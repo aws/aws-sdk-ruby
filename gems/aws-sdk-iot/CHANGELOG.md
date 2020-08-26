@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2020-08-12)
+------------------
+
+* Feature - Audit finding suppressions: Device Defender enables customers to turn off non-compliant findings for specific resources on a per check basis.
+
 1.54.0 (2020-07-02)
 ------------------
 

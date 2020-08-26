@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2020-07-27)
+------------------
+
+* Feature - Moved the eventTypeName attribute for PutExternalModel API to inputConfiguration. Model ID's no longer allow hyphens.
+
+1.8.0 (2020-07-24)
+------------------
+
+* Feature - GetPrediction has been replaced with GetEventPrediction. PutExternalModel has been simplified to accept a role ARN.
+
+1.7.0 (2020-07-20)
+------------------
+
+* Feature - Introduced flexible model training dataset requirements for Online Fraud Insights so that customers can choose any two inputs to train a model instead of being required to use 'email' and 'IP address' at minimum. Added support for resource ARNs, resource tags, resource-based IAM policies and identity-based policies that limit access to a resource based on tags. Added support for customer-managed customer master key (CMK) data encryption. Added new Event Type, Entity Type, and Label APIs. An event type defines the structure for an event sent to Amazon Fraud Detector, including the variables sent as part of the event, the entity performing the event, and the labels that classify the event. Introduced the GetEventPrediction API.
+
 1.6.0 (2020-06-23)
 ------------------
 

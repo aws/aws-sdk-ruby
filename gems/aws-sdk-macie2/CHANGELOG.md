@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2020-08-13)
+------------------
+
+* Feature - This release of the Amazon Macie API includes miscellaneous updates and improvements to the documentation.
+
+1.7.0 (2020-07-24)
+------------------
+
+* Feature - This release of the Amazon Macie API introduces additional criteria for sorting and filtering query results for account quotas and usage statistics.
+
+1.6.0 (2020-07-17)
+------------------
+
+* Feature - This release of the Amazon Macie API includes miscellaneous updates and improvements to the documentation.
+
 1.5.0 (2020-06-23)
 ------------------
 

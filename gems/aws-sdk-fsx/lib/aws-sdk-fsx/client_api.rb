@@ -23,6 +23,7 @@ module Aws::FSx
     AdministrativeActionType = Shapes::StringShape.new(name: 'AdministrativeActionType')
     AdministrativeActions = Shapes::ListShape.new(name: 'AdministrativeActions')
     ArchivePath = Shapes::StringShape.new(name: 'ArchivePath')
+    AutoImportPolicyType = Shapes::StringShape.new(name: 'AutoImportPolicyType')
     AutomaticBackupRetentionDays = Shapes::IntegerShape.new(name: 'AutomaticBackupRetentionDays')
     Backup = Shapes::StructureShape.new(name: 'Backup')
     BackupFailureDetails = Shapes::StructureShape.new(name: 'BackupFailureDetails')
@@ -53,6 +54,8 @@ module Aws::FSx
     DNSName = Shapes::StringShape.new(name: 'DNSName')
     DailyTime = Shapes::StringShape.new(name: 'DailyTime')
     DataRepositoryConfiguration = Shapes::StructureShape.new(name: 'DataRepositoryConfiguration')
+    DataRepositoryFailureDetails = Shapes::StructureShape.new(name: 'DataRepositoryFailureDetails')
+    DataRepositoryLifecycle = Shapes::StringShape.new(name: 'DataRepositoryLifecycle')
     DataRepositoryTask = Shapes::StructureShape.new(name: 'DataRepositoryTask')
     DataRepositoryTaskEnded = Shapes::StructureShape.new(name: 'DataRepositoryTaskEnded')
     DataRepositoryTaskExecuting = Shapes::StructureShape.new(name: 'DataRepositoryTaskExecuting')
@@ -87,6 +90,7 @@ module Aws::FSx
     DirectoryPassword = Shapes::StringShape.new(name: 'DirectoryPassword')
     DirectoryUserName = Shapes::StringShape.new(name: 'DirectoryUserName')
     DnsIps = Shapes::ListShape.new(name: 'DnsIps')
+    DriveCacheType = Shapes::StringShape.new(name: 'DriveCacheType')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailedCount = Shapes::IntegerShape.new(name: 'FailedCount')
@@ -280,10 +284,12 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:export_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ExportPath"))
     CreateFileSystemLustreConfiguration.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
     CreateFileSystemLustreConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: LustreDeploymentType, location_name: "DeploymentType"))
+    CreateFileSystemLustreConfiguration.add_member(:auto_import_policy, Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
     CreateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
     CreateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     CreateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     CreateFileSystemLustreConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
+    CreateFileSystemLustreConfiguration.add_member(:drive_cache_type, Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
     CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -312,10 +318,16 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
 
+    DataRepositoryConfiguration.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
     DataRepositoryConfiguration.add_member(:import_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ImportPath"))
     DataRepositoryConfiguration.add_member(:export_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ExportPath"))
     DataRepositoryConfiguration.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
+    DataRepositoryConfiguration.add_member(:auto_import_policy, Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
+    DataRepositoryConfiguration.add_member(:failure_details, Shapes::ShapeRef.new(shape: DataRepositoryFailureDetails, location_name: "FailureDetails"))
     DataRepositoryConfiguration.struct_class = Types::DataRepositoryConfiguration
+
+    DataRepositoryFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryFailureDetails.struct_class = Types::DataRepositoryFailureDetails
 
     DataRepositoryTask.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, required: true, location_name: "TaskId"))
     DataRepositoryTask.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryTaskLifecycle, required: true, location_name: "Lifecycle"))
@@ -507,6 +519,7 @@ module Aws::FSx
     LustreFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     LustreFileSystemConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     LustreFileSystemConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
+    LustreFileSystemConfiguration.add_member(:drive_cache_type, Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
 
     MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -554,8 +567,8 @@ module Aws::FSx
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
-    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -582,6 +595,7 @@ module Aws::FSx
     UpdateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     UpdateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemLustreConfiguration.add_member(:auto_import_policy, Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
     UpdateFileSystemLustreConfiguration.struct_class = Types::UpdateFileSystemLustreConfiguration
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))

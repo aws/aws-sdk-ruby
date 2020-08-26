@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.87.0 (2020-08-24)
+------------------
+
+* Feature - Add string length constraints to OpsDataAttributeName and OpsFilterValue.
+
+1.86.0 (2020-08-03)
+------------------
+
+* Feature - Adds a waiter for CommandExecuted and paginators for various other APIs.
+
+1.85.0 (2020-07-27)
+------------------
+
+* Feature - Assorted doc ticket-fix updates for Systems Manager.
+
 1.84.0 (2020-07-02)
 ------------------
 

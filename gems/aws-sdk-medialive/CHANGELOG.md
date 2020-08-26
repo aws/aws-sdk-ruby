@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2020-07-28)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports several new features: EBU-TT-D captions in Microsoft Smooth outputs; interlaced video in HEVC outputs; video noise reduction (using temporal filtering) in HEVC outputs.
+
+1.50.0 (2020-07-22)
+------------------
+
+* Feature - The AWS Elemental MediaLive APIs and SDKs now support the ability to get thumbnails for MediaLive devices that are attached or not attached to a channel. Previously, this thumbnail feature was available only on the console.
+
 1.49.0 (2020-06-23)
 ------------------
 

@@ -123,6 +123,10 @@ module Aws::AutoScaling
     HonorCooldown = Shapes::BooleanShape.new(name: 'HonorCooldown')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
+    InstanceMetadataEndpointState = Shapes::StringShape.new(name: 'InstanceMetadataEndpointState')
+    InstanceMetadataHttpPutResponseHopLimit = Shapes::IntegerShape.new(name: 'InstanceMetadataHttpPutResponseHopLimit')
+    InstanceMetadataHttpTokensState = Shapes::StringShape.new(name: 'InstanceMetadataHttpTokensState')
+    InstanceMetadataOptions = Shapes::StructureShape.new(name: 'InstanceMetadataOptions')
     InstanceMonitoring = Shapes::StructureShape.new(name: 'InstanceMonitoring')
     InstanceProtected = Shapes::BooleanShape.new(name: 'InstanceProtected')
     InstanceRefresh = Shapes::StructureShape.new(name: 'InstanceRefresh')
@@ -472,6 +476,7 @@ module Aws::AutoScaling
     CreateLaunchConfigurationType.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: EbsOptimized, location_name: "EbsOptimized"))
     CreateLaunchConfigurationType.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: AssociatePublicIpAddress, location_name: "AssociatePublicIpAddress"))
     CreateLaunchConfigurationType.add_member(:placement_tenancy, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, location_name: "PlacementTenancy"))
+    CreateLaunchConfigurationType.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "MetadataOptions"))
     CreateLaunchConfigurationType.struct_class = Types::CreateLaunchConfigurationType
 
     CreateOrUpdateTagsType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
@@ -697,6 +702,11 @@ module Aws::AutoScaling
 
     InstanceIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen19)
 
+    InstanceMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: InstanceMetadataHttpTokensState, location_name: "HttpTokens"))
+    InstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: InstanceMetadataHttpPutResponseHopLimit, location_name: "HttpPutResponseHopLimit"))
+    InstanceMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    InstanceMetadataOptions.struct_class = Types::InstanceMetadataOptions
+
     InstanceMonitoring.add_member(:enabled, Shapes::ShapeRef.new(shape: MonitoringEnabled, location_name: "Enabled"))
     InstanceMonitoring.struct_class = Types::InstanceMonitoring
 
@@ -749,6 +759,7 @@ module Aws::AutoScaling
     LaunchConfiguration.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: EbsOptimized, location_name: "EbsOptimized"))
     LaunchConfiguration.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: AssociatePublicIpAddress, location_name: "AssociatePublicIpAddress"))
     LaunchConfiguration.add_member(:placement_tenancy, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, location_name: "PlacementTenancy"))
+    LaunchConfiguration.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "MetadataOptions"))
     LaunchConfiguration.struct_class = Types::LaunchConfiguration
 
     LaunchConfigurationNameType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "LaunchConfigurationName"))

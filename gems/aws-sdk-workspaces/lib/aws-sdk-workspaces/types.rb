@@ -442,8 +442,13 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] custom_security_group_id
-    #   The identifier of any security groups to apply to WorkSpaces when
-    #   they are created.
+    #   The identifier of the default security group to apply to WorkSpaces
+    #   when they are created. For more information, see [ Security Groups
+    #   for Your WorkSpaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html
     #   @return [String]
     #
     # @!attribute [rw] user_enabled_as_local_administrator
@@ -864,11 +869,68 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeWorkspaceImagePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "WorkspaceImageId", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagePermissionsRequest AWS API Documentation
+    #
+    class DescribeWorkspaceImagePermissionsRequest < Struct.new(
+      :image_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_permissions
+    #   The identifiers of the AWS accounts that the image has been shared
+    #   with.
+    #   @return [Array<Types::ImagePermission>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagePermissionsResult AWS API Documentation
+    #
+    class DescribeWorkspaceImagePermissionsResult < Struct.new(
+      :image_id,
+      :image_permissions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeWorkspaceImagesRequest
     #   data as a hash:
     #
     #       {
     #         image_ids: ["WorkspaceImageId"],
+    #         image_type: "OWNED", # accepts OWNED, SHARED
     #         next_token: "PaginationToken",
     #         max_results: 1,
     #       }
@@ -876,6 +938,10 @@ module Aws::WorkSpaces
     # @!attribute [rw] image_ids
     #   The identifier of the image.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_type
+    #   The type (owned or shared) of the image.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   If you received a `NextToken` from a previous call that was
@@ -890,6 +956,7 @@ module Aws::WorkSpaces
     #
     class DescribeWorkspaceImagesRequest < Struct.new(
       :image_ids,
+      :image_type,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -1158,6 +1225,22 @@ module Aws::WorkSpaces
       :workspace_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the AWS accounts that have been granted permission to use a
+    # shared image.
+    #
+    # @!attribute [rw] shared_account_id
+    #   The identifier of the AWS account that an image has been shared
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImagePermission AWS API Documentation
+    #
+    class ImagePermission < Struct.new(
+      :shared_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1537,6 +1620,7 @@ module Aws::WorkSpaces
     #       {
     #         resource_id: "DirectoryId", # required
     #         workspace_creation_properties: { # required
+    #           enable_work_docs: false,
     #           enable_internet_access: false,
     #           default_ou: "DefaultOu",
     #           custom_security_group_id: "SecurityGroupId",
@@ -2358,6 +2442,43 @@ module Aws::WorkSpaces
     #
     class UpdateRulesOfIpGroupResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateWorkspaceImagePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "WorkspaceImageId", # required
+    #         allow_copy_image: false, # required
+    #         shared_account_id: "AwsAccount", # required
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_copy_image
+    #   The permission to copy the image. This permission can be revoked
+    #   only after an image has been shared.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] shared_account_id
+    #   The identifier of the AWS account to share or unshare the image
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermissionRequest AWS API Documentation
+    #
+    class UpdateWorkspaceImagePermissionRequest < Struct.new(
+      :image_id,
+      :allow_copy_image,
+      :shared_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermissionResult AWS API Documentation
+    #
+    class UpdateWorkspaceImagePermissionResult < Aws::EmptyStructure; end
+
     # Describes the user storage for a WorkSpace bundle.
     #
     # @!attribute [rw] capacity
@@ -2413,7 +2534,13 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] computer_name
-    #   The name of the WorkSpace, as seen by the operating system.
+    #   The name of the WorkSpace, as seen by the operating system. The
+    #   format of this name varies. For more information, see [ Launch a
+    #   WorkSpace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
@@ -2646,12 +2773,37 @@ module Aws::WorkSpaces
     #   data as a hash:
     #
     #       {
+    #         enable_work_docs: false,
     #         enable_internet_access: false,
     #         default_ou: "DefaultOu",
     #         custom_security_group_id: "SecurityGroupId",
     #         user_enabled_as_local_administrator: false,
     #         enable_maintenance_mode: false,
     #       }
+    #
+    # @!attribute [rw] enable_work_docs
+    #   Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.
+    #
+    #   <note markdown="1"> If WorkDocs is already enabled for a WorkSpaces directory and you
+    #   disable it, new WorkSpaces launched in the directory will not have
+    #   WorkDocs enabled. However, WorkDocs remains enabled for any existing
+    #   WorkSpaces, unless you either disable users' access to WorkDocs or
+    #   you delete the WorkDocs site. To disable users' access to WorkDocs,
+    #   see [Disabling Users][1] in the *Amazon WorkDocs Administration
+    #   Guide*. To delete a WorkDocs site, see [Deleting a Site][2] in the
+    #   *Amazon WorkDocs Administration Guide*.
+    #
+    #    If you enable WorkDocs on a directory that already has existing
+    #   WorkSpaces, the existing WorkSpaces and any new WorkSpaces that are
+    #   launched in the directory will have WorkDocs enabled.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html
+    #   [2]: https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html
+    #   @return [Boolean]
     #
     # @!attribute [rw] enable_internet_access
     #   Indicates whether internet access is enabled for your WorkSpaces.
@@ -2682,6 +2834,7 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceCreationProperties AWS API Documentation
     #
     class WorkspaceCreationProperties < Struct.new(
+      :enable_work_docs,
       :enable_internet_access,
       :default_ou,
       :custom_security_group_id,
@@ -2835,6 +2988,16 @@ module Aws::WorkSpaces
     #   The text of the error message that is returned for the image.
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   The date when the image was created. If the image has been shared,
+    #   the AWS account that the image has been shared with sees the
+    #   original creation date of the image.
+    #   @return [Time]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The identifier of the AWS account that owns the image.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceImage AWS API Documentation
     #
     class WorkspaceImage < Struct.new(
@@ -2845,7 +3008,9 @@ module Aws::WorkSpaces
       :state,
       :required_tenancy,
       :error_code,
-      :error_message)
+      :error_message,
+      :created,
+      :owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2878,11 +3043,23 @@ module Aws::WorkSpaces
     #   @return [Integer]
     #
     # @!attribute [rw] root_volume_size_gib
-    #   The size of the root volume.
+    #   The size of the root volume. For important information about how to
+    #   modify the size of the root and user volumes, see [Modify a
+    #   WorkSpace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html
     #   @return [Integer]
     #
     # @!attribute [rw] user_volume_size_gib
-    #   The size of the user storage.
+    #   The size of the user storage. For important information about how to
+    #   modify the size of the root and user volumes, see [Modify a
+    #   WorkSpace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html
     #   @return [Integer]
     #
     # @!attribute [rw] compute_type_name

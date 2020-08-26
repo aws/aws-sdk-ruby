@@ -177,6 +177,11 @@ module Aws::Personalize
     #   batch inference job.
     #   @return [Types::BatchInferenceJobOutput]
     #
+    # @!attribute [rw] batch_inference_job_config
+    #   A string to string map of the configuration details of a batch
+    #   inference job.
+    #   @return [Types::BatchInferenceJobConfig]
+    #
     # @!attribute [rw] role_arn
     #   The ARN of the Amazon Identity and Access Management (IAM) role that
     #   requested the batch inference job.
@@ -214,10 +219,36 @@ module Aws::Personalize
       :num_results,
       :job_input,
       :job_output,
+      :batch_inference_job_config,
       :role_arn,
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details of a batch inference job.
+    #
+    # @note When making an API call, you may pass BatchInferenceJobConfig
+    #   data as a hash:
+    #
+    #       {
+    #         item_exploration_config: {
+    #           "ParameterName" => "ParameterValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] item_exploration_config
+    #   A string to string map specifying the inference hyperparameters you
+    #   wish to use for hyperparameter optimization. See
+    #   customizing-solution-config-hpo.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/BatchInferenceJobConfig AWS API Documentation
+    #
+    class BatchInferenceJobConfig < Struct.new(
+      :item_exploration_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -349,6 +380,10 @@ module Aws::Personalize
     #   (recommendations) per second.
     #   @return [Integer]
     #
+    # @!attribute [rw] campaign_config
+    #   The configuration details of a campaign.
+    #   @return [Types::CampaignConfig]
+    #
     # @!attribute [rw] status
     #   The status of the campaign.
     #
@@ -385,11 +420,37 @@ module Aws::Personalize
       :campaign_arn,
       :solution_version_arn,
       :min_provisioned_tps,
+      :campaign_config,
       :status,
       :failure_reason,
       :creation_date_time,
       :last_updated_date_time,
       :latest_campaign_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details of a campaign.
+    #
+    # @note When making an API call, you may pass CampaignConfig
+    #   data as a hash:
+    #
+    #       {
+    #         item_exploration_config: {
+    #           "ParameterName" => "ParameterValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] item_exploration_config
+    #   A string to string map specifying the inference hyperparameters you
+    #   wish to use for hyperparameter optimization. See
+    #   customizing-solution-config-hpo.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignConfig AWS API Documentation
+    #
+    class CampaignConfig < Struct.new(
+      :item_exploration_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -453,6 +514,10 @@ module Aws::Personalize
     #   (recommendations) per second that Amazon Personalize will support.
     #   @return [Integer]
     #
+    # @!attribute [rw] campaign_config
+    #   The configuration details of a campaign.
+    #   @return [Types::CampaignConfig]
+    #
     # @!attribute [rw] status
     #   The status of the campaign update.
     #
@@ -483,6 +548,7 @@ module Aws::Personalize
     class CampaignUpdateSummary < Struct.new(
       :solution_version_arn,
       :min_provisioned_tps,
+      :campaign_config,
       :status,
       :failure_reason,
       :creation_date_time,
@@ -572,6 +638,11 @@ module Aws::Personalize
     #           },
     #         },
     #         role_arn: "RoleArn", # required
+    #         batch_inference_job_config: {
+    #           item_exploration_config: {
+    #             "ParameterName" => "ParameterValue",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -609,6 +680,10 @@ module Aws::Personalize
     #   buckets respectively.
     #   @return [String]
     #
+    # @!attribute [rw] batch_inference_job_config
+    #   The configuration details of a batch inference job.
+    #   @return [Types::BatchInferenceJobConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateBatchInferenceJobRequest AWS API Documentation
     #
     class CreateBatchInferenceJobRequest < Struct.new(
@@ -618,7 +693,8 @@ module Aws::Personalize
       :num_results,
       :job_input,
       :job_output,
-      :role_arn)
+      :role_arn,
+      :batch_inference_job_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -642,6 +718,11 @@ module Aws::Personalize
     #         name: "Name", # required
     #         solution_version_arn: "Arn", # required
     #         min_provisioned_tps: 1, # required
+    #         campaign_config: {
+    #           item_exploration_config: {
+    #             "ParameterName" => "ParameterValue",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -658,12 +739,17 @@ module Aws::Personalize
     #   (recommendations) per second that Amazon Personalize will support.
     #   @return [Integer]
     #
+    # @!attribute [rw] campaign_config
+    #   The configuration details of a campaign.
+    #   @return [Types::CampaignConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateCampaignRequest AWS API Documentation
     #
     class CreateCampaignRequest < Struct.new(
       :name,
       :solution_version_arn,
-      :min_provisioned_tps)
+      :min_provisioned_tps,
+      :campaign_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -910,8 +996,12 @@ module Aws::Personalize
     #
     #   Where "EVENT\_TYPE" is the type of event to filter out. To filter
     #   out all items with any interactions history, set `"*"` as the
-    #   EVENT\_TYPE. For more information, see Using Filters with Amazon
-    #   Personalize.
+    #   EVENT\_TYPE. For more information, see [Using Filters with Amazon
+    #   Personalize][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateFilterRequest AWS API Documentation
@@ -2449,7 +2539,11 @@ module Aws::Personalize
     #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
     #
     #   Where "EVENT\_TYPE" is the type of event to filter out. For more
-    #   information, see Using Filters with Amazon Personalize.
+    #   information, see [Using Filters with Amazon Personalize][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3902,6 +3996,11 @@ module Aws::Personalize
     #         campaign_arn: "Arn", # required
     #         solution_version_arn: "Arn",
     #         min_provisioned_tps: 1,
+    #         campaign_config: {
+    #           item_exploration_config: {
+    #             "ParameterName" => "ParameterValue",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -3917,12 +4016,17 @@ module Aws::Personalize
     #   (recommendations) per second that Amazon Personalize will support.
     #   @return [Integer]
     #
+    # @!attribute [rw] campaign_config
+    #   The configuration details of a campaign.
+    #   @return [Types::CampaignConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateCampaignRequest AWS API Documentation
     #
     class UpdateCampaignRequest < Struct.new(
       :campaign_arn,
       :solution_version_arn,
-      :min_provisioned_tps)
+      :min_provisioned_tps,
+      :campaign_config)
       SENSITIVE = []
       include Aws::Structure
     end

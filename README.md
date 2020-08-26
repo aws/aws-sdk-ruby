@@ -1,169 +1,129 @@
 # AWS SDK for Ruby - Version 3
 
-[![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-ruby.svg)](https://codeclimate.com/github/aws/aws-sdk-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-ruby/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-ruby?branch=master)
-
-This is version 3 of the `aws-sdk` gem. Version 2 can be found at branch:
-
-* [Version 2 branch](https://github.com/aws/aws-sdk-ruby/tree/version-2).
+[![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Github forks](https://img.shields.io/github/forks/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/network)
+[![Github stars](https://img.shields.io/github/stars/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/stargazers)
+[![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Links of Interest
 
-* [Developer Guide](http://docs.aws.amazon.com/sdk-for-ruby/latest/DeveloperGuide/aws-ruby-sdk-about-ruby-sdk.html)
-* [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/ruby/)
-* [API Docs](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/frames.html)
-* [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
-* [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
-
-## Change Log
-
-Change Log now can be found at each gem root path, e.g. change log for `aws-sdk-s3` gem can be found at `/gems/aws-sdk-s3/CHANGELOG.md` [here](https://github.com/aws/aws-sdk-ruby/blob/master/gems/aws-sdk-s3/CHANGELOG.md). The change log is also accessible via RubyGems.org page under "LINKS" section for changelog.
+* [API Documentation](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/index.html)
+* [Developer Guide](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/welcome.html)
+* [V3 Upgrading Guide](https://github.com/aws/aws-sdk-ruby/blob/master/V3_UPGRADING_GUIDE.md)
+* [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/ruby/)
 
 ## Installation
 
-The AWS SDK for Ruby is available from RubyGems. `aws-sdk` gem contains every available AWS service gem support. Please use a major version when expressing a dependency on `aws-sdk`.
-
-```ruby
-gem 'aws-sdk', '~> 3'
-```
-
-With version 3 modularization, you can also pick the specific AWS service gem to install. Please use a major version when expressing a dependency on service gems.
+The AWS SDK for Ruby is available from RubyGems. With V3 modularization, you
+should pick the specific AWS service gems to install.
 
 ```ruby
 gem 'aws-sdk-s3', '~> 1'
 gem 'aws-sdk-ec2', '~> 1'
 ```
 
-## Upgrading Guide
-
-Version 3 modularizes the monolithic SDK into service specific gems. Aside from gem packaging differences, version 3 interfaces are backwards compatible with version 2. Following guide contains instructions for both version 1 and version 2 SDK.
-
-### Upgrade from version 2
-
-1. If you depend on `aws-sdk` or `aws-sdk-resources`, you don't need to change anything. Meanwhile we recommend you to revisit following options to explore modularization benefits.
-
-2. If you depend on `aws-sdk-core`, you **must** replace this dependency with one of following options. This is because `aws-sdk-core` now only contains shared utilities.
-
-#### Options
-
-1. If you want to keep every AWS service gems in your project, simply keep/switch to `aws-sdk`
+Alternatively, the `aws-sdk` gem contains every available AWS service gem. This
+gem is very large; it is recommended to use it only as a quick way to migrate
+from V2 or if you depend on many AWS services.
 
 ```ruby
-# Gemfile
 gem 'aws-sdk', '~> 3'
-
-# or in code
-require 'aws-sdk'
 ```
 
-2. If you want to choose several AWS service gems in your project specifically, try following:
-
-```ruby
-# Gemfile
-gem 'aws-sdk-s3', '~> 1'
-gem 'aws-sdk-ec2', '~> 1'
-...
-
-# or in code
-require 'aws-sdk-s3'
-require 'aws-sdk-ec2'
-...
-```
-
-### Upgrade from version 1
-
-If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/), then you might have either `aws-sdk ~> 2` or `aws-sdk-resources ~> 2` exists in your project, you can simply update it to `~> 3` or using separate service gems as described in version 2 upgrade options.
-
-For additional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md).
-
-### Additional Information
-
-* [Introduction Blog](https://aws.amazon.com/blogs/developer/aws-sdk-for-ruby-modularization-version-3-2/)
-* [V2 to V3 Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
-* [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
-
-## Getting Help
-
-Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
-
-* Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`
-* Come join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
-* Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home), if it turns out that you may have found a bug, please open an issue
-* If in doubt as to whether your issue is a question about how to use AWS or a potential SDK issue, feel free to open a GitHub issue on this repo.
-
-## Opening Issues
-
-If you encounter a bug with `aws-sdk-ruby` we would like to hear about it. Search the existing issues and try to make sure your problem doesn’t already exist before opening a new issue. It’s helpful if you include the version of `aws-sdk-ruby`, ruby version and OS you’re using. Please include a stack trace and reduced repro case when appropriate, too.
-
-The GitHub issues are intended for bug reports and feature requests. For help and questions with using `aws-sdk-ruby` please make use of the resources listed in the Getting Help section.
+**Please use a pessimistic version constraint on the major version when
+depending on service gems.**
 
 ## Configuration
 
-You will need to configure credentials and a region, either in configuration files or environment variables, to make API calls. It is recommended that you provide these via your environment. This makes it easier to rotate credentials and it keeps your secrets out of source control.
+You will need to configure credentials and a region, either in configuration
+files or environment variables, to make API calls. It is recommended that you
+provide these via your environment. This makes it easier to rotate credentials
+and it keeps your secrets out of source control.
 
 The SDK searches the following locations for credentials:
 
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
-* Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will be checked for a `role_arn` and `source_profile`, which if present will be used to attempt to assume a role.
-* The shared credentials ini file at `~/.aws/credentials` ([more information](http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs))
-    * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
-* From an instance profile when running on EC2, or from the ECS credential provider when running in an ECS container with that feature enabled.
-* If using `~/.aws/config` or `~/.aws/credentials` a `:profile` option can be used to choose the proper credentials.
+* The shared credentials ini file at `~/.aws/credentials`
+  * Credential options supported in this file are:
+    * Static Credentials (`aws_access_key_id`, `aws_secret_access_key`, `aws_session_token`)
+    * Assume Role Web Identity Credentials (`web_identity_token_file`, `role_arn`, `source_profile`)
+    * Assume Role Credentials (`role_arn`, `source_profile`)
+    * Process Credentials (`credential_process`)
+  * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
+* From an instance profile when running on EC2 or from the ECS credential provider when running in an ECS container with that feature enabled.
 
 **Shared configuration is loaded only a single time, and credentials are provided statically at client creation time. Shared credentials do not refresh.**
 
 The SDK searches the following locations for a region:
 
 * `ENV['AWS_REGION']`
+* `ENV['AMAZON_REGION']`
+* `ENV['AWS_DEFAULT_REGION']`
 * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will also be checked for a region selection.
 
 **The region is used to construct an SSL endpoint**. If you need to connect to a non-standard endpoint, you may specify the `:endpoint` option.
 
 ### Configuration Options
 
-You can also configure default credentials and region via `Aws.config`. **In version 2, `Aws.config` is a vanilla Ruby hash, not a method like it was in version 1**. The `Aws.config` hash takes precedence over environment variables.
+You can also configure default credentials and the region via the `Aws.config`
+hash. The `Aws.config` hash takes precedence over environment variables.
 
 ```ruby
 require 'aws-sdk'
 
-Aws.config.update({
+Aws.config.update(
   region: 'us-west-2',
   credentials: Aws::Credentials.new('akid', 'secret')
-})
+)
 ```
 
 Valid region and credentials options are:
 
-* `:region` - A string like `us-west-2`. See [this document](http://docs.aws.amazon.com/general/latest/gr/rande.html) for a list of supported regions by service.
+* `:region` - A string like `us-west-2`. See [this page](https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html) for a list of supported regions by service.
 * `:credentials` - An instance of one of the following classes:
   * [`Aws::Credentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Credentials.html)
-  * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SharedCredentials.html)
-  * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InstanceProfileCredentials.html)
+  * [`Aws::AssumeRoleWebIdentityCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleWebIdentityCredentials.html)
   * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleCredentials.html)
+  * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SharedCredentials.html)
+  * [`Aws::ProcessCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ProcessCredentials.html)
+  * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InstanceProfileCredentials.html)
+  * [`Aws::ECSCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECSCredentials.html)
+  * [`Aws::CognitoIdentityCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/CognitoIdentityCredentials.html)
 
-You may also pass configuration options directly to resource and client constructors. These options take precedence over the environment and `Aws.config` defaults.
+You may also pass configuration options directly to Client and Resource
+constructors. These options take precedence over the environment and
+`Aws.config` defaults. A `:profile` Client option can also be used to choose a
+specific profile defined in your configuration file.
 
 ```ruby
-# resource constructors
-ec2 = Aws::EC2::Resource.new(region:'us-west-2', credentials: credentials)
+# using a credentials object
+ec2 = Aws::EC2::Client.new(region: 'us-west-2', credentials: credentials)
 
-# client constructors
-ec2 = Aws::EC2::Client.new(region:'us-west-2', credentials: credentials)
+# using a profile name
+ec2 = Aws::EC2::Client.new(profile: 'my_profile')
 ```
 
-Please take care to **never commit credentials to source control**.  We strongly recommended loading credentials from an external source.
+Please take care to **never commit credentials to source control**. We strongly
+recommended loading credentials from an external source.
 
 ```ruby
 require 'aws-sdk'
 require 'json'
+
 creds = JSON.load(File.read('secrets.json'))
-Aws.config[:credentials] = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
+Aws.config[:credentials] = Aws::Credentials.new(
+  creds['AccessKeyId'],
+  creds['SecretAccessKey']
+)
 ```
+
+For more information on how to configure credentials, see the developer guide
+for [configuring AWS SDK for Ruby](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html).
 
 ## API Clients
 
 Construct a service client to make API calls. Each client provides a 1-to-1
 mapping of methods to API operations. Refer to the
-[API documentation](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/frames.html)
+[API documentation](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/index.html)
 for a complete list of available methods.
 
 ```ruby
@@ -179,7 +139,7 @@ structured response data.
 
 ```ruby
 # list the first two objects in a bucket
-resp = s3.list_objects(bucket: 'aws-sdk-core', max_keys: 2)
+resp = s3.list_objects(bucket: 'aws-sdk', max_keys: 2)
 resp.contents.each do |object|
   puts "#{object.key} => #{object.etag}"
 end
@@ -204,7 +164,7 @@ that control paging:
 
 ```ruby
 # make a request that returns a truncated response
-resp = s3.list_objects(bucket:'aws-sdk')
+resp = s3.list_objects(bucket: 'aws-sdk')
 
 resp.last_page? #=> false
 resp.next_page? #=> true
@@ -236,7 +196,10 @@ waiters per service.
 
 Resource interfaces are object oriented classes that represent actual
 resources in AWS. Resource interfaces built on top of API clients and provide
-additional functionality. Each service gem contains its own resource interface.
+additional functionality.
+
+**Only a few services implement a resource interface. They are defined by hand
+in JSON and have limitations. Please use the Client API instead.**
 
 ```ruby
 s3 = Aws::S3::Resource.new
@@ -266,7 +229,7 @@ the Ruby SDK. You can access the REPL by running `aws-v3.rb` from the command li
 
 ```ruby
 $ aws-v3.rb
-Aws> ec2.describe_instances.reservations.first.instances.first
+[1] pry(Aws)> ec2.describe_instances.reservations.first.instances.first
 [Aws::EC2::Client 200 0.216615 0 retries] describe_instances()
 <struct
  instance_id="i-1234567",
@@ -284,15 +247,37 @@ $ aws-v3.rb -v
 In the REPL, every service class has a helper that returns a new client object.
 Simply downcase the service module name for the helper:
 
-* `Aws::S3` => `s3`
-* `Aws::EC2` => `ec2`
+* `s3` => `#<Aws::S3::Client>`
+* `ec2` => `#<Aws::EC2::Client>`
 * etc
+
+## Getting Help
+
+Please use any of these resources for getting help:
+
+* Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`.
+* Join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby).
+* Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
+
+## Opening Issues
+
+If you encounter a bug or have a feature request, we would like to hear about
+it. Search the existing issues and try to make sure your problem doesn’t already
+exist before opening a new issue.
+
+The GitHub issues are intended for bug reports and feature requests. For help
+and questions with using `aws-sdk-ruby` please make use of the resources listed
+in the Getting Help section.
 
 ## Versioning
 
 This project uses [semantic versioning](http://semver.org/). You can safely
 express a dependency on a major version and expect all minor and patch versions
 to be backwards compatible.
+
+A CHANGELOG can be found at each gem's root path (i.e. `aws-sdk-s3` can be found
+at `gems/aws-sdk-s3/CHANGELOG.md`). The CHANGELOG is also accessible via the
+RubyGems.org page under "LINKS" section.
 
 ## Supported Services
 
@@ -360,8 +345,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
-| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
+| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog              | aws-sdk-marketplacecatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
@@ -384,6 +369,7 @@ to be backwards compatible.
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI        | aws-sdk-resourcegroupstaggingapi        | 2017-01-26  |
 | AWS RoboMaker                                         | Aws::RoboMaker                       | aws-sdk-robomaker                       | 2018-06-29  |
 | AWS S3 Control                                        | Aws::S3Control                       | aws-sdk-s3control                       | 2018-08-20  |
+| AWS SSO Identity Store                                | Aws::IdentityStore                   | aws-sdk-identitystore                   | 2020-06-15  |
 | AWS SSO OIDC                                          | Aws::SSOOIDC                         | aws-sdk-ssooidc                         | 2019-06-10  |
 | AWS Savings Plans                                     | Aws::SavingsPlans                    | aws-sdk-savingsplans                    | 2019-06-28  |
 | AWS Secrets Manager                                   | Aws::SecretsManager                  | aws-sdk-secretsmanager                  | 2017-10-17  |
@@ -393,7 +379,7 @@ to be backwards compatible.
 | AWS Service Catalog                                   | Aws::ServiceCatalog                  | aws-sdk-servicecatalog                  | 2015-12-10  |
 | AWS Shield                                            | Aws::Shield                          | aws-sdk-shield                          | 2016-06-02  |
 | AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
-| AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-sso                             | 2019-06-10  |
+| AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-core                            | 2019-06-10  |
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
@@ -414,7 +400,7 @@ to be backwards compatible.
 | Amazon Augmented AI Runtime                           | Aws::AugmentedAIRuntime              | aws-sdk-augmentedairuntime              | 2019-11-07  |
 | Amazon Chime                                          | Aws::Chime                           | aws-sdk-chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                  | aws-sdk-clouddirectory                  | 2017-01-11  |
-| Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2019-03-26  |
+| Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2020-05-31  |
 | Amazon CloudHSM                                       | Aws::CloudHSM                        | aws-sdk-cloudhsm                        | 2014-05-30  |
 | Amazon CloudSearch                                    | Aws::CloudSearch                     | aws-sdk-cloudsearch                     | 2013-01-01  |
 | Amazon CloudSearch Domain                             | Aws::CloudSearchDomain               | aws-sdk-cloudsearchdomain               | 2013-01-01  |
@@ -460,8 +446,8 @@ to be backwards compatible.
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
 | Amazon Interactive Video Service                      | Aws::IVS                             | aws-sdk-ivs                             | 2020-07-14  |
 | Amazon Kinesis                                        | Aws::Kinesis                         | aws-sdk-kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Signaling Channels               | Aws::KinesisVideoSignalingChannels   | aws-sdk-kinesisvideosignalingchannels   | 2019-12-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
@@ -494,8 +480,8 @@ to be backwards compatible.
 | Amazon Route 53 Resolver                              | Aws::Route53Resolver                 | aws-sdk-route53resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                | aws-sdk-sagemakerruntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                       | aws-sdk-sagemaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
 | Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
+| Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
 | Amazon Simple Notification Service                    | Aws::SNS                             | aws-sdk-sns                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | Aws::SQS                             | aws-sdk-sqs                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | Aws::S3                              | aws-sdk-s3                              | 2006-03-01  |
@@ -516,6 +502,7 @@ to be backwards compatible.
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
+| Braket                                                | Aws::Braket                          | aws-sdk-braket                          | 2019-09-01  |
 | CodeArtifact                                          | Aws::CodeArtifact                    | aws-sdk-codeartifact                    | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |

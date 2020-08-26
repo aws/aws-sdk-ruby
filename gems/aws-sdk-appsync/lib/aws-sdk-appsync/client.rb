@@ -85,13 +85,28 @@ module Aws::AppSync
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::AppSync
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -592,7 +607,7 @@ module Aws::AppSync
     # @option params [required, String] :data_source_name
     #   The `Function` `DataSource` name.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The `Function` request mapping template. Functions support only the
     #   2018-05-29 version of the request mapping template.
     #
@@ -614,7 +629,7 @@ module Aws::AppSync
     #     name: "ResourceName", # required
     #     description: "String",
     #     data_source_name: "ResourceName", # required
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     function_version: "String", # required
     #   })
@@ -774,12 +789,16 @@ module Aws::AppSync
     # @option params [String] :data_source_name
     #   The name of the data source for which the resolver is being created.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The mapping template to be used for requests.
     #
     #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #
     # @option params [String] :response_mapping_template
     #   The mapping template to be used for responses from the data source.
@@ -816,7 +835,7 @@ module Aws::AppSync
     #     type_name: "ResourceName", # required
     #     field_name: "ResourceName", # required
     #     data_source_name: "ResourceName",
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     kind: "UNIT", # accepts UNIT, PIPELINE
     #     pipeline_config: {
@@ -1882,7 +1901,7 @@ module Aws::AppSync
     # @option params [required, String] :api_id
     #   The API ID.
     #
-    # @option params [required, String, IO] :definition
+    # @option params [required, String, StringIO, File] :definition
     #   The schema definition, in GraphQL schema language format.
     #
     # @return [Types::StartSchemaCreationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2233,7 +2252,7 @@ module Aws::AppSync
     # @option params [required, String] :data_source_name
     #   The `Function` `DataSource` name.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The `Function` request mapping template. Functions support only the
     #   2018-05-29 version of the request mapping template.
     #
@@ -2256,7 +2275,7 @@ module Aws::AppSync
     #     description: "String",
     #     function_id: "ResourceName", # required
     #     data_source_name: "ResourceName", # required
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     function_version: "String", # required
     #   })
@@ -2411,8 +2430,16 @@ module Aws::AppSync
     # @option params [String] :data_source_name
     #   The new data source name.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The new request mapping template.
+    #
+    #   A resolver uses a request mapping template to convert a GraphQL
+    #   expression into a format that a data source can understand. Mapping
+    #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #
     # @option params [String] :response_mapping_template
     #   The new response mapping template.
@@ -2449,7 +2476,7 @@ module Aws::AppSync
     #     type_name: "ResourceName", # required
     #     field_name: "ResourceName", # required
     #     data_source_name: "ResourceName",
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     kind: "UNIT", # accepts UNIT, PIPELINE
     #     pipeline_config: {
@@ -2552,7 +2579,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

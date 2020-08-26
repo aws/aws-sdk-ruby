@@ -44,9 +44,9 @@ require_relative 'aws-sdk-fms/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::FMS
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.30.0'
 
 end

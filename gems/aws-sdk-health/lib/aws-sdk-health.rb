@@ -44,9 +44,9 @@ require_relative 'aws-sdk-health/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Health
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.29.0'
 
 end

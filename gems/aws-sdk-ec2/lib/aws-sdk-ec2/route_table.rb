@@ -233,6 +233,7 @@ module Aws::EC2
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
     #     local_gateway_id: "LocalGatewayId",
+    #     carrier_gateway_id: "CarrierGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
@@ -267,6 +268,11 @@ module Aws::EC2
     #   The ID of a transit gateway.
     # @option options [String] :local_gateway_id
     #   The ID of the local gateway.
+    # @option options [String] :carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #
+    #   You can only use this option when the VPC contains a subnet which is
+    #   associated with a Wavelength Zone.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id

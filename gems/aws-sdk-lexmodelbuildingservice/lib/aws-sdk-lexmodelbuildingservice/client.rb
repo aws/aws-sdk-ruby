@@ -85,13 +85,28 @@ module Aws::LexModelBuildingService
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::LexModelBuildingService
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -358,6 +373,7 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateBotVersionResponse#version #version} => String
     #   * {Types::CreateBotVersionResponse#locale #locale} => String
     #   * {Types::CreateBotVersionResponse#child_directed #child_directed} => Boolean
+    #   * {Types::CreateBotVersionResponse#enable_model_improvements #enable_model_improvements} => Boolean
     #   * {Types::CreateBotVersionResponse#detect_sentiment #detect_sentiment} => Boolean
     #
     # @example Request syntax with placeholder values
@@ -395,6 +411,7 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
+    #   resp.enable_model_improvements #=> Boolean
     #   resp.detect_sentiment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersion AWS API Documentation
@@ -959,6 +976,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotResponse#name #name} => String
     #   * {Types::GetBotResponse#description #description} => String
     #   * {Types::GetBotResponse#intents #intents} => Array&lt;Types::Intent&gt;
+    #   * {Types::GetBotResponse#enable_model_improvements #enable_model_improvements} => Boolean
+    #   * {Types::GetBotResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::GetBotResponse#clarification_prompt #clarification_prompt} => Types::Prompt
     #   * {Types::GetBotResponse#abort_statement #abort_statement} => Types::Statement
     #   * {Types::GetBotResponse#status #status} => String
@@ -1042,6 +1061,8 @@ module Aws::LexModelBuildingService
     #   resp.intents #=> Array
     #   resp.intents[0].intent_name #=> String
     #   resp.intents[0].intent_version #=> String
+    #   resp.enable_model_improvements #=> Boolean
+    #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.clarification_prompt.messages #=> Array
     #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.clarification_prompt.messages[0].content #=> String
@@ -2513,6 +2534,77 @@ module Aws::LexModelBuildingService
     #   user can express. For example, a pizza ordering bot might support an
     #   OrderPizza intent. For more information, see how-it-works.
     #
+    # @option params [Boolean] :enable_model_improvements
+    #   Set to `true` to enable the use of a new natural language
+    #   understanding (NLU) model. Using the new NLU may improve the
+    #   performance of your bot.
+    #
+    #   When you set the `enableModelImprovements` parameter to `true` you can
+    #   use the `nluIntentConfidenceThreshold` parameter to configure
+    #   confidence scores. For more information, see [Confidence Scores][1].
+    #
+    #   You can only set the `enableModelImprovements` parameter in certain
+    #   Regions. If you set the parameter to `true`, your bot will use the new
+    #   NLU. If you set the parameter to `false`, your bot will continue to
+    #   use the original NLU. If you set the parameter to `false` after
+    #   setting it to `true`, your bot will return to the original NLU.
+    #
+    #   The Regions where you can set the `enableModelImprovements` parameter
+    #   to `true` are:
+    #
+    #   * US East (N. Virginia) (us-east-1)
+    #
+    #   * US West (Oregon) (us-west-2)
+    #
+    #   * Asia Pacific (Sydney) (ap-southeast-2)
+    #
+    #   * EU (Ireland) (eu-west-1)
+    #
+    #   In other Regions, the `enableModelImprovements` parameter is set to
+    #   `true` by default. In these Regions setting the parameter to `false`
+    #   throws a `ValidationException` exception.
+    #
+    #   * Asia Pacific (Singapore) (ap-southeast-1)
+    #
+    #   * Asia Pacific (Tokyo) (ap-northeast-1)
+    #
+    #   * EU (Frankfurt) (eu-central-1)
+    #
+    #   * EU (London) (eu-west-2)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html
+    #
+    # @option params [Float] :nlu_intent_confidence_threshold
+    #   Determines the threshold where Amazon Lex will insert the
+    #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
+    #   returning alternative intents in a [PostContent][1] or [PostText][2]
+    #   response. `AMAZON.FallbackIntent` and `AMAZON.KendraSearchIntent` are
+    #   only inserted if they are configured for the bot.
+    #
+    #   You must set the `enableModelImprovements` parameter to `true` to use
+    #   confidence scores.
+    #
+    #   For example, suppose a bot is configured with the confidence threshold
+    #   of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex returns three
+    #   alternative intents with the following confidence scores: IntentA
+    #   (0.70), IntentB (0.60), IntentC (0.50). The response from the
+    #   `PostText` operation would be:
+    #
+    #   * AMAZON.FallbackIntent
+    #
+    #   * IntentA
+    #
+    #   * IntentB
+    #
+    #   * IntentC
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
+    #   [2]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
+    #
     # @option params [Types::Prompt] :clarification_prompt
     #   When Amazon Lex doesn't understand the user's intent, it uses this
     #   message to get clarification. To specify how many times Amazon Lex
@@ -2687,6 +2779,8 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotResponse#name #name} => String
     #   * {Types::PutBotResponse#description #description} => String
     #   * {Types::PutBotResponse#intents #intents} => Array&lt;Types::Intent&gt;
+    #   * {Types::PutBotResponse#enable_model_improvements #enable_model_improvements} => Boolean
+    #   * {Types::PutBotResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::PutBotResponse#clarification_prompt #clarification_prompt} => Types::Prompt
     #   * {Types::PutBotResponse#abort_statement #abort_statement} => Types::Statement
     #   * {Types::PutBotResponse#status #status} => String
@@ -2804,6 +2898,8 @@ module Aws::LexModelBuildingService
     #         intent_version: "Version", # required
     #       },
     #     ],
+    #     enable_model_improvements: false,
+    #     nlu_intent_confidence_threshold: 1.0,
     #     clarification_prompt: {
     #       messages: [ # required
     #         {
@@ -2848,6 +2944,8 @@ module Aws::LexModelBuildingService
     #   resp.intents #=> Array
     #   resp.intents[0].intent_name #=> String
     #   resp.intents[0].intent_version #=> String
+    #   resp.enable_model_improvements #=> Boolean
+    #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.clarification_prompt.messages #=> Array
     #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.clarification_prompt.messages[0].content #=> String
@@ -3852,7 +3950,7 @@ module Aws::LexModelBuildingService
 
     # Starts a job to import a resource to Amazon Lex.
     #
-    # @option params [required, String, IO] :payload
+    # @option params [required, String, StringIO, File] :payload
     #   A zip archive in binary format. The archive should contain one file, a
     #   JSON file containing the resource to import. The resource should match
     #   the type specified in the `resourceType` field.
@@ -4002,7 +4100,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -453,6 +453,7 @@ module Aws::Lambda
     #         maximum_record_age_in_seconds: 1,
     #         bisect_batch_on_function_error: false,
     #         maximum_retry_attempts: 1,
+    #         topics: ["Topic"],
     #       }
     #
     # @!attribute [rw] event_source_arn
@@ -464,6 +465,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - The ARN of the stream.
     #
     #   * **Amazon Simple Queue Service** - The ARN of the queue.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #     cluster.
     #   @return [String]
     #
     # @!attribute [rw] function_name
@@ -486,7 +490,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Disables the event source mapping to pause polling and invocation.
+    #   If true, the event source mapping is active. Set to false to pause
+    #   polling and invocation.
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
@@ -497,6 +502,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #     10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -511,8 +519,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP`
-    #   is only supported for Amazon Kinesis streams.
+    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
+    #   `AT_TIMESTAMP` is only supported for Amazon Kinesis streams.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
@@ -526,8 +534,8 @@ module Aws::Lambda
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams) The maximum age of a record that Lambda sends to a
-    #   function for processing.
+    #   (Streams) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
@@ -536,9 +544,14 @@ module Aws::Lambda
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams) The maximum number of times to retry when the function
-    #   returns an error.
+    #   (Streams) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records will be retried until the record expires.
     #   @return [Integer]
+    #
+    # @!attribute [rw] topics
+    #   (MSK) The name of the Kafka topic.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
@@ -554,7 +567,8 @@ module Aws::Lambda
       :destination_config,
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
-      :maximum_retry_attempts)
+      :maximum_retry_attempts,
+      :topics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -564,7 +578,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -1305,6 +1319,10 @@ module Aws::Lambda
     #   discarded records.
     #   @return [Types::DestinationConfig]
     #
+    # @!attribute [rw] topics
+    #   (MSK) The name of the Kafka topic.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] maximum_record_age_in_seconds
     #   (Streams) The maximum age of a record that Lambda sends to a
     #   function for processing.
@@ -1334,6 +1352,7 @@ module Aws::Lambda
       :state,
       :state_transition_reason,
       :destination_config,
+      :topics,
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts)
@@ -2797,6 +2816,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - The ARN of the stream.
     #
     #   * **Amazon Simple Queue Service** - The ARN of the queue.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #     cluster.
     #   @return [String]
     #
     # @!attribute [rw] function_name
@@ -2982,7 +3004,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         layer_name: "LayerName", # required
     #         marker: "String",
     #         max_items: 1,
@@ -3037,7 +3059,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         marker: "String",
     #         max_items: 1,
     #       }
@@ -3399,7 +3421,7 @@ module Aws::Lambda
     #           s3_object_version: "S3ObjectVersion",
     #           zip_file: "data",
     #         },
-    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         license_info: "LicenseInfo",
     #       }
     #
@@ -4236,7 +4258,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Disables the event source mapping to pause polling and invocation.
+    #   If true, the event source mapping is active. Set to false to pause
+    #   polling and invocation.
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
@@ -4247,6 +4270,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #     10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -4260,8 +4286,8 @@ module Aws::Lambda
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams) The maximum age of a record that Lambda sends to a
-    #   function for processing.
+    #   (Streams) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
@@ -4270,8 +4296,9 @@ module Aws::Lambda
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams) The maximum number of times to retry when the function
-    #   returns an error.
+    #   (Streams) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records will be retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -4396,7 +4423,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },

@@ -44,9 +44,9 @@ require_relative 'aws-sdk-costexplorer/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::CostExplorer
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end

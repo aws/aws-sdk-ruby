@@ -32,6 +32,7 @@ module Aws::MediaConnect
     DescribeFlowResponse = Shapes::StructureShape.new(name: 'DescribeFlowResponse')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
+    EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
     FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
     Flow = Shapes::StructureShape.new(name: 'Flow')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
@@ -200,6 +201,7 @@ module Aws::MediaConnect
     Entitlement.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Entitlement.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     Entitlement.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "entitlementArn"))
+    Entitlement.add_member(:entitlement_status, Shapes::ShapeRef.new(shape: EntitlementStatus, location_name: "entitlementStatus"))
     Entitlement.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Entitlement.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subscribers"))
     Entitlement.struct_class = Types::Entitlement
@@ -228,6 +230,7 @@ module Aws::MediaConnect
     GrantEntitlementRequest.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "dataTransferSubscriberFeePercent"))
     GrantEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     GrantEntitlementRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
+    GrantEntitlementRequest.add_member(:entitlement_status, Shapes::ShapeRef.new(shape: EntitlementStatus, location_name: "entitlementStatus"))
     GrantEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     GrantEntitlementRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subscribers"))
     GrantEntitlementRequest.struct_class = Types::GrantEntitlementRequest
@@ -417,6 +420,7 @@ module Aws::MediaConnect
     UpdateFlowEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateFlowEntitlementRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: UpdateEncryption, location_name: "encryption"))
     UpdateFlowEntitlementRequest.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "entitlementArn"))
+    UpdateFlowEntitlementRequest.add_member(:entitlement_status, Shapes::ShapeRef.new(shape: EntitlementStatus, location_name: "entitlementStatus"))
     UpdateFlowEntitlementRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     UpdateFlowEntitlementRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subscribers"))
     UpdateFlowEntitlementRequest.struct_class = Types::UpdateFlowEntitlementRequest

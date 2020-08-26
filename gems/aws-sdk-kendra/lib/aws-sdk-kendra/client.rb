@@ -85,13 +85,28 @@ module Aws::Kendra
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::Kendra
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -592,6 +607,9 @@ module Aws::Kendra
     #         acl_configuration: {
     #           allowed_groups_column_name: "ColumnName", # required
     #         },
+    #         sql_configuration: {
+    #           query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
+    #         },
     #       },
     #       salesforce_configuration: {
     #         server_url: "Url", # required
@@ -1055,6 +1073,7 @@ module Aws::Kendra
     #   resp.configuration.database_configuration.column_configuration.change_detecting_columns #=> Array
     #   resp.configuration.database_configuration.column_configuration.change_detecting_columns[0] #=> String
     #   resp.configuration.database_configuration.acl_configuration.allowed_groups_column_name #=> String
+    #   resp.configuration.database_configuration.sql_configuration.query_identifiers_enclosing_option #=> String, one of "DOUBLE_QUOTES", "NONE"
     #   resp.configuration.salesforce_configuration.server_url #=> String
     #   resp.configuration.salesforce_configuration.secret_arn #=> String
     #   resp.configuration.salesforce_configuration.standard_object_configurations #=> Array
@@ -1256,6 +1275,7 @@ module Aws::Kendra
     #   resp.document_metadata_configurations[0].search.facetable #=> Boolean
     #   resp.document_metadata_configurations[0].search.searchable #=> Boolean
     #   resp.document_metadata_configurations[0].search.displayable #=> Boolean
+    #   resp.document_metadata_configurations[0].search.sortable #=> Boolean
     #   resp.index_statistics.faq_statistics.indexed_question_answers_count #=> Integer
     #   resp.index_statistics.text_document_statistics.indexed_text_documents_count #=> Integer
     #   resp.index_statistics.text_document_statistics.indexed_text_bytes #=> Integer
@@ -1577,6 +1597,16 @@ module Aws::Kendra
     #   The default page size is 10. The maximum number of results returned is
     #   100. If you ask for more than 100 results, only 100 are returned.
     #
+    # @option params [Types::SortingConfiguration] :sorting_configuration
+    #   Provides information that determines how the results of the query are
+    #   sorted. You can set the field that Amazon Kendra should sort the
+    #   results on, and specify whether the results should be sorted in
+    #   ascending or descending order. In the case of ties in sorting the
+    #   results, the results are sorted by relevance.
+    #
+    #   If you don't provide sorting configuration, the results are sorted by
+    #   the relevance that Amazon Kendra determines for the result.
+    #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::QueryResult#query_id #query_id} => String
@@ -1676,6 +1706,10 @@ module Aws::Kendra
     #     query_result_type_filter: "DOCUMENT", # accepts DOCUMENT, QUESTION_ANSWER, ANSWER
     #     page_number: 1,
     #     page_size: 1,
+    #     sorting_configuration: {
+    #       document_attribute_key: "DocumentAttributeKey", # required
+    #       sort_order: "DESC", # required, accepts DESC, ASC
+    #     },
     #   })
     #
     # @example Response structure
@@ -2000,6 +2034,9 @@ module Aws::Kendra
     #         acl_configuration: {
     #           allowed_groups_column_name: "ColumnName", # required
     #         },
+    #         sql_configuration: {
+    #           query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
+    #         },
     #       },
     #       salesforce_configuration: {
     #         server_url: "Url", # required
@@ -2192,6 +2229,7 @@ module Aws::Kendra
     #           facetable: false,
     #           searchable: false,
     #           displayable: false,
+    #           sortable: false,
     #         },
     #       },
     #     ],
@@ -2223,7 +2261,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

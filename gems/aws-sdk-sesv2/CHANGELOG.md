@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2020-08-18)
+------------------
+
+* Feature - This release includes new APIs to allow customers to add or remove email addresses from their account-level suppression list in bulk.
+
+1.9.0 (2020-07-30)
+------------------
+
+* Feature - This release makes more API operations available to customers in version 2 of the Amazon SES API. With these additions, customers can now access sending authorization, custom verification email, and template API operations.  With this release, Amazon SES is also providing new and updated APIs to allow customers to request production access.
+
 1.8.0 (2020-06-23)
 ------------------
 

@@ -36,15 +36,36 @@ module Aws
 
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
-        def decryption_cipher(envelope)
+        def decryption_cipher(envelope, options = {})
           encryption_context = Json.load(envelope['x-amz-matdesc'])
+          cek_alg = envelope['x-amz-cek-alg']
+
+          case envelope['x-amz-wrap-alg']
+          when 'kms'; # NO OP
+          when 'kms+context'
+            if cek_alg != encryption_context['aws:x-amz-cek-alg']
+              raise Errors::DecryptionError, 'Value of cek-alg from envelope'\
+              ' does not match the value in the encryption context'
+            end
+          when 'AES/GCM'
+            raise ArgumentError, 'Key mismatch - Client is configured' \
+                    ' with a KMS key and the x-amz-wrap-alg is AES/GCM.'
+          when 'RSA-OAEP-SHA1'
+            raise ArgumentError, 'Key mismatch - Client is configured' \
+                    ' with a KMS key and the x-amz-wrap-alg is RSA-OAEP-SHA1.'
+          else
+            raise ArgumentError, 'Unsupported wrap-alg: ' \
+                "#{envelope['x-amz-wrap-alg']}"
+          end
+
           key = @kms_client.decrypt(
             ciphertext_blob: decode64(envelope['x-amz-key-v2']),
-            encryption_context: encryption_context,
+            encryption_context: encryption_context
           ).plaintext
+
           iv = decode64(envelope['x-amz-iv'])
           block_mode =
-            case envelope['x-amz-cek-alg']
+            case cek_alg
             when 'AES/CBC/PKCS5Padding'
               :CBC
             when 'AES/CBC/PKCS7Padding'
@@ -60,6 +81,14 @@ module Aws
         end
 
         private
+
+        def build_encryption_context(cek_alg, options = {})
+          kms_context = (options[:kms_encryption_context] || {})
+                        .each_with_object({}) { |(k, v), h| h[k.to_s] = v }
+          {
+            'aws:x-amz-cek-alg' => cek_alg
+          }.merge(kms_context)
+        end
 
         def encode64(str)
           Base64.encode64(str).split("\n") * ""

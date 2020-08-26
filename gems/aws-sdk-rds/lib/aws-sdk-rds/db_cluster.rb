@@ -1339,6 +1339,13 @@ module Aws::RDS
     #   The Active Directory directory ID to move the DB cluster to. Specify
     #   `none` to remove the cluster from its current domain. The domain must
     #   be created prior to this operation.
+    #
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.

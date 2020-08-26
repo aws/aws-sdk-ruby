@@ -85,13 +85,28 @@ module Aws::GroundStation
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::GroundStation
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -407,6 +422,7 @@ module Aws::GroundStation
     #           units: "dBW", # required, accepts dBW
     #           value: 1.0, # required
     #         },
+    #         transmit_disabled: false,
     #       },
     #       dataflow_endpoint_config: {
     #         dataflow_endpoint_name: "String", # required
@@ -471,6 +487,7 @@ module Aws::GroundStation
     #             name: "String", # required
     #             port: 1, # required
     #           },
+    #           mtu: 1,
     #           name: "SafeName",
     #           status: "created", # accepts created, creating, deleted, deleting, failed
     #         },
@@ -664,6 +681,7 @@ module Aws::GroundStation
     #
     #   * {Types::DescribeContactResponse#contact_id #contact_id} => String
     #   * {Types::DescribeContactResponse#contact_status #contact_status} => String
+    #   * {Types::DescribeContactResponse#dataflow_list #dataflow_list} => Array&lt;Types::DataflowDetail&gt;
     #   * {Types::DescribeContactResponse#end_time #end_time} => Time
     #   * {Types::DescribeContactResponse#error_message #error_message} => String
     #   * {Types::DescribeContactResponse#ground_station #ground_station} => String
@@ -686,6 +704,35 @@ module Aws::GroundStation
     #
     #   resp.contact_id #=> String
     #   resp.contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
+    #   resp.dataflow_list #=> Array
+    #   resp.dataflow_list[0].destination.config_details.antenna_demod_decode_details.output_node #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.port #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.role_arn #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids #=> Array
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids #=> Array
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
+    #   resp.dataflow_list[0].destination.config_id #=> String
+    #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.dataflow_list[0].destination.dataflow_destination_region #=> String
+    #   resp.dataflow_list[0].source.config_details.antenna_demod_decode_details.output_node #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.port #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.role_arn #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids #=> Array
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids #=> Array
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
+    #   resp.dataflow_list[0].source.config_id #=> String
+    #   resp.dataflow_list[0].source.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
+    #   resp.dataflow_list[0].source.dataflow_source_region #=> String
     #   resp.end_time #=> Time
     #   resp.error_message #=> String
     #   resp.ground_station #=> String
@@ -755,6 +802,7 @@ module Aws::GroundStation
     #   resp.config_data.antenna_uplink_config.spectrum_config.polarization #=> String, one of "LEFT_HAND", "NONE", "RIGHT_HAND"
     #   resp.config_data.antenna_uplink_config.target_eirp.units #=> String, one of "dBW"
     #   resp.config_data.antenna_uplink_config.target_eirp.value #=> Float
+    #   resp.config_data.antenna_uplink_config.transmit_disabled #=> Boolean
     #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_name #=> String
     #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_region #=> String
     #   resp.config_data.tracking_config.autotrack #=> String, one of "PREFERRED", "REMOVED", "REQUIRED"
@@ -800,6 +848,7 @@ module Aws::GroundStation
     #   resp.endpoints_details #=> Array
     #   resp.endpoints_details[0].endpoint.address.name #=> String
     #   resp.endpoints_details[0].endpoint.address.port #=> Integer
+    #   resp.endpoints_details[0].endpoint.mtu #=> Integer
     #   resp.endpoints_details[0].endpoint.name #=> String
     #   resp.endpoints_details[0].endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
     #   resp.endpoints_details[0].security_details.role_arn #=> String
@@ -1434,6 +1483,7 @@ module Aws::GroundStation
     #           units: "dBW", # required, accepts dBW
     #           value: 1.0, # required
     #         },
+    #         transmit_disabled: false,
     #       },
     #       dataflow_endpoint_config: {
     #         dataflow_endpoint_name: "String", # required
@@ -1542,7 +1592,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

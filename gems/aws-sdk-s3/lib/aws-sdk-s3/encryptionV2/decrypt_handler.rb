@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'base64'
 
 module Aws
@@ -5,6 +7,7 @@ module Aws
     module EncryptionV2
       # @api private
       class DecryptHandler < Seahorse::Client::Handler
+        @@warned_response_target_proc = false
 
         V1_ENVELOPE_KEYS = %w(
           x-amz-key
@@ -38,9 +41,22 @@ module Aws
           AES/CBC/PKCS7Padding
         )
 
+        AUTH_REQUIRED_CEK_ALGS = %w(AES/GCM/NoPadding)
+
         def call(context)
           attach_http_event_listeners(context)
           apply_cse_user_agent(context)
+
+          if context[:response_target].is_a?(Proc) && !@@warned_response_target_proc
+            @@warned_response_target_proc = true
+            warn(':response_target is a Proc, or a block was provided. ' \
+              'Read the entire object to the ' \
+              'end before you start using the decrypted data. This is to ' \
+              'verify that the object has not been modified since it ' \
+              'was encrypted.')
+
+          end
+
           @handler.call(context)
         end
 
@@ -71,11 +87,11 @@ module Aws
         end
 
         def decryption_cipher(context)
-          if envelope = get_encryption_envelope(context)
+          if (envelope = get_encryption_envelope(context))
             cipher = context[:encryption][:cipher_provider]
              .decryption_cipher(
                envelope,
-               kms_encryption_context: context[:encryption][:kms_encryption_context]
+               context[:encryption]
              )
             [cipher, envelope]
           else
@@ -145,10 +161,6 @@ module Aws
           envelope
         end
 
-        # When the x-amz-meta-x-amz-tag-len header is present, it indicates
-        # that the body of this object has a trailing auth tag. The header
-        # indicates the length of that tag.
-        #
         # This method fetches the tag from the end of the object by
         # making a GET Object w/range request. This auth tag is used
         # to initialize the cipher, and the decrypter truncates the
@@ -160,8 +172,7 @@ module Aws
           end
           http_resp = context.http_response
           content_length = http_resp.headers['content-length'].to_i
-          auth_tag_length = envelope['x-amz-tag-len']
-          auth_tag_length = auth_tag_length.to_i / 8
+          auth_tag_length = auth_tag_length(envelope)
 
           auth_tag = context.client.get_object(
             bucket: context.params[:bucket],
@@ -181,14 +192,31 @@ module Aws
         end
 
         def body_contains_auth_tag?(envelope)
-          envelope.include? 'x-amz-tag-len'
+          AUTH_REQUIRED_CEK_ALGS.include?(envelope['x-amz-cek-alg'])
+        end
+
+        # Determine the auth tag length from the algorithm
+        # Validate it against the value provided in the x-amz-tag-len
+        # Return the tag length in bytes
+        def auth_tag_length(envelope)
+          tag_length =
+            case envelope['x-amz-cek-alg']
+            when 'AES/GCM/NoPadding' then AES_GCM_TAG_LEN_BYTES
+            else
+              raise ArgumentError, 'Unsupported cek-alg: ' \
+                "#{envelope['x-amz-cek-alg']}"
+            end
+          if (tag_length * 8) != envelope['x-amz-tag-len'].to_i
+            raise Errors::DecryptionError, 'x-amz-tag-len does not match expected'
+          end
+          tag_length
         end
 
         def apply_cse_user_agent(context)
           if context.config.user_agent_suffix.nil?
-            context.config.user_agent_suffix = 'CSE_V2'
-          elsif !context.config.user_agent_suffix.include? 'CSE_V2'
-            context.config.user_agent_suffix += ' CSE_V2'
+            context.config.user_agent_suffix = EC_USER_AGENT
+          elsif !context.config.user_agent_suffix.include? EC_USER_AGENT
+            context.config.user_agent_suffix += " #{EC_USER_AGENT}"
           end
         end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2020-08-19)
+------------------
+
+* Feature - Adding additional field in ListPermissions API response to return RAM resource share ARN if a resource were shared through AWS RAM service.
+
 1.7.0 (2020-07-07)
 ------------------
 

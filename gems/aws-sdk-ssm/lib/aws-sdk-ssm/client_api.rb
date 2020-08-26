@@ -501,7 +501,6 @@ module Aws::SSM
     InventoryAggregatorExpression = Shapes::StringShape.new(name: 'InventoryAggregatorExpression')
     InventoryAggregatorList = Shapes::ListShape.new(name: 'InventoryAggregatorList')
     InventoryAttributeDataType = Shapes::StringShape.new(name: 'InventoryAttributeDataType')
-    InventoryDeletionId = Shapes::StringShape.new(name: 'InventoryDeletionId')
     InventoryDeletionLastStatusMessage = Shapes::StringShape.new(name: 'InventoryDeletionLastStatusMessage')
     InventoryDeletionLastStatusUpdateTime = Shapes::TimestampShape.new(name: 'InventoryDeletionLastStatusUpdateTime')
     InventoryDeletionStartTime = Shapes::TimestampShape.new(name: 'InventoryDeletionStartTime')
@@ -1007,6 +1006,7 @@ module Aws::SSM
     TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
+    UUID = Shapes::StringShape.new(name: 'UUID')
     UnsupportedCalendarException = Shapes::StructureShape.new(name: 'UnsupportedCalendarException')
     UnsupportedFeatureRequiredException = Shapes::StructureShape.new(name: 'UnsupportedFeatureRequiredException')
     UnsupportedInventoryItemContextException = Shapes::StructureShape.new(name: 'UnsupportedInventoryItemContextException')
@@ -1614,10 +1614,10 @@ module Aws::SSM
     DeleteInventoryRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     DeleteInventoryRequest.add_member(:schema_delete_option, Shapes::ShapeRef.new(shape: InventorySchemaDeleteOption, location_name: "SchemaDeleteOption"))
     DeleteInventoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
-    DeleteInventoryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteInventoryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     DeleteInventoryRequest.struct_class = Types::DeleteInventoryRequest
 
-    DeleteInventoryResult.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    DeleteInventoryResult.add_member(:deletion_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DeletionId"))
     DeleteInventoryResult.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
     DeleteInventoryResult.add_member(:deletion_summary, Shapes::ShapeRef.new(shape: InventoryDeletionSummary, location_name: "DeletionSummary"))
     DeleteInventoryResult.struct_class = Types::DeleteInventoryResult
@@ -1838,7 +1838,7 @@ module Aws::SSM
     DescribeInstancePatchesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInstancePatchesResult.struct_class = Types::DescribeInstancePatchesResult
 
-    DescribeInventoryDeletionsRequest.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    DescribeInventoryDeletionsRequest.add_member(:deletion_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DeletionId"))
     DescribeInventoryDeletionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInventoryDeletionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     DescribeInventoryDeletionsRequest.struct_class = Types::DescribeInventoryDeletionsRequest
@@ -2678,7 +2678,7 @@ module Aws::SSM
 
     InventoryAggregatorList.member = Shapes::ShapeRef.new(shape: InventoryAggregator)
 
-    InventoryDeletionStatusItem.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    InventoryDeletionStatusItem.add_member(:deletion_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DeletionId"))
     InventoryDeletionStatusItem.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
     InventoryDeletionStatusItem.add_member(:deletion_start_time, Shapes::ShapeRef.new(shape: InventoryDeletionStartTime, location_name: "DeletionStartTime"))
     InventoryDeletionStatusItem.add_member(:last_status, Shapes::ShapeRef.new(shape: InventoryDeletionStatus, location_name: "LastStatus"))
@@ -4384,6 +4384,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: AssociationDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: AssociationExecutionDoesNotExist)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_association_executions, Seahorse::Model::Operation.new.tap do |o|
@@ -4395,6 +4401,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: AssociationDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_automation_executions, Seahorse::Model::Operation.new.tap do |o|
@@ -4407,6 +4419,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilterValue)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_automation_step_executions, Seahorse::Model::Operation.new.tap do |o|
@@ -4420,6 +4438,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilterValue)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_available_patches, Seahorse::Model::Operation.new.tap do |o|
@@ -4429,6 +4453,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribeAvailablePatchesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAvailablePatchesResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_document, Seahorse::Model::Operation.new.tap do |o|
@@ -4462,6 +4492,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_effective_patches_for_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
@@ -4474,6 +4510,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperatingSystem)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_associations_status, Seahorse::Model::Operation.new.tap do |o|
@@ -4485,6 +4527,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_information, Seahorse::Model::Operation.new.tap do |o|
@@ -4514,6 +4562,12 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeInstancePatchStatesResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_patch_states_for_patch_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4525,6 +4579,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_patches, Seahorse::Model::Operation.new.tap do |o|
@@ -4537,6 +4597,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_inventory_deletions, Seahorse::Model::Operation.new.tap do |o|
@@ -4548,6 +4614,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeletionIdException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_window_execution_task_invocations, Seahorse::Model::Operation.new.tap do |o|
@@ -4558,6 +4630,12 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowExecutionTaskInvocationsResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_window_execution_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -4568,6 +4646,12 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowExecutionTasksResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_window_executions, Seahorse::Model::Operation.new.tap do |o|
@@ -4577,6 +4661,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowExecutionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_window_schedule, Seahorse::Model::Operation.new.tap do |o|
@@ -4587,6 +4677,12 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowScheduleResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_window_targets, Seahorse::Model::Operation.new.tap do |o|
@@ -4597,6 +4693,12 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowTargetsResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_window_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -4607,6 +4709,12 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowTasksResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_windows, Seahorse::Model::Operation.new.tap do |o|
@@ -4616,6 +4724,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_maintenance_windows_for_target, Seahorse::Model::Operation.new.tap do |o|
@@ -4625,6 +4739,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsForTargetRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMaintenanceWindowsForTargetResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_ops_items, Seahorse::Model::Operation.new.tap do |o|
@@ -4634,6 +4754,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribeOpsItemsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeOpsItemsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -4662,6 +4788,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribePatchBaselinesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePatchBaselinesResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_patch_group_state, Seahorse::Model::Operation.new.tap do |o|
@@ -4681,6 +4813,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribePatchGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePatchGroupsResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_patch_properties, Seahorse::Model::Operation.new.tap do |o|
@@ -4690,6 +4828,12 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribePatchPropertiesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePatchPropertiesResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -4701,6 +4845,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_automation_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -4791,6 +4941,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidTypeNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAggregatorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResultAttributeException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_inventory_schema, Seahorse::Model::Operation.new.tap do |o|
@@ -4802,6 +4958,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTypeNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_maintenance_window, Seahorse::Model::Operation.new.tap do |o|
@@ -4876,6 +5038,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTypeNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAggregatorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_parameter, Seahorse::Model::Operation.new.tap do |o|
@@ -4990,6 +5158,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: AssociationDoesNotExist)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -5057,6 +5231,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_compliance_summaries, Seahorse::Model::Operation.new.tap do |o|
@@ -5068,6 +5248,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_document_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -5079,6 +5265,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_documents, Seahorse::Model::Operation.new.tap do |o|
@@ -5120,6 +5312,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resource_data_sync, Seahorse::Model::Operation.new.tap do |o|
@@ -5131,6 +5329,12 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncInvalidConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

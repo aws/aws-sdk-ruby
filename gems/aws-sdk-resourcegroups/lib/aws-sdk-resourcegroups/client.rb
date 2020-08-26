@@ -85,13 +85,28 @@ module Aws::ResourceGroups
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::ResourceGroups
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -312,50 +327,73 @@ module Aws::ResourceGroups
 
     # @!group API Operations
 
-    # Creates a group with a specified name, description, and resource
-    # query.
+    # Creates a resource group with the specified name and description. You
+    # can optionally include a resource query, or a service configuration.
     #
     # @option params [required, String] :name
     #   The name of the group, which is the identifier of the group in other
-    #   operations. A resource group name cannot be updated after it is
-    #   created. A resource group name can have a maximum of 128 characters,
-    #   including letters, numbers, hyphens, dots, and underscores. The name
-    #   cannot start with `AWS` or `aws`; these are reserved. A resource group
-    #   name must be unique within your account.
+    #   operations. You can't change the name of a resource group after you
+    #   create it. A resource group name can consist of letters, numbers,
+    #   hyphens, periods, and underscores. The name cannot start with `AWS` or
+    #   `aws`; these are reserved. A resource group name must be unique within
+    #   each AWS Region in your AWS account.
     #
     # @option params [String] :description
-    #   The description of the resource group. Descriptions can have a maximum
-    #   of 511 characters, including letters, numbers, hyphens, underscores,
-    #   punctuation, and spaces.
+    #   The description of the resource group. Descriptions can consist of
+    #   letters, numbers, hyphens, underscores, periods, and spaces.
     #
-    # @option params [required, Types::ResourceQuery] :resource_query
+    # @option params [Types::ResourceQuery] :resource_query
     #   The resource query that determines which AWS resources are members of
     #   this group.
     #
+    #   <note markdown="1"> You can specify either a `ResourceQuery` or a `Configuration`, but not
+    #   both.
+    #
+    #    </note>
+    #
     # @option params [Hash<String,String>] :tags
-    #   The tags to add to the group. A tag is a string-to-string map of
-    #   key-value pairs. Tag keys can have a maximum character length of 128
-    #   characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   The tags to add to the group. A tag is key-value pair string.
+    #
+    # @option params [Array<Types::GroupConfigurationItem>] :configuration
+    #   A configuration associates the resource group with an AWS service and
+    #   specifies how the service can interact with the resources in the
+    #   group. A configuration is an array of GroupConfigurationItem elements.
+    #
+    #   <note markdown="1"> You can specify either a `Configuration` or a `ResourceQuery` in a
+    #   group, but not both.
+    #
+    #    </note>
     #
     # @return [Types::CreateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGroupOutput#group #group} => Types::Group
     #   * {Types::CreateGroupOutput#resource_query #resource_query} => Types::ResourceQuery
     #   * {Types::CreateGroupOutput#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateGroupOutput#group_configuration #group_configuration} => Types::GroupConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_group({
     #     name: "GroupName", # required
-    #     description: "GroupDescription",
-    #     resource_query: { # required
+    #     description: "Description",
+    #     resource_query: {
     #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     configuration: [
+    #       {
+    #         type: "GroupConfigurationType", # required
+    #         parameters: [
+    #           {
+    #             name: "GroupConfigurationParameterName", # required
+    #             values: ["GroupConfigurationParameterValue"],
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -367,6 +405,20 @@ module Aws::ResourceGroups
     #   resp.resource_query.query #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.group_configuration.configuration #=> Array
+    #   resp.group_configuration.configuration[0].type #=> String
+    #   resp.group_configuration.configuration[0].parameters #=> Array
+    #   resp.group_configuration.configuration[0].parameters[0].name #=> String
+    #   resp.group_configuration.configuration[0].parameters[0].values #=> Array
+    #   resp.group_configuration.configuration[0].parameters[0].values[0] #=> String
+    #   resp.group_configuration.proposed_configuration #=> Array
+    #   resp.group_configuration.proposed_configuration[0].type #=> String
+    #   resp.group_configuration.proposed_configuration[0].parameters #=> Array
+    #   resp.group_configuration.proposed_configuration[0].parameters[0].name #=> String
+    #   resp.group_configuration.proposed_configuration[0].parameters[0].values #=> Array
+    #   resp.group_configuration.proposed_configuration[0].parameters[0].values[0] #=> String
+    #   resp.group_configuration.status #=> String, one of "UPDATING", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.group_configuration.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroup AWS API Documentation
     #
@@ -377,12 +429,15 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Deletes a specified resource group. Deleting a resource group does not
-    # delete resources that are members of the group; it only deletes the
-    # group structure.
+    # Deletes the specified resource group. Deleting a resource group does
+    # not delete any resources that are members of the group; it only
+    # deletes the group structure.
     #
-    # @option params [required, String] :group_name
-    #   The name of the resource group to delete.
+    # @option params [String] :group_name
+    #   Don't use this parameter. Use `Group` instead.
+    #
+    # @option params [String] :group
+    #   The name or the ARN of the resource group to delete.
     #
     # @return [Types::DeleteGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -391,7 +446,8 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_group({
-    #     group_name: "GroupName", # required
+    #     group_name: "GroupName",
+    #     group: "GroupString",
     #   })
     #
     # @example Response structure
@@ -411,8 +467,11 @@ module Aws::ResourceGroups
 
     # Returns information about a specified resource group.
     #
-    # @option params [required, String] :group_name
-    #   The name of the resource group.
+    # @option params [String] :group_name
+    #   Don't use this parameter. Use `Group` instead.
+    #
+    # @option params [String] :group
+    #   The name or the ARN of the resource group to retrieve.
     #
     # @return [Types::GetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -421,7 +480,8 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_group({
-    #     group_name: "GroupName", # required
+    #     group_name: "GroupName",
+    #     group: "GroupString",
     #   })
     #
     # @example Response structure
@@ -439,11 +499,67 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns the resource query associated with the specified resource
+    # Returns the service configuration associated with the specified
+    # resource group. AWS Resource Groups supports configurations for the
+    # following resource group types:
+    #
+    # * `AWS::EC2::CapacityReservationPool` - Amazon EC2 capacity
+    #   reservation pools. For more information, see [Working with capacity
+    #   reservation groups][1] in the *EC2 Users Guide*.
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group
+    #
+    # @option params [String] :group
+    #   The name or the ARN of the resource group.
+    #
+    # @return [Types::GetGroupConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupConfigurationOutput#group_configuration #group_configuration} => Types::GroupConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_group_configuration({
+    #     group: "GroupString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_configuration.configuration #=> Array
+    #   resp.group_configuration.configuration[0].type #=> String
+    #   resp.group_configuration.configuration[0].parameters #=> Array
+    #   resp.group_configuration.configuration[0].parameters[0].name #=> String
+    #   resp.group_configuration.configuration[0].parameters[0].values #=> Array
+    #   resp.group_configuration.configuration[0].parameters[0].values[0] #=> String
+    #   resp.group_configuration.proposed_configuration #=> Array
+    #   resp.group_configuration.proposed_configuration[0].type #=> String
+    #   resp.group_configuration.proposed_configuration[0].parameters #=> Array
+    #   resp.group_configuration.proposed_configuration[0].parameters[0].name #=> String
+    #   resp.group_configuration.proposed_configuration[0].parameters[0].values #=> Array
+    #   resp.group_configuration.proposed_configuration[0].parameters[0].values[0] #=> String
+    #   resp.group_configuration.status #=> String, one of "UPDATING", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.group_configuration.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupConfiguration AWS API Documentation
+    #
+    # @overload get_group_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_group_configuration(params = {}, options = {})
+      req = build_request(:get_group_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the resource query associated with the specified resource
     # group.
     #
-    # @option params [required, String] :group_name
-    #   The name of the resource group.
+    # @option params [String] :group_name
+    #   Don't use this parameter. Use `Group` instead.
+    #
+    # @option params [String] :group
+    #   The name or the ARN of the resource group to query.
     #
     # @return [Types::GetGroupQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -452,7 +568,8 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_group_query({
-    #     group_name: "GroupName", # required
+    #     group_name: "GroupName",
+    #     group: "GroupString",
     #   })
     #
     # @example Response structure
@@ -474,8 +591,7 @@ module Aws::ResourceGroups
     # specified by an ARN.
     #
     # @option params [required, String] :arn
-    #   The ARN of the resource group for which you want a list of tags. The
-    #   resource must exist within the account you are using.
+    #   The ARN of the resource group whose tags you want to retrieve.
     #
     # @return [Types::GetTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -503,31 +619,101 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of ARNs of resources that are members of a specified
-    # resource group.
+    # Adds the specified resources to the specified group.
     #
-    # @option params [required, String] :group_name
-    #   The name of the resource group.
+    # @option params [required, String] :group
+    #   The name or the ARN of the resource group to add resources to.
+    #
+    # @option params [required, Array<String>] :resource_arns
+    #   The list of ARNs for resources to be added to the group.
+    #
+    # @return [Types::GroupResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GroupResourcesOutput#succeeded #succeeded} => Array&lt;String&gt;
+    #   * {Types::GroupResourcesOutput#failed #failed} => Array&lt;Types::FailedResource&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.group_resources({
+    #     group: "GroupString", # required
+    #     resource_arns: ["ResourceArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.succeeded #=> Array
+    #   resp.succeeded[0] #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].resource_arn #=> String
+    #   resp.failed[0].error_message #=> String
+    #   resp.failed[0].error_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResources AWS API Documentation
+    #
+    # @overload group_resources(params = {})
+    # @param [Hash] params ({})
+    def group_resources(params = {}, options = {})
+      req = build_request(:group_resources, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ARNs of the resources that are members of a
+    # specified resource group.
+    #
+    # @option params [String] :group_name
+    #   Don't use this parameter. Use `Group` instead.
+    #
+    # @option params [String] :group
+    #   The name or the ARN of the resource group
     #
     # @option params [Array<Types::ResourceFilter>] :filters
     #   Filters, formatted as ResourceFilter objects, that you want to apply
-    #   to a ListGroupResources operation.
+    #   to a `ListGroupResources` operation. Filters the results to include
+    #   only those of the specified resource types.
     #
     #   * `resource-type` - Filter resources by their type. Specify up to five
-    #     resource types in the format AWS::ServiceCode::ResourceType. For
-    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #     resource types in the format `AWS::ServiceCode::ResourceType`. For
+    #     example, `AWS::EC2::Instance`, or `AWS::S3::Bucket`.
     #
     #   ^
     #
+    #   When you specify a `resource-type` filter for `ListGroupResources`,
+    #   AWS Resource Groups validates your filter resource types against the
+    #   types that are defined in the query associated with the group. For
+    #   example, if a group contains only S3 buckets because its query
+    #   specifies only that resource type, but your `resource-type` filter
+    #   includes EC2 instances, AWS Resource Groups does not filter for EC2
+    #   instances. In this case, a `ListGroupResources` request returns a
+    #   `BadRequestException` error with a message similar to the following:
+    #
+    #   `The resource types specified as filters in the request are not
+    #   valid.`
+    #
+    #   The error includes a list of resource types that failed the validation
+    #   because they are not part of the query associated with the group. This
+    #   validation doesn't occur when the group query specifies
+    #   `AWS::AllSupported`, because a group based on such a query can contain
+    #   any of the allowed resource types for the query type (tag-based or AWS
+    #   CloudFormation stack-based queries).
+    #
     # @option params [Integer] :max_results
-    #   The maximum number of group member ARNs that are returned in a single
-    #   call by ListGroupResources, in paginated output. By default, this
-    #   number is 50.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that the service might return fewer results
+    #   than the maximum even when there are more results available. You
+    #   should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @option params [String] :next_token
-    #   The NextToken value that is returned in a paginated ListGroupResources
-    #   request. To get the next page of results, run the call again, add the
-    #   NextToken parameter, and specify the NextToken value.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value provided by a previous call's `NextToken` response to indicate
+    #   where the output should continue from.
     #
     # @return [Types::ListGroupResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -540,7 +726,8 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_group_resources({
-    #     group_name: "GroupName", # required
+    #     group_name: "GroupName",
+    #     group: "GroupString",
     #     filters: [
     #       {
     #         name: "resource-type", # required, accepts resource-type
@@ -574,22 +761,39 @@ module Aws::ResourceGroups
     #
     # @option params [Array<Types::GroupFilter>] :filters
     #   Filters, formatted as GroupFilter objects, that you want to apply to a
-    #   ListGroups operation.
+    #   `ListGroups` operation.
     #
-    #   * `resource-type` - Filter groups by resource type. Specify up to five
-    #     resource types in the format AWS::ServiceCode::ResourceType. For
-    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #   * `resource-type` - Filter the results to include only those of the
+    #     specified resource types. Specify up to five resource types in the
+    #     format `AWS::ServiceCode::ResourceType `. For example,
+    #     `AWS::EC2::Instance`, or `AWS::S3::Bucket`.
     #
-    #   ^
+    #   * `configuration-type` - Filter the results to include only those
+    #     groups that have the specified configuration types attached. The
+    #     current supported values are:
+    #
+    #     * AWS:EC2::CapacityReservationPool
+    #
+    #     ^
     #
     # @option params [Integer] :max_results
-    #   The maximum number of resource group results that are returned by
-    #   ListGroups in paginated output. By default, this number is 50.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that the service might return fewer results
+    #   than the maximum even when there are more results available. You
+    #   should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @option params [String] :next_token
-    #   The NextToken value that is returned in a paginated `ListGroups`
-    #   request. To get the next page of results, run the call again, add the
-    #   NextToken parameter, and specify the NextToken value.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value provided by a previous call's `NextToken` response to indicate
+    #   where the output should continue from.
     #
     # @return [Types::ListGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -604,7 +808,7 @@ module Aws::ResourceGroups
     #   resp = client.list_groups({
     #     filters: [
     #       {
-    #         name: "resource-type", # required, accepts resource-type
+    #         name: "resource-type", # required, accepts resource-type, configuration-type
     #         values: ["GroupFilterValue"], # required
     #       },
     #     ],
@@ -632,22 +836,32 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of AWS resource identifiers that matches a specified
+    # Returns a list of AWS resource identifiers that matches tne specified
     # query. The query uses the same format as a resource query in a
     # CreateGroup or UpdateGroupQuery operation.
     #
     # @option params [required, Types::ResourceQuery] :resource_query
     #   The search query, using the same formats that are supported for
-    #   resource group definition.
+    #   resource group definition. For more information, see CreateGroup.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of group member ARNs returned by `SearchResources`
-    #   in paginated output. By default, this number is 50.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that the service might return fewer results
+    #   than the maximum even when there are more results available. You
+    #   should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @option params [String] :next_token
-    #   The NextToken value that is returned in a paginated `SearchResources`
-    #   request. To get the next page of results, run the call again, add the
-    #   NextToken parameter, and specify the NextToken value.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value provided by a previous call's `NextToken` response to indicate
+    #   where the output should continue from.
     #
     # @return [Types::SearchResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -691,14 +905,17 @@ module Aws::ResourceGroups
     # a resource group are not changed if they are not specified in the
     # request parameters.
     #
+    # Do not store personally identifiable information (PII) or other
+    # confidential or sensitive information in tags. We use tags to provide
+    # you with billing and administration services. Tags are not intended to
+    # be used for private or sensitive data.
+    #
     # @option params [required, String] :arn
-    #   The ARN of the resource to which to add tags.
+    #   The ARN of the resource group to which to add tags.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to add to the specified resource. A tag is a string-to-string
-    #   map of key-value pairs. Tag keys can have a maximum character length
-    #   of 128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   The tags to add to the specified resource group. A tag is a
+    #   string-to-string map of key-value pairs.
     #
     # @return [Types::TagOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -729,10 +946,51 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Deletes specified tags from a specified resource.
+    # Removes the specified resources from the specified group.
+    #
+    # @option params [required, String] :group
+    #   The name or the ARN of the resource group from which to remove the
+    #   resources.
+    #
+    # @option params [required, Array<String>] :resource_arns
+    #   The ARNs of the resources to be removed from the group.
+    #
+    # @return [Types::UngroupResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UngroupResourcesOutput#succeeded #succeeded} => Array&lt;String&gt;
+    #   * {Types::UngroupResourcesOutput#failed #failed} => Array&lt;Types::FailedResource&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.ungroup_resources({
+    #     group: "GroupString", # required
+    #     resource_arns: ["ResourceArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.succeeded #=> Array
+    #   resp.succeeded[0] #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].resource_arn #=> String
+    #   resp.failed[0].error_message #=> String
+    #   resp.failed[0].error_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UngroupResources AWS API Documentation
+    #
+    # @overload ungroup_resources(params = {})
+    # @param [Hash] params ({})
+    def ungroup_resources(params = {}, options = {})
+      req = build_request(:ungroup_resources, params)
+      req.send_request(options)
+    end
+
+    # Deletes tags from a specified resource group.
     #
     # @option params [required, String] :arn
-    #   The ARN of the resource from which to remove tags.
+    #   The ARN of the resource group from which to remove tags. The command
+    #   removed both the specified keys and any values associated with those
+    #   keys.
     #
     # @option params [required, Array<String>] :keys
     #   The keys of the tags to be removed.
@@ -764,17 +1022,19 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Updates an existing group with a new or changed description. You
-    # cannot update the name of a resource group.
+    # Updates the description for an existing group. You cannot update the
+    # name of a resource group.
     #
-    # @option params [required, String] :group_name
-    #   The name of the resource group for which you want to update its
-    #   description.
+    # @option params [String] :group_name
+    #   Don't use this parameter. Use `Group` instead.
+    #
+    # @option params [String] :group
+    #   The name or the ARN of the resource group to modify.
     #
     # @option params [String] :description
-    #   The description of the resource group. Descriptions can have a maximum
-    #   of 511 characters, including letters, numbers, hyphens, underscores,
-    #   punctuation, and spaces.
+    #   The new description that you want to update the resource group with.
+    #   Descriptions can contain letters, numbers, hyphens, underscores,
+    #   periods, and spaces.
     #
     # @return [Types::UpdateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -783,8 +1043,9 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_group({
-    #     group_name: "GroupName", # required
-    #     description: "GroupDescription",
+    #     group_name: "GroupName",
+    #     group: "GroupString",
+    #     description: "Description",
     #   })
     #
     # @example Response structure
@@ -804,12 +1065,15 @@ module Aws::ResourceGroups
 
     # Updates the resource query of a group.
     #
-    # @option params [required, String] :group_name
-    #   The name of the resource group for which you want to edit the query.
+    # @option params [String] :group_name
+    #   Don't use this parameter. Use `Group` instead.
+    #
+    # @option params [String] :group
+    #   The name or the ARN of the resource group to query.
     #
     # @option params [required, Types::ResourceQuery] :resource_query
-    #   The resource query that determines which AWS resources are members of
-    #   the resource group.
+    #   The resource query to determine which AWS resources are members of
+    #   this resource group.
     #
     # @return [Types::UpdateGroupQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -818,7 +1082,8 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_group_query({
-    #     group_name: "GroupName", # required
+    #     group_name: "GroupName",
+    #     group: "GroupString",
     #     resource_query: { # required
     #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
@@ -853,7 +1118,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

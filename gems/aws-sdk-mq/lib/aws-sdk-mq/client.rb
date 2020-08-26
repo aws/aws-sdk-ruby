@@ -85,13 +85,28 @@ module Aws::MQ
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::MQ
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -314,6 +329,9 @@ module Aws::MQ
 
     # Creates a broker. Note: This API is asynchronous.
     #
+    # @option params [String] :authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #
     # @option params [Boolean] :auto_minor_version_upgrade
     #
     # @option params [String] :broker_name
@@ -338,6 +356,10 @@ module Aws::MQ
     # @option params [String] :engine_version
     #
     # @option params [String] :host_instance_type
+    #
+    # @option params [Types::LdapServerMetadataInput] :ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
     #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
@@ -368,6 +390,7 @@ module Aws::MQ
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_broker({
+    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
     #     auto_minor_version_upgrade: false,
     #     broker_name: "__string",
     #     configuration: {
@@ -383,6 +406,19 @@ module Aws::MQ
     #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #     engine_version: "__string",
     #     host_instance_type: "__string",
+    #     ldap_server_metadata: {
+    #       hosts: ["__string"],
+    #       role_base: "__string",
+    #       role_name: "__string",
+    #       role_search_matching: "__string",
+    #       role_search_subtree: false,
+    #       service_account_password: "__string",
+    #       service_account_username: "__string",
+    #       user_base: "__string",
+    #       user_role_name: "__string",
+    #       user_search_matching: "__string",
+    #       user_search_subtree: false,
+    #     },
     #     logs: {
     #       audit: false,
     #       general: false,
@@ -427,6 +463,9 @@ module Aws::MQ
     # Amazon MQ uses the default configuration (the engine type and
     # version).
     #
+    # @option params [String] :authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #
     # @option params [String] :engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
     #   ActiveMQ.
@@ -440,6 +479,7 @@ module Aws::MQ
     # @return [Types::CreateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConfigurationResponse#arn #arn} => String
+    #   * {Types::CreateConfigurationResponse#authentication_strategy #authentication_strategy} => String
     #   * {Types::CreateConfigurationResponse#created #created} => Time
     #   * {Types::CreateConfigurationResponse#id #id} => String
     #   * {Types::CreateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
@@ -448,6 +488,7 @@ module Aws::MQ
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_configuration({
+    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
     #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #     engine_version: "__string",
     #     name: "__string",
@@ -459,6 +500,7 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.created #=> Time
     #   resp.id #=> String
     #   resp.latest_revision.created #=> Time
@@ -615,6 +657,7 @@ module Aws::MQ
     #
     # @return [Types::DescribeBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeBrokerResponse#authentication_strategy #authentication_strategy} => String
     #   * {Types::DescribeBrokerResponse#auto_minor_version_upgrade #auto_minor_version_upgrade} => Boolean
     #   * {Types::DescribeBrokerResponse#broker_arn #broker_arn} => String
     #   * {Types::DescribeBrokerResponse#broker_id #broker_id} => String
@@ -628,10 +671,13 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#engine_type #engine_type} => String
     #   * {Types::DescribeBrokerResponse#engine_version #engine_version} => String
     #   * {Types::DescribeBrokerResponse#host_instance_type #host_instance_type} => String
+    #   * {Types::DescribeBrokerResponse#ldap_server_metadata #ldap_server_metadata} => Types::LdapServerMetadataOutput
     #   * {Types::DescribeBrokerResponse#logs #logs} => Types::LogsSummary
     #   * {Types::DescribeBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
+    #   * {Types::DescribeBrokerResponse#pending_authentication_strategy #pending_authentication_strategy} => String
     #   * {Types::DescribeBrokerResponse#pending_engine_version #pending_engine_version} => String
     #   * {Types::DescribeBrokerResponse#pending_host_instance_type #pending_host_instance_type} => String
+    #   * {Types::DescribeBrokerResponse#pending_ldap_server_metadata #pending_ldap_server_metadata} => Types::LdapServerMetadataOutput
     #   * {Types::DescribeBrokerResponse#pending_security_groups #pending_security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
@@ -648,6 +694,7 @@ module Aws::MQ
     #
     # @example Response structure
     #
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.auto_minor_version_upgrade #=> Boolean
     #   resp.broker_arn #=> String
     #   resp.broker_id #=> String
@@ -672,6 +719,17 @@ module Aws::MQ
     #   resp.engine_type #=> String, one of "ACTIVEMQ"
     #   resp.engine_version #=> String
     #   resp.host_instance_type #=> String
+    #   resp.ldap_server_metadata.hosts #=> Array
+    #   resp.ldap_server_metadata.hosts[0] #=> String
+    #   resp.ldap_server_metadata.role_base #=> String
+    #   resp.ldap_server_metadata.role_name #=> String
+    #   resp.ldap_server_metadata.role_search_matching #=> String
+    #   resp.ldap_server_metadata.role_search_subtree #=> Boolean
+    #   resp.ldap_server_metadata.service_account_username #=> String
+    #   resp.ldap_server_metadata.user_base #=> String
+    #   resp.ldap_server_metadata.user_role_name #=> String
+    #   resp.ldap_server_metadata.user_search_matching #=> String
+    #   resp.ldap_server_metadata.user_search_subtree #=> Boolean
     #   resp.logs.audit #=> Boolean
     #   resp.logs.audit_log_group #=> String
     #   resp.logs.general #=> Boolean
@@ -681,8 +739,20 @@ module Aws::MQ
     #   resp.maintenance_window_start_time.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
     #   resp.maintenance_window_start_time.time_of_day #=> String
     #   resp.maintenance_window_start_time.time_zone #=> String
+    #   resp.pending_authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.pending_engine_version #=> String
     #   resp.pending_host_instance_type #=> String
+    #   resp.pending_ldap_server_metadata.hosts #=> Array
+    #   resp.pending_ldap_server_metadata.hosts[0] #=> String
+    #   resp.pending_ldap_server_metadata.role_base #=> String
+    #   resp.pending_ldap_server_metadata.role_name #=> String
+    #   resp.pending_ldap_server_metadata.role_search_matching #=> String
+    #   resp.pending_ldap_server_metadata.role_search_subtree #=> Boolean
+    #   resp.pending_ldap_server_metadata.service_account_username #=> String
+    #   resp.pending_ldap_server_metadata.user_base #=> String
+    #   resp.pending_ldap_server_metadata.user_role_name #=> String
+    #   resp.pending_ldap_server_metadata.user_search_matching #=> String
+    #   resp.pending_ldap_server_metadata.user_search_subtree #=> Boolean
     #   resp.pending_security_groups #=> Array
     #   resp.pending_security_groups[0] #=> String
     #   resp.publicly_accessible #=> Boolean
@@ -805,6 +875,7 @@ module Aws::MQ
     # @return [Types::DescribeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeConfigurationResponse#arn #arn} => String
+    #   * {Types::DescribeConfigurationResponse#authentication_strategy #authentication_strategy} => String
     #   * {Types::DescribeConfigurationResponse#created #created} => Time
     #   * {Types::DescribeConfigurationResponse#description #description} => String
     #   * {Types::DescribeConfigurationResponse#engine_type #engine_type} => String
@@ -823,6 +894,7 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.created #=> Time
     #   resp.description #=> String
     #   resp.engine_type #=> String, one of "ACTIVEMQ"
@@ -934,6 +1006,8 @@ module Aws::MQ
     #   * {Types::ListBrokersResponse#broker_summaries #broker_summaries} => Array&lt;Types::BrokerSummary&gt;
     #   * {Types::ListBrokersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_brokers({
@@ -1027,6 +1101,7 @@ module Aws::MQ
     #
     #   resp.configurations #=> Array
     #   resp.configurations[0].arn #=> String
+    #   resp.configurations[0].authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.configurations[0].created #=> Time
     #   resp.configurations[0].description #=> String
     #   resp.configurations[0].engine_type #=> String, one of "ACTIVEMQ"
@@ -1142,6 +1217,9 @@ module Aws::MQ
 
     # Adds a pending configuration change to a broker.
     #
+    # @option params [String] :authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #
     # @option params [Boolean] :auto_minor_version_upgrade
     #
     # @option params [required, String] :broker_id
@@ -1153,6 +1231,10 @@ module Aws::MQ
     #
     # @option params [String] :host_instance_type
     #
+    # @option params [Types::LdapServerMetadataInput] :ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -1161,17 +1243,20 @@ module Aws::MQ
     #
     # @return [Types::UpdateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdateBrokerResponse#authentication_strategy #authentication_strategy} => String
     #   * {Types::UpdateBrokerResponse#auto_minor_version_upgrade #auto_minor_version_upgrade} => Boolean
     #   * {Types::UpdateBrokerResponse#broker_id #broker_id} => String
     #   * {Types::UpdateBrokerResponse#configuration #configuration} => Types::ConfigurationId
     #   * {Types::UpdateBrokerResponse#engine_version #engine_version} => String
     #   * {Types::UpdateBrokerResponse#host_instance_type #host_instance_type} => String
+    #   * {Types::UpdateBrokerResponse#ldap_server_metadata #ldap_server_metadata} => Types::LdapServerMetadataOutput
     #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
     #   * {Types::UpdateBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_broker({
+    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
     #     auto_minor_version_upgrade: false,
     #     broker_id: "__string", # required
     #     configuration: {
@@ -1180,6 +1265,19 @@ module Aws::MQ
     #     },
     #     engine_version: "__string",
     #     host_instance_type: "__string",
+    #     ldap_server_metadata: {
+    #       hosts: ["__string"],
+    #       role_base: "__string",
+    #       role_name: "__string",
+    #       role_search_matching: "__string",
+    #       role_search_subtree: false,
+    #       service_account_password: "__string",
+    #       service_account_username: "__string",
+    #       user_base: "__string",
+    #       user_role_name: "__string",
+    #       user_search_matching: "__string",
+    #       user_search_subtree: false,
+    #     },
     #     logs: {
     #       audit: false,
     #       general: false,
@@ -1189,12 +1287,24 @@ module Aws::MQ
     #
     # @example Response structure
     #
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.auto_minor_version_upgrade #=> Boolean
     #   resp.broker_id #=> String
     #   resp.configuration.id #=> String
     #   resp.configuration.revision #=> Integer
     #   resp.engine_version #=> String
     #   resp.host_instance_type #=> String
+    #   resp.ldap_server_metadata.hosts #=> Array
+    #   resp.ldap_server_metadata.hosts[0] #=> String
+    #   resp.ldap_server_metadata.role_base #=> String
+    #   resp.ldap_server_metadata.role_name #=> String
+    #   resp.ldap_server_metadata.role_search_matching #=> String
+    #   resp.ldap_server_metadata.role_search_subtree #=> Boolean
+    #   resp.ldap_server_metadata.service_account_username #=> String
+    #   resp.ldap_server_metadata.user_base #=> String
+    #   resp.ldap_server_metadata.user_role_name #=> String
+    #   resp.ldap_server_metadata.user_search_matching #=> String
+    #   resp.ldap_server_metadata.user_search_subtree #=> Boolean
     #   resp.logs.audit #=> Boolean
     #   resp.logs.general #=> Boolean
     #   resp.security_groups #=> Array
@@ -1303,7 +1413,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

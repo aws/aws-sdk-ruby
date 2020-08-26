@@ -44,9 +44,9 @@ require_relative 'aws-sdk-mq/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::MQ
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.31.0'
 
 end

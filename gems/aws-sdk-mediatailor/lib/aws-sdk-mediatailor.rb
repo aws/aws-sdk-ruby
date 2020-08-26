@@ -44,9 +44,9 @@ require_relative 'aws-sdk-mediatailor/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::MediaTailor
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

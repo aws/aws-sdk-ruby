@@ -34,6 +34,7 @@ module Aws::DatabaseMigrationService
   # * {InvalidSubnet}
   # * {KMSAccessDeniedFault}
   # * {KMSDisabledFault}
+  # * {KMSFault}
   # * {KMSInvalidStateFault}
   # * {KMSKeyNotAccessibleFault}
   # * {KMSNotFoundFault}
@@ -42,6 +43,8 @@ module Aws::DatabaseMigrationService
   # * {ResourceAlreadyExistsFault}
   # * {ResourceNotFoundFault}
   # * {ResourceQuotaExceededFault}
+  # * {S3AccessDeniedFault}
+  # * {S3ResourceNotFoundFault}
   # * {SNSInvalidTopicFault}
   # * {SNSNoAuthorizationFault}
   # * {StorageQuotaExceededFault}
@@ -149,6 +152,21 @@ module Aws::DatabaseMigrationService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DatabaseMigrationService::Types::KMSDisabledFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KMSFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DatabaseMigrationService::Types::KMSFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -274,6 +292,36 @@ module Aws::DatabaseMigrationService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DatabaseMigrationService::Types::ResourceQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class S3AccessDeniedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DatabaseMigrationService::Types::S3AccessDeniedFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class S3ResourceNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DatabaseMigrationService::Types::S3ResourceNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -27,7 +27,7 @@ module AwsSdkCodeGenerator
         plugins.delete(plugin_name)
       end
       plugins.map do |class_name, path|
-        path = "./#{path}" unless path[0] == '/'
+        path = File.absolute_path(path)
         Kernel.require(path)
 
         Plugin.new(

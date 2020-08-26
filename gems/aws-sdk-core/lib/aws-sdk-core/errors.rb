@@ -207,6 +207,9 @@ module Aws
     # payload with either invalid version number or malformed contents
     class InvalidProcessCredentialsPayload < RuntimeError; end
 
+    # Raised when SSO Credentials are invalid
+    class InvalidSSOCredentials < RuntimeError; end
+
     # Raised when a client is constructed and region is not specified.
     class MissingRegionError < ArgumentError
       def initialize(*args)

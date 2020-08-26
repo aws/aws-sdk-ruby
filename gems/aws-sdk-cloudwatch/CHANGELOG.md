@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-07-24)
+------------------
+
+* Feature - AWS CloudWatch ListMetrics now supports an optional parameter (RecentlyActive) to filter results by only metrics that have received new datapoints in the past 3 hours. This enables more targeted metric data retrieval through the Get APIs
+
 1.41.0 (2020-07-02)
 ------------------
 

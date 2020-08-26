@@ -85,13 +85,28 @@ module Aws::CodeBuild
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::CodeBuild
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -352,6 +367,168 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def batch_delete_builds(params = {}, options = {})
       req = build_request(:batch_delete_builds, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about one or more batch builds.
+    #
+    # @option params [required, Array<String>] :ids
+    #   An array that contains the batch build identifiers to retrieve.
+    #
+    # @return [Types::BatchGetBuildBatchesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetBuildBatchesOutput#build_batches #build_batches} => Array&lt;Types::BuildBatch&gt;
+    #   * {Types::BatchGetBuildBatchesOutput#build_batches_not_found #build_batches_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_build_batches({
+    #     ids: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.build_batches #=> Array
+    #   resp.build_batches[0].id #=> String
+    #   resp.build_batches[0].arn #=> String
+    #   resp.build_batches[0].start_time #=> Time
+    #   resp.build_batches[0].end_time #=> Time
+    #   resp.build_batches[0].current_phase #=> String
+    #   resp.build_batches[0].build_batch_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batches[0].source_version #=> String
+    #   resp.build_batches[0].resolved_source_version #=> String
+    #   resp.build_batches[0].project_name #=> String
+    #   resp.build_batches[0].phases #=> Array
+    #   resp.build_batches[0].phases[0].phase_type #=> String, one of "SUBMITTED", "DOWNLOAD_BATCHSPEC", "IN_PROGRESS", "COMBINE_ARTIFACTS", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.build_batches[0].phases[0].phase_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batches[0].phases[0].start_time #=> Time
+    #   resp.build_batches[0].phases[0].end_time #=> Time
+    #   resp.build_batches[0].phases[0].duration_in_seconds #=> Integer
+    #   resp.build_batches[0].phases[0].contexts #=> Array
+    #   resp.build_batches[0].phases[0].contexts[0].status_code #=> String
+    #   resp.build_batches[0].phases[0].contexts[0].message #=> String
+    #   resp.build_batches[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batches[0].source.location #=> String
+    #   resp.build_batches[0].source.git_clone_depth #=> Integer
+    #   resp.build_batches[0].source.git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batches[0].source.buildspec #=> String
+    #   resp.build_batches[0].source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batches[0].source.auth.resource #=> String
+    #   resp.build_batches[0].source.report_build_status #=> Boolean
+    #   resp.build_batches[0].source.build_status_config.context #=> String
+    #   resp.build_batches[0].source.build_status_config.target_url #=> String
+    #   resp.build_batches[0].source.insecure_ssl #=> Boolean
+    #   resp.build_batches[0].source.source_identifier #=> String
+    #   resp.build_batches[0].secondary_sources #=> Array
+    #   resp.build_batches[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batches[0].secondary_sources[0].location #=> String
+    #   resp.build_batches[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build_batches[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batches[0].secondary_sources[0].buildspec #=> String
+    #   resp.build_batches[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batches[0].secondary_sources[0].auth.resource #=> String
+    #   resp.build_batches[0].secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build_batches[0].secondary_sources[0].build_status_config.context #=> String
+    #   resp.build_batches[0].secondary_sources[0].build_status_config.target_url #=> String
+    #   resp.build_batches[0].secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build_batches[0].secondary_sources[0].source_identifier #=> String
+    #   resp.build_batches[0].secondary_source_versions #=> Array
+    #   resp.build_batches[0].secondary_source_versions[0].source_identifier #=> String
+    #   resp.build_batches[0].secondary_source_versions[0].source_version #=> String
+    #   resp.build_batches[0].artifacts.location #=> String
+    #   resp.build_batches[0].artifacts.sha256sum #=> String
+    #   resp.build_batches[0].artifacts.md5sum #=> String
+    #   resp.build_batches[0].artifacts.override_artifact_name #=> Boolean
+    #   resp.build_batches[0].artifacts.encryption_disabled #=> Boolean
+    #   resp.build_batches[0].artifacts.artifact_identifier #=> String
+    #   resp.build_batches[0].secondary_artifacts #=> Array
+    #   resp.build_batches[0].secondary_artifacts[0].location #=> String
+    #   resp.build_batches[0].secondary_artifacts[0].sha256sum #=> String
+    #   resp.build_batches[0].secondary_artifacts[0].md5sum #=> String
+    #   resp.build_batches[0].secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build_batches[0].secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build_batches[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batches[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
+    #   resp.build_batches[0].cache.location #=> String
+    #   resp.build_batches[0].cache.modes #=> Array
+    #   resp.build_batches[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
+    #   resp.build_batches[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
+    #   resp.build_batches[0].environment.image #=> String
+    #   resp.build_batches[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
+    #   resp.build_batches[0].environment.environment_variables #=> Array
+    #   resp.build_batches[0].environment.environment_variables[0].name #=> String
+    #   resp.build_batches[0].environment.environment_variables[0].value #=> String
+    #   resp.build_batches[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
+    #   resp.build_batches[0].environment.privileged_mode #=> Boolean
+    #   resp.build_batches[0].environment.certificate #=> String
+    #   resp.build_batches[0].environment.registry_credential.credential #=> String
+    #   resp.build_batches[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build_batches[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batches[0].service_role #=> String
+    #   resp.build_batches[0].log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batches[0].log_config.cloud_watch_logs.group_name #=> String
+    #   resp.build_batches[0].log_config.cloud_watch_logs.stream_name #=> String
+    #   resp.build_batches[0].log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batches[0].log_config.s3_logs.location #=> String
+    #   resp.build_batches[0].log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batches[0].build_timeout_in_minutes #=> Integer
+    #   resp.build_batches[0].queued_timeout_in_minutes #=> Integer
+    #   resp.build_batches[0].complete #=> Boolean
+    #   resp.build_batches[0].initiator #=> String
+    #   resp.build_batches[0].vpc_config.vpc_id #=> String
+    #   resp.build_batches[0].vpc_config.subnets #=> Array
+    #   resp.build_batches[0].vpc_config.subnets[0] #=> String
+    #   resp.build_batches[0].vpc_config.security_group_ids #=> Array
+    #   resp.build_batches[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.build_batches[0].encryption_key #=> String
+    #   resp.build_batches[0].build_batch_number #=> Integer
+    #   resp.build_batches[0].file_system_locations #=> Array
+    #   resp.build_batches[0].file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.build_batches[0].file_system_locations[0].location #=> String
+    #   resp.build_batches[0].file_system_locations[0].mount_point #=> String
+    #   resp.build_batches[0].file_system_locations[0].identifier #=> String
+    #   resp.build_batches[0].file_system_locations[0].mount_options #=> String
+    #   resp.build_batches[0].build_batch_config.service_role #=> String
+    #   resp.build_batches[0].build_batch_config.combine_artifacts #=> Boolean
+    #   resp.build_batches[0].build_batch_config.restrictions.maximum_builds_allowed #=> Integer
+    #   resp.build_batches[0].build_batch_config.restrictions.compute_types_allowed #=> Array
+    #   resp.build_batches[0].build_batch_config.restrictions.compute_types_allowed[0] #=> String
+    #   resp.build_batches[0].build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batches[0].build_groups #=> Array
+    #   resp.build_batches[0].build_groups[0].identifier #=> String
+    #   resp.build_batches[0].build_groups[0].depends_on #=> Array
+    #   resp.build_batches[0].build_groups[0].depends_on[0] #=> String
+    #   resp.build_batches[0].build_groups[0].ignore_failure #=> Boolean
+    #   resp.build_batches[0].build_groups[0].current_build_summary.arn #=> String
+    #   resp.build_batches[0].build_groups[0].current_build_summary.requested_on #=> Time
+    #   resp.build_batches[0].build_groups[0].current_build_summary.build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batches[0].build_groups[0].current_build_summary.primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batches[0].build_groups[0].current_build_summary.primary_artifact.location #=> String
+    #   resp.build_batches[0].build_groups[0].current_build_summary.primary_artifact.identifier #=> String
+    #   resp.build_batches[0].build_groups[0].current_build_summary.secondary_artifacts #=> Array
+    #   resp.build_batches[0].build_groups[0].current_build_summary.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batches[0].build_groups[0].current_build_summary.secondary_artifacts[0].location #=> String
+    #   resp.build_batches[0].build_groups[0].current_build_summary.secondary_artifacts[0].identifier #=> String
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list #=> Array
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].arn #=> String
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].requested_on #=> Time
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].primary_artifact.location #=> String
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].primary_artifact.identifier #=> String
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].secondary_artifacts #=> Array
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
+    #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #   resp.build_batches_not_found #=> Array
+    #   resp.build_batches_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildBatches AWS API Documentation
+    #
+    # @overload batch_get_build_batches(params = {})
+    # @param [Hash] params ({})
+    def batch_get_build_batches(params = {}, options = {})
+      req = build_request(:batch_get_build_batches, params)
       req.send_request(options)
     end
 
@@ -691,7 +868,7 @@ module Aws::CodeBuild
     #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].cache.modes #=> Array
     #   resp.builds[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER"
+    #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
     #   resp.builds[0].environment.environment_variables #=> Array
@@ -739,6 +916,9 @@ module Aws::CodeBuild
     #   resp.builds[0].file_system_locations[0].mount_point #=> String
     #   resp.builds[0].file_system_locations[0].identifier #=> String
     #   resp.builds[0].file_system_locations[0].mount_options #=> String
+    #   resp.builds[0].debug_session.session_enabled #=> Boolean
+    #   resp.builds[0].debug_session.session_target #=> String
+    #   resp.builds[0].build_batch_arn #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -827,7 +1007,7 @@ module Aws::CodeBuild
     #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].cache.modes #=> Array
     #   resp.projects[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER"
+    #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
     #   resp.projects[0].environment.environment_variables #=> Array
@@ -857,6 +1037,7 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
     #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
+    #   resp.projects[0].webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
     #   resp.projects[0].webhook.last_modified_secret #=> Time
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
@@ -877,6 +1058,12 @@ module Aws::CodeBuild
     #   resp.projects[0].file_system_locations[0].mount_point #=> String
     #   resp.projects[0].file_system_locations[0].identifier #=> String
     #   resp.projects[0].file_system_locations[0].mount_options #=> String
+    #   resp.projects[0].build_batch_config.service_role #=> String
+    #   resp.projects[0].build_batch_config.combine_artifacts #=> Boolean
+    #   resp.projects[0].build_batch_config.restrictions.maximum_builds_allowed #=> Integer
+    #   resp.projects[0].build_batch_config.restrictions.compute_types_allowed #=> Array
+    #   resp.projects[0].build_batch_config.restrictions.compute_types_allowed[0] #=> String
+    #   resp.projects[0].build_batch_config.timeout_in_mins #=> Integer
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -911,7 +1098,7 @@ module Aws::CodeBuild
     #   resp.report_groups #=> Array
     #   resp.report_groups[0].arn #=> String
     #   resp.report_groups[0].name #=> String
-    #   resp.report_groups[0].type #=> String, one of "TEST"
+    #   resp.report_groups[0].type #=> String, one of "TEST", "CODE_COVERAGE"
     #   resp.report_groups[0].export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
     #   resp.report_groups[0].export_config.s3_destination.bucket #=> String
     #   resp.report_groups[0].export_config.s3_destination.path #=> String
@@ -955,7 +1142,7 @@ module Aws::CodeBuild
     #
     #   resp.reports #=> Array
     #   resp.reports[0].arn #=> String
-    #   resp.reports[0].type #=> String, one of "TEST"
+    #   resp.reports[0].type #=> String, one of "TEST", "CODE_COVERAGE"
     #   resp.reports[0].name #=> String
     #   resp.reports[0].report_group_arn #=> String
     #   resp.reports[0].execution_id #=> String
@@ -973,6 +1160,12 @@ module Aws::CodeBuild
     #   resp.reports[0].test_summary.status_counts #=> Hash
     #   resp.reports[0].test_summary.status_counts["String"] #=> Integer
     #   resp.reports[0].test_summary.duration_in_nano_seconds #=> Integer
+    #   resp.reports[0].code_coverage_summary.line_coverage_percentage #=> Float
+    #   resp.reports[0].code_coverage_summary.lines_covered #=> Integer
+    #   resp.reports[0].code_coverage_summary.lines_missed #=> Integer
+    #   resp.reports[0].code_coverage_summary.branch_coverage_percentage #=> Float
+    #   resp.reports[0].code_coverage_summary.branches_covered #=> Integer
+    #   resp.reports[0].code_coverage_summary.branches_missed #=> Integer
     #   resp.reports_not_found #=> Array
     #   resp.reports_not_found[0] #=> String
     #
@@ -1074,7 +1267,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this build project.
@@ -1099,6 +1293,10 @@ module Aws::CodeBuild
     #   project. A `ProjectFileSystemLocation` object specifies the
     #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type` of
     #   a file system created using Amazon Elastic File System.
+    #
+    # @option params [Types::ProjectBuildBatchConfig] :build_batch_config
+    #   A ProjectBuildBatchConfig object that defines the batch build options
+    #   for the project.
     #
     # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1188,7 +1386,7 @@ module Aws::CodeBuild
     #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: { # required
-    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #       environment_variables: [
@@ -1243,6 +1441,15 @@ module Aws::CodeBuild
     #         mount_options: "String",
     #       },
     #     ],
+    #     build_batch_config: {
+    #       service_role: "NonEmptyString",
+    #       combine_artifacts: false,
+    #       restrictions: {
+    #         maximum_builds_allowed: 1,
+    #         compute_types_allowed: ["NonEmptyString"],
+    #       },
+    #       timeout_in_mins: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1302,7 +1509,7 @@ module Aws::CodeBuild
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
     #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -1332,6 +1539,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
+    #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -1352,6 +1560,12 @@ module Aws::CodeBuild
     #   resp.project.file_system_locations[0].mount_point #=> String
     #   resp.project.file_system_locations[0].identifier #=> String
     #   resp.project.file_system_locations[0].mount_options #=> String
+    #   resp.project.build_batch_config.service_role #=> String
+    #   resp.project.build_batch_config.combine_artifacts #=> Boolean
+    #   resp.project.build_batch_config.restrictions.maximum_builds_allowed #=> Integer
+    #   resp.project.build_batch_config.restrictions.compute_types_allowed #=> Array
+    #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
+    #   resp.project.build_batch_config.timeout_in_mins #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -1389,7 +1603,7 @@ module Aws::CodeBuild
     #
     #   resp = client.create_report_group({
     #     name: "ReportGroupName", # required
-    #     type: "TEST", # required, accepts TEST
+    #     type: "TEST", # required, accepts TEST, CODE_COVERAGE
     #     export_config: { # required
     #       export_config_type: "S3", # accepts S3, NO_EXPORT
     #       s3_destination: {
@@ -1412,7 +1626,7 @@ module Aws::CodeBuild
     #
     #   resp.report_group.arn #=> String
     #   resp.report_group.name #=> String
-    #   resp.report_group.type #=> String, one of "TEST"
+    #   resp.report_group.type #=> String, one of "TEST", "CODE_COVERAGE"
     #   resp.report_group.export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
     #   resp.report_group.export_config.s3_destination.bucket #=> String
     #   resp.report_group.export_config.s3_destination.path #=> String
@@ -1475,6 +1689,9 @@ module Aws::CodeBuild
     #   `filterGroups` array must pass. For a filter group to pass, each of
     #   its filters must pass.
     #
+    # @option params [String] :build_type
+    #   Specifies the type of build this webhook will trigger.
+    #
     # @return [Types::CreateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebhookOutput#webhook #webhook} => Types::Webhook
@@ -1493,6 +1710,7 @@ module Aws::CodeBuild
     #         },
     #       ],
     #     ],
+    #     build_type: "BUILD", # accepts BUILD, BUILD_BATCH
     #   })
     #
     # @example Response structure
@@ -1506,6 +1724,7 @@ module Aws::CodeBuild
     #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
+    #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
@@ -1514,6 +1733,41 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def create_webhook(params = {}, options = {})
       req = build_request(:create_webhook, params)
+      req.send_request(options)
+    end
+
+    # Deletes a batch build.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the batch build to delete.
+    #
+    # @return [Types::DeleteBuildBatchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBuildBatchOutput#status_code #status_code} => String
+    #   * {Types::DeleteBuildBatchOutput#builds_deleted #builds_deleted} => Array&lt;String&gt;
+    #   * {Types::DeleteBuildBatchOutput#builds_not_deleted #builds_not_deleted} => Array&lt;Types::BuildNotDeleted&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_build_batch({
+    #     id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status_code #=> String
+    #   resp.builds_deleted #=> Array
+    #   resp.builds_deleted[0] #=> String
+    #   resp.builds_not_deleted #=> Array
+    #   resp.builds_not_deleted[0].id #=> String
+    #   resp.builds_not_deleted[0].status_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteBuildBatch AWS API Documentation
+    #
+    # @overload delete_build_batch(params = {})
+    # @param [Hash] params ({})
+    def delete_build_batch(params = {}, options = {})
+      req = build_request(:delete_build_batch, params)
       req.send_request(options)
     end
 
@@ -1667,6 +1921,82 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def delete_webhook(params = {}, options = {})
       req = build_request(:delete_webhook, params)
+      req.send_request(options)
+    end
+
+    # Retrieves one or more code coverage reports.
+    #
+    # @option params [required, String] :report_arn
+    #   The ARN of the report for which test cases are returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous call to
+    #   `DescribeCodeCoverages`. This specifies the next item to return. To
+    #   return the beginning of the list, exclude this parameter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :sort_order
+    #   Specifies if the results are sorted in ascending or descending order.
+    #
+    # @option params [String] :sort_by
+    #   Specifies how the results are sorted. Possible values are:
+    #
+    #   FILE\_PATH
+    #
+    #   : The results are sorted by file path.
+    #
+    #   LINE\_COVERAGE\_PERCENTAGE
+    #
+    #   : The results are sorted by the percentage of lines that are covered.
+    #
+    # @option params [Float] :min_line_coverage_percentage
+    #   The minimum line coverage percentage to report.
+    #
+    # @option params [Float] :max_line_coverage_percentage
+    #   The maximum line coverage percentage to report.
+    #
+    # @return [Types::DescribeCodeCoveragesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCodeCoveragesOutput#next_token #next_token} => String
+    #   * {Types::DescribeCodeCoveragesOutput#code_coverages #code_coverages} => Array&lt;Types::CodeCoverage&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_code_coverages({
+    #     report_arn: "NonEmptyString", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     sort_by: "LINE_COVERAGE_PERCENTAGE", # accepts LINE_COVERAGE_PERCENTAGE, FILE_PATH
+    #     min_line_coverage_percentage: 1.0,
+    #     max_line_coverage_percentage: 1.0,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.code_coverages #=> Array
+    #   resp.code_coverages[0].id #=> String
+    #   resp.code_coverages[0].report_arn #=> String
+    #   resp.code_coverages[0].file_path #=> String
+    #   resp.code_coverages[0].line_coverage_percentage #=> Float
+    #   resp.code_coverages[0].lines_covered #=> Integer
+    #   resp.code_coverages[0].lines_missed #=> Integer
+    #   resp.code_coverages[0].branch_coverage_percentage #=> Float
+    #   resp.code_coverages[0].branches_covered #=> Integer
+    #   resp.code_coverages[0].branches_missed #=> Integer
+    #   resp.code_coverages[0].expired #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeCodeCoverages AWS API Documentation
+    #
+    # @overload describe_code_coverages(params = {})
+    # @param [Hash] params ({})
+    def describe_code_coverages(params = {}, options = {})
+      req = build_request(:describe_code_coverages, params)
       req.send_request(options)
     end
 
@@ -1834,6 +2164,120 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def invalidate_project_cache(params = {}, options = {})
       req = build_request(:invalidate_project_cache, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the identifiers of your build batches in the current region.
+    #
+    # @option params [Types::BuildBatchFilter] :filter
+    #   A `BuildBatchFilter` object that specifies the filters for the search.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :sort_order
+    #   Specifies the sort order of the returned items. Valid values include:
+    #
+    #   * `ASCENDING`\: List the batch build identifiers in ascending order by
+    #     identifier.
+    #
+    #   * `DESCENDING`\: List the batch build identifiers in descending order
+    #     by identifier.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous call to
+    #   `ListBuildBatches`. This specifies the next item to return. To return
+    #   the beginning of the list, exclude this parameter.
+    #
+    # @return [Types::ListBuildBatchesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBuildBatchesOutput#ids #ids} => Array&lt;String&gt;
+    #   * {Types::ListBuildBatchesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_build_batches({
+    #     filter: {
+    #       status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
+    #     },
+    #     max_results: 1,
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ids #=> Array
+    #   resp.ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatches AWS API Documentation
+    #
+    # @overload list_build_batches(params = {})
+    # @param [Hash] params ({})
+    def list_build_batches(params = {}, options = {})
+      req = build_request(:list_build_batches, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the identifiers of the build batches for a specific project.
+    #
+    # @option params [String] :project_name
+    #   The name of the project.
+    #
+    # @option params [Types::BuildBatchFilter] :filter
+    #   A `BuildBatchFilter` object that specifies the filters for the search.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :sort_order
+    #   Specifies the sort order of the returned items. Valid values include:
+    #
+    #   * `ASCENDING`\: List the batch build identifiers in ascending order by
+    #     identifier.
+    #
+    #   * `DESCENDING`\: List the batch build identifiers in descending order
+    #     by identifier.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous call to
+    #   `ListBuildBatchesForProject`. This specifies the next item to return.
+    #   To return the beginning of the list, exclude this parameter.
+    #
+    # @return [Types::ListBuildBatchesForProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBuildBatchesForProjectOutput#ids #ids} => Array&lt;String&gt;
+    #   * {Types::ListBuildBatchesForProjectOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_build_batches_for_project({
+    #     project_name: "NonEmptyString",
+    #     filter: {
+    #       status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
+    #     },
+    #     max_results: 1,
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ids #=> Array
+    #   resp.ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatchesForProject AWS API Documentation
+    #
+    # @overload list_build_batches_for_project(params = {})
+    # @param [Hash] params ({})
+    def list_build_batches_for_project(params = {}, options = {})
+      req = build_request(:list_build_batches_for_project, params)
       req.send_request(options)
     end
 
@@ -2407,6 +2851,326 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Restarts a build.
+    #
+    # @option params [String] :id
+    #   Specifies the identifier of the build to restart.
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the `RetryBuild` request. The token is included in the
+    #   `RetryBuild` request and is valid for five minutes. If you repeat the
+    #   `RetryBuild` request with the same token, but change a parameter, AWS
+    #   CodeBuild returns a parameter mismatch error.
+    #
+    # @return [Types::RetryBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RetryBuildOutput#build #build} => Types::Build
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.retry_build({
+    #     id: "NonEmptyString",
+    #     idempotency_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.build.id #=> String
+    #   resp.build.arn #=> String
+    #   resp.build.build_number #=> Integer
+    #   resp.build.start_time #=> Time
+    #   resp.build.end_time #=> Time
+    #   resp.build.current_phase #=> String
+    #   resp.build.build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build.source_version #=> String
+    #   resp.build.resolved_source_version #=> String
+    #   resp.build.project_name #=> String
+    #   resp.build.phases #=> Array
+    #   resp.build.phases[0].phase_type #=> String, one of "SUBMITTED", "QUEUED", "PROVISIONING", "DOWNLOAD_SOURCE", "INSTALL", "PRE_BUILD", "BUILD", "POST_BUILD", "UPLOAD_ARTIFACTS", "FINALIZING", "COMPLETED"
+    #   resp.build.phases[0].phase_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build.phases[0].start_time #=> Time
+    #   resp.build.phases[0].end_time #=> Time
+    #   resp.build.phases[0].duration_in_seconds #=> Integer
+    #   resp.build.phases[0].contexts #=> Array
+    #   resp.build.phases[0].contexts[0].status_code #=> String
+    #   resp.build.phases[0].contexts[0].message #=> String
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.source.location #=> String
+    #   resp.build.source.git_clone_depth #=> Integer
+    #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build.source.buildspec #=> String
+    #   resp.build.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.report_build_status #=> Boolean
+    #   resp.build.source.build_status_config.context #=> String
+    #   resp.build.source.build_status_config.target_url #=> String
+    #   resp.build.source.insecure_ssl #=> Boolean
+    #   resp.build.source.source_identifier #=> String
+    #   resp.build.secondary_sources #=> Array
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].location #=> String
+    #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build.secondary_sources[0].buildspec #=> String
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.resource #=> String
+    #   resp.build.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build.secondary_sources[0].build_status_config.context #=> String
+    #   resp.build.secondary_sources[0].build_status_config.target_url #=> String
+    #   resp.build.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build.secondary_sources[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions #=> Array
+    #   resp.build.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build.secondary_source_versions[0].source_version #=> String
+    #   resp.build.artifacts.location #=> String
+    #   resp.build.artifacts.sha256sum #=> String
+    #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.artifacts.override_artifact_name #=> Boolean
+    #   resp.build.artifacts.encryption_disabled #=> Boolean
+    #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.secondary_artifacts #=> Array
+    #   resp.build.secondary_artifacts[0].location #=> String
+    #   resp.build.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build.secondary_artifacts[0].md5sum #=> String
+    #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
+    #   resp.build.cache.location #=> String
+    #   resp.build.cache.modes #=> Array
+    #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
+    #   resp.build.environment.image #=> String
+    #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
+    #   resp.build.environment.environment_variables #=> Array
+    #   resp.build.environment.environment_variables[0].name #=> String
+    #   resp.build.environment.environment_variables[0].value #=> String
+    #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
+    #   resp.build.environment.privileged_mode #=> Boolean
+    #   resp.build.environment.certificate #=> String
+    #   resp.build.environment.registry_credential.credential #=> String
+    #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build.service_role #=> String
+    #   resp.build.logs.group_name #=> String
+    #   resp.build.logs.stream_name #=> String
+    #   resp.build.logs.deep_link #=> String
+    #   resp.build.logs.s3_deep_link #=> String
+    #   resp.build.logs.cloud_watch_logs_arn #=> String
+    #   resp.build.logs.s3_logs_arn #=> String
+    #   resp.build.logs.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.cloud_watch_logs.group_name #=> String
+    #   resp.build.logs.cloud_watch_logs.stream_name #=> String
+    #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build.logs.s3_logs.location #=> String
+    #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.timeout_in_minutes #=> Integer
+    #   resp.build.queued_timeout_in_minutes #=> Integer
+    #   resp.build.build_complete #=> Boolean
+    #   resp.build.initiator #=> String
+    #   resp.build.vpc_config.vpc_id #=> String
+    #   resp.build.vpc_config.subnets #=> Array
+    #   resp.build.vpc_config.subnets[0] #=> String
+    #   resp.build.vpc_config.security_group_ids #=> Array
+    #   resp.build.vpc_config.security_group_ids[0] #=> String
+    #   resp.build.network_interface.subnet_id #=> String
+    #   resp.build.network_interface.network_interface_id #=> String
+    #   resp.build.encryption_key #=> String
+    #   resp.build.exported_environment_variables #=> Array
+    #   resp.build.exported_environment_variables[0].name #=> String
+    #   resp.build.exported_environment_variables[0].value #=> String
+    #   resp.build.report_arns #=> Array
+    #   resp.build.report_arns[0] #=> String
+    #   resp.build.file_system_locations #=> Array
+    #   resp.build.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.build.file_system_locations[0].location #=> String
+    #   resp.build.file_system_locations[0].mount_point #=> String
+    #   resp.build.file_system_locations[0].identifier #=> String
+    #   resp.build.file_system_locations[0].mount_options #=> String
+    #   resp.build.debug_session.session_enabled #=> Boolean
+    #   resp.build.debug_session.session_target #=> String
+    #   resp.build.build_batch_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuild AWS API Documentation
+    #
+    # @overload retry_build(params = {})
+    # @param [Hash] params ({})
+    def retry_build(params = {}, options = {})
+      req = build_request(:retry_build, params)
+      req.send_request(options)
+    end
+
+    # Restarts a batch build.
+    #
+    # @option params [String] :id
+    #   Specifies the identifier of the batch build to restart.
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the `RetryBuildBatch` request. The token is included in
+    #   the `RetryBuildBatch` request and is valid for five minutes. If you
+    #   repeat the `RetryBuildBatch` request with the same token, but change a
+    #   parameter, AWS CodeBuild returns a parameter mismatch error.
+    #
+    # @option params [String] :retry_type
+    #   Specifies the type of retry to perform.
+    #
+    # @return [Types::RetryBuildBatchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RetryBuildBatchOutput#build_batch #build_batch} => Types::BuildBatch
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.retry_build_batch({
+    #     id: "NonEmptyString",
+    #     idempotency_token: "String",
+    #     retry_type: "RETRY_ALL_BUILDS", # accepts RETRY_ALL_BUILDS, RETRY_FAILED_BUILDS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.build_batch.id #=> String
+    #   resp.build_batch.arn #=> String
+    #   resp.build_batch.start_time #=> Time
+    #   resp.build_batch.end_time #=> Time
+    #   resp.build_batch.current_phase #=> String
+    #   resp.build_batch.build_batch_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.source_version #=> String
+    #   resp.build_batch.resolved_source_version #=> String
+    #   resp.build_batch.project_name #=> String
+    #   resp.build_batch.phases #=> Array
+    #   resp.build_batch.phases[0].phase_type #=> String, one of "SUBMITTED", "DOWNLOAD_BATCHSPEC", "IN_PROGRESS", "COMBINE_ARTIFACTS", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.build_batch.phases[0].phase_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.phases[0].start_time #=> Time
+    #   resp.build_batch.phases[0].end_time #=> Time
+    #   resp.build_batch.phases[0].duration_in_seconds #=> Integer
+    #   resp.build_batch.phases[0].contexts #=> Array
+    #   resp.build_batch.phases[0].contexts[0].status_code #=> String
+    #   resp.build_batch.phases[0].contexts[0].message #=> String
+    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.source.location #=> String
+    #   resp.build_batch.source.git_clone_depth #=> Integer
+    #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batch.source.buildspec #=> String
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.source.auth.resource #=> String
+    #   resp.build_batch.source.report_build_status #=> Boolean
+    #   resp.build_batch.source.build_status_config.context #=> String
+    #   resp.build_batch.source.build_status_config.target_url #=> String
+    #   resp.build_batch.source.insecure_ssl #=> Boolean
+    #   resp.build_batch.source.source_identifier #=> String
+    #   resp.build_batch.secondary_sources #=> Array
+    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.secondary_sources[0].location #=> String
+    #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batch.secondary_sources[0].buildspec #=> String
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.secondary_sources[0].auth.resource #=> String
+    #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
+    #   resp.build_batch.secondary_sources[0].build_status_config.target_url #=> String
+    #   resp.build_batch.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build_batch.secondary_sources[0].source_identifier #=> String
+    #   resp.build_batch.secondary_source_versions #=> Array
+    #   resp.build_batch.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build_batch.secondary_source_versions[0].source_version #=> String
+    #   resp.build_batch.artifacts.location #=> String
+    #   resp.build_batch.artifacts.sha256sum #=> String
+    #   resp.build_batch.artifacts.md5sum #=> String
+    #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
+    #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
+    #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts #=> Array
+    #   resp.build_batch.secondary_artifacts[0].location #=> String
+    #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build_batch.secondary_artifacts[0].md5sum #=> String
+    #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
+    #   resp.build_batch.cache.location #=> String
+    #   resp.build_batch.cache.modes #=> Array
+    #   resp.build_batch.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
+    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
+    #   resp.build_batch.environment.image #=> String
+    #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
+    #   resp.build_batch.environment.environment_variables #=> Array
+    #   resp.build_batch.environment.environment_variables[0].name #=> String
+    #   resp.build_batch.environment.environment_variables[0].value #=> String
+    #   resp.build_batch.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
+    #   resp.build_batch.environment.privileged_mode #=> Boolean
+    #   resp.build_batch.environment.certificate #=> String
+    #   resp.build_batch.environment.registry_credential.credential #=> String
+    #   resp.build_batch.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build_batch.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batch.service_role #=> String
+    #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
+    #   resp.build_batch.log_config.cloud_watch_logs.stream_name #=> String
+    #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batch.log_config.s3_logs.location #=> String
+    #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.build_timeout_in_minutes #=> Integer
+    #   resp.build_batch.queued_timeout_in_minutes #=> Integer
+    #   resp.build_batch.complete #=> Boolean
+    #   resp.build_batch.initiator #=> String
+    #   resp.build_batch.vpc_config.vpc_id #=> String
+    #   resp.build_batch.vpc_config.subnets #=> Array
+    #   resp.build_batch.vpc_config.subnets[0] #=> String
+    #   resp.build_batch.vpc_config.security_group_ids #=> Array
+    #   resp.build_batch.vpc_config.security_group_ids[0] #=> String
+    #   resp.build_batch.encryption_key #=> String
+    #   resp.build_batch.build_batch_number #=> Integer
+    #   resp.build_batch.file_system_locations #=> Array
+    #   resp.build_batch.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.build_batch.file_system_locations[0].location #=> String
+    #   resp.build_batch.file_system_locations[0].mount_point #=> String
+    #   resp.build_batch.file_system_locations[0].identifier #=> String
+    #   resp.build_batch.file_system_locations[0].mount_options #=> String
+    #   resp.build_batch.build_batch_config.service_role #=> String
+    #   resp.build_batch.build_batch_config.combine_artifacts #=> Boolean
+    #   resp.build_batch.build_batch_config.restrictions.maximum_builds_allowed #=> Integer
+    #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed #=> Array
+    #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed[0] #=> String
+    #   resp.build_batch.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batch.build_groups #=> Array
+    #   resp.build_batch.build_groups[0].identifier #=> String
+    #   resp.build_batch.build_groups[0].depends_on #=> Array
+    #   resp.build_batch.build_groups[0].depends_on[0] #=> String
+    #   resp.build_batch.build_groups[0].ignore_failure #=> Boolean
+    #   resp.build_batch.build_groups[0].current_build_summary.arn #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.requested_on #=> Time
+    #   resp.build_batch.build_groups[0].current_build_summary.build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.location #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.identifier #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts #=> Array
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].location #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].identifier #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list #=> Array
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].arn #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].requested_on #=> Time
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.location #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.identifier #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts #=> Array
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildBatch AWS API Documentation
+    #
+    # @overload retry_build_batch(params = {})
+    # @param [Hash] params ({})
+    def retry_build_batch(params = {}, options = {})
+      req = build_request(:retry_build_batch, params)
+      req.send_request(options)
+    end
+
     # Starts running a build.
     #
     # @option params [required, String] :project_name
@@ -2421,25 +3185,34 @@ module Aws::CodeBuild
     #   only.
     #
     # @option params [String] :source_version
-    #   A version of the build input to be built, for this build only. If not
-    #   specified, the latest version is used. If specified, must be one of:
+    #   The version of the build input to be built, for this build only. If
+    #   not specified, the latest version is used. If specified, the contents
+    #   depends on the source provider:
     #
-    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
+    #   AWS CodeCommit
     #
-    #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
-    #     that corresponds to the version of the source code you want to
-    #     build. If a pull request ID is specified, it must use the format
+    #   : The commit ID, branch, or Git tag to use.
+    #
+    #   GitHub
+    #
+    #   : The commit ID, pull request ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build. If
+    #     a pull request ID is specified, it must use the format
     #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
-    #   * For Bitbucket: the commit ID, branch name, or tag name that
-    #     corresponds to the version of the source code you want to build. If
-    #     a branch name is specified, the branch's HEAD commit ID is used. If
-    #     not specified, the default branch's HEAD commit ID is used.
+    #   Bitbucket
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-    #     object that represents the build input ZIP file to use.
+    #   : The commit ID, branch name, or tag name that corresponds to the
+    #     version of the source code you want to build. If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   Amazon Simple Storage Service (Amazon S3)
+    #
+    #   : The version ID of the object that represents the build input ZIP
+    #     file to use.
     #
     #   If `sourceVersion` is specified at the project level, then this
     #   `sourceVersion` (at the build level) takes precedence.
@@ -2572,7 +3345,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #
     # @option params [String] :idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
@@ -2592,16 +3366,28 @@ module Aws::CodeBuild
     #   The type of credentials AWS CodeBuild uses to pull images in your
     #   build. There are two valid values:
     #
-    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
-    #     This requires that you modify your ECR repository policy to trust
-    #     AWS CodeBuild's service principal.
+    #   CODEBUILD
     #
-    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
-    #     project's service role.
+    #   : Specifies that AWS CodeBuild uses its own credentials. This requires
+    #     that you modify your ECR repository policy to trust AWS CodeBuild's
+    #     service principal.
+    #
+    #   SERVICE\_ROLE
+    #
+    #   : Specifies that AWS CodeBuild uses your build project's service
+    #     role.
     #
     #   When using a cross-account or private registry image, you must use
-    #   SERVICE\_ROLE credentials. When using an AWS CodeBuild curated image,
-    #   you must use CODEBUILD credentials.
+    #   `SERVICE_ROLE` credentials. When using an AWS CodeBuild curated image,
+    #   you must use `CODEBUILD` credentials.
+    #
+    # @option params [Boolean] :debug_session_enabled
+    #   Specifies if session debugging is enabled for this build. For more
+    #   information, see [Viewing a running build in Session Manager][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
     #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2688,7 +3474,7 @@ module Aws::CodeBuild
     #       context: "String",
     #       target_url: "String",
     #     },
-    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
+    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #     certificate_override: "String",
@@ -2720,6 +3506,7 @@ module Aws::CodeBuild
     #       credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
     #     },
     #     image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
+    #     debug_session_enabled: false,
     #   })
     #
     # @example Response structure
@@ -2788,7 +3575,7 @@ module Aws::CodeBuild
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
     #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -2836,6 +3623,9 @@ module Aws::CodeBuild
     #   resp.build.file_system_locations[0].mount_point #=> String
     #   resp.build.file_system_locations[0].identifier #=> String
     #   resp.build.file_system_locations[0].mount_options #=> String
+    #   resp.build.debug_session.session_enabled #=> Boolean
+    #   resp.build.debug_session.session_target #=> String
+    #   resp.build.build_batch_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -2843,6 +3633,482 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def start_build(params = {}, options = {})
       req = build_request(:start_build, params)
+      req.send_request(options)
+    end
+
+    # Starts a batch build for a project.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project.
+    #
+    # @option params [Array<Types::ProjectSource>] :secondary_sources_override
+    #   An array of `ProjectSource` objects that override the secondary
+    #   sources defined in the batch build project.
+    #
+    # @option params [Array<Types::ProjectSourceVersion>] :secondary_sources_version_override
+    #   An array of `ProjectSourceVersion` objects that override the secondary
+    #   source versions in the batch build project.
+    #
+    # @option params [String] :source_version
+    #   The version of the batch build input to be built, for this build only.
+    #   If not specified, the latest version is used. If specified, the
+    #   contents depends on the source provider:
+    #
+    #   AWS CodeCommit
+    #
+    #   : The commit ID, branch, or Git tag to use.
+    #
+    #   GitHub
+    #
+    #   : The commit ID, pull request ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build. If
+    #     a pull request ID is specified, it must use the format
+    #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   Bitbucket
+    #
+    #   : The commit ID, branch name, or tag name that corresponds to the
+    #     version of the source code you want to build. If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   Amazon Simple Storage Service (Amazon S3)
+    #
+    #   : The version ID of the object that represents the build input ZIP
+    #     file to use.
+    #
+    #   If `sourceVersion` is specified at the project level, then this
+    #   `sourceVersion` (at the build level) takes precedence.
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1] in
+    #   the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #
+    # @option params [Types::ProjectArtifacts] :artifacts_override
+    #   An array of `ProjectArtifacts` objects that contains information about
+    #   the build output artifact overrides for the build project.
+    #
+    # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts_override
+    #   An array of `ProjectArtifacts` objects that override the secondary
+    #   artifacts defined in the batch build project.
+    #
+    # @option params [Array<Types::EnvironmentVariable>] :environment_variables_override
+    #   An array of `EnvironmentVariable` objects that override, or add to,
+    #   the environment variables defined in the batch build project.
+    #
+    # @option params [String] :source_type_override
+    #   The source input type that overrides the source input defined in the
+    #   batch build project.
+    #
+    # @option params [String] :source_location_override
+    #   A location that overrides, for this batch build, the source location
+    #   defined in the batch build project.
+    #
+    # @option params [Types::SourceAuth] :source_auth_override
+    #   A `SourceAuth` object that overrides the one defined in the batch
+    #   build project. This override applies only if the build project's
+    #   source is BitBucket or GitHub.
+    #
+    # @option params [Integer] :git_clone_depth_override
+    #   The user-defined depth of history, with a minimum value of 0, that
+    #   overrides, for this batch build only, any previous depth of history
+    #   defined in the batch build project.
+    #
+    # @option params [Types::GitSubmodulesConfig] :git_submodules_config_override
+    #   A `GitSubmodulesConfig` object that overrides the Git submodules
+    #   configuration for this batch build.
+    #
+    # @option params [String] :buildspec_override
+    #   A buildspec file declaration that overrides, for this build only, the
+    #   latest one already defined in the build project.
+    #
+    #   If this value is set, it can be either an inline buildspec definition,
+    #   the path to an alternate buildspec file relative to the value of the
+    #   built-in `CODEBUILD_SRC_DIR` environment variable, or the path to an
+    #   S3 bucket. The bucket must be in the same AWS Region as the build
+    #   project. Specify the buildspec file using its ARN (for example,
+    #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
+    #   not provided or is set to an empty string, the source code must
+    #   contain a buildspec file in its root directory. For more information,
+    #   see [Buildspec File Name and Storage Location][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage
+    #
+    # @option params [Boolean] :insecure_ssl_override
+    #   Enable this flag to override the insecure SSL setting that is
+    #   specified in the batch build project. The insecure SSL setting
+    #   determines whether to ignore SSL warnings while connecting to the
+    #   project source code. This override applies only if the build's source
+    #   is GitHub Enterprise.
+    #
+    # @option params [Boolean] :report_build_batch_status_override
+    #   Set to `true` to report to your source provider the status of a batch
+    #   build's start and completion. If you use this option with a source
+    #   provider other than GitHub, GitHub Enterprise, or Bitbucket, an
+    #   `invalidInputException` is thrown.
+    #
+    #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
+    #   your source provider.
+    #
+    #    </note>
+    #
+    # @option params [String] :environment_type_override
+    #   A container type for this batch build that overrides the one specified
+    #   in the batch build project.
+    #
+    # @option params [String] :image_override
+    #   The name of an image for this batch build that overrides the one
+    #   specified in the batch build project.
+    #
+    # @option params [String] :compute_type_override
+    #   The name of a compute type for this batch build that overrides the one
+    #   specified in the batch build project.
+    #
+    # @option params [String] :certificate_override
+    #   The name of a certificate for this batch build that overrides the one
+    #   specified in the batch build project.
+    #
+    # @option params [Types::ProjectCache] :cache_override
+    #   A `ProjectCache` object that specifies cache overrides.
+    #
+    # @option params [String] :service_role_override
+    #   The name of a service role for this batch build that overrides the one
+    #   specified in the batch build project.
+    #
+    # @option params [Boolean] :privileged_mode_override
+    #   Enable this flag to override privileged mode in the batch build
+    #   project.
+    #
+    # @option params [Integer] :build_timeout_in_minutes_override
+    #   Overrides the build timeout specified in the batch build project.
+    #
+    # @option params [Integer] :queued_timeout_in_minutes_override
+    #   The number of minutes a batch build is allowed to be queued before it
+    #   times out.
+    #
+    # @option params [String] :encryption_key_override
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   that overrides the one specified in the batch build project. The CMK
+    #   key encrypts the build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the `StartBuildBatch` request. The token is included in
+    #   the `StartBuildBatch` request and is valid for five minutes. If you
+    #   repeat the `StartBuildBatch` request with the same token, but change a
+    #   parameter, AWS CodeBuild returns a parameter mismatch error.
+    #
+    # @option params [Types::LogsConfig] :logs_config_override
+    #   A `LogsConfig` object that override the log settings defined in the
+    #   batch build project.
+    #
+    # @option params [Types::RegistryCredential] :registry_credential_override
+    #   A `RegistryCredential` object that overrides credentials for access to
+    #   a private registry.
+    #
+    # @option params [String] :image_pull_credentials_type_override
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   batch build. There are two valid values:
+    #
+    #   CODEBUILD
+    #
+    #   : Specifies that AWS CodeBuild uses its own credentials. This requires
+    #     that you modify your ECR repository policy to trust AWS CodeBuild's
+    #     service principal.
+    #
+    #   SERVICE\_ROLE
+    #
+    #   : Specifies that AWS CodeBuild uses your build project's service
+    #     role.
+    #
+    #   When using a cross-account or private registry image, you must use
+    #   `SERVICE_ROLE` credentials. When using an AWS CodeBuild curated image,
+    #   you must use `CODEBUILD` credentials.
+    #
+    # @option params [Types::ProjectBuildBatchConfig] :build_batch_config_override
+    #   A `BuildBatchConfigOverride` object that contains batch build
+    #   configuration overrides.
+    #
+    # @return [Types::StartBuildBatchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBuildBatchOutput#build_batch #build_batch} => Types::BuildBatch
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_build_batch({
+    #     project_name: "NonEmptyString", # required
+    #     secondary_sources_override: [
+    #       {
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         location: "String",
+    #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
+    #         buildspec: "String",
+    #         auth: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         report_build_status: false,
+    #         build_status_config: {
+    #           context: "String",
+    #           target_url: "String",
+    #         },
+    #         insecure_ssl: false,
+    #         source_identifier: "String",
+    #       },
+    #     ],
+    #     secondary_sources_version_override: [
+    #       {
+    #         source_identifier: "String", # required
+    #         source_version: "String", # required
+    #       },
+    #     ],
+    #     source_version: "String",
+    #     artifacts_override: {
+    #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #       location: "String",
+    #       path: "String",
+    #       namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #       name: "String",
+    #       packaging: "NONE", # accepts NONE, ZIP
+    #       override_artifact_name: false,
+    #       encryption_disabled: false,
+    #       artifact_identifier: "String",
+    #     },
+    #     secondary_artifacts_override: [
+    #       {
+    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #         location: "String",
+    #         path: "String",
+    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #         name: "String",
+    #         packaging: "NONE", # accepts NONE, ZIP
+    #         override_artifact_name: false,
+    #         encryption_disabled: false,
+    #         artifact_identifier: "String",
+    #       },
+    #     ],
+    #     environment_variables_override: [
+    #       {
+    #         name: "NonEmptyString", # required
+    #         value: "String", # required
+    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
+    #       },
+    #     ],
+    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #     source_location_override: "String",
+    #     source_auth_override: {
+    #       type: "OAUTH", # required, accepts OAUTH
+    #       resource: "String",
+    #     },
+    #     git_clone_depth_override: 1,
+    #     git_submodules_config_override: {
+    #       fetch_submodules: false, # required
+    #     },
+    #     buildspec_override: "String",
+    #     insecure_ssl_override: false,
+    #     report_build_batch_status_override: false,
+    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
+    #     image_override: "NonEmptyString",
+    #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
+    #     certificate_override: "String",
+    #     cache_override: {
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
+    #       location: "String",
+    #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
+    #     },
+    #     service_role_override: "NonEmptyString",
+    #     privileged_mode_override: false,
+    #     build_timeout_in_minutes_override: 1,
+    #     queued_timeout_in_minutes_override: 1,
+    #     encryption_key_override: "NonEmptyString",
+    #     idempotency_token: "String",
+    #     logs_config_override: {
+    #       cloud_watch_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         group_name: "String",
+    #         stream_name: "String",
+    #       },
+    #       s3_logs: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         location: "String",
+    #         encryption_disabled: false,
+    #       },
+    #     },
+    #     registry_credential_override: {
+    #       credential: "NonEmptyString", # required
+    #       credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #     },
+    #     image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
+    #     build_batch_config_override: {
+    #       service_role: "NonEmptyString",
+    #       combine_artifacts: false,
+    #       restrictions: {
+    #         maximum_builds_allowed: 1,
+    #         compute_types_allowed: ["NonEmptyString"],
+    #       },
+    #       timeout_in_mins: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.build_batch.id #=> String
+    #   resp.build_batch.arn #=> String
+    #   resp.build_batch.start_time #=> Time
+    #   resp.build_batch.end_time #=> Time
+    #   resp.build_batch.current_phase #=> String
+    #   resp.build_batch.build_batch_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.source_version #=> String
+    #   resp.build_batch.resolved_source_version #=> String
+    #   resp.build_batch.project_name #=> String
+    #   resp.build_batch.phases #=> Array
+    #   resp.build_batch.phases[0].phase_type #=> String, one of "SUBMITTED", "DOWNLOAD_BATCHSPEC", "IN_PROGRESS", "COMBINE_ARTIFACTS", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.build_batch.phases[0].phase_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.phases[0].start_time #=> Time
+    #   resp.build_batch.phases[0].end_time #=> Time
+    #   resp.build_batch.phases[0].duration_in_seconds #=> Integer
+    #   resp.build_batch.phases[0].contexts #=> Array
+    #   resp.build_batch.phases[0].contexts[0].status_code #=> String
+    #   resp.build_batch.phases[0].contexts[0].message #=> String
+    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.source.location #=> String
+    #   resp.build_batch.source.git_clone_depth #=> Integer
+    #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batch.source.buildspec #=> String
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.source.auth.resource #=> String
+    #   resp.build_batch.source.report_build_status #=> Boolean
+    #   resp.build_batch.source.build_status_config.context #=> String
+    #   resp.build_batch.source.build_status_config.target_url #=> String
+    #   resp.build_batch.source.insecure_ssl #=> Boolean
+    #   resp.build_batch.source.source_identifier #=> String
+    #   resp.build_batch.secondary_sources #=> Array
+    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.secondary_sources[0].location #=> String
+    #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batch.secondary_sources[0].buildspec #=> String
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.secondary_sources[0].auth.resource #=> String
+    #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
+    #   resp.build_batch.secondary_sources[0].build_status_config.target_url #=> String
+    #   resp.build_batch.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build_batch.secondary_sources[0].source_identifier #=> String
+    #   resp.build_batch.secondary_source_versions #=> Array
+    #   resp.build_batch.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build_batch.secondary_source_versions[0].source_version #=> String
+    #   resp.build_batch.artifacts.location #=> String
+    #   resp.build_batch.artifacts.sha256sum #=> String
+    #   resp.build_batch.artifacts.md5sum #=> String
+    #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
+    #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
+    #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts #=> Array
+    #   resp.build_batch.secondary_artifacts[0].location #=> String
+    #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build_batch.secondary_artifacts[0].md5sum #=> String
+    #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
+    #   resp.build_batch.cache.location #=> String
+    #   resp.build_batch.cache.modes #=> Array
+    #   resp.build_batch.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
+    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
+    #   resp.build_batch.environment.image #=> String
+    #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
+    #   resp.build_batch.environment.environment_variables #=> Array
+    #   resp.build_batch.environment.environment_variables[0].name #=> String
+    #   resp.build_batch.environment.environment_variables[0].value #=> String
+    #   resp.build_batch.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
+    #   resp.build_batch.environment.privileged_mode #=> Boolean
+    #   resp.build_batch.environment.certificate #=> String
+    #   resp.build_batch.environment.registry_credential.credential #=> String
+    #   resp.build_batch.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build_batch.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batch.service_role #=> String
+    #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
+    #   resp.build_batch.log_config.cloud_watch_logs.stream_name #=> String
+    #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batch.log_config.s3_logs.location #=> String
+    #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.build_timeout_in_minutes #=> Integer
+    #   resp.build_batch.queued_timeout_in_minutes #=> Integer
+    #   resp.build_batch.complete #=> Boolean
+    #   resp.build_batch.initiator #=> String
+    #   resp.build_batch.vpc_config.vpc_id #=> String
+    #   resp.build_batch.vpc_config.subnets #=> Array
+    #   resp.build_batch.vpc_config.subnets[0] #=> String
+    #   resp.build_batch.vpc_config.security_group_ids #=> Array
+    #   resp.build_batch.vpc_config.security_group_ids[0] #=> String
+    #   resp.build_batch.encryption_key #=> String
+    #   resp.build_batch.build_batch_number #=> Integer
+    #   resp.build_batch.file_system_locations #=> Array
+    #   resp.build_batch.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.build_batch.file_system_locations[0].location #=> String
+    #   resp.build_batch.file_system_locations[0].mount_point #=> String
+    #   resp.build_batch.file_system_locations[0].identifier #=> String
+    #   resp.build_batch.file_system_locations[0].mount_options #=> String
+    #   resp.build_batch.build_batch_config.service_role #=> String
+    #   resp.build_batch.build_batch_config.combine_artifacts #=> Boolean
+    #   resp.build_batch.build_batch_config.restrictions.maximum_builds_allowed #=> Integer
+    #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed #=> Array
+    #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed[0] #=> String
+    #   resp.build_batch.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batch.build_groups #=> Array
+    #   resp.build_batch.build_groups[0].identifier #=> String
+    #   resp.build_batch.build_groups[0].depends_on #=> Array
+    #   resp.build_batch.build_groups[0].depends_on[0] #=> String
+    #   resp.build_batch.build_groups[0].ignore_failure #=> Boolean
+    #   resp.build_batch.build_groups[0].current_build_summary.arn #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.requested_on #=> Time
+    #   resp.build_batch.build_groups[0].current_build_summary.build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.location #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.identifier #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts #=> Array
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].location #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].identifier #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list #=> Array
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].arn #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].requested_on #=> Time
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.location #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.identifier #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts #=> Array
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildBatch AWS API Documentation
+    #
+    # @overload start_build_batch(params = {})
+    # @param [Hash] params ({})
+    def start_build_batch(params = {}, options = {})
+      req = build_request(:start_build_batch, params)
       req.send_request(options)
     end
 
@@ -2927,7 +4193,7 @@ module Aws::CodeBuild
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
     #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -2975,6 +4241,9 @@ module Aws::CodeBuild
     #   resp.build.file_system_locations[0].mount_point #=> String
     #   resp.build.file_system_locations[0].identifier #=> String
     #   resp.build.file_system_locations[0].mount_options #=> String
+    #   resp.build.debug_session.session_enabled #=> Boolean
+    #   resp.build.debug_session.session_target #=> String
+    #   resp.build.build_batch_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -2982,6 +4251,164 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def stop_build(params = {}, options = {})
       req = build_request(:stop_build, params)
+      req.send_request(options)
+    end
+
+    # Stops a running batch build.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the batch build to stop.
+    #
+    # @return [Types::StopBuildBatchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopBuildBatchOutput#build_batch #build_batch} => Types::BuildBatch
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_build_batch({
+    #     id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.build_batch.id #=> String
+    #   resp.build_batch.arn #=> String
+    #   resp.build_batch.start_time #=> Time
+    #   resp.build_batch.end_time #=> Time
+    #   resp.build_batch.current_phase #=> String
+    #   resp.build_batch.build_batch_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.source_version #=> String
+    #   resp.build_batch.resolved_source_version #=> String
+    #   resp.build_batch.project_name #=> String
+    #   resp.build_batch.phases #=> Array
+    #   resp.build_batch.phases[0].phase_type #=> String, one of "SUBMITTED", "DOWNLOAD_BATCHSPEC", "IN_PROGRESS", "COMBINE_ARTIFACTS", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.build_batch.phases[0].phase_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.phases[0].start_time #=> Time
+    #   resp.build_batch.phases[0].end_time #=> Time
+    #   resp.build_batch.phases[0].duration_in_seconds #=> Integer
+    #   resp.build_batch.phases[0].contexts #=> Array
+    #   resp.build_batch.phases[0].contexts[0].status_code #=> String
+    #   resp.build_batch.phases[0].contexts[0].message #=> String
+    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.source.location #=> String
+    #   resp.build_batch.source.git_clone_depth #=> Integer
+    #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batch.source.buildspec #=> String
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.source.auth.resource #=> String
+    #   resp.build_batch.source.report_build_status #=> Boolean
+    #   resp.build_batch.source.build_status_config.context #=> String
+    #   resp.build_batch.source.build_status_config.target_url #=> String
+    #   resp.build_batch.source.insecure_ssl #=> Boolean
+    #   resp.build_batch.source.source_identifier #=> String
+    #   resp.build_batch.secondary_sources #=> Array
+    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.secondary_sources[0].location #=> String
+    #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
+    #   resp.build_batch.secondary_sources[0].buildspec #=> String
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.secondary_sources[0].auth.resource #=> String
+    #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
+    #   resp.build_batch.secondary_sources[0].build_status_config.target_url #=> String
+    #   resp.build_batch.secondary_sources[0].insecure_ssl #=> Boolean
+    #   resp.build_batch.secondary_sources[0].source_identifier #=> String
+    #   resp.build_batch.secondary_source_versions #=> Array
+    #   resp.build_batch.secondary_source_versions[0].source_identifier #=> String
+    #   resp.build_batch.secondary_source_versions[0].source_version #=> String
+    #   resp.build_batch.artifacts.location #=> String
+    #   resp.build_batch.artifacts.sha256sum #=> String
+    #   resp.build_batch.artifacts.md5sum #=> String
+    #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
+    #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
+    #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts #=> Array
+    #   resp.build_batch.secondary_artifacts[0].location #=> String
+    #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
+    #   resp.build_batch.secondary_artifacts[0].md5sum #=> String
+    #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
+    #   resp.build_batch.cache.location #=> String
+    #   resp.build_batch.cache.modes #=> Array
+    #   resp.build_batch.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
+    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
+    #   resp.build_batch.environment.image #=> String
+    #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
+    #   resp.build_batch.environment.environment_variables #=> Array
+    #   resp.build_batch.environment.environment_variables[0].name #=> String
+    #   resp.build_batch.environment.environment_variables[0].value #=> String
+    #   resp.build_batch.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE", "SECRETS_MANAGER"
+    #   resp.build_batch.environment.privileged_mode #=> Boolean
+    #   resp.build_batch.environment.certificate #=> String
+    #   resp.build_batch.environment.registry_credential.credential #=> String
+    #   resp.build_batch.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build_batch.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batch.service_role #=> String
+    #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
+    #   resp.build_batch.log_config.cloud_watch_logs.stream_name #=> String
+    #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.build_batch.log_config.s3_logs.location #=> String
+    #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.build_timeout_in_minutes #=> Integer
+    #   resp.build_batch.queued_timeout_in_minutes #=> Integer
+    #   resp.build_batch.complete #=> Boolean
+    #   resp.build_batch.initiator #=> String
+    #   resp.build_batch.vpc_config.vpc_id #=> String
+    #   resp.build_batch.vpc_config.subnets #=> Array
+    #   resp.build_batch.vpc_config.subnets[0] #=> String
+    #   resp.build_batch.vpc_config.security_group_ids #=> Array
+    #   resp.build_batch.vpc_config.security_group_ids[0] #=> String
+    #   resp.build_batch.encryption_key #=> String
+    #   resp.build_batch.build_batch_number #=> Integer
+    #   resp.build_batch.file_system_locations #=> Array
+    #   resp.build_batch.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.build_batch.file_system_locations[0].location #=> String
+    #   resp.build_batch.file_system_locations[0].mount_point #=> String
+    #   resp.build_batch.file_system_locations[0].identifier #=> String
+    #   resp.build_batch.file_system_locations[0].mount_options #=> String
+    #   resp.build_batch.build_batch_config.service_role #=> String
+    #   resp.build_batch.build_batch_config.combine_artifacts #=> Boolean
+    #   resp.build_batch.build_batch_config.restrictions.maximum_builds_allowed #=> Integer
+    #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed #=> Array
+    #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed[0] #=> String
+    #   resp.build_batch.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batch.build_groups #=> Array
+    #   resp.build_batch.build_groups[0].identifier #=> String
+    #   resp.build_batch.build_groups[0].depends_on #=> Array
+    #   resp.build_batch.build_groups[0].depends_on[0] #=> String
+    #   resp.build_batch.build_groups[0].ignore_failure #=> Boolean
+    #   resp.build_batch.build_groups[0].current_build_summary.arn #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.requested_on #=> Time
+    #   resp.build_batch.build_groups[0].current_build_summary.build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.location #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.primary_artifact.identifier #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts #=> Array
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].location #=> String
+    #   resp.build_batch.build_groups[0].current_build_summary.secondary_artifacts[0].identifier #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list #=> Array
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].arn #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].requested_on #=> Time
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].build_status #=> String, one of "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.location #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].primary_artifact.identifier #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts #=> Array
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
+    #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildBatch AWS API Documentation
+    #
+    # @overload stop_build_batch(params = {})
+    # @param [Hash] params ({})
+    def stop_build_batch(params = {}, options = {})
+      req = build_request(:stop_build_batch, params)
       req.send_request(options)
     end
 
@@ -3080,7 +4507,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #
     # @option params [Array<Types::Tag>] :tags
     #   An updated list of tag key and value pairs associated with this build
@@ -3105,6 +4533,9 @@ module Aws::CodeBuild
     #   project. A `ProjectFileSystemLocation` object specifies the
     #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type` of
     #   a file system created using Amazon Elastic File System.
+    #
+    # @option params [Types::ProjectBuildBatchConfig] :build_batch_config
+    #   Contains configuration information about a batch build project.
     #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3194,7 +4625,7 @@ module Aws::CodeBuild
     #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: {
-    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #       environment_variables: [
@@ -3249,6 +4680,15 @@ module Aws::CodeBuild
     #         mount_options: "String",
     #       },
     #     ],
+    #     build_batch_config: {
+    #       service_role: "NonEmptyString",
+    #       combine_artifacts: false,
+    #       restrictions: {
+    #         maximum_builds_allowed: 1,
+    #         compute_types_allowed: ["NonEmptyString"],
+    #       },
+    #       timeout_in_mins: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3308,7 +4748,7 @@ module Aws::CodeBuild
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
     #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -3338,6 +4778,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
+    #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -3358,6 +4799,12 @@ module Aws::CodeBuild
     #   resp.project.file_system_locations[0].mount_point #=> String
     #   resp.project.file_system_locations[0].identifier #=> String
     #   resp.project.file_system_locations[0].mount_options #=> String
+    #   resp.project.build_batch_config.service_role #=> String
+    #   resp.project.build_batch_config.combine_artifacts #=> Boolean
+    #   resp.project.build_batch_config.restrictions.maximum_builds_allowed #=> Integer
+    #   resp.project.build_batch_config.restrictions.compute_types_allowed #=> Array
+    #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
+    #   resp.project.build_batch_config.timeout_in_mins #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -3417,7 +4864,7 @@ module Aws::CodeBuild
     #
     #   resp.report_group.arn #=> String
     #   resp.report_group.name #=> String
-    #   resp.report_group.type #=> String, one of "TEST"
+    #   resp.report_group.type #=> String, one of "TEST", "CODE_COVERAGE"
     #   resp.report_group.export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
     #   resp.report_group.export_config.s3_destination.bucket #=> String
     #   resp.report_group.export_config.s3_destination.path #=> String
@@ -3469,6 +4916,9 @@ module Aws::CodeBuild
     #   webhook event can trigger a build. A filter group must contain at
     #   least one `EVENT` `WebhookFilter`.
     #
+    # @option params [String] :build_type
+    #   Specifies the type of build this webhook will trigger.
+    #
     # @return [Types::UpdateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWebhookOutput#webhook #webhook} => Types::Webhook
@@ -3488,6 +4938,7 @@ module Aws::CodeBuild
     #         },
     #       ],
     #     ],
+    #     build_type: "BUILD", # accepts BUILD, BUILD_BATCH
     #   })
     #
     # @example Response structure
@@ -3501,6 +4952,7 @@ module Aws::CodeBuild
     #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
+    #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook AWS API Documentation
@@ -3525,7 +4977,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

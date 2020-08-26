@@ -85,13 +85,28 @@ module Aws::KMS
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::KMS
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -1316,7 +1331,7 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
-    # @option params [required, String, IO] :ciphertext_blob
+    # @option params [required, String, StringIO, File] :ciphertext_blob
     #   Ciphertext to be decrypted. The blob includes metadata.
     #
     # @option params [Hash<String,String>] :encryption_context
@@ -2259,7 +2274,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #   To get the alias name and alias ARN, use ListAliases.
     #
-    # @option params [required, String, IO] :plaintext
+    # @option params [required, String, StringIO, File] :plaintext
     #   Data to be encrypted.
     #
     # @option params [Hash<String,String>] :encryption_context
@@ -3491,12 +3506,12 @@ module Aws::KMS
     #
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #
-    # @option params [required, String, IO] :import_token
+    # @option params [required, String, StringIO, File] :import_token
     #   The import token that you received in the response to a previous
     #   GetParametersForImport request. It must be from the same response that
     #   contained the public key that you used to encrypt the key material.
     #
-    # @option params [required, String, IO] :encrypted_key_material
+    # @option params [required, String, StringIO, File] :encrypted_key_material
     #   The encrypted key material to import. The key material must be
     #   encrypted with the public wrapping key that GetParametersForImport
     #   returned, using the wrapping algorithm that you specified in the same
@@ -4402,7 +4417,7 @@ module Aws::KMS
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
-    # @option params [required, String, IO] :ciphertext_blob
+    # @option params [required, String, StringIO, File] :ciphertext_blob
     #   Ciphertext of the data to reencrypt.
     #
     # @option params [Hash<String,String>] :source_encryption_context
@@ -4886,7 +4901,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #   To get the alias name and alias ARN, use ListAliases.
     #
-    # @option params [required, String, IO] :message
+    # @option params [required, String, StringIO, File] :message
     #   Specifies the message or message digest to sign. Messages can be
     #   0-4096 bytes. To sign a larger message, provide the message digest.
     #
@@ -5399,7 +5414,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #   To get the alias name and alias ARN, use ListAliases.
     #
-    # @option params [required, String, IO] :message
+    # @option params [required, String, StringIO, File] :message
     #   Specifies the message that was signed. You can submit a raw message of
     #   up to 4096 bytes, or a hash digest of the message. If you submit a
     #   digest, use the `MessageType` parameter with a value of `DIGEST`.
@@ -5417,7 +5432,7 @@ module Aws::KMS
     #   is a message digest. If you use the `DIGEST` value with a raw message,
     #   the security of the verification operation can be compromised.
     #
-    # @option params [required, String, IO] :signature
+    # @option params [required, String, StringIO, File] :signature
     #   The signature that the `Sign` operation generated.
     #
     # @option params [required, String] :signing_algorithm
@@ -5479,7 +5494,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10,6 +10,20 @@
 module Aws::GroundStation
   module Types
 
+    # Details about an antenna demod decode `Config` used in a contact.
+    #
+    # @!attribute [rw] output_node
+    #   Name of an antenna demod decode output node used in a contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AntennaDemodDecodeDetails AWS API Documentation
+    #
+    class AntennaDemodDecodeDetails < Struct.new(
+      :output_node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about how AWS Ground Station should configure an antenna
     # for downlink during a contact.
     #
@@ -107,6 +121,7 @@ module Aws::GroundStation
     #           units: "dBW", # required, accepts dBW
     #           value: 1.0, # required
     #         },
+    #         transmit_disabled: false,
     #       }
     #
     # @!attribute [rw] spectrum_config
@@ -117,11 +132,16 @@ module Aws::GroundStation
     #   EIRP of the target.
     #   @return [Types::Eirp]
     #
+    # @!attribute [rw] transmit_disabled
+    #   Whether or not uplink transmit is disabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AntennaUplinkConfig AWS API Documentation
     #
     class AntennaUplinkConfig < Struct.new(
       :spectrum_config,
-      :target_eirp)
+      :target_eirp,
+      :transmit_disabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -141,6 +161,25 @@ module Aws::GroundStation
     #
     class CancelContactRequest < Struct.new(
       :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for certain `Config` object types in a contact.
+    #
+    # @!attribute [rw] antenna_demod_decode_details
+    #   Details for antenna demod decode `Config` in a contact.
+    #   @return [Types::AntennaDemodDecodeDetails]
+    #
+    # @!attribute [rw] endpoint_details
+    #   Information about the endpoint details.
+    #   @return [Types::EndpointDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ConfigDetails AWS API Documentation
+    #
+    class ConfigDetails < Struct.new(
+      :antenna_demod_decode_details,
+      :endpoint_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -248,6 +287,7 @@ module Aws::GroundStation
     #             units: "dBW", # required, accepts dBW
     #             value: 1.0, # required
     #           },
+    #           transmit_disabled: false,
     #         },
     #         dataflow_endpoint_config: {
     #           dataflow_endpoint_name: "String", # required
@@ -444,6 +484,7 @@ module Aws::GroundStation
     #               units: "dBW", # required, accepts dBW
     #               value: 1.0, # required
     #             },
+    #             transmit_disabled: false,
     #           },
     #           dataflow_endpoint_config: {
     #             dataflow_endpoint_name: "String", # required
@@ -496,6 +537,7 @@ module Aws::GroundStation
     #                 name: "String", # required
     #                 port: 1, # required
     #               },
+    #               mtu: 1,
     #               name: "SafeName",
     #               status: "created", # accepts created, creating, deleted, deleting, failed
     #             },
@@ -592,6 +634,25 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Information about a dataflow edge used in a contact.
+    #
+    # @!attribute [rw] destination
+    #   Dataflow details for the destination side.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] source
+    #   Dataflow details for the source side.
+    #   @return [Types::Source]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DataflowDetail AWS API Documentation
+    #
+    class DataflowDetail < Struct.new(
+      :destination,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a dataflow endpoint.
     #
     # @note When making an API call, you may pass DataflowEndpoint
@@ -602,6 +663,7 @@ module Aws::GroundStation
     #           name: "String", # required
     #           port: 1, # required
     #         },
+    #         mtu: 1,
     #         name: "SafeName",
     #         status: "created", # accepts created, creating, deleted, deleting, failed
     #       }
@@ -609,6 +671,11 @@ module Aws::GroundStation
     # @!attribute [rw] address
     #   Socket address of a dataflow endpoint.
     #   @return [Types::SocketAddress]
+    #
+    # @!attribute [rw] mtu
+    #   Maximum transmission unit (MTU) size in bytes of a dataflow
+    #   endpoint.
+    #   @return [Integer]
     #
     # @!attribute [rw] name
     #   Name of a dataflow endpoint.
@@ -622,6 +689,7 @@ module Aws::GroundStation
     #
     class DataflowEndpoint < Struct.new(
       :address,
+      :mtu,
       :name,
       :status)
       SENSITIVE = []
@@ -835,6 +903,11 @@ module Aws::GroundStation
     #   Status of a contact.
     #   @return [String]
     #
+    # @!attribute [rw] dataflow_list
+    #   List describing source and destination details for each dataflow
+    #   edge.
+    #   @return [Array<Types::DataflowDetail>]
+    #
     # @!attribute [rw] end_time
     #   End time of a contact.
     #   @return [Time]
@@ -886,6 +959,7 @@ module Aws::GroundStation
     class DescribeContactResponse < Struct.new(
       :contact_id,
       :contact_status,
+      :dataflow_list,
       :end_time,
       :error_message,
       :ground_station,
@@ -897,6 +971,36 @@ module Aws::GroundStation
       :satellite_arn,
       :start_time,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Dataflow details for the destination side.
+    #
+    # @!attribute [rw] config_details
+    #   Additional details for a `Config`, if type is dataflow endpoint or
+    #   antenna demod decode.
+    #   @return [Types::ConfigDetails]
+    #
+    # @!attribute [rw] config_id
+    #   UUID of a `Config`.
+    #   @return [String]
+    #
+    # @!attribute [rw] config_type
+    #   Type of a `Config`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataflow_destination_region
+    #   Region of a dataflow destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :config_details,
+      :config_id,
+      :config_type,
+      :dataflow_destination_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -916,7 +1020,7 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value of an EIRP.
+    #   Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/Eirp AWS API Documentation
@@ -958,6 +1062,7 @@ module Aws::GroundStation
     #             name: "String", # required
     #             port: 1, # required
     #           },
+    #           mtu: 1,
     #           name: "SafeName",
     #           status: "created", # accepts created, creating, deleted, deleting, failed
     #         },
@@ -1000,7 +1105,8 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Frequency value.
+    #   Frequency value. Valid values are between 2200 to 2300 MHz and 7750
+    #   to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/Frequency AWS API Documentation
@@ -1027,7 +1133,17 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Frequency bandwidth value.
+    #   Frequency bandwidth value. AWS Ground Station currently has the
+    #   following bandwidth limitations:
+    #
+    #   * For `AntennaDownlinkDemodDecodeconfig`, valid values are between
+    #     125 kHz to 650 MHz.
+    #
+    #   * For `AntennaDownlinkconfig`, valid values are between 10 kHz to 54
+    #     MHz.
+    #
+    #   * For `AntennaUplinkConfig`, valid values are between 10 kHz to 54
+    #     MHz.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/FrequencyBandwidth AWS API Documentation
@@ -1928,6 +2044,36 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Dataflow details for the source side.
+    #
+    # @!attribute [rw] config_details
+    #   Additional details for a `Config`, if type is dataflow endpoint or
+    #   antenna demod decode.
+    #   @return [Types::ConfigDetails]
+    #
+    # @!attribute [rw] config_id
+    #   UUID of a `Config`.
+    #   @return [String]
+    #
+    # @!attribute [rw] config_type
+    #   Type of a `Config`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataflow_source_region
+    #   Region of a dataflow source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/Source AWS API Documentation
+    #
+    class Source < Struct.new(
+      :config_details,
+      :config_id,
+      :config_type,
+      :dataflow_source_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object that describes a spectral `Config`.
     #
     # @note When making an API call, you may pass SpectrumConfig
@@ -1946,15 +2092,28 @@ module Aws::GroundStation
     #       }
     #
     # @!attribute [rw] bandwidth
-    #   Bandwidth of a spectral `Config`.
+    #   Bandwidth of a spectral `Config`. AWS Ground Station currently has
+    #   the following bandwidth limitations:
+    #
+    #   * For `AntennaDownlinkDemodDecodeconfig`, valid values are between
+    #     125 kHz to 650 MHz.
+    #
+    #   * For `AntennaDownlinkconfig` valid values are between 10 kHz to 54
+    #     MHz.
+    #
+    #   * For `AntennaUplinkConfig`, valid values are between 10 kHz to 54
+    #     MHz.
     #   @return [Types::FrequencyBandwidth]
     #
     # @!attribute [rw] center_frequency
-    #   Center frequency of a spectral `Config`.
+    #   Center frequency of a spectral `Config`. Valid values are between
+    #   2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120
+    #   MHz for uplink.
     #   @return [Types::Frequency]
     #
     # @!attribute [rw] polarization
-    #   Polarization of a spectral `Config`.
+    #   Polarization of a spectral `Config`. Capturing both `"RIGHT_HAND"`
+    #   and `"LEFT_HAND"` polarization requires two separate configs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/SpectrumConfig AWS API Documentation
@@ -2098,6 +2257,7 @@ module Aws::GroundStation
     #               units: "dBW", # required, accepts dBW
     #               value: 1.0, # required
     #             },
+    #             transmit_disabled: false,
     #           },
     #           dataflow_endpoint_config: {
     #             dataflow_endpoint_name: "String", # required
@@ -2250,11 +2410,14 @@ module Aws::GroundStation
     #       }
     #
     # @!attribute [rw] center_frequency
-    #   Center frequency of an uplink spectral `Config`.
+    #   Center frequency of an uplink spectral `Config`. Valid values are
+    #   between 2025 to 2120 MHz.
     #   @return [Types::Frequency]
     #
     # @!attribute [rw] polarization
-    #   Polarization of an uplink spectral `Config`.
+    #   Polarization of an uplink spectral `Config`. Capturing both
+    #   `"RIGHT_HAND"` and `"LEFT_HAND"` polarization requires two separate
+    #   configs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UplinkSpectrumConfig AWS API Documentation

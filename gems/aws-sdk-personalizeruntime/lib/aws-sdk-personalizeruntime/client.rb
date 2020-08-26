@@ -85,13 +85,28 @@ module Aws::PersonalizeRuntime
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::PersonalizeRuntime
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -326,7 +341,7 @@ module Aws::PersonalizeRuntime
     #   the personalized ranking.
     #
     # @option params [required, Array<String>] :input_list
-    #   A list of items (itemId's) to rank. If an item was not included in
+    #   A list of items (by `itemId`) to rank. If an item was not included in
     #   the training dataset, the item is appended to the end of the reranked
     #   list. The maximum is 500.
     #
@@ -340,9 +355,14 @@ module Aws::PersonalizeRuntime
     #   relevant when getting a user's recommendations, such as the user's
     #   current location or device type.
     #
+    # @option params [String] :filter_arn
+    #   The Amazon Resource Name (ARN) of a filter you created to include or
+    #   exclude items from recommendations for a given user.
+    #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPersonalizedRankingResponse#personalized_ranking #personalized_ranking} => Array&lt;Types::PredictedItem&gt;
+    #   * {Types::GetPersonalizedRankingResponse#recommendation_id #recommendation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -353,6 +373,7 @@ module Aws::PersonalizeRuntime
     #     context: {
     #       "AttributeName" => "AttributeValue",
     #     },
+    #     filter_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -360,6 +381,7 @@ module Aws::PersonalizeRuntime
     #   resp.personalized_ranking #=> Array
     #   resp.personalized_ranking[0].item_id #=> String
     #   resp.personalized_ranking[0].score #=> Float
+    #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
     #
@@ -409,11 +431,18 @@ module Aws::PersonalizeRuntime
     #
     # @option params [String] :filter_arn
     #   The ARN of the filter to apply to the returned recommendations. For
-    #   more information, see Using Filters with Amazon Personalize.
+    #   more information, see [Using Filters with Amazon Personalize][1].
+    #
+    #   When using this parameter, be sure the filter resource is `ACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
     #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#item_list #item_list} => Array&lt;Types::PredictedItem&gt;
+    #   * {Types::GetRecommendationsResponse#recommendation_id #recommendation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -433,6 +462,7 @@ module Aws::PersonalizeRuntime
     #   resp.item_list #=> Array
     #   resp.item_list[0].item_id #=> String
     #   resp.item_list[0].score #=> Float
+    #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
     #
@@ -456,7 +486,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

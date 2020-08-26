@@ -1,6 +1,76 @@
 Unreleased Changes
 ------------------
 
+1.190.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.189.0 (2020-08-24)
+------------------
+
+* Feature - This release enables customers to use VPC prefix lists in their transit gateway route tables, and it adds support for Provisioned IOPS SSD (io2) EBS volumes.
+
+1.188.0 (2020-08-14)
+------------------
+
+* Feature - New C5ad instances featuring AMD's 2nd Generation EPYC processors, offering up to 96 vCPUs, 192 GiB of instance memory, 3.8 TB of NVMe based SSD instance storage, and 20 Gbps in Network bandwidth
+
+1.187.0 (2020-08-13)
+------------------
+
+* Feature - Added MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool to ModifySubnetAttribute to allow CoIP auto assign. Fields are returned in DescribeSubnets and DescribeNetworkInterfaces responses.
+
+1.186.0 (2020-08-12)
+------------------
+
+* Feature - Introduces support for IPv6-in-IPv4 IPsec tunnels. A user can now send traffic from their on-premise IPv6 network to AWS VPCs that have IPv6 support enabled.
+
+1.185.0 (2020-08-11)
+------------------
+
+* Feature - This release rolls back the EC2 On-Demand Capacity Reservations (ODCRs) release 1.11.831 published on 2020-07-30, which was deployed in error.
+
+1.184.0 (2020-08-10)
+------------------
+
+* Feature - Remove CoIP Auto-Assign feature references.
+
+1.183.0 (2020-08-06)
+------------------
+
+* Feature - This release supports Wavelength resources, including carrier gateways, and carrier IP addresses.
+
+1.182.0 (2020-07-30)
+------------------
+
+* Feature - EC2 On-Demand Capacity Reservations now adds support to bring your own licenses (BYOL) of Windows operating system to launch EC2 instances.
+
+1.181.0 (2020-07-29)
+------------------
+
+* Feature - Adding support to target EC2 On-Demand Capacity Reservations within an AWS Resource Group to launch EC2 instances.
+
+1.180.0 (2020-07-28)
+------------------
+
+* Feature - Introduces support for tag-on-create capability for the following APIs: CreateVpnConnection, CreateVpnGateway, and CreateCustomerGateway. A user can now add tags while creating these resources. For further detail, please see AWS Tagging Strategies.
+
+1.179.0 (2020-07-27)
+------------------
+
+* Feature - m6gd, c6gd, r6gd instances are powered by AWS Graviton2 processors and support local NVMe instance storage
+
+1.178.0 (2020-07-20)
+------------------
+
+* Feature - Added support for tag-on-create for CreateVpcPeeringConnection and CreateRouteTable. You can now specify tags when creating any of these resources. For more information about tagging, see AWS Tagging Strategies. Add poolArn to the response of DescribeCoipPools.
+
+1.177.0 (2020-07-17)
+------------------
+
+* Feature - Documentation updates for EC2
+
 1.176.0 (2020-07-08)
 ------------------
 

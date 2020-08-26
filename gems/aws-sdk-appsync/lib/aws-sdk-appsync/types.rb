@@ -360,8 +360,8 @@ module Aws::AppSync
     # @!attribute [rw] caching_keys
     #   The caching keys for a resolver that has caching enabled.
     #
-    #   Valid values are entries from the `$context.identity` and
-    #   `$context.arguments` maps.
+    #   Valid values are entries from the `$context.arguments`,
+    #   `$context.source`, and `$context.identity` maps.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CachingConfig AWS API Documentation
@@ -705,7 +705,7 @@ module Aws::AppSync
     #         name: "ResourceName", # required
     #         description: "String",
     #         data_source_name: "ResourceName", # required
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         function_version: "String", # required
     #       }
@@ -881,7 +881,7 @@ module Aws::AppSync
     #         type_name: "ResourceName", # required
     #         field_name: "ResourceName", # required
     #         data_source_name: "ResourceName",
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         kind: "UNIT", # accepts UNIT, PIPELINE
     #         pipeline_config: {
@@ -922,6 +922,10 @@ module Aws::AppSync
     #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #   @return [String]
     #
     # @!attribute [rw] response_mapping_template
@@ -3166,7 +3170,7 @@ module Aws::AppSync
     #         description: "String",
     #         function_id: "ResourceName", # required
     #         data_source_name: "ResourceName", # required
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         function_version: "String", # required
     #       }
@@ -3346,7 +3350,7 @@ module Aws::AppSync
     #         type_name: "ResourceName", # required
     #         field_name: "ResourceName", # required
     #         data_source_name: "ResourceName",
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         kind: "UNIT", # accepts UNIT, PIPELINE
     #         pipeline_config: {
@@ -3383,6 +3387,14 @@ module Aws::AppSync
     #
     # @!attribute [rw] request_mapping_template
     #   The new request mapping template.
+    #
+    #   A resolver uses a request mapping template to convert a GraphQL
+    #   expression into a format that a data source can understand. Mapping
+    #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #   @return [String]
     #
     # @!attribute [rw] response_mapping_template

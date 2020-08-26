@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-07-17)
+------------------
+
+* Feature - This release adds a set of Amazon Connect APIs to programmatically control call recording with start, stop, pause and resume functions.
+
 1.28.0 (2020-07-02)
 ------------------
 

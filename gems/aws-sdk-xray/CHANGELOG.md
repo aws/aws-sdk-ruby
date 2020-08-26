@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-08-24)
+------------------
+
+* Feature - AWS X-Ray now supports tagging on sampling rules and groups.
+
 1.28.0 (2020-06-23)
 ------------------
 

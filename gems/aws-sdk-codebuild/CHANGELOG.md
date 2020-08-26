@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2020-08-18)
+------------------
+
+* Feature - Documentation updates for codebuild
+
+1.58.0 (2020-07-30)
+------------------
+
+* Feature - Adding support for BuildBatch, and CodeCoverage APIs. BuildBatch allows you to model your project environment in source, and helps start multiple builds with a single API call. CodeCoverage allows you to track your code coverage using AWS CodeBuild.
+
+1.57.0 (2020-07-20)
+------------------
+
+* Feature - AWS CodeBuild adds support for Session Manager and Windows 2019 Environment type
+
 1.56.0 (2020-07-02)
 ------------------
 

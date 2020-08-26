@@ -15,7 +15,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AccessDenied AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AccessDenied AWS API Documentation
     #
     class AccessDenied < Struct.new(
       :message)
@@ -59,7 +59,7 @@ module Aws::CloudFront
     #   type.
     #   @return [Array<Types::Signer>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ActiveTrustedSigners AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ActiveTrustedSigners AWS API Documentation
     #
     class ActiveTrustedSigners < Struct.new(
       :enabled,
@@ -111,7 +111,7 @@ module Aws::CloudFront
     #     CloudFront returns an APPROVED or SUSPENDED status.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AliasICPRecordal AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AliasICPRecordal AWS API Documentation
     #
     class AliasICPRecordal < Struct.new(
       :cname,
@@ -141,7 +141,7 @@ module Aws::CloudFront
     #   want to associate with this distribution.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Aliases AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Aliases AWS API Documentation
     #
     class Aliases < Struct.new(
       :quantity,
@@ -205,7 +205,7 @@ module Aws::CloudFront
     #   to be cached correctly.
     #   @return [Types::CachedMethods]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AllowedMethods AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AllowedMethods AWS API Documentation
     #
     class AllowedMethods < Struct.new(
       :quantity,
@@ -220,7 +220,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/BatchTooLarge AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/BatchTooLarge AWS API Documentation
     #
     class BatchTooLarge < Struct.new(
       :message)
@@ -233,7 +233,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CNAMEAlreadyExists AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CNAMEAlreadyExists AWS API Documentation
     #
     class CNAMEAlreadyExists < Struct.new(
       :message)
@@ -281,7 +281,36 @@ module Aws::CloudFront
     #       {
     #         path_pattern: "string", # required
     #         target_origin_id: "string", # required
-    #         forwarded_values: { # required
+    #         trusted_signers: { # required
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #         allowed_methods: {
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           cached_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           },
+    #         },
+    #         smooth_streaming: false,
+    #         compress: false,
+    #         lambda_function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               lambda_function_arn: "LambdaFunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
+    #             },
+    #           ],
+    #         },
+    #         field_level_encryption_id: "string",
+    #         cache_policy_id: "string",
+    #         origin_request_policy_id: "string",
+    #         forwarded_values: {
     #           query_string: false, # required
     #           cookies: { # required
     #             forward: "none", # required, accepts none, whitelist, all
@@ -299,36 +328,9 @@ module Aws::CloudFront
     #             items: ["string"],
     #           },
     #         },
-    #         trusted_signers: { # required
-    #           enabled: false, # required
-    #           quantity: 1, # required
-    #           items: ["string"],
-    #         },
-    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #         min_ttl: 1, # required
-    #         allowed_methods: {
-    #           quantity: 1, # required
-    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           cached_methods: {
-    #             quantity: 1, # required
-    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           },
-    #         },
-    #         smooth_streaming: false,
+    #         min_ttl: 1,
     #         default_ttl: 1,
     #         max_ttl: 1,
-    #         compress: false,
-    #         lambda_function_associations: {
-    #           quantity: 1, # required
-    #           items: [
-    #             {
-    #               lambda_function_arn: "LambdaFunctionARN", # required
-    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #               include_body: false,
-    #             },
-    #           ],
-    #         },
-    #         field_level_encryption_id: "string",
     #       }
     #
     # @!attribute [rw] path_pattern
@@ -360,11 +362,6 @@ module Aws::CloudFront
     #   The value of `ID` for the origin that you want CloudFront to route
     #   requests to when they match this cache behavior.
     #   @return [String]
-    #
-    # @!attribute [rw] forwarded_values
-    #   A complex type that specifies how CloudFront handles query strings,
-    #   cookies, and HTTP headers.
-    #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] trusted_signers
     #   A complex type that specifies the AWS accounts, if any, that you
@@ -428,22 +425,6 @@ module Aws::CloudFront
     #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [String]
     #
-    # @!attribute [rw] min_ttl
-    #   The minimum amount of time that you want objects to stay in
-    #   CloudFront caches before CloudFront forwards another request to your
-    #   origin to determine whether the object has been updated. For more
-    #   information, see [ Managing How Long Content Stays in an Edge Cache
-    #   (Expiration)][1] in the <i> Amazon CloudFront Developer Guide</i>.
-    #
-    #   You must specify `0` for `MinTTL` if you configure CloudFront to
-    #   forward all headers to your origin (under `Headers`, if you specify
-    #   `1` for `Quantity` and `*` for `Name`).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-    #   @return [Integer]
-    #
     # @!attribute [rw] allowed_methods
     #   A complex type that controls which HTTP methods CloudFront processes
     #   and forwards to your Amazon S3 bucket or your custom origin. There
@@ -472,36 +453,6 @@ module Aws::CloudFront
     #   content matches the value of `PathPattern`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] default_ttl
-    #   The default amount of time that you want objects to stay in
-    #   CloudFront caches before CloudFront forwards another request to your
-    #   origin to determine whether the object has been updated. The value
-    #   that you specify applies only when your origin does not add HTTP
-    #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
-    #   and `Expires` to objects. For more information, see [Managing How
-    #   Long Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
-    #   CloudFront Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-    #   @return [Integer]
-    #
-    # @!attribute [rw] max_ttl
-    #   The maximum amount of time that you want objects to stay in
-    #   CloudFront caches before CloudFront forwards another request to your
-    #   origin to determine whether the object has been updated. The value
-    #   that you specify applies only when your origin adds HTTP headers
-    #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
-    #   `Expires` to objects. For more information, see [Managing How Long
-    #   Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
-    #   CloudFront Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-    #   @return [Integer]
-    #
     # @!attribute [rw] compress
     #   Whether you want CloudFront to automatically compress certain files
     #   for this cache behavior. If so, specify true; if not, specify false.
@@ -524,22 +475,143 @@ module Aws::CloudFront
     #   for this cache behavior.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehavior AWS API Documentation
+    # @!attribute [rw] cache_policy_id
+    #   The unique identifier of the cache policy that is attached to this
+    #   cache behavior. For more information, see [Creating cache
+    #   policies][1] or [Using the managed cache policies][2] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_request_policy_id
+    #   The unique identifier of the origin request policy that is attached
+    #   to this cache behavior. For more information, see [Creating origin
+    #   request policies][1] or [Using the managed origin request
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] forwarded_values
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field. For more
+    #   information, see [Working with policies][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #   If you want to include values in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][2] or [Using the
+    #   managed cache policies][3] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #   If you want to send values to the origin but not include them in the
+    #   cache key, use an origin request policy. For more information, see
+    #   [Creating origin request policies][4] or [Using the managed origin
+    #   request policies][5] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   A complex type that specifies how CloudFront handles query strings,
+    #   cookies, and HTTP headers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [5]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
+    #   @return [Types::ForwardedValues]
+    #
+    # @!attribute [rw] min_ttl
+    #   This field is deprecated. We recommend that you use the `MinTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   The minimum amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. For more
+    #   information, see [ Managing How Long Content Stays in an Edge Cache
+    #   (Expiration)][3] in the <i> Amazon CloudFront Developer Guide</i>.
+    #
+    #   You must specify `0` for `MinTTL` if you configure CloudFront to
+    #   forward all headers to your origin (under `Headers`, if you specify
+    #   `1` for `Quantity` and `*` for `Name`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_ttl
+    #   This field is deprecated. We recommend that you use the `DefaultTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   The default amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. The value
+    #   that you specify applies only when your origin does not add HTTP
+    #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
+    #   and `Expires` to objects. For more information, see [Managing How
+    #   Long Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_ttl
+    #   This field is deprecated. We recommend that you use the `MaxTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   The maximum amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. The value
+    #   that you specify applies only when your origin adds HTTP headers
+    #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
+    #   `Expires` to objects. For more information, see [Managing How Long
+    #   Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CacheBehavior AWS API Documentation
     #
     class CacheBehavior < Struct.new(
       :path_pattern,
       :target_origin_id,
-      :forwarded_values,
       :trusted_signers,
       :viewer_protocol_policy,
-      :min_ttl,
       :allowed_methods,
       :smooth_streaming,
-      :default_ttl,
-      :max_ttl,
       :compress,
       :lambda_function_associations,
-      :field_level_encryption_id)
+      :field_level_encryption_id,
+      :cache_policy_id,
+      :origin_request_policy_id,
+      :forwarded_values,
+      :min_ttl,
+      :default_ttl,
+      :max_ttl)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -555,7 +627,36 @@ module Aws::CloudFront
     #           {
     #             path_pattern: "string", # required
     #             target_origin_id: "string", # required
-    #             forwarded_values: { # required
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             field_level_encryption_id: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
     #                 forward: "none", # required, accepts none, whitelist, all
@@ -573,36 +674,9 @@ module Aws::CloudFront
     #                 items: ["string"],
     #               },
     #             },
-    #             trusted_signers: { # required
-    #               enabled: false, # required
-    #               quantity: 1, # required
-    #               items: ["string"],
-    #             },
-    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #             min_ttl: 1, # required
-    #             allowed_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               cached_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               },
-    #             },
-    #             smooth_streaming: false,
+    #             min_ttl: 1,
     #             default_ttl: 1,
     #             max_ttl: 1,
-    #             compress: false,
-    #             lambda_function_associations: {
-    #               quantity: 1, # required
-    #               items: [
-    #                 {
-    #                   lambda_function_arn: "LambdaFunctionARN", # required
-    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                   include_body: false,
-    #                 },
-    #               ],
-    #             },
-    #             field_level_encryption_id: "string",
     #           },
     #         ],
     #       }
@@ -616,11 +690,425 @@ module Aws::CloudFront
     #   distribution. If `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<Types::CacheBehavior>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehaviors AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CacheBehaviors AWS API Documentation
     #
     class CacheBehaviors < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A cache policy.
+    #
+    # When it’s attached to a cache behavior, the cache policy determines
+    # the following:
+    #
+    # * The values that CloudFront includes in the cache key. These values
+    #   can include HTTP headers, cookies, and URL query strings. CloudFront
+    #   uses the cache key to find an object in its cache that it can return
+    #   to the viewer.
+    #
+    # * The default, minimum, and maximum time to live (TTL) values that you
+    #   want objects to stay in the CloudFront cache.
+    #
+    # The headers, cookies, and query strings that are included in the cache
+    # key are automatically included in requests that CloudFront sends to
+    # the origin. CloudFront sends a request when it can’t find a valid
+    # object in its cache that matches the request’s cache key. If you want
+    # to send values to the origin but *not* include them in the cache key,
+    # use `OriginRequestPolicy`.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the cache policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the cache policy was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cache_policy_config
+    #   The cache policy configuration.
+    #   @return [Types::CachePolicyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicy AWS API Documentation
+    #
+    class CachePolicy < Struct.new(
+      :id,
+      :last_modified_time,
+      :cache_policy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A cache policy with this name already exists. You must provide a
+    # unique name. To modify an existing cache policy, use
+    # `UpdateCachePolicy`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyAlreadyExists AWS API Documentation
+    #
+    class CachePolicyAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A cache policy configuration.
+    #
+    # This configuration determines the following:
+    #
+    # * The values that CloudFront includes in the cache key. These values
+    #   can include HTTP headers, cookies, and URL query strings. CloudFront
+    #   uses the cache key to find an object in its cache that it can return
+    #   to the viewer.
+    #
+    # * The default, minimum, and maximum time to live (TTL) values that you
+    #   want objects to stay in the CloudFront cache.
+    #
+    # The headers, cookies, and query strings that are included in the cache
+    # key are automatically included in requests that CloudFront sends to
+    # the origin. CloudFront sends a request when it can’t find a valid
+    # object in its cache that matches the request’s cache key. If you want
+    # to send values to the origin but *not* include them in the cache key,
+    # use `OriginRequestPolicy`.
+    #
+    # @note When making an API call, you may pass CachePolicyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         comment: "string",
+    #         name: "string", # required
+    #         default_ttl: 1,
+    #         max_ttl: 1,
+    #         min_ttl: 1, # required
+    #         parameters_in_cache_key_and_forwarded_to_origin: {
+    #           enable_accept_encoding_gzip: false, # required
+    #           headers_config: { # required
+    #             header_behavior: "none", # required, accepts none, whitelist
+    #             headers: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           cookies_config: { # required
+    #             cookie_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #             cookies: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           query_strings_config: { # required
+    #             query_string_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #             query_strings: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] comment
+    #   A comment to describe the cache policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A unique name to identify the cache policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_ttl
+    #   The default amount of time, in seconds, that you want objects to
+    #   stay in the CloudFront cache before CloudFront sends another request
+    #   to the origin to see if the object has been updated. CloudFront uses
+    #   this value as the object’s time to live (TTL) only when the origin
+    #   does *not* send `Cache-Control` or `Expires` headers with the
+    #   object. For more information, see [Managing How Long Content Stays
+    #   in an Edge Cache (Expiration)][1] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
+    #   The default value for this field is 86400 seconds (one day). If the
+    #   value of `MinTTL` is more than 86400 seconds, then the default value
+    #   for this field is the same as the value of `MinTTL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_ttl
+    #   The maximum amount of time, in seconds, that objects stay in the
+    #   CloudFront cache before CloudFront sends another request to the
+    #   origin to see if the object has been updated. CloudFront uses this
+    #   value only when the origin sends `Cache-Control` or `Expires`
+    #   headers with the object. For more information, see [Managing How
+    #   Long Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #   The default value for this field is 31536000 seconds (one year). If
+    #   the value of `MinTTL` or `DefaultTTL` is more than 31536000 seconds,
+    #   then the default value for this field is the same as the value of
+    #   `DefaultTTL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_ttl
+    #   The minimum amount of time, in seconds, that you want objects to
+    #   stay in the CloudFront cache before CloudFront sends another request
+    #   to the origin to see if the object has been updated. For more
+    #   information, see [Managing How Long Content Stays in an Edge Cache
+    #   (Expiration)][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parameters_in_cache_key_and_forwarded_to_origin
+    #   The HTTP headers, cookies, and URL query strings to include in the
+    #   cache key. The values included in the cache key are automatically
+    #   included in requests that CloudFront sends to the origin.
+    #   @return [Types::ParametersInCacheKeyAndForwardedToOrigin]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyConfig AWS API Documentation
+    #
+    class CachePolicyConfig < Struct.new(
+      :comment,
+      :name,
+      :default_ttl,
+      :max_ttl,
+      :min_ttl,
+      :parameters_in_cache_key_and_forwarded_to_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that determines whether any cookies in viewer requests (and
+    # if so, which cookies) are included in the cache key and automatically
+    # included in requests that CloudFront sends to the origin.
+    #
+    # @note When making an API call, you may pass CachePolicyCookiesConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cookie_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #         cookies: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cookie_behavior
+    #   Determines whether any cookies in viewer requests are included in
+    #   the cache key and automatically included in requests that CloudFront
+    #   sends to the origin. Valid values are:
+    #
+    #   * `none` – Cookies in viewer requests are not included in the cache
+    #     key and are not automatically included in requests that CloudFront
+    #     sends to the origin. Even when this field is set to `none`, any
+    #     cookies that are listed in an `OriginRequestPolicy` *are* included
+    #     in origin requests.
+    #
+    #   * `whitelist` – The cookies in viewer requests that are listed in
+    #     the `CookieNames` type are included in the cache key and
+    #     automatically included in requests that CloudFront sends to the
+    #     origin.
+    #
+    #   * `allExcept` – All cookies in viewer requests that are <i>
+    #     <b>not</b> </i> listed in the `CookieNames` type are included in
+    #     the cache key and automatically included in requests that
+    #     CloudFront sends to the origin.
+    #
+    #   * `all` – All cookies in viewer requests are included in the cache
+    #     key and are automatically included in requests that CloudFront
+    #     sends to the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] cookies
+    #   Contains a list of cookie names.
+    #   @return [Types::CookieNames]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyCookiesConfig AWS API Documentation
+    #
+    class CachePolicyCookiesConfig < Struct.new(
+      :cookie_behavior,
+      :cookies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that determines whether any HTTP headers (and if so, which
+    # headers) are included in the cache key and automatically included in
+    # requests that CloudFront sends to the origin.
+    #
+    # @note When making an API call, you may pass CachePolicyHeadersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         header_behavior: "none", # required, accepts none, whitelist
+    #         headers: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] header_behavior
+    #   Determines whether any HTTP headers are included in the cache key
+    #   and automatically included in requests that CloudFront sends to the
+    #   origin. Valid values are:
+    #
+    #   * `none` – HTTP headers are not included in the cache key and are
+    #     not automatically included in requests that CloudFront sends to
+    #     the origin. Even when this field is set to `none`, any headers
+    #     that are listed in an `OriginRequestPolicy` *are* included in
+    #     origin requests.
+    #
+    #   * `whitelist` – The HTTP headers that are listed in the `Headers`
+    #     type are included in the cache key and are automatically included
+    #     in requests that CloudFront sends to the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   Contains a list of HTTP header names.
+    #   @return [Types::Headers]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyHeadersConfig AWS API Documentation
+    #
+    class CachePolicyHeadersConfig < Struct.new(
+      :header_behavior,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cannot delete the cache policy because it is attached to one or more
+    # cache behaviors.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyInUse AWS API Documentation
+    #
+    class CachePolicyInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of cache policies.
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value that you should use in the
+    #   `Marker` field of a subsequent request to continue listing cache
+    #   policies where you left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of cache policies requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quantity
+    #   The total number of cache policies returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the cache policies in the list.
+    #   @return [Array<Types::CachePolicySummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyList AWS API Documentation
+    #
+    class CachePolicyList < Struct.new(
+      :next_marker,
+      :max_items,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that determines whether any URL query strings in viewer
+    # requests (and if so, which query strings) are included in the cache
+    # key and automatically included in requests that CloudFront sends to
+    # the origin.
+    #
+    # @note When making an API call, you may pass CachePolicyQueryStringsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         query_string_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #         query_strings: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] query_string_behavior
+    #   Determines whether any URL query strings in viewer requests are
+    #   included in the cache key and automatically included in requests
+    #   that CloudFront sends to the origin. Valid values are:
+    #
+    #   * `none` – Query strings in viewer requests are not included in the
+    #     cache key and are not automatically included in requests that
+    #     CloudFront sends to the origin. Even when this field is set to
+    #     `none`, any query strings that are listed in an
+    #     `OriginRequestPolicy` *are* included in origin requests.
+    #
+    #   * `whitelist` – The query strings in viewer requests that are listed
+    #     in the `QueryStringNames` type are included in the cache key and
+    #     automatically included in requests that CloudFront sends to the
+    #     origin.
+    #
+    #   * `allExcept` – All query strings in viewer requests that are <i>
+    #     <b>not</b> </i> listed in the `QueryStringNames` type are included
+    #     in the cache key and automatically included in requests that
+    #     CloudFront sends to the origin.
+    #
+    #   * `all` – All query strings in viewer requests are included in the
+    #     cache key and are automatically included in requests that
+    #     CloudFront sends to the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_strings
+    #   Contains the specific query strings in viewer requests that either
+    #   <i> <b>are</b> </i> or <i> <b>are not</b> </i> included in the cache
+    #   key and automatically included in requests that CloudFront sends to
+    #   the origin. The behavior depends on whether the
+    #   `QueryStringBehavior` field in the `CachePolicyQueryStringsConfig`
+    #   type is set to `whitelist` (the listed query strings <i> <b>are</b>
+    #   </i> included) or `allExcept` (the listed query strings <i> <b>are
+    #   not</b> </i> included, but all other query strings are).
+    #   @return [Types::QueryStringNames]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyQueryStringsConfig AWS API Documentation
+    #
+    class CachePolicyQueryStringsConfig < Struct.new(
+      :query_string_behavior,
+      :query_strings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a cache policy.
+    #
+    # @!attribute [rw] type
+    #   The type of cache policy, either `managed` (created by AWS) or
+    #   `custom` (created in this AWS account).
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_policy
+    #   The cache policy.
+    #   @return [Types::CachePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicySummary AWS API Documentation
+    #
+    class CachePolicySummary < Struct.new(
+      :type,
+      :cache_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -658,7 +1146,7 @@ module Aws::CloudFront
     #   CloudFront to cache responses to.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CachedMethods AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachedMethods AWS API Documentation
     #
     class CachedMethods < Struct.new(
       :quantity,
@@ -672,7 +1160,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CannotChangeImmutablePublicKeyFields AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CannotChangeImmutablePublicKeyFields AWS API Documentation
     #
     class CannotChangeImmutablePublicKeyFields < Struct.new(
       :message)
@@ -697,7 +1185,7 @@ module Aws::CloudFront
     #   The current configuration information for the identity.
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentity AWS API Documentation
     #
     class CloudFrontOriginAccessIdentity < Struct.new(
       :id,
@@ -716,7 +1204,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityAlreadyExists AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityAlreadyExists AWS API Documentation
     #
     class CloudFrontOriginAccessIdentityAlreadyExists < Struct.new(
       :message)
@@ -760,7 +1248,7 @@ module Aws::CloudFront
     #   Any comments you want to include about the origin access identity.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityConfig AWS API Documentation
     #
     class CloudFrontOriginAccessIdentityConfig < Struct.new(
       :caller_reference,
@@ -774,7 +1262,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityInUse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityInUse AWS API Documentation
     #
     class CloudFrontOriginAccessIdentityInUse < Struct.new(
       :message)
@@ -828,7 +1316,7 @@ module Aws::CloudFront
     #   access identity that was created by the current AWS account.
     #   @return [Array<Types::CloudFrontOriginAccessIdentitySummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityList AWS API Documentation
     #
     class CloudFrontOriginAccessIdentityList < Struct.new(
       :marker,
@@ -859,7 +1347,7 @@ module Aws::CloudFront
     #   when created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentitySummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentitySummary AWS API Documentation
     #
     class CloudFrontOriginAccessIdentitySummary < Struct.new(
       :id,
@@ -895,7 +1383,7 @@ module Aws::CloudFront
     #   mapping.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfile AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContentTypeProfile AWS API Documentation
     #
     class ContentTypeProfile < Struct.new(
       :format,
@@ -937,7 +1425,7 @@ module Aws::CloudFront
     #   The configuration for a field-level encryption content type-profile.
     #   @return [Types::ContentTypeProfiles]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfileConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContentTypeProfileConfig AWS API Documentation
     #
     class ContentTypeProfileConfig < Struct.new(
       :forward_when_content_type_is_unknown,
@@ -970,7 +1458,7 @@ module Aws::CloudFront
     #   Items in a field-level encryption content type-profile mapping.
     #   @return [Array<Types::ContentTypeProfile>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfiles AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContentTypeProfiles AWS API Documentation
     #
     class ContentTypeProfiles < Struct.new(
       :quantity,
@@ -979,14 +1467,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that specifies whether you want CloudFront to forward
-    # cookies to the origin and, if so, which ones. For more information
-    # about forwarding cookies to the origin, see [ Caching Content Based on
-    # Request Headers][1] in the *Amazon CloudFront Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
+    # Contains a list of cookie names.
     #
     # @note When making an API call, you may pass CookieNames
     #   data as a hash:
@@ -997,25 +1478,14 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] quantity
-    #   The number of different cookies that you want CloudFront to forward
-    #   to the origin for this cache behavior. The value must equal the
-    #   number of items that are in the `Items` field.
-    #
-    #   When you set `Forward = whitelist` (in the `CookiePreferences`
-    #   object), this value must be `1` or higher.
+    #   The number of cookie names in the `Items` list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   A complex type that contains one `Name` element for each cookie that
-    #   you want CloudFront to forward to the origin for this cache
-    #   behavior. It must contain the same number of items that is specified
-    #   in the `Quantity` field.
-    #
-    #   When you set `Forward = whitelist` (in the `CookiePreferences`
-    #   object), this field must contain at least one item.
+    #   A list of cookie names.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CookieNames AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CookieNames AWS API Documentation
     #
     class CookieNames < Struct.new(
       :quantity,
@@ -1024,6 +1494,16 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # This field is deprecated. We recommend that you use a cache policy or
+    # an origin request policy instead of this field.
+    #
+    # If you want to include cookies in the cache key, use `CookiesConfig`
+    # in a cache policy. See `CreateCachePolicy`.
+    #
+    # If you want to send cookies to the origin but not include them in the
+    # cache key, use `CookiesConfig` in an origin request policy. See
+    # `CreateOriginRequestPolicy`.
+    #
     # A complex type that specifies whether you want CloudFront to forward
     # cookies to the origin and, if so, which ones. For more information
     # about forwarding cookies to the origin, see [Caching Content Based on
@@ -1045,6 +1525,18 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] forward
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field.
+    #
+    #   If you want to include cookies in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If you want to send cookies to the origin but not include them in
+    #   the cache key, use origin request policy. For more information, see
+    #   [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
     #   Specifies which cookies to forward to the origin for this cache
     #   behavior: all, none, or the list of cookies specified in the
     #   `WhitelistedNames` complex type.
@@ -1052,9 +1544,26 @@ module Aws::CloudFront
     #   Amazon S3 doesn't process cookies. When the cache behavior is
     #   forwarding requests to an Amazon S3 origin, specify none for the
     #   `Forward` element.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
     #   @return [String]
     #
     # @!attribute [rw] whitelisted_names
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field.
+    #
+    #   If you want to include cookies in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If you want to send cookies to the origin but not include them in
+    #   the cache key, use an origin request policy. For more information,
+    #   see [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
     #   Required if you specify `whitelist` for the value of `Forward`. A
     #   complex type that specifies how many different cookies you want
     #   CloudFront to forward to the origin for this cache behavior and, if
@@ -1067,19 +1576,92 @@ module Aws::CloudFront
     #   deletes them automatically.
     #
     #   For the current limit on the number of cookie names that you can
-    #   whitelist for each cache behavior, see [ CloudFront Limits][1] in
+    #   whitelist for each cache behavior, see [ CloudFront Limits][3] in
     #   the *AWS General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront
     #   @return [Types::CookieNames]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CookiePreference AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CookiePreference AWS API Documentation
     #
     class CookiePreference < Struct.new(
       :forward,
       :whitelisted_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCachePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cache_policy_config: { # required
+    #           comment: "string",
+    #           name: "string", # required
+    #           default_ttl: 1,
+    #           max_ttl: 1,
+    #           min_ttl: 1, # required
+    #           parameters_in_cache_key_and_forwarded_to_origin: {
+    #             enable_accept_encoding_gzip: false, # required
+    #             headers_config: { # required
+    #               header_behavior: "none", # required, accepts none, whitelist
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             cookies_config: { # required
+    #               cookie_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #               cookies: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             query_strings_config: { # required
+    #               query_string_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #               query_strings: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cache_policy_config
+    #   A cache policy configuration.
+    #   @return [Types::CachePolicyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCachePolicyRequest AWS API Documentation
+    #
+    class CreateCachePolicyRequest < Struct.new(
+      :cache_policy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cache_policy
+    #   A cache policy.
+    #   @return [Types::CachePolicy]
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the cache policy just created.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the cache policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCachePolicyResult AWS API Documentation
+    #
+    class CreateCachePolicyResult < Struct.new(
+      :cache_policy,
+      :location,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1109,7 +1691,7 @@ module Aws::CloudFront
     #   The current configuration information for the identity.
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config)
@@ -1132,7 +1714,7 @@ module Aws::CloudFront
     #   The current version of the origin access identity created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentityResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -1214,7 +1796,36 @@ module Aws::CloudFront
     #           },
     #           default_cache_behavior: { # required
     #             target_origin_id: "string", # required
-    #             forwarded_values: { # required
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             field_level_encryption_id: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
     #                 forward: "none", # required, accepts none, whitelist, all
@@ -1232,36 +1843,9 @@ module Aws::CloudFront
     #                 items: ["string"],
     #               },
     #             },
-    #             trusted_signers: { # required
-    #               enabled: false, # required
-    #               quantity: 1, # required
-    #               items: ["string"],
-    #             },
-    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #             min_ttl: 1, # required
-    #             allowed_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               cached_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               },
-    #             },
-    #             smooth_streaming: false,
+    #             min_ttl: 1,
     #             default_ttl: 1,
     #             max_ttl: 1,
-    #             compress: false,
-    #             lambda_function_associations: {
-    #               quantity: 1, # required
-    #               items: [
-    #                 {
-    #                   lambda_function_arn: "LambdaFunctionARN", # required
-    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                   include_body: false,
-    #                 },
-    #               ],
-    #             },
-    #             field_level_encryption_id: "string",
     #           },
     #           cache_behaviors: {
     #             quantity: 1, # required
@@ -1269,7 +1853,36 @@ module Aws::CloudFront
     #               {
     #                 path_pattern: "string", # required
     #                 target_origin_id: "string", # required
-    #                 forwarded_values: { # required
+    #                 trusted_signers: { # required
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   },
+    #                 },
+    #                 smooth_streaming: false,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "LambdaFunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       include_body: false,
+    #                     },
+    #                   ],
+    #                 },
+    #                 field_level_encryption_id: "string",
+    #                 cache_policy_id: "string",
+    #                 origin_request_policy_id: "string",
+    #                 forwarded_values: {
     #                   query_string: false, # required
     #                   cookies: { # required
     #                     forward: "none", # required, accepts none, whitelist, all
@@ -1287,36 +1900,9 @@ module Aws::CloudFront
     #                     items: ["string"],
     #                   },
     #                 },
-    #                 trusted_signers: { # required
-    #                   enabled: false, # required
-    #                   quantity: 1, # required
-    #                   items: ["string"],
-    #                 },
-    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #                 min_ttl: 1, # required
-    #                 allowed_methods: {
-    #                   quantity: 1, # required
-    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                   cached_methods: {
-    #                     quantity: 1, # required
-    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                   },
-    #                 },
-    #                 smooth_streaming: false,
+    #                 min_ttl: 1,
     #                 default_ttl: 1,
     #                 max_ttl: 1,
-    #                 compress: false,
-    #                 lambda_function_associations: {
-    #                   quantity: 1, # required
-    #                   items: [
-    #                     {
-    #                       lambda_function_arn: "LambdaFunctionARN", # required
-    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                       include_body: false,
-    #                     },
-    #                   ],
-    #                 },
-    #                 field_level_encryption_id: "string",
     #               },
     #             ],
     #           },
@@ -1366,7 +1952,7 @@ module Aws::CloudFront
     #   The distribution's configuration information.
     #   @return [Types::DistributionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionRequest AWS API Documentation
     #
     class CreateDistributionRequest < Struct.new(
       :distribution_config)
@@ -1389,7 +1975,7 @@ module Aws::CloudFront
     #   The current version of the distribution created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionResult AWS API Documentation
     #
     class CreateDistributionResult < Struct.new(
       :distribution,
@@ -1472,7 +2058,36 @@ module Aws::CloudFront
     #             },
     #             default_cache_behavior: { # required
     #               target_origin_id: "string", # required
-    #               forwarded_values: { # required
+    #               trusted_signers: { # required
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #               allowed_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 cached_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 },
+    #               },
+    #               smooth_streaming: false,
+    #               compress: false,
+    #               lambda_function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     lambda_function_arn: "LambdaFunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     include_body: false,
+    #                   },
+    #                 ],
+    #               },
+    #               field_level_encryption_id: "string",
+    #               cache_policy_id: "string",
+    #               origin_request_policy_id: "string",
+    #               forwarded_values: {
     #                 query_string: false, # required
     #                 cookies: { # required
     #                   forward: "none", # required, accepts none, whitelist, all
@@ -1490,36 +2105,9 @@ module Aws::CloudFront
     #                   items: ["string"],
     #                 },
     #               },
-    #               trusted_signers: { # required
-    #                 enabled: false, # required
-    #                 quantity: 1, # required
-    #                 items: ["string"],
-    #               },
-    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #               min_ttl: 1, # required
-    #               allowed_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                 cached_methods: {
-    #                   quantity: 1, # required
-    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                 },
-    #               },
-    #               smooth_streaming: false,
+    #               min_ttl: 1,
     #               default_ttl: 1,
     #               max_ttl: 1,
-    #               compress: false,
-    #               lambda_function_associations: {
-    #                 quantity: 1, # required
-    #                 items: [
-    #                   {
-    #                     lambda_function_arn: "LambdaFunctionARN", # required
-    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                     include_body: false,
-    #                   },
-    #                 ],
-    #               },
-    #               field_level_encryption_id: "string",
     #             },
     #             cache_behaviors: {
     #               quantity: 1, # required
@@ -1527,7 +2115,36 @@ module Aws::CloudFront
     #                 {
     #                   path_pattern: "string", # required
     #                   target_origin_id: "string", # required
-    #                   forwarded_values: { # required
+    #                   trusted_signers: { # required
+    #                     enabled: false, # required
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                   viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                   allowed_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                     cached_methods: {
+    #                       quantity: 1, # required
+    #                       items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                     },
+    #                   },
+    #                   smooth_streaming: false,
+    #                   compress: false,
+    #                   lambda_function_associations: {
+    #                     quantity: 1, # required
+    #                     items: [
+    #                       {
+    #                         lambda_function_arn: "LambdaFunctionARN", # required
+    #                         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                         include_body: false,
+    #                       },
+    #                     ],
+    #                   },
+    #                   field_level_encryption_id: "string",
+    #                   cache_policy_id: "string",
+    #                   origin_request_policy_id: "string",
+    #                   forwarded_values: {
     #                     query_string: false, # required
     #                     cookies: { # required
     #                       forward: "none", # required, accepts none, whitelist, all
@@ -1545,36 +2162,9 @@ module Aws::CloudFront
     #                       items: ["string"],
     #                     },
     #                   },
-    #                   trusted_signers: { # required
-    #                     enabled: false, # required
-    #                     quantity: 1, # required
-    #                     items: ["string"],
-    #                   },
-    #                   viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #                   min_ttl: 1, # required
-    #                   allowed_methods: {
-    #                     quantity: 1, # required
-    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                     cached_methods: {
-    #                       quantity: 1, # required
-    #                       items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                     },
-    #                   },
-    #                   smooth_streaming: false,
+    #                   min_ttl: 1,
     #                   default_ttl: 1,
     #                   max_ttl: 1,
-    #                   compress: false,
-    #                   lambda_function_associations: {
-    #                     quantity: 1, # required
-    #                     items: [
-    #                       {
-    #                         lambda_function_arn: "LambdaFunctionARN", # required
-    #                         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                         include_body: false,
-    #                       },
-    #                     ],
-    #                   },
-    #                   field_level_encryption_id: "string",
     #                 },
     #               ],
     #             },
@@ -1633,7 +2223,7 @@ module Aws::CloudFront
     #   The distribution's configuration information.
     #   @return [Types::DistributionConfigWithTags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionWithTagsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionWithTagsRequest AWS API Documentation
     #
     class CreateDistributionWithTagsRequest < Struct.new(
       :distribution_config_with_tags)
@@ -1656,7 +2246,7 @@ module Aws::CloudFront
     #   The current version of the distribution created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionWithTagsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionWithTagsResult AWS API Documentation
     #
     class CreateDistributionWithTagsResult < Struct.new(
       :distribution,
@@ -1705,7 +2295,7 @@ module Aws::CloudFront
     #   The request to create a new field-level encryption configuration.
     #   @return [Types::FieldLevelEncryptionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class CreateFieldLevelEncryptionConfigRequest < Struct.new(
       :field_level_encryption_config)
@@ -1727,7 +2317,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionConfigResult AWS API Documentation
     #
     class CreateFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption,
@@ -1765,7 +2355,7 @@ module Aws::CloudFront
     #   The request to create a field-level encryption profile.
     #   @return [Types::FieldLevelEncryptionProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class CreateFieldLevelEncryptionProfileRequest < Struct.new(
       :field_level_encryption_profile_config)
@@ -1786,7 +2376,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfileResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionProfileResult AWS API Documentation
     #
     class CreateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
@@ -1820,7 +2410,7 @@ module Aws::CloudFront
     #   The batch information for the invalidation.
     #   @return [Types::InvalidationBatch]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidationRequest AWS API Documentation
     #
     class CreateInvalidationRequest < Struct.new(
       :distribution_id,
@@ -1840,11 +2430,76 @@ module Aws::CloudFront
     #   The invalidation's information.
     #   @return [Types::Invalidation]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidationResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidationResult AWS API Documentation
     #
     class CreateInvalidationResult < Struct.new(
       :location,
       :invalidation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateOriginRequestPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         origin_request_policy_config: { # required
+    #           comment: "string",
+    #           name: "string", # required
+    #           headers_config: { # required
+    #             header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #             headers: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           cookies_config: { # required
+    #             cookie_behavior: "none", # required, accepts none, whitelist, all
+    #             cookies: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           query_strings_config: { # required
+    #             query_string_behavior: "none", # required, accepts none, whitelist, all
+    #             query_strings: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] origin_request_policy_config
+    #   An origin request policy configuration.
+    #   @return [Types::OriginRequestPolicyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginRequestPolicyRequest AWS API Documentation
+    #
+    class CreateOriginRequestPolicyRequest < Struct.new(
+      :origin_request_policy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_request_policy
+    #   An origin request policy.
+    #   @return [Types::OriginRequestPolicy]
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the origin request policy just created.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the origin request policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginRequestPolicyResult AWS API Documentation
+    #
+    class CreateOriginRequestPolicyResult < Struct.new(
+      :origin_request_policy,
+      :location,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1865,7 +2520,7 @@ module Aws::CloudFront
     #   The request to add a public key to CloudFront.
     #   @return [Types::PublicKeyConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreatePublicKeyRequest AWS API Documentation
     #
     class CreatePublicKeyRequest < Struct.new(
       :public_key_config)
@@ -1886,7 +2541,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKeyResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreatePublicKeyResult AWS API Documentation
     #
     class CreatePublicKeyResult < Struct.new(
       :public_key,
@@ -1932,7 +2587,7 @@ module Aws::CloudFront
     #   The streaming distribution's configuration information.
     #   @return [Types::StreamingDistributionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionRequest AWS API Documentation
     #
     class CreateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config)
@@ -1955,7 +2610,7 @@ module Aws::CloudFront
     #   The current version of the streaming distribution created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionResult AWS API Documentation
     #
     class CreateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -2011,7 +2666,7 @@ module Aws::CloudFront
     #   The streaming distribution's configuration information.
     #   @return [Types::StreamingDistributionConfigWithTags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionWithTagsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionWithTagsRequest AWS API Documentation
     #
     class CreateStreamingDistributionWithTagsRequest < Struct.new(
       :streaming_distribution_config_with_tags)
@@ -2034,7 +2689,7 @@ module Aws::CloudFront
     #   The current version of the distribution created.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionWithTagsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionWithTagsResult AWS API Documentation
     #
     class CreateStreamingDistributionWithTagsResult < Struct.new(
       :streaming_distribution,
@@ -2141,7 +2796,7 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomErrorResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomErrorResponse AWS API Documentation
     #
     class CustomErrorResponse < Struct.new(
       :error_code,
@@ -2195,7 +2850,7 @@ module Aws::CloudFront
     #   page and/or a caching duration.
     #   @return [Array<Types::CustomErrorResponse>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomErrorResponses AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomErrorResponses AWS API Documentation
     #
     class CustomErrorResponses < Struct.new(
       :quantity,
@@ -2230,7 +2885,7 @@ module Aws::CloudFront
     #   origin. If Quantity is `0`, omit `Items`.
     #   @return [Array<Types::OriginCustomHeader>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomHeaders AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomHeaders AWS API Documentation
     #
     class CustomHeaders < Struct.new(
       :quantity,
@@ -2327,7 +2982,7 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomOriginConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomOriginConfig AWS API Documentation
     #
     class CustomOriginConfig < Struct.new(
       :http_port,
@@ -2350,7 +3005,36 @@ module Aws::CloudFront
     #
     #       {
     #         target_origin_id: "string", # required
-    #         forwarded_values: { # required
+    #         trusted_signers: { # required
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #         allowed_methods: {
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           cached_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           },
+    #         },
+    #         smooth_streaming: false,
+    #         compress: false,
+    #         lambda_function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               lambda_function_arn: "LambdaFunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
+    #             },
+    #           ],
+    #         },
+    #         field_level_encryption_id: "string",
+    #         cache_policy_id: "string",
+    #         origin_request_policy_id: "string",
+    #         forwarded_values: {
     #           query_string: false, # required
     #           cookies: { # required
     #             forward: "none", # required, accepts none, whitelist, all
@@ -2368,47 +3052,15 @@ module Aws::CloudFront
     #             items: ["string"],
     #           },
     #         },
-    #         trusted_signers: { # required
-    #           enabled: false, # required
-    #           quantity: 1, # required
-    #           items: ["string"],
-    #         },
-    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #         min_ttl: 1, # required
-    #         allowed_methods: {
-    #           quantity: 1, # required
-    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           cached_methods: {
-    #             quantity: 1, # required
-    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           },
-    #         },
-    #         smooth_streaming: false,
+    #         min_ttl: 1,
     #         default_ttl: 1,
     #         max_ttl: 1,
-    #         compress: false,
-    #         lambda_function_associations: {
-    #           quantity: 1, # required
-    #           items: [
-    #             {
-    #               lambda_function_arn: "LambdaFunctionARN", # required
-    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #               include_body: false,
-    #             },
-    #           ],
-    #         },
-    #         field_level_encryption_id: "string",
     #       }
     #
     # @!attribute [rw] target_origin_id
     #   The value of `ID` for the origin that you want CloudFront to route
     #   requests to when they use the default cache behavior.
     #   @return [String]
-    #
-    # @!attribute [rw] forwarded_values
-    #   A complex type that specifies how CloudFront handles query strings,
-    #   cookies, and HTTP headers.
-    #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] trusted_signers
     #   A complex type that specifies the AWS accounts, if any, that you
@@ -2472,22 +3124,6 @@ module Aws::CloudFront
     #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [String]
     #
-    # @!attribute [rw] min_ttl
-    #   The minimum amount of time that you want objects to stay in
-    #   CloudFront caches before CloudFront forwards another request to your
-    #   origin to determine whether the object has been updated. For more
-    #   information, see [Managing How Long Content Stays in an Edge Cache
-    #   (Expiration)][1] in the *Amazon CloudFront Developer Guide*.
-    #
-    #   You must specify `0` for `MinTTL` if you configure CloudFront to
-    #   forward all headers to your origin (under `Headers`, if you specify
-    #   `1` for `Quantity` and `*` for `Name`).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-    #   @return [Integer]
-    #
     # @!attribute [rw] allowed_methods
     #   A complex type that controls which HTTP methods CloudFront processes
     #   and forwards to your Amazon S3 bucket or your custom origin. There
@@ -2516,36 +3152,6 @@ module Aws::CloudFront
     #   content matches the value of `PathPattern`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] default_ttl
-    #   The default amount of time that you want objects to stay in
-    #   CloudFront caches before CloudFront forwards another request to your
-    #   origin to determine whether the object has been updated. The value
-    #   that you specify applies only when your origin does not add HTTP
-    #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
-    #   and `Expires` to objects. For more information, see [Managing How
-    #   Long Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
-    #   CloudFront Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-    #   @return [Integer]
-    #
-    # @!attribute [rw] max_ttl
-    #   The maximum amount of time that you want objects to stay in
-    #   CloudFront caches before CloudFront forwards another request to your
-    #   origin to determine whether the object has been updated. The value
-    #   that you specify applies only when your origin adds HTTP headers
-    #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
-    #   `Expires` to objects. For more information, see [Managing How Long
-    #   Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
-    #   CloudFront Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-    #   @return [Integer]
-    #
     # @!attribute [rw] compress
     #   Whether you want CloudFront to automatically compress certain files
     #   for this cache behavior. If so, specify `true`; if not, specify
@@ -2568,21 +3174,170 @@ module Aws::CloudFront
     #   for the default cache behavior.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DefaultCacheBehavior AWS API Documentation
+    # @!attribute [rw] cache_policy_id
+    #   The unique identifier of the cache policy that is attached to the
+    #   default cache behavior. For more information, see [Creating cache
+    #   policies][1] or [Using the managed cache policies][2] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_request_policy_id
+    #   The unique identifier of the origin request policy that is attached
+    #   to the default cache behavior. For more information, see [Creating
+    #   origin request policies][1] or [Using the managed origin request
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] forwarded_values
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field. For more
+    #   information, see [Working with policies][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #   If you want to include values in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][2] or [Using the
+    #   managed cache policies][3] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #   If you want to send values to the origin but not include them in the
+    #   cache key, use an origin request policy. For more information, see
+    #   [Creating origin request policies][4] or [Using the managed origin
+    #   request policies][5] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   A complex type that specifies how CloudFront handles query strings,
+    #   cookies, and HTTP headers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [5]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
+    #   @return [Types::ForwardedValues]
+    #
+    # @!attribute [rw] min_ttl
+    #   This field is deprecated. We recommend that you use the `MinTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   The minimum amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. For more
+    #   information, see [Managing How Long Content Stays in an Edge Cache
+    #   (Expiration)][3] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   You must specify `0` for `MinTTL` if you configure CloudFront to
+    #   forward all headers to your origin (under `Headers`, if you specify
+    #   `1` for `Quantity` and `*` for `Name`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_ttl
+    #   This field is deprecated. We recommend that you use the `DefaultTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   The default amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. The value
+    #   that you specify applies only when your origin does not add HTTP
+    #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
+    #   and `Expires` to objects. For more information, see [Managing How
+    #   Long Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_ttl
+    #   This field is deprecated. We recommend that you use the `MaxTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   The maximum amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. The value
+    #   that you specify applies only when your origin adds HTTP headers
+    #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
+    #   `Expires` to objects. For more information, see [Managing How Long
+    #   Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DefaultCacheBehavior AWS API Documentation
     #
     class DefaultCacheBehavior < Struct.new(
       :target_origin_id,
-      :forwarded_values,
       :trusted_signers,
       :viewer_protocol_policy,
-      :min_ttl,
       :allowed_methods,
       :smooth_streaming,
-      :default_ttl,
-      :max_ttl,
       :compress,
       :lambda_function_associations,
-      :field_level_encryption_id)
+      :field_level_encryption_id,
+      :cache_policy_id,
+      :origin_request_policy_id,
+      :forwarded_values,
+      :min_ttl,
+      :default_ttl,
+      :max_ttl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCachePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the cache policy that you are deleting. To
+    #   get the identifier, you can use `ListCachePolicies`.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The version of the cache policy that you are deleting. The version
+    #   is the cache policy’s `ETag` value, which you can get using
+    #   `ListCachePolicies`, `GetCachePolicy`, or `GetCachePolicyConfig`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCachePolicyRequest AWS API Documentation
+    #
+    class DeleteCachePolicyRequest < Struct.new(
+      :id,
+      :if_match)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2606,7 +3361,7 @@ module Aws::CloudFront
     #   `PUT` request. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id,
@@ -2676,7 +3431,7 @@ module Aws::CloudFront
     #   the distribution. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistributionRequest AWS API Documentation
     #
     class DeleteDistributionRequest < Struct.new(
       :id,
@@ -2702,7 +3457,7 @@ module Aws::CloudFront
     #   configuration identity to delete. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class DeleteFieldLevelEncryptionConfigRequest < Struct.new(
       :id,
@@ -2728,9 +3483,39 @@ module Aws::CloudFront
     #   profile to delete. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class DeleteFieldLevelEncryptionProfileRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteOriginRequestPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the origin request policy that you are
+    #   deleting. To get the identifier, you can use
+    #   `ListOriginRequestPolicies`.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The version of the origin request policy that you are deleting. The
+    #   version is the origin request policy’s `ETag` value, which you can
+    #   get using `ListOriginRequestPolicies`, `GetOriginRequestPolicy`, or
+    #   `GetOriginRequestPolicyConfig`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteOriginRequestPolicyRequest AWS API Documentation
+    #
+    class DeleteOriginRequestPolicyRequest < Struct.new(
       :id,
       :if_match)
       SENSITIVE = []
@@ -2754,7 +3539,7 @@ module Aws::CloudFront
     #   public key identity to delete. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeletePublicKeyRequest AWS API Documentation
     #
     class DeletePublicKeyRequest < Struct.new(
       :id,
@@ -2782,7 +3567,7 @@ module Aws::CloudFront
     #   the streaming distribution. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteStreamingDistributionRequest AWS API Documentation
     #
     class DeleteStreamingDistributionRequest < Struct.new(
       :id,
@@ -2856,7 +3641,7 @@ module Aws::CloudFront
     #   [1]: https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html
     #   @return [Array<Types::AliasICPRecordal>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Distribution AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Distribution AWS API Documentation
     #
     class Distribution < Struct.new(
       :id,
@@ -2878,7 +3663,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionAlreadyExists AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionAlreadyExists AWS API Documentation
     #
     class DistributionAlreadyExists < Struct.new(
       :message)
@@ -2957,7 +3742,36 @@ module Aws::CloudFront
     #         },
     #         default_cache_behavior: { # required
     #           target_origin_id: "string", # required
-    #           forwarded_values: { # required
+    #           trusted_signers: { # required
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #           allowed_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #             cached_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #             },
+    #           },
+    #           smooth_streaming: false,
+    #           compress: false,
+    #           lambda_function_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 lambda_function_arn: "LambdaFunctionARN", # required
+    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 include_body: false,
+    #               },
+    #             ],
+    #           },
+    #           field_level_encryption_id: "string",
+    #           cache_policy_id: "string",
+    #           origin_request_policy_id: "string",
+    #           forwarded_values: {
     #             query_string: false, # required
     #             cookies: { # required
     #               forward: "none", # required, accepts none, whitelist, all
@@ -2975,36 +3789,9 @@ module Aws::CloudFront
     #               items: ["string"],
     #             },
     #           },
-    #           trusted_signers: { # required
-    #             enabled: false, # required
-    #             quantity: 1, # required
-    #             items: ["string"],
-    #           },
-    #           viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #           min_ttl: 1, # required
-    #           allowed_methods: {
-    #             quantity: 1, # required
-    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #             cached_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #             },
-    #           },
-    #           smooth_streaming: false,
+    #           min_ttl: 1,
     #           default_ttl: 1,
     #           max_ttl: 1,
-    #           compress: false,
-    #           lambda_function_associations: {
-    #             quantity: 1, # required
-    #             items: [
-    #               {
-    #                 lambda_function_arn: "LambdaFunctionARN", # required
-    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                 include_body: false,
-    #               },
-    #             ],
-    #           },
-    #           field_level_encryption_id: "string",
     #         },
     #         cache_behaviors: {
     #           quantity: 1, # required
@@ -3012,7 +3799,36 @@ module Aws::CloudFront
     #             {
     #               path_pattern: "string", # required
     #               target_origin_id: "string", # required
-    #               forwarded_values: { # required
+    #               trusted_signers: { # required
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #               allowed_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 cached_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 },
+    #               },
+    #               smooth_streaming: false,
+    #               compress: false,
+    #               lambda_function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     lambda_function_arn: "LambdaFunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     include_body: false,
+    #                   },
+    #                 ],
+    #               },
+    #               field_level_encryption_id: "string",
+    #               cache_policy_id: "string",
+    #               origin_request_policy_id: "string",
+    #               forwarded_values: {
     #                 query_string: false, # required
     #                 cookies: { # required
     #                   forward: "none", # required, accepts none, whitelist, all
@@ -3030,36 +3846,9 @@ module Aws::CloudFront
     #                   items: ["string"],
     #                 },
     #               },
-    #               trusted_signers: { # required
-    #                 enabled: false, # required
-    #                 quantity: 1, # required
-    #                 items: ["string"],
-    #               },
-    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #               min_ttl: 1, # required
-    #               allowed_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                 cached_methods: {
-    #                   quantity: 1, # required
-    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                 },
-    #               },
-    #               smooth_streaming: false,
+    #               min_ttl: 1,
     #               default_ttl: 1,
     #               max_ttl: 1,
-    #               compress: false,
-    #               lambda_function_associations: {
-    #                 quantity: 1, # required
-    #                 items: [
-    #                   {
-    #                     lambda_function_arn: "LambdaFunctionARN", # required
-    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                     include_body: false,
-    #                   },
-    #                 ],
-    #               },
-    #               field_level_encryption_id: "string",
     #             },
     #           ],
     #         },
@@ -3337,7 +4126,7 @@ module Aws::CloudFront
     #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionConfig AWS API Documentation
     #
     class DistributionConfig < Struct.new(
       :caller_reference,
@@ -3434,7 +4223,36 @@ module Aws::CloudFront
     #           },
     #           default_cache_behavior: { # required
     #             target_origin_id: "string", # required
-    #             forwarded_values: { # required
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             field_level_encryption_id: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
     #                 forward: "none", # required, accepts none, whitelist, all
@@ -3452,36 +4270,9 @@ module Aws::CloudFront
     #                 items: ["string"],
     #               },
     #             },
-    #             trusted_signers: { # required
-    #               enabled: false, # required
-    #               quantity: 1, # required
-    #               items: ["string"],
-    #             },
-    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #             min_ttl: 1, # required
-    #             allowed_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               cached_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               },
-    #             },
-    #             smooth_streaming: false,
+    #             min_ttl: 1,
     #             default_ttl: 1,
     #             max_ttl: 1,
-    #             compress: false,
-    #             lambda_function_associations: {
-    #               quantity: 1, # required
-    #               items: [
-    #                 {
-    #                   lambda_function_arn: "LambdaFunctionARN", # required
-    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                   include_body: false,
-    #                 },
-    #               ],
-    #             },
-    #             field_level_encryption_id: "string",
     #           },
     #           cache_behaviors: {
     #             quantity: 1, # required
@@ -3489,7 +4280,36 @@ module Aws::CloudFront
     #               {
     #                 path_pattern: "string", # required
     #                 target_origin_id: "string", # required
-    #                 forwarded_values: { # required
+    #                 trusted_signers: { # required
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   },
+    #                 },
+    #                 smooth_streaming: false,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "LambdaFunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       include_body: false,
+    #                     },
+    #                   ],
+    #                 },
+    #                 field_level_encryption_id: "string",
+    #                 cache_policy_id: "string",
+    #                 origin_request_policy_id: "string",
+    #                 forwarded_values: {
     #                   query_string: false, # required
     #                   cookies: { # required
     #                     forward: "none", # required, accepts none, whitelist, all
@@ -3507,36 +4327,9 @@ module Aws::CloudFront
     #                     items: ["string"],
     #                   },
     #                 },
-    #                 trusted_signers: { # required
-    #                   enabled: false, # required
-    #                   quantity: 1, # required
-    #                   items: ["string"],
-    #                 },
-    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #                 min_ttl: 1, # required
-    #                 allowed_methods: {
-    #                   quantity: 1, # required
-    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                   cached_methods: {
-    #                     quantity: 1, # required
-    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                   },
-    #                 },
-    #                 smooth_streaming: false,
+    #                 min_ttl: 1,
     #                 default_ttl: 1,
     #                 max_ttl: 1,
-    #                 compress: false,
-    #                 lambda_function_associations: {
-    #                   quantity: 1, # required
-    #                   items: [
-    #                     {
-    #                       lambda_function_arn: "LambdaFunctionARN", # required
-    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                       include_body: false,
-    #                     },
-    #                   ],
-    #                 },
-    #                 field_level_encryption_id: "string",
     #               },
     #             ],
     #           },
@@ -3598,11 +4391,55 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionConfigWithTags AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionConfigWithTags AWS API Documentation
     #
     class DistributionConfigWithTags < Struct.new(
       :distribution_config,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of distribution IDs.
+    #
+    # @!attribute [rw] marker
+    #   The value provided in the `Marker` request field.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   Contains the value that you should use in the `Marker` field of a
+    #   subsequent request to continue listing distribution IDs where you
+    #   left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distribution IDs requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether more distribution IDs remain to be
+    #   listed. If your results were truncated, you can make a subsequent
+    #   request using the `Marker` request field to retrieve more
+    #   distribution IDs in the list.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The total number of distribution IDs returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the distribution IDs in the list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionIdList AWS API Documentation
+    #
+    class DistributionIdList < Struct.new(
+      :marker,
+      :next_marker,
+      :max_items,
+      :is_truncated,
+      :quantity,
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3640,7 +4477,7 @@ module Aws::CloudFront
     #   each distribution that was created by the current AWS account.
     #   @return [Array<Types::DistributionSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionList AWS API Documentation
     #
     class DistributionList < Struct.new(
       :marker,
@@ -3659,7 +4496,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionNotDisabled AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionNotDisabled AWS API Documentation
     #
     class DistributionNotDisabled < Struct.new(
       :message)
@@ -3780,7 +4617,7 @@ module Aws::CloudFront
     #   [1]: https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html
     #   @return [Array<Types::AliasICPRecordal>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionSummary AWS API Documentation
     #
     class DistributionSummary < Struct.new(
       :id,
@@ -3837,7 +4674,7 @@ module Aws::CloudFront
     #   type-profile mapping.
     #   @return [Array<Types::EncryptionEntity>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/EncryptionEntities AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EncryptionEntities AWS API Documentation
     #
     class EncryptionEntities < Struct.new(
       :quantity,
@@ -3882,7 +4719,7 @@ module Aws::CloudFront
     #   case-sensitive.
     #   @return [Types::FieldPatterns]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/EncryptionEntity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EncryptionEntity AWS API Documentation
     #
     class EncryptionEntity < Struct.new(
       :public_key_id,
@@ -3910,7 +4747,7 @@ module Aws::CloudFront
     #   specified for field-level encryption.
     #   @return [Types::FieldLevelEncryptionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryption AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryption AWS API Documentation
     #
     class FieldLevelEncryption < Struct.new(
       :id,
@@ -3976,7 +4813,7 @@ module Aws::CloudFront
     #   a request if a query argument doesn't specify a profile to use.
     #   @return [Types::ContentTypeProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionConfig AWS API Documentation
     #
     class FieldLevelEncryptionConfig < Struct.new(
       :caller_reference,
@@ -3992,7 +4829,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionConfigAlreadyExists AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionConfigAlreadyExists AWS API Documentation
     #
     class FieldLevelEncryptionConfigAlreadyExists < Struct.new(
       :message)
@@ -4005,7 +4842,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionConfigInUse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionConfigInUse AWS API Documentation
     #
     class FieldLevelEncryptionConfigInUse < Struct.new(
       :message)
@@ -4034,7 +4871,7 @@ module Aws::CloudFront
     #   An array of field-level encryption items.
     #   @return [Array<Types::FieldLevelEncryptionSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionList AWS API Documentation
     #
     class FieldLevelEncryptionList < Struct.new(
       :next_marker,
@@ -4062,7 +4899,7 @@ module Aws::CloudFront
     #   encryption entities for the field-level encryption profile.
     #   @return [Types::FieldLevelEncryptionProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfile AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfile AWS API Documentation
     #
     class FieldLevelEncryptionProfile < Struct.new(
       :id,
@@ -4077,7 +4914,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileAlreadyExists AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileAlreadyExists AWS API Documentation
     #
     class FieldLevelEncryptionProfileAlreadyExists < Struct.new(
       :message)
@@ -4127,7 +4964,7 @@ module Aws::CloudFront
     #   field patterns for specifying which fields to encrypt with this key.
     #   @return [Types::EncryptionEntities]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileConfig AWS API Documentation
     #
     class FieldLevelEncryptionProfileConfig < Struct.new(
       :name,
@@ -4143,7 +4980,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileInUse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileInUse AWS API Documentation
     #
     class FieldLevelEncryptionProfileInUse < Struct.new(
       :message)
@@ -4172,7 +5009,7 @@ module Aws::CloudFront
     #   The field-level encryption profile items.
     #   @return [Array<Types::FieldLevelEncryptionProfileSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileList AWS API Documentation
     #
     class FieldLevelEncryptionProfileList < Struct.new(
       :next_marker,
@@ -4188,7 +5025,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileSizeExceeded AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileSizeExceeded AWS API Documentation
     #
     class FieldLevelEncryptionProfileSizeExceeded < Struct.new(
       :message)
@@ -4221,7 +5058,7 @@ module Aws::CloudFront
     #   An optional comment for the field-level encryption profile summary.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileSummary AWS API Documentation
     #
     class FieldLevelEncryptionProfileSummary < Struct.new(
       :id,
@@ -4256,7 +5093,7 @@ module Aws::CloudFront
     #   A summary of a content type-profile mapping.
     #   @return [Types::ContentTypeProfileConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionSummary AWS API Documentation
     #
     class FieldLevelEncryptionSummary < Struct.new(
       :id,
@@ -4287,7 +5124,7 @@ module Aws::CloudFront
     #   An array of the field-level encryption field patterns.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldPatterns AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldPatterns AWS API Documentation
     #
     class FieldPatterns < Struct.new(
       :quantity,
@@ -4296,8 +5133,25 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # This field is deprecated. We recommend that you use a cache policy or
+    # an origin request policy instead of this field.
+    #
+    # If you want to include values in the cache key, use a cache policy.
+    # For more information, see [Creating cache policies][1] in the *Amazon
+    # CloudFront Developer Guide*.
+    #
+    # If you want to send values to the origin but not include them in the
+    # cache key, use an origin request policy. For more information, see
+    # [Creating origin request policies][2] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
     # A complex type that specifies how CloudFront handles query strings,
     # cookies, and HTTP headers.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
     #
     # @note When making an API call, you may pass ForwardedValues
     #   data as a hash:
@@ -4322,6 +5176,18 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] query_string
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field.
+    #
+    #   If you want to include query strings in the cache key, use a cache
+    #   policy. For more information, see [Creating cache policies][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #   If you want to send query strings to the origin but not include them
+    #   in the cache key, use an origin request policy. For more
+    #   information, see [Creating origin request policies][2] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
     #   Indicates whether you want CloudFront to forward query strings to
     #   the origin that is associated with this cache behavior and cache
     #   based on the query string parameters. CloudFront behavior depends on
@@ -4345,27 +5211,55 @@ module Aws::CloudFront
     #   on query string parameters.
     #
     #   For more information, see [Configuring CloudFront to Cache Based on
-    #   Query String Parameters][1] in the *Amazon CloudFront Developer
+    #   Query String Parameters][3] in the *Amazon CloudFront Developer
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html
     #   @return [Boolean]
     #
     # @!attribute [rw] cookies
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field.
+    #
+    #   If you want to include cookies in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If you want to send cookies to the origin but not include them in
+    #   the cache key, use an origin request policy. For more information,
+    #   see [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
     #   A complex type that specifies whether you want CloudFront to forward
     #   cookies to the origin and, if so, which ones. For more information
     #   about forwarding cookies to the origin, see [How CloudFront
-    #   Forwards, Caches, and Logs Cookies][1] in the *Amazon CloudFront
+    #   Forwards, Caches, and Logs Cookies][3] in the *Amazon CloudFront
     #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
     #   @return [Types::CookiePreference]
     #
     # @!attribute [rw] headers
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field.
+    #
+    #   If you want to include headers in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If you want to send headers to the origin but not include them in
+    #   the cache key, use an origin request policy. For more information,
+    #   see [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
     #   A complex type that specifies the `Headers`, if any, that you want
     #   CloudFront to forward to the origin for this cache behavior
     #   (whitelisted headers). For the headers that you specify, CloudFront
@@ -4373,20 +5267,39 @@ module Aws::CloudFront
     #   the header values in viewer requests.
     #
     #   For more information, see [ Caching Content Based on Request
-    #   Headers][1] in the *Amazon CloudFront Developer Guide*.
+    #   Headers][3] in the *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
     #   @return [Types::Headers]
     #
     # @!attribute [rw] query_string_cache_keys
+    #   This field is deprecated. We recommend that you use a cache policy
+    #   or an origin request policy instead of this field.
+    #
+    #   If you want to include query strings in the cache key, use a cache
+    #   policy. For more information, see [Creating cache policies][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #   If you want to send query strings to the origin but not include them
+    #   in the cache key, use an origin request policy. For more
+    #   information, see [Creating origin request policies][2] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
     #   A complex type that contains information about the query string
     #   parameters that you want CloudFront to use for caching for this
     #   cache behavior.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
     #   @return [Types::QueryStringCacheKeys]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ForwardedValues AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ForwardedValues AWS API Documentation
     #
     class ForwardedValues < Struct.new(
       :query_string,
@@ -4446,12 +5359,92 @@ module Aws::CloudFront
     #   the CloudFront console, which includes both country names and codes.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GeoRestriction AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GeoRestriction AWS API Documentation
     #
     class GeoRestriction < Struct.new(
       :restriction_type,
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCachePolicyConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the cache policy. If the cache policy is
+    #   attached to a distribution’s cache behavior, you can get the
+    #   policy’s identifier using `ListDistributions` or `GetDistribution`.
+    #   If the cache policy is not attached to a cache behavior, you can get
+    #   the identifier using `ListCachePolicies`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicyConfigRequest AWS API Documentation
+    #
+    class GetCachePolicyConfigRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cache_policy_config
+    #   The cache policy configuration.
+    #   @return [Types::CachePolicyConfig]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the cache policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicyConfigResult AWS API Documentation
+    #
+    class GetCachePolicyConfigResult < Struct.new(
+      :cache_policy_config,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCachePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the cache policy. If the cache policy is
+    #   attached to a distribution’s cache behavior, you can get the
+    #   policy’s identifier using `ListDistributions` or `GetDistribution`.
+    #   If the cache policy is not attached to a cache behavior, you can get
+    #   the identifier using `ListCachePolicies`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicyRequest AWS API Documentation
+    #
+    class GetCachePolicyRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cache_policy
+    #   The cache policy.
+    #   @return [Types::CachePolicy]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the cache policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicyResult AWS API Documentation
+    #
+    class GetCachePolicyResult < Struct.new(
+      :cache_policy,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4474,7 +5467,7 @@ module Aws::CloudFront
     #   The identity's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityConfigRequest AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
       :id)
@@ -4493,7 +5486,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityConfigResult AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
       :cloud_front_origin_access_identity_config,
@@ -4515,7 +5508,7 @@ module Aws::CloudFront
     #   The identity's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id)
@@ -4534,7 +5527,7 @@ module Aws::CloudFront
     #   For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -4557,7 +5550,7 @@ module Aws::CloudFront
     #   configuration is returned.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfigRequest AWS API Documentation
     #
     class GetDistributionConfigRequest < Struct.new(
       :id)
@@ -4576,7 +5569,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfigResult AWS API Documentation
     #
     class GetDistributionConfigResult < Struct.new(
       :distribution_config,
@@ -4599,7 +5592,7 @@ module Aws::CloudFront
     #   configuration is returned.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionRequest AWS API Documentation
     #
     class GetDistributionRequest < Struct.new(
       :id)
@@ -4618,7 +5611,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionResult AWS API Documentation
     #
     class GetDistributionResult < Struct.new(
       :distribution,
@@ -4639,7 +5632,7 @@ module Aws::CloudFront
     #   information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionConfigRequest < Struct.new(
       :id)
@@ -4656,7 +5649,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionConfigResult AWS API Documentation
     #
     class GetFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption_config,
@@ -4677,7 +5670,7 @@ module Aws::CloudFront
     #   information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfileConfigRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileConfigRequest < Struct.new(
       :id)
@@ -4694,7 +5687,7 @@ module Aws::CloudFront
     #   configuration result. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfileConfigResult AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileConfigResult < Struct.new(
       :field_level_encryption_profile_config,
@@ -4714,7 +5707,7 @@ module Aws::CloudFront
     #   Get the ID for the field-level encryption profile information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileRequest < Struct.new(
       :id)
@@ -4731,7 +5724,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfileResult AWS API Documentation
     #
     class GetFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
@@ -4752,7 +5745,7 @@ module Aws::CloudFront
     #   information.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionRequest AWS API Documentation
     #
     class GetFieldLevelEncryptionRequest < Struct.new(
       :id)
@@ -4769,7 +5762,7 @@ module Aws::CloudFront
     #   example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionResult AWS API Documentation
     #
     class GetFieldLevelEncryptionResult < Struct.new(
       :field_level_encryption,
@@ -4797,7 +5790,7 @@ module Aws::CloudFront
     #   `IDFDVBD632BHDS5`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidationRequest AWS API Documentation
     #
     class GetInvalidationRequest < Struct.new(
       :distribution_id,
@@ -4817,10 +5810,92 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html
     #   @return [Types::Invalidation]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidationResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidationResult AWS API Documentation
     #
     class GetInvalidationResult < Struct.new(
       :invalidation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOriginRequestPolicyConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the origin request policy. If the origin
+    #   request policy is attached to a distribution’s cache behavior, you
+    #   can get the policy’s identifier using `ListDistributions` or
+    #   `GetDistribution`. If the origin request policy is not attached to a
+    #   cache behavior, you can get the identifier using
+    #   `ListOriginRequestPolicies`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicyConfigRequest AWS API Documentation
+    #
+    class GetOriginRequestPolicyConfigRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_request_policy_config
+    #   The origin request policy configuration.
+    #   @return [Types::OriginRequestPolicyConfig]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the origin request policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicyConfigResult AWS API Documentation
+    #
+    class GetOriginRequestPolicyConfigResult < Struct.new(
+      :origin_request_policy_config,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOriginRequestPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the origin request policy. If the origin
+    #   request policy is attached to a distribution’s cache behavior, you
+    #   can get the policy’s identifier using `ListDistributions` or
+    #   `GetDistribution`. If the origin request policy is not attached to a
+    #   cache behavior, you can get the identifier using
+    #   `ListOriginRequestPolicies`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicyRequest AWS API Documentation
+    #
+    class GetOriginRequestPolicyRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_request_policy
+    #   The origin request policy.
+    #   @return [Types::OriginRequestPolicy]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the origin request policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicyResult AWS API Documentation
+    #
+    class GetOriginRequestPolicyResult < Struct.new(
+      :origin_request_policy,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4836,7 +5911,7 @@ module Aws::CloudFront
     #   Request the ID for the public key configuration.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfigRequest AWS API Documentation
     #
     class GetPublicKeyConfigRequest < Struct.new(
       :id)
@@ -4853,7 +5928,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfigResult AWS API Documentation
     #
     class GetPublicKeyConfigResult < Struct.new(
       :public_key_config,
@@ -4873,7 +5948,7 @@ module Aws::CloudFront
     #   Request the ID for the public key.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyRequest AWS API Documentation
     #
     class GetPublicKeyRequest < Struct.new(
       :id)
@@ -4890,7 +5965,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyResult AWS API Documentation
     #
     class GetPublicKeyResult < Struct.new(
       :public_key,
@@ -4912,7 +5987,7 @@ module Aws::CloudFront
     #   The streaming distribution's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionConfigRequest AWS API Documentation
     #
     class GetStreamingDistributionConfigRequest < Struct.new(
       :id)
@@ -4931,7 +6006,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionConfigResult AWS API Documentation
     #
     class GetStreamingDistributionConfigResult < Struct.new(
       :streaming_distribution_config,
@@ -4953,7 +6028,7 @@ module Aws::CloudFront
     #   The streaming distribution's ID.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionRequest AWS API Documentation
     #
     class GetStreamingDistributionRequest < Struct.new(
       :id)
@@ -4972,7 +6047,7 @@ module Aws::CloudFront
     #   For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionResult AWS API Documentation
     #
     class GetStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -4981,23 +6056,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that specifies the request headers, if any, that you
-    # want CloudFront to base caching on for this cache behavior.
-    #
-    # For the headers that you specify, CloudFront caches separate versions
-    # of a specified object based on the header values in viewer requests.
-    # For example, suppose viewer requests for `logo.jpg` contain a custom
-    # `product` header that has a value of either `acme` or `apex`, and you
-    # configure CloudFront to cache your content based on values in the
-    # `product` header. CloudFront forwards the `product` header to the
-    # origin and caches the response from the origin once for each header
-    # value. For more information about caching based on header values, see
-    # [How CloudFront Forwards and Caches Headers][1] in the *Amazon
-    # CloudFront Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
+    # Contains a list of HTTP header names.
     #
     # @note When making an API call, you may pass Headers
     #   data as a hash:
@@ -5008,53 +6067,31 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] quantity
-    #   The number of different headers that you want CloudFront to base
-    #   caching on for this cache behavior. You can configure each cache
-    #   behavior in a web distribution to do one of the following:
-    #
-    #   * **Forward all headers to your origin**\: Specify `1` for
-    #     `Quantity` and `*` for `Name`.
-    #
-    #     CloudFront doesn't cache the objects that are associated with
-    #     this cache behavior. Instead, CloudFront sends every request to
-    #     the origin.
-    #
-    #   * **Forward a whitelist of headers you specify**\: Specify the
-    #     number of headers that you want CloudFront to base caching on.
-    #     Then specify the header names in `Name` elements. CloudFront
-    #     caches your objects based on the values in the specified headers.
-    #
-    #   * **Forward only the default headers**\: Specify `0` for `Quantity`
-    #     and omit `Items`. In this configuration, CloudFront doesn't cache
-    #     based on the values in the request headers.
-    #
-    #   Regardless of which option you choose, CloudFront forwards headers
-    #   to your origin based on whether the origin is an S3 bucket or a
-    #   custom origin. See the following documentation:
-    #
-    #   * **S3 bucket**\: See [HTTP Request Headers That CloudFront Removes
-    #     or Updates][1]
-    #
-    #   * **Custom origin**\: See [HTTP Request Headers and CloudFront
-    #     Behavior][2]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior
+    #   The number of header names in the `Items` list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   A list that contains one `Name` element for each header that you
-    #   want CloudFront to use for caching in this cache behavior. If
-    #   `Quantity` is `0`, omit `Items`.
+    #   A list of HTTP header names.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Headers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Headers AWS API Documentation
     #
     class Headers < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You cannot delete a managed policy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/IllegalDelete AWS API Documentation
+    #
+    class IllegalDelete < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5065,7 +6102,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior AWS API Documentation
     #
     class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < Struct.new(
       :message)
@@ -5073,12 +6110,12 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # Origin and `CallerReference` cannot be updated.
+    # The update contains modifications that are not allowed.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/IllegalUpdate AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/IllegalUpdate AWS API Documentation
     #
     class IllegalUpdate < Struct.new(
       :message)
@@ -5091,7 +6128,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InconsistentQuantities AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InconsistentQuantities AWS API Documentation
     #
     class InconsistentQuantities < Struct.new(
       :message)
@@ -5104,7 +6141,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidArgument AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidArgument AWS API Documentation
     #
     class InvalidArgument < Struct.new(
       :message)
@@ -5118,7 +6155,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidDefaultRootObject AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidDefaultRootObject AWS API Documentation
     #
     class InvalidDefaultRootObject < Struct.new(
       :message)
@@ -5131,7 +6168,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidErrorCode AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidErrorCode AWS API Documentation
     #
     class InvalidErrorCode < Struct.new(
       :message)
@@ -5147,7 +6184,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidForwardCookies AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidForwardCookies AWS API Documentation
     #
     class InvalidForwardCookies < Struct.new(
       :message)
@@ -5160,7 +6197,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidGeoRestrictionParameter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidGeoRestrictionParameter AWS API Documentation
     #
     class InvalidGeoRestrictionParameter < Struct.new(
       :message)
@@ -5173,7 +6210,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidHeadersForS3Origin AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidHeadersForS3Origin AWS API Documentation
     #
     class InvalidHeadersForS3Origin < Struct.new(
       :message)
@@ -5181,12 +6218,12 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The `If-Match` version is missing or not valid for the distribution.
+    # The `If-Match` version is missing or not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidIfMatchVersion AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidIfMatchVersion AWS API Documentation
     #
     class InvalidIfMatchVersion < Struct.new(
       :message)
@@ -5199,7 +6236,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidLambdaFunctionAssociation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidLambdaFunctionAssociation AWS API Documentation
     #
     class InvalidLambdaFunctionAssociation < Struct.new(
       :message)
@@ -5212,7 +6249,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidLocationCode AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidLocationCode AWS API Documentation
     #
     class InvalidLocationCode < Struct.new(
       :message)
@@ -5225,7 +6262,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidMinimumProtocolVersion AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidMinimumProtocolVersion AWS API Documentation
     #
     class InvalidMinimumProtocolVersion < Struct.new(
       :message)
@@ -5239,7 +6276,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidOrigin AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidOrigin AWS API Documentation
     #
     class InvalidOrigin < Struct.new(
       :message)
@@ -5252,7 +6289,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidOriginAccessIdentity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidOriginAccessIdentity AWS API Documentation
     #
     class InvalidOriginAccessIdentity < Struct.new(
       :message)
@@ -5265,7 +6302,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidOriginKeepaliveTimeout AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidOriginKeepaliveTimeout AWS API Documentation
     #
     class InvalidOriginKeepaliveTimeout < Struct.new(
       :message)
@@ -5278,7 +6315,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidOriginReadTimeout AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidOriginReadTimeout AWS API Documentation
     #
     class InvalidOriginReadTimeout < Struct.new(
       :message)
@@ -5293,7 +6330,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidProtocolSettings AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidProtocolSettings AWS API Documentation
     #
     class InvalidProtocolSettings < Struct.new(
       :message)
@@ -5306,7 +6343,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidQueryStringParameters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidQueryStringParameters AWS API Documentation
     #
     class InvalidQueryStringParameters < Struct.new(
       :message)
@@ -5320,7 +6357,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidRelativePath AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidRelativePath AWS API Documentation
     #
     class InvalidRelativePath < Struct.new(
       :message)
@@ -5335,7 +6372,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidRequiredProtocol AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidRequiredProtocol AWS API Documentation
     #
     class InvalidRequiredProtocol < Struct.new(
       :message)
@@ -5348,7 +6385,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidResponseCode AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidResponseCode AWS API Documentation
     #
     class InvalidResponseCode < Struct.new(
       :message)
@@ -5361,7 +6398,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidTTLOrder AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidTTLOrder AWS API Documentation
     #
     class InvalidTTLOrder < Struct.new(
       :message)
@@ -5374,7 +6411,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidTagging AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidTagging AWS API Documentation
     #
     class InvalidTagging < Struct.new(
       :message)
@@ -5387,7 +6424,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidViewerCertificate AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidViewerCertificate AWS API Documentation
     #
     class InvalidViewerCertificate < Struct.new(
       :message)
@@ -5404,7 +6441,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidWebACLId AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidWebACLId AWS API Documentation
     #
     class InvalidWebACLId < Struct.new(
       :message)
@@ -5432,7 +6469,7 @@ module Aws::CloudFront
     #   The current invalidation information for the batch request.
     #   @return [Types::InvalidationBatch]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Invalidation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Invalidation AWS API Documentation
     #
     class Invalidation < Struct.new(
       :id,
@@ -5488,7 +6525,7 @@ module Aws::CloudFront
     #   `InvalidationBatchAlreadyExists` error.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationBatch AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidationBatch AWS API Documentation
     #
     class InvalidationBatch < Struct.new(
       :paths,
@@ -5537,7 +6574,7 @@ module Aws::CloudFront
     #   each invalidation batch created by the current AWS account.
     #   @return [Array<Types::InvalidationSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidationList AWS API Documentation
     #
     class InvalidationList < Struct.new(
       :marker,
@@ -5564,7 +6601,7 @@ module Aws::CloudFront
     #   The status of an invalidation request.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidationSummary AWS API Documentation
     #
     class InvalidationSummary < Struct.new(
       :id,
@@ -5604,7 +6641,7 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/KeyPairIds AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyPairIds AWS API Documentation
     #
     class KeyPairIds < Struct.new(
       :quantity,
@@ -5638,7 +6675,7 @@ module Aws::CloudFront
     #     requested object is in the edge cache.
     #
     #   * `origin-request`\: The function executes only when CloudFront
-    #     forwards a request to your origin. When the requested object is in
+    #     sends a request to your origin. When the requested object is in
     #     the edge cache, the function doesn't execute.
     #
     #   * `origin-response`\: The function executes after CloudFront
@@ -5665,7 +6702,7 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LambdaFunctionAssociation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/LambdaFunctionAssociation AWS API Documentation
     #
     class LambdaFunctionAssociation < Struct.new(
       :lambda_function_arn,
@@ -5712,11 +6749,64 @@ module Aws::CloudFront
     #   `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<Types::LambdaFunctionAssociation>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LambdaFunctionAssociations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/LambdaFunctionAssociations AWS API Documentation
     #
     class LambdaFunctionAssociations < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCachePoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "managed", # accepts managed, custom
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] type
+    #   A filter to return only the specified kinds of cache policies. Valid
+    #   values are:
+    #
+    #   * `managed` – Returns only the managed policies created by AWS.
+    #
+    #   * `custom` – Returns only the custom policies created in your AWS
+    #     account.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of cache policies. The response includes cache policies in
+    #   the list that occur after the marker. To get the next page of the
+    #   list, set this field’s value to the value of `NextMarker` from the
+    #   current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of cache policies that you want in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCachePoliciesRequest AWS API Documentation
+    #
+    class ListCachePoliciesRequest < Struct.new(
+      :type,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cache_policy_list
+    #   A list of cache policies.
+    #   @return [Types::CachePolicyList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCachePoliciesResult AWS API Documentation
+    #
+    class ListCachePoliciesResult < Struct.new(
+      :cache_policy_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5745,7 +6835,7 @@ module Aws::CloudFront
     #   response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentitiesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCloudFrontOriginAccessIdentitiesRequest AWS API Documentation
     #
     class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
       :marker,
@@ -5760,10 +6850,108 @@ module Aws::CloudFront
     #   The `CloudFrontOriginAccessIdentityList` type.
     #   @return [Types::CloudFrontOriginAccessIdentityList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentitiesResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCloudFrontOriginAccessIdentitiesResult AWS API Documentation
     #
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
       :cloud_front_origin_access_identity_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDistributionsByCachePolicyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #         cache_policy_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distribution IDs. The response includes distribution
+    #   IDs in the list that occur after the marker. To get the next page of
+    #   the list, set this field’s value to the value of `NextMarker` from
+    #   the current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distribution IDs that you want in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cache_policy_id
+    #   The ID of the cache policy whose associated distribution IDs you
+    #   want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByCachePolicyIdRequest AWS API Documentation
+    #
+    class ListDistributionsByCachePolicyIdRequest < Struct.new(
+      :marker,
+      :max_items,
+      :cache_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_id_list
+    #   A list of distribution IDs.
+    #   @return [Types::DistributionIdList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByCachePolicyIdResult AWS API Documentation
+    #
+    class ListDistributionsByCachePolicyIdResult < Struct.new(
+      :distribution_id_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDistributionsByOriginRequestPolicyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #         origin_request_policy_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distribution IDs. The response includes distribution
+    #   IDs in the list that occur after the marker. To get the next page of
+    #   the list, set this field’s value to the value of `NextMarker` from
+    #   the current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distribution IDs that you want in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] origin_request_policy_id
+    #   The ID of the origin request policy whose associated distribution
+    #   IDs you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByOriginRequestPolicyIdRequest AWS API Documentation
+    #
+    class ListDistributionsByOriginRequestPolicyIdRequest < Struct.new(
+      :marker,
+      :max_items,
+      :origin_request_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_id_list
+    #   A list of distribution IDs.
+    #   @return [Types::DistributionIdList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByOriginRequestPolicyIdResult AWS API Documentation
+    #
+    class ListDistributionsByOriginRequestPolicyIdResult < Struct.new(
+      :distribution_id_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5802,7 +6990,7 @@ module Aws::CloudFront
     #   web ACL.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLIdRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLIdRequest AWS API Documentation
     #
     class ListDistributionsByWebACLIdRequest < Struct.new(
       :marker,
@@ -5819,7 +7007,7 @@ module Aws::CloudFront
     #   The `DistributionList` type.
     #   @return [Types::DistributionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLIdResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLIdResult AWS API Documentation
     #
     class ListDistributionsByWebACLIdResult < Struct.new(
       :distribution_list)
@@ -5850,7 +7038,7 @@ module Aws::CloudFront
     #   The maximum number of distributions you want in the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsRequest AWS API Documentation
     #
     class ListDistributionsRequest < Struct.new(
       :marker,
@@ -5865,7 +7053,7 @@ module Aws::CloudFront
     #   The `DistributionList` type.
     #   @return [Types::DistributionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsResult AWS API Documentation
     #
     class ListDistributionsResult < Struct.new(
       :distribution_list)
@@ -5895,7 +7083,7 @@ module Aws::CloudFront
     #   in the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionConfigsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionConfigsRequest AWS API Documentation
     #
     class ListFieldLevelEncryptionConfigsRequest < Struct.new(
       :marker,
@@ -5909,7 +7097,7 @@ module Aws::CloudFront
     #   have been created in CloudFront for this account.
     #   @return [Types::FieldLevelEncryptionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionConfigsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionConfigsResult AWS API Documentation
     #
     class ListFieldLevelEncryptionConfigsResult < Struct.new(
       :field_level_encryption_list)
@@ -5938,7 +7126,7 @@ module Aws::CloudFront
     #   the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfilesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionProfilesRequest AWS API Documentation
     #
     class ListFieldLevelEncryptionProfilesRequest < Struct.new(
       :marker,
@@ -5952,7 +7140,7 @@ module Aws::CloudFront
     #   created in CloudFront for this account.
     #   @return [Types::FieldLevelEncryptionProfileList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfilesResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionProfilesResult AWS API Documentation
     #
     class ListFieldLevelEncryptionProfilesResult < Struct.new(
       :field_level_encryption_profile_list)
@@ -5991,7 +7179,7 @@ module Aws::CloudFront
     #   response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidationsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidationsRequest AWS API Documentation
     #
     class ListInvalidationsRequest < Struct.new(
       :distribution_id,
@@ -6007,10 +7195,64 @@ module Aws::CloudFront
     #   Information about invalidation batches.
     #   @return [Types::InvalidationList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidationsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidationsResult AWS API Documentation
     #
     class ListInvalidationsResult < Struct.new(
       :invalidation_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOriginRequestPoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "managed", # accepts managed, custom
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] type
+    #   A filter to return only the specified kinds of origin request
+    #   policies. Valid values are:
+    #
+    #   * `managed` – Returns only the managed policies created by AWS.
+    #
+    #   * `custom` – Returns only the custom policies created in your AWS
+    #     account.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of origin request policies. The response includes origin
+    #   request policies in the list that occur after the marker. To get the
+    #   next page of the list, set this field’s value to the value of
+    #   `NextMarker` from the current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of origin request policies that you want in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginRequestPoliciesRequest AWS API Documentation
+    #
+    class ListOriginRequestPoliciesRequest < Struct.new(
+      :type,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_request_policy_list
+    #   A list of origin request policies.
+    #   @return [Types::OriginRequestPolicyList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginRequestPoliciesResult AWS API Documentation
+    #
+    class ListOriginRequestPoliciesResult < Struct.new(
+      :origin_request_policy_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6036,7 +7278,7 @@ module Aws::CloudFront
     #   The maximum number of public keys you want in the response body.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListPublicKeysRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListPublicKeysRequest AWS API Documentation
     #
     class ListPublicKeysRequest < Struct.new(
       :marker,
@@ -6050,7 +7292,7 @@ module Aws::CloudFront
     #   for this account.
     #   @return [Types::PublicKeyList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListPublicKeysResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListPublicKeysResult AWS API Documentation
     #
     class ListPublicKeysResult < Struct.new(
       :public_key_list)
@@ -6076,7 +7318,7 @@ module Aws::CloudFront
     #   The value that you provided for the `MaxItems` request parameter.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributionsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListStreamingDistributionsRequest AWS API Documentation
     #
     class ListStreamingDistributionsRequest < Struct.new(
       :marker,
@@ -6091,7 +7333,7 @@ module Aws::CloudFront
     #   The `StreamingDistributionList` type.
     #   @return [Types::StreamingDistributionList]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributionsResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListStreamingDistributionsResult AWS API Documentation
     #
     class ListStreamingDistributionsResult < Struct.new(
       :streaming_distribution_list)
@@ -6112,7 +7354,7 @@ module Aws::CloudFront
     #   An ARN of a CloudFront resource.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource)
@@ -6126,7 +7368,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResourceResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTagsForResourceResult AWS API Documentation
     #
     class ListTagsForResourceResult < Struct.new(
       :tags)
@@ -6180,7 +7422,7 @@ module Aws::CloudFront
     #   element.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LoggingConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/LoggingConfig AWS API Documentation
     #
     class LoggingConfig < Struct.new(
       :enabled,
@@ -6197,9 +7439,22 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/MissingBody AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/MissingBody AWS API Documentation
     #
     class MissingBody < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cache policy does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchCachePolicy AWS API Documentation
+    #
+    class NoSuchCachePolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -6210,7 +7465,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchCloudFrontOriginAccessIdentity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchCloudFrontOriginAccessIdentity AWS API Documentation
     #
     class NoSuchCloudFrontOriginAccessIdentity < Struct.new(
       :message)
@@ -6223,7 +7478,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchDistribution AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchDistribution AWS API Documentation
     #
     class NoSuchDistribution < Struct.new(
       :message)
@@ -6236,7 +7491,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchFieldLevelEncryptionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchFieldLevelEncryptionConfig AWS API Documentation
     #
     class NoSuchFieldLevelEncryptionConfig < Struct.new(
       :message)
@@ -6249,7 +7504,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchFieldLevelEncryptionProfile AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchFieldLevelEncryptionProfile AWS API Documentation
     #
     class NoSuchFieldLevelEncryptionProfile < Struct.new(
       :message)
@@ -6262,7 +7517,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchInvalidation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchInvalidation AWS API Documentation
     #
     class NoSuchInvalidation < Struct.new(
       :message)
@@ -6275,9 +7530,22 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchOrigin AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchOrigin AWS API Documentation
     #
     class NoSuchOrigin < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The origin request policy does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchOriginRequestPolicy AWS API Documentation
+    #
+    class NoSuchOriginRequestPolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -6288,7 +7556,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchPublicKey AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchPublicKey AWS API Documentation
     #
     class NoSuchPublicKey < Struct.new(
       :message)
@@ -6301,7 +7569,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchResource AWS API Documentation
     #
     class NoSuchResource < Struct.new(
       :message)
@@ -6314,7 +7582,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/NoSuchStreamingDistribution AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchStreamingDistribution AWS API Documentation
     #
     class NoSuchStreamingDistribution < Struct.new(
       :message)
@@ -6479,7 +7747,7 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-timeout
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Origin AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Origin AWS API Documentation
     #
     class Origin < Struct.new(
       :id,
@@ -6506,10 +7774,9 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] header_name
-    #   The name of a header that you want CloudFront to forward to your
-    #   origin. For more information, see [Forwarding Custom Headers to Your
-    #   Origin (Web Distributions Only)][1] in the <i> Amazon CloudFront
-    #   Developer Guide</i>.
+    #   The name of a header that you want CloudFront to send to your
+    #   origin. For more information, see [Adding Custom Headers to Origin
+    #   Requests][1] in the <i> Amazon CloudFront Developer Guide</i>.
     #
     #
     #
@@ -6521,7 +7788,7 @@ module Aws::CloudFront
     #   field.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginCustomHeader AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginCustomHeader AWS API Documentation
     #
     class OriginCustomHeader < Struct.new(
       :header_name,
@@ -6573,7 +7840,7 @@ module Aws::CloudFront
     #   origin group.
     #   @return [Types::OriginGroupMembers]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginGroup AWS API Documentation
     #
     class OriginGroup < Struct.new(
       :id,
@@ -6602,7 +7869,7 @@ module Aws::CloudFront
     #   trigger CloudFront to failover to the second origin.
     #   @return [Types::StatusCodes]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupFailoverCriteria AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginGroupFailoverCriteria AWS API Documentation
     #
     class OriginGroupFailoverCriteria < Struct.new(
       :status_codes)
@@ -6623,7 +7890,7 @@ module Aws::CloudFront
     #   The ID for an origin in an origin group.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupMember AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginGroupMember AWS API Documentation
     #
     class OriginGroupMember < Struct.new(
       :origin_id)
@@ -6653,7 +7920,7 @@ module Aws::CloudFront
     #   Items (origins) in an origin group.
     #   @return [Array<Types::OriginGroupMember>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupMembers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginGroupMembers AWS API Documentation
     #
     class OriginGroupMembers < Struct.new(
       :quantity,
@@ -6699,11 +7966,362 @@ module Aws::CloudFront
     #   The items (origin groups) in a distribution.
     #   @return [Array<Types::OriginGroup>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroups AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginGroups AWS API Documentation
     #
     class OriginGroups < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An origin request policy.
+    #
+    # When it’s attached to a cache behavior, the origin request policy
+    # determines the values that CloudFront includes in requests that it
+    # sends to the origin. Each request that CloudFront sends to the origin
+    # includes the following:
+    #
+    # * The request body and the URL path (without the domain name) from the
+    #   viewer request.
+    #
+    # * The headers that CloudFront automatically includes in every origin
+    #   request, including `Host`, `User-Agent`, and `X-Amz-Cf-Id`.
+    #
+    # * All HTTP headers, cookies, and URL query strings that are specified
+    #   in the cache policy or the origin request policy. These can include
+    #   items from the viewer request and, in the case of headers,
+    #   additional ones that are added by CloudFront.
+    #
+    # CloudFront sends a request when it can’t find an object in its cache
+    # that matches the request. If you want to send values to the origin and
+    # also include them in the cache key, use `CreateCachePolicy`.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the origin request policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the origin request policy was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] origin_request_policy_config
+    #   The origin request policy configuration.
+    #   @return [Types::OriginRequestPolicyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicy AWS API Documentation
+    #
+    class OriginRequestPolicy < Struct.new(
+      :id,
+      :last_modified_time,
+      :origin_request_policy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An origin request policy with this name already exists. You must
+    # provide a unique name. To modify an existing origin request policy,
+    # use `UpdateOriginRequestPolicy`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyAlreadyExists AWS API Documentation
+    #
+    class OriginRequestPolicyAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An origin request policy configuration.
+    #
+    # This configuration determines the values that CloudFront includes in
+    # requests that it sends to the origin. Each request that CloudFront
+    # sends to the origin includes the following:
+    #
+    # * The request body and the URL path (without the domain name) from the
+    #   viewer request.
+    #
+    # * The headers that CloudFront automatically includes in every origin
+    #   request, including `Host`, `User-Agent`, and `X-Amz-Cf-Id`.
+    #
+    # * All HTTP headers, cookies, and URL query strings that are specified
+    #   in the cache policy or the origin request policy. These can include
+    #   items from the viewer request and, in the case of headers,
+    #   additional ones that are added by CloudFront.
+    #
+    # CloudFront sends a request when it can’t find an object in its cache
+    # that matches the request. If you want to send values to the origin and
+    # also include them in the cache key, use `CreateCachePolicy`.
+    #
+    # @note When making an API call, you may pass OriginRequestPolicyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         comment: "string",
+    #         name: "string", # required
+    #         headers_config: { # required
+    #           header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #           headers: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         cookies_config: { # required
+    #           cookie_behavior: "none", # required, accepts none, whitelist, all
+    #           cookies: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         query_strings_config: { # required
+    #           query_string_behavior: "none", # required, accepts none, whitelist, all
+    #           query_strings: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] comment
+    #   A comment to describe the origin request policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A unique name to identify the origin request policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers_config
+    #   The HTTP headers to include in origin requests. These can include
+    #   headers from viewer requests and additional headers added by
+    #   CloudFront.
+    #   @return [Types::OriginRequestPolicyHeadersConfig]
+    #
+    # @!attribute [rw] cookies_config
+    #   The cookies from viewer requests to include in origin requests.
+    #   @return [Types::OriginRequestPolicyCookiesConfig]
+    #
+    # @!attribute [rw] query_strings_config
+    #   The URL query strings from viewer requests to include in origin
+    #   requests.
+    #   @return [Types::OriginRequestPolicyQueryStringsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyConfig AWS API Documentation
+    #
+    class OriginRequestPolicyConfig < Struct.new(
+      :comment,
+      :name,
+      :headers_config,
+      :cookies_config,
+      :query_strings_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that determines whether any cookies in viewer requests (and
+    # if so, which cookies) are included in requests that CloudFront sends
+    # to the origin.
+    #
+    # @note When making an API call, you may pass OriginRequestPolicyCookiesConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cookie_behavior: "none", # required, accepts none, whitelist, all
+    #         cookies: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cookie_behavior
+    #   Determines whether cookies in viewer requests are included in
+    #   requests that CloudFront sends to the origin. Valid values are:
+    #
+    #   * `none` – Cookies in viewer requests are not included in requests
+    #     that CloudFront sends to the origin. Even when this field is set
+    #     to `none`, any cookies that are listed in a `CachePolicy` *are*
+    #     included in origin requests.
+    #
+    #   * `whitelist` – The cookies in viewer requests that are listed in
+    #     the `CookieNames` type are included in requests that CloudFront
+    #     sends to the origin.
+    #
+    #   * `all` – All cookies in viewer requests are included in requests
+    #     that CloudFront sends to the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] cookies
+    #   Contains a list of cookie names.
+    #   @return [Types::CookieNames]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyCookiesConfig AWS API Documentation
+    #
+    class OriginRequestPolicyCookiesConfig < Struct.new(
+      :cookie_behavior,
+      :cookies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that determines whether any HTTP headers (and if so, which
+    # headers) are included in requests that CloudFront sends to the origin.
+    #
+    # @note When making an API call, you may pass OriginRequestPolicyHeadersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #         headers: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] header_behavior
+    #   Determines whether any HTTP headers are included in requests that
+    #   CloudFront sends to the origin. Valid values are:
+    #
+    #   * `none` – HTTP headers are not included in requests that CloudFront
+    #     sends to the origin. Even when this field is set to `none`, any
+    #     headers that are listed in a `CachePolicy` *are* included in
+    #     origin requests.
+    #
+    #   * `whitelist` – The HTTP headers that are listed in the `Headers`
+    #     type are included in requests that CloudFront sends to the origin.
+    #
+    #   * `allViewer` – All HTTP headers in viewer requests are included in
+    #     requests that CloudFront sends to the origin.
+    #
+    #   * `allViewerAndWhitelistCloudFront` – All HTTP headers in viewer
+    #     requests and the additional CloudFront headers that are listed in
+    #     the `Headers` type are included in requests that CloudFront sends
+    #     to the origin. The additional headers are added by CloudFront.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   Contains a list of HTTP header names.
+    #   @return [Types::Headers]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyHeadersConfig AWS API Documentation
+    #
+    class OriginRequestPolicyHeadersConfig < Struct.new(
+      :header_behavior,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cannot delete the origin request policy because it is attached to one
+    # or more cache behaviors.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyInUse AWS API Documentation
+    #
+    class OriginRequestPolicyInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of origin request policies.
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value that you should use in the
+    #   `Marker` field of a subsequent request to continue listing origin
+    #   request policies where you left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of origin request policies requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quantity
+    #   The total number of origin request policies returned in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the origin request policies in the list.
+    #   @return [Array<Types::OriginRequestPolicySummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyList AWS API Documentation
+    #
+    class OriginRequestPolicyList < Struct.new(
+      :next_marker,
+      :max_items,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that determines whether any URL query strings in viewer
+    # requests (and if so, which query strings) are included in requests
+    # that CloudFront sends to the origin.
+    #
+    # @note When making an API call, you may pass OriginRequestPolicyQueryStringsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         query_string_behavior: "none", # required, accepts none, whitelist, all
+    #         query_strings: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] query_string_behavior
+    #   Determines whether any URL query strings in viewer requests are
+    #   included in requests that CloudFront sends to the origin. Valid
+    #   values are:
+    #
+    #   * `none` – Query strings in viewer requests are not included in
+    #     requests that CloudFront sends to the origin. Even when this field
+    #     is set to `none`, any query strings that are listed in a
+    #     `CachePolicy` *are* included in origin requests.
+    #
+    #   * `whitelist` – The query strings in viewer requests that are listed
+    #     in the `QueryStringNames` type are included in requests that
+    #     CloudFront sends to the origin.
+    #
+    #   * `all` – All query strings in viewer requests are included in
+    #     requests that CloudFront sends to the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_strings
+    #   Contains a list of the query strings in viewer requests that are
+    #   included in requests that CloudFront sends to the origin.
+    #   @return [Types::QueryStringNames]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyQueryStringsConfig AWS API Documentation
+    #
+    class OriginRequestPolicyQueryStringsConfig < Struct.new(
+      :query_string_behavior,
+      :query_strings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an origin request policy.
+    #
+    # @!attribute [rw] type
+    #   The type of origin request policy, either `managed` (created by AWS)
+    #   or `custom` (created in this AWS account).
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_request_policy
+    #   The origin request policy.
+    #   @return [Types::OriginRequestPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicySummary AWS API Documentation
+    #
+    class OriginRequestPolicySummary < Struct.new(
+      :type,
+      :origin_request_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6730,7 +8348,7 @@ module Aws::CloudFront
     #   distribution.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginSslProtocols AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginSslProtocols AWS API Documentation
     #
     class OriginSslProtocols < Struct.new(
       :quantity,
@@ -6790,11 +8408,119 @@ module Aws::CloudFront
     #   distribution.
     #   @return [Array<Types::Origin>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Origins AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Origins AWS API Documentation
     #
     class Origins < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This object determines the values that CloudFront includes in the
+    # cache key. These values can include HTTP headers, cookies, and URL
+    # query strings. CloudFront uses the cache key to find an object in its
+    # cache that it can return to the viewer.
+    #
+    # The headers, cookies, and query strings that are included in the cache
+    # key are automatically included in requests that CloudFront sends to
+    # the origin. CloudFront sends a request when it can’t find an object in
+    # its cache that matches the request’s cache key. If you want to send
+    # values to the origin but *not* include them in the cache key, use
+    # `CreateOriginRequestPolicy`.
+    #
+    # @note When making an API call, you may pass ParametersInCacheKeyAndForwardedToOrigin
+    #   data as a hash:
+    #
+    #       {
+    #         enable_accept_encoding_gzip: false, # required
+    #         headers_config: { # required
+    #           header_behavior: "none", # required, accepts none, whitelist
+    #           headers: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         cookies_config: { # required
+    #           cookie_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #           cookies: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         query_strings_config: { # required
+    #           query_string_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #           query_strings: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enable_accept_encoding_gzip
+    #   A flag that determines whether the `Accept-Encoding` HTTP header is
+    #   included in the cache key and included in requests that CloudFront
+    #   sends to the origin.
+    #
+    #   If this field is `true` *and* the viewer request includes the
+    #   `Accept-Encoding` header, then CloudFront normalizes the value of
+    #   the viewer’s `Accept-Encoding` header to one of the following:
+    #
+    #   * `Accept-Encoding: gzip` (if `gzip` is in the viewer’s
+    #     `Accept-Encoding` header)
+    #
+    #   * `Accept-Encoding: identity` (if `gzip` is *not* in the viewer’s
+    #     `Accept-Encoding` header)
+    #
+    #   CloudFront includes the normalized header in the cache key and
+    #   includes it in requests that CloudFront sends to the origin.
+    #
+    #   If this field is `false`, then CloudFront treats the
+    #   `Accept-Encoding` header the same as any other HTTP header in the
+    #   viewer request. By default, it’s not included in the cache key and
+    #   it’s not included in origin requests. You can manually add
+    #   `Accept-Encoding` to the headers whitelist like any other HTTP
+    #   header.
+    #
+    #   When this field is `true`, you should not whitelist the
+    #   `Accept-Encoding` header in the cache policy or in an origin request
+    #   policy attached to the same cache behavior.
+    #
+    #   For more information, see [Cache compressed objects][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-policy-compressed-objects
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] headers_config
+    #   An object that determines whether any HTTP headers (and if so, which
+    #   headers) are included in the cache key and automatically included in
+    #   requests that CloudFront sends to the origin.
+    #   @return [Types::CachePolicyHeadersConfig]
+    #
+    # @!attribute [rw] cookies_config
+    #   An object that determines whether any cookies in viewer requests
+    #   (and if so, which cookies) are included in the cache key and
+    #   automatically included in requests that CloudFront sends to the
+    #   origin.
+    #   @return [Types::CachePolicyCookiesConfig]
+    #
+    # @!attribute [rw] query_strings_config
+    #   An object that determines whether any URL query strings in viewer
+    #   requests (and if so, which query strings) are included in the cache
+    #   key and automatically included in requests that CloudFront sends to
+    #   the origin.
+    #   @return [Types::CachePolicyQueryStringsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ParametersInCacheKeyAndForwardedToOrigin AWS API Documentation
+    #
+    class ParametersInCacheKeyAndForwardedToOrigin < Struct.new(
+      :enable_accept_encoding_gzip,
+      :headers_config,
+      :cookies_config,
+      :query_strings_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6825,7 +8551,7 @@ module Aws::CloudFront
     #   invalidate.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Paths AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Paths AWS API Documentation
     #
     class Paths < Struct.new(
       :quantity,
@@ -6840,7 +8566,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PreconditionFailed AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PreconditionFailed AWS API Documentation
     #
     class PreconditionFailed < Struct.new(
       :message)
@@ -6864,7 +8590,7 @@ module Aws::CloudFront
     #   with features like field-level encryption.
     #   @return [Types::PublicKeyConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKey AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKey AWS API Documentation
     #
     class PublicKey < Struct.new(
       :id,
@@ -6879,7 +8605,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyAlreadyExists AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyAlreadyExists AWS API Documentation
     #
     class PublicKeyAlreadyExists < Struct.new(
       :message)
@@ -6918,7 +8644,7 @@ module Aws::CloudFront
     #   An optional comment about a public key.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyConfig AWS API Documentation
     #
     class PublicKeyConfig < Struct.new(
       :caller_reference,
@@ -6934,7 +8660,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyInUse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyInUse AWS API Documentation
     #
     class PublicKeyInUse < Struct.new(
       :message)
@@ -6965,7 +8691,7 @@ module Aws::CloudFront
     #   use with features like field-level encryption.
     #   @return [Array<Types::PublicKeySummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyList AWS API Documentation
     #
     class PublicKeyList < Struct.new(
       :next_marker,
@@ -6998,7 +8724,7 @@ module Aws::CloudFront
     #   Comment for public key information summary.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeySummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeySummary AWS API Documentation
     #
     class PublicKeySummary < Struct.new(
       :id,
@@ -7030,7 +8756,7 @@ module Aws::CloudFront
     #   argument-profile mapping
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfile AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/QueryArgProfile AWS API Documentation
     #
     class QueryArgProfile < Struct.new(
       :query_arg,
@@ -7069,7 +8795,7 @@ module Aws::CloudFront
     #   field-level encryption.
     #   @return [Types::QueryArgProfiles]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfileConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/QueryArgProfileConfig AWS API Documentation
     #
     class QueryArgProfileConfig < Struct.new(
       :forward_when_query_arg_profile_is_unknown,
@@ -7083,7 +8809,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfileEmpty AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/QueryArgProfileEmpty AWS API Documentation
     #
     class QueryArgProfileEmpty < Struct.new(
       :message)
@@ -7116,7 +8842,7 @@ module Aws::CloudFront
     #   encryption.
     #   @return [Array<Types::QueryArgProfile>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfiles AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/QueryArgProfiles AWS API Documentation
     #
     class QueryArgProfiles < Struct.new(
       :quantity,
@@ -7125,6 +8851,16 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # This field is deprecated. We recommend that you use a cache policy or
+    # an origin request policy instead of this field.
+    #
+    # If you want to include query strings in the cache key, use
+    # `QueryStringsConfig` in a cache policy. See `CreateCachePolicy`.
+    #
+    # If you want to send query strings to the origin but not include them
+    # in the cache key, use `QueryStringsConfig` in an origin request
+    # policy. See `CreateOriginRequestPolicy`.
+    #
     # A complex type that contains information about the query string
     # parameters that you want CloudFront to use for caching for a cache
     # behavior.
@@ -7148,9 +8884,36 @@ module Aws::CloudFront
     #   `Quantity` is 0, you can omit `Items`.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryStringCacheKeys AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/QueryStringCacheKeys AWS API Documentation
     #
     class QueryStringCacheKeys < Struct.new(
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a list of query string names.
+    #
+    # @note When making an API call, you may pass QueryStringNames
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of query string names in the `Items` list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A list of query string names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/QueryStringNames AWS API Documentation
+    #
+    class QueryStringNames < Struct.new(
       :quantity,
       :items)
       SENSITIVE = []
@@ -7177,7 +8940,7 @@ module Aws::CloudFront
     #   `MaxMind` GeoIP databases.
     #   @return [Types::GeoRestriction]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Restrictions AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Restrictions AWS API Documentation
     #
     class Restrictions < Struct.new(
       :geo_restriction)
@@ -7227,7 +8990,7 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/S3Origin AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/S3Origin AWS API Documentation
     #
     class S3Origin < Struct.new(
       :domain_name,
@@ -7279,7 +9042,7 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/S3OriginConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/S3OriginConfig AWS API Documentation
     #
     class S3OriginConfig < Struct.new(
       :origin_access_identity)
@@ -7305,7 +9068,7 @@ module Aws::CloudFront
     #   that are associated with `AwsAccountNumber`.
     #   @return [Types::KeyPairIds]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Signer AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Signer AWS API Documentation
     #
     class Signer < Struct.new(
       :aws_account_number,
@@ -7334,7 +9097,7 @@ module Aws::CloudFront
     #   The items (status codes) for an origin group.
     #   @return [Array<Integer>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StatusCodes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StatusCodes AWS API Documentation
     #
     class StatusCodes < Struct.new(
       :quantity,
@@ -7398,7 +9161,7 @@ module Aws::CloudFront
     #   The current configuration information for the RTMP distribution.
     #   @return [Types::StreamingDistributionConfig]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistribution AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingDistribution AWS API Documentation
     #
     class StreamingDistribution < Struct.new(
       :id,
@@ -7418,7 +9181,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionAlreadyExists AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingDistributionAlreadyExists AWS API Documentation
     #
     class StreamingDistributionAlreadyExists < Struct.new(
       :message)
@@ -7512,7 +9275,7 @@ module Aws::CloudFront
     #   requests for content.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingDistributionConfig AWS API Documentation
     #
     class StreamingDistributionConfig < Struct.new(
       :caller_reference,
@@ -7576,7 +9339,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionConfigWithTags AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingDistributionConfigWithTags AWS API Documentation
     #
     class StreamingDistributionConfigWithTags < Struct.new(
       :streaming_distribution_config,
@@ -7619,7 +9382,7 @@ module Aws::CloudFront
     #   account.
     #   @return [Array<Types::StreamingDistributionSummary>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingDistributionList AWS API Documentation
     #
     class StreamingDistributionList < Struct.new(
       :marker,
@@ -7638,7 +9401,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionNotDisabled AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingDistributionNotDisabled AWS API Documentation
     #
     class StreamingDistributionNotDisabled < Struct.new(
       :message)
@@ -7721,7 +9484,7 @@ module Aws::CloudFront
     #   content.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingDistributionSummary AWS API Documentation
     #
     class StreamingDistributionSummary < Struct.new(
       :id,
@@ -7774,7 +9537,7 @@ module Aws::CloudFront
     #   in the `Logging` element.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingLoggingConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StreamingLoggingConfig AWS API Documentation
     #
     class StreamingLoggingConfig < Struct.new(
       :enabled,
@@ -7810,7 +9573,7 @@ module Aws::CloudFront
     #   characters `_ - . : / = + @`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Tag AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -7832,7 +9595,7 @@ module Aws::CloudFront
     #   A complex type that contains `Tag` key elements.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagKeys AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TagKeys AWS API Documentation
     #
     class TagKeys < Struct.new(
       :items)
@@ -7865,7 +9628,7 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TagResourceRequest AWS API Documentation
     #
     class TagResourceRequest < Struct.new(
       :resource,
@@ -7892,7 +9655,7 @@ module Aws::CloudFront
     #   A complex type that contains `Tag` elements.
     #   @return [Array<Types::Tag>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Tags AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Tags AWS API Documentation
     #
     class Tags < Struct.new(
       :items)
@@ -7905,9 +9668,28 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyCacheBehaviors AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyCacheBehaviors AWS API Documentation
     #
     class TooManyCacheBehaviors < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of cache policies for this AWS
+    # account. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyCachePolicies AWS API Documentation
+    #
+    class TooManyCachePolicies < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -7918,7 +9700,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyCertificates AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyCertificates AWS API Documentation
     #
     class TooManyCertificates < Struct.new(
       :message)
@@ -7932,7 +9714,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyCloudFrontOriginAccessIdentities AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyCloudFrontOriginAccessIdentities AWS API Documentation
     #
     class TooManyCloudFrontOriginAccessIdentities < Struct.new(
       :message)
@@ -7946,9 +9728,47 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyCookieNamesInWhiteList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyCookieNamesInWhiteList AWS API Documentation
     #
     class TooManyCookieNamesInWhiteList < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of cookies in the cache policy exceeds the maximum. For
+    # more information, see [Quotas][1] (formerly known as limits) in the
+    # *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyCookiesInCachePolicy AWS API Documentation
+    #
+    class TooManyCookiesInCachePolicy < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of cookies in the origin request policy exceeds the
+    # maximum. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyCookiesInOriginRequestPolicy AWS API Documentation
+    #
+    class TooManyCookiesInOriginRequestPolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -7959,7 +9779,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyDistributionCNAMEs AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionCNAMEs AWS API Documentation
     #
     class TooManyDistributionCNAMEs < Struct.new(
       :message)
@@ -7973,9 +9793,28 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyDistributions AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributions AWS API Documentation
     #
     class TooManyDistributions < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum number of distributions have been associated with the
+    # specified cache policy. For more information, see [Quotas][1]
+    # (formerly known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsAssociatedToCachePolicy AWS API Documentation
+    #
+    class TooManyDistributionsAssociatedToCachePolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -7987,9 +9826,28 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig AWS API Documentation
     #
     class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum number of distributions have been associated with the
+    # specified origin request policy. For more information, see [Quotas][1]
+    # (formerly known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsAssociatedToOriginRequestPolicy AWS API Documentation
+    #
+    class TooManyDistributionsAssociatedToOriginRequestPolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8002,9 +9860,23 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyDistributionsWithLambdaAssociations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsWithLambdaAssociations AWS API Documentation
     #
     class TooManyDistributionsWithLambdaAssociations < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum number of distributions have been associated with the
+    # specified Lambda function.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsWithSingleFunctionARN AWS API Documentation
+    #
+    class TooManyDistributionsWithSingleFunctionARN < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8016,7 +9888,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyFieldLevelEncryptionConfigs AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFieldLevelEncryptionConfigs AWS API Documentation
     #
     class TooManyFieldLevelEncryptionConfigs < Struct.new(
       :message)
@@ -8030,7 +9902,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyFieldLevelEncryptionContentTypeProfiles AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFieldLevelEncryptionContentTypeProfiles AWS API Documentation
     #
     class TooManyFieldLevelEncryptionContentTypeProfiles < Struct.new(
       :message)
@@ -8044,7 +9916,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyFieldLevelEncryptionEncryptionEntities AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFieldLevelEncryptionEncryptionEntities AWS API Documentation
     #
     class TooManyFieldLevelEncryptionEncryptionEntities < Struct.new(
       :message)
@@ -8058,7 +9930,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyFieldLevelEncryptionFieldPatterns AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFieldLevelEncryptionFieldPatterns AWS API Documentation
     #
     class TooManyFieldLevelEncryptionFieldPatterns < Struct.new(
       :message)
@@ -8072,7 +9944,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyFieldLevelEncryptionProfiles AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFieldLevelEncryptionProfiles AWS API Documentation
     #
     class TooManyFieldLevelEncryptionProfiles < Struct.new(
       :message)
@@ -8086,9 +9958,28 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyFieldLevelEncryptionQueryArgProfiles AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFieldLevelEncryptionQueryArgProfiles AWS API Documentation
     #
     class TooManyFieldLevelEncryptionQueryArgProfiles < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of headers in the cache policy exceeds the maximum. For
+    # more information, see [Quotas][1] (formerly known as limits) in the
+    # *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyHeadersInCachePolicy AWS API Documentation
+    #
+    class TooManyHeadersInCachePolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8099,9 +9990,28 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyHeadersInForwardedValues AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyHeadersInForwardedValues AWS API Documentation
     #
     class TooManyHeadersInForwardedValues < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of headers in the origin request policy exceeds the
+    # maximum. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyHeadersInOriginRequestPolicy AWS API Documentation
+    #
+    class TooManyHeadersInOriginRequestPolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8113,7 +10023,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyInvalidationsInProgress AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyInvalidationsInProgress AWS API Documentation
     #
     class TooManyInvalidationsInProgress < Struct.new(
       :message)
@@ -8127,7 +10037,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyLambdaFunctionAssociations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyLambdaFunctionAssociations AWS API Documentation
     #
     class TooManyLambdaFunctionAssociations < Struct.new(
       :message)
@@ -8140,7 +10050,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyOriginCustomHeaders AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyOriginCustomHeaders AWS API Documentation
     #
     class TooManyOriginCustomHeaders < Struct.new(
       :message)
@@ -8154,9 +10064,28 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyOriginGroupsPerDistribution AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyOriginGroupsPerDistribution AWS API Documentation
     #
     class TooManyOriginGroupsPerDistribution < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of origin request policies for
+    # this AWS account. For more information, see [Quotas][1] (formerly
+    # known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyOriginRequestPolicies AWS API Documentation
+    #
+    class TooManyOriginRequestPolicies < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8167,7 +10096,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyOrigins AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyOrigins AWS API Documentation
     #
     class TooManyOrigins < Struct.new(
       :message)
@@ -8181,7 +10110,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyPublicKeys AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyPublicKeys AWS API Documentation
     #
     class TooManyPublicKeys < Struct.new(
       :message)
@@ -8194,9 +10123,47 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyQueryStringParameters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyQueryStringParameters AWS API Documentation
     #
     class TooManyQueryStringParameters < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of query strings in the cache policy exceeds the maximum.
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyQueryStringsInCachePolicy AWS API Documentation
+    #
+    class TooManyQueryStringsInCachePolicy < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of query strings in the origin request policy exceeds the
+    # maximum. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyQueryStringsInOriginRequestPolicy AWS API Documentation
+    #
+    class TooManyQueryStringsInOriginRequestPolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8207,7 +10174,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyStreamingDistributionCNAMEs AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyStreamingDistributionCNAMEs AWS API Documentation
     #
     class TooManyStreamingDistributionCNAMEs < Struct.new(
       :message)
@@ -8221,7 +10188,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyStreamingDistributions AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyStreamingDistributions AWS API Documentation
     #
     class TooManyStreamingDistributions < Struct.new(
       :message)
@@ -8235,7 +10202,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TooManyTrustedSigners AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyTrustedSigners AWS API Documentation
     #
     class TooManyTrustedSigners < Struct.new(
       :message)
@@ -8248,7 +10215,7 @@ module Aws::CloudFront
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TrustedSignerDoesNotExist AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustedSignerDoesNotExist AWS API Documentation
     #
     class TrustedSignerDoesNotExist < Struct.new(
       :message)
@@ -8306,7 +10273,7 @@ module Aws::CloudFront
     #   cache behavior. If `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TrustedSigners AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustedSigners AWS API Documentation
     #
     class TrustedSigners < Struct.new(
       :enabled,
@@ -8336,11 +10303,93 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` key elements.
     #   @return [Types::TagKeys]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource,
       :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCachePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cache_policy_config: { # required
+    #           comment: "string",
+    #           name: "string", # required
+    #           default_ttl: 1,
+    #           max_ttl: 1,
+    #           min_ttl: 1, # required
+    #           parameters_in_cache_key_and_forwarded_to_origin: {
+    #             enable_accept_encoding_gzip: false, # required
+    #             headers_config: { # required
+    #               header_behavior: "none", # required, accepts none, whitelist
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             cookies_config: { # required
+    #               cookie_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #               cookies: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             query_strings_config: { # required
+    #               query_string_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #               query_strings: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #           },
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] cache_policy_config
+    #   A cache policy configuration.
+    #   @return [Types::CachePolicyConfig]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the cache policy that you are updating.
+    #   The identifier is returned in a cache behavior’s `CachePolicyId`
+    #   field in the response to `GetDistributionConfig`.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The version of the cache policy that you are updating. The version
+    #   is returned in the cache policy’s `ETag` field in the response to
+    #   `GetCachePolicyConfig`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCachePolicyRequest AWS API Documentation
+    #
+    class UpdateCachePolicyRequest < Struct.new(
+      :cache_policy_config,
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cache_policy
+    #   A cache policy.
+    #   @return [Types::CachePolicy]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the cache policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCachePolicyResult AWS API Documentation
+    #
+    class UpdateCachePolicyResult < Struct.new(
+      :cache_policy,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8372,7 +10421,7 @@ module Aws::CloudFront
     #   identity's configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config,
@@ -8393,7 +10442,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateCloudFrontOriginAccessIdentityResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -8474,7 +10523,36 @@ module Aws::CloudFront
     #           },
     #           default_cache_behavior: { # required
     #             target_origin_id: "string", # required
-    #             forwarded_values: { # required
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             field_level_encryption_id: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
     #                 forward: "none", # required, accepts none, whitelist, all
@@ -8492,36 +10570,9 @@ module Aws::CloudFront
     #                 items: ["string"],
     #               },
     #             },
-    #             trusted_signers: { # required
-    #               enabled: false, # required
-    #               quantity: 1, # required
-    #               items: ["string"],
-    #             },
-    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #             min_ttl: 1, # required
-    #             allowed_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               cached_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               },
-    #             },
-    #             smooth_streaming: false,
+    #             min_ttl: 1,
     #             default_ttl: 1,
     #             max_ttl: 1,
-    #             compress: false,
-    #             lambda_function_associations: {
-    #               quantity: 1, # required
-    #               items: [
-    #                 {
-    #                   lambda_function_arn: "LambdaFunctionARN", # required
-    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                   include_body: false,
-    #                 },
-    #               ],
-    #             },
-    #             field_level_encryption_id: "string",
     #           },
     #           cache_behaviors: {
     #             quantity: 1, # required
@@ -8529,7 +10580,36 @@ module Aws::CloudFront
     #               {
     #                 path_pattern: "string", # required
     #                 target_origin_id: "string", # required
-    #                 forwarded_values: { # required
+    #                 trusted_signers: { # required
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   },
+    #                 },
+    #                 smooth_streaming: false,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "LambdaFunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       include_body: false,
+    #                     },
+    #                   ],
+    #                 },
+    #                 field_level_encryption_id: "string",
+    #                 cache_policy_id: "string",
+    #                 origin_request_policy_id: "string",
+    #                 forwarded_values: {
     #                   query_string: false, # required
     #                   cookies: { # required
     #                     forward: "none", # required, accepts none, whitelist, all
@@ -8547,36 +10627,9 @@ module Aws::CloudFront
     #                     items: ["string"],
     #                   },
     #                 },
-    #                 trusted_signers: { # required
-    #                   enabled: false, # required
-    #                   quantity: 1, # required
-    #                   items: ["string"],
-    #                 },
-    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #                 min_ttl: 1, # required
-    #                 allowed_methods: {
-    #                   quantity: 1, # required
-    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                   cached_methods: {
-    #                     quantity: 1, # required
-    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                   },
-    #                 },
-    #                 smooth_streaming: false,
+    #                 min_ttl: 1,
     #                 default_ttl: 1,
     #                 max_ttl: 1,
-    #                 compress: false,
-    #                 lambda_function_associations: {
-    #                   quantity: 1, # required
-    #                   items: [
-    #                     {
-    #                       lambda_function_arn: "LambdaFunctionARN", # required
-    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                       include_body: false,
-    #                     },
-    #                   ],
-    #                 },
-    #                 field_level_encryption_id: "string",
     #               },
     #             ],
     #           },
@@ -8637,7 +10690,7 @@ module Aws::CloudFront
     #   distribution's configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionRequest AWS API Documentation
     #
     class UpdateDistributionRequest < Struct.new(
       :distribution_config,
@@ -8658,7 +10711,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionResult AWS API Documentation
     #
     class UpdateDistributionResult < Struct.new(
       :distribution,
@@ -8717,7 +10770,7 @@ module Aws::CloudFront
     #   configuration identity to update. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfigRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionConfigRequest AWS API Documentation
     #
     class UpdateFieldLevelEncryptionConfigRequest < Struct.new(
       :field_level_encryption_config,
@@ -8736,7 +10789,7 @@ module Aws::CloudFront
     #   configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfigResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionConfigResult AWS API Documentation
     #
     class UpdateFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption,
@@ -8784,7 +10837,7 @@ module Aws::CloudFront
     #   profile identity to update. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfileRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionProfileRequest AWS API Documentation
     #
     class UpdateFieldLevelEncryptionProfileRequest < Struct.new(
       :field_level_encryption_profile_config,
@@ -8802,10 +10855,87 @@ module Aws::CloudFront
     #   The result of the field-level encryption profile request.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfileResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionProfileResult AWS API Documentation
     #
     class UpdateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateOriginRequestPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         origin_request_policy_config: { # required
+    #           comment: "string",
+    #           name: "string", # required
+    #           headers_config: { # required
+    #             header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #             headers: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           cookies_config: { # required
+    #             cookie_behavior: "none", # required, accepts none, whitelist, all
+    #             cookies: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           query_strings_config: { # required
+    #             query_string_behavior: "none", # required, accepts none, whitelist, all
+    #             query_strings: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] origin_request_policy_config
+    #   An origin request policy configuration.
+    #   @return [Types::OriginRequestPolicyConfig]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the origin request policy that you are
+    #   updating. The identifier is returned in a cache behavior’s
+    #   `OriginRequestPolicyId` field in the response to
+    #   `GetDistributionConfig`.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The version of the origin request policy that you are updating. The
+    #   version is returned in the origin request policy’s `ETag` field in
+    #   the response to `GetOriginRequestPolicyConfig`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginRequestPolicyRequest AWS API Documentation
+    #
+    class UpdateOriginRequestPolicyRequest < Struct.new(
+      :origin_request_policy_config,
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_request_policy
+    #   An origin request policy.
+    #   @return [Types::OriginRequestPolicy]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the origin request policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginRequestPolicyResult AWS API Documentation
+    #
+    class UpdateOriginRequestPolicyResult < Struct.new(
+      :origin_request_policy,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -8838,7 +10968,7 @@ module Aws::CloudFront
     #   public key to update. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKeyRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdatePublicKeyRequest AWS API Documentation
     #
     class UpdatePublicKeyRequest < Struct.new(
       :public_key_config,
@@ -8857,7 +10987,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKeyResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdatePublicKeyResult AWS API Documentation
     #
     class UpdatePublicKeyResult < Struct.new(
       :public_key,
@@ -8914,7 +11044,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateStreamingDistributionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateStreamingDistributionRequest AWS API Documentation
     #
     class UpdateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config,
@@ -8935,7 +11065,7 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateStreamingDistributionResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateStreamingDistributionResult AWS API Documentation
     #
     class UpdateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -9139,7 +11269,7 @@ module Aws::CloudFront
     #   * `CloudFrontDefaultCertificate`
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ViewerCertificate AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ViewerCertificate AWS API Documentation
     #
     class ViewerCertificate < Struct.new(
       :cloud_front_default_certificate,

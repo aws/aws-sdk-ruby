@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2020-07-20)
+------------------
+
+* Feature - Adds optional MTU property to DataflowEndpoint and adds contact source and destination details to DescribeContact response.
+
 1.10.0 (2020-06-23)
 ------------------
 

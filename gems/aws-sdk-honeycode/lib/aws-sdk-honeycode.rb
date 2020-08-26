@@ -44,9 +44,9 @@ require_relative 'aws-sdk-honeycode/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Honeycode
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

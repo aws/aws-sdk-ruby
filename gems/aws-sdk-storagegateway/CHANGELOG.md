@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2020-08-19)
+------------------
+
+* Feature - Added WORM, tape retention lock, and custom pool features for virtual tapes.
+
+1.46.0 (2020-07-31)
+------------------
+
+* Feature - Add support for gateway VM deprecation dates
+
 1.45.0 (2020-07-07)
 ------------------
 

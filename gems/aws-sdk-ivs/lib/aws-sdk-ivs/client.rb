@@ -85,13 +85,28 @@ module Aws::IVS
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::IVS
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -337,6 +352,7 @@ module Aws::IVS
     #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD"
     #   resp.channels[0].ingest_endpoint #=> String
     #   resp.channels[0].playback_url #=> String
+    #   resp.channels[0].authorized #=> Boolean
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
     #   resp.errors #=> Array
@@ -401,11 +417,23 @@ module Aws::IVS
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   `STANDARD`\: The stream is transcoded; resolution (width, in landscape
-    #   orientation) can be up to 1080p or the input source resolution,
-    #   whichever is lower; and bitrate can be up to 8.5 Mbps. `BASIC`\: The
-    #   stream is transfixed; resolution can be up to 480p; and bitrate can be
-    #   up to 1.5 Mbps. Default: `STANDARD`.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Valid values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Vertical resolution can be up to
+    #     1080 and bitrate can be up to 8.5 Mbps.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
+    #     Mbps.
+    #
+    #   Default: `STANDARD`.
+    #
+    # @option params [Boolean] :authorized
+    #   Whether the channel is authorized. Default: `false`.
     #
     # @option params [Hash<String,String>] :tags
     #   See Channel$tags.
@@ -421,6 +449,7 @@ module Aws::IVS
     #     name: "ChannelName",
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     type: "BASIC", # accepts BASIC, STANDARD
+    #     authorized: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -434,6 +463,7 @@ module Aws::IVS
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.stream_key.arn #=> String
@@ -451,7 +481,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Creates a stream key, used to initiate a stream, for a specified
+    # Creates a stream key, used to initiate a stream, for the specified
     # channel ARN.
     #
     # Note that CreateChannel creates a stream key. If you subsequently use
@@ -496,7 +526,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Deletes a specified channel and its associated stream keys.
+    # Deletes the specified channel and its associated stream keys.
     #
     # @option params [required, String] :arn
     #   ARN of the channel to be deleted.
@@ -518,7 +548,30 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Deletes the stream key for a specified ARN, so it can no longer be
+    # Deletes a specified authorization key pair. This invalidates future
+    # viewer tokens generated using the key pair’s `privateKey`.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the key pair to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_playback_key_pair({
+    #     arn: "PlaybackKeyPairArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeletePlaybackKeyPair AWS API Documentation
+    #
+    # @overload delete_playback_key_pair(params = {})
+    # @param [Hash] params ({})
+    def delete_playback_key_pair(params = {}, options = {})
+      req = build_request(:delete_playback_key_pair, params)
+      req.send_request(options)
+    end
+
+    # Deletes the stream key for the specified ARN, so it can no longer be
     # used to stream.
     #
     # @option params [required, String] :arn
@@ -541,7 +594,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets the channel configuration for a specified channel ARN. See also
+    # Gets the channel configuration for the specified channel ARN. See also
     # BatchGetChannel.
     #
     # @option params [required, String] :arn
@@ -565,6 +618,7 @@ module Aws::IVS
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #
@@ -574,6 +628,41 @@ module Aws::IVS
     # @param [Hash] params ({})
     def get_channel(params = {}, options = {})
       req = build_request(:get_channel, params)
+      req.send_request(options)
+    end
+
+    # Gets a specified playback authorization key pair and returns the `arn`
+    # and `fingerprint`. The `privateKey` held by the caller can be used to
+    # generate viewer authorization tokens, to grant viewers access to
+    # authorized channels.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the key pair to be returned.
+    #
+    # @return [Types::GetPlaybackKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPlaybackKeyPairResponse#key_pair #key_pair} => Types::PlaybackKeyPair
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_playback_key_pair({
+    #     arn: "PlaybackKeyPairArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_pair.arn #=> String
+    #   resp.key_pair.name #=> String
+    #   resp.key_pair.fingerprint #=> String
+    #   resp.key_pair.tags #=> Hash
+    #   resp.key_pair.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackKeyPair AWS API Documentation
+    #
+    # @overload get_playback_key_pair(params = {})
+    # @param [Hash] params ({})
+    def get_playback_key_pair(params = {}, options = {})
+      req = build_request(:get_playback_key_pair, params)
       req.send_request(options)
     end
 
@@ -643,8 +732,56 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets summary information about channels. This list can be filtered to
-    # match a specified string.
+    # Imports the public portion of a new key pair and returns its `arn` and
+    # `fingerprint`. The `privateKey` can then be used to generate viewer
+    # authorization tokens, to grant viewers access to authorized channels.
+    #
+    # @option params [required, String] :public_key_material
+    #   The public portion of a customer-generated key pair.
+    #
+    # @option params [String] :name
+    #   An arbitrary string (a nickname) assigned to a playback key pair that
+    #   helps the customer identify that resource. The value does not need to
+    #   be unique.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags provided with the request are added to the playback key pair
+    #   tags.
+    #
+    # @return [Types::ImportPlaybackKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportPlaybackKeyPairResponse#key_pair #key_pair} => Types::PlaybackKeyPair
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_playback_key_pair({
+    #     public_key_material: "PlaybackPublicKeyMaterial", # required
+    #     name: "PlaybackKeyPairName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_pair.arn #=> String
+    #   resp.key_pair.name #=> String
+    #   resp.key_pair.fingerprint #=> String
+    #   resp.key_pair.tags #=> Hash
+    #   resp.key_pair.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPair AWS API Documentation
+    #
+    # @overload import_playback_key_pair(params = {})
+    # @param [Hash] params ({})
+    def import_playback_key_pair(params = {}, options = {})
+      req = build_request(:import_playback_key_pair, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about all channels in your account, in the
+    # AWS region where the API request is processed. This list can be
+    # filtered to match a specified string.
     #
     # @option params [String] :filter_by_name
     #   Filters the channel list to match the specified name.
@@ -677,6 +814,7 @@ module Aws::IVS
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].name #=> String
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channels[0].authorized #=> Boolean
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -690,8 +828,48 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets summary information about stream keys. The list can be filtered
-    # to a particular channel.
+    # Gets summary information about playback key pairs.
+    #
+    # @option params [String] :next_token
+    #   Maximum number of key pairs to return.
+    #
+    # @option params [Integer] :max_results
+    #   The first key pair to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #
+    # @return [Types::ListPlaybackKeyPairsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPlaybackKeyPairsResponse#key_pairs #key_pairs} => Array&lt;Types::PlaybackKeyPairSummary&gt;
+    #   * {Types::ListPlaybackKeyPairsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_playback_key_pairs({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_pairs #=> Array
+    #   resp.key_pairs[0].arn #=> String
+    #   resp.key_pairs[0].name #=> String
+    #   resp.key_pairs[0].tags #=> Hash
+    #   resp.key_pairs[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairs AWS API Documentation
+    #
+    # @overload list_playback_key_pairs(params = {})
+    # @param [Hash] params ({})
+    def list_playback_key_pairs(params = {}, options = {})
+      req = build_request(:list_playback_key_pairs, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about stream keys for the specified channel.
     #
     # @option params [required, String] :channel_arn
     #   Channel ARN used to filter the list.
@@ -736,7 +914,8 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets summary information about live streams.
+    # Gets summary information about live streams in your account, in the
+    # AWS region where the API request is processed.
     #
     # @option params [String] :next_token
     #   The first stream to retrieve. This is used for pagination; see the
@@ -778,7 +957,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets information about the tags for a specified ARN.
+    # Gets information about AWS tags for the specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource to be retrieved.
@@ -820,7 +999,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Inserts metadata into an RTMP stream for a specified channel. A
+    # Inserts metadata into an RTMPS stream for the specified channel. A
     # maximum of 5 requests per second per channel is allowed, each with a
     # maximum 1KB payload.
     #
@@ -849,12 +1028,12 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Disconnects the stream for the specified channel. This disconnects the
-    # incoming RTMP stream from the client. Can be used in conjunction with
-    # DeleteStreamKey to prevent further streaming to a channel.
+    # Disconnects the incoming RTMPS stream for the specified channel. Can
+    # be used in conjunction with DeleteStreamKey to prevent further
+    # streaming to a channel.
     #
     # <note markdown="1"> Many streaming client-software libraries automatically reconnect a
-    # dropped RTMP session, so to stop the stream permanently, you may want
+    # dropped RTMPS session, so to stop the stream permanently, you may want
     # to first revoke the `streamKey` attached to the channel.
     #
     #  </note>
@@ -879,7 +1058,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Adds or updates tags for a resource with a specified ARN.
+    # Adds or updates tags for the AWS resource with the specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   ARN of the resource for which tags are to be added or updated.
@@ -907,7 +1086,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Removes tags for a resource with a specified ARN.
+    # Removes tags from the resource with the specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   ARN of the resource for which tags are to be removed.
@@ -948,11 +1127,23 @@ module Aws::IVS
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   `STANDARD`\: The stream is transcoded; resolution (width, in landscape
-    #   orientation) can be up to 1080p or the input source resolution,
-    #   whichever is lower; and bitrate can be up to 8.5 Mbps. `BASIC`\: The
-    #   stream is transfixed; resolution can be up to 480p; and bitrate can be
-    #   up to 1.5 Mbps. Default `STANDARD`.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Valid values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Vertical resolution can be up to
+    #     1080 and bitrate can be up to 8.5 Mbps.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
+    #     Mbps.
+    #
+    #   Default: `STANDARD`.
+    #
+    # @option params [Boolean] :authorized
+    #   Whether the channel is authorized. Default: `false`.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -965,6 +1156,7 @@ module Aws::IVS
     #     name: "ChannelName",
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     type: "BASIC", # accepts BASIC, STANDARD
+    #     authorized: false,
     #   })
     #
     # @example Response structure
@@ -975,6 +1167,7 @@ module Aws::IVS
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #
@@ -1000,7 +1193,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

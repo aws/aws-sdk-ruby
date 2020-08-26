@@ -17,5 +17,7 @@ require 'aws-sdk-s3/encryption/default_key_provider'
 module Aws
   module S3
     module Encryption; end
+    AES_GCM_TAG_LEN_BYTES = 16
+    EC_USER_AGENT = 'S3CryptoV1n'
   end
 end

@@ -85,13 +85,28 @@ module Aws::GuardDuty
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::GuardDuty
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -380,7 +395,8 @@ module Aws::GuardDuty
     # Creates a single Amazon GuardDuty detector. A detector is a resource
     # that represents the GuardDuty service. To start using GuardDuty, you
     # must create a detector in each Region where you enable the service.
-    # You can have only one detector per account per Region.
+    # You can have only one detector per account per Region. All data
+    # sources are enabled in a new detector by default.
     #
     # @option params [required, Boolean] :enable
     #   A Boolean value that specifies whether the detector is to be enabled.
@@ -395,6 +411,10 @@ module Aws::GuardDuty
     #   An enum value that specifies how frequently updated findings are
     #   exported.
     #
+    # @option params [Types::DataSourceConfigurations] :data_sources
+    #   An object that describes which data sources will be enabled for the
+    #   detector.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new detector resource.
     #
@@ -408,6 +428,11 @@ module Aws::GuardDuty
     #     enable: false, # required
     #     client_token: "ClientToken",
     #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #     data_sources: {
+    #       s3_logs: {
+    #         enable: false, # required
+    #       },
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -689,8 +714,22 @@ module Aws::GuardDuty
     end
 
     # Creates member accounts of the current AWS account by specifying a
-    # list of AWS account IDs. The current AWS account can then invite these
-    # members to manage GuardDuty in their accounts.
+    # list of AWS account IDs. This step is a prerequisite for managing the
+    # associated member accounts either by invitation or through an
+    # organization.
+    #
+    # When using `Create Members` as an organizations delegated
+    # administrator this action will enable GuardDuty in the added member
+    # accounts, with the exception of the organization master account, which
+    # must enable GuardDuty prior to being added as a member.
+    #
+    # If you are adding accounts by invitation use this action after
+    # GuardDuty has been enabled in potential member accounts and before
+    # using [ `Invite Members` ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -1116,6 +1155,7 @@ module Aws::GuardDuty
     #
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
+    #   * {Types::DescribeOrganizationConfigurationResponse#data_sources #data_sources} => Types::OrganizationDataSourceConfigurationsResult
     #
     # @example Request syntax with placeholder values
     #
@@ -1127,6 +1167,7 @@ module Aws::GuardDuty
     #
     #   resp.auto_enable #=> Boolean
     #   resp.member_account_limit_reached #=> Boolean
+    #   resp.data_sources.s3_logs.auto_enable #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfiguration AWS API Documentation
     #
@@ -1300,6 +1341,7 @@ module Aws::GuardDuty
     #   * {Types::GetDetectorResponse#service_role #service_role} => String
     #   * {Types::GetDetectorResponse#status #status} => String
     #   * {Types::GetDetectorResponse#updated_at #updated_at} => String
+    #   * {Types::GetDetectorResponse#data_sources #data_sources} => Types::DataSourceConfigurationsResult
     #   * {Types::GetDetectorResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1315,6 +1357,10 @@ module Aws::GuardDuty
     #   resp.service_role #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.updated_at #=> String
+    #   resp.data_sources.cloud_trail.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.dns_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.flow_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1712,6 +1758,48 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Describes which data sources are enabled for the member account's
+    # detector.
+    #
+    # @option params [required, String] :detector_id
+    #   The detector ID for the master account.
+    #
+    # @option params [required, Array<String>] :account_ids
+    #   The account ID of the member account.
+    #
+    # @return [Types::GetMemberDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMemberDetectorsResponse#member_data_source_configurations #member_data_source_configurations} => Array&lt;Types::MemberDataSourceConfiguration&gt;
+    #   * {Types::GetMemberDetectorsResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::UnprocessedAccount&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_member_detectors({
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.member_data_source_configurations #=> Array
+    #   resp.member_data_source_configurations[0].account_id #=> String
+    #   resp.member_data_source_configurations[0].data_sources.cloud_trail.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.dns_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.flow_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.unprocessed_accounts #=> Array
+    #   resp.unprocessed_accounts[0].account_id #=> String
+    #   resp.unprocessed_accounts[0].result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectors AWS API Documentation
+    #
+    # @overload get_member_detectors(params = {})
+    # @param [Hash] params ({})
+    def get_member_detectors(params = {}, options = {})
+      req = build_request(:get_member_detectors, params)
+      req.send_request(options)
+    end
+
     # Retrieves GuardDuty member accounts (to the current GuardDuty master
     # account) specified by the account IDs.
     #
@@ -1801,6 +1889,92 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Lists Amazon GuardDuty usage statistics over the last 30 days for the
+    # specified detector ID. For newly enabled detectors or data sources the
+    # cost returned will include only the usage so far under 30 days, this
+    # may differ from the cost metrics in the console, which projects usage
+    # over 30 days to provide a monthly cost estimate. For more information
+    # see [Understanding How Usage Costs are Calculated][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations
+    #
+    # @option params [required, String] :detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   usage statistics you want to retrieve.
+    #
+    # @option params [required, String] :usage_statistic_type
+    #   The type of usage statistics to retrieve.
+    #
+    # @option params [required, Types::UsageCriteria] :usage_criteria
+    #   Represents the criteria used for querying usage.
+    #
+    # @option params [String] :unit
+    #   The currency unit you would like to view your usage statistics in.
+    #   Current valid values are USD.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the NextToken
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #
+    # @return [Types::GetUsageStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUsageStatisticsResponse#usage_statistics #usage_statistics} => Types::UsageStatistics
+    #   * {Types::GetUsageStatisticsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_statistics({
+    #     detector_id: "DetectorId", # required
+    #     usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
+    #     usage_criteria: { # required
+    #       account_ids: ["AccountId"],
+    #       data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #       resources: ["String"],
+    #     },
+    #     unit: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_statistics.sum_by_account #=> Array
+    #   resp.usage_statistics.sum_by_account[0].account_id #=> String
+    #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
+    #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
+    #   resp.usage_statistics.sum_by_data_source #=> Array
+    #   resp.usage_statistics.sum_by_data_source[0].data_source #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_LOGS"
+    #   resp.usage_statistics.sum_by_data_source[0].total.amount #=> String
+    #   resp.usage_statistics.sum_by_data_source[0].total.unit #=> String
+    #   resp.usage_statistics.sum_by_resource #=> Array
+    #   resp.usage_statistics.sum_by_resource[0].resource #=> String
+    #   resp.usage_statistics.sum_by_resource[0].total.amount #=> String
+    #   resp.usage_statistics.sum_by_resource[0].total.unit #=> String
+    #   resp.usage_statistics.top_resources #=> Array
+    #   resp.usage_statistics.top_resources[0].resource #=> String
+    #   resp.usage_statistics.top_resources[0].total.amount #=> String
+    #   resp.usage_statistics.top_resources[0].total.unit #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatistics AWS API Documentation
+    #
+    # @overload get_usage_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_usage_statistics(params = {}, options = {})
+      req = build_request(:get_usage_statistics, params)
+      req.send_request(options)
+    end
+
     # Invites other AWS accounts (created as members of the current AWS
     # account by CreateMembers) to enable GuardDuty, and allow the current
     # AWS account to view and manage these accounts' GuardDuty findings on
@@ -1816,12 +1990,12 @@ module Aws::GuardDuty
     #
     # @option params [Boolean] :disable_email_notification
     #   A Boolean value that specifies whether you want to disable email
-    #   notification to the accounts that you’re inviting to GuardDuty as
+    #   notification to the accounts that you are inviting to GuardDuty as
     #   members.
     #
     # @option params [String] :message
     #   The invitation message that you want to send to the accounts that
-    #   you’re inviting to GuardDuty as members.
+    #   you're inviting to GuardDuty as members.
     #
     # @return [Types::InviteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2620,6 +2794,9 @@ module Aws::GuardDuty
     #   An enum value that specifies how frequently findings are exported,
     #   such as to CloudWatch Events.
     #
+    # @option params [Types::DataSourceConfigurations] :data_sources
+    #   An object that describes which data sources will be updated.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2628,6 +2805,11 @@ module Aws::GuardDuty
     #     detector_id: "DetectorId", # required
     #     enable: false,
     #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #     data_sources: {
+    #       s3_logs: {
+    #         enable: false, # required
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector AWS API Documentation
@@ -2785,6 +2967,48 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Contains information on member accounts to be updated.
+    #
+    # @option params [required, String] :detector_id
+    #   The detector ID of the master account.
+    #
+    # @option params [required, Array<String>] :account_ids
+    #   A list of member account IDs to be updated.
+    #
+    # @option params [Types::DataSourceConfigurations] :data_sources
+    #   An object describes which data sources will be updated.
+    #
+    # @return [Types::UpdateMemberDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMemberDetectorsResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::UnprocessedAccount&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_member_detectors({
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
+    #     data_sources: {
+    #       s3_logs: {
+    #         enable: false, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unprocessed_accounts #=> Array
+    #   resp.unprocessed_accounts[0].account_id #=> String
+    #   resp.unprocessed_accounts[0].result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectors AWS API Documentation
+    #
+    # @overload update_member_detectors(params = {})
+    # @param [Hash] params ({})
+    def update_member_detectors(params = {}, options = {})
+      req = build_request(:update_member_detectors, params)
+      req.send_request(options)
+    end
+
     # Updates the delegated administrator account with the values provided.
     #
     # @option params [required, String] :detector_id
@@ -2794,6 +3018,9 @@ module Aws::GuardDuty
     #   Indicates whether to automatically enable member accounts in the
     #   organization.
     #
+    # @option params [Types::OrganizationDataSourceConfigurations] :data_sources
+    #   An object describes which data sources will be updated.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2801,6 +3028,11 @@ module Aws::GuardDuty
     #   resp = client.update_organization_configuration({
     #     detector_id: "DetectorId", # required
     #     auto_enable: false, # required
+    #     data_sources: {
+    #       s3_logs: {
+    #         auto_enable: false, # required
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfiguration AWS API Documentation
@@ -2904,7 +3136,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

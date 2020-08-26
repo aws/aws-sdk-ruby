@@ -85,13 +85,28 @@ module Aws::CloudWatchLogs
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::CloudWatchLogs
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -333,17 +348,14 @@ module Aws::CloudWatchLogs
     # This enables Amazon CloudWatch Logs to decrypt this data whenever it
     # is requested.
     #
-    # <note markdown="1"> **Important:** CloudWatch Logs supports only symmetric CMKs. Do not
-    # use an associate an asymmetric CMK with your log group. For more
-    # information, see [Using Symmetric and Asymmetric Keys][1].
+    # CloudWatch Logs supports only symmetric CMKs. Do not use an associate
+    # an asymmetric CMK with your log group. For more information, see
+    # [Using Symmetric and Asymmetric Keys][1].
     #
-    #  </note>
-    #
-    # Note that it can take up to 5 minutes for this operation to take
-    # effect.
+    # It can take up to 5 minutes for this operation to take effect.
     #
     # If you attempt to associate a CMK with a log group but the CMK does
-    # not exist or the CMK is disabled, you will receive an
+    # not exist or the CMK is disabled, you receive an
     # `InvalidParameterException` error.
     #
     #
@@ -407,7 +419,10 @@ module Aws::CloudWatchLogs
     end
 
     # Creates an export task, which allows you to efficiently export data
-    # from a log group to an Amazon S3 bucket.
+    # from a log group to an Amazon S3 bucket. When you perform a
+    # `CreateExportTask` operation, you must use credentials that have
+    # permission to write to the S3 bucket that you specify as the
+    # destination.
     #
     # This is an asynchronous call. If all the required information is
     # provided, this operation initiates an export task and responds with
@@ -486,9 +501,8 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Creates a log group with the specified name.
-    #
-    # You can create up to 20,000 log groups per account.
+    # Creates a log group with the specified name. You can create up to
+    # 20,000 log groups per account.
     #
     # You must use the following guidelines when naming a log group:
     #
@@ -500,6 +514,10 @@ module Aws::CloudWatchLogs
     #   '\_' (underscore), '-' (hyphen), '/' (forward slash), '.'
     #   (period), and '#' (number sign)
     #
+    # When you create a log group, by default the log events in the log
+    # group never expire. To set a retention policy so that events expire
+    # and are deleted after a specified time, use [PutRetentionPolicy][1].
+    #
     # If you associate a AWS Key Management Service (AWS KMS) customer
     # master key (CMK) with the log group, ingested data is encrypted using
     # the CMK. This association is stored as long as the data encrypted with
@@ -507,18 +525,17 @@ module Aws::CloudWatchLogs
     # CloudWatch Logs to decrypt this data whenever it is requested.
     #
     # If you attempt to associate a CMK with the log group but the CMK does
-    # not exist or the CMK is disabled, you will receive an
+    # not exist or the CMK is disabled, you receive an
     # `InvalidParameterException` error.
     #
-    # <note markdown="1"> **Important:** CloudWatch Logs supports only symmetric CMKs. Do not
-    # associate an asymmetric CMK with your log group. For more information,
-    # see [Using Symmetric and Asymmetric Keys][1].
-    #
-    #  </note>
+    # CloudWatch Logs supports only symmetric CMKs. Do not associate an
+    # asymmetric CMK with your log group. For more information, see [Using
+    # Symmetric and Asymmetric Keys][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -556,7 +573,9 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Creates a log stream for the specified log group.
+    # Creates a log stream for the specified log group. A log stream is a
+    # sequence of log events that originate from a single source, such as an
+    # application instance or a resource that is being monitored.
     #
     # There is no limit on the number of log streams that you can create for
     # a log group. There is a limit of 50 TPS on `CreateLogStream`
@@ -694,7 +713,24 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Deletes a saved CloudWatch Logs Insights query definition. A query
+    # definition contains details about a saved CloudWatch Logs Insights
+    # query.
+    #
+    # Each `DeleteQueryDefinition` operation can delete one query
+    # definition.
+    #
+    # You must have the `logs:DeleteQueryDefinition` permission to be able
+    # to perform this operation.
+    #
     # @option params [required, String] :query_definition_id
+    #   The ID of the query definition that you want to delete. You can use
+    #   [DescribeQueryDefinitions][1] to retrieve the IDs of your saved query
+    #   definitions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
     #
     # @return [Types::DeleteQueryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -965,7 +1001,7 @@ module Aws::CloudWatchLogs
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
     #
-    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`, you cannot specify this parameter.
     #
     # @option params [String] :order_by
     #   If the value is `LogStreamName`, the results are ordered by log stream
@@ -975,12 +1011,12 @@ module Aws::CloudWatchLogs
     #   If you order the results by event time, you cannot specify the
     #   `logStreamNamePrefix` parameter.
     #
-    #   lastEventTimestamp represents the time of the most recent log event in
-    #   the log stream in CloudWatch Logs. This number is expressed as the
+    #   `lastEventTimeStamp` represents the time of the most recent log event
+    #   in the log stream in CloudWatch Logs. This number is expressed as the
     #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
-    #   lastEventTimeStamp updates on an eventual consistency basis. It
-    #   typically updates in less than an hour from ingestion, but may take
-    #   longer in some rare situations.
+    #   `lastEventTimeStamp` updates on an eventual consistency basis. It
+    #   typically updates in less than an hour from ingestion, but in rare
+    #   situations might take longer.
     #
     # @option params [Boolean] :descending
     #   If the value is true, results are returned in descending order. If the
@@ -1035,7 +1071,7 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Lists the specified metric filters. You can list all the metric
+    # Lists the specified metric filters. You can list all of the metric
     # filters or filter the results by log name, prefix, metric name, or
     # metric namespace. The results are ASCII-sorted by filter name.
     #
@@ -1043,7 +1079,8 @@ module Aws::CloudWatchLogs
     #   The name of the log group.
     #
     # @option params [String] :filter_name_prefix
-    #   The prefix to match.
+    #   The prefix to match. CloudWatch Logs uses the value you set here only
+    #   if you also include the `logGroupName` parameter in your request.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1106,7 +1143,7 @@ module Aws::CloudWatchLogs
 
     # Returns a list of CloudWatch Logs Insights queries that are scheduled,
     # executing, or have been executed recently in this account. You can
-    # request all queries, or limit it to queries of a specific log group or
+    # request all queries or limit it to queries of a specific log group or
     # queries with a certain status.
     #
     # @option params [String] :log_group_name
@@ -1157,9 +1194,20 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # This operation returns a paginated list of your saved CloudWatch Logs
+    # Insights query definitions.
+    #
+    # You can use the `queryDefinitionNamePrefix` parameter to limit the
+    # results to only the query definitions that have names that start with
+    # a certain string.
+    #
     # @option params [String] :query_definition_name_prefix
+    #   Use this parameter to filter your results to only the query
+    #   definitions that have names that start with the prefix you specify.
     #
     # @option params [Integer] :max_results
+    #   Limits the number of returned query definitions to the specified
+    #   number.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. The token expires after
@@ -1330,10 +1378,16 @@ module Aws::CloudWatchLogs
     # and the name of the log stream.
     #
     # By default, this operation returns as many log events as can fit in 1
-    # MB (up to 10,000 log events), or all the events found within the time
+    # MB (up to 10,000 log events) or all the events found within the time
     # range that you specify. If the results include a token, then there are
     # more log events available, and you can get additional results by
-    # specifying the token in a subsequent call.
+    # specifying the token in a subsequent call. This operation can return
+    # empty results while there are more log events available through the
+    # token.
+    #
+    # The returned log events are sorted by event timestamp, the timestamp
+    # when the event was ingested by CloudWatch Logs, and the ID of the
+    # `PutLogEvents` request.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group to search.
@@ -1358,6 +1412,9 @@ module Aws::CloudWatchLogs
     #   The start of the time range, expressed as the number of milliseconds
     #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
     #   time are not returned.
+    #
+    #   If you omit `startTime` and `endTime` the most recent log events are
+    #   retrieved, to up 1 MB or 10,000 log events.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
@@ -1388,10 +1445,10 @@ module Aws::CloudWatchLogs
     #   the matched log events in the first log stream are searched first,
     #   then those in the next log stream, and so on. The default is false.
     #
-    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
-    #   ignored and the value will be assumed to be true. The response from
-    #   this operation will always interleave events from multiple log streams
-    #   within a log group.
+    #   **Important:** Starting on June 17, 2019, this parameter is ignored
+    #   and the value is assumed to be true. The response from this operation
+    #   always interleaves events from multiple log streams within a log
+    #   group.
     #
     # @return [Types::FilterLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1437,12 +1494,14 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Lists log events from the specified log stream. You can list all the
-    # log events or filter using a time range.
+    # Lists log events from the specified log stream. You can list all of
+    # the log events or filter using a time range.
     #
     # By default, this operation returns as many log events as can fit in a
     # response size of 1MB (up to 10,000 log events). You can get additional
-    # log events by specifying one of the tokens in a subsequent call.
+    # log events by specifying one of the tokens in a subsequent call. This
+    # operation can return empty results while there are more log events
+    # available through the token.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1573,13 +1632,12 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Retrieves all the fields and values of a single log event. All fields
-    # are retrieved, even if the original query that produced the
+    # Retrieves all of the fields and values of a single log event. All
+    # fields are retrieved, even if the original query that produced the
     # `logRecordPointer` retrieved only a subset of fields. Fields are
     # returned as field name/field value pairs.
     #
-    # Additionally, the entire unparsed log event is returned within
-    # `@message`.
+    # The full unparsed log event is returned within `@message`.
     #
     # @option params [required, String] :log_record_pointer
     #   The pointer corresponding to the log event record you want to
@@ -1615,7 +1673,7 @@ module Aws::CloudWatchLogs
     # Returns the results from the specified query.
     #
     # Only the fields requested in the query are returned, along with a
-    # `@ptr` field which is the identifier for the log record. You can use
+    # `@ptr` field, which is the identifier for the log record. You can use
     # the value of `@ptr` in a [GetLogRecord][1] operation to get the full
     # log record.
     #
@@ -1710,6 +1768,9 @@ module Aws::CloudWatchLogs
     # the destination owner must call [PutDestinationPolicy][3] after
     # `PutDestination`.
     #
+    # To perform a `PutDestination` operation, you must also have the
+    # `iam:PassRole` permission.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
@@ -1725,7 +1786,7 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :role_arn
     #   The ARN of an IAM role that grants CloudWatch Logs permissions to call
-    #   the Amazon Kinesis PutRecord operation on the destination stream.
+    #   the Amazon Kinesis `PutRecord` operation on the destination stream.
     #
     # @return [Types::PutDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1771,7 +1832,8 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :access_policy
     #   An IAM policy document that authorizes cross-account users to deliver
-    #   their log events to the associated destination.
+    #   their log events to the associated destination. This can be up to 5120
+    #   bytes.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1798,14 +1860,14 @@ module Aws::CloudWatchLogs
     # require a sequence token. You can also get the sequence token in the
     # `expectedSequenceToken` field from `InvalidSequenceTokenException`. If
     # you call `PutLogEvents` twice within a narrow time period using the
-    # same value for `sequenceToken`, both calls may be successful, or one
-    # may be rejected.
+    # same value for `sequenceToken`, both calls might be successful or one
+    # might be rejected.
     #
     # The batch of events must satisfy the following constraints:
     #
-    # * The maximum batch size is 1,048,576 bytes, and this size is
-    #   calculated as the sum of all event messages in UTF-8, plus 26 bytes
-    #   for each log event.
+    # * The maximum batch size is 1,048,576 bytes. This size is calculated
+    #   as the sum of all event messages in UTF-8, plus 26 bytes for each
+    #   log event.
     #
     # * None of the log events in the batch can be more than 2 hours in the
     #   future.
@@ -1813,12 +1875,12 @@ module Aws::CloudWatchLogs
     # * None of the log events in the batch can be older than 14 days or
     #   older than the retention period of the log group.
     #
-    # * The log events in the batch must be in chronological ordered by
-    #   their timestamp. The timestamp is the time the event occurred,
-    #   expressed as the number of milliseconds after Jan 1, 1970 00:00:00
-    #   UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the
-    #   timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For
-    #   example, 2017-09-15T13:45:30.)
+    # * The log events in the batch must be in chronological order by their
+    #   timestamp. The timestamp is the time the event occurred, expressed
+    #   as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. (In
+    #   AWS Tools for PowerShell and the AWS SDK for .NET, the timestamp is
+    #   specified in .NET format: yyyy-mm-ddThh:mm:ss. For example,
+    #   2017-09-15T13:45:30.)
     #
     # * A batch of log events in a single request cannot span more than 24
     #   hours. Otherwise, the operation fails.
@@ -1828,8 +1890,8 @@ module Aws::CloudWatchLogs
     # * There is a quota of 5 requests per second per log stream. Additional
     #   requests are throttled. This quota can't be changed.
     #
-    # If a call to PutLogEvents returns "UnrecognizedClientException" the
-    # most likely cause is an invalid AWS access key ID or secret key.
+    # If a call to `PutLogEvents` returns "UnrecognizedClientException"
+    # the most likely cause is an invalid AWS access key ID or secret key.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1846,7 +1908,7 @@ module Aws::CloudWatchLogs
     #   require a sequence token. You can also get the sequence token using
     #   [DescribeLogStreams][1]. If you call `PutLogEvents` twice within a
     #   narrow time period using the same value for `sequenceToken`, both
-    #   calls may be successful, or one may be rejected.
+    #   calls might be successful or one might be rejected.
     #
     #
     #
@@ -1939,13 +2001,65 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Creates or updates a query definition for CloudWatch Logs Insights.
+    # For more information, see [Analyzing Log Data with CloudWatch Logs
+    # Insights][1].
+    #
+    # To update a query definition, specify its `queryDefinitionId` in your
+    # request. The values of `name`, `queryString`, and `logGroupNames` are
+    # changed to the values that you specify in your update operation. No
+    # current values are retained from the current query definition. For
+    # example, if you update a current query definition that includes log
+    # groups, and you don't specify the `logGroupNames` parameter in your
+    # update operation, the query definition changes to contain no log
+    # groups.
+    #
+    # You must have the `logs:PutQueryDefinition` permission to be able to
+    # perform this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html
+    #
     # @option params [required, String] :name
+    #   A name for the query definition. If you are saving a lot of query
+    #   definitions, we recommend that you name them so that you can easily
+    #   find the ones you want by using the first part of the name as a filter
+    #   in the `queryDefinitionNamePrefix` parameter of
+    #   [DescribeQueryDefinitions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
     #
     # @option params [String] :query_definition_id
+    #   If you are updating a query definition, use this parameter to specify
+    #   the ID of the query definition that you want to update. You can use
+    #   [DescribeQueryDefinitions][1] to retrieve the IDs of your saved query
+    #   definitions.
+    #
+    #   If you are creating a query definition, do not specify this parameter.
+    #   CloudWatch generates a unique ID for the new query definition and
+    #   include it in the response to this operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
     #
     # @option params [Array<String>] :log_group_names
+    #   Use this parameter to include specific log groups as part of your
+    #   query definition.
+    #
+    #   If you are updating a query definition and you omit this parameter,
+    #   then the updated definition will contain no log groups.
     #
     # @option params [required, String] :query_string
+    #   The query string to use for this definition. For more information, see
+    #   [CloudWatch Logs Insights Query Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #
     # @return [Types::PutQueryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1975,7 +2089,7 @@ module Aws::CloudWatchLogs
 
     # Creates or updates a resource policy allowing other AWS services to
     # put log events to this account, such as Amazon Route 53. An account
-    # can have up to 10 resource policies per region.
+    # can have up to 10 resource policies per AWS Region.
     #
     # @option params [String] :policy_name
     #   Name of the new policy. This parameter is required.
@@ -1987,7 +2101,7 @@ module Aws::CloudWatchLogs
     #
     #   The following example creates a resource policy enabling the Route 53
     #   service to put DNS query logs in to the specified log group. Replace
-    #   "logArn" with the ARN of your CloudWatch Logs resource, such as a
+    #   `"logArn"` with the ARN of your CloudWatch Logs resource, such as a
     #   log group or log stream.
     #
     #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
@@ -2033,6 +2147,9 @@ module Aws::CloudWatchLogs
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180,
     #   365, 400, 545, 731, 1827, and 3653.
     #
+    #   If you omit `retentionInDays` in a `PutRetentionPolicy` operation, the
+    #   events in the log group are always retained and never expire.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2054,8 +2171,11 @@ module Aws::CloudWatchLogs
     # Creates or updates a subscription filter and associates it with the
     # specified log group. Subscription filters allow you to subscribe to a
     # real-time stream of log events ingested through [PutLogEvents][1] and
-    # have them delivered to a specific destination. Currently, the
-    # supported destinations are:
+    # have them delivered to a specific destination. When log events are
+    # sent to the receiving service, they are Base64 encoded and compressed
+    # with the gzip format.
+    #
+    # The following destinations are supported for subscription filters:
     #
     # * An Amazon Kinesis stream belonging to the same account as the
     #   subscription filter, for same-account delivery.
@@ -2073,6 +2193,9 @@ module Aws::CloudWatchLogs
     # If you are updating an existing filter, you must specify the correct
     # name in `filterName`. Otherwise, the call fails because you cannot
     # associate a second filter with a log group.
+    #
+    # To perform a `PutSubscriptionFilter` operation, you must also have the
+    # `iam:PassRole` permission.
     #
     #
     #
@@ -2118,7 +2241,7 @@ module Aws::CloudWatchLogs
     #   cross-account delivery.
     #
     # @option params [String] :distribution
-    #   The method used to distribute log data to the destination. By default
+    #   The method used to distribute log data to the destination. By default,
     #   log data is grouped by log stream, but the grouping can be set to
     #   random for a more even distribution. This property is only applicable
     #   when the destination is an Amazon Kinesis stream.
@@ -2146,13 +2269,13 @@ module Aws::CloudWatchLogs
     end
 
     # Schedules a query of a log group using CloudWatch Logs Insights. You
-    # specify the log group and time range to query, and the query string to
+    # specify the log group and time range to query and the query string to
     # use.
     #
     # For more information, see [CloudWatch Logs Insights Query Syntax][1].
     #
     # Queries time out after 15 minutes of execution. If your queries are
-    # timing out, reduce the time range being searched, or partition your
+    # timing out, reduce the time range being searched or partition your
     # query into a number of queries.
     #
     #
@@ -2228,8 +2351,8 @@ module Aws::CloudWatchLogs
     # that the specified query is not running.
     #
     # @option params [required, String] :query_id
-    #   The ID number of the query to stop. If necessary, you can use
-    #   `DescribeQueries` to find this ID number.
+    #   The ID number of the query to stop. To find this ID number, use
+    #   `DescribeQueries`.
     #
     # @return [Types::StopQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2300,7 +2423,7 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
+    #   data in each log event. For example, a log event can contain
     #   timestamps, IP addresses, strings, and so on. You use the filter
     #   pattern to specify what to look for in the log event message.
     #
@@ -2382,7 +2505,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

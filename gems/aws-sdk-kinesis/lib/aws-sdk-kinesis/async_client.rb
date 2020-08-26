@@ -68,13 +68,28 @@ module Aws::Kinesis
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -84,10 +99,10 @@ module Aws::Kinesis
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -232,19 +247,36 @@ module Aws::Kinesis
 
     # @!group API Operations
 
-    # Call this operation from your consumer after you call
+    # This operation establishes an HTTP/2 connection between the consumer
+    # you specify in the `ConsumerARN` parameter and the shard you specify
+    # in the `ShardId` parameter. After the connection is successfully
+    # established, Kinesis Data Streams pushes records from the shard to the
+    # consumer over this connection. Before you call this operation, call
     # RegisterStreamConsumer to register the consumer with Kinesis Data
-    # Streams. If the call succeeds, your consumer starts receiving events
-    # of type SubscribeToShardEvent for up to 5 minutes, after which time
-    # you need to call `SubscribeToShard` again to renew the subscription if
-    # you want to continue to receive records.
+    # Streams.
     #
-    # You can make one call to `SubscribeToShard` per second per
-    # `ConsumerARN`. If your call succeeds, and then you call the operation
-    # again less than 5 seconds later, the second call generates a
-    # ResourceInUseException. If you call the operation a second time more
-    # than 5 seconds after the first call succeeds, the second call succeeds
-    # and the first connection gets shut down.
+    # When the `SubscribeToShard` call succeeds, your consumer starts
+    # receiving events of type SubscribeToShardEvent over the HTTP/2
+    # connection for up to 5 minutes, after which time you need to call
+    # `SubscribeToShard` again to renew the subscription if you want to
+    # continue to receive records.
+    #
+    # You can make one call to `SubscribeToShard` per second per registered
+    # consumer per shard. For example, if you have a 4000 shard stream and
+    # two registered stream consumers, you can make one `SubscribeToShard`
+    # request per second for each combination of shard and registered
+    # consumer, allowing you to subscribe both consumers to all 4000 shards
+    # in one second.
+    #
+    # If you call `SubscribeToShard` again with the same `ConsumerARN` and
+    # `ShardId` within 5 seconds of a successful call, you'll get a
+    # `ResourceInUseException`. If you call `SubscribeToShard` 5 seconds or
+    # more after a successful call, the first connection will expire and the
+    # second call will take over the subscription.
+    #
+    # For an example of how to use this operations, see [Enhanced Fan-Out
+    # Using the Kinesis Data Streams
+    # API](/streams/latest/dev/building-enhanced-consumers-api.html).
     #
     # @option params [required, String] :consumer_arn
     #   For this parameter, use the value you obtained when you called
@@ -456,6 +488,12 @@ module Aws::Kinesis
     #   event.records[0].encryption_type #=> String, one of "NONE", "KMS"
     #   event.continuation_sequence_number #=> String
     #   event.millis_behind_latest #=> Integer
+    #   event.child_shards #=> Array
+    #   event.child_shards[0].shard_id #=> String
+    #   event.child_shards[0].parent_shards #=> Array
+    #   event.child_shards[0].parent_shards[0] #=> String
+    #   event.child_shards[0].hash_key_range.starting_hash_key #=> String
+    #   event.child_shards[0].hash_key_range.ending_hash_key #=> String
     #
     #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -520,7 +558,7 @@ module Aws::Kinesis
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

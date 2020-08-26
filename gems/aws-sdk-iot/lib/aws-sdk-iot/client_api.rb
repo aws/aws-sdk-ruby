@@ -80,6 +80,7 @@ module Aws::IoT
     AuditCheckRunStatus = Shapes::StringShape.new(name: 'AuditCheckRunStatus')
     AuditCheckToActionsMapping = Shapes::MapShape.new(name: 'AuditCheckToActionsMapping')
     AuditCheckToReasonCodeFilter = Shapes::MapShape.new(name: 'AuditCheckToReasonCodeFilter')
+    AuditDescription = Shapes::StringShape.new(name: 'AuditDescription')
     AuditDetails = Shapes::MapShape.new(name: 'AuditDetails')
     AuditFinding = Shapes::StructureShape.new(name: 'AuditFinding')
     AuditFindingSeverity = Shapes::StringShape.new(name: 'AuditFindingSeverity')
@@ -97,6 +98,8 @@ module Aws::IoT
     AuditNotificationTarget = Shapes::StructureShape.new(name: 'AuditNotificationTarget')
     AuditNotificationTargetConfigurations = Shapes::MapShape.new(name: 'AuditNotificationTargetConfigurations')
     AuditNotificationType = Shapes::StringShape.new(name: 'AuditNotificationType')
+    AuditSuppression = Shapes::StructureShape.new(name: 'AuditSuppression')
+    AuditSuppressionList = Shapes::ListShape.new(name: 'AuditSuppressionList')
     AuditTaskId = Shapes::StringShape.new(name: 'AuditTaskId')
     AuditTaskMetadata = Shapes::StructureShape.new(name: 'AuditTaskMetadata')
     AuditTaskMetadataList = Shapes::ListShape.new(name: 'AuditTaskMetadataList')
@@ -213,6 +216,8 @@ module Aws::IoT
     ConsecutiveDatapointsToAlarm = Shapes::IntegerShape.new(name: 'ConsecutiveDatapointsToAlarm')
     ConsecutiveDatapointsToClear = Shapes::IntegerShape.new(name: 'ConsecutiveDatapointsToClear')
     Count = Shapes::IntegerShape.new(name: 'Count')
+    CreateAuditSuppressionRequest = Shapes::StructureShape.new(name: 'CreateAuditSuppressionRequest')
+    CreateAuditSuppressionResponse = Shapes::StructureShape.new(name: 'CreateAuditSuppressionResponse')
     CreateAuthorizerRequest = Shapes::StructureShape.new(name: 'CreateAuthorizerRequest')
     CreateAuthorizerResponse = Shapes::StructureShape.new(name: 'CreateAuthorizerResponse')
     CreateBillingGroupRequest = Shapes::StructureShape.new(name: 'CreateBillingGroupRequest')
@@ -272,6 +277,8 @@ module Aws::IoT
     DeleteAccountAuditConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteAccountAuditConfigurationResponse')
     DeleteAdditionalMetricsToRetain = Shapes::BooleanShape.new(name: 'DeleteAdditionalMetricsToRetain')
     DeleteAlertTargets = Shapes::BooleanShape.new(name: 'DeleteAlertTargets')
+    DeleteAuditSuppressionRequest = Shapes::StructureShape.new(name: 'DeleteAuditSuppressionRequest')
+    DeleteAuditSuppressionResponse = Shapes::StructureShape.new(name: 'DeleteAuditSuppressionResponse')
     DeleteAuthorizerRequest = Shapes::StructureShape.new(name: 'DeleteAuthorizerRequest')
     DeleteAuthorizerResponse = Shapes::StructureShape.new(name: 'DeleteAuthorizerResponse')
     DeleteBehaviors = Shapes::BooleanShape.new(name: 'DeleteBehaviors')
@@ -332,6 +339,8 @@ module Aws::IoT
     DescribeAuditFindingResponse = Shapes::StructureShape.new(name: 'DescribeAuditFindingResponse')
     DescribeAuditMitigationActionsTaskRequest = Shapes::StructureShape.new(name: 'DescribeAuditMitigationActionsTaskRequest')
     DescribeAuditMitigationActionsTaskResponse = Shapes::StructureShape.new(name: 'DescribeAuditMitigationActionsTaskResponse')
+    DescribeAuditSuppressionRequest = Shapes::StructureShape.new(name: 'DescribeAuditSuppressionRequest')
+    DescribeAuditSuppressionResponse = Shapes::StructureShape.new(name: 'DescribeAuditSuppressionResponse')
     DescribeAuditTaskRequest = Shapes::StructureShape.new(name: 'DescribeAuditTaskRequest')
     DescribeAuditTaskResponse = Shapes::StructureShape.new(name: 'DescribeAuditTaskResponse')
     DescribeAuthorizerRequest = Shapes::StructureShape.new(name: 'DescribeAuthorizerRequest')
@@ -532,6 +541,7 @@ module Aws::IoT
     IsAuthenticated = Shapes::BooleanShape.new(name: 'IsAuthenticated')
     IsDefaultVersion = Shapes::BooleanShape.new(name: 'IsDefaultVersion')
     IsDisabled = Shapes::BooleanShape.new(name: 'IsDisabled')
+    IsSuppressed = Shapes::BooleanShape.new(name: 'IsSuppressed')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobDescription = Shapes::StringShape.new(name: 'JobDescription')
@@ -573,6 +583,8 @@ module Aws::IoT
     ListAuditMitigationActionsExecutionsResponse = Shapes::StructureShape.new(name: 'ListAuditMitigationActionsExecutionsResponse')
     ListAuditMitigationActionsTasksRequest = Shapes::StructureShape.new(name: 'ListAuditMitigationActionsTasksRequest')
     ListAuditMitigationActionsTasksResponse = Shapes::StructureShape.new(name: 'ListAuditMitigationActionsTasksResponse')
+    ListAuditSuppressionsRequest = Shapes::StructureShape.new(name: 'ListAuditSuppressionsRequest')
+    ListAuditSuppressionsResponse = Shapes::StructureShape.new(name: 'ListAuditSuppressionsResponse')
     ListAuditTasksRequest = Shapes::StructureShape.new(name: 'ListAuditTasksRequest')
     ListAuditTasksResponse = Shapes::StructureShape.new(name: 'ListAuditTasksResponse')
     ListAuthorizersRequest = Shapes::StructureShape.new(name: 'ListAuthorizersRequest')
@@ -627,6 +639,7 @@ module Aws::IoT
     ListSecurityProfilesResponse = Shapes::StructureShape.new(name: 'ListSecurityProfilesResponse')
     ListStreamsRequest = Shapes::StructureShape.new(name: 'ListStreamsRequest')
     ListStreamsResponse = Shapes::StructureShape.new(name: 'ListStreamsResponse')
+    ListSuppressedFindings = Shapes::BooleanShape.new(name: 'ListSuppressedFindings')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTargetsForPolicyRequest = Shapes::StructureShape.new(name: 'ListTargetsForPolicyRequest')
@@ -929,6 +942,8 @@ module Aws::IoT
     SucceededThings = Shapes::IntegerShape.new(name: 'SucceededThings')
     Sum = Shapes::FloatShape.new(name: 'Sum')
     SumOfSquares = Shapes::FloatShape.new(name: 'SumOfSquares')
+    SuppressIndefinitely = Shapes::BooleanShape.new(name: 'SuppressIndefinitely')
+    SuppressedNonCompliantResourcesCount = Shapes::IntegerShape.new(name: 'SuppressedNonCompliantResourcesCount')
     TableName = Shapes::StringShape.new(name: 'TableName')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -1026,6 +1041,8 @@ module Aws::IoT
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAccountAuditConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateAccountAuditConfigurationRequest')
     UpdateAccountAuditConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAccountAuditConfigurationResponse')
+    UpdateAuditSuppressionRequest = Shapes::StructureShape.new(name: 'UpdateAuditSuppressionRequest')
+    UpdateAuditSuppressionResponse = Shapes::StructureShape.new(name: 'UpdateAuditSuppressionResponse')
     UpdateAuthorizerRequest = Shapes::StructureShape.new(name: 'UpdateAuthorizerRequest')
     UpdateAuthorizerResponse = Shapes::StructureShape.new(name: 'UpdateAuthorizerResponse')
     UpdateBillingGroupRequest = Shapes::StructureShape.new(name: 'UpdateBillingGroupRequest')
@@ -1241,6 +1258,7 @@ module Aws::IoT
     AuditCheckDetails.add_member(:check_compliant, Shapes::ShapeRef.new(shape: CheckCompliant, location_name: "checkCompliant"))
     AuditCheckDetails.add_member(:total_resources_count, Shapes::ShapeRef.new(shape: TotalResourcesCount, location_name: "totalResourcesCount"))
     AuditCheckDetails.add_member(:non_compliant_resources_count, Shapes::ShapeRef.new(shape: NonCompliantResourcesCount, location_name: "nonCompliantResourcesCount"))
+    AuditCheckDetails.add_member(:suppressed_non_compliant_resources_count, Shapes::ShapeRef.new(shape: SuppressedNonCompliantResourcesCount, location_name: "suppressedNonCompliantResourcesCount"))
     AuditCheckDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
     AuditCheckDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     AuditCheckDetails.struct_class = Types::AuditCheckDetails
@@ -1264,6 +1282,7 @@ module Aws::IoT
     AuditFinding.add_member(:related_resources, Shapes::ShapeRef.new(shape: RelatedResources, location_name: "relatedResources"))
     AuditFinding.add_member(:reason_for_non_compliance, Shapes::ShapeRef.new(shape: ReasonForNonCompliance, location_name: "reasonForNonCompliance"))
     AuditFinding.add_member(:reason_for_non_compliance_code, Shapes::ShapeRef.new(shape: ReasonForNonComplianceCode, location_name: "reasonForNonComplianceCode"))
+    AuditFinding.add_member(:is_suppressed, Shapes::ShapeRef.new(shape: IsSuppressed, location_name: "isSuppressed"))
     AuditFinding.struct_class = Types::AuditFinding
 
     AuditFindings.member = Shapes::ShapeRef.new(shape: AuditFinding)
@@ -1303,6 +1322,15 @@ module Aws::IoT
 
     AuditNotificationTargetConfigurations.key = Shapes::ShapeRef.new(shape: AuditNotificationType)
     AuditNotificationTargetConfigurations.value = Shapes::ShapeRef.new(shape: AuditNotificationTarget)
+
+    AuditSuppression.add_member(:check_name, Shapes::ShapeRef.new(shape: AuditCheckName, required: true, location_name: "checkName"))
+    AuditSuppression.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    AuditSuppression.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
+    AuditSuppression.add_member(:suppress_indefinitely, Shapes::ShapeRef.new(shape: SuppressIndefinitely, location_name: "suppressIndefinitely"))
+    AuditSuppression.add_member(:description, Shapes::ShapeRef.new(shape: AuditDescription, location_name: "description"))
+    AuditSuppression.struct_class = Types::AuditSuppression
+
+    AuditSuppressionList.member = Shapes::ShapeRef.new(shape: AuditSuppression)
 
     AuditTaskMetadata.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditTaskId, location_name: "taskId"))
     AuditTaskMetadata.add_member(:task_status, Shapes::ShapeRef.new(shape: AuditTaskStatus, location_name: "taskStatus"))
@@ -1537,6 +1565,16 @@ module Aws::IoT
 
     ConflictingResourceUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ConflictingResourceUpdateException.struct_class = Types::ConflictingResourceUpdateException
+
+    CreateAuditSuppressionRequest.add_member(:check_name, Shapes::ShapeRef.new(shape: AuditCheckName, required: true, location_name: "checkName"))
+    CreateAuditSuppressionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    CreateAuditSuppressionRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
+    CreateAuditSuppressionRequest.add_member(:suppress_indefinitely, Shapes::ShapeRef.new(shape: SuppressIndefinitely, location_name: "suppressIndefinitely"))
+    CreateAuditSuppressionRequest.add_member(:description, Shapes::ShapeRef.new(shape: AuditDescription, location_name: "description"))
+    CreateAuditSuppressionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAuditSuppressionRequest.struct_class = Types::CreateAuditSuppressionRequest
+
+    CreateAuditSuppressionResponse.struct_class = Types::CreateAuditSuppressionResponse
 
     CreateAuthorizerRequest.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, required: true, location: "uri", location_name: "authorizerName"))
     CreateAuthorizerRequest.add_member(:authorizer_function_arn, Shapes::ShapeRef.new(shape: AuthorizerFunctionArn, required: true, location_name: "authorizerFunctionArn"))
@@ -1828,6 +1866,12 @@ module Aws::IoT
 
     DeleteAccountAuditConfigurationResponse.struct_class = Types::DeleteAccountAuditConfigurationResponse
 
+    DeleteAuditSuppressionRequest.add_member(:check_name, Shapes::ShapeRef.new(shape: AuditCheckName, required: true, location_name: "checkName"))
+    DeleteAuditSuppressionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    DeleteAuditSuppressionRequest.struct_class = Types::DeleteAuditSuppressionRequest
+
+    DeleteAuditSuppressionResponse.struct_class = Types::DeleteAuditSuppressionResponse
+
     DeleteAuthorizerRequest.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, required: true, location: "uri", location_name: "authorizerName"))
     DeleteAuthorizerRequest.struct_class = Types::DeleteAuthorizerRequest
 
@@ -1995,6 +2039,17 @@ module Aws::IoT
     DescribeAuditMitigationActionsTaskResponse.add_member(:audit_check_to_actions_mapping, Shapes::ShapeRef.new(shape: AuditCheckToActionsMapping, location_name: "auditCheckToActionsMapping"))
     DescribeAuditMitigationActionsTaskResponse.add_member(:actions_definition, Shapes::ShapeRef.new(shape: MitigationActionList, location_name: "actionsDefinition"))
     DescribeAuditMitigationActionsTaskResponse.struct_class = Types::DescribeAuditMitigationActionsTaskResponse
+
+    DescribeAuditSuppressionRequest.add_member(:check_name, Shapes::ShapeRef.new(shape: AuditCheckName, required: true, location_name: "checkName"))
+    DescribeAuditSuppressionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    DescribeAuditSuppressionRequest.struct_class = Types::DescribeAuditSuppressionRequest
+
+    DescribeAuditSuppressionResponse.add_member(:check_name, Shapes::ShapeRef.new(shape: AuditCheckName, location_name: "checkName"))
+    DescribeAuditSuppressionResponse.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
+    DescribeAuditSuppressionResponse.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
+    DescribeAuditSuppressionResponse.add_member(:suppress_indefinitely, Shapes::ShapeRef.new(shape: SuppressIndefinitely, location_name: "suppressIndefinitely"))
+    DescribeAuditSuppressionResponse.add_member(:description, Shapes::ShapeRef.new(shape: AuditDescription, location_name: "description"))
+    DescribeAuditSuppressionResponse.struct_class = Types::DescribeAuditSuppressionResponse
 
     DescribeAuditTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditTaskId, required: true, location: "uri", location_name: "taskId"))
     DescribeAuditTaskRequest.struct_class = Types::DescribeAuditTaskRequest
@@ -2656,6 +2711,7 @@ module Aws::IoT
     ListAuditFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAuditFindingsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     ListAuditFindingsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    ListAuditFindingsRequest.add_member(:list_suppressed_findings, Shapes::ShapeRef.new(shape: ListSuppressedFindings, location_name: "listSuppressedFindings"))
     ListAuditFindingsRequest.struct_class = Types::ListAuditFindingsRequest
 
     ListAuditFindingsResponse.add_member(:findings, Shapes::ShapeRef.new(shape: AuditFindings, location_name: "findings"))
@@ -2685,6 +2741,17 @@ module Aws::IoT
     ListAuditMitigationActionsTasksResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskMetadataList, location_name: "tasks"))
     ListAuditMitigationActionsTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAuditMitigationActionsTasksResponse.struct_class = Types::ListAuditMitigationActionsTasksResponse
+
+    ListAuditSuppressionsRequest.add_member(:check_name, Shapes::ShapeRef.new(shape: AuditCheckName, location_name: "checkName"))
+    ListAuditSuppressionsRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
+    ListAuditSuppressionsRequest.add_member(:ascending_order, Shapes::ShapeRef.new(shape: AscendingOrder, location_name: "ascendingOrder"))
+    ListAuditSuppressionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAuditSuppressionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAuditSuppressionsRequest.struct_class = Types::ListAuditSuppressionsRequest
+
+    ListAuditSuppressionsResponse.add_member(:suppressions, Shapes::ShapeRef.new(shape: AuditSuppressionList, location_name: "suppressions"))
+    ListAuditSuppressionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAuditSuppressionsResponse.struct_class = Types::ListAuditSuppressionsResponse
 
     ListAuditTasksRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "startTime"))
     ListAuditTasksRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "endTime"))
@@ -3852,6 +3919,15 @@ module Aws::IoT
 
     UpdateAccountAuditConfigurationResponse.struct_class = Types::UpdateAccountAuditConfigurationResponse
 
+    UpdateAuditSuppressionRequest.add_member(:check_name, Shapes::ShapeRef.new(shape: AuditCheckName, required: true, location_name: "checkName"))
+    UpdateAuditSuppressionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    UpdateAuditSuppressionRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
+    UpdateAuditSuppressionRequest.add_member(:suppress_indefinitely, Shapes::ShapeRef.new(shape: SuppressIndefinitely, location_name: "suppressIndefinitely"))
+    UpdateAuditSuppressionRequest.add_member(:description, Shapes::ShapeRef.new(shape: AuditDescription, location_name: "description"))
+    UpdateAuditSuppressionRequest.struct_class = Types::UpdateAuditSuppressionRequest
+
+    UpdateAuditSuppressionResponse.struct_class = Types::UpdateAuditSuppressionResponse
+
     UpdateAuthorizerRequest.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, required: true, location: "uri", location_name: "authorizerName"))
     UpdateAuthorizerRequest.add_member(:authorizer_function_arn, Shapes::ShapeRef.new(shape: AuthorizerFunctionArn, location_name: "authorizerFunctionArn"))
     UpdateAuthorizerRequest.add_member(:token_key_name, Shapes::ShapeRef.new(shape: TokenKeyName, location_name: "tokenKeyName"))
@@ -4295,6 +4371,19 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
       end)
 
+      api.add_operation(:create_audit_suppression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAuditSuppression"
+        o.http_method = "POST"
+        o.http_request_uri = "/audit/suppressions/create"
+        o.input = Shapes::ShapeRef.new(shape: CreateAuditSuppressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAuditSuppressionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_authorizer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAuthorizer"
         o.http_method = "POST"
@@ -4641,6 +4730,17 @@ module Aws::IoT
         o.output = Shapes::ShapeRef.new(shape: DeleteAccountAuditConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_audit_suppression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAuditSuppression"
+        o.http_method = "POST"
+        o.http_request_uri = "/audit/suppressions/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAuditSuppressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAuditSuppressionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
@@ -5038,6 +5138,18 @@ module Aws::IoT
         o.http_request_uri = "/audit/mitigationactions/tasks/{taskId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeAuditMitigationActionsTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAuditMitigationActionsTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_audit_suppression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAuditSuppression"
+        o.http_method = "POST"
+        o.http_request_uri = "/audit/suppressions/describe"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAuditSuppressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAuditSuppressionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -5636,6 +5748,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_attached_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -5651,6 +5769,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_audit_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -5662,6 +5786,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_audit_mitigation_actions_executions, Seahorse::Model::Operation.new.tap do |o|
@@ -5673,6 +5803,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_audit_mitigation_actions_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -5684,6 +5820,29 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_audit_suppressions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAuditSuppressions"
+        o.http_method = "POST"
+        o.http_request_uri = "/audit/suppressions/list"
+        o.input = Shapes::ShapeRef.new(shape: ListAuditSuppressionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAuditSuppressionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_audit_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -5695,6 +5854,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_authorizers, Seahorse::Model::Operation.new.tap do |o|
@@ -5708,6 +5873,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_billing_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -5720,6 +5891,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_ca_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -5733,6 +5910,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -5746,6 +5929,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_certificates_by_ca, Seahorse::Model::Operation.new.tap do |o|
@@ -5759,6 +5948,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_dimensions, Seahorse::Model::Operation.new.tap do |o|
@@ -5770,6 +5965,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_domain_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -5783,6 +5984,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_indices, Seahorse::Model::Operation.new.tap do |o|
@@ -5796,6 +6003,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_job_executions_for_job, Seahorse::Model::Operation.new.tap do |o|
@@ -5808,6 +6021,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_job_executions_for_thing, Seahorse::Model::Operation.new.tap do |o|
@@ -5820,6 +6039,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -5832,6 +6057,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_mitigation_actions, Seahorse::Model::Operation.new.tap do |o|
@@ -5843,6 +6074,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_ota_updates, Seahorse::Model::Operation.new.tap do |o|
@@ -5856,6 +6093,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_outgoing_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -5869,6 +6112,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -5882,6 +6131,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_policy_principals, Seahorse::Model::Operation.new.tap do |o|
@@ -5897,6 +6152,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_policy_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -5926,6 +6187,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_principal_things, Seahorse::Model::Operation.new.tap do |o|
@@ -5940,6 +6207,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_provisioning_template_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -5953,6 +6226,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_provisioning_templates, Seahorse::Model::Operation.new.tap do |o|
@@ -5965,6 +6244,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_role_aliases, Seahorse::Model::Operation.new.tap do |o|
@@ -5978,6 +6263,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_scheduled_audits, Seahorse::Model::Operation.new.tap do |o|
@@ -5989,6 +6280,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_security_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -6001,6 +6298,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_security_profiles_for_target, Seahorse::Model::Operation.new.tap do |o|
@@ -6013,6 +6316,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_streams, Seahorse::Model::Operation.new.tap do |o|
@@ -6026,6 +6335,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -6038,6 +6353,11 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_targets_for_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -6053,6 +6373,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_targets_for_security_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -6065,6 +6391,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_thing_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -6076,6 +6408,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_thing_groups_for_thing, Seahorse::Model::Operation.new.tap do |o|
@@ -6087,6 +6425,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_thing_principals, Seahorse::Model::Operation.new.tap do |o|
@@ -6113,6 +6457,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_thing_registration_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -6125,6 +6475,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_thing_types, Seahorse::Model::Operation.new.tap do |o|
@@ -6138,6 +6494,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_things, Seahorse::Model::Operation.new.tap do |o|
@@ -6151,6 +6513,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_things_in_billing_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6163,6 +6531,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_things_in_thing_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6174,6 +6548,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_topic_rule_destinations, Seahorse::Model::Operation.new.tap do |o|
@@ -6186,6 +6566,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_topic_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -6197,6 +6583,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_v2_logging_levels, Seahorse::Model::Operation.new.tap do |o|
@@ -6209,6 +6601,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: NotConfiguredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_violation_events, Seahorse::Model::Operation.new.tap do |o|
@@ -6220,6 +6618,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:register_ca_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -6547,6 +6951,18 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdateAccountAuditConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAccountAuditConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_audit_suppression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAuditSuppression"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/audit/suppressions/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAuditSuppressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAuditSuppressionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)

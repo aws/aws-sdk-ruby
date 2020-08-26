@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2020-08-19)
+------------------
+
+* Feature - Amazon Transcribe and Amazon Transcribe Medical now enable you to identify different speakers in your real-time streams with speaker identification.
+
 1.17.0 (2020-06-23)
 ------------------
 

@@ -39,7 +39,7 @@ module Aws
         require 'oj'
         [
           Oj,
-          [{ mode: :compat, symbol_keys: false }],
+          [{ mode: :compat, symbol_keys: false, empty_string: false }],
           [{ mode: :compat }],
           oj_parse_error
         ]

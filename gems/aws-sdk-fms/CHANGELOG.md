@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-07-20)
+------------------
+
+* Feature - Added managed policies for auditing security group rules, including the use of managed application and protocol lists.
+
 1.28.0 (2020-06-23)
 ------------------
 

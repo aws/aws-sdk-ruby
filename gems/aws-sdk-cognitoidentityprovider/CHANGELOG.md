@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2020-08-18)
+------------------
+
+* Feature - Adding the option to use a service linked role to publish events to Pinpoint.
+
+1.43.0 (2020-08-13)
+------------------
+
+* Feature - Adding ability to customize expiry for Refresh, Access and ID tokens.
+
 1.42.0 (2020-07-02)
 ------------------
 

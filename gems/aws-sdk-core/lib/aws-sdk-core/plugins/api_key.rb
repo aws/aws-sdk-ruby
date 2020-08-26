@@ -23,7 +23,7 @@ When provided, `x-api-key` header will be injected with the value provided.
       class OptionHandler < Seahorse::Client::Handler
         def call(context)
           if context.operation.require_apikey
-            if context.params.is_a?(Hash)
+            if context.params.is_a?(Hash) && context.params[:api_key]
               api_key = context.params.delete(:api_key)
             end
             api_key = context.config.api_key if api_key.nil?

@@ -85,13 +85,28 @@ module Aws::Organizations
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::Organizations
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -855,7 +870,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -1069,7 +1084,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount AWS API Documentation
     #
@@ -1625,6 +1640,11 @@ module Aws::Organizations
     # Removes the specified member AWS account as a delegated administrator
     # for the specified AWS service.
     #
+    # Deregistering a delegated administrator can have unintended impacts on
+    # the functionality of the enabled AWS service. See the documentation
+    # for the enabled service before you deregister a delegated
+    # administrator so that you understand any potential impacts.
+    #
     # You can run this action only for AWS services that support this
     # feature. For a current list of services that support it, see the
     # column *Supports Delegated Administrator* in the table at [AWS
@@ -1795,7 +1815,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -2855,9 +2875,8 @@ module Aws::Organizations
     #   using the AWS Organizations console, API, or CLI commands, the
     #   information required of standalone accounts is *not* automatically
     #   collected. For each account that you want to make standalone, you
-    #   must do the following steps:
-    #
-    #   * Accept the end user license agreement (EULA)
+    #   must perform the following steps. If any of the steps are already
+    #   completed for this account, that step doesn't appear.
     #
     #   * Choose a support plan
     #
@@ -3425,7 +3444,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
     #   resp.create_account_statuses[0].gov_cloud_account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -3583,9 +3602,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
-    # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # This operation can be called from any account in the organization.
     #
     # @option params [Types::HandshakeFilter] :filter
     #   Filters the handshakes that you want included in the response. The
@@ -4798,16 +4815,15 @@ module Aws::Organizations
     # account. When you create an account in an organization using the AWS
     # Organizations console, API, or CLI commands, the information required
     # of standalone accounts is *not* automatically collected. For an
-    # account that you want to make standalone, you must accept the end user
-    # license agreement (EULA), choose a support plan, provide and verify
-    # the required contact information, and provide a current payment
-    # method. AWS uses the payment method to charge for any billable (not
-    # free tier) AWS activity that occurs while the account isn't attached
-    # to an organization. To remove an account that doesn't yet have this
-    # information, you must sign in as the member account and follow the
-    # steps at [ To leave an organization when all required account
-    # information has not yet been provided][1] in the *AWS Organizations
-    # User Guide.*
+    # account that you want to make standalone, you must choose a support
+    # plan, provide and verify the required contact information, and provide
+    # a current payment method. AWS uses the payment method to charge for
+    # any billable (not free tier) AWS activity that occurs while the
+    # account isn't attached to an organization. To remove an account that
+    # doesn't yet have this information, you must sign in as the member
+    # account and follow the steps at [ To leave an organization when all
+    # required account information has not yet been provided][1] in the *AWS
+    # Organizations User Guide.*
     #
     #
     #
@@ -5132,7 +5148,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

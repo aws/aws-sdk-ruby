@@ -755,6 +755,9 @@ module Aws::Organizations
     #     you have reached the limit on the number of accounts in your
     #     organization.
     #
+    #   * CONCURRENT\_ACCOUNT\_MODIFICATION: You already submitted a request
+    #     with the same information.
+    #
     #   * EMAIL\_ALREADY\_EXISTS: The account could not be created because
     #     another AWS account with that email address already exists.
     #
@@ -771,6 +774,12 @@ module Aws::Organizations
     #   * INTERNAL\_FAILURE: The account could not be created because of an
     #     internal failure. Try again later. If the problem persists,
     #     contact Customer Support.
+    #
+    #   * MISSING\_BUSINESS\_VALIDATION: The AWS account that owns your
+    #     organization has not received Business Validation.
+    #
+    #   * MISSING\_PAYMENT\_INSTRUMENT: You must configure the master
+    #     account with a valid payment method, such as a credit card.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus AWS API Documentation

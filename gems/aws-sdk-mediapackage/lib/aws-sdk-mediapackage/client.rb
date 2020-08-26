@@ -85,13 +85,28 @@ module Aws::MediaPackage
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::MediaPackage
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -500,7 +515,7 @@ module Aws::MediaPackage
     #       },
     #       hls_manifests: [
     #         {
-    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           id: "__string", # required
@@ -549,7 +564,7 @@ module Aws::MediaPackage
     #     },
     #     description: "__string",
     #     hls_package: {
-    #       ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #       ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #       ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #       ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #       encryption: {
@@ -620,7 +635,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.url #=> String
     #   resp.cmaf_package.hls_manifests #=> Array
-    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.cmaf_package.hls_manifests[0].id #=> String
     #   resp.cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
     #   resp.cmaf_package.hls_manifests[0].manifest_name #=> String
@@ -657,7 +672,7 @@ module Aws::MediaPackage
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.description #=> String
-    #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.hls_package.ad_triggers #=> Array
     #   resp.hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -881,7 +896,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.url #=> String
     #   resp.cmaf_package.hls_manifests #=> Array
-    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.cmaf_package.hls_manifests[0].id #=> String
     #   resp.cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
     #   resp.cmaf_package.hls_manifests[0].manifest_name #=> String
@@ -918,7 +933,7 @@ module Aws::MediaPackage
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.description #=> String
-    #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.hls_package.ad_triggers #=> Array
     #   resp.hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -1106,7 +1121,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.url #=> String
     #   resp.origin_endpoints[0].cmaf_package.hls_manifests #=> Array
-    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].id #=> String
     #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
     #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].manifest_name #=> String
@@ -1143,7 +1158,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.origin_endpoints[0].dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.origin_endpoints[0].description #=> String
-    #   resp.origin_endpoints[0].hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.origin_endpoints[0].hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.origin_endpoints[0].hls_package.ad_triggers #=> Array
     #   resp.origin_endpoints[0].hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.origin_endpoints[0].hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -1468,7 +1483,7 @@ module Aws::MediaPackage
     #       },
     #       hls_manifests: [
     #         {
-    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           id: "__string", # required
@@ -1517,7 +1532,7 @@ module Aws::MediaPackage
     #     },
     #     description: "__string",
     #     hls_package: {
-    #       ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #       ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #       ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #       ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #       encryption: {
@@ -1585,7 +1600,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.url #=> String
     #   resp.cmaf_package.hls_manifests #=> Array
-    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.cmaf_package.hls_manifests[0].id #=> String
     #   resp.cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
     #   resp.cmaf_package.hls_manifests[0].manifest_name #=> String
@@ -1622,7 +1637,7 @@ module Aws::MediaPackage
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.description #=> String
-    #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.hls_package.ad_triggers #=> Array
     #   resp.hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -1689,7 +1704,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

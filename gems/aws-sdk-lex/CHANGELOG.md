@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-08-06)
+------------------
+
+* Feature - Amazon Lex supports intent classification confidence scores along with a list of the top five intents.
+
 1.28.0 (2020-06-23)
 ------------------
 

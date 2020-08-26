@@ -668,6 +668,7 @@ module Aws::ConfigService
     ConfigurationAggregator.add_member(:organization_aggregation_source, Shapes::ShapeRef.new(shape: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
     ConfigurationAggregator.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
     ConfigurationAggregator.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
+    ConfigurationAggregator.add_member(:created_by, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
     ConfigurationAggregator.struct_class = Types::ConfigurationAggregator
 
     ConfigurationAggregatorList.member = Shapes::ShapeRef.new(shape: ConfigurationAggregator)
@@ -2146,6 +2147,7 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeConformancePackStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:describe_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
@@ -2157,6 +2159,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:describe_delivery_channel_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2623,6 +2626,7 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: PutRemediationExceptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutRemediationExceptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
       end)
 
       api.add_operation(:put_resource_config, Seahorse::Model::Operation.new.tap do |o|

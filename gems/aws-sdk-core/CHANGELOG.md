@@ -3,6 +3,35 @@ Unreleased Changes
 
 * Feature - Support `AWS_CA_BUNDLE` ENV variable and `ca_bundle` shared configuration options. The `:ssl_ca_bundle` client option will override either of these options. (#1907)
 
+3.105.0 (2020-08-25)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add `SSOCredentials`.  Moved functionality from `aws-sdk-sso` into core.
+
+3.104.4 (2020-08-19)
+------------------
+
+* Issue - Use Aws::Json for parsing instead of JSON
+
+3.104.3 (2020-07-23)
+------------------
+
+* Issue - Revert duplication of params.  Ensure code that relied on internal modification of parameters is not broken.
+
+3.104.2 (2020-07-22)
+------------------
+
+* Issue - Validate IO like objects support read,rewind and size unless streaming. Fixes #2364
+
+3.104.1 (2020-07-20)
+------------------
+
+* Issue - Duplicate params to ensure user provided params are not modified.  Fixes #2366
+
 3.104.0 (2020-07-15)
 ------------------
 

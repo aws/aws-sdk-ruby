@@ -524,6 +524,26 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # A structure containing the additional details to be returned in the
+    # `AdditionalDetails` attribute of `PrincipalResourcePermissions`.
+    #
+    # If a catalog resource is shared through AWS Resource Access Manager
+    # (AWS RAM), then there will exist a corresponding RAM share resource
+    # ARN.
+    #
+    # @!attribute [rw] resource_share
+    #   A share resource ARN for a catalog resource shared through AWS
+    #   Resource Access Manager (AWS RAM).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DetailsMap AWS API Documentation
+    #
+    class DetailsMap < Struct.new(
+      :resource_share)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A specified entity does not exist
     #
     # @!attribute [rw] message
@@ -1032,13 +1052,20 @@ module Aws::LakeFormation
     #   subset of permissions granted).
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_details
+    #   This attribute can be used to return any additional details of
+    #   `PrincipalResourcePermissions`. Currently returns only as a RAM
+    #   share resource ARN.
+    #   @return [Types::DetailsMap]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PrincipalResourcePermissions AWS API Documentation
     #
     class PrincipalResourcePermissions < Struct.new(
       :principal,
       :resource,
       :permissions,
-      :permissions_with_grant_option)
+      :permissions_with_grant_option,
+      :additional_details)
       SENSITIVE = []
       include Aws::Structure
     end

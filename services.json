@@ -66,6 +66,9 @@
   "Batch": {
     "models": "batch/2016-08-10"
   },
+  "Braket": {
+    "models": "braket/2019-09-01"
+  },
   "Budgets": {
     "models": "budgets/2016-10-20"
   },
@@ -82,7 +85,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2019-03-26"
+    "models": "cloudfront/2020-05-31"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -335,6 +338,9 @@
   },
   "IVS": {
     "models": "ivs/2020-07-14"
+  },
+  "IdentityStore": {
+    "models": "identitystore/2020-06-15"
   },
   "Imagebuilder": {
     "models": "imagebuilder/2019-12-02"
@@ -662,7 +668,8 @@
     "models": "sso/2019-06-10",
     "addPlugins": [
       "Aws::SSO::Plugins::ContentType"
-    ]
+    ],
+    "gemName": "aws-sdk-core"
   },
   "SSOOIDC": {
     "models": "sso-oidc/2019-06-10"

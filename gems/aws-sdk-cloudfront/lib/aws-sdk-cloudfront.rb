@@ -28,7 +28,7 @@ require_relative 'aws-sdk-cloudfront/customizations'
 # structure.
 #
 #     cloud_front = Aws::CloudFront::Client.new
-#     resp = cloud_front.create_cloud_front_origin_access_identity(params)
+#     resp = cloud_front.create_cache_policy(params)
 #
 # See {Client} for more information.
 #
@@ -45,9 +45,9 @@ require_relative 'aws-sdk-cloudfront/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::CloudFront
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.37.0'
 
 end

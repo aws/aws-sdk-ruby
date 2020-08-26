@@ -12,7 +12,7 @@ module BuildTools
     # Minimum `aws-sdk-core` version for new gem builds
     MINIMUM_CORE_VERSION = "3.99.0"
     # Minimum `aws-sdk-core` version for new S3 gem builds
-    MINIMUM_CORE_VERSION_S3 = "3.102.1"
+    MINIMUM_CORE_VERSION_S3 = "3.104.3"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
@@ -114,7 +114,7 @@ module BuildTools
       end
 
       gems_dir = File.expand_path('../../gems', __FILE__)
-      prefix = gem == 'sts' ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
+      prefix = %w[sts sso].include?(gem) ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
         ["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"]
       (prefix + parts).join('/') + '.rb'
     end

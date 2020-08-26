@@ -115,10 +115,10 @@ module Aws::DataSync
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] vpc_endpoint_id
-    #   The ID of the VPC (Virtual Private Cloud) endpoint that the agent
+    #   The ID of the VPC (virtual private cloud) endpoint that the agent
     #   has access to. This is the client-side VPC endpoint, also called a
     #   PrivateLink. If you don't have a PrivateLink VPC endpoint, see
-    #   [Creating a VPC Endpoint Service Configuration][1] in the AWS VPC
+    #   [Creating a VPC Endpoint Service Configuration][1] in the Amazon VPC
     #   User Guide.
     #
     #   VPC endpoint ID looks like this: `vpce-01234d5aff67890e1`.
@@ -199,7 +199,7 @@ module Aws::DataSync
     #   write data to the EFS destination. By default, AWS DataSync uses the
     #   root directory.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
     #   `/path/to/folder`.
     #
     #    </note>
@@ -393,9 +393,16 @@ module Aws::DataSync
     #   files. For the agent to access directories, you must additionally
     #   enable all execute access.
     #
+    #   If you are copying data to or from your AWS Snowcone device, see
+    #   [NFS Server on AWS Snowcone][1] for more information.
+    #
     #   For information about NFS export configuration, see 18.7. The
     #   /etc/exports Configuration File in the Red Hat Enterprise Linux
     #   documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
@@ -404,15 +411,29 @@ module Aws::DataSync
     #   installed on-premises uses this host name to mount the NFS server in
     #   a network.
     #
+    #   If you are copying data to or from your AWS Snowcone device, see
+    #   [NFS Server on AWS Snowcone][1] for more information.
+    #
     #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
     #   (IPv4) address.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #   @return [String]
     #
     # @!attribute [rw] on_prem_config
     #   Contains a list of Amazon Resource Names (ARNs) of agents that are
     #   used to connect to an NFS server.
+    #
+    #   If you are copying data to or from your AWS Snowcone device, see
+    #   [NFS Server on AWS Snowcone][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #   @return [Types::OnPremConfig]
     #
     # @!attribute [rw] mount_options
@@ -447,6 +468,109 @@ module Aws::DataSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationNfsResponse AWS API Documentation
     #
     class CreateLocationNfsResponse < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # CreateLocationObjectStorageRequest
+    #
+    # @note When making an API call, you may pass CreateLocationObjectStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_hostname: "ServerHostname", # required
+    #         server_port: 1,
+    #         server_protocol: "HTTPS", # accepts HTTPS, HTTP
+    #         subdirectory: "S3Subdirectory",
+    #         bucket_name: "ObjectStorageBucketName", # required
+    #         access_key: "ObjectStorageAccessKey",
+    #         secret_key: "ObjectStorageSecretKey",
+    #         agent_arns: ["AgentArn"], # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] server_hostname
+    #   The name of the self-managed object storage server. This value is
+    #   the IP address or Domain Name Service (DNS) name of the object
+    #   storage server. An agent uses this host name to mount the object
+    #   storage server in a network.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_port
+    #   The port that your self-managed object storage server accepts
+    #   inbound network traffic on. The server port is set by default to TCP
+    #   80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your
+    #   self-managed object storage server requires one.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_protocol
+    #   The protocol that the object storage server uses to communicate.
+    #   Valid values are HTTP or HTTPS.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   The subdirectory in the self-managed object storage server that is
+    #   used to read data from.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   The bucket on the self-managed object storage server that is used to
+    #   read data from.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_key
+    #   Optional. The access key is used if credentials are required to
+    #   access the self-managed object storage server.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_key
+    #   Optional. The secret key is used if credentials are required to
+    #   access the self-managed object storage server.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The Amazon Resource Name (ARN) of the agents associated with the
+    #   self-managed object storage server location.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair that represents the tag that you want to add to
+    #   the location. The value can be an empty string. We recommend using
+    #   tags to name your resources.
+    #   @return [Array<Types::TagListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationObjectStorageRequest AWS API Documentation
+    #
+    class CreateLocationObjectStorageRequest < Struct.new(
+      :server_hostname,
+      :server_port,
+      :server_protocol,
+      :subdirectory,
+      :bucket_name,
+      :access_key,
+      :secret_key,
+      :agent_arns,
+      :tags)
+      SENSITIVE = [:secret_key]
+      include Aws::Structure
+    end
+
+    # CreateLocationObjectStorageResponse
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the agents associated with the
+    #   self-managed object storage server location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationObjectStorageResponse AWS API Documentation
+    #
+    class CreateLocationObjectStorageResponse < Struct.new(
       :location_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -566,7 +690,7 @@ module Aws::DataSync
     #   a subdirectory of that path. The path should be such that it can be
     #   mounted by other SMB clients in your network.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
     #   `/path/to/folder`.
     #
     #    </note>
@@ -676,6 +800,7 @@ module Aws::DataSync
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #         },
     #         excludes: [
     #           {
@@ -706,12 +831,6 @@ module Aws::DataSync
     # @!attribute [rw] cloud_watch_log_group_arn
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
     #   that is used to monitor and log events in the task.
-    #
-    #   For more information on these groups, see Working with Log Groups
-    #   and Log Streams in the *Amazon CloudWatch User Guide.*
-    #
-    #   For more information about how to use CloudWatch Logs with DataSync,
-    #   see Monitoring Your Task in the *AWS DataSync User Guide.*
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -727,7 +846,7 @@ module Aws::DataSync
     #   data integrity verification, and so on.
     #
     #   For each individual task execution, you can override these options
-    #   by specifying the `OverrideOptions` before starting a the task
+    #   by specifying the `OverrideOptions` before starting the task
     #   execution. For more information, see the operation.
     #   @return [Types::Options]
     #
@@ -907,7 +1026,7 @@ module Aws::DataSync
     # @!attribute [rw] endpoint_type
     #   The type of endpoint that your agent is connected to. If the
     #   endpoint is a VPC endpoint, the agent is not accessible over the
-    #   public Internet.
+    #   public internet.
     #   @return [String]
     #
     # @!attribute [rw] private_link_config
@@ -953,7 +1072,7 @@ module Aws::DataSync
     # DescribeLocationEfsResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon resource Name (ARN) of the EFS location that was
+    #   The Amazon Resource Name (ARN) of the EFS location that was
     #   described.
     #   @return [String]
     #
@@ -1005,7 +1124,7 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The Amazon resource Name (ARN) of the FSx for Windows location that
+    #   The Amazon Resource Name (ARN) of the FSx for Windows location that
     #   was described.
     #   @return [String]
     #
@@ -1015,7 +1134,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] security_group_arns
     #   The Amazon Resource Names (ARNs) of the security groups that are
-    #   configured for the for the FSx for Windows file system.
+    #   configured for the FSx for Windows file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
@@ -1055,7 +1174,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] location_arn
-    #   The Amazon resource Name (ARN) of the NFS location to describe.
+    #   The Amazon Resource Name (ARN) of the NFS location to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationNfsRequest AWS API Documentation
@@ -1069,7 +1188,7 @@ module Aws::DataSync
     # DescribeLocationNfsResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon resource Name (ARN) of the NFS location that was
+    #   The Amazon Resource Name (ARN) of the NFS location that was
     #   described.
     #   @return [String]
     #
@@ -1097,6 +1216,80 @@ module Aws::DataSync
       :location_uri,
       :on_prem_config,
       :mount_options,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # DescribeLocationObjectStorageRequest
+    #
+    # @note When making an API call, you may pass DescribeLocationObjectStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the self-managed object storage
+    #   server location that was described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorageRequest AWS API Documentation
+    #
+    class DescribeLocationObjectStorageRequest < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # DescribeLocationObjectStorageResponse
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the self-managed object storage
+    #   server location to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_uri
+    #   The URL of the source self-managed object storage server location
+    #   that was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_key
+    #   Optional. The access key is used if credentials are required to
+    #   access the self-managed object storage server.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_port
+    #   The port that your self-managed object storage server accepts
+    #   inbound network traffic on. The server port is set by default to TCP
+    #   80 (HTTP) or TCP 443 (HTTPS).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_protocol
+    #   The protocol that the object storage server uses to communicate.
+    #   Valid values are HTTP or HTTPS.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The Amazon Resource Name (ARN) of the agents associated with the
+    #   self-managed object storage server location.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the self-managed object storage server agent was
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorageResponse AWS API Documentation
+    #
+    class DescribeLocationObjectStorageResponse < Struct.new(
+      :location_arn,
+      :location_uri,
+      :access_key,
+      :server_port,
+      :server_protocol,
+      :agent_arns,
       :creation_time)
       SENSITIVE = []
       include Aws::Structure
@@ -1181,7 +1374,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] location_arn
-    #   The Amazon resource Name (ARN) of the SMB location to describe.
+    #   The Amazon Resource Name (ARN) of the SMB location to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbRequest AWS API Documentation
@@ -1195,7 +1388,7 @@ module Aws::DataSync
     # DescribeLocationSmbResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon resource Name (ARN) of the SMB location that was
+    #   The Amazon Resource Name (ARN) of the SMB location that was
     #   described.
     #   @return [String]
     #
@@ -1658,6 +1851,13 @@ module Aws::DataSync
     #       {
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "LocationUri", # required, accepts LocationUri, LocationType, CreationTime
+    #             values: ["FilterAttributeValue"], # required
+    #             operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] max_results
@@ -1669,11 +1869,15 @@ module Aws::DataSync
     #   next list of locations.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   @return [Array<Types::LocationFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListLocationsRequest AWS API Documentation
     #
     class ListLocationsRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1815,6 +2019,13 @@ module Aws::DataSync
     #       {
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "LocationId", # required, accepts LocationId, CreationTime
+    #             values: ["FilterAttributeValue"], # required
+    #             operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] max_results
@@ -1826,11 +2037,15 @@ module Aws::DataSync
     #   next list of tasks.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   @return [Array<Types::TaskFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTasksRequest AWS API Documentation
     #
     class ListTasksRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1851,6 +2066,34 @@ module Aws::DataSync
     class ListTasksResponse < Struct.new(
       :tasks,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LocationFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "LocationUri", # required, accepts LocationUri, LocationType, CreationTime
+    #         values: ["FilterAttributeValue"], # required
+    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/LocationFilter AWS API Documentation
+    #
+    class LocationFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1987,21 +2230,29 @@ module Aws::DataSync
     #         bytes_per_second: 1,
     #         task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #         log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #         transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       }
     #
     # @!attribute [rw] verify_mode
     #   A value that determines whether a data integrity verification should
     #   be performed at the end of a task execution after all data and
-    #   metadata have been transferred.
+    #   metadata have been transferred. For more information, see
+    #   create-task
     #
     #   Default value: POINT\_IN\_TIME\_CONSISTENT.
     #
-    #   POINT\_IN\_TIME\_CONSISTENT: Perform verification (recommended).
+    #   ONLY\_FILES\_TRANSFERRED (recommended): Perform verification only on
+    #   files that were transferred.
     #
-    #   ONLY\_FILES\_TRANSFERRED: Perform verification on only files that
-    #   were transferred.
+    #   POINT\_IN\_TIME\_CONSISTENT: Scan the entire source and entire
+    #   destination at the end of the transfer to verify that source and
+    #   destination are fully synchronized. This option isn't supported
+    #   when transferring to S3 Glacier or S3 Glacier Deep Archive storage
+    #   classes.
     #
-    #   NONE: Skip verification.
+    #   NONE: No additional verification is done at the end of the transfer,
+    #   but all data transmissions are integrity-checked with checksum
+    #   verification during the transfer.
     #   @return [String]
     #
     # @!attribute [rw] overwrite_mode
@@ -2143,17 +2394,31 @@ module Aws::DataSync
     #   executing the tasks. If set to `ENABLED`, the tasks will be queued.
     #   The default is `ENABLED`.
     #
-    #   If you use the same agent to run multiple tasks you can enable the
-    #   tasks to run in series. For more information see
+    #   If you use the same agent to run multiple tasks, you can enable the
+    #   tasks to run in series. For more information, see
     #   queue-task-execution.
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   A value that determines the type of logs DataSync will deliver to
-    #   your AWS CloudWatch Logs file. If set to `OFF`, no logs will be
-    #   delivered. `BASIC` will deliver a few logs per transfer operation
-    #   and `TRANSFER` will deliver a verbose log that contains logs for
-    #   every file that is transferred.
+    #   A value that determines the type of logs that DataSync publishes to
+    #   a log stream in the Amazon CloudWatch log group that you provide.
+    #   For more information about providing a log group for DataSync, see
+    #   [CloudWatchLogGroupArn][1]. If set to `OFF`, no logs are published.
+    #   `BASIC` publishes logs on errors for individual files transferred,
+    #   and `TRANSFER` publishes logs for every file or object that is
+    #   transferred and integrity checked.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateTask.html#DataSync-CreateTask-request-CloudWatchLogGroupArn
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_mode
+    #   TransferMode has two values: CHANGED and ALL. CHANGED performs an
+    #   "incremental" or "delta sync", it compares file modification
+    #   time between source and destination to determine which files need to
+    #   be transferred. ALL skips destination inventory and transfers all
+    #   files discovered on the source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
@@ -2170,24 +2435,25 @@ module Aws::DataSync
       :posix_permissions,
       :bytes_per_second,
       :task_queueing,
-      :log_level)
+      :log_level,
+      :transfer_mode)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The VPC endpoint, subnet and security group that an agent uses to
+    # The VPC endpoint, subnet, and security group that an agent uses to
     # access IP addresses in a VPC (Virtual Private Cloud).
     #
     # @!attribute [rw] vpc_endpoint_id
     #   The ID of the VPC endpoint that is configured for an agent. An agent
     #   that is configured with a VPC endpoint will not be accessible over
-    #   the public Internet.
+    #   the public internet.
     #   @return [String]
     #
     # @!attribute [rw] private_link_endpoint
     #   The private endpoint that is configured for an agent that has access
     #   to IP addresses in a [PrivateLink][1]. An agent that is configured
-    #   with this endpoint will not be accessible over the public Internet.
+    #   with this endpoint will not be accessible over the public internet.
     #
     #
     #
@@ -2288,6 +2554,7 @@ module Aws::DataSync
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #         },
     #         includes: [
     #           {
@@ -2496,6 +2763,34 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TaskFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "LocationId", # required, accepts LocationId, CreationTime
+    #         values: ["FilterAttributeValue"], # required
+    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskFilter AWS API Documentation
+    #
+    class TaskFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a single entry in a list of tasks. `TaskListEntry` returns
     # an array that contains a list of tasks when the ListTasks operation is
     # called. A task includes the source and destination file systems to
@@ -2634,6 +2929,7 @@ module Aws::DataSync
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #         },
     #         excludes: [
     #           {

@@ -379,6 +379,22 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the status of CloudTrail as a data source for
+    # the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether CloudTrail is enabled as a data source for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CloudTrailConfigurationResult AWS API Documentation
+    #
+    class CloudTrailConfigurationResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the condition.
     #
     # @note When making an API call, you may pass Condition
@@ -505,6 +521,11 @@ module Aws::GuardDuty
     #         enable: false, # required
     #         client_token: "ClientToken",
     #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #         data_sources: {
+    #           s3_logs: {
+    #             enable: false, # required
+    #           },
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -527,6 +548,11 @@ module Aws::GuardDuty
     #   exported.
     #   @return [String]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources will be enabled for the
+    #   detector.
+    #   @return [Types::DataSourceConfigurations]
+    #
     # @!attribute [rw] tags
     #   The tags to be added to a new detector resource.
     #   @return [Hash<String,String>]
@@ -537,6 +563,7 @@ module Aws::GuardDuty
       :enable,
       :client_token,
       :finding_publishing_frequency,
+      :data_sources,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1052,6 +1079,76 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the status of DNS logs as a data source.
+    #
+    # @!attribute [rw] status
+    #   Denotes whether DNS logs is enabled as a data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DNSLogsConfigurationResult AWS API Documentation
+    #
+    class DNSLogsConfigurationResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about which data sources are enabled.
+    #
+    # @note When making an API call, you may pass DataSourceConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         s3_logs: {
+    #           enable: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether S3 data event logs are enabled as a data source.
+    #   @return [Types::S3LogsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurations AWS API Documentation
+    #
+    class DataSourceConfigurations < Struct.new(
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the status of data sources for the detector.
+    #
+    # @!attribute [rw] cloud_trail
+    #   An object that contains information on the status of CloudTrail as a
+    #   data source.
+    #   @return [Types::CloudTrailConfigurationResult]
+    #
+    # @!attribute [rw] dns_logs
+    #   An object that contains information on the status of DNS logs as a
+    #   data source.
+    #   @return [Types::DNSLogsConfigurationResult]
+    #
+    # @!attribute [rw] flow_logs
+    #   An object that contains information on the status of VPC flow logs
+    #   as a data source.
+    #   @return [Types::FlowLogsConfigurationResult]
+    #
+    # @!attribute [rw] s3_logs
+    #   An object that contains information on the status of S3 Data event
+    #   logs as a data source.
+    #   @return [Types::S3LogsConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurationsResult AWS API Documentation
+    #
+    class DataSourceConfigurationsResult < Struct.new(
+      :cloud_trail,
+      :dns_logs,
+      :flow_logs,
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeclineInvitationsRequest
     #   data as a hash:
     #
@@ -1354,11 +1451,17 @@ module Aws::GuardDuty
     #   already associated with the delegated administrator master account.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources are enabled
+    #   automatically for member accounts.
+    #   @return [Types::OrganizationDataSourceConfigurationsResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
-      :member_account_limit_reached)
+      :member_account_limit_reached,
+      :data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1771,6 +1874,20 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the status of VPC flow logs as a data source.
+    #
+    # @!attribute [rw] status
+    #   Denotes whether VPC flow logs is enabled as a data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FlowLogsConfigurationResult AWS API Documentation
+    #
+    class FlowLogsConfigurationResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the location of the remote IP address.
     #
     # @!attribute [rw] lat
@@ -1829,6 +1946,11 @@ module Aws::GuardDuty
     #   The last-updated timestamp for the detector.
     #   @return [String]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources are enabled for the
+    #   detector.
+    #   @return [Types::DataSourceConfigurationsResult]
+    #
     # @!attribute [rw] tags
     #   The tags of the detector resource.
     #   @return [Hash<String,String>]
@@ -1841,6 +1963,7 @@ module Aws::GuardDuty
       :service_role,
       :status,
       :updated_at,
+      :data_sources,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2127,6 +2250,50 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMemberDetectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID for the master account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   The account ID of the member account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectorsRequest AWS API Documentation
+    #
+    class GetMemberDetectorsRequest < Struct.new(
+      :detector_id,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] member_data_source_configurations
+    #   An object that describes which data sources are enabled for a member
+    #   account.
+    #   @return [Array<Types::MemberDataSourceConfiguration>]
+    #
+    # @!attribute [rw] unprocessed_accounts
+    #   A list of member account IDs that were unable to be processed along
+    #   with an explanation for why they were not processed.
+    #   @return [Array<Types::UnprocessedAccount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectorsResponse AWS API Documentation
+    #
+    class GetMemberDetectorsResponse < Struct.new(
+      :member_data_source_configurations,
+      :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMembersRequest
     #   data as a hash:
     #
@@ -2229,6 +2396,84 @@ module Aws::GuardDuty
       :location,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetUsageStatisticsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
+    #         usage_criteria: { # required
+    #           account_ids: ["AccountId"],
+    #           data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #           resources: ["String"],
+    #         },
+    #         unit: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   usage statistics you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_statistic_type
+    #   The type of usage statistics to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_criteria
+    #   Represents the criteria used for querying usage.
+    #   @return [Types::UsageCriteria]
+    #
+    # @!attribute [rw] unit
+    #   The currency unit you would like to view your usage statistics in.
+    #   Current valid values are USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the NextToken
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatisticsRequest AWS API Documentation
+    #
+    class GetUsageStatisticsRequest < Struct.new(
+      :detector_id,
+      :usage_statistic_type,
+      :usage_criteria,
+      :unit,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] usage_statistics
+    #   The usage statistics object. If a UsageStatisticType was provided,
+    #   the objects representing other types will be null.
+    #   @return [Types::UsageStatistics]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatisticsResponse AWS API Documentation
+    #
+    class GetUsageStatisticsResponse < Struct.new(
+      :usage_statistics,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2399,13 +2644,13 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] disable_email_notification
     #   A Boolean value that specifies whether you want to disable email
-    #   notification to the accounts that you’re inviting to GuardDuty as
+    #   notification to the accounts that you are inviting to GuardDuty as
     #   members.
     #   @return [Boolean]
     #
     # @!attribute [rw] message
     #   The invitation message that you want to send to the accounts that
-    #   you’re inviting to GuardDuty as members.
+    #   you're inviting to GuardDuty as members.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersRequest AWS API Documentation
@@ -3196,6 +3441,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on which data sources are enabled for a member
+    # account.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Contains information on the status of data sources for the account.
+    #   @return [Types::DataSourceConfigurationsResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberDataSourceConfiguration AWS API Documentation
+    #
+    class MemberDataSourceConfiguration < Struct.new(
+      :account_id,
+      :data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the NETWORK\_CONNECTION action described in
     # the finding.
     #
@@ -3329,6 +3594,86 @@ module Aws::GuardDuty
       :asn_org,
       :isp,
       :org)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on which data sources will be
+    # configured to be automatically enabled for new members within the
+    # organization.
+    #
+    # @note When making an API call, you may pass OrganizationDataSourceConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         s3_logs: {
+    #           auto_enable: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether S3 data event logs are enabled for new members of
+    #   the organization.
+    #   @return [Types::OrganizationS3LogsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurations AWS API Documentation
+    #
+    class OrganizationDataSourceConfigurations < Struct.new(
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on which data sources are
+    # automatically enabled for new members within the organization.
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether S3 data event logs are enabled as a data source.
+    #   @return [Types::OrganizationS3LogsConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurationsResult AWS API Documentation
+    #
+    class OrganizationDataSourceConfigurationsResult < Struct.new(
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether S3 data event logs will be automatically enabled for
+    # new members of the organization.
+    #
+    # @note When making an API call, you may pass OrganizationS3LogsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] auto_enable
+    #   A value that contains information on whether S3 data event logs will
+    #   be enabled automatically as a data source for the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationS3LogsConfiguration AWS API Documentation
+    #
+    class OrganizationS3LogsConfiguration < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current configuration of S3 data event logs as a data source for
+    # the organization.
+    #
+    # @!attribute [rw] auto_enable
+    #   A value that describes whether S3 data event logs are automatically
+    #   enabled for new members of the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationS3LogsConfigurationResult AWS API Documentation
+    #
+    class OrganizationS3LogsConfigurationResult < Struct.new(
+      :auto_enable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3565,6 +3910,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the S3 bucket.
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the S3 bucket.
     #   @return [String]
@@ -3608,6 +3955,42 @@ module Aws::GuardDuty
       :tags,
       :default_server_side_encryption,
       :public_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether S3 data event logs will be enabled as a data source.
+    #
+    # @note When making an API call, you may pass S3LogsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] enable
+    #   The status of S3 data event logs as a data source.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3LogsConfiguration AWS API Documentation
+    #
+    class S3LogsConfiguration < Struct.new(
+      :enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether S3 data event logs will be enabled as a data source.
+    #
+    # @!attribute [rw] status
+    #   A value that describes whether S3 data event logs are automatically
+    #   enabled for new members of the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3LogsConfigurationResult AWS API Documentation
+    #
+    class S3LogsConfigurationResult < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3873,6 +4256,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains the total usage with the corresponding currency unit for that
+    # value.
+    #
+    # @!attribute [rw] amount
+    #   The total usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The currency unit that the amount is given in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Total AWS API Documentation
+    #
+    class Total < Struct.new(
+      :amount,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UnarchiveFindingsRequest
     #   data as a hash:
     #
@@ -3957,6 +4360,11 @@ module Aws::GuardDuty
     #         detector_id: "DetectorId", # required
     #         enable: false,
     #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #         data_sources: {
+    #           s3_logs: {
+    #             enable: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] detector_id
@@ -3972,12 +4380,17 @@ module Aws::GuardDuty
     #   such as to CloudWatch Events.
     #   @return [String]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources will be updated.
+    #   @return [Types::DataSourceConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest AWS API Documentation
     #
     class UpdateDetectorRequest < Struct.new(
       :detector_id,
       :enable,
-      :finding_publishing_frequency)
+      :finding_publishing_frequency,
+      :data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4162,12 +4575,65 @@ module Aws::GuardDuty
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateMemberDetectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
+    #         data_sources: {
+    #           s3_logs: {
+    #             enable: false, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID of the master account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   A list of member account IDs to be updated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_sources
+    #   An object describes which data sources will be updated.
+    #   @return [Types::DataSourceConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectorsRequest AWS API Documentation
+    #
+    class UpdateMemberDetectorsRequest < Struct.new(
+      :detector_id,
+      :account_ids,
+      :data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unprocessed_accounts
+    #   A list of member account IDs that were unable to be processed along
+    #   with an explanation for why they were not processed.
+    #   @return [Array<Types::UnprocessedAccount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectorsResponse AWS API Documentation
+    #
+    class UpdateMemberDetectorsResponse < Struct.new(
+      :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
     #   data as a hash:
     #
     #       {
     #         detector_id: "DetectorId", # required
     #         auto_enable: false, # required
+    #         data_sources: {
+    #           s3_logs: {
+    #             auto_enable: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] detector_id
@@ -4179,11 +4645,16 @@ module Aws::GuardDuty
     #   organization.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_sources
+    #   An object describes which data sources will be updated.
+    #   @return [Types::OrganizationDataSourceConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :detector_id,
-      :auto_enable)
+      :auto_enable,
+      :data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4283,6 +4754,129 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetResponse AWS API Documentation
     #
     class UpdateThreatIntelSetResponse < Aws::EmptyStructure; end
+
+    # Contains information on the total of usage based on account IDs.
+    #
+    # @!attribute [rw] account_id
+    #   The Account ID that generated usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Represents the total of usage for the Account ID.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageAccountResult AWS API Documentation
+    #
+    class UsageAccountResult < Struct.new(
+      :account_id,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the criteria used to query usage
+    # statistics.
+    #
+    # @note When making an API call, you may pass UsageCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AccountId"],
+    #         data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #         resources: ["String"],
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The account IDs to aggregate usage statistics from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_sources
+    #   The data sources to aggregate usage statistics from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources
+    #   The resources to aggregate usage statistics from. Only accepts exact
+    #   resource names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageCriteria AWS API Documentation
+    #
+    class UsageCriteria < Struct.new(
+      :account_ids,
+      :data_sources,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the result of usage based on data source type.
+    #
+    # @!attribute [rw] data_source
+    #   The data source type that generated usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Represents the total of usage for the specified data source.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageDataSourceResult AWS API Documentation
+    #
+    class UsageDataSourceResult < Struct.new(
+      :data_source,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the sum of usage based on an AWS resource.
+    #
+    # @!attribute [rw] resource
+    #   The AWS resource that generated usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Represents the sum total of usage for the specified resource type.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageResourceResult AWS API Documentation
+    #
+    class UsageResourceResult < Struct.new(
+      :resource,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the result of GuardDuty usage. If a UsageStatisticType is
+    # provided the result for other types will be null.
+    #
+    # @!attribute [rw] sum_by_account
+    #   The usage statistic sum organized by account ID.
+    #   @return [Array<Types::UsageAccountResult>]
+    #
+    # @!attribute [rw] sum_by_data_source
+    #   The usage statistic sum organized by on data source.
+    #   @return [Array<Types::UsageDataSourceResult>]
+    #
+    # @!attribute [rw] sum_by_resource
+    #   The usage statistic sum organized by resource.
+    #   @return [Array<Types::UsageResourceResult>]
+    #
+    # @!attribute [rw] top_resources
+    #   Lists the top 50 resources that have generated the most GuardDuty
+    #   usage, in order from most to least expensive.
+    #   @return [Array<Types::UsageResourceResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageStatistics AWS API Documentation
+    #
+    class UsageStatistics < Struct.new(
+      :sum_by_account,
+      :sum_by_data_source,
+      :sum_by_resource,
+      :top_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end

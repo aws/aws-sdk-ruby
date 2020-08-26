@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2020-08-13)
+------------------
+
+* Feature - This release allows customers to specify a replica mode when creating or modifying a Read Replica, for DB engines which support this feature.
+
+1.95.0 (2020-07-28)
+------------------
+
+* Feature - Adds reporting of manual cluster snapshot quota to DescribeAccountAttributes API
+
+1.94.0 (2020-07-20)
+------------------
+
+* Feature - Add a new SupportsParallelQuery output field to DescribeDBEngineVersions. This field shows whether the engine version supports parallelquery. Add a new SupportsGlobalDatabases output field to DescribeDBEngineVersions and DescribeOrderableDBInstanceOptions. This field shows whether global database is supported by engine version or the combination of engine version and instance class.
+
 1.93.0 (2020-07-06)
 ------------------
 

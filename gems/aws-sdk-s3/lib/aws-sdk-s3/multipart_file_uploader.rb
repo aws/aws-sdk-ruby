@@ -39,6 +39,9 @@ module Aws
       # @param [String, Pathname, File, Tempfile] source The file to upload.
       # @option options [required, String] :bucket The bucket to upload to.
       # @option options [required, String] :key The key for the object.
+      # @option options [Proc] :progress_callback
+      #   A Proc that will be called when each chunk of the upload is sent.
+      #   It will be invoked with [bytes_read], [total_sizes]
       # @return [void]
       def upload(source, options = {})
         if File.size(source) < MIN_PART_SIZE
@@ -68,7 +71,7 @@ module Aws
       def upload_parts(upload_id, source, options)
         pending = PartList.new(compute_parts(upload_id, source, options))
         completed = PartList.new
-        errors = upload_in_threads(pending, completed)
+        errors = upload_in_threads(pending, completed, options)
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -127,12 +130,21 @@ module Aws
         end
       end
 
-      def upload_in_threads(pending, completed)
+      def upload_in_threads(pending, completed, options)
         threads = []
+        if (callback = options[:progress_callback])
+          progress = MultipartProgress.new(pending, callback)
+        end
         @thread_count.times do
           thread = Thread.new do
             begin
               while part = pending.shift
+                if progress
+                  part[:on_chunk_sent] =
+                    proc do |_chunk, bytes, _total|
+                      progress.call(part[:part_number], bytes)
+                    end
+                end
                 resp = @client.upload_part(part)
                 part[:body].close
                 completed.push(etag: resp.etag, part_number: part[:part_number])
@@ -182,10 +194,33 @@ module Aws
           @mutex.synchronize { @parts.clear }
         end
 
+        def size
+          @mutex.synchronize { @parts.size }
+        end
+
+        def part_sizes
+          @mutex.synchronize { @parts.map { |p| p[:body].size } }
+        end
+
         def to_a
           @mutex.synchronize { @parts.dup }
         end
 
+      end
+
+      # @api private
+      class MultipartProgress
+        def initialize(parts, progress_callback)
+          @bytes_sent = Array.new(parts.size, 0)
+          @total_sizes = parts.part_sizes
+          @progress_callback = progress_callback
+        end
+
+        def call(part_number, bytes_read)
+          # part numbers start at 1
+          @bytes_sent[part_number - 1] = bytes_read
+          @progress_callback.call(@bytes_sent, @total_sizes)
+        end
       end
     end
   end

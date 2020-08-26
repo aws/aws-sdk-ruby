@@ -85,13 +85,28 @@ module Aws::IoTSiteWise
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::IoTSiteWise
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -314,7 +329,7 @@ module Aws::IoTSiteWise
 
     # Associates a child asset with the given parent asset through a
     # hierarchy defined in the parent asset's model. For more information,
-    # see [Associating Assets][1] in the *AWS IoT SiteWise User Guide*.
+    # see [Associating assets][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -326,7 +341,7 @@ module Aws::IoTSiteWise
     # @option params [required, String] :hierarchy_id
     #   The ID of a hierarchy in the parent asset's model. Hierarchies allow
     #   different groupings of assets to be formed that all come from the same
-    #   asset model. For more information, see [Asset Hierarchies][1] in the
+    #   asset model. For more information, see [Asset hierarchies][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -450,7 +465,7 @@ module Aws::IoTSiteWise
 
     # Sends a list of asset property values to AWS IoT SiteWise. Each value
     # is a timestamp-quality-value (TQV) data point. For more information,
-    # see [Ingesting Data Using the API][1] in the *AWS IoT SiteWise User
+    # see [Ingesting data using the API][1] in the *AWS IoT SiteWise User
     # Guide*.
     #
     # To identify an asset property, you must specify one of the following:
@@ -472,10 +487,16 @@ module Aws::IoTSiteWise
     # example, if you store a TQV `\{T1, GOOD, V1\}`, then storing `\{T1,
     # GOOD, V2\}` replaces the existing TQV.
     #
+    # AWS IoT SiteWise authorizes access to each
+    # `BatchPutAssetPropertyValue` entry individually. For more information,
+    # see [BatchPutAssetPropertyValue authorization][3] in the *AWS IoT
+    # SiteWise User Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ingest-api.html
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+    # [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action
     #
     # @option params [required, Array<Types::PutAssetPropertyValueEntry>] :entries
     #   The list of asset property value entries for the batch put request.
@@ -608,7 +629,7 @@ module Aws::IoTSiteWise
     end
 
     # Creates an asset from an existing asset model. For more information,
-    # see [Creating Assets][1] in the *AWS IoT SiteWise User Guide*.
+    # see [Creating assets][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -674,7 +695,7 @@ module Aws::IoTSiteWise
     # you can easily create assets of the same type that have standardized
     # definitions. Each asset created from a model inherits the asset
     # model's property and hierarchy definitions. For more information, see
-    # [Defining Asset Models][1] in the *AWS IoT SiteWise User Guide*.
+    # [Defining asset models][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -688,7 +709,7 @@ module Aws::IoTSiteWise
     #
     # @option params [Array<Types::AssetModelPropertyDefinition>] :asset_model_properties
     #   The property definitions of the asset model. For more information, see
-    #   [Asset Properties][1] in the *AWS IoT SiteWise User Guide*.
+    #   [Asset properties][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 200 properties per asset model. For more
     #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
@@ -702,7 +723,7 @@ module Aws::IoTSiteWise
     #   The hierarchy definitions of the asset model. Each hierarchy specifies
     #   an asset model whose assets can be children of any other assets
     #   created from this asset model. For more information, see [Asset
-    #   Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 10 hierarchies per asset model. For more
     #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
@@ -823,7 +844,7 @@ module Aws::IoTSiteWise
     #
     # @option params [required, String] :dashboard_definition
     #   The dashboard definition specified in a JSON literal. For detailed
-    #   information, see [Creating Dashboards (CLI)][1] in the *AWS IoT
+    #   information, see [Creating dashboards (CLI)][1] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #
@@ -934,14 +955,14 @@ module Aws::IoTSiteWise
     end
 
     # Creates a portal, which can contain projects and dashboards. Before
-    # you can create a portal, you must configure AWS Single Sign-On in the
-    # current Region. AWS IoT SiteWise Monitor uses AWS SSO to manage user
-    # permissions. For more information, see [Enabling AWS SSO][1] in the
-    # *AWS IoT SiteWise User Guide*.
+    # you can create a portal, you must enable AWS Single Sign-On. AWS IoT
+    # SiteWise Monitor uses AWS SSO to manage user permissions. For more
+    # information, see [Enabling AWS SSO][1] in the *AWS IoT SiteWise User
+    # Guide*.
     #
     # <note markdown="1"> Before you can sign in to a new portal, you must add at least one AWS
     # SSO user or group to that portal. For more information, see [Adding or
-    # Removing Portal Administrators][2] in the *AWS IoT SiteWise User
+    # removing portal administrators][2] in the *AWS IoT SiteWise User
     # Guide*.
     #
     #  </note>
@@ -1023,7 +1044,7 @@ module Aws::IoTSiteWise
     #   resp.portal_arn #=> String
     #   resp.portal_start_url #=> String
     #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE"
+    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #   resp.sso_application_id #=> String
     #
@@ -1124,7 +1145,7 @@ module Aws::IoTSiteWise
     end
 
     # Deletes an asset. This action can't be undone. For more information,
-    # see [Deleting Assets and Models][1] in the *AWS IoT SiteWise User
+    # see [Deleting assets and models][1] in the *AWS IoT SiteWise User
     # Guide*.
     #
     # <note markdown="1"> You can't delete an asset that's associated to another asset. For
@@ -1177,7 +1198,7 @@ module Aws::IoTSiteWise
     # model. Also, you can't delete an asset model if a parent asset model
     # exists that contains a property formula expression that depends on the
     # asset model that you want to delete. For more information, see
-    # [Deleting Assets and Models][1] in the *AWS IoT SiteWise User Guide*.
+    # [Deleting assets and models][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1301,7 +1322,7 @@ module Aws::IoTSiteWise
     # @example Response structure
     #
     #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE"
+    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #
     # @overload delete_portal(params = {})
@@ -1509,7 +1530,21 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Retrieves information about an asset's property.
+    # Retrieves information about an asset property.
+    #
+    # <note markdown="1"> When you call this operation for an attribute property, this response
+    # includes the default attribute value that you define in the asset
+    # model. If you update the default value in the model, this operation's
+    # response includes the new default value.
+    #
+    #  </note>
+    #
+    # This operation doesn't return the value of the asset property. To get
+    # the value of an asset property, use [GetAssetPropertyValue][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html
     #
     # @option params [required, String] :asset_id
     #   The ID of the asset.
@@ -1746,7 +1781,7 @@ module Aws::IoTSiteWise
     #   resp.portal_start_url #=> String
     #   resp.portal_contact_email #=> String
     #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE"
+    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #   resp.portal_creation_date #=> Time
     #   resp.portal_last_update_date #=> Time
@@ -1816,7 +1851,7 @@ module Aws::IoTSiteWise
     #   different groupings of assets to be formed that all come from the same
     #   asset model. You can use the hierarchy ID to identify the correct
     #   asset to disassociate. For more information, see [Asset
-    #   Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1852,8 +1887,7 @@ module Aws::IoTSiteWise
     end
 
     # Gets aggregated values for an asset property. For more information,
-    # see [Querying Aggregated Property Values][1] in the *AWS IoT SiteWise
-    # User Guide*.
+    # see [Querying aggregates][1] in the *AWS IoT SiteWise User Guide*.
     #
     # To identify an asset property, you must specify one of the following:
     #
@@ -1878,7 +1912,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -1905,11 +1939,15 @@ module Aws::IoTSiteWise
     # @option params [String] :time_ordering
     #   The chronological sorting order of the requested information.
     #
+    #   Default: `ASCENDING`
+    #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 100
     #
     # @return [Types::GetAssetPropertyAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1955,8 +1993,7 @@ module Aws::IoTSiteWise
     end
 
     # Gets an asset property's current value. For more information, see
-    # [Querying Current Property Values][1] in the *AWS IoT SiteWise User
-    # Guide*.
+    # [Querying current values][1] in the *AWS IoT SiteWise User Guide*.
     #
     # To identify an asset property, you must specify one of the following:
     #
@@ -1981,7 +2018,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -2018,8 +2055,8 @@ module Aws::IoTSiteWise
     end
 
     # Gets the history of an asset property's values. For more information,
-    # see [Querying Historical Property Values][1] in the *AWS IoT SiteWise
-    # User Guide*.
+    # see [Querying historical values][1] in the *AWS IoT SiteWise User
+    # Guide*.
     #
     # To identify an asset property, you must specify one of the following:
     #
@@ -2044,7 +2081,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -2065,11 +2102,15 @@ module Aws::IoTSiteWise
     # @option params [String] :time_ordering
     #   The chronological sorting order of the requested information.
     #
+    #   Default: `ASCENDING`
+    #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 100
     #
     # @return [Types::GetAssetPropertyValueHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2137,6 +2178,8 @@ module Aws::IoTSiteWise
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
     #
+    #   Default: 50
+    #
     # @return [Types::ListAccessPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccessPoliciesResponse#access_policy_summaries #access_policy_summaries} => Array&lt;Types::AccessPolicySummary&gt;
@@ -2182,6 +2225,8 @@ module Aws::IoTSiteWise
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #
     # @return [Types::ListAssetModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2241,19 +2286,23 @@ module Aws::IoTSiteWise
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
     #
+    #   Default: 50
+    #
     # @option params [String] :asset_model_id
     #   The ID of the asset model by which to filter the list of assets. This
     #   parameter is required if you choose `ALL` for `filter`.
     #
     # @option params [String] :filter
     #   The filter for the requested list of assets. Choose one of the
-    #   following options. Defaults to `ALL`.
+    #   following options:
     #
     #   * `ALL` – The list includes all assets for a given asset model ID. The
     #     `assetModelId` parameter is required if you filter by `ALL`.
     #
     #   * `TOP_LEVEL` – The list includes only top-level assets in the asset
     #     hierarchy tree.
+    #
+    #   Default: `ALL`
     #
     # @return [Types::ListAssetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2295,18 +2344,25 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Retrieves a paginated list of the assets associated to a parent asset
-    # (`assetId`) by a given hierarchy (`hierarchyId`).
+    # Retrieves a paginated list of associated assets.
+    #
+    # You can use this operation to do the following:
+    #
+    # * List child assets associated to a parent asset by a hierarchy that
+    #   you specify.
+    #
+    # * List an asset's parent asset.
     #
     # @option params [required, String] :asset_id
-    #   The ID of the parent asset.
+    #   The ID of the asset to query.
     #
-    # @option params [required, String] :hierarchy_id
-    #   The hierarchy ID (of the parent asset model) whose associated assets
-    #   are returned. To find a hierarchy ID, use the [DescribeAsset][1] or
-    #   [DescribeAssetModel][2] actions.
+    # @option params [String] :hierarchy_id
+    #   The ID of the hierarchy by which child assets are associated to the
+    #   asset. To find a hierarchy ID, use the [DescribeAsset][1] or
+    #   [DescribeAssetModel][2] operations. This parameter is required if you
+    #   choose `CHILD` for `traversalDirection`.
     #
-    #   For more information, see [Asset Hierarchies][3] in the *AWS IoT
+    #   For more information, see [Asset hierarchies][3] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #
@@ -2315,11 +2371,25 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
     #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #
+    # @option params [String] :traversal_direction
+    #   The direction to list associated assets. Choose one of the following
+    #   options:
+    #
+    #   * `CHILD` – The list includes all child assets associated to the
+    #     asset. The `hierarchyId` parameter is required if you choose
+    #     `CHILD`.
+    #
+    #   * `PARENT` – The list includes the asset's parent asset.
+    #
+    #   Default: `CHILD`
+    #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #
     # @return [Types::ListAssociatedAssetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2332,7 +2402,8 @@ module Aws::IoTSiteWise
     #
     #   resp = client.list_associated_assets({
     #     asset_id: "ID", # required
-    #     hierarchy_id: "ID", # required
+    #     hierarchy_id: "ID",
+    #     traversal_direction: "PARENT", # accepts PARENT, CHILD
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -2373,6 +2444,8 @@ module Aws::IoTSiteWise
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
     #
+    #   Default: 50
+    #
     # @return [Types::ListDashboardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDashboardsResponse#dashboard_summaries #dashboard_summaries} => Array&lt;Types::DashboardSummary&gt;
@@ -2412,6 +2485,8 @@ module Aws::IoTSiteWise
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #
     # @return [Types::ListGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2454,6 +2529,8 @@ module Aws::IoTSiteWise
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
     #
+    #   Default: 50
+    #
     # @return [Types::ListPortalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPortalsResponse#portal_summaries #portal_summaries} => Array&lt;Types::PortalSummary&gt;
@@ -2478,6 +2555,9 @@ module Aws::IoTSiteWise
     #   resp.portal_summaries[0].creation_date #=> Time
     #   resp.portal_summaries[0].last_update_date #=> Time
     #   resp.portal_summaries[0].role_arn #=> String
+    #   resp.portal_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.portal_summaries[0].status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
+    #   resp.portal_summaries[0].status.error.message #=> String
     #   resp.next_token #=> String
     #
     # @overload list_portals(params = {})
@@ -2498,6 +2578,8 @@ module Aws::IoTSiteWise
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #
     # @return [Types::ListProjectAssetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2538,6 +2620,8 @@ module Aws::IoTSiteWise
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #
     # @return [Types::ListProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2749,8 +2833,8 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Updates an asset's name. For more information, see [Updating Assets
-    # and Models][1] in the *AWS IoT SiteWise User Guide*.
+    # Updates an asset's name. For more information, see [Updating assets
+    # and models][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -2798,7 +2882,7 @@ module Aws::IoTSiteWise
     # Updates an asset model and all of the assets that were created from
     # the model. Each asset created from the model inherits the updated
     # asset model's property and hierarchy definitions. For more
-    # information, see [Updating Assets and Models][1] in the *AWS IoT
+    # information, see [Updating assets and models][1] in the *AWS IoT
     # SiteWise User Guide*.
     #
     # This operation overwrites the existing model with the provided model.
@@ -2829,7 +2913,7 @@ module Aws::IoTSiteWise
     #
     # @option params [Array<Types::AssetModelProperty>] :asset_model_properties
     #   The updated property definitions of the asset model. For more
-    #   information, see [Asset Properties][1] in the *AWS IoT SiteWise User
+    #   information, see [Asset properties][1] in the *AWS IoT SiteWise User
     #   Guide*.
     #
     #   You can specify up to 200 properties per asset model. For more
@@ -2844,7 +2928,7 @@ module Aws::IoTSiteWise
     #   The updated hierarchy definitions of the asset model. Each hierarchy
     #   specifies an asset model whose assets can be children of any other
     #   assets created from this asset model. For more information, see [Asset
-    #   Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 10 hierarchies per asset model. For more
     #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
@@ -2961,7 +3045,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #   If you omit this parameter, the alias is removed from the property.
@@ -2974,7 +3058,7 @@ module Aws::IoTSiteWise
     #   The MQTT notification state (enabled or disabled) for this asset
     #   property. When the notification state is enabled, AWS IoT SiteWise
     #   publishes property value updates to a unique MQTT topic. For more
-    #   information, see [Interacting with Other Services][1] in the *AWS IoT
+    #   information, see [Interacting with other services][1] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #   If you omit this parameter, the notification state is set to
@@ -3024,7 +3108,7 @@ module Aws::IoTSiteWise
     #
     # @option params [required, String] :dashboard_definition
     #   The new dashboard definition, as specified in a JSON literal. For
-    #   detailed information, see [Creating Dashboards (CLI)][1] in the *AWS
+    #   detailed information, see [Creating dashboards (CLI)][1] in the *AWS
     #   IoT SiteWise User Guide*.
     #
     #
@@ -3204,7 +3288,7 @@ module Aws::IoTSiteWise
     # @example Response structure
     #
     #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE"
+    #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #
     # @overload update_portal(params = {})
@@ -3264,7 +3348,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

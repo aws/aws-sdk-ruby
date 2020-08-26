@@ -49,9 +49,9 @@ require_relative 'aws-sdk-cloudformation/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::CloudFormation
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end

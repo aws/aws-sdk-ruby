@@ -85,13 +85,28 @@ module Aws::CloudFront
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::CloudFront
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -312,6 +327,113 @@ module Aws::CloudFront
 
     # @!group API Operations
 
+    # Creates a cache policy.
+    #
+    # After you create a cache policy, you can attach it to one or more
+    # cache behaviors. When it’s attached to a cache behavior, the cache
+    # policy determines the following:
+    #
+    # * The values that CloudFront includes in the *cache key*. These values
+    #   can include HTTP headers, cookies, and URL query strings. CloudFront
+    #   uses the cache key to find an object in its cache that it can return
+    #   to the viewer.
+    #
+    # * The default, minimum, and maximum time to live (TTL) values that you
+    #   want objects to stay in the CloudFront cache.
+    #
+    # The headers, cookies, and query strings that are included in the cache
+    # key are automatically included in requests that CloudFront sends to
+    # the origin. CloudFront sends a request when it can’t find an object in
+    # its cache that matches the request’s cache key. If you want to send
+    # values to the origin but *not* include them in the cache key, use
+    # `CreateOriginRequestPolicy`.
+    #
+    # For more information about cache policies, see [Controlling the cache
+    # key][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html
+    #
+    # @option params [required, Types::CachePolicyConfig] :cache_policy_config
+    #   A cache policy configuration.
+    #
+    # @return [Types::CreateCachePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCachePolicyResult#cache_policy #cache_policy} => Types::CachePolicy
+    #   * {Types::CreateCachePolicyResult#location #location} => String
+    #   * {Types::CreateCachePolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cache_policy({
+    #     cache_policy_config: { # required
+    #       comment: "string",
+    #       name: "string", # required
+    #       default_ttl: 1,
+    #       max_ttl: 1,
+    #       min_ttl: 1, # required
+    #       parameters_in_cache_key_and_forwarded_to_origin: {
+    #         enable_accept_encoding_gzip: false, # required
+    #         headers_config: { # required
+    #           header_behavior: "none", # required, accepts none, whitelist
+    #           headers: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         cookies_config: { # required
+    #           cookie_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #           cookies: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         query_strings_config: { # required
+    #           query_string_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #           query_strings: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cache_policy.id #=> String
+    #   resp.cache_policy.last_modified_time #=> Time
+    #   resp.cache_policy.cache_policy_config.comment #=> String
+    #   resp.cache_policy.cache_policy_config.name #=> String
+    #   resp.cache_policy.cache_policy_config.default_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.max_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.min_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items[0] #=> String
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items[0] #=> String
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCachePolicy2020_05_31 AWS API Documentation
+    #
+    # @overload create_cache_policy(params = {})
+    # @param [Hash] params ({})
+    def create_cache_policy(params = {}, options = {})
+      req = build_request(:create_cache_policy, params)
+      req.send_request(options)
+    end
+
     # Creates a new origin access identity. If you're using Amazon S3 for
     # your origin, you can use an origin access identity to require users to
     # access your content using a CloudFront URL instead of the Amazon S3
@@ -350,7 +472,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
     #
     # @overload create_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -457,7 +579,36 @@ module Aws::CloudFront
     #       },
     #       default_cache_behavior: { # required
     #         target_origin_id: "string", # required
-    #         forwarded_values: { # required
+    #         trusted_signers: { # required
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #         allowed_methods: {
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           cached_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           },
+    #         },
+    #         smooth_streaming: false,
+    #         compress: false,
+    #         lambda_function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               lambda_function_arn: "LambdaFunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
+    #             },
+    #           ],
+    #         },
+    #         field_level_encryption_id: "string",
+    #         cache_policy_id: "string",
+    #         origin_request_policy_id: "string",
+    #         forwarded_values: {
     #           query_string: false, # required
     #           cookies: { # required
     #             forward: "none", # required, accepts none, whitelist, all
@@ -475,36 +626,9 @@ module Aws::CloudFront
     #             items: ["string"],
     #           },
     #         },
-    #         trusted_signers: { # required
-    #           enabled: false, # required
-    #           quantity: 1, # required
-    #           items: ["string"],
-    #         },
-    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #         min_ttl: 1, # required
-    #         allowed_methods: {
-    #           quantity: 1, # required
-    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           cached_methods: {
-    #             quantity: 1, # required
-    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           },
-    #         },
-    #         smooth_streaming: false,
+    #         min_ttl: 1,
     #         default_ttl: 1,
     #         max_ttl: 1,
-    #         compress: false,
-    #         lambda_function_associations: {
-    #           quantity: 1, # required
-    #           items: [
-    #             {
-    #               lambda_function_arn: "LambdaFunctionARN", # required
-    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #               include_body: false,
-    #             },
-    #           ],
-    #         },
-    #         field_level_encryption_id: "string",
     #       },
     #       cache_behaviors: {
     #         quantity: 1, # required
@@ -512,7 +636,36 @@ module Aws::CloudFront
     #           {
     #             path_pattern: "string", # required
     #             target_origin_id: "string", # required
-    #             forwarded_values: { # required
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             field_level_encryption_id: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
     #                 forward: "none", # required, accepts none, whitelist, all
@@ -530,36 +683,9 @@ module Aws::CloudFront
     #                 items: ["string"],
     #               },
     #             },
-    #             trusted_signers: { # required
-    #               enabled: false, # required
-    #               quantity: 1, # required
-    #               items: ["string"],
-    #             },
-    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #             min_ttl: 1, # required
-    #             allowed_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               cached_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               },
-    #             },
-    #             smooth_streaming: false,
+    #             min_ttl: 1,
     #             default_ttl: 1,
     #             max_ttl: 1,
-    #             compress: false,
-    #             lambda_function_associations: {
-    #               quantity: 1, # required
-    #               items: [
-    #                 {
-    #                   lambda_function_arn: "LambdaFunctionARN", # required
-    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                   include_body: false,
-    #                 },
-    #               ],
-    #             },
-    #             field_level_encryption_id: "string",
     #           },
     #         ],
     #       },
@@ -655,6 +781,27 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -666,32 +813,34 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.min_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -703,28 +852,9 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -758,7 +888,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistribution2020_05_31 AWS API Documentation
     #
     # @overload create_distribution(params = {})
     # @param [Hash] params ({})
@@ -848,7 +978,36 @@ module Aws::CloudFront
     #         },
     #         default_cache_behavior: { # required
     #           target_origin_id: "string", # required
-    #           forwarded_values: { # required
+    #           trusted_signers: { # required
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #           allowed_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #             cached_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #             },
+    #           },
+    #           smooth_streaming: false,
+    #           compress: false,
+    #           lambda_function_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 lambda_function_arn: "LambdaFunctionARN", # required
+    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 include_body: false,
+    #               },
+    #             ],
+    #           },
+    #           field_level_encryption_id: "string",
+    #           cache_policy_id: "string",
+    #           origin_request_policy_id: "string",
+    #           forwarded_values: {
     #             query_string: false, # required
     #             cookies: { # required
     #               forward: "none", # required, accepts none, whitelist, all
@@ -866,36 +1025,9 @@ module Aws::CloudFront
     #               items: ["string"],
     #             },
     #           },
-    #           trusted_signers: { # required
-    #             enabled: false, # required
-    #             quantity: 1, # required
-    #             items: ["string"],
-    #           },
-    #           viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #           min_ttl: 1, # required
-    #           allowed_methods: {
-    #             quantity: 1, # required
-    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #             cached_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #             },
-    #           },
-    #           smooth_streaming: false,
+    #           min_ttl: 1,
     #           default_ttl: 1,
     #           max_ttl: 1,
-    #           compress: false,
-    #           lambda_function_associations: {
-    #             quantity: 1, # required
-    #             items: [
-    #               {
-    #                 lambda_function_arn: "LambdaFunctionARN", # required
-    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                 include_body: false,
-    #               },
-    #             ],
-    #           },
-    #           field_level_encryption_id: "string",
     #         },
     #         cache_behaviors: {
     #           quantity: 1, # required
@@ -903,7 +1035,36 @@ module Aws::CloudFront
     #             {
     #               path_pattern: "string", # required
     #               target_origin_id: "string", # required
-    #               forwarded_values: { # required
+    #               trusted_signers: { # required
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #               allowed_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 cached_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 },
+    #               },
+    #               smooth_streaming: false,
+    #               compress: false,
+    #               lambda_function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     lambda_function_arn: "LambdaFunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     include_body: false,
+    #                   },
+    #                 ],
+    #               },
+    #               field_level_encryption_id: "string",
+    #               cache_policy_id: "string",
+    #               origin_request_policy_id: "string",
+    #               forwarded_values: {
     #                 query_string: false, # required
     #                 cookies: { # required
     #                   forward: "none", # required, accepts none, whitelist, all
@@ -921,36 +1082,9 @@ module Aws::CloudFront
     #                   items: ["string"],
     #                 },
     #               },
-    #               trusted_signers: { # required
-    #                 enabled: false, # required
-    #                 quantity: 1, # required
-    #                 items: ["string"],
-    #               },
-    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #               min_ttl: 1, # required
-    #               allowed_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                 cached_methods: {
-    #                   quantity: 1, # required
-    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #                 },
-    #               },
-    #               smooth_streaming: false,
+    #               min_ttl: 1,
     #               default_ttl: 1,
     #               max_ttl: 1,
-    #               compress: false,
-    #               lambda_function_associations: {
-    #                 quantity: 1, # required
-    #                 items: [
-    #                   {
-    #                     lambda_function_arn: "LambdaFunctionARN", # required
-    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                     include_body: false,
-    #                   },
-    #                 ],
-    #               },
-    #               field_level_encryption_id: "string",
     #             },
     #           ],
     #         },
@@ -1055,6 +1189,27 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -1066,32 +1221,34 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.min_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -1103,28 +1260,9 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -1158,7 +1296,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionWithTags2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionWithTags2020_05_31 AWS API Documentation
     #
     # @overload create_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -1232,7 +1370,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
     #
     # @overload create_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -1292,7 +1430,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
     #
     # @overload create_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -1338,12 +1476,112 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidation2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidation2020_05_31 AWS API Documentation
     #
     # @overload create_invalidation(params = {})
     # @param [Hash] params ({})
     def create_invalidation(params = {}, options = {})
       req = build_request(:create_invalidation, params)
+      req.send_request(options)
+    end
+
+    # Creates an origin request policy.
+    #
+    # After you create an origin request policy, you can attach it to one or
+    # more cache behaviors. When it’s attached to a cache behavior, the
+    # origin request policy determines the values that CloudFront includes
+    # in requests that it sends to the origin. Each request that CloudFront
+    # sends to the origin includes the following:
+    #
+    # * The request body and the URL path (without the domain name) from the
+    #   viewer request.
+    #
+    # * The headers that CloudFront automatically includes in every origin
+    #   request, including `Host`, `User-Agent`, and `X-Amz-Cf-Id`.
+    #
+    # * All HTTP headers, cookies, and URL query strings that are specified
+    #   in the cache policy or the origin request policy. These can include
+    #   items from the viewer request and, in the case of headers,
+    #   additional ones that are added by CloudFront.
+    #
+    # CloudFront sends a request when it can’t find a valid object in its
+    # cache that matches the request. If you want to send values to the
+    # origin and also include them in the cache key, use
+    # `CreateCachePolicy`.
+    #
+    # For more information about origin request policies, see [Controlling
+    # origin requests][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html
+    #
+    # @option params [required, Types::OriginRequestPolicyConfig] :origin_request_policy_config
+    #   An origin request policy configuration.
+    #
+    # @return [Types::CreateOriginRequestPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOriginRequestPolicyResult#origin_request_policy #origin_request_policy} => Types::OriginRequestPolicy
+    #   * {Types::CreateOriginRequestPolicyResult#location #location} => String
+    #   * {Types::CreateOriginRequestPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_origin_request_policy({
+    #     origin_request_policy_config: { # required
+    #       comment: "string",
+    #       name: "string", # required
+    #       headers_config: { # required
+    #         header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #         headers: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       },
+    #       cookies_config: { # required
+    #         cookie_behavior: "none", # required, accepts none, whitelist, all
+    #         cookies: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       },
+    #       query_strings_config: { # required
+    #         query_string_behavior: "none", # required, accepts none, whitelist, all
+    #         query_strings: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_request_policy.id #=> String
+    #   resp.origin_request_policy.last_modified_time #=> Time
+    #   resp.origin_request_policy.origin_request_policy_config.comment #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.name #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginRequestPolicy2020_05_31 AWS API Documentation
+    #
+    # @overload create_origin_request_policy(params = {})
+    # @param [Hash] params ({})
+    def create_origin_request_policy(params = {}, options = {})
+      req = build_request(:create_origin_request_policy, params)
       req.send_request(options)
     end
 
@@ -1382,7 +1620,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKey2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreatePublicKey2020_05_31 AWS API Documentation
     #
     # @overload create_public_key(params = {})
     # @param [Hash] params ({})
@@ -1497,7 +1735,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistribution2020_05_31 AWS API Documentation
     #
     # @overload create_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1589,12 +1827,49 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionWithTags2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionWithTags2020_05_31 AWS API Documentation
     #
     # @overload create_streaming_distribution_with_tags(params = {})
     # @param [Hash] params ({})
     def create_streaming_distribution_with_tags(params = {}, options = {})
       req = build_request(:create_streaming_distribution_with_tags, params)
+      req.send_request(options)
+    end
+
+    # Deletes a cache policy.
+    #
+    # You cannot delete a cache policy if it’s attached to a cache behavior.
+    # First update your distributions to remove the cache policy from all
+    # cache behaviors, then delete the cache policy.
+    #
+    # To delete a cache policy, you must provide the policy’s identifier and
+    # version. To get these values, you can use `ListCachePolicies` or
+    # `GetCachePolicy`.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the cache policy that you are deleting. To
+    #   get the identifier, you can use `ListCachePolicies`.
+    #
+    # @option params [String] :if_match
+    #   The version of the cache policy that you are deleting. The version is
+    #   the cache policy’s `ETag` value, which you can get using
+    #   `ListCachePolicies`, `GetCachePolicy`, or `GetCachePolicyConfig`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cache_policy({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCachePolicy2020_05_31 AWS API Documentation
+    #
+    # @overload delete_cache_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_cache_policy(params = {}, options = {})
+      req = build_request(:delete_cache_policy, params)
       req.send_request(options)
     end
 
@@ -1616,7 +1891,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
     #
     # @overload delete_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1643,7 +1918,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistribution2020_05_31 AWS API Documentation
     #
     # @overload delete_distribution(params = {})
     # @param [Hash] params ({})
@@ -1670,7 +1945,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
     #
     # @overload delete_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -1697,12 +1972,52 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
     #
     # @overload delete_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
     def delete_field_level_encryption_profile(params = {}, options = {})
       req = build_request(:delete_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes an origin request policy.
+    #
+    # You cannot delete an origin request policy if it’s attached to any
+    # cache behaviors. First update your distributions to remove the origin
+    # request policy from all cache behaviors, then delete the origin
+    # request policy.
+    #
+    # To delete an origin request policy, you must provide the policy’s
+    # identifier and version. To get the identifier, you can use
+    # `ListOriginRequestPolicies` or `GetOriginRequestPolicy`.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the origin request policy that you are
+    #   deleting. To get the identifier, you can use
+    #   `ListOriginRequestPolicies`.
+    #
+    # @option params [String] :if_match
+    #   The version of the origin request policy that you are deleting. The
+    #   version is the origin request policy’s `ETag` value, which you can get
+    #   using `ListOriginRequestPolicies`, `GetOriginRequestPolicy`, or
+    #   `GetOriginRequestPolicyConfig`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_origin_request_policy({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteOriginRequestPolicy2020_05_31 AWS API Documentation
+    #
+    # @overload delete_origin_request_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_origin_request_policy(params = {}, options = {})
+      req = build_request(:delete_origin_request_policy, params)
       req.send_request(options)
     end
 
@@ -1724,7 +2039,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKey2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeletePublicKey2020_05_31 AWS API Documentation
     #
     # @overload delete_public_key(params = {})
     # @param [Hash] params ({})
@@ -1794,12 +2109,133 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteStreamingDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteStreamingDistribution2020_05_31 AWS API Documentation
     #
     # @overload delete_streaming_distribution(params = {})
     # @param [Hash] params ({})
     def delete_streaming_distribution(params = {}, options = {})
       req = build_request(:delete_streaming_distribution, params)
+      req.send_request(options)
+    end
+
+    # Gets a cache policy, including the following metadata:
+    #
+    # * The policy’s identifier.
+    #
+    # * The date and time when the policy was last modified.
+    #
+    # To get a cache policy, you must provide the policy’s identifier. If
+    # the cache policy is attached to a distribution’s cache behavior, you
+    # can get the policy’s identifier using `ListDistributions` or
+    # `GetDistribution`. If the cache policy is not attached to a cache
+    # behavior, you can get the identifier using `ListCachePolicies`.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the cache policy. If the cache policy is
+    #   attached to a distribution’s cache behavior, you can get the policy’s
+    #   identifier using `ListDistributions` or `GetDistribution`. If the
+    #   cache policy is not attached to a cache behavior, you can get the
+    #   identifier using `ListCachePolicies`.
+    #
+    # @return [Types::GetCachePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCachePolicyResult#cache_policy #cache_policy} => Types::CachePolicy
+    #   * {Types::GetCachePolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cache_policy({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cache_policy.id #=> String
+    #   resp.cache_policy.last_modified_time #=> Time
+    #   resp.cache_policy.cache_policy_config.comment #=> String
+    #   resp.cache_policy.cache_policy_config.name #=> String
+    #   resp.cache_policy.cache_policy_config.default_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.max_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.min_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items[0] #=> String
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items[0] #=> String
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicy2020_05_31 AWS API Documentation
+    #
+    # @overload get_cache_policy(params = {})
+    # @param [Hash] params ({})
+    def get_cache_policy(params = {}, options = {})
+      req = build_request(:get_cache_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets a cache policy configuration.
+    #
+    # To get a cache policy configuration, you must provide the policy’s
+    # identifier. If the cache policy is attached to a distribution’s cache
+    # behavior, you can get the policy’s identifier using
+    # `ListDistributions` or `GetDistribution`. If the cache policy is not
+    # attached to a cache behavior, you can get the identifier using
+    # `ListCachePolicies`.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the cache policy. If the cache policy is
+    #   attached to a distribution’s cache behavior, you can get the policy’s
+    #   identifier using `ListDistributions` or `GetDistribution`. If the
+    #   cache policy is not attached to a cache behavior, you can get the
+    #   identifier using `ListCachePolicies`.
+    #
+    # @return [Types::GetCachePolicyConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCachePolicyConfigResult#cache_policy_config #cache_policy_config} => Types::CachePolicyConfig
+    #   * {Types::GetCachePolicyConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cache_policy_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cache_policy_config.comment #=> String
+    #   resp.cache_policy_config.name #=> String
+    #   resp.cache_policy_config.default_ttl #=> Integer
+    #   resp.cache_policy_config.max_ttl #=> Integer
+    #   resp.cache_policy_config.min_ttl #=> Integer
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items[0] #=> String
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.quantity #=> Integer
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items #=> Array
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items[0] #=> String
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items #=> Array
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicyConfig2020_05_31 AWS API Documentation
+    #
+    # @overload get_cache_policy_config(params = {})
+    # @param [Hash] params ({})
+    def get_cache_policy_config(params = {}, options = {})
+      req = build_request(:get_cache_policy_config, params)
       req.send_request(options)
     end
 
@@ -1827,7 +2263,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1858,7 +2294,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityConfig2020_05_31 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity_config(params = {})
     # @param [Hash] params ({})
@@ -1934,6 +2370,27 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -1945,32 +2402,34 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.min_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -1982,28 +2441,9 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -2041,7 +2481,7 @@ module Aws::CloudFront
     #
     #   * distribution_deployed
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistribution2020_05_31 AWS API Documentation
     #
     # @overload get_distribution(params = {})
     # @param [Hash] params ({})
@@ -2104,6 +2544,27 @@ module Aws::CloudFront
     #   resp.distribution_config.origin_groups.items[0].members.items #=> Array
     #   resp.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution_config.default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution_config.default_cache_behavior.compress #=> Boolean
+    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_config.default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -2115,32 +2576,34 @@ module Aws::CloudFront
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
-    #   resp.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
-    #   resp.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
-    #   resp.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
-    #   resp.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_config.default_cache_behavior.min_ttl #=> Integer
-    #   resp.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
-    #   resp.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
-    #   resp.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
     #   resp.distribution_config.default_cache_behavior.default_ttl #=> Integer
     #   resp.distribution_config.default_cache_behavior.max_ttl #=> Integer
-    #   resp.distribution_config.default_cache_behavior.compress #=> Boolean
-    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
-    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
-    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution_config.cache_behaviors.items[0].path_pattern #=> String
     #   resp.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -2152,28 +2615,9 @@ module Aws::CloudFront
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
-    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
-    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
-    #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
-    #   resp.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
-    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
-    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
-    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
     #   resp.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
     #   resp.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
-    #   resp.distribution_config.cache_behaviors.items[0].compress #=> Boolean
-    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
-    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
-    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -2203,7 +2647,7 @@ module Aws::CloudFront
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfig2020_05_31 AWS API Documentation
     #
     # @overload get_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -2248,7 +2692,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryption2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryption2020_05_31 AWS API Documentation
     #
     # @overload get_field_level_encryption(params = {})
     # @param [Hash] params ({})
@@ -2291,7 +2735,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
     #
     # @overload get_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -2332,7 +2776,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
     #
     # @overload get_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -2372,7 +2816,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfileConfig2020_05_31 AWS API Documentation
     #
     # @overload get_field_level_encryption_profile_config(params = {})
     # @param [Hash] params ({})
@@ -2416,12 +2860,128 @@ module Aws::CloudFront
     #
     #   * invalidation_completed
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidation2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidation2020_05_31 AWS API Documentation
     #
     # @overload get_invalidation(params = {})
     # @param [Hash] params ({})
     def get_invalidation(params = {}, options = {})
       req = build_request(:get_invalidation, params)
+      req.send_request(options)
+    end
+
+    # Gets an origin request policy, including the following metadata:
+    #
+    # * The policy’s identifier.
+    #
+    # * The date and time when the policy was last modified.
+    #
+    # To get an origin request policy, you must provide the policy’s
+    # identifier. If the origin request policy is attached to a
+    # distribution’s cache behavior, you can get the policy’s identifier
+    # using `ListDistributions` or `GetDistribution`. If the origin request
+    # policy is not attached to a cache behavior, you can get the identifier
+    # using `ListOriginRequestPolicies`.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the origin request policy. If the origin
+    #   request policy is attached to a distribution’s cache behavior, you can
+    #   get the policy’s identifier using `ListDistributions` or
+    #   `GetDistribution`. If the origin request policy is not attached to a
+    #   cache behavior, you can get the identifier using
+    #   `ListOriginRequestPolicies`.
+    #
+    # @return [Types::GetOriginRequestPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOriginRequestPolicyResult#origin_request_policy #origin_request_policy} => Types::OriginRequestPolicy
+    #   * {Types::GetOriginRequestPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_origin_request_policy({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_request_policy.id #=> String
+    #   resp.origin_request_policy.last_modified_time #=> Time
+    #   resp.origin_request_policy.origin_request_policy_config.comment #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.name #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicy2020_05_31 AWS API Documentation
+    #
+    # @overload get_origin_request_policy(params = {})
+    # @param [Hash] params ({})
+    def get_origin_request_policy(params = {}, options = {})
+      req = build_request(:get_origin_request_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets an origin request policy configuration.
+    #
+    # To get an origin request policy configuration, you must provide the
+    # policy’s identifier. If the origin request policy is attached to a
+    # distribution’s cache behavior, you can get the policy’s identifier
+    # using `ListDistributions` or `GetDistribution`. If the origin request
+    # policy is not attached to a cache behavior, you can get the identifier
+    # using `ListOriginRequestPolicies`.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the origin request policy. If the origin
+    #   request policy is attached to a distribution’s cache behavior, you can
+    #   get the policy’s identifier using `ListDistributions` or
+    #   `GetDistribution`. If the origin request policy is not attached to a
+    #   cache behavior, you can get the identifier using
+    #   `ListOriginRequestPolicies`.
+    #
+    # @return [Types::GetOriginRequestPolicyConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOriginRequestPolicyConfigResult#origin_request_policy_config #origin_request_policy_config} => Types::OriginRequestPolicyConfig
+    #   * {Types::GetOriginRequestPolicyConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_origin_request_policy_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_request_policy_config.comment #=> String
+    #   resp.origin_request_policy_config.name #=> String
+    #   resp.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy_config.headers_config.headers.quantity #=> Integer
+    #   resp.origin_request_policy_config.headers_config.headers.items #=> Array
+    #   resp.origin_request_policy_config.headers_config.headers.items[0] #=> String
+    #   resp.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
+    #   resp.origin_request_policy_config.cookies_config.cookies.items #=> Array
+    #   resp.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
+    #   resp.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
+    #   resp.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicyConfig2020_05_31 AWS API Documentation
+    #
+    # @overload get_origin_request_policy_config(params = {})
+    # @param [Hash] params ({})
+    def get_origin_request_policy_config(params = {}, options = {})
+      req = build_request(:get_origin_request_policy_config, params)
       req.send_request(options)
     end
 
@@ -2451,7 +3011,7 @@ module Aws::CloudFront
     #   resp.public_key.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKey2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKey2020_05_31 AWS API Documentation
     #
     # @overload get_public_key(params = {})
     # @param [Hash] params ({})
@@ -2484,7 +3044,7 @@ module Aws::CloudFront
     #   resp.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfig2020_05_31 AWS API Documentation
     #
     # @overload get_public_key_config(params = {})
     # @param [Hash] params ({})
@@ -2547,7 +3107,7 @@ module Aws::CloudFront
     #
     #   * streaming_distribution_deployed
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistribution2020_05_31 AWS API Documentation
     #
     # @overload get_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -2592,12 +3152,93 @@ module Aws::CloudFront
     #   resp.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionConfig2020_05_31 AWS API Documentation
     #
     # @overload get_streaming_distribution_config(params = {})
     # @param [Hash] params ({})
     def get_streaming_distribution_config(params = {}, options = {})
       req = build_request(:get_streaming_distribution_config, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of cache policies.
+    #
+    # You can optionally apply a filter to return only the managed policies
+    # created by AWS, or only the custom policies created in your AWS
+    # account.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :type
+    #   A filter to return only the specified kinds of cache policies. Valid
+    #   values are:
+    #
+    #   * `managed` – Returns only the managed policies created by AWS.
+    #
+    #   * `custom` – Returns only the custom policies created in your AWS
+    #     account.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of cache policies. The response includes cache policies in
+    #   the list that occur after the marker. To get the next page of the
+    #   list, set this field’s value to the value of `NextMarker` from the
+    #   current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of cache policies that you want in the response.
+    #
+    # @return [Types::ListCachePoliciesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCachePoliciesResult#cache_policy_list #cache_policy_list} => Types::CachePolicyList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cache_policies({
+    #     type: "managed", # accepts managed, custom
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cache_policy_list.next_marker #=> String
+    #   resp.cache_policy_list.max_items #=> Integer
+    #   resp.cache_policy_list.quantity #=> Integer
+    #   resp.cache_policy_list.items #=> Array
+    #   resp.cache_policy_list.items[0].type #=> String, one of "managed", "custom"
+    #   resp.cache_policy_list.items[0].cache_policy.id #=> String
+    #   resp.cache_policy_list.items[0].cache_policy.last_modified_time #=> Time
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.comment #=> String
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.name #=> String
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.default_ttl #=> Integer
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.max_ttl #=> Integer
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.min_ttl #=> Integer
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items[0] #=> String
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.quantity #=> Integer
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items #=> Array
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items[0] #=> String
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items #=> Array
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCachePolicies2020_05_31 AWS API Documentation
+    #
+    # @overload list_cache_policies(params = {})
+    # @param [Hash] params ({})
+    def list_cache_policies(params = {}, options = {})
+      req = build_request(:list_cache_policies, params)
       req.send_request(options)
     end
 
@@ -2640,7 +3281,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_list.items[0].s3_canonical_user_id #=> String
     #   resp.cloud_front_origin_access_identity_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentities2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCloudFrontOriginAccessIdentities2020_05_31 AWS API Documentation
     #
     # @overload list_cloud_front_origin_access_identities(params = {})
     # @param [Hash] params ({})
@@ -2720,6 +3361,27 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origin_groups.items[0].members.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -2731,32 +3393,34 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
-    #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].default_cache_behavior.min_ttl #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].default_cache_behavior.smooth_streaming #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.default_ttl #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.max_ttl #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -2768,28 +3432,9 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].min_ttl #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].smooth_streaming #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].default_ttl #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].max_ttl #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
     #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
@@ -2817,12 +3462,122 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributions2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributions2020_05_31 AWS API Documentation
     #
     # @overload list_distributions(params = {})
     # @param [Hash] params ({})
     def list_distributions(params = {}, options = {})
       req = build_request(:list_distributions, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of distribution IDs for distributions that have a cache
+    # behavior that’s associated with the specified cache policy.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distribution IDs. The response includes distribution IDs
+    #   in the list that occur after the marker. To get the next page of the
+    #   list, set this field’s value to the value of `NextMarker` from the
+    #   current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distribution IDs that you want in the response.
+    #
+    # @option params [required, String] :cache_policy_id
+    #   The ID of the cache policy whose associated distribution IDs you want
+    #   to list.
+    #
+    # @return [Types::ListDistributionsByCachePolicyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionsByCachePolicyIdResult#distribution_id_list #distribution_id_list} => Types::DistributionIdList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distributions_by_cache_policy_id({
+    #     marker: "string",
+    #     max_items: 1,
+    #     cache_policy_id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_id_list.marker #=> String
+    #   resp.distribution_id_list.next_marker #=> String
+    #   resp.distribution_id_list.max_items #=> Integer
+    #   resp.distribution_id_list.is_truncated #=> Boolean
+    #   resp.distribution_id_list.quantity #=> Integer
+    #   resp.distribution_id_list.items #=> Array
+    #   resp.distribution_id_list.items[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByCachePolicyId2020_05_31 AWS API Documentation
+    #
+    # @overload list_distributions_by_cache_policy_id(params = {})
+    # @param [Hash] params ({})
+    def list_distributions_by_cache_policy_id(params = {}, options = {})
+      req = build_request(:list_distributions_by_cache_policy_id, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of distribution IDs for distributions that have a cache
+    # behavior that’s associated with the specified origin request policy.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distribution IDs. The response includes distribution IDs
+    #   in the list that occur after the marker. To get the next page of the
+    #   list, set this field’s value to the value of `NextMarker` from the
+    #   current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distribution IDs that you want in the response.
+    #
+    # @option params [required, String] :origin_request_policy_id
+    #   The ID of the origin request policy whose associated distribution IDs
+    #   you want to list.
+    #
+    # @return [Types::ListDistributionsByOriginRequestPolicyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionsByOriginRequestPolicyIdResult#distribution_id_list #distribution_id_list} => Types::DistributionIdList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distributions_by_origin_request_policy_id({
+    #     marker: "string",
+    #     max_items: 1,
+    #     origin_request_policy_id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_id_list.marker #=> String
+    #   resp.distribution_id_list.next_marker #=> String
+    #   resp.distribution_id_list.max_items #=> Integer
+    #   resp.distribution_id_list.is_truncated #=> Boolean
+    #   resp.distribution_id_list.quantity #=> Integer
+    #   resp.distribution_id_list.items #=> Array
+    #   resp.distribution_id_list.items[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByOriginRequestPolicyId2020_05_31 AWS API Documentation
+    #
+    # @overload list_distributions_by_origin_request_policy_id(params = {})
+    # @param [Hash] params ({})
+    def list_distributions_by_origin_request_policy_id(params = {}, options = {})
+      req = build_request(:list_distributions_by_origin_request_policy_id, params)
       req.send_request(options)
     end
 
@@ -2904,6 +3659,27 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origin_groups.items[0].members.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -2915,32 +3691,34 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
-    #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].default_cache_behavior.min_ttl #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].default_cache_behavior.smooth_streaming #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.default_ttl #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.max_ttl #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -2952,28 +3730,9 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].min_ttl #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].smooth_streaming #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].default_ttl #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].max_ttl #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
     #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
@@ -3001,7 +3760,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLId2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLId2020_05_31 AWS API Documentation
     #
     # @overload list_distributions_by_web_acl_id(params = {})
     # @param [Hash] params ({})
@@ -3057,7 +3816,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
     #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionConfigs2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionConfigs2020_05_31 AWS API Documentation
     #
     # @overload list_field_level_encryption_configs(params = {})
     # @param [Hash] params ({})
@@ -3109,7 +3868,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.field_level_encryption_profile_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfiles2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionProfiles2020_05_31 AWS API Documentation
     #
     # @overload list_field_level_encryption_profiles(params = {})
     # @param [Hash] params ({})
@@ -3163,12 +3922,90 @@ module Aws::CloudFront
     #   resp.invalidation_list.items[0].create_time #=> Time
     #   resp.invalidation_list.items[0].status #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidations2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidations2020_05_31 AWS API Documentation
     #
     # @overload list_invalidations(params = {})
     # @param [Hash] params ({})
     def list_invalidations(params = {}, options = {})
       req = build_request(:list_invalidations, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of origin request policies.
+    #
+    # You can optionally apply a filter to return only the managed policies
+    # created by AWS, or only the custom policies created in your AWS
+    # account.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :type
+    #   A filter to return only the specified kinds of origin request
+    #   policies. Valid values are:
+    #
+    #   * `managed` – Returns only the managed policies created by AWS.
+    #
+    #   * `custom` – Returns only the custom policies created in your AWS
+    #     account.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of origin request policies. The response includes origin
+    #   request policies in the list that occur after the marker. To get the
+    #   next page of the list, set this field’s value to the value of
+    #   `NextMarker` from the current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of origin request policies that you want in the
+    #   response.
+    #
+    # @return [Types::ListOriginRequestPoliciesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOriginRequestPoliciesResult#origin_request_policy_list #origin_request_policy_list} => Types::OriginRequestPolicyList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_origin_request_policies({
+    #     type: "managed", # accepts managed, custom
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_request_policy_list.next_marker #=> String
+    #   resp.origin_request_policy_list.max_items #=> Integer
+    #   resp.origin_request_policy_list.quantity #=> Integer
+    #   resp.origin_request_policy_list.items #=> Array
+    #   resp.origin_request_policy_list.items[0].type #=> String, one of "managed", "custom"
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.id #=> String
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.last_modified_time #=> Time
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.comment #=> String
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.name #=> String
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginRequestPolicies2020_05_31 AWS API Documentation
+    #
+    # @overload list_origin_request_policies(params = {})
+    # @param [Hash] params ({})
+    def list_origin_request_policies(params = {}, options = {})
+      req = build_request(:list_origin_request_policies, params)
       req.send_request(options)
     end
 
@@ -3208,7 +4045,7 @@ module Aws::CloudFront
     #   resp.public_key_list.items[0].encoded_key #=> String
     #   resp.public_key_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListPublicKeys2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListPublicKeys2020_05_31 AWS API Documentation
     #
     # @overload list_public_keys(params = {})
     # @param [Hash] params ({})
@@ -3264,7 +4101,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributions2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListStreamingDistributions2020_05_31 AWS API Documentation
     #
     # @overload list_streaming_distributions(params = {})
     # @param [Hash] params ({})
@@ -3294,7 +4131,7 @@ module Aws::CloudFront
     #   resp.tags.items[0].key #=> String
     #   resp.tags.items[0].value #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResource2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTagsForResource2020_05_31 AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -3327,7 +4164,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagResource2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TagResource2020_05_31 AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -3355,12 +4192,117 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResource2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UntagResource2020_05_31 AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a cache policy configuration.
+    #
+    # When you update a cache policy configuration, all the fields are
+    # updated with the values provided in the request. You cannot update
+    # some fields independent of others. To update a cache policy
+    # configuration:
+    #
+    # 1.  Use `GetCachePolicyConfig` to get the current configuration.
+    #
+    # 2.  Locally modify the fields in the cache policy configuration that
+    #     you want to update.
+    #
+    # 3.  Call `UpdateCachePolicy` by providing the entire cache policy
+    #     configuration, including the fields that you modified and those
+    #     that you didn’t.
+    #
+    # @option params [required, Types::CachePolicyConfig] :cache_policy_config
+    #   A cache policy configuration.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the cache policy that you are updating. The
+    #   identifier is returned in a cache behavior’s `CachePolicyId` field in
+    #   the response to `GetDistributionConfig`.
+    #
+    # @option params [String] :if_match
+    #   The version of the cache policy that you are updating. The version is
+    #   returned in the cache policy’s `ETag` field in the response to
+    #   `GetCachePolicyConfig`.
+    #
+    # @return [Types::UpdateCachePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCachePolicyResult#cache_policy #cache_policy} => Types::CachePolicy
+    #   * {Types::UpdateCachePolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cache_policy({
+    #     cache_policy_config: { # required
+    #       comment: "string",
+    #       name: "string", # required
+    #       default_ttl: 1,
+    #       max_ttl: 1,
+    #       min_ttl: 1, # required
+    #       parameters_in_cache_key_and_forwarded_to_origin: {
+    #         enable_accept_encoding_gzip: false, # required
+    #         headers_config: { # required
+    #           header_behavior: "none", # required, accepts none, whitelist
+    #           headers: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         cookies_config: { # required
+    #           cookie_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #           cookies: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         query_strings_config: { # required
+    #           query_string_behavior: "none", # required, accepts none, whitelist, allExcept, all
+    #           query_strings: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #       },
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cache_policy.id #=> String
+    #   resp.cache_policy.last_modified_time #=> Time
+    #   resp.cache_policy.cache_policy_config.comment #=> String
+    #   resp.cache_policy.cache_policy_config.name #=> String
+    #   resp.cache_policy.cache_policy_config.default_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.max_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.min_ttl #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items[0] #=> String
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config.cookies.items[0] #=> String
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "allExcept", "all"
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items #=> Array
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCachePolicy2020_05_31 AWS API Documentation
+    #
+    # @overload update_cache_policy(params = {})
+    # @param [Hash] params ({})
+    def update_cache_policy(params = {}, options = {})
+      req = build_request(:update_cache_policy, params)
       req.send_request(options)
     end
 
@@ -3400,7 +4342,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
     #
     # @overload update_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -3570,7 +4512,36 @@ module Aws::CloudFront
     #       },
     #       default_cache_behavior: { # required
     #         target_origin_id: "string", # required
-    #         forwarded_values: { # required
+    #         trusted_signers: { # required
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #         allowed_methods: {
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           cached_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           },
+    #         },
+    #         smooth_streaming: false,
+    #         compress: false,
+    #         lambda_function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               lambda_function_arn: "LambdaFunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
+    #             },
+    #           ],
+    #         },
+    #         field_level_encryption_id: "string",
+    #         cache_policy_id: "string",
+    #         origin_request_policy_id: "string",
+    #         forwarded_values: {
     #           query_string: false, # required
     #           cookies: { # required
     #             forward: "none", # required, accepts none, whitelist, all
@@ -3588,36 +4559,9 @@ module Aws::CloudFront
     #             items: ["string"],
     #           },
     #         },
-    #         trusted_signers: { # required
-    #           enabled: false, # required
-    #           quantity: 1, # required
-    #           items: ["string"],
-    #         },
-    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #         min_ttl: 1, # required
-    #         allowed_methods: {
-    #           quantity: 1, # required
-    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           cached_methods: {
-    #             quantity: 1, # required
-    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #           },
-    #         },
-    #         smooth_streaming: false,
+    #         min_ttl: 1,
     #         default_ttl: 1,
     #         max_ttl: 1,
-    #         compress: false,
-    #         lambda_function_associations: {
-    #           quantity: 1, # required
-    #           items: [
-    #             {
-    #               lambda_function_arn: "LambdaFunctionARN", # required
-    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #               include_body: false,
-    #             },
-    #           ],
-    #         },
-    #         field_level_encryption_id: "string",
     #       },
     #       cache_behaviors: {
     #         quantity: 1, # required
@@ -3625,7 +4569,36 @@ module Aws::CloudFront
     #           {
     #             path_pattern: "string", # required
     #             target_origin_id: "string", # required
-    #             forwarded_values: { # required
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             field_level_encryption_id: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
     #                 forward: "none", # required, accepts none, whitelist, all
@@ -3643,36 +4616,9 @@ module Aws::CloudFront
     #                 items: ["string"],
     #               },
     #             },
-    #             trusted_signers: { # required
-    #               enabled: false, # required
-    #               quantity: 1, # required
-    #               items: ["string"],
-    #             },
-    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-    #             min_ttl: 1, # required
-    #             allowed_methods: {
-    #               quantity: 1, # required
-    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               cached_methods: {
-    #                 quantity: 1, # required
-    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-    #               },
-    #             },
-    #             smooth_streaming: false,
+    #             min_ttl: 1,
     #             default_ttl: 1,
     #             max_ttl: 1,
-    #             compress: false,
-    #             lambda_function_associations: {
-    #               quantity: 1, # required
-    #               items: [
-    #                 {
-    #                   lambda_function_arn: "LambdaFunctionARN", # required
-    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
-    #                   include_body: false,
-    #                 },
-    #               ],
-    #             },
-    #             field_level_encryption_id: "string",
     #           },
     #         ],
     #       },
@@ -3770,6 +4716,27 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -3781,32 +4748,34 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.min_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -3818,28 +4787,9 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
-    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -3872,7 +4822,7 @@ module Aws::CloudFront
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistribution2020_05_31 AWS API Documentation
     #
     # @overload update_distribution(params = {})
     # @param [Hash] params ({})
@@ -3953,7 +4903,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
     #
     # @overload update_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -4020,12 +4970,109 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
     #
     # @overload update_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
     def update_field_level_encryption_profile(params = {}, options = {})
       req = build_request(:update_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Updates an origin request policy configuration.
+    #
+    # When you update an origin request policy configuration, all the fields
+    # are updated with the values provided in the request. You cannot update
+    # some fields independent of others. To update an origin request policy
+    # configuration:
+    #
+    # 1.  Use `GetOriginRequestPolicyConfig` to get the current
+    #     configuration.
+    #
+    # 2.  Locally modify the fields in the origin request policy
+    #     configuration that you want to update.
+    #
+    # 3.  Call `UpdateOriginRequestPolicy` by providing the entire origin
+    #     request policy configuration, including the fields that you
+    #     modified and those that you didn’t.
+    #
+    # @option params [required, Types::OriginRequestPolicyConfig] :origin_request_policy_config
+    #   An origin request policy configuration.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier for the origin request policy that you are
+    #   updating. The identifier is returned in a cache behavior’s
+    #   `OriginRequestPolicyId` field in the response to
+    #   `GetDistributionConfig`.
+    #
+    # @option params [String] :if_match
+    #   The version of the origin request policy that you are updating. The
+    #   version is returned in the origin request policy’s `ETag` field in the
+    #   response to `GetOriginRequestPolicyConfig`.
+    #
+    # @return [Types::UpdateOriginRequestPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOriginRequestPolicyResult#origin_request_policy #origin_request_policy} => Types::OriginRequestPolicy
+    #   * {Types::UpdateOriginRequestPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_origin_request_policy({
+    #     origin_request_policy_config: { # required
+    #       comment: "string",
+    #       name: "string", # required
+    #       headers_config: { # required
+    #         header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #         headers: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       },
+    #       cookies_config: { # required
+    #         cookie_behavior: "none", # required, accepts none, whitelist, all
+    #         cookies: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       },
+    #       query_strings_config: { # required
+    #         query_string_behavior: "none", # required, accepts none, whitelist, all
+    #         query_strings: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       },
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_request_policy.id #=> String
+    #   resp.origin_request_policy.last_modified_time #=> Time
+    #   resp.origin_request_policy.origin_request_policy_config.comment #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.name #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginRequestPolicy2020_05_31 AWS API Documentation
+    #
+    # @overload update_origin_request_policy(params = {})
+    # @param [Hash] params ({})
+    def update_origin_request_policy(params = {}, options = {})
+      req = build_request(:update_origin_request_policy, params)
       req.send_request(options)
     end
 
@@ -4070,7 +5117,7 @@ module Aws::CloudFront
     #   resp.public_key.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKey2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdatePublicKey2020_05_31 AWS API Documentation
     #
     # @overload update_public_key(params = {})
     # @param [Hash] params ({})
@@ -4160,7 +5207,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateStreamingDistribution2019_03_26 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateStreamingDistribution2020_05_31 AWS API Documentation
     #
     # @overload update_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -4182,7 +5229,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

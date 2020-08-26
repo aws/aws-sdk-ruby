@@ -14,12 +14,26 @@ module Aws::QuickSight
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountCustomization = Shapes::StructureShape.new(name: 'AccountCustomization')
+    AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     ActiveIAMPolicyAssignment = Shapes::StructureShape.new(name: 'ActiveIAMPolicyAssignment')
     ActiveIAMPolicyAssignmentList = Shapes::ListShape.new(name: 'ActiveIAMPolicyAssignmentList')
     AdHocFilteringOption = Shapes::StructureShape.new(name: 'AdHocFilteringOption')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AmazonElasticsearchParameters = Shapes::StructureShape.new(name: 'AmazonElasticsearchParameters')
+    Analysis = Shapes::StructureShape.new(name: 'Analysis')
+    AnalysisError = Shapes::StructureShape.new(name: 'AnalysisError')
+    AnalysisErrorList = Shapes::ListShape.new(name: 'AnalysisErrorList')
+    AnalysisErrorType = Shapes::StringShape.new(name: 'AnalysisErrorType')
+    AnalysisFilterAttribute = Shapes::StringShape.new(name: 'AnalysisFilterAttribute')
+    AnalysisName = Shapes::StringShape.new(name: 'AnalysisName')
+    AnalysisSearchFilter = Shapes::StructureShape.new(name: 'AnalysisSearchFilter')
+    AnalysisSearchFilterList = Shapes::ListShape.new(name: 'AnalysisSearchFilterList')
+    AnalysisSourceEntity = Shapes::StructureShape.new(name: 'AnalysisSourceEntity')
+    AnalysisSourceTemplate = Shapes::StructureShape.new(name: 'AnalysisSourceTemplate')
+    AnalysisSummary = Shapes::StructureShape.new(name: 'AnalysisSummary')
+    AnalysisSummaryList = Shapes::ListShape.new(name: 'AnalysisSummaryList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssignmentStatus = Shapes::StringShape.new(name: 'AssignmentStatus')
     AthenaParameters = Shapes::StructureShape.new(name: 'AthenaParameters')
@@ -56,6 +70,10 @@ module Aws::QuickSight
     ConcurrentUpdatingException = Shapes::StructureShape.new(name: 'ConcurrentUpdatingException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CopySourceArn = Shapes::StringShape.new(name: 'CopySourceArn')
+    CreateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'CreateAccountCustomizationRequest')
+    CreateAccountCustomizationResponse = Shapes::StructureShape.new(name: 'CreateAccountCustomizationResponse')
+    CreateAnalysisRequest = Shapes::StructureShape.new(name: 'CreateAnalysisRequest')
+    CreateAnalysisResponse = Shapes::StructureShape.new(name: 'CreateAnalysisResponse')
     CreateColumnsOperation = Shapes::StructureShape.new(name: 'CreateColumnsOperation')
     CreateDashboardRequest = Shapes::StructureShape.new(name: 'CreateDashboardRequest')
     CreateDashboardResponse = Shapes::StructureShape.new(name: 'CreateDashboardResponse')
@@ -71,6 +89,8 @@ module Aws::QuickSight
     CreateIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'CreateIAMPolicyAssignmentResponse')
     CreateIngestionRequest = Shapes::StructureShape.new(name: 'CreateIngestionRequest')
     CreateIngestionResponse = Shapes::StructureShape.new(name: 'CreateIngestionResponse')
+    CreateNamespaceRequest = Shapes::StructureShape.new(name: 'CreateNamespaceRequest')
+    CreateNamespaceResponse = Shapes::StructureShape.new(name: 'CreateNamespaceResponse')
     CreateTemplateAliasRequest = Shapes::StructureShape.new(name: 'CreateTemplateAliasRequest')
     CreateTemplateAliasResponse = Shapes::StructureShape.new(name: 'CreateTemplateAliasResponse')
     CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
@@ -125,6 +145,10 @@ module Aws::QuickSight
     DateTimeParameterList = Shapes::ListShape.new(name: 'DateTimeParameterList')
     DecimalParameter = Shapes::StructureShape.new(name: 'DecimalParameter')
     DecimalParameterList = Shapes::ListShape.new(name: 'DecimalParameterList')
+    DeleteAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationRequest')
+    DeleteAccountCustomizationResponse = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationResponse')
+    DeleteAnalysisRequest = Shapes::StructureShape.new(name: 'DeleteAnalysisRequest')
+    DeleteAnalysisResponse = Shapes::StructureShape.new(name: 'DeleteAnalysisResponse')
     DeleteDashboardRequest = Shapes::StructureShape.new(name: 'DeleteDashboardRequest')
     DeleteDashboardResponse = Shapes::StructureShape.new(name: 'DeleteDashboardResponse')
     DeleteDataSetRequest = Shapes::StructureShape.new(name: 'DeleteDataSetRequest')
@@ -137,6 +161,8 @@ module Aws::QuickSight
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
     DeleteIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'DeleteIAMPolicyAssignmentRequest')
     DeleteIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DeleteIAMPolicyAssignmentResponse')
+    DeleteNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteNamespaceRequest')
+    DeleteNamespaceResponse = Shapes::StructureShape.new(name: 'DeleteNamespaceResponse')
     DeleteTemplateAliasRequest = Shapes::StructureShape.new(name: 'DeleteTemplateAliasRequest')
     DeleteTemplateAliasResponse = Shapes::StructureShape.new(name: 'DeleteTemplateAliasResponse')
     DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
@@ -150,6 +176,14 @@ module Aws::QuickSight
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteUserResponse = Shapes::StructureShape.new(name: 'DeleteUserResponse')
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
+    DescribeAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DescribeAccountCustomizationRequest')
+    DescribeAccountCustomizationResponse = Shapes::StructureShape.new(name: 'DescribeAccountCustomizationResponse')
+    DescribeAccountSettingsRequest = Shapes::StructureShape.new(name: 'DescribeAccountSettingsRequest')
+    DescribeAccountSettingsResponse = Shapes::StructureShape.new(name: 'DescribeAccountSettingsResponse')
+    DescribeAnalysisPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeAnalysisPermissionsRequest')
+    DescribeAnalysisPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisPermissionsResponse')
+    DescribeAnalysisRequest = Shapes::StructureShape.new(name: 'DescribeAnalysisRequest')
+    DescribeAnalysisResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisResponse')
     DescribeDashboardPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeDashboardPermissionsRequest')
     DescribeDashboardPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeDashboardPermissionsResponse')
     DescribeDashboardRequest = Shapes::StructureShape.new(name: 'DescribeDashboardRequest')
@@ -168,6 +202,8 @@ module Aws::QuickSight
     DescribeIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DescribeIAMPolicyAssignmentResponse')
     DescribeIngestionRequest = Shapes::StructureShape.new(name: 'DescribeIngestionRequest')
     DescribeIngestionResponse = Shapes::StructureShape.new(name: 'DescribeIngestionResponse')
+    DescribeNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeNamespaceRequest')
+    DescribeNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeNamespaceResponse')
     DescribeTemplateAliasRequest = Shapes::StructureShape.new(name: 'DescribeTemplateAliasRequest')
     DescribeTemplateAliasResponse = Shapes::StructureShape.new(name: 'DescribeTemplateAliasResponse')
     DescribeTemplatePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeTemplatePermissionsRequest')
@@ -186,7 +222,9 @@ module Aws::QuickSight
     DomainNotWhitelistedException = Shapes::StructureShape.new(name: 'DomainNotWhitelistedException')
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleList = Shapes::ListShape.new(name: 'DoubleList')
+    Edition = Shapes::StringShape.new(name: 'Edition')
     EmbeddingUrl = Shapes::StringShape.new(name: 'EmbeddingUrl')
+    EntryPoint = Shapes::StringShape.new(name: 'EntryPoint')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
     ExportToCSVOption = Shapes::StructureShape.new(name: 'ExportToCSVOption')
@@ -199,6 +237,8 @@ module Aws::QuickSight
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
     GetDashboardEmbedUrlRequest = Shapes::StructureShape.new(name: 'GetDashboardEmbedUrlRequest')
     GetDashboardEmbedUrlResponse = Shapes::StructureShape.new(name: 'GetDashboardEmbedUrlResponse')
+    GetSessionEmbedUrlRequest = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlRequest')
+    GetSessionEmbedUrlResponse = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupDescription = Shapes::StringShape.new(name: 'GroupDescription')
     GroupList = Shapes::ListShape.new(name: 'GroupList')
@@ -216,6 +256,7 @@ module Aws::QuickSight
     IdentityMap = Shapes::MapShape.new(name: 'IdentityMap')
     IdentityName = Shapes::StringShape.new(name: 'IdentityName')
     IdentityNameList = Shapes::ListShape.new(name: 'IdentityNameList')
+    IdentityStore = Shapes::StringShape.new(name: 'IdentityStore')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     IdentityTypeNotSupportedException = Shapes::StructureShape.new(name: 'IdentityTypeNotSupportedException')
     Ingestion = Shapes::StructureShape.new(name: 'Ingestion')
@@ -239,6 +280,8 @@ module Aws::QuickSight
     JoinInstruction = Shapes::StructureShape.new(name: 'JoinInstruction')
     JoinType = Shapes::StringShape.new(name: 'JoinType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAnalysesRequest = Shapes::StructureShape.new(name: 'ListAnalysesRequest')
+    ListAnalysesResponse = Shapes::StructureShape.new(name: 'ListAnalysesResponse')
     ListDashboardVersionsRequest = Shapes::StructureShape.new(name: 'ListDashboardVersionsRequest')
     ListDashboardVersionsResponse = Shapes::StructureShape.new(name: 'ListDashboardVersionsResponse')
     ListDashboardsRequest = Shapes::StructureShape.new(name: 'ListDashboardsRequest')
@@ -257,6 +300,8 @@ module Aws::QuickSight
     ListIAMPolicyAssignmentsResponse = Shapes::StructureShape.new(name: 'ListIAMPolicyAssignmentsResponse')
     ListIngestionsRequest = Shapes::StructureShape.new(name: 'ListIngestionsRequest')
     ListIngestionsResponse = Shapes::StructureShape.new(name: 'ListIngestionsResponse')
+    ListNamespacesRequest = Shapes::StructureShape.new(name: 'ListNamespacesRequest')
+    ListNamespacesResponse = Shapes::StructureShape.new(name: 'ListNamespacesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTemplateAliasesRequest = Shapes::StructureShape.new(name: 'ListTemplateAliasesRequest')
@@ -288,6 +333,11 @@ module Aws::QuickSight
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MySqlParameters = Shapes::StructureShape.new(name: 'MySqlParameters')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
+    NamespaceError = Shapes::StructureShape.new(name: 'NamespaceError')
+    NamespaceErrorType = Shapes::StringShape.new(name: 'NamespaceErrorType')
+    NamespaceInfoV2 = Shapes::StructureShape.new(name: 'NamespaceInfoV2')
+    NamespaceStatus = Shapes::StringShape.new(name: 'NamespaceStatus')
+    Namespaces = Shapes::ListShape.new(name: 'Namespaces')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     OnClause = Shapes::StringShape.new(name: 'OnClause')
     OptionalPort = Shapes::IntegerShape.new(name: 'OptionalPort')
@@ -310,6 +360,7 @@ module Aws::QuickSight
     QueueInfo = Shapes::StructureShape.new(name: 'QueueInfo')
     QuickSightUserNotFoundException = Shapes::StructureShape.new(name: 'QuickSightUserNotFoundException')
     RdsParameters = Shapes::StructureShape.new(name: 'RdsParameters')
+    RecoveryWindowInDays = Shapes::IntegerShape.new(name: 'RecoveryWindowInDays')
     RedshiftParameters = Shapes::StructureShape.new(name: 'RedshiftParameters')
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
@@ -325,7 +376,10 @@ module Aws::QuickSight
     ResourcePermissionList = Shapes::ListShape.new(name: 'ResourcePermissionList')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
+    RestoreAnalysisRequest = Shapes::StructureShape.new(name: 'RestoreAnalysisRequest')
+    RestoreAnalysisResponse = Shapes::StructureShape.new(name: 'RestoreAnalysisResponse')
     RestrictiveResourceId = Shapes::StringShape.new(name: 'RestrictiveResourceId')
+    RoleName = Shapes::StringShape.new(name: 'RoleName')
     RoleSessionName = Shapes::StringShape.new(name: 'RoleSessionName')
     RowInfo = Shapes::StructureShape.new(name: 'RowInfo')
     RowLevelPermissionDataSet = Shapes::StructureShape.new(name: 'RowLevelPermissionDataSet')
@@ -334,6 +388,8 @@ module Aws::QuickSight
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Parameters = Shapes::StructureShape.new(name: 'S3Parameters')
     S3Source = Shapes::StructureShape.new(name: 'S3Source')
+    SearchAnalysesRequest = Shapes::StructureShape.new(name: 'SearchAnalysesRequest')
+    SearchAnalysesResponse = Shapes::StructureShape.new(name: 'SearchAnalysesResponse')
     SearchDashboardsRequest = Shapes::StructureShape.new(name: 'SearchDashboardsRequest')
     SearchDashboardsResponse = Shapes::StructureShape.new(name: 'SearchDashboardsResponse')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
@@ -404,6 +460,14 @@ module Aws::QuickSight
     UnsupportedUserEditionException = Shapes::StructureShape.new(name: 'UnsupportedUserEditionException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'UpdateAccountCustomizationRequest')
+    UpdateAccountCustomizationResponse = Shapes::StructureShape.new(name: 'UpdateAccountCustomizationResponse')
+    UpdateAccountSettingsRequest = Shapes::StructureShape.new(name: 'UpdateAccountSettingsRequest')
+    UpdateAccountSettingsResponse = Shapes::StructureShape.new(name: 'UpdateAccountSettingsResponse')
+    UpdateAnalysisPermissionsRequest = Shapes::StructureShape.new(name: 'UpdateAnalysisPermissionsRequest')
+    UpdateAnalysisPermissionsResponse = Shapes::StructureShape.new(name: 'UpdateAnalysisPermissionsResponse')
+    UpdateAnalysisRequest = Shapes::StructureShape.new(name: 'UpdateAnalysisRequest')
+    UpdateAnalysisResponse = Shapes::StructureShape.new(name: 'UpdateAnalysisResponse')
     UpdateDashboardPermissionsRequest = Shapes::StructureShape.new(name: 'UpdateDashboardPermissionsRequest')
     UpdateDashboardPermissionsResponse = Shapes::StructureShape.new(name: 'UpdateDashboardPermissionsResponse')
     UpdateDashboardPublishedVersionRequest = Shapes::StructureShape.new(name: 'UpdateDashboardPublishedVersionRequest')
@@ -457,6 +521,15 @@ module Aws::QuickSight
     AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AccountCustomization.add_member(:default_theme, Shapes::ShapeRef.new(shape: Arn, location_name: "DefaultTheme"))
+    AccountCustomization.struct_class = Types::AccountCustomization
+
+    AccountSettings.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountName"))
+    AccountSettings.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, location_name: "Edition"))
+    AccountSettings.add_member(:default_namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "DefaultNamespace"))
+    AccountSettings.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
+    AccountSettings.struct_class = Types::AccountSettings
+
     ActionList.member = Shapes::ShapeRef.new(shape: String)
 
     ActiveIAMPolicyAssignment.add_member(:assignment_name, Shapes::ShapeRef.new(shape: IAMPolicyAssignmentName, location_name: "AssignmentName"))
@@ -470,6 +543,47 @@ module Aws::QuickSight
 
     AmazonElasticsearchParameters.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
     AmazonElasticsearchParameters.struct_class = Types::AmazonElasticsearchParameters
+
+    Analysis.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    Analysis.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    Analysis.add_member(:name, Shapes::ShapeRef.new(shape: AnalysisName, location_name: "Name"))
+    Analysis.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "Status"))
+    Analysis.add_member(:errors, Shapes::ShapeRef.new(shape: AnalysisErrorList, location_name: "Errors"))
+    Analysis.add_member(:data_set_arns, Shapes::ShapeRef.new(shape: DataSetArnsList, location_name: "DataSetArns"))
+    Analysis.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    Analysis.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Analysis.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    Analysis.struct_class = Types::Analysis
+
+    AnalysisError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisErrorType, location_name: "Type"))
+    AnalysisError.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AnalysisError.struct_class = Types::AnalysisError
+
+    AnalysisErrorList.member = Shapes::ShapeRef.new(shape: AnalysisError)
+
+    AnalysisSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, location_name: "Operator"))
+    AnalysisSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: AnalysisFilterAttribute, location_name: "Name"))
+    AnalysisSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    AnalysisSearchFilter.struct_class = Types::AnalysisSearchFilter
+
+    AnalysisSearchFilterList.member = Shapes::ShapeRef.new(shape: AnalysisSearchFilter)
+
+    AnalysisSourceEntity.add_member(:source_template, Shapes::ShapeRef.new(shape: AnalysisSourceTemplate, location_name: "SourceTemplate"))
+    AnalysisSourceEntity.struct_class = Types::AnalysisSourceEntity
+
+    AnalysisSourceTemplate.add_member(:data_set_references, Shapes::ShapeRef.new(shape: DataSetReferenceList, required: true, location_name: "DataSetReferences"))
+    AnalysisSourceTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    AnalysisSourceTemplate.struct_class = Types::AnalysisSourceTemplate
+
+    AnalysisSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AnalysisSummary.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    AnalysisSummary.add_member(:name, Shapes::ShapeRef.new(shape: AnalysisName, location_name: "Name"))
+    AnalysisSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "Status"))
+    AnalysisSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    AnalysisSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    AnalysisSummary.struct_class = Types::AnalysisSummary
+
+    AnalysisSummaryList.member = Shapes::ShapeRef.new(shape: AnalysisSummary)
 
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     AthenaParameters.struct_class = Types::AthenaParameters
@@ -552,6 +666,35 @@ module Aws::QuickSight
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    CreateAccountCustomizationRequest.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, required: true, location_name: "AccountCustomization"))
+    CreateAccountCustomizationRequest.struct_class = Types::CreateAccountCustomizationRequest
+
+    CreateAccountCustomizationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    CreateAccountCustomizationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    CreateAccountCustomizationResponse.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, location_name: "AccountCustomization"))
+    CreateAccountCustomizationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateAccountCustomizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateAccountCustomizationResponse.struct_class = Types::CreateAccountCustomizationResponse
+
+    CreateAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    CreateAnalysisRequest.add_member(:name, Shapes::ShapeRef.new(shape: AnalysisName, required: true, location_name: "Name"))
+    CreateAnalysisRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
+    CreateAnalysisRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    CreateAnalysisRequest.add_member(:source_entity, Shapes::ShapeRef.new(shape: AnalysisSourceEntity, required: true, location_name: "SourceEntity"))
+    CreateAnalysisRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    CreateAnalysisRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAnalysisRequest.struct_class = Types::CreateAnalysisRequest
+
+    CreateAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    CreateAnalysisResponse.add_member(:creation_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "CreationStatus"))
+    CreateAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateAnalysisResponse.struct_class = Types::CreateAnalysisResponse
 
     CreateColumnsOperation.add_member(:columns, Shapes::ShapeRef.new(shape: CalculatedColumnList, required: true, location_name: "Columns"))
     CreateColumnsOperation.struct_class = Types::CreateColumnsOperation
@@ -665,6 +808,21 @@ module Aws::QuickSight
     CreateIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: string, location_name: "RequestId"))
     CreateIngestionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateIngestionResponse.struct_class = Types::CreateIngestionResponse
+
+    CreateNamespaceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
+    CreateNamespaceRequest.add_member(:identity_store, Shapes::ShapeRef.new(shape: IdentityStore, required: true, location_name: "IdentityStore"))
+    CreateNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateNamespaceRequest.struct_class = Types::CreateNamespaceRequest
+
+    CreateNamespaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateNamespaceResponse.add_member(:name, Shapes::ShapeRef.new(shape: Namespace, location_name: "Name"))
+    CreateNamespaceResponse.add_member(:capacity_region, Shapes::ShapeRef.new(shape: String, location_name: "CapacityRegion"))
+    CreateNamespaceResponse.add_member(:creation_status, Shapes::ShapeRef.new(shape: NamespaceStatus, location_name: "CreationStatus"))
+    CreateNamespaceResponse.add_member(:identity_store, Shapes::ShapeRef.new(shape: IdentityStore, location_name: "IdentityStore"))
+    CreateNamespaceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateNamespaceResponse.struct_class = Types::CreateNamespaceResponse
 
     CreateTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
@@ -787,6 +945,7 @@ module Aws::QuickSight
     DashboardVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
     DashboardVersion.add_member(:data_set_arns, Shapes::ShapeRef.new(shape: DataSetArnsList, location_name: "DataSetArns"))
     DashboardVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
+    DashboardVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     DashboardVersion.struct_class = Types::DashboardVersion
 
     DashboardVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -906,6 +1065,27 @@ module Aws::QuickSight
 
     DecimalParameterList.member = Shapes::ShapeRef.new(shape: DecimalParameter)
 
+    DeleteAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    DeleteAccountCustomizationRequest.struct_class = Types::DeleteAccountCustomizationRequest
+
+    DeleteAccountCustomizationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteAccountCustomizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteAccountCustomizationResponse.struct_class = Types::DeleteAccountCustomizationResponse
+
+    DeleteAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    DeleteAnalysisRequest.add_member(:recovery_window_in_days, Shapes::ShapeRef.new(shape: RecoveryWindowInDays, location: "querystring", location_name: "recovery-window-in-days"))
+    DeleteAnalysisRequest.add_member(:force_delete_without_recovery, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "force-delete-without-recovery"))
+    DeleteAnalysisRequest.struct_class = Types::DeleteAnalysisRequest
+
+    DeleteAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DeleteAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    DeleteAnalysisResponse.add_member(:deletion_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletionTime"))
+    DeleteAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteAnalysisResponse.struct_class = Types::DeleteAnalysisResponse
+
     DeleteDashboardRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteDashboardRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
     DeleteDashboardRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version-number"))
@@ -965,6 +1145,14 @@ module Aws::QuickSight
     DeleteIAMPolicyAssignmentResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteIAMPolicyAssignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteIAMPolicyAssignmentResponse.struct_class = Types::DeleteIAMPolicyAssignmentResponse
+
+    DeleteNamespaceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    DeleteNamespaceRequest.struct_class = Types::DeleteNamespaceRequest
+
+    DeleteNamespaceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteNamespaceResponse.struct_class = Types::DeleteNamespaceResponse
 
     DeleteTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
@@ -1029,6 +1217,46 @@ module Aws::QuickSight
     DeleteUserResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteUserResponse.struct_class = Types::DeleteUserResponse
+
+    DescribeAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    DescribeAccountCustomizationRequest.add_member(:resolved, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "resolved"))
+    DescribeAccountCustomizationRequest.struct_class = Types::DescribeAccountCustomizationRequest
+
+    DescribeAccountCustomizationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    DescribeAccountCustomizationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    DescribeAccountCustomizationResponse.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, location_name: "AccountCustomization"))
+    DescribeAccountCustomizationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAccountCustomizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeAccountCustomizationResponse.struct_class = Types::DescribeAccountCustomizationResponse
+
+    DescribeAccountSettingsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAccountSettingsRequest.struct_class = Types::DescribeAccountSettingsRequest
+
+    DescribeAccountSettingsResponse.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "AccountSettings"))
+    DescribeAccountSettingsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAccountSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeAccountSettingsResponse.struct_class = Types::DescribeAccountSettingsResponse
+
+    DescribeAnalysisPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAnalysisPermissionsRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    DescribeAnalysisPermissionsRequest.struct_class = Types::DescribeAnalysisPermissionsRequest
+
+    DescribeAnalysisPermissionsResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    DescribeAnalysisPermissionsResponse.add_member(:analysis_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnalysisArn"))
+    DescribeAnalysisPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeAnalysisPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeAnalysisPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAnalysisPermissionsResponse.struct_class = Types::DescribeAnalysisPermissionsResponse
+
+    DescribeAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    DescribeAnalysisRequest.struct_class = Types::DescribeAnalysisRequest
+
+    DescribeAnalysisResponse.add_member(:analysis, Shapes::ShapeRef.new(shape: Analysis, location_name: "Analysis"))
+    DescribeAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAnalysisResponse.struct_class = Types::DescribeAnalysisResponse
 
     DescribeDashboardPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeDashboardPermissionsRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
@@ -1121,6 +1349,15 @@ module Aws::QuickSight
     DescribeIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: string, location_name: "RequestId"))
     DescribeIngestionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeIngestionResponse.struct_class = Types::DescribeIngestionResponse
+
+    DescribeNamespaceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    DescribeNamespaceRequest.struct_class = Types::DescribeNamespaceRequest
+
+    DescribeNamespaceResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceInfoV2, location_name: "Namespace"))
+    DescribeNamespaceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeNamespaceResponse.struct_class = Types::DescribeNamespaceResponse
 
     DescribeTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
@@ -1231,6 +1468,17 @@ module Aws::QuickSight
     GetDashboardEmbedUrlResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     GetDashboardEmbedUrlResponse.struct_class = Types::GetDashboardEmbedUrlResponse
 
+    GetSessionEmbedUrlRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    GetSessionEmbedUrlRequest.add_member(:entry_point, Shapes::ShapeRef.new(shape: EntryPoint, location: "querystring", location_name: "entry-point"))
+    GetSessionEmbedUrlRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location: "querystring", location_name: "session-lifetime"))
+    GetSessionEmbedUrlRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "user-arn"))
+    GetSessionEmbedUrlRequest.struct_class = Types::GetSessionEmbedUrlRequest
+
+    GetSessionEmbedUrlResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, location_name: "EmbedUrl"))
+    GetSessionEmbedUrlResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    GetSessionEmbedUrlResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    GetSessionEmbedUrlResponse.struct_class = Types::GetSessionEmbedUrlResponse
+
     Group.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Group.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
     Group.add_member(:description, Shapes::ShapeRef.new(shape: GroupDescription, location_name: "Description"))
@@ -1323,6 +1571,17 @@ module Aws::QuickSight
     LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))
     LimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListAnalysesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListAnalysesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListAnalysesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListAnalysesRequest.struct_class = Types::ListAnalysesRequest
+
+    ListAnalysesResponse.add_member(:analysis_summary_list, Shapes::ShapeRef.new(shape: AnalysisSummaryList, location_name: "AnalysisSummaryList"))
+    ListAnalysesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAnalysesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListAnalysesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListAnalysesResponse.struct_class = Types::ListAnalysesResponse
 
     ListDashboardVersionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListDashboardVersionsRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
@@ -1431,6 +1690,17 @@ module Aws::QuickSight
     ListIngestionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: string, location_name: "RequestId"))
     ListIngestionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListIngestionsResponse.struct_class = Types::ListIngestionsResponse
+
+    ListNamespacesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListNamespacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListNamespacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListNamespacesRequest.struct_class = Types::ListNamespacesRequest
+
+    ListNamespacesResponse.add_member(:namespaces, Shapes::ShapeRef.new(shape: Namespaces, location_name: "Namespaces"))
+    ListNamespacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListNamespacesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListNamespacesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListNamespacesResponse.struct_class = Types::ListNamespacesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1567,6 +1837,20 @@ module Aws::QuickSight
     MySqlParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     MySqlParameters.struct_class = Types::MySqlParameters
 
+    NamespaceError.add_member(:type, Shapes::ShapeRef.new(shape: NamespaceErrorType, location_name: "Type"))
+    NamespaceError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NamespaceError.struct_class = Types::NamespaceError
+
+    NamespaceInfoV2.add_member(:name, Shapes::ShapeRef.new(shape: Namespace, location_name: "Name"))
+    NamespaceInfoV2.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    NamespaceInfoV2.add_member(:capacity_region, Shapes::ShapeRef.new(shape: String, location_name: "CapacityRegion"))
+    NamespaceInfoV2.add_member(:creation_status, Shapes::ShapeRef.new(shape: NamespaceStatus, location_name: "CreationStatus"))
+    NamespaceInfoV2.add_member(:identity_store, Shapes::ShapeRef.new(shape: IdentityStore, location_name: "IdentityStore"))
+    NamespaceInfoV2.add_member(:namespace_error, Shapes::ShapeRef.new(shape: NamespaceError, location_name: "NamespaceError"))
+    NamespaceInfoV2.struct_class = Types::NamespaceInfoV2
+
+    Namespaces.member = Shapes::ShapeRef.new(shape: NamespaceInfoV2)
+
     OutputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "Name"))
     OutputColumn.add_member(:type, Shapes::ShapeRef.new(shape: ColumnDataType, location_name: "Type"))
     OutputColumn.struct_class = Types::OutputColumn
@@ -1632,6 +1916,7 @@ module Aws::QuickSight
     RegisterUserRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     RegisterUserRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     RegisterUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
+    RegisterUserRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "CustomPermissionsName"))
     RegisterUserRequest.struct_class = Types::RegisterUserRequest
 
     RegisterUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
@@ -1671,10 +1956,21 @@ module Aws::QuickSight
     ResourceUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
 
+    RestoreAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    RestoreAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    RestoreAnalysisRequest.struct_class = Types::RestoreAnalysisRequest
+
+    RestoreAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    RestoreAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    RestoreAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    RestoreAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    RestoreAnalysisResponse.struct_class = Types::RestoreAnalysisResponse
+
     RowInfo.add_member(:rows_ingested, Shapes::ShapeRef.new(shape: long, location_name: "RowsIngested", metadata: {"box"=>true}))
     RowInfo.add_member(:rows_dropped, Shapes::ShapeRef.new(shape: long, location_name: "RowsDropped", metadata: {"box"=>true}))
     RowInfo.struct_class = Types::RowInfo
 
+    RowLevelPermissionDataSet.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     RowLevelPermissionDataSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     RowLevelPermissionDataSet.add_member(:permission_policy, Shapes::ShapeRef.new(shape: RowLevelPermissionPolicy, required: true, location_name: "PermissionPolicy"))
     RowLevelPermissionDataSet.struct_class = Types::RowLevelPermissionDataSet
@@ -1687,10 +1983,22 @@ module Aws::QuickSight
     S3Source.add_member(:input_columns, Shapes::ShapeRef.new(shape: InputColumnList, required: true, location_name: "InputColumns"))
     S3Source.struct_class = Types::S3Source
 
+    SearchAnalysesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchAnalysesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalysisSearchFilterList, required: true, location_name: "Filters"))
+    SearchAnalysesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchAnalysesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchAnalysesRequest.struct_class = Types::SearchAnalysesRequest
+
+    SearchAnalysesResponse.add_member(:analysis_summary_list, Shapes::ShapeRef.new(shape: AnalysisSummaryList, location_name: "AnalysisSummaryList"))
+    SearchAnalysesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchAnalysesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    SearchAnalysesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchAnalysesResponse.struct_class = Types::SearchAnalysesResponse
+
     SearchDashboardsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchDashboardsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DashboardSearchFilterList, required: true, location_name: "Filters"))
     SearchDashboardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    SearchDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     SearchDashboardsRequest.struct_class = Types::SearchDashboardsRequest
 
     SearchDashboardsResponse.add_member(:dashboard_summary_list, Shapes::ShapeRef.new(shape: DashboardSummaryList, location_name: "DashboardSummaryList"))
@@ -1807,6 +2115,7 @@ module Aws::QuickSight
     TemplateVersion.add_member(:data_set_configurations, Shapes::ShapeRef.new(shape: DataSetConfigurationList, location_name: "DataSetConfigurations"))
     TemplateVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     TemplateVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
+    TemplateVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     TemplateVersion.struct_class = Types::TemplateVersion
 
     TemplateVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -1935,6 +2244,55 @@ module Aws::QuickSight
     UntagResourceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UntagResourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    UpdateAccountCustomizationRequest.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, required: true, location_name: "AccountCustomization"))
+    UpdateAccountCustomizationRequest.struct_class = Types::UpdateAccountCustomizationRequest
+
+    UpdateAccountCustomizationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    UpdateAccountCustomizationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    UpdateAccountCustomizationResponse.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, location_name: "AccountCustomization"))
+    UpdateAccountCustomizationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateAccountCustomizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateAccountCustomizationResponse.struct_class = Types::UpdateAccountCustomizationResponse
+
+    UpdateAccountSettingsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAccountSettingsRequest.add_member(:default_namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "DefaultNamespace"))
+    UpdateAccountSettingsRequest.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
+    UpdateAccountSettingsRequest.struct_class = Types::UpdateAccountSettingsRequest
+
+    UpdateAccountSettingsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateAccountSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateAccountSettingsResponse.struct_class = Types::UpdateAccountSettingsResponse
+
+    UpdateAnalysisPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAnalysisPermissionsRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    UpdateAnalysisPermissionsRequest.add_member(:grant_permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "GrantPermissions"))
+    UpdateAnalysisPermissionsRequest.add_member(:revoke_permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "RevokePermissions"))
+    UpdateAnalysisPermissionsRequest.struct_class = Types::UpdateAnalysisPermissionsRequest
+
+    UpdateAnalysisPermissionsResponse.add_member(:analysis_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnalysisArn"))
+    UpdateAnalysisPermissionsResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    UpdateAnalysisPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateAnalysisPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateAnalysisPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateAnalysisPermissionsResponse.struct_class = Types::UpdateAnalysisPermissionsResponse
+
+    UpdateAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    UpdateAnalysisRequest.add_member(:name, Shapes::ShapeRef.new(shape: AnalysisName, required: true, location_name: "Name"))
+    UpdateAnalysisRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
+    UpdateAnalysisRequest.add_member(:source_entity, Shapes::ShapeRef.new(shape: AnalysisSourceEntity, required: true, location_name: "SourceEntity"))
+    UpdateAnalysisRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    UpdateAnalysisRequest.struct_class = Types::UpdateAnalysisRequest
+
+    UpdateAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    UpdateAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
+    UpdateAnalysisResponse.add_member(:update_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "UpdateStatus"))
+    UpdateAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateAnalysisResponse.struct_class = Types::UpdateAnalysisResponse
 
     UpdateDashboardPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateDashboardPermissionsRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
@@ -2150,6 +2508,8 @@ module Aws::QuickSight
     UpdateUserRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     UpdateUserRequest.add_member(:email, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Email"))
     UpdateUserRequest.add_member(:role, Shapes::ShapeRef.new(shape: UserRole, required: true, location_name: "Role"))
+    UpdateUserRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "CustomPermissionsName"))
+    UpdateUserRequest.add_member(:unapply_custom_permissions, Shapes::ShapeRef.new(shape: Boolean, location_name: "UnapplyCustomPermissions"))
     UpdateUserRequest.struct_class = Types::UpdateUserRequest
 
     UpdateUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
@@ -2171,6 +2531,7 @@ module Aws::QuickSight
     User.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
     User.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "Active"))
     User.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "PrincipalId"))
+    User.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "CustomPermissionsName"))
     User.struct_class = Types::User
 
     UserList.member = Shapes::ShapeRef.new(shape: User)
@@ -2206,6 +2567,36 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_account_customization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccountCustomization"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/customizations"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccountCustomizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccountCustomizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:create_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -2319,6 +2710,24 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:create_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNamespace"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
       api.add_operation(:create_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTemplate"
         o.http_method = "POST"
@@ -2380,6 +2789,34 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_account_customization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountCustomization"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/customizations"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountCustomizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccountCustomizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:delete_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAnalysis"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
@@ -2469,6 +2906,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNamespace"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
       api.add_operation(:delete_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTemplate"
         o.http_method = "DELETE"
@@ -2536,6 +2988,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
@@ -2550,8 +3003,64 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:describe_account_customization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountCustomization"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/customizations"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountCustomizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountCustomizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:describe_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/settings"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:describe_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAnalysis"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_analysis_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAnalysisPermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/analyses/{AnalysisId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAnalysisPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAnalysisPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:describe_dashboard, Seahorse::Model::Operation.new.tap do |o|
@@ -2676,6 +3185,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:describe_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNamespace"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
       api.add_operation(:describe_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTemplate"
         o.http_method = "GET"
@@ -2771,6 +3294,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
@@ -2792,6 +3316,41 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: SessionLifetimeInMinutesInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_session_embed_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSessionEmbedUrl"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/session-embed-url"
+        o.input = Shapes::ShapeRef.new(shape: GetSessionEmbedUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSessionEmbedUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: QuickSightUserNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: SessionLifetimeInMinutesInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_analyses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAnalyses"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/analyses"
+        o.input = Shapes::ShapeRef.new(shape: ListAnalysesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAnalysesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_dashboard_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -2952,6 +3511,28 @@ module Aws::QuickSight
         )
       end)
 
+      api.add_operation(:list_namespaces, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNamespaces"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces"
+        o.input = Shapes::ShapeRef.new(shape: ListNamespacesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNamespacesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -3079,6 +3660,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
@@ -3094,6 +3676,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
@@ -3113,6 +3696,40 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:restore_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/restore/analyses/{AnalysisId}"
+        o.input = Shapes::ShapeRef.new(shape: RestoreAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:search_analyses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchAnalyses"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/search/analyses"
+        o.input = Shapes::ShapeRef.new(shape: SearchAnalysesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchAnalysesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:search_dashboards, Seahorse::Model::Operation.new.tap do |o|
@@ -3159,6 +3776,63 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_account_customization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountCustomization"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/customizations"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountCustomizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountCustomizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:update_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:update_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAnalysis"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_analysis_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAnalysisPermissions"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/analyses/{AnalysisId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAnalysisPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAnalysisPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -3392,6 +4066,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)

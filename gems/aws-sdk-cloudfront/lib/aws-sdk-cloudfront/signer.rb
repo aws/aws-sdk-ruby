@@ -3,7 +3,6 @@
 require 'base64'
 require 'uri'
 require 'time'
-require 'json'
 require 'openssl'
 
 module Aws
@@ -112,7 +111,7 @@ module Aws
               }
           ]
         }
-        JSON.dump(json_hash)
+        Aws::Json.dump(json_hash)
       end
 
       def encode(policy)

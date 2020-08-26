@@ -44,9 +44,9 @@ require_relative 'aws-sdk-importexport/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::ImportExport
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

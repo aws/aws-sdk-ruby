@@ -39,8 +39,8 @@ module Aws
           context.params[:body] = IOEncrypter.new(cipher, io)
           context.params[:metadata] ||= {}
           context.params[:metadata]['x-amz-unencrypted-content-length'] = io.size
-          if md5 = context.params.delete(:content_md5)
-            context.params[:metadata]['x-amz-unencrypted-content-md5'] = md5
+          if context.params.delete(:content_md5)
+            warn('Setting content_md5 on client side encrypted objects is deprecated')
           end
           context.http_response.on_headers do
             context.params[:body].close
@@ -49,9 +49,9 @@ module Aws
 
         def apply_cse_user_agent(context)
           if context.config.user_agent_suffix.nil?
-            context.config.user_agent_suffix = 'CSE_V1'
-          elsif !context.config.user_agent_suffix.include? 'CSE_V1'
-            context.config.user_agent_suffix += ' CSE_V1'
+            context.config.user_agent_suffix = EC_USER_AGENT
+          elsif !context.config.user_agent_suffix.include? EC_USER_AGENT
+            context.config.user_agent_suffix += " #{EC_USER_AGENT}"
           end
         end
 

@@ -46,9 +46,9 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::TranscribeStreamingService
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.19.0'
 
 end

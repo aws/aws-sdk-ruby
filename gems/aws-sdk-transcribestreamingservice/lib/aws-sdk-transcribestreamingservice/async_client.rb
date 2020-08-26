@@ -68,13 +68,28 @@ module Aws::TranscribeStreamingService
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -84,10 +99,10 @@ module Aws::TranscribeStreamingService
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -244,7 +259,7 @@ module Aws::TranscribeStreamingService
     #   8000 Hz for low quality audio and 16000 Hz for high quality audio.
     #
     # @option params [required, String] :media_encoding
-    #   The encoding used for the input audio.
+    #   The encoding used for the input audio. `pcm` is the only valid value.
     #
     # @option params [String] :vocabulary_name
     #   The name of the vocabulary to use when processing the transcription
@@ -258,7 +273,7 @@ module Aws::TranscribeStreamingService
     #
     # @option params [String] :vocabulary_filter_name
     #   The name of the vocabulary filter you've created that is unique to
-    #   your AWS accountf. Provide the name in this field to successfully use
+    #   your AWS account. Provide the name in this field to successfully use
     #   it in a stream.
     #
     # @option params [String] :vocabulary_filter_method
@@ -268,6 +283,9 @@ module Aws::TranscribeStreamingService
     #   transcription results. `Tag` keeps the filtered words in your
     #   transcription results and tags them. The tag appears as
     #   `VocabularyFilterMatch` equal to `True`
+    #
+    # @option params [Boolean] :show_speaker_label
+    #   When `true`, enables speaker identification in your real-time stream.
     #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -280,6 +298,7 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#transcript_result_stream #transcript_result_stream} => Types::TranscriptResultStream
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_name #vocabulary_filter_name} => String
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_method #vocabulary_filter_method} => String
+    #   * {Types::StartStreamTranscriptionResponse#show_speaker_label #show_speaker_label} => Boolean
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -384,6 +403,7 @@ module Aws::TranscribeStreamingService
     #     input_event_stream_hander: EventStreams::AudioStream.new,
     #     vocabulary_filter_name: "VocabularyFilterName",
     #     vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #     show_speaker_label: false,
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -416,6 +436,7 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items[0].type #=> String, one of "pronunciation", "punctuation"
     #   event.transcript.results[0].alternatives[0].items[0].content #=> String
     #   event.transcript.results[0].alternatives[0].items[0].vocabulary_filter_match #=> Boolean
+    #   event.transcript.results[0].alternatives[0].items[0].speaker #=> String
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -434,6 +455,7 @@ module Aws::TranscribeStreamingService
     #
     #   resp.vocabulary_filter_name #=> String
     #   resp.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.show_speaker_label #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -478,7 +500,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

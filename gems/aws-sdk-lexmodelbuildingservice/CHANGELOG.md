@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-08-06)
+------------------
+
+* Feature - Amazon Lex supports the option to enable accuracy improvements and specify an intent classification confidence score threshold.
+
 1.33.0 (2020-06-23)
 ------------------
 

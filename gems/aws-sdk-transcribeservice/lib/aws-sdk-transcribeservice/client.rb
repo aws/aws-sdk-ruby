@@ -85,13 +85,28 @@ module Aws::TranscribeService
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::TranscribeService
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -322,37 +337,103 @@ module Aws::TranscribeService
 
     # @!group API Operations
 
+    # Creates a new custom language model. Use Amazon S3 prefixes to provide
+    # the location of your input files. The time it takes to create your
+    # model depends on the size of your training data.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input text you're using to train your custom
+    #   language model.
+    #
+    # @option params [required, String] :base_model_name
+    #   The Amazon Transcribe standard language model, or base model used to
+    #   create your custom language model.
+    #
+    #   If you want to use your custom language model to transcribe audio with
+    #   a sample rate of 16 kHz or greater, choose `Wideband`.
+    #
+    #   If you want to use your custom language model to transcribe audio with
+    #   a sample rate that is less than 16 kHz, choose `Narrowband`.
+    #
+    # @option params [required, String] :model_name
+    #   The name you choose for your custom language model when you create it.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Contains the data access role and the Amazon S3 prefixes to read the
+    #   required input files to create a custom language model.
+    #
+    # @return [Types::CreateLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLanguageModelResponse#language_code #language_code} => String
+    #   * {Types::CreateLanguageModelResponse#base_model_name #base_model_name} => String
+    #   * {Types::CreateLanguageModelResponse#model_name #model_name} => String
+    #   * {Types::CreateLanguageModelResponse#input_data_config #input_data_config} => Types::InputDataConfig
+    #   * {Types::CreateLanguageModelResponse#model_status #model_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_language_model({
+    #     language_code: "en-US", # required, accepts en-US
+    #     base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
+    #     model_name: "ModelName", # required
+    #     input_data_config: { # required
+    #       s3_uri: "Uri", # required
+    #       tuning_data_s3_uri: "Uri",
+    #       data_access_role_arn: "DataAccessRoleArn", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.language_code #=> String, one of "en-US"
+    #   resp.base_model_name #=> String, one of "NarrowBand", "WideBand"
+    #   resp.model_name #=> String
+    #   resp.input_data_config.s3_uri #=> String
+    #   resp.input_data_config.tuning_data_s3_uri #=> String
+    #   resp.input_data_config.data_access_role_arn #=> String
+    #   resp.model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateLanguageModel AWS API Documentation
+    #
+    # @overload create_language_model(params = {})
+    # @param [Hash] params ({})
+    def create_language_model(params = {}, options = {})
+      req = build_request(:create_language_model, params)
+      req.send_request(options)
+    end
+
     # Creates a new custom vocabulary that you can use to change how Amazon
     # Transcribe Medical transcribes your audio file.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the custom vocabulary. This case-sensitive name must be
     #   unique within an AWS account. If you try to create a vocabulary with
-    #   the same name as a previous vocabulary you will receive a
-    #   `ConflictException` error.
+    #   the same name as a previous vocabulary, you get a `ConflictException`
+    #   error.
     #
     # @option params [required, String] :language_code
-    #   The language code used for the entries within your custom vocabulary.
-    #   The language code of your custom vocabulary must match the language
-    #   code of your transcription job. US English (en-US) is the only
-    #   language code available for Amazon Transcribe Medical.
+    #   The language code for the language used for the entries in your custom
+    #   vocabulary. The language code of your custom vocabulary must match the
+    #   language code of your transcription job. US English (en-US) is the
+    #   only language code available for Amazon Transcribe Medical.
     #
     # @option params [required, String] :vocabulary_file_uri
-    #   The Amazon S3 location of the text file you use to define your custom
-    #   vocabulary. The URI must be in the same AWS region as the API endpoint
-    #   you're calling. Enter information about your `VocabularyFileUri` in
-    #   the following format:
+    #   The location in Amazon S3 of the text file you use to define your
+    #   custom vocabulary. The URI must be in the same AWS Region as the
+    #   resource that you're calling. Enter information about your
+    #   `VocabularyFileUri` in the following format:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
-    #   This is an example of a vocabulary file uri location in Amazon S3:
+    #   The following is an example URI for a vocabulary file that is stored
+    #   in Amazon S3:
     #
     #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
-    #   For more information about S3 object names, see [Object Keys][1] in
-    #   the *Amazon S3 Developer Guide*.
+    #   For more information about Amazon S3 object names, see [Object
+    #   Keys][1] in the *Amazon S3 Developer Guide*.
     #
     #   For more information about custom vocabularies, see [Medical Custom
     #   Vocabularies][2].
@@ -374,14 +455,14 @@ module Aws::TranscribeService
     #
     #   resp = client.create_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     vocabulary_file_uri: "Uri", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -400,7 +481,7 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary. The name must be unique within an AWS
-    #   account. The name is case-sensitive. If you try to create a vocabulary
+    #   account. The name is case sensitive. If you try to create a vocabulary
     #   with the same name as a previous vocabulary you will receive a
     #   `ConflictException` error.
     #
@@ -438,7 +519,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -446,7 +527,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -465,9 +546,9 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :vocabulary_filter_name
     #   The vocabulary filter name. The name must be unique within the account
-    #   that contains it.If you try to create a vocabulary filter with the
-    #   same name as a previous vocabulary filter you will receive a
-    #   `ConflictException` error.
+    #   that contains it. If you try to create a vocabulary filter with the
+    #   same name as another vocabulary filter, you get a `ConflictException`
+    #   error.
     #
     # @option params [required, String] :language_code
     #   The language code of the words in the vocabulary filter. All words in
@@ -512,7 +593,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary_filter({
     #     vocabulary_filter_name: "VocabularyFilterName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
     #   })
@@ -520,7 +601,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilter AWS API Documentation
@@ -529,6 +610,28 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def create_vocabulary_filter(params = {}, options = {})
       req = build_request(:create_vocabulary_filter, params)
+      req.send_request(options)
+    end
+
+    # Deletes a custom language model using its name.
+    #
+    # @option params [required, String] :model_name
+    #   The name of the model you're choosing to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_language_model({
+    #     model_name: "ModelName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteLanguageModel AWS API Documentation
+    #
+    # @overload delete_language_model(params = {})
+    # @param [Hash] params ({})
+    def delete_language_model(params = {}, options = {})
+      req = build_request(:delete_language_model, params)
       req.send_request(options)
     end
 
@@ -559,7 +662,7 @@ module Aws::TranscribeService
     # Deletes a vocabulary from Amazon Transcribe Medical.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary you are choosing to delete.
+    #   The name of the vocabulary that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -645,6 +748,52 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Gets information about a single custom language model. Use this
+    # information to see details about the language model in your AWS
+    # account. You can also see whether the base language model used to
+    # create your custom language model has been updated. If Amazon
+    # Transcribe has updated the base model, you can create a new custom
+    # language model using the updated base model. If the language model
+    # wasn't created, you can use this operation to understand why Amazon
+    # Transcribe couldn't create it.
+    #
+    # @option params [required, String] :model_name
+    #   The name of the custom language model you submit to get more
+    #   information.
+    #
+    # @return [Types::DescribeLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLanguageModelResponse#language_model #language_model} => Types::LanguageModel
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_language_model({
+    #     model_name: "ModelName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.language_model.model_name #=> String
+    #   resp.language_model.create_time #=> Time
+    #   resp.language_model.last_modified_time #=> Time
+    #   resp.language_model.language_code #=> String, one of "en-US"
+    #   resp.language_model.base_model_name #=> String, one of "NarrowBand", "WideBand"
+    #   resp.language_model.model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.language_model.upgrade_availability #=> Boolean
+    #   resp.language_model.failure_reason #=> String
+    #   resp.language_model.input_data_config.s3_uri #=> String
+    #   resp.language_model.input_data_config.tuning_data_s3_uri #=> String
+    #   resp.language_model.input_data_config.data_access_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DescribeLanguageModel AWS API Documentation
+    #
+    # @overload describe_language_model(params = {})
+    # @param [Hash] params ({})
+    def describe_language_model(params = {}, options = {})
+      req = build_request(:describe_language_model, params)
+      req.send_request(options)
+    end
+
     # Returns information about a transcription job from Amazon Transcribe
     # Medical. To see the status of the job, check the
     # `TranscriptionJobStatus` field. If the status is `COMPLETED`, the job
@@ -668,7 +817,7 @@ module Aws::TranscribeService
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
@@ -695,11 +844,11 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Retrieve information about a medical vocabulary.
+    # Retrieves information about a medical vocabulary.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary you are trying to get information about.
-    #   The value you enter for this request is case-sensitive.
+    #   The name of the vocabulary that you want information about. The value
+    #   is case sensitive.
     #
     # @return [Types::GetMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -719,7 +868,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -758,7 +907,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -776,6 +925,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
     #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
@@ -794,7 +944,7 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary to return information about. The name is
-    #   case-sensitive.
+    #   case sensitive.
     #
     # @return [Types::GetVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -814,7 +964,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -850,7 +1000,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.last_modified_time #=> Time
     #   resp.download_uri #=> String
     #
@@ -860,6 +1010,71 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def get_vocabulary_filter(params = {}, options = {})
       req = build_request(:get_vocabulary_filter, params)
+      req.send_request(options)
+    end
+
+    # Provides more information about the custom language models you've
+    # created. You can use the information in this list to find a specific
+    # custom language model. You can then use the operation to get more
+    # information about it.
+    #
+    # @option params [String] :status_equals
+    #   When specified, returns only custom language models with the specified
+    #   status. Language models are ordered by creation date, with the newest
+    #   models first. If you don't specify a status, Amazon Transcribe
+    #   returns all custom language models ordered by date.
+    #
+    # @option params [String] :name_contains
+    #   When specified, the custom language model names returned contain the
+    #   substring you've specified.
+    #
+    # @option params [String] :next_token
+    #   When included, fetches the next set of jobs if the result of the
+    #   previous request was truncated.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of language models to return in the response. If
+    #   there are fewer results in the list, the response contains only the
+    #   actual results.
+    #
+    # @return [Types::ListLanguageModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLanguageModelsResponse#next_token #next_token} => String
+    #   * {Types::ListLanguageModelsResponse#models #models} => Array&lt;Types::LanguageModel&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_language_models({
+    #     status_equals: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, COMPLETED
+    #     name_contains: "ModelName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.models #=> Array
+    #   resp.models[0].model_name #=> String
+    #   resp.models[0].create_time #=> Time
+    #   resp.models[0].last_modified_time #=> Time
+    #   resp.models[0].language_code #=> String, one of "en-US"
+    #   resp.models[0].base_model_name #=> String, one of "NarrowBand", "WideBand"
+    #   resp.models[0].model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.models[0].upgrade_availability #=> Boolean
+    #   resp.models[0].failure_reason #=> String
+    #   resp.models[0].input_data_config.s3_uri #=> String
+    #   resp.models[0].input_data_config.tuning_data_s3_uri #=> String
+    #   resp.models[0].input_data_config.data_access_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListLanguageModels AWS API Documentation
+    #
+    # @overload list_language_models(params = {})
+    # @param [Hash] params ({})
+    def list_language_models(params = {}, options = {})
+      req = build_request(:list_language_models, params)
       req.send_request(options)
     end
 
@@ -912,7 +1127,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job_summaries[0].creation_time #=> Time
     #   resp.medical_transcription_job_summaries[0].start_time #=> Time
     #   resp.medical_transcription_job_summaries[0].completion_time #=> Time
-    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.medical_transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.medical_transcription_job_summaries[0].failure_reason #=> String
     #   resp.medical_transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -928,26 +1143,27 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Returns a list of vocabularies that match the specified criteria. You
-    # get the entire list of vocabularies if you don't enter a value in any
-    # of the request parameters.
+    # Returns a list of vocabularies that match the specified criteria. If
+    # you don't enter a value in any of the request parameters, returns the
+    # entire list of vocabularies.
     #
     # @option params [String] :next_token
     #   If the result of your previous request to `ListMedicalVocabularies`
-    #   was truncated, include the `NextToken` to fetch the next set of jobs.
+    #   was truncated, include the `NextToken` to fetch the next set of
+    #   vocabularies.
     #
     # @option params [Integer] :max_results
     #   The maximum number of vocabularies to return in the response.
     #
     # @option params [String] :state_equals
-    #   When specified, only returns vocabularies with the `VocabularyState`
-    #   equal to the specified vocabulary state.
+    #   When specified, returns only vocabularies with the `VocabularyState`
+    #   equal to the specified vocabulary state. Use this field to see which
+    #   vocabularies are ready for your medical transcription jobs.
     #
     # @option params [String] :name_contains
-    #   Returns vocabularies in the list whose name contains the specified
-    #   string. The search is case-insensitive, `ListMedicalVocabularies`
-    #   returns both "vocabularyname" and "VocabularyName" in the response
-    #   list.
+    #   Returns vocabularies whose names contain the specified string. The
+    #   search is not case sensitive. `ListMedicalVocabularies` returns both
+    #   "`vocabularyname`" and "`VocabularyName`".
     #
     # @return [Types::ListMedicalVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -972,7 +1188,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1032,12 +1248,13 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].start_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
     #   resp.transcription_job_summaries[0].content_redaction.redaction_type #=> String, one of "PII"
     #   resp.transcription_job_summaries[0].content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.transcription_job_summaries[0].model_settings.language_model_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs AWS API Documentation
     #
@@ -1067,7 +1284,7 @@ module Aws::TranscribeService
     # @option params [String] :name_contains
     #   When specified, the vocabularies returned in the list are limited to
     #   vocabularies whose name contains the specified string. The search is
-    #   case-insensitive, `ListVocabularies` returns both "vocabularyname"
+    #   not case sensitive, `ListVocabularies` returns both "vocabularyname"
     #   and "VocabularyName" in the response list.
     #
     # @return [Types::ListVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1093,7 +1310,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1142,7 +1359,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabulary_filters #=> Array
     #   resp.vocabulary_filters[0].vocabulary_filter_name #=> String
-    #   resp.vocabulary_filters[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.vocabulary_filters[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.vocabulary_filters[0].last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularyFilters AWS API Documentation
@@ -1154,14 +1371,14 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Start a batch job to transcribe medical speech to text.
+    # Starts a batch job to transcribe medical speech to text.
     #
     # @option params [required, String] :medical_transcription_job_name
     #   The name of the medical transcription job. You can't use the strings
-    #   "." or ".." by themselves as the job name. The name must also be
-    #   unique within an AWS account. If you try to create a medical
+    #   "`.`" or "`..`" by themselves as the job name. The name must also
+    #   be unique within an AWS account. If you try to create a medical
     #   transcription job with the same name as a previous medical
-    #   transcription job you will receive a `ConflictException` error.
+    #   transcription job, you get a `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code for the language spoken in the input media file. US
@@ -1255,7 +1472,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_medical_transcription_job({
     #     medical_transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac
     #     media: { # required
@@ -1279,7 +1496,7 @@ module Aws::TranscribeService
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
@@ -1309,11 +1526,10 @@ module Aws::TranscribeService
     # Starts an asynchronous job to transcribe speech to text.
     #
     # @option params [required, String] :transcription_job_name
-    #   The name of the job. Note that you can't use the strings "." or
-    #   ".." by themselves as the job name. The name must also be unique
-    #   within an AWS account. If you try to create a transcription job with
-    #   the same name as a previous transcription job you will receive a
-    #   `ConflictException` error.
+    #   The name of the job. You can't use the strings "`.`" or "`..`" by
+    #   themselves as the job name. The name must also be unique within an AWS
+    #   account. If you try to create a transcription job with the same name
+    #   as a previous transcription job, you get a `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code for the language used in the input media file.
@@ -1396,6 +1612,10 @@ module Aws::TranscribeService
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
     #
+    # @option params [Types::ModelSettings] :model_settings
+    #   Choose the custom language model you use for your transcription job in
+    #   this parameter.
+    #
     # @option params [Types::JobExecutionSettings] :job_execution_settings
     #   Provides information about how a transcription job is executed. Use
     #   this field to indicate that the job can be queued for deferred
@@ -1413,7 +1633,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac
     #     media: { # required
@@ -1431,6 +1651,9 @@ module Aws::TranscribeService
     #       vocabulary_filter_name: "VocabularyFilterName",
     #       vocabulary_filter_method: "remove", # accepts remove, mask
     #     },
+    #     model_settings: {
+    #       language_model_name: "ModelName",
+    #     },
     #     job_execution_settings: {
     #       allow_deferred_execution: false,
     #       data_access_role_arn: "DataAccessRoleArn",
@@ -1445,7 +1668,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -1463,6 +1686,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
     #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
@@ -1477,24 +1701,26 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Updates an existing vocabulary with new values in a different text
-    # file. The `UpdateMedicalVocabulary` operation overwrites all of the
-    # existing information with the values that you provide in the request.
+    # Updates a vocabulary with new values that you provide in a different
+    # text file from the one you used to create the vocabulary. The
+    # `UpdateMedicalVocabulary` operation overwrites all of the existing
+    # information with the values that you provide in the request.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary to update. The name is case-sensitive. If
-    #   you try to update a vocabulary with the same name as a previous
-    #   vocabulary you will receive a `ConflictException` error.
+    #   The name of the vocabulary to update. The name is case sensitive. If
+    #   you try to update a vocabulary with the same name as a vocabulary
+    #   you've already made, you get a `ConflictException` error.
     #
     # @option params [required, String] :language_code
-    #   The language code of the entries in the updated vocabulary. US English
-    #   (en-US) is the only valid language code in Amazon Transcribe Medical.
+    #   The language code of the language used for the entries in the updated
+    #   vocabulary. US English (en-US) is the only valid language code in
+    #   Amazon Transcribe Medical.
     #
     # @option params [String] :vocabulary_file_uri
-    #   The Amazon S3 location of the text file containing the definition of
-    #   the custom vocabulary. The URI must be in the same AWS region as the
-    #   API endpoint you are calling. You can see the fields you need to enter
-    #   for you Amazon S3 location in the example URI here:
+    #   The location in Amazon S3 of the text file that contains the you use
+    #   for your custom vocabulary. The URI must be in the same AWS Region as
+    #   the resource that you are calling. The following is the format for a
+    #   URI:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -1504,8 +1730,8 @@ module Aws::TranscribeService
     #
     #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
-    #   For more information about S3 object names, see [Object Keys][1] in
-    #   the *Amazon S3 Developer Guide*.
+    #   For more information about Amazon S3 object names, see [Object
+    #   Keys][1] in the *Amazon S3 Developer Guide*.
     #
     #   For more information about custom vocabularies in Amazon Transcribe
     #   Medical, see [Medical Custom Vocabularies][2].
@@ -1526,14 +1752,14 @@ module Aws::TranscribeService
     #
     #   resp = client.update_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     vocabulary_file_uri: "Uri",
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1551,7 +1777,7 @@ module Aws::TranscribeService
     # that you provide in the request.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary to update. The name is case-sensitive. If
+    #   The name of the vocabulary to update. The name is case sensitive. If
     #   you try to update a vocabulary with the same name as a previous
     #   vocabulary you will receive a `ConflictException` error.
     #
@@ -1590,7 +1816,7 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -1598,7 +1824,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1615,8 +1841,8 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :vocabulary_filter_name
     #   The name of the vocabulary filter to update. If you try to update a
-    #   vocabulary filter with the same name as a previous vocabulary filter
-    #   you will receive a `ConflictException` error.
+    #   vocabulary filter with the same name as another vocabulary filter, you
+    #   get a `ConflictException` error.
     #
     # @option params [Array<String>] :words
     #   The words to use in the vocabulary filter. Only use characters from
@@ -1663,7 +1889,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilter AWS API Documentation
@@ -1688,7 +1914,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

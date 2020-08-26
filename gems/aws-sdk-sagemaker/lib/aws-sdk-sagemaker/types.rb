@@ -688,6 +688,122 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition`
     #
+    #   **Named entity recognition** - Groups similar selections and
+    #   calculates aggregate boundaries, resolving to most-assigned label.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition`
+    #
+    #   **Video Classification** - Use this task type when you need workers
+    #   to classify videos using predefined labels that you specify. Workers
+    #   are shown videos and are asked to choose one label for each video.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoMultiClass`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoMultiClass`
+    #
+    #   **Video Frame Object Detection** - Use this task type to have
+    #   workers identify and locate objects in a sequence of video frames
+    #   (images extracted from a video) using bounding boxes. For example,
+    #   you can use this task to ask workers to identify and localize
+    #   various objects in a series of video frames, such as cars, bikes,
+    #   and pedestrians.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectDetection`
+    #
+    #   **Video Frame Object Tracking** - Use this task type to have workers
+    #   track the movement of objects in a sequence of video frames (images
+    #   extracted from a video) using bounding boxes. For example, you can
+    #   use this task to ask workers to track the movement of objects, such
+    #   as cars, bikes, and pedestrians.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectTracking`
+    #
     #   **3D point cloud object detection** - Use this task type when you
     #   want workers to classify objects in a 3D point cloud by drawing 3D
     #   cuboids around objects. For example, you can use this task type to
@@ -896,6 +1012,64 @@ module Aws::SageMaker
     #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox`
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox`
+    #
+    #   **Video Frame Object Detection Adjustment** - Use this task type
+    #   when you want workers to adjust bounding boxes that workers have
+    #   added to video frames to classify and localize objects in a sequence
+    #   of video frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectDetection`
+    #
+    #   **Video Frame Object Tracking Adjustment** - Use this task type when
+    #   you want workers to adjust bounding boxes that workers have added to
+    #   video frames to track object movement across a sequence of video
+    #   frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectTracking`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectTracking`
     #
     #   **3D point cloud object detection adjustment** - Use this task type
     #   when you want workers to adjust 3D cuboids around objects in a 3D
@@ -1111,7 +1285,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # An AutoPilot job will return recommendations, or candidates. Each
+    # An Autopilot job returns recommendations, or candidates. Each
     # candidate has futher details about the steps involed, and the status.
     #
     # @!attribute [rw] candidate_name
@@ -1119,7 +1293,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] final_auto_ml_job_objective_metric
-    #   The candidate result from a job.
+    #   The best candidate result from an AutoML training job.
     #   @return [Types::FinalAutoMLJobObjectiveMetric]
     #
     # @!attribute [rw] objective_status
@@ -1266,7 +1440,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The data source for the AutoPilot job.
+    # The data source for the Autopilot job.
     #
     # @note When making an API call, you may pass AutoMLDataSource
     #   data as a hash:
@@ -1389,17 +1563,91 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Applies a metric to minimize or maximize for the job's objective.
+    # Specifies a metric to minimize or maximize as the objective of a job.
     #
     # @note When making an API call, you may pass AutoMLJobObjective
     #   data as a hash:
     #
     #       {
-    #         metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro
+    #         metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
     #       }
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the objective metric used to measure the predictive
+    #   quality of a machine learning system. This metric is optimized
+    #   during training to provide the best estimate for model parameter
+    #   values from data.
+    #
+    #   Here are the options:
+    #
+    #   * `MSE`\: The mean squared error (MSE) is the average of the squared
+    #     differences between the predicted and actual values. It is used
+    #     for regression. MSE values are always positive, the better a model
+    #     is at predicting the actual values the smaller the MSE value. When
+    #     the data contains outliers, they tend to dominate the MSE which
+    #     might cause subpar prediction performance.
+    #
+    #   * `Accuracy`\: The ratio of the number correctly classified items to
+    #     the total number (correctly and incorrectly) classified. It is
+    #     used for binary and multiclass classification. Measures how close
+    #     the predicted class values are to the actual values. Accuracy
+    #     values vary between zero and one, one being perfect accuracy and
+    #     zero perfect inaccuracy.
+    #
+    #   * `F1`\: The F1 score is the harmonic mean of the precision and
+    #     recall. It is used for binary classification into classes
+    #     traditionally referred to as positive and negative. Predictions
+    #     are said to be true when they match their actual (correct) class;
+    #     false when they do not. Precision is the ratio of the true
+    #     positive predictions to all positive predictions (including the
+    #     false positives) in a data set and measures the quality of the
+    #     prediction when it predicts the positive class. Recall (or
+    #     sensitivity) is the ratio of the true positive predictions to all
+    #     actual positive instances and measures how completely a model
+    #     predicts the actual class members in a data set. The standard F1
+    #     score weighs precision and recall equally. But which metric is
+    #     paramount typically depends on specific aspects of a problem. F1
+    #     scores vary between zero and one, one being the best possible
+    #     performance and zero the worst.
+    #
+    #   * `AUC`\: The area under the curve (AUC) metric is used to compare
+    #     and evaluate binary classification by algorithms such as logistic
+    #     regression that return probabilities. A threshold is needed to map
+    #     the probabilities into classifications. The relevant curve is the
+    #     receiver operating characteristic curve that plots the true
+    #     positive rate (TPR) of predictions (or recall) against the false
+    #     positive rate (FPR) as a function of the threshold value, above
+    #     which a prediction is considered positive. Increasing the
+    #     threshold results in fewer false positives but more false
+    #     negatives. AUC is the area under this receiver operating
+    #     characteristic curve and so provides an aggregated measure of the
+    #     model performance across all possible classification thresholds.
+    #     The AUC score can also be interpreted as the probability that a
+    #     randomly selected positive data point is more likely to be
+    #     predicted positive than a randomly selected negative example. AUC
+    #     scores vary between zero and one, one being perfect accuracy and
+    #     one half not better than a random classifier. Values less that one
+    #     half predict worse than a random predictor and such consistently
+    #     bad predictors can be inverted to obtain better than random
+    #     predictors.
+    #
+    #   * `F1macro`\: The F1macro score applies F1 scoring to multiclass
+    #     classification. In this context, you have multiple classes to
+    #     predict. You just calculate the precision and recall for each
+    #     class as you did for the positive class in binary classification.
+    #     Then used these values to calculate the F1 score for each class
+    #     and average them to obtain the F1macro score. F1macro scores vary
+    #     between zero and one, one being the best possible performance and
+    #     zero the worst.
+    #
+    #   If you do not specify a metric explicitly, the default behavior is
+    #   to automatically use:
+    #
+    #   * `MSE`\: for regression.
+    #
+    #   * `F1`\: for binary classification
+    #
+    #   * `Accuracy`\: for multiclass classification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobObjective AWS API Documentation
@@ -1433,7 +1681,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The end time.
+    #   The end time of an AutoML job.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -1441,7 +1689,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
-    #   The failure reason.
+    #   The failure reason of a job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobSummary AWS API Documentation
@@ -1876,6 +2124,47 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Use this parameter to configure your Amazon Cognito workforce. A
+    # single Cognito workforce is created using and corresponds to a single
+    # [ Amazon Cognito user pool][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
+    #
+    # @note When making an API call, you may pass CognitoConfig
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool: "CognitoUserPool", # required
+    #         client_id: "ClientId", # required
+    #       }
+    #
+    # @!attribute [rw] user_pool
+    #   A [ user pool][1] is a user directory in Amazon Cognito. With a user
+    #   pool, your users can sign in to your web or mobile app through
+    #   Amazon Cognito. Your users can also sign in through social identity
+    #   providers like Google, Facebook, Amazon, or Apple, and through SAML
+    #   identity providers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for your Amazon Cognito user pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CognitoConfig AWS API Documentation
+    #
+    class CognitoConfig < Struct.new(
+      :user_pool,
+      :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Identifies a Amazon Cognito user group. A user group can be used in on
     # or more work teams.
     #
@@ -1885,7 +2174,7 @@ module Aws::SageMaker
     #       {
     #         user_pool: "CognitoUserPool", # required
     #         user_group: "CognitoUserGroup", # required
-    #         client_id: "CognitoClientId", # required
+    #         client_id: "ClientId", # required
     #       }
     #
     # @!attribute [rw] user_pool
@@ -1967,8 +2256,23 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] compilation_target_device
-    #   The type of device that the model will run on after compilation has
-    #   completed.
+    #   The type of device that the model will run on after the compilation
+    #   job has completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] compilation_target_platform_os
+    #   The type of OS that the model will run on after the compilation job
+    #   has completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] compilation_target_platform_arch
+    #   The type of architecture that the model will run on after the
+    #   compilation job has completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] compilation_target_platform_accelerator
+    #   The type of accelerator that the model will run on after the
+    #   compilation job has completed.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -1988,6 +2292,9 @@ module Aws::SageMaker
       :compilation_start_time,
       :compilation_end_time,
       :compilation_target_device,
+      :compilation_target_platform_os,
+      :compilation_target_platform_arch,
+      :compilation_target_platform_accelerator,
       :last_modified_time,
       :compilation_job_status)
       SENSITIVE = []
@@ -2015,7 +2322,10 @@ module Aws::SageMaker
     #
     #       {
     #         container_hostname: "ContainerHostname",
-    #         image: "Image",
+    #         image: "ContainerImage",
+    #         image_config: {
+    #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         },
     #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
     #         environment: {
@@ -2058,6 +2368,18 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
+    #
+    # @!attribute [rw] image_config
+    #   Specifies whether the model container is in Amazon ECR or a private
+    #   Docker registry in your Amazon Virtual Private Cloud (VPC). For
+    #   information about storing containers in a private Docker registry,
+    #   see [Use a Private Docker Registry for Real-Time Inference
+    #   Containers][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html
+    #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] mode
     #   Whether the container hosts a single model or multiple models.
@@ -2105,6 +2427,7 @@ module Aws::SageMaker
     class ContainerDefinition < Struct.new(
       :container_hostname,
       :image,
+      :image_config,
       :mode,
       :model_data_url,
       :environment,
@@ -2222,7 +2545,7 @@ module Aws::SageMaker
     #         algorithm_name: "EntityName", # required
     #         algorithm_description: "EntityDescription",
     #         training_specification: { # required
-    #           training_image: "Image", # required
+    #           training_image: "ContainerImage", # required
     #           training_image_digest: "ImageDigest",
     #           supported_hyper_parameters: [
     #             {
@@ -2276,7 +2599,7 @@ module Aws::SageMaker
     #           containers: [ # required
     #             {
     #               container_hostname: "ContainerHostname",
-    #               image: "Image", # required
+    #               image: "ContainerImage", # required
     #               image_digest: "ImageDigest",
     #               model_data_url: "Url",
     #               product_id: "ProductId",
@@ -2471,7 +2794,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #         resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       }
@@ -2550,7 +2873,7 @@ module Aws::SageMaker
     #         },
     #         problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
     #         auto_ml_job_objective: {
-    #           metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro
+    #           metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
     #         },
     #         auto_ml_job_config: {
     #           completion_criteria: {
@@ -2578,7 +2901,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] auto_ml_job_name
-    #   Identifies an AutoPilot job. Must be unique to your account and is
+    #   Identifies an Autopilot job. Must be unique to your account and is
     #   case-insensitive.
     #   @return [String]
     #
@@ -2599,9 +2922,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Defines the job's objective. You provide a MetricName and AutoML
-    #   will infer minimize or maximize. If this is not provided, the most
-    #   commonly used ObjectiveMetric for problem type will be selected.
+    #   Defines the objective of a an AutoML job. You provide a
+    #   AutoMLJobObjective$MetricName and Autopilot infers whether to
+    #   minimize or maximize it. If a metric is not specified, the most
+    #   commonly used ObjectiveMetric for problem type is automaically
+    #   selected.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
@@ -2609,13 +2934,13 @@ module Aws::SageMaker
     #   @return [Types::AutoMLJobConfig]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role that will be used to access the data.
+    #   The ARN of the role that is used to access the data.
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
-    #   This will generate possible candidates without training a model. A
-    #   candidate is a combination of data preprocessors, algorithms, and
-    #   algorithm parameter settings.
+    #   Generates possible candidates without training a model. A candidate
+    #   is a combination of data preprocessors, algorithms, and algorithm
+    #   parameter settings.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2708,7 +3033,13 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64
+    #           target_platform: {
+    #             os: "ANDROID", # required, accepts ANDROID, LINUX
+    #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
+    #             accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #           },
+    #           compiler_options: "CompilerOptions",
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -2809,19 +3140,19 @@ module Aws::SageMaker
     #           },
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -3664,7 +3995,7 @@ module Aws::SageMaker
     #         label_attribute_name: "LabelAttributeName", # required
     #         input_config: { # required
     #           data_source: { # required
-    #             s3_data_source: { # required
+    #             s3_data_source: {
     #               manifest_s3_uri: "S3Uri", # required
     #             },
     #           },
@@ -3868,7 +4199,10 @@ module Aws::SageMaker
     #         model_name: "ModelName", # required
     #         primary_container: {
     #           container_hostname: "ContainerHostname",
-    #           image: "Image",
+    #           image: "ContainerImage",
+    #           image_config: {
+    #             repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #           },
     #           mode: "SingleModel", # accepts SingleModel, MultiModel
     #           model_data_url: "Url",
     #           environment: {
@@ -3879,7 +4213,10 @@ module Aws::SageMaker
     #         containers: [
     #           {
     #             container_hostname: "ContainerHostname",
-    #             image: "Image",
+    #             image: "ContainerImage",
+    #             image_config: {
+    #               repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #             },
     #             mode: "SingleModel", # accepts SingleModel, MultiModel
     #             model_data_url: "Url",
     #             environment: {
@@ -3998,7 +4335,7 @@ module Aws::SageMaker
     #           containers: [ # required
     #             {
     #               container_hostname: "ContainerHostname",
-    #               image: "Image", # required
+    #               image: "ContainerImage", # required
     #               image_digest: "ImageDigest",
     #               model_data_url: "Url",
     #               product_id: "ProductId",
@@ -4695,7 +5032,14 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #   @return [Types::ExperimentConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateProcessingJobRequest AWS API Documentation
@@ -5027,7 +5371,14 @@ module Aws::SageMaker
     #   @return [Types::TensorBoardOutputConfig]
     #
     # @!attribute [rw] experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #   @return [Types::ExperimentConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
@@ -5232,7 +5583,14 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #   @return [Types::ExperimentConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTransformJobRequest AWS API Documentation
@@ -5463,19 +5821,19 @@ module Aws::SageMaker
     #           },
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -5540,17 +5898,116 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWorkforceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cognito_config: {
+    #           user_pool: "CognitoUserPool", # required
+    #           client_id: "ClientId", # required
+    #         },
+    #         oidc_config: {
+    #           client_id: "ClientId", # required
+    #           client_secret: "ClientSecret", # required
+    #           issuer: "OidcEndpoint", # required
+    #           authorization_endpoint: "OidcEndpoint", # required
+    #           token_endpoint: "OidcEndpoint", # required
+    #           user_info_endpoint: "OidcEndpoint", # required
+    #           logout_endpoint: "OidcEndpoint", # required
+    #           jwks_uri: "OidcEndpoint", # required
+    #         },
+    #         source_ip_config: {
+    #           cidrs: ["Cidr"], # required
+    #         },
+    #         workforce_name: "WorkforceName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cognito_config
+    #   Use this parameter to configure an Amazon Cognito private workforce.
+    #   A single Cognito workforce is created using and corresponds to a
+    #   single [ Amazon Cognito user pool][1].
+    #
+    #   Do not use `OidcConfig` if you specify values for `CognitoConfig`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
+    #   @return [Types::CognitoConfig]
+    #
+    # @!attribute [rw] oidc_config
+    #   Use this parameter to configure a private workforce using your own
+    #   OIDC Identity Provider.
+    #
+    #   Do not use `CognitoConfig` if you specify values for `OidcConfig`.
+    #   @return [Types::OidcConfig]
+    #
+    # @!attribute [rw] source_ip_config
+    #   A list of IP address ranges ([CIDRs][1]). Used to create an allow
+    #   list of IP addresses for a private workforce. Workers will only be
+    #   able to login to their worker portal from an IP address within this
+    #   range. By default, a workforce isn't restricted to specific IP
+    #   addresses.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   @return [Types::SourceIpConfig]
+    #
+    # @!attribute [rw] workforce_name
+    #   The name of the private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs that contain metadata to help you
+    #   categorize and organize our workforce. Each tag consists of a key
+    #   and a value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkforceRequest AWS API Documentation
+    #
+    class CreateWorkforceRequest < Struct.new(
+      :cognito_config,
+      :oidc_config,
+      :source_ip_config,
+      :workforce_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workforce_arn
+    #   The Amazon Resource Name (ARN) of the workforce.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkforceResponse AWS API Documentation
+    #
+    class CreateWorkforceResponse < Struct.new(
+      :workforce_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateWorkteamRequest
     #   data as a hash:
     #
     #       {
     #         workteam_name: "WorkteamName", # required
+    #         workforce_name: "WorkforceName",
     #         member_definitions: [ # required
     #           {
     #             cognito_member_definition: {
     #               user_pool: "CognitoUserPool", # required
     #               user_group: "CognitoUserGroup", # required
-    #               client_id: "CognitoClientId", # required
+    #               client_id: "ClientId", # required
+    #             },
+    #             oidc_member_definition: {
+    #               groups: ["Group"], # required
     #             },
     #           },
     #         ],
@@ -5570,13 +6027,31 @@ module Aws::SageMaker
     #   The name of the work team. Use this name to identify the work team.
     #   @return [String]
     #
+    # @!attribute [rw] workforce_name
+    #   The name of the workforce.
+    #   @return [String]
+    #
     # @!attribute [rw] member_definitions
     #   A list of `MemberDefinition` objects that contains objects that
-    #   identify the Amazon Cognito user pool that makes up the work team.
-    #   For more information, see [Amazon Cognito User Pools][1].
+    #   identify the workers that make up the work team.
     #
-    #   All of the `CognitoMemberDefinition` objects that make up the member
-    #   definition must have the same `ClientId` and `UserPool` values.
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`. Do
+    #   not provide input for both of these parameters in a single request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`.
     #
     #
     #
@@ -5609,6 +6084,7 @@ module Aws::SageMaker
     #
     class CreateWorkteamRequest < Struct.new(
       :workteam_name,
+      :workforce_name,
       :member_definitions,
       :description,
       :notification_configuration,
@@ -6407,6 +6883,29 @@ module Aws::SageMaker
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteWorkforceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workforce_name: "WorkforceName", # required
+    #       }
+    #
+    # @!attribute [rw] workforce_name
+    #   The name of the workforce.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkforceRequest AWS API Documentation
+    #
+    class DeleteWorkforceRequest < Struct.new(
+      :workforce_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkforceResponse AWS API Documentation
+    #
+    class DeleteWorkforceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteWorkteamRequest
     #   data as a hash:
@@ -8457,7 +8956,7 @@ module Aws::SageMaker
     #   : * `MaxRuntimeExceeded` - The job stopped because it exceeded the
     #       maximum allowed runtime.
     #
-    #     * `MaxWaitTmeExceeded` - The job stopped because it exceeded the
+    #     * `MaxWaitTimeExceeded` - The job stopped because it exceeded the
     #       maximum allowed wait time.
     #
     #     * `Stopped` - The training job has stopped.
@@ -8620,7 +9119,14 @@ module Aws::SageMaker
     #   @return [Types::DebugHookConfig]
     #
     # @!attribute [rw] experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #   @return [Types::ExperimentConfig]
     #
     # @!attribute [rw] debug_rule_configurations
@@ -8809,7 +9315,14 @@ module Aws::SageMaker
     #   @return [Types::DataProcessing]
     #
     # @!attribute [rw] experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #   @return [Types::ExperimentConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJobResponse AWS API Documentation
@@ -9502,7 +10015,14 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration for the experiment.
+    # Associates a SageMaker job as a trial component with an experiment and
+    # trial. Specified when you call the following APIs:
+    #
+    # * CreateProcessingJob
+    #
+    # * CreateTrainingJob
+    #
+    # * CreateTransformJob
     #
     # @note When making an API call, you may pass ExperimentConfig
     #   data as a hash:
@@ -9514,15 +10034,18 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] experiment_name
-    #   The name of the experiment.
+    #   The name of an existing experiment to associate the trial component
+    #   with.
     #   @return [String]
     #
     # @!attribute [rw] trial_name
-    #   The name of the trial.
+    #   The name of an existing trial to associate the trial component with.
+    #   If not specified, a new trial is created.
     #   @return [String]
     #
     # @!attribute [rw] trial_component_display_name
-    #   Display name for the trial component.
+    #   The display name for the trial component. If this key isn't
+    #   specified, the display name is the trial component name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExperimentConfig AWS API Documentation
@@ -9802,18 +10325,19 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The candidate result from a job.
+    # The best candidate result from an AutoML training job.
     #
     # @!attribute [rw] type
-    #   The metric type used.
+    #   The type of metric with the best result.
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the metric with the best result. For a description of
+    #   the possible objective metrics, see AutoMLJobObjective$MetricName.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the metric.
+    #   The value of the metric with the best result.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FinalAutoMLJobObjectiveMetric AWS API Documentation
@@ -10638,6 +11162,95 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition`
     #
+    #   **Video Classification** - Use this task type when you need workers
+    #   to classify videos using predefined labels that you specify. Workers
+    #   are shown videos and are asked to choose one label for each video.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoMultiClass`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoMultiClass`
+    #
+    #   **Video Frame Object Detection** - Use this task type to have
+    #   workers identify and locate objects in a sequence of video frames
+    #   (images extracted from a video) using bounding boxes. For example,
+    #   you can use this task to ask workers to identify and localize
+    #   various objects in a series of video frames, such as cars, bikes,
+    #   and pedestrians.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectDetection`
+    #
+    #   **Video Frame Object Tracking** - Use this task type to have workers
+    #   track the movement of objects in a sequence of video frames (images
+    #   extracted from a video) using bounding boxes. For example, you can
+    #   use this task to ask workers to track the movement of objects, such
+    #   as cars, bikes, and pedestrians.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectTracking`
+    #
     #   **3D Point Cloud Modalities**
     #
     #   Use the following pre-annotation lambdas for 3D point cloud labeling
@@ -10851,6 +11464,64 @@ module Aws::SageMaker
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   **Video Frame Object Detection Adjustment** - Use this task type
+    #   when you want workers to adjust bounding boxes that workers have
+    #   added to video frames to classify and localize objects in a sequence
+    #   of video frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectDetection`
+    #
+    #   **Video Frame Object Tracking Adjustment** - Use this task type when
+    #   you want workers to adjust bounding boxes that workers have added to
+    #   video frames to track object movement across a sequence of video
+    #   frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectTracking`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectTracking`
     #
     #   **3D point cloud object detection adjustment** - Adjust 3D cuboids
     #   in a point cloud frame.
@@ -11807,6 +12478,33 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies whether the model container is in Amazon ECR or a private
+    # Docker registry in your Amazon Virtual Private Cloud (VPC).
+    #
+    # @note When making an API call, you may pass ImageConfig
+    #   data as a hash:
+    #
+    #       {
+    #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #       }
+    #
+    # @!attribute [rw] repository_access_mode
+    #   Set this to one of the following values:
+    #
+    #   * `Platform` - The model image is hosted in Amazon ECR.
+    #
+    #   * `VPC` - The model image is hosted in a private Docker registry in
+    #     your VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImageConfig AWS API Documentation
+    #
+    class ImageConfig < Struct.new(
+      :repository_access_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines how to perform inference generation after a training job is
     # run.
     #
@@ -11817,7 +12515,7 @@ module Aws::SageMaker
     #         containers: [ # required
     #           {
     #             container_hostname: "ContainerHostname",
-    #             image: "Image", # required
+    #             image: "ContainerImage", # required
     #             image_digest: "ImageDigest",
     #             model_data_url: "Url",
     #             product_id: "ProductId",
@@ -12090,7 +12788,7 @@ module Aws::SageMaker
     #
     #       {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       }
@@ -12115,7 +12813,7 @@ module Aws::SageMaker
     #
     #       {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       }
@@ -12281,7 +12979,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         s3_data_source: { # required
+    #         s3_data_source: {
     #           manifest_s3_uri: "S3Uri", # required
     #         },
     #       }
@@ -12344,7 +13042,7 @@ module Aws::SageMaker
     #
     #       {
     #         data_source: { # required
-    #           s3_data_source: { # required
+    #           s3_data_source: {
     #             manifest_s3_uri: "S3Uri", # required
     #           },
     #         },
@@ -12811,8 +13509,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAutoMLJobsRequest AWS API Documentation
@@ -12837,8 +13535,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AutoMLJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAutoMLJobsResponse AWS API Documentation
@@ -12890,8 +13588,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCandidatesForAutoMLJobRequest AWS API Documentation
@@ -12913,8 +13611,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AutoMLCandidate>]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCandidatesForAutoMLJobResponse AWS API Documentation
@@ -13764,7 +14462,7 @@ module Aws::SageMaker
     #         name_contains: "NameContains",
     #         sort_by: "Name", # accepts Name, CreationTime, Status
     #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #         status_equals: "Initializing", # accepts Initializing, InProgress, Completed, Failed, Stopping, Stopped
     #       }
     #
     # @!attribute [rw] creation_time_after
@@ -15197,6 +15895,67 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListWorkforcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sort_by: "Name", # accepts Name, CreateDate
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         name_contains: "WorkforceName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] sort_by
+    #   Sort workforces using the workforce name or creation date.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort workforces in ascending or descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A filter you can use to search for workforces using part of the
+    #   workforce name.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of workforces returned in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkforcesRequest AWS API Documentation
+    #
+    class ListWorkforcesRequest < Struct.new(
+      :sort_by,
+      :sort_order,
+      :name_contains,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workforces
+    #   A list containing information about your workforce.
+    #   @return [Array<Types::Workforce>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkforcesResponse AWS API Documentation
+    #
+    class ListWorkforcesResponse < Struct.new(
+      :workforces,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListWorkteamsRequest
     #   data as a hash:
     #
@@ -15263,7 +16022,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines the Amazon Cognito user group that is part of a work team.
+    # Defines an Amazon Cognito or your own OIDC IdP user group that is part
+    # of a work team.
     #
     # @note When making an API call, you may pass MemberDefinition
     #   data as a hash:
@@ -15272,7 +16032,10 @@ module Aws::SageMaker
     #         cognito_member_definition: {
     #           user_pool: "CognitoUserPool", # required
     #           user_group: "CognitoUserGroup", # required
-    #           client_id: "CognitoClientId", # required
+    #           client_id: "ClientId", # required
+    #         },
+    #         oidc_member_definition: {
+    #           groups: ["Group"], # required
     #         },
     #       }
     #
@@ -15280,10 +16043,20 @@ module Aws::SageMaker
     #   The Amazon Cognito user group that is part of the work team.
     #   @return [Types::CognitoMemberDefinition]
     #
+    # @!attribute [rw] oidc_member_definition
+    #   A list user groups that exist in your OIDC Identity Provider (IdP).
+    #   One to ten groups can be used to create a single private work team.
+    #   When you add a user group to the list of `Groups`, you can add that
+    #   user group to one or more private work teams. If you add a user
+    #   group to a private work team, all workers in that user group are
+    #   added to the work team.
+    #   @return [Types::OidcMemberDefinition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MemberDefinition AWS API Documentation
     #
     class MemberDefinition < Struct.new(
-      :cognito_member_definition)
+      :cognito_member_definition,
+      :oidc_member_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15405,7 +16178,7 @@ module Aws::SageMaker
     #
     #       {
     #         container_hostname: "ContainerHostname",
-    #         image: "Image", # required
+    #         image: "ContainerImage", # required
     #         image_digest: "ImageDigest",
     #         model_data_url: "Url",
     #         product_id: "ProductId",
@@ -16667,32 +17440,290 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Use this parameter to configure your OIDC Identity Provider (IdP).
+    #
+    # @note When making an API call, you may pass OidcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         client_id: "ClientId", # required
+    #         client_secret: "ClientSecret", # required
+    #         issuer: "OidcEndpoint", # required
+    #         authorization_endpoint: "OidcEndpoint", # required
+    #         token_endpoint: "OidcEndpoint", # required
+    #         user_info_endpoint: "OidcEndpoint", # required
+    #         logout_endpoint: "OidcEndpoint", # required
+    #         jwks_uri: "OidcEndpoint", # required
+    #       }
+    #
+    # @!attribute [rw] client_id
+    #   The OIDC IdP client ID used to configure your private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The OIDC IdP client secret used to configure your private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer
+    #   The OIDC IdP issuer used to configure your private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_endpoint
+    #   The OIDC IdP authorization endpoint used to configure your private
+    #   workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_endpoint
+    #   The OIDC IdP token endpoint used to configure your private
+    #   workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_info_endpoint
+    #   The OIDC IdP user information endpoint used to configure your
+    #   private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] logout_endpoint
+    #   The OIDC IdP logout endpoint used to configure your private
+    #   workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] jwks_uri
+    #   The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your
+    #   private workforce.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OidcConfig AWS API Documentation
+    #
+    class OidcConfig < Struct.new(
+      :client_id,
+      :client_secret,
+      :issuer,
+      :authorization_endpoint,
+      :token_endpoint,
+      :user_info_endpoint,
+      :logout_endpoint,
+      :jwks_uri)
+      SENSITIVE = [:client_secret]
+      include Aws::Structure
+    end
+
+    # Your OIDC IdP workforce configuration.
+    #
+    # @!attribute [rw] client_id
+    #   The OIDC IdP client ID used to configure your private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer
+    #   The OIDC IdP issuer used to configure your private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_endpoint
+    #   The OIDC IdP authorization endpoint used to configure your private
+    #   workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_endpoint
+    #   The OIDC IdP token endpoint used to configure your private
+    #   workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_info_endpoint
+    #   The OIDC IdP user information endpoint used to configure your
+    #   private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] logout_endpoint
+    #   The OIDC IdP logout endpoint used to configure your private
+    #   workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] jwks_uri
+    #   The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your
+    #   private workforce.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OidcConfigForResponse AWS API Documentation
+    #
+    class OidcConfigForResponse < Struct.new(
+      :client_id,
+      :issuer,
+      :authorization_endpoint,
+      :token_endpoint,
+      :user_info_endpoint,
+      :logout_endpoint,
+      :jwks_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of user groups that exist in your OIDC Identity Provider (IdP).
+    # One to ten groups can be used to create a single private work team.
+    # When you add a user group to the list of `Groups`, you can add that
+    # user group to one or more private work teams. If you add a user group
+    # to a private work team, all workers in that user group are added to
+    # the work team.
+    #
+    # @note When making an API call, you may pass OidcMemberDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         groups: ["Group"], # required
+    #       }
+    #
+    # @!attribute [rw] groups
+    #   A list of comma seperated strings that identifies user groups in
+    #   your OIDC IdP. Each user group is made up of a group of private
+    #   workers.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OidcMemberDefinition AWS API Documentation
+    #
+    class OidcMemberDefinition < Struct.new(
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the output location for the compiled model
-    # and the device (target) that the model runs on.
+    # and the target device that the model runs on. `TargetDevice` and
+    # `TargetPlatform` are mutually exclusive, so you need to choose one
+    # between the two to specify your target device or platform. If you
+    # cannot find your device you want to use from the `TargetDevice` list,
+    # use `TargetPlatform` to describe the platform of your edge device and
+    # `CompilerOptions` if there are specific settings that are required or
+    # recommended to use for particular TargetPlatform.
     #
     # @note When making an API call, you may pass OutputConfig
     #   data as a hash:
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64
+    #         target_platform: {
+    #           os: "ANDROID", # required, accepts ANDROID, LINUX
+    #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
+    #           accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #         },
+    #         compiler_options: "CompilerOptions",
     #       }
     #
     # @!attribute [rw] s3_output_location
-    #   Identifies the S3 path where you want Amazon SageMaker to store the
-    #   model artifacts. For example, s3://bucket-name/key-name-prefix.
+    #   Identifies the S3 bucket where you want Amazon SageMaker to store
+    #   the model artifacts. For example,
+    #   `s3://bucket-name/key-name-prefix`.
     #   @return [String]
     #
     # @!attribute [rw] target_device
-    #   Identifies the device that you want to run your model on after it
-    #   has been compiled. For example: ml\_c5.
+    #   Identifies the target device or the machine learning instance that
+    #   you want to run your model on after the compilation has completed.
+    #   Alternatively, you can specify OS, architecture, and accelerator
+    #   using TargetPlatform fields. It can be used instead of
+    #   `TargetPlatform`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_platform
+    #   Contains information about a target platform that you want your
+    #   model to run on, such as OS, architecture, and accelerators. It is
+    #   an alternative of `TargetDevice`.
+    #
+    #   The following examples show how to configure the `TargetPlatform`
+    #   and `CompilerOptions` JSON strings for popular target platforms:
+    #
+    #   * Raspberry Pi 3 Model B+
+    #
+    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM_EABIHF"\},`
+    #
+    #     ` "CompilerOptions": \{'mattr': ['+neon']\}`
+    #
+    #   * Jetson TX2
+    #
+    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM64",
+    #     "Accelerator": "NVIDIA"\},`
+    #
+    #     ` "CompilerOptions": \{'gpu-code': 'sm_62', 'trt-ver': '6.0.1',
+    #     'cuda-ver': '10.0'\}`
+    #
+    #   * EC2 m5.2xlarge instance OS
+    #
+    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "X86_64",
+    #     "Accelerator": "NVIDIA"\},`
+    #
+    #     ` "CompilerOptions": \{'mcpu': 'skylake-avx512'\}`
+    #
+    #   * RK3399
+    #
+    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM64",
+    #     "Accelerator": "MALI"\}`
+    #
+    #   * ARMv7 phone (CPU)
+    #
+    #     `"TargetPlatform": \{"Os": "ANDROID", "Arch": "ARM_EABI"\},`
+    #
+    #     ` "CompilerOptions": \{'ANDROID_PLATFORM': 25, 'mattr':
+    #     ['+neon']\}`
+    #
+    #   * ARMv8 phone (CPU)
+    #
+    #     `"TargetPlatform": \{"Os": "ANDROID", "Arch": "ARM64"\},`
+    #
+    #     ` "CompilerOptions": \{'ANDROID_PLATFORM': 29\}`
+    #   @return [Types::TargetPlatform]
+    #
+    # @!attribute [rw] compiler_options
+    #   Specifies additional parameters for compiler options in JSON format.
+    #   The compiler options are `TargetPlatform` specific. It is required
+    #   for NVIDIA accelerators and highly recommended for CPU compliations.
+    #   For any other cases, it is optional to specify `CompilerOptions.`
+    #
+    #   * `CPU`\: Compilation for CPU supports the following compiler
+    #     options.
+    #
+    #     * `mcpu`\: CPU micro-architecture. For example, `\{'mcpu':
+    #       'skylake-avx512'\}`
+    #
+    #     * `mattr`\: CPU flags. For example, `\{'mattr': ['+neon',
+    #       '+vfpv4']\}`
+    #
+    #   * `ARM`\: Details of ARM CPU compilations.
+    #
+    #     * `NEON`\: NEON is an implementation of the Advanced SIMD
+    #       extension used in ARMv7 processors.
+    #
+    #       For example, add `\{'mattr': ['+neon']\}` to the compiler
+    #       options if compiling for ARM 32-bit platform with the NEON
+    #       support.
+    #
+    #   * `NVIDIA`\: Compilation for NVIDIA GPU supports the following
+    #     compiler options.
+    #
+    #     * `gpu_code`\: Specifies the targeted architecture.
+    #
+    #     * `trt-ver`\: Specifies the TensorRT versions in x.y.z. format.
+    #
+    #     * `cuda-ver`\: Specifies the CUDA version in x.y format.
+    #
+    #     For example, `\{'gpu-code': 'sm_72', 'trt-ver': '6.0.1',
+    #     'cuda-ver': '10.1'\}`
+    #
+    #   * `ANDROID`\: Compilation for the Android OS supports the following
+    #     compiler options:
+    #
+    #     * `ANDROID_PLATFORM`\: Specifies the Android API levels. Available
+    #       levels range from 21 to 29. For example, `\{'ANDROID_PLATFORM':
+    #       28\}`.
+    #
+    #     * `mattr`\: Add `\{'mattr': ['+neon']\}` to compiler options if
+    #       compiling for ARM 32-bit platform with NEON support.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig AWS API Documentation
     #
     class OutputConfig < Struct.new(
       :s3_output_location,
-      :target_device)
+      :target_device,
+      :target_platform,
+      :compiler_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17057,7 +18088,14 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #   @return [Types::ExperimentConfig]
     #
     # @!attribute [rw] processing_job_arn
@@ -17919,7 +18957,8 @@ module Aws::SageMaker
     # The resolved attributes.
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Applies a metric to minimize or maximize for the job's objective.
+    #   Specifies a metric to minimize or maximize as the objective of a
+    #   job.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] problem_type
@@ -18120,7 +19159,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         sage_maker_image_arn: "SageMakerImageArn",
+    #         sage_maker_image_arn: "ImageArn",
     #         instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #       }
     #
@@ -18841,7 +19880,9 @@ module Aws::SageMaker
     end
 
     # A list of IP address ranges ([CIDRs][1]). Used to create an allow list
-    # of IP addresses for a private workforce. For more information, see .
+    # of IP addresses for a private workforce. Workers will only be able to
+    # login to their worker portal from an IP address within this range. By
+    # default, a workforce isn't restricted to specific IP addresses.
     #
     #
     #
@@ -19232,6 +20273,65 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Contains information about a target platform that you want your model
+    # to run on, such as OS, architecture, and accelerators. It is an
+    # alternative of `TargetDevice`.
+    #
+    # @note When making an API call, you may pass TargetPlatform
+    #   data as a hash:
+    #
+    #       {
+    #         os: "ANDROID", # required, accepts ANDROID, LINUX
+    #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
+    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #       }
+    #
+    # @!attribute [rw] os
+    #   Specifies a target platform OS.
+    #
+    #   * `LINUX`\: Linux-based operating systems.
+    #
+    #   * `ANDROID`\: Android operating systems. Android API level can be
+    #     specified using the `ANDROID_PLATFORM` compiler option. For
+    #     example, `"CompilerOptions": \{'ANDROID_PLATFORM': 28\}`
+    #   @return [String]
+    #
+    # @!attribute [rw] arch
+    #   Specifies a target platform architecture.
+    #
+    #   * `X86_64`\: 64-bit version of the x86 instruction set.
+    #
+    #   * `X86`\: 32-bit version of the x86 instruction set.
+    #
+    #   * `ARM64`\: ARMv8 64-bit CPU.
+    #
+    #   * `ARM_EABIHF`\: ARMv7 32-bit, Hard Float.
+    #
+    #   * `ARM_EABI`\: ARMv7 32-bit, Soft Float. Used by Android 32-bit ARM
+    #     platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] accelerator
+    #   Specifies a target platform accelerator (optional).
+    #
+    #   * `NVIDIA`\: Nvidia graphics processing unit. It also requires
+    #     `gpu-code`, `trt-ver`, `cuda-ver` compiler options
+    #
+    #   * `MALI`\: ARM Mali graphics processor
+    #
+    #   * `INTEL_GRAPHICS`\: Integrated Intel graphics
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TargetPlatform AWS API Documentation
+    #
+    class TargetPlatform < Struct.new(
+      :os,
+      :arch,
+      :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The TensorBoard app settings.
     #
     # @note When making an API call, you may pass TensorBoardAppSettings
@@ -19239,7 +20339,7 @@ module Aws::SageMaker
     #
     #       {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       }
@@ -19525,7 +20625,14 @@ module Aws::SageMaker
     #   @return [Types::DebugHookConfig]
     #
     # @!attribute [rw] experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #   @return [Types::ExperimentConfig]
     #
     # @!attribute [rw] debug_rule_configurations
@@ -19792,7 +20899,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         training_image: "Image", # required
+    #         training_image: "ContainerImage", # required
     #         training_image_digest: "ImageDigest",
     #         supported_hyper_parameters: [
     #           {
@@ -19970,7 +21077,12 @@ module Aws::SageMaker
     #   request payloads contain the entire contents of an input object. Set
     #   the value of this parameter to `Line` to split records on a newline
     #   character boundary. `SplitType` also supports a number of
-    #   record-oriented binary data formats.
+    #   record-oriented binary data formats. Currently, the supported record
+    #   formats are:
+    #
+    #   * RecordIO
+    #
+    #   * TFRecord
     #
     #   When splitting is enabled, the size of a mini-batch depends on the
     #   values of the `BatchStrategy` and `MaxPayloadInMB` parameters. When
@@ -20006,6 +21118,186 @@ module Aws::SageMaker
       :content_type,
       :compression_type,
       :split_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A batch transform job. For information about SageMaker batch
+    # transform, see [Use Batch Transform][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
+    #
+    # @!attribute [rw] transform_job_name
+    #   The name of the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform_job_arn
+    #   The Amazon Resource Name (ARN) of the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform_job_status
+    #   The status of the transform job.
+    #
+    #   Transform job statuses are:
+    #
+    #   * `InProgress` - The job is in progress.
+    #
+    #   * `Completed` - The job has completed.
+    #
+    #   * `Failed` - The transform job has failed. To see the reason for the
+    #     failure, see the `FailureReason` field in the response to a
+    #     `DescribeTransformJob` call.
+    #
+    #   * `Stopping` - The transform job is stopping.
+    #
+    #   * `Stopped` - The transform job has stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the transform job failed, the reason it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model associated with the transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrent_transforms
+    #   The maximum number of parallel requests that can be sent to each
+    #   instance in a transform job. If `MaxConcurrentTransforms` is set to
+    #   0 or left unset, SageMaker checks the optional execution-parameters
+    #   to determine the settings for your chosen algorithm. If the
+    #   execution-parameters endpoint is not enabled, the default value is
+    #   1. For built-in algorithms, you don't need to set a value for
+    #   `MaxConcurrentTransforms`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_client_config
+    #   Configures the timeout and maximum number of retries for processing
+    #   a transform job invocation.
+    #   @return [Types::ModelClientConfig]
+    #
+    # @!attribute [rw] max_payload_in_mb
+    #   The maximum allowed size of the payload, in MB. A payload is the
+    #   data portion of a record (without metadata). The value in
+    #   `MaxPayloadInMB` must be greater than, or equal to, the size of a
+    #   single record. To estimate the size of a record in MB, divide the
+    #   size of your dataset by the number of records. To ensure that the
+    #   records fit within the maximum payload size, we recommend using a
+    #   slightly larger value. The default value is 6 MB. For cases where
+    #   the payload might be arbitrarily large and is transmitted using HTTP
+    #   chunked encoding, set the value to 0. This feature works only in
+    #   supported algorithms. Currently, SageMaker built-in algorithms do
+    #   not support HTTP chunked encoding.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_strategy
+    #   Specifies the number of records to include in a mini-batch for an
+    #   HTTP inference request. A record is a single unit of input data that
+    #   inference can be made on. For example, a single line in a CSV file
+    #   is a record.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container. We support
+    #   up to 16 key and values entries in the map.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] transform_input
+    #   Describes the input source of a transform job and the way the
+    #   transform job consumes it.
+    #   @return [Types::TransformInput]
+    #
+    # @!attribute [rw] transform_output
+    #   Describes the results of a transform job.
+    #   @return [Types::TransformOutput]
+    #
+    # @!attribute [rw] transform_resources
+    #   Describes the resources, including ML instance types and ML instance
+    #   count, to use for transform job.
+    #   @return [Types::TransformResources]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the transform Job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transform_start_time
+    #   Indicates when the transform job starts on ML instances. You are
+    #   billed for the time interval between this time and the value of
+    #   `TransformEndTime`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transform_end_time
+    #   Indicates when the transform job has been completed, or has stopped
+    #   or failed. You are billed for the time interval between this time
+    #   and the value of `TransformStartTime`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] labeling_job_arn
+    #   The Amazon Resource Name (ARN) of the labeling job that created the
+    #   transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_ml_job_arn
+    #   The Amazon Resource Name (ARN) of the AutoML job that created the
+    #   transform job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_processing
+    #   The data structure used to specify the data to be used for inference
+    #   in a batch transform job and to associate the data that is relevant
+    #   to the prediction results in the output. The input filter provided
+    #   allows you to exclude input data that is not needed for inference in
+    #   a batch transform job. The output filter provided allows you to
+    #   include input data relevant to interpreting the predictions in the
+    #   output from the job. For more information, see [Associate Prediction
+    #   Results with their Corresponding Input Records][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
+    #   @return [Types::DataProcessing]
+    #
+    # @!attribute [rw] experiment_config
+    #   Associates a SageMaker job as a trial component with an experiment
+    #   and trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
+    #   @return [Types::ExperimentConfig]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the transform job.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJob AWS API Documentation
+    #
+    class TransformJob < Struct.new(
+      :transform_job_name,
+      :transform_job_arn,
+      :transform_job_status,
+      :failure_reason,
+      :model_name,
+      :max_concurrent_transforms,
+      :model_client_config,
+      :max_payload_in_mb,
+      :batch_strategy,
+      :environment,
+      :transform_input,
+      :transform_output,
+      :transform_resources,
+      :creation_time,
+      :transform_start_time,
+      :transform_end_time,
+      :labeling_job_arn,
+      :auto_ml_job_arn,
+      :data_processing,
+      :experiment_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20338,7 +21630,7 @@ module Aws::SageMaker
     #
     #     `]`
     #
-    #     The preceding JSON matches the following `s3Uris`\:
+    #     The preceding JSON matches the following `S3Uris`\:
     #
     #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
     #
@@ -20736,12 +22028,18 @@ module Aws::SageMaker
     #   component.
     #   @return [Types::ProcessingJob]
     #
+    # @!attribute [rw] transform_job
+    #   Information about a transform job that's the source of the trial
+    #   component.
+    #   @return [Types::TransformJob]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSourceDetail AWS API Documentation
     #
     class TrialComponentSourceDetail < Struct.new(
       :source_arn,
       :training_job,
-      :processing_job)
+      :processing_job,
+      :transform_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20917,7 +22215,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] target_objective_metric_value
-    #   The objective metric's value.
+    #   The value of the objective metric.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TuningJobCompletionCriteria AWS API Documentation
@@ -20989,10 +22287,12 @@ module Aws::SageMaker
     #   tools for labeling job tasks.
     #
     #   Use this parameter when you are creating a labeling job for 3D point
-    #   cloud labeling modalities. Use your labeling job task type to select
-    #   one of the following ARN's and use it with this parameter when you
-    #   create a labeling job. Replace `aws-region` with the AWS region you
-    #   are creating your labeling job in.
+    #   cloud and video fram labeling jobs. Use your labeling job task type
+    #   to select one of the following ARN's and use it with this parameter
+    #   when you create a labeling job. Replace `aws-region` with the AWS
+    #   region you are creating your labeling job in.
+    #
+    #   **3D Point Cloud HumanTaskUiArns**
     #
     #   Use this `HumanTaskUiArn` for 3D point cloud object detection and 3D
     #   point cloud object detection adjustment labeling jobs.
@@ -21012,6 +22312,22 @@ module Aws::SageMaker
     #   and 3D point cloud semantic segmentation adjustment labeling jobs.
     #
     #   * `arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudSemanticSegmentation`
+    #
+    #   ^
+    #
+    #   **Video Frame HumanTaskUiArns**
+    #
+    #   Use this `HumanTaskUiArn` for video frame object detection and video
+    #   frame object detection adjustment labeling jobs.
+    #
+    #   * `arn:aws:sagemaker:region:394669845002:human-task-ui/VideoObjectDetection`
+    #
+    #   ^
+    #
+    #   Use this `HumanTaskUiArn` for video frame object tracking and video
+    #   frame object tracking adjustment labeling jobs.
+    #
+    #   * `arn:aws:sagemaker:aws-region:394669845002:human-task-ui/VideoObjectTracking`
     #
     #   ^
     #   @return [String]
@@ -21125,19 +22441,19 @@ module Aws::SageMaker
     #           },
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -21812,19 +23128,19 @@ module Aws::SageMaker
     #           },
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
-    #               sage_maker_image_arn: "SageMakerImageArn",
+    #               sage_maker_image_arn: "ImageArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -21873,12 +23189,21 @@ module Aws::SageMaker
     #         source_ip_config: {
     #           cidrs: ["Cidr"], # required
     #         },
+    #         oidc_config: {
+    #           client_id: "ClientId", # required
+    #           client_secret: "ClientSecret", # required
+    #           issuer: "OidcEndpoint", # required
+    #           authorization_endpoint: "OidcEndpoint", # required
+    #           token_endpoint: "OidcEndpoint", # required
+    #           user_info_endpoint: "OidcEndpoint", # required
+    #           logout_endpoint: "OidcEndpoint", # required
+    #           jwks_uri: "OidcEndpoint", # required
+    #         },
     #       }
     #
     # @!attribute [rw] workforce_name
-    #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `default` when a workforce
-    #   is created and cannot be modified.
+    #   The name of the private workforce that you want to update. You can
+    #   find your workforce name by using the operation.
     #   @return [String]
     #
     # @!attribute [rw] source_ip_config
@@ -21892,22 +23217,27 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #   @return [Types::SourceIpConfig]
     #
+    # @!attribute [rw] oidc_config
+    #   Use this parameter to update your OIDC Identity Provider (IdP)
+    #   configuration for a workforce made using your own IdP.
+    #   @return [Types::OidcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforceRequest AWS API Documentation
     #
     class UpdateWorkforceRequest < Struct.new(
       :workforce_name,
-      :source_ip_config)
+      :source_ip_config,
+      :oidc_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] workforce
-    #   A single private workforce, which is automatically created when you
-    #   create your first private work team. You can create one private work
-    #   force in each AWS Region. By default, any workforce-related API
-    #   operation used in a specific region will apply to the workforce
-    #   created in that region. To learn how to create a private workforce,
-    #   see [Create a Private Workforce][1].
+    #   A single private workforce. You can create one private work force in
+    #   each AWS Region. By default, any workforce-related API operation
+    #   used in a specific region will apply to the workforce created in
+    #   that region. To learn how to create a private workforce, see [Create
+    #   a Private Workforce][1].
     #
     #
     #
@@ -21932,7 +23262,10 @@ module Aws::SageMaker
     #             cognito_member_definition: {
     #               user_pool: "CognitoUserPool", # required
     #               user_group: "CognitoUserGroup", # required
-    #               client_id: "CognitoClientId", # required
+    #               client_id: "ClientId", # required
+    #             },
+    #             oidc_member_definition: {
+    #               groups: ["Group"], # required
     #             },
     #           },
     #         ],
@@ -21947,8 +23280,35 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] member_definitions
-    #   A list of `MemberDefinition` objects that contain the updated work
-    #   team members.
+    #   A list of `MemberDefinition` objects that contains objects that
+    #   identify the workers that make up the work team.
+    #
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`.
+    #   You should not provide input for both of these parameters in a
+    #   single request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`. Be aware
+    #   that user groups that are already in the work team must also be
+    #   listed in `Groups` when you make this request to remain on the work
+    #   team. If you do not include these user groups, they will no longer
+    #   be associated with the work team you update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
     #   @return [Array<Types::MemberDefinition>]
     #
     # @!attribute [rw] description
@@ -22057,19 +23417,19 @@ module Aws::SageMaker
     #         },
     #         jupyter_server_app_settings: {
     #           default_resource_spec: {
-    #             sage_maker_image_arn: "SageMakerImageArn",
+    #             sage_maker_image_arn: "ImageArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           },
     #         },
     #         kernel_gateway_app_settings: {
     #           default_resource_spec: {
-    #             sage_maker_image_arn: "SageMakerImageArn",
+    #             sage_maker_image_arn: "ImageArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           },
     #         },
     #         tensor_board_app_settings: {
     #           default_resource_spec: {
-    #             sage_maker_image_arn: "SageMakerImageArn",
+    #             sage_maker_image_arn: "ImageArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           },
     #         },
@@ -22206,9 +23566,7 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
     #
     # @!attribute [rw] workforce_name
-    #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `default` when a workforce
-    #   is created and cannot be modified.
+    #   The name of the private workforce.
     #   @return [String]
     #
     # @!attribute [rw] workforce_arn
@@ -22226,12 +23584,36 @@ module Aws::SageMaker
     #
     # @!attribute [rw] source_ip_config
     #   A list of one to ten IP address ranges ([CIDRs][1]) to be added to
-    #   the workforce allow list.
+    #   the workforce allow list. By default, a workforce isn't restricted
+    #   to specific IP addresses.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #   @return [Types::SourceIpConfig]
+    #
+    # @!attribute [rw] sub_domain
+    #   The subdomain for your OIDC Identity Provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] cognito_config
+    #   The configuration of an Amazon Cognito workforce. A single Cognito
+    #   workforce is created using and corresponds to a single [ Amazon
+    #   Cognito user pool][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
+    #   @return [Types::CognitoConfig]
+    #
+    # @!attribute [rw] oidc_config
+    #   The configuration of an OIDC Identity Provider (IdP) private
+    #   workforce.
+    #   @return [Types::OidcConfigForResponse]
+    #
+    # @!attribute [rw] create_date
+    #   The date that the workforce is created.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workforce AWS API Documentation
     #
@@ -22239,7 +23621,11 @@ module Aws::SageMaker
       :workforce_name,
       :workforce_arn,
       :last_updated_date,
-      :source_ip_config)
+      :source_ip_config,
+      :sub_domain,
+      :cognito_config,
+      :oidc_config,
+      :create_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22251,11 +23637,21 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] member_definitions
-    #   The Amazon Cognito user groups that make up the work team.
+    #   A list of `MemberDefinition` objects that contains objects that
+    #   identify the workers that make up the work team.
+    #
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`.
     #   @return [Array<Types::MemberDefinition>]
     #
     # @!attribute [rw] workteam_arn
     #   The Amazon Resource Name (ARN) that identifies the work team.
+    #   @return [String]
+    #
+    # @!attribute [rw] workforce_arn
+    #   The Amazon Resource Name (ARN) of the workforce.
     #   @return [String]
     #
     # @!attribute [rw] product_listing_ids
@@ -22290,6 +23686,7 @@ module Aws::SageMaker
       :workteam_name,
       :member_definitions,
       :workteam_arn,
+      :workforce_arn,
       :product_listing_ids,
       :description,
       :sub_domain,

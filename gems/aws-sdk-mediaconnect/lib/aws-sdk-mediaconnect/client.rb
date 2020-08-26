@@ -85,13 +85,28 @@ module Aws::MediaConnect
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::MediaConnect
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -580,6 +595,7 @@ module Aws::MediaConnect
     #           secret_arn: "__string",
     #           url: "__string",
     #         },
+    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         name: "__string",
     #         subscribers: ["__string"], # required
     #       },
@@ -693,6 +709,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
     #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
+    #   resp.flow.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
@@ -863,6 +880,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
     #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
+    #   resp.flow.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
@@ -1001,6 +1019,7 @@ module Aws::MediaConnect
     #           secret_arn: "__string",
     #           url: "__string",
     #         },
+    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         name: "__string",
     #         subscribers: ["__string"], # required
     #       },
@@ -1023,6 +1042,7 @@ module Aws::MediaConnect
     #   resp.entitlements[0].encryption.secret_arn #=> String
     #   resp.entitlements[0].encryption.url #=> String
     #   resp.entitlements[0].entitlement_arn #=> String
+    #   resp.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.entitlements[0].name #=> String
     #   resp.entitlements[0].subscribers #=> Array
     #   resp.entitlements[0].subscribers[0] #=> String
@@ -1439,6 +1459,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
     #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
+    #   resp.flow.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
@@ -1560,6 +1581,12 @@ module Aws::MediaConnect
     #
     # @option params [required, String] :entitlement_arn
     #
+    # @option params [String] :entitlement_status
+    #   An indication of whether you want to enable the entitlement to allow
+    #   access, or disable it to stop streaming content to the subscriber’s
+    #   flow temporarily. If you don’t specify the entitlementStatus field in
+    #   your request, MediaConnect leaves the value unchanged.
+    #
     # @option params [required, String] :flow_arn
     #
     # @option params [Array<String>] :subscribers
@@ -1588,6 +1615,7 @@ module Aws::MediaConnect
     #       url: "__string",
     #     },
     #     entitlement_arn: "__string", # required
+    #     entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #     flow_arn: "__string", # required
     #     subscribers: ["__string"],
     #   })
@@ -1606,6 +1634,7 @@ module Aws::MediaConnect
     #   resp.entitlement.encryption.secret_arn #=> String
     #   resp.entitlement.encryption.url #=> String
     #   resp.entitlement.entitlement_arn #=> String
+    #   resp.entitlement.entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.entitlement.name #=> String
     #   resp.entitlement.subscribers #=> Array
     #   resp.entitlement.subscribers[0] #=> String
@@ -1866,7 +1895,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

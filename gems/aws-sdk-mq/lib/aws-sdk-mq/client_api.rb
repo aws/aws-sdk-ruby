@@ -13,6 +13,7 @@ module Aws::MQ
 
     include Seahorse::Model
 
+    AuthenticationStrategy = Shapes::StringShape.new(name: 'AuthenticationStrategy')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BrokerEngineType = Shapes::StructureShape.new(name: 'BrokerEngineType')
@@ -70,6 +71,8 @@ module Aws::MQ
     Error = Shapes::StructureShape.new(name: 'Error')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    LdapServerMetadataInput = Shapes::StructureShape.new(name: 'LdapServerMetadataInput')
+    LdapServerMetadataOutput = Shapes::StructureShape.new(name: 'LdapServerMetadataOutput')
     ListBrokersOutput = Shapes::StructureShape.new(name: 'ListBrokersOutput')
     ListBrokersRequest = Shapes::StructureShape.new(name: 'ListBrokersRequest')
     ListBrokersResponse = Shapes::StructureShape.new(name: 'ListBrokersResponse')
@@ -178,6 +181,7 @@ module Aws::MQ
     BrokerSummary.struct_class = Types::BrokerSummary
 
     Configuration.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Configuration.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     Configuration.add_member(:created, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "created"))
     Configuration.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Configuration.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
@@ -206,6 +210,7 @@ module Aws::MQ
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateBrokerInput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     CreateBrokerInput.add_member(:broker_name, Shapes::ShapeRef.new(shape: __string, location_name: "brokerName"))
     CreateBrokerInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
@@ -215,6 +220,7 @@ module Aws::MQ
     CreateBrokerInput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     CreateBrokerInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateBrokerInput.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    CreateBrokerInput.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataInput, location_name: "ldapServerMetadata"))
     CreateBrokerInput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     CreateBrokerInput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     CreateBrokerInput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
@@ -229,6 +235,7 @@ module Aws::MQ
     CreateBrokerOutput.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     CreateBrokerOutput.struct_class = Types::CreateBrokerOutput
 
+    CreateBrokerRequest.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateBrokerRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     CreateBrokerRequest.add_member(:broker_name, Shapes::ShapeRef.new(shape: __string, location_name: "brokerName"))
     CreateBrokerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
@@ -238,6 +245,7 @@ module Aws::MQ
     CreateBrokerRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     CreateBrokerRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateBrokerRequest.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    CreateBrokerRequest.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataInput, location_name: "ldapServerMetadata"))
     CreateBrokerRequest.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     CreateBrokerRequest.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     CreateBrokerRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
@@ -252,6 +260,7 @@ module Aws::MQ
     CreateBrokerResponse.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     CreateBrokerResponse.struct_class = Types::CreateBrokerResponse
 
+    CreateConfigurationInput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateConfigurationInput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     CreateConfigurationInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -259,12 +268,14 @@ module Aws::MQ
     CreateConfigurationInput.struct_class = Types::CreateConfigurationInput
 
     CreateConfigurationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateConfigurationOutput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateConfigurationOutput.add_member(:created, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "created"))
     CreateConfigurationOutput.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreateConfigurationOutput.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
     CreateConfigurationOutput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateConfigurationOutput.struct_class = Types::CreateConfigurationOutput
 
+    CreateConfigurationRequest.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateConfigurationRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     CreateConfigurationRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -272,6 +283,7 @@ module Aws::MQ
     CreateConfigurationRequest.struct_class = Types::CreateConfigurationRequest
 
     CreateConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateConfigurationResponse.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateConfigurationResponse.add_member(:created, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "created"))
     CreateConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreateConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
@@ -337,6 +349,7 @@ module Aws::MQ
     DescribeBrokerInstanceOptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     DescribeBrokerInstanceOptionsResponse.struct_class = Types::DescribeBrokerInstanceOptionsResponse
 
+    DescribeBrokerOutput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     DescribeBrokerOutput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     DescribeBrokerOutput.add_member(:broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "brokerArn"))
     DescribeBrokerOutput.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
@@ -350,10 +363,13 @@ module Aws::MQ
     DescribeBrokerOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     DescribeBrokerOutput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     DescribeBrokerOutput.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    DescribeBrokerOutput.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "ldapServerMetadata"))
     DescribeBrokerOutput.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerOutput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
+    DescribeBrokerOutput.add_member(:pending_authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "pendingAuthenticationStrategy"))
     DescribeBrokerOutput.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
     DescribeBrokerOutput.add_member(:pending_host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "pendingHostInstanceType"))
+    DescribeBrokerOutput.add_member(:pending_ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "pendingLdapServerMetadata"))
     DescribeBrokerOutput.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
     DescribeBrokerOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerOutput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
@@ -366,6 +382,7 @@ module Aws::MQ
     DescribeBrokerRequest.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "broker-id"))
     DescribeBrokerRequest.struct_class = Types::DescribeBrokerRequest
 
+    DescribeBrokerResponse.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     DescribeBrokerResponse.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     DescribeBrokerResponse.add_member(:broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "brokerArn"))
     DescribeBrokerResponse.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
@@ -379,10 +396,13 @@ module Aws::MQ
     DescribeBrokerResponse.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     DescribeBrokerResponse.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     DescribeBrokerResponse.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    DescribeBrokerResponse.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "ldapServerMetadata"))
     DescribeBrokerResponse.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerResponse.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
+    DescribeBrokerResponse.add_member(:pending_authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "pendingAuthenticationStrategy"))
     DescribeBrokerResponse.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
     DescribeBrokerResponse.add_member(:pending_host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "pendingHostInstanceType"))
+    DescribeBrokerResponse.add_member(:pending_ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "pendingLdapServerMetadata"))
     DescribeBrokerResponse.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
     DescribeBrokerResponse.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
@@ -396,6 +416,7 @@ module Aws::MQ
     DescribeConfigurationRequest.struct_class = Types::DescribeConfigurationRequest
 
     DescribeConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeConfigurationResponse.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     DescribeConfigurationResponse.add_member(:created, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "created"))
     DescribeConfigurationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     DescribeConfigurationResponse.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
@@ -458,6 +479,31 @@ module Aws::MQ
     InternalServerErrorException.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    LdapServerMetadataInput.add_member(:hosts, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "hosts"))
+    LdapServerMetadataInput.add_member(:role_base, Shapes::ShapeRef.new(shape: __string, location_name: "roleBase"))
+    LdapServerMetadataInput.add_member(:role_name, Shapes::ShapeRef.new(shape: __string, location_name: "roleName"))
+    LdapServerMetadataInput.add_member(:role_search_matching, Shapes::ShapeRef.new(shape: __string, location_name: "roleSearchMatching"))
+    LdapServerMetadataInput.add_member(:role_search_subtree, Shapes::ShapeRef.new(shape: __boolean, location_name: "roleSearchSubtree"))
+    LdapServerMetadataInput.add_member(:service_account_password, Shapes::ShapeRef.new(shape: __string, location_name: "serviceAccountPassword"))
+    LdapServerMetadataInput.add_member(:service_account_username, Shapes::ShapeRef.new(shape: __string, location_name: "serviceAccountUsername"))
+    LdapServerMetadataInput.add_member(:user_base, Shapes::ShapeRef.new(shape: __string, location_name: "userBase"))
+    LdapServerMetadataInput.add_member(:user_role_name, Shapes::ShapeRef.new(shape: __string, location_name: "userRoleName"))
+    LdapServerMetadataInput.add_member(:user_search_matching, Shapes::ShapeRef.new(shape: __string, location_name: "userSearchMatching"))
+    LdapServerMetadataInput.add_member(:user_search_subtree, Shapes::ShapeRef.new(shape: __boolean, location_name: "userSearchSubtree"))
+    LdapServerMetadataInput.struct_class = Types::LdapServerMetadataInput
+
+    LdapServerMetadataOutput.add_member(:hosts, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "hosts"))
+    LdapServerMetadataOutput.add_member(:role_base, Shapes::ShapeRef.new(shape: __string, location_name: "roleBase"))
+    LdapServerMetadataOutput.add_member(:role_name, Shapes::ShapeRef.new(shape: __string, location_name: "roleName"))
+    LdapServerMetadataOutput.add_member(:role_search_matching, Shapes::ShapeRef.new(shape: __string, location_name: "roleSearchMatching"))
+    LdapServerMetadataOutput.add_member(:role_search_subtree, Shapes::ShapeRef.new(shape: __boolean, location_name: "roleSearchSubtree"))
+    LdapServerMetadataOutput.add_member(:service_account_username, Shapes::ShapeRef.new(shape: __string, location_name: "serviceAccountUsername"))
+    LdapServerMetadataOutput.add_member(:user_base, Shapes::ShapeRef.new(shape: __string, location_name: "userBase"))
+    LdapServerMetadataOutput.add_member(:user_role_name, Shapes::ShapeRef.new(shape: __string, location_name: "userRoleName"))
+    LdapServerMetadataOutput.add_member(:user_search_matching, Shapes::ShapeRef.new(shape: __string, location_name: "userSearchMatching"))
+    LdapServerMetadataOutput.add_member(:user_search_subtree, Shapes::ShapeRef.new(shape: __boolean, location_name: "userSearchSubtree"))
+    LdapServerMetadataOutput.struct_class = Types::LdapServerMetadataOutput
 
     ListBrokersOutput.add_member(:broker_summaries, Shapes::ShapeRef.new(shape: __listOfBrokerSummary, location_name: "brokerSummaries"))
     ListBrokersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
@@ -561,37 +607,45 @@ module Aws::MQ
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
 
+    UpdateBrokerInput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     UpdateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
     UpdateBrokerInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerInput.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    UpdateBrokerInput.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataInput, location_name: "ldapServerMetadata"))
     UpdateBrokerInput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     UpdateBrokerInput.struct_class = Types::UpdateBrokerInput
 
+    UpdateBrokerOutput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     UpdateBrokerOutput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerOutput.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     UpdateBrokerOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
     UpdateBrokerOutput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerOutput.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    UpdateBrokerOutput.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "ldapServerMetadata"))
     UpdateBrokerOutput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerOutput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     UpdateBrokerOutput.struct_class = Types::UpdateBrokerOutput
 
+    UpdateBrokerRequest.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     UpdateBrokerRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerRequest.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "broker-id"))
     UpdateBrokerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
     UpdateBrokerRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerRequest.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    UpdateBrokerRequest.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataInput, location_name: "ldapServerMetadata"))
     UpdateBrokerRequest.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     UpdateBrokerRequest.struct_class = Types::UpdateBrokerRequest
 
+    UpdateBrokerResponse.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     UpdateBrokerResponse.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerResponse.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     UpdateBrokerResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
     UpdateBrokerResponse.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerResponse.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    UpdateBrokerResponse.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "ldapServerMetadata"))
     UpdateBrokerResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     UpdateBrokerResponse.struct_class = Types::UpdateBrokerResponse
@@ -869,6 +923,12 @@ module Aws::MQ
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_configuration_revisions, Seahorse::Model::Operation.new.tap do |o|

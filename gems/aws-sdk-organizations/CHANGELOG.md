@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2020-08-19)
+------------------
+
+* Feature - Minor documentation updates for AWS Organizations
+
+1.48.0 (2020-08-11)
+------------------
+
+* Feature - Minor documentation update for AWS Organizations
+
+1.47.0 (2020-08-07)
+------------------
+
+* Feature - Documentation updates for some new error reasons.
+
+1.46.0 (2020-07-30)
+------------------
+
+* Feature - Documentation updates for AWS Organizations
+
 1.45.0 (2020-07-08)
 ------------------
 

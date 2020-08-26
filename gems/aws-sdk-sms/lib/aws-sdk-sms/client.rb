@@ -85,13 +85,28 @@ module Aws::SMS
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::SMS
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -326,23 +341,24 @@ module Aws::SMS
     # groups. Each server group contain one or more servers.
     #
     # @option params [String] :name
-    #   Name of the new application.
+    #   The name of the new application.
     #
     # @option params [String] :description
-    #   Description of the new application
+    #   The description of the new application
     #
     # @option params [String] :role_name
-    #   Name of service role in customer's account to be used by AWS SMS.
+    #   The name of the service role in the customer's account to be used by
+    #   AWS SMS.
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier you provide to ensure idempotency
-    #   of application creation.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of application creation.
     #
     # @option params [Array<Types::ServerGroup>] :server_groups
-    #   List of server groups to include in the application.
+    #   The server groups to include in the application.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   List of tags to be associated with the application.
+    #   The tags to be associated with the application.
     #
     # @return [Types::CreateAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -392,14 +408,17 @@ module Aws::SMS
     # @example Response structure
     #
     #   resp.app_summary.app_id #=> String
+    #   resp.app_summary.imported_app_id #=> String
     #   resp.app_summary.name #=> String
     #   resp.app_summary.description #=> String
     #   resp.app_summary.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.app_summary.status_message #=> String
-    #   resp.app_summary.replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
+    #   resp.app_summary.replication_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.app_summary.replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "PARTIALLY_REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
     #   resp.app_summary.replication_status_message #=> String
     #   resp.app_summary.latest_replication_time #=> Time
-    #   resp.app_summary.launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
+    #   resp.app_summary.launch_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.app_summary.launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "PARTIALLY_LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
     #   resp.app_summary.launch_status_message #=> String
     #   resp.app_summary.launch_details.latest_launch_time #=> Time
     #   resp.app_summary.launch_details.stack_name #=> String
@@ -441,7 +460,7 @@ module Aws::SMS
     # creates an Amazon Machine Image (AMI).
     #
     # @option params [required, String] :server_id
-    #   The identifier of the server.
+    #   The ID of the server.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :seed_replication_time
     #   The seed replication time.
@@ -450,6 +469,7 @@ module Aws::SMS
     #   The time between consecutive replication runs, in hours.
     #
     # @option params [Boolean] :run_once
+    #   Indicates whether to run the replication job one time.
     #
     # @option params [String] :license_type
     #   The license type to be used for the AMI created by a successful
@@ -462,27 +482,26 @@ module Aws::SMS
     #   The description of the replication job.
     #
     # @option params [Integer] :number_of_recent_amis_to_keep
-    #   The maximum number of SMS-created AMIs to retain. The oldest will be
-    #   deleted once the maximum number is reached and a new AMI is created.
+    #   The maximum number of SMS-created AMIs to retain. The oldest is
+    #   deleted after the maximum number is reached and a new AMI is created.
     #
     # @option params [Boolean] :encrypted
-    #   When *true*, the replication job produces encrypted AMIs. See also
-    #   `KmsKeyId` below.
+    #   Indicates whether the replication job produces encrypted AMIs.
     #
     # @option params [String] :kms_key_id
-    #   KMS key ID for replication jobs that produce encrypted AMIs. Can be
-    #   any of the following:
+    #   The ID of the KMS key for replication jobs that produce encrypted
+    #   AMIs. This value can be any of the following:
     #
     #   * KMS key ID
     #
     #   * KMS key alias
     #
-    #   * ARN referring to KMS key ID
+    #   * ARN referring to the KMS key ID
     #
-    #   * ARN referring to KMS key alias
+    #   * ARN referring to the KMS key alias
     #
-    #   If encrypted is *true* but a KMS key id is not specified, the
-    #   customer's default KMS key for EBS is used.
+    #   If encrypted is *true* but a KMS key ID is not specified, the
+    #   customer's default KMS key for Amazon EBS is used.
     #
     # @return [Types::CreateReplicationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -516,20 +535,20 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Deletes an existing application. Optionally deletes the launched stack
-    # associated with the application and all AWS SMS replication jobs for
-    # servers in the application.
+    # Deletes the specified application. Optionally deletes the launched
+    # stack associated with the application and all AWS SMS replication jobs
+    # for servers in the application.
     #
     # @option params [String] :app_id
-    #   ID of the application to delete.
+    #   The ID of the application.
     #
     # @option params [Boolean] :force_stop_app_replication
-    #   While deleting the application, stop all replication jobs
-    #   corresponding to the servers in the application.
+    #   Indicates whether to stop all replication jobs corresponding to the
+    #   servers in the application while deleting the application.
     #
     # @option params [Boolean] :force_terminate_app
-    #   While deleting the application, terminate the stack corresponding to
-    #   the application.
+    #   Indicates whether to terminate the stack corresponding to the
+    #   application while deleting the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -550,10 +569,10 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Deletes existing launch configuration for an application.
+    # Deletes the launch configuration for the specified application.
     #
     # @option params [String] :app_id
-    #   ID of the application associated with the launch configuration.
+    #   The ID of the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -572,10 +591,10 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Deletes existing replication configuration for an application.
+    # Deletes the replication configuration for the specified application.
     #
     # @option params [String] :app_id
-    #   ID of the application associated with the replication configuration.
+    #   The ID of the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -594,6 +613,28 @@ module Aws::SMS
       req.send_request(options)
     end
 
+    # Deletes the validation configuration for the specified application.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_validation_configuration({
+    #     app_id: "AppIdWithValidation", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppValidationConfiguration AWS API Documentation
+    #
+    # @overload delete_app_validation_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_app_validation_configuration(params = {}, options = {})
+      req = build_request(:delete_app_validation_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified replication job.
     #
     # After you delete a replication job, there are no further replication
@@ -602,7 +643,7 @@ module Aws::SMS
     # deleted.
     #
     # @option params [required, String] :replication_job_id
-    #   The identifier of the replication job.
+    #   The ID of the replication job.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -640,7 +681,7 @@ module Aws::SMS
     # support replication jobs.
     #
     # @option params [required, String] :connector_id
-    #   The identifier of the connector.
+    #   The ID of the connector.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -663,10 +704,10 @@ module Aws::SMS
     # writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
     #
     # @option params [String] :app_id
-    #   ID of the application associated with the change set.
+    #   The ID of the application associated with the change set.
     #
     # @option params [String] :changeset_format
-    #   Format for the change set.
+    #   The format for the change set.
     #
     # @return [Types::GenerateChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -693,16 +734,16 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Generates an Amazon CloudFormation template based on the current
-    # launch configuration and writes it to an Amazon S3 object in the
-    # customer’s Amazon S3 bucket.
+    # Generates an AWS CloudFormation template based on the current launch
+    # configuration and writes it to an Amazon S3 object in the customer’s
+    # Amazon S3 bucket.
     #
     # @option params [String] :app_id
-    #   ID of the application associated with the Amazon CloudFormation
+    #   The ID of the application associated with the AWS CloudFormation
     #   template.
     #
     # @option params [String] :template_format
-    #   Format for generating the Amazon CloudFormation template.
+    #   The format for generating the AWS CloudFormation template.
     #
     # @return [Types::GenerateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -729,10 +770,10 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Retrieve information about an application.
+    # Retrieve information about the specified application.
     #
     # @option params [String] :app_id
-    #   ID of the application whose information is being retrieved.
+    #   The ID of the application.
     #
     # @return [Types::GetAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -749,14 +790,17 @@ module Aws::SMS
     # @example Response structure
     #
     #   resp.app_summary.app_id #=> String
+    #   resp.app_summary.imported_app_id #=> String
     #   resp.app_summary.name #=> String
     #   resp.app_summary.description #=> String
     #   resp.app_summary.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.app_summary.status_message #=> String
-    #   resp.app_summary.replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
+    #   resp.app_summary.replication_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.app_summary.replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "PARTIALLY_REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
     #   resp.app_summary.replication_status_message #=> String
     #   resp.app_summary.latest_replication_time #=> Time
-    #   resp.app_summary.launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
+    #   resp.app_summary.launch_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.app_summary.launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "PARTIALLY_LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
     #   resp.app_summary.launch_status_message #=> String
     #   resp.app_summary.launch_details.latest_launch_time #=> Time
     #   resp.app_summary.launch_details.stack_name #=> String
@@ -793,16 +837,17 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Retrieves the application launch configuration associated with an
-    # application.
+    # Retrieves the application launch configuration associated with the
+    # specified application.
     #
     # @option params [String] :app_id
-    #   ID of the application launch configuration.
+    #   The ID of the application.
     #
     # @return [Types::GetAppLaunchConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAppLaunchConfigurationResponse#app_id #app_id} => String
     #   * {Types::GetAppLaunchConfigurationResponse#role_name #role_name} => String
+    #   * {Types::GetAppLaunchConfigurationResponse#auto_launch #auto_launch} => Boolean
     #   * {Types::GetAppLaunchConfigurationResponse#server_group_launch_configurations #server_group_launch_configurations} => Array&lt;Types::ServerGroupLaunchConfiguration&gt;
     #
     # @example Request syntax with placeholder values
@@ -815,6 +860,7 @@ module Aws::SMS
     #
     #   resp.app_id #=> String
     #   resp.role_name #=> String
+    #   resp.auto_launch #=> Boolean
     #   resp.server_group_launch_configurations #=> Array
     #   resp.server_group_launch_configurations[0].server_group_id #=> String
     #   resp.server_group_launch_configurations[0].launch_order #=> Integer
@@ -838,6 +884,10 @@ module Aws::SMS
     #   resp.server_group_launch_configurations[0].server_launch_configurations[0].user_data.s3_location.key #=> String
     #   resp.server_group_launch_configurations[0].server_launch_configurations[0].instance_type #=> String
     #   resp.server_group_launch_configurations[0].server_launch_configurations[0].associate_public_ip_address #=> Boolean
+    #   resp.server_group_launch_configurations[0].server_launch_configurations[0].iam_instance_profile_name #=> String
+    #   resp.server_group_launch_configurations[0].server_launch_configurations[0].configure_script.bucket #=> String
+    #   resp.server_group_launch_configurations[0].server_launch_configurations[0].configure_script.key #=> String
+    #   resp.server_group_launch_configurations[0].server_launch_configurations[0].configure_script_type #=> String, one of "SHELL_SCRIPT", "POWERSHELL_SCRIPT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppLaunchConfiguration AWS API Documentation
     #
@@ -848,11 +898,11 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Retrieves an application replication configuration associatd with an
-    # application.
+    # Retrieves the application replication configuration associated with
+    # the specified application.
     #
     # @option params [String] :app_id
-    #   ID of the application associated with the replication configuration.
+    #   The ID of the application.
     #
     # @return [Types::GetAppReplicationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -896,6 +946,110 @@ module Aws::SMS
       req.send_request(options)
     end
 
+    # Retrieves information about a configuration for validating an
+    # application.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the application.
+    #
+    # @return [Types::GetAppValidationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAppValidationConfigurationResponse#app_validation_configurations #app_validation_configurations} => Array&lt;Types::AppValidationConfiguration&gt;
+    #   * {Types::GetAppValidationConfigurationResponse#server_group_validation_configurations #server_group_validation_configurations} => Array&lt;Types::ServerGroupValidationConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_app_validation_configuration({
+    #     app_id: "AppIdWithValidation", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_validation_configurations #=> Array
+    #   resp.app_validation_configurations[0].validation_id #=> String
+    #   resp.app_validation_configurations[0].name #=> String
+    #   resp.app_validation_configurations[0].app_validation_strategy #=> String, one of "SSM"
+    #   resp.app_validation_configurations[0].ssm_validation_parameters.source.s3_location.bucket #=> String
+    #   resp.app_validation_configurations[0].ssm_validation_parameters.source.s3_location.key #=> String
+    #   resp.app_validation_configurations[0].ssm_validation_parameters.instance_id #=> String
+    #   resp.app_validation_configurations[0].ssm_validation_parameters.script_type #=> String, one of "SHELL_SCRIPT", "POWERSHELL_SCRIPT"
+    #   resp.app_validation_configurations[0].ssm_validation_parameters.command #=> String
+    #   resp.app_validation_configurations[0].ssm_validation_parameters.execution_timeout_seconds #=> Integer
+    #   resp.app_validation_configurations[0].ssm_validation_parameters.output_s3_bucket_name #=> String
+    #   resp.server_group_validation_configurations #=> Array
+    #   resp.server_group_validation_configurations[0].server_group_id #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations #=> Array
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.server_id #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.server_type #=> String, one of "VIRTUAL_MACHINE"
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.vm_server.vm_server_address.vm_manager_id #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.vm_server.vm_server_address.vm_id #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.vm_server.vm_name #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.vm_server.vm_manager_name #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.vm_server.vm_manager_type #=> String, one of "VSPHERE", "SCVMM", "HYPERV-MANAGER"
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.vm_server.vm_path #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.replication_job_id #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server.replication_job_terminated #=> Boolean
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].validation_id #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].name #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].server_validation_strategy #=> String, one of "USERDATA"
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].user_data_validation_parameters.source.s3_location.bucket #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].user_data_validation_parameters.source.s3_location.key #=> String
+    #   resp.server_group_validation_configurations[0].server_validation_configurations[0].user_data_validation_parameters.script_type #=> String, one of "SHELL_SCRIPT", "POWERSHELL_SCRIPT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppValidationConfiguration AWS API Documentation
+    #
+    # @overload get_app_validation_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_app_validation_configuration(params = {}, options = {})
+      req = build_request(:get_app_validation_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves output from validating an application.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the application.
+    #
+    # @return [Types::GetAppValidationOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAppValidationOutputResponse#validation_output_list #validation_output_list} => Array&lt;Types::ValidationOutput&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_app_validation_output({
+    #     app_id: "AppIdWithValidation", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.validation_output_list #=> Array
+    #   resp.validation_output_list[0].validation_id #=> String
+    #   resp.validation_output_list[0].name #=> String
+    #   resp.validation_output_list[0].status #=> String, one of "READY_FOR_VALIDATION", "PENDING", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.validation_output_list[0].status_message #=> String
+    #   resp.validation_output_list[0].latest_validation_time #=> Time
+    #   resp.validation_output_list[0].app_validation_output.ssm_output.s3_location.bucket #=> String
+    #   resp.validation_output_list[0].app_validation_output.ssm_output.s3_location.key #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.server_id #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.server_type #=> String, one of "VIRTUAL_MACHINE"
+    #   resp.validation_output_list[0].server_validation_output.server.vm_server.vm_server_address.vm_manager_id #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.vm_server.vm_server_address.vm_id #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.vm_server.vm_name #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.vm_server.vm_manager_name #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.vm_server.vm_manager_type #=> String, one of "VSPHERE", "SCVMM", "HYPERV-MANAGER"
+    #   resp.validation_output_list[0].server_validation_output.server.vm_server.vm_path #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.replication_job_id #=> String
+    #   resp.validation_output_list[0].server_validation_output.server.replication_job_terminated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppValidationOutput AWS API Documentation
+    #
+    # @overload get_app_validation_output(params = {})
+    # @param [Hash] params ({})
+    def get_app_validation_output(params = {}, options = {})
+      req = build_request(:get_app_validation_output, params)
+      req.send_request(options)
+    end
+
     # Describes the connectors registered with the AWS SMS.
     #
     # @option params [String] :next_token
@@ -927,7 +1081,7 @@ module Aws::SMS
     #   resp.connector_list[0].version #=> String
     #   resp.connector_list[0].status #=> String, one of "HEALTHY", "UNHEALTHY"
     #   resp.connector_list[0].capability_list #=> Array
-    #   resp.connector_list[0].capability_list[0] #=> String, one of "VSPHERE", "SCVMM", "HYPERV-MANAGER", "SNAPSHOT_BATCHING"
+    #   resp.connector_list[0].capability_list[0] #=> String, one of "VSPHERE", "SCVMM", "HYPERV-MANAGER", "SNAPSHOT_BATCHING", "SMS_OPTIMIZED"
     #   resp.connector_list[0].vm_manager_name #=> String
     #   resp.connector_list[0].vm_manager_type #=> String, one of "VSPHERE", "SCVMM", "HYPERV-MANAGER"
     #   resp.connector_list[0].vm_manager_id #=> String
@@ -949,7 +1103,7 @@ module Aws::SMS
     # jobs.
     #
     # @option params [String] :replication_job_id
-    #   The identifier of the replication job.
+    #   The ID of the replication job.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
@@ -1026,7 +1180,7 @@ module Aws::SMS
     # Describes the replication runs for the specified replication job.
     #
     # @option params [required, String] :replication_job_id
-    #   The identifier of the replication job.
+    #   The ID of the replication job.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
@@ -1127,7 +1281,7 @@ module Aws::SMS
     #   the returned `NextToken` value.
     #
     # @option params [Array<Types::VmServerAddress>] :vm_server_address_list
-    #   List of `VmServerAddress` objects
+    #   The server addresses.
     #
     # @return [Types::GetServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1177,8 +1331,37 @@ module Aws::SMS
       req.send_request(options)
     end
 
+    # Allows application import from AWS Migration Hub.
+    #
+    # @option params [String] :role_name
+    #   The name of the service role. If you omit this parameter, we create a
+    #   service-linked role for AWS Migration Hub in your account. Otherwise,
+    #   the role that you provide must have the [policy and trust policy][1]
+    #   described in the *AWS Migration Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_app_catalog({
+    #     role_name: "RoleName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportAppCatalog AWS API Documentation
+    #
+    # @overload import_app_catalog(params = {})
+    # @param [Hash] params ({})
+    def import_app_catalog(params = {}, options = {})
+      req = build_request(:import_app_catalog, params)
+      req.send_request(options)
+    end
+
     # Gathers a complete list of on-premises servers. Connectors must be
-    # installed and monitoring all servers that you want to import.
+    # installed and monitoring all servers to import.
     #
     # This call returns immediately, but might take additional time to
     # retrieve all the servers.
@@ -1194,10 +1377,10 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Launches an application stack.
+    # Launches the specified application as a stack in AWS CloudFormation.
     #
     # @option params [String] :app_id
-    #   ID of the application to launch.
+    #   The ID of the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1216,17 +1399,18 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Returns a list of summaries for all applications.
+    # Retrieves summaries for all applications.
     #
     # @option params [Array<String>] :app_ids
+    #   The unique application IDs.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. The default
-    #   value is 50. To retrieve the remaining results, make another call with
-    #   the returned `NextToken` value.
+    #   value is 100. To retrieve the remaining results, make another call
+    #   with the returned `NextToken` value.
     #
     # @return [Types::ListAppsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1245,14 +1429,17 @@ module Aws::SMS
     #
     #   resp.apps #=> Array
     #   resp.apps[0].app_id #=> String
+    #   resp.apps[0].imported_app_id #=> String
     #   resp.apps[0].name #=> String
     #   resp.apps[0].description #=> String
     #   resp.apps[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.apps[0].status_message #=> String
-    #   resp.apps[0].replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
+    #   resp.apps[0].replication_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.apps[0].replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "PARTIALLY_REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
     #   resp.apps[0].replication_status_message #=> String
     #   resp.apps[0].latest_replication_time #=> Time
-    #   resp.apps[0].launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
+    #   resp.apps[0].launch_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.apps[0].launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "PARTIALLY_LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
     #   resp.apps[0].launch_status_message #=> String
     #   resp.apps[0].launch_details.latest_launch_time #=> Time
     #   resp.apps[0].launch_details.stack_name #=> String
@@ -1273,17 +1460,54 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Creates a launch configuration for an application.
+    # Provides information to AWS SMS about whether application validation
+    # is successful.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the application.
+    #
+    # @option params [Types::NotificationContext] :notification_context
+    #   The notification information.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.notify_app_validation_output({
+    #     app_id: "AppIdWithValidation", # required
+    #     notification_context: {
+    #       validation_id: "ValidationId",
+    #       status: "READY_FOR_VALIDATION", # accepts READY_FOR_VALIDATION, PENDING, IN_PROGRESS, SUCCEEDED, FAILED
+    #       status_message: "ValidationStatusMessage",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/NotifyAppValidationOutput AWS API Documentation
+    #
+    # @overload notify_app_validation_output(params = {})
+    # @param [Hash] params ({})
+    def notify_app_validation_output(params = {}, options = {})
+      req = build_request(:notify_app_validation_output, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates the launch configuration for the specified
+    # application.
     #
     # @option params [String] :app_id
-    #   ID of the application associated with the launch configuration.
+    #   The ID of the application.
     #
     # @option params [String] :role_name
-    #   Name of service role in the customer's account that Amazon
+    #   The name of service role in the customer's account that AWS
     #   CloudFormation uses to launch the application.
     #
+    # @option params [Boolean] :auto_launch
+    #   Indicates whether the application is configured to launch
+    #   automatically after replication is complete.
+    #
     # @option params [Array<Types::ServerGroupLaunchConfiguration>] :server_group_launch_configurations
-    #   Launch configurations for server groups in the application.
+    #   Information about the launch configurations for server groups in the
+    #   application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1292,6 +1516,7 @@ module Aws::SMS
     #   resp = client.put_app_launch_configuration({
     #     app_id: "AppId",
     #     role_name: "RoleName",
+    #     auto_launch: false,
     #     server_group_launch_configurations: [
     #       {
     #         server_group_id: "ServerGroupId",
@@ -1321,12 +1546,18 @@ module Aws::SMS
     #             ec2_key_name: "EC2KeyName",
     #             user_data: {
     #               s3_location: {
-    #                 bucket: "BucketName",
-    #                 key: "KeyName",
+    #                 bucket: "S3BucketName",
+    #                 key: "S3KeyName",
     #               },
     #             },
     #             instance_type: "InstanceType",
     #             associate_public_ip_address: false,
+    #             iam_instance_profile_name: "RoleName",
+    #             configure_script: {
+    #               bucket: "S3BucketName",
+    #               key: "S3KeyName",
+    #             },
+    #             configure_script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
     #           },
     #         ],
     #       },
@@ -1342,13 +1573,15 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Creates or updates a replication configuration for an application.
+    # Creates or updates the replication configuration for the specified
+    # application.
     #
     # @option params [String] :app_id
-    #   ID of the application tassociated with the replication configuration.
+    #   The ID of the application.
     #
     # @option params [Array<Types::ServerGroupReplicationConfiguration>] :server_group_replication_configurations
-    #   Replication configurations for server groups in the application.
+    #   Information about the replication configurations for server groups in
+    #   the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1401,10 +1634,97 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Starts replicating an application.
+    # Creates or updates a validation configuration for the specified
+    # application.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the application.
+    #
+    # @option params [Array<Types::AppValidationConfiguration>] :app_validation_configurations
+    #   The configuration for application validation.
+    #
+    # @option params [Array<Types::ServerGroupValidationConfiguration>] :server_group_validation_configurations
+    #   The configuration for instance validation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_app_validation_configuration({
+    #     app_id: "AppIdWithValidation", # required
+    #     app_validation_configurations: [
+    #       {
+    #         validation_id: "ValidationId",
+    #         name: "NonEmptyStringWithMaxLen255",
+    #         app_validation_strategy: "SSM", # accepts SSM
+    #         ssm_validation_parameters: {
+    #           source: {
+    #             s3_location: {
+    #               bucket: "S3BucketName",
+    #               key: "S3KeyName",
+    #             },
+    #           },
+    #           instance_id: "InstanceId",
+    #           script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
+    #           command: "Command",
+    #           execution_timeout_seconds: 1,
+    #           output_s3_bucket_name: "BucketName",
+    #         },
+    #       },
+    #     ],
+    #     server_group_validation_configurations: [
+    #       {
+    #         server_group_id: "ServerGroupId",
+    #         server_validation_configurations: [
+    #           {
+    #             server: {
+    #               server_id: "ServerId",
+    #               server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
+    #               vm_server: {
+    #                 vm_server_address: {
+    #                   vm_manager_id: "VmManagerId",
+    #                   vm_id: "VmId",
+    #                 },
+    #                 vm_name: "VmName",
+    #                 vm_manager_name: "VmManagerName",
+    #                 vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
+    #                 vm_path: "VmPath",
+    #               },
+    #               replication_job_id: "ReplicationJobId",
+    #               replication_job_terminated: false,
+    #             },
+    #             validation_id: "ValidationId",
+    #             name: "NonEmptyStringWithMaxLen255",
+    #             server_validation_strategy: "USERDATA", # accepts USERDATA
+    #             user_data_validation_parameters: {
+    #               source: {
+    #                 s3_location: {
+    #                   bucket: "S3BucketName",
+    #                   key: "S3KeyName",
+    #                 },
+    #               },
+    #               script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppValidationConfiguration AWS API Documentation
+    #
+    # @overload put_app_validation_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_app_validation_configuration(params = {}, options = {})
+      req = build_request(:put_app_validation_configuration, params)
+      req.send_request(options)
+    end
+
+    # Starts replicating the specified application by creating replication
+    # jobs for each server in the application.
     #
     # @option params [String] :app_id
-    #   ID of the application to replicate.
+    #   The ID of the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1423,15 +1743,41 @@ module Aws::SMS
       req.send_request(options)
     end
 
+    # Starts an on-demand replication run for the specified application.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the application.
+    #
+    # @option params [String] :description
+    #   The description of the replication run.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_on_demand_app_replication({
+    #     app_id: "AppId", # required
+    #     description: "Description",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandAppReplication AWS API Documentation
+    #
+    # @overload start_on_demand_app_replication(params = {})
+    # @param [Hash] params ({})
+    def start_on_demand_app_replication(params = {}, options = {})
+      req = build_request(:start_on_demand_app_replication, params)
+      req.send_request(options)
+    end
+
     # Starts an on-demand replication run for the specified replication job.
     # This replication run starts immediately. This replication run is in
     # addition to the ones already scheduled.
     #
-    # There is a limit on the number of on-demand replications runs you can
-    # request in a 24-hour period.
+    # There is a limit on the number of on-demand replications runs that you
+    # can request in a 24-hour period.
     #
     # @option params [required, String] :replication_job_id
-    #   The identifier of the replication job.
+    #   The ID of the replication job.
     #
     # @option params [String] :description
     #   The description of the replication run.
@@ -1460,10 +1806,11 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Stops replicating an application.
+    # Stops replicating the specified application by deleting the
+    # replication job for each server in the application.
     #
     # @option params [String] :app_id
-    #   ID of the application to stop replicating.
+    #   The ID of the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1482,10 +1829,10 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Terminates the stack for an application.
+    # Terminates the stack for the specified application.
     #
     # @option params [String] :app_id
-    #   ID of the application to terminate.
+    #   The ID of the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1504,25 +1851,26 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Updates an application.
+    # Updates the specified application.
     #
     # @option params [String] :app_id
-    #   ID of the application to update.
+    #   The ID of the application.
     #
     # @option params [String] :name
-    #   New name of the application.
+    #   The new name of the application.
     #
     # @option params [String] :description
-    #   New description of the application.
+    #   The new description of the application.
     #
     # @option params [String] :role_name
-    #   Name of the service role in the customer's account used by AWS SMS.
+    #   The name of the service role in the customer's account used by AWS
+    #   SMS.
     #
     # @option params [Array<Types::ServerGroup>] :server_groups
-    #   List of server groups in the application to update.
+    #   The server groups in the application to update.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   List of tags to associate with the application.
+    #   The tags to associate with the application.
     #
     # @return [Types::UpdateAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1572,14 +1920,17 @@ module Aws::SMS
     # @example Response structure
     #
     #   resp.app_summary.app_id #=> String
+    #   resp.app_summary.imported_app_id #=> String
     #   resp.app_summary.name #=> String
     #   resp.app_summary.description #=> String
     #   resp.app_summary.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.app_summary.status_message #=> String
-    #   resp.app_summary.replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
+    #   resp.app_summary.replication_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.app_summary.replication_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_REPLICATION", "VALIDATION_IN_PROGRESS", "REPLICATION_PENDING", "REPLICATION_IN_PROGRESS", "REPLICATED", "PARTIALLY_REPLICATED", "DELTA_REPLICATION_IN_PROGRESS", "DELTA_REPLICATED", "DELTA_REPLICATION_FAILED", "REPLICATION_FAILED", "REPLICATION_STOPPING", "REPLICATION_STOP_FAILED", "REPLICATION_STOPPED"
     #   resp.app_summary.replication_status_message #=> String
     #   resp.app_summary.latest_replication_time #=> Time
-    #   resp.app_summary.launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
+    #   resp.app_summary.launch_configuration_status #=> String, one of "NOT_CONFIGURED", "CONFIGURED"
+    #   resp.app_summary.launch_status #=> String, one of "READY_FOR_CONFIGURATION", "CONFIGURATION_IN_PROGRESS", "CONFIGURATION_INVALID", "READY_FOR_LAUNCH", "VALIDATION_IN_PROGRESS", "LAUNCH_PENDING", "LAUNCH_IN_PROGRESS", "LAUNCHED", "PARTIALLY_LAUNCHED", "DELTA_LAUNCH_IN_PROGRESS", "DELTA_LAUNCH_FAILED", "LAUNCH_FAILED", "TERMINATE_IN_PROGRESS", "TERMINATE_FAILED", "TERMINATED"
     #   resp.app_summary.launch_status_message #=> String
     #   resp.app_summary.launch_details.latest_launch_time #=> Time
     #   resp.app_summary.launch_details.stack_name #=> String
@@ -1619,7 +1970,7 @@ module Aws::SMS
     # Updates the specified settings for the specified replication job.
     #
     # @option params [required, String] :replication_job_id
-    #   The identifier of the replication job.
+    #   The ID of the replication job.
     #
     # @option params [Integer] :frequency
     #   The time between consecutive replication runs, in hours.
@@ -1638,27 +1989,27 @@ module Aws::SMS
     #   The description of the replication job.
     #
     # @option params [Integer] :number_of_recent_amis_to_keep
-    #   The maximum number of SMS-created AMIs to retain. The oldest will be
-    #   deleted once the maximum number is reached and a new AMI is created.
+    #   The maximum number of SMS-created AMIs to retain. The oldest is
+    #   deleted after the maximum number is reached and a new AMI is created.
     #
     # @option params [Boolean] :encrypted
-    #   When true, the replication job produces encrypted AMIs . See also
-    #   `KmsKeyId` below.
+    #   When true, the replication job produces encrypted AMIs. For more
+    #   information, `KmsKeyId`.
     #
     # @option params [String] :kms_key_id
-    #   KMS key ID for replication jobs that produce encrypted AMIs. Can be
-    #   any of the following:
+    #   The ID of the KMS key for replication jobs that produce encrypted
+    #   AMIs. This value can be any of the following:
     #
     #   * KMS key ID
     #
     #   * KMS key alias
     #
-    #   * ARN referring to KMS key ID
+    #   * ARN referring to the KMS key ID
     #
-    #   * ARN referring to KMS key alias
+    #   * ARN referring to the KMS key alias
     #
-    #   If encrypted is *true* but a KMS key id is not specified, the
-    #   customer's default KMS key for EBS is used.
+    #   If encrypted is enabled but a KMS key ID is not specified, the
+    #   customer's default KMS key for Amazon EBS is used.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1698,7 +2049,7 @@ module Aws::SMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sms'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

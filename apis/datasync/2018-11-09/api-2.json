@@ -79,6 +79,19 @@
         {"shape":"InternalException"}
       ]
     },
+    "CreateLocationObjectStorage":{
+      "name":"CreateLocationObjectStorage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateLocationObjectStorageRequest"},
+      "output":{"shape":"CreateLocationObjectStorageResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalException"}
+      ]
+    },
     "CreateLocationS3":{
       "name":"CreateLocationS3",
       "http":{
@@ -204,6 +217,19 @@
       },
       "input":{"shape":"DescribeLocationNfsRequest"},
       "output":{"shape":"DescribeLocationNfsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalException"}
+      ]
+    },
+    "DescribeLocationObjectStorage":{
+      "name":"DescribeLocationObjectStorage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeLocationObjectStorageRequest"},
+      "output":{"shape":"DescribeLocationObjectStorageResponse"},
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalException"}
@@ -406,7 +432,7 @@
     "AgentArnList":{
       "type":"list",
       "member":{"shape":"AgentArn"},
-      "max":64,
+      "max":4,
       "min":1
     },
     "AgentList":{
@@ -457,7 +483,7 @@
       "members":{
         "ActivationKey":{"shape":"ActivationKey"},
         "AgentName":{"shape":"TagValue"},
-        "Tags":{"shape":"TagList"},
+        "Tags":{"shape":"InputTagList"},
         "VpcEndpointId":{"shape":"VpcEndpointId"},
         "SubnetArns":{"shape":"PLSubnetArnList"},
         "SecurityGroupArns":{"shape":"PLSecurityGroupArnList"}
@@ -479,7 +505,7 @@
         "Subdirectory":{"shape":"EfsSubdirectory"},
         "EfsFilesystemArn":{"shape":"EfsFilesystemArn"},
         "Ec2Config":{"shape":"Ec2Config"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"InputTagList"}
       }
     },
     "CreateLocationEfsResponse":{
@@ -500,7 +526,7 @@
         "Subdirectory":{"shape":"FsxWindowsSubdirectory"},
         "FsxFilesystemArn":{"shape":"FsxFilesystemArn"},
         "SecurityGroupArns":{"shape":"Ec2SecurityGroupArnList"},
-        "Tags":{"shape":"TagList"},
+        "Tags":{"shape":"InputTagList"},
         "User":{"shape":"SmbUser"},
         "Domain":{"shape":"SmbDomain"},
         "Password":{"shape":"SmbPassword"}
@@ -524,10 +550,35 @@
         "ServerHostname":{"shape":"ServerHostname"},
         "OnPremConfig":{"shape":"OnPremConfig"},
         "MountOptions":{"shape":"NfsMountOptions"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"InputTagList"}
       }
     },
     "CreateLocationNfsResponse":{
+      "type":"structure",
+      "members":{
+        "LocationArn":{"shape":"LocationArn"}
+      }
+    },
+    "CreateLocationObjectStorageRequest":{
+      "type":"structure",
+      "required":[
+        "ServerHostname",
+        "BucketName",
+        "AgentArns"
+      ],
+      "members":{
+        "ServerHostname":{"shape":"ServerHostname"},
+        "ServerPort":{"shape":"ObjectStorageServerPort"},
+        "ServerProtocol":{"shape":"ObjectStorageServerProtocol"},
+        "Subdirectory":{"shape":"S3Subdirectory"},
+        "BucketName":{"shape":"ObjectStorageBucketName"},
+        "AccessKey":{"shape":"ObjectStorageAccessKey"},
+        "SecretKey":{"shape":"ObjectStorageSecretKey"},
+        "AgentArns":{"shape":"AgentArnList"},
+        "Tags":{"shape":"InputTagList"}
+      }
+    },
+    "CreateLocationObjectStorageResponse":{
       "type":"structure",
       "members":{
         "LocationArn":{"shape":"LocationArn"}
@@ -544,7 +595,7 @@
         "S3BucketArn":{"shape":"S3BucketArn"},
         "S3StorageClass":{"shape":"S3StorageClass"},
         "S3Config":{"shape":"S3Config"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"InputTagList"}
       }
     },
     "CreateLocationS3Response":{
@@ -570,7 +621,7 @@
         "Password":{"shape":"SmbPassword"},
         "AgentArns":{"shape":"AgentArnList"},
         "MountOptions":{"shape":"SmbMountOptions"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"InputTagList"}
       }
     },
     "CreateLocationSmbResponse":{
@@ -593,7 +644,7 @@
         "Options":{"shape":"Options"},
         "Excludes":{"shape":"FilterList"},
         "Schedule":{"shape":"TaskSchedule"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"InputTagList"}
       }
     },
     "CreateTaskResponse":{
@@ -705,6 +756,25 @@
         "LocationUri":{"shape":"LocationUri"},
         "OnPremConfig":{"shape":"OnPremConfig"},
         "MountOptions":{"shape":"NfsMountOptions"},
+        "CreationTime":{"shape":"Time"}
+      }
+    },
+    "DescribeLocationObjectStorageRequest":{
+      "type":"structure",
+      "required":["LocationArn"],
+      "members":{
+        "LocationArn":{"shape":"LocationArn"}
+      }
+    },
+    "DescribeLocationObjectStorageResponse":{
+      "type":"structure",
+      "members":{
+        "LocationArn":{"shape":"LocationArn"},
+        "LocationUri":{"shape":"LocationUri"},
+        "AccessKey":{"shape":"ObjectStorageAccessKey"},
+        "ServerPort":{"shape":"ObjectStorageServerPort"},
+        "ServerProtocol":{"shape":"ObjectStorageServerProtocol"},
+        "AgentArns":{"shape":"AgentArnList"},
         "CreationTime":{"shape":"Time"}
       }
     },
@@ -854,6 +924,12 @@
         "FIPS"
       ]
     },
+    "FilterAttributeValue":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"^[0-9a-zA-Z_\\ \\-\\:\\*\\.\\\\/\\?-]*$"
+    },
     "FilterList":{
       "type":"list",
       "member":{"shape":"FilterRule"},
@@ -878,6 +954,10 @@
       "max":409600,
       "pattern":"^[^\\x00]+$"
     },
+    "FilterValues":{
+      "type":"list",
+      "member":{"shape":"FilterAttributeValue"}
+    },
     "FsxFilesystemArn":{
       "type":"string",
       "max":128,
@@ -901,6 +981,12 @@
       "type":"string",
       "max":2048,
       "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"
+    },
+    "InputTagList":{
+      "type":"list",
+      "member":{"shape":"TagListEntry"},
+      "max":50,
+      "min":0
     },
     "InternalException":{
       "type":"structure",
@@ -937,7 +1023,8 @@
       "type":"structure",
       "members":{
         "MaxResults":{"shape":"MaxResults"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"NextToken"},
+        "Filters":{"shape":"LocationFilters"}
       }
     },
     "ListLocationsResponse":{
@@ -959,7 +1046,7 @@
     "ListTagsForResourceResponse":{
       "type":"structure",
       "members":{
-        "Tags":{"shape":"TagList"},
+        "Tags":{"shape":"OutputTagList"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -982,7 +1069,8 @@
       "type":"structure",
       "members":{
         "MaxResults":{"shape":"MaxResults"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"NextToken"},
+        "Filters":{"shape":"TaskFilters"}
       }
     },
     "ListTasksResponse":{
@@ -996,6 +1084,31 @@
       "type":"string",
       "max":128,
       "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$"
+    },
+    "LocationFilter":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Values",
+        "Operator"
+      ],
+      "members":{
+        "Name":{"shape":"LocationFilterName"},
+        "Values":{"shape":"FilterValues"},
+        "Operator":{"shape":"Operator"}
+      }
+    },
+    "LocationFilterName":{
+      "type":"string",
+      "enum":[
+        "LocationUri",
+        "LocationType",
+        "CreationTime"
+      ]
+    },
+    "LocationFilters":{
+      "type":"list",
+      "member":{"shape":"LocationFilter"}
     },
     "LocationList":{
       "type":"list",
@@ -1016,7 +1129,7 @@
     "LogGroupArn":{
       "type":"string",
       "max":562,
-      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$"
     },
     "LogLevel":{
       "type":"string",
@@ -1068,12 +1181,59 @@
         "NFS4_1"
       ]
     },
+    "ObjectStorageAccessKey":{
+      "type":"string",
+      "max":200,
+      "min":8,
+      "pattern":"^.+$"
+    },
+    "ObjectStorageBucketName":{
+      "type":"string",
+      "max":63,
+      "min":3,
+      "pattern":"^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
+    },
+    "ObjectStorageSecretKey":{
+      "type":"string",
+      "max":200,
+      "min":8,
+      "pattern":"^.+$",
+      "sensitive":true
+    },
+    "ObjectStorageServerPort":{
+      "type":"integer",
+      "box":true,
+      "max":65536,
+      "min":1
+    },
+    "ObjectStorageServerProtocol":{
+      "type":"string",
+      "enum":[
+        "HTTPS",
+        "HTTP"
+      ]
+    },
     "OnPremConfig":{
       "type":"structure",
       "required":["AgentArns"],
       "members":{
         "AgentArns":{"shape":"AgentArnList"}
       }
+    },
+    "Operator":{
+      "type":"string",
+      "enum":[
+        "Equals",
+        "NotEquals",
+        "In",
+        "LessThanOrEqual",
+        "LessThan",
+        "GreaterThanOrEqual",
+        "GreaterThan",
+        "Contains",
+        "NotContains",
+        "BeginsWith"
+      ]
     },
     "Options":{
       "type":"structure",
@@ -1089,8 +1249,15 @@
         "PosixPermissions":{"shape":"PosixPermissions"},
         "BytesPerSecond":{"shape":"BytesPerSecond"},
         "TaskQueueing":{"shape":"TaskQueueing"},
-        "LogLevel":{"shape":"LogLevel"}
+        "LogLevel":{"shape":"LogLevel"},
+        "TransferMode":{"shape":"TransferMode"}
       }
+    },
+    "OutputTagList":{
+      "type":"list",
+      "member":{"shape":"TagListEntry"},
+      "max":55,
+      "min":0
     },
     "OverwriteMode":{
       "type":"string",
@@ -1253,12 +1420,6 @@
       "max":50,
       "min":1
     },
-    "TagList":{
-      "type":"list",
-      "member":{"shape":"TagListEntry"},
-      "max":55,
-      "min":0
-    },
     "TagListEntry":{
       "type":"structure",
       "required":["Key"],
@@ -1275,7 +1436,7 @@
       ],
       "members":{
         "ResourceArn":{"shape":"TaggableResourceArn"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"InputTagList"}
       }
     },
     "TagResourceResponse":{
@@ -1341,6 +1502,30 @@
         "ERROR"
       ]
     },
+    "TaskFilter":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Values",
+        "Operator"
+      ],
+      "members":{
+        "Name":{"shape":"TaskFilterName"},
+        "Values":{"shape":"FilterValues"},
+        "Operator":{"shape":"Operator"}
+      }
+    },
+    "TaskFilterName":{
+      "type":"string",
+      "enum":[
+        "LocationId",
+        "CreationTime"
+      ]
+    },
+    "TaskFilters":{
+      "type":"list",
+      "member":{"shape":"TaskFilter"}
+    },
     "TaskList":{
       "type":"list",
       "member":{"shape":"TaskListEntry"}
@@ -1378,6 +1563,13 @@
       ]
     },
     "Time":{"type":"timestamp"},
+    "TransferMode":{
+      "type":"string",
+      "enum":[
+        "CHANGED",
+        "ALL"
+      ]
+    },
     "Uid":{
       "type":"string",
       "enum":[

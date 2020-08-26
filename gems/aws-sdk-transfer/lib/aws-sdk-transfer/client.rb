@@ -85,13 +85,28 @@ module Aws::Transfer
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::Transfer
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -438,8 +453,8 @@ module Aws::Transfer
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
     #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
-    #   Certificate Manager (ACM) which will be used to identify your server
-    #   when clients connect to it over FTPS.
+    #   Certificate Manager (ACM) which will be used to identify your file
+    #   transfer protocol-enabled server when clients connect to it over FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the `EndpointType`
     #   must be `VPC` and the `IdentityProviderType` must be `API_GATEWAY`.
@@ -452,6 +467,10 @@ module Aws::Transfer
     #   `SERVICE_MANAGED`.
     #
     #    </note>
+    #
+    # @option params [String] :security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for file transfer
@@ -480,6 +499,7 @@ module Aws::Transfer
     #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY
     #     logging_role: "Role",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #     security_policy_name: "SecurityPolicyName",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -546,7 +566,7 @@ module Aws::Transfer
     #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
     #   S3, the entry will be ignored. As a workaround, you can use the Amazon
-    #   S3 api to create 0 byte objects as place holders for your directory.
+    #   S3 API to create 0 byte objects as place holders for your directory.
     #   If using the CLI, use the `s3api` call instead of `s3` so you can use
     #   the put-object operation. For example, you use the following: `aws
     #   s3api put-object --bucket bucketname --key path/to/folder/`. Make sure
@@ -605,9 +625,10 @@ module Aws::Transfer
     # @option params [required, String] :user_name
     #   A unique string that identifies a user and is associated with a file
     #   transfer protocol-enabled server as specified by the `ServerId`. This
-    #   user name must be a minimum of 3 and a maximum of 32 characters long.
-    #   The following are valid characters: a-z, A-Z, 0-9, underscore, and
-    #   hyphen. The user name can't start with a hyphen.
+    #   user name must be a minimum of 3 and a maximum of 100 characters long.
+    #   The following are valid characters: a-z, A-Z, 0-9, underscore '\_',
+    #   hyphen '-', period '.', and at sign '@'. The user name can't
+    #   start with a hyphen, period, and at sign.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -746,6 +767,51 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Describes the security policy that is attached to your file transfer
+    # protocol-enabled server. The response contains a description of the
+    # security policy's properties. For more information about security
+    # policies, see [Working with security policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
+    #
+    # @option params [required, String] :security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
+    #
+    # @return [Types::DescribeSecurityPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSecurityPolicyResponse#security_policy #security_policy} => Types::DescribedSecurityPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_security_policy({
+    #     security_policy_name: "SecurityPolicyName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_policy.fips #=> Boolean
+    #   resp.security_policy.security_policy_name #=> String
+    #   resp.security_policy.ssh_ciphers #=> Array
+    #   resp.security_policy.ssh_ciphers[0] #=> String
+    #   resp.security_policy.ssh_kexs #=> Array
+    #   resp.security_policy.ssh_kexs[0] #=> String
+    #   resp.security_policy.ssh_macs #=> Array
+    #   resp.security_policy.ssh_macs[0] #=> String
+    #   resp.security_policy.tls_ciphers #=> Array
+    #   resp.security_policy.tls_ciphers[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeSecurityPolicy AWS API Documentation
+    #
+    # @overload describe_security_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_security_policy(params = {}, options = {})
+      req = build_request(:describe_security_policy, params)
+      req.send_request(options)
+    end
+
     # Describes a file transfer protocol-enabled server that you specify by
     # passing the `ServerId` parameter.
     #
@@ -785,6 +851,7 @@ module Aws::Transfer
     #   resp.server.logging_role #=> String
     #   resp.server.protocols #=> Array
     #   resp.server.protocols[0] #=> String, one of "SFTP", "FTP", "FTPS"
+    #   resp.server.security_policy_name #=> String
     #   resp.server.server_id #=> String
     #   resp.server.state #=> String, one of "OFFLINE", "ONLINE", "STARTING", "STOPPING", "START_FAILED", "STOP_FAILED"
     #   resp.server.tags #=> Array
@@ -905,6 +972,48 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Lists the security policies that are attached to your file transfer
+    # protocol-enabled servers.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the number of security policies to return as a response to
+    #   the `ListSecurityPolicies` query.
+    #
+    # @option params [String] :next_token
+    #   When additional results are obtained from the `ListSecurityPolicies`
+    #   command, a `NextToken` parameter is returned in the output. You can
+    #   then pass the `NextToken` parameter in a subsequent command to
+    #   continue listing additional security policies.
+    #
+    # @return [Types::ListSecurityPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityPoliciesResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityPoliciesResponse#security_policy_names #security_policy_names} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_policies({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.security_policy_names #=> Array
+    #   resp.security_policy_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListSecurityPolicies AWS API Documentation
+    #
+    # @overload list_security_policies(params = {})
+    # @param [Hash] params ({})
+    def list_security_policies(params = {}, options = {})
+      req = build_request(:list_security_policies, params)
+      req.send_request(options)
+    end
+
     # Lists the file transfer protocol-enabled servers that are associated
     # with your AWS account.
     #
@@ -913,7 +1022,7 @@ module Aws::Transfer
     #   return as a response to the `ListServers` query.
     #
     # @option params [String] :next_token
-    #   When additional results are obtained from the`ListServers` command, a
+    #   When additional results are obtained from the `ListServers` command, a
     #   `NextToken` parameter is returned in the output. You can then pass the
     #   `NextToken` parameter in a subsequent command to continue listing
     #   additional file transfer protocol-enabled servers.
@@ -1382,6 +1491,10 @@ module Aws::Transfer
     #
     #    </note>
     #
+    # @option params [String] :security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
+    #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a file transfer
     #   protocol-enabled server instance that the user account is assigned to.
@@ -1408,6 +1521,7 @@ module Aws::Transfer
     #     },
     #     logging_role: "NullableRole",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #     security_policy_name: "SecurityPolicyName",
     #     server_id: "ServerId", # required
     #   })
     #
@@ -1467,7 +1581,7 @@ module Aws::Transfer
     #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
     #   S3, the entry will be ignored. As a workaround, you can use the Amazon
-    #   S3 api to create 0 byte objects as place holders for your directory.
+    #   S3 API to create 0 byte objects as place holders for your directory.
     #   If using the CLI, use the `s3api` call instead of `s3` so you can use
     #   the put-object operation. For example, you use the following: `aws
     #   s3api put-object --bucket bucketname --key path/to/folder/`. Make sure
@@ -1517,10 +1631,10 @@ module Aws::Transfer
     # @option params [required, String] :user_name
     #   A unique string that identifies a user and is associated with a file
     #   transfer protocol-enabled server as specified by the `ServerId`. This
-    #   is the string that will be used by your user when they log in to your
-    #   server. This user name is a minimum of 3 and a maximum of 32
-    #   characters long. The following are valid characters: a-z, A-Z, 0-9,
-    #   underscore, and hyphen. The user name can't start with a hyphen.
+    #   user name must be a minimum of 3 and a maximum of 100 characters long.
+    #   The following are valid characters: a-z, A-Z, 0-9, underscore '\_',
+    #   hyphen '-', period '.', and at sign '@'. The user name can't
+    #   start with a hyphen, period, and at sign.
     #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1571,7 +1685,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

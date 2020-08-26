@@ -34,6 +34,7 @@ module Aws::AppStream
   # * {InvalidRoleException}
   # * {LimitExceededException}
   # * {OperationNotPermittedException}
+  # * {RequestLimitExceededException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceInUseException}
   # * {ResourceNotAvailableException}
@@ -140,6 +141,21 @@ module Aws::AppStream
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AppStream::Types::OperationNotPermittedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RequestLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppStream::Types::RequestLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

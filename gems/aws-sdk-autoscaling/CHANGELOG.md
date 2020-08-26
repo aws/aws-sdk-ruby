@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2020-07-28)
+------------------
+
+* Feature - Now you can enable Instance Metadata Service Version 2 (IMDSv2) or disable the instance metadata endpoint with Launch Configurations.
+
 1.43.0 (2020-07-02)
 ------------------
 

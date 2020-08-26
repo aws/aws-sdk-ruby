@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2020-08-24)
+------------------
+
+* Feature - Add UpdateConfiguration and DeleteConfiguration operations.
+
+1.24.0 (2020-07-30)
+------------------
+
+* Feature - Amazon MSK has added a new API that allows you to reboot brokers within a cluster.
+
 1.23.0 (2020-06-23)
 ------------------
 

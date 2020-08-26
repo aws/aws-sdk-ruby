@@ -14,6 +14,7 @@ require_relative 'aws-sdk-ssm/types'
 require_relative 'aws-sdk-ssm/client_api'
 require_relative 'aws-sdk-ssm/client'
 require_relative 'aws-sdk-ssm/errors'
+require_relative 'aws-sdk-ssm/waiters'
 require_relative 'aws-sdk-ssm/resource'
 require_relative 'aws-sdk-ssm/customizations'
 
@@ -44,9 +45,9 @@ require_relative 'aws-sdk-ssm/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::SSM
 
-  GEM_VERSION = '1.84.0'
+  GEM_VERSION = '1.88.0'
 
 end

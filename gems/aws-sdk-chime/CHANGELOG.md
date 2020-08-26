@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-08-20)
+------------------
+
+* Feature - Documentation updates for chime
+
+1.33.0 (2020-07-31)
+------------------
+
+* Feature - This release increases the CreateMeetingWithAttendee max attendee limit to 10.
+
 1.32.0 (2020-07-01)
 ------------------
 

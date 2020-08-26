@@ -127,6 +127,11 @@ module Aws::TranscribeStreamingService
     #   `true` then a word in the item matches your vocabulary filter.
     #   @return [Boolean]
     #
+    # @!attribute [rw] speaker
+    #   If speaker identification is enabled, shows the speakers identified
+    #   in the real-time stream.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Item AWS API Documentation
     #
     class Item < Struct.new(
@@ -134,7 +139,8 @@ module Aws::TranscribeStreamingService
       :end_time,
       :type,
       :content,
-      :vocabulary_filter_match)
+      :vocabulary_filter_match,
+      :speaker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -227,6 +233,7 @@ module Aws::TranscribeStreamingService
     #         input_event_stream_hander: EventStreams::AudioStream.new,
     #         vocabulary_filter_name: "VocabularyFilterName",
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #         show_speaker_label: false,
     #       }
     #
     # @!attribute [rw] language_code
@@ -240,7 +247,8 @@ module Aws::TranscribeStreamingService
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
-    #   The encoding used for the input audio.
+    #   The encoding used for the input audio. `pcm` is the only valid
+    #   value.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_name
@@ -262,8 +270,8 @@ module Aws::TranscribeStreamingService
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the vocabulary filter you've created that is unique to
-    #   your AWS accountf. Provide the name in this field to successfully
-    #   use it in a stream.
+    #   your AWS account. Provide the name in this field to successfully use
+    #   it in a stream.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_method
@@ -275,6 +283,11 @@ module Aws::TranscribeStreamingService
     #   `VocabularyFilterMatch` equal to `True`
     #   @return [String]
     #
+    # @!attribute [rw] show_speaker_label
+    #   When `true`, enables speaker identification in your real-time
+    #   stream.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -285,7 +298,8 @@ module Aws::TranscribeStreamingService
       :session_id,
       :audio_stream,
       :vocabulary_filter_name,
-      :vocabulary_filter_method)
+      :vocabulary_filter_method,
+      :show_speaker_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -328,6 +342,10 @@ module Aws::TranscribeStreamingService
     #   The vocabulary filtering method used in the real-time stream.
     #   @return [String]
     #
+    # @!attribute [rw] show_speaker_label
+    #   Shows whether speaker identification was enabled in the stream.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -339,7 +357,8 @@ module Aws::TranscribeStreamingService
       :session_id,
       :transcript_result_stream,
       :vocabulary_filter_name,
-      :vocabulary_filter_method)
+      :vocabulary_filter_method,
+      :show_speaker_label)
       SENSITIVE = []
       include Aws::Structure
     end

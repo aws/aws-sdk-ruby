@@ -14,6 +14,7 @@ module Aws::GroundStation
     include Seahorse::Model
 
     AngleUnits = Shapes::StringShape.new(name: 'AngleUnits')
+    AntennaDemodDecodeDetails = Shapes::StructureShape.new(name: 'AntennaDemodDecodeDetails')
     AntennaDownlinkConfig = Shapes::StructureShape.new(name: 'AntennaDownlinkConfig')
     AntennaDownlinkDemodDecodeConfig = Shapes::StructureShape.new(name: 'AntennaDownlinkDemodDecodeConfig')
     AntennaUplinkConfig = Shapes::StructureShape.new(name: 'AntennaUplinkConfig')
@@ -22,6 +23,7 @@ module Aws::GroundStation
     CancelContactRequest = Shapes::StructureShape.new(name: 'CancelContactRequest')
     ConfigArn = Shapes::StringShape.new(name: 'ConfigArn')
     ConfigCapabilityType = Shapes::StringShape.new(name: 'ConfigCapabilityType')
+    ConfigDetails = Shapes::StructureShape.new(name: 'ConfigDetails')
     ConfigIdResponse = Shapes::StructureShape.new(name: 'ConfigIdResponse')
     ConfigList = Shapes::ListShape.new(name: 'ConfigList')
     ConfigListItem = Shapes::StructureShape.new(name: 'ConfigListItem')
@@ -34,6 +36,7 @@ module Aws::GroundStation
     CreateDataflowEndpointGroupRequest = Shapes::StructureShape.new(name: 'CreateDataflowEndpointGroupRequest')
     CreateMissionProfileRequest = Shapes::StructureShape.new(name: 'CreateMissionProfileRequest')
     Criticality = Shapes::StringShape.new(name: 'Criticality')
+    DataflowDetail = Shapes::StructureShape.new(name: 'DataflowDetail')
     DataflowEdge = Shapes::ListShape.new(name: 'DataflowEdge')
     DataflowEdgeList = Shapes::ListShape.new(name: 'DataflowEdgeList')
     DataflowEndpoint = Shapes::StructureShape.new(name: 'DataflowEndpoint')
@@ -42,6 +45,8 @@ module Aws::GroundStation
     DataflowEndpointGroupIdResponse = Shapes::StructureShape.new(name: 'DataflowEndpointGroupIdResponse')
     DataflowEndpointGroupList = Shapes::ListShape.new(name: 'DataflowEndpointGroupList')
     DataflowEndpointListItem = Shapes::StructureShape.new(name: 'DataflowEndpointListItem')
+    DataflowEndpointmtuInteger = Shapes::IntegerShape.new(name: 'DataflowEndpointmtuInteger')
+    DataflowList = Shapes::ListShape.new(name: 'DataflowList')
     DecodeConfig = Shapes::StructureShape.new(name: 'DecodeConfig')
     DeleteConfigRequest = Shapes::StructureShape.new(name: 'DeleteConfigRequest')
     DeleteDataflowEndpointGroupRequest = Shapes::StructureShape.new(name: 'DeleteDataflowEndpointGroupRequest')
@@ -50,6 +55,7 @@ module Aws::GroundStation
     DependencyException = Shapes::StructureShape.new(name: 'DependencyException')
     DescribeContactRequest = Shapes::StructureShape.new(name: 'DescribeContactRequest')
     DescribeContactResponse = Shapes::StructureShape.new(name: 'DescribeContactResponse')
+    Destination = Shapes::StructureShape.new(name: 'Destination')
     Double = Shapes::FloatShape.new(name: 'Double')
     DurationInSeconds = Shapes::IntegerShape.new(name: 'DurationInSeconds')
     Eirp = Shapes::StructureShape.new(name: 'Eirp')
@@ -106,6 +112,7 @@ module Aws::GroundStation
     SecurityDetails = Shapes::StructureShape.new(name: 'SecurityDetails')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     SocketAddress = Shapes::StructureShape.new(name: 'SocketAddress')
+    Source = Shapes::StructureShape.new(name: 'Source')
     SpectrumConfig = Shapes::StructureShape.new(name: 'SpectrumConfig')
     StatusList = Shapes::ListShape.new(name: 'StatusList')
     String = Shapes::StringShape.new(name: 'String')
@@ -126,6 +133,9 @@ module Aws::GroundStation
     noradSatelliteID = Shapes::IntegerShape.new(name: 'noradSatelliteID')
     satelliteArn = Shapes::StringShape.new(name: 'satelliteArn')
 
+    AntennaDemodDecodeDetails.add_member(:output_node, Shapes::ShapeRef.new(shape: String, location_name: "outputNode"))
+    AntennaDemodDecodeDetails.struct_class = Types::AntennaDemodDecodeDetails
+
     AntennaDownlinkConfig.add_member(:spectrum_config, Shapes::ShapeRef.new(shape: SpectrumConfig, required: true, location_name: "spectrumConfig"))
     AntennaDownlinkConfig.struct_class = Types::AntennaDownlinkConfig
 
@@ -136,10 +146,15 @@ module Aws::GroundStation
 
     AntennaUplinkConfig.add_member(:spectrum_config, Shapes::ShapeRef.new(shape: UplinkSpectrumConfig, required: true, location_name: "spectrumConfig"))
     AntennaUplinkConfig.add_member(:target_eirp, Shapes::ShapeRef.new(shape: Eirp, required: true, location_name: "targetEirp"))
+    AntennaUplinkConfig.add_member(:transmit_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "transmitDisabled"))
     AntennaUplinkConfig.struct_class = Types::AntennaUplinkConfig
 
     CancelContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "contactId"))
     CancelContactRequest.struct_class = Types::CancelContactRequest
+
+    ConfigDetails.add_member(:antenna_demod_decode_details, Shapes::ShapeRef.new(shape: AntennaDemodDecodeDetails, location_name: "antennaDemodDecodeDetails"))
+    ConfigDetails.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "endpointDetails"))
+    ConfigDetails.struct_class = Types::ConfigDetails
 
     ConfigIdResponse.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "configArn"))
     ConfigIdResponse.add_member(:config_id, Shapes::ShapeRef.new(shape: String, location_name: "configId"))
@@ -200,11 +215,16 @@ module Aws::GroundStation
     CreateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "trackingConfigArn"))
     CreateMissionProfileRequest.struct_class = Types::CreateMissionProfileRequest
 
+    DataflowDetail.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
+    DataflowDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    DataflowDetail.struct_class = Types::DataflowDetail
+
     DataflowEdge.member = Shapes::ShapeRef.new(shape: ConfigArn)
 
     DataflowEdgeList.member = Shapes::ShapeRef.new(shape: DataflowEdge)
 
     DataflowEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: SocketAddress, location_name: "address"))
+    DataflowEndpoint.add_member(:mtu, Shapes::ShapeRef.new(shape: DataflowEndpointmtuInteger, location_name: "mtu"))
     DataflowEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
     DataflowEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "status"))
     DataflowEndpoint.struct_class = Types::DataflowEndpoint
@@ -221,6 +241,8 @@ module Aws::GroundStation
     DataflowEndpointListItem.add_member(:dataflow_endpoint_group_arn, Shapes::ShapeRef.new(shape: DataflowEndpointGroupArn, location_name: "dataflowEndpointGroupArn"))
     DataflowEndpointListItem.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: String, location_name: "dataflowEndpointGroupId"))
     DataflowEndpointListItem.struct_class = Types::DataflowEndpointListItem
+
+    DataflowList.member = Shapes::ShapeRef.new(shape: DataflowDetail)
 
     DecodeConfig.add_member(:unvalidated_json, Shapes::ShapeRef.new(shape: JsonString, required: true, location_name: "unvalidatedJSON"))
     DecodeConfig.struct_class = Types::DecodeConfig
@@ -247,6 +269,7 @@ module Aws::GroundStation
 
     DescribeContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: String, location_name: "contactId"))
     DescribeContactResponse.add_member(:contact_status, Shapes::ShapeRef.new(shape: ContactStatus, location_name: "contactStatus"))
+    DescribeContactResponse.add_member(:dataflow_list, Shapes::ShapeRef.new(shape: DataflowList, location_name: "dataflowList"))
     DescribeContactResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     DescribeContactResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
     DescribeContactResponse.add_member(:ground_station, Shapes::ShapeRef.new(shape: String, location_name: "groundStation"))
@@ -259,6 +282,12 @@ module Aws::GroundStation
     DescribeContactResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     DescribeContactResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     DescribeContactResponse.struct_class = Types::DescribeContactResponse
+
+    Destination.add_member(:config_details, Shapes::ShapeRef.new(shape: ConfigDetails, location_name: "configDetails"))
+    Destination.add_member(:config_id, Shapes::ShapeRef.new(shape: String, location_name: "configId"))
+    Destination.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    Destination.add_member(:dataflow_destination_region, Shapes::ShapeRef.new(shape: String, location_name: "dataflowDestinationRegion"))
+    Destination.struct_class = Types::Destination
 
     Eirp.add_member(:units, Shapes::ShapeRef.new(shape: EirpUnits, required: true, location_name: "units"))
     Eirp.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
@@ -456,6 +485,12 @@ module Aws::GroundStation
     SocketAddress.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     SocketAddress.add_member(:port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "port"))
     SocketAddress.struct_class = Types::SocketAddress
+
+    Source.add_member(:config_details, Shapes::ShapeRef.new(shape: ConfigDetails, location_name: "configDetails"))
+    Source.add_member(:config_id, Shapes::ShapeRef.new(shape: String, location_name: "configId"))
+    Source.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    Source.add_member(:dataflow_source_region, Shapes::ShapeRef.new(shape: String, location_name: "dataflowSourceRegion"))
+    Source.struct_class = Types::Source
 
     SpectrumConfig.add_member(:bandwidth, Shapes::ShapeRef.new(shape: FrequencyBandwidth, required: true, location_name: "bandwidth"))
     SpectrumConfig.add_member(:center_frequency, Shapes::ShapeRef.new(shape: Frequency, required: true, location_name: "centerFrequency"))

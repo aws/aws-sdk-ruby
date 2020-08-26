@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2020-07-24)
+------------------
+
+* Feature - Amazon MQ now supports LDAP (Lightweight Directory Access Protocol), providing authentication and authorization of Amazon MQ users via a customer designated LDAP server.
+
 1.29.0 (2020-06-23)
 ------------------
 

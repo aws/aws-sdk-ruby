@@ -44,9 +44,9 @@ require_relative 'aws-sdk-greengrass/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Greengrass
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end

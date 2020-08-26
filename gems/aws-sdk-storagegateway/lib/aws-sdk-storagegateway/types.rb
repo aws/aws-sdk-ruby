@@ -111,7 +111,7 @@ module Aws::StorageGateway
     #   The value that indicates the type of medium changer to use for tape
     #   gateway. This field is optional.
     #
-    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL` \| `IBM-03584L32-0402`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -368,6 +368,7 @@ module Aws::StorageGateway
     #       {
     #         tape_arn: "TapeARN", # required
     #         pool_id: "PoolId", # required
+    #         bypass_governance_retention: false,
     #       }
     #
     # @!attribute [rw] tape_arn
@@ -386,11 +387,23 @@ module Aws::StorageGateway
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
+    # @!attribute [rw] bypass_governance_retention
+    #   Set permissions to bypass governance retention. If the lock type of
+    #   the archived tape is `Governance`, the tape's archived age is not
+    #   older than `RetentionLockInDays`, and the user does not already have
+    #   `BypassGovernanceRetention`, setting this to TRUE enables the user
+    #   to bypass the retention lock. This parameter is set to true by
+    #   default for calls from the console.
+    #
+    #   Valid values: `TRUE` \| `FALSE`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePoolInput AWS API Documentation
     #
     class AssignTapePoolInput < Struct.new(
       :tape_arn,
-      :pool_id)
+      :pool_id,
+      :bypass_governance_retention)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -517,7 +530,13 @@ module Aws::StorageGateway
     end
 
     # An automatic tape creation policy consists of automatic tape creation
-    # rules where each rule defines when and how to create new tapes.
+    # rules where each rule defines when and how to create new tapes. For
+    # more information about automatic tape creation, see [Creating Tapes
+    # Automatically][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically
     #
     # @note When making an API call, you may pass AutomaticTapeCreationRule
     #   data as a hash:
@@ -527,6 +546,7 @@ module Aws::StorageGateway
     #         pool_id: "PoolId", # required
     #         tape_size_in_bytes: 1, # required
     #         minimum_num_tapes: 1, # required
+    #         worm: false,
     #       }
     #
     # @!attribute [rw] tape_barcode_prefix
@@ -558,8 +578,20 @@ module Aws::StorageGateway
     #   The minimum number of available virtual tapes that the gateway
     #   maintains at all times. If the number of tapes on the gateway goes
     #   below this value, the gateway creates as many new tapes as are
-    #   needed to have `MinimumNumTapes` on the gateway.
+    #   needed to have `MinimumNumTapes` on the gateway. For more
+    #   information about automatic tape creation, see [Creating Tapes
+    #   Automatically][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically
     #   @return [Integer]
+    #
+    # @!attribute [rw] worm
+    #   Set to `true` to indicate that tapes are to be archived as
+    #   write-once-read-many (WORM). Set to `false` when WORM is not enabled
+    #   for tapes.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AutomaticTapeCreationRule AWS API Documentation
     #
@@ -567,7 +599,8 @@ module Aws::StorageGateway
       :tape_barcode_prefix,
       :pool_id,
       :tape_size_in_bytes,
-      :minimum_num_tapes)
+      :minimum_num_tapes,
+      :worm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -606,7 +639,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] volume_id
-    #   The unique identifier of the volume, e.g. vol-AE4B946D.
+    #   The unique identifier of the volume, e.g., vol-AE4B946D.
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -642,7 +675,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] source_snapshot_id
     #   If the cached volume was created from a snapshot, this field
-    #   contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this
+    #   contains the snapshot ID used, e.g., snap-78e22663. Otherwise, this
     #   field is not included.
     #   @return [String]
     #
@@ -653,7 +686,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] created_date
     #   The date the volume was created. Volumes created prior to March 28,
-    #   2017 don’t have this time stamp.
+    #   2017 don’t have this timestamp.
     #   @return [Time]
     #
     # @!attribute [rw] volume_used_in_bytes
@@ -821,7 +854,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] secret_to_authenticate_target
     #   The secret key that the target must provide to participate in mutual
-    #   CHAP with the initiator (e.g. Windows client).
+    #   CHAP with the initiator (e.g., Windows client).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ChapInfo AWS API Documentation
@@ -1730,6 +1763,84 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTapePoolInput
+    #   data as a hash:
+    #
+    #       {
+    #         pool_name: "PoolName", # required
+    #         storage_class: "DEEP_ARCHIVE", # required, accepts DEEP_ARCHIVE, GLACIER
+    #         retention_lock_type: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE, NONE
+    #         retention_lock_time_in_days: 1,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the new custom tape pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_class
+    #   The storage class that is associated with the new custom pool. When
+    #   you use your backup application to eject the tape, the tape is
+    #   archived directly into the storage class (S3 Glacier or S3 Glacier
+    #   Deep Archive) that corresponds to the pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_lock_type
+    #   Tape retention lock can be configured in two modes. When configured
+    #   in governance mode, AWS accounts with specific IAM permissions are
+    #   authorized to remove the tape retention lock from archived virtual
+    #   tapes. When configured in compliance mode, the tape retention lock
+    #   cannot be removed by any user, including the root AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_lock_time_in_days
+    #   Tape retention lock time is set in days. Tape retention lock can be
+    #   enabled for up to 100 years (36,500 days).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to tape pool. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapePoolInput AWS API Documentation
+    #
+    class CreateTapePoolInput < Struct.new(
+      :pool_name,
+      :storage_class,
+      :retention_lock_type,
+      :retention_lock_time_in_days,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pool_arn
+    #   The unique Amazon Resource Name (ARN) that represents the custom
+    #   tape pool. Use the ListTapePools operation to return a list of tape
+    #   pools for your account and AWS Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapePoolOutput AWS API Documentation
+    #
+    class CreateTapePoolOutput < Struct.new(
+      :pool_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # CreateTapeWithBarcodeInput
     #
     # @note When making an API call, you may pass CreateTapeWithBarcodeInput
@@ -1742,6 +1853,7 @@ module Aws::StorageGateway
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
     #         pool_id: "PoolId",
+    #         worm: false,
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1797,6 +1909,11 @@ module Aws::StorageGateway
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
+    # @!attribute [rw] worm
+    #   Set to `TRUE` if the tape you are creating is to be configured as a
+    #   write-once-read-many (WORM) tape.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   A list of up to 50 tags that can be assigned to a virtual tape that
     #   has a barcode. Each tag is a key-value pair.
@@ -1818,6 +1935,7 @@ module Aws::StorageGateway
       :kms_encrypted,
       :kms_key,
       :pool_id,
+      :worm,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1852,6 +1970,7 @@ module Aws::StorageGateway
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
     #         pool_id: "PoolId",
+    #         worm: false,
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1924,6 +2043,11 @@ module Aws::StorageGateway
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
+    # @!attribute [rw] worm
+    #   Set to `TRUE` if the tape you are creating is to be configured as a
+    #   write-once-read-many (WORM) tape.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   A list of up to 50 tags that can be assigned to a virtual tape. Each
     #   tag is a key-value pair.
@@ -1947,6 +2071,7 @@ module Aws::StorageGateway
       :kms_encrypted,
       :kms_key,
       :pool_id,
+      :worm,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2026,7 +2151,7 @@ module Aws::StorageGateway
     #   One of the BandwidthType values that indicates the gateway bandwidth
     #   rate limit to delete.
     #
-    #   Valid Values: `Upload` \| `Download` \| `All`
+    #   Valid Values: `UPLOAD` \| `DOWNLOAD` \| `ALL`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimitInput AWS API Documentation
@@ -2231,6 +2356,7 @@ module Aws::StorageGateway
     #
     #       {
     #         tape_arn: "TapeARN", # required
+    #         bypass_governance_retention: false,
     #       }
     #
     # @!attribute [rw] tape_arn
@@ -2238,10 +2364,18 @@ module Aws::StorageGateway
     #   the virtual tape shelf (VTS).
     #   @return [String]
     #
+    # @!attribute [rw] bypass_governance_retention
+    #   Set to `TRUE` to delete an archived tape that belongs to a custom
+    #   pool with tape retention lock. Only archived tapes with tape
+    #   retention lock set to `governance` can be deleted. Archived tapes
+    #   with tape retention lock set to `compliance` can't be deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchiveInput AWS API Documentation
     #
     class DeleteTapeArchiveInput < Struct.new(
-      :tape_arn)
+      :tape_arn,
+      :bypass_governance_retention)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2269,6 +2403,7 @@ module Aws::StorageGateway
     #       {
     #         gateway_arn: "GatewayARN", # required
     #         tape_arn: "TapeARN", # required
+    #         bypass_governance_retention: false,
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -2282,11 +2417,19 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the virtual tape to delete.
     #   @return [String]
     #
+    # @!attribute [rw] bypass_governance_retention
+    #   Set to `TRUE` to delete an archived tape that belongs to a custom
+    #   pool with tape retention lock. Only archived tapes with tape
+    #   retention lock set to `governance` can be deleted. Archived tapes
+    #   with tape retention lock set to `compliance` can't be deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeInput AWS API Documentation
     #
     class DeleteTapeInput < Struct.new(
       :gateway_arn,
-      :tape_arn)
+      :tape_arn,
+      :bypass_governance_retention)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2301,6 +2444,38 @@ module Aws::StorageGateway
     #
     class DeleteTapeOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTapePoolInput
+    #   data as a hash:
+    #
+    #       {
+    #         pool_arn: "PoolARN", # required
+    #       }
+    #
+    # @!attribute [rw] pool_arn
+    #   The Amazon Resource Name (ARN) of the custom tape pool to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapePoolInput AWS API Documentation
+    #
+    class DeleteTapePoolInput < Struct.new(
+      :pool_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pool_arn
+    #   The Amazon Resource Name (ARN) of the custom tape pool being
+    #   deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapePoolOutput AWS API Documentation
+    #
+    class DeleteTapePoolOutput < Struct.new(
+      :pool_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2704,7 +2879,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group
+    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
     #   that is used to monitor events in the gateway.
     #   @return [String]
     #
@@ -2716,6 +2891,16 @@ module Aws::StorageGateway
     #   The type of endpoint for your gateway.
     #
     #   Valid Values: `STANDARD` \| `FIPS`
+    #   @return [String]
+    #
+    # @!attribute [rw] software_updates_end_date
+    #   Date after which this gateway will not receive software updates for
+    #   new features.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecation_date
+    #   Date after which this gateway will not receive software updates for
+    #   new features and bug fixes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
@@ -2736,7 +2921,9 @@ module Aws::StorageGateway
       :vpc_endpoint,
       :cloud_watch_log_group_arn,
       :host_environment,
-      :endpoint_type)
+      :endpoint_type,
+      :software_updates_end_date,
+      :deprecation_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4201,7 +4388,7 @@ module Aws::StorageGateway
     # ListTagsForResourceOutput
     #
     # @!attribute [rw] resource_arn
-    #   he Amazon Resource Name (ARN) of the resource for which you want to
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
     #   list tags.
     #   @return [String]
     #
@@ -4220,6 +4407,63 @@ module Aws::StorageGateway
       :resource_arn,
       :marker,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTapePoolsInput
+    #   data as a hash:
+    #
+    #       {
+    #         pool_arns: ["PoolARN"],
+    #         marker: "Marker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] pool_arns
+    #   The Amazon Resource Name (ARN) of each of the custom tape pools you
+    #   want to list. If you don't specify a custom tape pool ARN, the
+    #   response lists all custom tape pools.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] marker
+    #   A string that indicates the position at which to begin the returned
+    #   list of tape pools.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   An optional number limit for the tape pools in the list returned by
+    #   this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapePoolsInput AWS API Documentation
+    #
+    class ListTapePoolsInput < Struct.new(
+      :pool_arns,
+      :marker,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pool_infos
+    #   An array of `PoolInfo` objects, where each object describes a single
+    #   custom tape pool. If there are no custom tape pools, the `PoolInfos`
+    #   is an empty array.
+    #   @return [Array<Types::PoolInfo>]
+    #
+    # @!attribute [rw] marker
+    #   A string that indicates the position at which to begin the returned
+    #   list of tape pools. Use the marker in your next request to continue
+    #   pagination of tape pools. If there are no more tape pools to list,
+    #   this element does not appear in the response body.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapePoolsOutput AWS API Documentation
+    #
+    class ListTapePoolsOutput < Struct.new(
+      :pool_infos,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4732,6 +4976,57 @@ module Aws::StorageGateway
     class NotifyWhenUploadedOutput < Struct.new(
       :file_share_arn,
       :notification_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a custom tape pool.
+    #
+    # @!attribute [rw] pool_arn
+    #   The Amazon Resource Name (ARN) of the custom tape pool. Use the
+    #   ListTapePools operation to return a list of custom tape pools for
+    #   your account and AWS Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the custom tape pool. `PoolName` can use all ASCII
+    #   characters, except '/' and '\\'.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_class
+    #   The storage class that is associated with the custom pool. When you
+    #   use your backup application to eject the tape, the tape is archived
+    #   directly into the storage class (S3 Glacier or S3 Glacier Deep
+    #   Archive) that corresponds to the pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_lock_type
+    #   Tape retention lock type, which can be configured in two modes. When
+    #   configured in governance mode, AWS accounts with specific IAM
+    #   permissions are authorized to remove the tape retention lock from
+    #   archived virtual tapes. When configured in compliance mode, the tape
+    #   retention lock cannot be removed by any user, including the root AWS
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_lock_time_in_days
+    #   Tape retention lock time is set in days. Tape retention lock can be
+    #   enabled for up to 100 years (36,500 days).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pool_status
+    #   Status of the custom tape pool. Pool can be `ACTIVE` or `DELETED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/PoolInfo AWS API Documentation
+    #
+    class PoolInfo < Struct.new(
+      :pool_arn,
+      :pool_name,
+      :storage_class,
+      :retention_lock_type,
+      :retention_lock_time_in_days,
+      :pool_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5436,7 +5731,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] volume_id
-    #   The unique identifier of the volume, e.g. vol-AE4B946D.
+    #   The unique identifier of the volume, e.g., vol-AE4B946D.
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -5496,7 +5791,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] created_date
     #   The date the volume was created. Volumes created prior to March 28,
-    #   2017 don’t have this time stamp.
+    #   2017 don’t have this timestamp.
     #   @return [Time]
     #
     # @!attribute [rw] volume_used_in_bytes
@@ -5643,6 +5938,20 @@ module Aws::StorageGateway
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
+    # @!attribute [rw] worm
+    #   If the tape is archived as write-once-read-many (WORM), this value
+    #   is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_start_date
+    #   The date that the tape is first archived with tape retention lock
+    #   enabled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pool_entry_date
+    #   The date that the tape enters a custom tape pool.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tape AWS API Documentation
     #
     class Tape < Struct.new(
@@ -5655,7 +5964,10 @@ module Aws::StorageGateway
       :progress,
       :tape_used_in_bytes,
       :kms_key,
-      :pool_id)
+      :pool_id,
+      :worm,
+      :retention_start_date,
+      :pool_entry_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5682,7 +5994,7 @@ module Aws::StorageGateway
     # @!attribute [rw] completion_time
     #   The time that the archiving of the virtual tape was completed.
     #
-    #   The default time stamp format is in the ISO8601 extended
+    #   The default timestamp format is in the ISO8601 extended
     #   YYYY-MM-DD'T'HH:MM:SS'Z' format.
     #   @return [Time]
     #
@@ -5720,6 +6032,23 @@ module Aws::StorageGateway
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
+    # @!attribute [rw] worm
+    #   Set to `true` if the archived tape is stored as write-once-read-many
+    #   (WORM).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_start_date
+    #   If the archived tape is subject to tape retention lock, the date
+    #   that the archived tape started being retained.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pool_entry_date
+    #   The time that the tape entered the custom tape pool.
+    #
+    #   The default timestamp format is in the ISO8601 extended
+    #   YYYY-MM-DD'T'HH:MM:SS'Z' format.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeArchive AWS API Documentation
     #
     class TapeArchive < Struct.new(
@@ -5732,7 +6061,10 @@ module Aws::StorageGateway
       :tape_status,
       :tape_used_in_bytes,
       :kms_key,
-      :pool_id)
+      :pool_id,
+      :worm,
+      :retention_start_date,
+      :pool_entry_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5772,6 +6104,15 @@ module Aws::StorageGateway
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
+    # @!attribute [rw] retention_start_date
+    #   The date that the tape became subject to tape retention lock.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pool_entry_date
+    #   The date that the tape entered the custom tape pool with tape
+    #   retention lock enabled.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeInfo AWS API Documentation
     #
     class TapeInfo < Struct.new(
@@ -5780,7 +6121,9 @@ module Aws::StorageGateway
       :tape_size_in_bytes,
       :tape_status,
       :gateway_arn,
-      :pool_id)
+      :pool_id,
+      :retention_start_date,
+      :pool_entry_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5795,7 +6138,7 @@ module Aws::StorageGateway
     #   The time when the point-in-time view of the virtual tape was
     #   replicated for later recovery.
     #
-    #   The default time stamp format of the tape recovery point time is in
+    #   The default timestamp format of the tape recovery point time is in
     #   the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
     #   @return [Time]
     #
@@ -5828,6 +6171,7 @@ module Aws::StorageGateway
     #             pool_id: "PoolId", # required
     #             tape_size_in_bytes: 1, # required
     #             minimum_num_tapes: 1, # required
+    #             worm: false,
     #           },
     #         ],
     #         gateway_arn: "GatewayARN", # required
@@ -6036,7 +6380,7 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
     #   that you want to use to monitor and log events in the gateway.
     #
-    #   For more information, see [What is Amazon CloudWatch logs?][1].
+    #   For more information, see [What is Amazon CloudWatch Logs?][1]
     #
     #
     #
@@ -6715,7 +7059,7 @@ module Aws::StorageGateway
     # @!attribute [rw] device_type
     #   The type of medium changer you want to select.
     #
-    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL` \| `IBM-03584L32-0402`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeInput AWS API Documentation

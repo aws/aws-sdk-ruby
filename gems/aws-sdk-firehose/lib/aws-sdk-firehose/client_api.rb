@@ -23,6 +23,7 @@ module Aws::Firehose
     ColumnToJsonKeyMappings = Shapes::MapShape.new(name: 'ColumnToJsonKeyMappings')
     CompressionFormat = Shapes::StringShape.new(name: 'CompressionFormat')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ContentEncoding = Shapes::StringShape.new(name: 'ContentEncoding')
     CopyCommand = Shapes::StructureShape.new(name: 'CopyCommand')
     CopyOptions = Shapes::StringShape.new(name: 'CopyOptions')
     CreateDeliveryStreamInput = Shapes::StructureShape.new(name: 'CreateDeliveryStreamInput')
@@ -79,6 +80,25 @@ module Aws::Firehose
     HECEndpointType = Shapes::StringShape.new(name: 'HECEndpointType')
     HECToken = Shapes::StringShape.new(name: 'HECToken')
     HiveJsonSerDe = Shapes::StructureShape.new(name: 'HiveJsonSerDe')
+    HttpEndpointAccessKey = Shapes::StringShape.new(name: 'HttpEndpointAccessKey')
+    HttpEndpointAttributeName = Shapes::StringShape.new(name: 'HttpEndpointAttributeName')
+    HttpEndpointAttributeValue = Shapes::StringShape.new(name: 'HttpEndpointAttributeValue')
+    HttpEndpointBufferingHints = Shapes::StructureShape.new(name: 'HttpEndpointBufferingHints')
+    HttpEndpointBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'HttpEndpointBufferingIntervalInSeconds')
+    HttpEndpointBufferingSizeInMBs = Shapes::IntegerShape.new(name: 'HttpEndpointBufferingSizeInMBs')
+    HttpEndpointCommonAttribute = Shapes::StructureShape.new(name: 'HttpEndpointCommonAttribute')
+    HttpEndpointCommonAttributesList = Shapes::ListShape.new(name: 'HttpEndpointCommonAttributesList')
+    HttpEndpointConfiguration = Shapes::StructureShape.new(name: 'HttpEndpointConfiguration')
+    HttpEndpointDescription = Shapes::StructureShape.new(name: 'HttpEndpointDescription')
+    HttpEndpointDestinationConfiguration = Shapes::StructureShape.new(name: 'HttpEndpointDestinationConfiguration')
+    HttpEndpointDestinationDescription = Shapes::StructureShape.new(name: 'HttpEndpointDestinationDescription')
+    HttpEndpointDestinationUpdate = Shapes::StructureShape.new(name: 'HttpEndpointDestinationUpdate')
+    HttpEndpointName = Shapes::StringShape.new(name: 'HttpEndpointName')
+    HttpEndpointRequestConfiguration = Shapes::StructureShape.new(name: 'HttpEndpointRequestConfiguration')
+    HttpEndpointRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'HttpEndpointRetryDurationInSeconds')
+    HttpEndpointRetryOptions = Shapes::StructureShape.new(name: 'HttpEndpointRetryOptions')
+    HttpEndpointS3BackupMode = Shapes::StringShape.new(name: 'HttpEndpointS3BackupMode')
+    HttpEndpointUrl = Shapes::StringShape.new(name: 'HttpEndpointUrl')
     InputFormatConfiguration = Shapes::StructureShape.new(name: 'InputFormatConfiguration')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
@@ -210,6 +230,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:redshift_destination_configuration, Shapes::ShapeRef.new(shape: RedshiftDestinationConfiguration, location_name: "RedshiftDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:elasticsearch_destination_configuration, Shapes::ShapeRef.new(shape: ElasticsearchDestinationConfiguration, location_name: "ElasticsearchDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:splunk_destination_configuration, Shapes::ShapeRef.new(shape: SplunkDestinationConfiguration, location_name: "SplunkDestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:http_endpoint_destination_configuration, Shapes::ShapeRef.new(shape: HttpEndpointDestinationConfiguration, location_name: "HttpEndpointDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, location_name: "Tags"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
@@ -272,6 +293,7 @@ module Aws::Firehose
     DestinationDescription.add_member(:redshift_destination_description, Shapes::ShapeRef.new(shape: RedshiftDestinationDescription, location_name: "RedshiftDestinationDescription"))
     DestinationDescription.add_member(:elasticsearch_destination_description, Shapes::ShapeRef.new(shape: ElasticsearchDestinationDescription, location_name: "ElasticsearchDestinationDescription"))
     DestinationDescription.add_member(:splunk_destination_description, Shapes::ShapeRef.new(shape: SplunkDestinationDescription, location_name: "SplunkDestinationDescription"))
+    DestinationDescription.add_member(:http_endpoint_destination_description, Shapes::ShapeRef.new(shape: HttpEndpointDestinationDescription, location_name: "HttpEndpointDestinationDescription"))
     DestinationDescription.struct_class = Types::DestinationDescription
 
     DestinationDescriptionList.member = Shapes::ShapeRef.new(shape: DestinationDescription)
@@ -378,6 +400,65 @@ module Aws::Firehose
 
     HiveJsonSerDe.add_member(:timestamp_formats, Shapes::ShapeRef.new(shape: ListOfNonEmptyStrings, location_name: "TimestampFormats"))
     HiveJsonSerDe.struct_class = Types::HiveJsonSerDe
+
+    HttpEndpointBufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: HttpEndpointBufferingSizeInMBs, location_name: "SizeInMBs"))
+    HttpEndpointBufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: HttpEndpointBufferingIntervalInSeconds, location_name: "IntervalInSeconds"))
+    HttpEndpointBufferingHints.struct_class = Types::HttpEndpointBufferingHints
+
+    HttpEndpointCommonAttribute.add_member(:attribute_name, Shapes::ShapeRef.new(shape: HttpEndpointAttributeName, required: true, location_name: "AttributeName"))
+    HttpEndpointCommonAttribute.add_member(:attribute_value, Shapes::ShapeRef.new(shape: HttpEndpointAttributeValue, required: true, location_name: "AttributeValue"))
+    HttpEndpointCommonAttribute.struct_class = Types::HttpEndpointCommonAttribute
+
+    HttpEndpointCommonAttributesList.member = Shapes::ShapeRef.new(shape: HttpEndpointCommonAttribute)
+
+    HttpEndpointConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: HttpEndpointUrl, required: true, location_name: "Url"))
+    HttpEndpointConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: HttpEndpointName, location_name: "Name"))
+    HttpEndpointConfiguration.add_member(:access_key, Shapes::ShapeRef.new(shape: HttpEndpointAccessKey, location_name: "AccessKey"))
+    HttpEndpointConfiguration.struct_class = Types::HttpEndpointConfiguration
+
+    HttpEndpointDescription.add_member(:url, Shapes::ShapeRef.new(shape: HttpEndpointUrl, location_name: "Url"))
+    HttpEndpointDescription.add_member(:name, Shapes::ShapeRef.new(shape: HttpEndpointName, location_name: "Name"))
+    HttpEndpointDescription.struct_class = Types::HttpEndpointDescription
+
+    HttpEndpointDestinationConfiguration.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: HttpEndpointConfiguration, required: true, location_name: "EndpointConfiguration"))
+    HttpEndpointDestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: HttpEndpointBufferingHints, location_name: "BufferingHints"))
+    HttpEndpointDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    HttpEndpointDestinationConfiguration.add_member(:request_configuration, Shapes::ShapeRef.new(shape: HttpEndpointRequestConfiguration, location_name: "RequestConfiguration"))
+    HttpEndpointDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    HttpEndpointDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    HttpEndpointDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: HttpEndpointRetryOptions, location_name: "RetryOptions"))
+    HttpEndpointDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: HttpEndpointS3BackupMode, location_name: "S3BackupMode"))
+    HttpEndpointDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    HttpEndpointDestinationConfiguration.struct_class = Types::HttpEndpointDestinationConfiguration
+
+    HttpEndpointDestinationDescription.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: HttpEndpointDescription, location_name: "EndpointConfiguration"))
+    HttpEndpointDestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: HttpEndpointBufferingHints, location_name: "BufferingHints"))
+    HttpEndpointDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    HttpEndpointDestinationDescription.add_member(:request_configuration, Shapes::ShapeRef.new(shape: HttpEndpointRequestConfiguration, location_name: "RequestConfiguration"))
+    HttpEndpointDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    HttpEndpointDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    HttpEndpointDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: HttpEndpointRetryOptions, location_name: "RetryOptions"))
+    HttpEndpointDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: HttpEndpointS3BackupMode, location_name: "S3BackupMode"))
+    HttpEndpointDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    HttpEndpointDestinationDescription.struct_class = Types::HttpEndpointDestinationDescription
+
+    HttpEndpointDestinationUpdate.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: HttpEndpointConfiguration, location_name: "EndpointConfiguration"))
+    HttpEndpointDestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: HttpEndpointBufferingHints, location_name: "BufferingHints"))
+    HttpEndpointDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    HttpEndpointDestinationUpdate.add_member(:request_configuration, Shapes::ShapeRef.new(shape: HttpEndpointRequestConfiguration, location_name: "RequestConfiguration"))
+    HttpEndpointDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    HttpEndpointDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    HttpEndpointDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: HttpEndpointRetryOptions, location_name: "RetryOptions"))
+    HttpEndpointDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: HttpEndpointS3BackupMode, location_name: "S3BackupMode"))
+    HttpEndpointDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    HttpEndpointDestinationUpdate.struct_class = Types::HttpEndpointDestinationUpdate
+
+    HttpEndpointRequestConfiguration.add_member(:content_encoding, Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding"))
+    HttpEndpointRequestConfiguration.add_member(:common_attributes, Shapes::ShapeRef.new(shape: HttpEndpointCommonAttributesList, location_name: "CommonAttributes"))
+    HttpEndpointRequestConfiguration.struct_class = Types::HttpEndpointRequestConfiguration
+
+    HttpEndpointRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: HttpEndpointRetryDurationInSeconds, location_name: "DurationInSeconds"))
+    HttpEndpointRetryOptions.struct_class = Types::HttpEndpointRetryOptions
 
     InputFormatConfiguration.add_member(:deserializer, Shapes::ShapeRef.new(shape: Deserializer, location_name: "Deserializer"))
     InputFormatConfiguration.struct_class = Types::InputFormatConfiguration
@@ -675,6 +756,7 @@ module Aws::Firehose
     UpdateDestinationInput.add_member(:redshift_destination_update, Shapes::ShapeRef.new(shape: RedshiftDestinationUpdate, location_name: "RedshiftDestinationUpdate"))
     UpdateDestinationInput.add_member(:elasticsearch_destination_update, Shapes::ShapeRef.new(shape: ElasticsearchDestinationUpdate, location_name: "ElasticsearchDestinationUpdate"))
     UpdateDestinationInput.add_member(:splunk_destination_update, Shapes::ShapeRef.new(shape: SplunkDestinationUpdate, location_name: "SplunkDestinationUpdate"))
+    UpdateDestinationInput.add_member(:http_endpoint_destination_update, Shapes::ShapeRef.new(shape: HttpEndpointDestinationUpdate, location_name: "HttpEndpointDestinationUpdate"))
     UpdateDestinationInput.struct_class = Types::UpdateDestinationInput
 
     UpdateDestinationOutput.struct_class = Types::UpdateDestinationOutput

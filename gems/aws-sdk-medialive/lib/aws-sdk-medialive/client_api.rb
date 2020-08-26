@@ -27,6 +27,7 @@ module Aws::MediaLive
     Ac3LfeFilter = Shapes::StringShape.new(name: 'Ac3LfeFilter')
     Ac3MetadataControl = Shapes::StringShape.new(name: 'Ac3MetadataControl')
     Ac3Settings = Shapes::StructureShape.new(name: 'Ac3Settings')
+    AcceptHeader = Shapes::StringShape.new(name: 'AcceptHeader')
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     ArchiveContainerSettings = Shapes::StructureShape.new(name: 'ArchiveContainerSettings')
@@ -91,6 +92,7 @@ module Aws::MediaLive
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ColorSpacePassthroughSettings = Shapes::StructureShape.new(name: 'ColorSpacePassthroughSettings')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateChannel = Shapes::StructureShape.new(name: 'CreateChannel')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
@@ -130,6 +132,8 @@ module Aws::MediaLive
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DescribeInputDeviceRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceRequest')
     DescribeInputDeviceResponse = Shapes::StructureShape.new(name: 'DescribeInputDeviceResponse')
+    DescribeInputDeviceThumbnailRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceThumbnailRequest')
+    DescribeInputDeviceThumbnailResponse = Shapes::StructureShape.new(name: 'DescribeInputDeviceThumbnailResponse')
     DescribeInputRequest = Shapes::StructureShape.new(name: 'DescribeInputRequest')
     DescribeInputResponse = Shapes::StructureShape.new(name: 'DescribeInputResponse')
     DescribeInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupRequest')
@@ -172,6 +176,9 @@ module Aws::MediaLive
     Eac3StereoDownmix = Shapes::StringShape.new(name: 'Eac3StereoDownmix')
     Eac3SurroundExMode = Shapes::StringShape.new(name: 'Eac3SurroundExMode')
     Eac3SurroundMode = Shapes::StringShape.new(name: 'Eac3SurroundMode')
+    EbuTtDDestinationSettings = Shapes::StructureShape.new(name: 'EbuTtDDestinationSettings')
+    EbuTtDDestinationStyleControl = Shapes::StringShape.new(name: 'EbuTtDDestinationStyleControl')
+    EbuTtDFillLineGapControl = Shapes::StringShape.new(name: 'EbuTtDFillLineGapControl')
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedPlusScte20DestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedPlusScte20DestinationSettings')
@@ -229,6 +236,7 @@ module Aws::MediaLive
     H265AlternativeTransferFunction = Shapes::StringShape.new(name: 'H265AlternativeTransferFunction')
     H265ColorMetadata = Shapes::StringShape.new(name: 'H265ColorMetadata')
     H265ColorSpaceSettings = Shapes::StructureShape.new(name: 'H265ColorSpaceSettings')
+    H265FilterSettings = Shapes::StructureShape.new(name: 'H265FilterSettings')
     H265FlickerAq = Shapes::StringShape.new(name: 'H265FlickerAq')
     H265GopSizeUnits = Shapes::StringShape.new(name: 'H265GopSizeUnits')
     H265Level = Shapes::StringShape.new(name: 'H265Level')
@@ -302,6 +310,7 @@ module Aws::MediaLive
     InputDeviceSettings = Shapes::StructureShape.new(name: 'InputDeviceSettings')
     InputDeviceState = Shapes::StringShape.new(name: 'InputDeviceState')
     InputDeviceSummary = Shapes::StructureShape.new(name: 'InputDeviceSummary')
+    InputDeviceThumbnail = Shapes::BlobShape.new(name: 'InputDeviceThumbnail', streaming: true)
     InputDeviceType = Shapes::StringShape.new(name: 'InputDeviceType')
     InputFilter = Shapes::StringShape.new(name: 'InputFilter')
     InputLocation = Shapes::StructureShape.new(name: 'InputLocation')
@@ -681,10 +690,12 @@ module Aws::MediaLive
     __stringMin1 = Shapes::StringShape.new(name: '__stringMin1')
     __stringMin1Max255 = Shapes::StringShape.new(name: '__stringMin1Max255')
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
+    __stringMin1Max35 = Shapes::StringShape.new(name: '__stringMin1Max35')
     __stringMin32Max32 = Shapes::StringShape.new(name: '__stringMin32Max32')
     __stringMin34Max34 = Shapes::StringShape.new(name: '__stringMin34Max34')
     __stringMin3Max3 = Shapes::StringShape.new(name: '__stringMin3Max3')
     __stringMin6Max6 = Shapes::StringShape.new(name: '__stringMin6Max6')
+    __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
@@ -743,7 +754,7 @@ module Aws::MediaLive
     AudioDescription.add_member(:audio_type, Shapes::ShapeRef.new(shape: AudioType, location_name: "audioType"))
     AudioDescription.add_member(:audio_type_control, Shapes::ShapeRef.new(shape: AudioDescriptionAudioTypeControl, location_name: "audioTypeControl"))
     AudioDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: AudioCodecSettings, location_name: "codecSettings"))
-    AudioDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3, location_name: "languageCode"))
+    AudioDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: __stringMin1Max35, location_name: "languageCode"))
     AudioDescription.add_member(:language_code_control, Shapes::ShapeRef.new(shape: AudioDescriptionLanguageCodeControl, location_name: "languageCodeControl"))
     AudioDescription.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     AudioDescription.add_member(:remix_settings, Shapes::ShapeRef.new(shape: RemixSettings, location_name: "remixSettings"))
@@ -865,6 +876,7 @@ module Aws::MediaLive
     CaptionDestinationSettings.add_member(:arib_destination_settings, Shapes::ShapeRef.new(shape: AribDestinationSettings, location_name: "aribDestinationSettings"))
     CaptionDestinationSettings.add_member(:burn_in_destination_settings, Shapes::ShapeRef.new(shape: BurnInDestinationSettings, location_name: "burnInDestinationSettings"))
     CaptionDestinationSettings.add_member(:dvb_sub_destination_settings, Shapes::ShapeRef.new(shape: DvbSubDestinationSettings, location_name: "dvbSubDestinationSettings"))
+    CaptionDestinationSettings.add_member(:ebu_tt_d_destination_settings, Shapes::ShapeRef.new(shape: EbuTtDDestinationSettings, location_name: "ebuTtDDestinationSettings"))
     CaptionDestinationSettings.add_member(:embedded_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedDestinationSettings, location_name: "embeddedDestinationSettings"))
     CaptionDestinationSettings.add_member(:embedded_plus_scte_20_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedPlusScte20DestinationSettings, location_name: "embeddedPlusScte20DestinationSettings"))
     CaptionDestinationSettings.add_member(:rtmp_caption_info_destination_settings, Shapes::ShapeRef.new(shape: RtmpCaptionInfoDestinationSettings, location_name: "rtmpCaptionInfoDestinationSettings"))
@@ -1175,6 +1187,19 @@ module Aws::MediaLive
     DescribeInputDeviceResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
     DescribeInputDeviceResponse.struct_class = Types::DescribeInputDeviceResponse
 
+    DescribeInputDeviceThumbnailRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    DescribeInputDeviceThumbnailRequest.add_member(:accept, Shapes::ShapeRef.new(shape: AcceptHeader, required: true, location: "header", location_name: "accept"))
+    DescribeInputDeviceThumbnailRequest.struct_class = Types::DescribeInputDeviceThumbnailRequest
+
+    DescribeInputDeviceThumbnailResponse.add_member(:body, Shapes::ShapeRef.new(shape: InputDeviceThumbnail, location_name: "body"))
+    DescribeInputDeviceThumbnailResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "Content-Type"))
+    DescribeInputDeviceThumbnailResponse.add_member(:content_length, Shapes::ShapeRef.new(shape: __long, location: "header", location_name: "Content-Length"))
+    DescribeInputDeviceThumbnailResponse.add_member(:etag, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "ETag"))
+    DescribeInputDeviceThumbnailResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: __timestamp, location: "header", location_name: "Last-Modified"))
+    DescribeInputDeviceThumbnailResponse.struct_class = Types::DescribeInputDeviceThumbnailResponse
+    DescribeInputDeviceThumbnailResponse[:payload] = :body
+    DescribeInputDeviceThumbnailResponse[:payload_member] = DescribeInputDeviceThumbnailResponse.member(:body)
+
     DescribeInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
     DescribeInputRequest.struct_class = Types::DescribeInputRequest
 
@@ -1337,6 +1362,11 @@ module Aws::MediaLive
     Eac3Settings.add_member(:surround_mode, Shapes::ShapeRef.new(shape: Eac3SurroundMode, location_name: "surroundMode"))
     Eac3Settings.struct_class = Types::Eac3Settings
 
+    EbuTtDDestinationSettings.add_member(:fill_line_gap, Shapes::ShapeRef.new(shape: EbuTtDFillLineGapControl, location_name: "fillLineGap"))
+    EbuTtDDestinationSettings.add_member(:font_family, Shapes::ShapeRef.new(shape: __string, location_name: "fontFamily"))
+    EbuTtDDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: EbuTtDDestinationStyleControl, location_name: "styleControl"))
+    EbuTtDDestinationSettings.struct_class = Types::EbuTtDDestinationSettings
+
     EmbeddedDestinationSettings.struct_class = Types::EmbeddedDestinationSettings
 
     EmbeddedPlusScte20DestinationSettings.struct_class = Types::EmbeddedPlusScte20DestinationSettings
@@ -1441,7 +1471,7 @@ module Aws::MediaLive
     H264Settings.add_member(:num_ref_frames, Shapes::ShapeRef.new(shape: __integerMin1Max6, location_name: "numRefFrames"))
     H264Settings.add_member(:par_control, Shapes::ShapeRef.new(shape: H264ParControl, location_name: "parControl"))
     H264Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parDenominator"))
-    H264Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integer, location_name: "parNumerator"))
+    H264Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parNumerator"))
     H264Settings.add_member(:profile, Shapes::ShapeRef.new(shape: H264Profile, location_name: "profile"))
     H264Settings.add_member(:quality_level, Shapes::ShapeRef.new(shape: H264QualityLevel, location_name: "qualityLevel"))
     H264Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
@@ -1463,6 +1493,9 @@ module Aws::MediaLive
     H265ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
     H265ColorSpaceSettings.struct_class = Types::H265ColorSpaceSettings
 
+    H265FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
+    H265FilterSettings.struct_class = Types::H265FilterSettings
+
     H265Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H265AdaptiveQuantization, location_name: "adaptiveQuantization"))
     H265Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
     H265Settings.add_member(:alternative_transfer_function, Shapes::ShapeRef.new(shape: H265AlternativeTransferFunction, location_name: "alternativeTransferFunction"))
@@ -1470,6 +1503,7 @@ module Aws::MediaLive
     H265Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin100000Max80000000, location_name: "bufSize"))
     H265Settings.add_member(:color_metadata, Shapes::ShapeRef.new(shape: H265ColorMetadata, location_name: "colorMetadata"))
     H265Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: H265ColorSpaceSettings, location_name: "colorSpaceSettings"))
+    H265Settings.add_member(:filter_settings, Shapes::ShapeRef.new(shape: H265FilterSettings, location_name: "filterSettings"))
     H265Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
     H265Settings.add_member(:flicker_aq, Shapes::ShapeRef.new(shape: H265FlickerAq, location_name: "flickerAq"))
     H265Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max3003, required: true, location_name: "framerateDenominator"))
@@ -1711,7 +1745,7 @@ module Aws::MediaLive
     InputLossBehavior.add_member(:repeat_frame_msec, Shapes::ShapeRef.new(shape: __integerMin0Max1000000, location_name: "repeatFrameMsec"))
     InputLossBehavior.struct_class = Types::InputLossBehavior
 
-    InputPrepareScheduleActionSettings.add_member(:input_attachment_name_reference, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "inputAttachmentNameReference"))
+    InputPrepareScheduleActionSettings.add_member(:input_attachment_name_reference, Shapes::ShapeRef.new(shape: __string, location_name: "inputAttachmentNameReference"))
     InputPrepareScheduleActionSettings.add_member(:input_clipping_settings, Shapes::ShapeRef.new(shape: InputClippingSettings, location_name: "inputClippingSettings"))
     InputPrepareScheduleActionSettings.add_member(:url_path, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "urlPath"))
     InputPrepareScheduleActionSettings.struct_class = Types::InputPrepareScheduleActionSettings
@@ -3046,6 +3080,21 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/inputDevices/{inputDeviceId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeInputDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInputDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_input_device_thumbnail, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInputDeviceThumbnail"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}/thumbnailData"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInputDeviceThumbnailRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInputDeviceThumbnailResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

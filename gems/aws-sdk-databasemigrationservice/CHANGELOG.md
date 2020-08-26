@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-08-24)
+------------------
+
+* Feature - Added new endpoint settings to include columns with Null and Empty value when using Kinesis and Kafka as target. Added a new endpoint setting to set maximum message size when using Kafka as target.
+
+1.39.0 (2020-07-27)
+------------------
+
+* Feature - Basic endpoint settings for relational databases, Preflight validation API.
+
 1.38.0 (2020-07-02)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2020-08-12)
+------------------
+
+* Feature - Adds security policies to control cryptographic algorithms advertised by your server, additional characters in usernames and length increase, and FIPS compliant endpoints in the US and Canada regions.
+
 1.23.0 (2020-06-23)
 ------------------
 

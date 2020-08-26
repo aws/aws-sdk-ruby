@@ -1620,6 +1620,17 @@ module Aws::Glue
     #     port pairs that are the addresses of the Apache Kafka brokers in a
     #     Kafka cluster to which a Kafka client will connect to and
     #     bootstrap itself.
+    #
+    #   * `KAFKA_SSL_ENABLED` - Whether to enable or disable SSL on an
+    #     Apache Kafka connection. Default value is "true".
+    #
+    #   * `KAFKA_CUSTOM_CERT` - The Amazon S3 URL for the private CA cert
+    #     file (.pem format). The default is an empty string.
+    #
+    #   * `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` - Whether to skip the
+    #     validation of the CA cert file or not. AWS Glue validates for
+    #     three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
+    #     Default value is "false".
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -1665,7 +1676,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #         match_criteria: ["NameString"],
     #         connection_properties: { # required
     #           "HOST" => "ValueString",
@@ -1696,6 +1707,9 @@ module Aws::Glue
     #
     #   * `MONGODB` - Designates a connection to a MongoDB document
     #     database.
+    #
+    #   * `NETWORK` - Designates a network connection to a data source
+    #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
     #   SFTP is not supported.
     #   @return [String]
@@ -2066,6 +2080,7 @@ module Aws::Glue
     #           {
     #             path: "Path",
     #             exclusions: ["Path"],
+    #             connection_name: "ConnectionName",
     #           },
     #         ],
     #         jdbc_targets: [
@@ -2186,7 +2201,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -2234,6 +2249,7 @@ module Aws::Glue
     #             {
     #               path: "Path",
     #               exclusions: ["Path"],
+    #               connection_name: "ConnectionName",
     #             },
     #           ],
     #           jdbc_targets: [
@@ -2959,8 +2975,9 @@ module Aws::Glue
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -3813,6 +3830,7 @@ module Aws::Glue
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         max_concurrent_runs: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -3833,13 +3851,22 @@ module Aws::Glue
     #   The tags to be used with this workflow.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If
+    #   you leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateWorkflowRequest AWS API Documentation
     #
     class CreateWorkflowRequest < Struct.new(
       :name,
       :description,
       :default_run_properties,
-      :tags)
+      :tags,
+      :max_concurrent_runs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5192,7 +5219,7 @@ module Aws::Glue
     end
 
     # An edge represents a directed connection between two AWS Glue
-    # components which are part of the workflow the edge belongs to.
+    # components that are part of the workflow the edge belongs to.
     #
     # @!attribute [rw] source_id
     #   The unique of the node within the workflow where the edge starts.
@@ -5827,7 +5854,7 @@ module Aws::Glue
     #
     #       {
     #         match_criteria: ["NameString"],
-    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
+    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #       }
     #
     # @!attribute [rw] match_criteria
@@ -5855,7 +5882,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         filter: {
     #           match_criteria: ["NameString"],
-    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
+    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #         },
     #         hide_password: false,
     #         next_token: "Token",
@@ -8437,15 +8464,17 @@ module Aws::Glue
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -8615,7 +8644,8 @@ module Aws::Glue
     #
     # @!attribute [rw] name
     #   The name of the job command. For an Apache Spark ETL job, this must
-    #   be `glueetl`. For a Python shell job, it must be `pythonshell`.
+    #   be `glueetl`. For a Python shell job, it must be `pythonshell`. For
+    #   an Apache Spark streaming ETL job, this must be `gluestreaming`.
     #   @return [String]
     #
     # @!attribute [rw] script_location
@@ -8998,8 +9028,9 @@ module Aws::Glue
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -9875,8 +9906,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A node represents an AWS Glue component like Trigger, Job etc. which
-    # is part of a workflow.
+    # A node represents an AWS Glue component such as a trigger, or job,
+    # etc., that is part of a workflow.
     #
     # @!attribute [rw] type
     #   The type of AWS Glue component represented by the node.
@@ -10556,6 +10587,57 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResumeWorkflowRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         run_id: "IdString", # required
+    #         node_ids: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow to resume.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the workflow run to resume.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of the node IDs for the nodes you want to restart. The nodes
+    #   that are to be restarted must have a run attempt in the original
+    #   run.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResumeWorkflowRunRequest AWS API Documentation
+    #
+    class ResumeWorkflowRunRequest < Struct.new(
+      :name,
+      :run_id,
+      :node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The new ID assigned to the resumed workflow run. Each resume of a
+    #   workflow run will have a new run ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of the node IDs for the nodes that were actually restarted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResumeWorkflowRunResponse AWS API Documentation
+    #
+    class ResumeWorkflowRunResponse < Struct.new(
+      :run_id,
+      :node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how Amazon Simple Storage Service (Amazon S3) data should be
     # encrypted.
     #
@@ -10593,6 +10675,7 @@ module Aws::Glue
     #       {
     #         path: "Path",
     #         exclusions: ["Path"],
+    #         connection_name: "ConnectionName",
     #       }
     #
     # @!attribute [rw] path
@@ -10608,11 +10691,18 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] connection_name
+    #   The name of a connection which allows a job or crawler to access
+    #   data in Amazon S3 within an Amazon Virtual Private Cloud environment
+    #   (Amazon VPC).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target AWS API Documentation
     #
     class S3Target < Struct.new(
       :path,
-      :exclusions)
+      :exclusions,
+      :connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10765,7 +10855,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] catalog_id
-    #   A unique identifier, consisting of ` account_id/datalake`.
+    #   A unique identifier, consisting of ` account_id `.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -10775,6 +10865,17 @@ module Aws::Glue
     # @!attribute [rw] filters
     #   A list of key-value pairs, and a comparator used to filter the
     #   search results. Returns all entities matching the predicate.
+    #
+    #   The `Comparator` member of the `PropertyPredicate` struct is used
+    #   only for time fields, and can be omitted for other field types.
+    #   Also, when comparing string values, such as when `Key=Name`, a fuzzy
+    #   match algorithm is used. The `Key` field (for example, the value of
+    #   the `Name` field) is split on certain punctuation characters, for
+    #   example, -, :, #, etc. into tokens. Then each token is exact-match
+    #   compared with the `Value` member of `PropertyPredicate`. For
+    #   example, if `Key=Name` and `Value=link`, tables named
+    #   `customer-link` and `xx-link-yy` are returned, but `xxlinkyy` is not
+    #   returned.
     #   @return [Array<Types::PropertyPredicate>]
     #
     # @!attribute [rw] search_text
@@ -12885,7 +12986,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -12939,6 +13040,7 @@ module Aws::Glue
     #             {
     #               path: "Path",
     #               exclusions: ["Path"],
+    #               connection_name: "ConnectionName",
     #             },
     #           ],
     #           jdbc_targets: [
@@ -13652,11 +13754,15 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] partition_value_list
-    #   A list of the values defining the partition.
+    #   List of partition key values that define the partition to update.
     #   @return [Array<String>]
     #
     # @!attribute [rw] partition_input
     #   The new partition object to update the partition to.
+    #
+    #   The `Values` property can't be changed. If you want to change the
+    #   partition key values for a partition, delete and recreate the
+    #   partition.
     #   @return [Types::PartitionInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartitionRequest AWS API Documentation
@@ -13922,6 +14028,7 @@ module Aws::Glue
     #         default_run_properties: {
     #           "IdString" => "GenericString",
     #         },
+    #         max_concurrent_runs: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -13937,12 +14044,21 @@ module Aws::Glue
     #   the workflow.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If
+    #   you leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateWorkflowRequest AWS API Documentation
     #
     class UpdateWorkflowRequest < Struct.new(
       :name,
       :description,
-      :default_run_properties)
+      :default_run_properties,
+      :max_concurrent_runs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14159,6 +14275,14 @@ module Aws::Glue
     #   edges.
     #   @return [Types::WorkflowGraph]
     #
+    # @!attribute [rw] max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If
+    #   you leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Workflow AWS API Documentation
     #
     class Workflow < Struct.new(
@@ -14168,7 +14292,8 @@ module Aws::Glue
       :created_on,
       :last_modified_on,
       :last_run,
-      :graph)
+      :graph,
+      :max_concurrent_runs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14200,11 +14325,15 @@ module Aws::Glue
     # information.
     #
     # @!attribute [rw] name
-    #   Name of the workflow which was executed.
+    #   Name of the workflow that was executed.
     #   @return [String]
     #
     # @!attribute [rw] workflow_run_id
     #   The ID of this workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_run_id
+    #   The ID of the previous workflow run.
     #   @return [String]
     #
     # @!attribute [rw] workflow_run_properties
@@ -14223,6 +14352,12 @@ module Aws::Glue
     #   The status of the workflow run.
     #   @return [String]
     #
+    # @!attribute [rw] error_message
+    #   This error message describes any error that may have occurred in
+    #   starting the workflow run. Currently the only error message is
+    #   "Concurrent runs exceeded for workflow: `foo`."
+    #   @return [String]
+    #
     # @!attribute [rw] statistics
     #   The statistics of the run.
     #   @return [Types::WorkflowRunStatistics]
@@ -14238,10 +14373,12 @@ module Aws::Glue
     class WorkflowRun < Struct.new(
       :name,
       :workflow_run_id,
+      :previous_run_id,
       :workflow_run_properties,
       :started_on,
       :completed_on,
       :status,
+      :error_message,
       :statistics,
       :graph)
       SENSITIVE = []
@@ -14255,19 +14392,19 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout_actions
-    #   Total number of Actions which timed out.
+    #   Total number of Actions that timed out.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_actions
-    #   Total number of Actions which have failed.
+    #   Total number of Actions that have failed.
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_actions
-    #   Total number of Actions which have stopped.
+    #   Total number of Actions that have stopped.
     #   @return [Integer]
     #
     # @!attribute [rw] succeeded_actions
-    #   Total number of Actions which have succeeded.
+    #   Total number of Actions that have succeeded.
     #   @return [Integer]
     #
     # @!attribute [rw] running_actions

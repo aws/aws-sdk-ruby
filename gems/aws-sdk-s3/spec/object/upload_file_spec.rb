@@ -78,7 +78,23 @@ module Aws
             object.upload_file(ten_meg_file)
           end
 
-          it 'accepts an alterative multipart file threshold' do
+          it 'reports progress for small objects' do
+            expect(client).to receive(:put_object).with(
+              bucket: 'bucket',
+              key: 'key',
+              body: ten_meg_file,
+              on_chunk_sent: instance_of(Proc)
+            ) do |args|
+              args[:on_chunk_sent].call(ten_meg_file, ten_meg_file.size, ten_meg_file.size)
+            end
+            callback = proc do |bytes, totals|
+              expect(bytes).to eq([ten_meg_file.size])
+              expect(totals).to eq([ten_meg_file.size])
+            end
+            object.upload_file(ten_meg_file, progress_callback: callback)
+          end
+
+          it 'accepts an alternative multipart file threshold' do
             expect(client).to receive(:put_object).with(
               bucket: 'bucket',
               key: 'key',
@@ -121,6 +137,20 @@ module Aws
               }
             )
             object.upload_file(seventeen_meg_file, content_type: 'text/plain')
+          end
+
+          it 'reports progress for multipart uploads' do
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:complete_multipart_upload)
+            expect(client).to receive(:upload_part).exactly(4).times do |args|
+              args[:on_chunk_sent].call(args[:body], args[:body].size, args[:body].size)
+              double(etag: 'etag')
+            end
+            callback = proc do |bytes, totals|
+              expect(bytes.size).to eq(4)
+              expect(totals.size).to eq(4)
+            end
+            object.upload_file(seventeen_meg_file, content_type: 'text/plain', progress_callback: callback)
           end
 
           it 'raises an error if the multipart threshold is too small' do

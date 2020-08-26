@@ -126,7 +126,11 @@ module Aws::EC2
       data[:public_dns_name]
     end
 
-    # The public IPv4 address assigned to the instance, if applicable.
+    # The public IPv4 address, or the Carrier IP address assigned to the
+    # instance, if applicable.
+    #
+    # A Carrier IP address only applies to an instance launched in a subnet
+    # associated with a Wavelength Zone.
     # @return [String]
     def public_ip_address
       data[:public_ip_address]
@@ -641,7 +645,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -1404,7 +1408,7 @@ module Aws::EC2
     #
     #   * `snapshot-id` - The snapshot from which the volume was created.
     #
-    #   * `status` - The status of the volume (`creating` \| `available` \|
+    #   * `status` - The state of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
@@ -1420,8 +1424,8 @@ module Aws::EC2
     #   * `volume-id` - The volume ID.
     #
     #   * `volume-type` - The Amazon EBS volume type. This can be `gp2` for
-    #     General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1` for
-    #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
+    #     General Purpose SSD, `io1` or `io2` for Provisioned IOPS SSD, `st1`
+    #     for Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
     # @option options [Array<String>] :volume_ids
     #   The volume IDs.
@@ -1492,8 +1496,8 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
-    #   * `network-border-group` - The location from where the IP address is
-    #     advertised.
+    #   * `network-border-group` - A unique set of Availability Zones, Local
+    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
@@ -1503,7 +1507,7 @@ module Aws::EC2
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
     #
-    #   * `public-ip` - The Elastic IP address.
+    #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value

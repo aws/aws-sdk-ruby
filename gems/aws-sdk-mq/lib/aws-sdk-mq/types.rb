@@ -231,6 +231,10 @@ module Aws::MQ
     #   Required. The ARN of the configuration.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy associated with the configuration.
+    #   @return [String]
+    #
     # @!attribute [rw] created
     #   Required. The date and time of the configuration revision.
     #   @return [Time]
@@ -273,6 +277,7 @@ module Aws::MQ
     #
     class Configuration < Struct.new(
       :arn,
+      :authentication_strategy,
       :created,
       :description,
       :engine_type,
@@ -378,8 +383,13 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # Required. The time period during which Amazon MQ applies pending
-    # updates or patches to the broker.
+    # Required. The version of the broker engine. For a list of supported
+    # engine versions, see
+    # https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Required. Enables automatic upgrades to new minor versions for
@@ -427,6 +437,11 @@ module Aws::MQ
     #   Required. The broker's instance type.
     #   @return [String]
     #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataInput]
+    #
     # @!attribute [rw] logs
     #   Enables Amazon CloudWatch logging for brokers.
     #   @return [Types::Logs]
@@ -471,6 +486,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerInput AWS API Documentation
     #
     class CreateBrokerInput < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_name,
       :configuration,
@@ -480,6 +496,7 @@ module Aws::MQ
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
       :publicly_accessible,
@@ -515,6 +532,7 @@ module Aws::MQ
     #   data as a hash:
     #
     #       {
+    #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
     #         auto_minor_version_upgrade: false,
     #         broker_name: "__string",
     #         configuration: {
@@ -530,6 +548,19 @@ module Aws::MQ
     #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #         engine_version: "__string",
     #         host_instance_type: "__string",
+    #         ldap_server_metadata: {
+    #           hosts: ["__string"],
+    #           role_base: "__string",
+    #           role_name: "__string",
+    #           role_search_matching: "__string",
+    #           role_search_subtree: false,
+    #           service_account_password: "__string",
+    #           service_account_username: "__string",
+    #           user_base: "__string",
+    #           user_role_name: "__string",
+    #           user_search_matching: "__string",
+    #           user_search_subtree: false,
+    #         },
     #         logs: {
     #           audit: false,
     #           general: false,
@@ -555,6 +586,10 @@ module Aws::MQ
     #           },
     #         ],
     #       }
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   @return [Boolean]
@@ -590,6 +625,11 @@ module Aws::MQ
     # @!attribute [rw] host_instance_type
     #   @return [String]
     #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataInput]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -622,6 +662,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerRequest AWS API Documentation
     #
     class CreateBrokerRequest < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_name,
       :configuration,
@@ -631,6 +672,7 @@ module Aws::MQ
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
       :publicly_accessible,
@@ -662,6 +704,10 @@ module Aws::MQ
     # Amazon MQ uses the default configuration (the engine type and
     # version).
     #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy associated with the configuration.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_type
     #   Required. The type of broker engine. Note: Currently, Amazon MQ
     #   supports only ACTIVEMQ.
@@ -686,6 +732,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationInput AWS API Documentation
     #
     class CreateConfigurationInput < Struct.new(
+      :authentication_strategy,
       :engine_type,
       :engine_version,
       :name,
@@ -698,6 +745,10 @@ module Aws::MQ
     #
     # @!attribute [rw] arn
     #   Required. The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy associated with the configuration.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -723,6 +774,7 @@ module Aws::MQ
     #
     class CreateConfigurationOutput < Struct.new(
       :arn,
+      :authentication_strategy,
       :created,
       :id,
       :latest_revision,
@@ -735,6 +787,7 @@ module Aws::MQ
     #   data as a hash:
     #
     #       {
+    #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
     #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #         engine_version: "__string",
     #         name: "__string",
@@ -742,6 +795,10 @@ module Aws::MQ
     #           "__string" => "__string",
     #         },
     #       }
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
     #
     # @!attribute [rw] engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
@@ -760,6 +817,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationRequest AWS API Documentation
     #
     class CreateConfigurationRequest < Struct.new(
+      :authentication_strategy,
       :engine_type,
       :engine_version,
       :name,
@@ -769,6 +827,10 @@ module Aws::MQ
     end
 
     # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -788,6 +850,7 @@ module Aws::MQ
     #
     class CreateConfigurationResponse < Struct.new(
       :arn,
+      :authentication_strategy,
       :created,
       :id,
       :latest_revision,
@@ -1094,6 +1157,10 @@ module Aws::MQ
     # versions, see
     # https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Required. Enables automatic upgrades to new minor versions for
     #   brokers, as Apache releases the versions. The automatic upgrades
@@ -1155,6 +1222,11 @@ module Aws::MQ
     #   The broker's instance type.
     #   @return [String]
     #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataOutput]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs currently enabled and pending to
     #   be deployed for the specified broker.
@@ -1163,6 +1235,11 @@ module Aws::MQ
     # @!attribute [rw] maintenance_window_start_time
     #   The parameters that determine the WeeklyStartTime.
     #   @return [Types::WeeklyStartTime]
+    #
+    # @!attribute [rw] pending_authentication_strategy
+    #   The authentication strategy that will be applied when the broker is
+    #   rebooted.
+    #   @return [String]
     #
     # @!attribute [rw] pending_engine_version
     #   The version of the broker engine to upgrade to. For a list of
@@ -1175,6 +1252,11 @@ module Aws::MQ
     #   supported instance types, see
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
     #   @return [String]
+    #
+    # @!attribute [rw] pending_ldap_server_metadata
+    #   The metadata of the LDAP server that will be used to authenticate
+    #   and authorize connections to the broker once it is rebooted.
+    #   @return [Types::LdapServerMetadataOutput]
     #
     # @!attribute [rw] pending_security_groups
     #   The list of pending security groups to authorize connections to
@@ -1214,6 +1296,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerOutput AWS API Documentation
     #
     class DescribeBrokerOutput < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_arn,
       :broker_id,
@@ -1227,10 +1310,13 @@ module Aws::MQ
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
+      :pending_authentication_strategy,
       :pending_engine_version,
       :pending_host_instance_type,
+      :pending_ldap_server_metadata,
       :pending_security_groups,
       :publicly_accessible,
       :security_groups,
@@ -1260,6 +1346,10 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_minor_version_upgrade
     #   @return [Boolean]
     #
@@ -1305,6 +1395,11 @@ module Aws::MQ
     # @!attribute [rw] host_instance_type
     #   @return [String]
     #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataOutput]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs currently enabled and pending to
     #   be deployed for the specified broker.
@@ -1315,11 +1410,20 @@ module Aws::MQ
     #   begins to apply pending updates or patches to the broker.
     #   @return [Types::WeeklyStartTime]
     #
+    # @!attribute [rw] pending_authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
+    #
     # @!attribute [rw] pending_engine_version
     #   @return [String]
     #
     # @!attribute [rw] pending_host_instance_type
     #   @return [String]
+    #
+    # @!attribute [rw] pending_ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataOutput]
     #
     # @!attribute [rw] pending_security_groups
     #   @return [Array<String>]
@@ -1346,6 +1450,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerResponse AWS API Documentation
     #
     class DescribeBrokerResponse < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_arn,
       :broker_id,
@@ -1359,10 +1464,13 @@ module Aws::MQ
       :engine_type,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
+      :pending_authentication_strategy,
       :pending_engine_version,
       :pending_host_instance_type,
+      :pending_ldap_server_metadata,
       :pending_security_groups,
       :publicly_accessible,
       :security_groups,
@@ -1393,6 +1501,10 @@ module Aws::MQ
     end
 
     # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -1426,6 +1538,7 @@ module Aws::MQ
     #
     class DescribeConfigurationResponse < Struct.new(
       :arn,
+      :authentication_strategy,
       :created,
       :description,
       :engine_type,
@@ -1618,9 +1731,10 @@ module Aws::MQ
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The customer master key (CMK) to use for the AWS Key Management
-    #   Service (KMS). This key is used to encrypt your data at rest. If not
-    #   provided, Amazon MQ will use a default CMK to encrypt your data.
+    #   The symmetric customer master key (CMK) to use for the AWS Key
+    #   Management Service (KMS). This key is used to encrypt your data at
+    #   rest. If not provided, Amazon MQ will use a default CMK to encrypt
+    #   your data.
     #   @return [String]
     #
     # @!attribute [rw] use_aws_owned_key
@@ -1700,6 +1814,160 @@ module Aws::MQ
     class InternalServerErrorException < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the LDAP server used to authenticate and authorize
+    # connections to the broker.
+    #
+    # @note When making an API call, you may pass LdapServerMetadataInput
+    #   data as a hash:
+    #
+    #       {
+    #         hosts: ["__string"],
+    #         role_base: "__string",
+    #         role_name: "__string",
+    #         role_search_matching: "__string",
+    #         role_search_subtree: false,
+    #         service_account_password: "__string",
+    #         service_account_username: "__string",
+    #         user_base: "__string",
+    #         user_role_name: "__string",
+    #         user_search_matching: "__string",
+    #         user_search_subtree: false,
+    #       }
+    #
+    # @!attribute [rw] hosts
+    #   Fully qualified domain name of the LDAP server. Optional failover
+    #   server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_base
+    #   Fully qualified name of the directory to search for a user’s groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   Specifies the LDAP attribute that identifies the group name
+    #   attribute in the object returned from the group membership query.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_matching
+    #   The search criteria for groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_subtree
+    #   The directory search scope for the role. If set to true, scope is to
+    #   search the entire sub-tree.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_account_password
+    #   Service account password.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_username
+    #   Service account username.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_base
+    #   Fully qualified name of the directory where you want to search for
+    #   users.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_role_name
+    #   Specifies the name of the LDAP attribute for the user group
+    #   membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_matching
+    #   The search criteria for users.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_subtree
+    #   The directory search scope for the user. If set to true, scope is to
+    #   search the entire sub-tree.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/LdapServerMetadataInput AWS API Documentation
+    #
+    class LdapServerMetadataInput < Struct.new(
+      :hosts,
+      :role_base,
+      :role_name,
+      :role_search_matching,
+      :role_search_subtree,
+      :service_account_password,
+      :service_account_username,
+      :user_base,
+      :user_role_name,
+      :user_search_matching,
+      :user_search_subtree)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the LDAP server used to authenticate and authorize
+    # connections to the broker.
+    #
+    # @!attribute [rw] hosts
+    #   Fully qualified domain name of the LDAP server. Optional failover
+    #   server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_base
+    #   Fully qualified name of the directory to search for a user’s groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   Specifies the LDAP attribute that identifies the group name
+    #   attribute in the object returned from the group membership query.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_matching
+    #   The search criteria for groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_subtree
+    #   The directory search scope for the role. If set to true, scope is to
+    #   search the entire sub-tree.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_account_username
+    #   Service account username.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_base
+    #   Fully qualified name of the directory where you want to search for
+    #   users.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_role_name
+    #   Specifies the name of the LDAP attribute for the user group
+    #   membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_matching
+    #   The search criteria for users.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_subtree
+    #   The directory search scope for the user. If set to true, scope is to
+    #   search the entire sub-tree.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/LdapServerMetadataOutput AWS API Documentation
+    #
+    class LdapServerMetadataOutput < Struct.new(
+      :hosts,
+      :role_base,
+      :role_name,
+      :role_search_matching,
+      :role_search_subtree,
+      :service_account_username,
+      :user_base,
+      :user_role_name,
+      :user_search_matching,
+      :user_search_subtree)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2213,6 +2481,10 @@ module Aws::MQ
 
     # Updates the broker using the specified properties.
     #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Enables automatic upgrades to new minor versions for brokers, as
     #   Apache releases the versions. The automatic upgrades occur during
@@ -2236,6 +2508,11 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
     #   @return [String]
     #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataInput]
+    #
     # @!attribute [rw] logs
     #   Enables Amazon CloudWatch logging for brokers.
     #   @return [Types::Logs]
@@ -2248,10 +2525,12 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerInput AWS API Documentation
     #
     class UpdateBrokerInput < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :configuration,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :security_groups)
       SENSITIVE = []
@@ -2259,6 +2538,10 @@ module Aws::MQ
     end
 
     # Returns information about the updated broker.
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   The new value of automatic upgrades to new minor version for
@@ -2285,6 +2568,11 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
     #   @return [String]
     #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataOutput]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -2298,11 +2586,13 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerOutput AWS API Documentation
     #
     class UpdateBrokerOutput < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_id,
       :configuration,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :security_groups)
       SENSITIVE = []
@@ -2313,6 +2603,7 @@ module Aws::MQ
     #   data as a hash:
     #
     #       {
+    #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
     #         auto_minor_version_upgrade: false,
     #         broker_id: "__string", # required
     #         configuration: {
@@ -2321,12 +2612,29 @@ module Aws::MQ
     #         },
     #         engine_version: "__string",
     #         host_instance_type: "__string",
+    #         ldap_server_metadata: {
+    #           hosts: ["__string"],
+    #           role_base: "__string",
+    #           role_name: "__string",
+    #           role_search_matching: "__string",
+    #           role_search_subtree: false,
+    #           service_account_password: "__string",
+    #           service_account_username: "__string",
+    #           user_base: "__string",
+    #           user_role_name: "__string",
+    #           user_search_matching: "__string",
+    #           user_search_subtree: false,
+    #         },
     #         logs: {
     #           audit: false,
     #           general: false,
     #         },
     #         security_groups: ["__string"],
     #       }
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   @return [Boolean]
@@ -2343,6 +2651,11 @@ module Aws::MQ
     #
     # @!attribute [rw] host_instance_type
     #   @return [String]
+    #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataInput]
     #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
@@ -2355,17 +2668,23 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest AWS API Documentation
     #
     class UpdateBrokerRequest < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_id,
       :configuration,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_minor_version_upgrade
     #   @return [Boolean]
     #
@@ -2382,6 +2701,11 @@ module Aws::MQ
     # @!attribute [rw] host_instance_type
     #   @return [String]
     #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the LDAP server used to authenticate and authorize
+    #   connections to the broker.
+    #   @return [Types::LdapServerMetadataOutput]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
@@ -2393,11 +2717,13 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse AWS API Documentation
     #
     class UpdateBrokerResponse < Struct.new(
+      :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_id,
       :configuration,
       :engine_version,
       :host_instance_type,
+      :ldap_server_metadata,
       :logs,
       :security_groups)
       SENSITIVE = []

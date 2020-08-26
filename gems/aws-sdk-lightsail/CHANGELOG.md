@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-07-23)
+------------------
+
+* Feature - This release adds support for Amazon Lightsail content delivery network (CDN) distributions and SSL/TLS certificates.
+
 1.35.0 (2020-07-02)
 ------------------
 

@@ -140,18 +140,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # For the affected resource:
-    #
-    # * The name of the operation that was invoked most recently and
-    #   produced the finding (api).
-    #
-    # * The first date and time when any operation was invoked and produced
-    #   the finding (firstSeen).
-    #
-    # * The most recent date and time when the specified operation was
-    #   invoked and produced the finding (lastSeen).
-    #
-    # All date and time values are in UTC and extended ISO 8601 format.
+    # Provides information about an API operation that an entity invoked for
+    # an affected resource.
     #
     # @!attribute [rw] api
     #   @return [String]
@@ -176,7 +166,10 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about an identity that performed an action on an
+    # affected resource by using temporary security credentials. The
+    # credentials were obtained using the AssumeRole operation of the AWS
+    # Security Token Service (AWS STS) API.
     #
     # @!attribute [rw] access_key_id
     #   @return [String]
@@ -207,7 +200,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about an AWS account and entity that performed an
+    # action on an affected resource. The action was performed using the
+    # credentials for an AWS account other than your own account.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -224,7 +219,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about an AWS service that performed an action on
+    # an affected resource.
     #
     # @!attribute [rw] invoked_by
     #   @return [String]
@@ -341,8 +337,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # The total number of buckets that are publicly accessible, based on a
-    # combination of permissions settings for each bucket.
+    # Provides information about the number of S3 buckets that are publicly
+    # accessible based on a combination of permissions settings for each
+    # bucket.
     #
     # @!attribute [rw] publicly_accessible
     #   @return [Integer]
@@ -363,9 +360,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # The total number of buckets, grouped by server-side encryption type.
-    # This object also reports the total number of buckets that aren't
-    # encrypted.
+    # Provides information about the number of S3 buckets that use certain
+    # types of server-side encryption or don't encrypt objects by default.
     #
     # @!attribute [rw] kms_managed
     #   @return [Integer]
@@ -386,8 +382,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # The total number of buckets that are shared with another AWS account
-    # or configured to support cross-origin resource sharing (CORS).
+    # Provides information about the number of S3 buckets that are shared
+    # with other AWS accounts.
     #
     # @!attribute [rw] external
     #   @return [Integer]
@@ -519,6 +515,9 @@ module Aws::Macie2
     #   @return [Integer]
     #
     # @!attribute [rw] object_count_by_encryption_type
+    #   Provides information about the number of objects that are in an S3
+    #   bucket and use certain types of server-side encryption, use
+    #   client-side encryption, or aren't encrypted.
     #   @return [Types::ObjectCountByEncryptionType]
     #
     # @!attribute [rw] public_access
@@ -574,7 +573,7 @@ module Aws::Macie2
     end
 
     # The account-level and bucket-level permissions settings for an S3
-    # bucket, or the bucket that contains an object.
+    # bucket.
     #
     # @!attribute [rw] account_level_permissions
     #   Provides information about account-level permissions settings that
@@ -621,7 +620,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] permission_configuration
     #   The account-level and bucket-level permissions settings for an S3
-    #   bucket, or the bucket that contains an object.
+    #   bucket.
     #   @return [Types::BucketPermissionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketPublicAccess AWS API Documentation
@@ -673,8 +672,8 @@ module Aws::Macie2
     #
     # @!attribute [rw] result
     #   Provides detailed information about a sensitive data finding,
-    #   including the types and number of occurrences of the data that was
-    #   found.
+    #   including the types and number of occurrences of the sensitive data
+    #   that was found.
     #   @return [Types::ClassificationResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationDetails AWS API Documentation
@@ -717,8 +716,8 @@ module Aws::Macie2
     end
 
     # Provides detailed information about a sensitive data finding,
-    # including the types and number of occurrences of the data that was
-    # found.
+    # including the types and number of occurrences of the sensitive data
+    # that was found.
     #
     # @!attribute [rw] custom_data_identifiers
     #   Provides information about the number of occurrences of the data
@@ -785,7 +784,10 @@ module Aws::Macie2
     end
 
     # Specifies the scope, schedule, and other settings for a classification
-    # job.
+    # job. You can't delete or change the settings for a classification job
+    # after you create it. In Amazon Macie, classification jobs are
+    # immutable. This ensures accurate data classification results for
+    # audits or investigations.
     #
     # @note When making an API call, you may pass CreateClassificationJobRequest
     #   data as a hash:
@@ -942,7 +944,10 @@ module Aws::Macie2
     end
 
     # Specifies the criteria and other settings for a new custom data
-    # identifier.
+    # identifier. You can't change a custom data identifier after you
+    # create it. In Amazon Macie, custom data identifiers are immutable.
+    # This ensures accurate data classification results for audits or
+    # investigations.
     #
     # @note When making an API call, you may pass CreateCustomDataIdentifierRequest
     #   data as a hash:
@@ -1307,7 +1312,9 @@ module Aws::Macie2
     # that detected the data for the finding.
     #
     # @!attribute [rw] detections
-    #   Reserved for future use.
+    #   Provides information about custom data identifiers that produced a
+    #   sensitive data finding, and the number of occurrences of the data
+    #   that each identifier detected.
     #   @return [Array<Types::CustomDetection>]
     #
     # @!attribute [rw] total_count
@@ -1345,6 +1352,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies that a classification job runs once a day, every day. This
+    # is an empty object.
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DailySchedule AWS API Documentation
@@ -1388,7 +1398,7 @@ module Aws::Macie2
     end
 
     # Provides information about sensitive data that was detected by managed
-    # data identifiers and produced a finding.
+    # data identifiers and produced a sensitive data finding.
     #
     # @!attribute [rw] count
     #   @return [Integer]
@@ -1623,7 +1633,7 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Valid values are:
+    #   The current status of a classification job. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] job_type
@@ -1769,6 +1779,9 @@ module Aws::Macie2
     #
     class DisassociateMemberResponse < Aws::EmptyStructure; end
 
+    # Provides information about the domain name of the device that an
+    # entity used to perform an action on an affected resource.
+    #
     # @!attribute [rw] domain_name
     #   @return [String]
     #
@@ -1862,7 +1875,10 @@ module Aws::Macie2
     #
     class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
-    # Reserved for future use.
+    # Provides information about an identity that performed an action on an
+    # affected resource by using temporary security credentials. The
+    # credentials were obtained using the GetFederationToken operation of
+    # the AWS Security Token Service (AWS STS) API.
     #
     # @!attribute [rw] access_key_id
     #   @return [String]
@@ -1926,7 +1942,7 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] policy_details
-    #   Provides detailed information about a policy finding.
+    #   Provides the details of a policy finding.
     #   @return [Types::PolicyDetails]
     #
     # @!attribute [rw] region
@@ -1987,22 +2003,12 @@ module Aws::Macie2
     #
     # @!attribute [rw] action_type
     #   The type of action that occurred for the resource and produced the
-    #   policy finding.
+    #   policy finding:
     #   @return [String]
     #
     # @!attribute [rw] api_call_details
-    #   For the affected resource:
-    #
-    #   * The name of the operation that was invoked most recently and
-    #     produced the finding (api).
-    #
-    #   * The first date and time when any operation was invoked and
-    #     produced the finding (firstSeen).
-    #
-    #   * The most recent date and time when the specified operation was
-    #     invoked and produced the finding (lastSeen).
-    #
-    #   All date and time values are in UTC and extended ISO 8601 format.
+    #   Provides information about an API operation that an entity invoked
+    #   for an affected resource.
     #   @return [Types::ApiCallDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingAction AWS API Documentation
@@ -2018,12 +2024,18 @@ module Aws::Macie2
     # produced a policy finding for a resource.
     #
     # @!attribute [rw] domain_details
+    #   Provides information about the domain name of the device that an
+    #   entity used to perform an action on an affected resource.
     #   @return [Types::DomainDetails]
     #
     # @!attribute [rw] ip_address_details
+    #   Provides information about the IP address of the device that an
+    #   entity used to perform an action on an affected resource.
     #   @return [Types::IpAddressDetails]
     #
     # @!attribute [rw] user_identity
+    #   Provides information about the type and other characteristics of an
+    #   entity that performed an action on an affected resource.
     #   @return [Types::UserIdentity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingActor AWS API Documentation
@@ -2068,8 +2080,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies criteria for sorting the results of a query for information
-    # about findings.
+    # Specifies criteria for sorting the results of a query that retrieves
+    # aggregated statistical data about findings.
     #
     # @note When making an API call, you may pass FindingStatisticsSortCriteria
     #   data as a hash:
@@ -2097,6 +2109,12 @@ module Aws::Macie2
 
     # Provides information about a findings filter.
     #
+    # @!attribute [rw] action
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria,
+    #   set this value to ARCHIVE. Valid values are:
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   @return [String]
     #
@@ -2115,6 +2133,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingsFilterListItem AWS API Documentation
     #
     class FindingsFilterListItem < Struct.new(
+      :action,
       :arn,
       :id,
       :name,
@@ -2123,8 +2142,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies an account that's associated with S3 buckets to retrieve
-    # aggregated statistical data for.
+    # Specifies an account that's associated with the S3 buckets to
+    # retrieve aggregated statistical data for.
     #
     # @note When making an API call, you may pass GetBucketStatisticsRequest
     #   data as a hash:
@@ -2152,19 +2171,20 @@ module Aws::Macie2
     #   @return [Integer]
     #
     # @!attribute [rw] bucket_count_by_effective_permission
-    #   The total number of buckets that are publicly accessible, based on a
-    #   combination of permissions settings for each bucket.
+    #   Provides information about the number of S3 buckets that are
+    #   publicly accessible based on a combination of permissions settings
+    #   for each bucket.
     #   @return [Types::BucketCountByEffectivePermission]
     #
     # @!attribute [rw] bucket_count_by_encryption_type
-    #   The total number of buckets, grouped by server-side encryption type.
-    #   This object also reports the total number of buckets that aren't
-    #   encrypted.
+    #   Provides information about the number of S3 buckets that use certain
+    #   types of server-side encryption or don't encrypt objects by
+    #   default.
     #   @return [Types::BucketCountByEncryptionType]
     #
     # @!attribute [rw] bucket_count_by_shared_access_type
-    #   The total number of buckets that are shared with another AWS account
-    #   or configured to support cross-origin resource sharing (CORS).
+    #   Provides information about the number of S3 buckets that are shared
+    #   with other AWS accounts.
     #   @return [Types::BucketCountBySharedAccessType]
     #
     # @!attribute [rw] classifiable_object_count
@@ -2298,7 +2318,8 @@ module Aws::Macie2
     end
 
     # Specifies criteria for filtering, grouping, sorting, and paginating
-    # the results of a query for information about findings.
+    # the results of a query that retrieves aggregated statistical data
+    # about findings.
     #
     # @note When making an API call, you may pass GetFindingStatisticsRequest
     #   data as a hash:
@@ -2336,8 +2357,8 @@ module Aws::Macie2
     #   @return [Integer]
     #
     # @!attribute [rw] sort_criteria
-    #   Specifies criteria for sorting the results of a query for
-    #   information about findings.
+    #   Specifies criteria for sorting the results of a query that retrieves
+    #   aggregated statistical data about findings.
     #   @return [Types::FindingStatisticsSortCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingStatisticsRequest AWS API Documentation
@@ -2383,7 +2404,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about a findings filter.
+    # Provides information about the criteria and other settings for a
+    # findings filter.
     #
     # @!attribute [rw] action
     #   The action to perform on findings that meet the filter criteria. To
@@ -2638,14 +2660,15 @@ module Aws::Macie2
     #       {
     #         filter_by: [
     #           {
-    #             key: "accountId", # accepts accountId
+    #             comparator: "GT", # accepts GT, GTE, LT, LTE, EQ, NE, CONTAINS
+    #             key: "accountId", # accepts accountId, serviceLimit, freeTrialStartDate, total
     #             values: ["__string"],
     #           },
     #         ],
     #         max_results: 1,
     #         next_token: "__string",
     #         sort_by: {
-    #           key: "accountId", # accepts accountId, total
+    #           key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #           order_by: "ASC", # accepts ASC, DESC
     #         },
     #       }
@@ -2713,8 +2736,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides a group of results for a query that retrieved information
-    # about findings.
+    # Provides a group of results for a query that retrieved aggregated
+    # statistical data about findings.
     #
     # @!attribute [rw] count
     #   @return [Integer]
@@ -2731,7 +2754,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about an AWS Identity and Access Management (IAM)
+    # user who performed an action on an affected resource.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -2799,23 +2823,29 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides information about the IP address of the device that an entity
+    # used to perform an action on an affected resource.
+    #
     # @!attribute [rw] ip_address_v4
     #   @return [String]
     #
     # @!attribute [rw] ip_city
-    #   Reserved for future use.
+    #   Provides information about the city that an IP address originated
+    #   from.
     #   @return [Types::IpCity]
     #
     # @!attribute [rw] ip_country
-    #   Reserved for future use.
+    #   Provides information about the country that an IP address originated
+    #   from.
     #   @return [Types::IpCountry]
     #
     # @!attribute [rw] ip_geo_location
-    #   Reserved for future use.
+    #   Provides geographic coordinates that indicate where a specified IP
+    #   address originated from.
     #   @return [Types::IpGeoLocation]
     #
     # @!attribute [rw] ip_owner
-    #   Reserved for future use.
+    #   Provides information about the registered owner of an IP address.
     #   @return [Types::IpOwner]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/IpAddressDetails AWS API Documentation
@@ -2830,7 +2860,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about the city that an IP address originated
+    # from.
     #
     # @!attribute [rw] name
     #   @return [String]
@@ -2843,7 +2874,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about the country that an IP address originated
+    # from.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -2860,7 +2892,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides geographic coordinates that indicate where a specified IP
+    # address originated from.
     #
     # @!attribute [rw] lat
     #   @return [Float]
@@ -2877,7 +2910,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about the registered owner of an IP address.
     #
     # @!attribute [rw] asn
     #   @return [String]
@@ -2919,14 +2952,18 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] daily_schedule
+    #   Specifies that a classification job runs once a day, every day. This
+    #   is an empty object.
     #   @return [Types::DailySchedule]
     #
     # @!attribute [rw] monthly_schedule
-    #   Run the job once a month, on a specific day of the month. This value
-    #   can be an integer from 1 through 30.
+    #   Specifies a monthly recurrence pattern for running a classification
+    #   job.
     #   @return [Types::MonthlySchedule]
     #
     # @!attribute [rw] weekly_schedule
+    #   Specifies a weekly recurrence pattern for running a classification
+    #   job.
     #   @return [Types::WeeklySchedule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobScheduleFrequency AWS API Documentation
@@ -2939,8 +2976,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies one or more conditions that determine which objects a
-    # classification job analyzes.
+    # Specifies a property- or tag-based condition that defines criteria for
+    # including or excluding objects from a classification job.
     #
     # @note When making an API call, you may pass JobScopeTerm
     #   data as a hash:
@@ -2983,7 +3020,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Specifies one or more property- and tag-based conditions that define
+    # criteria for including or excluding objects from a classification job.
     #
     # @note When making an API call, you may pass JobScopingBlock
     #   data as a hash:
@@ -3035,7 +3073,7 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Valid values are:
+    #   The current status of a classification job. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] job_type
@@ -3620,8 +3658,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Run the job once a month, on a specific day of the month. This value
-    # can be an integer from 1 through 30.
+    # Specifies a monthly recurrence pattern for running a classification
+    # job.
     #
     # @note When making an API call, you may pass MonthlySchedule
     #   data as a hash:
@@ -3641,6 +3679,10 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides information about the number of objects that are in an S3
+    # bucket and use certain types of server-side encryption, use
+    # client-side encryption, or aren't encrypted.
+    #
     # @!attribute [rw] customer_managed
     #   @return [Integer]
     #
@@ -3664,7 +3706,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides detailed information about a policy finding.
+    # Provides the details of a policy finding.
     #
     # @!attribute [rw] action
     #   Provides information about an action that occurred for a resource
@@ -3817,7 +3859,9 @@ module Aws::Macie2
     #   @return [Types::BucketPublicAccess]
     #
     # @!attribute [rw] tags
-    #   Reserved for future use.
+    #   Provides information about the tags that are associated with an S3
+    #   bucket or object. Each tag consists of a required tag key and an
+    #   associated tag value.
     #   @return [Array<Types::KeyValuePair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3Bucket AWS API Documentation
@@ -3973,6 +4017,9 @@ module Aws::Macie2
     #   @return [Array<Types::S3BucketDefinitionForJob>]
     #
     # @!attribute [rw] scoping
+    #   Specifies one or more property- and tag-based conditions that refine
+    #   the scope of a classification job. These conditions define criteria
+    #   that determine which objects a job analyzes.
     #   @return [Types::Scoping]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3JobDefinition AWS API Documentation
@@ -4016,11 +4063,13 @@ module Aws::Macie2
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
-    #   The storage class of the S3 bucket or object. Valid values are:
+    #   The storage class of the S3 bucket or object. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Reserved for future use.
+    #   Provides information about the tags that are associated with an S3
+    #   bucket or object. Each tag consists of a required tag key and an
+    #   associated tag value.
     #   @return [Array<Types::KeyValuePair>]
     #
     # @!attribute [rw] version_id
@@ -4045,6 +4094,10 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies one or more property- and tag-based conditions that refine
+    # the scope of a classification job. These conditions define criteria
+    # that determine which objects a job analyzes.
+    #
     # @note When making an API call, you may pass Scoping
     #   data as a hash:
     #
@@ -4096,11 +4149,15 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] excludes
-    #   Reserved for future use.
+    #   Specifies one or more property- and tag-based conditions that define
+    #   criteria for including or excluding objects from a classification
+    #   job.
     #   @return [Types::JobScopingBlock]
     #
     # @!attribute [rw] includes
-    #   Reserved for future use.
+    #   Specifies one or more property- and tag-based conditions that define
+    #   criteria for including or excluding objects from a classification
+    #   job.
     #   @return [Types::JobScopingBlock]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Scoping AWS API Documentation
@@ -4117,11 +4174,14 @@ module Aws::Macie2
     #
     # @!attribute [rw] category
     #   The category of sensitive data that was detected and produced the
-    #   finding.
+    #   finding. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] detections
-    #   Reserved for future use.
+    #   Provides information about sensitive data that was detected by
+    #   managed data identifiers and produced a sensitive data finding, and
+    #   the number of occurrences of each type of sensitive data that was
+    #   detected.
     #   @return [Array<Types::DefaultDetection>]
     #
     # @!attribute [rw] total_count
@@ -4141,8 +4201,8 @@ module Aws::Macie2
     # S3 bucket or object.
     #
     # @!attribute [rw] encryption_type
-    #   The server-side encryption algorithm that's used when storing the
-    #   S3 bucket or object. Valid values are:
+    #   The type of server-side encryption that's used to encrypt objects
+    #   in the S3 bucket. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
@@ -4266,8 +4326,8 @@ module Aws::Macie2
     # value.
     #
     # @!attribute [rw] description
-    #   The textual representation of the finding's severity. Valid values
-    #   are:
+    #   The textual representation of the finding's severity. Possible
+    #   values are:
     #   @return [String]
     #
     # @!attribute [rw] score
@@ -4601,7 +4661,7 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Valid values are:
+    #   The current status of a classification job. Possible values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationJobRequest AWS API Documentation
@@ -4838,20 +4898,26 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies criteria for filtering the results of a query for account
+    # Specifies a condition for filtering the results of a query for account
     # quotas and usage data.
     #
     # @note When making an API call, you may pass UsageStatisticsFilter
     #   data as a hash:
     #
     #       {
-    #         key: "accountId", # accepts accountId
+    #         comparator: "GT", # accepts GT, GTE, LT, LTE, EQ, NE, CONTAINS
+    #         key: "accountId", # accepts accountId, serviceLimit, freeTrialStartDate, total
     #         values: ["__string"],
     #       }
     #
+    # @!attribute [rw] comparator
+    #   The operator to use in a condition that filters the results of a
+    #   query for account quotas and usage data. Valid values are:
+    #   @return [String]
+    #
     # @!attribute [rw] key
-    #   The field to use to filter the results of a query for account quotas
-    #   and usage data.
+    #   The field to use in a condition that filters the results of a query
+    #   for account quotas and usage data. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -4860,6 +4926,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageStatisticsFilter AWS API Documentation
     #
     class UsageStatisticsFilter < Struct.new(
+      :comparator,
       :key,
       :values)
       SENSITIVE = []
@@ -4873,13 +4940,13 @@ module Aws::Macie2
     #   data as a hash:
     #
     #       {
-    #         key: "accountId", # accepts accountId, total
+    #         key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #         order_by: "ASC", # accepts ASC, DESC
     #       }
     #
     # @!attribute [rw] key
     #   The field to use to sort the results of a query for account quotas
-    #   and usage data.
+    #   and usage data. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -4919,32 +4986,48 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides information about the type and other characteristics of an
+    # entity that performed an action on an affected resource.
+    #
     # @!attribute [rw] assumed_role
-    #   Reserved for future use.
+    #   Provides information about an identity that performed an action on
+    #   an affected resource by using temporary security credentials. The
+    #   credentials were obtained using the AssumeRole operation of the AWS
+    #   Security Token Service (AWS STS) API.
     #   @return [Types::AssumedRole]
     #
     # @!attribute [rw] aws_account
-    #   Reserved for future use.
+    #   Provides information about an AWS account and entity that performed
+    #   an action on an affected resource. The action was performed using
+    #   the credentials for an AWS account other than your own account.
     #   @return [Types::AwsAccount]
     #
     # @!attribute [rw] aws_service
-    #   Reserved for future use.
+    #   Provides information about an AWS service that performed an action
+    #   on an affected resource.
     #   @return [Types::AwsService]
     #
     # @!attribute [rw] federated_user
-    #   Reserved for future use.
+    #   Provides information about an identity that performed an action on
+    #   an affected resource by using temporary security credentials. The
+    #   credentials were obtained using the GetFederationToken operation of
+    #   the AWS Security Token Service (AWS STS) API.
     #   @return [Types::FederatedUser]
     #
     # @!attribute [rw] iam_user
-    #   Reserved for future use.
+    #   Provides information about an AWS Identity and Access Management
+    #   (IAM) user who performed an action on an affected resource.
     #   @return [Types::IamUser]
     #
     # @!attribute [rw] root
-    #   Reserved for future use.
+    #   Provides information about an AWS account and entity that performed
+    #   an action on an affected resource. The action was performed using
+    #   the credentials for your AWS account.
     #   @return [Types::UserIdentityRoot]
     #
     # @!attribute [rw] type
-    #   Reserved for future use.
+    #   The type of entity that performed the action on the affected
+    #   resource. Possible values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UserIdentity AWS API Documentation
@@ -4961,7 +5044,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Provides information about an AWS account and entity that performed an
+    # action on an affected resource. The action was performed using the
+    # credentials for your AWS account.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -4996,6 +5081,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies a weekly recurrence pattern for running a classification
+    # job.
+    #
     # @note When making an API call, you may pass WeeklySchedule
     #   data as a hash:
     #

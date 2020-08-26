@@ -85,13 +85,28 @@ module Aws::Kafka
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::Kafka
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -450,7 +465,7 @@ module Aws::Kafka
     #   The name of the configuration. Configuration names are strings that
     #   match the regex "^\[0-9A-Za-z-\]+$".
     #
-    # @option params [required, String, IO] :server_properties
+    # @option params [required, String, StringIO, File] :server_properties
     #
     # @return [Types::CreateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -458,6 +473,7 @@ module Aws::Kafka
     #   * {Types::CreateConfigurationResponse#creation_time #creation_time} => Time
     #   * {Types::CreateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
     #   * {Types::CreateConfigurationResponse#name #name} => String
+    #   * {Types::CreateConfigurationResponse#state #state} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -476,6 +492,7 @@ module Aws::Kafka
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfiguration AWS API Documentation
     #
@@ -516,6 +533,37 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def delete_cluster(params = {}, options = {})
       req = build_request(:delete_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified MSK configuration. The configuration must be in
+    # the ACTIVE or DELETE\_FAILED state.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #
+    # @return [Types::DeleteConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConfigurationResponse#arn #arn} => String
+    #   * {Types::DeleteConfigurationResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configuration({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteConfiguration AWS API Documentation
+    #
+    # @overload delete_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_configuration(params = {}, options = {})
+      req = build_request(:delete_configuration, params)
       req.send_request(options)
     end
 
@@ -665,6 +713,7 @@ module Aws::Kafka
     #   * {Types::DescribeConfigurationResponse#kafka_versions #kafka_versions} => Array&lt;String&gt;
     #   * {Types::DescribeConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
     #   * {Types::DescribeConfigurationResponse#name #name} => String
+    #   * {Types::DescribeConfigurationResponse#state #state} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -683,6 +732,7 @@ module Aws::Kafka
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfiguration AWS API Documentation
     #
@@ -1019,6 +1069,7 @@ module Aws::Kafka
     #   resp.configurations[0].latest_revision.description #=> String
     #   resp.configurations[0].latest_revision.revision #=> Integer
     #   resp.configurations[0].name #=> String
+    #   resp.configurations[0].state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurations AWS API Documentation
@@ -1147,6 +1198,39 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Executes a reboot on a broker.
+    #
+    # @option params [required, Array<String>] :broker_ids
+    #   The list of broker ids to be rebooted.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @return [Types::RebootBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RebootBrokerResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::RebootBrokerResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_broker({
+    #     broker_ids: ["__string"], # required
+    #     cluster_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/RebootBroker AWS API Documentation
+    #
+    # @overload reboot_broker(params = {})
+    # @param [Hash] params ({})
+    def reboot_broker(params = {}, options = {})
+      req = build_request(:reboot_broker, params)
       req.send_request(options)
     end
 
@@ -1289,6 +1373,46 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def update_broker_storage(params = {}, options = {})
       req = build_request(:update_broker_storage, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing MSK configuration. The configuration must be in
+    # the Active state.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #
+    # @option params [String] :description
+    #   The description of the configuration.
+    #
+    # @option params [required, String, StringIO, File] :server_properties
+    #
+    # @return [Types::UpdateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConfigurationResponse#arn #arn} => String
+    #   * {Types::UpdateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configuration({
+    #     arn: "__string", # required
+    #     description: "__string",
+    #     server_properties: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.latest_revision.creation_time #=> Time
+    #   resp.latest_revision.description #=> String
+    #   resp.latest_revision.revision #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateConfiguration AWS API Documentation
+    #
+    # @overload update_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_configuration(params = {}, options = {})
+      req = build_request(:update_configuration, params)
       req.send_request(options)
     end
 
@@ -1465,7 +1589,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

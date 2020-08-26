@@ -39,7 +39,29 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @!attribute [rw] shard_id
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_shards
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hash_key_range
+    #   The range of possible hash key values for the shard, which is a set
+    #   of ordered contiguous positive integers.
+    #   @return [Types::HashKeyRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ChildShard AWS API Documentation
+    #
+    class ChildShard < Struct.new(
+      :shard_id,
+      :parent_shards,
+      :hash_key_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the details of the consumer you registered.
+    # This type of object is returned by RegisterStreamConsumer.
     #
     # @!attribute [rw] consumer_name
     #   The name of the consumer is something you choose when you register
@@ -75,7 +97,8 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # An object that represents the details of a registered consumer.
+    # An object that represents the details of a registered consumer. This
+    # type of object is returned by DescribeStreamConsumer.
     #
     # @!attribute [rw] consumer_name
     #   The name of the consumer is something you choose when you register
@@ -138,8 +161,6 @@ module Aws::Kinesis
     #   The number of shards that the stream will use. The throughput of the
     #   stream is a function of the number of shards; more shards are
     #   required for greater provisioned throughput.
-    #
-    #   DefaultShardLimit;
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput AWS API Documentation
@@ -448,7 +469,7 @@ module Aws::Kinesis
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoringInput AWS API Documentation
@@ -502,7 +523,7 @@ module Aws::Kinesis
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoringInput AWS API Documentation
@@ -544,7 +565,7 @@ module Aws::Kinesis
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnhancedMetrics AWS API Documentation
@@ -628,7 +649,8 @@ module Aws::Kinesis
     # @!attribute [rw] limit
     #   The maximum number of records to return. Specify a value of up to
     #   10,000. If you specify a value that is greater than 10,000,
-    #   GetRecords throws `InvalidArgumentException`.
+    #   GetRecords throws `InvalidArgumentException`. The default value is
+    #   10,000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsInput AWS API Documentation
@@ -659,12 +681,16 @@ module Aws::Kinesis
     #   and there are no new records to process at this moment.
     #   @return [Integer]
     #
+    # @!attribute [rw] child_shards
+    #   @return [Array<Types::ChildShard>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsOutput AWS API Documentation
     #
     class GetRecordsOutput < Struct.new(
       :records,
       :next_shard_iterator,
-      :millis_behind_latest)
+      :millis_behind_latest,
+      :child_shards)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -808,6 +834,9 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The processing of the request failed because of an unknown error,
+    # exception, or failure.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -874,7 +903,7 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @!attribute [rw] message
     #   A message that provides information about the error.
@@ -926,7 +955,7 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second
     #
     # @!attribute [rw] message
     #   A message that provides information about the error.
@@ -966,6 +995,11 @@ module Aws::Kinesis
     #         exclusive_start_shard_id: "ShardId",
     #         max_results: 1,
     #         stream_creation_timestamp: Time.now,
+    #         shard_filter: {
+    #           type: "AFTER_SHARD_ID", # required, accepts AFTER_SHARD_ID, AT_TRIM_HORIZON, FROM_TRIM_HORIZON, AT_LATEST, AT_TIMESTAMP, FROM_TIMESTAMP
+    #           shard_id: "ShardId",
+    #           timestamp: Time.now,
+    #         },
     #       }
     #
     # @!attribute [rw] stream_name
@@ -1015,7 +1049,7 @@ module Aws::Kinesis
     # @!attribute [rw] max_results
     #   The maximum number of shards to return in a single call to
     #   `ListShards`. The minimum value you can specify for this parameter
-    #   is 1, and the maximum is 1,000, which is also the default.
+    #   is 1, and the maximum is 10,000, which is also the default.
     #
     #   When the number of shards to be listed is greater than the value of
     #   `MaxResults`, the response contains a `NextToken` value that you can
@@ -1034,6 +1068,9 @@ module Aws::Kinesis
     #   parameter.
     #   @return [Time]
     #
+    # @!attribute [rw] shard_filter
+    #   @return [Types::ShardFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListShardsInput AWS API Documentation
     #
     class ListShardsInput < Struct.new(
@@ -1041,7 +1078,8 @@ module Aws::Kinesis
       :next_token,
       :exclusive_start_shard_id,
       :max_results,
-      :stream_creation_timestamp)
+      :stream_creation_timestamp,
+      :shard_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1337,8 +1375,8 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
-    # [2]: http://docs.aws.amazon.com/general/latest/gr/api-retries.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/api-retries.html
     #
     # @!attribute [rw] message
     #   A message that provides information about the error.
@@ -1373,7 +1411,7 @@ module Aws::Kinesis
     #   The data blob to put into the record, which is base64-encoded when
     #   the blob is serialized. When the data blob (the payload before
     #   base64-encoding) is added to the partition key size, the total size
-    #   must not exceed the maximum record size (1 MB).
+    #   must not exceed the maximum record size (1 MiB).
     #   @return [String]
     #
     # @!attribute [rw] partition_key
@@ -1530,7 +1568,7 @@ module Aws::Kinesis
     #   The data blob to put into the record, which is base64-encoded when
     #   the blob is serialized. When the data blob (the payload before
     #   base64-encoding) is added to the partition key size, the total size
-    #   must not exceed the maximum record size (1 MB).
+    #   must not exceed the maximum record size (1 MiB).
     #   @return [String]
     #
     # @!attribute [rw] explicit_hash_key
@@ -1615,7 +1653,7 @@ module Aws::Kinesis
     #   Kinesis Data Streams, which does not inspect, interpret, or change
     #   the data in the blob in any way. When the data blob (the payload
     #   before base64-encoding) is added to the partition key size, the
-    #   total size must not exceed the maximum record size (1 MB).
+    #   total size must not exceed the maximum record size (1 MiB).
     #   @return [String]
     #
     # @!attribute [rw] partition_key
@@ -1806,6 +1844,34 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ShardFilter
+    #   data as a hash:
+    #
+    #       {
+    #         type: "AFTER_SHARD_ID", # required, accepts AFTER_SHARD_ID, AT_TRIM_HORIZON, FROM_TRIM_HORIZON, AT_LATEST, AT_TIMESTAMP, FROM_TIMESTAMP
+    #         shard_id: "ShardId",
+    #         timestamp: Time.now,
+    #       }
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] shard_id
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ShardFilter AWS API Documentation
+    #
+    class ShardFilter < Struct.new(
+      :type,
+      :shard_id,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input for `SplitShard`.
     #
     # @note When making an API call, you may pass SplitShardInput
@@ -1904,12 +1970,41 @@ module Aws::Kinesis
     #       }
     #
     # @!attribute [rw] type
+    #   You can set the starting position to one of the following values:
+    #
+    #   `AT_SEQUENCE_NUMBER`\: Start streaming from the position denoted by
+    #   the sequence number specified in the `SequenceNumber` field.
+    #
+    #   `AFTER_SEQUENCE_NUMBER`\: Start streaming right after the position
+    #   denoted by the sequence number specified in the `SequenceNumber`
+    #   field.
+    #
+    #   `AT_TIMESTAMP`\: Start streaming from the position denoted by the
+    #   time stamp specified in the `Timestamp` field.
+    #
+    #   `TRIM_HORIZON`\: Start streaming at the last untrimmed record in the
+    #   shard, which is the oldest data record in the shard.
+    #
+    #   `LATEST`\: Start streaming just after the most recent record in the
+    #   shard, so that you always read the most recent data in the shard.
     #   @return [String]
     #
     # @!attribute [rw] sequence_number
+    #   The sequence number of the data record in the shard from which to
+    #   start streaming. To specify a sequence number, set
+    #   `StartingPosition` to `AT_SEQUENCE_NUMBER` or
+    #   `AFTER_SEQUENCE_NUMBER`.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
+    #   The time stamp of the data record from which to start reading. To
+    #   specify a time stamp, set `StartingPosition` to `Type AT_TIMESTAMP`.
+    #   A time stamp is the Unix epoch date with precision in milliseconds.
+    #   For example, `2016-04-04T19:58:46.480-00:00` or `1459799926.480`. If
+    #   a record with this exact time stamp does not exist, records will be
+    #   streamed from the next (later) record. If the time stamp is older
+    #   than the current trim horizon, records will be streamed from the
+    #   oldest untrimmed data record (`TRIM_HORIZON`).
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartingPosition AWS API Documentation
@@ -2010,7 +2105,8 @@ module Aws::Kinesis
     #   @return [Boolean]
     #
     # @!attribute [rw] retention_period_hours
-    #   The current retention period, in hours.
+    #   The current retention period, in hours. Minimum value of 24. Maximum
+    #   value of 168.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_creation_timestamp
@@ -2166,14 +2262,17 @@ module Aws::Kinesis
     end
 
     # After you call SubscribeToShard, Kinesis Data Streams sends events of
-    # this type to your consumer.
+    # this type over an HTTP/2 connection to your consumer.
     #
     # @!attribute [rw] records
     #   @return [Array<Types::Record>]
     #
     # @!attribute [rw] continuation_sequence_number
-    #   Use this as `StartingSequenceNumber` in the next call to
-    #   SubscribeToShard.
+    #   Use this as `SequenceNumber` in the next call to SubscribeToShard,
+    #   with `StartingPosition` set to `AT_SEQUENCE_NUMBER` or
+    #   `AFTER_SEQUENCE_NUMBER`. Use `ContinuationSequenceNumber` for
+    #   checkpointing because it captures your shard progress even when no
+    #   data is written to the shard.
     #   @return [String]
     #
     # @!attribute [rw] millis_behind_latest
@@ -2183,12 +2282,16 @@ module Aws::Kinesis
     #   there are no new records to process at this moment.
     #   @return [Integer]
     #
+    # @!attribute [rw] child_shards
+    #   @return [Array<Types::ChildShard>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardEvent AWS API Documentation
     #
     class SubscribeToShardEvent < Struct.new(
       :records,
       :continuation_sequence_number,
       :millis_behind_latest,
+      :child_shards,
       :event_type)
       SENSITIVE = []
       include Aws::Structure
@@ -2280,7 +2383,20 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] target_shard_count
-    #   The new number of shards.
+    #   The new number of shards. This value has the following default
+    #   limits. By default, you cannot do the following:
+    #
+    #   * Set this value to more than double your current shard count for a
+    #     stream.
+    #
+    #   * Set this value below half your current shard count for a stream.
+    #
+    #   * Set this value to more than 500 shards in a stream (the default
+    #     limit for shard count per stream is 500 per account per region),
+    #     unless you request a limit increase.
+    #
+    #   * Scale a stream with more than 500 shards down unless you set this
+    #     value to less than 500 shards.
     #   @return [Integer]
     #
     # @!attribute [rw] scaling_type
@@ -2319,6 +2435,10 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # This is a tagged union for all of the types of events an enhanced
+    # fan-out consumer can receive over HTTP/2 after a call to
+    # SubscribeToShard.
+    #
     # EventStream is an Enumerator of Events.
     #  #event_types #=> Array, returns all modeled event types in the stream
     #

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2020-07-24)
+------------------
+
+* Feature - Amazon Kendra now supports sorting query results based on document attributes. Amazon Kendra also introduced an option to enclose table and column names with double quotes for database data sources.
+
 1.8.0 (2020-06-23)
 ------------------
 

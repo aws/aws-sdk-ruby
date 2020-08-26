@@ -102,7 +102,7 @@ module AwsSdkCodeGenerator
           end
           YardOptionTag.new(
             name: Underscore.underscore(member_name),
-            ruby_type: Api.ruby_input_type(member_ref, api),
+            ruby_type: Api.ruby_input_type(member_ref, api, operation),
             required: shape.fetch('required', []).include?(member_name),
             docstring: Docstring.html_to_markdown(docstring),
             option_hash_name: 'params',

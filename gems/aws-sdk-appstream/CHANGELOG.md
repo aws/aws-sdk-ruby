@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2020-08-14)
+------------------
+
+* Feature - Adds support for the Desktop View feature
+
 1.44.0 (2020-07-02)
 ------------------
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2020-08-18)
+------------------
+
+* Feature - DataSync support for filters as input arguments to the ListTasks and ListLocations API calls.
+
+1.23.0 (2020-07-27)
+------------------
+
+* Feature - Today AWS DataSync releases support for self-managed object storage Locations and the new TransferMode Option.
+
 1.22.0 (2020-06-23)
 ------------------
 

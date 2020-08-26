@@ -171,10 +171,9 @@ module Seahorse
           #   seconds to wait when opening an HTTP session before raising a
           #   `Timeout::Error`.
           #
-          # @option options [Integer] :http_read_timeout (60) The default
-          #   number of seconds to wait for response data.  This value can
-          #   safely be set
-          #   per-request on the session yielded by {#session_for}.
+          # @option options [Float] :http_read_timeout (60) The default
+          #   number of seconds to wait for response data. This value can be
+          #   safely set per-request on the session yielded by {#session_for}.
           #
           # @option options [Float] :http_idle_timeout (5) The number of
           #   seconds a connection is allowed to sit idle before it is

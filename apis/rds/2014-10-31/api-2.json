@@ -2912,7 +2912,8 @@
         "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
         "DeletionProtection":{"shape":"BooleanOptional"},
         "Domain":{"shape":"String"},
-        "DomainIAMRoleName":{"shape":"String"}
+        "DomainIAMRoleName":{"shape":"String"},
+        "ReplicaMode":{"shape":"ReplicaMode"}
       }
     },
     "CreateDBInstanceReadReplicaResult":{
@@ -3593,7 +3594,9 @@
         "SupportsReadReplica":{"shape":"Boolean"},
         "SupportedEngineModes":{"shape":"EngineModeList"},
         "SupportedFeatureNames":{"shape":"FeatureNameList"},
-        "Status":{"shape":"String"}
+        "Status":{"shape":"String"},
+        "SupportsParallelQuery":{"shape":"Boolean"},
+        "SupportsGlobalDatabases":{"shape":"Boolean"}
       }
     },
     "DBEngineVersionList":{
@@ -3638,6 +3641,7 @@
         "ReadReplicaSourceDBInstanceIdentifier":{"shape":"String"},
         "ReadReplicaDBInstanceIdentifiers":{"shape":"ReadReplicaDBInstanceIdentifierList"},
         "ReadReplicaDBClusterIdentifiers":{"shape":"ReadReplicaDBClusterIdentifierList"},
+        "ReplicaMode":{"shape":"ReplicaMode"},
         "LicenseModel":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupMemberships":{"shape":"OptionGroupMembershipList"},
@@ -5997,7 +6001,8 @@
         "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
         "DeletionProtection":{"shape":"BooleanOptional"},
         "MaxAllocatedStorage":{"shape":"IntegerOptional"},
-        "CertificateRotationRestart":{"shape":"BooleanOptional"}
+        "CertificateRotationRestart":{"shape":"BooleanOptional"},
+        "ReplicaMode":{"shape":"ReplicaMode"}
       }
     },
     "ModifyDBInstanceResult":{
@@ -6413,7 +6418,8 @@
         "SupportedEngineModes":{"shape":"EngineModeList"},
         "SupportsStorageAutoscaling":{"shape":"BooleanOptional"},
         "SupportsKerberosAuthentication":{"shape":"BooleanOptional"},
-        "OutpostCapable":{"shape":"Boolean"}
+        "OutpostCapable":{"shape":"Boolean"},
+        "SupportsGlobalDatabases":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -6749,6 +6755,13 @@
         "ResourceName":{"shape":"String"},
         "TagKeys":{"shape":"KeyList"}
       }
+    },
+    "ReplicaMode":{
+      "type":"string",
+      "enum":[
+        "open-read-only",
+        "mounted"
+      ]
     },
     "ReservedDBInstance":{
       "type":"structure",

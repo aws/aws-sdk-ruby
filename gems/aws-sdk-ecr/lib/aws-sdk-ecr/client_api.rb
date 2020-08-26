@@ -48,6 +48,8 @@ module Aws::ECR
     DescribeRepositoriesRequest = Shapes::StructureShape.new(name: 'DescribeRepositoriesRequest')
     DescribeRepositoriesResponse = Shapes::StructureShape.new(name: 'DescribeRepositoriesResponse')
     EmptyUploadException = Shapes::StructureShape.new(name: 'EmptyUploadException')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EvaluationTimestamp = Shapes::TimestampShape.new(name: 'EvaluationTimestamp')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExpirationTimestamp = Shapes::TimestampShape.new(name: 'ExpirationTimestamp')
@@ -101,6 +103,9 @@ module Aws::ECR
     InvalidLayerPartException = Shapes::StructureShape.new(name: 'InvalidLayerPartException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidTagParameterException = Shapes::StructureShape.new(name: 'InvalidTagParameterException')
+    KmsError = Shapes::StringShape.new(name: 'KmsError')
+    KmsException = Shapes::StructureShape.new(name: 'KmsException')
+    KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     Layer = Shapes::StructureShape.new(name: 'Layer')
     LayerAlreadyExistsException = Shapes::StructureShape.new(name: 'LayerAlreadyExistsException')
     LayerAvailability = Shapes::StringShape.new(name: 'LayerAvailability')
@@ -251,6 +256,7 @@ module Aws::ECR
     CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
     CreateRepositoryRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    CreateRepositoryRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateRepositoryRequest.struct_class = Types::CreateRepositoryRequest
 
     CreateRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
@@ -326,6 +332,10 @@ module Aws::ECR
     EmptyUploadException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     EmptyUploadException.struct_class = Types::EmptyUploadException
 
+    EncryptionConfiguration.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
     FindingSeverityCounts.key = Shapes::ShapeRef.new(shape: FindingSeverity)
     FindingSeverityCounts.value = Shapes::ShapeRef.new(shape: SeverityCount)
 
@@ -400,6 +410,8 @@ module Aws::ECR
     ImageDetail.add_member(:image_pushed_at, Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
     ImageDetail.add_member(:image_scan_status, Shapes::ShapeRef.new(shape: ImageScanStatus, location_name: "imageScanStatus"))
     ImageDetail.add_member(:image_scan_findings_summary, Shapes::ShapeRef.new(shape: ImageScanFindingsSummary, location_name: "imageScanFindingsSummary"))
+    ImageDetail.add_member(:image_manifest_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
+    ImageDetail.add_member(:artifact_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "artifactMediaType"))
     ImageDetail.struct_class = Types::ImageDetail
 
     ImageDetailList.member = Shapes::ShapeRef.new(shape: ImageDetail)
@@ -480,6 +492,10 @@ module Aws::ECR
 
     InvalidTagParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidTagParameterException.struct_class = Types::InvalidTagParameterException
+
+    KmsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsException.add_member(:kms_error, Shapes::ShapeRef.new(shape: KmsError, location_name: "kmsError"))
+    KmsException.struct_class = Types::KmsException
 
     Layer.add_member(:layer_digest, Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
     Layer.add_member(:layer_availability, Shapes::ShapeRef.new(shape: LayerAvailability, location_name: "layerAvailability"))
@@ -613,6 +629,7 @@ module Aws::ECR
     Repository.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
     Repository.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
     Repository.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    Repository.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     Repository.struct_class = Types::Repository
 
     RepositoryAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -780,6 +797,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LayerPartTooSmallException)
         o.errors << Shapes::ShapeRef.new(shape: LayerAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: EmptyUploadException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
       end)
 
       api.add_operation(:create_repository, Seahorse::Model::Operation.new.tap do |o|
@@ -794,6 +812,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
       end)
 
       api.add_operation(:delete_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -818,6 +837,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotEmptyException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
       end)
 
       api.add_operation(:delete_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -960,6 +980,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
       end)
 
       api.add_operation(:list_images, Seahorse::Model::Operation.new.tap do |o|
@@ -1005,6 +1026,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ImageTagAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ImageDigestDoesNotMatchException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
       end)
 
       api.add_operation(:put_image_scanning_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1116,6 +1138,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UploadNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
       end)
     end
 

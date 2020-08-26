@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2020-08-07)
+------------------
+
+* Feature - In this release, AWS Server Migration Service (SMS) has added new features: 1. APIs to work with application and instance level validation 2. Import application catalog from AWS Application Discovery Service 3. For an application you can start on-demand replication
+
 1.23.0 (2020-07-02)
 ------------------
 

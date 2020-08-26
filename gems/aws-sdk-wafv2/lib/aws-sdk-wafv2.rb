@@ -44,9 +44,9 @@ require_relative 'aws-sdk-wafv2/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::WAFV2
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.11.0'
 
 end

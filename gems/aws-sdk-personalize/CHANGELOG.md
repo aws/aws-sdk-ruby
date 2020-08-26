@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2020-08-06)
+------------------
+
+* Feature - Add 'exploration' functionality
+
 1.15.0 (2020-06-23)
 ------------------
 

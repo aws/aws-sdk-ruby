@@ -85,13 +85,28 @@ module Aws::WAFV2
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::WAFV2
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -2112,6 +2127,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields #=> Array
     #   resp.logging_configuration.redacted_fields[0].single_header.name #=> String
     #   resp.logging_configuration.redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetLoggingConfiguration AWS API Documentation
     #
@@ -3025,6 +3041,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].redacted_fields #=> Array
     #   resp.logging_configurations[0].redacted_fields[0].single_header.name #=> String
     #   resp.logging_configurations[0].redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configurations[0].managed_by_firewall_manager #=> Boolean
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurations AWS API Documentation
@@ -3442,6 +3459,7 @@ module Aws::WAFV2
     #           },
     #         },
     #       ],
+    #       managed_by_firewall_manager: false,
     #     },
     #   })
     #
@@ -3453,6 +3471,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields #=> Array
     #   resp.logging_configuration.redacted_fields[0].single_header.name #=> String
     #   resp.logging_configuration.redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutLoggingConfiguration AWS API Documentation
     #
@@ -4479,7 +4498,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

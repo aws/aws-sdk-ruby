@@ -25,6 +25,11 @@ module Aws
 
         let(:client) { Encryption::Client.new(options) }
 
+        before do
+          # suppress deprecation warning
+          allow_any_instance_of(Client).to receive(:warn)
+        end
+
         describe 'configuration' do
           it 'can be used with a Resource client' do
             resource = S3::Resource.new(client: client)
@@ -72,7 +77,7 @@ module Aws
             end.not_to raise_error
           end
 
-          it 'consturcts a key provider from a master key' do
+          it 'constructs a key provider from a master key' do
             options[:encryption_key] = master_key
             expect(client.key_provider.key_for('')).to eq(master_key)
             expect(client.key_provider.key_for('{}')).to eq(master_key)
@@ -228,10 +233,11 @@ module Aws
               expect(req2).to have_been_made.once
             end
 
-            it 'moves the un-encrypted md5 to a new header' do
+            it 'does not set the un-encrypted md5 header' do
               stub_request(
                 :put, 'https://bucket.s3.us-west-1.amazonaws.com/key'
               )
+              expect_any_instance_of(EncryptHandler).to receive(:warn)
               client.put_object(
                 bucket: 'bucket', key: 'key', body: 'secret', content_md5: 'MD5'
               )
@@ -239,10 +245,7 @@ module Aws
                 a_request(
                   :put, 'https://bucket.s3.us-west-1.amazonaws.com/key'
                 ).with(
-                  body: encrypted_body,
-                  headers: {
-                    'X-Amz-Meta-X-Amz-Unencrypted-Content-Md5' => 'MD5'
-                  }
+                  body: encrypted_body
                 )
               ).to have_been_made.once
             end
@@ -629,11 +632,8 @@ module Aws
             "\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
           end
 
-          if !ENV['TRAVIS'] && RUBY_VERSION > '1.9.3'
+          if !ENV['TRAVIS'] && RUBY_VERSION > '1.9.3' && OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
             it 'supports decryption via KMS w/ GCM' do
-              unless OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
-                pending('aes-256-gcm not supported')
-              end
               kms_client.stub_responses(
                 :decrypt, plaintext: plaintext_object_key
               )

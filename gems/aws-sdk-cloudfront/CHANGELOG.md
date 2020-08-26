@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.1 (2020-08-19)
+------------------
+
+* Issue - Use Aws::Json for parsing instead of JSON
+
+1.36.0 (2020-07-30)
+------------------
+
+* Feature - Documentation updates for CloudFront
+
+1.35.0 (2020-07-20)
+------------------
+
+* Feature - CloudFront adds support for cache policies and origin request policies. With these new policies, you can now more granularly control the query string, header, and cookie values that are included in the cache key and in requests that CloudFront sends to your origin.
+
 1.34.0 (2020-07-07)
 ------------------
 

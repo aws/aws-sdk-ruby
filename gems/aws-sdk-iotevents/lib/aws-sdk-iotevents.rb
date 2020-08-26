@@ -44,9 +44,9 @@ require_relative 'aws-sdk-iotevents/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::IoTEvents
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end

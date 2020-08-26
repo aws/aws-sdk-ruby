@@ -29,6 +29,9 @@ module Aws
       # @param [String, Pathname, File, Tempfile] source The file to upload.
       # @option options [required, String] :bucket The bucket to upload to.
       # @option options [required, String] :key The key for the object.
+      # @option options [Proc] :progress_callback
+      #   A Proc that will be called when each chunk of the upload is sent.
+      #   It will be invoked with [bytes_read], [total_sizes]
       # @return [void]
       def upload(source, options = {})
         if File.size(source) >= multipart_threshold
@@ -49,11 +52,19 @@ module Aws
       end
 
       def put_object(source, options)
+        if (callback = options.delete(:progress_callback))
+          options[:on_chunk_sent] = single_part_progress(callback)
+        end
         open_file(source) do |file|
           @client.put_object(options.merge(body: file))
         end
       end
 
+      def single_part_progress(progress_callback)
+        proc do |_chunk, bytes_read, total_size|
+          progress_callback.call([bytes_read], [total_size])
+        end
+      end
     end
   end
 end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2020-08-19)
+------------------
+
+* Feature - Enhance SearchProvisionedProducts API to allow queries using productName and provisioningArtifactName. Added lastProvisioningRecordId and lastSuccessfulRecordId to Read ProvisionedProduct APIs
+
+1.44.0 (2020-07-30)
+------------------
+
+* Feature - This release adds support for ProvisionProduct, UpdateProvisionedProduct & DescribeProvisioningParameters by product name, provisioning artifact name and path name. In addition DescribeProvisioningParameters now returns a list of provisioning artifact outputs.
+
 1.43.0 (2020-07-02)
 ------------------
 

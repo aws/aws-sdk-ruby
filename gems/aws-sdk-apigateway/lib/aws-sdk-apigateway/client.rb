@@ -87,13 +87,28 @@ module Aws::APIGateway
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -103,10 +118,10 @@ module Aws::APIGateway
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -316,7 +331,7 @@ module Aws::APIGateway
 
     # Create an ApiKey resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -411,7 +426,7 @@ module Aws::APIGateway
 
     # Adds a new Authorizer resource to an existing RestApi resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -1541,7 +1556,7 @@ module Aws::APIGateway
 
     # Deletes an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -2300,7 +2315,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -2357,7 +2372,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizers resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -4519,7 +4534,7 @@ module Aws::APIGateway
 
     # Import API keys from an external source, such as a CSV-formatted file.
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   The payload of the POST request to import API keys. For the payload
     #   format, see [API Key File Format][1].
     #
@@ -4575,7 +4590,7 @@ module Aws::APIGateway
     #   importation (`true`) or not (`false`) when a warning is encountered.
     #   The default value is `false`.
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   \[Required\] Raw byte array representing the to-be-imported
     #   documentation parts. To import from an OpenAPI file, this is a JSON
     #   object.
@@ -4643,7 +4658,7 @@ module Aws::APIGateway
     #
     #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   \[Required\] The POST request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
     #   supported. The maximum size of the API definition file is 6MB.
@@ -5335,7 +5350,7 @@ module Aws::APIGateway
     #   command of `aws apigateway import-rest-api --parameters
     #   ignore=documentation --body 'file:///path/to/imported-api-body.json'`.
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   \[Required\] The PUT request body containing external API definitions.
     #   Currently, only OpenAPI definition JSON/YAML files are supported. The
     #   maximum size of the API definition file is 6MB.
@@ -5426,7 +5441,7 @@ module Aws::APIGateway
     # Simulate the execution of an Authorizer in your RestApi with headers,
     # parameters, and an incoming request body.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
     # Authorizer][2]
     # </div>
@@ -5730,7 +5745,7 @@ module Aws::APIGateway
 
     # Updates an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -7018,7 +7033,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

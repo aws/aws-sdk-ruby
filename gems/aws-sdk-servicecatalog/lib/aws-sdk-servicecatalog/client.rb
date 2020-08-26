@@ -85,13 +85,28 @@ module Aws::ServiceCatalog
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::ServiceCatalog
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -968,6 +983,9 @@ module Aws::ServiceCatalog
     #
     # `AWSOrganizationsAccess` must be enabled in order to create a
     # portfolio share to an organization node.
+    #
+    # You can't share a shared resource. This includes portfolios that
+    # contain a shared product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2193,6 +2211,8 @@ module Aws::ServiceCatalog
     #   resp.provisioned_product_detail.created_time #=> Time
     #   resp.provisioned_product_detail.idempotency_token #=> String
     #   resp.provisioned_product_detail.last_record_id #=> String
+    #   resp.provisioned_product_detail.last_provisioning_record_id #=> String
+    #   resp.provisioned_product_detail.last_successful_provisioning_record_id #=> String
     #   resp.provisioned_product_detail.product_id #=> String
     #   resp.provisioned_product_detail.provisioning_artifact_id #=> String
     #   resp.cloud_watch_dashboards #=> Array
@@ -2377,16 +2397,30 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
-    # @option params [required, String] :product_id
-    #   The product identifier.
+    # @option params [String] :product_id
+    #   The product identifier. You must provide the product name or ID, but
+    #   not both.
     #
-    # @option params [required, String] :provisioning_artifact_id
-    #   The identifier of the provisioning artifact.
+    # @option params [String] :product_name
+    #   The name of the product. You must provide the name or ID, but not
+    #   both.
+    #
+    # @option params [String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact. You must provide the name
+    #   or ID, but not both.
+    #
+    # @option params [String] :provisioning_artifact_name
+    #   The name of the provisioning artifact. You must provide the name or
+    #   ID, but not both.
     #
     # @option params [String] :path_id
     #   The path identifier of the product. This value is optional if the
     #   product has a default path, and required if the product has more than
-    #   one path. To list the paths for a product, use ListLaunchPaths.
+    #   one path. To list the paths for a product, use ListLaunchPaths. You
+    #   must provide the name or ID, but not both.
+    #
+    # @option params [String] :path_name
+    #   The name of the path. You must provide the name or ID, but not both.
     #
     # @return [Types::DescribeProvisioningParametersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2395,14 +2429,18 @@ module Aws::ServiceCatalog
     #   * {Types::DescribeProvisioningParametersOutput#usage_instructions #usage_instructions} => Array&lt;Types::UsageInstruction&gt;
     #   * {Types::DescribeProvisioningParametersOutput#tag_options #tag_options} => Array&lt;Types::TagOptionSummary&gt;
     #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_preferences #provisioning_artifact_preferences} => Types::ProvisioningArtifactPreferences
+    #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_outputs #provisioning_artifact_outputs} => Array&lt;Types::ProvisioningArtifactOutput&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_provisioning_parameters({
     #     accept_language: "AcceptLanguage",
-    #     product_id: "Id", # required
-    #     provisioning_artifact_id: "Id", # required
+    #     product_id: "Id",
+    #     product_name: "ProductViewName",
+    #     provisioning_artifact_id: "Id",
+    #     provisioning_artifact_name: "ProvisioningArtifactName",
     #     path_id: "Id",
+    #     path_name: "PortfolioDisplayName",
     #   })
     #
     # @example Response structure
@@ -2429,6 +2467,9 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_preferences.stack_set_accounts[0] #=> String
     #   resp.provisioning_artifact_preferences.stack_set_regions #=> Array
     #   resp.provisioning_artifact_preferences.stack_set_regions[0] #=> String
+    #   resp.provisioning_artifact_outputs #=> Array
+    #   resp.provisioning_artifact_outputs[0].key #=> String
+    #   resp.provisioning_artifact_outputs[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters AWS API Documentation
     #
@@ -4105,16 +4146,29 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
-    # @option params [required, String] :product_id
-    #   The product identifier.
+    # @option params [String] :product_id
+    #   The product identifier. You must provide the name or ID, but not both.
     #
-    # @option params [required, String] :provisioning_artifact_id
-    #   The identifier of the provisioning artifact.
+    # @option params [String] :product_name
+    #   The name of the product. You must provide the name or ID, but not
+    #   both.
+    #
+    # @option params [String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact. You must provide the name
+    #   or ID, but not both.
+    #
+    # @option params [String] :provisioning_artifact_name
+    #   The name of the provisioning artifact. You must provide the name or
+    #   ID, but not both.
     #
     # @option params [String] :path_id
     #   The path identifier of the product. This value is optional if the
     #   product has a default path, and required if the product has more than
-    #   one path. To list the paths for a product, use ListLaunchPaths.
+    #   one path. To list the paths for a product, use ListLaunchPaths. You
+    #   must provide the name or ID, but not both.
+    #
+    # @option params [String] :path_name
+    #   The name of the path. You must provide the name or ID, but not both.
     #
     # @option params [required, String] :provisioned_product_name
     #   A user-friendly name for the provisioned product. This value must be
@@ -4151,9 +4205,12 @@ module Aws::ServiceCatalog
     #
     #   resp = client.provision_product({
     #     accept_language: "AcceptLanguage",
-    #     product_id: "Id", # required
-    #     provisioning_artifact_id: "Id", # required
+    #     product_id: "Id",
+    #     product_name: "ProductViewName",
+    #     provisioning_artifact_id: "Id",
+    #     provisioning_artifact_name: "ProvisioningArtifactName",
     #     path_id: "Id",
+    #     path_name: "PortfolioDisplayName",
     #     provisioned_product_name: "ProvisionedProductName", # required
     #     provisioning_parameters: [
     #       {
@@ -4308,6 +4365,8 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].created_time #=> Time
     #   resp.provisioned_products[0].idempotency_token #=> String
     #   resp.provisioned_products[0].last_record_id #=> String
+    #   resp.provisioned_products[0].last_provisioning_record_id #=> String
+    #   resp.provisioned_products[0].last_successful_provisioning_record_id #=> String
     #   resp.provisioned_products[0].product_id #=> String
     #   resp.provisioned_products[0].provisioning_artifact_id #=> String
     #   resp.next_page_token #=> String
@@ -4505,7 +4564,9 @@ module Aws::ServiceCatalog
     #   When the key is `SearchQuery`, the searchable fields are `arn`,
     #   `createdTime`, `id`, `lastRecordId`, `idempotencyToken`, `name`,
     #   `physicalId`, `productId`, `provisioningArtifact`, `type`, `status`,
-    #   `tags`, `userArn`, and `userArnSession`.
+    #   `tags`, `userArn`, `userArnSession`, `lastProvisioningRecordId`,
+    #   `lastSuccessfulProvisioningRecordId`, `productName`, and
+    #   `provisioningArtifactName`.
     #
     #   Example: `"SearchQuery":["status:AVAILABLE"]`
     #
@@ -4560,12 +4621,16 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].created_time #=> Time
     #   resp.provisioned_products[0].idempotency_token #=> String
     #   resp.provisioned_products[0].last_record_id #=> String
+    #   resp.provisioned_products[0].last_provisioning_record_id #=> String
+    #   resp.provisioned_products[0].last_successful_provisioning_record_id #=> String
     #   resp.provisioned_products[0].tags #=> Array
     #   resp.provisioned_products[0].tags[0].key #=> String
     #   resp.provisioned_products[0].tags[0].value #=> String
     #   resp.provisioned_products[0].physical_id #=> String
     #   resp.provisioned_products[0].product_id #=> String
+    #   resp.provisioned_products[0].product_name #=> String
     #   resp.provisioned_products[0].provisioning_artifact_id #=> String
+    #   resp.provisioned_products[0].provisioning_artifact_name #=> String
     #   resp.provisioned_products[0].user_arn #=> String
     #   resp.provisioned_products[0].user_arn_session #=> String
     #   resp.total_results_count #=> Integer
@@ -4981,18 +5046,31 @@ module Aws::ServiceCatalog
     #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [String] :provisioned_product_id
-    #   The identifier of the provisioned product. You cannot specify both
-    #   `ProvisionedProductName` and `ProvisionedProductId`.
+    #   The identifier of the provisioned product. You must provide the name
+    #   or ID, but not both.
     #
     # @option params [String] :product_id
-    #   The identifier of the product.
+    #   The identifier of the product. You must provide the name or ID, but
+    #   not both.
+    #
+    # @option params [String] :product_name
+    #   The name of the product. You must provide the name or ID, but not
+    #   both.
     #
     # @option params [String] :provisioning_artifact_id
     #   The identifier of the provisioning artifact.
     #
+    # @option params [String] :provisioning_artifact_name
+    #   The name of the provisioning artifact. You must provide the name or
+    #   ID, but not both.
+    #
     # @option params [String] :path_id
-    #   The new path identifier. This value is optional if the product has a
-    #   default path, and required if the product has more than one path.
+    #   The path identifier. This value is optional if the product has a
+    #   default path, and required if the product has more than one path. You
+    #   must provide the name or ID, but not both.
+    #
+    # @option params [String] :path_name
+    #   The name of the path. You must provide the name or ID, but not both.
     #
     # @option params [Array<Types::UpdateProvisioningParameter>] :provisioning_parameters
     #   The new parameters.
@@ -5024,8 +5102,11 @@ module Aws::ServiceCatalog
     #     provisioned_product_name: "ProvisionedProductNameOrArn",
     #     provisioned_product_id: "Id",
     #     product_id: "Id",
+    #     product_name: "ProductViewName",
     #     provisioning_artifact_id: "Id",
+    #     provisioning_artifact_name: "ProvisioningArtifactName",
     #     path_id: "Id",
+    #     path_name: "PortfolioDisplayName",
     #     provisioning_parameters: [
     #       {
     #         key: "ParameterKey",
@@ -5355,7 +5436,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

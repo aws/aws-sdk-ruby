@@ -2312,9 +2312,12 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
+    #         product_id: "Id",
+    #         product_name: "ProductViewName",
+    #         provisioning_artifact_id: "Id",
+    #         provisioning_artifact_name: "ProvisioningArtifactName",
     #         path_id: "Id",
+    #         path_name: "PortfolioDisplayName",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2328,17 +2331,34 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The product identifier.
+    #   The product identifier. You must provide the product name or ID, but
+    #   not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The name of the product. You must provide the name or ID, but not
+    #   both.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The identifier of the provisioning artifact.
+    #   The identifier of the provisioning artifact. You must provide the
+    #   name or ID, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_name
+    #   The name of the provisioning artifact. You must provide the name or
+    #   ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] path_id
     #   The path identifier of the product. This value is optional if the
     #   product has a default path, and required if the product has more
     #   than one path. To list the paths for a product, use ListLaunchPaths.
+    #   You must provide the name or ID, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] path_name
+    #   The name of the path. You must provide the name or ID, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersInput AWS API Documentation
@@ -2346,8 +2366,11 @@ module Aws::ServiceCatalog
     class DescribeProvisioningParametersInput < Struct.new(
       :accept_language,
       :product_id,
+      :product_name,
       :provisioning_artifact_id,
-      :path_id)
+      :provisioning_artifact_name,
+      :path_id,
+      :path_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2375,6 +2398,10 @@ module Aws::ServiceCatalog
     #   regions and accounts, for the provisioning artifact.
     #   @return [Types::ProvisioningArtifactPreferences]
     #
+    # @!attribute [rw] provisioning_artifact_outputs
+    #   The output of the provisioning artifact.
+    #   @return [Array<Types::ProvisioningArtifactOutput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
     #
     class DescribeProvisioningParametersOutput < Struct.new(
@@ -2382,7 +2409,8 @@ module Aws::ServiceCatalog
       :constraint_summaries,
       :usage_instructions,
       :tag_options,
-      :provisioning_artifact_preferences)
+      :provisioning_artifact_preferences,
+      :provisioning_artifact_outputs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4528,9 +4556,12 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
+    #         product_id: "Id",
+    #         product_name: "ProductViewName",
+    #         provisioning_artifact_id: "Id",
+    #         provisioning_artifact_name: "ProvisioningArtifactName",
     #         path_id: "Id",
+    #         path_name: "PortfolioDisplayName",
     #         provisioned_product_name: "ProvisionedProductName", # required
     #         provisioning_parameters: [
     #           {
@@ -4567,17 +4598,34 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The product identifier.
+    #   The product identifier. You must provide the name or ID, but not
+    #   both.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The name of the product. You must provide the name or ID, but not
+    #   both.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The identifier of the provisioning artifact.
+    #   The identifier of the provisioning artifact. You must provide the
+    #   name or ID, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_name
+    #   The name of the provisioning artifact. You must provide the name or
+    #   ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] path_id
     #   The path identifier of the product. This value is optional if the
     #   product has a default path, and required if the product has more
     #   than one path. To list the paths for a product, use ListLaunchPaths.
+    #   You must provide the name or ID, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] path_name
+    #   The name of the path. You must provide the name or ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
@@ -4618,8 +4666,11 @@ module Aws::ServiceCatalog
     class ProvisionProductInput < Struct.new(
       :accept_language,
       :product_id,
+      :product_name,
       :provisioning_artifact_id,
+      :provisioning_artifact_name,
       :path_id,
+      :path_name,
       :provisioned_product_name,
       :provisioning_parameters,
       :provisioning_preferences,
@@ -4707,6 +4758,32 @@ module Aws::ServiceCatalog
     #   provisioned product.
     #   @return [String]
     #
+    # @!attribute [rw] last_provisioning_record_id
+    #   The record identifier of the last request performed on this
+    #   provisioned product of the following types:
+    #
+    #   * ProvisionedProduct
+    #
+    #   * UpdateProvisionedProduct
+    #
+    #   * ExecuteProvisionedProductPlan
+    #
+    #   * TerminateProvisionedProduct
+    #   @return [String]
+    #
+    # @!attribute [rw] last_successful_provisioning_record_id
+    #   The record identifier of the last successful request performed on
+    #   this provisioned product of the following types:
+    #
+    #   * ProvisionedProduct
+    #
+    #   * UpdateProvisionedProduct
+    #
+    #   * ExecuteProvisionedProductPlan
+    #
+    #   * TerminateProvisionedProduct
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   One or more tags.
     #   @return [Array<Types::Tag>]
@@ -4720,8 +4797,16 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] product_name
+    #   The name of the product.
+    #   @return [String]
+    #
     # @!attribute [rw] provisioning_artifact_id
     #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_name
+    #   The name of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] user_arn
@@ -4745,10 +4830,14 @@ module Aws::ServiceCatalog
       :created_time,
       :idempotency_token,
       :last_record_id,
+      :last_provisioning_record_id,
+      :last_successful_provisioning_record_id,
       :tags,
       :physical_id,
       :product_id,
+      :product_name,
       :provisioning_artifact_id,
+      :provisioning_artifact_name,
       :user_arn,
       :user_arn_session)
       SENSITIVE = []
@@ -4820,6 +4909,32 @@ module Aws::ServiceCatalog
     #   provisioned product.
     #   @return [String]
     #
+    # @!attribute [rw] last_provisioning_record_id
+    #   The record identifier of the last request performed on this
+    #   provisioned product of the following types:
+    #
+    #   * ProvisionedProduct
+    #
+    #   * UpdateProvisionedProduct
+    #
+    #   * ExecuteProvisionedProductPlan
+    #
+    #   * TerminateProvisionedProduct
+    #   @return [String]
+    #
+    # @!attribute [rw] last_successful_provisioning_record_id
+    #   The record identifier of the last successful request performed on
+    #   this provisioned product of the following types:
+    #
+    #   * ProvisionedProduct
+    #
+    #   * UpdateProvisionedProduct
+    #
+    #   * ExecuteProvisionedProductPlan
+    #
+    #   * TerminateProvisionedProduct
+    #   @return [String]
+    #
     # @!attribute [rw] product_id
     #   The product identifier. For example, `prod-abcdzk7xy33qa`.
     #   @return [String]
@@ -4841,6 +4956,8 @@ module Aws::ServiceCatalog
       :created_time,
       :idempotency_token,
       :last_record_id,
+      :last_provisioning_record_id,
+      :last_successful_provisioning_record_id,
       :product_id,
       :provisioning_artifact_id)
       SENSITIVE = []
@@ -5058,6 +5175,25 @@ module Aws::ServiceCatalog
       :created_time,
       :active,
       :guidance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provisioning artifact output.
+    #
+    # @!attribute [rw] key
+    #   The provisioning artifact output key.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the provisioning artifact output key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactOutput AWS API Documentation
+    #
+    class ProvisioningArtifactOutput < Struct.new(
+      :key,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6050,7 +6186,9 @@ module Aws::ServiceCatalog
     #   When the key is `SearchQuery`, the searchable fields are `arn`,
     #   `createdTime`, `id`, `lastRecordId`, `idempotencyToken`, `name`,
     #   `physicalId`, `productId`, `provisioningArtifact`, `type`, `status`,
-    #   `tags`, `userArn`, and `userArnSession`.
+    #   `tags`, `userArn`, `userArnSession`, `lastProvisioningRecordId`,
+    #   `lastSuccessfulProvisioningRecordId`, `productName`, and
+    #   `provisioningArtifactName`.
     #
     #   Example: `"SearchQuery":["status:AVAILABLE"]`
     #   @return [Hash<String,Array<String>>]
@@ -6782,8 +6920,11 @@ module Aws::ServiceCatalog
     #         provisioned_product_name: "ProvisionedProductNameOrArn",
     #         provisioned_product_id: "Id",
     #         product_id: "Id",
+    #         product_name: "ProductViewName",
     #         provisioning_artifact_id: "Id",
+    #         provisioning_artifact_name: "ProvisioningArtifactName",
     #         path_id: "Id",
+    #         path_name: "PortfolioDisplayName",
     #         provisioning_parameters: [
     #           {
     #             key: "ParameterKey",
@@ -6825,21 +6966,37 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_id
-    #   The identifier of the provisioned product. You cannot specify both
-    #   `ProvisionedProductName` and `ProvisionedProductId`.
+    #   The identifier of the provisioned product. You must provide the name
+    #   or ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The identifier of the product.
+    #   The identifier of the product. You must provide the name or ID, but
+    #   not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The name of the product. You must provide the name or ID, but not
+    #   both.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
     #   The identifier of the provisioning artifact.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_artifact_name
+    #   The name of the provisioning artifact. You must provide the name or
+    #   ID, but not both.
+    #   @return [String]
+    #
     # @!attribute [rw] path_id
-    #   The new path identifier. This value is optional if the product has a
+    #   The path identifier. This value is optional if the product has a
     #   default path, and required if the product has more than one path.
+    #   You must provide the name or ID, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] path_name
+    #   The name of the path. You must provide the name or ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_parameters
@@ -6872,8 +7029,11 @@ module Aws::ServiceCatalog
       :provisioned_product_name,
       :provisioned_product_id,
       :product_id,
+      :product_name,
       :provisioning_artifact_id,
+      :provisioning_artifact_name,
       :path_id,
+      :path_name,
       :provisioning_parameters,
       :provisioning_preferences,
       :tags,

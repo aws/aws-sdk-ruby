@@ -79,6 +79,8 @@ module Aws::CodeGuruProfiler
     ListProfileTimesResponse = Shapes::StructureShape.new(name: 'ListProfileTimesResponse')
     ListProfilingGroupsRequest = Shapes::StructureShape.new(name: 'ListProfilingGroupsRequest')
     ListProfilingGroupsResponse = Shapes::StructureShape.new(name: 'ListProfilingGroupsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Locale = Shapes::StringShape.new(name: 'Locale')
     Match = Shapes::StructureShape.new(name: 'Match')
     Matches = Shapes::ListShape.new(name: 'Matches')
@@ -121,6 +123,10 @@ module Aws::CodeGuruProfiler
     Strings = Shapes::ListShape.new(name: 'Strings')
     SubmitFeedbackRequest = Shapes::StructureShape.new(name: 'SubmitFeedbackRequest')
     SubmitFeedbackResponse = Shapes::StructureShape.new(name: 'SubmitFeedbackResponse')
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     TargetFrame = Shapes::ListShape.new(name: 'TargetFrame')
     TargetFrames = Shapes::ListShape.new(name: 'TargetFrames')
     ThreadStates = Shapes::ListShape.new(name: 'ThreadStates')
@@ -128,6 +134,8 @@ module Aws::CodeGuruProfiler
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     TimestampStructure = Shapes::StructureShape.new(name: 'TimestampStructure')
     UnprocessedEndTimeMap = Shapes::MapShape.new(name: 'UnprocessedEndTimeMap')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateProfilingGroupRequest = Shapes::StructureShape.new(name: 'UpdateProfilingGroupRequest')
     UpdateProfilingGroupResponse = Shapes::StructureShape.new(name: 'UpdateProfilingGroupResponse')
     UserFeedback = Shapes::StructureShape.new(name: 'UserFeedback')
@@ -210,6 +218,7 @@ module Aws::CodeGuruProfiler
     CreateProfilingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateProfilingGroupRequest.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     CreateProfilingGroupRequest.add_member(:profiling_group_name, Shapes::ShapeRef.new(shape: ProfilingGroupName, required: true, location_name: "profilingGroupName"))
+    CreateProfilingGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateProfilingGroupRequest.struct_class = Types::CreateProfilingGroupRequest
 
     CreateProfilingGroupResponse.add_member(:profiling_group, Shapes::ShapeRef.new(shape: ProfilingGroupDescription, required: true, location_name: "profilingGroup"))
@@ -346,6 +355,12 @@ module Aws::CodeGuruProfiler
     ListProfilingGroupsResponse.add_member(:profiling_groups, Shapes::ShapeRef.new(shape: ProfilingGroupDescriptions, location_name: "profilingGroups"))
     ListProfilingGroupsResponse.struct_class = Types::ListProfilingGroupsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ProfilingGroupArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     Match.add_member(:frame_address, Shapes::ShapeRef.new(shape: String, location_name: "frameAddress"))
     Match.add_member(:target_frames_index, Shapes::ShapeRef.new(shape: Integer, location_name: "targetFramesIndex"))
     Match.add_member(:threshold_breach_value, Shapes::ShapeRef.new(shape: Double, location_name: "thresholdBreachValue"))
@@ -396,6 +411,7 @@ module Aws::CodeGuruProfiler
     ProfilingGroupDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     ProfilingGroupDescription.add_member(:name, Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "name"))
     ProfilingGroupDescription.add_member(:profiling_status, Shapes::ShapeRef.new(shape: ProfilingStatus, location_name: "profilingStatus"))
+    ProfilingGroupDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ProfilingGroupDescription.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     ProfilingGroupDescription.struct_class = Types::ProfilingGroupDescription
 
@@ -460,6 +476,17 @@ module Aws::CodeGuruProfiler
 
     SubmitFeedbackResponse.struct_class = Types::SubmitFeedbackResponse
 
+    TagKeys.member = Shapes::ShapeRef.new(shape: String)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ProfilingGroupArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TagsMap.key = Shapes::ShapeRef.new(shape: String)
+    TagsMap.value = Shapes::ShapeRef.new(shape: String)
+
     TargetFrame.member = Shapes::ShapeRef.new(shape: String)
 
     TargetFrames.member = Shapes::ShapeRef.new(shape: TargetFrame)
@@ -474,6 +501,12 @@ module Aws::CodeGuruProfiler
 
     UnprocessedEndTimeMap.key = Shapes::ShapeRef.new(shape: String)
     UnprocessedEndTimeMap.value = Shapes::ShapeRef.new(shape: ListOfTimestamps)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ProfilingGroupArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateProfilingGroupRequest.add_member(:agent_orchestration_config, Shapes::ShapeRef.new(shape: AgentOrchestrationConfig, required: true, location_name: "agentOrchestrationConfig"))
     UpdateProfilingGroupRequest.add_member(:profiling_group_name, Shapes::ShapeRef.new(shape: ProfilingGroupName, required: true, location: "uri", location_name: "profilingGroupName"))
@@ -699,6 +732,17 @@ module Aws::CodeGuruProfiler
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:post_agent_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PostAgentProfile"
         o.http_method = "POST"
@@ -758,6 +802,28 @@ module Aws::CodeGuruProfiler
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

@@ -27,6 +27,7 @@ module Aws::SMS
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {DryRunOperationException}
   # * {InternalError}
   # * {InvalidParameterException}
   # * {MissingRequiredParameterException}
@@ -44,6 +45,21 @@ module Aws::SMS
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class DryRunOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SMS::Types::DryRunOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class InternalError < ServiceError
 

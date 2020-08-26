@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-08-12)
+------------------
+
+* Feature - Adds optional EnableWorkDocs property to WorkspaceCreationProperties in the ModifyWorkspaceCreationProperties API
+
+1.41.0 (2020-07-23)
+------------------
+
+* Feature - Added UpdateWorkspaceImagePermission API to share Amazon WorkSpaces images across AWS accounts.
+
 1.40.0 (2020-07-02)
 ------------------
 

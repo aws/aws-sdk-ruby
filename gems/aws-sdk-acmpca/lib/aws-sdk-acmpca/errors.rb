@@ -37,6 +37,7 @@ module Aws::ACMPCA
   # * {InvalidStateException}
   # * {InvalidTagException}
   # * {LimitExceededException}
+  # * {LockoutPreventedException}
   # * {MalformedCSRException}
   # * {MalformedCertificateException}
   # * {PermissionAlreadyExistsException}
@@ -192,6 +193,21 @@ module Aws::ACMPCA
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ACMPCA::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class LockoutPreventedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ACMPCA::Types::LockoutPreventedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -27,7 +27,7 @@ require_relative 'aws-sdk-transcribeservice/customizations'
 # structure.
 #
 #     transcribe_service = Aws::TranscribeService::Client.new
-#     resp = transcribe_service.create_medical_vocabulary(params)
+#     resp = transcribe_service.create_language_model(params)
 #
 # See {Client} for more information.
 #
@@ -44,9 +44,9 @@ require_relative 'aws-sdk-transcribeservice/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::TranscribeService
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.47.0'
 
 end

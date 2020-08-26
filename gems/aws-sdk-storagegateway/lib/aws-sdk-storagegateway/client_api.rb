@@ -66,6 +66,8 @@ module Aws::StorageGateway
     CreateSnapshotOutput = Shapes::StructureShape.new(name: 'CreateSnapshotOutput')
     CreateStorediSCSIVolumeInput = Shapes::StructureShape.new(name: 'CreateStorediSCSIVolumeInput')
     CreateStorediSCSIVolumeOutput = Shapes::StructureShape.new(name: 'CreateStorediSCSIVolumeOutput')
+    CreateTapePoolInput = Shapes::StructureShape.new(name: 'CreateTapePoolInput')
+    CreateTapePoolOutput = Shapes::StructureShape.new(name: 'CreateTapePoolOutput')
     CreateTapeWithBarcodeInput = Shapes::StructureShape.new(name: 'CreateTapeWithBarcodeInput')
     CreateTapeWithBarcodeOutput = Shapes::StructureShape.new(name: 'CreateTapeWithBarcodeOutput')
     CreateTapesInput = Shapes::StructureShape.new(name: 'CreateTapesInput')
@@ -89,8 +91,11 @@ module Aws::StorageGateway
     DeleteTapeArchiveOutput = Shapes::StructureShape.new(name: 'DeleteTapeArchiveOutput')
     DeleteTapeInput = Shapes::StructureShape.new(name: 'DeleteTapeInput')
     DeleteTapeOutput = Shapes::StructureShape.new(name: 'DeleteTapeOutput')
+    DeleteTapePoolInput = Shapes::StructureShape.new(name: 'DeleteTapePoolInput')
+    DeleteTapePoolOutput = Shapes::StructureShape.new(name: 'DeleteTapePoolOutput')
     DeleteVolumeInput = Shapes::StructureShape.new(name: 'DeleteVolumeInput')
     DeleteVolumeOutput = Shapes::StructureShape.new(name: 'DeleteVolumeOutput')
+    DeprecationDate = Shapes::StringShape.new(name: 'DeprecationDate')
     DescribeAvailabilityMonitorTestInput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestInput')
     DescribeAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestOutput')
     DescribeBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitInput')
@@ -196,6 +201,8 @@ module Aws::StorageGateway
     ListLocalDisksOutput = Shapes::StructureShape.new(name: 'ListLocalDisksOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    ListTapePoolsInput = Shapes::StructureShape.new(name: 'ListTapePoolsInput')
+    ListTapePoolsOutput = Shapes::StructureShape.new(name: 'ListTapePoolsOutput')
     ListTapesInput = Shapes::StructureShape.new(name: 'ListTapesInput')
     ListTapesOutput = Shapes::StructureShape.new(name: 'ListTapesOutput')
     ListVolumeInitiatorsInput = Shapes::StructureShape.new(name: 'ListVolumeInitiatorsInput')
@@ -225,7 +232,13 @@ module Aws::StorageGateway
     Path = Shapes::StringShape.new(name: 'Path')
     PermissionId = Shapes::IntegerShape.new(name: 'PermissionId')
     PermissionMode = Shapes::StringShape.new(name: 'PermissionMode')
+    PoolARN = Shapes::StringShape.new(name: 'PoolARN')
+    PoolARNs = Shapes::ListShape.new(name: 'PoolARNs')
     PoolId = Shapes::StringShape.new(name: 'PoolId')
+    PoolInfo = Shapes::StructureShape.new(name: 'PoolInfo')
+    PoolInfos = Shapes::ListShape.new(name: 'PoolInfos')
+    PoolName = Shapes::StringShape.new(name: 'PoolName')
+    PoolStatus = Shapes::StringShape.new(name: 'PoolStatus')
     PositiveIntObject = Shapes::IntegerShape.new(name: 'PositiveIntObject')
     RecurrenceInHours = Shapes::IntegerShape.new(name: 'RecurrenceInHours')
     RefreshCacheInput = Shapes::StructureShape.new(name: 'RefreshCacheInput')
@@ -236,6 +249,8 @@ module Aws::StorageGateway
     ResetCacheInput = Shapes::StructureShape.new(name: 'ResetCacheInput')
     ResetCacheOutput = Shapes::StructureShape.new(name: 'ResetCacheOutput')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
+    RetentionLockTimeInDays = Shapes::IntegerShape.new(name: 'RetentionLockTimeInDays')
+    RetentionLockType = Shapes::StringShape.new(name: 'RetentionLockType')
     RetrieveTapeArchiveInput = Shapes::StructureShape.new(name: 'RetrieveTapeArchiveInput')
     RetrieveTapeArchiveOutput = Shapes::StructureShape.new(name: 'RetrieveTapeArchiveOutput')
     RetrieveTapeRecoveryPointInput = Shapes::StructureShape.new(name: 'RetrieveTapeRecoveryPointInput')
@@ -254,6 +269,7 @@ module Aws::StorageGateway
     ShutdownGatewayOutput = Shapes::StructureShape.new(name: 'ShutdownGatewayOutput')
     SnapshotDescription = Shapes::StringShape.new(name: 'SnapshotDescription')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
+    SoftwareUpdatesEndDate = Shapes::StringShape.new(name: 'SoftwareUpdatesEndDate')
     Squash = Shapes::StringShape.new(name: 'Squash')
     StartAvailabilityMonitorTestInput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestInput')
     StartAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestOutput')
@@ -284,6 +300,7 @@ module Aws::StorageGateway
     TapeRecoveryPointStatus = Shapes::StringShape.new(name: 'TapeRecoveryPointStatus')
     TapeSize = Shapes::IntegerShape.new(name: 'TapeSize')
     TapeStatus = Shapes::StringShape.new(name: 'TapeStatus')
+    TapeStorageClass = Shapes::StringShape.new(name: 'TapeStorageClass')
     TapeUsage = Shapes::IntegerShape.new(name: 'TapeUsage')
     Tapes = Shapes::ListShape.new(name: 'Tapes')
     TargetARN = Shapes::StringShape.new(name: 'TargetARN')
@@ -381,6 +398,7 @@ module Aws::StorageGateway
 
     AssignTapePoolInput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, required: true, location_name: "TapeARN"))
     AssignTapePoolInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, required: true, location_name: "PoolId"))
+    AssignTapePoolInput.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: boolean, location_name: "BypassGovernanceRetention"))
     AssignTapePoolInput.struct_class = Types::AssignTapePoolInput
 
     AssignTapePoolOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
@@ -407,6 +425,7 @@ module Aws::StorageGateway
     AutomaticTapeCreationRule.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, required: true, location_name: "PoolId"))
     AutomaticTapeCreationRule.add_member(:tape_size_in_bytes, Shapes::ShapeRef.new(shape: TapeSize, required: true, location_name: "TapeSizeInBytes"))
     AutomaticTapeCreationRule.add_member(:minimum_num_tapes, Shapes::ShapeRef.new(shape: MinimumNumTapes, required: true, location_name: "MinimumNumTapes"))
+    AutomaticTapeCreationRule.add_member(:worm, Shapes::ShapeRef.new(shape: boolean, location_name: "Worm"))
     AutomaticTapeCreationRule.struct_class = Types::AutomaticTapeCreationRule
 
     AutomaticTapeCreationRules.member = Shapes::ShapeRef.new(shape: AutomaticTapeCreationRule)
@@ -552,12 +571,23 @@ module Aws::StorageGateway
     CreateStorediSCSIVolumeOutput.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
     CreateStorediSCSIVolumeOutput.struct_class = Types::CreateStorediSCSIVolumeOutput
 
+    CreateTapePoolInput.add_member(:pool_name, Shapes::ShapeRef.new(shape: PoolName, required: true, location_name: "PoolName"))
+    CreateTapePoolInput.add_member(:storage_class, Shapes::ShapeRef.new(shape: TapeStorageClass, required: true, location_name: "StorageClass"))
+    CreateTapePoolInput.add_member(:retention_lock_type, Shapes::ShapeRef.new(shape: RetentionLockType, location_name: "RetentionLockType"))
+    CreateTapePoolInput.add_member(:retention_lock_time_in_days, Shapes::ShapeRef.new(shape: RetentionLockTimeInDays, location_name: "RetentionLockTimeInDays"))
+    CreateTapePoolInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateTapePoolInput.struct_class = Types::CreateTapePoolInput
+
+    CreateTapePoolOutput.add_member(:pool_arn, Shapes::ShapeRef.new(shape: PoolARN, location_name: "PoolARN"))
+    CreateTapePoolOutput.struct_class = Types::CreateTapePoolOutput
+
     CreateTapeWithBarcodeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     CreateTapeWithBarcodeInput.add_member(:tape_size_in_bytes, Shapes::ShapeRef.new(shape: TapeSize, required: true, location_name: "TapeSizeInBytes"))
     CreateTapeWithBarcodeInput.add_member(:tape_barcode, Shapes::ShapeRef.new(shape: TapeBarcode, required: true, location_name: "TapeBarcode"))
     CreateTapeWithBarcodeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateTapeWithBarcodeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateTapeWithBarcodeInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
+    CreateTapeWithBarcodeInput.add_member(:worm, Shapes::ShapeRef.new(shape: boolean, location_name: "Worm"))
     CreateTapeWithBarcodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateTapeWithBarcodeInput.struct_class = Types::CreateTapeWithBarcodeInput
 
@@ -572,6 +602,7 @@ module Aws::StorageGateway
     CreateTapesInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateTapesInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateTapesInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
+    CreateTapesInput.add_member(:worm, Shapes::ShapeRef.new(shape: boolean, location_name: "Worm"))
     CreateTapesInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateTapesInput.struct_class = Types::CreateTapesInput
 
@@ -619,6 +650,7 @@ module Aws::StorageGateway
     DeleteSnapshotScheduleOutput.struct_class = Types::DeleteSnapshotScheduleOutput
 
     DeleteTapeArchiveInput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, required: true, location_name: "TapeARN"))
+    DeleteTapeArchiveInput.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: boolean, location_name: "BypassGovernanceRetention"))
     DeleteTapeArchiveInput.struct_class = Types::DeleteTapeArchiveInput
 
     DeleteTapeArchiveOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
@@ -626,10 +658,17 @@ module Aws::StorageGateway
 
     DeleteTapeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DeleteTapeInput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, required: true, location_name: "TapeARN"))
+    DeleteTapeInput.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: boolean, location_name: "BypassGovernanceRetention"))
     DeleteTapeInput.struct_class = Types::DeleteTapeInput
 
     DeleteTapeOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
     DeleteTapeOutput.struct_class = Types::DeleteTapeOutput
+
+    DeleteTapePoolInput.add_member(:pool_arn, Shapes::ShapeRef.new(shape: PoolARN, required: true, location_name: "PoolARN"))
+    DeleteTapePoolInput.struct_class = Types::DeleteTapePoolInput
+
+    DeleteTapePoolOutput.add_member(:pool_arn, Shapes::ShapeRef.new(shape: PoolARN, location_name: "PoolARN"))
+    DeleteTapePoolOutput.struct_class = Types::DeleteTapePoolOutput
 
     DeleteVolumeInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     DeleteVolumeInput.struct_class = Types::DeleteVolumeInput
@@ -696,6 +735,8 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
     DescribeGatewayInformationOutput.add_member(:host_environment, Shapes::ShapeRef.new(shape: HostEnvironment, location_name: "HostEnvironment"))
     DescribeGatewayInformationOutput.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
+    DescribeGatewayInformationOutput.add_member(:software_updates_end_date, Shapes::ShapeRef.new(shape: SoftwareUpdatesEndDate, location_name: "SoftwareUpdatesEndDate"))
+    DescribeGatewayInformationOutput.add_member(:deprecation_date, Shapes::ShapeRef.new(shape: DeprecationDate, location_name: "DeprecationDate"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -937,6 +978,15 @@ module Aws::StorageGateway
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    ListTapePoolsInput.add_member(:pool_arns, Shapes::ShapeRef.new(shape: PoolARNs, location_name: "PoolARNs"))
+    ListTapePoolsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListTapePoolsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListTapePoolsInput.struct_class = Types::ListTapePoolsInput
+
+    ListTapePoolsOutput.add_member(:pool_infos, Shapes::ShapeRef.new(shape: PoolInfos, location_name: "PoolInfos"))
+    ListTapePoolsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListTapePoolsOutput.struct_class = Types::ListTapePoolsOutput
+
     ListTapesInput.add_member(:tape_arns, Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
     ListTapesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListTapesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
@@ -1010,6 +1060,18 @@ module Aws::StorageGateway
     NotifyWhenUploadedOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
     NotifyWhenUploadedOutput.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "NotificationId"))
     NotifyWhenUploadedOutput.struct_class = Types::NotifyWhenUploadedOutput
+
+    PoolARNs.member = Shapes::ShapeRef.new(shape: PoolARN)
+
+    PoolInfo.add_member(:pool_arn, Shapes::ShapeRef.new(shape: PoolARN, location_name: "PoolARN"))
+    PoolInfo.add_member(:pool_name, Shapes::ShapeRef.new(shape: PoolName, location_name: "PoolName"))
+    PoolInfo.add_member(:storage_class, Shapes::ShapeRef.new(shape: TapeStorageClass, location_name: "StorageClass"))
+    PoolInfo.add_member(:retention_lock_type, Shapes::ShapeRef.new(shape: RetentionLockType, location_name: "RetentionLockType"))
+    PoolInfo.add_member(:retention_lock_time_in_days, Shapes::ShapeRef.new(shape: RetentionLockTimeInDays, location_name: "RetentionLockTimeInDays"))
+    PoolInfo.add_member(:pool_status, Shapes::ShapeRef.new(shape: PoolStatus, location_name: "PoolStatus"))
+    PoolInfo.struct_class = Types::PoolInfo
+
+    PoolInfos.member = Shapes::ShapeRef.new(shape: PoolInfo)
 
     RefreshCacheInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
     RefreshCacheInput.add_member(:folder_list, Shapes::ShapeRef.new(shape: FolderList, location_name: "FolderList"))
@@ -1152,6 +1214,9 @@ module Aws::StorageGateway
     Tape.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
     Tape.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     Tape.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
+    Tape.add_member(:worm, Shapes::ShapeRef.new(shape: boolean, location_name: "Worm"))
+    Tape.add_member(:retention_start_date, Shapes::ShapeRef.new(shape: Time, location_name: "RetentionStartDate"))
+    Tape.add_member(:pool_entry_date, Shapes::ShapeRef.new(shape: Time, location_name: "PoolEntryDate"))
     Tape.struct_class = Types::Tape
 
     TapeARNs.member = Shapes::ShapeRef.new(shape: TapeARN)
@@ -1166,6 +1231,9 @@ module Aws::StorageGateway
     TapeArchive.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
     TapeArchive.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     TapeArchive.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
+    TapeArchive.add_member(:worm, Shapes::ShapeRef.new(shape: boolean, location_name: "Worm"))
+    TapeArchive.add_member(:retention_start_date, Shapes::ShapeRef.new(shape: Time, location_name: "RetentionStartDate"))
+    TapeArchive.add_member(:pool_entry_date, Shapes::ShapeRef.new(shape: Time, location_name: "PoolEntryDate"))
     TapeArchive.struct_class = Types::TapeArchive
 
     TapeArchives.member = Shapes::ShapeRef.new(shape: TapeArchive)
@@ -1176,6 +1244,8 @@ module Aws::StorageGateway
     TapeInfo.add_member(:tape_status, Shapes::ShapeRef.new(shape: TapeStatus, location_name: "TapeStatus"))
     TapeInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     TapeInfo.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
+    TapeInfo.add_member(:retention_start_date, Shapes::ShapeRef.new(shape: Time, location_name: "RetentionStartDate"))
+    TapeInfo.add_member(:pool_entry_date, Shapes::ShapeRef.new(shape: Time, location_name: "PoolEntryDate"))
     TapeInfo.struct_class = Types::TapeInfo
 
     TapeInfos.member = Shapes::ShapeRef.new(shape: TapeInfo)
@@ -1516,6 +1586,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:create_tape_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTapePool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTapePoolInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateTapePoolOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:create_tape_with_barcode, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTapeWithBarcode"
         o.http_method = "POST"
@@ -1612,6 +1692,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTapeArchiveInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteTapeArchiveOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:delete_tape_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTapePool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTapePoolInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTapePoolOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -1926,6 +2016,16 @@ module Aws::StorageGateway
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:list_tape_pools, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTapePools"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTapePoolsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTapePoolsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:list_tapes, Seahorse::Model::Operation.new.tap do |o|

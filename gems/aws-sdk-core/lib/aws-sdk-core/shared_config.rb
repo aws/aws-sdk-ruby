@@ -3,6 +3,8 @@
 module Aws
   # @api private
   class SharedConfig
+    SSO_PROFILE_KEYS = %w[sso_start_url sso_region sso_account_id sso_role_name].freeze
+
     # @return [String]
     attr_reader :credentials_path
 
@@ -135,6 +137,18 @@ module Aws
       end
     end
 
+    # Attempts to load from shared config or shared credentials file.
+    # Will always attempt first to load from the shared credentials
+    # file, if present.
+    def sso_credentials_from_config(opts = {})
+      p = opts[:profile] || @profile_name
+      credentials = sso_credentials_from_profile(@parsed_credentials, p)
+      if @parsed_config
+        credentials ||= sso_credentials_from_profile(@parsed_config, p)
+      end
+      credentials
+    end
+
     # Add an accessor method (similar to attr_reader) to return a configuration value
     # Uses the get_config_value below to control where
     # values are loaded from
@@ -238,6 +252,8 @@ module Aws
         provider.credentials if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         provider.credentials if provider.credentials.set?
+      elsif (provider = sso_credentials_from_config(profile: profile))
+        provider.credentials if provider.credentials.set?
       end
     end
 
@@ -271,6 +287,22 @@ module Aws
     def credentials_from_config(profile, _opts)
       if @parsed_config && prof_config = @parsed_config[profile]
         credentials_from_profile(prof_config)
+      end
+    end
+
+    # If any of the sso_ profile values are present, attempt to construct
+    # SSOCredentials
+    def sso_credentials_from_profile(cfg, profile)
+      if @parsed_config &&
+         (prof_config = cfg[profile]) &&
+         !(prof_config.keys & SSO_PROFILE_KEYS).empty?
+
+        SSOCredentials.new(
+          sso_start_url: prof_config['sso_start_url'],
+          sso_region: prof_config['sso_region'],
+          sso_account_id: prof_config['sso_account_id'],
+          sso_role_name: prof_config['sso_role_name']
+        )
       end
     end
 

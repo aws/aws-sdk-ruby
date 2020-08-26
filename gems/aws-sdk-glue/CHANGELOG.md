@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2020-08-10)
+------------------
+
+* Feature - Starting today, you can further control orchestration of your ETL workloads in AWS Glue by specifying the maximum number of concurrent runs for a Glue workflow.
+
+1.66.0 (2020-08-07)
+------------------
+
+* Feature - AWS Glue now adds support for Network connection type enabling you to access resources inside your VPC using Glue crawlers and Glue ETL jobs.
+
+1.65.0 (2020-07-27)
+------------------
+
+* Feature - Add ability to manually resume workflows in AWS Glue providing customers further control over the orchestration of ETL workloads.
+
+1.64.0 (2020-07-23)
+------------------
+
+* Feature - Added new ConnectionProperties: "KAFKA_SSL_ENABLED" (to toggle SSL connections) and "KAFKA_CUSTOM_CERT" (import CA certificate file)
+
 1.63.0 (2020-07-07)
 ------------------
 

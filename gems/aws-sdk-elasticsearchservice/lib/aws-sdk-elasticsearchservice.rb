@@ -44,9 +44,9 @@ require_relative 'aws-sdk-elasticsearchservice/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::ElasticsearchService
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end

@@ -44,9 +44,9 @@ require_relative 'aws-sdk-macie2/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Macie2
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.9.0'
 
 end

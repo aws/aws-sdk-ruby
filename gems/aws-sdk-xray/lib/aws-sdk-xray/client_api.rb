@@ -16,6 +16,7 @@ module Aws::XRay
     Alias = Shapes::StructureShape.new(name: 'Alias')
     AliasList = Shapes::ListShape.new(name: 'AliasList')
     AliasNames = Shapes::ListShape.new(name: 'AliasNames')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AnnotationKey = Shapes::StringShape.new(name: 'AnnotationKey')
     AnnotationValue = Shapes::StructureShape.new(name: 'AnnotationValue')
     Annotations = Shapes::MapShape.new(name: 'Annotations')
@@ -99,6 +100,8 @@ module Aws::XRay
     InstanceIdDetail = Shapes::StructureShape.new(name: 'InstanceIdDetail')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
@@ -114,6 +117,7 @@ module Aws::XRay
     ReservoirSize = Shapes::IntegerShape.new(name: 'ReservoirSize')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceARNDetail = Shapes::StructureShape.new(name: 'ResourceARNDetail')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseTimeRootCause = Shapes::StructureShape.new(name: 'ResponseTimeRootCause')
     ResponseTimeRootCauseEntity = Shapes::StructureShape.new(name: 'ResponseTimeRootCauseEntity')
     ResponseTimeRootCauseEntityPath = Shapes::ListShape.new(name: 'ResponseTimeRootCauseEntityPath')
@@ -150,6 +154,13 @@ module Aws::XRay
     ServiceStatistics = Shapes::StructureShape.new(name: 'ServiceStatistics')
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TelemetryRecord = Shapes::StructureShape.new(name: 'TelemetryRecord')
     TelemetryRecordList = Shapes::ListShape.new(name: 'TelemetryRecordList')
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
@@ -157,6 +168,7 @@ module Aws::XRay
     TimeSeriesServiceStatistics = Shapes::StructureShape.new(name: 'TimeSeriesServiceStatistics')
     TimeSeriesServiceStatisticsList = Shapes::ListShape.new(name: 'TimeSeriesServiceStatisticsList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     Trace = Shapes::StructureShape.new(name: 'Trace')
     TraceAvailabilityZones = Shapes::ListShape.new(name: 'TraceAvailabilityZones')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
@@ -176,6 +188,8 @@ module Aws::XRay
     UnprocessedTraceIdList = Shapes::ListShape.new(name: 'UnprocessedTraceIdList')
     UnprocessedTraceSegment = Shapes::StructureShape.new(name: 'UnprocessedTraceSegment')
     UnprocessedTraceSegmentList = Shapes::ListShape.new(name: 'UnprocessedTraceSegmentList')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
     UpdateGroupResult = Shapes::StructureShape.new(name: 'UpdateGroupResult')
     UpdateSamplingRuleRequest = Shapes::StructureShape.new(name: 'UpdateSamplingRuleRequest')
@@ -226,12 +240,14 @@ module Aws::XRay
 
     CreateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
     CreateGroupRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterExpression"))
+    CreateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGroupRequest.struct_class = Types::CreateGroupRequest
 
     CreateGroupResult.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
     CreateGroupResult.struct_class = Types::CreateGroupResult
 
     CreateSamplingRuleRequest.add_member(:sampling_rule, Shapes::ShapeRef.new(shape: SamplingRule, required: true, location_name: "SamplingRule"))
+    CreateSamplingRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateSamplingRuleRequest.struct_class = Types::CreateSamplingRuleRequest
 
     CreateSamplingRuleResult.add_member(:sampling_rule_record, Shapes::ShapeRef.new(shape: SamplingRuleRecord, location_name: "SamplingRuleRecord"))
@@ -450,6 +466,14 @@ module Aws::XRay
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     PutEncryptionConfigRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyId, location_name: "KeyId"))
     PutEncryptionConfigRequest.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
     PutEncryptionConfigRequest.struct_class = Types::PutEncryptionConfigRequest
@@ -473,6 +497,10 @@ module Aws::XRay
 
     ResourceARNDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     ResourceARNDetail.struct_class = Types::ResourceARNDetail
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResponseTimeRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ResponseTimeRootCauseServices, location_name: "Services"))
     ResponseTimeRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
@@ -614,6 +642,20 @@ module Aws::XRay
     ServiceStatistics.add_member(:total_response_time, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalResponseTime"))
     ServiceStatistics.struct_class = Types::ServiceStatistics
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TelemetryRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     TelemetryRecord.add_member(:segments_received_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "SegmentsReceivedCount"))
     TelemetryRecord.add_member(:segments_sent_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "SegmentsSentCount"))
@@ -634,6 +676,10 @@ module Aws::XRay
     TimeSeriesServiceStatistics.struct_class = Types::TimeSeriesServiceStatistics
 
     TimeSeriesServiceStatisticsList.member = Shapes::ShapeRef.new(shape: TimeSeriesServiceStatistics)
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     Trace.add_member(:id, Shapes::ShapeRef.new(shape: TraceId, location_name: "Id"))
     Trace.add_member(:duration, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Duration"))
@@ -697,6 +743,12 @@ module Aws::XRay
     UnprocessedTraceSegment.struct_class = Types::UnprocessedTraceSegment
 
     UnprocessedTraceSegmentList.member = Shapes::ShapeRef.new(shape: UnprocessedTraceSegment)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
     UpdateGroupRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
@@ -925,6 +977,17 @@ module Aws::XRay
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListTagsForResource"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:put_encryption_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutEncryptionConfig"
         o.http_method = "POST"
@@ -953,6 +1016,29 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: PutTraceSegmentsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/TagResource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/UntagResource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_group, Seahorse::Model::Operation.new.tap do |o|

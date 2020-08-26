@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+3.79.0 (2020-08-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-core` gem.
+
+3.78.0 (2020-08-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-identitystore` gem.
+
+3.77.0 (2020-08-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-braket` gem.
+
 3.76.0 (2020-07-15)
 ------------------
 

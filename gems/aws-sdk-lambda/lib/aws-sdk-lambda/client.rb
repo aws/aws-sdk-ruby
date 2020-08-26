@@ -85,13 +85,28 @@ module Aws::Lambda
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
-    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +116,10 @@ module Aws::Lambda
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -660,6 +675,8 @@ module Aws::Lambda
     #
     # * [Using AWS Lambda with Amazon SQS][3]
     #
+    # * [Using AWS Lambda with Amazon MSK][4]
+    #
     # The following error handling options are only available for stream
     # sources (DynamoDB and Kinesis):
     #
@@ -670,10 +687,11 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age.
+    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries.
+    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
+    #   infinite, failed records will be retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -683,6 +701,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     #
     # @option params [required, String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -693,6 +712,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - The ARN of the stream.
     #
     #   * **Amazon Simple Queue Service** - The ARN of the queue.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #     cluster.
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -713,7 +735,8 @@ module Aws::Lambda
     #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   Disables the event source mapping to pause polling and invocation.
+    #   If true, the event source mapping is active. Set to false to pause
+    #   polling and invocation.
     #
     # @option params [Integer] :batch_size
     #   The maximum number of items to retrieve in a single batch.
@@ -723,6 +746,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #     10,000.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams) The maximum amount of time to gather records before invoking
@@ -734,8 +760,8 @@ module Aws::Lambda
     #
     # @option params [String] :starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP` is
-    #   only supported for Amazon Kinesis streams.
+    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
+    #   `AT_TIMESTAMP` is only supported for Amazon Kinesis streams.
     #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
@@ -746,16 +772,20 @@ module Aws::Lambda
     #   discarded records.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
-    #   (Streams) The maximum age of a record that Lambda sends to a function
-    #   for processing.
+    #   (Streams) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #
     # @option params [Boolean] :bisect_batch_on_function_error
     #   (Streams) If the function returns an error, split the batch in two and
     #   retry.
     #
     # @option params [Integer] :maximum_retry_attempts
-    #   (Streams) The maximum number of times to retry when the function
-    #   returns an error.
+    #   (Streams) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records will be retried until the record expires.
+    #
+    # @option params [Array<String>] :topics
+    #   (MSK) The name of the Kafka topic.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -770,6 +800,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -818,6 +849,7 @@ module Aws::Lambda
     #     maximum_record_age_in_seconds: 1,
     #     bisect_batch_on_function_error: false,
     #     maximum_retry_attempts: 1,
+    #     topics: ["Topic"],
     #   })
     #
     # @example Response structure
@@ -834,6 +866,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1095,7 +1129,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     role: "RoleArn", # required
     #     handler: "Handler", # required
     #     code: { # required
@@ -1140,7 +1174,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1264,6 +1298,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1308,6 +1343,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1719,6 +1756,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1770,6 +1808,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1875,7 +1915,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -2095,7 +2135,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2303,7 +2343,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersion AWS API Documentation
@@ -2379,7 +2419,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArn AWS API Documentation
@@ -2682,7 +2722,7 @@ module Aws::Lambda
     #   Up to 3583 bytes of base64-encoded data about the invoking client to
     #   pass to the function in the context object.
     #
-    # @option params [String, IO] :payload
+    # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
     # @option params [String] :qualifier
@@ -2778,7 +2818,7 @@ module Aws::Lambda
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
-    # @option params [required, String, IO] :invoke_args
+    # @option params [required, String, StringIO, File] :invoke_args
     #   The JSON that you want to provide to your Lambda function as input.
     #
     # @return [Types::InvokeAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2936,6 +2976,9 @@ module Aws::Lambda
     #
     #   * **Amazon Simple Queue Service** - The ARN of the queue.
     #
+    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #     cluster.
+    #
     # @option params [String] :function_name
     #   The name of the Lambda function.
     #
@@ -3016,6 +3059,8 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].state_transition_reason #=> String
     #   resp.event_source_mappings[0].destination_config.on_success.destination #=> String
     #   resp.event_source_mappings[0].destination_config.on_failure.destination #=> String
+    #   resp.event_source_mappings[0].topics #=> Array
+    #   resp.event_source_mappings[0].topics[0] #=> String
     #   resp.event_source_mappings[0].maximum_record_age_in_seconds #=> Integer
     #   resp.event_source_mappings[0].bisect_batch_on_function_error #=> Boolean
     #   resp.event_source_mappings[0].maximum_retry_attempts #=> Integer
@@ -3223,7 +3268,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -3334,7 +3379,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -3349,7 +3394,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].description #=> String
     #   resp.layer_versions[0].created_date #=> Time
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layer_versions[0].license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersions AWS API Documentation
@@ -3418,7 +3463,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layers({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     marker: "String",
     #     max_items: 1,
     #   })
@@ -3434,7 +3479,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.description #=> String
     #   resp.layers[0].latest_matching_version.created_date #=> Time
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayers AWS API Documentation
@@ -3704,7 +3749,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -3853,7 +3898,7 @@ module Aws::Lambda
     #       s3_object_version: "S3ObjectVersion",
     #       zip_file: "data",
     #     },
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     license_info: "LicenseInfo",
     #   })
     #
@@ -3868,7 +3913,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersion AWS API Documentation
@@ -4010,7 +4055,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4680,10 +4725,11 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age.
+    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries.
+    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
+    #   infinite, failed records will be retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -4710,7 +4756,8 @@ module Aws::Lambda
     #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   Disables the event source mapping to pause polling and invocation.
+    #   If true, the event source mapping is active. Set to false to pause
+    #   polling and invocation.
     #
     # @option params [Integer] :batch_size
     #   The maximum number of items to retrieve in a single batch.
@@ -4721,6 +4768,9 @@ module Aws::Lambda
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
+    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #     10,000.
+    #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams) The maximum amount of time to gather records before invoking
     #   the function, in seconds.
@@ -4730,16 +4780,17 @@ module Aws::Lambda
     #   discarded records.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
-    #   (Streams) The maximum age of a record that Lambda sends to a function
-    #   for processing.
+    #   (Streams) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #
     # @option params [Boolean] :bisect_batch_on_function_error
     #   (Streams) If the function returns an error, split the batch in two and
     #   retry.
     #
     # @option params [Integer] :maximum_retry_attempts
-    #   (Streams) The maximum number of times to retry when the function
-    #   returns an error.
+    #   (Streams) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records will be retried until the record expires.
     #
     # @option params [Integer] :parallelization_factor
     #   (Streams) The number of batches to process from each shard
@@ -4758,6 +4809,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -4822,6 +4874,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -4855,7 +4909,7 @@ module Aws::Lambda
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
-    # @option params [String, IO] :zip_file
+    # @option params [String, StringIO, File] :zip_file
     #   The base64-encoded contents of the deployment package. AWS SDK and AWS
     #   CLI clients handle the encoding for you.
     #
@@ -4963,7 +5017,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -5208,7 +5262,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -5230,7 +5284,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -5410,7 +5464,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

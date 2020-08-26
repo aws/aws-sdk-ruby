@@ -31,6 +31,8 @@ module Aws::DataSync
     CreateLocationFsxWindowsResponse = Shapes::StructureShape.new(name: 'CreateLocationFsxWindowsResponse')
     CreateLocationNfsRequest = Shapes::StructureShape.new(name: 'CreateLocationNfsRequest')
     CreateLocationNfsResponse = Shapes::StructureShape.new(name: 'CreateLocationNfsResponse')
+    CreateLocationObjectStorageRequest = Shapes::StructureShape.new(name: 'CreateLocationObjectStorageRequest')
+    CreateLocationObjectStorageResponse = Shapes::StructureShape.new(name: 'CreateLocationObjectStorageResponse')
     CreateLocationS3Request = Shapes::StructureShape.new(name: 'CreateLocationS3Request')
     CreateLocationS3Response = Shapes::StructureShape.new(name: 'CreateLocationS3Response')
     CreateLocationSmbRequest = Shapes::StructureShape.new(name: 'CreateLocationSmbRequest')
@@ -51,6 +53,8 @@ module Aws::DataSync
     DescribeLocationFsxWindowsResponse = Shapes::StructureShape.new(name: 'DescribeLocationFsxWindowsResponse')
     DescribeLocationNfsRequest = Shapes::StructureShape.new(name: 'DescribeLocationNfsRequest')
     DescribeLocationNfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationNfsResponse')
+    DescribeLocationObjectStorageRequest = Shapes::StructureShape.new(name: 'DescribeLocationObjectStorageRequest')
+    DescribeLocationObjectStorageResponse = Shapes::StructureShape.new(name: 'DescribeLocationObjectStorageResponse')
     DescribeLocationS3Request = Shapes::StructureShape.new(name: 'DescribeLocationS3Request')
     DescribeLocationS3Response = Shapes::StructureShape.new(name: 'DescribeLocationS3Response')
     DescribeLocationSmbRequest = Shapes::StructureShape.new(name: 'DescribeLocationSmbRequest')
@@ -69,14 +73,17 @@ module Aws::DataSync
     EfsSubdirectory = Shapes::StringShape.new(name: 'EfsSubdirectory')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    FilterAttributeValue = Shapes::StringShape.new(name: 'FilterAttributeValue')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterRule = Shapes::StructureShape.new(name: 'FilterRule')
     FilterType = Shapes::StringShape.new(name: 'FilterType')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
+    FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     FsxFilesystemArn = Shapes::StringShape.new(name: 'FsxFilesystemArn')
     FsxWindowsSubdirectory = Shapes::StringShape.new(name: 'FsxWindowsSubdirectory')
     Gid = Shapes::StringShape.new(name: 'Gid')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    InputTagList = Shapes::ListShape.new(name: 'InputTagList')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     ListAgentsRequest = Shapes::StructureShape.new(name: 'ListAgentsRequest')
@@ -90,6 +97,9 @@ module Aws::DataSync
     ListTasksRequest = Shapes::StructureShape.new(name: 'ListTasksRequest')
     ListTasksResponse = Shapes::StructureShape.new(name: 'ListTasksResponse')
     LocationArn = Shapes::StringShape.new(name: 'LocationArn')
+    LocationFilter = Shapes::StructureShape.new(name: 'LocationFilter')
+    LocationFilterName = Shapes::StringShape.new(name: 'LocationFilterName')
+    LocationFilters = Shapes::ListShape.new(name: 'LocationFilters')
     LocationList = Shapes::ListShape.new(name: 'LocationList')
     LocationListEntry = Shapes::StructureShape.new(name: 'LocationListEntry')
     LocationUri = Shapes::StringShape.new(name: 'LocationUri')
@@ -102,8 +112,15 @@ module Aws::DataSync
     NfsMountOptions = Shapes::StructureShape.new(name: 'NfsMountOptions')
     NfsSubdirectory = Shapes::StringShape.new(name: 'NfsSubdirectory')
     NfsVersion = Shapes::StringShape.new(name: 'NfsVersion')
+    ObjectStorageAccessKey = Shapes::StringShape.new(name: 'ObjectStorageAccessKey')
+    ObjectStorageBucketName = Shapes::StringShape.new(name: 'ObjectStorageBucketName')
+    ObjectStorageSecretKey = Shapes::StringShape.new(name: 'ObjectStorageSecretKey')
+    ObjectStorageServerPort = Shapes::IntegerShape.new(name: 'ObjectStorageServerPort')
+    ObjectStorageServerProtocol = Shapes::StringShape.new(name: 'ObjectStorageServerProtocol')
     OnPremConfig = Shapes::StructureShape.new(name: 'OnPremConfig')
+    Operator = Shapes::StringShape.new(name: 'Operator')
     Options = Shapes::StructureShape.new(name: 'Options')
+    OutputTagList = Shapes::ListShape.new(name: 'OutputTagList')
     OverwriteMode = Shapes::StringShape.new(name: 'OverwriteMode')
     PLSecurityGroupArnList = Shapes::ListShape.new(name: 'PLSecurityGroupArnList')
     PLSubnetArnList = Shapes::ListShape.new(name: 'PLSubnetArnList')
@@ -129,7 +146,6 @@ module Aws::DataSync
     StartTaskExecutionResponse = Shapes::StructureShape.new(name: 'StartTaskExecutionResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
-    TagList = Shapes::ListShape.new(name: 'TagList')
     TagListEntry = Shapes::StructureShape.new(name: 'TagListEntry')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
@@ -141,12 +157,16 @@ module Aws::DataSync
     TaskExecutionListEntry = Shapes::StructureShape.new(name: 'TaskExecutionListEntry')
     TaskExecutionResultDetail = Shapes::StructureShape.new(name: 'TaskExecutionResultDetail')
     TaskExecutionStatus = Shapes::StringShape.new(name: 'TaskExecutionStatus')
+    TaskFilter = Shapes::StructureShape.new(name: 'TaskFilter')
+    TaskFilterName = Shapes::StringShape.new(name: 'TaskFilterName')
+    TaskFilters = Shapes::ListShape.new(name: 'TaskFilters')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskListEntry = Shapes::StructureShape.new(name: 'TaskListEntry')
     TaskQueueing = Shapes::StringShape.new(name: 'TaskQueueing')
     TaskSchedule = Shapes::StructureShape.new(name: 'TaskSchedule')
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     Time = Shapes::TimestampShape.new(name: 'Time')
+    TransferMode = Shapes::StringShape.new(name: 'TransferMode')
     Uid = Shapes::StringShape.new(name: 'Uid')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -175,7 +195,7 @@ module Aws::DataSync
 
     CreateAgentRequest.add_member(:activation_key, Shapes::ShapeRef.new(shape: ActivationKey, required: true, location_name: "ActivationKey"))
     CreateAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: TagValue, location_name: "AgentName"))
-    CreateAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateAgentRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     CreateAgentRequest.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: PLSubnetArnList, location_name: "SubnetArns"))
     CreateAgentRequest.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
@@ -187,7 +207,7 @@ module Aws::DataSync
     CreateLocationEfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: EfsSubdirectory, location_name: "Subdirectory"))
     CreateLocationEfsRequest.add_member(:efs_filesystem_arn, Shapes::ShapeRef.new(shape: EfsFilesystemArn, required: true, location_name: "EfsFilesystemArn"))
     CreateLocationEfsRequest.add_member(:ec2_config, Shapes::ShapeRef.new(shape: Ec2Config, required: true, location_name: "Ec2Config"))
-    CreateLocationEfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLocationEfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationEfsRequest.struct_class = Types::CreateLocationEfsRequest
 
     CreateLocationEfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -196,7 +216,7 @@ module Aws::DataSync
     CreateLocationFsxWindowsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: FsxWindowsSubdirectory, location_name: "Subdirectory"))
     CreateLocationFsxWindowsRequest.add_member(:fsx_filesystem_arn, Shapes::ShapeRef.new(shape: FsxFilesystemArn, required: true, location_name: "FsxFilesystemArn"))
     CreateLocationFsxWindowsRequest.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, required: true, location_name: "SecurityGroupArns"))
-    CreateLocationFsxWindowsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLocationFsxWindowsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationFsxWindowsRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, required: true, location_name: "User"))
     CreateLocationFsxWindowsRequest.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
     CreateLocationFsxWindowsRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, required: true, location_name: "Password"))
@@ -209,17 +229,31 @@ module Aws::DataSync
     CreateLocationNfsRequest.add_member(:server_hostname, Shapes::ShapeRef.new(shape: ServerHostname, required: true, location_name: "ServerHostname"))
     CreateLocationNfsRequest.add_member(:on_prem_config, Shapes::ShapeRef.new(shape: OnPremConfig, required: true, location_name: "OnPremConfig"))
     CreateLocationNfsRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
-    CreateLocationNfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLocationNfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationNfsRequest.struct_class = Types::CreateLocationNfsRequest
 
     CreateLocationNfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     CreateLocationNfsResponse.struct_class = Types::CreateLocationNfsResponse
 
+    CreateLocationObjectStorageRequest.add_member(:server_hostname, Shapes::ShapeRef.new(shape: ServerHostname, required: true, location_name: "ServerHostname"))
+    CreateLocationObjectStorageRequest.add_member(:server_port, Shapes::ShapeRef.new(shape: ObjectStorageServerPort, location_name: "ServerPort"))
+    CreateLocationObjectStorageRequest.add_member(:server_protocol, Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
+    CreateLocationObjectStorageRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
+    CreateLocationObjectStorageRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: ObjectStorageBucketName, required: true, location_name: "BucketName"))
+    CreateLocationObjectStorageRequest.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
+    CreateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
+    CreateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
+    CreateLocationObjectStorageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationObjectStorageRequest.struct_class = Types::CreateLocationObjectStorageRequest
+
+    CreateLocationObjectStorageResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationObjectStorageResponse.struct_class = Types::CreateLocationObjectStorageResponse
+
     CreateLocationS3Request.add_member(:subdirectory, Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
     CreateLocationS3Request.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "S3BucketArn"))
     CreateLocationS3Request.add_member(:s3_storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
     CreateLocationS3Request.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, required: true, location_name: "S3Config"))
-    CreateLocationS3Request.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLocationS3Request.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationS3Request.struct_class = Types::CreateLocationS3Request
 
     CreateLocationS3Response.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -232,7 +266,7 @@ module Aws::DataSync
     CreateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, required: true, location_name: "Password"))
     CreateLocationSmbRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
     CreateLocationSmbRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
-    CreateLocationSmbRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLocationSmbRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationSmbRequest.struct_class = Types::CreateLocationSmbRequest
 
     CreateLocationSmbResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -245,7 +279,7 @@ module Aws::DataSync
     CreateTaskRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
     CreateTaskRequest.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
     CreateTaskRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: TaskSchedule, location_name: "Schedule"))
-    CreateTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateTaskRequest.struct_class = Types::CreateTaskRequest
 
     CreateTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
@@ -307,6 +341,18 @@ module Aws::DataSync
     DescribeLocationNfsResponse.add_member(:mount_options, Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
     DescribeLocationNfsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationNfsResponse.struct_class = Types::DescribeLocationNfsResponse
+
+    DescribeLocationObjectStorageRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    DescribeLocationObjectStorageRequest.struct_class = Types::DescribeLocationObjectStorageRequest
+
+    DescribeLocationObjectStorageResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    DescribeLocationObjectStorageResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    DescribeLocationObjectStorageResponse.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
+    DescribeLocationObjectStorageResponse.add_member(:server_port, Shapes::ShapeRef.new(shape: ObjectStorageServerPort, location_name: "ServerPort"))
+    DescribeLocationObjectStorageResponse.add_member(:server_protocol, Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
+    DescribeLocationObjectStorageResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationObjectStorageResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationObjectStorageResponse.struct_class = Types::DescribeLocationObjectStorageResponse
 
     DescribeLocationS3Request.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     DescribeLocationS3Request.struct_class = Types::DescribeLocationS3Request
@@ -381,6 +427,10 @@ module Aws::DataSync
     FilterRule.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, location_name: "Value"))
     FilterRule.struct_class = Types::FilterRule
 
+    FilterValues.member = Shapes::ShapeRef.new(shape: FilterAttributeValue)
+
+    InputTagList.member = Shapes::ShapeRef.new(shape: TagListEntry)
+
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InternalException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "errorCode"))
     InternalException.struct_class = Types::InternalException
@@ -399,6 +449,7 @@ module Aws::DataSync
 
     ListLocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListLocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLocationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: LocationFilters, location_name: "Filters"))
     ListLocationsRequest.struct_class = Types::ListLocationsRequest
 
     ListLocationsResponse.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, location_name: "Locations"))
@@ -410,7 +461,7 @@ module Aws::DataSync
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
-    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagList, location_name: "Tags"))
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
@@ -425,11 +476,19 @@ module Aws::DataSync
 
     ListTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: TaskFilters, location_name: "Filters"))
     ListTasksRequest.struct_class = Types::ListTasksRequest
 
     ListTasksResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: TaskList, location_name: "Tasks"))
     ListTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTasksResponse.struct_class = Types::ListTasksResponse
+
+    LocationFilter.add_member(:name, Shapes::ShapeRef.new(shape: LocationFilterName, required: true, location_name: "Name"))
+    LocationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "Values"))
+    LocationFilter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
+    LocationFilter.struct_class = Types::LocationFilter
+
+    LocationFilters.member = Shapes::ShapeRef.new(shape: LocationFilter)
 
     LocationList.member = Shapes::ShapeRef.new(shape: LocationListEntry)
 
@@ -455,7 +514,10 @@ module Aws::DataSync
     Options.add_member(:bytes_per_second, Shapes::ShapeRef.new(shape: BytesPerSecond, location_name: "BytesPerSecond"))
     Options.add_member(:task_queueing, Shapes::ShapeRef.new(shape: TaskQueueing, location_name: "TaskQueueing"))
     Options.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
+    Options.add_member(:transfer_mode, Shapes::ShapeRef.new(shape: TransferMode, location_name: "TransferMode"))
     Options.struct_class = Types::Options
+
+    OutputTagList.member = Shapes::ShapeRef.new(shape: TagListEntry)
 
     PLSecurityGroupArnList.member = Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
 
@@ -485,14 +547,12 @@ module Aws::DataSync
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
-    TagList.member = Shapes::ShapeRef.new(shape: TagListEntry)
-
     TagListEntry.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     TagListEntry.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     TagListEntry.struct_class = Types::TagListEntry
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
-    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
@@ -513,6 +573,13 @@ module Aws::DataSync
     TaskExecutionResultDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "ErrorCode"))
     TaskExecutionResultDetail.add_member(:error_detail, Shapes::ShapeRef.new(shape: string, location_name: "ErrorDetail"))
     TaskExecutionResultDetail.struct_class = Types::TaskExecutionResultDetail
+
+    TaskFilter.add_member(:name, Shapes::ShapeRef.new(shape: TaskFilterName, required: true, location_name: "Name"))
+    TaskFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "Values"))
+    TaskFilter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
+    TaskFilter.struct_class = Types::TaskFilter
+
+    TaskFilters.member = Shapes::ShapeRef.new(shape: TaskFilter)
 
     TaskList.member = Shapes::ShapeRef.new(shape: TaskListEntry)
 
@@ -616,6 +683,16 @@ module Aws::DataSync
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:create_location_object_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocationObjectStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocationObjectStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocationObjectStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:create_location_s3, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLocationS3"
         o.http_method = "POST"
@@ -712,6 +789,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationNfsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationNfsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_location_object_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLocationObjectStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLocationObjectStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLocationObjectStorageResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

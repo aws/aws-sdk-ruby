@@ -26,6 +26,8 @@ module Aws::DatabaseMigrationService
     AvailabilityZonesList = Shapes::ListShape.new(name: 'AvailabilityZonesList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
+    CancelReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'CancelReplicationTaskAssessmentRunMessage')
+    CancelReplicationTaskAssessmentRunResponse = Shapes::StructureShape.new(name: 'CancelReplicationTaskAssessmentRunResponse')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
     CertificateWallet = Shapes::BlobShape.new(name: 'CertificateWallet')
@@ -55,10 +57,14 @@ module Aws::DatabaseMigrationService
     DeleteReplicationInstanceResponse = Shapes::StructureShape.new(name: 'DeleteReplicationInstanceResponse')
     DeleteReplicationSubnetGroupMessage = Shapes::StructureShape.new(name: 'DeleteReplicationSubnetGroupMessage')
     DeleteReplicationSubnetGroupResponse = Shapes::StructureShape.new(name: 'DeleteReplicationSubnetGroupResponse')
+    DeleteReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'DeleteReplicationTaskAssessmentRunMessage')
+    DeleteReplicationTaskAssessmentRunResponse = Shapes::StructureShape.new(name: 'DeleteReplicationTaskAssessmentRunResponse')
     DeleteReplicationTaskMessage = Shapes::StructureShape.new(name: 'DeleteReplicationTaskMessage')
     DeleteReplicationTaskResponse = Shapes::StructureShape.new(name: 'DeleteReplicationTaskResponse')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
     DescribeAccountAttributesResponse = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResponse')
+    DescribeApplicableIndividualAssessmentsMessage = Shapes::StructureShape.new(name: 'DescribeApplicableIndividualAssessmentsMessage')
+    DescribeApplicableIndividualAssessmentsResponse = Shapes::StructureShape.new(name: 'DescribeApplicableIndividualAssessmentsResponse')
     DescribeCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeCertificatesMessage')
     DescribeCertificatesResponse = Shapes::StructureShape.new(name: 'DescribeCertificatesResponse')
     DescribeConnectionsMessage = Shapes::StructureShape.new(name: 'DescribeConnectionsMessage')
@@ -87,6 +93,10 @@ module Aws::DatabaseMigrationService
     DescribeReplicationSubnetGroupsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationSubnetGroupsResponse')
     DescribeReplicationTaskAssessmentResultsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationTaskAssessmentResultsMessage')
     DescribeReplicationTaskAssessmentResultsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationTaskAssessmentResultsResponse')
+    DescribeReplicationTaskAssessmentRunsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationTaskAssessmentRunsMessage')
+    DescribeReplicationTaskAssessmentRunsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationTaskAssessmentRunsResponse')
+    DescribeReplicationTaskIndividualAssessmentsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationTaskIndividualAssessmentsMessage')
+    DescribeReplicationTaskIndividualAssessmentsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationTaskIndividualAssessmentsResponse')
     DescribeReplicationTasksMessage = Shapes::StructureShape.new(name: 'DescribeReplicationTasksMessage')
     DescribeReplicationTasksResponse = Shapes::StructureShape.new(name: 'DescribeReplicationTasksResponse')
     DescribeSchemasMessage = Shapes::StructureShape.new(name: 'DescribeSchemasMessage')
@@ -109,11 +119,15 @@ module Aws::DatabaseMigrationService
     EventSubscription = Shapes::StructureShape.new(name: 'EventSubscription')
     EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExcludeTestList = Shapes::ListShape.new(name: 'ExcludeTestList')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    IBMDb2Settings = Shapes::StructureShape.new(name: 'IBMDb2Settings')
     ImportCertificateMessage = Shapes::StructureShape.new(name: 'ImportCertificateMessage')
     ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
+    IncludeTestList = Shapes::ListShape.new(name: 'IncludeTestList')
+    IndividualAssessmentNameList = Shapes::ListShape.new(name: 'IndividualAssessmentNameList')
     InsufficientResourceCapacityFault = Shapes::StructureShape.new(name: 'InsufficientResourceCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
@@ -122,6 +136,7 @@ module Aws::DatabaseMigrationService
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     KMSAccessDeniedFault = Shapes::StructureShape.new(name: 'KMSAccessDeniedFault')
     KMSDisabledFault = Shapes::StructureShape.new(name: 'KMSDisabledFault')
+    KMSFault = Shapes::StructureShape.new(name: 'KMSFault')
     KMSInvalidStateFault = Shapes::StructureShape.new(name: 'KMSInvalidStateFault')
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KMSNotFoundFault = Shapes::StructureShape.new(name: 'KMSNotFoundFault')
@@ -133,6 +148,7 @@ module Aws::DatabaseMigrationService
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MessageFormatValue = Shapes::StringShape.new(name: 'MessageFormatValue')
+    MicrosoftSQLServerSettings = Shapes::StructureShape.new(name: 'MicrosoftSQLServerSettings')
     MigrationTypeValue = Shapes::StringShape.new(name: 'MigrationTypeValue')
     ModifyEndpointMessage = Shapes::StructureShape.new(name: 'ModifyEndpointMessage')
     ModifyEndpointResponse = Shapes::StructureShape.new(name: 'ModifyEndpointResponse')
@@ -145,14 +161,17 @@ module Aws::DatabaseMigrationService
     ModifyReplicationTaskMessage = Shapes::StructureShape.new(name: 'ModifyReplicationTaskMessage')
     ModifyReplicationTaskResponse = Shapes::StructureShape.new(name: 'ModifyReplicationTaskResponse')
     MongoDbSettings = Shapes::StructureShape.new(name: 'MongoDbSettings')
+    MySQLSettings = Shapes::StructureShape.new(name: 'MySQLSettings')
     NeptuneSettings = Shapes::StructureShape.new(name: 'NeptuneSettings')
     NestingLevelValue = Shapes::StringShape.new(name: 'NestingLevelValue')
+    OracleSettings = Shapes::StructureShape.new(name: 'OracleSettings')
     OrderableReplicationInstance = Shapes::StructureShape.new(name: 'OrderableReplicationInstance')
     OrderableReplicationInstanceList = Shapes::ListShape.new(name: 'OrderableReplicationInstanceList')
     ParquetVersionValue = Shapes::StringShape.new(name: 'ParquetVersionValue')
     PendingMaintenanceAction = Shapes::StructureShape.new(name: 'PendingMaintenanceAction')
     PendingMaintenanceActionDetails = Shapes::ListShape.new(name: 'PendingMaintenanceActionDetails')
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
+    PostgreSQLSettings = Shapes::StructureShape.new(name: 'PostgreSQLSettings')
     RebootReplicationInstanceMessage = Shapes::StructureShape.new(name: 'RebootReplicationInstanceMessage')
     RebootReplicationInstanceResponse = Shapes::StructureShape.new(name: 'RebootReplicationInstanceResponse')
     RedshiftSettings = Shapes::StructureShape.new(name: 'RedshiftSettings')
@@ -180,6 +199,11 @@ module Aws::DatabaseMigrationService
     ReplicationTask = Shapes::StructureShape.new(name: 'ReplicationTask')
     ReplicationTaskAssessmentResult = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentResult')
     ReplicationTaskAssessmentResultList = Shapes::ListShape.new(name: 'ReplicationTaskAssessmentResultList')
+    ReplicationTaskAssessmentRun = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRun')
+    ReplicationTaskAssessmentRunList = Shapes::ListShape.new(name: 'ReplicationTaskAssessmentRunList')
+    ReplicationTaskAssessmentRunProgress = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRunProgress')
+    ReplicationTaskIndividualAssessment = Shapes::StructureShape.new(name: 'ReplicationTaskIndividualAssessment')
+    ReplicationTaskIndividualAssessmentList = Shapes::ListShape.new(name: 'ReplicationTaskIndividualAssessmentList')
     ReplicationTaskList = Shapes::ListShape.new(name: 'ReplicationTaskList')
     ReplicationTaskStats = Shapes::StructureShape.new(name: 'ReplicationTaskStats')
     ResourceAlreadyExistsFault = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsFault')
@@ -187,6 +211,8 @@ module Aws::DatabaseMigrationService
     ResourceNotFoundFault = Shapes::StructureShape.new(name: 'ResourceNotFoundFault')
     ResourcePendingMaintenanceActions = Shapes::StructureShape.new(name: 'ResourcePendingMaintenanceActions')
     ResourceQuotaExceededFault = Shapes::StructureShape.new(name: 'ResourceQuotaExceededFault')
+    S3AccessDeniedFault = Shapes::StructureShape.new(name: 'S3AccessDeniedFault')
+    S3ResourceNotFoundFault = Shapes::StructureShape.new(name: 'S3ResourceNotFoundFault')
     S3Settings = Shapes::StructureShape.new(name: 'S3Settings')
     SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault')
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault')
@@ -196,6 +222,8 @@ module Aws::DatabaseMigrationService
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartReplicationTaskAssessmentMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentMessage')
     StartReplicationTaskAssessmentResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentResponse')
+    StartReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentRunMessage')
+    StartReplicationTaskAssessmentRunResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentRunResponse')
     StartReplicationTaskMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskMessage')
     StartReplicationTaskResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskResponse')
     StartReplicationTaskTypeValue = Shapes::StringShape.new(name: 'StartReplicationTaskTypeValue')
@@ -209,6 +237,7 @@ module Aws::DatabaseMigrationService
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
     SupportedEndpointType = Shapes::StructureShape.new(name: 'SupportedEndpointType')
     SupportedEndpointTypeList = Shapes::ListShape.new(name: 'SupportedEndpointTypeList')
+    SybaseSettings = Shapes::StructureShape.new(name: 'SybaseSettings')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     TableListToReload = Shapes::ListShape.new(name: 'TableListToReload')
     TableStatistics = Shapes::StructureShape.new(name: 'TableStatistics')
@@ -251,6 +280,12 @@ module Aws::DatabaseMigrationService
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZonesList.member = Shapes::ShapeRef.new(shape: String)
+
+    CancelReplicationTaskAssessmentRunMessage.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskAssessmentRunArn"))
+    CancelReplicationTaskAssessmentRunMessage.struct_class = Types::CancelReplicationTaskAssessmentRunMessage
+
+    CancelReplicationTaskAssessmentRunResponse.add_member(:replication_task_assessment_run, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun, location_name: "ReplicationTaskAssessmentRun"))
+    CancelReplicationTaskAssessmentRunResponse.struct_class = Types::CancelReplicationTaskAssessmentRunResponse
 
     Certificate.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
     Certificate.add_member(:certificate_creation_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CertificateCreationDate"))
@@ -300,6 +335,12 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     CreateEndpointMessage.add_member(:neptune_settings, Shapes::ShapeRef.new(shape: NeptuneSettings, location_name: "NeptuneSettings"))
     CreateEndpointMessage.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
+    CreateEndpointMessage.add_member(:postgre_sql_settings, Shapes::ShapeRef.new(shape: PostgreSQLSettings, location_name: "PostgreSQLSettings"))
+    CreateEndpointMessage.add_member(:my_sql_settings, Shapes::ShapeRef.new(shape: MySQLSettings, location_name: "MySQLSettings"))
+    CreateEndpointMessage.add_member(:oracle_settings, Shapes::ShapeRef.new(shape: OracleSettings, location_name: "OracleSettings"))
+    CreateEndpointMessage.add_member(:sybase_settings, Shapes::ShapeRef.new(shape: SybaseSettings, location_name: "SybaseSettings"))
+    CreateEndpointMessage.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
+    CreateEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
     CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -398,6 +439,12 @@ module Aws::DatabaseMigrationService
 
     DeleteReplicationSubnetGroupResponse.struct_class = Types::DeleteReplicationSubnetGroupResponse
 
+    DeleteReplicationTaskAssessmentRunMessage.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskAssessmentRunArn"))
+    DeleteReplicationTaskAssessmentRunMessage.struct_class = Types::DeleteReplicationTaskAssessmentRunMessage
+
+    DeleteReplicationTaskAssessmentRunResponse.add_member(:replication_task_assessment_run, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun, location_name: "ReplicationTaskAssessmentRun"))
+    DeleteReplicationTaskAssessmentRunResponse.struct_class = Types::DeleteReplicationTaskAssessmentRunResponse
+
     DeleteReplicationTaskMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
     DeleteReplicationTaskMessage.struct_class = Types::DeleteReplicationTaskMessage
 
@@ -409,6 +456,19 @@ module Aws::DatabaseMigrationService
     DescribeAccountAttributesResponse.add_member(:account_quotas, Shapes::ShapeRef.new(shape: AccountQuotaList, location_name: "AccountQuotas"))
     DescribeAccountAttributesResponse.add_member(:unique_account_identifier, Shapes::ShapeRef.new(shape: String, location_name: "UniqueAccountIdentifier"))
     DescribeAccountAttributesResponse.struct_class = Types::DescribeAccountAttributesResponse
+
+    DescribeApplicableIndividualAssessmentsMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
+    DescribeApplicableIndividualAssessmentsMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceArn"))
+    DescribeApplicableIndividualAssessmentsMessage.add_member(:source_engine_name, Shapes::ShapeRef.new(shape: String, location_name: "SourceEngineName"))
+    DescribeApplicableIndividualAssessmentsMessage.add_member(:target_engine_name, Shapes::ShapeRef.new(shape: String, location_name: "TargetEngineName"))
+    DescribeApplicableIndividualAssessmentsMessage.add_member(:migration_type, Shapes::ShapeRef.new(shape: MigrationTypeValue, location_name: "MigrationType"))
+    DescribeApplicableIndividualAssessmentsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeApplicableIndividualAssessmentsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeApplicableIndividualAssessmentsMessage.struct_class = Types::DescribeApplicableIndividualAssessmentsMessage
+
+    DescribeApplicableIndividualAssessmentsResponse.add_member(:individual_assessment_names, Shapes::ShapeRef.new(shape: IndividualAssessmentNameList, location_name: "IndividualAssessmentNames"))
+    DescribeApplicableIndividualAssessmentsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeApplicableIndividualAssessmentsResponse.struct_class = Types::DescribeApplicableIndividualAssessmentsResponse
 
     DescribeCertificatesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeCertificatesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -540,6 +600,24 @@ module Aws::DatabaseMigrationService
     DescribeReplicationTaskAssessmentResultsResponse.add_member(:replication_task_assessment_results, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentResultList, location_name: "ReplicationTaskAssessmentResults"))
     DescribeReplicationTaskAssessmentResultsResponse.struct_class = Types::DescribeReplicationTaskAssessmentResultsResponse
 
+    DescribeReplicationTaskAssessmentRunsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeReplicationTaskAssessmentRunsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeReplicationTaskAssessmentRunsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationTaskAssessmentRunsMessage.struct_class = Types::DescribeReplicationTaskAssessmentRunsMessage
+
+    DescribeReplicationTaskAssessmentRunsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationTaskAssessmentRunsResponse.add_member(:replication_task_assessment_runs, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRunList, location_name: "ReplicationTaskAssessmentRuns"))
+    DescribeReplicationTaskAssessmentRunsResponse.struct_class = Types::DescribeReplicationTaskAssessmentRunsResponse
+
+    DescribeReplicationTaskIndividualAssessmentsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeReplicationTaskIndividualAssessmentsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeReplicationTaskIndividualAssessmentsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationTaskIndividualAssessmentsMessage.struct_class = Types::DescribeReplicationTaskIndividualAssessmentsMessage
+
+    DescribeReplicationTaskIndividualAssessmentsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationTaskIndividualAssessmentsResponse.add_member(:replication_task_individual_assessments, Shapes::ShapeRef.new(shape: ReplicationTaskIndividualAssessmentList, location_name: "ReplicationTaskIndividualAssessments"))
+    DescribeReplicationTaskIndividualAssessmentsResponse.struct_class = Types::DescribeReplicationTaskIndividualAssessmentsResponse
+
     DescribeReplicationTasksMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeReplicationTasksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReplicationTasksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -609,6 +687,12 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     Endpoint.add_member(:neptune_settings, Shapes::ShapeRef.new(shape: NeptuneSettings, location_name: "NeptuneSettings"))
     Endpoint.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
+    Endpoint.add_member(:postgre_sql_settings, Shapes::ShapeRef.new(shape: PostgreSQLSettings, location_name: "PostgreSQLSettings"))
+    Endpoint.add_member(:my_sql_settings, Shapes::ShapeRef.new(shape: MySQLSettings, location_name: "MySQLSettings"))
+    Endpoint.add_member(:oracle_settings, Shapes::ShapeRef.new(shape: OracleSettings, location_name: "OracleSettings"))
+    Endpoint.add_member(:sybase_settings, Shapes::ShapeRef.new(shape: SybaseSettings, location_name: "SybaseSettings"))
+    Endpoint.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
+    Endpoint.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -643,6 +727,8 @@ module Aws::DatabaseMigrationService
 
     EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription)
 
+    ExcludeTestList.member = Shapes::ShapeRef.new(shape: String)
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
     Filter.struct_class = Types::Filter
@@ -650,6 +736,13 @@ module Aws::DatabaseMigrationService
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: String)
+
+    IBMDb2Settings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    IBMDb2Settings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    IBMDb2Settings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    IBMDb2Settings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    IBMDb2Settings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    IBMDb2Settings.struct_class = Types::IBMDb2Settings
 
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
     ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
@@ -659,6 +752,10 @@ module Aws::DatabaseMigrationService
 
     ImportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     ImportCertificateResponse.struct_class = Types::ImportCertificateResponse
+
+    IncludeTestList.member = Shapes::ShapeRef.new(shape: String)
+
+    IndividualAssessmentNameList.member = Shapes::ShapeRef.new(shape: String)
 
     InsufficientResourceCapacityFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InsufficientResourceCapacityFault.struct_class = Types::InsufficientResourceCapacityFault
@@ -678,6 +775,9 @@ module Aws::DatabaseMigrationService
     KMSDisabledFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     KMSDisabledFault.struct_class = Types::KMSDisabledFault
 
+    KMSFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KMSFault.struct_class = Types::KMSFault
+
     KMSInvalidStateFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     KMSInvalidStateFault.struct_class = Types::KMSInvalidStateFault
 
@@ -692,6 +792,14 @@ module Aws::DatabaseMigrationService
 
     KafkaSettings.add_member(:broker, Shapes::ShapeRef.new(shape: String, location_name: "Broker"))
     KafkaSettings.add_member(:topic, Shapes::ShapeRef.new(shape: String, location_name: "Topic"))
+    KafkaSettings.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormatValue, location_name: "MessageFormat"))
+    KafkaSettings.add_member(:include_transaction_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeTransactionDetails"))
+    KafkaSettings.add_member(:include_partition_value, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludePartitionValue"))
+    KafkaSettings.add_member(:partition_include_schema_table, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PartitionIncludeSchemaTable"))
+    KafkaSettings.add_member(:include_table_alter_operations, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeTableAlterOperations"))
+    KafkaSettings.add_member(:include_control_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeControlDetails"))
+    KafkaSettings.add_member(:message_max_bytes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MessageMaxBytes"))
+    KafkaSettings.add_member(:include_null_and_empty, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeNullAndEmpty"))
     KafkaSettings.struct_class = Types::KafkaSettings
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
@@ -704,6 +812,7 @@ module Aws::DatabaseMigrationService
     KinesisSettings.add_member(:partition_include_schema_table, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PartitionIncludeSchemaTable"))
     KinesisSettings.add_member(:include_table_alter_operations, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeTableAlterOperations"))
     KinesisSettings.add_member(:include_control_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeControlDetails"))
+    KinesisSettings.add_member(:include_null_and_empty, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeNullAndEmpty"))
     KinesisSettings.struct_class = Types::KinesisSettings
 
     ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
@@ -711,6 +820,13 @@ module Aws::DatabaseMigrationService
 
     ListTagsForResourceResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MicrosoftSQLServerSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    MicrosoftSQLServerSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    MicrosoftSQLServerSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    MicrosoftSQLServerSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    MicrosoftSQLServerSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    MicrosoftSQLServerSettings.struct_class = Types::MicrosoftSQLServerSettings
 
     ModifyEndpointMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     ModifyEndpointMessage.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String, location_name: "EndpointIdentifier"))
@@ -735,6 +851,12 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     ModifyEndpointMessage.add_member(:neptune_settings, Shapes::ShapeRef.new(shape: NeptuneSettings, location_name: "NeptuneSettings"))
     ModifyEndpointMessage.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
+    ModifyEndpointMessage.add_member(:postgre_sql_settings, Shapes::ShapeRef.new(shape: PostgreSQLSettings, location_name: "PostgreSQLSettings"))
+    ModifyEndpointMessage.add_member(:my_sql_settings, Shapes::ShapeRef.new(shape: MySQLSettings, location_name: "MySQLSettings"))
+    ModifyEndpointMessage.add_member(:oracle_settings, Shapes::ShapeRef.new(shape: OracleSettings, location_name: "OracleSettings"))
+    ModifyEndpointMessage.add_member(:sybase_settings, Shapes::ShapeRef.new(shape: SybaseSettings, location_name: "SybaseSettings"))
+    ModifyEndpointMessage.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
+    ModifyEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
     ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -802,6 +924,13 @@ module Aws::DatabaseMigrationService
     MongoDbSettings.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     MongoDbSettings.struct_class = Types::MongoDbSettings
 
+    MySQLSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    MySQLSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    MySQLSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    MySQLSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    MySQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    MySQLSettings.struct_class = Types::MySQLSettings
+
     NeptuneSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
     NeptuneSettings.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
     NeptuneSettings.add_member(:s3_bucket_folder, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketFolder"))
@@ -810,6 +939,18 @@ module Aws::DatabaseMigrationService
     NeptuneSettings.add_member(:max_retry_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRetryCount"))
     NeptuneSettings.add_member(:iam_auth_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IamAuthEnabled"))
     NeptuneSettings.struct_class = Types::NeptuneSettings
+
+    OracleSettings.add_member(:asm_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "AsmPassword"))
+    OracleSettings.add_member(:asm_server, Shapes::ShapeRef.new(shape: String, location_name: "AsmServer"))
+    OracleSettings.add_member(:asm_user, Shapes::ShapeRef.new(shape: String, location_name: "AsmUser"))
+    OracleSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    OracleSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    OracleSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    OracleSettings.add_member(:security_db_encryption, Shapes::ShapeRef.new(shape: SecretString, location_name: "SecurityDbEncryption"))
+    OracleSettings.add_member(:security_db_encryption_name, Shapes::ShapeRef.new(shape: String, location_name: "SecurityDbEncryptionName"))
+    OracleSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    OracleSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    OracleSettings.struct_class = Types::OracleSettings
 
     OrderableReplicationInstance.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     OrderableReplicationInstance.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceClass"))
@@ -835,6 +976,13 @@ module Aws::DatabaseMigrationService
     PendingMaintenanceActionDetails.member = Shapes::ShapeRef.new(shape: PendingMaintenanceAction)
 
     PendingMaintenanceActions.member = Shapes::ShapeRef.new(shape: ResourcePendingMaintenanceActions)
+
+    PostgreSQLSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    PostgreSQLSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    PostgreSQLSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    PostgreSQLSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    PostgreSQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    PostgreSQLSettings.struct_class = Types::PostgreSQLSettings
 
     RebootReplicationInstanceMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     RebootReplicationInstanceMessage.add_member(:force_failover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceFailover"))
@@ -985,6 +1133,35 @@ module Aws::DatabaseMigrationService
 
     ReplicationTaskAssessmentResultList.member = Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentResult)
 
+    ReplicationTaskAssessmentRun.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskAssessmentRunArn"))
+    ReplicationTaskAssessmentRun.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
+    ReplicationTaskAssessmentRun.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ReplicationTaskAssessmentRun.add_member(:replication_task_assessment_run_creation_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationTaskAssessmentRunCreationDate"))
+    ReplicationTaskAssessmentRun.add_member(:assessment_progress, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRunProgress, location_name: "AssessmentProgress"))
+    ReplicationTaskAssessmentRun.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))
+    ReplicationTaskAssessmentRun.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    ReplicationTaskAssessmentRun.add_member(:result_location_bucket, Shapes::ShapeRef.new(shape: String, location_name: "ResultLocationBucket"))
+    ReplicationTaskAssessmentRun.add_member(:result_location_folder, Shapes::ShapeRef.new(shape: String, location_name: "ResultLocationFolder"))
+    ReplicationTaskAssessmentRun.add_member(:result_encryption_mode, Shapes::ShapeRef.new(shape: String, location_name: "ResultEncryptionMode"))
+    ReplicationTaskAssessmentRun.add_member(:result_kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResultKmsKeyArn"))
+    ReplicationTaskAssessmentRun.add_member(:assessment_run_name, Shapes::ShapeRef.new(shape: String, location_name: "AssessmentRunName"))
+    ReplicationTaskAssessmentRun.struct_class = Types::ReplicationTaskAssessmentRun
+
+    ReplicationTaskAssessmentRunList.member = Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun)
+
+    ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_count, Shapes::ShapeRef.new(shape: Integer, location_name: "IndividualAssessmentCount"))
+    ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_completed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "IndividualAssessmentCompletedCount"))
+    ReplicationTaskAssessmentRunProgress.struct_class = Types::ReplicationTaskAssessmentRunProgress
+
+    ReplicationTaskIndividualAssessment.add_member(:replication_task_individual_assessment_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIndividualAssessmentArn"))
+    ReplicationTaskIndividualAssessment.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskAssessmentRunArn"))
+    ReplicationTaskIndividualAssessment.add_member(:individual_assessment_name, Shapes::ShapeRef.new(shape: String, location_name: "IndividualAssessmentName"))
+    ReplicationTaskIndividualAssessment.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ReplicationTaskIndividualAssessment.add_member(:replication_task_individual_assessment_start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationTaskIndividualAssessmentStartDate"))
+    ReplicationTaskIndividualAssessment.struct_class = Types::ReplicationTaskIndividualAssessment
+
+    ReplicationTaskIndividualAssessmentList.member = Shapes::ShapeRef.new(shape: ReplicationTaskIndividualAssessment)
+
     ReplicationTaskList.member = Shapes::ShapeRef.new(shape: ReplicationTask)
 
     ReplicationTaskStats.add_member(:full_load_progress_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "FullLoadProgressPercent"))
@@ -1013,6 +1190,12 @@ module Aws::DatabaseMigrationService
 
     ResourceQuotaExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ResourceQuotaExceededFault.struct_class = Types::ResourceQuotaExceededFault
+
+    S3AccessDeniedFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    S3AccessDeniedFault.struct_class = Types::S3AccessDeniedFault
+
+    S3ResourceNotFoundFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    S3ResourceNotFoundFault.struct_class = Types::S3ResourceNotFoundFault
 
     S3Settings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
     S3Settings.add_member(:external_table_definition, Shapes::ShapeRef.new(shape: String, location_name: "ExternalTableDefinition"))
@@ -1052,6 +1235,20 @@ module Aws::DatabaseMigrationService
 
     StartReplicationTaskAssessmentResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     StartReplicationTaskAssessmentResponse.struct_class = Types::StartReplicationTaskAssessmentResponse
+
+    StartReplicationTaskAssessmentRunMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:result_location_bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResultLocationBucket"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:result_location_folder, Shapes::ShapeRef.new(shape: String, location_name: "ResultLocationFolder"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:result_encryption_mode, Shapes::ShapeRef.new(shape: String, location_name: "ResultEncryptionMode"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:result_kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResultKmsKeyArn"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:assessment_run_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssessmentRunName"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:include_only, Shapes::ShapeRef.new(shape: IncludeTestList, location_name: "IncludeOnly"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:exclude, Shapes::ShapeRef.new(shape: ExcludeTestList, location_name: "Exclude"))
+    StartReplicationTaskAssessmentRunMessage.struct_class = Types::StartReplicationTaskAssessmentRunMessage
+
+    StartReplicationTaskAssessmentRunResponse.add_member(:replication_task_assessment_run, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun, location_name: "ReplicationTaskAssessmentRun"))
+    StartReplicationTaskAssessmentRunResponse.struct_class = Types::StartReplicationTaskAssessmentRunResponse
 
     StartReplicationTaskMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
     StartReplicationTaskMessage.add_member(:start_replication_task_type, Shapes::ShapeRef.new(shape: StartReplicationTaskTypeValue, required: true, location_name: "StartReplicationTaskType"))
@@ -1093,6 +1290,13 @@ module Aws::DatabaseMigrationService
 
     SupportedEndpointTypeList.member = Shapes::ShapeRef.new(shape: SupportedEndpointType)
 
+    SybaseSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    SybaseSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    SybaseSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    SybaseSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    SybaseSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    SybaseSettings.struct_class = Types::SybaseSettings
+
     TableListToReload.member = Shapes::ShapeRef.new(shape: TableToReload)
 
     TableStatistics.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
@@ -1118,8 +1322,8 @@ module Aws::DatabaseMigrationService
 
     TableStatisticsList.member = Shapes::ShapeRef.new(shape: TableStatistics)
 
-    TableToReload.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    TableToReload.add_member(:table_name, Shapes::ShapeRef.new(shape: String, location_name: "TableName"))
+    TableToReload.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SchemaName"))
+    TableToReload.add_member(:table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TableName"))
     TableToReload.struct_class = Types::TableToReload
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
@@ -1180,6 +1384,17 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionMessage)
         o.output = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:cancel_replication_task_assessment_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelReplicationTaskAssessmentRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelReplicationTaskAssessmentRunMessage)
+        o.output = Shapes::ShapeRef.new(shape: CancelReplicationTaskAssessmentRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:create_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -1331,12 +1546,40 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
+      api.add_operation(:delete_replication_task_assessment_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteReplicationTaskAssessmentRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteReplicationTaskAssessmentRunMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteReplicationTaskAssessmentRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
       api.add_operation(:describe_account_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAccountAttributes"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountAttributesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountAttributesResponse)
+      end)
+
+      api.add_operation(:describe_applicable_individual_assessments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeApplicableIndividualAssessments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeApplicableIndividualAssessmentsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeApplicableIndividualAssessmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -1526,6 +1769,36 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeReplicationTaskAssessmentResultsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeReplicationTaskAssessmentResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_replication_task_assessment_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReplicationTaskAssessmentRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReplicationTaskAssessmentRunsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReplicationTaskAssessmentRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_replication_task_individual_assessments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReplicationTaskIndividualAssessments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReplicationTaskIndividualAssessmentsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReplicationTaskIndividualAssessmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
@@ -1733,6 +2006,26 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: StartReplicationTaskAssessmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:start_replication_task_assessment_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartReplicationTaskAssessmentRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartReplicationTaskAssessmentRunMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartReplicationTaskAssessmentRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
       end)
 
       api.add_operation(:stop_replication_task, Seahorse::Model::Operation.new.tap do |o|

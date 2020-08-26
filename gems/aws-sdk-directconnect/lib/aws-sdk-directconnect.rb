@@ -44,9 +44,9 @@ require_relative 'aws-sdk-directconnect/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::DirectConnect
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.35.0'
 
 end

@@ -348,6 +348,63 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AttachCertificateToDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName", # required
+    #         certificate_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution that the certificate will be attached
+    #   to.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of the certificate to attach to a distribution.
+    #
+    #   Only certificates with a status of `ISSUED` can be attached to a
+    #   distribution.
+    #
+    #   Use the `GetCertificates` action to get a list of certificate names
+    #   that you can specify.
+    #
+    #   <note markdown="1"> This is the name of the certificate resource type and is used only
+    #   to reference the certificate in other API actions. It can be
+    #   different than the domain name of the certificate. For example, your
+    #   certificate name might be `WordPress-Blog-Certificate` and the
+    #   domain name of the certificate might be `example.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachCertificateToDistributionRequest AWS API Documentation
+    #
+    class AttachCertificateToDistributionRequest < Struct.new(
+      :distribution_name,
+      :certificate_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachCertificateToDistributionResult AWS API Documentation
+    #
+    class AttachCertificateToDistributionResult < Struct.new(
+      :operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AttachDiskRequest
     #   data as a hash:
     #
@@ -809,6 +866,492 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the default cache behavior of an Amazon Lightsail content
+    # delivery network (CDN) distribution.
+    #
+    # @note When making an API call, you may pass CacheBehavior
+    #   data as a hash:
+    #
+    #       {
+    #         behavior: "dont-cache", # accepts dont-cache, cache
+    #       }
+    #
+    # @!attribute [rw] behavior
+    #   The cache behavior of the distribution.
+    #
+    #   The following cache behaviors can be specified:
+    #
+    #   * <b> <code>cache</code> </b> - This option is best for static
+    #     sites. When specified, your distribution caches and serves your
+    #     entire website as static content. This behavior is ideal for
+    #     websites with static content that doesn't change depending on who
+    #     views it, or for websites that don't use cookies, headers, or
+    #     query strings to personalize content.
+    #
+    #   * <b> <code>dont-cache</code> </b> - This option is best for sites
+    #     that serve a mix of static and dynamic content. When specified,
+    #     your distribution caches and serve only the content that is
+    #     specified in the distribution's `CacheBehaviorPerPath` parameter.
+    #     This behavior is ideal for websites or web applications that use
+    #     cookies, headers, and query strings to personalize content for
+    #     individual users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CacheBehavior AWS API Documentation
+    #
+    class CacheBehavior < Struct.new(
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the per-path cache behavior of an Amazon Lightsail content
+    # delivery network (CDN) distribution.
+    #
+    # A per-path cache behavior is used to override, or add an exception to,
+    # the default cache behavior of a distribution. For example, if the
+    # `cacheBehavior` is set to `cache`, then a per-path cache behavior can
+    # be used to specify a directory, file, or file type that your
+    # distribution will cache. Alternately, if the distribution's
+    # `cacheBehavior` is `dont-cache`, then a per-path cache behavior can be
+    # used to specify a directory, file, or file type that your distribution
+    # will not cache.
+    #
+    # if the cacheBehavior's behavior is set to 'cache', then
+    #
+    # @note When making an API call, you may pass CacheBehaviorPerPath
+    #   data as a hash:
+    #
+    #       {
+    #         path: "string",
+    #         behavior: "dont-cache", # accepts dont-cache, cache
+    #       }
+    #
+    # @!attribute [rw] path
+    #   The path to a directory or file to cached, or not cache. Use an
+    #   asterisk symbol to specify wildcard directories
+    #   (`path/to/assets/*`), and file types (`*.html, *jpg, *js`).
+    #   Directories and file paths are case-sensitive.
+    #
+    #   Examples:
+    #
+    #   * Specify the following to cache all files in the document root of
+    #     an Apache web server running on a Lightsail instance.
+    #
+    #     `var/www/html/`
+    #
+    #   * Specify the following file to cache only the index page in the
+    #     document root of an Apache web server.
+    #
+    #     `var/www/html/index.html`
+    #
+    #   * Specify the following to cache only the .html files in the
+    #     document root of an Apache web server.
+    #
+    #     `var/www/html/*.html`
+    #
+    #   * Specify the following to cache only the .jpg, .png, and .gif files
+    #     in the images sub-directory of the document root of an Apache web
+    #     server.
+    #
+    #     `var/www/html/images/*.jpg`
+    #
+    #     `var/www/html/images/*.png`
+    #
+    #     `var/www/html/images/*.gif`
+    #
+    #     Specify the following to cache all files in the images
+    #     sub-directory of the document root of an Apache web server.
+    #
+    #     `var/www/html/images/`
+    #   @return [String]
+    #
+    # @!attribute [rw] behavior
+    #   The cache behavior for the specified path.
+    #
+    #   You can specify one of the following per-path cache behaviors:
+    #
+    #   * <b> <code>cache</code> </b> - This behavior caches the specified
+    #     path.
+    #
+    #   * <b> <code>dont-cache</code> </b> - This behavior doesn't cache
+    #     the specified path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CacheBehaviorPerPath AWS API Documentation
+    #
+    class CacheBehaviorPerPath < Struct.new(
+      :path,
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the cache settings of an Amazon Lightsail content delivery
+    # network (CDN) distribution.
+    #
+    # These settings apply only to your distribution's `cacheBehaviors`
+    # (including the `defaultCacheBehavior`) that have a `behavior` of
+    # `cache`.
+    #
+    # @note When making an API call, you may pass CacheSettings
+    #   data as a hash:
+    #
+    #       {
+    #         default_ttl: 1,
+    #         minimum_ttl: 1,
+    #         maximum_ttl: 1,
+    #         allowed_http_methods: "NonEmptyString",
+    #         cached_http_methods: "NonEmptyString",
+    #         forwarded_cookies: {
+    #           option: "none", # accepts none, allow-list, all
+    #           cookies_allow_list: ["string"],
+    #         },
+    #         forwarded_headers: {
+    #           option: "none", # accepts none, allow-list, all
+    #           headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
+    #         },
+    #         forwarded_query_strings: {
+    #           option: false,
+    #           query_strings_allow_list: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] default_ttl
+    #   The default amount of time that objects stay in the distribution's
+    #   cache before the distribution forwards another request to the origin
+    #   to determine whether the content has been updated.
+    #
+    #   <note markdown="1"> The value specified applies only when the origin does not add HTTP
+    #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
+    #   and `Expires` to objects.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_ttl
+    #   The minimum amount of time that objects stay in the distribution's
+    #   cache before the distribution forwards another request to the origin
+    #   to determine whether the object has been updated.
+    #
+    #   A value of `0` must be specified for `minimumTTL` if the
+    #   distribution is configured to forward all headers to the origin.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_ttl
+    #   The maximum amount of time that objects stay in the distribution's
+    #   cache before the distribution forwards another request to the origin
+    #   to determine whether the object has been updated.
+    #
+    #   The value specified applies only when the origin adds HTTP headers
+    #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
+    #   `Expires` to objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allowed_http_methods
+    #   The HTTP methods that are processed and forwarded to the
+    #   distribution's origin.
+    #
+    #   You can specify the following options:
+    #
+    #   * `GET,HEAD` - The distribution forwards the `GET` and `HEAD`
+    #     methods.
+    #
+    #   * `GET,HEAD,OPTIONS` - The distribution forwards the `GET`, `HEAD`,
+    #     and `OPTIONS` methods.
+    #
+    #   * `GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE` - The distribution
+    #     forwards the `GET`, `HEAD`, `OPTIONS`, `PUT`, `PATCH`, `POST`, and
+    #     `DELETE` methods.
+    #
+    #   If you specify the third option, you might need to restrict access
+    #   to your distribution's origin so users can't perform operations
+    #   that you don't want them to. For example, you might not want users
+    #   to have permission to delete objects from your origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] cached_http_methods
+    #   The HTTP method responses that are cached by your distribution.
+    #
+    #   You can specify the following options:
+    #
+    #   * `GET,HEAD` - The distribution caches responses to the `GET` and
+    #     `HEAD` methods.
+    #
+    #   * `GET,HEAD,OPTIONS` - The distribution caches responses to the
+    #     `GET`, `HEAD`, and `OPTIONS` methods.
+    #   @return [String]
+    #
+    # @!attribute [rw] forwarded_cookies
+    #   An object that describes the cookies that are forwarded to the
+    #   origin. Your content is cached based on the cookies that are
+    #   forwarded.
+    #   @return [Types::CookieObject]
+    #
+    # @!attribute [rw] forwarded_headers
+    #   An object that describes the headers that are forwarded to the
+    #   origin. Your content is cached based on the headers that are
+    #   forwarded.
+    #   @return [Types::HeaderObject]
+    #
+    # @!attribute [rw] forwarded_query_strings
+    #   An object that describes the query strings that are forwarded to the
+    #   origin. Your content is cached based on the query strings that are
+    #   forwarded.
+    #   @return [Types::QueryStringObject]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CacheSettings AWS API Documentation
+    #
+    class CacheSettings < Struct.new(
+      :default_ttl,
+      :minimum_ttl,
+      :maximum_ttl,
+      :allowed_http_methods,
+      :cached_http_methods,
+      :forwarded_cookies,
+      :forwarded_headers,
+      :forwarded_query_strings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the full details of an Amazon Lightsail SSL/TLS certificate.
+    #
+    # <note markdown="1"> To get a summary of a certificate, use the `GetCertificates` action
+    # and ommit `includeCertificateDetails` from your request. The response
+    # will include only the certificate Amazon Resource Name (ARN),
+    # certificate name, domain name, and tags.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the certificate (e.g., `my-certificate`).
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The validation status of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] serial_number
+    #   The serial number of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_alternative_names
+    #   An array of strings that specify the alternate domains (e.g.,
+    #   `example2.com`) and subdomains (e.g., `blog.example.com`) of the
+    #   certificate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_validation_records
+    #   An array of objects that describe the domain validation records of
+    #   the certificate.
+    #   @return [Array<Types::DomainValidationRecord>]
+    #
+    # @!attribute [rw] request_failure_reason
+    #   The validation failure reason, if any, of the certificate.
+    #
+    #   The following failure reasons are possible:
+    #
+    #   * <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies
+    #     to email validation, which is not available for Lightsail
+    #     certificates.
+    #
+    #   * <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail
+    #     requires additional information to process this certificate
+    #     request. This can happen as a fraud-protection measure, such as
+    #     when the domain ranks within the Alexa top 1000 websites. To
+    #     provide the required information, use the [AWS Support Center][1]
+    #     to contact AWS Support.
+    #
+    #     <note markdown="1"> You cannot request a certificate for Amazon-owned domain names
+    #     such as those ending in amazonaws.com, cloudfront.net, or
+    #     elasticbeanstalk.com.
+    #
+    #      </note>
+    #
+    #   * <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the
+    #     domain names in the certificate request was reported as an unsafe
+    #     domain by [VirusTotal][2]. To correct the problem, search for your
+    #     domain name on the [VirusTotal][2] website. If your domain is
+    #     reported as suspicious, see [Google Help for Hacked Websites][3]
+    #     to learn what you can do.
+    #
+    #     If you believe that the result is a false positive, notify the
+    #     organization that is reporting the domain. VirusTotal is an
+    #     aggregate of several antivirus and URL scanners and cannot remove
+    #     your domain from a block list itself. After you correct the
+    #     problem and the VirusTotal registry has been updated, request a
+    #     new certificate.
+    #
+    #     If you see this error and your domain is not included in the
+    #     VirusTotal list, visit the [AWS Support Center][1] and create a
+    #     case.
+    #
+    #   * <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the
+    #     domain names in the certificate request is not valid. Typically,
+    #     this is because a domain name in the request is not a valid
+    #     top-level domain. Try to request a certificate again, correcting
+    #     any spelling errors or typos that were in the failed request, and
+    #     ensure that all domain names in the request are for valid
+    #     top-level domains. For example, you cannot request a certificate
+    #     for `example.invalidpublicdomain` because `invalidpublicdomain` is
+    #     not a valid top-level domain.
+    #
+    #   * <b> <code>OTHER</code> </b> - Typically, this failure occurs when
+    #     there is a typographical error in one or more of the domain names
+    #     in the certificate request. Try to request a certificate again,
+    #     correcting any spelling errors or typos that were in the failed
+    #     request.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home
+    #   [2]: https://www.virustotal.com/gui/home/url
+    #   [3]: https://www.google.com/webmasters/hacked/?hl=en
+    #   @return [String]
+    #
+    # @!attribute [rw] in_use_resource_count
+    #   The number of Lightsail resources that the certificate is attached
+    #   to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_algorithm
+    #   The algorithm used to generate the key pair (the public and private
+    #   key) of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the certificate was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] issued_at
+    #   The timestamp when the certificate was issued.
+    #   @return [Time]
+    #
+    # @!attribute [rw] issuer_ca
+    #   The certificate authority that issued the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_before
+    #   The timestamp when the certificate is first valid.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_after
+    #   The timestamp when the certificate expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] eligible_to_renew
+    #   The renewal eligibility of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_summary
+    #   An object that describes the status of the certificate renewal
+    #   managed by Lightsail.
+    #   @return [Types::RenewalSummary]
+    #
+    # @!attribute [rw] revoked_at
+    #   The timestamp when the certificate was revoked. This value is
+    #   present only when the certificate status is `REVOKED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revocation_reason
+    #   The reason the certificate was revoked. This value is present only
+    #   when the certificate status is `REVOKED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values for the resource. For more
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] support_code
+    #   The support code. Include this code in your email to support when
+    #   you have questions about your Lightsail certificate. This code
+    #   enables our support team to look up your Lightsail information more
+    #   easily.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :arn,
+      :name,
+      :domain_name,
+      :status,
+      :serial_number,
+      :subject_alternative_names,
+      :domain_validation_records,
+      :request_failure_reason,
+      :in_use_resource_count,
+      :key_algorithm,
+      :created_at,
+      :issued_at,
+      :issuer_ca,
+      :not_before,
+      :not_after,
+      :eligible_to_renew,
+      :renewal_summary,
+      :revoked_at,
+      :revocation_reason,
+      :tags,
+      :support_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Lightsail SSL/TLS certificate.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_detail
+    #   An object that describes a certificate in detail.
+    #   @return [Types::Certificate]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values for the resource. For more
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CertificateSummary AWS API Documentation
+    #
+    class CertificateSummary < Struct.new(
+      :certificate_arn,
+      :certificate_name,
+      :domain_name,
+      :certificate_detail,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CloseInstancePublicPortsRequest
     #   data as a hash:
     #
@@ -1014,6 +1557,40 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes whether an Amazon Lightsail content delivery network (CDN)
+    # distribution forwards cookies to the origin and, if so, which ones.
+    #
+    # For the cookies that you specify, your distribution caches separate
+    # versions of the specified content based on the cookie values in viewer
+    # requests.
+    #
+    # @note When making an API call, you may pass CookieObject
+    #   data as a hash:
+    #
+    #       {
+    #         option: "none", # accepts none, allow-list, all
+    #         cookies_allow_list: ["string"],
+    #       }
+    #
+    # @!attribute [rw] option
+    #   Specifies which cookies to forward to the distribution's origin for
+    #   a cache behavior: `all`, `none`, or `allow-list` to forward only the
+    #   cookies specified in the `cookiesAllowList` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] cookies_allow_list
+    #   The specific cookies to forward to your distribution's origin.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CookieObject AWS API Documentation
+    #
+    class CookieObject < Struct.new(
+      :option,
+      :cookies_allow_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CopySnapshotRequest
     #   data as a hash:
     #
@@ -1127,6 +1704,77 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotResult AWS API Documentation
     #
     class CopySnapshotResult < Struct.new(
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_name: "CertificateName", # required
+    #         domain_name: "DomainName", # required
+    #         subject_alternative_names: ["DomainName"],
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] certificate_name
+    #   The name for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name (e.g., `example.com`) for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_alternative_names
+    #   An array of strings that specify the alternate domains (e.g.,
+    #   `example2.com`) and subdomains (e.g., `blog.example.com`) for the
+    #   certificate.
+    #
+    #   You can specify a maximum of nine alternate domains (in addition to
+    #   the primary domain name).
+    #
+    #   Wildcard domain entries (e.g., `*.example.com`) are not supported.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values to add to the certificate during
+    #   create.
+    #
+    #   Use the `TagResource` action to tag a resource after it's created.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCertificateRequest AWS API Documentation
+    #
+    class CreateCertificateRequest < Struct.new(
+      :certificate_name,
+      :domain_name,
+      :subject_alternative_names,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate
+    #   An object that describes the certificate created.
+    #   @return [Types::CertificateSummary]
+    #
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCertificateResult AWS API Documentation
+    #
+    class CreateCertificateResult < Struct.new(
+      :certificate,
       :operations)
       SENSITIVE = []
       include Aws::Structure
@@ -1317,8 +1965,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] add_ons
@@ -1461,8 +2108,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] add_ons
@@ -1542,8 +2188,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskSnapshotRequest AWS API Documentation
@@ -1567,6 +2212,130 @@ module Aws::Lightsail
     #
     class CreateDiskSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName", # required
+    #         origin: { # required
+    #           name: "ResourceName",
+    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
+    #           protocol_policy: "http-only", # accepts http-only, https-only
+    #         },
+    #         default_cache_behavior: { # required
+    #           behavior: "dont-cache", # accepts dont-cache, cache
+    #         },
+    #         cache_behavior_settings: {
+    #           default_ttl: 1,
+    #           minimum_ttl: 1,
+    #           maximum_ttl: 1,
+    #           allowed_http_methods: "NonEmptyString",
+    #           cached_http_methods: "NonEmptyString",
+    #           forwarded_cookies: {
+    #             option: "none", # accepts none, allow-list, all
+    #             cookies_allow_list: ["string"],
+    #           },
+    #           forwarded_headers: {
+    #             option: "none", # accepts none, allow-list, all
+    #             headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
+    #           },
+    #           forwarded_query_strings: {
+    #             option: false,
+    #             query_strings_allow_list: ["string"],
+    #           },
+    #         },
+    #         cache_behaviors: [
+    #           {
+    #             path: "string",
+    #             behavior: "dont-cache", # accepts dont-cache, cache
+    #           },
+    #         ],
+    #         bundle_id: "string", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name for the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   An object that describes the origin resource for the distribution,
+    #   such as a Lightsail instance or load balancer.
+    #
+    #   The distribution pulls, caches, and serves content from the origin.
+    #   @return [Types::InputOrigin]
+    #
+    # @!attribute [rw] default_cache_behavior
+    #   An object that describes the default cache behavior for the
+    #   distribution.
+    #   @return [Types::CacheBehavior]
+    #
+    # @!attribute [rw] cache_behavior_settings
+    #   An object that describes the cache behavior settings for the
+    #   distribution.
+    #   @return [Types::CacheSettings]
+    #
+    # @!attribute [rw] cache_behaviors
+    #   An array of objects that describe the per-path cache behavior for
+    #   the distribution.
+    #   @return [Array<Types::CacheBehaviorPerPath>]
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle ID to use for the distribution.
+    #
+    #   A distribution bundle describes the specifications of your
+    #   distribution, such as the monthly cost and monthly network transfer
+    #   quota.
+    #
+    #   Use the `GetDistributionBundles` action to get a list of
+    #   distribution bundle IDs that you can specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values to add to the distribution during
+    #   create.
+    #
+    #   Use the `TagResource` action to tag a resource after it's created.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDistributionRequest AWS API Documentation
+    #
+    class CreateDistributionRequest < Struct.new(
+      :distribution_name,
+      :origin,
+      :default_cache_behavior,
+      :cache_behavior_settings,
+      :cache_behaviors,
+      :bundle_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution
+    #   An object that describes the distribution created.
+    #   @return [Types::LightsailDistribution]
+    #
+    # @!attribute [rw] operation
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDistributionResult AWS API Documentation
+    #
+    class CreateDistributionResult < Struct.new(
+      :distribution,
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1650,8 +2419,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainRequest AWS API Documentation
@@ -1703,8 +2471,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshotRequest AWS API Documentation
@@ -1832,8 +2599,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] add_ons
@@ -2034,8 +2800,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] add_ons
@@ -2094,8 +2859,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPairRequest AWS API Documentation
@@ -2198,8 +2962,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerRequest AWS API Documentation
@@ -2281,8 +3044,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerTlsCertificateRequest AWS API Documentation
@@ -2410,8 +3172,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseFromSnapshotRequest AWS API Documentation
@@ -2603,8 +3364,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseRequest AWS API Documentation
@@ -2671,8 +3431,7 @@ module Aws::Lightsail
     #   The tag keys and optional values to add to the resource during
     #   create.
     #
-    #   To tag a resource after it has been created, see the `tag resource`
-    #   operation.
+    #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseSnapshotRequest AWS API Documentation
@@ -2769,6 +3528,42 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAutoSnapshotResult AWS API Documentation
     #
     class DeleteAutoSnapshotResult < Struct.new(
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_name: "CertificateName", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of the certificate to delete.
+    #
+    #   Use the `GetCertificates` action to get a list of certificate names
+    #   that you can specify.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteCertificateRequest AWS API Documentation
+    #
+    class DeleteCertificateRequest < Struct.new(
+      :certificate_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteCertificateResult AWS API Documentation
+    #
+    class DeleteCertificateResult < Struct.new(
       :operations)
       SENSITIVE = []
       include Aws::Structure
@@ -2884,6 +3679,42 @@ module Aws::Lightsail
     #
     class DeleteDiskSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName",
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution to delete.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDistributionRequest AWS API Documentation
+    #
+    class DeleteDistributionRequest < Struct.new(
+      :distribution_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDistributionResult AWS API Documentation
+    #
+    class DeleteDistributionResult < Struct.new(
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3306,6 +4137,42 @@ module Aws::Lightsail
     class DestinationInfo < Struct.new(
       :id,
       :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetachCertificateFromDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution from which to detach the certificate.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachCertificateFromDistributionRequest AWS API Documentation
+    #
+    class DetachCertificateFromDistributionRequest < Struct.new(
+      :distribution_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachCertificateFromDistributionResult AWS API Documentation
+    #
+    class DetachCertificateFromDistributionResult < Struct.new(
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3743,6 +4610,41 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the specifications of a distribution bundle.
+    #
+    # @!attribute [rw] bundle_id
+    #   The ID of the bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the distribution bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   The monthly price, in US dollars, of the bundle.
+    #   @return [Float]
+    #
+    # @!attribute [rw] transfer_per_month_in_gb
+    #   The monthly network transfer quota of the bundle.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_active
+    #   Indicates whether the bundle is active, and can be specified for a
+    #   new distribution.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DistributionBundle AWS API Documentation
+    #
+    class DistributionBundle < Struct.new(
+      :bundle_id,
+      :name,
+      :price,
+      :transfer_per_month_in_gb,
+      :is_active)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a domain where you are storing recordsets in Lightsail.
     #
     # @!attribute [rw] name
@@ -3884,6 +4786,28 @@ module Aws::Lightsail
       :is_alias,
       :type,
       :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the domain validation records of an Amazon Lightsail SSL/TLS
+    # certificate.
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name of the certificate validation record. For example,
+    #   `example.com` or `www.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_record
+    #   An object that describes the DNS records to add to your domain's
+    #   DNS to validate it for the certificate.
+    #   @return [Types::ResourceRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DomainValidationRecord AWS API Documentation
+    #
+    class DomainValidationRecord < Struct.new(
+      :domain_name,
+      :resource_record)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4360,6 +5284,63 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCertificatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
+    #         include_certificate_details: false,
+    #         certificate_name: "CertificateName",
+    #       }
+    #
+    # @!attribute [rw] certificate_statuses
+    #   The status of the certificates for which to return information.
+    #
+    #   For example, specify `ISSUED` to return only certificates with an
+    #   `ISSUED` status.
+    #
+    #   When omitted, the response includes all of your certificates in the
+    #   AWS region where the request is made, regardless of their current
+    #   status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_certificate_details
+    #   Indicates whether to include detailed information about the
+    #   certificates in the response.
+    #
+    #   When omitted, the response includes only the certificate names,
+    #   Amazon Resource Names (ARNs), domain names, and tags.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name for the certificate for which to return information.
+    #
+    #   When omitted, the response includes all of your certificates in the
+    #   AWS region where the request is made.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCertificatesRequest AWS API Documentation
+    #
+    class GetCertificatesRequest < Struct.new(
+      :certificate_statuses,
+      :include_certificate_details,
+      :certificate_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificates
+    #   An object that describes certificates.
+    #   @return [Array<Types::CertificateSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCertificatesResult AWS API Documentation
+    #
+    class GetCertificatesResult < Struct.new(
+      :certificates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCloudFormationStackRecordsRequest
     #   data as a hash:
     #
@@ -4596,6 +5577,318 @@ module Aws::Lightsail
     #
     class GetDisksResult < Struct.new(
       :disks,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionBundlesRequest AWS API Documentation
+    #
+    class GetDistributionBundlesRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] bundles
+    #   An object that describes a distribution bundle.
+    #   @return [Array<Types::DistributionBundle>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionBundlesResult AWS API Documentation
+    #
+    class GetDistributionBundlesResult < Struct.new(
+      :bundles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDistributionLatestCacheResetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName",
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution for which to return the timestamp of
+    #   the last cache reset.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #
+    #   When omitted, the response includes the latest cache reset timestamp
+    #   of all your distributions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionLatestCacheResetRequest AWS API Documentation
+    #
+    class GetDistributionLatestCacheResetRequest < Struct.new(
+      :distribution_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the last cache reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp of the last cache reset (e.g., `1479734909.17`) in
+    #   Unix time format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionLatestCacheResetResult AWS API Documentation
+    #
+    class GetDistributionLatestCacheResetResult < Struct.new(
+      :status,
+      :create_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDistributionMetricDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName", # required
+    #         metric_name: "Requests", # required, accepts Requests, BytesDownloaded, BytesUploaded, TotalErrorRate, Http4xxErrorRate, Http5xxErrorRate
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         period: 1, # required
+    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution for which to get metric data.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The metric for which you want to return information.
+    #
+    #   Valid distribution metric names are listed below, along with the
+    #   most useful `statistics` to include in your request, and the
+    #   published `unit` value.
+    #
+    #   * <b> <code>Requests</code> </b> - The total number of viewer
+    #     requests received by your Lightsail distribution, for all HTTP
+    #     methods, and for both HTTP and HTTPS requests.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `None`.
+    #
+    #   * <b> <code>BytesDownloaded</code> </b> - The number of bytes
+    #     downloaded by viewers for GET, HEAD, and OPTIONS requests.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `None`.
+    #
+    #   * <b> <code>BytesUploaded </code> </b> - The number of bytes
+    #     uploaded to your origin by your Lightsail distribution, using POST
+    #     and PUT requests.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `None`.
+    #
+    #   * <b> <code>TotalErrorRate</code> </b> - The percentage of all
+    #     viewer requests for which the response's HTTP status code was 4xx
+    #     or 5xx.
+    #
+    #     `Statistics`\: The most useful statistic is `Average`.
+    #
+    #     `Unit`\: The published unit is `Percent`.
+    #
+    #   * <b> <code>4xxErrorRate</code> </b> - The percentage of all viewer
+    #     requests for which the response's HTTP status cod was 4xx. In
+    #     these cases, the client or client viewer may have made an error.
+    #     For example, a status code of 404 (Not Found) means that the
+    #     client requested an object that could not be found.
+    #
+    #     `Statistics`\: The most useful statistic is `Average`.
+    #
+    #     `Unit`\: The published unit is `Percent`.
+    #
+    #   * <b> <code>5xxErrorRate</code> </b> - The percentage of all viewer
+    #     requests for which the response's HTTP status code was 5xx. In
+    #     these cases, the origin server did not satisfy the requests. For
+    #     example, a status code of 503 (Service Unavailable) means that the
+    #     origin server is currently unavailable.
+    #
+    #     `Statistics`\: The most useful statistic is `Average`.
+    #
+    #     `Unit`\: The published unit is `Percent`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time interval for which to get metric data.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use a start time of October 1, 2018,
+    #     at 8 PM UTC, specify `1538424000` as the start time.
+    #
+    #   You can convert a human-friendly time to Unix time format using a
+    #   converter like [Epoch converter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time interval for which to get metric data.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use an end time of October 1, 2018, at
+    #     9 PM UTC, specify `1538427600` as the end time.
+    #
+    #   You can convert a human-friendly time to Unix time format using a
+    #   converter like [Epoch converter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] period
+    #   The granularity, in seconds, for the metric data points that will be
+    #   returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   The unit for the metric data request.
+    #
+    #   Valid units depend on the metric data being requested. For the valid
+    #   units with each available metric, see the `metricName` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistics
+    #   The statistic for the metric.
+    #
+    #   The following statistics are available:
+    #
+    #   * `Minimum` - The lowest value observed during the specified period.
+    #     Use this value to determine low volumes of activity for your
+    #     application.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
+    #
+    #   * `Sum` - All values submitted for the matching metric added
+    #     together. You can use this statistic to determine the total volume
+    #     of a metric.
+    #
+    #   * `Average` - The value of Sum / SampleCount during the specified
+    #     period. By comparing this statistic with the Minimum and Maximum
+    #     values, you can determine the full scope of a metric and how close
+    #     the average use is to the Minimum and Maximum values. This
+    #     comparison helps you to know when to increase or decrease your
+    #     resources.
+    #
+    #   * `SampleCount` - The count, or number, of data points used for the
+    #     statistical calculation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionMetricDataRequest AWS API Documentation
+    #
+    class GetDistributionMetricDataRequest < Struct.new(
+      :distribution_name,
+      :metric_name,
+      :start_time,
+      :end_time,
+      :period,
+      :unit,
+      :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The name of the metric returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_data
+    #   An array of objects that describe the metric data returned.
+    #   @return [Array<Types::MetricDatapoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionMetricDataResult AWS API Documentation
+    #
+    class GetDistributionMetricDataResult < Struct.new(
+      :metric_name,
+      :metric_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDistributionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName",
+    #         page_token: "string",
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution for which to return information.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #
+    #   When omitted, the response includes all of your distributions in the
+    #   AWS Region where the request is made.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetDistributions` request.
+    #   If your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionsRequest AWS API Documentation
+    #
+    class GetDistributionsRequest < Struct.new(
+      :distribution_name,
+      :page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distributions
+    #   An array of objects that describe your distributions.
+    #   @return [Array<Types::LightsailDistribution>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetDistributions`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionsResult AWS API Documentation
+    #
+    class GetDistributionsResult < Struct.new(
+      :distributions,
       :next_page_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6625,6 +7918,53 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the request headers that a Lightsail distribution bases
+    # caching on.
+    #
+    # For the headers that you specify, your distribution caches separate
+    # versions of the specified content based on the header values in viewer
+    # requests. For example, suppose viewer requests for `logo.jpg` contain
+    # a custom `product` header that has a value of either `acme` or `apex`,
+    # and you configure your distribution to cache your content based on
+    # values in the `product` header. Your distribution forwards the
+    # `product` header to the origin and caches the response from the origin
+    # once for each header value.
+    #
+    # @note When making an API call, you may pass HeaderObject
+    #   data as a hash:
+    #
+    #       {
+    #         option: "none", # accepts none, allow-list, all
+    #         headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
+    #       }
+    #
+    # @!attribute [rw] option
+    #   The headers that you want your distribution to forward to your
+    #   origin and base caching on.
+    #
+    #   You can configure your distribution to do one of the following:
+    #
+    #   * <b> <code>all</code> </b> - Forward all headers to your origin.
+    #
+    #   * <b> <code>none</code> </b> - Forward only the default headers.
+    #
+    #   * <b> <code>allow-list</code> </b> - Forward only the headers you
+    #     specify using the `headersAllowList` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers_allow_list
+    #   The specific headers to forward to your distribution's origin.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/HeaderObject AWS API Documentation
+    #
+    class HeaderObject < Struct.new(
+      :option,
+      :headers_allow_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the public SSH host keys or the RDP certificate.
     #
     # @!attribute [rw] algorithm
@@ -6736,6 +8076,45 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the origin resource of an Amazon Lightsail content delivery
+    # network (CDN) distribution.
+    #
+    # An origin can be a Lightsail instance or load balancer. A distribution
+    # pulls content from an origin, caches it, and serves it to viewers via
+    # a worldwide network of edge servers.
+    #
+    # @note When making an API call, you may pass InputOrigin
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName",
+    #         region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
+    #         protocol_policy: "http-only", # accepts http-only, https-only
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the origin resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The AWS Region name of the origin resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_policy
+    #   The protocol that your Amazon Lightsail distribution uses when
+    #   establishing a connection with your origin to pull content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InputOrigin AWS API Documentation
+    #
+    class InputOrigin < Struct.new(
+      :name,
+      :region_name,
+      :protocol_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an instance (a virtual private server).
     #
     # @!attribute [rw] name
@@ -6756,7 +8135,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the instance was created (e.g., `1479734909.17`).
+    #   The timestamp when the instance was created (e.g., `1479734909.17`)
+    #   in Unix time format.
     #   @return [Time]
     #
     # @!attribute [rw] location
@@ -7664,6 +9044,139 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes an Amazon Lightsail content delivery network (CDN)
+    # distribution.
+    #
+    # @!attribute [rw] name
+    #   The name of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_code
+    #   The support code. Include this code in your email to support when
+    #   you have questions about your Lightsail distribution. This code
+    #   enables our support team to look up your Lightsail information more
+    #   easily.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the distribution was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   An object that describes the location of the distribution, such as
+    #   the AWS Region and Availability Zone.
+    #
+    #   <note markdown="1"> Lightsail distributions are global resources that can reference an
+    #   origin in any AWS Region, and distribute its content globally.
+    #   However, all distributions are located in the `us-east-1` Region.
+    #
+    #    </note>
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The Lightsail resource type (e.g., `Distribution`).
+    #   @return [String]
+    #
+    # @!attribute [rw] alternative_domain_names
+    #   The alternate domain names of the distribution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   Indicates whether the distribution is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] bundle_id
+    #   The ID of the bundle currently applied to the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of the SSL/TLS certificate attached to the distribution, if
+    #   any.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   An object that describes the origin resource of the distribution,
+    #   such as a Lightsail instance or load balancer.
+    #
+    #   The distribution pulls, caches, and serves content from the origin.
+    #   @return [Types::Origin]
+    #
+    # @!attribute [rw] origin_public_dns
+    #   The public DNS of the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_cache_behavior
+    #   An object that describes the default cache behavior of the
+    #   distribution.
+    #   @return [Types::CacheBehavior]
+    #
+    # @!attribute [rw] cache_behavior_settings
+    #   An object that describes the cache behavior settings of the
+    #   distribution.
+    #   @return [Types::CacheSettings]
+    #
+    # @!attribute [rw] cache_behaviors
+    #   An array of objects that describe the per-path cache behavior of the
+    #   distribution.
+    #   @return [Array<Types::CacheBehaviorPerPath>]
+    #
+    # @!attribute [rw] able_to_update_bundle
+    #   Indicates whether the bundle that is currently applied to your
+    #   distribution, specified using the `distributionName` parameter, can
+    #   be changed to another bundle.
+    #
+    #   Use the `UpdateDistributionBundle` action to change your
+    #   distribution's bundle.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values for the resource. For more
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LightsailDistribution AWS API Documentation
+    #
+    class LightsailDistribution < Struct.new(
+      :name,
+      :arn,
+      :support_code,
+      :created_at,
+      :location,
+      :resource_type,
+      :alternative_domain_names,
+      :status,
+      :is_enabled,
+      :domain_name,
+      :bundle_id,
+      :certificate_name,
+      :origin,
+      :origin_public_dns,
+      :default_cache_behavior,
+      :cache_behavior_settings,
+      :cache_behaviors,
+      :able_to_update_bundle,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the Lightsail load balancer.
     #
     # @!attribute [rw] name
@@ -7867,7 +9380,66 @@ module Aws::Lightsail
     #   @return [Array<Types::LoadBalancerTlsCertificateDomainValidationRecord>]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for the SSL/TLS certificate validation failure.
+    #   The validation failure reason, if any, of the certificate.
+    #
+    #   The following failure reasons are possible:
+    #
+    #   * <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies
+    #     to email validation, which is not available for Lightsail
+    #     certificates.
+    #
+    #   * <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail
+    #     requires additional information to process this certificate
+    #     request. This can happen as a fraud-protection measure, such as
+    #     when the domain ranks within the Alexa top 1000 websites. To
+    #     provide the required information, use the [AWS Support Center][1]
+    #     to contact AWS Support.
+    #
+    #     <note markdown="1"> You cannot request a certificate for Amazon-owned domain names
+    #     such as those ending in amazonaws.com, cloudfront.net, or
+    #     elasticbeanstalk.com.
+    #
+    #      </note>
+    #
+    #   * <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the
+    #     domain names in the certificate request was reported as an unsafe
+    #     domain by [VirusTotal][2]. To correct the problem, search for your
+    #     domain name on the [VirusTotal][2] website. If your domain is
+    #     reported as suspicious, see [Google Help for Hacked Websites][3]
+    #     to learn what you can do.
+    #
+    #     If you believe that the result is a false positive, notify the
+    #     organization that is reporting the domain. VirusTotal is an
+    #     aggregate of several antivirus and URL scanners and cannot remove
+    #     your domain from a block list itself. After you correct the
+    #     problem and the VirusTotal registry has been updated, request a
+    #     new certificate.
+    #
+    #     If you see this error and your domain is not included in the
+    #     VirusTotal list, visit the [AWS Support Center][1] and create a
+    #     case.
+    #
+    #   * <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the
+    #     domain names in the certificate request is not valid. Typically,
+    #     this is because a domain name in the request is not a valid
+    #     top-level domain. Try to request a certificate again, correcting
+    #     any spelling errors or typos that were in the failed request, and
+    #     ensure that all domain names in the request are for valid
+    #     top-level domains. For example, you cannot request a certificate
+    #     for `example.invalidpublicdomain` because `invalidpublicdomain` is
+    #     not a valid top-level domain.
+    #
+    #   * <b> <code>OTHER</code> </b> - Typically, this failure occurs when
+    #     there is a typographical error in one or more of the domain names
+    #     in the certificate request. Try to request a certificate again,
+    #     correcting any spelling errors or typos that were in the failed
+    #     request.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home
+    #   [2]: https://www.virustotal.com/gui/home/url
+    #   [3]: https://www.google.com/webmasters/hacked/?hl=en
     #   @return [String]
     #
     # @!attribute [rw] issued_at
@@ -7879,8 +9451,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] key_algorithm
-    #   The algorithm that was used to generate the key pair (the public and
-    #   private key).
+    #   The algorithm used to generate the key pair (the public and private
+    #   key).
     #   @return [String]
     #
     # @!attribute [rw] not_after
@@ -7892,16 +9464,18 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] renewal_summary
-    #   An object containing information about the status of Lightsail's
-    #   managed renewal for the certificate.
+    #   An object that describes the status of the certificate renewal
+    #   managed by Lightsail.
     #   @return [Types::LoadBalancerTlsCertificateRenewalSummary]
     #
     # @!attribute [rw] revocation_reason
-    #   The reason the certificate was revoked. Valid values are below.
+    #   The reason the certificate was revoked. This value is present only
+    #   when the certificate status is `REVOKED`.
     #   @return [String]
     #
     # @!attribute [rw] revoked_at
-    #   The timestamp when the SSL/TLS certificate was revoked.
+    #   The timestamp when the certificate was revoked. This value is
+    #   present only when the certificate status is `REVOKED`.
     #   @return [Time]
     #
     # @!attribute [rw] serial
@@ -7918,12 +9492,9 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
-    #   One or more domains or subdomains included in the certificate. This
-    #   list contains the domain names that are bound to the public key that
-    #   is contained in the certificate. The subject alternative names
-    #   include the canonical domain name (CNAME) of the certificate and
-    #   additional domain names that can be used to connect to the website,
-    #   such as `example.com`, `www.example.com`, or `m.example.com`.
+    #   An array of strings that specify the alternate domains (e.g.,
+    #   `example2.com`) and subdomains (e.g., `blog.example.com`) for the
+    #   certificate.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificate AWS API Documentation
@@ -8019,9 +9590,54 @@ module Aws::Lightsail
     # Contains information about the status of Lightsail's managed renewal
     # for the certificate.
     #
+    # The renewal status of the certificate.
+    #
+    # The following renewal status are possible:
+    #
+    # * <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting
+    #   to automatically validate the domain names in the certificate. No
+    #   further action is required.
+    #
+    # * <b> <code>PendingValidation</code> </b> - Lightsail couldn't
+    #   automatically validate one or more domain names in the certificate.
+    #   You must take action to validate these domain names or the
+    #   certificate won't be renewed. If you used DNS validation, check to
+    #   make sure your certificate's domain validation records exist in
+    #   your domain's DNS, and that your certificate remains in use.
+    #
+    # * <b> <code>Success</code> </b> - All domain names in the certificate
+    #   are validated, and Lightsail renewed the certificate. No further
+    #   action is required.
+    #
+    # * <b> <code>Failed</code> </b> - One or more domain names were not
+    #   validated before the certificate expired, and Lightsail did not
+    #   renew the certificate. You can request a new certificate using the
+    #   `CreateCertificate` action.
+    #
     # @!attribute [rw] renewal_status
-    #   The status of Lightsail's managed renewal of the certificate. Valid
-    #   values are listed below.
+    #   The renewal status of the certificate.
+    #
+    #   The following renewal status are possible:
+    #
+    #   * <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting
+    #     to automatically validate the domain names of the certificate. No
+    #     further action is required.
+    #
+    #   * <b> <code>PendingValidation</code> </b> - Lightsail couldn't
+    #     automatically validate one or more domain names of the
+    #     certificate. You must take action to validate these domain names
+    #     or the certificate won't be renewed. Check to make sure your
+    #     certificate's domain validation records exist in your domain's
+    #     DNS, and that your certificate remains in use.
+    #
+    #   * <b> <code>Success</code> </b> - All domain names in the
+    #     certificate are validated, and Lightsail renewed the certificate.
+    #     No further action is required.
+    #
+    #   * <b> <code>Failed</code> </b> - One or more domain names were not
+    #     validated before the certificate expired, and Lightsail did not
+    #     renew the certificate. You can request a new certificate using the
+    #     `CreateCertificate` action.
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
@@ -8333,6 +9949,41 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the origin resource of an Amazon Lightsail content delivery
+    # network (CDN) distribution.
+    #
+    # An origin can be a Lightsail instance or load balancer. A distribution
+    # pulls content from an origin, caches it, and serves it to viewers via
+    # a worldwide network of edge servers.
+    #
+    # @!attribute [rw] name
+    #   The name of the origin resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the origin resource (e.g., *Instance*).
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The AWS Region name of the origin resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_policy
+    #   The protocol that your Amazon Lightsail distribution uses when
+    #   establishing a connection with your origin to pull content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Origin AWS API Documentation
+    #
+    class Origin < Struct.new(
+      :name,
+      :resource_type,
+      :region_name,
+      :protocol_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8819,6 +10470,47 @@ module Aws::Lightsail
     #
     class PutInstancePublicPortsResult < Struct.new(
       :operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the query string parameters that an Amazon Lightsail content
+    # delivery network (CDN) distribution to bases caching on.
+    #
+    # For the query strings that you specify, your distribution caches
+    # separate versions of the specified content based on the query string
+    # values in viewer requests.
+    #
+    # @note When making an API call, you may pass QueryStringObject
+    #   data as a hash:
+    #
+    #       {
+    #         option: false,
+    #         query_strings_allow_list: ["string"],
+    #       }
+    #
+    # @!attribute [rw] option
+    #   Indicates whether the distribution forwards and caches based on
+    #   query strings.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] query_strings_allow_list
+    #   The specific query strings that the distribution forwards to the
+    #   origin.
+    #
+    #   Your distribution will cache content based on the specified query
+    #   strings.
+    #
+    #   If the `option` parameter is true, then your distribution forwards
+    #   all query strings, regardless of what you specify using the
+    #   `queryStringsAllowList` parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/QueryStringObject AWS API Documentation
+    #
+    class QueryStringObject < Struct.new(
+      :option,
+      :query_strings_allow_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9466,6 +11158,106 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the status of a SSL/TLS certificate renewal managed by
+    # Amazon Lightsail.
+    #
+    # @!attribute [rw] domain_validation_records
+    #   An array of objects that describe the domain validation records of
+    #   the certificate.
+    #   @return [Array<Types::DomainValidationRecord>]
+    #
+    # @!attribute [rw] renewal_status
+    #   The renewal status of the certificate.
+    #
+    #   The following renewal status are possible:
+    #
+    #   * <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting
+    #     to automatically validate the domain names of the certificate. No
+    #     further action is required.
+    #
+    #   * <b> <code>PendingValidation</code> </b> - Lightsail couldn't
+    #     automatically validate one or more domain names of the
+    #     certificate. You must take action to validate these domain names
+    #     or the certificate won't be renewed. Check to make sure your
+    #     certificate's domain validation records exist in your domain's
+    #     DNS, and that your certificate remains in use.
+    #
+    #   * <b> <code>Success</code> </b> - All domain names in the
+    #     certificate are validated, and Lightsail renewed the certificate.
+    #     No further action is required.
+    #
+    #   * <b> <code>Failed</code> </b> - One or more domain names were not
+    #     validated before the certificate expired, and Lightsail did not
+    #     renew the certificate. You can request a new certificate using the
+    #     `CreateCertificate` action.
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_status_reason
+    #   The reason for the renewal status of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the certificate was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RenewalSummary AWS API Documentation
+    #
+    class RenewalSummary < Struct.new(
+      :domain_validation_records,
+      :renewal_status,
+      :renewal_status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ResetDistributionCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName",
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution for which to reset cache.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResetDistributionCacheRequest AWS API Documentation
+    #
+    class ResetDistributionCacheRequest < Struct.new(
+      :distribution_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the reset cache request.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp of the reset cache request (e.g., `1479734909.17`) in
+    #   Unix time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResetDistributionCacheResult AWS API Documentation
+    #
+    class ResetDistributionCacheResult < Struct.new(
+      :status,
+      :create_time,
+      :operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the resource location.
     #
     # @!attribute [rw] availability_zone
@@ -9482,6 +11274,31 @@ module Aws::Lightsail
     class ResourceLocation < Struct.new(
       :availability_zone,
       :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the domain name system (DNS) records to add to your
+    # domain's DNS to validate it for an Amazon Lightsail certificate.
+    #
+    # @!attribute [rw] name
+    #   The name of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The DNS record type.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the DNS record.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResourceRecord AWS API Documentation
+    #
+    class ResourceRecord < Struct.new(
+      :name,
+      :type,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9983,6 +11800,156 @@ module Aws::Lightsail
     #
     class UntagResourceResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateDistributionBundleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName",
+    #         bundle_id: "string",
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution for which to update the bundle.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle ID of the new bundle to apply to your distribution.
+    #
+    #   Use the `GetDistributionBundles` action to get a list of
+    #   distribution bundle IDs that you can specify.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionBundleRequest AWS API Documentation
+    #
+    class UpdateDistributionBundleRequest < Struct.new(
+      :distribution_name,
+      :bundle_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation
+    #   Describes the API operation.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionBundleResult AWS API Documentation
+    #
+    class UpdateDistributionBundleResult < Struct.new(
+      :operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_name: "ResourceName", # required
+    #         origin: {
+    #           name: "ResourceName",
+    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
+    #           protocol_policy: "http-only", # accepts http-only, https-only
+    #         },
+    #         default_cache_behavior: {
+    #           behavior: "dont-cache", # accepts dont-cache, cache
+    #         },
+    #         cache_behavior_settings: {
+    #           default_ttl: 1,
+    #           minimum_ttl: 1,
+    #           maximum_ttl: 1,
+    #           allowed_http_methods: "NonEmptyString",
+    #           cached_http_methods: "NonEmptyString",
+    #           forwarded_cookies: {
+    #             option: "none", # accepts none, allow-list, all
+    #             cookies_allow_list: ["string"],
+    #           },
+    #           forwarded_headers: {
+    #             option: "none", # accepts none, allow-list, all
+    #             headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
+    #           },
+    #           forwarded_query_strings: {
+    #             option: false,
+    #             query_strings_allow_list: ["string"],
+    #           },
+    #         },
+    #         cache_behaviors: [
+    #           {
+    #             path: "string",
+    #             behavior: "dont-cache", # accepts dont-cache, cache
+    #           },
+    #         ],
+    #         is_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] distribution_name
+    #   The name of the distribution to update.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   An object that describes the origin resource for the distribution,
+    #   such as a Lightsail instance or load balancer.
+    #
+    #   The distribution pulls, caches, and serves content from the origin.
+    #   @return [Types::InputOrigin]
+    #
+    # @!attribute [rw] default_cache_behavior
+    #   An object that describes the default cache behavior for the
+    #   distribution.
+    #   @return [Types::CacheBehavior]
+    #
+    # @!attribute [rw] cache_behavior_settings
+    #   An object that describes the cache behavior settings for the
+    #   distribution.
+    #
+    #   <note markdown="1"> The `cacheBehaviorSettings` specified in your
+    #   `UpdateDistributionRequest` will replace your distribution's
+    #   existing settings.
+    #
+    #    </note>
+    #   @return [Types::CacheSettings]
+    #
+    # @!attribute [rw] cache_behaviors
+    #   An array of objects that describe the per-path cache behavior for
+    #   the distribution.
+    #   @return [Array<Types::CacheBehaviorPerPath>]
+    #
+    # @!attribute [rw] is_enabled
+    #   Indicates whether to enable the distribution.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionRequest AWS API Documentation
+    #
+    class UpdateDistributionRequest < Struct.new(
+      :distribution_name,
+      :origin,
+      :default_cache_behavior,
+      :cache_behavior_settings,
+      :cache_behaviors,
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionResult AWS API Documentation
+    #
+    class UpdateDistributionResult < Struct.new(
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end

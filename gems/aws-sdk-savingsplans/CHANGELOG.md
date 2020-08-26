@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-08-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2020-08-10)
+------------------
+
+* Feature - Updates to the list of services supported by this API.
+
 1.7.0 (2020-06-23)
 ------------------
 
