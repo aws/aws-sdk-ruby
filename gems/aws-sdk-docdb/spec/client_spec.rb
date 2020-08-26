@@ -35,7 +35,7 @@ module Aws
               source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
               target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be nil
+            expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
 
@@ -47,7 +47,7 @@ module Aws
               source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
               target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
+            expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
@@ -76,9 +76,11 @@ module Aws
       #       resp = client.create_db_cluster(
       #         kms_key_id: kms_key_id,
       #         db_cluster_identifier: db_cluster_identifier,
-      #         engine: engine
+      #         engine: engine,
+      #         master_username: 'username',
+      #         master_user_password: 'password'
       #       )
-      #       expect(resp.context.params[:pre_signed_url]).to be nil
+      #       expect(resp.context.params[:pre_signed_url]).to eq nil
       #     end
       #   end
       #
@@ -88,9 +90,11 @@ module Aws
       #         pre_signed_url: 'https://aws.com',
       #         kms_key_id: kms_key_id,
       #         db_cluster_identifier: db_cluster_identifier,
-      #         engine: engine
+      #         engine: engine,
+      #         master_username: 'username',
+      #         master_user_password: 'password'
       #       )
-      #       expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
+      #       expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
       #     end
       #   end
       #
@@ -100,11 +104,13 @@ module Aws
       #         source_region: source_region,
       #         kms_key_id: kms_key_id,
       #         db_cluster_identifier: db_cluster_identifier,
-      #         engine: engine
+      #         engine: engine,
+      #         master_username: 'username',
+      #         master_user_password: 'password'
       #       )
       #
       #       expect(resp.context.params[:pre_signed_url]).to match(
-      #         /ef8f88d5e107c9ac1b5b9c690da48cceedcb5a889b2267918adc2f22e7171582/
+      #         /asdf/
       #       )
       #     end
       #   end
