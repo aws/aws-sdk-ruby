@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.573 (2020-08-26)
+------------------
+
 * Feature - Aws::Route53Resolver - Updated the API, and documentation for Amazon Route 53 Resolver.
 
 * Feature - Aws::Appflow - Added support for a new service, Amazon Appflow.
