@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.105.0 (2020-08-25)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add `SSOCredentials`.  Moved functionality from `aws-sdk-sso` into core.
+
 3.104.4 (2020-08-19)
 ------------------
 

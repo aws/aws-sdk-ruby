@@ -47,6 +47,6 @@ require_relative 'aws-sdk-servicequotas/customizations'
 # @!group service
 module Aws::ServiceQuotas
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

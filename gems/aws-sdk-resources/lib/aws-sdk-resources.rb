@@ -198,7 +198,7 @@ module Aws
   autoload :SNS, 'aws-sdk-sns'
   autoload :SQS, 'aws-sdk-sqs'
   autoload :SSM, 'aws-sdk-ssm'
-  autoload :SSO, 'aws-sdk-sso'
+  autoload :SSO, 'aws-sdk-core'
   autoload :SSOOIDC, 'aws-sdk-ssooidc'
   autoload :STS, 'aws-sdk-core'
   autoload :SWF, 'aws-sdk-swf'

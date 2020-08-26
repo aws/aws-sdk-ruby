@@ -47,6 +47,6 @@ require_relative 'aws-sdk-chime/customizations'
 # @!group service
 module Aws::Chime
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.35.0'
 
 end

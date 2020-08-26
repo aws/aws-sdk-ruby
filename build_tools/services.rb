@@ -114,7 +114,7 @@ module BuildTools
       end
 
       gems_dir = File.expand_path('../../gems', __FILE__)
-      prefix = gem == 'sts' ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
+      prefix = %w[sts sso].include?(gem) ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
         ["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"]
       (prefix + parts).join('/') + '.rb'
     end
