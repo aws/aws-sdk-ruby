@@ -6,7 +6,6 @@ module Aws
   module S3
     describe Object do
       describe '#presigned_post' do
-
         it 'respects the configured client endpoint' do
           client = Aws::S3::Client.new(
             stub_responses: true,
@@ -15,6 +14,16 @@ module Aws
           obj = Aws::S3::Object.new('bucket', 'key', client: client)
           expect(obj.presigned_post.url)
             .to eq('http://bucket.custom-endpoint.com')
+        end
+
+        it 'applies the :use_accelerate_endpoint option' do
+          object = Object.new(
+            'bucket',
+            'key',
+            stub_responses: true
+          )
+          post = object.presigned_post(use_accelerate_endpoint: true)
+          expect(post.url).to eq('https://bucket.s3-accelerate.amazonaws.com')
         end
 
         it 'creates a presigned post with a key' do
@@ -27,7 +36,6 @@ module Aws
           expect(post.fields['key']).to eq('key')
           expect(post.fields['acl']).to eq('public-read')
         end
-
       end
     end
   end
