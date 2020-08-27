@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.574 (2020-08-27)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
