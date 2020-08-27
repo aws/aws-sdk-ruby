@@ -120,27 +120,32 @@ module BuildTools
 
     end
 
-    api('RDS') do |api|
-      %w(
-        CopyDBSnapshotMessage
-        CreateDBInstanceReadReplicaMessage
+    # Cross Region Copying
+    %w[RDS Neptune DocDB].each do |service|
+      operations = %w[
         CopyDBClusterSnapshotMessage
         CreateDBClusterMessage
-      ).each do |shape_name|
-        api['shapes'][shape_name]['members']['DestinationRegion'] = {"shape" => "String", "documented" => false }
-        api['shapes'][shape_name]['members']['SourceRegion'] = {"shape" => "String"}
+      ]
+      if service == 'RDS'
+        operations += %w[
+          CopyDBSnapshotMessage
+          CreateDBInstanceReadReplicaMessage
+        ]
       end
-    end
 
-    doc('RDS') do |docs|
-      %w(
-        CopyDBSnapshotMessage
-        CreateDBInstanceReadReplicaMessage
-        CopyDBClusterSnapshotMessage
-        CreateDBClusterMessage
-      ).each do |shape_name|
-        docs['shapes']['String']['refs']["#{shape_name}$SourceRegion"] =
-          "<p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>"
+      api(service) do |api|
+        operations.each do |shape_name|
+          api['shapes'][shape_name]['members']['SourceRegion'] =
+            { 'shape' => 'String' }
+        end
+      end
+
+      doc(service) do |docs|
+        operations.each do |shape_name|
+          docs['shapes']['String']['refs']["#{shape_name}$SourceRegion"] =
+            '<p>The source region of the snapshot. This is only needed when '\
+            'the shapshot is encrypted and in a different region.</p>'
+        end
       end
     end
 
