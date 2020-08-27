@@ -665,6 +665,10 @@ module Aws::Neptune
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the new DB cluster snapshot copy.
     #
+    # @option params [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #
     # @return [Types::CopyDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
@@ -683,6 +687,7 @@ module Aws::Neptune
     #         value: "String",
     #       },
     #     ],
+    #     source_region: "String",
     #   })
     #
     # @example Response structure
@@ -1000,6 +1005,10 @@ module Aws::Neptune
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is enabled.
     #
+    # @option params [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -1036,6 +1045,7 @@ module Aws::Neptune
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     source_region: "String",
     #   })
     #
     # @example Response structure

@@ -19,7 +19,6 @@ module Aws
             if params.is_a?(Hash) &&
                params[:source_region] && !params[:pre_signed_url]
               params[:pre_signed_url] = presigned_url(context, params)
-              # params[:destination_region] = context.config.region
             end
             @handler.call(context)
           end
