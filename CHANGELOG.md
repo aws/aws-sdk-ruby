@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
 2.11.573 (2020-08-26)
 ------------------
 
