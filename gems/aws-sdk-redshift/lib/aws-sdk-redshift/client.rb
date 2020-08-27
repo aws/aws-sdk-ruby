@@ -6358,9 +6358,7 @@ module Aws::Redshift
     #   Indicates whether the cluster is encrypted. If the value is encrypted
     #   (true) and you provide a value for the `KmsKeyId` parameter, we
     #   encrypt the cluster with the provided `KmsKeyId`. If you don't
-    #   provide a `KmsKeyId`, we encrypt with the default key. In the China
-    #   region we use legacy encryption if you specify that the cluster is
-    #   encrypted.
+    #   provide a `KmsKeyId`, we encrypt with the default key.
     #
     #   If the value is not encrypted (false), then the cluster is decrypted.
     #
@@ -7998,6 +7996,10 @@ module Aws::Redshift
     #
     # * You can only resize clusters of the following types:
     #
+    #   * dc1.large (if your cluster is in a VPC)
+    #
+    #   * dc1.8xlarge (if your cluster is in a VPC)
+    #
     #   * dc2.large
     #
     #   * dc2.8xlarge
@@ -8024,7 +8026,8 @@ module Aws::Redshift
     #   cluster's current node type is used.
     #
     # @option params [Integer] :number_of_nodes
-    #   The new number of nodes for the cluster.
+    #   The new number of nodes for the cluster. If not specified, the
+    #   cluster's current number of nodes is used.
     #
     # @option params [Boolean] :classic
     #   A boolean value indicating whether the resize operation is using the
@@ -9041,7 +9044,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

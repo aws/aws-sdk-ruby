@@ -416,47 +416,46 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Locates an available game server and temporarily reserves it to host
-    # gameplay and players. This action is called by a game client or client
-    # service (such as a matchmaker) to request hosting resources for a new
-    # game session. In response, GameLift FleetIQ searches for an available
-    # game server in the specified game server group, places the game server
-    # in "claimed" status for 60 seconds, and returns connection
-    # information back to the requester so that players can connect to the
-    # game server.
+    # gameplay and players. This operation is called from a game client or
+    # client service (such as a matchmaker) to request hosting resources for
+    # a new game session. In response, GameLift FleetIQ locates an available
+    # game server, places it in `CLAIMED` status for 60 seconds, and returns
+    # connection information that players can use to connect to the game
+    # server.
     #
-    # There are two ways you can claim a game server. For the first option,
-    # you provide a game server group ID only, which prompts GameLift
-    # FleetIQ to search for an available game server in the specified group
-    # and claim it. With this option, GameLift FleetIQ attempts to
-    # consolidate gameplay on as few instances as possible to minimize
-    # hosting costs. For the second option, you request a specific game
-    # server by its ID. This option results in a less efficient claiming
-    # process because it does not take advantage of consolidation and may
-    # fail if the requested game server is unavailable.
-    #
-    # To claim a game server, identify a game server group and (optionally)
-    # a game server ID. If your game requires that game data be provided to
-    # the game server at the start of a game, such as a game map or player
-    # information, you can provide it in your claim request.
+    # To claim a game server, identify a game server group. You can also
+    # specify a game server ID, although this approach bypasses GameLift
+    # FleetIQ placement optimization. Optionally, include game data to pass
+    # to the game server at the start of a game session, such as a game map
+    # or player information.
     #
     # When a game server is successfully claimed, connection information is
     # returned. A claimed game server's utilization status remains
-    # AVAILABLE, while the claim status is set to CLAIMED for up to 60
-    # seconds. This time period allows the game server to be prompted to
-    # update its status to UTILIZED (using UpdateGameServer). If the game
-    # server's status is not updated within 60 seconds, the game server
-    # reverts to unclaimed status and is available to be claimed by another
-    # request.
+    # `AVAILABLE` while the claim status is set to `CLAIMED` for up to 60
+    # seconds. This time period gives the game server time to update its
+    # status to `UTILIZED` (using UpdateGameServer) once players join. If
+    # the game server's status is not updated within 60 seconds, the game
+    # server reverts to unclaimed status and is available to be claimed by
+    # another request. The claim time period is a fixed value and is not
+    # configurable.
     #
     # If you try to claim a specific game server, this request will fail in
-    # the following cases: (1) if the game server utilization status is
-    # UTILIZED, (2) if the game server claim status is CLAIMED, or (3) if
-    # the instance that the game server is running on is flagged as
-    # draining.
+    # the following cases:
+    #
+    # * If the game server utilization status is `UTILIZED`.
+    #
+    # * If the game server claim status is `CLAIMED`.
+    #
+    # <note markdown="1"> When claiming a specific game server, this request will succeed even
+    # if the game server is running on an instance in `DRAINING` status. To
+    # avoid this, first check the instance status by calling
+    # DescribeGameServerInstances.
+    #
+    #  </note>
     #
     # **Learn more**
     #
@@ -478,14 +477,13 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   An identifier for the game server group. When claiming a specific game
-    #   server, this is the game server group whether the game server is
-    #   located. When requesting that GameLift FleetIQ locate an available
-    #   game server, this is the game server group to search on. You can use
-    #   either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group where the game server is
+    #   running. Use either the GameServerGroup name or ARN value.. If you are
+    #   not specifying a game server to claim, this value identifies where you
+    #   want GameLift FleetIQ to look for an available game server to claim.
     #
     # @option params [String] :game_server_id
     #   A custom string that uniquely identifies the game server to claim. If
@@ -494,7 +492,9 @@ module Aws::GameLift
     #
     # @option params [String] :game_server_data
     #   A set of custom game server properties, formatted as a single string
-    #   value, to be passed to the claimed game server.
+    #   value. This data is passed to a game client or service when it
+    #   requests information on game servers using ListGameServers or
+    #   ClaimGameServer.
     #
     # @return [Types::ClaimGameServerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -516,7 +516,6 @@ module Aws::GameLift
     #   resp.game_server.instance_id #=> String
     #   resp.game_server.connection_info #=> String
     #   resp.game_server.game_server_data #=> String
-    #   resp.game_server.custom_sort_key #=> String
     #   resp.game_server.claim_status #=> String, one of "CLAIMED"
     #   resp.game_server.utilization_status #=> String, one of "AVAILABLE", "UTILIZED"
     #   resp.game_server.registration_time #=> Time
@@ -651,12 +650,13 @@ module Aws::GameLift
     #
     # * To directly upload your build files to a GameLift S3 location. To
     #   use this option, first call `CreateBuild` and specify a build name
-    #   and operating system. This action creates a new build resource and
-    #   also returns an S3 location with temporary access credentials. Use
-    #   the credentials to manually upload your build files to the specified
-    #   S3 location. For more information, see [Uploading Objects][1] in the
-    #   *Amazon S3 Developer Guide*. Build files can be uploaded to the
-    #   GameLift S3 location once only; that can't be updated.
+    #   and operating system. This operation creates a new build resource
+    #   and also returns an S3 location with temporary access credentials.
+    #   Use the credentials to manually upload your build files to the
+    #   specified S3 location. For more information, see [Uploading
+    #   Objects][1] in the *Amazon S3 Developer Guide*. Build files can be
+    #   uploaded to the GameLift S3 location once only; that can't be
+    #   updated.
     #
     # If successful, this operation creates a new build resource with a
     # unique build ID and places it in `INITIALIZED` status. A build must be
@@ -1119,53 +1119,48 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Creates a GameLift FleetIQ game server group to manage a collection of
-    # EC2 instances for game hosting. In addition to creating the game
-    # server group, this action also creates an Auto Scaling group in your
-    # AWS account and establishes a link between the two groups. You have
-    # full control over configuration of the Auto Scaling group, but
-    # GameLift FleetIQ routinely certain Auto Scaling group properties in
-    # order to optimize the group's instances for low-cost game hosting.
+    # Creates a GameLift FleetIQ game server group for managing game hosting
+    # on a collection of Amazon EC2 instances for game hosting. This
+    # operation creates the game server group, creates an Auto Scaling group
+    # in your AWS account, and establishes a link between the two groups.
     # You can view the status of your game server groups in the GameLift
-    # Console. Game server group metrics and events are emitted to Amazon
+    # console. Game server group metrics and events are emitted to Amazon
     # CloudWatch.
     #
-    # Prior creating a new game server group, you must set up the following:
+    # Before creating a new game server group, you must have the following:
     #
-    # * An EC2 launch template. The template provides configuration settings
-    #   for a set of EC2 instances and includes the game server build that
-    #   you want to deploy and run on each instance. For more information on
-    #   creating a launch template, see [ Launching an Instance from a
-    #   Launch Template][1] in the *Amazon EC2 User Guide*.
+    # * An Amazon EC2 launch template that specifies how to launch Amazon
+    #   EC2 instances with your game server build. For more information, see
+    #   [ Launching an Instance from a Launch Template][1] in the *Amazon
+    #   EC2 User Guide*.
     #
-    # * An IAM role. The role sets up limited access to your AWS account,
-    #   allowing GameLift FleetIQ to create and manage the EC2 Auto Scaling
-    #   group, get instance data, and emit metrics and events to CloudWatch.
-    #   For more information on setting up an IAM permissions policy with
-    #   principal access for GameLift, see [ Specifying a Principal in a
-    #   Policy][2] in the *Amazon S3 Developer Guide*.
+    # * An IAM role that extends limited access to your AWS account to allow
+    #   GameLift FleetIQ to create and interact with the Auto Scaling group.
+    #   For more information, see [Create IAM roles for cross-service
+    #   interaction][2] in the *GameLift FleetIQ Developer Guide*.
     #
-    # To create a new game server group, provide a name and specify the IAM
-    # role and EC2 launch template. You also need to provide a list of
-    # instance types to be used in the group and set initial maximum and
-    # minimum limits on the group's instance count. You can optionally set
-    # an autoscaling policy with target tracking based on a GameLift FleetIQ
-    # metric.
+    # To create a new game server group, specify a unique group name, IAM
+    # role and Amazon EC2 launch template, and provide a list of instance
+    # types that can be used in the group. You must also set initial maximum
+    # and minimum limits on the group's instance count. You can optionally
+    # set an Auto Scaling policy with target tracking based on a GameLift
+    # FleetIQ metric.
     #
     # Once the game server group and corresponding Auto Scaling group are
     # created, you have full access to change the Auto Scaling group's
-    # configuration as needed. Keep in mind, however, that some properties
-    # are periodically updated by GameLift FleetIQ as it balances the
-    # group's instances based on availability and cost.
+    # configuration as needed. Several properties that are set when creating
+    # a game server group, including maximum/minimum size and auto-scaling
+    # policy settings, must be updated directly in the Auto Scaling group.
+    # Keep in mind that some Auto Scaling group properties are periodically
+    # updated by GameLift FleetIQ as part of its balancing activities to
+    # optimize for availability and cost.
     #
     # **Learn more**
     #
     # [GameLift FleetIQ Guide][3]
-    #
-    # [Updating a GameLift FleetIQ-Linked Auto Scaling Group][4]
     #
     # **Related operations**
     #
@@ -1183,12 +1178,13 @@ module Aws::GameLift
     #
     # * SuspendGameServerGroup
     #
+    # * DescribeGameServerInstances
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-bucket-user-policy-specifying-principal-intro.html
-    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
-    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-asgroups.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-iam-permissions-roles.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
     #   An identifier for the new game server group. This value is used to
@@ -1198,9 +1194,7 @@ module Aws::GameLift
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows Amazon
-    #   GameLift to access your EC2 Auto Scaling groups. The submitted role is
-    #   validated to ensure that it contains the necessary permissions for
-    #   game server groups.
+    #   GameLift to access your EC2 Auto Scaling groups.
     #
     #
     #
@@ -1208,14 +1202,18 @@ module Aws::GameLift
     #
     # @option params [required, Integer] :min_size
     #   The minimum number of instances allowed in the EC2 Auto Scaling group.
-    #   During autoscaling events, GameLift FleetIQ and EC2 do not scale down
-    #   the group below this minimum. In production, this value should be set
-    #   to at least 1.
+    #   During automatic scaling events, GameLift FleetIQ and EC2 do not scale
+    #   down the group below this minimum. In production, this value should be
+    #   set to at least 1. After the Auto Scaling group is created, update
+    #   this value directly in the Auto Scaling group using the AWS console or
+    #   APIs.
     #
     # @option params [required, Integer] :max_size
     #   The maximum number of instances allowed in the EC2 Auto Scaling group.
-    #   During autoscaling events, GameLift FleetIQ and EC2 do not scale up
-    #   the group above this maximum.
+    #   During automatic scaling events, GameLift FleetIQ and EC2 do not scale
+    #   up the group above this maximum. After the Auto Scaling group is
+    #   created, update this value directly in the Auto Scaling group using
+    #   the AWS console or APIs.
     #
     # @option params [required, Types::LaunchTemplateSpecification] :launch_template
     #   The EC2 launch template that contains configuration settings and game
@@ -1223,72 +1221,88 @@ module Aws::GameLift
     #   You can specify the template using either the template name or ID. For
     #   help with creating a launch template, see [Creating a Launch Template
     #   for an Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   Guide*. After the Auto Scaling group is created, update this value
+    #   directly in the Auto Scaling group using the AWS console or APIs.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
     #
     # @option params [required, Array<Types::InstanceDefinition>] :instance_definitions
-    #   A set of EC2 instance types to use when creating instances in the
-    #   group. The instance definitions must specify at least two different
-    #   instance types that are supported by GameLift FleetIQ. For more
-    #   information on instance types, see [EC2 Instance Types][1] in the
-    #   *Amazon EC2 User Guide*.
+    #   The EC2 instance types and sizes to use in the Auto Scaling group. The
+    #   instance definitions must specify at least two different instance
+    #   types that are supported by GameLift FleetIQ. For more information on
+    #   instance types, see [EC2 Instance Types][1] in the *Amazon EC2 User
+    #   Guide*. You can optionally specify capacity weighting for each
+    #   instance type. If no weight value is specified for an instance type,
+    #   it is set to the default value "1". For more information about
+    #   capacity weighting, see [ Instance Weighting for Amazon EC2 Auto
+    #   Scaling][2] in the Amazon EC2 Auto Scaling User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
     #
     # @option params [Types::GameServerGroupAutoScalingPolicy] :auto_scaling_policy
     #   Configuration settings to define a scaling policy for the Auto Scaling
     #   group that is optimized for game hosting. The scaling policy uses the
-    #   metric "PercentUtilizedGameServers" to maintain a buffer of idle
+    #   metric `"PercentUtilizedGameServers"` to maintain a buffer of idle
     #   game servers that can immediately accommodate new games and players.
-    #   Once the game server and Auto Scaling groups are created, you can
-    #   update the scaling policy settings directly in Auto Scaling Groups.
+    #   After the Auto Scaling group is created, update this value directly in
+    #   the Auto Scaling group using the AWS console or APIs.
     #
     # @option params [String] :balancing_strategy
-    #   The fallback balancing method to use for the game server group when
-    #   Spot instances in a Region become unavailable or are not viable for
-    #   game hosting. Once triggered, this method remains active until Spot
-    #   instances can once again be used. Method options include:
+    #   Indicates how GameLift FleetIQ balances the use of Spot Instances and
+    #   On-Demand Instances in the game server group. Method options include
+    #   the following:
     #
-    #   * SPOT\_ONLY -- If Spot instances are unavailable, the game server
-    #     group provides no hosting capacity. No new instances are started,
-    #     and the existing nonviable Spot instances are terminated (once
-    #     current gameplay ends) and not replaced.
+    #   * `SPOT_ONLY` - Only Spot Instances are used in the game server group.
+    #     If Spot Instances are unavailable or not viable for game hosting,
+    #     the game server group provides no hosting capacity until Spot
+    #     Instances can again be used. Until then, no new instances are
+    #     started, and the existing nonviable Spot Instances are terminated
+    #     (after current gameplay ends) and are not replaced.
     #
-    #   * SPOT\_PREFERRED -- If Spot instances are unavailable, the game
-    #     server group continues to provide hosting capacity by using
-    #     On-Demand instances. Existing nonviable Spot instances are
-    #     terminated (once current gameplay ends) and replaced with new
-    #     On-Demand instances.
+    #   * `SPOT_PREFERRED` - (default value) Spot Instances are used whenever
+    #     available in the game server group. If Spot Instances are
+    #     unavailable, the game server group continues to provide hosting
+    #     capacity by falling back to On-Demand Instances. Existing nonviable
+    #     Spot Instances are terminated (after current gameplay ends) and are
+    #     replaced with new On-Demand Instances.
+    #
+    #   * `ON_DEMAND_ONLY` - Only On-Demand Instances are used in the game
+    #     server group. No Spot Instances are used, even when available, while
+    #     this balancing strategy is in force.
     #
     # @option params [String] :game_server_protection_policy
     #   A flag that indicates whether instances in the game server group are
     #   protected from early termination. Unprotected instances that have
-    #   active game servers running may by terminated during a scale-down
+    #   active game servers running might be terminated during a scale-down
     #   event, causing players to be dropped from the game. Protected
     #   instances cannot be terminated while there are active game servers
-    #   running. An exception to this is Spot Instances, which may be
+    #   running except in the event of a forced game server group deletion
+    #   (see ). An exception to this is with Spot Instances, which can be
     #   terminated by AWS regardless of protection status. This property is
-    #   set to NO\_PROTECTION by default.
+    #   set to `NO_PROTECTION` by default.
     #
     # @option params [Array<String>] :vpc_subnets
     #   A list of virtual private cloud (VPC) subnets to use with instances in
     #   the game server group. By default, all GameLift FleetIQ-supported
-    #   availability zones are used; this parameter allows you to specify VPCs
-    #   that you've set up.
+    #   Availability Zones are used. You can use this parameter to specify
+    #   VPCs that you've set up. This property cannot be updated after the
+    #   game server group is created, and the corresponding Auto Scaling group
+    #   will always use the property value that is set with this request, even
+    #   if the Auto Scaling group is updated directly
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new game server group resource. Tags
-    #   are developer-defined key-value pairs. Tagging AWS resources are
-    #   useful for resource management, access management, and cost
-    #   allocation. For more information, see [ Tagging AWS Resources][1] in
-    #   the *AWS General Reference*. Once the resource is created, you can use
-    #   TagResource, UntagResource, and ListTagsForResource to add, remove,
-    #   and view tags. The maximum tag limit may be lower than stated. See the
+    #   are developer-defined key-value pairs. Tagging AWS resources is useful
+    #   for resource management, access management, and cost allocation. For
+    #   more information, see [ Tagging AWS Resources][1] in the *AWS General
+    #   Reference*. Once the resource is created, you can use TagResource,
+    #   UntagResource, and ListTagsForResource to add, remove, and view tags,
+    #   respectively. The maximum tag limit may be lower than stated. See the
     #   AWS General Reference for actual tagging limits.
     #
     #
@@ -1323,7 +1337,7 @@ module Aws::GameLift
     #         target_value: 1.0, # required
     #       },
     #     },
-    #     balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED
+    #     balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED, ON_DEMAND_ONLY
     #     game_server_protection_policy: "NO_PROTECTION", # accepts NO_PROTECTION, FULL_PROTECTION
     #     vpc_subnets: ["VpcSubnet"],
     #     tags: [
@@ -1342,7 +1356,7 @@ module Aws::GameLift
     #   resp.game_server_group.instance_definitions #=> Array
     #   resp.game_server_group.instance_definitions[0].instance_type #=> String, one of "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.game_server_group.instance_definitions[0].weighted_capacity #=> String
-    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED"
+    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED", "ON_DEMAND_ONLY"
     #   resp.game_server_group.game_server_protection_policy #=> String, one of "NO_PROTECTION", "FULL_PROTECTION"
     #   resp.game_server_group.auto_scaling_group_arn #=> String
     #   resp.game_server_group.status #=> String, one of "NEW", "ACTIVATING", "ACTIVE", "DELETE_SCHEDULED", "DELETING", "DELETED", "ERROR"
@@ -1361,8 +1375,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Creates a multiplayer game session for players. This action creates a
-    # game session record and assigns an available server process in the
+    # Creates a multiplayer game session for players. This operation creates
+    # a game session record and assigns an available server process in the
     # specified fleet to host the game session. A fleet must have an
     # `ACTIVE` status before a game session can be created in it.
     #
@@ -1693,20 +1707,17 @@ module Aws::GameLift
     # use when placing a new game session for the match; and the maximum
     # time allowed for a matchmaking attempt.
     #
-    # There are two ways to track the progress of matchmaking tickets: (1)
-    # polling ticket status with DescribeMatchmaking; or (2) receiving
-    # notifications with Amazon Simple Notification Service (SNS). To use
-    # notifications, you first need to set up an SNS topic to receive the
-    # notifications, and provide the topic ARN in the matchmaking
-    # configuration. Since notifications promise only "best effort"
-    # delivery, we recommend calling `DescribeMatchmaking` if no
-    # notifications are received within 30 seconds.
+    # To track the progress of matchmaking tickets, set up an Amazon Simple
+    # Notification Service (SNS) to receive notifications, and provide the
+    # topic ARN in the matchmaking configuration. An alternative method,
+    # continuously poling ticket status with DescribeMatchmaking, should
+    # only be used for games in development with low matchmaking usage.
     #
     # **Learn more**
     #
     # [ Design a FlexMatch Matchmaker][1]
     #
-    # [ Setting up Notifications for Matchmaking][2]
+    # [ Set Up FlexMatch Event Notification][2]
     #
     # **Related operations**
     #
@@ -2474,7 +2485,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes an alias. This action removes all record of the alias. Game
+    # Deletes an alias. This operation removes all record of the alias. Game
     # clients attempting to access a server process using the deleted alias
     # receive an error. To delete an alias, specify the alias ID to be
     # deleted.
@@ -2512,7 +2523,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes a build. This action permanently deletes the build resource
+    # Deletes a build. This operation permanently deletes the build resource
     # and any uploaded build files. Deleting a build does not affect the
     # status of any active fleets using the build, but you can no longer
     # create new fleets with the deleted build.
@@ -2570,7 +2581,7 @@ module Aws::GameLift
     # the VPC peering connection--this is done as part of the delete fleet
     # process.
     #
-    # This action removes the fleet and its resources. Once a fleet is
+    # This operation removes the fleet and its resources. Once a fleet is
     # deleted, you can no longer use any of the resource in that fleet.
     #
     # **Learn more**
@@ -2616,27 +2627,33 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Terminates a game server group and permanently deletes the game server
     # group record. You have several options for how these resources are
     # impacted when deleting the game server group. Depending on the type of
-    # delete action selected, this action may affect three types of
-    # resources: the game server group, the corresponding Auto Scaling
-    # group, and all game servers currently running in the group.
+    # delete operation selected, this operation might affect these
+    # resources:
+    #
+    # * The game server group
+    #
+    # * The corresponding Auto Scaling group
+    #
+    # * All game servers that are currently running in the group
     #
     # To delete a game server group, identify the game server group to
-    # delete and specify the type of delete action to initiate. Game server
-    # groups can only be deleted if they are in ACTIVE or ERROR status.
+    # delete and specify the type of delete operation to initiate. Game
+    # server groups can only be deleted if they are in `ACTIVE` or `ERROR`
+    # status.
     #
-    # If the delete request is successful, a series of actions are kicked
-    # off. The game server group status is changed to DELETE\_SCHEDULED,
+    # If the delete request is successful, a series of operations are kicked
+    # off. The game server group status is changed to `DELETE_SCHEDULED`,
     # which prevents new game servers from being registered and stops
-    # autoscaling activity. Once all game servers in the game server group
-    # are de-registered, GameLift FleetIQ can begin deleting resources. If
-    # any of the delete actions fail, the game server group is placed in
-    # ERROR status.
+    # automatic scaling activity. Once all game servers in the game server
+    # group are deregistered, GameLift FleetIQ can begin deleting resources.
+    # If any of the delete operations fail, the game server group is placed
+    # in `ERROR` status.
     #
     # GameLift FleetIQ emits delete events to Amazon CloudWatch.
     #
@@ -2660,26 +2677,29 @@ module Aws::GameLift
     #
     # * SuspendGameServerGroup
     #
+    # * DescribeGameServerInstances
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   The unique identifier of the game server group to delete. Use either
-    #   the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #
     # @option params [String] :delete_option
-    #   The type of delete to perform. Options include:
+    #   The type of delete to perform. Options include the following:
     #
-    #   * SAFE\_DELETE – Terminates the game server group and EC2 Auto Scaling
-    #     group only when it has no game servers that are in IN\_USE status.
+    #   * `SAFE_DELETE` – Terminates the game server group and EC2 Auto
+    #     Scaling group only when it has no game servers that are in
+    #     `UTILIZED` status.
     #
-    #   * FORCE\_DELETE – Terminates the game server group, including all
+    #   * `FORCE_DELETE` – Terminates the game server group, including all
     #     active game servers regardless of their utilization status, and the
     #     EC2 Auto Scaling group.
     #
-    #   * RETAIN – Does a safe delete of the game server group but retains the
-    #     EC2 Auto Scaling group as is.
+    #   * `RETAIN` – Does a safe delete of the game server group but retains
+    #     the EC2 Auto Scaling group as is.
     #
     # @return [Types::DeleteGameServerGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2700,7 +2720,7 @@ module Aws::GameLift
     #   resp.game_server_group.instance_definitions #=> Array
     #   resp.game_server_group.instance_definitions[0].instance_type #=> String, one of "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.game_server_group.instance_definitions[0].weighted_capacity #=> String
-    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED"
+    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED", "ON_DEMAND_ONLY"
     #   resp.game_server_group.game_server_protection_policy #=> String, one of "NO_PROTECTION", "FULL_PROTECTION"
     #   resp.game_server_group.auto_scaling_group_arn #=> String
     #   resp.game_server_group.status #=> String, one of "NEW", "ACTIVATING", "ACTIVE", "DELETE_SCHEDULED", "DELETING", "DELETED", "ERROR"
@@ -2719,9 +2739,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes a game session queue. This action means that any
-    # StartGameSessionPlacement requests that reference this queue will
-    # fail. To delete a queue, specify the queue name.
+    # Deletes a game session queue. Once a queue is successfully deleted,
+    # unfulfilled StartGameSessionPlacement requests that reference the
+    # queue will fail. To delete a queue, specify the queue name.
     #
     # **Learn more**
     #
@@ -2860,8 +2880,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes a fleet scaling policy. This action means that the policy is
-    # no longer in force and removes all record of it. To delete a scaling
+    # Deletes a fleet scaling policy. Once deleted, the policy is no longer
+    # in force and GameLift removes all record of it. To delete a scaling
     # policy, specify both the scaling policy name and the fleet ID it is
     # associated with.
     #
@@ -2914,9 +2934,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes a Realtime script. This action permanently deletes the script
-    # record. If script files were uploaded, they are also deleted (files
-    # stored in an S3 bucket are not deleted).
+    # Deletes a Realtime script. This operation permanently deletes the
+    # script record. If script files were uploaded, they are also deleted
+    # (files stored in an S3 bucket are not deleted).
     #
     # To delete a script, specify the script ID. Before deleting a script,
     # be sure to terminate all fleets that are deployed with the script
@@ -3067,16 +3087,16 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Removes the game server resource from the game server group. As a
-    # result of this action, the de-registered game server can no longer be
-    # claimed and will not returned in a list of active game servers.
+    # Removes the game server from a game server group. As a result of this
+    # operation, the deregistered game server can no longer be claimed and
+    # will not be returned in a list of active game servers.
     #
-    # To de-register a game server, specify the game server group and game
-    # server ID. If successful, this action emits a CloudWatch event with
-    # termination time stamp and reason.
+    # To deregister a game server, specify the game server group and game
+    # server ID. If successful, this operation emits a CloudWatch event with
+    # termination timestamp and reason.
     #
     # **Learn more**
     #
@@ -3098,15 +3118,15 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   An identifier for the game server group where the game server to be
-    #   de-registered is running. Use either the GameServerGroup name or ARN
-    #   value.
+    #   A unique identifier for the game server group where the game server is
+    #   running. Use either the GameServerGroup name or ARN value.
     #
     # @option params [required, String] :game_server_id
-    #   The identifier for the game server to be de-registered.
+    #   A custom string that uniquely identifies the game server to
+    #   deregister.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3320,7 +3340,7 @@ module Aws::GameLift
     # pages. If successful, a FleetAttributes object is returned for each
     # fleet requested, unless the fleet identifier is not found.
     #
-    # <note markdown="1"> Some API actions may limit the number of fleet IDs allowed in one
+    # <note markdown="1"> Some API operations may limit the number of fleet IDs allowed in one
     # request. If a request exceeds this limit, the request fails and the
     # error message includes the maximum allowed number.
     #
@@ -3377,15 +3397,17 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value. This
-    #   parameter is ignored when the request specifies one or a list of fleet
-    #   IDs.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
+    #   This parameter is ignored when the request specifies one or a list of
+    #   fleet IDs.
     #
     # @return [Types::DescribeFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFleetAttributesOutput#fleet_attributes #fleet_attributes} => Array&lt;Types::FleetAttributes&gt;
     #   * {Types::DescribeFleetAttributesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3449,7 +3471,7 @@ module Aws::GameLift
     # requested fleet ID. When a list of fleet IDs is provided, attribute
     # objects are returned only for fleets that currently exist.
     #
-    # <note markdown="1"> Some API actions may limit the number of fleet IDs allowed in one
+    # <note markdown="1"> Some API operations may limit the number of fleet IDs allowed in one
     # request. If a request exceeds this limit, the request fails and the
     # error message includes the maximum allowed.
     #
@@ -3506,15 +3528,17 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value. This
-    #   parameter is ignored when the request specifies one or a list of fleet
-    #   IDs.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
+    #   This parameter is ignored when the request specifies one or a list of
+    #   fleet IDs.
     #
     # @return [Types::DescribeFleetCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFleetCapacityOutput#fleet_capacity #fleet_capacity} => Array&lt;Types::FleetCapacity&gt;
     #   * {Types::DescribeFleetCapacityOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3611,13 +3635,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeFleetEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFleetEventsOutput#events #events} => Array&lt;Types::Event&gt;
     #   * {Types::DescribeFleetEventsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3738,7 +3764,7 @@ module Aws::GameLift
     # pages. If successful, a FleetUtilization object is returned for each
     # requested fleet ID, unless the fleet identifier is not found.
     #
-    # <note markdown="1"> Some API actions may limit the number of fleet IDs allowed in one
+    # <note markdown="1"> Some API operations may limit the number of fleet IDs allowed in one
     # request. If a request exceeds this limit, the request fails and the
     # error message includes the maximum allowed.
     #
@@ -3798,15 +3824,17 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value. This
-    #   parameter is ignored when the request specifies one or a list of fleet
-    #   IDs.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
+    #   This parameter is ignored when the request specifies one or a list of
+    #   fleet IDs.
     #
     # @return [Types::DescribeFleetUtilizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFleetUtilizationOutput#fleet_utilization #fleet_utilization} => Array&lt;Types::FleetUtilization&gt;
     #   * {Types::DescribeFleetUtilizationOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3835,12 +3863,12 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Retrieves information for a game server resource. Information includes
-    # the game server statuses, health check info, and the instance the game
-    # server is running on.
+    # Retrieves information for a registered game server. Information
+    # includes game server status, health check info, and the instance that
+    # the game server is running on.
     #
     # To retrieve game server information, specify the game server ID. If
     # successful, the requested game server object is returned.
@@ -3865,14 +3893,15 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   An identifier for the game server group where the game server is
+    #   A unique identifier for the game server group where the game server is
     #   running. Use either the GameServerGroup name or ARN value.
     #
     # @option params [required, String] :game_server_id
-    #   The identifier for the game server to be retrieved.
+    #   A custom string that uniquely identifies the game server information
+    #   to be retrieved.
     #
     # @return [Types::DescribeGameServerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3893,7 +3922,6 @@ module Aws::GameLift
     #   resp.game_server.instance_id #=> String
     #   resp.game_server.connection_info #=> String
     #   resp.game_server.game_server_data #=> String
-    #   resp.game_server.custom_sort_key #=> String
     #   resp.game_server.claim_status #=> String, one of "CLAIMED"
     #   resp.game_server.utilization_status #=> String, one of "AVAILABLE", "UTILIZED"
     #   resp.game_server.registration_time #=> Time
@@ -3909,10 +3937,14 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Retrieves information on a game server group.
+    # Retrieves information on a game server group. This operation returns
+    # only properties related to GameLift FleetIQ. To view or update
+    # properties for the corresponding Auto Scaling group, such as launch
+    # template, auto scaling policies, and maximum/minimum group size,
+    # access the Auto Scaling group directly.
     #
     # To get attributes for a game server group, provide a group name or ARN
     # value. If successful, a GameServerGroup object is returned.
@@ -3937,13 +3969,15 @@ module Aws::GameLift
     #
     # * SuspendGameServerGroup
     #
+    # * DescribeGameServerInstances
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   The unique identifier for the game server group being requested. Use
-    #   either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #
     # @return [Types::DescribeGameServerGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3963,7 +3997,7 @@ module Aws::GameLift
     #   resp.game_server_group.instance_definitions #=> Array
     #   resp.game_server_group.instance_definitions[0].instance_type #=> String, one of "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.game_server_group.instance_definitions[0].weighted_capacity #=> String
-    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED"
+    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED", "ON_DEMAND_ONLY"
     #   resp.game_server_group.game_server_protection_policy #=> String, one of "NO_PROTECTION", "FULL_PROTECTION"
     #   resp.game_server_group.auto_scaling_group_arn #=> String
     #   resp.game_server_group.status #=> String, one of "NEW", "ACTIVATING", "ACTIVE", "DELETE_SCHEDULED", "DELETING", "DELETED", "ERROR"
@@ -3982,8 +4016,109 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
+    #
+    # Retrieves status information about the Amazon EC2 instances associated
+    # with a GameLift FleetIQ game server group. Use this operation to
+    # detect when instances are active or not available to host new game
+    # servers. If you are looking for instance configuration information,
+    # call DescribeGameServerGroup or access the corresponding Auto Scaling
+    # group properties.
+    #
+    # To request status for all instances in the game server group, provide
+    # a game server group ID only. To request status for specific instances,
+    # provide the game server group ID and one or more instance IDs. Use the
+    # pagination parameters to retrieve results in sequential segments. If
+    # successful, a collection of `GameServerInstance` objects is returned.
+    #
+    # This operation is not designed to be called with every game server
+    # claim request; this practice can cause you to exceed your API limit,
+    # which results in errors. Instead, as a best practice, cache the
+    # results and refresh your cache no more than once every 10 seconds.
+    #
+    # **Learn more**
+    #
+    # [GameLift FleetIQ Guide][1]
+    #
+    # **Related operations**
+    #
+    # * CreateGameServerGroup
+    #
+    # * ListGameServerGroups
+    #
+    # * DescribeGameServerGroup
+    #
+    # * UpdateGameServerGroup
+    #
+    # * DeleteGameServerGroup
+    #
+    # * ResumeGameServerGroup
+    #
+    # * SuspendGameServerGroup
+    #
+    # * DescribeGameServerInstances
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
+    #
+    # @option params [required, String] :game_server_group_name
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
+    #
+    # @option params [Array<String>] :instance_ids
+    #   The EC2 instance IDs that you want to retrieve status on. EC2 instance
+    #   IDs use a 17-character format, for example: `i-1234567890abcdef0`. To
+    #   retrieve all instances in the game server group, leave this parameter
+    #   empty.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential segments.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates the start of the next sequential segment of
+    #   results. Use the token returned with the previous call to this
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
+    #
+    # @return [Types::DescribeGameServerInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGameServerInstancesOutput#game_server_instances #game_server_instances} => Array&lt;Types::GameServerInstance&gt;
+    #   * {Types::DescribeGameServerInstancesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_game_server_instances({
+    #     game_server_group_name: "GameServerGroupNameOrArn", # required
+    #     instance_ids: ["GameServerInstanceId"],
+    #     limit: 1,
+    #     next_token: "NonZeroAndMaxString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.game_server_instances #=> Array
+    #   resp.game_server_instances[0].game_server_group_name #=> String
+    #   resp.game_server_instances[0].game_server_group_arn #=> String
+    #   resp.game_server_instances[0].instance_id #=> String
+    #   resp.game_server_instances[0].instance_status #=> String, one of "ACTIVE", "DRAINING", "SPOT_TERMINATING"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameServerInstances AWS API Documentation
+    #
+    # @overload describe_game_server_instances(params = {})
+    # @param [Hash] params ({})
+    def describe_game_server_instances(params = {}, options = {})
+      req = build_request(:describe_game_server_instances, params)
+      req.send_request(options)
+    end
+
     # Retrieves properties, including the protection policy in force, for
-    # one or more game sessions. This action can be used in several ways:
+    # one or more game sessions. This operation can be used in several ways:
     # (1) provide a `GameSessionId` or `GameSessionArn` to request details
     # for a specific game session; (2) provide either a `FleetId` or an
     # `AliasId` to request properties for all game sessions running on a
@@ -4037,13 +4172,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeGameSessionDetailsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeGameSessionDetailsOutput#game_session_details #game_session_details} => Array&lt;Types::GameSessionDetail&gt;
     #   * {Types::DescribeGameSessionDetailsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4197,18 +4334,21 @@ module Aws::GameLift
     #
     # @option params [Integer] :limit
     #   The maximum number of results to return. Use this parameter with
-    #   `NextToken` to get results as a set of sequential pages.
+    #   `NextToken` to get results as a set of sequential pages. You can
+    #   request up to 50 results.
     #
     # @option params [String] :next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify a
-    #   value.
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
     #
     # @return [Types::DescribeGameSessionQueuesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeGameSessionQueuesOutput#game_session_queues #game_session_queues} => Array&lt;Types::GameSessionQueue&gt;
     #   * {Types::DescribeGameSessionQueuesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4296,13 +4436,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeGameSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeGameSessionsOutput#game_sessions #game_sessions} => Array&lt;Types::GameSession&gt;
     #   * {Types::DescribeGameSessionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4350,8 +4492,8 @@ module Aws::GameLift
     end
 
     # Retrieves information about a fleet's instances, including instance
-    # IDs. Use this action to get details on all instances in the fleet or
-    # get details on one specific instance.
+    # IDs. Use this operation to get details on all instances in the fleet
+    # or get details on one specific instance.
     #
     # To get a specific instance, specify fleet ID and instance ID. To get
     # all instances in a fleet, specify a fleet ID only. Use the pagination
@@ -4389,13 +4531,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeInstancesOutput#instances #instances} => Array&lt;Types::Instance&gt;
     #   * {Types::DescribeInstancesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4429,18 +4573,23 @@ module Aws::GameLift
     end
 
     # Retrieves one or more matchmaking tickets. Use this operation to
-    # retrieve ticket information, including status and--once a successful
-    # match is made--acquire connection information for the resulting new
-    # game session.
-    #
-    # You can use this operation to track the progress of matchmaking
-    # requests (through polling) as an alternative to using event
-    # notifications. See more details on tracking matchmaking requests
-    # through polling or notifications in StartMatchmaking.
+    # retrieve ticket information, including--after a successful match is
+    # made--connection information for the resulting new game session.
     #
     # To request matchmaking tickets, provide a list of up to 10 ticket IDs.
     # If the request is successful, a ticket object is returned for each
     # requested ID that currently exists.
+    #
+    # This operation is not designed to be continually called to track
+    # matchmaking ticket status. This practice can cause you to exceed your
+    # API limit, which results in errors. Instead, as a best practice, set
+    # up an Amazon Simple Notification Service (SNS) to receive
+    # notifications, and provide the topic ARN in the matchmaking
+    # configuration. Continuously poling ticket status with
+    # DescribeMatchmaking should only be used for games in development with
+    # low matchmaking usage.
+    #
+    #
     #
     # **Learn more**
     #
@@ -4515,15 +4664,18 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves the details of FlexMatch matchmaking configurations. With
-    # this operation, you have the following options: (1) retrieve all
-    # existing configurations, (2) provide the names of one or more
-    # configurations to retrieve, or (3) retrieve all configurations that
-    # use a specified rule set name. When requesting multiple items, use the
+    # Retrieves the details of FlexMatch matchmaking configurations.
+    #
+    # This operation offers the following options: (1) retrieve all
+    # matchmaking configurations, (2) retrieve configurations for a
+    # specified list, or (3) retrieve all configurations that use a
+    # specified rule set name. When requesting multiple items, use the
     # pagination parameters to retrieve results as a set of sequential
-    # pages. If successful, a configuration is returned for each requested
-    # name. When specifying a list of names, only configurations that
-    # currently exist are returned.
+    # pages.
+    #
+    # If successful, a configuration is returned for each requested name.
+    # When specifying a list of names, only configurations that currently
+    # exist are returned.
     #
     # **Learn more**
     #
@@ -4569,13 +4721,15 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify a
-    #   value.
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
     #
     # @return [Types::DescribeMatchmakingConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeMatchmakingConfigurationsOutput#configurations #configurations} => Array&lt;Types::MatchmakingConfiguration&gt;
     #   * {Types::DescribeMatchmakingConfigurationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4666,13 +4820,15 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify a
-    #   value.
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
     #
     # @return [Types::DescribeMatchmakingRuleSetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeMatchmakingRuleSetsOutput#rule_sets #rule_sets} => Array&lt;Types::MatchmakingRuleSet&gt;
     #   * {Types::DescribeMatchmakingRuleSetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4700,9 +4856,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves properties for one or more player sessions. This action can
-    # be used in several ways: (1) provide a `PlayerSessionId` to request
-    # properties for a specific player session; (2) provide a
+    # Retrieves properties for one or more player sessions. This operation
+    # can be used in several ways: (1) provide a `PlayerSessionId` to
+    # request properties for a specific player session; (2) provide a
     # `GameSessionId` to request properties for all player sessions in the
     # specified game session; (3) provide a `PlayerId` to request properties
     # for all player sessions of a specified player.
@@ -4765,14 +4921,16 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value. If a
-    #   player session ID is specified, this parameter is ignored.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
+    #   If a player session ID is specified, this parameter is ignored.
     #
     # @return [Types::DescribePlayerSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePlayerSessionsOutput#player_sessions #player_sessions} => Array&lt;Types::PlayerSession&gt;
     #   * {Types::DescribePlayerSessionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4900,7 +5058,7 @@ module Aws::GameLift
     # is returned for the fleet.
     #
     # A fleet may have all of its scaling policies suspended
-    # (StopFleetActions). This action does not affect the status of the
+    # (StopFleetActions). This operation does not affect the status of the
     # scaling policies, which remains ACTIVE. To see whether a fleet's
     # scaling policies are in force or suspended, call
     # DescribeFleetAttributes and check the stopped actions.
@@ -4956,13 +5114,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeScalingPoliciesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeScalingPoliciesOutput#scaling_policies #scaling_policies} => Array&lt;Types::ScalingPolicy&gt;
     #   * {Types::DescribeScalingPoliciesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5228,7 +5388,7 @@ module Aws::GameLift
     # an SSH client. The private key must be saved in the proper format to a
     # `.pem` file before using. If you're making this request using the AWS
     # CLI, saving the secret can be handled as part of the GetInstanceAccess
-    # request, as shown in one of the examples for this action.
+    # request, as shown in one of the examples for this operation.
     #
     # To request access to a specific instance, specify the IDs of both the
     # instance and the fleet it belongs to. You can retrieve a fleet's
@@ -5339,13 +5499,15 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify a
-    #   value.
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
     #
     # @return [Types::ListAliasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAliasesOutput#aliases #aliases} => Array&lt;Types::Alias&gt;
     #   * {Types::ListAliasesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5431,13 +5593,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::ListBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBuildsOutput#builds #builds} => Array&lt;Types::Build&gt;
     #   * {Types::ListBuildsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5518,13 +5682,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::ListFleetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListFleetsOutput#fleet_ids #fleet_ids} => Array&lt;String&gt;
     #   * {Types::ListFleetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5550,12 +5716,12 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Retrieves information on all game servers groups that exist in the
-    # current AWS account for the selected region. Use the pagination
-    # parameters to retrieve results in a set of sequential pages.
+    # current AWS account for the selected Region. Use the pagination
+    # parameters to retrieve results in a set of sequential segments.
     #
     # **Learn more**
     #
@@ -5577,24 +5743,28 @@ module Aws::GameLift
     #
     # * SuspendGameServerGroup
     #
+    # * DescribeGameServerInstances
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [Integer] :limit
     #   The maximum number of results to return. Use this parameter with
-    #   `NextToken` to get results as a set of sequential pages.
+    #   `NextToken` to get results as a set of sequential segments.
     #
     # @option params [String] :next_token
-    #   A token that indicates the start of the next sequential page of
-    #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify a
-    #   value.
+    #   A token that indicates the start of the next sequential segment of
+    #   results. Use the token returned with the previous call to this
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
     #
     # @return [Types::ListGameServerGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListGameServerGroupsOutput#game_server_groups #game_server_groups} => Array&lt;Types::GameServerGroup&gt;
     #   * {Types::ListGameServerGroupsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5612,7 +5782,7 @@ module Aws::GameLift
     #   resp.game_server_groups[0].instance_definitions #=> Array
     #   resp.game_server_groups[0].instance_definitions[0].instance_type #=> String, one of "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.game_server_groups[0].instance_definitions[0].weighted_capacity #=> String
-    #   resp.game_server_groups[0].balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED"
+    #   resp.game_server_groups[0].balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED", "ON_DEMAND_ONLY"
     #   resp.game_server_groups[0].game_server_protection_policy #=> String, one of "NO_PROTECTION", "FULL_PROTECTION"
     #   resp.game_server_groups[0].auto_scaling_group_arn #=> String
     #   resp.game_server_groups[0].status #=> String, one of "NEW", "ACTIVATING", "ACTIVE", "DELETE_SCHEDULED", "DELETING", "DELETED", "ERROR"
@@ -5632,14 +5802,13 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Retrieves information on all game servers that are currently running
-    # in a specified game server group. If there are custom key sort values
-    # for your game servers, you can opt to have the returned list sorted
-    # based on these values. Use the pagination parameters to retrieve
-    # results in a set of sequential pages.
+    # Retrieves information on all game servers that are currently active in
+    # a specified game server group. You can opt to sort the list by game
+    # server age. Use the pagination parameters to retrieve results in a set
+    # of sequential segments.
     #
     # **Learn more**
     #
@@ -5661,31 +5830,35 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   An identifier for the game server group for the game server you want
-    #   to list. Use either the GameServerGroup name or ARN value.
+    #   An identifier for the game server group to retrieve a list of game
+    #   servers from. Use either the GameServerGroup name or ARN value.
     #
     # @option params [String] :sort_order
-    #   Indicates how to sort the returned data based on the game servers'
-    #   custom key sort value. If this parameter is left empty, the list of
-    #   game servers is returned in no particular order.
+    #   Indicates how to sort the returned data based on game server
+    #   registration timestamp. Use ASCENDING to retrieve oldest game servers
+    #   first, or use DESCENDING to retrieve newest game servers first. If
+    #   this parameter is left empty, game servers are returned in no
+    #   particular order.
     #
     # @option params [Integer] :limit
     #   The maximum number of results to return. Use this parameter with
-    #   `NextToken` to get results as a set of sequential pages.
+    #   `NextToken` to get results as a set of sequential segments.
     #
     # @option params [String] :next_token
-    #   A token that indicates the start of the next sequential page of
-    #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify a
-    #   value.
+    #   A token that indicates the start of the next sequential segment of
+    #   results. Use the token returned with the previous call to this
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
     #
     # @return [Types::ListGameServersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListGameServersOutput#game_servers #game_servers} => Array&lt;Types::GameServer&gt;
     #   * {Types::ListGameServersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5705,7 +5878,6 @@ module Aws::GameLift
     #   resp.game_servers[0].instance_id #=> String
     #   resp.game_servers[0].connection_info #=> String
     #   resp.game_servers[0].game_server_data #=> String
-    #   resp.game_servers[0].custom_sort_key #=> String
     #   resp.game_servers[0].claim_status #=> String, one of "CLAIMED"
     #   resp.game_servers[0].utilization_status #=> String, one of "AVAILABLE", "UTILIZED"
     #   resp.game_servers[0].registration_time #=> Time
@@ -5752,13 +5924,15 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify a
-    #   value.
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
     #
     # @return [Types::ListScriptsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListScriptsOutput#scripts #scripts} => Array&lt;Types::Script&gt;
     #   * {Types::ListScriptsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5793,7 +5967,7 @@ module Aws::GameLift
 
     # Retrieves all tags that are assigned to a GameLift resource. Resource
     # tags are used to organize AWS resources for a range of purposes. This
-    # action handles the permissions necessary to manage tags for the
+    # operation handles the permissions necessary to manage tags for the
     # following GameLift resource types:
     #
     # * Build
@@ -5836,8 +6010,8 @@ module Aws::GameLift
     #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
     #   identifies the GameLift resource that you want to retrieve tags for.
     #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe action
-    #   for the resource type.
+    #   resource, which can be retrieved by calling a List or Describe
+    #   operation for the resource type.
     #
     #
     #
@@ -6105,26 +6279,26 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Creates a new game server resource and notifies GameLift FleetIQ that
-    # the game server is ready to host gameplay and players. This action is
-    # called by a game server process that is running on an instance in a
+    # the game server is ready to host gameplay and players. This operation
+    # is called by a game server process that is running on an instance in a
     # game server group. Registering game servers enables GameLift FleetIQ
     # to track available game servers and enables game clients and services
     # to claim a game server for a new game session.
     #
     # To register a game server, identify the game server group and instance
     # where the game server is running, and provide a unique identifier for
-    # the game server. You can also include connection and game server data;
-    # when a game client or service requests a game server by calling
-    # ClaimGameServer, this information is returned in response.
+    # the game server. You can also include connection and game server data.
+    # When a game client or service requests a game server by calling
+    # ClaimGameServer, this information is returned in the response.
     #
     # Once a game server is successfully registered, it is put in status
-    # AVAILABLE. A request to register a game server may fail if the
-    # instance it is in the process of shutting down as part of instance
-    # rebalancing or scale-down activity.
+    # `AVAILABLE`. A request to register a game server may fail if the
+    # instance it is running on is in the process of shutting down as part
+    # of instance balancing or scale-down activity.
     #
     # **Learn more**
     #
@@ -6146,50 +6320,32 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   An identifier for the game server group where the game server is
-    #   running. You can use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group where the game server is
+    #   running. Use either the GameServerGroup name or ARN value.
     #
     # @option params [required, String] :game_server_id
-    #   A custom string that uniquely identifies the new game server. Game
-    #   server IDs are developer-defined and must be unique across all game
-    #   server groups in your AWS account.
+    #   A custom string that uniquely identifies the game server to register.
+    #   Game server IDs are developer-defined and must be unique across all
+    #   game server groups in your AWS account.
     #
     # @option params [required, String] :instance_id
     #   The unique identifier for the instance where the game server is
-    #   running. This ID is available in the instance metadata.
+    #   running. This ID is available in the instance metadata. EC2 instance
+    #   IDs use a 17-character format, for example: `i-1234567890abcdef0`.
     #
     # @option params [String] :connection_info
-    #   Information needed to make inbound client connections to the game
-    #   server. This might include IP address and port, DNS name, etc.
+    #   Information that is needed to make inbound client connections to the
+    #   game server. This might include the IP address and port, DNS name, and
+    #   other information.
     #
     # @option params [String] :game_server_data
     #   A set of custom game server properties, formatted as a single string
     #   value. This data is passed to a game client or service when it
-    #   requests information on a game servers using ListGameServers or
+    #   requests information on game servers using ListGameServers or
     #   ClaimGameServer.
-    #
-    # @option params [String] :custom_sort_key
-    #   A game server tag that can be used to request sorted lists of game
-    #   servers using ListGameServers. Custom sort keys are developer-defined
-    #   based on how you want to organize the retrieved game server
-    #   information.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   A list of labels to assign to the new game server resource. Tags are
-    #   developer-defined key-value pairs. Tagging AWS resources are useful
-    #   for resource management, access management, and cost allocation. For
-    #   more information, see [ Tagging AWS Resources][1] in the *AWS General
-    #   Reference*. Once the resource is created, you can use TagResource,
-    #   UntagResource, and ListTagsForResource to add, remove, and view tags.
-    #   The maximum tag limit may be lower than stated. See the AWS General
-    #   Reference for actual tagging limits.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::RegisterGameServerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6203,13 +6359,6 @@ module Aws::GameLift
     #     instance_id: "GameServerInstanceId", # required
     #     connection_info: "GameServerConnectionInfo",
     #     game_server_data: "GameServerData",
-    #     custom_sort_key: "GameServerSortKey",
-    #     tags: [
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       },
-    #     ],
     #   })
     #
     # @example Response structure
@@ -6220,7 +6369,6 @@ module Aws::GameLift
     #   resp.game_server.instance_id #=> String
     #   resp.game_server.connection_info #=> String
     #   resp.game_server.game_server_data #=> String
-    #   resp.game_server.custom_sort_key #=> String
     #   resp.game_server.claim_status #=> String, one of "CLAIMED"
     #   resp.game_server.utilization_status #=> String, one of "AVAILABLE", "UTILIZED"
     #   resp.game_server.registration_time #=> Time
@@ -6342,19 +6490,21 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Reinstates activity on a game server group after it has been
-    # suspended. A game server group may be suspended by calling
-    # SuspendGameServerGroup, or it may have been involuntarily suspended
-    # due to a configuration problem. You can manually resume activity on
-    # the group once the configuration problem has been resolved. Refer to
-    # the game server group status and status reason for more information on
-    # why group activity is suspended.
+    # suspended. A game server group might be suspended by
+    # theSuspendGameServerGroup operation, or it might be suspended
+    # involuntarily due to a configuration problem. In the second case, you
+    # can manually resume activity on the group once the configuration
+    # problem has been resolved. Refer to the game server group status and
+    # status reason for more information on why group activity is suspended.
     #
     # To resume activity, specify a game server group ARN and the type of
-    # activity to be resumed.
+    # activity to be resumed. If successful, a GameServerGroup object is
+    # returned showing that the resumed activity is no longer listed in
+    # `SuspendedActions`.
     #
     # **Learn more**
     #
@@ -6376,16 +6526,18 @@ module Aws::GameLift
     #
     # * SuspendGameServerGroup
     #
+    # * DescribeGameServerInstances
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   The unique identifier of the game server group to resume activity on.
-    #   Use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #
     # @option params [required, Array<String>] :resume_actions
-    #   The action to resume for this game server group.
+    #   The activity to resume for this game server group.
     #
     # @return [Types::ResumeGameServerGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6406,7 +6558,7 @@ module Aws::GameLift
     #   resp.game_server_group.instance_definitions #=> Array
     #   resp.game_server_group.instance_definitions[0].instance_type #=> String, one of "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.game_server_group.instance_definitions[0].weighted_capacity #=> String
-    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED"
+    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED", "ON_DEMAND_ONLY"
     #   resp.game_server_group.game_server_protection_policy #=> String, one of "NO_PROTECTION", "FULL_PROTECTION"
     #   resp.game_server_group.auto_scaling_group_arn #=> String
     #   resp.game_server_group.status #=> String, one of "NEW", "ACTIVATING", "ACTIVE", "DELETE_SCHEDULED", "DELETING", "DELETED", "ERROR"
@@ -6585,13 +6737,15 @@ module Aws::GameLift
     #
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
-    #   Use the token that is returned with a previous call to this action. To
-    #   start at the beginning of the result set, do not specify a value.
+    #   Use the token that is returned with a previous call to this operation.
+    #   To start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::SearchGameSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchGameSessionsOutput#game_sessions #game_sessions} => Array&lt;Types::GameSession&gt;
     #   * {Types::SearchGameSessionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7041,26 +7195,13 @@ module Aws::GameLift
     # matchmaking configuration, and include the players to be matched. You
     # must also include a set of player attributes relevant for the
     # matchmaking configuration. If successful, a matchmaking ticket is
-    # returned with status set to `QUEUED`. Track the status of the ticket
-    # to respond as needed and acquire game session connection information
-    # for successfully completed matches.
+    # returned with status set to `QUEUED`.
     #
-    # **Tracking ticket status** -- A couple of options are available for
-    # tracking the status of matchmaking requests:
-    #
-    # * Polling -- Call `DescribeMatchmaking`. This operation returns the
-    #   full ticket object, including current status and (for completed
-    #   tickets) game session connection info. We recommend polling no more
-    #   than once every 10 seconds.
-    #
-    # * Notifications -- Get event notifications for changes in ticket
-    #   status using Amazon Simple Notification Service (SNS). Notifications
-    #   are easy to set up (see CreateMatchmakingConfiguration) and
-    #   typically deliver match status changes faster and more efficiently
-    #   than polling. We recommend that you use polling to back up to
-    #   notifications (since delivery is not guaranteed) and call
-    #   `DescribeMatchmaking` only when notifications are not received
-    #   within 30 seconds.
+    # Track the status of the ticket to respond as needed and acquire game
+    # session connection information for successfully completed matches.
+    # Ticket status updates are tracked using event notification through
+    # Amazon Simple Notification Service (SNS), which is defined in the
+    # matchmaking configuration.
     #
     # **Processing a matchmaking request** -- FlexMatch handles a
     # matchmaking request as follows:
@@ -7341,7 +7482,7 @@ module Aws::GameLift
     # The ticket ID is included in the `MatchmakerData` of an updated game
     # session object, which is provided to the game server.
     #
-    # <note markdown="1"> If the action is successful, the service sends back an empty JSON
+    # <note markdown="1"> If the operation is successful, the service sends back an empty JSON
     # struct with the HTTP 200 response (not an empty HTTP body).
     #
     #  </note>
@@ -7386,27 +7527,28 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Temporarily stops activity on a game server group without terminating
-    # instances or the game server group. Activity can be restarted by
-    # calling ResumeGameServerGroup. Activities that can suspended are:
+    # instances or the game server group. You can restart activity by
+    # calling ResumeGameServerGroup. You can suspend the following activity:
     #
-    # * Instance type replacement. This activity evaluates the current Spot
-    #   viability of all instance types that are defined for the game server
-    #   group. It updates the Auto Scaling group to remove nonviable Spot
-    #   instance types (which have a higher chance of game server
-    #   interruptions) and rebalances capacity across the remaining viable
-    #   Spot instance types. When this activity is suspended, the Auto
-    #   Scaling group continues with its current balance, regardless of
-    #   viability. Instance protection, utilization metrics, and capacity
-    #   autoscaling activities continue to be active.
+    # * **Instance type replacement** - This activity evaluates the current
+    #   game hosting viability of all Spot instance types that are defined
+    #   for the game server group. It updates the Auto Scaling group to
+    #   remove nonviable Spot Instance types, which have a higher chance of
+    #   game server interruptions. It then balances capacity across the
+    #   remaining viable Spot Instance types. When this activity is
+    #   suspended, the Auto Scaling group continues with its current
+    #   balance, regardless of viability. Instance protection, utilization
+    #   metrics, and capacity scaling activities continue to be active.
     #
     # ^
     #
     # To suspend activity, specify a game server group ARN and the type of
-    # activity to be suspended.
+    # activity to be suspended. If successful, a GameServerGroup object is
+    # returned showing that the activity is listed in `SuspendedActions`.
     #
     # **Learn more**
     #
@@ -7428,16 +7570,18 @@ module Aws::GameLift
     #
     # * SuspendGameServerGroup
     #
+    # * DescribeGameServerInstances
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   The unique identifier of the game server group to stop activity on.
-    #   Use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #
     # @option params [required, Array<String>] :suspend_actions
-    #   The action to suspend for this game server group.
+    #   The activity to suspend for this game server group.
     #
     # @return [Types::SuspendGameServerGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7458,7 +7602,7 @@ module Aws::GameLift
     #   resp.game_server_group.instance_definitions #=> Array
     #   resp.game_server_group.instance_definitions[0].instance_type #=> String, one of "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.game_server_group.instance_definitions[0].weighted_capacity #=> String
-    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED"
+    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED", "ON_DEMAND_ONLY"
     #   resp.game_server_group.game_server_protection_policy #=> String, one of "NO_PROTECTION", "FULL_PROTECTION"
     #   resp.game_server_group.auto_scaling_group_arn #=> String
     #   resp.game_server_group.status #=> String, one of "NEW", "ACTIVATING", "ACTIVE", "DELETE_SCHEDULED", "DELETING", "DELETED", "ERROR"
@@ -7480,9 +7624,9 @@ module Aws::GameLift
     # Assigns a tag to a GameLift resource. AWS resource tags provide an
     # additional management tool set. You can use tags to organize
     # resources, create IAM permissions policies to manage access to groups
-    # of resources, customize AWS cost breakdowns, etc. This action handles
-    # the permissions necessary to manage tags for the following GameLift
-    # resource types:
+    # of resources, customize AWS cost breakdowns, etc. This operation
+    # handles the permissions necessary to manage tags for the following
+    # GameLift resource types:
     #
     # * Build
     #
@@ -7526,8 +7670,8 @@ module Aws::GameLift
     #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
     #   identifies the GameLift resource that you want to assign tags to.
     #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe action
-    #   for the resource type.
+    #   resource, which can be retrieved by calling a List or Describe
+    #   operation for the resource type.
     #
     #
     #
@@ -7568,7 +7712,7 @@ module Aws::GameLift
 
     # Removes a tag that is assigned to a GameLift resource. Resource tags
     # are used to organize AWS resources for a range of purposes. This
-    # action handles the permissions necessary to manage tags for the
+    # operation handles the permissions necessary to manage tags for the
     # following GameLift resource types:
     #
     # * Build
@@ -7587,8 +7731,8 @@ module Aws::GameLift
     #
     # To remove a tag from a resource, specify the unique ARN value for the
     # resource and provide a string list containing one or more tags to be
-    # removed. This action succeeds even if the list includes tags that are
-    # not currently assigned to the specified resource.
+    # removed. This operation succeeds even if the list includes tags that
+    # are not currently assigned to the specified resource.
     #
     # **Learn more**
     #
@@ -7613,8 +7757,8 @@ module Aws::GameLift
     #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
     #   identifies the GameLift resource that you want to remove tags from.
     #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe action
-    #   for the resource type.
+    #   resource, which can be retrieved by calling a List or Describe
+    #   operation for the resource type.
     #
     #
     #
@@ -7881,9 +8025,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates capacity settings for a fleet. Use this action to specify the
-    # number of EC2 instances (hosts) that you want this fleet to contain.
-    # Before calling this action, you may want to call
+    # Updates capacity settings for a fleet. Use this operation to specify
+    # the number of EC2 instances (hosts) that you want this fleet to
+    # contain. Before calling this operation, you may want to call
     # DescribeEC2InstanceLimits to get the maximum capacity based on the
     # fleet's EC2 instance type.
     #
@@ -8059,18 +8203,17 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Updates information about a registered game server. This action is
-    # called by a game server process that is running on an instance in a
-    # game server group. There are three reasons to update game server
-    # information: (1) to change the utilization status of the game server,
-    # (2) to report game server health status, and (3) to change game server
-    # metadata. A registered game server should regularly report health and
-    # should update utilization status when it is supporting gameplay so
-    # that GameLift FleetIQ can accurately track game server availability.
-    # You can make all three types of updates in the same request.
+    # Updates information about a registered game server to help GameLift
+    # FleetIQ to track game server availability. This operation is called by
+    # a game server process that is running on an instance in a game server
+    # group.
+    #
+    # Use this operation to update the following types of game server
+    # information. You can make all three types of updates in the same
+    # request:
     #
     # * To update the game server's utilization status, identify the game
     #   server and game server group and specify the current utilization
@@ -8078,14 +8221,14 @@ module Aws::GameLift
     #   hosting games and when they are available to be claimed.
     #
     # * To report health status, identify the game server and game server
-    #   group and set health check to HEALTHY. If a game server does not
+    #   group and set health check to `HEALTHY`. If a game server does not
     #   report health status for a certain length of time, the game server
-    #   is no longer considered healthy and will be eventually de-registered
-    #   from the game server group to avoid affecting utilization metrics.
-    #   The best practice is to report health every 60 seconds.
+    #   is no longer considered healthy. As a result, it will be eventually
+    #   deregistered from the game server group to avoid affecting
+    #   utilization metrics. The best practice is to report health every 60
+    #   seconds.
     #
-    # * To change game server metadata, provide updated game server data and
-    #   custom sort key values.
+    # * To change game server metadata, provide updated game server data.
     #
     # Once a game server is successfully updated, the relevant statuses and
     # timestamps are updated.
@@ -8110,35 +8253,29 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   An identifier for the game server group where the game server is
+    #   A unique identifier for the game server group where the game server is
     #   running. Use either the GameServerGroup name or ARN value.
     #
     # @option params [required, String] :game_server_id
-    #   The identifier for the game server to be updated.
+    #   A custom string that uniquely identifies the game server to update.
     #
     # @option params [String] :game_server_data
     #   A set of custom game server properties, formatted as a single string
     #   value. This data is passed to a game client or service when it
-    #   requests information on a game servers using DescribeGameServer or
+    #   requests information on game servers using ListGameServers or
     #   ClaimGameServer.
-    #
-    # @option params [String] :custom_sort_key
-    #   A game server tag that can be used to request sorted lists of game
-    #   servers using ListGameServers. Custom sort keys are developer-defined
-    #   based on how you want to organize the retrieved game server
-    #   information.
     #
     # @option params [String] :utilization_status
     #   Indicates whether the game server is available or is currently hosting
     #   gameplay.
     #
     # @option params [String] :health_check
-    #   Indicates health status of the game server. An update that explicitly
-    #   includes this parameter updates the game server's
-    #   *LastHealthCheckTime* time stamp.
+    #   Indicates health status of the game server. A request that includes
+    #   this parameter updates the game server's *LastHealthCheckTime*
+    #   timestamp.
     #
     # @return [Types::UpdateGameServerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8150,7 +8287,6 @@ module Aws::GameLift
     #     game_server_group_name: "GameServerGroupNameOrArn", # required
     #     game_server_id: "GameServerId", # required
     #     game_server_data: "GameServerData",
-    #     custom_sort_key: "GameServerSortKey",
     #     utilization_status: "AVAILABLE", # accepts AVAILABLE, UTILIZED
     #     health_check: "HEALTHY", # accepts HEALTHY
     #   })
@@ -8163,7 +8299,6 @@ module Aws::GameLift
     #   resp.game_server.instance_id #=> String
     #   resp.game_server.connection_info #=> String
     #   resp.game_server.game_server_data #=> String
-    #   resp.game_server.custom_sort_key #=> String
     #   resp.game_server.claim_status #=> String, one of "CLAIMED"
     #   resp.game_server.utilization_status #=> String, one of "AVAILABLE", "UTILIZED"
     #   resp.game_server.registration_time #=> Time
@@ -8179,28 +8314,23 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This action is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Updates GameLift FleetIQ-specific properties for a game server group.
-    # These properties include instance rebalancing and game server
-    # protection. Many Auto Scaling group properties are updated directly.
-    # These include autoscaling policies, minimum/maximum/desired instance
-    # counts, and launch template.
+    # Many Auto Scaling group properties are updated on the Auto Scaling
+    # group directly, including the launch template, Auto Scaling policies,
+    # and maximum/minimum/desired instance counts.
     #
     # To update the game server group, specify the game server group ID and
-    # provide the updated values.
-    #
-    # Updated properties are validated to ensure that GameLift FleetIQ can
-    # continue to perform its core instance rebalancing activity. When you
-    # change Auto Scaling group properties directly and the changes cause
-    # errors with GameLift FleetIQ activities, an alert is sent.
+    # provide the updated values. Before applying the updates, the new
+    # values are validated to ensure that GameLift FleetIQ can continue to
+    # perform instance balancing activity. If successful, a GameServerGroup
+    # object is returned.
     #
     # **Learn more**
     #
     # [GameLift FleetIQ Guide][1]
-    #
-    # [Updating a GameLift FleetIQ-Linked Auto Scaling Group][2]
     #
     # **Related operations**
     #
@@ -8218,64 +8348,75 @@ module Aws::GameLift
     #
     # * SuspendGameServerGroup
     #
+    # * DescribeGameServerInstances
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-asgroups.html
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
     #
     # @option params [required, String] :game_server_group_name
-    #   The unique identifier of the game server group to update. Use either
-    #   the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows Amazon
-    #   GameLift to access your EC2 Auto Scaling groups. The submitted role is
-    #   validated to ensure that it contains the necessary permissions for
-    #   game server groups.
+    #   GameLift to access your EC2 Auto Scaling groups.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #
     # @option params [Array<Types::InstanceDefinition>] :instance_definitions
-    #   An updated list of EC2 instance types to use when creating instances
-    #   in the group. The instance definition must specify instance types that
-    #   are supported by GameLift FleetIQ, and must include at least two
-    #   instance types. This updated list replaces the entire current list of
-    #   instance definitions for the game server group. For more information
-    #   on instance types, see [EC2 Instance Types][1] in the *Amazon EC2 User
-    #   Guide*..
+    #   An updated list of EC2 instance types to use in the Auto Scaling
+    #   group. The instance definitions must specify at least two different
+    #   instance types that are supported by GameLift FleetIQ. This updated
+    #   list replaces the entire current list of instance definitions for the
+    #   game server group. For more information on instance types, see [EC2
+    #   Instance Types][1] in the *Amazon EC2 User Guide*. You can optionally
+    #   specify capacity weighting for each instance type. If no weight value
+    #   is specified for an instance type, it is set to the default value
+    #   "1". For more information about capacity weighting, see [ Instance
+    #   Weighting for Amazon EC2 Auto Scaling][2] in the Amazon EC2 Auto
+    #   Scaling User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
     #
     # @option params [String] :game_server_protection_policy
     #   A flag that indicates whether instances in the game server group are
     #   protected from early termination. Unprotected instances that have
-    #   active game servers running may by terminated during a scale-down
+    #   active game servers running might be terminated during a scale-down
     #   event, causing players to be dropped from the game. Protected
     #   instances cannot be terminated while there are active game servers
-    #   running. An exception to this is Spot Instances, which may be
+    #   running except in the event of a forced game server group deletion
+    #   (see ). An exception to this is with Spot Instances, which can be
     #   terminated by AWS regardless of protection status. This property is
-    #   set to NO\_PROTECTION by default.
+    #   set to `NO_PROTECTION` by default.
     #
     # @option params [String] :balancing_strategy
-    #   The fallback balancing method to use for the game server group when
-    #   Spot instances in a Region become unavailable or are not viable for
-    #   game hosting. Once triggered, this method remains active until Spot
-    #   instances can once again be used. Method options include:
+    #   Indicates how GameLift FleetIQ balances the use of Spot Instances and
+    #   On-Demand Instances in the game server group. Method options include
+    #   the following:
     #
-    #   * SPOT\_ONLY -- If Spot instances are unavailable, the game server
-    #     group provides no hosting capacity. No new instances are started,
-    #     and the existing nonviable Spot instances are terminated (once
-    #     current gameplay ends) and not replaced.
+    #   * `SPOT_ONLY` - Only Spot Instances are used in the game server group.
+    #     If Spot Instances are unavailable or not viable for game hosting,
+    #     the game server group provides no hosting capacity until Spot
+    #     Instances can again be used. Until then, no new instances are
+    #     started, and the existing nonviable Spot Instances are terminated
+    #     (after current gameplay ends) and are not replaced.
     #
-    #   * SPOT\_PREFERRED -- If Spot instances are unavailable, the game
-    #     server group continues to provide hosting capacity by using
-    #     On-Demand instances. Existing nonviable Spot instances are
-    #     terminated (once current gameplay ends) and replaced with new
-    #     On-Demand instances.
+    #   * `SPOT_PREFERRED` - (default value) Spot Instances are used whenever
+    #     available in the game server group. If Spot Instances are
+    #     unavailable, the game server group continues to provide hosting
+    #     capacity by falling back to On-Demand Instances. Existing nonviable
+    #     Spot Instances are terminated (after current gameplay ends) and are
+    #     replaced with new On-Demand Instances.
+    #
+    #   * `ON_DEMAND_ONLY` - Only On-Demand Instances are used in the game
+    #     server group. No Spot Instances are used, even when available, while
+    #     this balancing strategy is in force.
     #
     # @return [Types::UpdateGameServerGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8293,7 +8434,7 @@ module Aws::GameLift
     #       },
     #     ],
     #     game_server_protection_policy: "NO_PROTECTION", # accepts NO_PROTECTION, FULL_PROTECTION
-    #     balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED
+    #     balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED, ON_DEMAND_ONLY
     #   })
     #
     # @example Response structure
@@ -8304,7 +8445,7 @@ module Aws::GameLift
     #   resp.game_server_group.instance_definitions #=> Array
     #   resp.game_server_group.instance_definitions[0].instance_type #=> String, one of "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge"
     #   resp.game_server_group.instance_definitions[0].weighted_capacity #=> String
-    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED"
+    #   resp.game_server_group.balancing_strategy #=> String, one of "SPOT_ONLY", "SPOT_PREFERRED", "ON_DEMAND_ONLY"
     #   resp.game_server_group.game_server_protection_policy #=> String, one of "NO_PROTECTION", "FULL_PROTECTION"
     #   resp.game_server_group.auto_scaling_group_arn #=> String
     #   resp.game_server_group.status #=> String, one of "NEW", "ACTIVATING", "ACTIVE", "DELETE_SCHEDULED", "DELETING", "DELETED", "ERROR"
@@ -8980,7 +9121,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

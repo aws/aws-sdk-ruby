@@ -498,7 +498,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -570,7 +570,7 @@ module Aws::MediaConvert
     #             kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #           },
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #           file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #           file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
     #           filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #           filter_strength: 1,
     #           image_inserter: {
@@ -767,6 +767,7 @@ module Aws::MediaConvert
     #                   selected_outputs: ["__stringMin1"],
     #                 },
     #               ],
+    #               audio_only_header: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -863,6 +864,9 @@ module Aws::MediaConvert
     #             {
     #               audio_descriptions: [
     #                 {
+    #                   audio_channel_tagging_settings: {
+    #                     channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR
+    #                   },
     #                   audio_normalization_settings: {
     #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #                     algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
@@ -1716,6 +1720,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.audio_only_header #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -1777,6 +1782,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job.settings.output_groups[0].outputs #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -2369,7 +2375,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -2630,6 +2636,7 @@ module Aws::MediaConvert
     #                   selected_outputs: ["__stringMin1"],
     #                 },
     #               ],
+    #               audio_only_header: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -2726,6 +2733,9 @@ module Aws::MediaConvert
     #             {
     #               audio_descriptions: [
     #                 {
+    #                   audio_channel_tagging_settings: {
+    #                     channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR
+    #                   },
     #                   audio_normalization_settings: {
     #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #                     algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
@@ -3549,6 +3559,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.audio_only_header #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -3610,6 +3621,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -4130,6 +4142,9 @@ module Aws::MediaConvert
     #     settings: { # required
     #       audio_descriptions: [
     #         {
+    #           audio_channel_tagging_settings: {
+    #             channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR
+    #           },
     #           audio_normalization_settings: {
     #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #             algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
@@ -4737,6 +4752,7 @@ module Aws::MediaConvert
     #   resp.preset.last_updated #=> Time
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -5657,6 +5673,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.audio_only_header #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -5718,6 +5735,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job.settings.output_groups[0].outputs #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -6418,6 +6436,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.audio_only_header #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -6479,6 +6498,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -6990,6 +7010,7 @@ module Aws::MediaConvert
     #   resp.preset.last_updated #=> Time
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -7739,6 +7760,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.audio_only_header #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -7800,6 +7822,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_templates[0].settings.output_groups[0].outputs #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -8550,6 +8573,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.audio_only_header #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -8611,6 +8635,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.jobs[0].settings.output_groups[0].outputs #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions #=> Array
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -9160,6 +9185,7 @@ module Aws::MediaConvert
     #   resp.presets[0].last_updated #=> Time
     #   resp.presets[0].name #=> String
     #   resp.presets[0].settings.audio_descriptions #=> Array
+    #   resp.presets[0].settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -9877,7 +9903,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -10138,6 +10164,7 @@ module Aws::MediaConvert
     #                   selected_outputs: ["__stringMin1"],
     #                 },
     #               ],
+    #               audio_only_header: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -10234,6 +10261,9 @@ module Aws::MediaConvert
     #             {
     #               audio_descriptions: [
     #                 {
+    #                   audio_channel_tagging_settings: {
+    #                     channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR
+    #                   },
     #                   audio_normalization_settings: {
     #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #                     algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
@@ -11054,6 +11084,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.audio_only_header #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -11115,6 +11146,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -11629,6 +11661,9 @@ module Aws::MediaConvert
     #     settings: {
     #       audio_descriptions: [
     #         {
+    #           audio_channel_tagging_settings: {
+    #             channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR
+    #           },
     #           audio_normalization_settings: {
     #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #             algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
@@ -12233,6 +12268,7 @@ module Aws::MediaConvert
     #   resp.preset.last_updated #=> Time
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -12782,7 +12818,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

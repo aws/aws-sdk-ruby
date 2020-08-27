@@ -105,6 +105,8 @@ module Aws::GameLift
     DescribeGameServerGroupInput = Shapes::StructureShape.new(name: 'DescribeGameServerGroupInput')
     DescribeGameServerGroupOutput = Shapes::StructureShape.new(name: 'DescribeGameServerGroupOutput')
     DescribeGameServerInput = Shapes::StructureShape.new(name: 'DescribeGameServerInput')
+    DescribeGameServerInstancesInput = Shapes::StructureShape.new(name: 'DescribeGameServerInstancesInput')
+    DescribeGameServerInstancesOutput = Shapes::StructureShape.new(name: 'DescribeGameServerInstancesOutput')
     DescribeGameServerOutput = Shapes::StructureShape.new(name: 'DescribeGameServerOutput')
     DescribeGameSessionDetailsInput = Shapes::StructureShape.new(name: 'DescribeGameSessionDetailsInput')
     DescribeGameSessionDetailsOutput = Shapes::StructureShape.new(name: 'DescribeGameSessionDetailsOutput')
@@ -185,9 +187,12 @@ module Aws::GameLift
     GameServerGroups = Shapes::ListShape.new(name: 'GameServerGroups')
     GameServerHealthCheck = Shapes::StringShape.new(name: 'GameServerHealthCheck')
     GameServerId = Shapes::StringShape.new(name: 'GameServerId')
+    GameServerInstance = Shapes::StructureShape.new(name: 'GameServerInstance')
     GameServerInstanceId = Shapes::StringShape.new(name: 'GameServerInstanceId')
+    GameServerInstanceIds = Shapes::ListShape.new(name: 'GameServerInstanceIds')
+    GameServerInstanceStatus = Shapes::StringShape.new(name: 'GameServerInstanceStatus')
+    GameServerInstances = Shapes::ListShape.new(name: 'GameServerInstances')
     GameServerProtectionPolicy = Shapes::StringShape.new(name: 'GameServerProtectionPolicy')
-    GameServerSortKey = Shapes::StringShape.new(name: 'GameServerSortKey')
     GameServerUtilizationStatus = Shapes::StringShape.new(name: 'GameServerUtilizationStatus')
     GameServers = Shapes::ListShape.new(name: 'GameServers')
     GameSession = Shapes::StructureShape.new(name: 'GameSession')
@@ -746,6 +751,16 @@ module Aws::GameLift
     DescribeGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, required: true, location_name: "GameServerId"))
     DescribeGameServerInput.struct_class = Types::DescribeGameServerInput
 
+    DescribeGameServerInstancesInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    DescribeGameServerInstancesInput.add_member(:instance_ids, Shapes::ShapeRef.new(shape: GameServerInstanceIds, location_name: "InstanceIds"))
+    DescribeGameServerInstancesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
+    DescribeGameServerInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+    DescribeGameServerInstancesInput.struct_class = Types::DescribeGameServerInstancesInput
+
+    DescribeGameServerInstancesOutput.add_member(:game_server_instances, Shapes::ShapeRef.new(shape: GameServerInstances, location_name: "GameServerInstances"))
+    DescribeGameServerInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+    DescribeGameServerInstancesOutput.struct_class = Types::DescribeGameServerInstancesOutput
+
     DescribeGameServerOutput.add_member(:game_server, Shapes::ShapeRef.new(shape: GameServer, location_name: "GameServer"))
     DescribeGameServerOutput.struct_class = Types::DescribeGameServerOutput
 
@@ -964,7 +979,6 @@ module Aws::GameLift
     GameServer.add_member(:instance_id, Shapes::ShapeRef.new(shape: GameServerInstanceId, location_name: "InstanceId"))
     GameServer.add_member(:connection_info, Shapes::ShapeRef.new(shape: GameServerConnectionInfo, location_name: "ConnectionInfo"))
     GameServer.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
-    GameServer.add_member(:custom_sort_key, Shapes::ShapeRef.new(shape: GameServerSortKey, location_name: "CustomSortKey"))
     GameServer.add_member(:claim_status, Shapes::ShapeRef.new(shape: GameServerClaimStatus, location_name: "ClaimStatus"))
     GameServer.add_member(:utilization_status, Shapes::ShapeRef.new(shape: GameServerUtilizationStatus, location_name: "UtilizationStatus"))
     GameServer.add_member(:registration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RegistrationTime"))
@@ -993,6 +1007,16 @@ module Aws::GameLift
     GameServerGroupAutoScalingPolicy.struct_class = Types::GameServerGroupAutoScalingPolicy
 
     GameServerGroups.member = Shapes::ShapeRef.new(shape: GameServerGroup)
+
+    GameServerInstance.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupName, location_name: "GameServerGroupName"))
+    GameServerInstance.add_member(:game_server_group_arn, Shapes::ShapeRef.new(shape: GameServerGroupArn, location_name: "GameServerGroupArn"))
+    GameServerInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: GameServerInstanceId, location_name: "InstanceId"))
+    GameServerInstance.add_member(:instance_status, Shapes::ShapeRef.new(shape: GameServerInstanceStatus, location_name: "InstanceStatus"))
+    GameServerInstance.struct_class = Types::GameServerInstance
+
+    GameServerInstanceIds.member = Shapes::ShapeRef.new(shape: GameServerInstanceId)
+
+    GameServerInstances.member = Shapes::ShapeRef.new(shape: GameServerInstance)
 
     GameServers.member = Shapes::ShapeRef.new(shape: GameServer)
 
@@ -1343,8 +1367,6 @@ module Aws::GameLift
     RegisterGameServerInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: GameServerInstanceId, required: true, location_name: "InstanceId"))
     RegisterGameServerInput.add_member(:connection_info, Shapes::ShapeRef.new(shape: GameServerConnectionInfo, location_name: "ConnectionInfo"))
     RegisterGameServerInput.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
-    RegisterGameServerInput.add_member(:custom_sort_key, Shapes::ShapeRef.new(shape: GameServerSortKey, location_name: "CustomSortKey"))
-    RegisterGameServerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RegisterGameServerInput.struct_class = Types::RegisterGameServerInput
 
     RegisterGameServerOutput.add_member(:game_server, Shapes::ShapeRef.new(shape: GameServer, location_name: "GameServer"))
@@ -1597,7 +1619,6 @@ module Aws::GameLift
     UpdateGameServerInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
     UpdateGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, required: true, location_name: "GameServerId"))
     UpdateGameServerInput.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
-    UpdateGameServerInput.add_member(:custom_sort_key, Shapes::ShapeRef.new(shape: GameServerSortKey, location_name: "CustomSortKey"))
     UpdateGameServerInput.add_member(:utilization_status, Shapes::ShapeRef.new(shape: GameServerUtilizationStatus, location_name: "UtilizationStatus"))
     UpdateGameServerInput.add_member(:health_check, Shapes::ShapeRef.new(shape: GameServerHealthCheck, location_name: "HealthCheck"))
     UpdateGameServerInput.struct_class = Types::UpdateGameServerInput
@@ -2111,6 +2132,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_fleet_capacity, Seahorse::Model::Operation.new.tap do |o|
@@ -2123,6 +2150,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_fleet_events, Seahorse::Model::Operation.new.tap do |o|
@@ -2135,6 +2168,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_fleet_port_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -2159,6 +2198,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_game_server, Seahorse::Model::Operation.new.tap do |o|
@@ -2185,6 +2230,24 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:describe_game_server_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGameServerInstances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGameServerInstancesInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGameServerInstancesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_game_session_details, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeGameSessionDetails"
         o.http_method = "POST"
@@ -2196,6 +2259,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_game_session_placement, Seahorse::Model::Operation.new.tap do |o|
@@ -2220,6 +2289,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_game_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -2233,6 +2308,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -2245,6 +2326,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_matchmaking, Seahorse::Model::Operation.new.tap do |o|
@@ -2267,6 +2354,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_matchmaking_rule_sets, Seahorse::Model::Operation.new.tap do |o|
@@ -2279,6 +2372,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_player_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -2291,6 +2390,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_runtime_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -2315,6 +2420,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_script, Seahorse::Model::Operation.new.tap do |o|
@@ -2385,6 +2496,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_builds, Seahorse::Model::Operation.new.tap do |o|
@@ -2396,6 +2513,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_fleets, Seahorse::Model::Operation.new.tap do |o|
@@ -2408,6 +2531,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_game_server_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -2419,6 +2548,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_game_servers, Seahorse::Model::Operation.new.tap do |o|
@@ -2430,6 +2565,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_scripts, Seahorse::Model::Operation.new.tap do |o|
@@ -2441,6 +2582,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2528,6 +2675,12 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:start_fleet_actions, Seahorse::Model::Operation.new.tap do |o|

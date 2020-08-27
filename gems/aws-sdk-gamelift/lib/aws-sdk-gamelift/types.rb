@@ -10,7 +10,7 @@
 module Aws::GameLift
   module Types
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass AcceptMatchInput
     #   data as a hash:
@@ -326,11 +326,11 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   An identifier for the game server group. When claiming a specific
-    #   game server, this is the game server group whether the game server
-    #   is located. When requesting that GameLift FleetIQ locate an
-    #   available game server, this is the game server group to search on.
-    #   You can use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group where the game server
+    #   is running. Use either the GameServerGroup name or ARN value.. If
+    #   you are not specifying a game server to claim, this value identifies
+    #   where you want GameLift FleetIQ to look for an available game server
+    #   to claim.
     #   @return [String]
     #
     # @!attribute [rw] game_server_id
@@ -341,7 +341,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_server_data
     #   A set of custom game server properties, formatted as a single string
-    #   value, to be passed to the claimed game server.
+    #   value. This data is passed to a game client or service when it
+    #   requests information on game servers using ListGameServers or
+    #   ClaimGameServer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ClaimGameServerInput AWS API Documentation
@@ -355,7 +357,7 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] game_server
-    #   Object that describes the newly claimed game server resource.
+    #   Object that describes the newly claimed game server.
     #   @return [Types::GameServer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ClaimGameServerOutput AWS API Documentation
@@ -381,7 +383,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateAliasInput
     #   data as a hash:
@@ -442,7 +444,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] alias
     #   The newly created alias resource.
@@ -456,7 +458,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateBuildInput
     #   data as a hash:
@@ -537,7 +539,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] build
     #   The newly created build resource, including a unique build IDs and
@@ -567,7 +569,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateFleetInput
     #   data as a hash:
@@ -853,7 +855,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_attributes
     #   Properties for the newly created fleet.
@@ -892,7 +894,7 @@ module Aws::GameLift
     #             target_value: 1.0, # required
     #           },
     #         },
-    #         balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED
+    #         balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED, ON_DEMAND_ONLY
     #         game_server_protection_policy: "NO_PROTECTION", # accepts NO_PROTECTION, FULL_PROTECTION
     #         vpc_subnets: ["VpcSubnet"],
     #         tags: [
@@ -912,9 +914,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows
-    #   Amazon GameLift to access your EC2 Auto Scaling groups. The
-    #   submitted role is validated to ensure that it contains the necessary
-    #   permissions for game server groups.
+    #   Amazon GameLift to access your EC2 Auto Scaling groups.
     #
     #
     #
@@ -923,15 +923,19 @@ module Aws::GameLift
     #
     # @!attribute [rw] min_size
     #   The minimum number of instances allowed in the EC2 Auto Scaling
-    #   group. During autoscaling events, GameLift FleetIQ and EC2 do not
-    #   scale down the group below this minimum. In production, this value
-    #   should be set to at least 1.
+    #   group. During automatic scaling events, GameLift FleetIQ and EC2 do
+    #   not scale down the group below this minimum. In production, this
+    #   value should be set to at least 1. After the Auto Scaling group is
+    #   created, update this value directly in the Auto Scaling group using
+    #   the AWS console or APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
     #   The maximum number of instances allowed in the EC2 Auto Scaling
-    #   group. During autoscaling events, GameLift FleetIQ and EC2 do not
-    #   scale up the group above this maximum.
+    #   group. During automatic scaling events, GameLift FleetIQ and EC2 do
+    #   not scale up the group above this maximum. After the Auto Scaling
+    #   group is created, update this value directly in the Auto Scaling
+    #   group using the AWS console or APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] launch_template
@@ -940,7 +944,9 @@ module Aws::GameLift
     #   group. You can specify the template using either the template name
     #   or ID. For help with creating a launch template, see [Creating a
     #   Launch Template for an Auto Scaling Group][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   Auto Scaling User Guide*. After the Auto Scaling group is created,
+    #   update this value directly in the Auto Scaling group using the AWS
+    #   console or APIs.
     #
     #
     #
@@ -948,72 +954,88 @@ module Aws::GameLift
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] instance_definitions
-    #   A set of EC2 instance types to use when creating instances in the
-    #   group. The instance definitions must specify at least two different
+    #   The EC2 instance types and sizes to use in the Auto Scaling group.
+    #   The instance definitions must specify at least two different
     #   instance types that are supported by GameLift FleetIQ. For more
     #   information on instance types, see [EC2 Instance Types][1] in the
-    #   *Amazon EC2 User Guide*.
+    #   *Amazon EC2 User Guide*. You can optionally specify capacity
+    #   weighting for each instance type. If no weight value is specified
+    #   for an instance type, it is set to the default value "1". For more
+    #   information about capacity weighting, see [ Instance Weighting for
+    #   Amazon EC2 Auto Scaling][2] in the Amazon EC2 Auto Scaling User
+    #   Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
     #   @return [Array<Types::InstanceDefinition>]
     #
     # @!attribute [rw] auto_scaling_policy
     #   Configuration settings to define a scaling policy for the Auto
     #   Scaling group that is optimized for game hosting. The scaling policy
-    #   uses the metric "PercentUtilizedGameServers" to maintain a buffer
+    #   uses the metric `"PercentUtilizedGameServers"` to maintain a buffer
     #   of idle game servers that can immediately accommodate new games and
-    #   players. Once the game server and Auto Scaling groups are created,
-    #   you can update the scaling policy settings directly in Auto Scaling
-    #   Groups.
+    #   players. After the Auto Scaling group is created, update this value
+    #   directly in the Auto Scaling group using the AWS console or APIs.
     #   @return [Types::GameServerGroupAutoScalingPolicy]
     #
     # @!attribute [rw] balancing_strategy
-    #   The fallback balancing method to use for the game server group when
-    #   Spot instances in a Region become unavailable or are not viable for
-    #   game hosting. Once triggered, this method remains active until Spot
-    #   instances can once again be used. Method options include:
+    #   Indicates how GameLift FleetIQ balances the use of Spot Instances
+    #   and On-Demand Instances in the game server group. Method options
+    #   include the following:
     #
-    #   * SPOT\_ONLY -- If Spot instances are unavailable, the game server
-    #     group provides no hosting capacity. No new instances are started,
-    #     and the existing nonviable Spot instances are terminated (once
-    #     current gameplay ends) and not replaced.
+    #   * `SPOT_ONLY` - Only Spot Instances are used in the game server
+    #     group. If Spot Instances are unavailable or not viable for game
+    #     hosting, the game server group provides no hosting capacity until
+    #     Spot Instances can again be used. Until then, no new instances are
+    #     started, and the existing nonviable Spot Instances are terminated
+    #     (after current gameplay ends) and are not replaced.
     #
-    #   * SPOT\_PREFERRED -- If Spot instances are unavailable, the game
-    #     server group continues to provide hosting capacity by using
-    #     On-Demand instances. Existing nonviable Spot instances are
-    #     terminated (once current gameplay ends) and replaced with new
-    #     On-Demand instances.
+    #   * `SPOT_PREFERRED` - (default value) Spot Instances are used
+    #     whenever available in the game server group. If Spot Instances are
+    #     unavailable, the game server group continues to provide hosting
+    #     capacity by falling back to On-Demand Instances. Existing
+    #     nonviable Spot Instances are terminated (after current gameplay
+    #     ends) and are replaced with new On-Demand Instances.
+    #
+    #   * `ON_DEMAND_ONLY` - Only On-Demand Instances are used in the game
+    #     server group. No Spot Instances are used, even when available,
+    #     while this balancing strategy is in force.
     #   @return [String]
     #
     # @!attribute [rw] game_server_protection_policy
     #   A flag that indicates whether instances in the game server group are
     #   protected from early termination. Unprotected instances that have
-    #   active game servers running may by terminated during a scale-down
+    #   active game servers running might be terminated during a scale-down
     #   event, causing players to be dropped from the game. Protected
     #   instances cannot be terminated while there are active game servers
-    #   running. An exception to this is Spot Instances, which may be
+    #   running except in the event of a forced game server group deletion
+    #   (see ). An exception to this is with Spot Instances, which can be
     #   terminated by AWS regardless of protection status. This property is
-    #   set to NO\_PROTECTION by default.
+    #   set to `NO_PROTECTION` by default.
     #   @return [String]
     #
     # @!attribute [rw] vpc_subnets
     #   A list of virtual private cloud (VPC) subnets to use with instances
     #   in the game server group. By default, all GameLift FleetIQ-supported
-    #   availability zones are used; this parameter allows you to specify
-    #   VPCs that you've set up.
+    #   Availability Zones are used. You can use this parameter to specify
+    #   VPCs that you've set up. This property cannot be updated after the
+    #   game server group is created, and the corresponding Auto Scaling
+    #   group will always use the property value that is set with this
+    #   request, even if the Auto Scaling group is updated directly
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
     #   A list of labels to assign to the new game server group resource.
-    #   Tags are developer-defined key-value pairs. Tagging AWS resources
-    #   are useful for resource management, access management, and cost
+    #   Tags are developer-defined key-value pairs. Tagging AWS resources is
+    #   useful for resource management, access management, and cost
     #   allocation. For more information, see [ Tagging AWS Resources][1] in
     #   the *AWS General Reference*. Once the resource is created, you can
     #   use TagResource, UntagResource, and ListTagsForResource to add,
-    #   remove, and view tags. The maximum tag limit may be lower than
-    #   stated. See the AWS General Reference for actual tagging limits.
+    #   remove, and view tags, respectively. The maximum tag limit may be
+    #   lower than stated. See the AWS General Reference for actual tagging
+    #   limits.
     #
     #
     #
@@ -1043,7 +1065,7 @@ module Aws::GameLift
     #   value for the GameLift FleetIQ game server group and the object's
     #   status. The EC2 Auto Scaling group ARN is initially null, since the
     #   group has not yet been created. This value is added once the game
-    #   server group status reaches ACTIVE.
+    #   server group status reaches `ACTIVE`.
     #   @return [Types::GameServerGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameServerGroupOutput AWS API Documentation
@@ -1054,7 +1076,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateGameSessionInput
     #   data as a hash:
@@ -1165,7 +1187,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session
     #   Object that describes the newly created game session record.
@@ -1179,7 +1201,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateGameSessionQueueInput
     #   data as a hash:
@@ -1266,7 +1288,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session_queue
     #   An object that describes the newly created game session queue.
@@ -1280,7 +1302,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateMatchmakingConfigurationInput
     #   data as a hash:
@@ -1454,7 +1476,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] configuration
     #   Object that describes the newly created matchmaking configuration.
@@ -1468,7 +1490,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateMatchmakingRuleSetInput
     #   data as a hash:
@@ -1522,7 +1544,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] rule_set
     #   The newly created matchmaking rule set.
@@ -1536,7 +1558,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreatePlayerSessionInput
     #   data as a hash:
@@ -1571,7 +1593,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] player_session
     #   Object that describes the newly created player session record.
@@ -1585,7 +1607,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreatePlayerSessionsInput
     #   data as a hash:
@@ -1624,7 +1646,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] player_sessions
     #   A collection of player session objects created for the added
@@ -1740,7 +1762,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateVpcPeeringAuthorizationInput
     #   data as a hash:
@@ -1778,7 +1800,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] vpc_peering_authorization
     #   Details on the requested VPC peering authorization, including
@@ -1793,7 +1815,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass CreateVpcPeeringConnectionInput
     #   data as a hash:
@@ -1843,7 +1865,7 @@ module Aws::GameLift
     #
     class CreateVpcPeeringConnectionOutput < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteAliasInput
     #   data as a hash:
@@ -1865,7 +1887,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteBuildInput
     #   data as a hash:
@@ -1887,7 +1909,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteFleetInput
     #   data as a hash:
@@ -1918,22 +1940,22 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   The unique identifier of the game server group to delete. Use either
-    #   the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] delete_option
-    #   The type of delete to perform. Options include:
+    #   The type of delete to perform. Options include the following:
     #
-    #   * SAFE\_DELETE – Terminates the game server group and EC2 Auto
-    #     Scaling group only when it has no game servers that are in IN\_USE
-    #     status.
+    #   * `SAFE_DELETE` – Terminates the game server group and EC2 Auto
+    #     Scaling group only when it has no game servers that are in
+    #     `UTILIZED` status.
     #
-    #   * FORCE\_DELETE – Terminates the game server group, including all
+    #   * `FORCE_DELETE` – Terminates the game server group, including all
     #     active game servers regardless of their utilization status, and
     #     the EC2 Auto Scaling group.
     #
-    #   * RETAIN – Does a safe delete of the game server group but retains
+    #   * `RETAIN` – Does a safe delete of the game server group but retains
     #     the EC2 Auto Scaling group as is.
     #   @return [String]
     #
@@ -1948,7 +1970,7 @@ module Aws::GameLift
 
     # @!attribute [rw] game_server_group
     #   An object that describes the deleted game server group resource,
-    #   with status updated to DELETE\_SCHEDULED.
+    #   with status updated to `DELETE_SCHEDULED`.
     #   @return [Types::GameServerGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameServerGroupOutput AWS API Documentation
@@ -1959,7 +1981,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteGameSessionQueueInput
     #   data as a hash:
@@ -1986,7 +2008,7 @@ module Aws::GameLift
     #
     class DeleteGameSessionQueueOutput < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteMatchmakingConfigurationInput
     #   data as a hash:
@@ -2012,7 +2034,7 @@ module Aws::GameLift
     #
     class DeleteMatchmakingConfigurationOutput < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteMatchmakingRuleSetInput
     #   data as a hash:
@@ -2036,13 +2058,13 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingRuleSetOutput AWS API Documentation
     #
     class DeleteMatchmakingRuleSetOutput < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteScalingPolicyInput
     #   data as a hash:
@@ -2091,7 +2113,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteVpcPeeringAuthorizationInput
     #   data as a hash:
@@ -2133,7 +2155,7 @@ module Aws::GameLift
     #
     class DeleteVpcPeeringAuthorizationOutput < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DeleteVpcPeeringConnectionInput
     #   data as a hash:
@@ -2177,13 +2199,13 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   An identifier for the game server group where the game server to be
-    #   de-registered is running. Use either the GameServerGroup name or ARN
-    #   value.
+    #   A unique identifier for the game server group where the game server
+    #   is running. Use either the GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] game_server_id
-    #   The identifier for the game server to be de-registered.
+    #   A custom string that uniquely identifies the game server to
+    #   deregister.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeregisterGameServerInput AWS API Documentation
@@ -2195,7 +2217,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeAliasInput
     #   data as a hash:
@@ -2217,7 +2239,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] alias
     #   The requested alias resource.
@@ -2231,7 +2253,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeBuildInput
     #   data as a hash:
@@ -2253,7 +2275,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] build
     #   Set of properties describing the requested build.
@@ -2267,7 +2289,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeEC2InstanceLimitsInput
     #   data as a hash:
@@ -2298,7 +2320,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] ec2_instance_limits
     #   The maximum number of instances for the specified instance type.
@@ -2312,7 +2334,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeFleetAttributesInput
     #   data as a hash:
@@ -2341,9 +2363,9 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value. This parameter is ignored when the request specifies one or
-    #   a list of fleet IDs.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value. This parameter is ignored when the request
+    #   specifies one or a list of fleet IDs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributesInput AWS API Documentation
@@ -2356,7 +2378,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_attributes
     #   A collection of objects containing attribute metadata for each
@@ -2366,7 +2388,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -2379,7 +2401,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeFleetCapacityInput
     #   data as a hash:
@@ -2405,9 +2427,9 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value. This parameter is ignored when the request specifies one or
-    #   a list of fleet IDs.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value. This parameter is ignored when the request
+    #   specifies one or a list of fleet IDs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacityInput AWS API Documentation
@@ -2420,7 +2442,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_capacity
     #   A collection of objects containing capacity information for each
@@ -2430,7 +2452,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -2443,7 +2465,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeFleetEventsInput
     #   data as a hash:
@@ -2483,8 +2505,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEventsInput AWS API Documentation
@@ -2499,7 +2521,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] events
     #   A collection of objects containing event log entries for the
@@ -2508,7 +2530,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -2521,7 +2543,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeFleetPortSettingsInput
     #   data as a hash:
@@ -2543,7 +2565,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] inbound_permissions
     #   The port settings for the requested fleet ID.
@@ -2557,7 +2579,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeFleetUtilizationInput
     #   data as a hash:
@@ -2586,9 +2608,9 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value. This parameter is ignored when the request specifies one or
-    #   a list of fleet IDs.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value. This parameter is ignored when the request
+    #   specifies one or a list of fleet IDs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilizationInput AWS API Documentation
@@ -2601,7 +2623,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_utilization
     #   A collection of objects containing utilization information for each
@@ -2610,7 +2632,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -2631,8 +2653,8 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   The unique identifier for the game server group being requested. Use
-    #   either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameServerGroupInput AWS API Documentation
@@ -2644,7 +2666,8 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] game_server_group
-    #   An object that describes the requested game server group resource.
+    #   An object with the property settings for the requested game server
+    #   group resource.
     #   @return [Types::GameServerGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameServerGroupOutput AWS API Documentation
@@ -2664,12 +2687,13 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   An identifier for the game server group where the game server is
-    #   running. Use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group where the game server
+    #   is running. Use either the GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] game_server_id
-    #   The identifier for the game server to be retrieved.
+    #   A custom string that uniquely identifies the game server information
+    #   to be retrieved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameServerInput AWS API Documentation
@@ -2681,8 +2705,72 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGameServerInstancesInput
+    #   data as a hash:
+    #
+    #       {
+    #         game_server_group_name: "GameServerGroupNameOrArn", # required
+    #         instance_ids: ["GameServerInstanceId"],
+    #         limit: 1,
+    #         next_token: "NonZeroAndMaxString",
+    #       }
+    #
+    # @!attribute [rw] game_server_group_name
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_ids
+    #   The EC2 instance IDs that you want to retrieve status on. EC2
+    #   instance IDs use a 17-character format, for example:
+    #   `i-1234567890abcdef0`. To retrieve all instances in the game server
+    #   group, leave this parameter empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential segments.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates the start of the next sequential segment of
+    #   results. Use the token returned with the previous call to this
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameServerInstancesInput AWS API Documentation
+    #
+    class DescribeGameServerInstancesInput < Struct.new(
+      :game_server_group_name,
+      :instance_ids,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] game_server_instances
+    #   The collection of requested game server instances.
+    #   @return [Array<Types::GameServerInstance>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where to resume retrieving results on the
+    #   next call to this operation. If no token is returned, these results
+    #   represent the end of the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameServerInstancesOutput AWS API Documentation
+    #
+    class DescribeGameServerInstancesOutput < Struct.new(
+      :game_server_instances,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] game_server
-    #   Object that describes the requested game server resource.
+    #   Object that describes the requested game server.
     #   @return [Types::GameServer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameServerOutput AWS API Documentation
@@ -2693,7 +2781,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeGameSessionDetailsInput
     #   data as a hash:
@@ -2736,8 +2824,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetailsInput AWS API Documentation
@@ -2753,7 +2841,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session_details
     #   A collection of objects containing game session properties and the
@@ -2763,7 +2851,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -2776,7 +2864,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeGameSessionPlacementInput
     #   data as a hash:
@@ -2797,7 +2885,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session_placement
     #   Object that describes the requested game session placement.
@@ -2811,7 +2899,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeGameSessionQueuesInput
     #   data as a hash:
@@ -2830,14 +2918,15 @@ module Aws::GameLift
     #
     # @!attribute [rw] limit
     #   The maximum number of results to return. Use this parameter with
-    #   `NextToken` to get results as a set of sequential pages.
+    #   `NextToken` to get results as a set of sequential pages. You can
+    #   request up to 50 results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueuesInput AWS API Documentation
@@ -2850,7 +2939,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session_queues
     #   A collection of objects that describe the requested game session
@@ -2859,7 +2948,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   A token that indicates where to resume retrieving results on the
-    #   next call to this action. If no token is returned, these results
+    #   next call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -2872,7 +2961,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeGameSessionsInput
     #   data as a hash:
@@ -2915,8 +3004,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionsInput AWS API Documentation
@@ -2932,7 +3021,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_sessions
     #   A collection of objects containing game session properties for each
@@ -2941,7 +3030,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -2954,7 +3043,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeInstancesInput
     #   data as a hash:
@@ -2984,8 +3073,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstancesInput AWS API Documentation
@@ -2999,7 +3088,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] instances
     #   A collection of objects containing properties for each instance
@@ -3008,7 +3097,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -3021,7 +3110,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeMatchmakingConfigurationsInput
     #   data as a hash:
@@ -3054,8 +3143,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurationsInput AWS API Documentation
@@ -3069,7 +3158,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] configurations
     #   A collection of requested matchmaking configurations.
@@ -3077,7 +3166,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   A token that indicates where to resume retrieving results on the
-    #   next call to this action. If no token is returned, these results
+    #   next call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -3090,7 +3179,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeMatchmakingInput
     #   data as a hash:
@@ -3112,7 +3201,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] ticket_list
     #   A collection of existing matchmaking ticket objects matching the
@@ -3127,7 +3216,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeMatchmakingRuleSetsInput
     #   data as a hash:
@@ -3153,8 +3242,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSetsInput AWS API Documentation
@@ -3167,7 +3256,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] rule_sets
     #   A collection of requested matchmaking rule set objects.
@@ -3175,7 +3264,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   A token that indicates where to resume retrieving results on the
-    #   next call to this action. If no token is returned, these results
+    #   next call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -3188,7 +3277,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribePlayerSessionsInput
     #   data as a hash:
@@ -3243,9 +3332,9 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value. If a player session ID is specified, this parameter is
-    #   ignored.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value. If a player session ID is specified, this parameter
+    #   is ignored.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessionsInput AWS API Documentation
@@ -3261,7 +3350,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] player_sessions
     #   A collection of objects containing properties for each player
@@ -3270,7 +3359,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -3283,7 +3372,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeRuntimeConfigurationInput
     #   data as a hash:
@@ -3305,7 +3394,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] runtime_configuration
     #   Instructions describing how server processes should be launched and
@@ -3320,7 +3409,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeScalingPoliciesInput
     #   data as a hash:
@@ -3367,8 +3456,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPoliciesInput AWS API Documentation
@@ -3382,7 +3471,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] scaling_policies
     #   A collection of objects containing the scaling policies matching the
@@ -3391,7 +3480,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -3455,7 +3544,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass DescribeVpcPeeringConnectionsInput
     #   data as a hash:
@@ -3477,7 +3566,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] vpc_peering_connections
     #   A collection of VPC peering connection records that match the
@@ -3955,7 +4044,7 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] stopped_actions
-    #   List of fleet actions that have been suspended using
+    #   List of fleet activity that have been suspended using
     #   StopFleetActions. This includes auto-scaling.
     #   @return [Array<String>]
     #
@@ -4160,17 +4249,31 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
-    # Properties describing a game server resource.
+    # Properties describing a game server that is running on an instance in
+    # a GameServerGroup.
     #
-    # A game server resource is created by a successful call to
-    # RegisterGameServer and deleted by calling DeregisterGameServer.
+    # A game server is created by a successful call to `RegisterGameServer`
+    # and deleted by calling `DeregisterGameServer`. A game server is
+    # claimed to host a game session by calling `ClaimGameServer`.
+    #
+    # * RegisterGameServer
+    #
+    # * ListGameServers
+    #
+    # * ClaimGameServer
+    #
+    # * DescribeGameServer
+    #
+    # * UpdateGameServer
+    #
+    # * DeregisterGameServer
     #
     # @!attribute [rw] game_server_group_name
-    #   The name identifier for the game server group where the game server
-    #   is located.
+    #   A unique identifier for the game server group where the game server
+    #   is running. Use either the GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] game_server_group_arn
@@ -4186,7 +4289,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] instance_id
     #   The unique identifier for the instance where the game server is
-    #   located.
+    #   running. This ID is available in the instance metadata. EC2 instance
+    #   IDs use a 17-character format, for example: `i-1234567890abcdef0`.
     #   @return [String]
     #
     # @!attribute [rw] connection_info
@@ -4196,24 +4300,17 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_server_data
     #   A set of custom game server properties, formatted as a single string
-    #   value. This data is passed to a game client or service in response
-    #   to requests ListGameServers or ClaimGameServer. This property can be
-    #   updated using UpdateGameServer.
-    #   @return [String]
-    #
-    # @!attribute [rw] custom_sort_key
-    #   A game server tag that can be used to request sorted lists of game
-    #   servers when calling ListGameServers. Custom sort keys are
-    #   developer-defined. This property can be updated using
-    #   UpdateGameServer.
+    #   value. This data is passed to a game client or service when it
+    #   requests information on game servers using ListGameServers or
+    #   ClaimGameServer.
     #   @return [String]
     #
     # @!attribute [rw] claim_status
-    #   Indicates when an available game server has been reserved but has
-    #   not yet started hosting a game. Once it is claimed, game server
-    #   remains in CLAIMED status for a maximum of one minute. During this
-    #   time, game clients must connect to the game server and start the
-    #   game, which triggers the game server to update its utilization
+    #   Indicates when an available game server has been reserved for
+    #   gameplay but has not yet started hosting a game. Once it is claimed,
+    #   the game server remains in `CLAIMED` status for a maximum of one
+    #   minute. During this time, game clients connect to the game server to
+    #   start the game and trigger the game server to update its utilization
     #   status. After one minute, the game server claim status reverts to
     #   null.
     #   @return [String]
@@ -4222,32 +4319,33 @@ module Aws::GameLift
     #   Indicates whether the game server is currently available for new
     #   games or is busy. Possible statuses include:
     #
-    #   * AVAILABLE - The game server is available to be claimed. A game
+    #   * `AVAILABLE` - The game server is available to be claimed. A game
     #     server that has been claimed remains in this status until it
     #     reports game hosting activity.
     #
-    #   * IN\_USE - The game server is currently hosting a game session with
-    #     players.
+    #   * `UTILIZED` - The game server is currently hosting a game session
+    #     with players.
     #   @return [String]
     #
     # @!attribute [rw] registration_time
-    #   Time stamp indicating when the game server resource was created with
-    #   a RegisterGameServer request. Format is a number expressed in Unix
-    #   time as milliseconds (for example "1469498468.057").
+    #   Timestamp that indicates when the game server was created with a
+    #   RegisterGameServer request. The format is a number expressed in Unix
+    #   time as milliseconds (for example `"1469498468.057"`).
     #   @return [Time]
     #
     # @!attribute [rw] last_claim_time
-    #   Time stamp indicating the last time the game server was claimed with
-    #   a ClaimGameServer request. Format is a number expressed in Unix time
-    #   as milliseconds (for example "1469498468.057"). This value is used
-    #   to calculate when the game server's claim status.
+    #   Timestamp that indicates the last time the game server was claimed
+    #   with a ClaimGameServer request. The format is a number expressed in
+    #   Unix time as milliseconds (for example `"1469498468.057"`). This
+    #   value is used to calculate when a claimed game server's status
+    #   should revert to null.
     #   @return [Time]
     #
     # @!attribute [rw] last_health_check_time
-    #   Time stamp indicating the last time the game server was updated with
-    #   health status using an UpdateGameServer request. Format is a number
-    #   expressed in Unix time as milliseconds (for example
-    #   "1469498468.057"). After game server registration, this property
+    #   Timestamp that indicates the last time the game server was updated
+    #   with health status using an UpdateGameServer request. The format is
+    #   a number expressed in Unix time as milliseconds (for example
+    #   `"1469498468.057"`). After game server registration, this property
     #   is only changed when a game server update specifies a health check
     #   value.
     #   @return [Time]
@@ -4261,7 +4359,6 @@ module Aws::GameLift
       :instance_id,
       :connection_info,
       :game_server_data,
-      :custom_sort_key,
       :claim_status,
       :utilization_status,
       :registration_time,
@@ -4271,21 +4368,38 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
-    # Properties describing a game server group resource. A game server
-    # group manages certain properties of a corresponding EC2 Auto Scaling
-    # group.
+    # Properties that describe a game server group resource. A game server
+    # group manages certain properties related to a corresponding EC2 Auto
+    # Scaling group.
     #
     # A game server group is created by a successful call to
-    # CreateGameServerGroup and deleted by calling DeleteGameServerGroup.
-    # Game server group activity can be temporarily suspended and resumed by
-    # calling SuspendGameServerGroup and ResumeGameServerGroup.
+    # `CreateGameServerGroup` and deleted by calling
+    # `DeleteGameServerGroup`. Game server group activity can be temporarily
+    # suspended and resumed by calling `SuspendGameServerGroup` and
+    # `ResumeGameServerGroup`, respectively.
+    #
+    # * CreateGameServerGroup
+    #
+    # * ListGameServerGroups
+    #
+    # * DescribeGameServerGroup
+    #
+    # * UpdateGameServerGroup
+    #
+    # * DeleteGameServerGroup
+    #
+    # * ResumeGameServerGroup
+    #
+    # * SuspendGameServerGroup
+    #
+    # * DescribeGameServerInstances
     #
     # @!attribute [rw] game_server_group_name
     #   A developer-defined identifier for the game server group. The name
-    #   is unique per Region per AWS account.
+    #   is unique for each Region in each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] game_server_group_arn
@@ -4294,9 +4408,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows
-    #   Amazon GameLift to access your EC2 Auto Scaling groups. The
-    #   submitted role is validated to ensure that it contains the necessary
-    #   permissions for game server groups.
+    #   Amazon GameLift to access your EC2 Auto Scaling groups.
     #
     #
     #
@@ -4305,40 +4417,47 @@ module Aws::GameLift
     #
     # @!attribute [rw] instance_definitions
     #   The set of EC2 instance types that GameLift FleetIQ can use when
-    #   rebalancing and autoscaling instances in the group.
+    #   balancing and automatically scaling instances in the corresponding
+    #   Auto Scaling group.
     #   @return [Array<Types::InstanceDefinition>]
     #
     # @!attribute [rw] balancing_strategy
-    #   The fallback balancing method to use for the game server group when
-    #   Spot instances in a Region become unavailable or are not viable for
-    #   game hosting. Once triggered, this method remains active until Spot
-    #   instances can once again be used. Method options include:
+    #   Indicates how GameLift FleetIQ balances the use of Spot Instances
+    #   and On-Demand Instances in the game server group. Method options
+    #   include the following:
     #
-    #   * SPOT\_ONLY -- If Spot instances are unavailable, the game server
-    #     group provides no hosting capacity. No new instances are started,
-    #     and the existing nonviable Spot instances are terminated (once
-    #     current gameplay ends) and not replaced.
+    #   * `SPOT_ONLY` - Only Spot Instances are used in the game server
+    #     group. If Spot Instances are unavailable or not viable for game
+    #     hosting, the game server group provides no hosting capacity until
+    #     Spot Instances can again be used. Until then, no new instances are
+    #     started, and the existing nonviable Spot Instances are terminated
+    #     (after current gameplay ends) and are not replaced.
     #
-    #   * SPOT\_PREFERRED -- If Spot instances are unavailable, the game
-    #     server group continues to provide hosting capacity by using
-    #     On-Demand instances. Existing nonviable Spot instances are
-    #     terminated (once current gameplay ends) and replaced with new
-    #     On-Demand instances.
+    #   * `SPOT_PREFERRED` - (default value) Spot Instances are used
+    #     whenever available in the game server group. If Spot Instances are
+    #     unavailable, the game server group continues to provide hosting
+    #     capacity by falling back to On-Demand Instances. Existing
+    #     nonviable Spot Instances are terminated (after current gameplay
+    #     ends) and are replaced with new On-Demand Instances.
+    #
+    #   * `ON_DEMAND_ONLY` - Only On-Demand Instances are used in the game
+    #     server group. No Spot Instances are used, even when available,
+    #     while this balancing strategy is in force.
     #   @return [String]
     #
     # @!attribute [rw] game_server_protection_policy
     #   A flag that indicates whether instances in the game server group are
     #   protected from early termination. Unprotected instances that have
-    #   active game servers running may be terminated during a scale-down
+    #   active game servers running might be terminated during a scale-down
     #   event, causing players to be dropped from the game. Protected
     #   instances cannot be terminated while there are active game servers
     #   running except in the event of a forced game server group deletion
-    #   (see DeleteGameServerGroup). An exception to this is Spot Instances,
-    #   which may be terminated by AWS regardless of protection status.
+    #   (see ). An exception to this is with Spot Instances, which can be
+    #   terminated by AWS regardless of protection status.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_group_arn
-    #   A generated unique ID for the EC2 Auto Scaling group with is
+    #   A generated unique ID for the EC2 Auto Scaling group that is
     #   associated with this game server group.
     #   @return [String]
     #
@@ -4346,32 +4465,32 @@ module Aws::GameLift
     #   The current status of the game server group. Possible statuses
     #   include:
     #
-    #   * NEW - GameLift FleetIQ has validated the `CreateGameServerGroup()`
-    #     request.
+    #   * `NEW` - GameLift FleetIQ has validated the
+    #     `CreateGameServerGroup()` request.
     #
-    #   * ACTIVATING - GameLift FleetIQ is setting up a game server group,
-    #     which includes creating an autoscaling group in your AWS account.
+    #   * `ACTIVATING` - GameLift FleetIQ is setting up a game server group,
+    #     which includes creating an Auto Scaling group in your AWS account.
     #
-    #   * ACTIVE - The game server group has been successfully created.
+    #   * `ACTIVE` - The game server group has been successfully created.
     #
-    #   * DELETE\_SCHEDULED - A request to delete the game server group has
+    #   * `DELETE_SCHEDULED` - A request to delete the game server group has
     #     been received.
     #
-    #   * DELETING - GameLift FleetIQ has received a valid
+    #   * `DELETING` - GameLift FleetIQ has received a valid
     #     `DeleteGameServerGroup()` request and is processing it. GameLift
     #     FleetIQ must first complete and release hosts before it deletes
-    #     the autoscaling group and the game server group.
+    #     the Auto Scaling group and the game server group.
     #
-    #   * DELETED - The game server group has been successfully deleted.
+    #   * `DELETED` - The game server group has been successfully deleted.
     #
-    #   * ERROR - The asynchronous processes of activating or deleting a
+    #   * `ERROR` - The asynchronous processes of activating or deleting a
     #     game server group has failed, resulting in an error state.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
     #   Additional information about the current game server group status.
-    #   This information may provide additional insight on groups that in
-    #   ERROR status.
+    #   This information might provide additional insight on groups that are
+    #   in `ERROR` status.
     #   @return [String]
     #
     # @!attribute [rw] suspended_actions
@@ -4381,13 +4500,13 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
-    #   A time stamp indicating when this data object was created. Format is
-    #   a number expressed in Unix time as milliseconds (for example
-    #   "1469498468.057").
+    #   A timestamp that indicates when this data object was created. Format
+    #   is a number expressed in Unix time as milliseconds (for example
+    #   `"1469498468.057"`).
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   A time stamp indicating when this game server group was last
+    #   A timestamp that indicates when this game server group was last
     #   updated.
     #   @return [Time]
     #
@@ -4410,16 +4529,16 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
-    # Configuration settings for intelligent autoscaling that uses target
-    # tracking. An autoscaling policy can be specified when a new game
-    # server group is created with CreateGameServerGroup. If a group has an
-    # autoscaling policy, the Auto Scaling group takes action based on this
-    # policy, in addition to (and potentially in conflict with) any other
-    # autoscaling policies that are separately applied to the Auto Scaling
-    # group.
+    # Configuration settings for intelligent automatic scaling that uses
+    # target tracking. These settings are used to add an Auto Scaling policy
+    # when creating the corresponding Auto Scaling group with
+    # CreateGameServerGroup. After the Auto Scaling group is created, all
+    # updates to Auto Scaling policies, including changing this policy and
+    # adding or removing other policies, is done directly on the Auto
+    # Scaling group.
     #
     # @note When making an API call, you may pass GameServerGroupAutoScalingPolicy
     #   data as a hash:
@@ -4436,13 +4555,13 @@ module Aws::GameLift
     #   game server processes and register with GameLift FleetIQ. Specifying
     #   a warm-up time can be useful, particularly with game servers that
     #   take a long time to start up, because it avoids prematurely starting
-    #   new instances
+    #   new instances.
     #   @return [Integer]
     #
     # @!attribute [rw] target_tracking_configuration
     #   Settings for a target-based scaling policy applied to Auto Scaling
     #   group. These settings are used to create a target-based policy that
-    #   tracks the GameLift FleetIQ metric "PercentUtilizedGameServers"
+    #   tracks the GameLift FleetIQ metric `"PercentUtilizedGameServers"`
     #   and specifies a target value for the metric. As player usage
     #   changes, the policy triggers to adjust the game server group
     #   capacity so that the metric returns to the target value.
@@ -4453,6 +4572,79 @@ module Aws::GameLift
     class GameServerGroupAutoScalingPolicy < Struct.new(
       :estimated_instance_warmup,
       :target_tracking_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
+    #
+    # Additional properties, including status, that describe an EC2 instance
+    # in a game server group. Instance configurations are set with game
+    # server group properties (see `DescribeGameServerGroup` and with the
+    # EC2 launch template that was used when creating the game server group.
+    #
+    # Retrieve game server instances for a game server group by calling
+    # `DescribeGameServerInstances`.
+    #
+    # * CreateGameServerGroup
+    #
+    # * ListGameServerGroups
+    #
+    # * DescribeGameServerGroup
+    #
+    # * UpdateGameServerGroup
+    #
+    # * DeleteGameServerGroup
+    #
+    # * ResumeGameServerGroup
+    #
+    # * SuspendGameServerGroup
+    #
+    # * DescribeGameServerInstances
+    #
+    # @!attribute [rw] game_server_group_name
+    #   A developer-defined identifier for the game server group that
+    #   includes the game server instance. The name is unique for each
+    #   Region in each AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_server_group_arn
+    #   A generated unique identifier for the game server group that
+    #   includes the game server instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The unique identifier for the instance where the game server is
+    #   running. This ID is available in the instance metadata. EC2 instance
+    #   IDs use a 17-character format, for example: `i-1234567890abcdef0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_status
+    #   Current status of the game server instance.
+    #
+    #   * **ACTIVE** -- The instance is viable for hosting game servers.
+    #
+    #   * **DRAINING** -- The instance is not viable for hosting game
+    #     servers. Existing game servers are in the process of ending, and
+    #     new game servers are not started on this instance unless no other
+    #     resources are available. When the instance is put in DRAINING, a
+    #     new instance is started up to replace it. Once the instance has no
+    #     UTILIZED game servers, it will be terminated in favor of the new
+    #     instance.
+    #
+    #   * **SPOT\_TERMINATING** -- The instance is in the process of
+    #     shutting down due to a Spot instance interruption. No new game
+    #     servers are started on this instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameServerInstance AWS API Documentation
+    #
+    class GameServerInstance < Struct.new(
+      :game_server_group_name,
+      :game_server_group_arn,
+      :instance_id,
+      :instance_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5059,7 +5251,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass GetGameSessionLogUrlInput
     #   data as a hash:
@@ -5080,7 +5272,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] pre_signed_url
     #   Location of the requested game session logs, available for download.
@@ -5097,7 +5289,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass GetInstanceAccessInput
     #   data as a hash:
@@ -5129,7 +5321,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] instance_access
     #   The connection information for a fleet instance, including IP
@@ -5300,10 +5492,11 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
-    # An allowed instance type for your game server group. GameLift FleetIQ
+    # An allowed instance type for a GameServerGroup. All game server groups
+    # must have at least two instance types defined for it. GameLift FleetIQ
     # periodically evaluates each defined instance type for viability. It
     # then updates the Auto Scaling group with the list of viable instance
     # types.
@@ -5451,11 +5644,13 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # An EC2 launch template that contains configuration settings and game
     # server code to be deployed to all instances in a game server group.
+    # The launch template is specified when creating a new game server group
+    # with CreateGameServerGroup.
     #
     # @note When making an API call, you may pass LaunchTemplateSpecification
     #   data as a hash:
@@ -5476,9 +5671,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] version
     #   The version of the EC2 launch template to use. If no version is
-    #   specified, the default version will be used. EC2 allows you to
-    #   specify a default version for a launch template, if none is set, the
-    #   default is the first version created.
+    #   specified, the default version will be used. With Amazon EC2, you
+    #   can specify a default version for a launch template. If none is set,
+    #   the default is the first version created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LaunchTemplateSpecification AWS API Documentation
@@ -5505,7 +5700,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass ListAliasesInput
     #   data as a hash:
@@ -5546,8 +5741,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliasesInput AWS API Documentation
@@ -5561,7 +5756,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] aliases
     #   A collection of alias resources that match the request parameters.
@@ -5569,7 +5764,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   A token that indicates where to resume retrieving results on the
-    #   next call to this action. If no token is returned, these results
+    #   next call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -5582,7 +5777,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass ListBuildsInput
     #   data as a hash:
@@ -5619,8 +5814,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuildsInput AWS API Documentation
@@ -5633,7 +5828,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] builds
     #   A collection of build resources that match the request.
@@ -5641,7 +5836,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -5654,7 +5849,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass ListFleetsInput
     #   data as a hash:
@@ -5688,8 +5883,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleetsInput AWS API Documentation
@@ -5703,7 +5898,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_ids
     #   Set of fleet IDs matching the list request. You can retrieve
@@ -5714,7 +5909,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -5737,14 +5932,14 @@ module Aws::GameLift
     #
     # @!attribute [rw] limit
     #   The maximum number of results to return. Use this parameter with
-    #   `NextToken` to get results as a set of sequential pages.
+    #   `NextToken` to get results as a set of sequential segments.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token that indicates the start of the next sequential page of
-    #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   A token that indicates the start of the next sequential segment of
+    #   results. Use the token returned with the previous call to this
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListGameServerGroupsInput AWS API Documentation
@@ -5762,7 +5957,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   A token that indicates where to resume retrieving results on the
-    #   next call to this action. If no token is returned, these results
+    #   next call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -5786,26 +5981,28 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   An identifier for the game server group for the game server you want
-    #   to list. Use either the GameServerGroup name or ARN value.
+    #   An identifier for the game server group to retrieve a list of game
+    #   servers from. Use either the GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   Indicates how to sort the returned data based on the game servers'
-    #   custom key sort value. If this parameter is left empty, the list of
-    #   game servers is returned in no particular order.
+    #   Indicates how to sort the returned data based on game server
+    #   registration timestamp. Use ASCENDING to retrieve oldest game
+    #   servers first, or use DESCENDING to retrieve newest game servers
+    #   first. If this parameter is left empty, game servers are returned in
+    #   no particular order.
     #   @return [String]
     #
     # @!attribute [rw] limit
     #   The maximum number of results to return. Use this parameter with
-    #   `NextToken` to get results as a set of sequential pages.
+    #   `NextToken` to get results as a set of sequential segments.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token that indicates the start of the next sequential page of
-    #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   A token that indicates the start of the next sequential segment of
+    #   results. Use the token returned with the previous call to this
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListGameServersInput AWS API Documentation
@@ -5825,7 +6022,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   A token that indicates where to resume retrieving results on the
-    #   next call to this action. If no token is returned, these results
+    #   next call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -5854,8 +6051,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListScriptsInput AWS API Documentation
@@ -5873,7 +6070,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   A token that indicates where to resume retrieving results on the
-    #   next call to this action. If no token is returned, these results
+    #   next call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -5898,7 +6095,7 @@ module Aws::GameLift
     #   identifies the GameLift resource that you want to retrieve tags for.
     #   GameLift resource ARNs are included in the data object for the
     #   resource, which can be retrieved by calling a List or Describe
-    #   action for the resource type.
+    #   operation for the resource type.
     #
     #
     #
@@ -6658,7 +6855,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass PutScalingPolicyInput
     #   data as a hash:
@@ -6803,7 +7000,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a scaling policy. Policy
@@ -6827,64 +7024,37 @@ module Aws::GameLift
     #         instance_id: "GameServerInstanceId", # required
     #         connection_info: "GameServerConnectionInfo",
     #         game_server_data: "GameServerData",
-    #         custom_sort_key: "GameServerSortKey",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   An identifier for the game server group where the game server is
-    #   running. You can use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group where the game server
+    #   is running. Use either the GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] game_server_id
-    #   A custom string that uniquely identifies the new game server. Game
-    #   server IDs are developer-defined and must be unique across all game
-    #   server groups in your AWS account.
+    #   A custom string that uniquely identifies the game server to
+    #   register. Game server IDs are developer-defined and must be unique
+    #   across all game server groups in your AWS account.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The unique identifier for the instance where the game server is
-    #   running. This ID is available in the instance metadata.
+    #   running. This ID is available in the instance metadata. EC2 instance
+    #   IDs use a 17-character format, for example: `i-1234567890abcdef0`.
     #   @return [String]
     #
     # @!attribute [rw] connection_info
-    #   Information needed to make inbound client connections to the game
-    #   server. This might include IP address and port, DNS name, etc.
+    #   Information that is needed to make inbound client connections to the
+    #   game server. This might include the IP address and port, DNS name,
+    #   and other information.
     #   @return [String]
     #
     # @!attribute [rw] game_server_data
     #   A set of custom game server properties, formatted as a single string
     #   value. This data is passed to a game client or service when it
-    #   requests information on a game servers using ListGameServers or
+    #   requests information on game servers using ListGameServers or
     #   ClaimGameServer.
     #   @return [String]
-    #
-    # @!attribute [rw] custom_sort_key
-    #   A game server tag that can be used to request sorted lists of game
-    #   servers using ListGameServers. Custom sort keys are
-    #   developer-defined based on how you want to organize the retrieved
-    #   game server information.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   A list of labels to assign to the new game server resource. Tags are
-    #   developer-defined key-value pairs. Tagging AWS resources are useful
-    #   for resource management, access management, and cost allocation. For
-    #   more information, see [ Tagging AWS Resources][1] in the *AWS
-    #   General Reference*. Once the resource is created, you can use
-    #   TagResource, UntagResource, and ListTagsForResource to add, remove,
-    #   and view tags. The maximum tag limit may be lower than stated. See
-    #   the AWS General Reference for actual tagging limits.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RegisterGameServerInput AWS API Documentation
     #
@@ -6893,15 +7063,13 @@ module Aws::GameLift
       :game_server_id,
       :instance_id,
       :connection_info,
-      :game_server_data,
-      :custom_sort_key,
-      :tags)
+      :game_server_data)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] game_server
-    #   Object that describes the newly created game server resource.
+    #   Object that describes the newly registered game server.
     #   @return [Types::GameServer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RegisterGameServerOutput AWS API Documentation
@@ -6912,7 +7080,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass RequestUploadCredentialsInput
     #   data as a hash:
@@ -6934,7 +7102,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] upload_credentials
     #   AWS credentials required when uploading a game build to the storage
@@ -6956,7 +7124,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass ResolveAliasInput
     #   data as a hash:
@@ -6978,7 +7146,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_id
     #   The fleet identifier that the alias is pointing to.
@@ -7051,12 +7219,12 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   The unique identifier of the game server group to resume activity
-    #   on. Use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] resume_actions
-    #   The action to resume for this game server group.
+    #   The activity to resume for this game server group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResumeGameServerGroupInput AWS API Documentation
@@ -7070,7 +7238,7 @@ module Aws::GameLift
 
     # @!attribute [rw] game_server_group
     #   An object that describes the game server group resource, with the
-    #   *SuspendedActions* property updated to reflect the resumed activity.
+    #   `SuspendedActions` property updated to reflect the resumed activity.
     #   @return [Types::GameServerGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResumeGameServerGroupOutput AWS API Documentation
@@ -7229,6 +7397,11 @@ module Aws::GameLift
     #
     # @!attribute [rw] bucket
     #   An S3 bucket identifier. This is the name of the S3 bucket.
+    #
+    #   <note markdown="1"> GameLift currently does not support uploading from S3 buckets with
+    #   names that contain a dot (.).
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -7507,7 +7680,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass SearchGameSessionsInput
     #   data as a hash:
@@ -7609,8 +7782,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To start at the beginning of the result set, do not specify
-    #   a value.
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessionsInput AWS API Documentation
@@ -7626,7 +7799,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_sessions
     #   A collection of objects containing game session properties for each
@@ -7635,7 +7808,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] next_token
     #   Token that indicates where to resume retrieving results on the next
-    #   call to this action. If no token is returned, these results
+    #   call to this operation. If no token is returned, these results
     #   represent the end of the list.
     #   @return [String]
     #
@@ -7730,7 +7903,7 @@ module Aws::GameLift
     #
     class StartFleetActionsOutput < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass StartGameSessionPlacementInput
     #   data as a hash:
@@ -7832,7 +8005,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session_placement
     #   Object that describes the newly created game session placement. This
@@ -7848,7 +8021,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass StartMatchBackfillInput
     #   data as a hash:
@@ -7926,7 +8099,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] matchmaking_ticket
     #   Ticket representing the backfill matchmaking request. This object
@@ -7942,7 +8115,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass StartMatchmakingInput
     #   data as a hash:
@@ -7995,7 +8168,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] matchmaking_ticket
     #   Ticket representing the matchmaking request. This object include the
@@ -8041,7 +8214,7 @@ module Aws::GameLift
     #
     class StopFleetActionsOutput < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass StopGameSessionPlacementInput
     #   data as a hash:
@@ -8062,7 +8235,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session_placement
     #   Object that describes the canceled game session placement, with
@@ -8077,7 +8250,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass StopMatchmakingInput
     #   data as a hash:
@@ -8111,12 +8284,12 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   The unique identifier of the game server group to stop activity on.
-    #   Use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] suspend_actions
-    #   The action to suspend for this game server group.
+    #   The activity to suspend for this game server group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SuspendGameServerGroupInput AWS API Documentation
@@ -8130,7 +8303,7 @@ module Aws::GameLift
 
     # @!attribute [rw] game_server_group
     #   An object that describes the game server group resource, with the
-    #   *SuspendedActions* property updated to reflect the suspended
+    #   `SuspendedActions` property updated to reflect the suspended
     #   activity.
     #   @return [Types::GameServerGroup]
     #
@@ -8208,7 +8381,7 @@ module Aws::GameLift
     #   identifies the GameLift resource that you want to assign tags to.
     #   GameLift resource ARNs are included in the data object for the
     #   resource, which can be retrieved by calling a List or Describe
-    #   action for the resource type.
+    #   operation for the resource type.
     #
     #
     #
@@ -8305,15 +8478,16 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is part of Amazon GameLift FleetIQ with game server
-    # groups, which is in preview release and is subject to change.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
-    # Settings for a target-based scaling policy applied to Auto Scaling
-    # group. These settings are used to create a target-based policy that
-    # tracks the GameLift FleetIQ metric "PercentUtilizedGameServers" and
-    # specifies a target value for the metric. As player usage changes, the
-    # policy triggers to adjust the game server group capacity so that the
-    # metric returns to the target value.
+    # Settings for a target-based scaling policy as part of a
+    # GameServerGroupAutoScalingPolicy. These settings are used to create a
+    # target-based policy that tracks the GameLift FleetIQ metric
+    # `"PercentUtilizedGameServers"` and specifies a target value for the
+    # metric. As player usage changes, the policy triggers to adjust the
+    # game server group capacity so that the metric returns to the target
+    # value.
     #
     # @note When making an API call, you may pass TargetTrackingConfiguration
     #   data as a hash:
@@ -8392,7 +8566,7 @@ module Aws::GameLift
     #   identifies the GameLift resource that you want to remove tags from.
     #   GameLift resource ARNs are included in the data object for the
     #   resource, which can be retrieved by calling a List or Describe
-    #   action for the resource type.
+    #   operation for the resource type.
     #
     #
     #
@@ -8418,7 +8592,7 @@ module Aws::GameLift
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateAliasInput
     #   data as a hash:
@@ -8464,7 +8638,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] alias
     #   The updated alias resource.
@@ -8478,7 +8652,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateBuildInput
     #   data as a hash:
@@ -8514,7 +8688,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] build
     #   The updated build resource.
@@ -8528,7 +8702,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateFleetAttributesInput
     #   data as a hash:
@@ -8597,7 +8771,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for a fleet that was updated. Use either the
@@ -8612,7 +8786,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateFleetCapacityInput
     #   data as a hash:
@@ -8654,7 +8828,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for a fleet that was updated.
@@ -8668,7 +8842,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateFleetPortSettingsInput
     #   data as a hash:
@@ -8716,7 +8890,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for a fleet that was updated.
@@ -8743,19 +8917,17 @@ module Aws::GameLift
     #           },
     #         ],
     #         game_server_protection_policy: "NO_PROTECTION", # accepts NO_PROTECTION, FULL_PROTECTION
-    #         balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED
+    #         balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED, ON_DEMAND_ONLY
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   The unique identifier of the game server group to update. Use either
-    #   the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group. Use either the
+    #   GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows
-    #   Amazon GameLift to access your EC2 Auto Scaling groups. The
-    #   submitted role is validated to ensure that it contains the necessary
-    #   permissions for game server groups.
+    #   Amazon GameLift to access your EC2 Auto Scaling groups.
     #
     #
     #
@@ -8763,46 +8935,58 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] instance_definitions
-    #   An updated list of EC2 instance types to use when creating instances
-    #   in the group. The instance definition must specify instance types
-    #   that are supported by GameLift FleetIQ, and must include at least
-    #   two instance types. This updated list replaces the entire current
-    #   list of instance definitions for the game server group. For more
-    #   information on instance types, see [EC2 Instance Types][1] in the
-    #   *Amazon EC2 User Guide*..
+    #   An updated list of EC2 instance types to use in the Auto Scaling
+    #   group. The instance definitions must specify at least two different
+    #   instance types that are supported by GameLift FleetIQ. This updated
+    #   list replaces the entire current list of instance definitions for
+    #   the game server group. For more information on instance types, see
+    #   [EC2 Instance Types][1] in the *Amazon EC2 User Guide*. You can
+    #   optionally specify capacity weighting for each instance type. If no
+    #   weight value is specified for an instance type, it is set to the
+    #   default value "1". For more information about capacity weighting,
+    #   see [ Instance Weighting for Amazon EC2 Auto Scaling][2] in the
+    #   Amazon EC2 Auto Scaling User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
     #   @return [Array<Types::InstanceDefinition>]
     #
     # @!attribute [rw] game_server_protection_policy
     #   A flag that indicates whether instances in the game server group are
     #   protected from early termination. Unprotected instances that have
-    #   active game servers running may by terminated during a scale-down
+    #   active game servers running might be terminated during a scale-down
     #   event, causing players to be dropped from the game. Protected
     #   instances cannot be terminated while there are active game servers
-    #   running. An exception to this is Spot Instances, which may be
+    #   running except in the event of a forced game server group deletion
+    #   (see ). An exception to this is with Spot Instances, which can be
     #   terminated by AWS regardless of protection status. This property is
-    #   set to NO\_PROTECTION by default.
+    #   set to `NO_PROTECTION` by default.
     #   @return [String]
     #
     # @!attribute [rw] balancing_strategy
-    #   The fallback balancing method to use for the game server group when
-    #   Spot instances in a Region become unavailable or are not viable for
-    #   game hosting. Once triggered, this method remains active until Spot
-    #   instances can once again be used. Method options include:
+    #   Indicates how GameLift FleetIQ balances the use of Spot Instances
+    #   and On-Demand Instances in the game server group. Method options
+    #   include the following:
     #
-    #   * SPOT\_ONLY -- If Spot instances are unavailable, the game server
-    #     group provides no hosting capacity. No new instances are started,
-    #     and the existing nonviable Spot instances are terminated (once
-    #     current gameplay ends) and not replaced.
+    #   * `SPOT_ONLY` - Only Spot Instances are used in the game server
+    #     group. If Spot Instances are unavailable or not viable for game
+    #     hosting, the game server group provides no hosting capacity until
+    #     Spot Instances can again be used. Until then, no new instances are
+    #     started, and the existing nonviable Spot Instances are terminated
+    #     (after current gameplay ends) and are not replaced.
     #
-    #   * SPOT\_PREFERRED -- If Spot instances are unavailable, the game
-    #     server group continues to provide hosting capacity by using
-    #     On-Demand instances. Existing nonviable Spot instances are
-    #     terminated (once current gameplay ends) and replaced with new
-    #     On-Demand instances.
+    #   * `SPOT_PREFERRED` - (default value) Spot Instances are used
+    #     whenever available in the game server group. If Spot Instances are
+    #     unavailable, the game server group continues to provide hosting
+    #     capacity by falling back to On-Demand Instances. Existing
+    #     nonviable Spot Instances are terminated (after current gameplay
+    #     ends) and are replaced with new On-Demand Instances.
+    #
+    #   * `ON_DEMAND_ONLY` - Only On-Demand Instances are used in the game
+    #     server group. No Spot Instances are used, even when available,
+    #     while this balancing strategy is in force.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameServerGroupInput AWS API Documentation
@@ -8837,32 +9021,24 @@ module Aws::GameLift
     #         game_server_group_name: "GameServerGroupNameOrArn", # required
     #         game_server_id: "GameServerId", # required
     #         game_server_data: "GameServerData",
-    #         custom_sort_key: "GameServerSortKey",
     #         utilization_status: "AVAILABLE", # accepts AVAILABLE, UTILIZED
     #         health_check: "HEALTHY", # accepts HEALTHY
     #       }
     #
     # @!attribute [rw] game_server_group_name
-    #   An identifier for the game server group where the game server is
-    #   running. Use either the GameServerGroup name or ARN value.
+    #   A unique identifier for the game server group where the game server
+    #   is running. Use either the GameServerGroup name or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] game_server_id
-    #   The identifier for the game server to be updated.
+    #   A custom string that uniquely identifies the game server to update.
     #   @return [String]
     #
     # @!attribute [rw] game_server_data
     #   A set of custom game server properties, formatted as a single string
     #   value. This data is passed to a game client or service when it
-    #   requests information on a game servers using DescribeGameServer or
+    #   requests information on game servers using ListGameServers or
     #   ClaimGameServer.
-    #   @return [String]
-    #
-    # @!attribute [rw] custom_sort_key
-    #   A game server tag that can be used to request sorted lists of game
-    #   servers using ListGameServers. Custom sort keys are
-    #   developer-defined based on how you want to organize the retrieved
-    #   game server information.
     #   @return [String]
     #
     # @!attribute [rw] utilization_status
@@ -8871,9 +9047,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] health_check
-    #   Indicates health status of the game server. An update that
-    #   explicitly includes this parameter updates the game server's
-    #   *LastHealthCheckTime* time stamp.
+    #   Indicates health status of the game server. A request that includes
+    #   this parameter updates the game server's *LastHealthCheckTime*
+    #   timestamp.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameServerInput AWS API Documentation
@@ -8882,7 +9058,6 @@ module Aws::GameLift
       :game_server_group_name,
       :game_server_id,
       :game_server_data,
-      :custom_sort_key,
       :utilization_status,
       :health_check)
       SENSITIVE = []
@@ -8890,7 +9065,7 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] game_server
-    #   Object that describes the newly updated game server resource.
+    #   Object that describes the newly updated game server.
     #   @return [Types::GameServer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameServerOutput AWS API Documentation
@@ -8901,7 +9076,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateGameSessionInput
     #   data as a hash:
@@ -8955,7 +9130,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session
     #   The updated game session metadata.
@@ -8969,7 +9144,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateGameSessionQueueInput
     #   data as a hash:
@@ -9035,7 +9210,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] game_session_queue
     #   An object that describes the newly updated game session queue.
@@ -9049,7 +9224,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateMatchmakingConfigurationInput
     #   data as a hash:
@@ -9205,7 +9380,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] configuration
     #   The updated matchmaking configuration.
@@ -9219,7 +9394,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass UpdateRuntimeConfigurationInput
     #   data as a hash:
@@ -9264,7 +9439,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] runtime_configuration
     #   The runtime configuration currently in force. If the update was
@@ -9363,7 +9538,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the input for a request action.
+    # Represents the input for a request operation.
     #
     # @note When making an API call, you may pass ValidateMatchmakingRuleSetInput
     #   data as a hash:
@@ -9385,7 +9560,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Represents the returned data in response to a request action.
+    # Represents the returned data in response to a request operation.
     #
     # @!attribute [rw] valid
     #   A response indicating whether the rule set is valid.

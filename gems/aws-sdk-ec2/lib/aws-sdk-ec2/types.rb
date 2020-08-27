@@ -9925,6 +9925,7 @@ module Aws::EC2
     #               rekey_fuzz_percentage: 1,
     #               replay_window_size: 1,
     #               dpd_timeout_seconds: 1,
+    #               dpd_timeout_action: "String",
     #               phase_1_encryption_algorithms: [
     #                 {
     #                   value: "String",
@@ -9960,8 +9961,13 @@ module Aws::EC2
     #                   value: "String",
     #                 },
     #               ],
+    #               startup_action: "String",
     #             },
     #           ],
+    #           local_ipv_4_network_cidr: "String",
+    #           remote_ipv_4_network_cidr: "String",
+    #           local_ipv_6_network_cidr: "String",
+    #           remote_ipv_6_network_cidr: "String",
     #         },
     #         tag_specifications: [
     #           {
@@ -37173,6 +37179,80 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyVpnConnectionOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_connection_id: "VpnConnectionId", # required
+    #         local_ipv_4_network_cidr: "String",
+    #         remote_ipv_4_network_cidr: "String",
+    #         local_ipv_6_network_cidr: "String",
+    #         remote_ipv_6_network_cidr: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the Site-to-Site VPN VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_ipv_4_network_cidr
+    #   The IPv4 CIDR on the customer gateway (on-premises) side of the VPN
+    #   connection.
+    #
+    #   Default: `0.0.0.0/0`
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ipv_4_network_cidr
+    #   The IPv4 CIDR on the AWS side of the VPN connection.
+    #
+    #   Default: `0.0.0.0/0`
+    #   @return [String]
+    #
+    # @!attribute [rw] local_ipv_6_network_cidr
+    #   The IPv6 CIDR on the customer gateway (on-premises) side of the VPN
+    #   connection.
+    #
+    #   Default: `::/0`
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ipv_6_network_cidr
+    #   The IPv6 CIDR on the AWS side of the VPN connection.
+    #
+    #   Default: `::/0`
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionOptionsRequest AWS API Documentation
+    #
+    class ModifyVpnConnectionOptionsRequest < Struct.new(
+      :vpn_connection_id,
+      :local_ipv_4_network_cidr,
+      :remote_ipv_4_network_cidr,
+      :local_ipv_6_network_cidr,
+      :remote_ipv_6_network_cidr,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection
+    #   Describes a VPN connection.
+    #   @return [Types::VpnConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionOptionsResult AWS API Documentation
+    #
+    class ModifyVpnConnectionOptionsResult < Struct.new(
+      :vpn_connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyVpnConnectionRequest
     #   data as a hash:
     #
@@ -37294,6 +37374,7 @@ module Aws::EC2
     #           rekey_fuzz_percentage: 1,
     #           replay_window_size: 1,
     #           dpd_timeout_seconds: 1,
+    #           dpd_timeout_action: "String",
     #           phase_1_encryption_algorithms: [
     #             {
     #               value: "String",
@@ -37329,6 +37410,7 @@ module Aws::EC2
     #               value: "String",
     #             },
     #           ],
+    #           startup_action: "String",
     #         },
     #         dry_run: false,
     #       }
@@ -37390,6 +37472,7 @@ module Aws::EC2
     #         rekey_fuzz_percentage: 1,
     #         replay_window_size: 1,
     #         dpd_timeout_seconds: 1,
+    #         dpd_timeout_action: "String",
     #         phase_1_encryption_algorithms: [
     #           {
     #             value: "String",
@@ -37425,6 +37508,7 @@ module Aws::EC2
     #             value: "String",
     #           },
     #         ],
+    #         startup_action: "String",
     #       }
     #
     # @!attribute [rw] tunnel_inside_cidr
@@ -37521,6 +37605,15 @@ module Aws::EC2
     #   Default: `30`
     #   @return [Integer]
     #
+    # @!attribute [rw] dpd_timeout_action
+    #   The action to take after DPD timeout occurs. Specify `restart` to
+    #   restart the IKE initiation. Specify `clear` to end the IKE session.
+    #
+    #   Valid Values: `clear` \| `none` \| `restart`
+    #
+    #   Default: `clear`
+    #   @return [String]
+    #
     # @!attribute [rw] phase_1_encryption_algorithms
     #   One or more encryption algorithms that are permitted for the VPN
     #   tunnel for phase 1 IKE negotiations.
@@ -37573,6 +37666,17 @@ module Aws::EC2
     #   Valid values: `ikev1` \| `ikev2`
     #   @return [Array<Types::IKEVersionsRequestListValue>]
     #
+    # @!attribute [rw] startup_action
+    #   The action to take when the establishing the tunnel for the VPN
+    #   connection. By default, your customer gateway device must initiate
+    #   the IKE negotiation and bring up the tunnel. Specify `start` for AWS
+    #   to initiate the IKE negotiation.
+    #
+    #   Valid Values: `add` \| `start`
+    #
+    #   Default: `add`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsSpecification AWS API Documentation
     #
     class ModifyVpnTunnelOptionsSpecification < Struct.new(
@@ -37585,13 +37689,15 @@ module Aws::EC2
       :rekey_fuzz_percentage,
       :replay_window_size,
       :dpd_timeout_seconds,
+      :dpd_timeout_action,
       :phase_1_encryption_algorithms,
       :phase_2_encryption_algorithms,
       :phase_1_integrity_algorithms,
       :phase_2_integrity_algorithms,
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
-      :ike_versions)
+      :ike_versions,
+      :startup_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49709,6 +49815,10 @@ module Aws::EC2
     #   The number of seconds after which a DPD timeout occurs.
     #   @return [Integer]
     #
+    # @!attribute [rw] dpd_timeout_action
+    #   The action to take after a DPD timeout occurs.
+    #   @return [String]
+    #
     # @!attribute [rw] phase_1_encryption_algorithms
     #   The permitted encryption algorithms for the VPN tunnel for phase 1
     #   IKE negotiations.
@@ -49743,6 +49853,11 @@ module Aws::EC2
     #   The IKE versions that are permitted for the VPN tunnel.
     #   @return [Array<Types::IKEVersionsListValue>]
     #
+    # @!attribute [rw] startup_action
+    #   The action to take when the establishing the VPN tunnels for a VPN
+    #   connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TunnelOption AWS API Documentation
     #
     class TunnelOption < Struct.new(
@@ -49756,13 +49871,15 @@ module Aws::EC2
       :rekey_fuzz_percentage,
       :replay_window_size,
       :dpd_timeout_seconds,
+      :dpd_timeout_action,
       :phase_1_encryption_algorithms,
       :phase_2_encryption_algorithms,
       :phase_1_integrity_algorithms,
       :phase_2_integrity_algorithms,
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
-      :ike_versions)
+      :ike_versions,
+      :startup_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51372,6 +51489,24 @@ module Aws::EC2
     #   routes must be used for devices that don't support BGP.
     #   @return [Boolean]
     #
+    # @!attribute [rw] local_ipv_4_network_cidr
+    #   The IPv4 CIDR on the customer gateway (on-premises) side of the VPN
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ipv_4_network_cidr
+    #   The IPv4 CIDR on the AWS side of the VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_ipv_6_network_cidr
+    #   The IPv6 CIDR on the customer gateway (on-premises) side of the VPN
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ipv_6_network_cidr
+    #   The IPv6 CIDR on the AWS side of the VPN connection.
+    #   @return [String]
+    #
     # @!attribute [rw] tunnel_inside_ip_version
     #   Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
     #   @return [String]
@@ -51385,6 +51520,10 @@ module Aws::EC2
     class VpnConnectionOptions < Struct.new(
       :enable_acceleration,
       :static_routes_only,
+      :local_ipv_4_network_cidr,
+      :remote_ipv_4_network_cidr,
+      :local_ipv_6_network_cidr,
+      :remote_ipv_6_network_cidr,
       :tunnel_inside_ip_version,
       :tunnel_options)
       SENSITIVE = []
@@ -51411,6 +51550,7 @@ module Aws::EC2
     #             rekey_fuzz_percentage: 1,
     #             replay_window_size: 1,
     #             dpd_timeout_seconds: 1,
+    #             dpd_timeout_action: "String",
     #             phase_1_encryption_algorithms: [
     #               {
     #                 value: "String",
@@ -51446,8 +51586,13 @@ module Aws::EC2
     #                 value: "String",
     #               },
     #             ],
+    #             startup_action: "String",
     #           },
     #         ],
+    #         local_ipv_4_network_cidr: "String",
+    #         remote_ipv_4_network_cidr: "String",
+    #         local_ipv_6_network_cidr: "String",
+    #         remote_ipv_6_network_cidr: "String",
     #       }
     #
     # @!attribute [rw] enable_acceleration
@@ -51475,13 +51620,43 @@ module Aws::EC2
     #   The tunnel options for the VPN connection.
     #   @return [Array<Types::VpnTunnelOptionsSpecification>]
     #
+    # @!attribute [rw] local_ipv_4_network_cidr
+    #   The IPv4 CIDR on the customer gateway (on-premises) side of the VPN
+    #   connection.
+    #
+    #   Default: `0.0.0.0/0`
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ipv_4_network_cidr
+    #   The IPv4 CIDR on the AWS side of the VPN connection.
+    #
+    #   Default: `0.0.0.0/0`
+    #   @return [String]
+    #
+    # @!attribute [rw] local_ipv_6_network_cidr
+    #   The IPv6 CIDR on the customer gateway (on-premises) side of the VPN
+    #   connection.
+    #
+    #   Default: `::/0`
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ipv_6_network_cidr
+    #   The IPv6 CIDR on the AWS side of the VPN connection.
+    #
+    #   Default: `::/0`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptionsSpecification AWS API Documentation
     #
     class VpnConnectionOptionsSpecification < Struct.new(
       :enable_acceleration,
       :static_routes_only,
       :tunnel_inside_ip_version,
-      :tunnel_options)
+      :tunnel_options,
+      :local_ipv_4_network_cidr,
+      :remote_ipv_4_network_cidr,
+      :local_ipv_6_network_cidr,
+      :remote_ipv_6_network_cidr)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51572,6 +51747,7 @@ module Aws::EC2
     #         rekey_fuzz_percentage: 1,
     #         replay_window_size: 1,
     #         dpd_timeout_seconds: 1,
+    #         dpd_timeout_action: "String",
     #         phase_1_encryption_algorithms: [
     #           {
     #             value: "String",
@@ -51607,6 +51783,7 @@ module Aws::EC2
     #             value: "String",
     #           },
     #         ],
+    #         startup_action: "String",
     #       }
     #
     # @!attribute [rw] tunnel_inside_cidr
@@ -51703,6 +51880,15 @@ module Aws::EC2
     #   Default: `30`
     #   @return [Integer]
     #
+    # @!attribute [rw] dpd_timeout_action
+    #   The action to take after DPD timeout occurs. Specify `restart` to
+    #   restart the IKE initiation. Specify `clear` to end the IKE session.
+    #
+    #   Valid Values: `clear` \| `none` \| `restart`
+    #
+    #   Default: `clear`
+    #   @return [String]
+    #
     # @!attribute [rw] phase_1_encryption_algorithms
     #   One or more encryption algorithms that are permitted for the VPN
     #   tunnel for phase 1 IKE negotiations.
@@ -51755,6 +51941,17 @@ module Aws::EC2
     #   Valid values: `ikev1` \| `ikev2`
     #   @return [Array<Types::IKEVersionsRequestListValue>]
     #
+    # @!attribute [rw] startup_action
+    #   The action to take when the establishing the tunnel for the VPN
+    #   connection. By default, your customer gateway device must initiate
+    #   the IKE negotiation and bring up the tunnel. Specify `start` for AWS
+    #   to initiate the IKE negotiation.
+    #
+    #   Valid Values: `add` \| `start`
+    #
+    #   Default: `add`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelOptionsSpecification AWS API Documentation
     #
     class VpnTunnelOptionsSpecification < Struct.new(
@@ -51767,13 +51964,15 @@ module Aws::EC2
       :rekey_fuzz_percentage,
       :replay_window_size,
       :dpd_timeout_seconds,
+      :dpd_timeout_action,
       :phase_1_encryption_algorithms,
       :phase_2_encryption_algorithms,
       :phase_1_integrity_algorithms,
       :phase_2_integrity_algorithms,
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
-      :ike_versions)
+      :ike_versions,
+      :startup_action)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1405,6 +1405,8 @@ module Aws::EC2
     ModifyVpcPeeringConnectionOptionsResult = Shapes::StructureShape.new(name: 'ModifyVpcPeeringConnectionOptionsResult')
     ModifyVpcTenancyRequest = Shapes::StructureShape.new(name: 'ModifyVpcTenancyRequest')
     ModifyVpcTenancyResult = Shapes::StructureShape.new(name: 'ModifyVpcTenancyResult')
+    ModifyVpnConnectionOptionsRequest = Shapes::StructureShape.new(name: 'ModifyVpnConnectionOptionsRequest')
+    ModifyVpnConnectionOptionsResult = Shapes::StructureShape.new(name: 'ModifyVpnConnectionOptionsResult')
     ModifyVpnConnectionRequest = Shapes::StructureShape.new(name: 'ModifyVpnConnectionRequest')
     ModifyVpnConnectionResult = Shapes::StructureShape.new(name: 'ModifyVpnConnectionResult')
     ModifyVpnTunnelCertificateRequest = Shapes::StructureShape.new(name: 'ModifyVpnTunnelCertificateRequest')
@@ -7632,6 +7634,17 @@ module Aws::EC2
     ModifyVpcTenancyResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyVpcTenancyResult.struct_class = Types::ModifyVpcTenancyResult
 
+    ModifyVpnConnectionOptionsRequest.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, required: true, location_name: "VpnConnectionId"))
+    ModifyVpnConnectionOptionsRequest.add_member(:local_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "LocalIpv4NetworkCidr"))
+    ModifyVpnConnectionOptionsRequest.add_member(:remote_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "RemoteIpv4NetworkCidr"))
+    ModifyVpnConnectionOptionsRequest.add_member(:local_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "LocalIpv6NetworkCidr"))
+    ModifyVpnConnectionOptionsRequest.add_member(:remote_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "RemoteIpv6NetworkCidr"))
+    ModifyVpnConnectionOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVpnConnectionOptionsRequest.struct_class = Types::ModifyVpnConnectionOptionsRequest
+
+    ModifyVpnConnectionOptionsResult.add_member(:vpn_connection, Shapes::ShapeRef.new(shape: VpnConnection, location_name: "vpnConnection"))
+    ModifyVpnConnectionOptionsResult.struct_class = Types::ModifyVpnConnectionOptionsResult
+
     ModifyVpnConnectionRequest.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, required: true, location_name: "VpnConnectionId"))
     ModifyVpnConnectionRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "TransitGatewayId"))
     ModifyVpnConnectionRequest.add_member(:customer_gateway_id, Shapes::ShapeRef.new(shape: CustomerGatewayId, location_name: "CustomerGatewayId"))
@@ -7668,6 +7681,7 @@ module Aws::EC2
     ModifyVpnTunnelOptionsSpecification.add_member(:rekey_fuzz_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "RekeyFuzzPercentage"))
     ModifyVpnTunnelOptionsSpecification.add_member(:replay_window_size, Shapes::ShapeRef.new(shape: Integer, location_name: "ReplayWindowSize"))
     ModifyVpnTunnelOptionsSpecification.add_member(:dpd_timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DPDTimeoutSeconds"))
+    ModifyVpnTunnelOptionsSpecification.add_member(:dpd_timeout_action, Shapes::ShapeRef.new(shape: String, location_name: "DPDTimeoutAction"))
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_1_encryption_algorithms, Shapes::ShapeRef.new(shape: Phase1EncryptionAlgorithmsRequestList, location_name: "Phase1EncryptionAlgorithm"))
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_2_encryption_algorithms, Shapes::ShapeRef.new(shape: Phase2EncryptionAlgorithmsRequestList, location_name: "Phase2EncryptionAlgorithm"))
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_1_integrity_algorithms, Shapes::ShapeRef.new(shape: Phase1IntegrityAlgorithmsRequestList, location_name: "Phase1IntegrityAlgorithm"))
@@ -7675,6 +7689,7 @@ module Aws::EC2
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_1_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase1DHGroupNumbersRequestList, location_name: "Phase1DHGroupNumber"))
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_2_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase2DHGroupNumbersRequestList, location_name: "Phase2DHGroupNumber"))
     ModifyVpnTunnelOptionsSpecification.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsRequestList, location_name: "IKEVersion"))
+    ModifyVpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
     ModifyVpnTunnelOptionsSpecification.struct_class = Types::ModifyVpnTunnelOptionsSpecification
 
     MonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
@@ -9751,6 +9766,7 @@ module Aws::EC2
     TunnelOption.add_member(:rekey_fuzz_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "rekeyFuzzPercentage"))
     TunnelOption.add_member(:replay_window_size, Shapes::ShapeRef.new(shape: Integer, location_name: "replayWindowSize"))
     TunnelOption.add_member(:dpd_timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "dpdTimeoutSeconds"))
+    TunnelOption.add_member(:dpd_timeout_action, Shapes::ShapeRef.new(shape: String, location_name: "dpdTimeoutAction"))
     TunnelOption.add_member(:phase_1_encryption_algorithms, Shapes::ShapeRef.new(shape: Phase1EncryptionAlgorithmsList, location_name: "phase1EncryptionAlgorithmSet"))
     TunnelOption.add_member(:phase_2_encryption_algorithms, Shapes::ShapeRef.new(shape: Phase2EncryptionAlgorithmsList, location_name: "phase2EncryptionAlgorithmSet"))
     TunnelOption.add_member(:phase_1_integrity_algorithms, Shapes::ShapeRef.new(shape: Phase1IntegrityAlgorithmsList, location_name: "phase1IntegrityAlgorithmSet"))
@@ -9758,6 +9774,7 @@ module Aws::EC2
     TunnelOption.add_member(:phase_1_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase1DHGroupNumbersList, location_name: "phase1DHGroupNumberSet"))
     TunnelOption.add_member(:phase_2_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase2DHGroupNumbersList, location_name: "phase2DHGroupNumberSet"))
     TunnelOption.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsList, location_name: "ikeVersionSet"))
+    TunnelOption.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "startupAction"))
     TunnelOption.struct_class = Types::TunnelOption
 
     TunnelOptionsList.member = Shapes::ShapeRef.new(shape: TunnelOption, location_name: "item")
@@ -10119,6 +10136,10 @@ module Aws::EC2
 
     VpnConnectionOptions.add_member(:enable_acceleration, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableAcceleration"))
     VpnConnectionOptions.add_member(:static_routes_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "staticRoutesOnly"))
+    VpnConnectionOptions.add_member(:local_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "localIpv4NetworkCidr"))
+    VpnConnectionOptions.add_member(:remote_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "remoteIpv4NetworkCidr"))
+    VpnConnectionOptions.add_member(:local_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "localIpv6NetworkCidr"))
+    VpnConnectionOptions.add_member(:remote_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "remoteIpv6NetworkCidr"))
     VpnConnectionOptions.add_member(:tunnel_inside_ip_version, Shapes::ShapeRef.new(shape: TunnelInsideIpVersion, location_name: "tunnelInsideIpVersion"))
     VpnConnectionOptions.add_member(:tunnel_options, Shapes::ShapeRef.new(shape: TunnelOptionsList, location_name: "tunnelOptionSet"))
     VpnConnectionOptions.struct_class = Types::VpnConnectionOptions
@@ -10127,6 +10148,10 @@ module Aws::EC2
     VpnConnectionOptionsSpecification.add_member(:static_routes_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "staticRoutesOnly"))
     VpnConnectionOptionsSpecification.add_member(:tunnel_inside_ip_version, Shapes::ShapeRef.new(shape: TunnelInsideIpVersion, location_name: "TunnelInsideIpVersion"))
     VpnConnectionOptionsSpecification.add_member(:tunnel_options, Shapes::ShapeRef.new(shape: VpnTunnelOptionsSpecificationsList, location_name: "TunnelOptions"))
+    VpnConnectionOptionsSpecification.add_member(:local_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "LocalIpv4NetworkCidr"))
+    VpnConnectionOptionsSpecification.add_member(:remote_ipv_4_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "RemoteIpv4NetworkCidr"))
+    VpnConnectionOptionsSpecification.add_member(:local_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "LocalIpv6NetworkCidr"))
+    VpnConnectionOptionsSpecification.add_member(:remote_ipv_6_network_cidr, Shapes::ShapeRef.new(shape: String, location_name: "RemoteIpv6NetworkCidr"))
     VpnConnectionOptionsSpecification.struct_class = Types::VpnConnectionOptionsSpecification
 
     VpnGateway.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -10158,6 +10183,7 @@ module Aws::EC2
     VpnTunnelOptionsSpecification.add_member(:rekey_fuzz_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "RekeyFuzzPercentage"))
     VpnTunnelOptionsSpecification.add_member(:replay_window_size, Shapes::ShapeRef.new(shape: Integer, location_name: "ReplayWindowSize"))
     VpnTunnelOptionsSpecification.add_member(:dpd_timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DPDTimeoutSeconds"))
+    VpnTunnelOptionsSpecification.add_member(:dpd_timeout_action, Shapes::ShapeRef.new(shape: String, location_name: "DPDTimeoutAction"))
     VpnTunnelOptionsSpecification.add_member(:phase_1_encryption_algorithms, Shapes::ShapeRef.new(shape: Phase1EncryptionAlgorithmsRequestList, location_name: "Phase1EncryptionAlgorithm"))
     VpnTunnelOptionsSpecification.add_member(:phase_2_encryption_algorithms, Shapes::ShapeRef.new(shape: Phase2EncryptionAlgorithmsRequestList, location_name: "Phase2EncryptionAlgorithm"))
     VpnTunnelOptionsSpecification.add_member(:phase_1_integrity_algorithms, Shapes::ShapeRef.new(shape: Phase1IntegrityAlgorithmsRequestList, location_name: "Phase1IntegrityAlgorithm"))
@@ -10165,6 +10191,7 @@ module Aws::EC2
     VpnTunnelOptionsSpecification.add_member(:phase_1_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase1DHGroupNumbersRequestList, location_name: "Phase1DHGroupNumber"))
     VpnTunnelOptionsSpecification.add_member(:phase_2_dh_group_numbers, Shapes::ShapeRef.new(shape: Phase2DHGroupNumbersRequestList, location_name: "Phase2DHGroupNumber"))
     VpnTunnelOptionsSpecification.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsRequestList, location_name: "IKEVersion"))
+    VpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
     VpnTunnelOptionsSpecification.struct_class = Types::VpnTunnelOptionsSpecification
 
     VpnTunnelOptionsSpecificationsList.member = Shapes::ShapeRef.new(shape: VpnTunnelOptionsSpecification)
@@ -13633,6 +13660,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyVpnConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyVpnConnectionResult)
+      end)
+
+      api.add_operation(:modify_vpn_connection_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyVpnConnectionOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyVpnConnectionOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyVpnConnectionOptionsResult)
       end)
 
       api.add_operation(:modify_vpn_tunnel_certificate, Seahorse::Model::Operation.new.tap do |o|

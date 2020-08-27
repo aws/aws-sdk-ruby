@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-08-27)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for WebM DASH outputs as well as H.264 4:2:2 10-bit output in MOV and MP4.
+
 1.54.0 (2020-08-25)
 ------------------
 

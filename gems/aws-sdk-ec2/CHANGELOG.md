@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.191.0 (2020-08-27)
+------------------
+
+* Feature - Introduces support to initiate Internet Key Exchange (IKE) negotiations for VPN connections from AWS. A user can now send the initial IKE message to their Customer Gateway (CGW) from VPN endpoints.
+
 1.190.0 (2020-08-25)
 ------------------
 

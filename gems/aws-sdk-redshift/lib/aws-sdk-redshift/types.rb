@@ -6827,9 +6827,7 @@ module Aws::Redshift
     #   Indicates whether the cluster is encrypted. If the value is
     #   encrypted (true) and you provide a value for the `KmsKeyId`
     #   parameter, we encrypt the cluster with the provided `KmsKeyId`. If
-    #   you don't provide a `KmsKeyId`, we encrypt with the default key. In
-    #   the China region we use legacy encryption if you specify that the
-    #   cluster is encrypted.
+    #   you don't provide a `KmsKeyId`, we encrypt with the default key.
     #
     #   If the value is not encrypted (false), then the cluster is
     #   decrypted.
@@ -6869,6 +6867,8 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a modify cluster parameter group operation.
+    #
     # @note When making an API call, you may pass ModifyClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -7603,6 +7603,9 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a pause cluster operation. For example, a scheduled action
+    # to run the `PauseCluster` API operation.
+    #
     # @note When making an API call, you may pass PauseClusterMessage
     #   data as a hash:
     #
@@ -7698,7 +7701,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] encryption_type
     #   The encryption type for a cluster. Possible values are: KMS and
-    #   None. For the China region the possible values are None, and Legacy.
+    #   None.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues AWS API Documentation
@@ -8095,6 +8098,9 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a resize cluster operation. For example, a scheduled action
+    # to run the `ResizeCluster` API operation.
+    #
     # @note When making an API call, you may pass ResizeClusterMessage
     #   data as a hash:
     #
@@ -8120,7 +8126,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] number_of_nodes
-    #   The new number of nodes for the cluster.
+    #   The new number of nodes for the cluster. If not specified, the
+    #   cluster's current number of nodes is used.
     #   @return [Integer]
     #
     # @!attribute [rw] classic
@@ -8268,8 +8275,7 @@ module Aws::Redshift
     # @!attribute [rw] target_encryption_type
     #   The type of encryption for the cluster after the resize is complete.
     #
-    #   Possible values are `KMS` and `None`. In the China region possible
-    #   values are: `Legacy` and `None`.
+    #   Possible values are `KMS` and `None`.
     #   @return [String]
     #
     # @!attribute [rw] data_transfer_progress_percent
@@ -8755,6 +8761,9 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a resume cluster operation. For example, a scheduled action
+    # to run the `ResumeCluster` API operation.
+    #
     # @note When making an API call, you may pass ResumeClusterMessage
     #   data as a hash:
     #
