@@ -18,6 +18,7 @@ rvm:
   - 2.7
   - jruby-9.1
   - jruby-9.2
+  - truffleruby-head
 
 sudo: false
 
