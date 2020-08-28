@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
+
+* Feature - Aws::CostandUsageReportService - Updated the API, and documentation for AWS Cost and Usage Report Service.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::Route53 - Updated the documentation for Amazon Route 53.
+
 2.11.574 (2020-08-27)
 ------------------
 
