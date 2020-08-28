@@ -20,7 +20,7 @@ module Aws::CostandUsageReportService
     #       }
     #
     # @!attribute [rw] report_name
-    #   The name of the report that you want to create. The name must be
+    #   The name of the report that you want to delete. The name must be
     #   unique, is case sensitive, and can't include spaces.
     #   @return [String]
     #
@@ -131,13 +131,13 @@ module Aws::CostandUsageReportService
     #         report_name: "ReportName", # required
     #         report_definition: { # required
     #           report_name: "ReportName", # required
-    #           time_unit: "HOURLY", # required, accepts HOURLY, DAILY
+    #           time_unit: "HOURLY", # required, accepts HOURLY, DAILY, MONTHLY
     #           format: "textORcsv", # required, accepts textORcsv, Parquet
     #           compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
     #           additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #           s3_bucket: "S3Bucket", # required
     #           s3_prefix: "S3Prefix", # required
-    #           s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
+    #           s3_region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-south-1, me-south-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2, cn-north-1, cn-northwest-1
     #           additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #           refresh_closed_reports: false,
     #           report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
@@ -176,13 +176,13 @@ module Aws::CostandUsageReportService
     #       {
     #         report_definition: { # required
     #           report_name: "ReportName", # required
-    #           time_unit: "HOURLY", # required, accepts HOURLY, DAILY
+    #           time_unit: "HOURLY", # required, accepts HOURLY, DAILY, MONTHLY
     #           format: "textORcsv", # required, accepts textORcsv, Parquet
     #           compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
     #           additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #           s3_bucket: "S3Bucket", # required
     #           s3_prefix: "S3Prefix", # required
-    #           s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
+    #           s3_region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-south-1, me-south-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2, cn-north-1, cn-northwest-1
     #           additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #           refresh_closed_reports: false,
     #           report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
@@ -218,13 +218,13 @@ module Aws::CostandUsageReportService
     #
     #       {
     #         report_name: "ReportName", # required
-    #         time_unit: "HOURLY", # required, accepts HOURLY, DAILY
+    #         time_unit: "HOURLY", # required, accepts HOURLY, DAILY, MONTHLY
     #         format: "textORcsv", # required, accepts textORcsv, Parquet
     #         compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
     #         additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #         s3_bucket: "S3Bucket", # required
     #         s3_prefix: "S3Prefix", # required
-    #         s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
+    #         s3_region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-south-1, me-south-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2, cn-north-1, cn-northwest-1
     #         additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #         refresh_closed_reports: false,
     #         report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT

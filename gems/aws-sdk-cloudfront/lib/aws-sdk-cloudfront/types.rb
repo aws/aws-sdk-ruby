@@ -2439,6 +2439,51 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateMonitoringSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_id: "string", # required
+    #         monitoring_subscription: { # required
+    #           realtime_metrics_subscription_config: {
+    #             realtime_metrics_subscription_status: "Enabled", # required, accepts Enabled, Disabled
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID of the distribution that you are enabling metrics for.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_subscription
+    #   A monitoring subscription. This structure contains information about
+    #   whether additional CloudWatch metrics are enabled for a given
+    #   CloudFront distribution.
+    #   @return [Types::MonitoringSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateMonitoringSubscriptionRequest AWS API Documentation
+    #
+    class CreateMonitoringSubscriptionRequest < Struct.new(
+      :distribution_id,
+      :monitoring_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_subscription
+    #   A monitoring subscription. This structure contains information about
+    #   whether additional CloudWatch metrics are enabled for a given
+    #   CloudFront distribution.
+    #   @return [Types::MonitoringSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateMonitoringSubscriptionResult AWS API Documentation
+    #
+    class CreateMonitoringSubscriptionResult < Struct.new(
+      :monitoring_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOriginRequestPolicyRequest
     #   data as a hash:
     #
@@ -3491,6 +3536,29 @@ module Aws::CloudFront
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteMonitoringSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID of the distribution that you are disabling metrics for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteMonitoringSubscriptionRequest AWS API Documentation
+    #
+    class DeleteMonitoringSubscriptionRequest < Struct.new(
+      :distribution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteMonitoringSubscriptionResult AWS API Documentation
+    #
+    class DeleteMonitoringSubscriptionResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteOriginRequestPolicyRequest
     #   data as a hash:
@@ -5818,6 +5886,40 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMonitoringSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID of the distribution that you are getting metrics information
+    #   for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetMonitoringSubscriptionRequest AWS API Documentation
+    #
+    class GetMonitoringSubscriptionRequest < Struct.new(
+      :distribution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_subscription
+    #   A monitoring subscription. This structure contains information about
+    #   whether additional CloudWatch metrics are enabled for a given
+    #   CloudFront distribution.
+    #   @return [Types::MonitoringSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetMonitoringSubscriptionResult AWS API Documentation
+    #
+    class GetMonitoringSubscriptionResult < Struct.new(
+      :monitoring_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetOriginRequestPolicyConfigRequest
     #   data as a hash:
     #
@@ -7447,6 +7549,31 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A monitoring subscription. This structure contains information about
+    # whether additional CloudWatch metrics are enabled for a given
+    # CloudFront distribution.
+    #
+    # @note When making an API call, you may pass MonitoringSubscription
+    #   data as a hash:
+    #
+    #       {
+    #         realtime_metrics_subscription_config: {
+    #           realtime_metrics_subscription_status: "Enabled", # required, accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] realtime_metrics_subscription_config
+    #   A subscription configuration for additional CloudWatch metrics.
+    #   @return [Types::RealtimeMetricsSubscriptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/MonitoringSubscription AWS API Documentation
+    #
+    class MonitoringSubscription < Struct.new(
+      :realtime_metrics_subscription_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The cache policy does not exist.
     #
     # @!attribute [rw] message
@@ -8916,6 +9043,28 @@ module Aws::CloudFront
     class QueryStringNames < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A subscription configuration for additional CloudWatch metrics.
+    #
+    # @note When making an API call, you may pass RealtimeMetricsSubscriptionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         realtime_metrics_subscription_status: "Enabled", # required, accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] realtime_metrics_subscription_status
+    #   A flag that indicates whether additional CloudWatch metrics are
+    #   enabled for a given CloudFront distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeMetricsSubscriptionConfig AWS API Documentation
+    #
+    class RealtimeMetricsSubscriptionConfig < Struct.new(
+      :realtime_metrics_subscription_status)
       SENSITIVE = []
       include Aws::Structure
     end

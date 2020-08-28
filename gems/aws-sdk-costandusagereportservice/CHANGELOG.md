@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-08-28)
+------------------
+
+* Feature - This release add MONTHLY as the new supported TimeUnit for ReportDefinition.
+
 1.25.0 (2020-08-25)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-08-28)
+------------------
+
+* Feature - You can now manage CloudFront's additional, real-time metrics with the CloudFront API.
+
 1.37.0 (2020-08-25)
 ------------------
 

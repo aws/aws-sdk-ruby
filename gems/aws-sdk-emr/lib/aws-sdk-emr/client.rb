@@ -988,6 +988,50 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Provides details of a notebook execution.
+    #
+    # @option params [required, String] :notebook_execution_id
+    #   The unique identifier of the notebook execution.
+    #
+    # @return [Types::DescribeNotebookExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNotebookExecutionOutput#notebook_execution #notebook_execution} => Types::NotebookExecution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_notebook_execution({
+    #     notebook_execution_id: "XmlStringMaxLen256", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_execution.notebook_execution_id #=> String
+    #   resp.notebook_execution.editor_id #=> String
+    #   resp.notebook_execution.execution_engine.id #=> String
+    #   resp.notebook_execution.execution_engine.type #=> String, one of "EMR"
+    #   resp.notebook_execution.execution_engine.master_instance_security_group_id #=> String
+    #   resp.notebook_execution.notebook_execution_name #=> String
+    #   resp.notebook_execution.notebook_params #=> String
+    #   resp.notebook_execution.status #=> String, one of "START_PENDING", "STARTING", "RUNNING", "FINISHING", "FINISHED", "FAILING", "FAILED", "STOP_PENDING", "STOPPING", "STOPPED"
+    #   resp.notebook_execution.start_time #=> Time
+    #   resp.notebook_execution.end_time #=> Time
+    #   resp.notebook_execution.arn #=> String
+    #   resp.notebook_execution.output_notebook_uri #=> String
+    #   resp.notebook_execution.last_state_change_reason #=> String
+    #   resp.notebook_execution.notebook_instance_security_group_id #=> String
+    #   resp.notebook_execution.tags #=> Array
+    #   resp.notebook_execution.tags[0].key #=> String
+    #   resp.notebook_execution.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeNotebookExecution AWS API Documentation
+    #
+    # @overload describe_notebook_execution(params = {})
+    # @param [Hash] params ({})
+    def describe_notebook_execution(params = {}, options = {})
+      req = build_request(:describe_notebook_execution, params)
+      req.send_request(options)
+    end
+
     # Provides the details of a security configuration by returning the
     # configuration JSON.
     #
@@ -1496,6 +1540,95 @@ module Aws::EMR
     # @param [Hash] params ({})
     def list_instances(params = {}, options = {})
       req = build_request(:list_instances, params)
+      req.send_request(options)
+    end
+
+    # Provides summaries of all notebook executions. You can filter the list
+    # based on multiple criteria such as status, time range, and editor id.
+    # Returns a maximum of 50 notebook executions and a marker to track the
+    # paging of a longer notebook execution list across multiple
+    # `ListNotebookExecution` calls.
+    #
+    # @option params [String] :editor_id
+    #   The unique ID of the editor associated with the notebook execution.
+    #
+    # @option params [String] :status
+    #   The status filter for listing notebook executions.
+    #
+    #   * `START_PENDING` indicates that the cluster has received the
+    #     execution request but execution has not begun.
+    #
+    #   * `STARTING` indicates that the execution is starting on the cluster.
+    #
+    #   * `RUNNING` indicates that the execution is being processed by the
+    #     cluster.
+    #
+    #   * `FINISHING` indicates that execution processing is in the final
+    #     stages.
+    #
+    #   * `FINISHED` indicates that the execution has completed without error.
+    #
+    #   * `FAILING` indicates that the execution is failing and will not
+    #     finish successfully.
+    #
+    #   * `FAILED` indicates that the execution failed.
+    #
+    #   * `STOP_PENDING` indicates that the cluster has received a
+    #     `StopNotebookExecution` request and the stop is pending.
+    #
+    #   * `STOPPING` indicates that the cluster is in the process of stopping
+    #     the execution as a result of a `StopNotebookExecution` request.
+    #
+    #   * `STOPPED` indicates that the execution stopped because of a
+    #     `StopNotebookExecution` request.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :from
+    #   The beginning of time range filter for listing notebook executions.
+    #   The default is the timestamp of 30 days ago.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :to
+    #   The end of time range filter for listing notebook executions. The
+    #   default is the current timestamp.
+    #
+    # @option params [String] :marker
+    #   The pagination token, returned by a previous `ListNotebookExecutions`
+    #   call, that indicates the start of the list for this
+    #   `ListNotebookExecutions` call.
+    #
+    # @return [Types::ListNotebookExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotebookExecutionsOutput#notebook_executions #notebook_executions} => Array&lt;Types::NotebookExecutionSummary&gt;
+    #   * {Types::ListNotebookExecutionsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notebook_executions({
+    #     editor_id: "XmlStringMaxLen256",
+    #     status: "START_PENDING", # accepts START_PENDING, STARTING, RUNNING, FINISHING, FINISHED, FAILING, FAILED, STOP_PENDING, STOPPING, STOPPED
+    #     from: Time.now,
+    #     to: Time.now,
+    #     marker: "Marker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_executions #=> Array
+    #   resp.notebook_executions[0].notebook_execution_id #=> String
+    #   resp.notebook_executions[0].editor_id #=> String
+    #   resp.notebook_executions[0].notebook_execution_name #=> String
+    #   resp.notebook_executions[0].status #=> String, one of "START_PENDING", "STARTING", "RUNNING", "FINISHING", "FINISHED", "FAILING", "FAILED", "STOP_PENDING", "STOPPING", "STOPPED"
+    #   resp.notebook_executions[0].start_time #=> Time
+    #   resp.notebook_executions[0].end_time #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListNotebookExecutions AWS API Documentation
+    #
+    # @overload list_notebook_executions(params = {})
+    # @param [Hash] params ({})
+    def list_notebook_executions(params = {}, options = {})
+      req = build_request(:list_notebook_executions, params)
       req.send_request(options)
     end
 
@@ -2616,6 +2749,109 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Starts a notebook execution.
+    #
+    # @option params [required, String] :editor_id
+    #   The unique identifier of the EMR Notebook to use for notebook
+    #   execution.
+    #
+    # @option params [required, String] :relative_path
+    #   The path and file name of the notebook file for this execution,
+    #   relative to the path specified for the EMR Notebook. For example, if
+    #   you specify a path of `s3://MyBucket/MyNotebooks` when you create an
+    #   EMR Notebook for a notebook with an ID of
+    #   `e-ABCDEFGHIJK1234567890ABCD` (the `EditorID` of this request), and
+    #   you specify a `RelativePath` of
+    #   `my_notebook_executions/notebook_execution.ipynb`, the location of the
+    #   file for the notebook execution is
+    #   `s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb`.
+    #
+    # @option params [String] :notebook_execution_name
+    #   An optional name for the notebook execution.
+    #
+    # @option params [String] :notebook_params
+    #   Input parameters in JSON format passed to the EMR Notebook at runtime
+    #   for execution.
+    #
+    # @option params [required, Types::ExecutionEngineConfig] :execution_engine
+    #   Specifies the execution engine (cluster) that runs the notebook
+    #   execution.
+    #
+    # @option params [required, String] :service_role
+    #   The name or ARN of the IAM role that is used as the service role for
+    #   Amazon EMR (the EMR role) for the notebook execution.
+    #
+    # @option params [String] :notebook_instance_security_group_id
+    #   The unique identifier of the Amazon EC2 security group to associate
+    #   with the EMR Notebook for this notebook execution.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags associated with a notebook execution. Tags are
+    #   user-defined key value pairs that consist of a required key string
+    #   with a maximum of 128 characters and an optional value string with a
+    #   maximum of 256 characters.
+    #
+    # @return [Types::StartNotebookExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNotebookExecutionOutput#notebook_execution_id #notebook_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_notebook_execution({
+    #     editor_id: "XmlStringMaxLen256", # required
+    #     relative_path: "XmlString", # required
+    #     notebook_execution_name: "XmlStringMaxLen256",
+    #     notebook_params: "XmlString",
+    #     execution_engine: { # required
+    #       id: "XmlStringMaxLen256", # required
+    #       type: "EMR", # accepts EMR
+    #       master_instance_security_group_id: "XmlStringMaxLen256",
+    #     },
+    #     service_role: "XmlString", # required
+    #     notebook_instance_security_group_id: "XmlStringMaxLen256",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StartNotebookExecution AWS API Documentation
+    #
+    # @overload start_notebook_execution(params = {})
+    # @param [Hash] params ({})
+    def start_notebook_execution(params = {}, options = {})
+      req = build_request(:start_notebook_execution, params)
+      req.send_request(options)
+    end
+
+    # Stops a notebook execution.
+    #
+    # @option params [required, String] :notebook_execution_id
+    #   The unique identifier of the notebook execution.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_notebook_execution({
+    #     notebook_execution_id: "XmlStringMaxLen256", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StopNotebookExecution AWS API Documentation
+    #
+    # @overload stop_notebook_execution(params = {})
+    # @param [Hash] params ({})
+    def stop_notebook_execution(params = {}, options = {})
+      req = build_request(:stop_notebook_execution, params)
+      req.send_request(options)
+    end
+
     # TerminateJobFlows shuts a list of clusters (job flows) down. When a
     # job flow is shut down, any step not yet completed is canceled and the
     # EC2 instances on which the cluster is running are stopped. Any log
@@ -2661,7 +2897,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

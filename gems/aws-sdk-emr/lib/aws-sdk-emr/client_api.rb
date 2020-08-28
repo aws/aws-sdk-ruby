@@ -72,6 +72,8 @@ module Aws::EMR
     DescribeClusterOutput = Shapes::StructureShape.new(name: 'DescribeClusterOutput')
     DescribeJobFlowsInput = Shapes::StructureShape.new(name: 'DescribeJobFlowsInput')
     DescribeJobFlowsOutput = Shapes::StructureShape.new(name: 'DescribeJobFlowsOutput')
+    DescribeNotebookExecutionInput = Shapes::StructureShape.new(name: 'DescribeNotebookExecutionInput')
+    DescribeNotebookExecutionOutput = Shapes::StructureShape.new(name: 'DescribeNotebookExecutionOutput')
     DescribeSecurityConfigurationInput = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationInput')
     DescribeSecurityConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationOutput')
     DescribeStepInput = Shapes::StructureShape.new(name: 'DescribeStepInput')
@@ -88,6 +90,8 @@ module Aws::EMR
     Ec2InstanceAttributes = Shapes::StructureShape.new(name: 'Ec2InstanceAttributes')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExecutionEngineConfig = Shapes::StructureShape.new(name: 'ExecutionEngineConfig')
+    ExecutionEngineType = Shapes::StringShape.new(name: 'ExecutionEngineType')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     GetBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationInput')
     GetBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationOutput')
@@ -166,6 +170,8 @@ module Aws::EMR
     ListInstanceGroupsOutput = Shapes::StructureShape.new(name: 'ListInstanceGroupsOutput')
     ListInstancesInput = Shapes::StructureShape.new(name: 'ListInstancesInput')
     ListInstancesOutput = Shapes::StructureShape.new(name: 'ListInstancesOutput')
+    ListNotebookExecutionsInput = Shapes::StructureShape.new(name: 'ListNotebookExecutionsInput')
+    ListNotebookExecutionsOutput = Shapes::StructureShape.new(name: 'ListNotebookExecutionsOutput')
     ListSecurityConfigurationsInput = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsInput')
     ListSecurityConfigurationsOutput = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsOutput')
     ListStepsInput = Shapes::StructureShape.new(name: 'ListStepsInput')
@@ -182,6 +188,10 @@ module Aws::EMR
     ModifyInstanceGroupsInput = Shapes::StructureShape.new(name: 'ModifyInstanceGroupsInput')
     NewSupportedProductsList = Shapes::ListShape.new(name: 'NewSupportedProductsList')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
+    NotebookExecution = Shapes::StructureShape.new(name: 'NotebookExecution')
+    NotebookExecutionStatus = Shapes::StringShape.new(name: 'NotebookExecutionStatus')
+    NotebookExecutionSummary = Shapes::StructureShape.new(name: 'NotebookExecutionSummary')
+    NotebookExecutionSummaryList = Shapes::ListShape.new(name: 'NotebookExecutionSummaryList')
     OnDemandProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'OnDemandProvisioningAllocationStrategy')
     OnDemandProvisioningSpecification = Shapes::StructureShape.new(name: 'OnDemandProvisioningSpecification')
     OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
@@ -222,6 +232,8 @@ module Aws::EMR
     SpotProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'SpotProvisioningAllocationStrategy')
     SpotProvisioningSpecification = Shapes::StructureShape.new(name: 'SpotProvisioningSpecification')
     SpotProvisioningTimeoutAction = Shapes::StringShape.new(name: 'SpotProvisioningTimeoutAction')
+    StartNotebookExecutionInput = Shapes::StructureShape.new(name: 'StartNotebookExecutionInput')
+    StartNotebookExecutionOutput = Shapes::StructureShape.new(name: 'StartNotebookExecutionOutput')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Step = Shapes::StructureShape.new(name: 'Step')
     StepCancellationOption = Shapes::StringShape.new(name: 'StepCancellationOption')
@@ -241,6 +253,7 @@ module Aws::EMR
     StepSummary = Shapes::StructureShape.new(name: 'StepSummary')
     StepSummaryList = Shapes::ListShape.new(name: 'StepSummaryList')
     StepTimeline = Shapes::StructureShape.new(name: 'StepTimeline')
+    StopNotebookExecutionInput = Shapes::StructureShape.new(name: 'StopNotebookExecutionInput')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
@@ -464,6 +477,12 @@ module Aws::EMR
     DescribeJobFlowsOutput.add_member(:job_flows, Shapes::ShapeRef.new(shape: JobFlowDetailList, location_name: "JobFlows"))
     DescribeJobFlowsOutput.struct_class = Types::DescribeJobFlowsOutput
 
+    DescribeNotebookExecutionInput.add_member(:notebook_execution_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "NotebookExecutionId"))
+    DescribeNotebookExecutionInput.struct_class = Types::DescribeNotebookExecutionInput
+
+    DescribeNotebookExecutionOutput.add_member(:notebook_execution, Shapes::ShapeRef.new(shape: NotebookExecution, location_name: "NotebookExecution"))
+    DescribeNotebookExecutionOutput.struct_class = Types::DescribeNotebookExecutionOutput
+
     DescribeSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
     DescribeSecurityConfigurationInput.struct_class = Types::DescribeSecurityConfigurationInput
 
@@ -517,6 +536,11 @@ module Aws::EMR
     Ec2InstanceAttributes.add_member(:additional_master_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "AdditionalMasterSecurityGroups"))
     Ec2InstanceAttributes.add_member(:additional_slave_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "AdditionalSlaveSecurityGroups"))
     Ec2InstanceAttributes.struct_class = Types::Ec2InstanceAttributes
+
+    ExecutionEngineConfig.add_member(:id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Id"))
+    ExecutionEngineConfig.add_member(:type, Shapes::ShapeRef.new(shape: ExecutionEngineType, location_name: "Type"))
+    ExecutionEngineConfig.add_member(:master_instance_security_group_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "MasterInstanceSecurityGroupId"))
+    ExecutionEngineConfig.struct_class = Types::ExecutionEngineConfig
 
     FailureDetails.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "Reason"))
     FailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -863,6 +887,17 @@ module Aws::EMR
     ListInstancesOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListInstancesOutput.struct_class = Types::ListInstancesOutput
 
+    ListNotebookExecutionsInput.add_member(:editor_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "EditorId"))
+    ListNotebookExecutionsInput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookExecutionStatus, location_name: "Status"))
+    ListNotebookExecutionsInput.add_member(:from, Shapes::ShapeRef.new(shape: Date, location_name: "From"))
+    ListNotebookExecutionsInput.add_member(:to, Shapes::ShapeRef.new(shape: Date, location_name: "To"))
+    ListNotebookExecutionsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListNotebookExecutionsInput.struct_class = Types::ListNotebookExecutionsInput
+
+    ListNotebookExecutionsOutput.add_member(:notebook_executions, Shapes::ShapeRef.new(shape: NotebookExecutionSummaryList, location_name: "NotebookExecutions"))
+    ListNotebookExecutionsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListNotebookExecutionsOutput.struct_class = Types::ListNotebookExecutionsOutput
+
     ListSecurityConfigurationsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListSecurityConfigurationsInput.struct_class = Types::ListSecurityConfigurationsInput
 
@@ -905,6 +940,31 @@ module Aws::EMR
     ModifyInstanceGroupsInput.struct_class = Types::ModifyInstanceGroupsInput
 
     NewSupportedProductsList.member = Shapes::ShapeRef.new(shape: SupportedProductConfig)
+
+    NotebookExecution.add_member(:notebook_execution_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookExecutionId"))
+    NotebookExecution.add_member(:editor_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "EditorId"))
+    NotebookExecution.add_member(:execution_engine, Shapes::ShapeRef.new(shape: ExecutionEngineConfig, location_name: "ExecutionEngine"))
+    NotebookExecution.add_member(:notebook_execution_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookExecutionName"))
+    NotebookExecution.add_member(:notebook_params, Shapes::ShapeRef.new(shape: XmlString, location_name: "NotebookParams"))
+    NotebookExecution.add_member(:status, Shapes::ShapeRef.new(shape: NotebookExecutionStatus, location_name: "Status"))
+    NotebookExecution.add_member(:start_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
+    NotebookExecution.add_member(:end_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndTime"))
+    NotebookExecution.add_member(:arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Arn"))
+    NotebookExecution.add_member(:output_notebook_uri, Shapes::ShapeRef.new(shape: XmlString, location_name: "OutputNotebookURI"))
+    NotebookExecution.add_member(:last_state_change_reason, Shapes::ShapeRef.new(shape: XmlString, location_name: "LastStateChangeReason"))
+    NotebookExecution.add_member(:notebook_instance_security_group_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookInstanceSecurityGroupId"))
+    NotebookExecution.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    NotebookExecution.struct_class = Types::NotebookExecution
+
+    NotebookExecutionSummary.add_member(:notebook_execution_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookExecutionId"))
+    NotebookExecutionSummary.add_member(:editor_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "EditorId"))
+    NotebookExecutionSummary.add_member(:notebook_execution_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookExecutionName"))
+    NotebookExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: NotebookExecutionStatus, location_name: "Status"))
+    NotebookExecutionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
+    NotebookExecutionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndTime"))
+    NotebookExecutionSummary.struct_class = Types::NotebookExecutionSummary
+
+    NotebookExecutionSummaryList.member = Shapes::ShapeRef.new(shape: NotebookExecutionSummary)
 
     OnDemandProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandProvisioningAllocationStrategy, required: true, location_name: "AllocationStrategy"))
     OnDemandProvisioningSpecification.struct_class = Types::OnDemandProvisioningSpecification
@@ -1044,6 +1104,19 @@ module Aws::EMR
     SpotProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotProvisioningAllocationStrategy, location_name: "AllocationStrategy"))
     SpotProvisioningSpecification.struct_class = Types::SpotProvisioningSpecification
 
+    StartNotebookExecutionInput.add_member(:editor_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "EditorId"))
+    StartNotebookExecutionInput.add_member(:relative_path, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "RelativePath"))
+    StartNotebookExecutionInput.add_member(:notebook_execution_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookExecutionName"))
+    StartNotebookExecutionInput.add_member(:notebook_params, Shapes::ShapeRef.new(shape: XmlString, location_name: "NotebookParams"))
+    StartNotebookExecutionInput.add_member(:execution_engine, Shapes::ShapeRef.new(shape: ExecutionEngineConfig, required: true, location_name: "ExecutionEngine"))
+    StartNotebookExecutionInput.add_member(:service_role, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "ServiceRole"))
+    StartNotebookExecutionInput.add_member(:notebook_instance_security_group_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookInstanceSecurityGroupId"))
+    StartNotebookExecutionInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartNotebookExecutionInput.struct_class = Types::StartNotebookExecutionInput
+
+    StartNotebookExecutionOutput.add_member(:notebook_execution_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "NotebookExecutionId"))
+    StartNotebookExecutionOutput.struct_class = Types::StartNotebookExecutionOutput
+
     Step.add_member(:id, Shapes::ShapeRef.new(shape: StepId, location_name: "Id"))
     Step.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Step.add_member(:config, Shapes::ShapeRef.new(shape: HadoopStepConfig, location_name: "Config"))
@@ -1098,6 +1171,9 @@ module Aws::EMR
     StepTimeline.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartDateTime"))
     StepTimeline.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndDateTime"))
     StepTimeline.struct_class = Types::StepTimeline
+
+    StopNotebookExecutionInput.add_member(:notebook_execution_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "NotebookExecutionId"))
+    StopNotebookExecutionInput.struct_class = Types::StopNotebookExecutionInput
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1235,6 +1311,16 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_notebook_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNotebookExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNotebookExecutionInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNotebookExecutionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:describe_security_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSecurityConfiguration"
         o.http_method = "POST"
@@ -1340,6 +1426,21 @@ module Aws::EMR
         o.input = Shapes::ShapeRef.new(shape: ListInstancesInput)
         o.output = Shapes::ShapeRef.new(shape: ListInstancesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_notebook_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNotebookExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListNotebookExecutionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListNotebookExecutionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(
           tokens: {
@@ -1484,6 +1585,26 @@ module Aws::EMR
         o.input = Shapes::ShapeRef.new(shape: SetVisibleToAllUsersInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:start_notebook_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartNotebookExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartNotebookExecutionInput)
+        o.output = Shapes::ShapeRef.new(shape: StartNotebookExecutionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:stop_notebook_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopNotebookExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopNotebookExecutionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:terminate_job_flows, Seahorse::Model::Operation.new.tap do |o|

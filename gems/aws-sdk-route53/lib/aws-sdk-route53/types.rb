@@ -4209,8 +4209,9 @@ module Aws::Route53
     #   (Optional) The maximum number of hosted zones that you want Amazon
     #   Route 53 to return. If the specified VPC is associated with more
     #   than `MaxItems` hosted zones, the response includes a `NextToken`
-    #   element. `NextToken` contains the hosted zone ID of the first hosted
-    #   zone that Route 53 will return if you submit another request.
+    #   element. `NextToken` contains an encrypted token that identifies the
+    #   first hosted zone that Route 53 will return if you submit another
+    #   request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

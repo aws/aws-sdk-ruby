@@ -1485,6 +1485,52 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Enables additional CloudWatch metrics for the specified CloudFront
+    # distribution. The additional metrics incur an additional cost.
+    #
+    # For more information, see [Viewing additional CloudFront distribution
+    # metrics][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional
+    #
+    # @option params [required, String] :distribution_id
+    #   The ID of the distribution that you are enabling metrics for.
+    #
+    # @option params [required, Types::MonitoringSubscription] :monitoring_subscription
+    #   A monitoring subscription. This structure contains information about
+    #   whether additional CloudWatch metrics are enabled for a given
+    #   CloudFront distribution.
+    #
+    # @return [Types::CreateMonitoringSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMonitoringSubscriptionResult#monitoring_subscription #monitoring_subscription} => Types::MonitoringSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_monitoring_subscription({
+    #     distribution_id: "string", # required
+    #     monitoring_subscription: { # required
+    #       realtime_metrics_subscription_config: {
+    #         realtime_metrics_subscription_status: "Enabled", # required, accepts Enabled, Disabled
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitoring_subscription.realtime_metrics_subscription_config.realtime_metrics_subscription_status #=> String, one of "Enabled", "Disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateMonitoringSubscription2020_05_31 AWS API Documentation
+    #
+    # @overload create_monitoring_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_monitoring_subscription(params = {}, options = {})
+      req = build_request(:create_monitoring_subscription, params)
+      req.send_request(options)
+    end
+
     # Creates an origin request policy.
     #
     # After you create an origin request policy, you can attach it to one or
@@ -1978,6 +2024,29 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def delete_field_level_encryption_profile(params = {}, options = {})
       req = build_request(:delete_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Disables additional CloudWatch metrics for the specified CloudFront
+    # distribution.
+    #
+    # @option params [required, String] :distribution_id
+    #   The ID of the distribution that you are disabling metrics for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_monitoring_subscription({
+    #     distribution_id: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteMonitoringSubscription2020_05_31 AWS API Documentation
+    #
+    # @overload delete_monitoring_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_monitoring_subscription(params = {}, options = {})
+      req = build_request(:delete_monitoring_subscription, params)
       req.send_request(options)
     end
 
@@ -2866,6 +2935,36 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def get_invalidation(params = {}, options = {})
       req = build_request(:get_invalidation, params)
+      req.send_request(options)
+    end
+
+    # Gets information about whether additional CloudWatch metrics are
+    # enabled for the specified CloudFront distribution.
+    #
+    # @option params [required, String] :distribution_id
+    #   The ID of the distribution that you are getting metrics information
+    #   for.
+    #
+    # @return [Types::GetMonitoringSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMonitoringSubscriptionResult#monitoring_subscription #monitoring_subscription} => Types::MonitoringSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_monitoring_subscription({
+    #     distribution_id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitoring_subscription.realtime_metrics_subscription_config.realtime_metrics_subscription_status #=> String, one of "Enabled", "Disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetMonitoringSubscription2020_05_31 AWS API Documentation
+    #
+    # @overload get_monitoring_subscription(params = {})
+    # @param [Hash] params ({})
+    def get_monitoring_subscription(params = {}, options = {})
+      req = build_request(:get_monitoring_subscription, params)
       req.send_request(options)
     end
 
@@ -5229,7 +5328,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

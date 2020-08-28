@@ -331,30 +331,18 @@ module Aws::Route53
 
     # Associates an Amazon VPC with a private hosted zone.
     #
-    # <note markdown="1"> To perform the association, the VPC and the private hosted zone must
-    # already exist. Also, you can't convert a public hosted zone into a
-    # private hosted zone.
+    # To perform the association, the VPC and the private hosted zone must
+    # already exist. You can't convert a public hosted zone into a private
+    # hosted zone.
+    #
+    # <note markdown="1"> If you want to associate a VPC that was created by using one AWS
+    # account with a private hosted zone that was created by using a
+    # different account, the AWS account that created the private hosted
+    # zone must first submit a `CreateVPCAssociationAuthorization` request.
+    # Then the account that created the VPC must submit an
+    # `AssociateVPCWithHostedZone` request.
     #
     #  </note>
-    #
-    # If you want to associate a VPC that was created by one AWS account
-    # with a private hosted zone that was created by a different account, do
-    # one of the following:
-    #
-    # * Use the AWS account that created the private hosted zone to submit a
-    #   [CreateVPCAssociationAuthorization][1] request. Then use the account
-    #   that created the VPC to submit an `AssociateVPCWithHostedZone`
-    #   request.
-    #
-    # * If a subnet in the VPC was shared with another account, you can use
-    #   the account that the subnet was shared with to submit an
-    #   `AssociateVPCWithHostedZone` request. For more information about
-    #   sharing subnets, see [Working with Shared VPCs][2].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateVPCAssociationAuthorization.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the private hosted zone that you want to associate an Amazon
@@ -2261,6 +2249,24 @@ module Aws::Route53
 
     # Deletes a traffic policy.
     #
+    # When you delete a traffic policy, Route 53 sets a flag on the policy
+    # to indicate that it has been deleted. However, Route 53 never fully
+    # deletes the traffic policy. Note the following:
+    #
+    # * Deleted traffic policies aren't listed if you run
+    #   [ListTrafficPolicies][1].
+    #
+    # * There's no way to get a list of deleted policies.
+    #
+    # * If you retain the ID of the policy, you can get information about
+    #   the policy, including the traffic policy document, by running
+    #   [GetTrafficPolicy][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListTrafficPolicies.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html
+    #
     # @option params [required, String] :id
     #   The ID of the traffic policy that you want to delete.
     #
@@ -3094,6 +3100,13 @@ module Aws::Route53
 
     # Gets information about a specific traffic policy version.
     #
+    # For information about how of deleting a traffic policy affects the
+    # response from `GetTrafficPolicy`, see [DeleteTrafficPolicy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html
+    #
     # @option params [required, String] :id
     #   The ID of the traffic policy that you want to get information about.
     #
@@ -3617,8 +3630,8 @@ module Aws::Route53
     #   (Optional) The maximum number of hosted zones that you want Amazon
     #   Route 53 to return. If the specified VPC is associated with more than
     #   `MaxItems` hosted zones, the response includes a `NextToken` element.
-    #   `NextToken` contains the hosted zone ID of the first hosted zone that
-    #   Route 53 will return if you submit another request.
+    #   `NextToken` contains an encrypted token that identifies the first
+    #   hosted zone that Route 53 will return if you submit another request.
     #
     # @option params [String] :next_token
     #   If the previous response included a `NextToken` element, the specified
@@ -4086,6 +4099,13 @@ module Aws::Route53
     # Gets information about the latest version for every traffic policy
     # that is associated with the current AWS account. Policies are listed
     # in the order that they were created in.
+    #
+    # For information about how of deleting a traffic policy affects the
+    # response from `ListTrafficPolicies`, see [DeleteTrafficPolicy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html
     #
     # @option params [String] :traffic_policy_id_marker
     #   (Conditional) For your first request to `ListTrafficPolicies`, don't
@@ -5244,7 +5264,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

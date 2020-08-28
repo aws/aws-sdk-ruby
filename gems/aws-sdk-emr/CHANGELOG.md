@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-08-28)
+------------------
+
+* Feature - Amazon EMR adds support for ICMP, port -1, in Block Public Access Exceptions and API access for EMR Notebooks execution. You can now non-interactively execute EMR Notebooks and pass input parameters.
+
 1.35.0 (2020-08-25)
 ------------------
 

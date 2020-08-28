@@ -1457,6 +1457,37 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeNotebookExecutionInput
+    #   data as a hash:
+    #
+    #       {
+    #         notebook_execution_id: "XmlStringMaxLen256", # required
+    #       }
+    #
+    # @!attribute [rw] notebook_execution_id
+    #   The unique identifier of the notebook execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeNotebookExecutionInput AWS API Documentation
+    #
+    class DescribeNotebookExecutionInput < Struct.new(
+      :notebook_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_execution
+    #   Properties of the notebook execution.
+    #   @return [Types::NotebookExecution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeNotebookExecutionOutput AWS API Documentation
+    #
+    class DescribeNotebookExecutionOutput < Struct.new(
+      :notebook_execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeSecurityConfigurationInput
     #   data as a hash:
     #
@@ -1743,6 +1774,49 @@ module Aws::EMR
       :service_access_security_group,
       :additional_master_security_groups,
       :additional_slave_security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the execution engine (cluster) to run the notebook and
+    # perform the notebook execution, for example, an EMR cluster.
+    #
+    # @note When making an API call, you may pass ExecutionEngineConfig
+    #   data as a hash:
+    #
+    #       {
+    #         id: "XmlStringMaxLen256", # required
+    #         type: "EMR", # accepts EMR
+    #         master_instance_security_group_id: "XmlStringMaxLen256",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the execution engine. For an EMR cluster,
+    #   this is the cluster ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of execution engine. A value of `EMR` specifies an EMR
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_instance_security_group_id
+    #   An optional unique ID of an EC2 security group to associate with the
+    #   master instance of the EMR cluster for this notebook execution. For
+    #   more information see [Specifying EC2 Security Groups for EMR
+    #   Notebooks][1] in the *EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ExecutionEngineConfig AWS API Documentation
+    #
+    class ExecutionEngineConfig < Struct.new(
+      :id,
+      :type,
+      :master_instance_security_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4140,6 +4214,101 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListNotebookExecutionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         editor_id: "XmlStringMaxLen256",
+    #         status: "START_PENDING", # accepts START_PENDING, STARTING, RUNNING, FINISHING, FINISHED, FAILING, FAILED, STOP_PENDING, STOPPING, STOPPED
+    #         from: Time.now,
+    #         to: Time.now,
+    #         marker: "Marker",
+    #       }
+    #
+    # @!attribute [rw] editor_id
+    #   The unique ID of the editor associated with the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status filter for listing notebook executions.
+    #
+    #   * `START_PENDING` indicates that the cluster has received the
+    #     execution request but execution has not begun.
+    #
+    #   * `STARTING` indicates that the execution is starting on the
+    #     cluster.
+    #
+    #   * `RUNNING` indicates that the execution is being processed by the
+    #     cluster.
+    #
+    #   * `FINISHING` indicates that execution processing is in the final
+    #     stages.
+    #
+    #   * `FINISHED` indicates that the execution has completed without
+    #     error.
+    #
+    #   * `FAILING` indicates that the execution is failing and will not
+    #     finish successfully.
+    #
+    #   * `FAILED` indicates that the execution failed.
+    #
+    #   * `STOP_PENDING` indicates that the cluster has received a
+    #     `StopNotebookExecution` request and the stop is pending.
+    #
+    #   * `STOPPING` indicates that the cluster is in the process of
+    #     stopping the execution as a result of a `StopNotebookExecution`
+    #     request.
+    #
+    #   * `STOPPED` indicates that the execution stopped because of a
+    #     `StopNotebookExecution` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] from
+    #   The beginning of time range filter for listing notebook executions.
+    #   The default is the timestamp of 30 days ago.
+    #   @return [Time]
+    #
+    # @!attribute [rw] to
+    #   The end of time range filter for listing notebook executions. The
+    #   default is the current timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token, returned by a previous
+    #   `ListNotebookExecutions` call, that indicates the start of the list
+    #   for this `ListNotebookExecutions` call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListNotebookExecutionsInput AWS API Documentation
+    #
+    class ListNotebookExecutionsInput < Struct.new(
+      :editor_id,
+      :status,
+      :from,
+      :to,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_executions
+    #   A list of notebook executions.
+    #   @return [Array<Types::NotebookExecutionSummary>]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token that a subsequent `ListNotebookExecutions` can
+    #   use to determine the next set of results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListNotebookExecutionsOutput AWS API Documentation
+    #
+    class ListNotebookExecutionsOutput < Struct.new(
+      :notebook_executions,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSecurityConfigurationsInput
     #   data as a hash:
     #
@@ -4421,6 +4590,191 @@ module Aws::EMR
     class ModifyInstanceGroupsInput < Struct.new(
       :cluster_id,
       :instance_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A notebook execution. An execution is a specific instance that an EMR
+    # Notebook is run using the `StartNotebookExecution` action.
+    #
+    # @!attribute [rw] notebook_execution_id
+    #   The unique identifier of a notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] editor_id
+    #   The unique identifier of the EMR Notebook that is used for the
+    #   notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_engine
+    #   The execution engine, such as an EMR cluster, used to run the EMR
+    #   notebook and perform the notebook execution.
+    #   @return [Types::ExecutionEngineConfig]
+    #
+    # @!attribute [rw] notebook_execution_name
+    #   A name for the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_params
+    #   Input parameters in JSON format passed to the EMR Notebook at
+    #   runtime for execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook execution.
+    #
+    #   * `START_PENDING` indicates that the cluster has received the
+    #     execution request but execution has not begun.
+    #
+    #   * `STARTING` indicates that the execution is starting on the
+    #     cluster.
+    #
+    #   * `RUNNING` indicates that the execution is being processed by the
+    #     cluster.
+    #
+    #   * `FINISHING` indicates that execution processing is in the final
+    #     stages.
+    #
+    #   * `FINISHED` indicates that the execution has completed without
+    #     error.
+    #
+    #   * `FAILING` indicates that the execution is failing and will not
+    #     finish successfully.
+    #
+    #   * `FAILED` indicates that the execution failed.
+    #
+    #   * `STOP_PENDING` indicates that the cluster has received a
+    #     `StopNotebookExecution` request and the stop is pending.
+    #
+    #   * `STOPPING` indicates that the cluster is in the process of
+    #     stopping the execution as a result of a `StopNotebookExecution`
+    #     request.
+    #
+    #   * `STOPPED` indicates that the execution stopped because of a
+    #     `StopNotebookExecution` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when notebook execution started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when notebook execution ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_notebook_uri
+    #   The location of the notebook execution's output file in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_state_change_reason
+    #   The reason for the latest status change of the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_security_group_id
+    #   The unique identifier of the EC2 security group associated with the
+    #   EMR Notebook instance. For more information see [Specifying EC2
+    #   Security Groups for EMR Notebooks][1] in the *EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with a notebook execution. Tags are
+    #   user-defined key value pairs that consist of a required key string
+    #   with a maximum of 128 characters and an optional value string with a
+    #   maximum of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/NotebookExecution AWS API Documentation
+    #
+    class NotebookExecution < Struct.new(
+      :notebook_execution_id,
+      :editor_id,
+      :execution_engine,
+      :notebook_execution_name,
+      :notebook_params,
+      :status,
+      :start_time,
+      :end_time,
+      :arn,
+      :output_notebook_uri,
+      :last_state_change_reason,
+      :notebook_instance_security_group_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_execution_id
+    #   The unique identifier of the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] editor_id
+    #   The unique identifier of the editor associated with the notebook
+    #   execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_execution_name
+    #   The name of the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook execution.
+    #
+    #   * `START_PENDING` indicates that the cluster has received the
+    #     execution request but execution has not begun.
+    #
+    #   * `STARTING` indicates that the execution is starting on the
+    #     cluster.
+    #
+    #   * `RUNNING` indicates that the execution is being processed by the
+    #     cluster.
+    #
+    #   * `FINISHING` indicates that execution processing is in the final
+    #     stages.
+    #
+    #   * `FINISHED` indicates that the execution has completed without
+    #     error.
+    #
+    #   * `FAILING` indicates that the execution is failing and will not
+    #     finish successfully.
+    #
+    #   * `FAILED` indicates that the execution failed.
+    #
+    #   * `STOP_PENDING` indicates that the cluster has received a
+    #     `StopNotebookExecution` request and the stop is pending.
+    #
+    #   * `STOPPING` indicates that the cluster is in the process of
+    #     stopping the execution as a result of a `StopNotebookExecution`
+    #     request.
+    #
+    #   * `STOPPED` indicates that the execution stopped because of a
+    #     `StopNotebookExecution` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when notebook execution started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when notebook execution started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/NotebookExecutionSummary AWS API Documentation
+    #
+    class NotebookExecutionSummary < Struct.new(
+      :notebook_execution_id,
+      :editor_id,
+      :notebook_execution_name,
+      :status,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5774,6 +6128,104 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartNotebookExecutionInput
+    #   data as a hash:
+    #
+    #       {
+    #         editor_id: "XmlStringMaxLen256", # required
+    #         relative_path: "XmlString", # required
+    #         notebook_execution_name: "XmlStringMaxLen256",
+    #         notebook_params: "XmlString",
+    #         execution_engine: { # required
+    #           id: "XmlStringMaxLen256", # required
+    #           type: "EMR", # accepts EMR
+    #           master_instance_security_group_id: "XmlStringMaxLen256",
+    #         },
+    #         service_role: "XmlString", # required
+    #         notebook_instance_security_group_id: "XmlStringMaxLen256",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] editor_id
+    #   The unique identifier of the EMR Notebook to use for notebook
+    #   execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_path
+    #   The path and file name of the notebook file for this execution,
+    #   relative to the path specified for the EMR Notebook. For example, if
+    #   you specify a path of `s3://MyBucket/MyNotebooks` when you create an
+    #   EMR Notebook for a notebook with an ID of
+    #   `e-ABCDEFGHIJK1234567890ABCD` (the `EditorID` of this request), and
+    #   you specify a `RelativePath` of
+    #   `my_notebook_executions/notebook_execution.ipynb`, the location of
+    #   the file for the notebook execution is
+    #   `s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb`.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_execution_name
+    #   An optional name for the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_params
+    #   Input parameters in JSON format passed to the EMR Notebook at
+    #   runtime for execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_engine
+    #   Specifies the execution engine (cluster) that runs the notebook
+    #   execution.
+    #   @return [Types::ExecutionEngineConfig]
+    #
+    # @!attribute [rw] service_role
+    #   The name or ARN of the IAM role that is used as the service role for
+    #   Amazon EMR (the EMR role) for the notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_security_group_id
+    #   The unique identifier of the Amazon EC2 security group to associate
+    #   with the EMR Notebook for this notebook execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with a notebook execution. Tags are
+    #   user-defined key value pairs that consist of a required key string
+    #   with a maximum of 128 characters and an optional value string with a
+    #   maximum of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StartNotebookExecutionInput AWS API Documentation
+    #
+    class StartNotebookExecutionInput < Struct.new(
+      :editor_id,
+      :relative_path,
+      :notebook_execution_name,
+      :notebook_params,
+      :execution_engine,
+      :service_role,
+      :notebook_instance_security_group_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_execution_id
+    #   The unique identifier of the notebook execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StartNotebookExecutionOutput AWS API Documentation
+    #
+    class StartNotebookExecutionOutput < Struct.new(
+      :notebook_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This represents a step in a cluster.
     #
     # @!attribute [rw] id
@@ -6018,6 +6470,25 @@ module Aws::EMR
       :creation_date_time,
       :start_date_time,
       :end_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopNotebookExecutionInput
+    #   data as a hash:
+    #
+    #       {
+    #         notebook_execution_id: "XmlStringMaxLen256", # required
+    #       }
+    #
+    # @!attribute [rw] notebook_execution_id
+    #   The unique identifier of the notebook execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StopNotebookExecutionInput AWS API Documentation
+    #
+    class StopNotebookExecutionInput < Struct.new(
+      :notebook_execution_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -72,6 +72,8 @@ module Aws::CloudFront
     CreateFieldLevelEncryptionProfileResult = Shapes::StructureShape.new(name: 'CreateFieldLevelEncryptionProfileResult')
     CreateInvalidationRequest = Shapes::StructureShape.new(name: 'CreateInvalidationRequest')
     CreateInvalidationResult = Shapes::StructureShape.new(name: 'CreateInvalidationResult')
+    CreateMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateMonitoringSubscriptionRequest')
+    CreateMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'CreateMonitoringSubscriptionResult')
     CreateOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'CreateOriginRequestPolicyRequest')
     CreateOriginRequestPolicyResult = Shapes::StructureShape.new(name: 'CreateOriginRequestPolicyResult')
     CreatePublicKeyRequest = Shapes::StructureShape.new(name: 'CreatePublicKeyRequest')
@@ -91,6 +93,8 @@ module Aws::CloudFront
     DeleteDistributionRequest = Shapes::StructureShape.new(name: 'DeleteDistributionRequest')
     DeleteFieldLevelEncryptionConfigRequest = Shapes::StructureShape.new(name: 'DeleteFieldLevelEncryptionConfigRequest')
     DeleteFieldLevelEncryptionProfileRequest = Shapes::StructureShape.new(name: 'DeleteFieldLevelEncryptionProfileRequest')
+    DeleteMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteMonitoringSubscriptionRequest')
+    DeleteMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteMonitoringSubscriptionResult')
     DeleteOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'DeleteOriginRequestPolicyRequest')
     DeletePublicKeyRequest = Shapes::StructureShape.new(name: 'DeletePublicKeyRequest')
     DeleteStreamingDistributionRequest = Shapes::StructureShape.new(name: 'DeleteStreamingDistributionRequest')
@@ -151,6 +155,8 @@ module Aws::CloudFront
     GetFieldLevelEncryptionResult = Shapes::StructureShape.new(name: 'GetFieldLevelEncryptionResult')
     GetInvalidationRequest = Shapes::StructureShape.new(name: 'GetInvalidationRequest')
     GetInvalidationResult = Shapes::StructureShape.new(name: 'GetInvalidationResult')
+    GetMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'GetMonitoringSubscriptionRequest')
+    GetMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'GetMonitoringSubscriptionResult')
     GetOriginRequestPolicyConfigRequest = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyConfigRequest')
     GetOriginRequestPolicyConfigResult = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyConfigResult')
     GetOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyRequest')
@@ -238,6 +244,7 @@ module Aws::CloudFront
     MethodsList = Shapes::ListShape.new(name: 'MethodsList')
     MinimumProtocolVersion = Shapes::StringShape.new(name: 'MinimumProtocolVersion')
     MissingBody = Shapes::StructureShape.new(name: 'MissingBody')
+    MonitoringSubscription = Shapes::StructureShape.new(name: 'MonitoringSubscription')
     NoSuchCachePolicy = Shapes::StructureShape.new(name: 'NoSuchCachePolicy')
     NoSuchCloudFrontOriginAccessIdentity = Shapes::StructureShape.new(name: 'NoSuchCloudFrontOriginAccessIdentity')
     NoSuchDistribution = Shapes::StructureShape.new(name: 'NoSuchDistribution')
@@ -298,6 +305,8 @@ module Aws::CloudFront
     QueryStringCacheKeysList = Shapes::ListShape.new(name: 'QueryStringCacheKeysList')
     QueryStringNames = Shapes::StructureShape.new(name: 'QueryStringNames')
     QueryStringNamesList = Shapes::ListShape.new(name: 'QueryStringNamesList')
+    RealtimeMetricsSubscriptionConfig = Shapes::StructureShape.new(name: 'RealtimeMetricsSubscriptionConfig')
+    RealtimeMetricsSubscriptionStatus = Shapes::StringShape.new(name: 'RealtimeMetricsSubscriptionStatus')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     Restrictions = Shapes::StructureShape.new(name: 'Restrictions')
     S3Origin = Shapes::StructureShape.new(name: 'S3Origin')
@@ -634,6 +643,17 @@ module Aws::CloudFront
     CreateInvalidationResult[:payload] = :invalidation
     CreateInvalidationResult[:payload_member] = CreateInvalidationResult.member(:invalidation)
 
+    CreateMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
+    CreateMonitoringSubscriptionRequest.add_member(:monitoring_subscription, Shapes::ShapeRef.new(shape: MonitoringSubscription, required: true, location_name: "MonitoringSubscription", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    CreateMonitoringSubscriptionRequest.struct_class = Types::CreateMonitoringSubscriptionRequest
+    CreateMonitoringSubscriptionRequest[:payload] = :monitoring_subscription
+    CreateMonitoringSubscriptionRequest[:payload_member] = CreateMonitoringSubscriptionRequest.member(:monitoring_subscription)
+
+    CreateMonitoringSubscriptionResult.add_member(:monitoring_subscription, Shapes::ShapeRef.new(shape: MonitoringSubscription, location_name: "MonitoringSubscription"))
+    CreateMonitoringSubscriptionResult.struct_class = Types::CreateMonitoringSubscriptionResult
+    CreateMonitoringSubscriptionResult[:payload] = :monitoring_subscription
+    CreateMonitoringSubscriptionResult[:payload_member] = CreateMonitoringSubscriptionResult.member(:monitoring_subscription)
+
     CreateOriginRequestPolicyRequest.add_member(:origin_request_policy_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyConfig, required: true, location_name: "OriginRequestPolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateOriginRequestPolicyRequest.struct_class = Types::CreateOriginRequestPolicyRequest
     CreateOriginRequestPolicyRequest[:payload] = :origin_request_policy_config
@@ -741,6 +761,11 @@ module Aws::CloudFront
     DeleteFieldLevelEncryptionProfileRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteFieldLevelEncryptionProfileRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     DeleteFieldLevelEncryptionProfileRequest.struct_class = Types::DeleteFieldLevelEncryptionProfileRequest
+
+    DeleteMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
+    DeleteMonitoringSubscriptionRequest.struct_class = Types::DeleteMonitoringSubscriptionRequest
+
+    DeleteMonitoringSubscriptionResult.struct_class = Types::DeleteMonitoringSubscriptionResult
 
     DeleteOriginRequestPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteOriginRequestPolicyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -1029,6 +1054,14 @@ module Aws::CloudFront
     GetInvalidationResult.struct_class = Types::GetInvalidationResult
     GetInvalidationResult[:payload] = :invalidation
     GetInvalidationResult[:payload_member] = GetInvalidationResult.member(:invalidation)
+
+    GetMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
+    GetMonitoringSubscriptionRequest.struct_class = Types::GetMonitoringSubscriptionRequest
+
+    GetMonitoringSubscriptionResult.add_member(:monitoring_subscription, Shapes::ShapeRef.new(shape: MonitoringSubscription, location_name: "MonitoringSubscription"))
+    GetMonitoringSubscriptionResult.struct_class = Types::GetMonitoringSubscriptionResult
+    GetMonitoringSubscriptionResult[:payload] = :monitoring_subscription
+    GetMonitoringSubscriptionResult[:payload_member] = GetMonitoringSubscriptionResult.member(:monitoring_subscription)
 
     GetOriginRequestPolicyConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     GetOriginRequestPolicyConfigRequest.struct_class = Types::GetOriginRequestPolicyConfigRequest
@@ -1348,6 +1381,9 @@ module Aws::CloudFront
     MissingBody.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     MissingBody.struct_class = Types::MissingBody
 
+    MonitoringSubscription.add_member(:realtime_metrics_subscription_config, Shapes::ShapeRef.new(shape: RealtimeMetricsSubscriptionConfig, location_name: "RealtimeMetricsSubscriptionConfig"))
+    MonitoringSubscription.struct_class = Types::MonitoringSubscription
+
     NoSuchCachePolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchCachePolicy.struct_class = Types::NoSuchCachePolicy
 
@@ -1547,6 +1583,9 @@ module Aws::CloudFront
     QueryStringNames.struct_class = Types::QueryStringNames
 
     QueryStringNamesList.member = Shapes::ShapeRef.new(shape: string, location_name: "Name")
+
+    RealtimeMetricsSubscriptionConfig.add_member(:realtime_metrics_subscription_status, Shapes::ShapeRef.new(shape: RealtimeMetricsSubscriptionStatus, required: true, location_name: "RealtimeMetricsSubscriptionStatus"))
+    RealtimeMetricsSubscriptionConfig.struct_class = Types::RealtimeMetricsSubscriptionConfig
 
     Restrictions.add_member(:geo_restriction, Shapes::ShapeRef.new(shape: GeoRestriction, required: true, location_name: "GeoRestriction"))
     Restrictions.struct_class = Types::Restrictions
@@ -2093,6 +2132,16 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
       end)
 
+      api.add_operation(:create_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMonitoringSubscription2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
+        o.input = Shapes::ShapeRef.new(shape: CreateMonitoringSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMonitoringSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+      end)
+
       api.add_operation(:create_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOriginRequestPolicy2020_05_31"
         o.http_method = "POST"
@@ -2225,6 +2274,16 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileInUse)
+      end)
+
+      api.add_operation(:delete_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMonitoringSubscription2020_05_31"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMonitoringSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMonitoringSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
       end)
 
       api.add_operation(:delete_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2376,6 +2435,16 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchInvalidation)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
+      api.add_operation(:get_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMonitoringSubscription2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
+        o.input = Shapes::ShapeRef.new(shape: GetMonitoringSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMonitoringSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
       end)
 
       api.add_operation(:get_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|

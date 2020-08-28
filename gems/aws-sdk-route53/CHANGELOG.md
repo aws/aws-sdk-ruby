@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-08-28)
+------------------
+
+* Feature - Documentation updates for Route 53
+
 1.41.0 (2020-08-25)
 ------------------
 
