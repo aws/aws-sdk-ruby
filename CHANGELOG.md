@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.575 (2020-08-28)
+------------------
+
 * Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
 
 * Feature - Aws::CostandUsageReportService - Updated the API, and documentation for AWS Cost and Usage Report Service.
