@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Backup - Updated the documentation for AWS Backup.
+
+* Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SQS - Updated the documentation for Amazon Simple Queue Service.
+
 2.11.575 (2020-08-28)
 ------------------
 
