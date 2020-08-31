@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.576 (2020-08-31)
+------------------
+
 * Feature - Aws::Backup - Updated the documentation for AWS Backup.
 
 * Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
