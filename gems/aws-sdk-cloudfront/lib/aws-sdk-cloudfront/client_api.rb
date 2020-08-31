@@ -78,6 +78,8 @@ module Aws::CloudFront
     CreateOriginRequestPolicyResult = Shapes::StructureShape.new(name: 'CreateOriginRequestPolicyResult')
     CreatePublicKeyRequest = Shapes::StructureShape.new(name: 'CreatePublicKeyRequest')
     CreatePublicKeyResult = Shapes::StructureShape.new(name: 'CreatePublicKeyResult')
+    CreateRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'CreateRealtimeLogConfigRequest')
+    CreateRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'CreateRealtimeLogConfigResult')
     CreateStreamingDistributionRequest = Shapes::StructureShape.new(name: 'CreateStreamingDistributionRequest')
     CreateStreamingDistributionResult = Shapes::StructureShape.new(name: 'CreateStreamingDistributionResult')
     CreateStreamingDistributionWithTagsRequest = Shapes::StructureShape.new(name: 'CreateStreamingDistributionWithTagsRequest')
@@ -97,6 +99,7 @@ module Aws::CloudFront
     DeleteMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteMonitoringSubscriptionResult')
     DeleteOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'DeleteOriginRequestPolicyRequest')
     DeletePublicKeyRequest = Shapes::StructureShape.new(name: 'DeletePublicKeyRequest')
+    DeleteRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'DeleteRealtimeLogConfigRequest')
     DeleteStreamingDistributionRequest = Shapes::StructureShape.new(name: 'DeleteStreamingDistributionRequest')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionAlreadyExists = Shapes::StructureShape.new(name: 'DistributionAlreadyExists')
@@ -111,6 +114,8 @@ module Aws::CloudFront
     EncryptionEntities = Shapes::StructureShape.new(name: 'EncryptionEntities')
     EncryptionEntity = Shapes::StructureShape.new(name: 'EncryptionEntity')
     EncryptionEntityList = Shapes::ListShape.new(name: 'EncryptionEntityList')
+    EndPoint = Shapes::StructureShape.new(name: 'EndPoint')
+    EndPointList = Shapes::ListShape.new(name: 'EndPointList')
     EventType = Shapes::StringShape.new(name: 'EventType')
     FieldLevelEncryption = Shapes::StructureShape.new(name: 'FieldLevelEncryption')
     FieldLevelEncryptionConfig = Shapes::StructureShape.new(name: 'FieldLevelEncryptionConfig')
@@ -127,6 +132,7 @@ module Aws::CloudFront
     FieldLevelEncryptionProfileSummaryList = Shapes::ListShape.new(name: 'FieldLevelEncryptionProfileSummaryList')
     FieldLevelEncryptionSummary = Shapes::StructureShape.new(name: 'FieldLevelEncryptionSummary')
     FieldLevelEncryptionSummaryList = Shapes::ListShape.new(name: 'FieldLevelEncryptionSummaryList')
+    FieldList = Shapes::ListShape.new(name: 'FieldList')
     FieldPatternList = Shapes::ListShape.new(name: 'FieldPatternList')
     FieldPatterns = Shapes::StructureShape.new(name: 'FieldPatterns')
     Format = Shapes::StringShape.new(name: 'Format')
@@ -165,6 +171,8 @@ module Aws::CloudFront
     GetPublicKeyConfigResult = Shapes::StructureShape.new(name: 'GetPublicKeyConfigResult')
     GetPublicKeyRequest = Shapes::StructureShape.new(name: 'GetPublicKeyRequest')
     GetPublicKeyResult = Shapes::StructureShape.new(name: 'GetPublicKeyResult')
+    GetRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'GetRealtimeLogConfigRequest')
+    GetRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'GetRealtimeLogConfigResult')
     GetStreamingDistributionConfigRequest = Shapes::StructureShape.new(name: 'GetStreamingDistributionConfigRequest')
     GetStreamingDistributionConfigResult = Shapes::StructureShape.new(name: 'GetStreamingDistributionConfigResult')
     GetStreamingDistributionRequest = Shapes::StructureShape.new(name: 'GetStreamingDistributionRequest')
@@ -208,6 +216,7 @@ module Aws::CloudFront
     ItemSelection = Shapes::StringShape.new(name: 'ItemSelection')
     KeyPairIdList = Shapes::ListShape.new(name: 'KeyPairIdList')
     KeyPairIds = Shapes::StructureShape.new(name: 'KeyPairIds')
+    KinesisStreamConfig = Shapes::StructureShape.new(name: 'KinesisStreamConfig')
     LambdaFunctionARN = Shapes::StringShape.new(name: 'LambdaFunctionARN')
     LambdaFunctionAssociation = Shapes::StructureShape.new(name: 'LambdaFunctionAssociation')
     LambdaFunctionAssociationList = Shapes::ListShape.new(name: 'LambdaFunctionAssociationList')
@@ -220,6 +229,8 @@ module Aws::CloudFront
     ListDistributionsByCachePolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByCachePolicyIdResult')
     ListDistributionsByOriginRequestPolicyIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByOriginRequestPolicyIdRequest')
     ListDistributionsByOriginRequestPolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByOriginRequestPolicyIdResult')
+    ListDistributionsByRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'ListDistributionsByRealtimeLogConfigRequest')
+    ListDistributionsByRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'ListDistributionsByRealtimeLogConfigResult')
     ListDistributionsByWebACLIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByWebACLIdRequest')
     ListDistributionsByWebACLIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByWebACLIdResult')
     ListDistributionsRequest = Shapes::StructureShape.new(name: 'ListDistributionsRequest')
@@ -234,6 +245,8 @@ module Aws::CloudFront
     ListOriginRequestPoliciesResult = Shapes::StructureShape.new(name: 'ListOriginRequestPoliciesResult')
     ListPublicKeysRequest = Shapes::StructureShape.new(name: 'ListPublicKeysRequest')
     ListPublicKeysResult = Shapes::StructureShape.new(name: 'ListPublicKeysResult')
+    ListRealtimeLogConfigsRequest = Shapes::StructureShape.new(name: 'ListRealtimeLogConfigsRequest')
+    ListRealtimeLogConfigsResult = Shapes::StructureShape.new(name: 'ListRealtimeLogConfigsResult')
     ListStreamingDistributionsRequest = Shapes::StructureShape.new(name: 'ListStreamingDistributionsRequest')
     ListStreamingDistributionsResult = Shapes::StructureShape.new(name: 'ListStreamingDistributionsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -254,6 +267,7 @@ module Aws::CloudFront
     NoSuchOrigin = Shapes::StructureShape.new(name: 'NoSuchOrigin')
     NoSuchOriginRequestPolicy = Shapes::StructureShape.new(name: 'NoSuchOriginRequestPolicy')
     NoSuchPublicKey = Shapes::StructureShape.new(name: 'NoSuchPublicKey')
+    NoSuchRealtimeLogConfig = Shapes::StructureShape.new(name: 'NoSuchRealtimeLogConfig')
     NoSuchResource = Shapes::StructureShape.new(name: 'NoSuchResource')
     NoSuchStreamingDistribution = Shapes::StructureShape.new(name: 'NoSuchStreamingDistribution')
     Origin = Shapes::StructureShape.new(name: 'Origin')
@@ -305,6 +319,11 @@ module Aws::CloudFront
     QueryStringCacheKeysList = Shapes::ListShape.new(name: 'QueryStringCacheKeysList')
     QueryStringNames = Shapes::StructureShape.new(name: 'QueryStringNames')
     QueryStringNamesList = Shapes::ListShape.new(name: 'QueryStringNamesList')
+    RealtimeLogConfig = Shapes::StructureShape.new(name: 'RealtimeLogConfig')
+    RealtimeLogConfigAlreadyExists = Shapes::StructureShape.new(name: 'RealtimeLogConfigAlreadyExists')
+    RealtimeLogConfigInUse = Shapes::StructureShape.new(name: 'RealtimeLogConfigInUse')
+    RealtimeLogConfigList = Shapes::ListShape.new(name: 'RealtimeLogConfigList')
+    RealtimeLogConfigs = Shapes::StructureShape.new(name: 'RealtimeLogConfigs')
     RealtimeMetricsSubscriptionConfig = Shapes::StructureShape.new(name: 'RealtimeMetricsSubscriptionConfig')
     RealtimeMetricsSubscriptionStatus = Shapes::StringShape.new(name: 'RealtimeMetricsSubscriptionStatus')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
@@ -368,6 +387,7 @@ module Aws::CloudFront
     TooManyQueryStringParameters = Shapes::StructureShape.new(name: 'TooManyQueryStringParameters')
     TooManyQueryStringsInCachePolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInCachePolicy')
     TooManyQueryStringsInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInOriginRequestPolicy')
+    TooManyRealtimeLogConfigs = Shapes::StructureShape.new(name: 'TooManyRealtimeLogConfigs')
     TooManyStreamingDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyStreamingDistributionCNAMEs')
     TooManyStreamingDistributions = Shapes::StructureShape.new(name: 'TooManyStreamingDistributions')
     TooManyTrustedSigners = Shapes::StructureShape.new(name: 'TooManyTrustedSigners')
@@ -388,6 +408,8 @@ module Aws::CloudFront
     UpdateOriginRequestPolicyResult = Shapes::StructureShape.new(name: 'UpdateOriginRequestPolicyResult')
     UpdatePublicKeyRequest = Shapes::StructureShape.new(name: 'UpdatePublicKeyRequest')
     UpdatePublicKeyResult = Shapes::StructureShape.new(name: 'UpdatePublicKeyResult')
+    UpdateRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'UpdateRealtimeLogConfigRequest')
+    UpdateRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'UpdateRealtimeLogConfigResult')
     UpdateStreamingDistributionRequest = Shapes::StructureShape.new(name: 'UpdateStreamingDistributionRequest')
     UpdateStreamingDistributionResult = Shapes::StructureShape.new(name: 'UpdateStreamingDistributionResult')
     ViewerCertificate = Shapes::StructureShape.new(name: 'ViewerCertificate')
@@ -440,6 +462,7 @@ module Aws::CloudFront
     CacheBehavior.add_member(:compress, Shapes::ShapeRef.new(shape: boolean, location_name: "Compress"))
     CacheBehavior.add_member(:lambda_function_associations, Shapes::ShapeRef.new(shape: LambdaFunctionAssociations, location_name: "LambdaFunctionAssociations"))
     CacheBehavior.add_member(:field_level_encryption_id, Shapes::ShapeRef.new(shape: string, location_name: "FieldLevelEncryptionId"))
+    CacheBehavior.add_member(:realtime_log_config_arn, Shapes::ShapeRef.new(shape: string, location_name: "RealtimeLogConfigArn"))
     CacheBehavior.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "CachePolicyId"))
     CacheBehavior.add_member(:origin_request_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "OriginRequestPolicyId"))
     CacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, deprecated: true, location_name: "ForwardedValues"))
@@ -678,6 +701,15 @@ module Aws::CloudFront
     CreatePublicKeyResult[:payload] = :public_key
     CreatePublicKeyResult[:payload_member] = CreatePublicKeyResult.member(:public_key)
 
+    CreateRealtimeLogConfigRequest.add_member(:end_points, Shapes::ShapeRef.new(shape: EndPointList, required: true, location_name: "EndPoints"))
+    CreateRealtimeLogConfigRequest.add_member(:fields, Shapes::ShapeRef.new(shape: FieldList, required: true, location_name: "Fields"))
+    CreateRealtimeLogConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
+    CreateRealtimeLogConfigRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: long, required: true, location_name: "SamplingRate"))
+    CreateRealtimeLogConfigRequest.struct_class = Types::CreateRealtimeLogConfigRequest
+
+    CreateRealtimeLogConfigResult.add_member(:realtime_log_config, Shapes::ShapeRef.new(shape: RealtimeLogConfig, location_name: "RealtimeLogConfig"))
+    CreateRealtimeLogConfigResult.struct_class = Types::CreateRealtimeLogConfigResult
+
     CreateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateStreamingDistributionRequest.struct_class = Types::CreateStreamingDistributionRequest
     CreateStreamingDistributionRequest[:payload] = :streaming_distribution_config
@@ -734,6 +766,7 @@ module Aws::CloudFront
     DefaultCacheBehavior.add_member(:compress, Shapes::ShapeRef.new(shape: boolean, location_name: "Compress"))
     DefaultCacheBehavior.add_member(:lambda_function_associations, Shapes::ShapeRef.new(shape: LambdaFunctionAssociations, location_name: "LambdaFunctionAssociations"))
     DefaultCacheBehavior.add_member(:field_level_encryption_id, Shapes::ShapeRef.new(shape: string, location_name: "FieldLevelEncryptionId"))
+    DefaultCacheBehavior.add_member(:realtime_log_config_arn, Shapes::ShapeRef.new(shape: string, location_name: "RealtimeLogConfigArn"))
     DefaultCacheBehavior.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "CachePolicyId"))
     DefaultCacheBehavior.add_member(:origin_request_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "OriginRequestPolicyId"))
     DefaultCacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, deprecated: true, location_name: "ForwardedValues"))
@@ -774,6 +807,10 @@ module Aws::CloudFront
     DeletePublicKeyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeletePublicKeyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     DeletePublicKeyRequest.struct_class = Types::DeletePublicKeyRequest
+
+    DeleteRealtimeLogConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "Name"))
+    DeleteRealtimeLogConfigRequest.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "ARN"))
+    DeleteRealtimeLogConfigRequest.struct_class = Types::DeleteRealtimeLogConfigRequest
 
     DeleteStreamingDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteStreamingDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -872,6 +909,12 @@ module Aws::CloudFront
 
     EncryptionEntityList.member = Shapes::ShapeRef.new(shape: EncryptionEntity, location_name: "EncryptionEntity")
 
+    EndPoint.add_member(:stream_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "StreamType"))
+    EndPoint.add_member(:kinesis_stream_config, Shapes::ShapeRef.new(shape: KinesisStreamConfig, location_name: "KinesisStreamConfig"))
+    EndPoint.struct_class = Types::EndPoint
+
+    EndPointList.member = Shapes::ShapeRef.new(shape: EndPoint)
+
     FieldLevelEncryption.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     FieldLevelEncryption.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
     FieldLevelEncryption.add_member(:field_level_encryption_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfig, required: true, location_name: "FieldLevelEncryptionConfig"))
@@ -938,6 +981,8 @@ module Aws::CloudFront
     FieldLevelEncryptionSummary.struct_class = Types::FieldLevelEncryptionSummary
 
     FieldLevelEncryptionSummaryList.member = Shapes::ShapeRef.new(shape: FieldLevelEncryptionSummary, location_name: "FieldLevelEncryptionSummary")
+
+    FieldList.member = Shapes::ShapeRef.new(shape: string, location_name: "Field")
 
     FieldPatternList.member = Shapes::ShapeRef.new(shape: string, location_name: "FieldPattern")
 
@@ -1099,6 +1144,13 @@ module Aws::CloudFront
     GetPublicKeyResult[:payload] = :public_key
     GetPublicKeyResult[:payload_member] = GetPublicKeyResult.member(:public_key)
 
+    GetRealtimeLogConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "Name"))
+    GetRealtimeLogConfigRequest.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "ARN"))
+    GetRealtimeLogConfigRequest.struct_class = Types::GetRealtimeLogConfigRequest
+
+    GetRealtimeLogConfigResult.add_member(:realtime_log_config, Shapes::ShapeRef.new(shape: RealtimeLogConfig, location_name: "RealtimeLogConfig"))
+    GetRealtimeLogConfigResult.struct_class = Types::GetRealtimeLogConfigResult
+
     GetStreamingDistributionConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     GetStreamingDistributionConfigRequest.struct_class = Types::GetStreamingDistributionConfigRequest
 
@@ -1235,6 +1287,10 @@ module Aws::CloudFront
     KeyPairIds.add_member(:items, Shapes::ShapeRef.new(shape: KeyPairIdList, location_name: "Items"))
     KeyPairIds.struct_class = Types::KeyPairIds
 
+    KinesisStreamConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "RoleARN"))
+    KinesisStreamConfig.add_member(:stream_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "StreamARN"))
+    KinesisStreamConfig.struct_class = Types::KinesisStreamConfig
+
     LambdaFunctionAssociation.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionARN, required: true, location_name: "LambdaFunctionARN"))
     LambdaFunctionAssociation.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "EventType"))
     LambdaFunctionAssociation.add_member(:include_body, Shapes::ShapeRef.new(shape: boolean, location_name: "IncludeBody"))
@@ -1284,6 +1340,17 @@ module Aws::CloudFront
     ListDistributionsByOriginRequestPolicyIdResult.struct_class = Types::ListDistributionsByOriginRequestPolicyIdResult
     ListDistributionsByOriginRequestPolicyIdResult[:payload] = :distribution_id_list
     ListDistributionsByOriginRequestPolicyIdResult[:payload_member] = ListDistributionsByOriginRequestPolicyIdResult.member(:distribution_id_list)
+
+    ListDistributionsByRealtimeLogConfigRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location_name: "Marker"))
+    ListDistributionsByRealtimeLogConfigRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location_name: "MaxItems"))
+    ListDistributionsByRealtimeLogConfigRequest.add_member(:realtime_log_config_name, Shapes::ShapeRef.new(shape: string, location_name: "RealtimeLogConfigName"))
+    ListDistributionsByRealtimeLogConfigRequest.add_member(:realtime_log_config_arn, Shapes::ShapeRef.new(shape: string, location_name: "RealtimeLogConfigArn"))
+    ListDistributionsByRealtimeLogConfigRequest.struct_class = Types::ListDistributionsByRealtimeLogConfigRequest
+
+    ListDistributionsByRealtimeLogConfigResult.add_member(:distribution_list, Shapes::ShapeRef.new(shape: DistributionList, location_name: "DistributionList"))
+    ListDistributionsByRealtimeLogConfigResult.struct_class = Types::ListDistributionsByRealtimeLogConfigResult
+    ListDistributionsByRealtimeLogConfigResult[:payload] = :distribution_list
+    ListDistributionsByRealtimeLogConfigResult[:payload_member] = ListDistributionsByRealtimeLogConfigResult.member(:distribution_list)
 
     ListDistributionsByWebACLIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListDistributionsByWebACLIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
@@ -1351,6 +1418,15 @@ module Aws::CloudFront
     ListPublicKeysResult[:payload] = :public_key_list
     ListPublicKeysResult[:payload_member] = ListPublicKeysResult.member(:public_key_list)
 
+    ListRealtimeLogConfigsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListRealtimeLogConfigsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListRealtimeLogConfigsRequest.struct_class = Types::ListRealtimeLogConfigsRequest
+
+    ListRealtimeLogConfigsResult.add_member(:realtime_log_configs, Shapes::ShapeRef.new(shape: RealtimeLogConfigs, location_name: "RealtimeLogConfigs"))
+    ListRealtimeLogConfigsResult.struct_class = Types::ListRealtimeLogConfigsResult
+    ListRealtimeLogConfigsResult[:payload] = :realtime_log_configs
+    ListRealtimeLogConfigsResult[:payload_member] = ListRealtimeLogConfigsResult.member(:realtime_log_configs)
+
     ListStreamingDistributionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListStreamingDistributionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
     ListStreamingDistributionsRequest.struct_class = Types::ListStreamingDistributionsRequest
@@ -1410,6 +1486,9 @@ module Aws::CloudFront
 
     NoSuchPublicKey.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchPublicKey.struct_class = Types::NoSuchPublicKey
+
+    NoSuchRealtimeLogConfig.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchRealtimeLogConfig.struct_class = Types::NoSuchRealtimeLogConfig
 
     NoSuchResource.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchResource.struct_class = Types::NoSuchResource
@@ -1583,6 +1662,28 @@ module Aws::CloudFront
     QueryStringNames.struct_class = Types::QueryStringNames
 
     QueryStringNamesList.member = Shapes::ShapeRef.new(shape: string, location_name: "Name")
+
+    RealtimeLogConfig.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
+    RealtimeLogConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
+    RealtimeLogConfig.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: long, required: true, location_name: "SamplingRate"))
+    RealtimeLogConfig.add_member(:end_points, Shapes::ShapeRef.new(shape: EndPointList, required: true, location_name: "EndPoints"))
+    RealtimeLogConfig.add_member(:fields, Shapes::ShapeRef.new(shape: FieldList, required: true, location_name: "Fields"))
+    RealtimeLogConfig.struct_class = Types::RealtimeLogConfig
+
+    RealtimeLogConfigAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    RealtimeLogConfigAlreadyExists.struct_class = Types::RealtimeLogConfigAlreadyExists
+
+    RealtimeLogConfigInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    RealtimeLogConfigInUse.struct_class = Types::RealtimeLogConfigInUse
+
+    RealtimeLogConfigList.member = Shapes::ShapeRef.new(shape: RealtimeLogConfig)
+
+    RealtimeLogConfigs.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
+    RealtimeLogConfigs.add_member(:items, Shapes::ShapeRef.new(shape: RealtimeLogConfigList, location_name: "Items"))
+    RealtimeLogConfigs.add_member(:is_truncated, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "IsTruncated"))
+    RealtimeLogConfigs.add_member(:marker, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Marker"))
+    RealtimeLogConfigs.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    RealtimeLogConfigs.struct_class = Types::RealtimeLogConfigs
 
     RealtimeMetricsSubscriptionConfig.add_member(:realtime_metrics_subscription_status, Shapes::ShapeRef.new(shape: RealtimeMetricsSubscriptionStatus, required: true, location_name: "RealtimeMetricsSubscriptionStatus"))
     RealtimeMetricsSubscriptionConfig.struct_class = Types::RealtimeMetricsSubscriptionConfig
@@ -1787,6 +1888,9 @@ module Aws::CloudFront
     TooManyQueryStringsInOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyQueryStringsInOriginRequestPolicy.struct_class = Types::TooManyQueryStringsInOriginRequestPolicy
 
+    TooManyRealtimeLogConfigs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyRealtimeLogConfigs.struct_class = Types::TooManyRealtimeLogConfigs
+
     TooManyStreamingDistributionCNAMEs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyStreamingDistributionCNAMEs.struct_class = Types::TooManyStreamingDistributionCNAMEs
 
@@ -1900,6 +2004,16 @@ module Aws::CloudFront
     UpdatePublicKeyResult.struct_class = Types::UpdatePublicKeyResult
     UpdatePublicKeyResult[:payload] = :public_key
     UpdatePublicKeyResult[:payload_member] = UpdatePublicKeyResult.member(:public_key)
+
+    UpdateRealtimeLogConfigRequest.add_member(:end_points, Shapes::ShapeRef.new(shape: EndPointList, location_name: "EndPoints"))
+    UpdateRealtimeLogConfigRequest.add_member(:fields, Shapes::ShapeRef.new(shape: FieldList, location_name: "Fields"))
+    UpdateRealtimeLogConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "Name"))
+    UpdateRealtimeLogConfigRequest.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "ARN"))
+    UpdateRealtimeLogConfigRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: long, location_name: "SamplingRate"))
+    UpdateRealtimeLogConfigRequest.struct_class = Types::UpdateRealtimeLogConfigRequest
+
+    UpdateRealtimeLogConfigResult.add_member(:realtime_log_config, Shapes::ShapeRef.new(shape: RealtimeLogConfig, location_name: "RealtimeLogConfig"))
+    UpdateRealtimeLogConfigResult.struct_class = Types::UpdateRealtimeLogConfigResult
 
     UpdateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateStreamingDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
@@ -2169,6 +2283,22 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeys)
       end)
 
+      api.add_operation(:create_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRealtimeLogConfig2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/realtime-log-config"
+        o.input = Shapes::ShapeRef.new(shape: CreateRealtimeLogConfigRequest,
+          location_name: "CreateRealtimeLogConfigRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateRealtimeLogConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRealtimeLogConfigs)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateStreamingDistribution2020_05_31"
         o.http_method = "POST"
@@ -2311,6 +2441,22 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+      end)
+
+      api.add_operation(:delete_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRealtimeLogConfig2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/delete-realtime-log-config/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRealtimeLogConfigRequest,
+          location_name: "DeleteRealtimeLogConfigRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigInUse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -2487,6 +2633,21 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
       end)
 
+      api.add_operation(:get_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRealtimeLogConfig2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/get-realtime-log-config/"
+        o.input = Shapes::ShapeRef.new(shape: GetRealtimeLogConfigRequest,
+          location_name: "GetRealtimeLogConfigRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: GetRealtimeLogConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
       api.add_operation(:get_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStreamingDistribution2020_05_31"
         o.http_method = "GET"
@@ -2572,6 +2733,20 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
+      api.add_operation(:list_distributions_by_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDistributionsByRealtimeLogConfig2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/distributionsByRealtimeLogConfig/"
+        o.input = Shapes::ShapeRef.new(shape: ListDistributionsByRealtimeLogConfigRequest,
+          location_name: "ListDistributionsByRealtimeLogConfigRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: ListDistributionsByRealtimeLogConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
       api.add_operation(:list_distributions_by_web_acl_id, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDistributionsByWebACLId2020_05_31"
         o.http_method = "GET"
@@ -2636,6 +2811,14 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: ListPublicKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPublicKeysResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
+      api.add_operation(:list_realtime_log_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRealtimeLogConfigs2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/realtime-log-config"
+        o.input = Shapes::ShapeRef.new(shape: ListRealtimeLogConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRealtimeLogConfigsResult)
       end)
 
       api.add_operation(:list_streaming_distributions, Seahorse::Model::Operation.new.tap do |o|
@@ -2853,6 +3036,21 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+      end)
+
+      api.add_operation(:update_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRealtimeLogConfig2020_05_31"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-05-31/realtime-log-config/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRealtimeLogConfigRequest,
+          location_name: "UpdateRealtimeLogConfigRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: UpdateRealtimeLogConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|

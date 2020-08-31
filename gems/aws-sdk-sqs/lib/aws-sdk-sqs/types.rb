@@ -268,7 +268,7 @@ module Aws::SQS
     #
     # @!attribute [rw] visibility_timeout
     #   The new value for the message's visibility timeout (in seconds).
-    #   Values values: `0` to `43200`. Maximum: 12 hours.
+    #   Values range: `0` to `43200`. Maximum: 12 hours.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityRequest AWS API Documentation
@@ -911,7 +911,9 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to include in the response.
+    #   Maximum number of results to include in the response. Value range is
+    #   1 to 1000. You must set `MaxResults` to receive a value for
+    #   `NextToken` in the response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesRequest AWS API Documentation
@@ -932,7 +934,9 @@ module Aws::SQS
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token to include in the next request.
+    #   Pagination token to include in the next request. Token value is
+    #   `null` if there are no additional results to request, or if you did
+    #   not set `MaxResults` in the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesResult AWS API Documentation
@@ -996,7 +1000,9 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to include in the response.
+    #   Maximum number of results to include in the response. Value range is
+    #   1 to 1000. You must set `MaxResults` to receive a value for
+    #   `NextToken` in the response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesRequest AWS API Documentation
@@ -1017,7 +1023,9 @@ module Aws::SQS
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token to include in the next request.
+    #   Pagination token to include in the next request. Token value is
+    #   `null` if there are no additional results to request, or if you did
+    #   not set `MaxResults` in the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesResult AWS API Documentation
@@ -1097,7 +1105,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/Message AWS API Documentation
@@ -1167,7 +1175,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/MessageAttributeValue AWS API Documentation
@@ -1239,7 +1247,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/MessageSystemAttributeValue AWS API Documentation
@@ -1681,7 +1689,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] message_system_attributes
@@ -1940,7 +1948,8 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] message_body
-    #   The message to send. The maximum string size is 256 KB.
+    #   The message to send. The minimum size is one character. The maximum
+    #   size is 256 KB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
     #   following Unicode characters are allowed:
@@ -1976,7 +1985,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] message_system_attributes

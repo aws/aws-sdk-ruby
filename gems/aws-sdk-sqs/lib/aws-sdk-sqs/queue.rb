@@ -410,7 +410,8 @@ module Aws::SQS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :message_body
-    #   The message to send. The maximum string size is 256 KB.
+    #   The message to send. The minimum size is one character. The maximum
+    #   size is 256 KB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
     #   following Unicode characters are allowed:
@@ -442,7 +443,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     # @option options [Hash<String,Types::MessageSystemAttributeValue>] :message_system_attributes
     #   The message system attribute to send. Each message system attribute
     #   consists of a `Name`, `Type`, and `Value`.

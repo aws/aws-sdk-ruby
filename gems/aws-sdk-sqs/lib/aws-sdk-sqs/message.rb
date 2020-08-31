@@ -109,7 +109,7 @@ module Aws::SQS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     # @return [Hash<String,Types::MessageAttributeValue>]
     def message_attributes
       data[:message_attributes]
@@ -155,7 +155,7 @@ module Aws::SQS
     # @param [Hash] options ({})
     # @option options [required, Integer] :visibility_timeout
     #   The new value for the message's visibility timeout (in seconds).
-    #   Values values: `0` to `43200`. Maximum: 12 hours.
+    #   Values range: `0` to `43200`. Maximum: 12 hours.
     # @return [EmptyStructure]
     def change_visibility(options = {})
       options = options.merge(

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.192.0 (2020-08-31)
+------------------
+
+* Feature - Amazon EC2 and Spot Fleet now support modification of launch template configs for a running fleet enabling instance type, instance weight, AZ, and AMI updates without losing the current fleet ID.
+
 1.191.0 (2020-08-27)
 ------------------
 

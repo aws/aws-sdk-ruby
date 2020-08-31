@@ -517,7 +517,7 @@ module Aws::SQS
     #
     # @option params [required, Integer] :visibility_timeout
     #   The new value for the message's visibility timeout (in seconds).
-    #   Values values: `0` to `43200`. Maximum: 12 hours.
+    #   Values range: `0` to `43200`. Maximum: 12 hours.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1237,6 +1237,15 @@ module Aws::SQS
     # Returns a list of your queues that have the `RedrivePolicy` queue
     # attribute configured with a dead-letter queue.
     #
+    # The `ListDeadLetterSourceQueues` methods supports pagination. Set
+    # parameter `MaxResults` in the request to specify the maximum number of
+    # results to be returned in the response. If you do not set
+    # `MaxResults`, the response includes a maximum of 1,000 results. If you
+    # set `MaxResults` and there are additional results to display, the
+    # response includes a value for `NextToken`. Use `NextToken` as a
+    # parameter in your next request to `ListDeadLetterSourceQueues` to
+    # receive the next page of results.
+    #
     # For more information about using dead-letter queues, see [Using Amazon
     # SQS Dead-Letter Queues][1] in the *Amazon Simple Queue Service
     # Developer Guide*.
@@ -1254,7 +1263,9 @@ module Aws::SQS
     #   Pagination token to request the next set of results.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to include in the response.
+    #   Maximum number of results to include in the response. Value range is 1
+    #   to 1000. You must set `MaxResults` to receive a value for `NextToken`
+    #   in the response.
     #
     # @return [Types::ListDeadLetterSourceQueuesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1328,10 +1339,18 @@ module Aws::SQS
       req.send_request(options)
     end
 
-    # Returns a list of your queues. The maximum number of queues that can
-    # be returned is 1,000. If you specify a value for the optional
-    # `QueueNamePrefix` parameter, only queues with a name that begins with
-    # the specified value are returned.
+    # Returns a list of your queues in the current region. The response
+    # includes a maximum of 1,000 results. If you specify a value for the
+    # optional `QueueNamePrefix` parameter, only queues with a name that
+    # begins with the specified value are returned.
+    #
+    # The `listQueues` methods supports pagination. Set parameter
+    # `MaxResults` in the request to specify the maximum number of results
+    # to be returned in the response. If you do not set `MaxResults`, the
+    # response includes a maximum of 1,000 results. If you set `MaxResults`
+    # and there are additional results to display, the response includes a
+    # value for `NextToken`. Use `NextToken` as a parameter in your next
+    # request to `listQueues` to receive the next page of results.
     #
     # <note markdown="1"> Cross-account permissions don't apply to this action. For more
     # information, see [Grant Cross-Account Permissions to a Role and a User
@@ -1353,7 +1372,9 @@ module Aws::SQS
     #   Pagination token to request the next set of results.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to include in the response.
+    #   Maximum number of results to include in the response. Value range is 1
+    #   to 1000. You must set `MaxResults` to receive a value for `NextToken`
+    #   in the response.
     #
     # @return [Types::ListQueuesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1749,7 +1770,8 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #
     # @option params [required, String] :message_body
-    #   The message to send. The maximum string size is 256 KB.
+    #   The message to send. The minimum size is one character. The maximum
+    #   size is 256 KB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
     #   following Unicode characters are allowed:
@@ -1783,7 +1805,7 @@ module Aws::SQS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
     #
     # @option params [Hash<String,Types::MessageSystemAttributeValue>] :message_system_attributes
     #   The message system attribute to send. Each message system attribute
@@ -2331,7 +2353,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

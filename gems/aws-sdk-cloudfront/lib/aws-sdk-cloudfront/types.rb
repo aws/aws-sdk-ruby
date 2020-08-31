@@ -308,6 +308,7 @@ module Aws::CloudFront
     #           ],
     #         },
     #         field_level_encryption_id: "string",
+    #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
     #         origin_request_policy_id: "string",
     #         forwarded_values: {
@@ -475,6 +476,16 @@ module Aws::CloudFront
     #   for this cache behavior.
     #   @return [String]
     #
+    # @!attribute [rw] realtime_log_config_arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration
+    #   that is attached to this cache behavior. For more information, see
+    #   [Real-time logs][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html
+    #   @return [String]
+    #
     # @!attribute [rw] cache_policy_id
     #   The unique identifier of the cache policy that is attached to this
     #   cache behavior. For more information, see [Creating cache
@@ -606,6 +617,7 @@ module Aws::CloudFront
       :compress,
       :lambda_function_associations,
       :field_level_encryption_id,
+      :realtime_log_config_arn,
       :cache_policy_id,
       :origin_request_policy_id,
       :forwarded_values,
@@ -654,6 +666,7 @@ module Aws::CloudFront
     #               ],
     #             },
     #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
     #             forwarded_values: {
@@ -1823,6 +1836,7 @@ module Aws::CloudFront
     #               ],
     #             },
     #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
     #             forwarded_values: {
@@ -1880,6 +1894,7 @@ module Aws::CloudFront
     #                   ],
     #                 },
     #                 field_level_encryption_id: "string",
+    #                 realtime_log_config_arn: "string",
     #                 cache_policy_id: "string",
     #                 origin_request_policy_id: "string",
     #                 forwarded_values: {
@@ -1930,7 +1945,7 @@ module Aws::CloudFront
     #             cloud_front_default_certificate: false,
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
-    #             ssl_support_method: "sni-only", # accepts sni-only, vip
+    #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -2085,6 +2100,7 @@ module Aws::CloudFront
     #                 ],
     #               },
     #               field_level_encryption_id: "string",
+    #               realtime_log_config_arn: "string",
     #               cache_policy_id: "string",
     #               origin_request_policy_id: "string",
     #               forwarded_values: {
@@ -2142,6 +2158,7 @@ module Aws::CloudFront
     #                     ],
     #                   },
     #                   field_level_encryption_id: "string",
+    #                   realtime_log_config_arn: "string",
     #                   cache_policy_id: "string",
     #                   origin_request_policy_id: "string",
     #                   forwarded_values: {
@@ -2192,7 +2209,7 @@ module Aws::CloudFront
     #               cloud_front_default_certificate: false,
     #               iam_certificate_id: "string",
     #               acm_certificate_arn: "string",
-    #               ssl_support_method: "sni-only", # accepts sni-only, vip
+    #               ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #               certificate: "string",
     #               certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -2592,6 +2609,74 @@ module Aws::CloudFront
       :public_key,
       :location,
       :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRealtimeLogConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         end_points: [ # required
+    #           {
+    #             stream_type: "string", # required
+    #             kinesis_stream_config: {
+    #               role_arn: "string", # required
+    #               stream_arn: "string", # required
+    #             },
+    #           },
+    #         ],
+    #         fields: ["string"], # required
+    #         name: "string", # required
+    #         sampling_rate: 1, # required
+    #       }
+    #
+    # @!attribute [rw] end_points
+    #   Contains information about the Amazon Kinesis data stream where you
+    #   are sending real-time log data.
+    #   @return [Array<Types::EndPoint>]
+    #
+    # @!attribute [rw] fields
+    #   A list of fields to include in each real-time log record.
+    #
+    #   For more information about fields, see [Real-time log configuration
+    #   fields][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   A unique name to identify this real-time log configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] sampling_rate
+    #   The sampling rate for this real-time log configuration. The sampling
+    #   rate determines the percentage of viewer requests that are
+    #   represented in the real-time log data. You must provide an integer
+    #   between 1 and 100, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateRealtimeLogConfigRequest AWS API Documentation
+    #
+    class CreateRealtimeLogConfigRequest < Struct.new(
+      :end_points,
+      :fields,
+      :name,
+      :sampling_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] realtime_log_config
+    #   A real-time log configuration.
+    #   @return [Types::RealtimeLogConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateRealtimeLogConfigResult AWS API Documentation
+    #
+    class CreateRealtimeLogConfigResult < Struct.new(
+      :realtime_log_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3077,6 +3162,7 @@ module Aws::CloudFront
     #           ],
     #         },
     #         field_level_encryption_id: "string",
+    #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
     #         origin_request_policy_id: "string",
     #         forwarded_values: {
@@ -3219,6 +3305,16 @@ module Aws::CloudFront
     #   for the default cache behavior.
     #   @return [String]
     #
+    # @!attribute [rw] realtime_log_config_arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration
+    #   that is attached to this cache behavior. For more information, see
+    #   [Real-time logs][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html
+    #   @return [String]
+    #
     # @!attribute [rw] cache_policy_id
     #   The unique identifier of the cache policy that is attached to the
     #   default cache behavior. For more information, see [Creating cache
@@ -3349,6 +3445,7 @@ module Aws::CloudFront
       :compress,
       :lambda_function_associations,
       :field_level_encryption_id,
+      :realtime_log_config_arn,
       :cache_policy_id,
       :origin_request_policy_id,
       :forwarded_values,
@@ -3616,6 +3713,32 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteRealtimeLogConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string",
+    #         arn: "string",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the real-time log configuration to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteRealtimeLogConfigRequest AWS API Documentation
+    #
+    class DeleteRealtimeLogConfigRequest < Struct.new(
+      :name,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to delete a streaming distribution.
     #
     # @note When making an API call, you may pass DeleteStreamingDistributionRequest
@@ -3837,6 +3960,7 @@ module Aws::CloudFront
     #             ],
     #           },
     #           field_level_encryption_id: "string",
+    #           realtime_log_config_arn: "string",
     #           cache_policy_id: "string",
     #           origin_request_policy_id: "string",
     #           forwarded_values: {
@@ -3894,6 +4018,7 @@ module Aws::CloudFront
     #                 ],
     #               },
     #               field_level_encryption_id: "string",
+    #               realtime_log_config_arn: "string",
     #               cache_policy_id: "string",
     #               origin_request_policy_id: "string",
     #               forwarded_values: {
@@ -3944,7 +4069,7 @@ module Aws::CloudFront
     #           cloud_front_default_certificate: false,
     #           iam_certificate_id: "string",
     #           acm_certificate_arn: "string",
-    #           ssl_support_method: "sni-only", # accepts sni-only, vip
+    #           ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #           certificate: "string",
     #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -4318,6 +4443,7 @@ module Aws::CloudFront
     #               ],
     #             },
     #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
     #             forwarded_values: {
@@ -4375,6 +4501,7 @@ module Aws::CloudFront
     #                   ],
     #                 },
     #                 field_level_encryption_id: "string",
+    #                 realtime_log_config_arn: "string",
     #                 cache_policy_id: "string",
     #                 origin_request_policy_id: "string",
     #                 forwarded_values: {
@@ -4425,7 +4552,7 @@ module Aws::CloudFront
     #             cloud_front_default_certificate: false,
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
-    #             ssl_support_method: "sni-only", # accepts sni-only, vip
+    #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -4793,6 +4920,39 @@ module Aws::CloudFront
       :public_key_id,
       :provider_id,
       :field_patterns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the Amazon Kinesis data stream where you
+    # are sending real-time log data in a real-time log configuration.
+    #
+    # @note When making an API call, you may pass EndPoint
+    #   data as a hash:
+    #
+    #       {
+    #         stream_type: "string", # required
+    #         kinesis_stream_config: {
+    #           role_arn: "string", # required
+    #           stream_arn: "string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stream_type
+    #   The type of data stream where you are sending real-time log data.
+    #   The only valid value is `Kinesis`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_config
+    #   Contains information about the Amazon Kinesis data stream where you
+    #   are sending real-time log data.
+    #   @return [Types::KinesisStreamConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EndPoint AWS API Documentation
+    #
+    class EndPoint < Struct.new(
+      :stream_type,
+      :kinesis_stream_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6076,6 +6236,44 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetRealtimeLogConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string",
+    #         arn: "string",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the real-time log configuration to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration to
+    #   get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetRealtimeLogConfigRequest AWS API Documentation
+    #
+    class GetRealtimeLogConfigRequest < Struct.new(
+      :name,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] realtime_log_config
+    #   A real-time log configuration.
+    #   @return [Types::RealtimeLogConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetRealtimeLogConfigResult AWS API Documentation
+    #
+    class GetRealtimeLogConfigResult < Struct.new(
+      :realtime_log_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # To request to get a streaming distribution configuration.
     #
     # @note When making an API call, you may pass GetStreamingDistributionConfigRequest
@@ -6752,6 +6950,44 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # Contains information about the Amazon Kinesis data stream where you
+    # are sending real-time log data.
+    #
+    # @note When making an API call, you may pass KinesisStreamConfig
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "string", # required
+    #         stream_arn: "string", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that CloudFront can use to send real-time log
+    #   data to your Kinesis data stream.
+    #
+    #   For more information the IAM role, see [Real-time log configuration
+    #   IAM role][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis data stream where you
+    #   are sending real-time log data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KinesisStreamConfig AWS API Documentation
+    #
+    class KinesisStreamConfig < Struct.new(
+      :role_arn,
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that contains a Lambda function association.
     #
     # @note When making an API call, you may pass LambdaFunctionAssociation
@@ -7054,6 +7290,61 @@ module Aws::CloudFront
     #
     class ListDistributionsByOriginRequestPolicyIdResult < Struct.new(
       :distribution_id_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDistributionsByRealtimeLogConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #         realtime_log_config_name: "string",
+    #         realtime_log_config_arn: "string",
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distributions. The response includes distributions in
+    #   the list that occur after the marker. To get the next page of the
+    #   list, set this field’s value to the value of `NextMarker` from the
+    #   current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distributions that you want in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] realtime_log_config_name
+    #   The name of the real-time log configuration whose associated
+    #   distributions you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] realtime_log_config_arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration
+    #   whose associated distributions you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByRealtimeLogConfigRequest AWS API Documentation
+    #
+    class ListDistributionsByRealtimeLogConfigRequest < Struct.new(
+      :marker,
+      :max_items,
+      :realtime_log_config_name,
+      :realtime_log_config_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_list
+    #   A distribution list.
+    #   @return [Types::DistributionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByRealtimeLogConfigResult AWS API Documentation
+    #
+    class ListDistributionsByRealtimeLogConfigResult < Struct.new(
+      :distribution_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7402,6 +7693,48 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRealtimeLogConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_items: 1,
+    #         marker: "string",
+    #       }
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of real-time log configurations that you want in
+    #   the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of real-time log configurations. The response includes
+    #   real-time log configurations in the list that occur after the
+    #   marker. To get the next page of the list, set this field’s value to
+    #   the value of `NextMarker` from the current page’s response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListRealtimeLogConfigsRequest AWS API Documentation
+    #
+    class ListRealtimeLogConfigsRequest < Struct.new(
+      :max_items,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] realtime_log_configs
+    #   A list of real-time log configurations.
+    #   @return [Types::RealtimeLogConfigs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListRealtimeLogConfigsResult AWS API Documentation
+    #
+    class ListRealtimeLogConfigsResult < Struct.new(
+      :realtime_log_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to list your streaming distributions.
     #
     # @note When making an API call, you may pass ListStreamingDistributionsRequest
@@ -7686,6 +8019,19 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchPublicKey AWS API Documentation
     #
     class NoSuchPublicKey < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The real-time log configuration does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchRealtimeLogConfig AWS API Documentation
+    #
+    class NoSuchRealtimeLogConfig < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9047,6 +9393,122 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A real-time log configuration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this real-time log configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name of this real-time log configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] sampling_rate
+    #   The sampling rate for this real-time log configuration. The sampling
+    #   rate determines the percentage of viewer requests that are
+    #   represented in the real-time log data. The sampling rate is an
+    #   integer between 1 and 100, inclusive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_points
+    #   Contains information about the Amazon Kinesis data stream where you
+    #   are sending real-time log data for this real-time log configuration.
+    #   @return [Array<Types::EndPoint>]
+    #
+    # @!attribute [rw] fields
+    #   A list of fields that are included in each real-time log record. In
+    #   an API response, the fields are provided in the same order in which
+    #   they are sent to the Amazon Kinesis data stream.
+    #
+    #   For more information about fields, see [Real-time log configuration
+    #   fields][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeLogConfig AWS API Documentation
+    #
+    class RealtimeLogConfig < Struct.new(
+      :arn,
+      :name,
+      :sampling_rate,
+      :end_points,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A real-time log configuration with this name already exists. You must
+    # provide a unique name. To modify an existing real-time log
+    # configuration, use `UpdateRealtimeLogConfig`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeLogConfigAlreadyExists AWS API Documentation
+    #
+    class RealtimeLogConfigAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cannot delete the real-time log configuration because it is attached
+    # to one or more cache behaviors.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeLogConfigInUse AWS API Documentation
+    #
+    class RealtimeLogConfigInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of real-time log configurations.
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of real-time log configurations requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the list of real-time log configurations.
+    #   @return [Array<Types::RealtimeLogConfig>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more real-time log
+    #   configurations than are contained in this list.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   This parameter indicates where this list of real-time log
+    #   configurations begins. This list includes real-time log
+    #   configurations that occur after the marker.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value that you should use in the
+    #   `Marker` field of a subsequent request to continue listing real-time
+    #   log configurations where you left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeLogConfigs AWS API Documentation
+    #
+    class RealtimeLogConfigs < Struct.new(
+      :max_items,
+      :items,
+      :is_truncated,
+      :marker,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A subscription configuration for additional CloudWatch metrics.
     #
     # @note When making an API call, you may pass RealtimeMetricsSubscriptionConfig
@@ -10318,6 +10780,25 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # You have reached the maximum number of real-time log configurations
+    # for this AWS account. For more information, see [Quotas][1] (formerly
+    # known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyRealtimeLogConfigs AWS API Documentation
+    #
+    class TooManyRealtimeLogConfigs < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request contains more CNAMEs than are allowed per distribution.
     #
     # @!attribute [rw] message
@@ -10699,6 +11180,7 @@ module Aws::CloudFront
     #               ],
     #             },
     #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
     #             forwarded_values: {
@@ -10756,6 +11238,7 @@ module Aws::CloudFront
     #                   ],
     #                 },
     #                 field_level_encryption_id: "string",
+    #                 realtime_log_config_arn: "string",
     #                 cache_policy_id: "string",
     #                 origin_request_policy_id: "string",
     #                 forwarded_values: {
@@ -10806,7 +11289,7 @@ module Aws::CloudFront
     #             cloud_front_default_certificate: false,
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
-    #             ssl_support_method: "sni-only", # accepts sni-only, vip
+    #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -11145,6 +11628,80 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateRealtimeLogConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         end_points: [
+    #           {
+    #             stream_type: "string", # required
+    #             kinesis_stream_config: {
+    #               role_arn: "string", # required
+    #               stream_arn: "string", # required
+    #             },
+    #           },
+    #         ],
+    #         fields: ["string"],
+    #         name: "string",
+    #         arn: "string",
+    #         sampling_rate: 1,
+    #       }
+    #
+    # @!attribute [rw] end_points
+    #   Contains information about the Amazon Kinesis data stream where you
+    #   are sending real-time log data.
+    #   @return [Array<Types::EndPoint>]
+    #
+    # @!attribute [rw] fields
+    #   A list of fields to include in each real-time log record.
+    #
+    #   For more information about fields, see [Real-time log configuration
+    #   fields][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name for this real-time log configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for this real-time log configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] sampling_rate
+    #   The sampling rate for this real-time log configuration. The sampling
+    #   rate determines the percentage of viewer requests that are
+    #   represented in the real-time log data. You must provide an integer
+    #   between 1 and 100, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateRealtimeLogConfigRequest AWS API Documentation
+    #
+    class UpdateRealtimeLogConfigRequest < Struct.new(
+      :end_points,
+      :fields,
+      :name,
+      :arn,
+      :sampling_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] realtime_log_config
+    #   A real-time log configuration.
+    #   @return [Types::RealtimeLogConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateRealtimeLogConfigResult AWS API Documentation
+    #
+    class UpdateRealtimeLogConfigResult < Struct.new(
+      :realtime_log_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to update a streaming distribution.
     #
     # @note When making an API call, you may pass UpdateStreamingDistributionRequest
@@ -11289,7 +11846,7 @@ module Aws::CloudFront
     #         cloud_front_default_certificate: false,
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
-    #         ssl_support_method: "sni-only", # accepts sni-only, vip
+    #         ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -11354,12 +11911,19 @@ module Aws::CloudFront
     #     recommended, and results in additional monthly charges from
     #     CloudFront.
     #
+    #   * `static-ip` - Do not specify this value unless your distribution
+    #     has been enabled for this feature by the CloudFront team. If you
+    #     have a use case that requires static IP addresses for a
+    #     distribution, contact CloudFront through the [AWS Support
+    #     Center][2].
+    #
     #   If the distribution uses the CloudFront domain name such as
     #   `d111111abcdef8.cloudfront.net`, don’t set a value for this field.
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Server_Name_Indication
+    #   [2]: https://console.aws.amazon.com/support/home
     #   @return [String]
     #
     # @!attribute [rw] minimum_protocol_version

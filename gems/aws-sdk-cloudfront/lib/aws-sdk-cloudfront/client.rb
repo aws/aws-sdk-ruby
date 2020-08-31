@@ -606,6 +606,7 @@ module Aws::CloudFront
     #           ],
     #         },
     #         field_level_encryption_id: "string",
+    #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
     #         origin_request_policy_id: "string",
     #         forwarded_values: {
@@ -663,6 +664,7 @@ module Aws::CloudFront
     #               ],
     #             },
     #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
     #             forwarded_values: {
@@ -713,7 +715,7 @@ module Aws::CloudFront
     #         cloud_front_default_certificate: false,
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
-    #         ssl_support_method: "sni-only", # accepts sni-only, vip
+    #         ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -800,6 +802,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
@@ -839,6 +842,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
@@ -871,7 +875,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
-    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
     #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
@@ -1005,6 +1009,7 @@ module Aws::CloudFront
     #             ],
     #           },
     #           field_level_encryption_id: "string",
+    #           realtime_log_config_arn: "string",
     #           cache_policy_id: "string",
     #           origin_request_policy_id: "string",
     #           forwarded_values: {
@@ -1062,6 +1067,7 @@ module Aws::CloudFront
     #                 ],
     #               },
     #               field_level_encryption_id: "string",
+    #               realtime_log_config_arn: "string",
     #               cache_policy_id: "string",
     #               origin_request_policy_id: "string",
     #               forwarded_values: {
@@ -1112,7 +1118,7 @@ module Aws::CloudFront
     #           cloud_front_default_certificate: false,
     #           iam_certificate_id: "string",
     #           acm_certificate_arn: "string",
-    #           ssl_support_method: "sni-only", # accepts sni-only, vip
+    #           ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #           certificate: "string",
     #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -1208,6 +1214,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
@@ -1247,6 +1254,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
@@ -1279,7 +1287,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
-    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
     #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
@@ -1672,6 +1680,84 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def create_public_key(params = {}, options = {})
       req = build_request(:create_public_key, params)
+      req.send_request(options)
+    end
+
+    # Creates a real-time log configuration.
+    #
+    # After you create a real-time log configuration, you can attach it to
+    # one or more cache behaviors to send real-time log data to the
+    # specified Amazon Kinesis data stream.
+    #
+    # For more information about real-time log configurations, see
+    # [Real-time logs][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html
+    #
+    # @option params [required, Array<Types::EndPoint>] :end_points
+    #   Contains information about the Amazon Kinesis data stream where you
+    #   are sending real-time log data.
+    #
+    # @option params [required, Array<String>] :fields
+    #   A list of fields to include in each real-time log record.
+    #
+    #   For more information about fields, see [Real-time log configuration
+    #   fields][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
+    #
+    # @option params [required, String] :name
+    #   A unique name to identify this real-time log configuration.
+    #
+    # @option params [required, Integer] :sampling_rate
+    #   The sampling rate for this real-time log configuration. The sampling
+    #   rate determines the percentage of viewer requests that are represented
+    #   in the real-time log data. You must provide an integer between 1 and
+    #   100, inclusive.
+    #
+    # @return [Types::CreateRealtimeLogConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRealtimeLogConfigResult#realtime_log_config #realtime_log_config} => Types::RealtimeLogConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_realtime_log_config({
+    #     end_points: [ # required
+    #       {
+    #         stream_type: "string", # required
+    #         kinesis_stream_config: {
+    #           role_arn: "string", # required
+    #           stream_arn: "string", # required
+    #         },
+    #       },
+    #     ],
+    #     fields: ["string"], # required
+    #     name: "string", # required
+    #     sampling_rate: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.realtime_log_config.arn #=> String
+    #   resp.realtime_log_config.name #=> String
+    #   resp.realtime_log_config.sampling_rate #=> Integer
+    #   resp.realtime_log_config.end_points #=> Array
+    #   resp.realtime_log_config.end_points[0].stream_type #=> String
+    #   resp.realtime_log_config.end_points[0].kinesis_stream_config.role_arn #=> String
+    #   resp.realtime_log_config.end_points[0].kinesis_stream_config.stream_arn #=> String
+    #   resp.realtime_log_config.fields #=> Array
+    #   resp.realtime_log_config.fields[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateRealtimeLogConfig2020_05_31 AWS API Documentation
+    #
+    # @overload create_realtime_log_config(params = {})
+    # @param [Hash] params ({})
+    def create_realtime_log_config(params = {}, options = {})
+      req = build_request(:create_realtime_log_config, params)
       req.send_request(options)
     end
 
@@ -2117,6 +2203,43 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Deletes a real-time log configuration.
+    #
+    # You cannot delete a real-time log configuration if it’s attached to a
+    # cache behavior. First update your distributions to remove the
+    # real-time log configuration from all cache behaviors, then delete the
+    # real-time log configuration.
+    #
+    # To delete a real-time log configuration, you can provide the
+    # configuration’s name or its Amazon Resource Name (ARN). You must
+    # provide at least one. If you provide both, CloudFront uses the name to
+    # identify the real-time log configuration to delete.
+    #
+    # @option params [String] :name
+    #   The name of the real-time log configuration to delete.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_realtime_log_config({
+    #     name: "string",
+    #     arn: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteRealtimeLogConfig2020_05_31 AWS API Documentation
+    #
+    # @overload delete_realtime_log_config(params = {})
+    # @param [Hash] params ({})
+    def delete_realtime_log_config(params = {}, options = {})
+      req = build_request(:delete_realtime_log_config, params)
+      req.send_request(options)
+    end
+
     # Delete a streaming distribution. To delete an RTMP distribution using
     # the CloudFront API, perform the following steps.
     #
@@ -2458,6 +2581,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
@@ -2497,6 +2621,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
@@ -2529,7 +2654,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
-    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
     #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
@@ -2632,6 +2757,7 @@ module Aws::CloudFront
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
@@ -2671,6 +2797,7 @@ module Aws::CloudFront
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
@@ -2703,7 +2830,7 @@ module Aws::CloudFront
     #   resp.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_config.viewer_certificate.acm_certificate_arn #=> String
-    #   resp.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+    #   resp.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
     #   resp.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
@@ -3152,6 +3279,52 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Gets a real-time log configuration.
+    #
+    # To get a real-time log configuration, you can provide the
+    # configuration’s name or its Amazon Resource Name (ARN). You must
+    # provide at least one. If you provide both, CloudFront uses the name to
+    # identify the real-time log configuration to get.
+    #
+    # @option params [String] :name
+    #   The name of the real-time log configuration to get.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration to
+    #   get.
+    #
+    # @return [Types::GetRealtimeLogConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRealtimeLogConfigResult#realtime_log_config #realtime_log_config} => Types::RealtimeLogConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_realtime_log_config({
+    #     name: "string",
+    #     arn: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.realtime_log_config.arn #=> String
+    #   resp.realtime_log_config.name #=> String
+    #   resp.realtime_log_config.sampling_rate #=> Integer
+    #   resp.realtime_log_config.end_points #=> Array
+    #   resp.realtime_log_config.end_points[0].stream_type #=> String
+    #   resp.realtime_log_config.end_points[0].kinesis_stream_config.role_arn #=> String
+    #   resp.realtime_log_config.end_points[0].kinesis_stream_config.stream_arn #=> String
+    #   resp.realtime_log_config.fields #=> Array
+    #   resp.realtime_log_config.fields[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetRealtimeLogConfig2020_05_31 AWS API Documentation
+    #
+    # @overload get_realtime_log_config(params = {})
+    # @param [Hash] params ({})
+    def get_realtime_log_config(params = {}, options = {})
+      req = build_request(:get_realtime_log_config, params)
+      req.send_request(options)
+    end
+
     # Gets information about a specified RTMP distribution, including the
     # distribution configuration.
     #
@@ -3479,6 +3652,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
@@ -3518,6 +3692,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
@@ -3546,7 +3721,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
-    #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+    #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
     #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
     #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
@@ -3680,6 +3855,210 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Gets a list of distribution that have a cache behavior that’s
+    # associated with the specified real-time log configuration.
+    #
+    # You can specify the real-time log configuration by its name or its
+    # Amazon Resource Name (ARN). You must provide at least one. If you
+    # provide both, CloudFront uses the name to identify the real-time log
+    # configuration to list distributions for.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distributions. The response includes distributions in the
+    #   list that occur after the marker. To get the next page of the list,
+    #   set this field’s value to the value of `NextMarker` from the current
+    #   page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distributions that you want in the response.
+    #
+    # @option params [String] :realtime_log_config_name
+    #   The name of the real-time log configuration whose associated
+    #   distributions you want to list.
+    #
+    # @option params [String] :realtime_log_config_arn
+    #   The Amazon Resource Name (ARN) of the real-time log configuration
+    #   whose associated distributions you want to list.
+    #
+    # @return [Types::ListDistributionsByRealtimeLogConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionsByRealtimeLogConfigResult#distribution_list #distribution_list} => Types::DistributionList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distributions_by_realtime_log_config({
+    #     marker: "string",
+    #     max_items: 1,
+    #     realtime_log_config_name: "string",
+    #     realtime_log_config_arn: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_list.marker #=> String
+    #   resp.distribution_list.next_marker #=> String
+    #   resp.distribution_list.max_items #=> Integer
+    #   resp.distribution_list.is_truncated #=> Boolean
+    #   resp.distribution_list.quantity #=> Integer
+    #   resp.distribution_list.items #=> Array
+    #   resp.distribution_list.items[0].id #=> String
+    #   resp.distribution_list.items[0].arn #=> String
+    #   resp.distribution_list.items[0].status #=> String
+    #   resp.distribution_list.items[0].last_modified_time #=> Time
+    #   resp.distribution_list.items[0].domain_name #=> String
+    #   resp.distribution_list.items[0].aliases.quantity #=> Integer
+    #   resp.distribution_list.items[0].aliases.items #=> Array
+    #   resp.distribution_list.items[0].aliases.items[0] #=> String
+    #   resp.distribution_list.items[0].origins.quantity #=> Integer
+    #   resp.distribution_list.items[0].origins.items #=> Array
+    #   resp.distribution_list.items[0].origins.items[0].id #=> String
+    #   resp.distribution_list.items[0].origins.items[0].domain_name #=> String
+    #   resp.distribution_list.items[0].origins.items[0].origin_path #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.quantity #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.items #=> Array
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_name #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_value #=> String
+    #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.http_port #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.https_port #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items[0].origin_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.min_ttl #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.default_ttl #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.max_ttl #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].min_ttl #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].default_ttl #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].max_ttl #=> Integer
+    #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
+    #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].response_page_path #=> String
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].response_code #=> String
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].error_caching_min_ttl #=> Integer
+    #   resp.distribution_list.items[0].comment #=> String
+    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution_list.items[0].enabled #=> Boolean
+    #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
+    #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
+    #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
+    #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
+    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
+    #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
+    #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.quantity #=> Integer
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
+    #   resp.distribution_list.items[0].web_acl_id #=> String
+    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
+    #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
+    #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByRealtimeLogConfig2020_05_31 AWS API Documentation
+    #
+    # @overload list_distributions_by_realtime_log_config(params = {})
+    # @param [Hash] params ({})
+    def list_distributions_by_realtime_log_config(params = {}, options = {})
+      req = build_request(:list_distributions_by_realtime_log_config, params)
+      req.send_request(options)
+    end
+
     # List the distributions that are associated with a specified AWS WAF
     # web ACL.
     #
@@ -3777,6 +4156,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
@@ -3816,6 +4196,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
@@ -3844,7 +4225,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
-    #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+    #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
     #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
     #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
@@ -4150,6 +4531,63 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_public_keys(params = {}, options = {})
       req = build_request(:list_public_keys, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of real-time log configurations.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of real-time log configurations that you want in
+    #   the response.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of real-time log configurations. The response includes
+    #   real-time log configurations in the list that occur after the marker.
+    #   To get the next page of the list, set this field’s value to the value
+    #   of `NextMarker` from the current page’s response.
+    #
+    # @return [Types::ListRealtimeLogConfigsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRealtimeLogConfigsResult#realtime_log_configs #realtime_log_configs} => Types::RealtimeLogConfigs
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_realtime_log_configs({
+    #     max_items: 1,
+    #     marker: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.realtime_log_configs.max_items #=> Integer
+    #   resp.realtime_log_configs.items #=> Array
+    #   resp.realtime_log_configs.items[0].arn #=> String
+    #   resp.realtime_log_configs.items[0].name #=> String
+    #   resp.realtime_log_configs.items[0].sampling_rate #=> Integer
+    #   resp.realtime_log_configs.items[0].end_points #=> Array
+    #   resp.realtime_log_configs.items[0].end_points[0].stream_type #=> String
+    #   resp.realtime_log_configs.items[0].end_points[0].kinesis_stream_config.role_arn #=> String
+    #   resp.realtime_log_configs.items[0].end_points[0].kinesis_stream_config.stream_arn #=> String
+    #   resp.realtime_log_configs.items[0].fields #=> Array
+    #   resp.realtime_log_configs.items[0].fields[0] #=> String
+    #   resp.realtime_log_configs.is_truncated #=> Boolean
+    #   resp.realtime_log_configs.marker #=> String
+    #   resp.realtime_log_configs.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListRealtimeLogConfigs2020_05_31 AWS API Documentation
+    #
+    # @overload list_realtime_log_configs(params = {})
+    # @param [Hash] params ({})
+    def list_realtime_log_configs(params = {}, options = {})
+      req = build_request(:list_realtime_log_configs, params)
       req.send_request(options)
     end
 
@@ -4638,6 +5076,7 @@ module Aws::CloudFront
     #           ],
     #         },
     #         field_level_encryption_id: "string",
+    #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
     #         origin_request_policy_id: "string",
     #         forwarded_values: {
@@ -4695,6 +5134,7 @@ module Aws::CloudFront
     #               ],
     #             },
     #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
     #             forwarded_values: {
@@ -4745,7 +5185,7 @@ module Aws::CloudFront
     #         cloud_front_default_certificate: false,
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
-    #         ssl_support_method: "sni-only", # accepts sni-only, vip
+    #         ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
     #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
@@ -4834,6 +5274,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
@@ -4873,6 +5314,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
@@ -4905,7 +5347,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
-    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
     #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
@@ -5225,6 +5667,94 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Updates a real-time log configuration.
+    #
+    # When you update a real-time log configuration, all the parameters are
+    # updated with the values provided in the request. You cannot update
+    # some parameters independent of others. To update a real-time log
+    # configuration:
+    #
+    # 1.  Call `GetRealtimeLogConfig` to get the current real-time log
+    #     configuration.
+    #
+    # 2.  Locally modify the parameters in the real-time log configuration
+    #     that you want to update.
+    #
+    # 3.  Call this API (`UpdateRealtimeLogConfig`) by providing the entire
+    #     real-time log configuration, including the parameters that you
+    #     modified and those that you didn’t.
+    #
+    # You cannot update a real-time log configuration’s `Name` or `ARN`.
+    #
+    # @option params [Array<Types::EndPoint>] :end_points
+    #   Contains information about the Amazon Kinesis data stream where you
+    #   are sending real-time log data.
+    #
+    # @option params [Array<String>] :fields
+    #   A list of fields to include in each real-time log record.
+    #
+    #   For more information about fields, see [Real-time log configuration
+    #   fields][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
+    #
+    # @option params [String] :name
+    #   The name for this real-time log configuration.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) for this real-time log configuration.
+    #
+    # @option params [Integer] :sampling_rate
+    #   The sampling rate for this real-time log configuration. The sampling
+    #   rate determines the percentage of viewer requests that are represented
+    #   in the real-time log data. You must provide an integer between 1 and
+    #   100, inclusive.
+    #
+    # @return [Types::UpdateRealtimeLogConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRealtimeLogConfigResult#realtime_log_config #realtime_log_config} => Types::RealtimeLogConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_realtime_log_config({
+    #     end_points: [
+    #       {
+    #         stream_type: "string", # required
+    #         kinesis_stream_config: {
+    #           role_arn: "string", # required
+    #           stream_arn: "string", # required
+    #         },
+    #       },
+    #     ],
+    #     fields: ["string"],
+    #     name: "string",
+    #     arn: "string",
+    #     sampling_rate: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.realtime_log_config.arn #=> String
+    #   resp.realtime_log_config.name #=> String
+    #   resp.realtime_log_config.sampling_rate #=> Integer
+    #   resp.realtime_log_config.end_points #=> Array
+    #   resp.realtime_log_config.end_points[0].stream_type #=> String
+    #   resp.realtime_log_config.end_points[0].kinesis_stream_config.role_arn #=> String
+    #   resp.realtime_log_config.end_points[0].kinesis_stream_config.stream_arn #=> String
+    #   resp.realtime_log_config.fields #=> Array
+    #   resp.realtime_log_config.fields[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateRealtimeLogConfig2020_05_31 AWS API Documentation
+    #
+    # @overload update_realtime_log_config(params = {})
+    # @param [Hash] params ({})
+    def update_realtime_log_config(params = {}, options = {})
+      req = build_request(:update_realtime_log_config, params)
+      req.send_request(options)
+    end
+
     # Update a streaming distribution.
     #
     # @option params [required, Types::StreamingDistributionConfig] :streaming_distribution_config
@@ -5328,7 +5858,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

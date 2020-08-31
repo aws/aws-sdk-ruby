@@ -79,6 +79,7 @@ module Aws::CloudFront
   # * {NoSuchOrigin}
   # * {NoSuchOriginRequestPolicy}
   # * {NoSuchPublicKey}
+  # * {NoSuchRealtimeLogConfig}
   # * {NoSuchResource}
   # * {NoSuchStreamingDistribution}
   # * {OriginRequestPolicyAlreadyExists}
@@ -87,6 +88,8 @@ module Aws::CloudFront
   # * {PublicKeyAlreadyExists}
   # * {PublicKeyInUse}
   # * {QueryArgProfileEmpty}
+  # * {RealtimeLogConfigAlreadyExists}
+  # * {RealtimeLogConfigInUse}
   # * {StreamingDistributionAlreadyExists}
   # * {StreamingDistributionNotDisabled}
   # * {TooManyCacheBehaviors}
@@ -122,6 +125,7 @@ module Aws::CloudFront
   # * {TooManyQueryStringParameters}
   # * {TooManyQueryStringsInCachePolicy}
   # * {TooManyQueryStringsInOriginRequestPolicy}
+  # * {TooManyRealtimeLogConfigs}
   # * {TooManyStreamingDistributionCNAMEs}
   # * {TooManyStreamingDistributions}
   # * {TooManyTrustedSigners}
@@ -913,6 +917,21 @@ module Aws::CloudFront
       end
     end
 
+    class NoSuchRealtimeLogConfig < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::NoSuchRealtimeLogConfig] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchResource < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1023,6 +1042,36 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::QueryArgProfileEmpty] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RealtimeLogConfigAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::RealtimeLogConfigAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RealtimeLogConfigInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::RealtimeLogConfigInUse] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1548,6 +1597,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyQueryStringsInOriginRequestPolicy] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyRealtimeLogConfigs < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyRealtimeLogConfigs] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

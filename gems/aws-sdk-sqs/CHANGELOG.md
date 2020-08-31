@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-08-31)
+------------------
+
+* Feature - Documentation updates for SQS.
+
 1.31.0 (2020-08-25)
 ------------------
 

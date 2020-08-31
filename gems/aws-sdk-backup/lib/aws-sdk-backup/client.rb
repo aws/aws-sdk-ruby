@@ -420,13 +420,13 @@ module Aws::Backup
     #
     #   `ConditionValue:"finance"`
     #
-    #   `ConditionType:"STRINGEQUALS"`
+    #   `ConditionType:"StringEquals"`
     #
     # * `ConditionKey:"importance"`
     #
     #   `ConditionValue:"critical"`
     #
-    #   `ConditionType:"STRINGEQUALS"`
+    #   `ConditionType:"StringEquals"`
     #
     # Using these patterns would back up all Amazon Elastic Block Store
     # (Amazon EBS) volumes that are tagged as `"department=finance"`,
@@ -2767,7 +2767,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

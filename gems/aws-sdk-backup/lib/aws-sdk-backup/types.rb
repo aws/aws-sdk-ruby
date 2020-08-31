@@ -523,7 +523,7 @@ module Aws::Backup
     #
     # @!attribute [rw] iam_role_arn
     #   The ARN of the IAM role that AWS Backup uses to authenticate when
-    #   restoring the target resource; for example,
+    #   backing up the target resource; for example,
     #   `arn:aws:iam::123456789012:role/S3Access`.
     #   @return [String]
     #
@@ -534,7 +534,7 @@ module Aws::Backup
     #
     # @!attribute [rw] list_of_tags
     #   An array of conditions used to specify a set of resources to assign
-    #   to a backup plan; for example, `"STRINGEQUALS":
+    #   to a backup plan; for example, `"StringEquals":
     #   \{"ec2:ResourceTag/Department": "accounting"`.
     #   @return [Array<Types::Condition>]
     #
@@ -679,7 +679,7 @@ module Aws::Backup
     end
 
     # Contains an array of triplets made up of a condition type (such as
-    # `STRINGEQUALS`), a key, and a value. Conditions are used to filter
+    # `StringEquals`), a key, and a value. Conditions are used to filter
     # resources in a selection that is assigned to a backup plan.
     #
     # @note When making an API call, you may pass Condition
@@ -692,7 +692,7 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] condition_type
-    #   An operation, such as `STRINGEQUALS`, that is applied to a key-value
+    #   An operation, such as `StringEquals`, that is applied to a key-value
     #   pair used to filter resources in a selection.
     #   @return [String]
     #
