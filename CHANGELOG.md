@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.577 (2020-09-01)
+------------------
+
 * Feature - Aws::CodeGuruReviewer - Updated the API, and documentation for Amazon CodeGuru Reviewer.
 
 * Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
