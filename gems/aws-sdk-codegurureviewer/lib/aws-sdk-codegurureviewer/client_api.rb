@@ -18,15 +18,20 @@ module Aws::CodeGuruReviewer
     AssociateRepositoryRequest = Shapes::StructureShape.new(name: 'AssociateRepositoryRequest')
     AssociateRepositoryResponse = Shapes::StructureShape.new(name: 'AssociateRepositoryResponse')
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
+    BranchName = Shapes::StringShape.new(name: 'BranchName')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CodeCommitRepository = Shapes::StructureShape.new(name: 'CodeCommitRepository')
     CodeReview = Shapes::StructureShape.new(name: 'CodeReview')
+    CodeReviewName = Shapes::StringShape.new(name: 'CodeReviewName')
     CodeReviewSummaries = Shapes::ListShape.new(name: 'CodeReviewSummaries')
     CodeReviewSummary = Shapes::StructureShape.new(name: 'CodeReviewSummary')
+    CodeReviewType = Shapes::StructureShape.new(name: 'CodeReviewType')
     CommitDiffSourceCodeType = Shapes::StructureShape.new(name: 'CommitDiffSourceCodeType')
     CommitId = Shapes::StringShape.new(name: 'CommitId')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
+    CreateCodeReviewRequest = Shapes::StructureShape.new(name: 'CreateCodeReviewRequest')
+    CreateCodeReviewResponse = Shapes::StructureShape.new(name: 'CreateCodeReviewResponse')
     DescribeCodeReviewRequest = Shapes::StructureShape.new(name: 'DescribeCodeReviewRequest')
     DescribeCodeReviewResponse = Shapes::StructureShape.new(name: 'DescribeCodeReviewResponse')
     DescribeRecommendationFeedbackRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationFeedbackRequest')
@@ -76,11 +81,13 @@ module Aws::CodeGuruReviewer
     RecommendationSummaries = Shapes::ListShape.new(name: 'RecommendationSummaries')
     RecommendationSummary = Shapes::StructureShape.new(name: 'RecommendationSummary')
     Repository = Shapes::StructureShape.new(name: 'Repository')
+    RepositoryAnalysis = Shapes::StructureShape.new(name: 'RepositoryAnalysis')
     RepositoryAssociation = Shapes::StructureShape.new(name: 'RepositoryAssociation')
     RepositoryAssociationState = Shapes::StringShape.new(name: 'RepositoryAssociationState')
     RepositoryAssociationStates = Shapes::ListShape.new(name: 'RepositoryAssociationStates')
     RepositoryAssociationSummaries = Shapes::ListShape.new(name: 'RepositoryAssociationSummaries')
     RepositoryAssociationSummary = Shapes::StructureShape.new(name: 'RepositoryAssociationSummary')
+    RepositoryHeadSourceCodeType = Shapes::StructureShape.new(name: 'RepositoryHeadSourceCodeType')
     RepositoryNames = Shapes::ListShape.new(name: 'RepositoryNames')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SourceCodeType = Shapes::StructureShape.new(name: 'SourceCodeType')
@@ -137,12 +144,24 @@ module Aws::CodeGuruReviewer
     CodeReviewSummary.add_member(:metrics_summary, Shapes::ShapeRef.new(shape: MetricsSummary, location_name: "MetricsSummary"))
     CodeReviewSummary.struct_class = Types::CodeReviewSummary
 
+    CodeReviewType.add_member(:repository_analysis, Shapes::ShapeRef.new(shape: RepositoryAnalysis, required: true, location_name: "RepositoryAnalysis"))
+    CodeReviewType.struct_class = Types::CodeReviewType
+
     CommitDiffSourceCodeType.add_member(:source_commit, Shapes::ShapeRef.new(shape: CommitId, location_name: "SourceCommit"))
     CommitDiffSourceCodeType.add_member(:destination_commit, Shapes::ShapeRef.new(shape: CommitId, location_name: "DestinationCommit"))
     CommitDiffSourceCodeType.struct_class = Types::CommitDiffSourceCodeType
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateCodeReviewRequest.add_member(:name, Shapes::ShapeRef.new(shape: CodeReviewName, required: true, location_name: "Name"))
+    CreateCodeReviewRequest.add_member(:repository_association_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RepositoryAssociationArn"))
+    CreateCodeReviewRequest.add_member(:type, Shapes::ShapeRef.new(shape: CodeReviewType, required: true, location_name: "Type"))
+    CreateCodeReviewRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateCodeReviewRequest.struct_class = Types::CreateCodeReviewRequest
+
+    CreateCodeReviewResponse.add_member(:code_review, Shapes::ShapeRef.new(shape: CodeReview, location_name: "CodeReview"))
+    CreateCodeReviewResponse.struct_class = Types::CreateCodeReviewResponse
 
     DescribeCodeReviewRequest.add_member(:code_review_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "CodeReviewArn"))
     DescribeCodeReviewRequest.struct_class = Types::DescribeCodeReviewRequest
@@ -276,6 +295,9 @@ module Aws::CodeGuruReviewer
     Repository.add_member(:git_hub_enterprise_server, Shapes::ShapeRef.new(shape: ThirdPartySourceRepository, location_name: "GitHubEnterpriseServer"))
     Repository.struct_class = Types::Repository
 
+    RepositoryAnalysis.add_member(:repository_head, Shapes::ShapeRef.new(shape: RepositoryHeadSourceCodeType, required: true, location_name: "RepositoryHead"))
+    RepositoryAnalysis.struct_class = Types::RepositoryAnalysis
+
     RepositoryAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     RepositoryAssociation.add_member(:association_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AssociationArn"))
     RepositoryAssociation.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn"))
@@ -302,12 +324,16 @@ module Aws::CodeGuruReviewer
     RepositoryAssociationSummary.add_member(:state, Shapes::ShapeRef.new(shape: RepositoryAssociationState, location_name: "State"))
     RepositoryAssociationSummary.struct_class = Types::RepositoryAssociationSummary
 
+    RepositoryHeadSourceCodeType.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "BranchName"))
+    RepositoryHeadSourceCodeType.struct_class = Types::RepositoryHeadSourceCodeType
+
     RepositoryNames.member = Shapes::ShapeRef.new(shape: Name)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SourceCodeType.add_member(:commit_diff, Shapes::ShapeRef.new(shape: CommitDiffSourceCodeType, location_name: "CommitDiff"))
+    SourceCodeType.add_member(:repository_head, Shapes::ShapeRef.new(shape: RepositoryHeadSourceCodeType, location_name: "RepositoryHead"))
     SourceCodeType.struct_class = Types::SourceCodeType
 
     ThirdPartySourceRepository.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
@@ -352,6 +378,20 @@ module Aws::CodeGuruReviewer
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_code_review, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCodeReview"
+        o.http_method = "POST"
+        o.http_request_uri = "/codereviews"
+        o.input = Shapes::ShapeRef.new(shape: CreateCodeReviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCodeReviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

@@ -362,25 +362,6 @@ module Aws::CodeGuruReviewer
     #   The repository to associate.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
-    #
-    #   To add a new repository association, this parameter specifies a unique
-    #   identifier for the new repository association that helps ensure
-    #   idempotency.
-    #
-    #   If you use the AWS CLI or one of the AWS SDKs to call this operation,
-    #   you can leave this parameter empty. The CLI or SDK generates a random
-    #   UUID for you and includes that in the request. If you don't use the
-    #   SDK and instead generate a raw HTTP request to the Secrets Manager
-    #   service endpoint, you must generate a ClientRequestToken yourself for
-    #   new versions and include that value in the request.
-    #
-    #   You typically interact with this value if you implement your own retry
-    #   logic and want to ensure that a given repository association is not
-    #   created twice. We recommend that you generate a UUID-type value to
-    #   ensure uniqueness within the specified repository association.
-    #
     #   Amazon CodeGuru Reviewer uses this value to prevent the accidental
     #   creation of duplicate repository associations if there are failures
     #   and retries.
@@ -435,6 +416,85 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
+    # Use to create a code review for a repository analysis.
+    #
+    # @option params [required, String] :name
+    #   The name of the code review. Each code review of the same code review
+    #   type must have a unique name in your AWS account.
+    #
+    # @option params [required, String] :repository_association_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #
+    #   A code review can only be created on an associated repository. This is
+    #   the ARN of the associated repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #
+    # @option params [required, Types::CodeReviewType] :type
+    #   The type of code review to create. This is specified using a [
+    #   `CodeReviewType` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html
+    #
+    # @option params [String] :client_request_token
+    #   Amazon CodeGuru Reviewer uses this value to prevent the accidental
+    #   creation of duplicate code reviews if there are failures and retries.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateCodeReviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCodeReviewResponse#code_review #code_review} => Types::CodeReview
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_code_review({
+    #     name: "CodeReviewName", # required
+    #     repository_association_arn: "Arn", # required
+    #     type: { # required
+    #       repository_analysis: { # required
+    #         repository_head: { # required
+    #           branch_name: "BranchName", # required
+    #         },
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review.name #=> String
+    #   resp.code_review.code_review_arn #=> String
+    #   resp.code_review.repository_name #=> String
+    #   resp.code_review.owner #=> String
+    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.code_review.state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
+    #   resp.code_review.state_reason #=> String
+    #   resp.code_review.created_time_stamp #=> Time
+    #   resp.code_review.last_updated_time_stamp #=> Time
+    #   resp.code_review.type #=> String, one of "PullRequest", "RepositoryAnalysis"
+    #   resp.code_review.pull_request_id #=> String
+    #   resp.code_review.source_code_type.commit_diff.source_commit #=> String
+    #   resp.code_review.source_code_type.commit_diff.destination_commit #=> String
+    #   resp.code_review.source_code_type.repository_head.branch_name #=> String
+    #   resp.code_review.metrics.metered_lines_of_code_count #=> Integer
+    #   resp.code_review.metrics.findings_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CreateCodeReview AWS API Documentation
+    #
+    # @overload create_code_review(params = {})
+    # @param [Hash] params ({})
+    def create_code_review(params = {}, options = {})
+      req = build_request(:create_code_review, params)
+      req.send_request(options)
+    end
+
     # Returns the metadata associated with the code review along with its
     # status.
     #
@@ -466,10 +526,11 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.state_reason #=> String
     #   resp.code_review.created_time_stamp #=> Time
     #   resp.code_review.last_updated_time_stamp #=> Time
-    #   resp.code_review.type #=> String, one of "PullRequest"
+    #   resp.code_review.type #=> String, one of "PullRequest", "RepositoryAnalysis"
     #   resp.code_review.pull_request_id #=> String
     #   resp.code_review.source_code_type.commit_diff.source_commit #=> String
     #   resp.code_review.source_code_type.commit_diff.destination_commit #=> String
+    #   resp.code_review.source_code_type.repository_head.branch_name #=> String
     #   resp.code_review.metrics.metered_lines_of_code_count #=> Integer
     #   resp.code_review.metrics.findings_count #=> Integer
     #
@@ -592,7 +653,7 @@ module Aws::CodeGuruReviewer
     #
     # @option params [required, String] :association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object.
+    #   object. You can retrieve this ARN by calling `ListRepositories`.
     #
     #
     #
@@ -683,7 +744,7 @@ module Aws::CodeGuruReviewer
     #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #     states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #     repository_names: ["Name"],
-    #     type: "PullRequest", # required, accepts PullRequest
+    #     type: "PullRequest", # required, accepts PullRequest, RepositoryAnalysis
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -699,7 +760,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review_summaries[0].state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review_summaries[0].created_time_stamp #=> Time
     #   resp.code_review_summaries[0].last_updated_time_stamp #=> Time
-    #   resp.code_review_summaries[0].type #=> String, one of "PullRequest"
+    #   resp.code_review_summaries[0].type #=> String, one of "PullRequest", "RepositoryAnalysis"
     #   resp.code_review_summaries[0].pull_request_id #=> String
     #   resp.code_review_summaries[0].metrics_summary.metered_lines_of_code_count #=> Integer
     #   resp.code_review_summaries[0].metrics_summary.findings_count #=> Integer
@@ -868,10 +929,11 @@ module Aws::CodeGuruReviewer
     #     * Setting up pull request notifications. This is required for pull
     #       requests to trigger a CodeGuru Reviewer review.
     #
-    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
-    #       CodeGuru Reviewer creates webhooks in your repository to trigger
-    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
-    #       of code in your repository cannot be triggered.
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub`, `GitHub Enterprise
+    #       Server`, or `Bitbucket`, CodeGuru Reviewer creates webhooks in
+    #       your repository to trigger CodeGuru Reviewer reviews. If you
+    #       delete these webhooks, reviews of code in your repository cannot
+    #       be triggered.
     #
     #        </note>
     #
@@ -889,8 +951,9 @@ module Aws::CodeGuruReviewer
     # @option params [Array<String>] :owners
     #   List of owners to use as a filter. For AWS CodeCommit, it is the name
     #   of the CodeCommit account that was used to associate the repository.
-    #   For other repository source providers, such as Bitbucket, this is name
-    #   of the account that was used to associate the repository.
+    #   For other repository source providers, such as Bitbucket and GitHub
+    #   Enterprise Server, this is name of the account that was used to
+    #   associate the repository.
     #
     # @option params [Integer] :max_results
     #   The maximum number of repository association results returned by
@@ -1006,7 +1069,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

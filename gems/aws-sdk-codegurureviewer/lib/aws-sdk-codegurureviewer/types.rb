@@ -50,27 +50,6 @@ module Aws::CodeGuruReviewer
     #   @return [Types::Repository]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
-    #
-    #   To add a new repository association, this parameter specifies a
-    #   unique identifier for the new repository association that helps
-    #   ensure idempotency.
-    #
-    #   If you use the AWS CLI or one of the AWS SDKs to call this
-    #   operation, you can leave this parameter empty. The CLI or SDK
-    #   generates a random UUID for you and includes that in the request. If
-    #   you don't use the SDK and instead generate a raw HTTP request to
-    #   the Secrets Manager service endpoint, you must generate a
-    #   ClientRequestToken yourself for new versions and include that value
-    #   in the request.
-    #
-    #   You typically interact with this value if you implement your own
-    #   retry logic and want to ensure that a given repository association
-    #   is not created twice. We recommend that you generate a UUID-type
-    #   value to ensure uniqueness within the specified repository
-    #   association.
-    #
     #   Amazon CodeGuru Reviewer uses this value to prevent the accidental
     #   creation of duplicate repository associations if there are failures
     #   and retries.
@@ -149,8 +128,8 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] owner
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
-    #   GitHub or Bitbucket repository, this is the username for the account
-    #   that owns the repository.
+    #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -242,8 +221,8 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] owner
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
-    #   GitHub or Bitbucket repository, this is the username for the account
-    #   that owns the repository.
+    #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -305,14 +284,63 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # The commit diff for the pull request.
+    # The type of a code review. There are two code review types:
+    #
+    # * `PullRequest` - A code review that is automatically triggered by a
+    #   pull request on an assocaited repository. Because this type of code
+    #   review is automatically generated, you cannot specify this code
+    #   review type using [ `CreateCodeReview` ][1].
+    #
+    # * `RepositoryAnalysis` - A code review that analyzes all code under a
+    #   specified branch in an associated respository. The assocated
+    #   repository is specified using its ARN in [ `CreateCodeReview` ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview
+    #
+    # @note When making an API call, you may pass CodeReviewType
+    #   data as a hash:
+    #
+    #       {
+    #         repository_analysis: { # required
+    #           repository_head: { # required
+    #             branch_name: "BranchName", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] repository_analysis
+    #   A code review that analyzes all code under a specified branch in an
+    #   associated respository. The assocated repository is specified using
+    #   its ARN in [ `CreateCodeReview` ][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview
+    #   @return [Types::RepositoryAnalysis]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeReviewType AWS API Documentation
+    #
+    class CodeReviewType < Struct.new(
+      :repository_analysis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A type of [ `SourceCodeType` ][1] that specifies the commit diff for a
+    # pull request on an associated repository.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
     #
     # @!attribute [rw] source_commit
-    #   The SHA of the source commit.
+    #   The SHA of the source commit used to generate a commit diff.
     #   @return [String]
     #
     # @!attribute [rw] destination_commit
-    #   The SHA of the destination commit.
+    #   The SHA of the destination commit used to generate a commit diff.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CommitDiffSourceCodeType AWS API Documentation
@@ -335,6 +363,80 @@ module Aws::CodeGuruReviewer
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCodeReviewRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CodeReviewName", # required
+    #         repository_association_arn: "Arn", # required
+    #         type: { # required
+    #           repository_analysis: { # required
+    #             repository_head: { # required
+    #               branch_name: "BranchName", # required
+    #             },
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the code review. Each code review of the same code
+    #   review type must have a unique name in your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_association_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #
+    #   A code review can only be created on an associated repository. This
+    #   is the ARN of the associated repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of code review to create. This is specified using a [
+    #   `CodeReviewType` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html
+    #   @return [Types::CodeReviewType]
+    #
+    # @!attribute [rw] client_request_token
+    #   Amazon CodeGuru Reviewer uses this value to prevent the accidental
+    #   creation of duplicate code reviews if there are failures and
+    #   retries.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CreateCodeReviewRequest AWS API Documentation
+    #
+    class CreateCodeReviewRequest < Struct.new(
+      :name,
+      :repository_association_arn,
+      :type,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code_review
+    #   Information about a code review.
+    #   @return [Types::CodeReview]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CreateCodeReviewResponse AWS API Documentation
+    #
+    class CreateCodeReviewResponse < Struct.new(
+      :code_review)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -477,7 +579,7 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object.
+    #   object. You can retrieve this ARN by calling `ListRepositories`.
     #
     #
     #
@@ -525,7 +627,7 @@ module Aws::CodeGuruReviewer
     #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #         states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #         repository_names: ["Name"],
-    #         type: "PullRequest", # required, accepts PullRequest
+    #         type: "PullRequest", # required, accepts PullRequest, RepositoryAnalysis
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -769,10 +871,11 @@ module Aws::CodeGuruReviewer
     #     * Setting up pull request notifications. This is required for pull
     #       requests to trigger a CodeGuru Reviewer review.
     #
-    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
-    #       CodeGuru Reviewer creates webhooks in your repository to trigger
-    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
-    #       of code in your repository cannot be triggered.
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub`, `GitHub
+    #       Enterprise Server`, or `Bitbucket`, CodeGuru Reviewer creates
+    #       webhooks in your repository to trigger CodeGuru Reviewer
+    #       reviews. If you delete these webhooks, reviews of code in your
+    #       repository cannot be triggered.
     #
     #        </note>
     #
@@ -792,9 +895,9 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] owners
     #   List of owners to use as a filter. For AWS CodeCommit, it is the
     #   name of the CodeCommit account that was used to associate the
-    #   repository. For other repository source providers, such as
-    #   Bitbucket, this is name of the account that was used to associate
-    #   the repository.
+    #   repository. For other repository source providers, such as Bitbucket
+    #   and GitHub Enterprise Server, this is name of the account that was
+    #   used to associate the repository.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -1146,6 +1249,40 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
+    # A code review type that analyzes all code under a specified branch in
+    # an associated respository. The assocated repository is specified using
+    # its ARN when you call [ `CreateCodeReview` ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview
+    #
+    # @note When making an API call, you may pass RepositoryAnalysis
+    #   data as a hash:
+    #
+    #       {
+    #         repository_head: { # required
+    #           branch_name: "BranchName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] repository_head
+    #   A [ `SourceCodeType` ][1] that specifies the tip of a branch in an
+    #   associated repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
+    #   @return [Types::RepositoryHeadSourceCodeType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RepositoryAnalysis AWS API Documentation
+    #
+    class RepositoryAnalysis < Struct.new(
+      :repository_head)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a repository association. The [
     # `DescribeRepositoryAssociation` ][1] operation returns a
     # `RepositoryAssociation` object.
@@ -1167,7 +1304,7 @@ module Aws::CodeGuruReviewer
     #   The Amazon Resource Name (ARN) of an AWS CodeStar Connections
     #   connection. Its format is
     #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
-    #   For more information, see [Connection][1] in the *AWS CodeStar
+    #   For more information, see [ `Connection` ][1] in the *AWS CodeStar
     #   Connections API Reference*.
     #
     #
@@ -1182,8 +1319,8 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] owner
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
-    #   GitHub or Bitbucket repository, this is the username for the account
-    #   that owns the repository.
+    #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -1202,10 +1339,11 @@ module Aws::CodeGuruReviewer
     #     * Setting up pull request notifications. This is required for pull
     #       requests to trigger a CodeGuru Reviewer review.
     #
-    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
-    #       CodeGuru Reviewer creates webhooks in your repository to trigger
-    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
-    #       of code in your repository cannot be triggered.
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub`, `GitHub
+    #       Enterprise Server`, or `Bitbucket`, CodeGuru Reviewer creates
+    #       webhooks in your repository to trigger CodeGuru Reviewer
+    #       reviews. If you delete these webhooks, reviews of code in your
+    #       repository cannot be triggered.
     #
     #        </note>
     #
@@ -1260,7 +1398,7 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object.
+    #   object. You can retrieve this ARN by calling `ListRepositories`.
     #
     #
     #
@@ -1271,7 +1409,7 @@ module Aws::CodeGuruReviewer
     #   The Amazon Resource Name (ARN) of an AWS CodeStar Connections
     #   connection. Its format is
     #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
-    #   For more information, see [Connection][1] in the *AWS CodeStar
+    #   For more information, see [ `Connection` ][1] in the *AWS CodeStar
     #   Connections API Reference*.
     #
     #
@@ -1295,8 +1433,8 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] owner
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
-    #   GitHub or Bitbucket repository, this is the username for the account
-    #   that owns the repository.
+    #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -1315,10 +1453,11 @@ module Aws::CodeGuruReviewer
     #     * Setting up pull request notifications. This is required for pull
     #       requests to trigger a CodeGuru Reviewer review.
     #
-    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
-    #       CodeGuru Reviewer creates webhooks in your repository to trigger
-    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
-    #       of code in your repository cannot be triggered.
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub`, `GitHub
+    #       Enterprise Server`, or `Bitbucket`, CodeGuru Reviewer creates
+    #       webhooks in your repository to trigger CodeGuru Reviewer
+    #       reviews. If you delete these webhooks, reviews of code in your
+    #       repository cannot be triggered.
     #
     #        </note>
     #
@@ -1346,6 +1485,33 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
+    # A [ `SourceCodeType` ][1] that specifies the tip of a branch in an
+    # associated repository.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
+    #
+    # @note When making an API call, you may pass RepositoryHeadSourceCodeType
+    #   data as a hash:
+    #
+    #       {
+    #         branch_name: "BranchName", # required
+    #       }
+    #
+    # @!attribute [rw] branch_name
+    #   The name of the branch in an associated repository. The
+    #   `RepositoryHeadSourceCodeType` specifies the tip of this branch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RepositoryHeadSourceCodeType AWS API Documentation
+    #
+    class RepositoryHeadSourceCodeType < Struct.new(
+      :branch_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource specified in the request was not found.
     #
     # @!attribute [rw] message
@@ -1359,16 +1525,33 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about the source code type.
+    # Specifies the source code that is analyzed in a code review. A code
+    # review can analyze the source code that is specified using a pull
+    # request diff or a branch in an associated repository.
     #
     # @!attribute [rw] commit_diff
-    #   The commit diff for the pull request.
+    #   A [ `SourceCodeType` ][1] that specifies a commit diff created by a
+    #   pull request on an associated repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
     #   @return [Types::CommitDiffSourceCodeType]
+    #
+    # @!attribute [rw] repository_head
+    #   A [ `SourceCodeType` ][1] that specifies the tip of a branch in an
+    #   associated repository.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
+    #   @return [Types::RepositoryHeadSourceCodeType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/SourceCodeType AWS API Documentation
     #
     class SourceCodeType < Struct.new(
-      :commit_diff)
+      :commit_diff,
+      :repository_head)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1393,7 +1576,7 @@ module Aws::CodeGuruReviewer
     #   The Amazon Resource Name (ARN) of an AWS CodeStar Connections
     #   connection. Its format is
     #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
-    #   For more information, see [Connection][1] in the *AWS CodeStar
+    #   For more information, see [ `Connection` ][1] in the *AWS CodeStar
     #   Connections API Reference*.
     #
     #

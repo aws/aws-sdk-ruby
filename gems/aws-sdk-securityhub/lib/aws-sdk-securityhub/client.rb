@@ -1520,6 +1520,19 @@ module Aws::SecurityHub
     #             reference_urls: ["NonEmptyString"],
     #           },
     #         ],
+    #         patch_summary: {
+    #           id: "NonEmptyString", # required
+    #           installed_count: 1,
+    #           missing_count: 1,
+    #           failed_count: 1,
+    #           installed_other_count: 1,
+    #           installed_rejected_count: 1,
+    #           installed_pending_reboot: 1,
+    #           operation_start_time: "NonEmptyString",
+    #           operation_end_time: "NonEmptyString",
+    #           reboot_option: "NonEmptyString",
+    #           operation: "NonEmptyString",
+    #         },
     #       },
     #     ],
     #   })
@@ -4337,6 +4350,17 @@ module Aws::SecurityHub
     #   resp.findings[0].vulnerabilities[0].vendor.vendor_updated_at #=> String
     #   resp.findings[0].vulnerabilities[0].reference_urls #=> Array
     #   resp.findings[0].vulnerabilities[0].reference_urls[0] #=> String
+    #   resp.findings[0].patch_summary.id #=> String
+    #   resp.findings[0].patch_summary.installed_count #=> Integer
+    #   resp.findings[0].patch_summary.missing_count #=> Integer
+    #   resp.findings[0].patch_summary.failed_count #=> Integer
+    #   resp.findings[0].patch_summary.installed_other_count #=> Integer
+    #   resp.findings[0].patch_summary.installed_rejected_count #=> Integer
+    #   resp.findings[0].patch_summary.installed_pending_reboot #=> Integer
+    #   resp.findings[0].patch_summary.operation_start_time #=> String
+    #   resp.findings[0].patch_summary.operation_end_time #=> String
+    #   resp.findings[0].patch_summary.reboot_option #=> String
+    #   resp.findings[0].patch_summary.operation #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindings AWS API Documentation
@@ -6354,7 +6378,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

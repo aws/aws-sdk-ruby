@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-09-01)
+------------------
+
+* Feature - Added a PatchSummary object for security findings. The PatchSummary object provides details about the patch compliance status of an instance.
+
 1.32.0 (2020-08-25)
 ------------------
 

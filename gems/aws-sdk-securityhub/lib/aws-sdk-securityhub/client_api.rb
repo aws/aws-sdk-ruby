@@ -294,6 +294,7 @@ module Aws::SecurityHub
     NumberFilter = Shapes::StructureShape.new(name: 'NumberFilter')
     NumberFilterList = Shapes::ListShape.new(name: 'NumberFilterList')
     Partition = Shapes::StringShape.new(name: 'Partition')
+    PatchSummary = Shapes::StructureShape.new(name: 'PatchSummary')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PortRangeList = Shapes::ListShape.new(name: 'PortRangeList')
     ProcessDetails = Shapes::StructureShape.new(name: 'ProcessDetails')
@@ -1186,6 +1187,7 @@ module Aws::SecurityHub
     AwsSecurityFinding.add_member(:related_findings, Shapes::ShapeRef.new(shape: RelatedFindingList, location_name: "RelatedFindings"))
     AwsSecurityFinding.add_member(:note, Shapes::ShapeRef.new(shape: Note, location_name: "Note"))
     AwsSecurityFinding.add_member(:vulnerabilities, Shapes::ShapeRef.new(shape: VulnerabilityList, location_name: "Vulnerabilities"))
+    AwsSecurityFinding.add_member(:patch_summary, Shapes::ShapeRef.new(shape: PatchSummary, location_name: "PatchSummary"))
     AwsSecurityFinding.struct_class = Types::AwsSecurityFinding
 
     AwsSecurityFindingFilters.add_member(:product_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ProductArn"))
@@ -1758,6 +1760,19 @@ module Aws::SecurityHub
     NumberFilter.struct_class = Types::NumberFilter
 
     NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilter)
+
+    PatchSummary.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
+    PatchSummary.add_member(:installed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstalledCount"))
+    PatchSummary.add_member(:missing_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MissingCount"))
+    PatchSummary.add_member(:failed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "FailedCount"))
+    PatchSummary.add_member(:installed_other_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstalledOtherCount"))
+    PatchSummary.add_member(:installed_rejected_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstalledRejectedCount"))
+    PatchSummary.add_member(:installed_pending_reboot, Shapes::ShapeRef.new(shape: Integer, location_name: "InstalledPendingReboot"))
+    PatchSummary.add_member(:operation_start_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OperationStartTime"))
+    PatchSummary.add_member(:operation_end_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OperationEndTime"))
+    PatchSummary.add_member(:reboot_option, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RebootOption"))
+    PatchSummary.add_member(:operation, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Operation"))
+    PatchSummary.struct_class = Types::PatchSummary
 
     PortRange.add_member(:begin, Shapes::ShapeRef.new(shape: Integer, location_name: "Begin"))
     PortRange.add_member(:end, Shapes::ShapeRef.new(shape: Integer, location_name: "End"))

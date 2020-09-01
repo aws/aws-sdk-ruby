@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-09-01)
+------------------
+
+* Feature - Add support for repository analysis based code reviews
+
 1.10.0 (2020-08-25)
 ------------------
 

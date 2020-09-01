@@ -6582,6 +6582,19 @@ module Aws::SecurityHub
     #             reference_urls: ["NonEmptyString"],
     #           },
     #         ],
+    #         patch_summary: {
+    #           id: "NonEmptyString", # required
+    #           installed_count: 1,
+    #           missing_count: 1,
+    #           failed_count: 1,
+    #           installed_other_count: 1,
+    #           installed_rejected_count: 1,
+    #           installed_pending_reboot: 1,
+    #           operation_start_time: "NonEmptyString",
+    #           operation_end_time: "NonEmptyString",
+    #           reboot_option: "NonEmptyString",
+    #           operation: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] schema_version
@@ -6792,6 +6805,11 @@ module Aws::SecurityHub
     #   Provides a list of vulnerabilities associated with the findings.
     #   @return [Array<Types::Vulnerability>]
     #
+    # @!attribute [rw] patch_summary
+    #   Provides an overview of the patch compliance status for an instance
+    #   against a selected compliance standard.
+    #   @return [Types::PatchSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -6827,7 +6845,8 @@ module Aws::SecurityHub
       :record_state,
       :related_findings,
       :note,
-      :vulnerabilities)
+      :vulnerabilities,
+      :patch_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9271,6 +9290,19 @@ module Aws::SecurityHub
     #                 reference_urls: ["NonEmptyString"],
     #               },
     #             ],
+    #             patch_summary: {
+    #               id: "NonEmptyString", # required
+    #               installed_count: 1,
+    #               missing_count: 1,
+    #               failed_count: 1,
+    #               installed_other_count: 1,
+    #               installed_rejected_count: 1,
+    #               installed_pending_reboot: 1,
+    #               operation_start_time: "NonEmptyString",
+    #               operation_end_time: "NonEmptyString",
+    #               reboot_option: "NonEmptyString",
+    #               operation: "NonEmptyString",
+    #             },
     #           },
     #         ],
     #       }
@@ -12854,6 +12886,113 @@ module Aws::SecurityHub
       :gte,
       :lte,
       :eq)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides an overview of the patch compliance status for an instance
+    # against a selected compliance standard.
+    #
+    # @note When making an API call, you may pass PatchSummary
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString", # required
+    #         installed_count: 1,
+    #         missing_count: 1,
+    #         failed_count: 1,
+    #         installed_other_count: 1,
+    #         installed_rejected_count: 1,
+    #         installed_pending_reboot: 1,
+    #         operation_start_time: "NonEmptyString",
+    #         operation_end_time: "NonEmptyString",
+    #         reboot_option: "NonEmptyString",
+    #         operation: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the compliance standard that was used to determine
+    #   the patch compliance status.
+    #   @return [String]
+    #
+    # @!attribute [rw] installed_count
+    #   The number of patches from the compliance standard that were
+    #   installed successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] missing_count
+    #   The number of patches that are part of the compliance standard but
+    #   are not installed. The count includes patches that failed to
+    #   install.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_count
+    #   The number of patches from the compliance standard that failed to
+    #   install.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] installed_other_count
+    #   The number of installed patches that are not part of the compliance
+    #   standard.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] installed_rejected_count
+    #   The number of patches that are installed but are also on a list of
+    #   patches that the customer rejected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] installed_pending_reboot
+    #   The number of patches that were installed since the last time the
+    #   instance was rebooted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operation_start_time
+    #   Indicates when the operation started.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_end_time
+    #   Indicates when the operation completed.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] reboot_option
+    #   The reboot option specified for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The type of patch operation performed. For Patch Manager, the values
+    #   are `SCAN` and `INSTALL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PatchSummary AWS API Documentation
+    #
+    class PatchSummary < Struct.new(
+      :id,
+      :installed_count,
+      :missing_count,
+      :failed_count,
+      :installed_other_count,
+      :installed_rejected_count,
+      :installed_pending_reboot,
+      :operation_start_time,
+      :operation_end_time,
+      :reboot_option,
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end
