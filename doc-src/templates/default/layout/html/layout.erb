@@ -2,6 +2,13 @@
 <html>
   <head>
     <%= erb(:headers) %>
+    <!-- Docs Metrics + Cookie Consent Script -->
+    <meta name="guide-name" content="API Reference">
+    <meta name="service-name" content="AWS SDK For Ruby V3">
+    <script type="text/javascript" src="/assets/js/awsdocs-boot.js"></script>
+    <!-- Gitter chat -->
+    <script>((window.gitter = {}).chat = {}).options = { room: 'aws/aws-sdk-ruby' };</script>
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
   </head>
   <body>
     <div class="nav_wrap">
@@ -23,6 +30,7 @@
       </div>
 
       <%= erb(:footer) %>
+      <div id="awsdocs-legal-zone-copyright"></div>
     </div>
   </body>
 </html>
