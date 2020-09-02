@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.578 (2020-09-02)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
