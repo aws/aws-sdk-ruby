@@ -919,13 +919,14 @@ module Aws::Macie2
     #   resp.buckets[0].bucket_created_at #=> Time
     #   resp.buckets[0].bucket_name #=> String
     #   resp.buckets[0].classifiable_object_count #=> Integer
+    #   resp.buckets[0].classifiable_size_in_bytes #=> Integer
     #   resp.buckets[0].last_updated #=> Time
     #   resp.buckets[0].object_count #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.customer_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.kms_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.s3_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.unencrypted #=> Integer
-    #   resp.buckets[0].public_access.effective_permission #=> String, one of "PUBLIC", "NOT_PUBLIC"
+    #   resp.buckets[0].public_access.effective_permission #=> String, one of "PUBLIC", "NOT_PUBLIC", "UNKNOWN"
     #   resp.buckets[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_acls #=> Boolean
     #   resp.buckets[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_policy #=> Boolean
     #   resp.buckets[0].public_access.permission_configuration.account_level_permissions.block_public_access.ignore_public_acls #=> Boolean
@@ -943,12 +944,18 @@ module Aws::Macie2
     #   resp.buckets[0].replication_details.replicated_externally #=> Boolean
     #   resp.buckets[0].replication_details.replication_accounts #=> Array
     #   resp.buckets[0].replication_details.replication_accounts[0] #=> String
-    #   resp.buckets[0].shared_access #=> String, one of "EXTERNAL", "INTERNAL", "NOT_SHARED"
+    #   resp.buckets[0].shared_access #=> String, one of "EXTERNAL", "INTERNAL", "NOT_SHARED", "UNKNOWN"
     #   resp.buckets[0].size_in_bytes #=> Integer
     #   resp.buckets[0].size_in_bytes_compressed #=> Integer
     #   resp.buckets[0].tags #=> Array
     #   resp.buckets[0].tags[0].key #=> String
     #   resp.buckets[0].tags[0].value #=> String
+    #   resp.buckets[0].unclassifiable_object_count.file_type #=> Integer
+    #   resp.buckets[0].unclassifiable_object_count.storage_class #=> Integer
+    #   resp.buckets[0].unclassifiable_object_count.total #=> Integer
+    #   resp.buckets[0].unclassifiable_object_size_in_bytes.file_type #=> Integer
+    #   resp.buckets[0].unclassifiable_object_size_in_bytes.storage_class #=> Integer
+    #   resp.buckets[0].unclassifiable_object_size_in_bytes.total #=> Integer
     #   resp.buckets[0].versioning #=> Boolean
     #   resp.next_token #=> String
     #
@@ -1214,10 +1221,13 @@ module Aws::Macie2
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_encryption_type #bucket_count_by_encryption_type} => Types::BucketCountByEncryptionType
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_shared_access_type #bucket_count_by_shared_access_type} => Types::BucketCountBySharedAccessType
     #   * {Types::GetBucketStatisticsResponse#classifiable_object_count #classifiable_object_count} => Integer
+    #   * {Types::GetBucketStatisticsResponse#classifiable_size_in_bytes #classifiable_size_in_bytes} => Integer
     #   * {Types::GetBucketStatisticsResponse#last_updated #last_updated} => Time
     #   * {Types::GetBucketStatisticsResponse#object_count #object_count} => Integer
     #   * {Types::GetBucketStatisticsResponse#size_in_bytes #size_in_bytes} => Integer
     #   * {Types::GetBucketStatisticsResponse#size_in_bytes_compressed #size_in_bytes_compressed} => Integer
+    #   * {Types::GetBucketStatisticsResponse#unclassifiable_object_count #unclassifiable_object_count} => Types::ObjectLevelStatistics
+    #   * {Types::GetBucketStatisticsResponse#unclassifiable_object_size_in_bytes #unclassifiable_object_size_in_bytes} => Types::ObjectLevelStatistics
     #
     # @example Request syntax with placeholder values
     #
@@ -1238,10 +1248,17 @@ module Aws::Macie2
     #   resp.bucket_count_by_shared_access_type.internal #=> Integer
     #   resp.bucket_count_by_shared_access_type.not_shared #=> Integer
     #   resp.classifiable_object_count #=> Integer
+    #   resp.classifiable_size_in_bytes #=> Integer
     #   resp.last_updated #=> Time
     #   resp.object_count #=> Integer
     #   resp.size_in_bytes #=> Integer
     #   resp.size_in_bytes_compressed #=> Integer
+    #   resp.unclassifiable_object_count.file_type #=> Integer
+    #   resp.unclassifiable_object_count.storage_class #=> Integer
+    #   resp.unclassifiable_object_count.total #=> Integer
+    #   resp.unclassifiable_object_size_in_bytes.file_type #=> Integer
+    #   resp.unclassifiable_object_size_in_bytes.storage_class #=> Integer
+    #   resp.unclassifiable_object_size_in_bytes.total #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetBucketStatistics AWS API Documentation
     #
@@ -1489,7 +1506,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_bucket.name #=> String
     #   resp.findings[0].resources_affected.s3_bucket.owner.display_name #=> String
     #   resp.findings[0].resources_affected.s3_bucket.owner.id #=> String
-    #   resp.findings[0].resources_affected.s3_bucket.public_access.effective_permission #=> String, one of "PUBLIC", "NOT_PUBLIC"
+    #   resp.findings[0].resources_affected.s3_bucket.public_access.effective_permission #=> String, one of "PUBLIC", "NOT_PUBLIC", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_bucket.public_access.permission_configuration.account_level_permissions.block_public_access.block_public_acls #=> Boolean
     #   resp.findings[0].resources_affected.s3_bucket.public_access.permission_configuration.account_level_permissions.block_public_access.block_public_policy #=> Boolean
     #   resp.findings[0].resources_affected.s3_bucket.public_access.permission_configuration.account_level_permissions.block_public_access.ignore_public_acls #=> Boolean
@@ -2459,7 +2476,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

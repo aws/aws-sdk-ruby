@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2020-09-02)
+------------------
+
+* Feature - This release adds a new transit gateway attachment state and resource type.
+
 1.192.0 (2020-08-31)
 ------------------
 

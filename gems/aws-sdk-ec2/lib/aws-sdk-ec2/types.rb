@@ -21119,12 +21119,13 @@ module Aws::EC2
     #   * `resource-owner-id` - The ID of the AWS account that owns the
     #     resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
-    #     `direct-connect-gateway` \| `tgw-peering`).
+    #   * `resource-type` - The resource type. Valid values are `vpc` \|
+    #     `vpn` \| `direct-connect-gateway` \| `peering`.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the attachment. Valid values are
+    #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
+    #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -21291,10 +21292,10 @@ module Aws::EC2
     #   * `remote-owner-id` - The ID of the AWS account in the remote Region
     #     that owns the transit gateway.
     #
-    #   * `state` - The state of the peering attachment (`available` \|
-    #     `deleted` \| `deleting` \| `failed` \| `modifying` \|
-    #     `pendingAcceptance` \| `pending` \| `rollingBack` \| `rejected` \|
-    #     `rejecting`).
+    #   * `state` - The state of the peering attachment. Valid values are
+    #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
+    #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #   @return [Array<Types::Filter>]
@@ -21377,9 +21378,8 @@ module Aws::EC2
     #     default propagation route table for the transit gateway (`true` \|
     #     `false`).
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the route table (`available` \| `deleting`
+    #     \| `deleted` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -21457,9 +21457,10 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the attachment. Valid values are
+    #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
+    #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -21568,9 +21569,8 @@ module Aws::EC2
     #   * `owner-id` - The ID of the AWS account that owns the transit
     #     gateway.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the transit gateway (`available` \|
+    #     `deleted` \| `deleting` \| `modifying` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #   @return [Array<Types::Filter>]
@@ -25861,13 +25861,11 @@ module Aws::EC2
     #     supernet-of-match as 10.0.1.0/30, then the result returns
     #     10.0.1.0/29.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the route (`active` \| `blackhole`).
     #
     #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
     #
-    #   * `type` - The type of route (`active` \| `blackhole`).
+    #   * `type` - The type of route (`propagated` \| `static`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] s3_bucket
@@ -27875,8 +27873,8 @@ module Aws::EC2
     #     attachment.
     #
     #   * `attachment.resource-type` - The type of resource for the
-    #     attachment (`vpc` \| `vpn` \| `direct-connect-gateway` \|
-    #     `tgw-peering`).
+    #     attachment. Valid values are `vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `peering`.
     #
     #   * `attachment.transit-gateway-attachment-id` - The ID of the
     #     attachment.
@@ -27964,8 +27962,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
-    #     `direct-connect-gateway` \| `tgw-peering`).
+    #   * `resource-type` - The resource type. Valid values are `vpc` \|
+    #     `vpn` \| `direct-connect-gateway` \| `peering`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #   @return [Array<Types::Filter>]
@@ -28042,8 +28040,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
-    #     `direct-connect-gateway` \| `tgw-peering`).
+    #   * `resource-type` - The resource type. Valid values are `vpc` \|
+    #     `vpn` \| `direct-connect-gateway` \| `peering`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #   @return [Array<Types::Filter>]
@@ -45599,8 +45597,9 @@ module Aws::EC2
     #   * `attachment.resource-id` - The resource id of the transit gateway
     #     attachment.
     #
-    #   * `attachment.resource-type` - The attachment resource type (`vpc`
-    #     \| `vpn` \| `direct-connect-gateway` \| `tgw-peering`).
+    #   * `attachment.resource-type` - The attachment resource type. Valid
+    #     values are `vpc` \| `vpn` \| `direct-connect-gateway` \|
+    #     `peering`.
     #
     #   * `prefix-list-id` - The ID of the prefix list.
     #
@@ -48958,7 +48957,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   The resource type. Note that the `tgw-peering` resource type has
+    #   been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -48996,7 +48996,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   The resource type. Note that the `tgw-peering` resource type has
+    #   been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -49004,7 +49005,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The attachment state.
+    #   The attachment state. Note that the `initiating` state has been
+    #   deprecated.
     #   @return [String]
     #
     # @!attribute [rw] association
@@ -49408,7 +49410,8 @@ module Aws::EC2
     #   @return [Types::PeeringAttachmentStatus]
     #
     # @!attribute [rw] state
-    #   The state of the transit gateway peering attachment.
+    #   The state of the transit gateway peering attachment. Note that the
+    #   `initiating` state has been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -49440,7 +49443,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   The resource type. Note that the `tgw-peering` resource type has
+    #   been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -49507,7 +49511,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   The resource type. Note that the `tgw-peering` resource type has
+    #   been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_route_table_id
@@ -49638,7 +49643,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   The resource type. Note that the `tgw-peering` resource type has
+    #   been deprecated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteAttachment AWS API Documentation
@@ -49709,7 +49715,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   The resource type. Note that the `tgw-peering` resource type has
+    #   been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -49738,7 +49745,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource.
+    #   The type of resource. Note that the `tgw-peering` resource type has
+    #   been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -49775,7 +49783,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the VPC attachment.
+    #   The state of the VPC attachment. Note that the `initiating` state
+    #   has been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids

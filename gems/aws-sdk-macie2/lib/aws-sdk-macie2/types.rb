@@ -455,8 +455,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about bucket-level permissions settings for an S3
-    # bucket.
+    # Provides information about the bucket-level permissions settings for
+    # an S3 bucket.
     #
     # @!attribute [rw] access_control_list
     #   Provides information about the permissions settings of the
@@ -508,6 +508,9 @@ module Aws::Macie2
     # @!attribute [rw] classifiable_object_count
     #   @return [Integer]
     #
+    # @!attribute [rw] classifiable_size_in_bytes
+    #   @return [Integer]
+    #
     # @!attribute [rw] last_updated
     #   @return [Time]
     #
@@ -521,7 +524,7 @@ module Aws::Macie2
     #   @return [Types::ObjectCountByEncryptionType]
     #
     # @!attribute [rw] public_access
-    #   Provides information about permissions settings that determine
+    #   Provides information about the permissions settings that determine
     #   whether an S3 bucket is publicly accessible.
     #   @return [Types::BucketPublicAccess]
     #
@@ -546,6 +549,22 @@ module Aws::Macie2
     # @!attribute [rw] tags
     #   @return [Array<Types::KeyValuePair>]
     #
+    # @!attribute [rw] unclassifiable_object_count
+    #   Provides information about the total storage size (in bytes) or
+    #   number of objects that Amazon Macie can't analyze in one or more S3
+    #   buckets. In a BucketMetadata object, this data is for a specific
+    #   bucket. In a GetBucketStatisticsResponse object, this data is
+    #   aggregated for all the buckets in the query results.
+    #   @return [Types::ObjectLevelStatistics]
+    #
+    # @!attribute [rw] unclassifiable_object_size_in_bytes
+    #   Provides information about the total storage size (in bytes) or
+    #   number of objects that Amazon Macie can't analyze in one or more S3
+    #   buckets. In a BucketMetadata object, this data is for a specific
+    #   bucket. In a GetBucketStatisticsResponse object, this data is
+    #   aggregated for all the buckets in the query results.
+    #   @return [Types::ObjectLevelStatistics]
+    #
     # @!attribute [rw] versioning
     #   @return [Boolean]
     #
@@ -557,6 +576,7 @@ module Aws::Macie2
       :bucket_created_at,
       :bucket_name,
       :classifiable_object_count,
+      :classifiable_size_in_bytes,
       :last_updated,
       :object_count,
       :object_count_by_encryption_type,
@@ -567,13 +587,15 @@ module Aws::Macie2
       :size_in_bytes,
       :size_in_bytes_compressed,
       :tags,
+      :unclassifiable_object_count,
+      :unclassifiable_object_size_in_bytes,
       :versioning)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The account-level and bucket-level permissions settings for an S3
-    # bucket.
+    # Provides information about the account-level and bucket-level
+    # permissions settings for an S3 bucket.
     #
     # @!attribute [rw] account_level_permissions
     #   Provides information about account-level permissions settings that
@@ -581,8 +603,8 @@ module Aws::Macie2
     #   @return [Types::AccountLevelPermissions]
     #
     # @!attribute [rw] bucket_level_permissions
-    #   Provides information about bucket-level permissions settings for an
-    #   S3 bucket.
+    #   Provides information about the bucket-level permissions settings for
+    #   an S3 bucket.
     #   @return [Types::BucketLevelPermissions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketPermissionConfiguration AWS API Documentation
@@ -612,15 +634,15 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about permissions settings that determine whether
-    # an S3 bucket is publicly accessible.
+    # Provides information about the permissions settings that determine
+    # whether an S3 bucket is publicly accessible.
     #
     # @!attribute [rw] effective_permission
     #   @return [String]
     #
     # @!attribute [rw] permission_configuration
-    #   The account-level and bucket-level permissions settings for an S3
-    #   bucket.
+    #   Provides information about the account-level and bucket-level
+    #   permissions settings for an S3 bucket.
     #   @return [Types::BucketPermissionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketPublicAccess AWS API Documentation
@@ -785,9 +807,9 @@ module Aws::Macie2
 
     # Specifies the scope, schedule, and other settings for a classification
     # job. You can't delete or change the settings for a classification job
-    # after you create it. In Amazon Macie, classification jobs are
-    # immutable. This ensures accurate data classification results for
-    # audits or investigations.
+    # after you create it. This helps ensure that you have an immutable
+    # history of sensitive data findings and discovery results for data
+    # privacy and protection audits or investigations.
     #
     # @note When making an API call, you may pass CreateClassificationJobRequest
     #   data as a hash:
@@ -945,9 +967,9 @@ module Aws::Macie2
 
     # Specifies the criteria and other settings for a new custom data
     # identifier. You can't change a custom data identifier after you
-    # create it. In Amazon Macie, custom data identifiers are immutable.
-    # This ensures accurate data classification results for audits or
-    # investigations.
+    # create it. This helps ensure that you have an immutable history of
+    # sensitive data findings and discovery results for data privacy and
+    # protection audits or investigations.
     #
     # @note When making an API call, you may pass CreateCustomDataIdentifierRequest
     #   data as a hash:
@@ -2142,8 +2164,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies an account that's associated with the S3 buckets to
-    # retrieve aggregated statistical data for.
+    # Specifies the account that owns the S3 buckets to retrieve aggregated
+    # statistical data for.
     #
     # @note When making an API call, you may pass GetBucketStatisticsRequest
     #   data as a hash:
@@ -2164,8 +2186,7 @@ module Aws::Macie2
     end
 
     # Provides the results of a query that retrieved aggregated statistical
-    # data for all the S3 buckets that Amazon Macie monitors and analyzes
-    # for an account.
+    # data for the S3 buckets that are owned by an account.
     #
     # @!attribute [rw] bucket_count
     #   @return [Integer]
@@ -2190,6 +2211,9 @@ module Aws::Macie2
     # @!attribute [rw] classifiable_object_count
     #   @return [Integer]
     #
+    # @!attribute [rw] classifiable_size_in_bytes
+    #   @return [Integer]
+    #
     # @!attribute [rw] last_updated
     #   @return [Time]
     #
@@ -2202,6 +2226,22 @@ module Aws::Macie2
     # @!attribute [rw] size_in_bytes_compressed
     #   @return [Integer]
     #
+    # @!attribute [rw] unclassifiable_object_count
+    #   Provides information about the total storage size (in bytes) or
+    #   number of objects that Amazon Macie can't analyze in one or more S3
+    #   buckets. In a BucketMetadata object, this data is for a specific
+    #   bucket. In a GetBucketStatisticsResponse object, this data is
+    #   aggregated for all the buckets in the query results.
+    #   @return [Types::ObjectLevelStatistics]
+    #
+    # @!attribute [rw] unclassifiable_object_size_in_bytes
+    #   Provides information about the total storage size (in bytes) or
+    #   number of objects that Amazon Macie can't analyze in one or more S3
+    #   buckets. In a BucketMetadata object, this data is for a specific
+    #   bucket. In a GetBucketStatisticsResponse object, this data is
+    #   aggregated for all the buckets in the query results.
+    #   @return [Types::ObjectLevelStatistics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetBucketStatisticsResponse AWS API Documentation
     #
     class GetBucketStatisticsResponse < Struct.new(
@@ -2210,10 +2250,13 @@ module Aws::Macie2
       :bucket_count_by_encryption_type,
       :bucket_count_by_shared_access_type,
       :classifiable_object_count,
+      :classifiable_size_in_bytes,
       :last_updated,
       :object_count,
       :size_in_bytes,
-      :size_in_bytes_compressed)
+      :size_in_bytes_compressed,
+      :unclassifiable_object_count,
+      :unclassifiable_object_size_in_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3706,6 +3749,31 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides information about the total storage size (in bytes) or number
+    # of objects that Amazon Macie can't analyze in one or more S3 buckets.
+    # In a BucketMetadata object, this data is for a specific bucket. In a
+    # GetBucketStatisticsResponse object, this data is aggregated for all
+    # the buckets in the query results.
+    #
+    # @!attribute [rw] file_type
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_class
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ObjectLevelStatistics AWS API Documentation
+    #
+    class ObjectLevelStatistics < Struct.new(
+      :file_type,
+      :storage_class,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the details of a policy finding.
     #
     # @!attribute [rw] action
@@ -3854,7 +3922,7 @@ module Aws::Macie2
     #   @return [Types::S3BucketOwner]
     #
     # @!attribute [rw] public_access
-    #   Provides information about permissions settings that determine
+    #   Provides information about the permissions settings that determine
     #   whether an S3 bucket is publicly accessible.
     #   @return [Types::BucketPublicAccess]
     #

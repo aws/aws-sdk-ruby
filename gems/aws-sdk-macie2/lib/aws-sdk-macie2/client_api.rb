@@ -183,6 +183,7 @@ module Aws::Macie2
     Member = Shapes::StructureShape.new(name: 'Member')
     MonthlySchedule = Shapes::StructureShape.new(name: 'MonthlySchedule')
     ObjectCountByEncryptionType = Shapes::StructureShape.new(name: 'ObjectCountByEncryptionType')
+    ObjectLevelStatistics = Shapes::StructureShape.new(name: 'ObjectLevelStatistics')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
     PutClassificationExportConfigurationRequest = Shapes::StructureShape.new(name: 'PutClassificationExportConfigurationRequest')
@@ -384,6 +385,7 @@ module Aws::Macie2
     BucketMetadata.add_member(:bucket_created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "bucketCreatedAt"))
     BucketMetadata.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
     BucketMetadata.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
+    BucketMetadata.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
     BucketMetadata.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
     BucketMetadata.add_member(:object_count, Shapes::ShapeRef.new(shape: __long, location_name: "objectCount"))
     BucketMetadata.add_member(:object_count_by_encryption_type, Shapes::ShapeRef.new(shape: ObjectCountByEncryptionType, location_name: "objectCountByEncryptionType"))
@@ -394,6 +396,8 @@ module Aws::Macie2
     BucketMetadata.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytes"))
     BucketMetadata.add_member(:size_in_bytes_compressed, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytesCompressed"))
     BucketMetadata.add_member(:tags, Shapes::ShapeRef.new(shape: __listOfKeyValuePair, location_name: "tags"))
+    BucketMetadata.add_member(:unclassifiable_object_count, Shapes::ShapeRef.new(shape: ObjectLevelStatistics, location_name: "unclassifiableObjectCount"))
+    BucketMetadata.add_member(:unclassifiable_object_size_in_bytes, Shapes::ShapeRef.new(shape: ObjectLevelStatistics, location_name: "unclassifiableObjectSizeInBytes"))
     BucketMetadata.add_member(:versioning, Shapes::ShapeRef.new(shape: __boolean, location_name: "versioning"))
     BucketMetadata.struct_class = Types::BucketMetadata
 
@@ -693,10 +697,13 @@ module Aws::Macie2
     GetBucketStatisticsResponse.add_member(:bucket_count_by_encryption_type, Shapes::ShapeRef.new(shape: BucketCountByEncryptionType, location_name: "bucketCountByEncryptionType"))
     GetBucketStatisticsResponse.add_member(:bucket_count_by_shared_access_type, Shapes::ShapeRef.new(shape: BucketCountBySharedAccessType, location_name: "bucketCountBySharedAccessType"))
     GetBucketStatisticsResponse.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
+    GetBucketStatisticsResponse.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
     GetBucketStatisticsResponse.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
     GetBucketStatisticsResponse.add_member(:object_count, Shapes::ShapeRef.new(shape: __long, location_name: "objectCount"))
     GetBucketStatisticsResponse.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytes"))
     GetBucketStatisticsResponse.add_member(:size_in_bytes_compressed, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytesCompressed"))
+    GetBucketStatisticsResponse.add_member(:unclassifiable_object_count, Shapes::ShapeRef.new(shape: ObjectLevelStatistics, location_name: "unclassifiableObjectCount"))
+    GetBucketStatisticsResponse.add_member(:unclassifiable_object_size_in_bytes, Shapes::ShapeRef.new(shape: ObjectLevelStatistics, location_name: "unclassifiableObjectSizeInBytes"))
     GetBucketStatisticsResponse.struct_class = Types::GetBucketStatisticsResponse
 
     GetClassificationExportConfigurationRequest.struct_class = Types::GetClassificationExportConfigurationRequest
@@ -963,6 +970,11 @@ module Aws::Macie2
     ObjectCountByEncryptionType.add_member(:s3_managed, Shapes::ShapeRef.new(shape: __long, location_name: "s3Managed"))
     ObjectCountByEncryptionType.add_member(:unencrypted, Shapes::ShapeRef.new(shape: __long, location_name: "unencrypted"))
     ObjectCountByEncryptionType.struct_class = Types::ObjectCountByEncryptionType
+
+    ObjectLevelStatistics.add_member(:file_type, Shapes::ShapeRef.new(shape: __long, location_name: "fileType"))
+    ObjectLevelStatistics.add_member(:storage_class, Shapes::ShapeRef.new(shape: __long, location_name: "storageClass"))
+    ObjectLevelStatistics.add_member(:total, Shapes::ShapeRef.new(shape: __long, location_name: "total"))
+    ObjectLevelStatistics.struct_class = Types::ObjectLevelStatistics
 
     PolicyDetails.add_member(:action, Shapes::ShapeRef.new(shape: FindingAction, location_name: "action"))
     PolicyDetails.add_member(:actor, Shapes::ShapeRef.new(shape: FindingActor, location_name: "actor"))

@@ -412,7 +412,7 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
-    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_peering_attachment.creation_time #=> Time
     #   resp.transit_gateway_peering_attachment.tags #=> Array
     #   resp.transit_gateway_peering_attachment.tags[0].key #=> String
@@ -460,7 +460,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
-    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
@@ -1627,7 +1627,7 @@ module Aws::EC2
     #   resp.associations.transit_gateway_multicast_domain_id #=> String
     #   resp.associations.transit_gateway_attachment_id #=> String
     #   resp.associations.resource_id #=> String
-    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.associations.subnets #=> Array
     #   resp.associations.subnets[0].subnet_id #=> String
     #   resp.associations.subnets[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
@@ -1674,7 +1674,7 @@ module Aws::EC2
     #   resp.association.transit_gateway_route_table_id #=> String
     #   resp.association.transit_gateway_attachment_id #=> String
     #   resp.association.resource_id #=> String
-    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayRouteTable AWS API Documentation
@@ -8662,7 +8662,7 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
-    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_peering_attachment.creation_time #=> Time
     #   resp.transit_gateway_peering_attachment.tags #=> Array
     #   resp.transit_gateway_peering_attachment.tags[0].key #=> String
@@ -8720,7 +8720,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayPrefixListReference AWS API Documentation
@@ -8774,7 +8774,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -8911,7 +8911,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
-    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
@@ -11829,7 +11829,7 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
-    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_peering_attachment.creation_time #=> Time
     #   resp.transit_gateway_peering_attachment.tags #=> Array
     #   resp.transit_gateway_peering_attachment.tags[0].key #=> String
@@ -11879,7 +11879,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayPrefixListReference AWS API Documentation
@@ -11926,7 +11926,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -12012,7 +12012,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
-    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
@@ -23645,12 +23645,13 @@ module Aws::EC2
     #   * `resource-owner-id` - The ID of the AWS account that owns the
     #     resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
-    #     `direct-connect-gateway` \| `tgw-peering`).
+    #   * `resource-type` - The resource type. Valid values are `vpc` \| `vpn`
+    #     \| `direct-connect-gateway` \| `peering`.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the attachment. Valid values are `available`
+    #     \| `deleted` \| `deleting` \| `failed` \| `failing` \|
+    #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -23702,9 +23703,9 @@ module Aws::EC2
     #   resp.transit_gateway_attachments[0].transit_gateway_id #=> String
     #   resp.transit_gateway_attachments[0].transit_gateway_owner_id #=> String
     #   resp.transit_gateway_attachments[0].resource_owner_id #=> String
-    #   resp.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.transit_gateway_attachments[0].resource_id #=> String
-    #   resp.transit_gateway_attachments[0].state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_attachments[0].state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_attachments[0].association.transit_gateway_route_table_id #=> String
     #   resp.transit_gateway_attachments[0].association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #   resp.transit_gateway_attachments[0].creation_time #=> Time
@@ -23811,10 +23812,10 @@ module Aws::EC2
     #   * `remote-owner-id` - The ID of the AWS account in the remote Region
     #     that owns the transit gateway.
     #
-    #   * `state` - The state of the peering attachment (`available` \|
-    #     `deleted` \| `deleting` \| `failed` \| `modifying` \|
-    #     `pendingAcceptance` \| `pending` \| `rollingBack` \| `rejected` \|
-    #     `rejecting`).
+    #   * `state` - The state of the peering attachment. Valid values are
+    #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
+    #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -23866,7 +23867,7 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachments[0].accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachments[0].status.code #=> String
     #   resp.transit_gateway_peering_attachments[0].status.message #=> String
-    #   resp.transit_gateway_peering_attachments[0].state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_peering_attachments[0].state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_peering_attachments[0].creation_time #=> Time
     #   resp.transit_gateway_peering_attachments[0].tags #=> Array
     #   resp.transit_gateway_peering_attachments[0].tags[0].key #=> String
@@ -23900,9 +23901,8 @@ module Aws::EC2
     #     default propagation route table for the transit gateway (`true` \|
     #     `false`).
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the route table (`available` \| `deleting` \|
+    #     `deleted` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -23977,9 +23977,10 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the attachment. Valid values are `available`
+    #     \| `deleted` \| `deleting` \| `failed` \| `failing` \|
+    #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -24030,7 +24031,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachments[0].transit_gateway_id #=> String
     #   resp.transit_gateway_vpc_attachments[0].vpc_id #=> String
     #   resp.transit_gateway_vpc_attachments[0].vpc_owner_id #=> String
-    #   resp.transit_gateway_vpc_attachments[0].state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachments[0].state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_vpc_attachments[0].subnet_ids #=> Array
     #   resp.transit_gateway_vpc_attachments[0].subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachments[0].creation_time #=> Time
@@ -24089,9 +24090,8 @@ module Aws::EC2
     #   * `owner-id` - The ID of the AWS account that owns the transit
     #     gateway.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the transit gateway (`available` \| `deleted`
+    #     \| `deleting` \| `modifying` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -26520,7 +26520,7 @@ module Aws::EC2
     #
     #   resp.propagation.transit_gateway_attachment_id #=> String
     #   resp.propagation.resource_id #=> String
-    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.propagation.transit_gateway_route_table_id #=> String
     #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #
@@ -26944,7 +26944,7 @@ module Aws::EC2
     #   resp.associations.transit_gateway_multicast_domain_id #=> String
     #   resp.associations.transit_gateway_attachment_id #=> String
     #   resp.associations.resource_id #=> String
-    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.associations.subnets #=> Array
     #   resp.associations.subnets[0].subnet_id #=> String
     #   resp.associations.subnets[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
@@ -26990,7 +26990,7 @@ module Aws::EC2
     #   resp.association.transit_gateway_route_table_id #=> String
     #   resp.association.transit_gateway_attachment_id #=> String
     #   resp.association.resource_id #=> String
-    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayRouteTable AWS API Documentation
@@ -27205,7 +27205,7 @@ module Aws::EC2
     #
     #   resp.propagation.transit_gateway_attachment_id #=> String
     #   resp.propagation.resource_id #=> String
-    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.propagation.transit_gateway_route_table_id #=> String
     #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #
@@ -27614,13 +27614,11 @@ module Aws::EC2
     #     supernet-of-match as 10.0.1.0/30, then the result returns
     #     10.0.1.0/29.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the route (`active` \| `blackhole`).
     #
     #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
     #
-    #   * `type` - The type of route (`active` \| `blackhole`).
+    #   * `type` - The type of route (`propagated` \| `static`).
     #
     # @option params [required, String] :s3_bucket
     #   The name of the S3 bucket.
@@ -28793,7 +28791,7 @@ module Aws::EC2
     #   resp.multicast_domain_associations #=> Array
     #   resp.multicast_domain_associations[0].transit_gateway_attachment_id #=> String
     #   resp.multicast_domain_associations[0].resource_id #=> String
-    #   resp.multicast_domain_associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.multicast_domain_associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.multicast_domain_associations[0].subnet.subnet_id #=> String
     #   resp.multicast_domain_associations[0].subnet.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #   resp.next_token #=> String
@@ -28819,8 +28817,9 @@ module Aws::EC2
     #   * `attachment.resource-id` - The ID of the resource for the
     #     attachment.
     #
-    #   * `attachment.resource-type` - The type of resource for the attachment
-    #     (`vpc` \| `vpn` \| `direct-connect-gateway` \| `tgw-peering`).
+    #   * `attachment.resource-type` - The type of resource for the
+    #     attachment. Valid values are `vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `peering`.
     #
     #   * `attachment.transit-gateway-attachment-id` - The ID of the
     #     attachment.
@@ -28880,7 +28879,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_references[0].state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_references[0].blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_id #=> String
     #   resp.next_token #=> String
     #
@@ -28904,8 +28903,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
-    #     `direct-connect-gateway` \| `tgw-peering`).
+    #   * `resource-type` - The resource type. Valid values are `vpc` \| `vpn`
+    #     \| `direct-connect-gateway` \| `peering`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -28950,7 +28949,7 @@ module Aws::EC2
     #   resp.associations #=> Array
     #   resp.associations[0].transit_gateway_attachment_id #=> String
     #   resp.associations[0].resource_id #=> String
-    #   resp.associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.associations[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #   resp.next_token #=> String
     #
@@ -28974,8 +28973,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
-    #     `direct-connect-gateway` \| `tgw-peering`).
+    #   * `resource-type` - The resource type. Valid values are `vpc` \| `vpn`
+    #     \| `direct-connect-gateway` \| `peering`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -29020,7 +29019,7 @@ module Aws::EC2
     #   resp.transit_gateway_route_table_propagations #=> Array
     #   resp.transit_gateway_route_table_propagations[0].transit_gateway_attachment_id #=> String
     #   resp.transit_gateway_route_table_propagations[0].resource_id #=> String
-    #   resp.transit_gateway_route_table_propagations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_route_table_propagations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.transit_gateway_route_table_propagations[0].state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #   resp.next_token #=> String
     #
@@ -32284,7 +32283,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPrefixListReference AWS API Documentation
@@ -32344,7 +32343,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
-    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
@@ -34458,7 +34457,7 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
-    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_peering_attachment.creation_time #=> Time
     #   resp.transit_gateway_peering_attachment.tags #=> Array
     #   resp.transit_gateway_peering_attachment.tags[0].key #=> String
@@ -34506,7 +34505,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.transit_gateway_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_id #=> String
     #   resp.transit_gateway_vpc_attachment.vpc_owner_id #=> String
-    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_vpc_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_vpc_attachment.subnet_ids #=> Array
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
@@ -35178,7 +35177,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -37760,7 +37759,7 @@ module Aws::EC2
     #   resp.multicast_groups[0].transit_gateway_attachment_id #=> String
     #   resp.multicast_groups[0].subnet_id #=> String
     #   resp.multicast_groups[0].resource_id #=> String
-    #   resp.multicast_groups[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.multicast_groups[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.multicast_groups[0].network_interface_id #=> String
     #   resp.multicast_groups[0].group_member #=> Boolean
     #   resp.multicast_groups[0].group_source #=> Boolean
@@ -37791,8 +37790,8 @@ module Aws::EC2
     #   * `attachment.resource-id` - The resource id of the transit gateway
     #     attachment.
     #
-    #   * `attachment.resource-type` - The attachment resource type (`vpc` \|
-    #     `vpn` \| `direct-connect-gateway` \| `tgw-peering`).
+    #   * `attachment.resource-type` - The attachment resource type. Valid
+    #     values are `vpc` \| `vpn` \| `direct-connect-gateway` \| `peering`.
     #
     #   * `prefix-list-id` - The ID of the prefix list.
     #
@@ -37851,7 +37850,7 @@ module Aws::EC2
     #   resp.routes[0].transit_gateway_attachments #=> Array
     #   resp.routes[0].transit_gateway_attachments[0].resource_id #=> String
     #   resp.routes[0].transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
     #   resp.routes[0].type #=> String, one of "static", "propagated"
     #   resp.routes[0].state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #   resp.additional_routes_available #=> Boolean
@@ -38771,7 +38770,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.192.0'
+      context[:gem_version] = '1.193.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
