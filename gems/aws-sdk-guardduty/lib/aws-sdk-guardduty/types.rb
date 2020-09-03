@@ -228,7 +228,7 @@ module Aws::GuardDuty
     #
     class ArchiveFindingsResponse < Aws::EmptyStructure; end
 
-    # Contains information about the API operation.
+    # Contains information about the API action.
     #
     # @!attribute [rw] api
     #   The AWS API name.
@@ -242,8 +242,13 @@ module Aws::GuardDuty
     #   The domain information for the AWS API call.
     #   @return [Types::DomainDetails]
     #
+    # @!attribute [rw] error_code
+    #   The error code of the failed AWS API action.
+    #   @return [String]
+    #
     # @!attribute [rw] remote_ip_details
-    #   The remote IP information of the connection.
+    #   The remote IP information of the connection that initiated the AWS
+    #   API call.
     #   @return [Types::RemoteIpDetails]
     #
     # @!attribute [rw] service_name
@@ -256,6 +261,7 @@ module Aws::GuardDuty
       :api,
       :caller_type,
       :domain_details,
+      :error_code,
       :remote_ip_details,
       :service_name)
       SENSITIVE = []
@@ -1188,7 +1194,7 @@ module Aws::GuardDuty
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
     #
     # @!attribute [rw] encryption_type
     #   The type of encryption used for objects within the S3 bucket.

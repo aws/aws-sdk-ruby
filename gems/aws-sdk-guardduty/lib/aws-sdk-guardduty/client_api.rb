@@ -326,6 +326,7 @@ module Aws::GuardDuty
     AwsApiCallAction.add_member(:api, Shapes::ShapeRef.new(shape: String, location_name: "api"))
     AwsApiCallAction.add_member(:caller_type, Shapes::ShapeRef.new(shape: String, location_name: "callerType"))
     AwsApiCallAction.add_member(:domain_details, Shapes::ShapeRef.new(shape: DomainDetails, location_name: "domainDetails"))
+    AwsApiCallAction.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
     AwsApiCallAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     AwsApiCallAction.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     AwsApiCallAction.struct_class = Types::AwsApiCallAction

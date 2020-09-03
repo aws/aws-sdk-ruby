@@ -493,6 +493,8 @@ module Aws::MediaPackage
     #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #           },
     #           suggested_presentation_delay_seconds: 1,
+    #           utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #           utc_timing_uri: "__string",
     #         },
     #         description: "__string",
     #         hls_package: {
@@ -769,6 +771,8 @@ module Aws::MediaPackage
     #           stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #         },
     #         suggested_presentation_delay_seconds: 1,
+    #         utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #         utc_timing_uri: "__string",
     #       }
     #
     # @!attribute [rw] ad_triggers
@@ -856,6 +860,16 @@ module Aws::MediaPackage
     #   Duration (in seconds) to delay live content before presentation.
     #   @return [Integer]
     #
+    # @!attribute [rw] utc_timing
+    #   Determines the type of UTCTiming included in the Media Presentation
+    #   Description (MPD)
+    #   @return [String]
+    #
+    # @!attribute [rw] utc_timing_uri
+    #   Specifies the value attribute of the UTCTiming field when utcTiming
+    #   is set to HTTP-ISO or HTTP-HEAD
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DashPackage AWS API Documentation
     #
     class DashPackage < Struct.new(
@@ -871,7 +885,9 @@ module Aws::MediaPackage
       :segment_duration_seconds,
       :segment_template_format,
       :stream_selection,
-      :suggested_presentation_delay_seconds)
+      :suggested_presentation_delay_seconds,
+      :utc_timing,
+      :utc_timing_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2629,6 +2645,8 @@ module Aws::MediaPackage
     #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #           },
     #           suggested_presentation_delay_seconds: 1,
+    #           utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #           utc_timing_uri: "__string",
     #         },
     #         description: "__string",
     #         hls_package: {

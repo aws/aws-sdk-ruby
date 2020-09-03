@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-09-03)
+------------------
+
+* Feature - Amazon Kendra now returns confidence scores for both 'answer' and 'question and answer' query responses.
+
 1.10.0 (2020-08-25)
 ------------------
 

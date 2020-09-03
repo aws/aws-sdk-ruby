@@ -95,6 +95,7 @@ module Aws::MediaPackage
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateOriginEndpointRequest = Shapes::StructureShape.new(name: 'UpdateOriginEndpointRequest')
     UpdateOriginEndpointResponse = Shapes::StructureShape.new(name: 'UpdateOriginEndpointResponse')
+    UtcTiming = Shapes::StringShape.new(name: 'UtcTiming')
     __AdTriggersElement = Shapes::StringShape.new(name: '__AdTriggersElement')
     __PeriodTriggersElement = Shapes::StringShape.new(name: '__PeriodTriggersElement')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
@@ -236,6 +237,8 @@ module Aws::MediaPackage
     DashPackage.add_member(:segment_template_format, Shapes::ShapeRef.new(shape: SegmentTemplateFormat, location_name: "segmentTemplateFormat"))
     DashPackage.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
     DashPackage.add_member(:suggested_presentation_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "suggestedPresentationDelaySeconds"))
+    DashPackage.add_member(:utc_timing, Shapes::ShapeRef.new(shape: UtcTiming, location_name: "utcTiming"))
+    DashPackage.add_member(:utc_timing_uri, Shapes::ShapeRef.new(shape: __string, location_name: "utcTimingUri"))
     DashPackage.struct_class = Types::DashPackage
 
     DeleteChannelRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))

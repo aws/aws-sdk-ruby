@@ -199,6 +199,8 @@ module Aws::Kendra
     SalesforceStandardObjectConfigurationList = Shapes::ListShape.new(name: 'SalesforceStandardObjectConfigurationList')
     SalesforceStandardObjectName = Shapes::StringShape.new(name: 'SalesforceStandardObjectName')
     ScanSchedule = Shapes::StringShape.new(name: 'ScanSchedule')
+    ScoreAttributes = Shapes::StructureShape.new(name: 'ScoreAttributes')
+    ScoreConfidence = Shapes::StringShape.new(name: 'ScoreConfidence')
     Search = Shapes::StructureShape.new(name: 'Search')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
@@ -684,6 +686,7 @@ module Aws::Kendra
     QueryResultItem.add_member(:document_excerpt, Shapes::ShapeRef.new(shape: TextWithHighlights, location_name: "DocumentExcerpt"))
     QueryResultItem.add_member(:document_uri, Shapes::ShapeRef.new(shape: Url, location_name: "DocumentURI"))
     QueryResultItem.add_member(:document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "DocumentAttributes"))
+    QueryResultItem.add_member(:score_attributes, Shapes::ShapeRef.new(shape: ScoreAttributes, location_name: "ScoreAttributes"))
     QueryResultItem.struct_class = Types::QueryResultItem
 
     QueryResultItemList.member = Shapes::ShapeRef.new(shape: QueryResultItem)
@@ -774,6 +777,9 @@ module Aws::Kendra
     SalesforceStandardObjectConfiguration.struct_class = Types::SalesforceStandardObjectConfiguration
 
     SalesforceStandardObjectConfigurationList.member = Shapes::ShapeRef.new(shape: SalesforceStandardObjectConfiguration)
+
+    ScoreAttributes.add_member(:score_confidence, Shapes::ShapeRef.new(shape: ScoreConfidence, location_name: "ScoreConfidence"))
+    ScoreAttributes.struct_class = Types::ScoreAttributes
 
     Search.add_member(:facetable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Facetable"))
     Search.add_member(:searchable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Searchable"))

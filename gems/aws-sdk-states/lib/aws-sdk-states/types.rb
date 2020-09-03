@@ -122,8 +122,13 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   The JSON data input to the activity task.
+    #   The JSON data input to the activity task. Length constraints apply
+    #   to the payload size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] input_details
+    #   Contains details about the input for an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @!attribute [rw] timeout_in_seconds
     #   The maximum allowed duration of the activity task.
@@ -139,6 +144,7 @@ module Aws::States
     class ActivityScheduledEventDetails < Struct.new(
       :resource,
       :input,
+      :input_details,
       :timeout_in_seconds,
       :heartbeat_in_seconds)
       SENSITIVE = [:input]
@@ -164,13 +170,19 @@ module Aws::States
     # an execution.
     #
     # @!attribute [rw] output
-    #   The JSON data output by the activity task.
+    #   The JSON data output by the activity task. Length constraints apply
+    #   to the payload size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Contains details about the output of an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivitySucceededEventDetails AWS API Documentation
     #
     class ActivitySucceededEventDetails < Struct.new(
-      :output)
+      :output,
+      :output_details)
       SENSITIVE = [:output]
       include Aws::Structure
     end
@@ -205,6 +217,22 @@ module Aws::States
     #
     class ActivityWorkerLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about execution input.
+    #
+    # @!attribute [rw] included
+    #   Indicates whether input or output was included in the response.
+    #   Always `true` for API calls, but may be `false` for CloudWatch
+    #   Events.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CloudWatchEventsExecutionDataDetails AWS API Documentation
+    #
+    class CloudWatchEventsExecutionDataDetails < Struct.new(
+      :included)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -599,16 +627,27 @@ module Aws::States
     #
     # @!attribute [rw] input
     #   The string that contains the JSON input data of the execution.
+    #   Length constraints apply to the payload size, and are expressed as
+    #   bytes in UTF-8 encoding.
     #   @return [String]
     #
+    # @!attribute [rw] input_details
+    #   Provides details about execution input.
+    #   @return [Types::CloudWatchEventsExecutionDataDetails]
+    #
     # @!attribute [rw] output
-    #   The JSON output data of the execution.
+    #   The JSON output data of the execution. Length constraints apply to
+    #   the payload size, and are expressed as bytes in UTF-8 encoding.
     #
     #   <note markdown="1"> This field is set only if the execution succeeds. If the execution
     #   fails, this field is null.
     #
     #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Provides details about execution input.
+    #   @return [Types::CloudWatchEventsExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
     #
@@ -620,7 +659,9 @@ module Aws::States
       :start_date,
       :stop_date,
       :input,
-      :output)
+      :input_details,
+      :output,
+      :output_details)
       SENSITIVE = [:input, :output]
       include Aws::Structure
     end
@@ -922,8 +963,13 @@ module Aws::States
     # Contains details about the start of the execution.
     #
     # @!attribute [rw] input
-    #   The JSON data input to the execution.
+    #   The JSON data input to the execution. Length constraints apply to
+    #   the payload size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] input_details
+    #   Contains details about the input for an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used for executing
@@ -934,6 +980,7 @@ module Aws::States
     #
     class ExecutionStartedEventDetails < Struct.new(
       :input,
+      :input_details,
       :role_arn)
       SENSITIVE = [:input]
       include Aws::Structure
@@ -942,13 +989,19 @@ module Aws::States
     # Contains details about the successful termination of the execution.
     #
     # @!attribute [rw] output
-    #   The JSON data output by the execution.
+    #   The JSON data output by the execution. Length constraints apply to
+    #   the payload size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Contains details about the output of an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionSucceededEventDetails AWS API Documentation
     #
     class ExecutionSucceededEventDetails < Struct.new(
-      :output)
+      :output,
+      :output_details)
       SENSITIVE = [:output]
       include Aws::Structure
     end
@@ -1009,7 +1062,9 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   The string that contains the JSON input data for the task.
+    #   The string that contains the JSON input data for the task. Length
+    #   constraints apply to the payload size, and are expressed as bytes in
+    #   UTF-8 encoding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTaskOutput AWS API Documentation
@@ -1029,6 +1084,7 @@ module Aws::States
     #         max_results: 1,
     #         reverse_order: false,
     #         next_token: "PageToken",
+    #         include_execution_data: false,
     #       }
     #
     # @!attribute [rw] execution_arn
@@ -1058,13 +1114,19 @@ module Aws::States
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
+    # @!attribute [rw] include_execution_data
+    #   You can select whether execution data (input or output of a history
+    #   event) is returned. The default is `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistoryInput AWS API Documentation
     #
     class GetExecutionHistoryInput < Struct.new(
       :execution_arn,
       :max_results,
       :reverse_order,
-      :next_token)
+      :next_token,
+      :include_execution_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1291,6 +1353,22 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Contains details about the data from an execution's events. Always
+    # `true` for API calls, but may be `false` for CloudWatch Logs.
+    #
+    # @!attribute [rw] truncated
+    #   Indicates whether input or output was truncated in the response.
+    #   Always `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEventExecutionDataDetails AWS API Documentation
+    #
+    class HistoryEventExecutionDataDetails < Struct.new(
+      :truncated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The provided Amazon Resource Name (ARN) is invalid.
     #
     # @!attribute [rw] message
@@ -1428,8 +1506,13 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   The JSON data input to the lambda function.
+    #   The JSON data input to the lambda function. Length constraints apply
+    #   to the payload size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] input_details
+    #   Contains details about input for an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @!attribute [rw] timeout_in_seconds
     #   The maximum allowed duration of the lambda function.
@@ -1440,6 +1523,7 @@ module Aws::States
     class LambdaFunctionScheduledEventDetails < Struct.new(
       :resource,
       :input,
+      :input_details,
       :timeout_in_seconds)
       SENSITIVE = [:input]
       include Aws::Structure
@@ -1469,13 +1553,20 @@ module Aws::States
     # during an execution.
     #
     # @!attribute [rw] output
-    #   The JSON data output by the lambda function.
+    #   The JSON data output by the lambda function. Length constraints
+    #   apply to the payload size, and are expressed as bytes in UTF-8
+    #   encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Contains details about the output of an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionSucceededEventDetails AWS API Documentation
     #
     class LambdaFunctionSucceededEventDetails < Struct.new(
-      :output)
+      :output,
+      :output_details)
       SENSITIVE = [:output]
       include Aws::Structure
     end
@@ -1769,7 +1860,7 @@ module Aws::States
     #
     # @!attribute [rw] include_execution_data
     #   Determines whether execution data is included in your log. When set
-    #   to `FALSE`, data is excluded.
+    #   to `false`, data is excluded.
     #   @return [Boolean]
     #
     # @!attribute [rw] destinations
@@ -1945,7 +2036,8 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The JSON output of the task.
+    #   The JSON output of the task. Length constraints apply to the payload
+    #   size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccessInput AWS API Documentation
@@ -2010,6 +2102,9 @@ module Aws::States
     #   the two braces, for example: `"input": "\{\}"`
     #
     #    </note>
+    #
+    #   Length constraints apply to the payload size, and are expressed as
+    #   bytes in UTF-8 encoding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionInput AWS API Documentation
@@ -2046,14 +2141,21 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   The string that contains the JSON input data for the state.
+    #   The string that contains the JSON input data for the state. Length
+    #   constraints apply to the payload size, and are expressed as bytes in
+    #   UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] input_details
+    #   Contains details about the input for an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateEnteredEventDetails AWS API Documentation
     #
     class StateEnteredEventDetails < Struct.new(
       :name,
-      :input)
+      :input,
+      :input_details)
       SENSITIVE = [:input]
       include Aws::Structure
     end
@@ -2080,14 +2182,20 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The JSON output data of the state.
+    #   The JSON output data of the state. Length constraints apply to the
+    #   payload size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Contains details about the output of an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateExitedEventDetails AWS API Documentation
     #
     class StateExitedEventDetails < Struct.new(
       :name,
-      :output)
+      :output,
+      :output_details)
       SENSITIVE = [:output]
       include Aws::Structure
     end
@@ -2377,10 +2485,16 @@ module Aws::States
     #
     # @!attribute [rw] parameters
     #   The JSON data passed to the resource referenced in a task state.
+    #   Length constraints apply to the payload size, and are expressed as
+    #   bytes in UTF-8 encoding.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_seconds
     #   The maximum allowed duration of the task.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] heartbeat_in_seconds
+    #   The maximum allowed duration between two heartbeats for the task.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskScheduledEventDetails AWS API Documentation
@@ -2390,7 +2504,8 @@ module Aws::States
       :resource,
       :region,
       :parameters,
-      :timeout_in_seconds)
+      :timeout_in_seconds,
+      :heartbeat_in_seconds)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -2485,15 +2600,22 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The response from a resource when a task has started.
+    #   The response from a resource when a task has started. Length
+    #   constraints apply to the payload size, and are expressed as bytes in
+    #   UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Contains details about the output of an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmittedEventDetails AWS API Documentation
     #
     class TaskSubmittedEventDetails < Struct.new(
       :resource_type,
       :resource,
-      :output)
+      :output,
+      :output_details)
       SENSITIVE = [:output]
       include Aws::Structure
     end
@@ -2510,15 +2632,22 @@ module Aws::States
     #
     # @!attribute [rw] output
     #   The full JSON response from a resource when a task has succeeded.
-    #   This response becomes the output of the related task.
+    #   This response becomes the output of the related task. Length
+    #   constraints apply to the payload size, and are expressed as bytes in
+    #   UTF-8 encoding.
     #   @return [String]
+    #
+    # @!attribute [rw] output_details
+    #   Contains details about the output of an execution history event.
+    #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSucceededEventDetails AWS API Documentation
     #
     class TaskSucceededEventDetails < Struct.new(
       :resource_type,
       :resource,
-      :output)
+      :output,
+      :output_details)
       SENSITIVE = [:output]
       include Aws::Structure
     end

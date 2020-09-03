@@ -1537,6 +1537,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.api #=> String
     #   resp.findings[0].service.action.aws_api_call_action.caller_type #=> String
     #   resp.findings[0].service.action.aws_api_call_action.domain_details.domain #=> String
+    #   resp.findings[0].service.action.aws_api_call_action.error_code #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.country.country_name #=> String
@@ -3136,7 +3137,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -561,6 +561,8 @@ module Aws::MediaPackage
     #         stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #       },
     #       suggested_presentation_delay_seconds: 1,
+    #       utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #       utc_timing_uri: "__string",
     #     },
     #     description: "__string",
     #     hls_package: {
@@ -671,6 +673,8 @@ module Aws::MediaPackage
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_package.utc_timing #=> String, one of "NONE", "HTTP-HEAD", "HTTP-ISO"
+    #   resp.dash_package.utc_timing_uri #=> String
     #   resp.description #=> String
     #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.hls_package.ad_triggers #=> Array
@@ -932,6 +936,8 @@ module Aws::MediaPackage
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_package.utc_timing #=> String, one of "NONE", "HTTP-HEAD", "HTTP-ISO"
+    #   resp.dash_package.utc_timing_uri #=> String
     #   resp.description #=> String
     #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.hls_package.ad_triggers #=> Array
@@ -1157,6 +1163,8 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.origin_endpoints[0].dash_package.suggested_presentation_delay_seconds #=> Integer
+    #   resp.origin_endpoints[0].dash_package.utc_timing #=> String, one of "NONE", "HTTP-HEAD", "HTTP-ISO"
+    #   resp.origin_endpoints[0].dash_package.utc_timing_uri #=> String
     #   resp.origin_endpoints[0].description #=> String
     #   resp.origin_endpoints[0].hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.origin_endpoints[0].hls_package.ad_triggers #=> Array
@@ -1529,6 +1537,8 @@ module Aws::MediaPackage
     #         stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #       },
     #       suggested_presentation_delay_seconds: 1,
+    #       utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #       utc_timing_uri: "__string",
     #     },
     #     description: "__string",
     #     hls_package: {
@@ -1636,6 +1646,8 @@ module Aws::MediaPackage
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_package.utc_timing #=> String, one of "NONE", "HTTP-HEAD", "HTTP-ISO"
+    #   resp.dash_package.utc_timing_uri #=> String
     #   resp.description #=> String
     #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH", "DATERANGE"
     #   resp.hls_package.ad_triggers #=> Array
@@ -1704,7 +1716,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

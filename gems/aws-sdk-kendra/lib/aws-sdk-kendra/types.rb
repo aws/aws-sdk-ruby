@@ -439,13 +439,13 @@ module Aws::Kendra
     #
     # @!attribute [rw] contains_all
     #   Returns true when a document contains all of the specified document
-    #   attributes. This filter is only appicable to `StringListValue`
+    #   attributes. This filter is only applicable to `StringListValue`
     #   metadata.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_any
     #   Returns true when a document contains any of the specified document
-    #   attributes.This filter is only appicable to `StringListValue`
+    #   attributes. This filter is only applicable to `StringListValue`
     #   metadata.
     #   @return [Types::DocumentAttribute]
     #
@@ -3326,7 +3326,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] additional_attributes
-    #   One or more additional attribues associated with the query result.
+    #   One or more additional attributes associated with the query result.
     #   @return [Array<Types::AdditionalResultAttribute>]
     #
     # @!attribute [rw] document_id
@@ -3353,6 +3353,18 @@ module Aws::Kendra
     #   source URI (SourceUri) of the document.
     #   @return [Array<Types::DocumentAttribute>]
     #
+    # @!attribute [rw] score_attributes
+    #   Indicates the confidence that Amazon Kendra has that a result
+    #   matches the query that you provided. Each result is placed into a
+    #   bin that indicates the confidence, `VERY_HIGH`, `HIGH`, and
+    #   `MEDIUM`. You can use the score to determine if a response meets the
+    #   confidence needed for your application.
+    #
+    #   Confidence scores are only returned for results with the `Type`
+    #   field set to `QUESTION_ANSWER` or `ANSWER`. This field is not
+    #   returned if the `Type` field is set to `DOCUMENT`.
+    #   @return [Types::ScoreAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResultItem AWS API Documentation
     #
     class QueryResultItem < Struct.new(
@@ -3363,7 +3375,8 @@ module Aws::Kendra
       :document_title,
       :document_excerpt,
       :document_uri,
-      :document_attributes)
+      :document_attributes,
+      :score_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4078,6 +4091,21 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides a relative ranking that indicates how confident Amazon Kendra
+    # is that the response matches the query.
+    #
+    # @!attribute [rw] score_confidence
+    #   A relative ranking for how well the response matches the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ScoreAttributes AWS API Documentation
+    #
+    class ScoreAttributes < Struct.new(
+      :score_confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about how a custom index field is used during a
     # search.
     #
@@ -4500,6 +4528,20 @@ module Aws::Kendra
     # The attribute must have the `Sortable` flag set to `true`, otherwise
     # Amazon Kendra returns an exception.
     #
+    # You can sort attributes of the following types.
+    #
+    # * Date value
+    #
+    # * Long value
+    #
+    # * String value
+    #
+    # You can't sort attributes of the following type.
+    #
+    # * String list value
+    #
+    # ^
+    #
     # @note When making an API call, you may pass SortingConfiguration
     #   data as a hash:
     #
@@ -4551,8 +4593,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] query_identifiers_enclosing_option
-    #   Determines whether Amazon Kendra encloses SQL identifiers in double
-    #   quotes (") when making a database query.
+    #   Determines whether Amazon Kendra encloses SQL identifiers for tables
+    #   and column names in double quotes (") when making a database query.
     #
     #   By default, Amazon Kendra passes SQL identifiers the way that they
     #   are entered into the data source configuration. It does not change
@@ -4564,7 +4606,7 @@ module Aws::Kendra
     #   convert the character's case.
     #
     #   For MySQL databases, you must enable the `ansi_quotes` option when
-    #   you choose this option.
+    #   you set this field to `DOUBLE_QUOTES`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SqlConfiguration AWS API Documentation

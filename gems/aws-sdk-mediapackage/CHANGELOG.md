@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-09-03)
+------------------
+
+* Feature - Enables inserting a UTCTiming XML tag in the output manifest of a DASH endpoint which a media player will use to help with time synchronization.
+
 1.32.0 (2020-08-25)
 ------------------
 

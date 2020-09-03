@@ -676,7 +676,9 @@ module Aws::States
     #   * {Types::DescribeExecutionOutput#start_date #start_date} => Time
     #   * {Types::DescribeExecutionOutput#stop_date #stop_date} => Time
     #   * {Types::DescribeExecutionOutput#input #input} => String
+    #   * {Types::DescribeExecutionOutput#input_details #input_details} => Types::CloudWatchEventsExecutionDataDetails
     #   * {Types::DescribeExecutionOutput#output #output} => String
+    #   * {Types::DescribeExecutionOutput#output_details #output_details} => Types::CloudWatchEventsExecutionDataDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -693,7 +695,9 @@ module Aws::States
     #   resp.start_date #=> Time
     #   resp.stop_date #=> Time
     #   resp.input #=> String
+    #   resp.input_details.included #=> Boolean
     #   resp.output #=> String
+    #   resp.output_details.included #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution AWS API Documentation
     #
@@ -895,6 +899,10 @@ module Aws::States
     #   after 24 hours. Using an expired pagination token will return an *HTTP
     #   400 InvalidToken* error.
     #
+    # @option params [Boolean] :include_execution_data
+    #   You can select whether execution data (input or output of a history
+    #   event) is returned. The default is `true`.
+    #
     # @return [Types::GetExecutionHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetExecutionHistoryOutput#events #events} => Array&lt;Types::HistoryEvent&gt;
@@ -909,6 +917,7 @@ module Aws::States
     #     max_results: 1,
     #     reverse_order: false,
     #     next_token: "PageToken",
+    #     include_execution_data: false,
     #   })
     #
     # @example Response structure
@@ -924,10 +933,12 @@ module Aws::States
     #   resp.events[0].activity_schedule_failed_event_details.cause #=> String
     #   resp.events[0].activity_scheduled_event_details.resource #=> String
     #   resp.events[0].activity_scheduled_event_details.input #=> String
+    #   resp.events[0].activity_scheduled_event_details.input_details.truncated #=> Boolean
     #   resp.events[0].activity_scheduled_event_details.timeout_in_seconds #=> Integer
     #   resp.events[0].activity_scheduled_event_details.heartbeat_in_seconds #=> Integer
     #   resp.events[0].activity_started_event_details.worker_name #=> String
     #   resp.events[0].activity_succeeded_event_details.output #=> String
+    #   resp.events[0].activity_succeeded_event_details.output_details.truncated #=> Boolean
     #   resp.events[0].activity_timed_out_event_details.error #=> String
     #   resp.events[0].activity_timed_out_event_details.cause #=> String
     #   resp.events[0].task_failed_event_details.resource_type #=> String
@@ -939,6 +950,7 @@ module Aws::States
     #   resp.events[0].task_scheduled_event_details.region #=> String
     #   resp.events[0].task_scheduled_event_details.parameters #=> String
     #   resp.events[0].task_scheduled_event_details.timeout_in_seconds #=> Integer
+    #   resp.events[0].task_scheduled_event_details.heartbeat_in_seconds #=> Integer
     #   resp.events[0].task_start_failed_event_details.resource_type #=> String
     #   resp.events[0].task_start_failed_event_details.resource #=> String
     #   resp.events[0].task_start_failed_event_details.error #=> String
@@ -952,9 +964,11 @@ module Aws::States
     #   resp.events[0].task_submitted_event_details.resource_type #=> String
     #   resp.events[0].task_submitted_event_details.resource #=> String
     #   resp.events[0].task_submitted_event_details.output #=> String
+    #   resp.events[0].task_submitted_event_details.output_details.truncated #=> Boolean
     #   resp.events[0].task_succeeded_event_details.resource_type #=> String
     #   resp.events[0].task_succeeded_event_details.resource #=> String
     #   resp.events[0].task_succeeded_event_details.output #=> String
+    #   resp.events[0].task_succeeded_event_details.output_details.truncated #=> Boolean
     #   resp.events[0].task_timed_out_event_details.resource_type #=> String
     #   resp.events[0].task_timed_out_event_details.resource #=> String
     #   resp.events[0].task_timed_out_event_details.error #=> String
@@ -962,8 +976,10 @@ module Aws::States
     #   resp.events[0].execution_failed_event_details.error #=> String
     #   resp.events[0].execution_failed_event_details.cause #=> String
     #   resp.events[0].execution_started_event_details.input #=> String
+    #   resp.events[0].execution_started_event_details.input_details.truncated #=> Boolean
     #   resp.events[0].execution_started_event_details.role_arn #=> String
     #   resp.events[0].execution_succeeded_event_details.output #=> String
+    #   resp.events[0].execution_succeeded_event_details.output_details.truncated #=> Boolean
     #   resp.events[0].execution_aborted_event_details.error #=> String
     #   resp.events[0].execution_aborted_event_details.cause #=> String
     #   resp.events[0].execution_timed_out_event_details.error #=> String
@@ -983,16 +999,20 @@ module Aws::States
     #   resp.events[0].lambda_function_schedule_failed_event_details.cause #=> String
     #   resp.events[0].lambda_function_scheduled_event_details.resource #=> String
     #   resp.events[0].lambda_function_scheduled_event_details.input #=> String
+    #   resp.events[0].lambda_function_scheduled_event_details.input_details.truncated #=> Boolean
     #   resp.events[0].lambda_function_scheduled_event_details.timeout_in_seconds #=> Integer
     #   resp.events[0].lambda_function_start_failed_event_details.error #=> String
     #   resp.events[0].lambda_function_start_failed_event_details.cause #=> String
     #   resp.events[0].lambda_function_succeeded_event_details.output #=> String
+    #   resp.events[0].lambda_function_succeeded_event_details.output_details.truncated #=> Boolean
     #   resp.events[0].lambda_function_timed_out_event_details.error #=> String
     #   resp.events[0].lambda_function_timed_out_event_details.cause #=> String
     #   resp.events[0].state_entered_event_details.name #=> String
     #   resp.events[0].state_entered_event_details.input #=> String
+    #   resp.events[0].state_entered_event_details.input_details.truncated #=> Boolean
     #   resp.events[0].state_exited_event_details.name #=> String
     #   resp.events[0].state_exited_event_details.output #=> String
+    #   resp.events[0].state_exited_event_details.output_details.truncated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory AWS API Documentation
@@ -1350,7 +1370,8 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #
     # @option params [required, String] :output
-    #   The JSON output of the task.
+    #   The JSON output of the task. Length constraints apply to the payload
+    #   size, and are expressed as bytes in UTF-8 encoding.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1418,6 +1439,9 @@ module Aws::States
     #   two braces, for example: `"input": "\{\}"`
     #
     #    </note>
+    #
+    #   Length constraints apply to the payload size, and are expressed as
+    #   bytes in UTF-8 encoding.
     #
     # @return [Types::StartExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1638,7 +1662,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

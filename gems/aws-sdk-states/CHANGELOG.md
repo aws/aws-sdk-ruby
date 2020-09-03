@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-09-03)
+------------------
+
+* Feature - This release of the AWS Step Functions SDK introduces support for payloads up to 256KB for Standard and Express workflows
+
 1.32.0 (2020-08-25)
 ------------------
 

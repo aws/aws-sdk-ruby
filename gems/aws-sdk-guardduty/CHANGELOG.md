@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-09-03)
+------------------
+
+* Feature - GuardDuty findings triggered by failed events now include the error code name within the AwsApiCallAction section.
+
 1.39.0 (2020-08-25)
 ------------------
 

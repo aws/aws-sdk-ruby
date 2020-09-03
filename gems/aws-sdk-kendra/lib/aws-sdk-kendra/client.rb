@@ -1745,6 +1745,7 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.string_list_value[0] #=> String
     #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
+    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM"
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
     #   resp.facet_results[0].document_attribute_value_count_pairs #=> Array
@@ -2261,7 +2262,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
