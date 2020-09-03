@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
+
+* Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
 2.11.578 (2020-09-02)
 ------------------
 
