@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.579 (2020-09-03)
+------------------
+
 * Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
 
 * Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
