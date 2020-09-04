@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.580 (2020-09-04)
+------------------
+
 * Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
 
 * Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
