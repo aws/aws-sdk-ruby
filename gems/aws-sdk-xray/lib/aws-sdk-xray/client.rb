@@ -382,7 +382,34 @@ module Aws::XRay
     # @option params [String] :filter_expression
     #   The filter expression defining criteria by which to group traces.
     #
+    # @option params [Types::InsightsConfiguration] :insights_configuration
+    #   The structure containing configurations related to insights. The
+    #   InsightsEnabled boolean can be set to true to enable insights for the
+    #   new group or false to disable insights for the new group.
+    #
     # @option params [Array<Types::Tag>] :tags
+    #   A map that contains one or more tag keys and tag values to attach to
+    #   an X-Ray group. For more information about ways to use tags, see
+    #   [Tagging AWS resources][1] in the *AWS General Reference*.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * Maximum number of user-applied tags per resource: 50
+    #
+    #   * Maximum tag key length: 128 Unicode characters
+    #
+    #   * Maximum tag value length: 256 Unicode characters
+    #
+    #   * Valid values for key and value: a-z, A-Z, 0-9, space, and the
+    #     following characters: \_ . : / = + - and @
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS use.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -393,6 +420,9 @@ module Aws::XRay
     #   resp = client.create_group({
     #     group_name: "GroupName", # required
     #     filter_expression: "FilterExpression",
+    #     insights_configuration: {
+    #       insights_enabled: false,
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -406,6 +436,7 @@ module Aws::XRay
     #   resp.group.group_name #=> String
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
+    #   resp.group.insights_configuration.insights_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup AWS API Documentation
     #
@@ -429,6 +460,28 @@ module Aws::XRay
     #   The rule definition.
     #
     # @option params [Array<Types::Tag>] :tags
+    #   A map that contains one or more tag keys and tag values to attach to
+    #   an X-Ray sampling rule. For more information about ways to use tags,
+    #   see [Tagging AWS resources][1] in the *AWS General Reference*.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * Maximum number of user-applied tags per resource: 50
+    #
+    #   * Maximum tag key length: 128 Unicode characters
+    #
+    #   * Maximum tag value length: 256 Unicode characters
+    #
+    #   * Valid values for key and value: a-z, A-Z, 0-9, space, and the
+    #     following characters: \_ . : / = + - and @
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS use.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateSamplingRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -610,6 +663,7 @@ module Aws::XRay
     #   resp.group.group_name #=> String
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
+    #   resp.group.insights_configuration.insights_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup AWS API Documentation
     #
@@ -644,6 +698,7 @@ module Aws::XRay
     #   resp.groups[0].group_name #=> String
     #   resp.groups[0].group_arn #=> String
     #   resp.groups[0].filter_expression #=> String
+    #   resp.groups[0].insights_configuration.insights_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups AWS API Documentation
@@ -1242,9 +1297,16 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Returns a list of tags that are applied to the specified AWS X-Ray
+    # group or sampling rule.
+    #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #
     # @option params [String] :next_token
+    #   A pagination token. If multiple pages of results are returned, use the
+    #   `NextToken` value returned with the current page of results as the
+    #   value of this parameter to get the next page of results.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1451,9 +1513,36 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Applies tags to an existing AWS X-Ray group or sampling rule.
+    #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #
     # @option params [required, Array<Types::Tag>] :tags
+    #   A map that contains one or more tag keys and tag values to attach to
+    #   an X-Ray group or sampling rule. For more information about ways to
+    #   use tags, see [Tagging AWS resources][1] in the *AWS General
+    #   Reference*.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * Maximum number of user-applied tags per resource: 50
+    #
+    #   * Maximum tag key length: 128 Unicode characters
+    #
+    #   * Maximum tag value length: 256 Unicode characters
+    #
+    #   * Valid values for key and value: a-z, A-Z, 0-9, space, and the
+    #     following characters: \_ . : / = + - and @
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS use.
+    #     You cannot edit or delete system tags.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1478,9 +1567,15 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Removes tags from an AWS X-Ray group or sampling rule. You cannot edit
+    # or delete system tags (those with an `aws:` prefix).
+    #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #
     # @option params [required, Array<String>] :tag_keys
+    #   Keys for one or more tags that you want to remove from an X-Ray group
+    #   or sampling rule.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1512,6 +1607,11 @@ module Aws::XRay
     #   The updated filter expression defining criteria by which to group
     #   traces.
     #
+    # @option params [Types::InsightsConfiguration] :insights_configuration
+    #   The structure containing configurations related to insights. The
+    #   InsightsEnabled boolean can be set to true to enable insights for the
+    #   group or false to disable insights for the group.
+    #
     # @return [Types::UpdateGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGroupResult#group #group} => Types::Group
@@ -1522,6 +1622,9 @@ module Aws::XRay
     #     group_name: "GroupName",
     #     group_arn: "GroupARN",
     #     filter_expression: "FilterExpression",
+    #     insights_configuration: {
+    #       insights_enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1529,6 +1632,7 @@ module Aws::XRay
     #   resp.group.group_name #=> String
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
+    #   resp.group.insights_configuration.insights_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup AWS API Documentation
     #
@@ -1610,7 +1714,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

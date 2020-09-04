@@ -97,6 +97,7 @@ module Aws::XRay
     Host = Shapes::StringShape.new(name: 'Host')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     Http = Shapes::StructureShape.new(name: 'Http')
+    InsightsConfiguration = Shapes::StructureShape.new(name: 'InsightsConfiguration')
     InstanceIdDetail = Shapes::StructureShape.new(name: 'InstanceIdDetail')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -240,6 +241,7 @@ module Aws::XRay
 
     CreateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
     CreateGroupRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterExpression"))
+    CreateGroupRequest.add_member(:insights_configuration, Shapes::ShapeRef.new(shape: InsightsConfiguration, location_name: "InsightsConfiguration"))
     CreateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGroupRequest.struct_class = Types::CreateGroupRequest
 
@@ -438,11 +440,13 @@ module Aws::XRay
     Group.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "GroupName"))
     Group.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "GroupARN"))
     Group.add_member(:filter_expression, Shapes::ShapeRef.new(shape: String, location_name: "FilterExpression"))
+    Group.add_member(:insights_configuration, Shapes::ShapeRef.new(shape: InsightsConfiguration, location_name: "InsightsConfiguration"))
     Group.struct_class = Types::Group
 
     GroupSummary.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "GroupName"))
     GroupSummary.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "GroupARN"))
     GroupSummary.add_member(:filter_expression, Shapes::ShapeRef.new(shape: String, location_name: "FilterExpression"))
+    GroupSummary.add_member(:insights_configuration, Shapes::ShapeRef.new(shape: InsightsConfiguration, location_name: "InsightsConfiguration"))
     GroupSummary.struct_class = Types::GroupSummary
 
     GroupSummaryList.member = Shapes::ShapeRef.new(shape: GroupSummary)
@@ -459,6 +463,9 @@ module Aws::XRay
     Http.add_member(:user_agent, Shapes::ShapeRef.new(shape: String, location_name: "UserAgent"))
     Http.add_member(:client_ip, Shapes::ShapeRef.new(shape: String, location_name: "ClientIp"))
     Http.struct_class = Types::Http
+
+    InsightsConfiguration.add_member(:insights_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "InsightsEnabled"))
+    InsightsConfiguration.struct_class = Types::InsightsConfiguration
 
     InstanceIdDetail.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     InstanceIdDetail.struct_class = Types::InstanceIdDetail
@@ -753,6 +760,7 @@ module Aws::XRay
     UpdateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
     UpdateGroupRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
     UpdateGroupRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterExpression"))
+    UpdateGroupRequest.add_member(:insights_configuration, Shapes::ShapeRef.new(shape: InsightsConfiguration, location_name: "InsightsConfiguration"))
     UpdateGroupRequest.struct_class = Types::UpdateGroupRequest
 
     UpdateGroupResult.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))

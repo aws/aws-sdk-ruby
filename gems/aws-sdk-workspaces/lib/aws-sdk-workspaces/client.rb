@@ -1331,16 +1331,23 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Imports the specified Windows 7 or Windows 10 Bring Your Own License
-    # (BYOL) image into Amazon WorkSpaces. The image must be an already
-    # licensed EC2 image that is in your AWS account, and you must own the
-    # image.
+    # Imports the specified Windows 10 Bring Your Own License (BYOL) image
+    # into Amazon WorkSpaces. The image must be an already licensed EC2
+    # image that is in your AWS account, and you must own the image. For
+    # more information about creating BYOL images, see [ Bring Your Own
+    # Windows Desktop Licenses][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
     #
     # @option params [required, String] :ec2_image_id
     #   The identifier of the EC2 image.
     #
     # @option params [required, String] :ingestion_process
-    #   The ingestion process to be used when importing the image.
+    #   The ingestion process to be used when importing the image. For
+    #   non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro),
+    #   specify `BYOL_REGULAR`.
     #
     # @option params [required, String] :image_name
     #   The name of the WorkSpace image.
@@ -1350,6 +1357,21 @@ module Aws::WorkSpaces
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #
+    # @option params [Array<String>] :applications
+    #   If specified, the version of Microsoft Office to subscribe to. Valid
+    #   only for Windows 10 BYOL images. For more information about
+    #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
+    #   Desktop Licenses][1].
+    #
+    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at this
+    #   time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
     #
     # @return [Types::ImportWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1368,6 +1390,7 @@ module Aws::WorkSpaces
     #         value: "TagValue",
     #       },
     #     ],
+    #     applications: ["Microsoft_Office_2016"], # accepts Microsoft_Office_2016, Microsoft_Office_2019
     #   })
     #
     # @example Response structure
@@ -2164,7 +2187,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

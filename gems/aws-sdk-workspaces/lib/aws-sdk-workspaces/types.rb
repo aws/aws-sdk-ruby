@@ -1259,6 +1259,7 @@ module Aws::WorkSpaces
     #             value: "TagValue",
     #           },
     #         ],
+    #         applications: ["Microsoft_Office_2016"], # accepts Microsoft_Office_2016, Microsoft_Office_2019
     #       }
     #
     # @!attribute [rw] ec2_image_id
@@ -1266,7 +1267,9 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] ingestion_process
-    #   The ingestion process to be used when importing the image.
+    #   The ingestion process to be used when importing the image. For
+    #   non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR`.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -1281,6 +1284,22 @@ module Aws::WorkSpaces
     #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] applications
+    #   If specified, the version of Microsoft Office to subscribe to. Valid
+    #   only for Windows 10 BYOL images. For more information about
+    #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
+    #   Desktop Licenses][1].
+    #
+    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at
+    #   this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImageRequest AWS API Documentation
     #
     class ImportWorkspaceImageRequest < Struct.new(
@@ -1288,7 +1307,8 @@ module Aws::WorkSpaces
       :ingestion_process,
       :image_name,
       :image_description,
-      :tags)
+      :tags,
+      :applications)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -4220,11 +4220,6 @@ module Aws::SSM
     # The following section lists the properties that can be used in filters
     # for each major operating system type:
     #
-    # WINDOWS
-    #
-    # : Valid properties: PRODUCT, PRODUCT\_FAMILY, CLASSIFICATION,
-    #   MSRC\_SEVERITY
-    #
     # AMAZON\_LINUX
     #
     # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
@@ -4233,9 +4228,17 @@ module Aws::SSM
     #
     # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
     #
-    # UBUNTU
+    # CENTOS
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
+    #
+    # DEBIAN
     #
     # : Valid properties: PRODUCT, PRIORITY
+    #
+    # ORACLE\_LINUX
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
     #
     # REDHAT\_ENTERPRISE\_LINUX
     #
@@ -4245,9 +4248,14 @@ module Aws::SSM
     #
     # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
     #
-    # CENTOS
+    # UBUNTU
     #
-    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
+    # : Valid properties: PRODUCT, PRIORITY
+    #
+    # WINDOWS
+    #
+    # : Valid properties: PRODUCT, PRODUCT\_FAMILY, CLASSIFICATION,
+    #   MSRC\_SEVERITY
     #
     # @option params [required, String] :operating_system
     #   The operating system type for which to list patches.
@@ -5605,6 +5613,14 @@ module Aws::SSM
     #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
+    #
+    #   <note markdown="1"> For `GetParametersByPath`, the following filter `Key` names are
+    #   supported: `Type`, `KeyId`, `Label`, and `DataType`.
+    #
+    #    The following `Key` values are not supported for
+    #   `GetParametersByPath`\: `tag`, `Name`, `Path`, and `Tier`.
+    #
+    #    </note>
     #
     # @option params [Boolean] :with_decryption
     #   Retrieve all parameters in a hierarchy with their value decrypted.
@@ -8996,10 +9012,21 @@ module Aws::SSM
     #
     # * MaxErrors
     #
-    # If a parameter is null, then the corresponding field is not modified.
-    # Also, if you set Replace to true, then all fields required by the
+    # If the value for a parameter in `UpdateMaintenanceWindowTask` is null,
+    # then the corresponding field is not modified. If you set `Replace` to
+    # true, then all fields required by the
     # RegisterTaskWithMaintenanceWindow action are required for this
     # request. Optional fields that aren't specified are set to null.
+    #
+    # When you update a maintenance window task that has options specified
+    # in `TaskInvocationParameters`, you must provide again all the
+    # `TaskInvocationParameters` values that you want to retain. The values
+    # you do not specify again are removed. For example, suppose that when
+    # you registered a Run Command task, you specified
+    # `TaskInvocationParameters` values for `Comment`, `NotificationConfig`,
+    # and `OutputS3BucketName`. If you update the maintenance window task
+    # and specify only a different `OutputS3BucketName` value, the values
+    # for `Comment` and `NotificationConfig` are removed.
     #
     # @option params [required, String] :window_id
     #   The maintenance window ID that contains the task to modify.
@@ -9058,6 +9085,16 @@ module Aws::SSM
     #   only the fields that match the task type. All other fields should be
     #   empty.
     #
+    #   When you update a maintenance window task that has options specified
+    #   in `TaskInvocationParameters`, you must provide again all the
+    #   `TaskInvocationParameters` values that you want to retain. The values
+    #   you do not specify again are removed. For example, suppose that when
+    #   you registered a Run Command task, you specified
+    #   `TaskInvocationParameters` values for `Comment`, `NotificationConfig`,
+    #   and `OutputS3BucketName`. If you update the maintenance window task
+    #   and specify only a different `OutputS3BucketName` value, the values
+    #   for `Comment` and `NotificationConfig` are removed.
+    #
     # @option params [Integer] :priority
     #   The new task priority to specify. The lower the number, the higher the
     #   priority. Tasks that have the same priority are scheduled in parallel.
@@ -9092,8 +9129,8 @@ module Aws::SSM
     #
     # @option params [Boolean] :replace
     #   If True, then all fields that are required by the
-    #   RegisterTaskWithMaintenanceWndow action are also required for this API
-    #   request. Optional fields that are not specified are set to null.
+    #   RegisterTaskWithMaintenanceWindow action are also required for this
+    #   API request. Optional fields that are not specified are set to null.
     #
     # @return [Types::UpdateMaintenanceWindowTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9718,7 +9755,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

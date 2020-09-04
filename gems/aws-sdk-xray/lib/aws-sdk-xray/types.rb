@@ -169,6 +169,9 @@ module Aws::XRay
     #       {
     #         group_name: "GroupName", # required
     #         filter_expression: "FilterExpression",
+    #         insights_configuration: {
+    #           insights_enabled: false,
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -186,7 +189,36 @@ module Aws::XRay
     #   The filter expression defining criteria by which to group traces.
     #   @return [String]
     #
+    # @!attribute [rw] insights_configuration
+    #   The structure containing configurations related to insights. The
+    #   InsightsEnabled boolean can be set to true to enable insights for
+    #   the new group or false to disable insights for the new group.
+    #   @return [Types::InsightsConfiguration]
+    #
     # @!attribute [rw] tags
+    #   A map that contains one or more tag keys and tag values to attach to
+    #   an X-Ray group. For more information about ways to use tags, see
+    #   [Tagging AWS resources][1] in the *AWS General Reference*.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * Maximum number of user-applied tags per resource: 50
+    #
+    #   * Maximum tag key length: 128 Unicode characters
+    #
+    #   * Maximum tag value length: 256 Unicode characters
+    #
+    #   * Valid values for key and value: a-z, A-Z, 0-9, space, and the
+    #     following characters: \_ . : / = + - and @
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS
+    #     use.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroupRequest AWS API Documentation
@@ -194,6 +226,7 @@ module Aws::XRay
     class CreateGroupRequest < Struct.new(
       :group_name,
       :filter_expression,
+      :insights_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -202,7 +235,8 @@ module Aws::XRay
     # @!attribute [rw] group
     #   The group that was created. Contains the name of the group that was
     #   created, the ARN of the group that was generated based on the group
-    #   name, and the filter expression that was assigned to the group.
+    #   name, the filter expression, and the insight configuration that was
+    #   assigned to the group.
     #   @return [Types::Group]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroupResult AWS API Documentation
@@ -247,6 +281,29 @@ module Aws::XRay
     #   @return [Types::SamplingRule]
     #
     # @!attribute [rw] tags
+    #   A map that contains one or more tag keys and tag values to attach to
+    #   an X-Ray sampling rule. For more information about ways to use tags,
+    #   see [Tagging AWS resources][1] in the *AWS General Reference*.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * Maximum number of user-applied tags per resource: 50
+    #
+    #   * Maximum tag key length: 128 Unicode characters
+    #
+    #   * Maximum tag value length: 256 Unicode characters
+    #
+    #   * Valid values for key and value: a-z, A-Z, 0-9, space, and the
+    #     following characters: \_ . : / = + - and @
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS
+    #     use.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRuleRequest AWS API Documentation
@@ -1197,12 +1254,19 @@ module Aws::XRay
     #   The filter expression defining the parameters to include traces.
     #   @return [String]
     #
+    # @!attribute [rw] insights_configuration
+    #   The structure containing configurations related to insights. The
+    #   InsightsEnabled boolean can be set to true to enable insights for
+    #   the group or false to disable insights for the group.
+    #   @return [Types::InsightsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Group AWS API Documentation
     #
     class Group < Struct.new(
       :group_name,
       :group_arn,
-      :filter_expression)
+      :filter_expression,
+      :insights_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1221,12 +1285,19 @@ module Aws::XRay
     #   The filter expression defining the parameters to include traces.
     #   @return [String]
     #
+    # @!attribute [rw] insights_configuration
+    #   The structure containing configurations related to insights. The
+    #   InsightsEnabled boolean can be set to true to enable insights for
+    #   the groups or false to disable insights for the groups.
+    #   @return [Types::InsightsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GroupSummary AWS API Documentation
     #
     class GroupSummary < Struct.new(
       :group_name,
       :group_arn,
-      :filter_expression)
+      :filter_expression,
+      :insights_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1286,6 +1357,28 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The structure containing configurations related to insights.
+    #
+    # @note When making an API call, you may pass InsightsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         insights_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] insights_enabled
+    #   Set the InsightsEnabled value to true to enable insights or false to
+    #   disable insights.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InsightsConfiguration AWS API Documentation
+    #
+    class InsightsConfiguration < Struct.new(
+      :insights_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of EC2 instance IDs corresponding to the segments in a trace.
     #
     # @!attribute [rw] id
@@ -1322,9 +1415,13 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #   @return [String]
     #
     # @!attribute [rw] next_token
+    #   A pagination token. If multiple pages of results are returned, use
+    #   the `NextToken` value returned with the current page of results as
+    #   the value of this parameter to get the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListTagsForResourceRequest AWS API Documentation
@@ -1337,9 +1434,14 @@ module Aws::XRay
     end
 
     # @!attribute [rw] tags
+    #   A list of tags, as key and value pairs, that is associated with the
+    #   specified X-Ray group or sampling rule.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
+    #   A pagination token. If multiple pages of results are returned, use
+    #   the `NextToken` value returned with the current page of results to
+    #   get the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListTagsForResourceResponse AWS API Documentation
@@ -1502,6 +1604,9 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The resource was not found. Verify that the name or ARN of the
+    # resource is correct.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2194,6 +2299,23 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # A map that contains tag keys and tag values to attach to an AWS X-Ray
+    # group or sampling rule. For more information about ways to use tags,
+    # see [Tagging AWS resources][1] in the *AWS General Reference*.
+    #
+    # The following restrictions apply to tags:
+    #
+    # * Maximum number of user-applied tags per resource: 50
+    #
+    # * Tag keys and values are case sensitive.
+    #
+    # * Don't use `aws:` as a prefix for keys; it's reserved for AWS use.
+    #   You cannot edit or delete system tags.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -2203,9 +2325,17 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] key
+    #   A tag key, such as `Stage` or `Name`. A tag key cannot be empty. The
+    #   key can be a maximum of 128 characters, and can contain only Unicode
+    #   letters, numbers, or separators, or the following special
+    #   characters: `+ - = . _ : /`
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   An optional tag value, such as `Production` or `test-only`. The
+    #   value can be a maximum of 255 characters, and contain only Unicode
+    #   letters, numbers, or separators, or the following special
+    #   characters: `+ - = . _ : /`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Tag AWS API Documentation
@@ -2231,9 +2361,34 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   A map that contains one or more tag keys and tag values to attach to
+    #   an X-Ray group or sampling rule. For more information about ways to
+    #   use tags, see [Tagging AWS resources][1] in the *AWS General
+    #   Reference*.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * Maximum number of user-applied tags per resource: 50
+    #
+    #   * Maximum tag key length: 128 Unicode characters
+    #
+    #   * Maximum tag value length: 256 Unicode characters
+    #
+    #   * Valid values for key and value: a-z, A-Z, 0-9, space, and the
+    #     following characters: \_ . : / = + - and @
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS
+    #     use. You cannot edit or delete system tags.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TagResourceRequest AWS API Documentation
@@ -2341,6 +2496,9 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # You have exceeded the maximum number of tags you can apply to this
+    # resource.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2581,9 +2739,12 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
+    #   Keys for one or more tags that you want to remove from an X-Ray
+    #   group or sampling rule.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UntagResourceRequest AWS API Documentation
@@ -2606,6 +2767,9 @@ module Aws::XRay
     #         group_name: "GroupName",
     #         group_arn: "GroupARN",
     #         filter_expression: "FilterExpression",
+    #         insights_configuration: {
+    #           insights_enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] group_name
@@ -2621,20 +2785,28 @@ module Aws::XRay
     #   traces.
     #   @return [String]
     #
+    # @!attribute [rw] insights_configuration
+    #   The structure containing configurations related to insights. The
+    #   InsightsEnabled boolean can be set to true to enable insights for
+    #   the group or false to disable insights for the group.
+    #   @return [Types::InsightsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroupRequest AWS API Documentation
     #
     class UpdateGroupRequest < Struct.new(
       :group_name,
       :group_arn,
-      :filter_expression)
+      :filter_expression,
+      :insights_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] group
     #   The group that was updated. Contains the name of the group that was
-    #   updated, the ARN of the group that was updated, and the updated
-    #   filter expression assigned to the group.
+    #   updated, the ARN of the group that was updated, the updated filter
+    #   expression, and the updated insight configuration assigned to the
+    #   group.
     #   @return [Types::Group]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroupResult AWS API Documentation

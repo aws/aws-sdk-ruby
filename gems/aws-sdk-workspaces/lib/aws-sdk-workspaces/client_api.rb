@@ -19,6 +19,8 @@ module Aws::WorkSpaces
     AccountModification = Shapes::StructureShape.new(name: 'AccountModification')
     AccountModificationList = Shapes::ListShape.new(name: 'AccountModificationList')
     Alias = Shapes::StringShape.new(name: 'Alias')
+    Application = Shapes::StringShape.new(name: 'Application')
+    ApplicationList = Shapes::ListShape.new(name: 'ApplicationList')
     AssociateIpGroupsRequest = Shapes::StructureShape.new(name: 'AssociateIpGroupsRequest')
     AssociateIpGroupsResult = Shapes::StructureShape.new(name: 'AssociateIpGroupsResult')
     AuthorizeIpRulesRequest = Shapes::StructureShape.new(name: 'AuthorizeIpRulesRequest')
@@ -258,6 +260,8 @@ module Aws::WorkSpaces
 
     AccountModificationList.member = Shapes::ShapeRef.new(shape: AccountModification)
 
+    ApplicationList.member = Shapes::ShapeRef.new(shape: Application)
+
     AssociateIpGroupsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     AssociateIpGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: IpGroupIdList, required: true, location_name: "GroupIds"))
     AssociateIpGroupsRequest.struct_class = Types::AssociateIpGroupsRequest
@@ -492,6 +496,7 @@ module Aws::WorkSpaces
     ImportWorkspaceImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "ImageName"))
     ImportWorkspaceImageRequest.add_member(:image_description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, required: true, location_name: "ImageDescription"))
     ImportWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportWorkspaceImageRequest.add_member(:applications, Shapes::ShapeRef.new(shape: ApplicationList, location_name: "Applications"))
     ImportWorkspaceImageRequest.struct_class = Types::ImportWorkspaceImageRequest
 
     ImportWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))

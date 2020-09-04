@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-09-04)
+------------------
+
+* Feature - Adding support for Microsoft Office 2016 and Microsoft Office 2019 in BYOL Images
+
 1.43.0 (2020-08-25)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2020-09-04)
+------------------
+
+* Feature - Documentation-only updates for AWS Systems Manager
+
 1.88.0 (2020-08-25)
 ------------------
 

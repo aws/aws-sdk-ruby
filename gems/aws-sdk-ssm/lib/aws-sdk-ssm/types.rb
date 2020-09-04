@@ -6510,17 +6510,59 @@ module Aws::SSM
     # For keys, you can specify one or more tags that have been applied to a
     # document.
     #
-    # Other valid values include `Owner`, `Name`, `PlatformTypes`,
-    # `DocumentType`, and `TargetType`.
+    # You can also use AWS-provided keys, some of which have specific
+    # allowed values. These keys and their associated values are as follows:
     #
-    # Note that only one Owner can be specified in a request. For example:
-    # `Key=Owner,Values=Self`.
+    # DocumentType
+    # : * ApplicationConfiguration
     #
-    # If you use Name as a key, you can use a name prefix to return a list
-    # of documents. For example, in the AWS CLI, to return a list of all
-    # documents that begin with `Te`, run the following command:
+    #   * ApplicationConfigurationSchema
+    #
+    #   * Automation
+    #
+    #   * ChangeCalendar
+    #
+    #   * Command
+    #
+    #   * DeploymentStrategy
+    #
+    #   * Package
+    #
+    #   * Policy
+    #
+    #   * Session
+    #
+    # Owner
+    #
+    # : Note that only one `Owner` can be specified in a request. For
+    #   example: `Key=Owner,Values=Self`.
+    #
+    #   * Amazon
+    #
+    #   * Private
+    #
+    #   * Public
+    #
+    #   * Self
+    #
+    #   * ThirdParty
+    #
+    # PlatformTypes
+    # : * Linux
+    #
+    #   * Windows
+    #
+    # `Name` is another AWS-provided key. If you use `Name` as a key, you
+    # can use a name prefix to return a list of documents. For example, in
+    # the AWS CLI, to return a list of all documents that begin with `Te`,
+    # run the following command:
     #
     # `aws ssm list-documents --filters Key=Name,Values=Te`
+    #
+    # You can also use the `TargetType` AWS-provided key. For a list of
+    # valid resource type values that can be used with this key, see [AWS
+    # resource and property types reference][1] in the *AWS CloudFormation
+    # User Guide*.
     #
     # If you specify more than two keys, only documents that are identified
     # by all the tags are returned in the results. If you specify more than
@@ -6530,11 +6572,15 @@ module Aws::SSM
     # To specify a custom key and value pair, use the format
     # `Key=tag:tagName,Values=valueName`.
     #
-    # For example, if you created a Key called region and are using the AWS
+    # For example, if you created a key called region and are using the AWS
     # CLI to call the `list-documents` command:
     #
     # `aws ssm list-documents --filters Key=tag:region,Values=east,west
     # Key=Owner,Values=Self`
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
     # @note When making an API call, you may pass DocumentKeyValuesFilter
     #   data as a hash:
@@ -8380,6 +8426,14 @@ module Aws::SSM
     #
     # @!attribute [rw] parameter_filters
     #   Filters to limit the request results.
+    #
+    #   <note markdown="1"> For `GetParametersByPath`, the following filter `Key` names are
+    #   supported: `Type`, `KeyId`, `Label`, and `DataType`.
+    #
+    #    The following `Key` values are not supported for
+    #   `GetParametersByPath`\: `tag`, `Name`, `Path`, and `Tier`.
+    #
+    #    </note>
     #   @return [Array<Types::ParameterStringFilter>]
     #
     # @!attribute [rw] with_decryption
@@ -9171,14 +9225,14 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] installed_rejected_count
-    #   The number of instances with patches installed that are specified in
-    #   a RejectedPatches list. Patches with a status of *InstalledRejected*
-    #   were typically installed before they were added to a RejectedPatches
-    #   list.
+    #   The number of patches installed on an instance that are specified in
+    #   a `RejectedPatches` list. Patches with a status of
+    #   *InstalledRejected* were typically installed before they were added
+    #   to a `RejectedPatches` list.
     #
-    #   <note markdown="1"> If ALLOW\_AS\_DEPENDENCY is the specified option for
-    #   RejectedPatchesAction, the value of InstalledRejectedCount will
-    #   always be 0 (zero).
+    #   <note markdown="1"> If `ALLOW_AS_DEPENDENCY` is the specified option for
+    #   `RejectedPatchesAction`, the value of `InstalledRejectedCount` will
+    #   always be `0` (zero).
     #
     #    </note>
     #   @return [Integer]
@@ -9219,8 +9273,8 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] operation
-    #   The type of patching operation that was performed: SCAN (assess
-    #   patch compliance state) or INSTALL (install missing patches).
+    #   The type of patching operation that was performed: `SCAN` (assess
+    #   patch compliance state) or `INSTALL` (install missing patches).
     #   @return [String]
     #
     # @!attribute [rw] last_no_reboot_install_operation_time
@@ -13149,25 +13203,6 @@ module Aws::SSM
     # One or more filters. Use a filter to return a more specific list of
     # results.
     #
-    # The `ParameterStringFilter` object is used by the DescribeParameters
-    # and GetParametersByPath API actions. However, not all of the pattern
-    # values listed for `Key` can be used with both actions.
-    #
-    #  For `DescribeActions`, all of the listed patterns are valid, with the
-    # exception of `Label`.
-    #
-    #  For `GetParametersByPath`, the following patterns listed for `Key`
-    # are
-    # not valid: `Name`, `Path`, and `Tier`.
-    #
-    #  For examples of CLI commands demonstrating valid parameter filter
-    # constructions, see [Searching for Systems Manager parameters][1] in
-    # the *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html
-    #
     # @note When making an API call, you may pass ParameterStringFilter
     #   data as a hash:
     #
@@ -13179,6 +13214,26 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   The name of the filter.
+    #
+    #   <note markdown="1"> The `ParameterStringFilter` object is used by the DescribeParameters
+    #   and GetParametersByPath API actions. However, not all of the pattern
+    #   values listed for `Key` can be used with both actions.
+    #
+    #    For `DescribeActions`, all of the listed patterns are valid, with
+    #   the exception of `Label`.
+    #
+    #    For `GetParametersByPath`, the following patterns listed for `Key`
+    #   are not valid: `tag`, `Name`, `Path`, and `Tier`.
+    #
+    #    For examples of CLI commands demonstrating valid parameter filter
+    #   constructions, see [Searching for Systems Manager parameters][1] in
+    #   the *AWS Systems Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html
     #   @return [String]
     #
     # @!attribute [rw] option
@@ -13188,8 +13243,8 @@ module Aws::SSM
     #   valid options include `Recursive` and `OneLevel`.)
     #
     #   For filters used with GetParametersByPath, valid options include
-    #   `Equals` and `BeginsWith`. (Exception: For filters using the key
-    #   `Label`, the only valid option is `Equals`.)
+    #   `Equals` and `BeginsWith`. (Exception: For filters using `Label` as
+    #   the Key name, the only valid option is `Equals`.)
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -16788,8 +16843,7 @@ module Aws::SSM
     end
 
     # The operating systems you specified is not supported, or the operation
-    # is not supported for the operating system. Valid operating systems
-    # include: Windows, AmazonLinux, RedhatEnterpriseLinux, and Ubuntu.
+    # is not supported for the operating system.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -17643,6 +17697,17 @@ module Aws::SSM
     #   The parameters that the task should use during execution. Populate
     #   only the fields that match the task type. All other fields should be
     #   empty.
+    #
+    #   When you update a maintenance window task that has options specified
+    #   in `TaskInvocationParameters`, you must provide again all the
+    #   `TaskInvocationParameters` values that you want to retain. The
+    #   values you do not specify again are removed. For example, suppose
+    #   that when you registered a Run Command task, you specified
+    #   `TaskInvocationParameters` values for `Comment`,
+    #   `NotificationConfig`, and `OutputS3BucketName`. If you update the
+    #   maintenance window task and specify only a different
+    #   `OutputS3BucketName` value, the values for `Comment` and
+    #   `NotificationConfig` are removed.
     #   @return [Types::MaintenanceWindowTaskInvocationParameters]
     #
     # @!attribute [rw] priority
@@ -17686,7 +17751,7 @@ module Aws::SSM
     #
     # @!attribute [rw] replace
     #   If True, then all fields that are required by the
-    #   RegisterTaskWithMaintenanceWndow action are also required for this
+    #   RegisterTaskWithMaintenanceWindow action are also required for this
     #   API request. Optional fields that are not specified are set to null.
     #   @return [Boolean]
     #
