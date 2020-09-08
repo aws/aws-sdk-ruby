@@ -438,6 +438,10 @@ module Aws::ElasticLoadBalancingV2
     #   Zone.
     #   @return [String]
     #
+    # @!attribute [rw] outpost_id
+    #   \[Application Load Balancers on Outposts\] The ID of the Outpost.
+    #   @return [String]
+    #
     # @!attribute [rw] load_balancer_addresses
     #   \[Network Load Balancers\] If you need static IP addresses for your
     #   load balancer, you can specify one Elastic IP address per
@@ -451,6 +455,7 @@ module Aws::ElasticLoadBalancingV2
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id,
+      :outpost_id,
       :load_balancer_addresses)
       SENSITIVE = []
       include Aws::Structure
@@ -748,6 +753,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         type: "application", # accepts application, network
     #         ip_address_type: "ipv4", # accepts ipv4, dualstack
+    #         customer_owned_ipv_4_pool: "CustomerOwnedIpv4Pool",
     #       }
     #
     # @!attribute [rw] name
@@ -767,6 +773,12 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers\] You must specify subnets from at
     #   least two Availability Zones.
     #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify
+    #   subnets from one or more Local Zones.
+    #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones.
     #   @return [Array<String>]
@@ -779,6 +791,12 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers\] You must specify subnets from at
     #   least two Availability Zones. You cannot specify Elastic IP
     #   addresses for your subnets.
+    #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify
+    #   subnets from one or more Local Zones.
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You can specify one Elastic IP address per
@@ -823,6 +841,11 @@ module Aws::ElasticLoadBalancingV2
     #   Internal load balancers must use `ipv4`.
     #   @return [String]
     #
+    # @!attribute [rw] customer_owned_ipv_4_pool
+    #   \[Application Load Balancers on Outposts\] The ID of the
+    #   customer-owned address pool (CoIP pool).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerInput AWS API Documentation
     #
     class CreateLoadBalancerInput < Struct.new(
@@ -833,7 +856,8 @@ module Aws::ElasticLoadBalancingV2
       :scheme,
       :tags,
       :type,
-      :ip_address_type)
+      :ip_address_type,
+      :customer_owned_ipv_4_pool)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2229,7 +2253,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
-    #   The Availability Zones for the load balancer.
+    #   The subnets for the load balancer.
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @!attribute [rw] security_groups
@@ -2240,6 +2264,11 @@ module Aws::ElasticLoadBalancingV2
     #   The type of IP addresses used by the subnets for your load balancer.
     #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
     #   (for IPv4 and IPv6 addresses).
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_owned_ipv_4_pool
+    #   \[Application Load Balancers on Outposts\] The ID of the
+    #   customer-owned address pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancer AWS API Documentation
@@ -2256,7 +2285,8 @@ module Aws::ElasticLoadBalancingV2
       :type,
       :availability_zones,
       :security_groups,
-      :ip_address_type)
+      :ip_address_type,
+      :customer_owned_ipv_4_pool)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3661,7 +3691,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] availability_zones
-    #   Information about the subnet and Availability Zone.
+    #   Information about the subnets.
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsOutput AWS API Documentation

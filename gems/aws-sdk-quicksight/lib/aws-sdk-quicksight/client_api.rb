@@ -670,8 +670,10 @@ module Aws::QuickSight
     CreateAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
     CreateAccountCustomizationRequest.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, required: true, location_name: "AccountCustomization"))
+    CreateAccountCustomizationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAccountCustomizationRequest.struct_class = Types::CreateAccountCustomizationRequest
 
+    CreateAccountCustomizationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     CreateAccountCustomizationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
     CreateAccountCustomizationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     CreateAccountCustomizationResponse.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, location_name: "AccountCustomization"))
@@ -1223,6 +1225,7 @@ module Aws::QuickSight
     DescribeAccountCustomizationRequest.add_member(:resolved, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "resolved"))
     DescribeAccountCustomizationRequest.struct_class = Types::DescribeAccountCustomizationRequest
 
+    DescribeAccountCustomizationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DescribeAccountCustomizationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
     DescribeAccountCustomizationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     DescribeAccountCustomizationResponse.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, location_name: "AccountCustomization"))
@@ -2250,6 +2253,7 @@ module Aws::QuickSight
     UpdateAccountCustomizationRequest.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, required: true, location_name: "AccountCustomization"))
     UpdateAccountCustomizationRequest.struct_class = Types::UpdateAccountCustomizationRequest
 
+    UpdateAccountCustomizationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     UpdateAccountCustomizationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
     UpdateAccountCustomizationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     UpdateAccountCustomizationResponse.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, location_name: "AccountCustomization"))

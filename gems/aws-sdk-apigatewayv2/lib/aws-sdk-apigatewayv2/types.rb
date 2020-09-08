@@ -214,8 +214,8 @@ module Aws::ApiGatewayV2
     #   Specifies the required credentials as an IAM role for API Gateway to
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
-    #   resource-based permissions on the Lambda function, specify null.
-    #   Supported only for REQUEST authorizers.
+    #   resource-based permissions on the Lambda function, don't specify
+    #   this parameter. Supported only for REQUEST authorizers.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -223,18 +223,20 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
-    #   Authorizer caching is not currently supported. Don't specify this
-    #   value for authorizers.
+    #   The time to live (TTL) for cached authorizer results, in seconds. If
+    #   it equals 0, authorization caching is disabled. If it is greater
+    #   than 0, API Gateway caches authorizer responses. The maximum value
+    #   is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
-    #   The authorizer's Uniform Resource Identifier (URI). ForREQUEST
+    #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
     #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
@@ -255,22 +257,30 @@ module Aws::ApiGatewayV2
     #
     #   For a REQUEST authorizer, this is optional. The value is a set of
     #   one or more mapping expressions of the specified request parameters.
-    #   Currently, the identity source can be headers, query string
-    #   parameters, stage variables, and context parameters. For example, if
-    #   an Auth header and a Name query string parameter are defined as
-    #   identity sources, this value is route.request.header.Auth,
-    #   route.request.querystring.Name. These parameters will be used to
-    #   perform runtime validation for Lambda-based authorizers by verifying
-    #   all of the identity-related request parameters are present in the
-    #   request, not null, and non-empty. Only when this is true does the
-    #   authorizer invoke the authorizer Lambda function. Otherwise, it
-    #   returns a 401 Unauthorized response without calling the Lambda
-    #   function.
+    #   The identity source can be headers, query string parameters, stage
+    #   variables, and context parameters. For example, if an Auth header
+    #   and a Name query string parameter are defined as identity sources,
+    #   this value is route.request.header.Auth,
+    #   route.request.querystring.Name for WebSocket APIs. For HTTP APIs,
+    #   use selection expressions prefixed with $, for example,
+    #   $request.header.Auth, $request.querystring.Name. These parameters
+    #   are used to perform runtime validation for Lambda-based authorizers
+    #   by verifying all of the identity-related request parameters are
+    #   present in the request, not null, and non-empty. Only when this is
+    #   true does the authorizer invoke the authorizer Lambda function.
+    #   Otherwise, it returns a 401 Unauthorized response without calling
+    #   the Lambda function. For HTTP APIs, identity sources are also used
+    #   as the cache key when caching is enabled. To learn more, see
+    #   [Working with AWS Lambda authorizers for HTTP APIs][1].
     #
     #   For JWT, a single entry that specifies where to extract the JSON Web
     #   Token (JWT) from inbound requests. Currently only header-based and
     #   query parameter-based selections are supported, for example
-    #   "$request.header.Authorization".
+    #   $request.header.Authorization.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] identity_validation_expression
@@ -286,6 +296,28 @@ module Aws::ApiGatewayV2
     #   The name of the authorizer.
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   Specifies the format of the payload sent to an HTTP API Lambda
+    #   authorizer. Required for HTTP API Lambda authorizers. Supported
+    #   values are 1.0 and 2.0. To learn more, see [Working with AWS Lambda
+    #   authorizers for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   Specifies whether a Lambda authorizer returns a response in a simple
+    #   format. If enabled, the Lambda authorizer can return a boolean value
+    #   instead of an IAM policy. Supported only for HTTP APIs. To learn
+    #   more, see [Working with AWS Lambda authorizers for HTTP APIs][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
+    #   @return [Boolean]
+    #
     class Authorizer < Struct.new(
       :authorizer_credentials_arn,
       :authorizer_id,
@@ -295,7 +327,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -809,19 +843,21 @@ module Aws::ApiGatewayV2
     #   Specifies the required credentials as an IAM role for API Gateway to
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
-    #   resource-based permissions on the Lambda function, specify null.
-    #   Supported only for REQUEST authorizers.
+    #   resource-based permissions on the Lambda function, don't specify
+    #   this parameter. Supported only for REQUEST authorizers.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
-    #   Authorizer caching is not currently supported. Don't specify this
-    #   value for authorizers.
+    #   The time to live (TTL) for cached authorizer results, in seconds. If
+    #   it equals 0, authorization caching is disabled. If it is greater
+    #   than 0, API Gateway caches authorizer responses. The maximum value
+    #   is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -846,22 +882,30 @@ module Aws::ApiGatewayV2
     #
     #   For a REQUEST authorizer, this is optional. The value is a set of
     #   one or more mapping expressions of the specified request parameters.
-    #   Currently, the identity source can be headers, query string
-    #   parameters, stage variables, and context parameters. For example, if
-    #   an Auth header and a Name query string parameter are defined as
-    #   identity sources, this value is route.request.header.Auth,
-    #   route.request.querystring.Name. These parameters will be used to
-    #   perform runtime validation for Lambda-based authorizers by verifying
-    #   all of the identity-related request parameters are present in the
-    #   request, not null, and non-empty. Only when this is true does the
-    #   authorizer invoke the authorizer Lambda function. Otherwise, it
-    #   returns a 401 Unauthorized response without calling the Lambda
-    #   function.
+    #   The identity source can be headers, query string parameters, stage
+    #   variables, and context parameters. For example, if an Auth header
+    #   and a Name query string parameter are defined as identity sources,
+    #   this value is route.request.header.Auth,
+    #   route.request.querystring.Name for WebSocket APIs. For HTTP APIs,
+    #   use selection expressions prefixed with $, for example,
+    #   $request.header.Auth, $request.querystring.Name. These parameters
+    #   are used to perform runtime validation for Lambda-based authorizers
+    #   by verifying all of the identity-related request parameters are
+    #   present in the request, not null, and non-empty. Only when this is
+    #   true does the authorizer invoke the authorizer Lambda function.
+    #   Otherwise, it returns a 401 Unauthorized response without calling
+    #   the Lambda function. For HTTP APIs, identity sources are also used
+    #   as the cache key when caching is enabled. To learn more, see
+    #   [Working with AWS Lambda authorizers for HTTP APIs][1].
     #
     #   For JWT, a single entry that specifies where to extract the JSON Web
-    #   Token (JWT )from inbound requests. Currently only header-based and
+    #   Token (JWT) from inbound requests. Currently only header-based and
     #   query parameter-based selections are supported, for example
-    #   "$request.header.Authorization".
+    #   $request.header.Authorization.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] identity_validation_expression
@@ -877,6 +921,29 @@ module Aws::ApiGatewayV2
     #   The name of the authorizer.
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   Specifies the format of the payload sent to an HTTP API Lambda
+    #   authorizer. Required for HTTP API Lambda authorizers. Supported
+    #   values are 1.0 and 2.0. To learn more, see [Working with AWS Lambda
+    #   authorizers for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   Specifies whether a Lambda authorizer returns a response in a simple
+    #   format. By default, a Lambda authorizer must return an IAM policy.
+    #   If enabled, the Lambda authorizer can return a boolean value instead
+    #   of an IAM policy. Supported only for HTTP APIs. To learn more, see
+    #   [Working with AWS Lambda authorizers for HTTP APIs][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
+    #   @return [Boolean]
+    #
     class CreateAuthorizerInput < Struct.new(
       :authorizer_credentials_arn,
       :authorizer_result_ttl_in_seconds,
@@ -885,7 +952,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -906,6 +975,8 @@ module Aws::ApiGatewayV2
     #           issuer: "UriWithLengthBetween1And2048",
     #         },
     #         name: "StringWithLengthBetween1And128", # required
+    #         authorizer_payload_format_version: "StringWithLengthBetween1And64",
+    #         enable_simple_responses: false,
     #       }
     #
     # @!attribute [rw] api_id
@@ -920,9 +991,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -961,6 +1032,13 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   @return [Boolean]
+    #
     class CreateAuthorizerRequest < Struct.new(
       :api_id,
       :authorizer_credentials_arn,
@@ -970,7 +1048,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -988,9 +1068,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -1029,6 +1109,13 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   @return [Boolean]
+    #
     class CreateAuthorizerResponse < Struct.new(
       :authorizer_credentials_arn,
       :authorizer_id,
@@ -1038,7 +1125,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1994,8 +2083,9 @@ module Aws::ApiGatewayV2
     #   The authorization type for the route. For WebSocket APIs, valid
     #   values are NONE for open access, AWS\_IAM for using AWS IAM
     #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
-    #   valid values are NONE for open access, or JWT for using JSON Web
-    #   Tokens.
+    #   valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
+    #   a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -2097,7 +2187,8 @@ module Aws::ApiGatewayV2
     #   The authorization type. For WebSocket APIs, valid values are NONE
     #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
     #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, or JWT for using JSON Web Tokens.
+    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
+    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -2188,7 +2279,8 @@ module Aws::ApiGatewayV2
     #   The authorization type. For WebSocket APIs, valid values are NONE
     #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
     #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, or JWT for using JSON Web Tokens.
+    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
+    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -3308,6 +3400,27 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResetAuthorizersCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         stage_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   @return [String]
+    #
+    class ResetAuthorizersCacheRequest < Struct.new(
+      :api_id,
+      :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetApiMappingRequest
     #   data as a hash:
     #
@@ -3577,9 +3690,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -3618,6 +3731,13 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   @return [Boolean]
+    #
     class GetAuthorizerResponse < Struct.new(
       :authorizer_credentials_arn,
       :authorizer_id,
@@ -3627,7 +3747,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4335,7 +4457,8 @@ module Aws::ApiGatewayV2
     #   The authorization type. For WebSocket APIs, valid values are NONE
     #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
     #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, or JWT for using JSON Web Tokens.
+    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
+    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -5587,8 +5710,9 @@ module Aws::ApiGatewayV2
     #   The authorization type for the route. For WebSocket APIs, valid
     #   values are NONE for open access, AWS\_IAM for using AWS IAM
     #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
-    #   valid values are NONE for open access, or JWT for using JSON Web
-    #   Tokens.
+    #   valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
+    #   a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -6386,14 +6510,16 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
-    #   Authorizer caching is not currently supported. Don't specify this
-    #   value for authorizers.
+    #   The time to live (TTL) for cached authorizer results, in seconds. If
+    #   it equals 0, authorization caching is disabled. If it is greater
+    #   than 0, API Gateway caches authorizer responses. The maximum value
+    #   is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -6418,22 +6544,30 @@ module Aws::ApiGatewayV2
     #
     #   For a REQUEST authorizer, this is optional. The value is a set of
     #   one or more mapping expressions of the specified request parameters.
-    #   Currently, the identity source can be headers, query string
-    #   parameters, stage variables, and context parameters. For example, if
-    #   an Auth header and a Name query string parameter are defined as
-    #   identity sources, this value is route.request.header.Auth,
-    #   route.request.querystring.Name. These parameters will be used to
-    #   perform runtime validation for Lambda-based authorizers by verifying
-    #   all of the identity-related request parameters are present in the
-    #   request, not null, and non-empty. Only when this is true does the
-    #   authorizer invoke the authorizer Lambda function. Otherwise, it
-    #   returns a 401 Unauthorized response without calling the Lambda
-    #   function.
+    #   The identity source can be headers, query string parameters, stage
+    #   variables, and context parameters. For example, if an Auth header
+    #   and a Name query string parameter are defined as identity sources,
+    #   this value is route.request.header.Auth,
+    #   route.request.querystring.Name for WebSocket APIs. For HTTP APIs,
+    #   use selection expressions prefixed with $, for example,
+    #   $request.header.Auth, $request.querystring.Name. These parameters
+    #   are used to perform runtime validation for Lambda-based authorizers
+    #   by verifying all of the identity-related request parameters are
+    #   present in the request, not null, and non-empty. Only when this is
+    #   true does the authorizer invoke the authorizer Lambda function.
+    #   Otherwise, it returns a 401 Unauthorized response without calling
+    #   the Lambda function. For HTTP APIs, identity sources are also used
+    #   as the cache key when caching is enabled. To learn more, see
+    #   [Working with AWS Lambda authorizers for HTTP APIs][1].
     #
     #   For JWT, a single entry that specifies where to extract the JSON Web
     #   Token (JWT) from inbound requests. Currently only header-based and
     #   query parameter-based selections are supported, for example
-    #   "$request.header.Authorization".
+    #   $request.header.Authorization.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] identity_validation_expression
@@ -6449,6 +6583,29 @@ module Aws::ApiGatewayV2
     #   The name of the authorizer.
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   Specifies the format of the payload sent to an HTTP API Lambda
+    #   authorizer. Required for HTTP API Lambda authorizers. Supported
+    #   values are 1.0 and 2.0. To learn more, see [Working with AWS Lambda
+    #   authorizers for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   Specifies whether a Lambda authorizer returns a response in a simple
+    #   format. By default, a Lambda authorizer must return an IAM policy.
+    #   If enabled, the Lambda authorizer can return a boolean value instead
+    #   of an IAM policy. Supported only for HTTP APIs. To learn more, see
+    #   [Working with AWS Lambda authorizers for HTTP APIs][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
+    #   @return [Boolean]
+    #
     class UpdateAuthorizerInput < Struct.new(
       :authorizer_credentials_arn,
       :authorizer_result_ttl_in_seconds,
@@ -6457,7 +6614,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6479,6 +6638,8 @@ module Aws::ApiGatewayV2
     #           issuer: "UriWithLengthBetween1And2048",
     #         },
     #         name: "StringWithLengthBetween1And128",
+    #         authorizer_payload_format_version: "StringWithLengthBetween1And64",
+    #         enable_simple_responses: false,
     #       }
     #
     # @!attribute [rw] api_id
@@ -6496,9 +6657,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -6537,6 +6698,13 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   @return [Boolean]
+    #
     class UpdateAuthorizerRequest < Struct.new(
       :api_id,
       :authorizer_credentials_arn,
@@ -6547,7 +6715,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6565,9 +6735,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
-    #   Lambda function using incoming request parameters. For HTTP APIs,
-    #   specify JWT to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -6606,6 +6776,13 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_payload_format_version
+    #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_simple_responses
+    #   @return [Boolean]
+    #
     class UpdateAuthorizerResponse < Struct.new(
       :authorizer_credentials_arn,
       :authorizer_id,
@@ -6615,7 +6792,9 @@ module Aws::ApiGatewayV2
       :identity_source,
       :identity_validation_expression,
       :jwt_configuration,
-      :name)
+      :name,
+      :authorizer_payload_format_version,
+      :enable_simple_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7562,8 +7741,9 @@ module Aws::ApiGatewayV2
     #   The authorization type for the route. For WebSocket APIs, valid
     #   values are NONE for open access, AWS\_IAM for using AWS IAM
     #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
-    #   valid values are NONE for open access, or JWT for using JSON Web
-    #   Tokens.
+    #   valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
+    #   a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -7666,7 +7846,8 @@ module Aws::ApiGatewayV2
     #   The authorization type. For WebSocket APIs, valid values are NONE
     #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
     #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, or JWT for using JSON Web Tokens.
+    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
+    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -7761,7 +7942,8 @@ module Aws::ApiGatewayV2
     #   The authorization type. For WebSocket APIs, valid values are NONE
     #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
     #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, or JWT for using JSON Web Tokens.
+    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
+    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-09-08)
+------------------
+
+* Feature - Adds tagging support for QuickSight customization resources.  A user can now specify a list of tags when creating a customization resource and use a customization ARN in QuickSight's tagging APIs.
+
 1.28.0 (2020-08-25)
 ------------------
 

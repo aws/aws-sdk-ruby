@@ -412,7 +412,7 @@ module Aws::LexModelBuildingService
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
-    #   The message that Amazon Lex uses to abort a conversation. For more
+    #   The message that Amazon Lex uses to cancel a conversation. For more
     #   information, see PutBot.
     #   @return [Types::Statement]
     #
@@ -493,9 +493,9 @@ module Aws::LexModelBuildingService
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_model_improvements
-    #   Indicates whether the bot uses the new natural language
-    #   understanding (NLU) model or the original NLU. True indicates that
-    #   the bot is using the new model, otherwise, false.
+    #   Indicates whether the bot uses accuracy improvements. `true`
+    #   indicates that the bot is using the imoprovements, otherwise,
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] detect_sentiment
@@ -1457,17 +1457,19 @@ module Aws::LexModelBuildingService
     #   @return [Array<Types::Intent>]
     #
     # @!attribute [rw] enable_model_improvements
-    #   Indicates whether the bot uses the new natural language
-    #   understanding (NLU) model or the original NLU. True indicates that
-    #   the bot is using the new model, otherwise, false.
+    #   Indicates whether the bot uses accuracy improvements. `true`
+    #   indicates that the bot is using the imoprovements, otherwise,
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] nlu_intent_confidence_threshold
     #   The score that determines where Amazon Lex inserts the
     #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
     #   returning alternative intents in a [PostContent][1] or [PostText][2]
-    #   response. `AMAZON.FallbackIntent` and `AMAZON.KendraSearchIntent`
-    #   are only inserted if they are configured for the bot.
+    #   response. `AMAZON.FallbackIntent` is inserted if the confidence
+    #   score for all intents is below this value.
+    #   `AMAZON.KendraSearchIntent` is only inserted if it is configured for
+    #   the bot.
     #
     #
     #
@@ -1766,7 +1768,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US, en-GB, de-DE
+    #         locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -1836,7 +1838,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US, en-GB, de-DE
+    #         locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -3091,7 +3093,7 @@ module Aws::LexModelBuildingService
     #         voice_id: "String",
     #         checksum: "String",
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
-    #         locale: "en-US", # required, accepts en-US, en-GB, de-DE
+    #         locale: "en-US", # required, accepts en-US, en-GB, de-DE, en-AU
     #         child_directed: false, # required
     #         detect_sentiment: false,
     #         create_version: false,
@@ -3118,19 +3120,16 @@ module Aws::LexModelBuildingService
     #   @return [Array<Types::Intent>]
     #
     # @!attribute [rw] enable_model_improvements
-    #   Set to `true` to enable the use of a new natural language
-    #   understanding (NLU) model. Using the new NLU may improve the
-    #   performance of your bot.
+    #   Set to `true` to enable access to natural language understanding
+    #   improvements.
     #
     #   When you set the `enableModelImprovements` parameter to `true` you
     #   can use the `nluIntentConfidenceThreshold` parameter to configure
     #   confidence scores. For more information, see [Confidence Scores][1].
     #
     #   You can only set the `enableModelImprovements` parameter in certain
-    #   Regions. If you set the parameter to `true`, your bot will use the
-    #   new NLU. If you set the parameter to `false`, your bot will continue
-    #   to use the original NLU. If you set the parameter to `false` after
-    #   setting it to `true`, your bot will return to the original NLU.
+    #   Regions. If you set the parameter to `true`, your bot has access to
+    #   accuracy improvements.
     #
     #   The Regions where you can set the `enableModelImprovements`
     #   parameter to `true` are:
@@ -3169,6 +3168,17 @@ module Aws::LexModelBuildingService
     #
     #   You must set the `enableModelImprovements` parameter to `true` to
     #   use confidence scores.
+    #
+    #   * US East (N. Virginia) (us-east-1)
+    #
+    #   * US West (Oregon) (us-west-2)
+    #
+    #   * Asia Pacific (Sydney) (ap-southeast-2)
+    #
+    #   * EU (Ireland) (eu-west-1)
+    #
+    #   In other Regions, the `enableModelImprovements` parameter is set to
+    #   `true` by default.
     #
     #   For example, suppose a bot is configured with the confidence
     #   threshold of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex
@@ -3237,7 +3247,7 @@ module Aws::LexModelBuildingService
     #   When Amazon Lex can't understand the user's input in context, it
     #   tries to elicit the information a few times. After that, Amazon Lex
     #   sends the message defined in `abortStatement` to the user, and then
-    #   aborts the conversation. To set the number of retries, use the
+    #   cancels the conversation. To set the number of retries, use the
     #   `valueElicitationPrompt` field for the slot type.
     #
     #   For example, in a pizza ordering bot, Amazon Lex might ask a user
@@ -3251,7 +3261,7 @@ module Aws::LexModelBuildingService
     #   You specify the `valueElicitationPrompt` field when you create the
     #   `CrustType` slot.
     #
-    #   If you have defined a fallback intent the abort statement will not
+    #   If you have defined a fallback intent the cancel statement will not
     #   be sent to the user, the fallback intent is used instead. For more
     #   information, see [ AMAZON.FallbackIntent][1].
     #
@@ -3407,17 +3417,19 @@ module Aws::LexModelBuildingService
     #   @return [Array<Types::Intent>]
     #
     # @!attribute [rw] enable_model_improvements
-    #   Indicates whether the bot uses the new natural language
-    #   understanding (NLU) model or the original NLU. True indicates that
-    #   the bot is using the new model, otherwise, false.
+    #   Indicates whether the bot uses accuracy improvements. `true`
+    #   indicates that the bot is using the imoprovements, otherwise,
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] nlu_intent_confidence_threshold
     #   The score that determines where Amazon Lex inserts the
     #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
     #   returning alternative intents in a [PostContent][1] or [PostText][2]
-    #   response. `AMAZON.FallbackIntent` and `AMAZON.KendraSearchIntent`
-    #   are only inserted if they are configured for the bot.
+    #   response. `AMAZON.FallbackIntent` is inserted if the confidence
+    #   score for all intents is below this value.
+    #   `AMAZON.KendraSearchIntent` is only inserted if it is configured for
+    #   the bot.
     #
     #
     #
@@ -3431,7 +3443,7 @@ module Aws::LexModelBuildingService
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
-    #   The message that Amazon Lex uses to abort a conversation. For more
+    #   The message that Amazon Lex uses to cancel a conversation. For more
     #   information, see PutBot.
     #   @return [Types::Statement]
     #
@@ -4016,6 +4028,9 @@ module Aws::LexModelBuildingService
     #   the slot type can take. Each value can have a list of `synonyms`,
     #   which are additional values that help train the machine learning
     #   model about the values that it resolves for a slot.
+    #
+    #   A regular expression slot type doesn't require enumeration values.
+    #   All other slot types require a list of enumeration values.
     #
     #   When Amazon Lex resolves a slot value, it generates a resolution
     #   list that contains up to five possible values for the slot. If you

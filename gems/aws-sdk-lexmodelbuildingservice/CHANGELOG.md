@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-09-08)
+------------------
+
+* Feature - Amazon Lex supports en-AU locale
+
 1.35.0 (2020-08-25)
 ------------------
 

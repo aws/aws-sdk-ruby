@@ -1816,20 +1816,26 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # `DeleteReportGroup`\: Deletes a report group. Before you delete a
-    # report group, you must delete its reports. Use
-    # [ListReportsForReportGroup][1] to get the reports in a report group.
-    # Use [DeleteReport][2] to delete the reports. If you call
-    # `DeleteReportGroup` for a report group that contains one or more
-    # reports, an exception is thrown.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html
-    # [2]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html
+    # Deletes a report group. Before you delete a report group, you must
+    # delete its reports.
     #
     # @option params [required, String] :arn
     #   The ARN of the report group to delete.
+    #
+    # @option params [Boolean] :delete_reports
+    #   If `true`, deletes any reports that belong to a report group before
+    #   deleting the report group.
+    #
+    #   If `false`, you must delete any reports in the report group. Use
+    #   [ListReportsForReportGroup][1] to get the reports in a report group.
+    #   Use [DeleteReport][2] to delete the reports. If you call
+    #   `DeleteReportGroup` for a report group that contains one or more
+    #   reports, an exception is thrown.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1837,6 +1843,7 @@ module Aws::CodeBuild
     #
     #   resp = client.delete_report_group({
     #     arn: "NonEmptyString", # required
+    #     delete_reports: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportGroup AWS API Documentation
@@ -2037,6 +2044,7 @@ module Aws::CodeBuild
     #     max_results: 1,
     #     filter: {
     #       status: "String",
+    #       keyword: "String",
     #     },
     #   })
     #
@@ -4977,7 +4985,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

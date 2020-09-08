@@ -1939,16 +1939,34 @@ module Aws::CodeBuild
     #
     #       {
     #         arn: "NonEmptyString", # required
+    #         delete_reports: false,
     #       }
     #
     # @!attribute [rw] arn
     #   The ARN of the report group to delete.
     #   @return [String]
     #
+    # @!attribute [rw] delete_reports
+    #   If `true`, deletes any reports that belong to a report group before
+    #   deleting the report group.
+    #
+    #   If `false`, you must delete any reports in the report group. Use
+    #   [ListReportsForReportGroup][1] to get the reports in a report group.
+    #   Use [DeleteReport][2] to delete the reports. If you call
+    #   `DeleteReportGroup` for a report group that contains one or more
+    #   reports, an exception is thrown.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportGroupInput AWS API Documentation
     #
     class DeleteReportGroupInput < Struct.new(
-      :arn)
+      :arn,
+      :delete_reports)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2152,6 +2170,7 @@ module Aws::CodeBuild
     #         max_results: 1,
     #         filter: {
     #           status: "String",
+    #           keyword: "String",
     #         },
     #       }
     #
@@ -2311,21 +2330,21 @@ module Aws::CodeBuild
     #
     #   * `PARAMETER_STORE`\: An environment variable stored in Amazon EC2
     #     Systems Manager Parameter Store. To learn how to specify a
-    #     parameter store environment variable, see [ parameter store
-    #     reference-key in the buildspec file][1].
+    #     parameter store environment variable, see [env/parameter-store][1]
+    #     in the *AWS CodeBuild User Guide*.
     #
     #   * `PLAINTEXT`\: An environment variable in plain text format. This
     #     is the default value.
     #
     #   * `SECRETS_MANAGER`\: An environment variable stored in AWS Secrets
     #     Manager. To learn how to specify a secrets manager environment
-    #     variable, see [ secrets manager reference-key in the buildspec
-    #     file][2].
+    #     variable, see [env/secrets-manager][2] in the *AWS CodeBuild User
+    #     Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#parameter-store-build-spec
-    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#secrets-manager-build-spec
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable AWS API Documentation
@@ -3996,15 +4015,17 @@ module Aws::CodeBuild
     #   The image tag or image digest that identifies the Docker image to
     #   use for this build project. Use the following formats:
     #
-    #   * For an image tag: `registry/repository:tag`. For example, to
-    #     specify an image with the tag "latest," use
-    #     `registry/repository:latest`.
+    #   * For an image tag: `<registry>/<repository>:<tag>`. For example, in
+    #     the Docker repository that CodeBuild uses to manage its Docker
+    #     images, this would be `aws/codebuild/standard:4.0`. To specify the
+    #     latest version of this image, this would be
+    #     `aws/codebuild/standard:latest`.
     #
-    #   * For an image digest: `registry/repository@digest`. For example, to
-    #     specify an image with the digest
+    #   * For an image digest: `<registry>/<repository>@<digest>`. For
+    #     example, to specify an image with the digest
     #     "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,"
     #     use
-    #     `registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf`.
+    #     `<registry>/<repository>@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf`.
     #   @return [String]
     #
     # @!attribute [rw] compute_type
@@ -5977,25 +5998,43 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # A filter used to return specific types of test cases.
+    # A filter used to return specific types of test cases. In order to pass
+    # the filter, the report must meet all of the filter properties.
     #
     # @note When making an API call, you may pass TestCaseFilter
     #   data as a hash:
     #
     #       {
     #         status: "String",
+    #         keyword: "String",
     #       }
     #
     # @!attribute [rw] status
-    #   The status used to filter test cases. Valid statuses are
-    #   `SUCCEEDED`, `FAILED`, `ERROR`, `SKIPPED`, and `UNKNOWN`. A
-    #   `TestCaseFilter` can have one status.
+    #   The status used to filter test cases. A `TestCaseFilter` can have
+    #   one status. Valid values are:
+    #
+    #   * `SUCCEEDED`
+    #
+    #   * `FAILED`
+    #
+    #   * `ERROR`
+    #
+    #   * `SKIPPED`
+    #
+    #   * `UNKNOWN`
+    #   @return [String]
+    #
+    # @!attribute [rw] keyword
+    #   A keyword that is used to filter on the `name` or the `prefix` of
+    #   the test cases. Only test cases where the keyword is a substring of
+    #   the `name` or the `prefix` will be returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/TestCaseFilter AWS API Documentation
     #
     class TestCaseFilter < Struct.new(
-      :status)
+      :status,
+      :keyword)
       SENSITIVE = []
       include Aws::Structure
     end

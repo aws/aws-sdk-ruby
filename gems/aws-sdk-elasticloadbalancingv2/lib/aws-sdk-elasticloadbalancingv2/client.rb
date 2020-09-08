@@ -835,6 +835,12 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers\] You must specify subnets from at least
     #   two Availability Zones.
     #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify subnets
+    #   from one or more Local Zones.
+    #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones.
     #
@@ -845,6 +851,12 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers\] You must specify subnets from at least
     #   two Availability Zones. You cannot specify Elastic IP addresses for
     #   your subnets.
+    #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify subnets
+    #   from one or more Local Zones.
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You can specify one Elastic IP address per subnet
@@ -882,6 +894,10 @@ module Aws::ElasticLoadBalancingV2
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
     #   Internal load balancers must use `ipv4`.
+    #
+    # @option params [String] :customer_owned_ipv_4_pool
+    #   \[Application Load Balancers on Outposts\] The ID of the
+    #   customer-owned address pool (CoIP pool).
     #
     # @return [Types::CreateLoadBalancerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1001,6 +1017,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     type: "application", # accepts application, network
     #     ip_address_type: "ipv4", # accepts ipv4, dualstack
+    #     customer_owned_ipv_4_pool: "CustomerOwnedIpv4Pool",
     #   })
     #
     # @example Response structure
@@ -1019,6 +1036,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones #=> Array
     #   resp.load_balancers[0].availability_zones[0].zone_name #=> String
     #   resp.load_balancers[0].availability_zones[0].subnet_id #=> String
+    #   resp.load_balancers[0].availability_zones[0].outpost_id #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
@@ -1026,6 +1044,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
+    #   resp.load_balancers[0].customer_owned_ipv_4_pool #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancer AWS API Documentation
     #
@@ -2122,6 +2141,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones #=> Array
     #   resp.load_balancers[0].availability_zones[0].zone_name #=> String
     #   resp.load_balancers[0].availability_zones[0].subnet_id #=> String
+    #   resp.load_balancers[0].availability_zones[0].outpost_id #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
@@ -2129,6 +2149,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
+    #   resp.load_balancers[0].customer_owned_ipv_4_pool #=> String
     #   resp.next_marker #=> String
     #
     #
@@ -4264,6 +4285,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.availability_zones #=> Array
     #   resp.availability_zones[0].zone_name #=> String
     #   resp.availability_zones[0].subnet_id #=> String
+    #   resp.availability_zones[0].outpost_id #=> String
     #   resp.availability_zones[0].load_balancer_addresses #=> Array
     #   resp.availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
@@ -4291,7 +4313,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

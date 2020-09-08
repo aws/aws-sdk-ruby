@@ -410,8 +410,12 @@ module Aws::QuickSight
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
     #   \}`.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of the tags that you want to attach to this resource.
+    #
     # @return [Types::CreateAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateAccountCustomizationResponse#arn #arn} => String
     #   * {Types::CreateAccountCustomizationResponse#aws_account_id #aws_account_id} => String
     #   * {Types::CreateAccountCustomizationResponse#namespace #namespace} => String
     #   * {Types::CreateAccountCustomizationResponse#account_customization #account_customization} => Types::AccountCustomization
@@ -426,10 +430,17 @@ module Aws::QuickSight
     #     account_customization: { # required
     #       default_theme: "Arn",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
+    #   resp.arn #=> String
     #   resp.aws_account_id #=> String
     #   resp.namespace #=> String
     #   resp.account_customization.default_theme #=> String
@@ -2589,6 +2600,7 @@ module Aws::QuickSight
     #
     # @return [Types::DescribeAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeAccountCustomizationResponse#arn #arn} => String
     #   * {Types::DescribeAccountCustomizationResponse#aws_account_id #aws_account_id} => String
     #   * {Types::DescribeAccountCustomizationResponse#namespace #namespace} => String
     #   * {Types::DescribeAccountCustomizationResponse#account_customization #account_customization} => Types::AccountCustomization
@@ -2605,6 +2617,7 @@ module Aws::QuickSight
     #
     # @example Response structure
     #
+    #   resp.arn #=> String
     #   resp.aws_account_id #=> String
     #   resp.namespace #=> String
     #   resp.account_customization.default_theme #=> String
@@ -5547,6 +5560,7 @@ module Aws::QuickSight
     #
     # @return [Types::UpdateAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdateAccountCustomizationResponse#arn #arn} => String
     #   * {Types::UpdateAccountCustomizationResponse#aws_account_id #aws_account_id} => String
     #   * {Types::UpdateAccountCustomizationResponse#namespace #namespace} => String
     #   * {Types::UpdateAccountCustomizationResponse#account_customization #account_customization} => Types::AccountCustomization
@@ -5565,6 +5579,7 @@ module Aws::QuickSight
     #
     # @example Response structure
     #
+    #   resp.arn #=> String
     #   resp.aws_account_id #=> String
     #   resp.namespace #=> String
     #   resp.account_customization.default_theme #=> String
@@ -7272,7 +7287,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

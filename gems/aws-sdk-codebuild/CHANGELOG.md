@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2020-09-08)
+------------------
+
+* Feature - AWS CodeBuild - Support keyword search for test cases in DecribeTestCases API . Allow deletion of reports in the report group, before deletion of report group using the deleteReports flag.
+
 1.60.0 (2020-08-25)
 ------------------
 

@@ -74,6 +74,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupInput = Shapes::StructureShape.new(name: 'CreateTargetGroupInput')
     CreateTargetGroupOutput = Shapes::StructureShape.new(name: 'CreateTargetGroupOutput')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime')
+    CustomerOwnedIpv4Pool = Shapes::StringShape.new(name: 'CustomerOwnedIpv4Pool')
     DNSName = Shapes::StringShape.new(name: 'DNSName')
     Default = Shapes::BooleanShape.new(name: 'Default')
     DeleteListenerInput = Shapes::StructureShape.new(name: 'DeleteListenerInput')
@@ -179,6 +180,7 @@ module Aws::ElasticLoadBalancingV2
     ModifyTargetGroupOutput = Shapes::StructureShape.new(name: 'ModifyTargetGroupOutput')
     Name = Shapes::StringShape.new(name: 'Name')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
+    OutpostId = Shapes::StringShape.new(name: 'OutpostId')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Path = Shapes::StringShape.new(name: 'Path')
     PathPatternConditionConfig = Shapes::StructureShape.new(name: 'PathPatternConditionConfig')
@@ -352,6 +354,7 @@ module Aws::ElasticLoadBalancingV2
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: ZoneName, location_name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    AvailabilityZone.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
     AvailabilityZone.add_member(:load_balancer_addresses, Shapes::ShapeRef.new(shape: LoadBalancerAddresses, location_name: "LoadBalancerAddresses"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
@@ -393,6 +396,7 @@ module Aws::ElasticLoadBalancingV2
     CreateLoadBalancerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateLoadBalancerInput.add_member(:type, Shapes::ShapeRef.new(shape: LoadBalancerTypeEnum, location_name: "Type"))
     CreateLoadBalancerInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    CreateLoadBalancerInput.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
     CreateLoadBalancerInput.struct_class = Types::CreateLoadBalancerInput
 
     CreateLoadBalancerOutput.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "LoadBalancers"))
@@ -623,6 +627,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancer.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     LoadBalancer.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    LoadBalancer.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancerAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))

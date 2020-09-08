@@ -771,6 +771,12 @@ module Aws::QuickSight
     #         account_customization: { # required
     #           default_theme: "Arn",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -797,16 +803,26 @@ module Aws::QuickSight
     #   \}`.
     #   @return [Types::AccountCustomization]
     #
+    # @!attribute [rw] tags
+    #   A list of the tags that you want to attach to this resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountCustomizationRequest AWS API Documentation
     #
     class CreateAccountCustomizationRequest < Struct.new(
       :aws_account_id,
       :namespace,
-      :account_customization)
+      :account_customization,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the customization that you
+    #   created for this AWS account.
+    #   @return [String]
+    #
     # @!attribute [rw] aws_account_id
     #   The ID for the AWS account that you want to customize QuickSight
     #   for.
@@ -832,6 +848,7 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountCustomizationResponse AWS API Documentation
     #
     class CreateAccountCustomizationResponse < Struct.new(
+      :arn,
       :aws_account_id,
       :namespace,
       :account_customization,
@@ -4676,6 +4693,11 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the customization that's
+    #   associated with this AWS account.
+    #   @return [String]
+    #
     # @!attribute [rw] aws_account_id
     #   The ID for the AWS account that you're describing.
     #   @return [String]
@@ -4699,6 +4721,7 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountCustomizationResponse AWS API Documentation
     #
     class DescribeAccountCustomizationResponse < Struct.new(
+      :arn,
       :aws_account_id,
       :namespace,
       :account_customization,
@@ -10561,6 +10584,11 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the updated customization for
+    #   this AWS account.
+    #   @return [String]
+    #
     # @!attribute [rw] aws_account_id
     #   The ID for the AWS account that you want to update QuickSight
     #   customizations for.
@@ -10587,6 +10615,7 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomizationResponse AWS API Documentation
     #
     class UpdateAccountCustomizationResponse < Struct.new(
+      :arn,
       :aws_account_id,
       :namespace,
       :account_customization,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-09-08)
+------------------
+
+* Feature - Adds support for Application Load Balancers on Outposts.
+
 1.49.0 (2020-08-25)
 ------------------
 

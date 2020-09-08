@@ -528,9 +528,9 @@ module Aws::ApiGatewayV2
     #   An integer with a value between \[0-3600\].
     #
     # @option params [required, String] :authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda
-    #   function using incoming request parameters. For HTTP APIs, specify JWT
-    #   to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #
     # @option params [String] :authorizer_uri
     #   A string representation of a URI with a length between \[1-2048\].
@@ -562,6 +562,11 @@ module Aws::ApiGatewayV2
     # @option params [required, String] :name
     #   A string with a length between \[1-128\].
     #
+    # @option params [String] :authorizer_payload_format_version
+    #   A string with a length between \[1-64\].
+    #
+    # @option params [Boolean] :enable_simple_responses
+    #
     # @return [Types::CreateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAuthorizerResponse#authorizer_credentials_arn #authorizer_credentials_arn} => String
@@ -573,6 +578,8 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateAuthorizerResponse#identity_validation_expression #identity_validation_expression} => String
     #   * {Types::CreateAuthorizerResponse#jwt_configuration #jwt_configuration} => Types::JWTConfiguration
     #   * {Types::CreateAuthorizerResponse#name #name} => String
+    #   * {Types::CreateAuthorizerResponse#authorizer_payload_format_version #authorizer_payload_format_version} => String
+    #   * {Types::CreateAuthorizerResponse#enable_simple_responses #enable_simple_responses} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -589,6 +596,8 @@ module Aws::ApiGatewayV2
     #       issuer: "UriWithLengthBetween1And2048",
     #     },
     #     name: "StringWithLengthBetween1And128", # required
+    #     authorizer_payload_format_version: "StringWithLengthBetween1And64",
+    #     enable_simple_responses: false,
     #   })
     #
     # @example Response structure
@@ -605,6 +614,8 @@ module Aws::ApiGatewayV2
     #   resp.jwt_configuration.audience[0] #=> String
     #   resp.jwt_configuration.issuer #=> String
     #   resp.name #=> String
+    #   resp.authorizer_payload_format_version #=> String
+    #   resp.enable_simple_responses #=> Boolean
     #
     # @overload create_authorizer(params = {})
     # @param [Hash] params ({})
@@ -1032,7 +1043,8 @@ module Aws::ApiGatewayV2
     #   The authorization type. For WebSocket APIs, valid values are NONE for
     #   open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for
     #   using a Lambda authorizer. For HTTP APIs, valid values are NONE for
-    #   open access, or JWT for using JSON Web Tokens.
+    #   open access, JWT for using JSON Web Tokens, AWS\_IAM for using AWS IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer.
     #
     # @option params [String] :authorizer_id
     #   The identifier.
@@ -1788,6 +1800,29 @@ module Aws::ApiGatewayV2
       req.send_request(options)
     end
 
+    # Resets all authorizer cache entries for the specified stage. Supported
+    # only for HTTP API Lambda authorizers.
+    #
+    # @option params [required, String] :api_id
+    #
+    # @option params [required, String] :stage_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_authorizers_cache({
+    #     api_id: "__string", # required
+    #     stage_name: "__string", # required
+    #   })
+    #
+    # @overload reset_authorizers_cache(params = {})
+    # @param [Hash] params ({})
+    def reset_authorizers_cache(params = {}, options = {})
+      req = build_request(:reset_authorizers_cache, params)
+      req.send_request(options)
+    end
+
     # Gets an Api resource.
     #
     # @option params [required, String] :api_id
@@ -1998,6 +2033,8 @@ module Aws::ApiGatewayV2
     #   * {Types::GetAuthorizerResponse#identity_validation_expression #identity_validation_expression} => String
     #   * {Types::GetAuthorizerResponse#jwt_configuration #jwt_configuration} => Types::JWTConfiguration
     #   * {Types::GetAuthorizerResponse#name #name} => String
+    #   * {Types::GetAuthorizerResponse#authorizer_payload_format_version #authorizer_payload_format_version} => String
+    #   * {Types::GetAuthorizerResponse#enable_simple_responses #enable_simple_responses} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2020,6 +2057,8 @@ module Aws::ApiGatewayV2
     #   resp.jwt_configuration.audience[0] #=> String
     #   resp.jwt_configuration.issuer #=> String
     #   resp.name #=> String
+    #   resp.authorizer_payload_format_version #=> String
+    #   resp.enable_simple_responses #=> Boolean
     #
     # @overload get_authorizer(params = {})
     # @param [Hash] params ({})
@@ -2064,6 +2103,8 @@ module Aws::ApiGatewayV2
     #   resp.items[0].jwt_configuration.audience[0] #=> String
     #   resp.items[0].jwt_configuration.issuer #=> String
     #   resp.items[0].name #=> String
+    #   resp.items[0].authorizer_payload_format_version #=> String
+    #   resp.items[0].enable_simple_responses #=> Boolean
     #   resp.next_token #=> String
     #
     # @overload get_authorizers(params = {})
@@ -3360,9 +3401,9 @@ module Aws::ApiGatewayV2
     #   An integer with a value between \[0-3600\].
     #
     # @option params [String] :authorizer_type
-    #   The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda
-    #   function using incoming request parameters. For HTTP APIs, specify JWT
-    #   to use JSON Web Tokens.
+    #   The authorizer type. Specify REQUEST for a Lambda function using
+    #   incoming request parameters. Specify JWT to use JSON Web Tokens
+    #   (supported only for HTTP APIs).
     #
     # @option params [String] :authorizer_uri
     #   A string representation of a URI with a length between \[1-2048\].
@@ -3394,6 +3435,11 @@ module Aws::ApiGatewayV2
     # @option params [String] :name
     #   A string with a length between \[1-128\].
     #
+    # @option params [String] :authorizer_payload_format_version
+    #   A string with a length between \[1-64\].
+    #
+    # @option params [Boolean] :enable_simple_responses
+    #
     # @return [Types::UpdateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAuthorizerResponse#authorizer_credentials_arn #authorizer_credentials_arn} => String
@@ -3405,6 +3451,8 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateAuthorizerResponse#identity_validation_expression #identity_validation_expression} => String
     #   * {Types::UpdateAuthorizerResponse#jwt_configuration #jwt_configuration} => Types::JWTConfiguration
     #   * {Types::UpdateAuthorizerResponse#name #name} => String
+    #   * {Types::UpdateAuthorizerResponse#authorizer_payload_format_version #authorizer_payload_format_version} => String
+    #   * {Types::UpdateAuthorizerResponse#enable_simple_responses #enable_simple_responses} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3422,6 +3470,8 @@ module Aws::ApiGatewayV2
     #       issuer: "UriWithLengthBetween1And2048",
     #     },
     #     name: "StringWithLengthBetween1And128",
+    #     authorizer_payload_format_version: "StringWithLengthBetween1And64",
+    #     enable_simple_responses: false,
     #   })
     #
     # @example Response structure
@@ -3438,6 +3488,8 @@ module Aws::ApiGatewayV2
     #   resp.jwt_configuration.audience[0] #=> String
     #   resp.jwt_configuration.issuer #=> String
     #   resp.name #=> String
+    #   resp.authorizer_payload_format_version #=> String
+    #   resp.enable_simple_responses #=> Boolean
     #
     # @overload update_authorizer(params = {})
     # @param [Hash] params ({})
@@ -3866,7 +3918,8 @@ module Aws::ApiGatewayV2
     #   The authorization type. For WebSocket APIs, valid values are NONE for
     #   open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for
     #   using a Lambda authorizer. For HTTP APIs, valid values are NONE for
-    #   open access, or JWT for using JSON Web Tokens.
+    #   open access, JWT for using JSON Web Tokens, AWS\_IAM for using AWS IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer.
     #
     # @option params [String] :authorizer_id
     #   The identifier.
@@ -4229,7 +4282,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

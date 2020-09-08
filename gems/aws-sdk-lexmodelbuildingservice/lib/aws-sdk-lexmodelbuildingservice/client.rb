@@ -409,7 +409,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
+    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
     #   resp.child_directed #=> Boolean
     #   resp.enable_model_improvements #=> Boolean
     #   resp.detect_sentiment #=> Boolean
@@ -1082,7 +1082,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
+    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
     #   resp.child_directed #=> Boolean
     #   resp.detect_sentiment #=> Boolean
     #
@@ -1524,7 +1524,7 @@ module Aws::LexModelBuildingService
     #
     #   resp.signature #=> String
     #   resp.supported_locales #=> Array
-    #   resp.supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE"
+    #   resp.supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
     #   resp.slots #=> Array
     #   resp.slots[0].name #=> String
     #
@@ -1576,7 +1576,7 @@ module Aws::LexModelBuildingService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_builtin_intents({
-    #     locale: "en-US", # accepts en-US, en-GB, de-DE
+    #     locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
     #     signature_contains: "String",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -1587,7 +1587,7 @@ module Aws::LexModelBuildingService
     #   resp.intents #=> Array
     #   resp.intents[0].signature #=> String
     #   resp.intents[0].supported_locales #=> Array
-    #   resp.intents[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE"
+    #   resp.intents[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntents AWS API Documentation
@@ -1639,7 +1639,7 @@ module Aws::LexModelBuildingService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_builtin_slot_types({
-    #     locale: "en-US", # accepts en-US, en-GB, de-DE
+    #     locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
     #     signature_contains: "String",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -1650,7 +1650,7 @@ module Aws::LexModelBuildingService
     #   resp.slot_types #=> Array
     #   resp.slot_types[0].signature #=> String
     #   resp.slot_types[0].supported_locales #=> Array
-    #   resp.slot_types[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE"
+    #   resp.slot_types[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypes AWS API Documentation
@@ -2535,19 +2535,16 @@ module Aws::LexModelBuildingService
     #   OrderPizza intent. For more information, see how-it-works.
     #
     # @option params [Boolean] :enable_model_improvements
-    #   Set to `true` to enable the use of a new natural language
-    #   understanding (NLU) model. Using the new NLU may improve the
-    #   performance of your bot.
+    #   Set to `true` to enable access to natural language understanding
+    #   improvements.
     #
     #   When you set the `enableModelImprovements` parameter to `true` you can
     #   use the `nluIntentConfidenceThreshold` parameter to configure
     #   confidence scores. For more information, see [Confidence Scores][1].
     #
     #   You can only set the `enableModelImprovements` parameter in certain
-    #   Regions. If you set the parameter to `true`, your bot will use the new
-    #   NLU. If you set the parameter to `false`, your bot will continue to
-    #   use the original NLU. If you set the parameter to `false` after
-    #   setting it to `true`, your bot will return to the original NLU.
+    #   Regions. If you set the parameter to `true`, your bot has access to
+    #   accuracy improvements.
     #
     #   The Regions where you can set the `enableModelImprovements` parameter
     #   to `true` are:
@@ -2585,6 +2582,17 @@ module Aws::LexModelBuildingService
     #
     #   You must set the `enableModelImprovements` parameter to `true` to use
     #   confidence scores.
+    #
+    #   * US East (N. Virginia) (us-east-1)
+    #
+    #   * US West (Oregon) (us-west-2)
+    #
+    #   * Asia Pacific (Sydney) (ap-southeast-2)
+    #
+    #   * EU (Ireland) (eu-west-1)
+    #
+    #   In other Regions, the `enableModelImprovements` parameter is set to
+    #   `true` by default.
     #
     #   For example, suppose a bot is configured with the confidence threshold
     #   of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex returns three
@@ -2651,7 +2659,7 @@ module Aws::LexModelBuildingService
     #   When Amazon Lex can't understand the user's input in context, it
     #   tries to elicit the information a few times. After that, Amazon Lex
     #   sends the message defined in `abortStatement` to the user, and then
-    #   aborts the conversation. To set the number of retries, use the
+    #   cancels the conversation. To set the number of retries, use the
     #   `valueElicitationPrompt` field for the slot type.
     #
     #   For example, in a pizza ordering bot, Amazon Lex might ask a user
@@ -2665,7 +2673,7 @@ module Aws::LexModelBuildingService
     #   You specify the `valueElicitationPrompt` field when you create the
     #   `CrustType` slot.
     #
-    #   If you have defined a fallback intent the abort statement will not be
+    #   If you have defined a fallback intent the cancel statement will not be
     #   sent to the user, the fallback intent is used instead. For more
     #   information, see [ AMAZON.FallbackIntent][1].
     #
@@ -2925,7 +2933,7 @@ module Aws::LexModelBuildingService
     #     voice_id: "String",
     #     checksum: "String",
     #     process_behavior: "SAVE", # accepts SAVE, BUILD
-    #     locale: "en-US", # required, accepts en-US, en-GB, de-DE
+    #     locale: "en-US", # required, accepts en-US, en-GB, de-DE, en-AU
     #     child_directed: false, # required
     #     detect_sentiment: false,
     #     create_version: false,
@@ -2965,7 +2973,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
+    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
     #   resp.child_directed #=> Boolean
     #   resp.create_version #=> Boolean
     #   resp.detect_sentiment #=> Boolean
@@ -3797,6 +3805,9 @@ module Aws::LexModelBuildingService
     #   are additional values that help train the machine learning model about
     #   the values that it resolves for a slot.
     #
+    #   A regular expression slot type doesn't require enumeration values.
+    #   All other slot types require a list of enumeration values.
+    #
     #   When Amazon Lex resolves a slot value, it generates a resolution list
     #   that contains up to five possible values for the slot. If you are
     #   using a Lambda function, this resolution list is passed to the
@@ -4100,7 +4111,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

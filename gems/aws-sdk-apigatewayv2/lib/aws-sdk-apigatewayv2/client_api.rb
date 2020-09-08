@@ -177,6 +177,7 @@ module Aws::ApiGatewayV2
     ReimportApiInput = Shapes::StructureShape.new(name: 'ReimportApiInput')
     ReimportApiRequest = Shapes::StructureShape.new(name: 'ReimportApiRequest')
     ReimportApiResponse = Shapes::StructureShape.new(name: 'ReimportApiResponse')
+    ResetAuthorizersCacheRequest = Shapes::StructureShape.new(name: 'ResetAuthorizersCacheRequest')
     Route = Shapes::StructureShape.new(name: 'Route')
     RouteModels = Shapes::MapShape.new(name: 'RouteModels')
     RouteParameters = Shapes::MapShape.new(name: 'RouteParameters')
@@ -323,6 +324,8 @@ module Aws::ApiGatewayV2
     Authorizer.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     Authorizer.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     Authorizer.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
+    Authorizer.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    Authorizer.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     Authorizer.struct_class = Types::Authorizer
 
     Authorizers.add_member(:items, Shapes::ShapeRef.new(shape: __listOfAuthorizer, location_name: "items"))
@@ -419,6 +422,8 @@ module Aws::ApiGatewayV2
     CreateAuthorizerInput.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     CreateAuthorizerInput.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     CreateAuthorizerInput.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
+    CreateAuthorizerInput.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    CreateAuthorizerInput.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     CreateAuthorizerInput.struct_class = Types::CreateAuthorizerInput
 
     CreateAuthorizerRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -430,6 +435,8 @@ module Aws::ApiGatewayV2
     CreateAuthorizerRequest.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     CreateAuthorizerRequest.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     CreateAuthorizerRequest.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
+    CreateAuthorizerRequest.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    CreateAuthorizerRequest.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     CreateAuthorizerRequest.struct_class = Types::CreateAuthorizerRequest
 
     CreateAuthorizerResponse.add_member(:authorizer_credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "authorizerCredentialsArn"))
@@ -441,6 +448,8 @@ module Aws::ApiGatewayV2
     CreateAuthorizerResponse.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     CreateAuthorizerResponse.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     CreateAuthorizerResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    CreateAuthorizerResponse.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    CreateAuthorizerResponse.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     CreateAuthorizerResponse.struct_class = Types::CreateAuthorizerResponse
 
     CreateDeploymentInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
@@ -879,6 +888,8 @@ module Aws::ApiGatewayV2
     GetAuthorizerResponse.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     GetAuthorizerResponse.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     GetAuthorizerResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    GetAuthorizerResponse.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    GetAuthorizerResponse.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     GetAuthorizerResponse.struct_class = Types::GetAuthorizerResponse
 
     GetAuthorizersRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -1238,6 +1249,10 @@ module Aws::ApiGatewayV2
     ReimportApiResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "warnings"))
     ReimportApiResponse.struct_class = Types::ReimportApiResponse
 
+    ResetAuthorizersCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
+    ResetAuthorizersCacheRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
+    ResetAuthorizersCacheRequest.struct_class = Types::ResetAuthorizersCacheRequest
+
     Route.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     Route.add_member(:api_key_required, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiKeyRequired"))
     Route.add_member(:authorization_scopes, Shapes::ShapeRef.new(shape: AuthorizationScopes, location_name: "authorizationScopes"))
@@ -1411,6 +1426,8 @@ module Aws::ApiGatewayV2
     UpdateAuthorizerInput.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     UpdateAuthorizerInput.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     UpdateAuthorizerInput.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    UpdateAuthorizerInput.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    UpdateAuthorizerInput.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     UpdateAuthorizerInput.struct_class = Types::UpdateAuthorizerInput
 
     UpdateAuthorizerRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -1423,6 +1440,8 @@ module Aws::ApiGatewayV2
     UpdateAuthorizerRequest.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     UpdateAuthorizerRequest.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     UpdateAuthorizerRequest.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    UpdateAuthorizerRequest.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    UpdateAuthorizerRequest.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     UpdateAuthorizerRequest.struct_class = Types::UpdateAuthorizerRequest
 
     UpdateAuthorizerResponse.add_member(:authorizer_credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "authorizerCredentialsArn"))
@@ -1434,6 +1453,8 @@ module Aws::ApiGatewayV2
     UpdateAuthorizerResponse.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "identityValidationExpression"))
     UpdateAuthorizerResponse.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JWTConfiguration, location_name: "jwtConfiguration"))
     UpdateAuthorizerResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    UpdateAuthorizerResponse.add_member(:authorizer_payload_format_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "authorizerPayloadFormatVersion"))
+    UpdateAuthorizerResponse.add_member(:enable_simple_responses, Shapes::ShapeRef.new(shape: __boolean, location_name: "enableSimpleResponses"))
     UpdateAuthorizerResponse.struct_class = Types::UpdateAuthorizerResponse
 
     UpdateDeploymentInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
@@ -2063,6 +2084,16 @@ module Aws::ApiGatewayV2
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:reset_authorizers_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetAuthorizersCache"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/apis/{apiId}/stages/{stageName}/cache/authorizers"
+        o.input = Shapes::ShapeRef.new(shape: ResetAuthorizersCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:get_api, Seahorse::Model::Operation.new.tap do |o|

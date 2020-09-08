@@ -523,6 +523,7 @@ module Aws::CodeBuild
     DeleteProjectOutput.struct_class = Types::DeleteProjectOutput
 
     DeleteReportGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
+    DeleteReportGroupInput.add_member(:delete_reports, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteReports"))
     DeleteReportGroupInput.struct_class = Types::DeleteReportGroupInput
 
     DeleteReportGroupOutput.struct_class = Types::DeleteReportGroupOutput
@@ -1077,6 +1078,7 @@ module Aws::CodeBuild
     TestCase.struct_class = Types::TestCase
 
     TestCaseFilter.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    TestCaseFilter.add_member(:keyword, Shapes::ShapeRef.new(shape: String, location_name: "keyword"))
     TestCaseFilter.struct_class = Types::TestCaseFilter
 
     TestCases.member = Shapes::ShapeRef.new(shape: TestCase)
