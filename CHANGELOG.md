@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.581 (2020-09-08)
+------------------
+
 * Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
