@@ -2328,6 +2328,10 @@ module Aws::Glue
     #   The `TableInput` object that defines the metadata table to create in
     #   the catalog.
     #
+    # @option params [Array<Types::PartitionIndex>] :partition_indexes
+    #   A list of partition indexes, `PartitionIndex` structures, to create in
+    #   the table.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2406,6 +2410,12 @@ module Aws::Glue
     #         name: "NameString",
     #       },
     #     },
+    #     partition_indexes: [
+    #       {
+    #         keys: ["NameString"], # required
+    #         index_name: "NameString", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable AWS API Documentation
@@ -4853,6 +4863,57 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_partition(params = {}, options = {})
       req = build_request(:get_partition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the partition indexes associated with a table.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog ID where the table resides.
+    #
+    # @option params [required, String] :database_name
+    #   Specifies the name of a database from which you want to retrieve
+    #   partition indexes.
+    #
+    # @option params [required, String] :table_name
+    #   Specifies the name of a table for which you want to retrieve the
+    #   partition indexes.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, included if this is a continuation call.
+    #
+    # @return [Types::GetPartitionIndexesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPartitionIndexesResponse#partition_index_descriptor_list #partition_index_descriptor_list} => Array&lt;Types::PartitionIndexDescriptor&gt;
+    #   * {Types::GetPartitionIndexesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_partition_indexes({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.partition_index_descriptor_list #=> Array
+    #   resp.partition_index_descriptor_list[0].index_name #=> String
+    #   resp.partition_index_descriptor_list[0].keys #=> Array
+    #   resp.partition_index_descriptor_list[0].keys[0].name #=> String
+    #   resp.partition_index_descriptor_list[0].keys[0].type #=> String
+    #   resp.partition_index_descriptor_list[0].index_status #=> String, one of "ACTIVE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionIndexes AWS API Documentation
+    #
+    # @overload get_partition_indexes(params = {})
+    # @param [Hash] params ({})
+    def get_partition_indexes(params = {}, options = {})
+      req = build_request(:get_partition_indexes, params)
       req.send_request(options)
     end
 
@@ -8927,7 +8988,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

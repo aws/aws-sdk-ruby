@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.366.0 (2020-09-09)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RedshiftDataAPIService`.
+
 1.365.0 (2020-09-04)
 ------------------
 

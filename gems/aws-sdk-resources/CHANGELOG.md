@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.81.0 (2020-09-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-redshiftdataapiservice` gem.
+
 3.80.0 (2020-08-26)
 ------------------
 

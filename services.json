@@ -577,6 +577,9 @@
   "Redshift": {
     "models": "redshift/2012-12-01"
   },
+  "RedshiftDataAPIService": {
+    "models": "redshift-data/2019-12-20"
+  },
   "Rekognition": {
     "models": "rekognition/2016-06-27"
   },

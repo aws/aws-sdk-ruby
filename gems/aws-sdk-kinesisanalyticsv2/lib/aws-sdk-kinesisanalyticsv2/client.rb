@@ -1024,7 +1024,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1084,6 +1084,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpoint_interval #=> Integer
@@ -1466,7 +1467,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1526,6 +1527,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpoint_interval #=> Integer
@@ -1767,7 +1769,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries #=> Array
     #   resp.application_summaries[0].application_name #=> String
     #   resp.application_summaries[0].application_arn #=> String
-    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
+    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
     #   resp.application_summaries[0].application_version_id #=> Integer
     #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.next_token #=> String
@@ -2165,7 +2167,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -2225,6 +2227,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpoint_interval #=> Integer
@@ -2277,7 +2280,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

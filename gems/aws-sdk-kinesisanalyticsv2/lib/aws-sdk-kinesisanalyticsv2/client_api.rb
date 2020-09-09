@@ -882,6 +882,7 @@ module Aws::KinesisAnalyticsV2
     RunConfiguration.struct_class = Types::RunConfiguration
 
     RunConfigurationDescription.add_member(:application_restore_configuration_description, Shapes::ShapeRef.new(shape: ApplicationRestoreConfiguration, location_name: "ApplicationRestoreConfigurationDescription"))
+    RunConfigurationDescription.add_member(:flink_run_configuration_description, Shapes::ShapeRef.new(shape: FlinkRunConfiguration, location_name: "FlinkRunConfigurationDescription"))
     RunConfigurationDescription.struct_class = Types::RunConfigurationDescription
 
     RunConfigurationUpdate.add_member(:flink_run_configuration, Shapes::ShapeRef.new(shape: FlinkRunConfiguration, location_name: "FlinkRunConfiguration"))
@@ -1132,6 +1133,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1161,6 +1163,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1253,6 +1256,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
       end)
 
       api.add_operation(:describe_application, Seahorse::Model::Operation.new.tap do |o|

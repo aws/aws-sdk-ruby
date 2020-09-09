@@ -447,8 +447,8 @@ RubyGems.org page under "LINKS" section.
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
 | Amazon Interactive Video Service                      | Aws::IVS                             | aws-sdk-ivs                             | 2020-07-14  |
 | Amazon Kinesis                                        | Aws::Kinesis                         | aws-sdk-kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Signaling Channels               | Aws::KinesisVideoSignalingChannels   | aws-sdk-kinesisvideosignalingchannels   | 2019-12-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
@@ -481,8 +481,8 @@ RubyGems.org page under "LINKS" section.
 | Amazon Route 53 Resolver                              | Aws::Route53Resolver                 | aws-sdk-route53resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                | aws-sdk-sagemakerruntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                       | aws-sdk-sagemaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
 | Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
+| Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
 | Amazon Simple Notification Service                    | Aws::SNS                             | aws-sdk-sns                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | Aws::SQS                             | aws-sdk-sqs                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | Aws::S3                              | aws-sdk-s3                              | 2006-03-01  |
@@ -510,6 +510,7 @@ RubyGems.org page under "LINKS" section.
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
+| Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                      | aws-sdk-synthetics                      | 2017-10-11  |

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2020-09-09)
+------------------
+
+* Feature - Adding support for partitionIndexes to improve GetPartitions performance.
+
 1.68.0 (2020-08-25)
 ------------------
 

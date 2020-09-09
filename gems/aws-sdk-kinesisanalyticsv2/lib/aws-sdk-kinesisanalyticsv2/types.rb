@@ -4816,10 +4816,16 @@ module Aws::KinesisAnalyticsV2
     #   Describes the restore behavior of a restarting application.
     #   @return [Types::ApplicationRestoreConfiguration]
     #
+    # @!attribute [rw] flink_run_configuration_description
+    #   Describes the starting parameters for an Apache Flink-based Kinesis
+    #   Data Analytics application.
+    #   @return [Types::FlinkRunConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RunConfigurationDescription AWS API Documentation
     #
     class RunConfigurationDescription < Struct.new(
-      :application_restore_configuration_description)
+      :application_restore_configuration_description,
+      :flink_run_configuration_description)
       SENSITIVE = []
       include Aws::Structure
     end

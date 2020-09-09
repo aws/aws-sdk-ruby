@@ -400,6 +400,7 @@ module Aws
             'RDS' => 'rds',
             'RDSDataService' => 'rds-data',
             'Redshift' => 'redshift',
+            'RedshiftDataAPIService' => 'redshift-data',
             'Rekognition' => 'rekognition',
             'ResourceGroups' => 'resource-groups',
             'ResourceGroupsTaggingAPI' => 'tagging',

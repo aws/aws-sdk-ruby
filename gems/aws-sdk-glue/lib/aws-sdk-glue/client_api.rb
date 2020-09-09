@@ -103,6 +103,7 @@ module Aws::Glue
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionCheckFailureException = Shapes::StructureShape.new(name: 'ConditionCheckFailureException')
     ConditionList = Shapes::ListShape.new(name: 'ConditionList')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConfusionMatrix = Shapes::StructureShape.new(name: 'ConfusionMatrix')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionInput = Shapes::StructureShape.new(name: 'ConnectionInput')
@@ -305,6 +306,8 @@ module Aws::Glue
     GetMLTransformsResponse = Shapes::StructureShape.new(name: 'GetMLTransformsResponse')
     GetMappingRequest = Shapes::StructureShape.new(name: 'GetMappingRequest')
     GetMappingResponse = Shapes::StructureShape.new(name: 'GetMappingResponse')
+    GetPartitionIndexesRequest = Shapes::StructureShape.new(name: 'GetPartitionIndexesRequest')
+    GetPartitionIndexesResponse = Shapes::StructureShape.new(name: 'GetPartitionIndexesResponse')
     GetPartitionRequest = Shapes::StructureShape.new(name: 'GetPartitionRequest')
     GetPartitionResponse = Shapes::StructureShape.new(name: 'GetPartitionResponse')
     GetPartitionsRequest = Shapes::StructureShape.new(name: 'GetPartitionsRequest')
@@ -385,6 +388,9 @@ module Aws::Glue
     JsonClassifier = Shapes::StructureShape.new(name: 'JsonClassifier')
     JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
+    KeyList = Shapes::ListShape.new(name: 'KeyList')
+    KeySchemaElement = Shapes::StructureShape.new(name: 'KeySchemaElement')
+    KeySchemaElementList = Shapes::ListShape.new(name: 'KeySchemaElementList')
     KeyString = Shapes::StringShape.new(name: 'KeyString')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LabelCount = Shapes::IntegerShape.new(name: 'LabelCount')
@@ -450,6 +456,11 @@ module Aws::Glue
     Partition = Shapes::StructureShape.new(name: 'Partition')
     PartitionError = Shapes::StructureShape.new(name: 'PartitionError')
     PartitionErrors = Shapes::ListShape.new(name: 'PartitionErrors')
+    PartitionIndex = Shapes::StructureShape.new(name: 'PartitionIndex')
+    PartitionIndexDescriptor = Shapes::StructureShape.new(name: 'PartitionIndexDescriptor')
+    PartitionIndexDescriptorList = Shapes::ListShape.new(name: 'PartitionIndexDescriptorList')
+    PartitionIndexList = Shapes::ListShape.new(name: 'PartitionIndexList')
+    PartitionIndexStatus = Shapes::StringShape.new(name: 'PartitionIndexStatus')
     PartitionInput = Shapes::StructureShape.new(name: 'PartitionInput')
     PartitionInputList = Shapes::ListShape.new(name: 'PartitionInputList')
     PartitionList = Shapes::ListShape.new(name: 'PartitionList')
@@ -926,6 +937,9 @@ module Aws::Glue
 
     ConditionList.member = Shapes::ShapeRef.new(shape: Condition)
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
     ConfusionMatrix.add_member(:num_true_positives, Shapes::ShapeRef.new(shape: RecordsCount, location_name: "NumTruePositives"))
     ConfusionMatrix.add_member(:num_false_positives, Shapes::ShapeRef.new(shape: RecordsCount, location_name: "NumFalsePositives"))
     ConfusionMatrix.add_member(:num_true_negatives, Shapes::ShapeRef.new(shape: RecordsCount, location_name: "NumTrueNegatives"))
@@ -1188,6 +1202,7 @@ module Aws::Glue
     CreateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     CreateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
+    CreateTableRequest.add_member(:partition_indexes, Shapes::ShapeRef.new(shape: PartitionIndexList, location_name: "PartitionIndexes"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.struct_class = Types::CreateTableResponse
@@ -1749,6 +1764,16 @@ module Aws::Glue
     GetMappingResponse.add_member(:mapping, Shapes::ShapeRef.new(shape: MappingList, required: true, location_name: "Mapping"))
     GetMappingResponse.struct_class = Types::GetMappingResponse
 
+    GetPartitionIndexesRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetPartitionIndexesRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetPartitionIndexesRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetPartitionIndexesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetPartitionIndexesRequest.struct_class = Types::GetPartitionIndexesRequest
+
+    GetPartitionIndexesResponse.add_member(:partition_index_descriptor_list, Shapes::ShapeRef.new(shape: PartitionIndexDescriptorList, location_name: "PartitionIndexDescriptorList"))
+    GetPartitionIndexesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetPartitionIndexesResponse.struct_class = Types::GetPartitionIndexesResponse
+
     GetPartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetPartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetPartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -2081,6 +2106,14 @@ module Aws::Glue
     JsonClassifier.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "JsonPath"))
     JsonClassifier.struct_class = Types::JsonClassifier
 
+    KeyList.member = Shapes::ShapeRef.new(shape: NameString)
+
+    KeySchemaElement.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    KeySchemaElement.add_member(:type, Shapes::ShapeRef.new(shape: ColumnTypeString, required: true, location_name: "Type"))
+    KeySchemaElement.struct_class = Types::KeySchemaElement
+
+    KeySchemaElementList.member = Shapes::ShapeRef.new(shape: KeySchemaElement)
+
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
     LabelingSetGenerationTaskRunProperties.struct_class = Types::LabelingSetGenerationTaskRunProperties
 
@@ -2250,6 +2283,19 @@ module Aws::Glue
     PartitionError.struct_class = Types::PartitionError
 
     PartitionErrors.member = Shapes::ShapeRef.new(shape: PartitionError)
+
+    PartitionIndex.add_member(:keys, Shapes::ShapeRef.new(shape: KeyList, required: true, location_name: "Keys"))
+    PartitionIndex.add_member(:index_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "IndexName"))
+    PartitionIndex.struct_class = Types::PartitionIndex
+
+    PartitionIndexDescriptor.add_member(:index_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "IndexName"))
+    PartitionIndexDescriptor.add_member(:keys, Shapes::ShapeRef.new(shape: KeySchemaElementList, required: true, location_name: "Keys"))
+    PartitionIndexDescriptor.add_member(:index_status, Shapes::ShapeRef.new(shape: PartitionIndexStatus, required: true, location_name: "IndexStatus"))
+    PartitionIndexDescriptor.struct_class = Types::PartitionIndexDescriptor
+
+    PartitionIndexDescriptorList.member = Shapes::ShapeRef.new(shape: PartitionIndexDescriptor)
+
+    PartitionIndexList.member = Shapes::ShapeRef.new(shape: PartitionIndex)
 
     PartitionInput.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Values"))
     PartitionInput.add_member(:last_access_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessTime"))
@@ -3869,6 +3915,24 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:get_partition_indexes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPartitionIndexes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPartitionIndexesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPartitionIndexesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_partitions, Seahorse::Model::Operation.new.tap do |o|

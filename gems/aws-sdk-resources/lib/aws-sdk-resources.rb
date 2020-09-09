@@ -184,6 +184,7 @@ module Aws
   autoload :RDS, 'aws-sdk-rds'
   autoload :RDSDataService, 'aws-sdk-rdsdataservice'
   autoload :Redshift, 'aws-sdk-redshift'
+  autoload :RedshiftDataAPIService, 'aws-sdk-redshiftdataapiservice'
   autoload :Rekognition, 'aws-sdk-rekognition'
   autoload :ResourceGroups, 'aws-sdk-resourcegroups'
   autoload :ResourceGroupsTaggingAPI, 'aws-sdk-resourcegroupstaggingapi'

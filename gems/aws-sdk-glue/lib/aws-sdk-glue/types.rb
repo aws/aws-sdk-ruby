@@ -1492,6 +1492,21 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The `CreatePartitions` API was called on a table that has indexes
+    # enabled.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The confusion matrix shows you what your transform is predicting
     # accurately and what types of errors it is making.
     #
@@ -1620,17 +1635,6 @@ module Aws::Glue
     #     port pairs that are the addresses of the Apache Kafka brokers in a
     #     Kafka cluster to which a Kafka client will connect to and
     #     bootstrap itself.
-    #
-    #   * `KAFKA_SSL_ENABLED` - Whether to enable or disable SSL on an
-    #     Apache Kafka connection. Default value is "true".
-    #
-    #   * `KAFKA_CUSTOM_CERT` - The Amazon S3 URL for the private CA cert
-    #     file (.pem format). The default is an empty string.
-    #
-    #   * `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` - Whether to skip the
-    #     validation of the CA cert file or not. AWS Glue validates for
-    #     three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
-    #     Default value is "false".
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -1707,9 +1711,6 @@ module Aws::Glue
     #
     #   * `MONGODB` - Designates a connection to a MongoDB document
     #     database.
-    #
-    #   * `NETWORK` - Designates a network connection to a data source
-    #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
     #   SFTP is not supported.
     #   @return [String]
@@ -3617,6 +3618,12 @@ module Aws::Glue
     #             name: "NameString",
     #           },
     #         },
+    #         partition_indexes: [
+    #           {
+    #             keys: ["NameString"], # required
+    #             index_name: "NameString", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -3634,12 +3641,18 @@ module Aws::Glue
     #   the catalog.
     #   @return [Types::TableInput]
     #
+    # @!attribute [rw] partition_indexes
+    #   A list of partition indexes, `PartitionIndex` structures, to create
+    #   in the table.
+    #   @return [Array<Types::PartitionIndex>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
       :catalog_id,
       :database_name,
-      :table_input)
+      :table_input,
+      :partition_indexes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6970,6 +6983,63 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPartitionIndexesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The catalog ID where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Specifies the name of a database from which you want to retrieve
+    #   partition indexes.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Specifies the name of a table for which you want to retrieve the
+    #   partition indexes.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, included if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionIndexesRequest AWS API Documentation
+    #
+    class GetPartitionIndexesRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] partition_index_descriptor_list
+    #   A list of index descriptors.
+    #   @return [Array<Types::PartitionIndexDescriptor>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, present if the current list segment is not the
+    #   last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionIndexesResponse AWS API Documentation
+    #
+    class GetPartitionIndexesResponse < Struct.new(
+      :partition_index_descriptor_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPartitionRequest
     #   data as a hash:
     #
@@ -9149,6 +9219,25 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A partition key pair consisting of a name and a type.
+    #
+    # @!attribute [rw] name
+    #   The name of a partition key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of a partition key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KeySchemaElement AWS API Documentation
+    #
+    class KeySchemaElement < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies configuration properties for a labeling set generation task
     # run.
     #
@@ -10081,6 +10170,58 @@ module Aws::Glue
     class PartitionError < Struct.new(
       :partition_values,
       :error_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure for a partition index.
+    #
+    # @note When making an API call, you may pass PartitionIndex
+    #   data as a hash:
+    #
+    #       {
+    #         keys: ["NameString"], # required
+    #         index_name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] keys
+    #   The keys for the partition index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the partition index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionIndex AWS API Documentation
+    #
+    class PartitionIndex < Struct.new(
+      :keys,
+      :index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A descriptor for a partition index in a table.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the partition index.
+    #   @return [String]
+    #
+    # @!attribute [rw] keys
+    #   A list of one or more keys, as `KeySchemaElement` structures, for
+    #   the partition index.
+    #   @return [Array<Types::KeySchemaElement>]
+    #
+    # @!attribute [rw] index_status
+    #   The status of the partition index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionIndexDescriptor AWS API Documentation
+    #
+    class PartitionIndexDescriptor < Struct.new(
+      :index_name,
+      :keys,
+      :index_status)
       SENSITIVE = []
       include Aws::Structure
     end

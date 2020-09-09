@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-09-09)
+------------------
+
+* Feature - Kinesis Data Analytics is adding new AUTOSCALING application status for applications during auto scaling and also adding FlinkRunConfigurationDescription in the ApplicationDetails.
+
 1.19.0 (2020-08-25)
 ------------------
 
