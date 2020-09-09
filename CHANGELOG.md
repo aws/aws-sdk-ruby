@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.582 (2020-09-09)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 * Feature - Aws::KinesisAnalyticsV2 - Updated the API, and documentation for Amazon Kinesis Analytics.
