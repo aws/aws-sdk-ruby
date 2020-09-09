@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::KinesisAnalyticsV2 - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::RedshiftDataAPIService - Added support for a new service, Redshift Data API Service.
+
 2.11.581 (2020-09-08)
 ------------------
 

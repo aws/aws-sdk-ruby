@@ -202,6 +202,7 @@ module Aws
     RDS
     RDSDataService
     Redshift
+    RedshiftDataAPIService
     Rekognition
     ResourceGroups
     ResourceGroupsTaggingAPI

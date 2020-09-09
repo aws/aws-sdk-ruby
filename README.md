@@ -318,8 +318,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | MarketplaceCatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
@@ -454,8 +454,8 @@ to be backwards compatible.
 | Amazon Route 53 Resolver                              | Route53Resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | SageMaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Email Service                           | SES                             | 2010-12-01  |
+| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | SNS                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | SQS                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | S3                              | 2006-03-01  |
@@ -482,6 +482,7 @@ to be backwards compatible.
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
+| Redshift Data API Service                             | RedshiftDataAPIService          | 2019-12-20  |
 | Schemas                                               | Schemas                         | 2019-12-02  |
 | Service Quotas                                        | ServiceQuotas                   | 2019-06-24  |
 | Synthetics                                            | Synthetics                      | 2017-10-11  |
