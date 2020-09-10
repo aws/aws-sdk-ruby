@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.583 (2020-09-10)
+------------------
+
 * Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
 
 * Feature - Aws::EBS - Updated the documentation for Amazon Elastic Block Store.
