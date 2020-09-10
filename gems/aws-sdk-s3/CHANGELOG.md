@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2020-09-10)
+------------------
+
+* Feature - Bucket owner verification feature added. This feature introduces the x-amz-expected-bucket-owner and x-amz-source-expected-bucket-owner headers.
+
 1.79.1 (2020-08-26)
 ------------------
 

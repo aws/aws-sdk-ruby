@@ -188,6 +188,7 @@ module Aws::S3
     #   bucket_versioning.enable({
     #     content_md5: "ContentMD5",
     #     mfa: "MFA",
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
@@ -202,6 +203,10 @@ module Aws::S3
     # @option options [String] :mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def enable(options = {})
       options = Aws::Util.deep_merge(options,
@@ -223,6 +228,7 @@ module Aws::S3
     #       mfa_delete: "Enabled", # accepts Enabled, Disabled
     #       status: "Enabled", # accepts Enabled, Suspended
     #     },
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
@@ -239,6 +245,10 @@ module Aws::S3
     #   space, and the value that is displayed on your authentication device.
     # @option options [required, Types::VersioningConfiguration] :versioning_configuration
     #   Container for setting the versioning state.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
@@ -251,6 +261,7 @@ module Aws::S3
     #   bucket_versioning.suspend({
     #     content_md5: "ContentMD5",
     #     mfa: "MFA",
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
@@ -265,6 +276,10 @@ module Aws::S3
     # @option options [String] :mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def suspend(options = {})
       options = Aws::Util.deep_merge(options,

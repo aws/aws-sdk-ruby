@@ -345,8 +345,8 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
-| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
+| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog              | aws-sdk-marketplacecatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
@@ -380,6 +380,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Shield                                            | Aws::Shield                          | aws-sdk-shield                          | 2016-06-02  |
 | AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
 | AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-core                            | 2019-06-10  |
+| AWS Single Sign-On Admin                              | Aws::SSOAdmin                        | aws-sdk-ssoadmin                        | 2020-07-20  |
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
@@ -506,8 +507,8 @@ RubyGems.org page under "LINKS" section.
 | Braket                                                | Aws::Braket                          | aws-sdk-braket                          | 2019-09-01  |
 | CodeArtifact                                          | Aws::CodeArtifact                    | aws-sdk-codeartifact                    | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |

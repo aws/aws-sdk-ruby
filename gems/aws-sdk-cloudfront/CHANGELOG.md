@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-09-10)
+------------------
+
+* Feature - Cloudfront adds support for Brotli. You can enable brotli caching and compression support by enabling it in your Cache Policy.
+
 1.39.0 (2020-08-31)
 ------------------
 

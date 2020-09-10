@@ -228,6 +228,7 @@ module Aws::S3
     #     grant_write_acp: "GrantWriteACP",
     #     request_payer: "requester", # accepts requester
     #     version_id: "ObjectVersionId",
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -273,6 +274,10 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::PutObjectAclOutput]
     def put(options = {})
       options = options.merge(

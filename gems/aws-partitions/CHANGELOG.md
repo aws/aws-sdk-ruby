@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.367.0 (2020-09-10)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SSOAdmin`.
+
 1.366.0 (2020-09-09)
 ------------------
 

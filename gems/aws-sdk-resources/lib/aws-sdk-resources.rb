@@ -201,6 +201,7 @@ module Aws
   autoload :SQS, 'aws-sdk-sqs'
   autoload :SSM, 'aws-sdk-ssm'
   autoload :SSO, 'aws-sdk-core'
+  autoload :SSOAdmin, 'aws-sdk-ssoadmin'
   autoload :SSOOIDC, 'aws-sdk-ssooidc'
   autoload :STS, 'aws-sdk-core'
   autoload :SWF, 'aws-sdk-swf'

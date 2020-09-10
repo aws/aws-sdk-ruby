@@ -176,8 +176,14 @@ module Aws::S3
 
     # @example Request syntax with placeholder values
     #
-    #   bucket_tagging.delete()
+    #   bucket_tagging.delete({
+    #     expected_bucket_owner: "AccountId",
+    #   })
     # @param [Hash] options ({})
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @bucket_name)
@@ -197,6 +203,7 @@ module Aws::S3
     #         },
     #       ],
     #     },
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
@@ -209,6 +216,10 @@ module Aws::S3
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [required, Types::Tagging] :tagging
     #   Container for the `TagSet` and `Tag` elements.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

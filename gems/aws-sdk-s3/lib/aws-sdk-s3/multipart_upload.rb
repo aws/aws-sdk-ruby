@@ -220,6 +220,7 @@ module Aws::S3
     #
     #   multipart_upload.abort({
     #     request_payer: "requester", # accepts requester
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :request_payer
@@ -232,6 +233,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::AbortMultipartUploadOutput]
     def abort(options = {})
       options = options.merge(
@@ -255,6 +260,7 @@ module Aws::S3
     #       ],
     #     },
     #     request_payer: "requester", # accepts requester
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [Types::CompletedMultipartUpload] :multipart_upload
@@ -269,6 +275,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Object]
     def complete(options = {})
       options = options.merge(
@@ -311,6 +321,7 @@ module Aws::S3
     #
     #   parts = multipart_upload.parts({
     #     request_payer: "requester", # accepts requester
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :request_payer
@@ -323,6 +334,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [MultipartUploadPart::Collection]
     def parts(options = {})
       batches = Enumerator.new do |y|

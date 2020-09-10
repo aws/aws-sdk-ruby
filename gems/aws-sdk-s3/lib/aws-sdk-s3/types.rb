@@ -61,6 +61,7 @@ module Aws::S3
     #         key: "ObjectKey", # required
     #         upload_id: "MultipartUploadId", # required
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -100,13 +101,20 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadRequest AWS API Documentation
     #
     class AbortMultipartUploadRequest < Struct.new(
       :bucket,
       :key,
       :upload_id,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -969,6 +977,7 @@ module Aws::S3
     #         },
     #         upload_id: "MultipartUploadId", # required
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -999,6 +1008,12 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadRequest AWS API Documentation
     #
     class CompleteMultipartUploadRequest < Struct.new(
@@ -1006,7 +1021,8 @@ module Aws::S3
       :key,
       :multipart_upload,
       :upload_id,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1229,6 +1245,8 @@ module Aws::S3
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #         object_lock_retain_until_date: Time.now,
     #         object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #         expected_bucket_owner: "AccountId",
+    #         expected_source_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] acl
@@ -1262,8 +1280,41 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] copy_source
-    #   The name of the source bucket and key name of the source object,
-    #   separated by a slash (/). Must be URL-encoded.
+    #   Specifies the source object for the copy operation. You specify the
+    #   value in one of two formats, depending on whether you want to access
+    #   the source object through an [access point][1]\:
+    #
+    #   * For objects not accessed through an access point, specify the name
+    #     of the source bucket and the key of the source object, separated
+    #     by a slash (/). For example, to copy the object
+    #     `reports/january.pdf` from the bucket `awsexamplebucket`, use
+    #     `awsexamplebucket/reports/january.pdf`. The value must be URL
+    #     encoded.
+    #
+    #   * For objects accessed through access points, specify the Amazon
+    #     Resource Name (ARN) of the object as accessed through the access
+    #     point, in the format
+    #     `arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     access point `my-access-point` owned by account `123456789012` in
+    #     Region `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
+    #     The value must be URL encoded.
+    #
+    #     <note markdown="1"> Amazon S3 supports copy operations using access points only when
+    #     the source and destination buckets are in the same AWS Region.
+    #
+    #      </note>
+    #
+    #   To copy a specific version of an object, append
+    #   `?versionId=<version-id>` to the value (for example,
+    #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
+    #   If you don't specify a version ID, Amazon S3 copies the latest
+    #   version of the source object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
     #   @return [String]
     #
     # @!attribute [rw] copy_source_if_match
@@ -1350,7 +1401,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -1427,6 +1478,18 @@ module Aws::S3
     #   object.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected destination bucket owner. If the
+    #   destination bucket is owned by a different account, the request will
+    #   fail with an HTTP `403 (Access Denied)` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_source_bucket_owner
+    #   The account id of the expected source bucket owner. If the source
+    #   bucket is owned by a different account, the request will fail with
+    #   an HTTP `403 (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectRequest AWS API Documentation
     #
     class CopyObjectRequest < Struct.new(
@@ -1466,7 +1529,9 @@ module Aws::S3
       :tagging,
       :object_lock_mode,
       :object_lock_retain_until_date,
-      :object_lock_legal_hold_status)
+      :object_lock_legal_hold_status,
+      :expected_bucket_owner,
+      :expected_source_bucket_owner)
       SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context, :copy_source_sse_customer_key]
       include Aws::Structure
     end
@@ -1756,6 +1821,7 @@ module Aws::S3
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #         object_lock_retain_until_date: Time.now,
     #         object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] acl
@@ -1843,7 +1909,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -1903,6 +1969,12 @@ module Aws::S3
     #   object.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUploadRequest AWS API Documentation
     #
     class CreateMultipartUploadRequest < Struct.new(
@@ -1932,7 +2004,8 @@ module Aws::S3
       :tagging,
       :object_lock_mode,
       :object_lock_retain_until_date,
-      :object_lock_legal_hold_status)
+      :object_lock_legal_hold_status,
+      :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
@@ -2013,6 +2086,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         id: "AnalyticsId", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2024,11 +2098,18 @@ module Aws::S3
     #   The ID that identifies the analytics configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfigurationRequest AWS API Documentation
     #
     class DeleteBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2038,16 +2119,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   Specifies the bucket whose `cors` configuration is being deleted.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCorsRequest AWS API Documentation
     #
     class DeleteBucketCorsRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2057,6 +2146,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2064,10 +2154,17 @@ module Aws::S3
     #   configuration to delete.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryptionRequest AWS API Documentation
     #
     class DeleteBucketEncryptionRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2078,6 +2175,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         id: "InventoryId", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2089,11 +2187,18 @@ module Aws::S3
     #   The ID used to identify the inventory configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfigurationRequest AWS API Documentation
     #
     class DeleteBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2103,16 +2208,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name of the lifecycle to delete.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycleRequest AWS API Documentation
     #
     class DeleteBucketLifecycleRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2123,6 +2236,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         id: "MetricsId", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2134,11 +2248,18 @@ module Aws::S3
     #   The ID used to identify the metrics configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfigurationRequest AWS API Documentation
     #
     class DeleteBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2148,16 +2269,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicyRequest AWS API Documentation
     #
     class DeleteBucketPolicyRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2167,16 +2296,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationRequest AWS API Documentation
     #
     class DeleteBucketReplicationRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2186,16 +2323,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   Specifies the bucket being deleted.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketRequest AWS API Documentation
     #
     class DeleteBucketRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2205,16 +2350,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket that has the tag set to be removed.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTaggingRequest AWS API Documentation
     #
     class DeleteBucketTaggingRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2224,6 +2377,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2231,10 +2385,17 @@ module Aws::S3
     #   configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsiteRequest AWS API Documentation
     #
     class DeleteBucketWebsiteRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2353,6 +2514,7 @@ module Aws::S3
     #         version_id: "ObjectVersionId",
     #         request_payer: "requester", # accepts requester
     #         bypass_governance_retention: false,
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2404,6 +2566,12 @@ module Aws::S3
     #   restrictions to process this operation.
     #   @return [Boolean]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectRequest AWS API Documentation
     #
     class DeleteObjectRequest < Struct.new(
@@ -2412,7 +2580,8 @@ module Aws::S3
       :mfa,
       :version_id,
       :request_payer,
-      :bypass_governance_retention)
+      :bypass_governance_retention,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2436,6 +2605,7 @@ module Aws::S3
     #         bucket: "BucketName", # required
     #         key: "ObjectKey", # required
     #         version_id: "ObjectVersionId",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2464,12 +2634,19 @@ module Aws::S3
     #   The versionId of the object that the tag-set will be removed from.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTaggingRequest AWS API Documentation
     #
     class DeleteObjectTaggingRequest < Struct.new(
       :bucket,
       :key,
-      :version_id)
+      :version_id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2516,6 +2693,7 @@ module Aws::S3
     #         mfa: "MFA",
     #         request_payer: "requester", # accepts requester
     #         bypass_governance_retention: false,
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2564,6 +2742,12 @@ module Aws::S3
     #   permissions to perform this operation.
     #   @return [Boolean]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectsRequest AWS API Documentation
     #
     class DeleteObjectsRequest < Struct.new(
@@ -2571,7 +2755,8 @@ module Aws::S3
       :delete,
       :mfa,
       :request_payer,
-      :bypass_governance_retention)
+      :bypass_governance_retention,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2581,6 +2766,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -2588,10 +2774,17 @@ module Aws::S3
     #   want to delete.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletePublicAccessBlockRequest AWS API Documentation
     #
     class DeletePublicAccessBlockRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3750,6 +3943,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -3757,10 +3951,17 @@ module Aws::S3
     #   retrieved.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationRequest AWS API Documentation
     #
     class GetBucketAccelerateConfigurationRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3787,16 +3988,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   Specifies the S3 bucket whose ACL is being requested.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAclRequest AWS API Documentation
     #
     class GetBucketAclRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3819,6 +4028,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         id: "AnalyticsId", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -3830,11 +4040,18 @@ module Aws::S3
     #   The ID that identifies the analytics configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfigurationRequest AWS API Documentation
     #
     class GetBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3857,16 +4074,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name for which to get the cors configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCorsRequest AWS API Documentation
     #
     class GetBucketCorsRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3888,6 +4113,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -3895,10 +4121,17 @@ module Aws::S3
     #   configuration is retrieved.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryptionRequest AWS API Documentation
     #
     class GetBucketEncryptionRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3921,6 +4154,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         id: "InventoryId", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -3932,11 +4166,18 @@ module Aws::S3
     #   The ID used to identify the inventory configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfigurationRequest AWS API Documentation
     #
     class GetBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3958,16 +4199,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The name of the bucket for which to get the lifecycle information.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfigurationRequest AWS API Documentation
     #
     class GetBucketLifecycleConfigurationRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3989,16 +4238,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The name of the bucket for which to get the lifecycle information.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleRequest AWS API Documentation
     #
     class GetBucketLifecycleRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4027,16 +4284,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The name of the bucket for which to get the location.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocationRequest AWS API Documentation
     #
     class GetBucketLocationRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4065,16 +4330,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name for which to get the logging information.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLoggingRequest AWS API Documentation
     #
     class GetBucketLoggingRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4097,6 +4370,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         id: "MetricsId", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -4108,11 +4382,18 @@ module Aws::S3
     #   The ID used to identify the metrics configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfigurationRequest AWS API Documentation
     #
     class GetBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4122,16 +4403,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   Name of the bucket for which to get the notification configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfigurationRequest AWS API Documentation
     #
     class GetBucketNotificationConfigurationRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4153,16 +4442,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name for which to get the bucket policy.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyRequest AWS API Documentation
     #
     class GetBucketPolicyRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4184,6 +4481,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -4191,10 +4489,17 @@ module Aws::S3
     #   retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyStatusRequest AWS API Documentation
     #
     class GetBucketPolicyStatusRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4217,16 +4522,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name for which to get the replication information.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplicationRequest AWS API Documentation
     #
     class GetBucketReplicationRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4248,6 +4561,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -4255,10 +4569,17 @@ module Aws::S3
     #   configuration
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPaymentRequest AWS API Documentation
     #
     class GetBucketRequestPaymentRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4280,16 +4601,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The name of the bucket for which to get the tagging information.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTaggingRequest AWS API Documentation
     #
     class GetBucketTaggingRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4319,16 +4648,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The name of the bucket for which to get the versioning information.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioningRequest AWS API Documentation
     #
     class GetBucketVersioningRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4369,16 +4706,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name for which to get the website configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsiteRequest AWS API Documentation
     #
     class GetBucketWebsiteRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4414,6 +4759,7 @@ module Aws::S3
     #         key: "ObjectKey", # required
     #         version_id: "ObjectVersionId",
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -4454,13 +4800,20 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclRequest AWS API Documentation
     #
     class GetObjectAclRequest < Struct.new(
       :bucket,
       :key,
       :version_id,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4485,6 +4838,7 @@ module Aws::S3
     #         key: "ObjectKey", # required
     #         version_id: "ObjectVersionId",
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -4527,13 +4881,20 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLegalHoldRequest AWS API Documentation
     #
     class GetObjectLegalHoldRequest < Struct.new(
       :bucket,
       :key,
       :version_id,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4555,16 +4916,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket whose Object Lock configuration you want to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLockConfigurationRequest AWS API Documentation
     #
     class GetObjectLockConfigurationRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4788,6 +5157,7 @@ module Aws::S3
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         request_payer: "requester", # accepts requester
     #         part_number: 1,
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -4884,7 +5254,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -4912,6 +5282,12 @@ module Aws::S3
     #   object.
     #   @return [Integer]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRequest AWS API Documentation
     #
     class GetObjectRequest < Struct.new(
@@ -4933,7 +5309,8 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :request_payer,
-      :part_number)
+      :part_number,
+      :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
@@ -4958,6 +5335,7 @@ module Aws::S3
     #         key: "ObjectKey", # required
     #         version_id: "ObjectVersionId",
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -5000,13 +5378,20 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRetentionRequest AWS API Documentation
     #
     class GetObjectRetentionRequest < Struct.new(
       :bucket,
       :key,
       :version_id,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5036,6 +5421,7 @@ module Aws::S3
     #         bucket: "BucketName", # required
     #         key: "ObjectKey", # required
     #         version_id: "ObjectVersionId",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -5065,12 +5451,19 @@ module Aws::S3
     #   information.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTaggingRequest AWS API Documentation
     #
     class GetObjectTaggingRequest < Struct.new(
       :bucket,
       :key,
-      :version_id)
+      :version_id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5100,6 +5493,7 @@ module Aws::S3
     #         bucket: "BucketName", # required
     #         key: "ObjectKey", # required
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -5123,12 +5517,19 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentRequest AWS API Documentation
     #
     class GetObjectTorrentRequest < Struct.new(
       :bucket,
       :key,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5151,6 +5552,7 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -5158,10 +5560,17 @@ module Aws::S3
     #   configuration you want to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetPublicAccessBlockRequest AWS API Documentation
     #
     class GetPublicAccessBlockRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5298,16 +5707,24 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
     #   The bucket name.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucketRequest AWS API Documentation
     #
     class HeadBucketRequest < Struct.new(
-      :bucket)
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5332,8 +5749,8 @@ module Aws::S3
     # @!attribute [rw] restore
     #   If the object is an archived object (an object whose storage class
     #   is GLACIER), the response includes this header if either the archive
-    #   restoration is in progress (see RestoreObject or an archive copy is
-    #   already restored.
+    #   restoration is in progress (see [RestoreObject][1] or an archive
+    #   copy is already restored.
     #
     #   If an archive copy is already restored, the header value indicates
     #   when Amazon S3 is scheduled to delete the object copy. For example:
@@ -5345,11 +5762,12 @@ module Aws::S3
     #   value `ongoing-request="true"`.
     #
     #   For more information about archiving objects, see [Transitioning
-    #   Objects: General Considerations][1].
+    #   Objects: General Considerations][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
     #   @return [String]
     #
     # @!attribute [rw] last_modified
@@ -5583,6 +6001,7 @@ module Aws::S3
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         request_payer: "requester", # accepts requester
     #         part_number: 1,
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -5638,7 +6057,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -5666,6 +6085,12 @@ module Aws::S3
     #   and the number of parts in this object.
     #   @return [Integer]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectRequest AWS API Documentation
     #
     class HeadObjectRequest < Struct.new(
@@ -5681,7 +6106,8 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :request_payer,
-      :part_number)
+      :part_number,
+      :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
@@ -6486,6 +6912,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         continuation_token: "Token",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -6498,11 +6925,18 @@ module Aws::S3
     #   request should begin.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurationsRequest AWS API Documentation
     #
     class ListBucketAnalyticsConfigurationsRequest < Struct.new(
       :bucket,
-      :continuation_token)
+      :continuation_token,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6546,6 +6980,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         continuation_token: "Token",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -6560,11 +6995,18 @@ module Aws::S3
     #   token is an opaque value that Amazon S3 understands.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurationsRequest AWS API Documentation
     #
     class ListBucketInventoryConfigurationsRequest < Struct.new(
       :bucket,
-      :continuation_token)
+      :continuation_token,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6610,6 +7052,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         continuation_token: "Token",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -6624,11 +7067,18 @@ module Aws::S3
     #   continuation token is an opaque value that Amazon S3 understands.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurationsRequest AWS API Documentation
     #
     class ListBucketMetricsConfigurationsRequest < Struct.new(
       :bucket,
-      :continuation_token)
+      :continuation_token,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6751,6 +7201,7 @@ module Aws::S3
     #         max_uploads: 1,
     #         prefix: "Prefix",
     #         upload_id_marker: "UploadIdMarker",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -6827,6 +7278,12 @@ module Aws::S3
     #   the specified `upload-id-marker`.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsRequest AWS API Documentation
     #
     class ListMultipartUploadsRequest < Struct.new(
@@ -6836,7 +7293,8 @@ module Aws::S3
       :key_marker,
       :max_uploads,
       :prefix,
-      :upload_id_marker)
+      :upload_id_marker,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6948,6 +7406,7 @@ module Aws::S3
     #         max_keys: 1,
     #         prefix: "Prefix",
     #         version_id_marker: "VersionIdMarker",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -7012,6 +7471,12 @@ module Aws::S3
     #   Specifies the object version you want to start listing from.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsRequest AWS API Documentation
     #
     class ListObjectVersionsRequest < Struct.new(
@@ -7021,7 +7486,8 @@ module Aws::S3
       :key_marker,
       :max_keys,
       :prefix,
-      :version_id_marker)
+      :version_id_marker,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7123,6 +7589,7 @@ module Aws::S3
     #         max_keys: 1,
     #         prefix: "Prefix",
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -7162,6 +7629,12 @@ module Aws::S3
     #   parameter in their requests.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsRequest AWS API Documentation
     #
     class ListObjectsRequest < Struct.new(
@@ -7171,7 +7644,8 @@ module Aws::S3
       :marker,
       :max_keys,
       :prefix,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7308,6 +7782,7 @@ module Aws::S3
     #         fetch_owner: false,
     #         start_after: "StartAfter",
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -7370,6 +7845,12 @@ module Aws::S3
     #   this parameter in their requests.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Request AWS API Documentation
     #
     class ListObjectsV2Request < Struct.new(
@@ -7381,7 +7862,8 @@ module Aws::S3
       :continuation_token,
       :fetch_owner,
       :start_after,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7505,6 +7987,7 @@ module Aws::S3
     #         part_number_marker: 1,
     #         upload_id: "MultipartUploadId", # required
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -7554,6 +8037,12 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsRequest AWS API Documentation
     #
     class ListPartsRequest < Struct.new(
@@ -7562,7 +8051,8 @@ module Aws::S3
       :max_parts,
       :part_number_marker,
       :upload_id,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8682,6 +9172,7 @@ module Aws::S3
     #         accelerate_configuration: { # required
     #           status: "Enabled", # accepts Enabled, Suspended
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -8692,11 +9183,18 @@ module Aws::S3
     #   Container for setting the transfer acceleration state.
     #   @return [Types::AccelerateConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfigurationRequest AWS API Documentation
     #
     class PutBucketAccelerateConfigurationRequest < Struct.new(
       :bucket,
-      :accelerate_configuration)
+      :accelerate_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8731,6 +9229,7 @@ module Aws::S3
     #         grant_read_acp: "GrantReadACP",
     #         grant_write: "GrantWrite",
     #         grant_write_acp: "GrantWriteACP",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] acl
@@ -8779,6 +9278,12 @@ module Aws::S3
     #   Allows grantee to write the ACL for the applicable bucket.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAclRequest AWS API Documentation
     #
     class PutBucketAclRequest < Struct.new(
@@ -8790,7 +9295,8 @@ module Aws::S3
       :grant_read,
       :grant_read_acp,
       :grant_write,
-      :grant_write_acp)
+      :grant_write_acp,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8833,6 +9339,7 @@ module Aws::S3
     #             },
     #           },
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -8848,12 +9355,19 @@ module Aws::S3
     #   The configuration and any analyses for the analytics filter.
     #   @return [Types::AnalyticsConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfigurationRequest AWS API Documentation
     #
     class PutBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
       :id,
-      :analytics_configuration)
+      :analytics_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8875,6 +9389,7 @@ module Aws::S3
     #           ],
     #         },
     #         content_md5: "ContentMD5",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -8903,12 +9418,19 @@ module Aws::S3
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCorsRequest AWS API Documentation
     #
     class PutBucketCorsRequest < Struct.new(
       :bucket,
       :cors_configuration,
-      :content_md5)
+      :content_md5,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8929,6 +9451,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -8954,12 +9477,19 @@ module Aws::S3
     #   Specifies the default server-side-encryption configuration.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryptionRequest AWS API Documentation
     #
     class PutBucketEncryptionRequest < Struct.new(
       :bucket,
       :content_md5,
-      :server_side_encryption_configuration)
+      :server_side_encryption_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8997,6 +9527,7 @@ module Aws::S3
     #             frequency: "Daily", # required, accepts Daily, Weekly
     #           },
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9012,12 +9543,19 @@ module Aws::S3
     #   Specifies the inventory configuration.
     #   @return [Types::InventoryConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfigurationRequest AWS API Documentation
     #
     class PutBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
       :id,
-      :inventory_configuration)
+      :inventory_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9076,6 +9614,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9086,11 +9625,18 @@ module Aws::S3
     #   Container for lifecycle rules. You can add as many as 1,000 rules.
     #   @return [Types::BucketLifecycleConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfigurationRequest AWS API Documentation
     #
     class PutBucketLifecycleConfigurationRequest < Struct.new(
       :bucket,
-      :lifecycle_configuration)
+      :lifecycle_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9130,6 +9676,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9141,12 +9688,19 @@ module Aws::S3
     # @!attribute [rw] lifecycle_configuration
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleRequest AWS API Documentation
     #
     class PutBucketLifecycleRequest < Struct.new(
       :bucket,
       :content_md5,
-      :lifecycle_configuration)
+      :lifecycle_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9175,6 +9729,7 @@ module Aws::S3
     #           },
     #         },
     #         content_md5: "ContentMD5",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9189,12 +9744,19 @@ module Aws::S3
     #   The MD5 hash of the `PutBucketLogging` request body.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLoggingRequest AWS API Documentation
     #
     class PutBucketLoggingRequest < Struct.new(
       :bucket,
       :bucket_logging_status,
-      :content_md5)
+      :content_md5,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9224,6 +9786,7 @@ module Aws::S3
     #             },
     #           },
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9238,12 +9801,19 @@ module Aws::S3
     #   Specifies the metrics configuration.
     #   @return [Types::MetricsConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfigurationRequest AWS API Documentation
     #
     class PutBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
       :id,
-      :metrics_configuration)
+      :metrics_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9306,6 +9876,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9318,11 +9889,18 @@ module Aws::S3
     #   the bucket.
     #   @return [Types::NotificationConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationRequest AWS API Documentation
     #
     class PutBucketNotificationConfigurationRequest < Struct.new(
       :bucket,
-      :notification_configuration)
+      :notification_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9354,6 +9932,7 @@ module Aws::S3
     #             invocation_role: "CloudFunctionInvocationRole",
     #           },
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9368,12 +9947,19 @@ module Aws::S3
     #   The container for the configuration.
     #   @return [Types::NotificationConfigurationDeprecated]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationRequest AWS API Documentation
     #
     class PutBucketNotificationRequest < Struct.new(
       :bucket,
       :content_md5,
-      :notification_configuration)
+      :notification_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9386,6 +9972,7 @@ module Aws::S3
     #         content_md5: "ContentMD5",
     #         confirm_remove_self_bucket_access: false,
     #         policy: "Policy", # required
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9405,13 +9992,20 @@ module Aws::S3
     #   The bucket policy as a JSON document.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicyRequest AWS API Documentation
     #
     class PutBucketPolicyRequest < Struct.new(
       :bucket,
       :content_md5,
       :confirm_remove_self_bucket_access,
-      :policy)
+      :policy,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9484,6 +10078,7 @@ module Aws::S3
     #           ],
     #         },
     #         token: "ObjectLockToken",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9509,13 +10104,20 @@ module Aws::S3
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationRequest AWS API Documentation
     #
     class PutBucketReplicationRequest < Struct.new(
       :bucket,
       :content_md5,
       :replication_configuration,
-      :token)
+      :token,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9529,6 +10131,7 @@ module Aws::S3
     #         request_payment_configuration: { # required
     #           payer: "Requester", # required, accepts Requester, BucketOwner
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9550,12 +10153,19 @@ module Aws::S3
     #   Container for Payer.
     #   @return [Types::RequestPaymentConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPaymentRequest AWS API Documentation
     #
     class PutBucketRequestPaymentRequest < Struct.new(
       :bucket,
       :content_md5,
-      :request_payment_configuration)
+      :request_payment_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9574,6 +10184,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9595,12 +10206,19 @@ module Aws::S3
     #   Container for the `TagSet` and `Tag` elements.
     #   @return [Types::Tagging]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTaggingRequest AWS API Documentation
     #
     class PutBucketTaggingRequest < Struct.new(
       :bucket,
       :content_md5,
-      :tagging)
+      :tagging,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9616,6 +10234,7 @@ module Aws::S3
     #           mfa_delete: "Enabled", # accepts Enabled, Disabled
     #           status: "Enabled", # accepts Enabled, Suspended
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9643,13 +10262,20 @@ module Aws::S3
     #   Container for setting the versioning state.
     #   @return [Types::VersioningConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioningRequest AWS API Documentation
     #
     class PutBucketVersioningRequest < Struct.new(
       :bucket,
       :content_md5,
       :mfa,
-      :versioning_configuration)
+      :versioning_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9687,6 +10313,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9708,12 +10335,19 @@ module Aws::S3
     #   Container for the request.
     #   @return [Types::WebsiteConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsiteRequest AWS API Documentation
     #
     class PutBucketWebsiteRequest < Struct.new(
       :bucket,
       :content_md5,
-      :website_configuration)
+      :website_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9764,6 +10398,7 @@ module Aws::S3
     #         key: "ObjectKey", # required
     #         request_payer: "requester", # accepts requester
     #         version_id: "ObjectVersionId",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] acl
@@ -9851,6 +10486,12 @@ module Aws::S3
     #   VersionId used to reference a specific version of the object.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAclRequest AWS API Documentation
     #
     class PutObjectAclRequest < Struct.new(
@@ -9865,7 +10506,8 @@ module Aws::S3
       :grant_write_acp,
       :key,
       :request_payer,
-      :version_id)
+      :version_id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9895,6 +10537,7 @@ module Aws::S3
     #         request_payer: "requester", # accepts requester
     #         version_id: "ObjectVersionId",
     #         content_md5: "ContentMD5",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -9944,6 +10587,12 @@ module Aws::S3
     #   The MD5 hash for the request body.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLegalHoldRequest AWS API Documentation
     #
     class PutObjectLegalHoldRequest < Struct.new(
@@ -9952,7 +10601,8 @@ module Aws::S3
       :legal_hold,
       :request_payer,
       :version_id,
-      :content_md5)
+      :content_md5,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9988,6 +10638,7 @@ module Aws::S3
     #         request_payer: "requester", # accepts requester
     #         token: "ObjectLockToken",
     #         content_md5: "ContentMD5",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -10020,6 +10671,12 @@ module Aws::S3
     #   The MD5 hash for the request body.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLockConfigurationRequest AWS API Documentation
     #
     class PutObjectLockConfigurationRequest < Struct.new(
@@ -10027,17 +10684,22 @@ module Aws::S3
       :object_lock_configuration,
       :request_payer,
       :token,
-      :content_md5)
+      :content_md5,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] expiration
     #   If the expiration is configured for the object (see
-    #   PutBucketLifecycleConfiguration), the response includes this header.
-    #   It includes the expiry-date and rule-id key-value pairs that provide
-    #   information about object expiration. The value of the rule-id is URL
-    #   encoded.
+    #   [PutBucketLifecycleConfiguration][1]), the response includes this
+    #   header. It includes the expiry-date and rule-id key-value pairs that
+    #   provide information about object expiration. The value of the
+    #   rule-id is URL encoded.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -10139,6 +10801,7 @@ module Aws::S3
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #         object_lock_retain_until_date: Time.now,
     #         object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] acl
@@ -10325,7 +10988,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -10389,6 +11052,12 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRequest AWS API Documentation
     #
     class PutObjectRequest < Struct.new(
@@ -10421,7 +11090,8 @@ module Aws::S3
       :tagging,
       :object_lock_mode,
       :object_lock_retain_until_date,
-      :object_lock_legal_hold_status)
+      :object_lock_legal_hold_status,
+      :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
@@ -10453,6 +11123,7 @@ module Aws::S3
     #         version_id: "ObjectVersionId",
     #         bypass_governance_retention: false,
     #         content_md5: "ContentMD5",
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -10508,6 +11179,12 @@ module Aws::S3
     #   The MD5 hash for the request body.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRetentionRequest AWS API Documentation
     #
     class PutObjectRetentionRequest < Struct.new(
@@ -10517,7 +11194,8 @@ module Aws::S3
       :request_payer,
       :version_id,
       :bypass_governance_retention,
-      :content_md5)
+      :content_md5,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10550,6 +11228,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -10585,6 +11264,12 @@ module Aws::S3
     #   Container for the `TagSet` and `Tag` elements
     #   @return [Types::Tagging]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingRequest AWS API Documentation
     #
     class PutObjectTaggingRequest < Struct.new(
@@ -10592,7 +11277,8 @@ module Aws::S3
       :key,
       :version_id,
       :content_md5,
-      :tagging)
+      :tagging,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10609,6 +11295,7 @@ module Aws::S3
     #           block_public_policy: false,
     #           restrict_public_buckets: false,
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -10632,12 +11319,19 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
     #   @return [Types::PublicAccessBlockConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutPublicAccessBlockRequest AWS API Documentation
     #
     class PutPublicAccessBlockRequest < Struct.new(
       :bucket,
       :content_md5,
-      :public_access_block_configuration)
+      :public_access_block_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10702,10 +11396,14 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # This data type is deprecated. Use QueueConfiguration for the same
+    # This data type is deprecated. Use [QueueConfiguration][1] for the same
     # purposes. This data type specifies the configuration for publishing
     # messages to an Amazon Simple Queue Service (Amazon SQS) queue when
     # Amazon S3 detects specified events.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_QueueConfiguration.html
     #
     # @note When making an API call, you may pass QueueConfigurationDeprecated
     #   data as a hash:
@@ -11411,6 +12109,7 @@ module Aws::S3
     #           },
     #         },
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -11454,6 +12153,12 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectRequest AWS API Documentation
     #
     class RestoreObjectRequest < Struct.new(
@@ -11461,7 +12166,8 @@ module Aws::S3
       :key,
       :version_id,
       :restore_request,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11597,7 +12303,14 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the redirect behavior and when a redirect is applied.
+    # Specifies the redirect behavior and when a redirect is applied. For
+    # more information about routing rules, see [Configuring advanced
+    # conditional redirects][1] in the *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html#advanced-conditional-redirects
     #
     # @note When making an API call, you may pass RoutingRule
     #   data as a hash:
@@ -12017,6 +12730,7 @@ module Aws::S3
     #           start: 1,
     #           end: 1,
     #         },
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -12098,6 +12812,12 @@ module Aws::S3
     #     within the last 50 bytes of the file.
     #   @return [Types::ScanRange]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentRequest AWS API Documentation
     #
     class SelectObjectContentRequest < Struct.new(
@@ -12111,7 +12831,8 @@ module Aws::S3
       :request_progress,
       :input_serialization,
       :output_serialization,
-      :scan_range)
+      :scan_range,
+      :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
@@ -12614,7 +13335,11 @@ module Aws::S3
     # A container for specifying the configuration for publication of
     # messages to an Amazon Simple Notification Service (Amazon SNS) topic
     # when Amazon S3 detects specified events. This data type is deprecated.
-    # Use TopicConfiguration instead.
+    # Use [TopicConfiguration][1] instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_TopicConfiguration.html
     #
     # @note When making an API call, you may pass TopicConfigurationDeprecated
     #   data as a hash:
@@ -12773,6 +13498,8 @@ module Aws::S3
     #         copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #         copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
+    #         expected_source_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] bucket
@@ -12780,8 +13507,41 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] copy_source
-    #   The name of the source bucket and key name of the source object,
-    #   separated by a slash (/). Must be URL-encoded.
+    #   Specifies the source object for the copy operation. You specify the
+    #   value in one of two formats, depending on whether you want to access
+    #   the source object through an [access point][1]\:
+    #
+    #   * For objects not accessed through an access point, specify the name
+    #     of the source bucket and key of the source object, separated by a
+    #     slash (/). For example, to copy the object `reports/january.pdf`
+    #     from the bucket `awsexamplebucket`, use
+    #     `awsexamplebucket/reports/january.pdf`. The value must be URL
+    #     encoded.
+    #
+    #   * For objects accessed through access points, specify the Amazon
+    #     Resource Name (ARN) of the object as accessed through the access
+    #     point, in the format
+    #     `arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through the
+    #     access point `my-access-point` owned by account `123456789012` in
+    #     Region `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
+    #     The value must be URL encoded.
+    #
+    #     <note markdown="1"> Amazon S3 supports copy operations using access points only when
+    #     the source and destination buckets are in the same AWS Region.
+    #
+    #      </note>
+    #
+    #   To copy a specific version of an object, append
+    #   `?versionId=<version-id>` to the value (for example,
+    #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
+    #   If you don't specify a version ID, Amazon S3 copies the latest
+    #   version of the source object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
     #   @return [String]
     #
     # @!attribute [rw] copy_source_if_match
@@ -12835,8 +13595,8 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This
-    #   must be the same encryption key specified in the initiate multipart
+    #   `x-amz-server-side-encryption-customer-algorithm` header. This must
+    #   be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #
@@ -12875,6 +13635,18 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected destination bucket owner. If the
+    #   destination bucket is owned by a different account, the request will
+    #   fail with an HTTP `403 (Access Denied)` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_source_bucket_owner
+    #   The account id of the expected source bucket owner. If the source
+    #   bucket is owned by a different account, the request will fail with
+    #   an HTTP `403 (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyRequest AWS API Documentation
     #
     class UploadPartCopyRequest < Struct.new(
@@ -12894,7 +13666,9 @@ module Aws::S3
       :copy_source_sse_customer_algorithm,
       :copy_source_sse_customer_key,
       :copy_source_sse_customer_key_md5,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner,
+      :expected_source_bucket_owner)
       SENSITIVE = [:sse_customer_key, :copy_source_sse_customer_key]
       include Aws::Structure
     end
@@ -12960,6 +13734,7 @@ module Aws::S3
     #         sse_customer_key: "SSECustomerKey",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         request_payer: "requester", # accepts requester
+    #         expected_bucket_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] body
@@ -13005,8 +13780,8 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This
-    #   must be the same encryption key specified in the initiate multipart
+    #   `x-amz-server-side-encryption-customer-algorithm header`. This must
+    #   be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #
@@ -13028,6 +13803,12 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartRequest AWS API Documentation
     #
     class UploadPartRequest < Struct.new(
@@ -13041,7 +13822,8 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key,
       :sse_customer_key_md5,
-      :request_payer)
+      :request_payer,
+      :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end

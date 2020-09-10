@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.82.0 (2020-09-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssoadmin` gem.
+
 3.81.0 (2020-09-09)
 ------------------
 
