@@ -782,6 +782,10 @@
     "models": "sso/2019-06-10",
     "endpoint": "portal.sso"
   },
+  "SSOAdmin": {
+    "models": "sso-admin/2020-07-20",
+    "endpoint": "sso"
+  },
   "SSOOIDC": {
     "models": "sso-oidc/2019-06-10",
     "endpoint": "oidc"

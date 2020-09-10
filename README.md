@@ -353,6 +353,7 @@ to be backwards compatible.
 | AWS Shield                                            | Shield                          | 2016-06-02  |
 | AWS Signer                                            | Signer                          | 2017-08-25  |
 | AWS Single Sign-On                                    | SSO                             | 2019-06-10  |
+| AWS Single Sign-On Admin                              | SSOAdmin                        | 2020-07-20  |
 | AWS Step Functions                                    | States                          | 2016-11-23  |
 | AWS Storage Gateway                                   | StorageGateway                  | 2013-06-30  |
 | AWS Support                                           | Support                         | 2013-04-15  |

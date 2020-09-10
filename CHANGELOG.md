@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
+
+* Feature - Aws::EBS - Updated the documentation for Amazon Elastic Block Store.
+
+* Feature - Aws::Pinpoint - Updated the documentation for Amazon Pinpoint.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::SSOAdmin - Added support for a new service, AWS Single Sign-On Admin.
+
 2.11.582 (2020-09-09)
 ------------------
 

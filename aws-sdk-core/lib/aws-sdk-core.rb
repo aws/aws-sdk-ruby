@@ -219,6 +219,7 @@ module Aws
     SQS
     SSM
     SSO
+    SSOAdmin
     SSOOIDC
     STS
     SWF
