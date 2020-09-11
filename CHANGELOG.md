@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.584 (2020-09-11)
+------------------
+
 * Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
 
 2.11.583 (2020-09-10)
