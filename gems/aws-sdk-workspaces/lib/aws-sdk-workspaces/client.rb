@@ -337,6 +337,52 @@ module Aws::WorkSpaces
 
     # @!group API Operations
 
+    # Associates the specified connection alias with the specified directory
+    # to enable cross-Region redirection. For more information, see [
+    # Cross-Region Redirection for Amazon WorkSpaces][1].
+    #
+    # <note markdown="1"> Before performing this operation, call [ DescribeConnectionAliases][2]
+    # to make sure that the current state of the connection alias is
+    # `CREATED`.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    # [2]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the connection alias.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the directory to associate the connection alias
+    #   with.
+    #
+    # @return [Types::AssociateConnectionAliasResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateConnectionAliasResult#connection_identifier #connection_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_connection_alias({
+    #     alias_id: "ConnectionAliasId", # required
+    #     resource_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateConnectionAlias AWS API Documentation
+    #
+    # @overload associate_connection_alias(params = {})
+    # @param [Hash] params ({})
+    def associate_connection_alias(params = {}, options = {})
+      req = build_request(:associate_connection_alias, params)
+      req.send_request(options)
+    end
+
     # Associates the specified IP access control group with the specified
     # directory.
     #
@@ -448,6 +494,56 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates the specified connection alias for use with cross-Region
+    # redirection. For more information, see [ Cross-Region Redirection for
+    # Amazon WorkSpaces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    #
+    # @option params [required, String] :connection_string
+    #   A connection string in the form of a fully qualified domain name
+    #   (FQDN), such as `www.example.com`.
+    #
+    #   After you create a connection string, it is always associated to your
+    #   AWS account. You cannot recreate the same connection string with a
+    #   different account, even if you delete all instances of it from the
+    #   original account. The connection string is globally reserved for your
+    #   account.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the connection alias.
+    #
+    # @return [Types::CreateConnectionAliasResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectionAliasResult#alias_id #alias_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connection_alias({
+    #     connection_string: "ConnectionString", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alias_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectionAlias AWS API Documentation
+    #
+    # @overload create_connection_alias(params = {})
+    # @param [Hash] params ({})
+    def create_connection_alias(params = {}, options = {})
+      req = build_request(:create_connection_alias, params)
+      req.send_request(options)
+    end
+
     # Creates an IP access control group.
     #
     # An IP access control group provides you with the ability to control
@@ -517,7 +613,7 @@ module Aws::WorkSpaces
     # @option params [required, String] :resource_id
     #   The identifier of the WorkSpaces resource. The supported resource
     #   types are WorkSpaces, registered directories, images, custom bundles,
-    #   and IP access control groups.
+    #   IP access control groups, and connection aliases.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags. Each WorkSpaces resource can have a maximum of 50 tags. If
@@ -639,6 +735,49 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Deletes the specified connection alias. For more information, see [
+    # Cross-Region Redirection for Amazon WorkSpaces][1].
+    #
+    # **If you will no longer be using a fully qualified domain name (FQDN)
+    # as the registration code for your WorkSpaces users, you must take
+    # certain precautions to prevent potential security issues.** For more
+    # information, see [ Security Considerations if You Stop Using
+    # Cross-Region Redirection][2].
+    #
+    # <note markdown="1"> To delete a connection alias that has been shared, the shared account
+    # must first disassociate the connection alias from any directories it
+    # has been associated with. Then you must unshare the connection alias
+    # from the account it has been shared with. You can delete a connection
+    # alias only after it is no longer shared with any accounts or
+    # associated with any directories.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    # [2]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html#cross-region-redirection-security-considerations
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the connection alias to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection_alias({
+    #     alias_id: "ConnectionAliasId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectionAlias AWS API Documentation
+    #
+    # @overload delete_connection_alias(params = {})
+    # @param [Hash] params ({})
+    def delete_connection_alias(params = {}, options = {})
+      req = build_request(:delete_connection_alias, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified IP access control group.
     #
     # You cannot delete an IP access control group that is associated with a
@@ -669,7 +808,7 @@ module Aws::WorkSpaces
     # @option params [required, String] :resource_id
     #   The identifier of the WorkSpaces resource. The supported resource
     #   types are WorkSpaces, registered directories, images, custom bundles,
-    #   and IP access control groups.
+    #   IP access control groups, and connection aliases.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag keys.
@@ -835,6 +974,114 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Describes the permissions that the owner of a connection alias has
+    # granted to another AWS account for the specified connection alias. For
+    # more information, see [ Cross-Region Redirection for Amazon
+    # WorkSpaces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the connection alias.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::DescribeConnectionAliasPermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConnectionAliasPermissionsResult#alias_id #alias_id} => String
+    #   * {Types::DescribeConnectionAliasPermissionsResult#connection_alias_permissions #connection_alias_permissions} => Array&lt;Types::ConnectionAliasPermission&gt;
+    #   * {Types::DescribeConnectionAliasPermissionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_connection_alias_permissions({
+    #     alias_id: "ConnectionAliasId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alias_id #=> String
+    #   resp.connection_alias_permissions #=> Array
+    #   resp.connection_alias_permissions[0].shared_account_id #=> String
+    #   resp.connection_alias_permissions[0].allow_association #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasPermissions AWS API Documentation
+    #
+    # @overload describe_connection_alias_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_connection_alias_permissions(params = {}, options = {})
+      req = build_request(:describe_connection_alias_permissions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes the connection aliases used for
+    # cross-Region redirection. For more information, see [ Cross-Region
+    # Redirection for Amazon WorkSpaces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    #
+    # @option params [Array<String>] :alias_ids
+    #   The identifiers of the connection aliases to describe.
+    #
+    # @option params [String] :resource_id
+    #   The identifier of the directory associated with the connection alias.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of connection aliases to return.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @return [Types::DescribeConnectionAliasesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConnectionAliasesResult#connection_aliases #connection_aliases} => Array&lt;Types::ConnectionAlias&gt;
+    #   * {Types::DescribeConnectionAliasesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_connection_aliases({
+    #     alias_ids: ["ConnectionAliasId"],
+    #     resource_id: "NonEmptyString",
+    #     limit: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_aliases #=> Array
+    #   resp.connection_aliases[0].connection_string #=> String
+    #   resp.connection_aliases[0].alias_id #=> String
+    #   resp.connection_aliases[0].state #=> String, one of "CREATING", "CREATED", "DELETING"
+    #   resp.connection_aliases[0].owner_account_id #=> String
+    #   resp.connection_aliases[0].associations #=> Array
+    #   resp.connection_aliases[0].associations[0].association_status #=> String, one of "NOT_ASSOCIATED", "ASSOCIATED_WITH_OWNER_ACCOUNT", "ASSOCIATED_WITH_SHARED_ACCOUNT", "PENDING_ASSOCIATION", "PENDING_DISASSOCIATION"
+    #   resp.connection_aliases[0].associations[0].associated_account_id #=> String
+    #   resp.connection_aliases[0].associations[0].resource_id #=> String
+    #   resp.connection_aliases[0].associations[0].connection_identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliases AWS API Documentation
+    #
+    # @overload describe_connection_aliases(params = {})
+    # @param [Hash] params ({})
+    def describe_connection_aliases(params = {}, options = {})
+      req = build_request(:describe_connection_aliases, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your IP access control groups.
     #
     # @option params [Array<String>] :group_ids
@@ -885,7 +1132,7 @@ module Aws::WorkSpaces
     # @option params [required, String] :resource_id
     #   The identifier of the WorkSpaces resource. The supported resource
     #   types are WorkSpaces, registered directories, images, custom bundles,
-    #   and IP access control groups.
+    #   IP access control groups, and connection aliases.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1304,6 +1551,42 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Disassociates a connection alias from a directory. Disassociating a
+    # connection alias disables cross-Region redirection between two
+    # directories in different AWS Regions. For more information, see [
+    # Cross-Region Redirection for Amazon WorkSpaces][1].
+    #
+    # <note markdown="1"> Before performing this operation, call [ DescribeConnectionAliases][2]
+    # to make sure that the current state of the connection alias is
+    # `CREATED`.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    # [2]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the connection alias to disassociate.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_connection_alias({
+    #     alias_id: "ConnectionAliasId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateConnectionAlias AWS API Documentation
+    #
+    # @overload disassociate_connection_alias(params = {})
+    # @param [Hash] params ({})
+    def disassociate_connection_alias(params = {}, options = {})
+      req = build_request(:disassociate_connection_alias, params)
+      req.send_request(options)
+    end
+
     # Disassociates the specified IP access control group from the specified
     # directory.
     #
@@ -1332,8 +1615,8 @@ module Aws::WorkSpaces
     end
 
     # Imports the specified Windows 10 Bring Your Own License (BYOL) image
-    # into Amazon WorkSpaces. The image must be an already licensed EC2
-    # image that is in your AWS account, and you must own the image. For
+    # into Amazon WorkSpaces. The image must be an already licensed Amazon
+    # EC2 image that is in your AWS account, and you must own the image. For
     # more information about creating BYOL images, see [ Bring Your Own
     # Windows Desktop Licenses][1].
     #
@@ -2097,6 +2380,61 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Shares or unshares a connection alias with one account by specifying
+    # whether that account has permission to associate the connection alias
+    # with a directory. If the association permission is granted, the
+    # connection alias is shared with that account. If the association
+    # permission is revoked, the connection alias is unshared with the
+    # account. For more information, see [ Cross-Region Redirection for
+    # Amazon WorkSpaces][1].
+    #
+    # <note markdown="1"> * Before performing this operation, call [
+    #   DescribeConnectionAliases][2] to make sure that the current state of
+    #   the connection alias is `CREATED`.
+    #
+    # * To delete a connection alias that has been shared, the shared
+    #   account must first disassociate the connection alias from any
+    #   directories it has been associated with. Then you must unshare the
+    #   connection alias from the account it has been shared with. You can
+    #   delete a connection alias only after it is no longer shared with any
+    #   accounts or associated with any directories.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    # [2]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the connection alias that you want to update
+    #   permissions for.
+    #
+    # @option params [required, Types::ConnectionAliasPermission] :connection_alias_permission
+    #   Indicates whether to share or unshare the connection alias with the
+    #   specified AWS account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connection_alias_permission({
+    #     alias_id: "ConnectionAliasId", # required
+    #     connection_alias_permission: { # required
+    #       shared_account_id: "AwsAccount", # required
+    #       allow_association: false, # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectionAliasPermission AWS API Documentation
+    #
+    # @overload update_connection_alias_permission(params = {})
+    # @param [Hash] params ({})
+    def update_connection_alias_permission(params = {}, options = {})
+      req = build_request(:update_connection_alias_permission, params)
+      req.send_request(options)
+    end
+
     # Replaces the current rules of the specified IP access control group
     # with the specified rules.
     #
@@ -2187,7 +2525,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

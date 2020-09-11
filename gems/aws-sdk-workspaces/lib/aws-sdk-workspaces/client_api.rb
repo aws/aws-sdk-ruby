@@ -21,8 +21,11 @@ module Aws::WorkSpaces
     Alias = Shapes::StringShape.new(name: 'Alias')
     Application = Shapes::StringShape.new(name: 'Application')
     ApplicationList = Shapes::ListShape.new(name: 'ApplicationList')
+    AssociateConnectionAliasRequest = Shapes::StructureShape.new(name: 'AssociateConnectionAliasRequest')
+    AssociateConnectionAliasResult = Shapes::StructureShape.new(name: 'AssociateConnectionAliasResult')
     AssociateIpGroupsRequest = Shapes::StructureShape.new(name: 'AssociateIpGroupsRequest')
     AssociateIpGroupsResult = Shapes::StructureShape.new(name: 'AssociateIpGroupsResult')
+    AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
     AuthorizeIpRulesRequest = Shapes::StructureShape.new(name: 'AuthorizeIpRulesRequest')
     AuthorizeIpRulesResult = Shapes::StructureShape.new(name: 'AuthorizeIpRulesResult')
     AwsAccount = Shapes::StringShape.new(name: 'AwsAccount')
@@ -37,9 +40,22 @@ module Aws::WorkSpaces
     Compute = Shapes::StringShape.new(name: 'Compute')
     ComputeType = Shapes::StructureShape.new(name: 'ComputeType')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
+    ConnectionAlias = Shapes::StructureShape.new(name: 'ConnectionAlias')
+    ConnectionAliasAssociation = Shapes::StructureShape.new(name: 'ConnectionAliasAssociation')
+    ConnectionAliasAssociationList = Shapes::ListShape.new(name: 'ConnectionAliasAssociationList')
+    ConnectionAliasId = Shapes::StringShape.new(name: 'ConnectionAliasId')
+    ConnectionAliasIdList = Shapes::ListShape.new(name: 'ConnectionAliasIdList')
+    ConnectionAliasList = Shapes::ListShape.new(name: 'ConnectionAliasList')
+    ConnectionAliasPermission = Shapes::StructureShape.new(name: 'ConnectionAliasPermission')
+    ConnectionAliasPermissions = Shapes::ListShape.new(name: 'ConnectionAliasPermissions')
+    ConnectionAliasState = Shapes::StringShape.new(name: 'ConnectionAliasState')
+    ConnectionIdentifier = Shapes::StringShape.new(name: 'ConnectionIdentifier')
     ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
+    ConnectionString = Shapes::StringShape.new(name: 'ConnectionString')
     CopyWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CopyWorkspaceImageRequest')
     CopyWorkspaceImageResult = Shapes::StructureShape.new(name: 'CopyWorkspaceImageResult')
+    CreateConnectionAliasRequest = Shapes::StructureShape.new(name: 'CreateConnectionAliasRequest')
+    CreateConnectionAliasResult = Shapes::StructureShape.new(name: 'CreateConnectionAliasResult')
     CreateIpGroupRequest = Shapes::StructureShape.new(name: 'CreateIpGroupRequest')
     CreateIpGroupResult = Shapes::StructureShape.new(name: 'CreateIpGroupResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
@@ -53,6 +69,8 @@ module Aws::WorkSpaces
     DedicatedTenancySupportResultEnum = Shapes::StringShape.new(name: 'DedicatedTenancySupportResultEnum')
     DefaultOu = Shapes::StringShape.new(name: 'DefaultOu')
     DefaultWorkspaceCreationProperties = Shapes::StructureShape.new(name: 'DefaultWorkspaceCreationProperties')
+    DeleteConnectionAliasRequest = Shapes::StructureShape.new(name: 'DeleteConnectionAliasRequest')
+    DeleteConnectionAliasResult = Shapes::StructureShape.new(name: 'DeleteConnectionAliasResult')
     DeleteIpGroupRequest = Shapes::StructureShape.new(name: 'DeleteIpGroupRequest')
     DeleteIpGroupResult = Shapes::StructureShape.new(name: 'DeleteIpGroupResult')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
@@ -67,6 +85,10 @@ module Aws::WorkSpaces
     DescribeAccountResult = Shapes::StructureShape.new(name: 'DescribeAccountResult')
     DescribeClientPropertiesRequest = Shapes::StructureShape.new(name: 'DescribeClientPropertiesRequest')
     DescribeClientPropertiesResult = Shapes::StructureShape.new(name: 'DescribeClientPropertiesResult')
+    DescribeConnectionAliasPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeConnectionAliasPermissionsRequest')
+    DescribeConnectionAliasPermissionsResult = Shapes::StructureShape.new(name: 'DescribeConnectionAliasPermissionsResult')
+    DescribeConnectionAliasesRequest = Shapes::StructureShape.new(name: 'DescribeConnectionAliasesRequest')
+    DescribeConnectionAliasesResult = Shapes::StructureShape.new(name: 'DescribeConnectionAliasesResult')
     DescribeIpGroupsRequest = Shapes::StructureShape.new(name: 'DescribeIpGroupsRequest')
     DescribeIpGroupsResult = Shapes::StructureShape.new(name: 'DescribeIpGroupsResult')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
@@ -90,6 +112,8 @@ module Aws::WorkSpaces
     DirectoryIdList = Shapes::ListShape.new(name: 'DirectoryIdList')
     DirectoryList = Shapes::ListShape.new(name: 'DirectoryList')
     DirectoryName = Shapes::StringShape.new(name: 'DirectoryName')
+    DisassociateConnectionAliasRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionAliasRequest')
+    DisassociateConnectionAliasResult = Shapes::StructureShape.new(name: 'DisassociateConnectionAliasResult')
     DisassociateIpGroupsRequest = Shapes::StructureShape.new(name: 'DisassociateIpGroupsRequest')
     DisassociateIpGroupsResult = Shapes::StructureShape.new(name: 'DisassociateIpGroupsResult')
     DnsIpAddresses = Shapes::ListShape.new(name: 'DnsIpAddresses')
@@ -208,6 +232,8 @@ module Aws::WorkSpaces
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnsupportedNetworkConfigurationException = Shapes::StructureShape.new(name: 'UnsupportedNetworkConfigurationException')
     UnsupportedWorkspaceConfigurationException = Shapes::StructureShape.new(name: 'UnsupportedWorkspaceConfigurationException')
+    UpdateConnectionAliasPermissionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionAliasPermissionRequest')
+    UpdateConnectionAliasPermissionResult = Shapes::StructureShape.new(name: 'UpdateConnectionAliasPermissionResult')
     UpdateRulesOfIpGroupRequest = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupRequest')
     UpdateRulesOfIpGroupResult = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupResult')
     UpdateWorkspaceImagePermissionRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceImagePermissionRequest')
@@ -262,6 +288,13 @@ module Aws::WorkSpaces
 
     ApplicationList.member = Shapes::ShapeRef.new(shape: Application)
 
+    AssociateConnectionAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
+    AssociateConnectionAliasRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
+    AssociateConnectionAliasRequest.struct_class = Types::AssociateConnectionAliasRequest
+
+    AssociateConnectionAliasResult.add_member(:connection_identifier, Shapes::ShapeRef.new(shape: ConnectionIdentifier, location_name: "ConnectionIdentifier"))
+    AssociateConnectionAliasResult.struct_class = Types::AssociateConnectionAliasResult
+
     AssociateIpGroupsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     AssociateIpGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: IpGroupIdList, required: true, location_name: "GroupIds"))
     AssociateIpGroupsRequest.struct_class = Types::AssociateIpGroupsRequest
@@ -290,6 +323,31 @@ module Aws::WorkSpaces
     ComputeType.add_member(:name, Shapes::ShapeRef.new(shape: Compute, location_name: "Name"))
     ComputeType.struct_class = Types::ComputeType
 
+    ConnectionAlias.add_member(:connection_string, Shapes::ShapeRef.new(shape: ConnectionString, location_name: "ConnectionString"))
+    ConnectionAlias.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, location_name: "AliasId"))
+    ConnectionAlias.add_member(:state, Shapes::ShapeRef.new(shape: ConnectionAliasState, location_name: "State"))
+    ConnectionAlias.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "OwnerAccountId"))
+    ConnectionAlias.add_member(:associations, Shapes::ShapeRef.new(shape: ConnectionAliasAssociationList, location_name: "Associations"))
+    ConnectionAlias.struct_class = Types::ConnectionAlias
+
+    ConnectionAliasAssociation.add_member(:association_status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "AssociationStatus"))
+    ConnectionAliasAssociation.add_member(:associated_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "AssociatedAccountId"))
+    ConnectionAliasAssociation.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceId"))
+    ConnectionAliasAssociation.add_member(:connection_identifier, Shapes::ShapeRef.new(shape: ConnectionIdentifier, location_name: "ConnectionIdentifier"))
+    ConnectionAliasAssociation.struct_class = Types::ConnectionAliasAssociation
+
+    ConnectionAliasAssociationList.member = Shapes::ShapeRef.new(shape: ConnectionAliasAssociation)
+
+    ConnectionAliasIdList.member = Shapes::ShapeRef.new(shape: ConnectionAliasId)
+
+    ConnectionAliasList.member = Shapes::ShapeRef.new(shape: ConnectionAlias)
+
+    ConnectionAliasPermission.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccount, required: true, location_name: "SharedAccountId"))
+    ConnectionAliasPermission.add_member(:allow_association, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "AllowAssociation"))
+    ConnectionAliasPermission.struct_class = Types::ConnectionAliasPermission
+
+    ConnectionAliasPermissions.member = Shapes::ShapeRef.new(shape: ConnectionAliasPermission)
+
     CopyWorkspaceImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "Name"))
     CopyWorkspaceImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, location_name: "Description"))
     CopyWorkspaceImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "SourceImageId"))
@@ -299,6 +357,13 @@ module Aws::WorkSpaces
 
     CopyWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
     CopyWorkspaceImageResult.struct_class = Types::CopyWorkspaceImageResult
+
+    CreateConnectionAliasRequest.add_member(:connection_string, Shapes::ShapeRef.new(shape: ConnectionString, required: true, location_name: "ConnectionString"))
+    CreateConnectionAliasRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateConnectionAliasRequest.struct_class = Types::CreateConnectionAliasRequest
+
+    CreateConnectionAliasResult.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, location_name: "AliasId"))
+    CreateConnectionAliasResult.struct_class = Types::CreateConnectionAliasResult
 
     CreateIpGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: IpGroupName, required: true, location_name: "GroupName"))
     CreateIpGroupRequest.add_member(:group_desc, Shapes::ShapeRef.new(shape: IpGroupDesc, location_name: "GroupDesc"))
@@ -331,6 +396,11 @@ module Aws::WorkSpaces
     DefaultWorkspaceCreationProperties.add_member(:user_enabled_as_local_administrator, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UserEnabledAsLocalAdministrator"))
     DefaultWorkspaceCreationProperties.add_member(:enable_maintenance_mode, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableMaintenanceMode"))
     DefaultWorkspaceCreationProperties.struct_class = Types::DefaultWorkspaceCreationProperties
+
+    DeleteConnectionAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
+    DeleteConnectionAliasRequest.struct_class = Types::DeleteConnectionAliasRequest
+
+    DeleteConnectionAliasResult.struct_class = Types::DeleteConnectionAliasResult
 
     DeleteIpGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, required: true, location_name: "GroupId"))
     DeleteIpGroupRequest.struct_class = Types::DeleteIpGroupRequest
@@ -371,6 +441,26 @@ module Aws::WorkSpaces
 
     DescribeClientPropertiesResult.add_member(:client_properties_list, Shapes::ShapeRef.new(shape: ClientPropertiesList, location_name: "ClientPropertiesList"))
     DescribeClientPropertiesResult.struct_class = Types::DescribeClientPropertiesResult
+
+    DescribeConnectionAliasPermissionsRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
+    DescribeConnectionAliasPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeConnectionAliasPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
+    DescribeConnectionAliasPermissionsRequest.struct_class = Types::DescribeConnectionAliasPermissionsRequest
+
+    DescribeConnectionAliasPermissionsResult.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, location_name: "AliasId"))
+    DescribeConnectionAliasPermissionsResult.add_member(:connection_alias_permissions, Shapes::ShapeRef.new(shape: ConnectionAliasPermissions, location_name: "ConnectionAliasPermissions"))
+    DescribeConnectionAliasPermissionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeConnectionAliasPermissionsResult.struct_class = Types::DescribeConnectionAliasPermissionsResult
+
+    DescribeConnectionAliasesRequest.add_member(:alias_ids, Shapes::ShapeRef.new(shape: ConnectionAliasIdList, location_name: "AliasIds"))
+    DescribeConnectionAliasesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceId"))
+    DescribeConnectionAliasesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeConnectionAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeConnectionAliasesRequest.struct_class = Types::DescribeConnectionAliasesRequest
+
+    DescribeConnectionAliasesResult.add_member(:connection_aliases, Shapes::ShapeRef.new(shape: ConnectionAliasList, location_name: "ConnectionAliases"))
+    DescribeConnectionAliasesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeConnectionAliasesResult.struct_class = Types::DescribeConnectionAliasesResult
 
     DescribeIpGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: IpGroupIdList, location_name: "GroupIds"))
     DescribeIpGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -455,6 +545,11 @@ module Aws::WorkSpaces
     DirectoryIdList.member = Shapes::ShapeRef.new(shape: DirectoryId)
 
     DirectoryList.member = Shapes::ShapeRef.new(shape: WorkspaceDirectory)
+
+    DisassociateConnectionAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
+    DisassociateConnectionAliasRequest.struct_class = Types::DisassociateConnectionAliasRequest
+
+    DisassociateConnectionAliasResult.struct_class = Types::DisassociateConnectionAliasResult
 
     DisassociateIpGroupsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DisassociateIpGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: IpGroupIdList, required: true, location_name: "GroupIds"))
@@ -721,6 +816,12 @@ module Aws::WorkSpaces
     UnsupportedWorkspaceConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnsupportedWorkspaceConfigurationException.struct_class = Types::UnsupportedWorkspaceConfigurationException
 
+    UpdateConnectionAliasPermissionRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
+    UpdateConnectionAliasPermissionRequest.add_member(:connection_alias_permission, Shapes::ShapeRef.new(shape: ConnectionAliasPermission, required: true, location_name: "ConnectionAliasPermission"))
+    UpdateConnectionAliasPermissionRequest.struct_class = Types::UpdateConnectionAliasPermissionRequest
+
+    UpdateConnectionAliasPermissionResult.struct_class = Types::UpdateConnectionAliasPermissionResult
+
     UpdateRulesOfIpGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, required: true, location_name: "GroupId"))
     UpdateRulesOfIpGroupRequest.add_member(:user_rules, Shapes::ShapeRef.new(shape: IpRuleList, required: true, location_name: "UserRules"))
     UpdateRulesOfIpGroupRequest.struct_class = Types::UpdateRulesOfIpGroupRequest
@@ -876,6 +977,20 @@ module Aws::WorkSpaces
         "uid" => "workspaces-2015-04-08",
       }
 
+      api.add_operation(:associate_connection_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateConnectionAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateConnectionAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateConnectionAliasResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAssociatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
       api.add_operation(:associate_ip_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateIpGroups"
         o.http_method = "POST"
@@ -918,6 +1033,20 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
+      api.add_operation(:create_connection_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConnectionAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateConnectionAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConnectionAliasResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
       api.add_operation(:create_ip_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIpGroup"
         o.http_method = "POST"
@@ -950,6 +1079,20 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: CreateWorkspacesResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
+      api.add_operation(:delete_connection_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnectionAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectionAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConnectionAliasResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAssociatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:delete_ip_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1025,6 +1168,29 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_connection_alias_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConnectionAliasPermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConnectionAliasPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConnectionAliasPermissionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
+      api.add_operation(:describe_connection_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConnectionAliases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConnectionAliasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConnectionAliasesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:describe_ip_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1128,6 +1294,19 @@ module Aws::WorkSpaces
         o.input = Shapes::ShapeRef.new(shape: DescribeWorkspacesConnectionStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeWorkspacesConnectionStatusResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
+      api.add_operation(:disassociate_connection_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateConnectionAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateConnectionAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateConnectionAliasResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:disassociate_ip_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1340,6 +1519,21 @@ module Aws::WorkSpaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TerminateWorkspacesRequest)
         o.output = Shapes::ShapeRef.new(shape: TerminateWorkspacesResult)
+      end)
+
+      api.add_operation(:update_connection_alias_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectionAliasPermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectionAliasPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectionAliasPermissionResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAssociatedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:update_rules_of_ip_group, Seahorse::Model::Operation.new.tap do |o|
