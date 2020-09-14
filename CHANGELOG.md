@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.585 (2020-09-14)
+------------------
+
 * Feature - Aws::DocDB - Updated the API, and documentation for Amazon DocumentDB with MongoDB compatibility.
 
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
