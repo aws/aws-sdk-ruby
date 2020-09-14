@@ -7,8 +7,11 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-require 'aws-sdk-core'
-require 'aws-sigv4'
+
+unless Module.const_defined?(:Aws)
+  require 'aws-sdk-core'
+  require 'aws-sigv4'
+end
 
 require_relative 'aws-sdk-sso/types'
 require_relative 'aws-sdk-sso/client_api'

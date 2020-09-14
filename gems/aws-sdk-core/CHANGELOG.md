@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix circular dependency of `aws-sdk-sso` and `aws-sdk-core` (#2405).
+
 3.106.0 (2020-09-14)
 ------------------
 

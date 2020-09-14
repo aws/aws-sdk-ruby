@@ -51,6 +51,14 @@ module AwsSdkCodeGenerator
         @service.gem_dependencies.keys
       end
 
+      # @return [Boolean] - Return true if a check is needed before
+      # requiring core to prevent circular dependencies.
+      # This is required to support backwards compatibility for SSO which was
+      # moved from the aws-sdk-sso gem into aws-sdk-core.
+      def require_core_guard?
+        name == 'SSO'
+      end
+
       # @return [Array<String>]
       def relative_requires
         paths = Set.new
