@@ -67,6 +67,46 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateConnectionAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias_id: "ConnectionAliasId", # required
+    #         resource_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the directory to associate the connection alias
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateConnectionAliasRequest AWS API Documentation
+    #
+    class AssociateConnectionAliasRequest < Struct.new(
+      :alias_id,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_identifier
+    #   The identifier of the connection alias association. You use the
+    #   connection identifier in the DNS TXT record when you're configuring
+    #   your DNS routing policies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateConnectionAliasResult AWS API Documentation
+    #
+    class AssociateConnectionAliasResult < Struct.new(
+      :connection_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateIpGroupsRequest
     #   data as a hash:
     #
@@ -186,6 +226,121 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes a connection alias. Connection aliases are used for
+    # cross-Region redirection. For more information, see [ Cross-Region
+    # Redirection for Amazon WorkSpaces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    #
+    # @!attribute [rw] connection_string
+    #   The connection string specified for the connection alias. The
+    #   connection string must be in the form of a fully qualified domain
+    #   name (FQDN), such as `www.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The identifier of the AWS account that owns the connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] associations
+    #   The association status of the connection alias.
+    #   @return [Array<Types::ConnectionAliasAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ConnectionAlias AWS API Documentation
+    #
+    class ConnectionAlias < Struct.new(
+      :connection_string,
+      :alias_id,
+      :state,
+      :owner_account_id,
+      :associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a connection alias association that is used for cross-Region
+    # redirection. For more information, see [ Cross-Region Redirection for
+    # Amazon WorkSpaces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    #
+    # @!attribute [rw] association_status
+    #   The association status of the connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_account_id
+    #   The identifier of the AWS account that associated the connection
+    #   alias with a directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the directory associated with a connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_identifier
+    #   The identifier of the connection alias association. You use the
+    #   connection identifier in the DNS TXT record when you're configuring
+    #   your DNS routing policies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ConnectionAliasAssociation AWS API Documentation
+    #
+    class ConnectionAliasAssociation < Struct.new(
+      :association_status,
+      :associated_account_id,
+      :resource_id,
+      :connection_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the permissions for a connection alias. Connection aliases
+    # are used for cross-Region redirection. For more information, see [
+    # Cross-Region Redirection for Amazon WorkSpaces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
+    #
+    # @note When making an API call, you may pass ConnectionAliasPermission
+    #   data as a hash:
+    #
+    #       {
+    #         shared_account_id: "AwsAccount", # required
+    #         allow_association: false, # required
+    #       }
+    #
+    # @!attribute [rw] shared_account_id
+    #   The identifier of the AWS account that the connection alias is
+    #   shared with.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_association
+    #   Indicates whether the specified AWS account is allowed to associate
+    #   the connection alias with a directory.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ConnectionAliasPermission AWS API Documentation
+    #
+    class ConnectionAliasPermission < Struct.new(
+      :shared_account_id,
+      :allow_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CopyWorkspaceImageRequest
     #   data as a hash:
     #
@@ -242,6 +397,55 @@ module Aws::WorkSpaces
     #
     class CopyWorkspaceImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateConnectionAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_string: "ConnectionString", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] connection_string
+    #   A connection string in the form of a fully qualified domain name
+    #   (FQDN), such as `www.example.com`.
+    #
+    #   After you create a connection string, it is always associated to
+    #   your AWS account. You cannot recreate the same connection string
+    #   with a different account, even if you delete all instances of it
+    #   from the original account. The connection string is globally
+    #   reserved for your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the connection alias.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectionAliasRequest AWS API Documentation
+    #
+    class CreateConnectionAliasRequest < Struct.new(
+      :connection_string,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectionAliasResult AWS API Documentation
+    #
+    class CreateConnectionAliasResult < Struct.new(
+      :alias_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -321,7 +525,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] resource_id
     #   The identifier of the WorkSpaces resource. The supported resource
     #   types are WorkSpaces, registered directories, images, custom
-    #   bundles, and IP access control groups.
+    #   bundles, IP access control groups, and connection aliases.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -478,6 +682,29 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteConnectionAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias_id: "ConnectionAliasId", # required
+    #       }
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectionAliasRequest AWS API Documentation
+    #
+    class DeleteConnectionAliasRequest < Struct.new(
+      :alias_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectionAliasResult AWS API Documentation
+    #
+    class DeleteConnectionAliasResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteIpGroupRequest
     #   data as a hash:
     #
@@ -512,7 +739,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] resource_id
     #   The identifier of the WorkSpaces resource. The supported resource
     #   types are WorkSpaces, registered directories, images, custom
-    #   bundles, and IP access control groups.
+    #   bundles, IP access control groups, and connection aliases.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -679,6 +906,118 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeConnectionAliasPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias_id: "ConnectionAliasId", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasPermissionsRequest AWS API Documentation
+    #
+    class DescribeConnectionAliasPermissionsRequest < Struct.new(
+      :alias_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_alias_permissions
+    #   The permissions associated with a connection alias.
+    #   @return [Array<Types::ConnectionAliasPermission>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasPermissionsResult AWS API Documentation
+    #
+    class DescribeConnectionAliasPermissionsResult < Struct.new(
+      :alias_id,
+      :connection_alias_permissions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConnectionAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias_ids: ["ConnectionAliasId"],
+    #         resource_id: "NonEmptyString",
+    #         limit: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] alias_ids
+    #   The identifiers of the connection aliases to describe.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the directory associated with the connection
+    #   alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of connection aliases to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasesRequest AWS API Documentation
+    #
+    class DescribeConnectionAliasesRequest < Struct.new(
+      :alias_ids,
+      :resource_id,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_aliases
+    #   Information about the specified connection aliases.
+    #   @return [Array<Types::ConnectionAlias>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if no
+    #   more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasesResult AWS API Documentation
+    #
+    class DescribeConnectionAliasesResult < Struct.new(
+      :connection_aliases,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeIpGroupsRequest
     #   data as a hash:
     #
@@ -739,7 +1078,7 @@ module Aws::WorkSpaces
     # @!attribute [rw] resource_id
     #   The identifier of the WorkSpaces resource. The supported resource
     #   types are WorkSpaces, registered directories, images, custom
-    #   bundles, and IP access control groups.
+    #   bundles, IP access control groups, and connection aliases.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation
@@ -1146,6 +1485,29 @@ module Aws::WorkSpaces
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DisassociateConnectionAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias_id: "ConnectionAliasId", # required
+    #       }
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias to disassociate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateConnectionAliasRequest AWS API Documentation
+    #
+    class DisassociateConnectionAliasRequest < Struct.new(
+      :alias_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateConnectionAliasResult AWS API Documentation
+    #
+    class DisassociateConnectionAliasResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociateIpGroupsRequest
     #   data as a hash:
@@ -2428,6 +2790,40 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateConnectionAliasPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias_id: "ConnectionAliasId", # required
+    #         connection_alias_permission: { # required
+    #           shared_account_id: "AwsAccount", # required
+    #           allow_association: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the connection alias that you want to update
+    #   permissions for.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_alias_permission
+    #   Indicates whether to share or unshare the connection alias with the
+    #   specified AWS account.
+    #   @return [Types::ConnectionAliasPermission]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectionAliasPermissionRequest AWS API Documentation
+    #
+    class UpdateConnectionAliasPermissionRequest < Struct.new(
+      :alias_id,
+      :connection_alias_permission)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectionAliasPermissionResult AWS API Documentation
+    #
+    class UpdateConnectionAliasPermissionResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateRulesOfIpGroupRequest
     #   data as a hash:
     #
@@ -2830,7 +3226,23 @@ module Aws::WorkSpaces
     #   @return [Boolean]
     #
     # @!attribute [rw] default_ou
-    #   The default organizational unit (OU) for your WorkSpace directories.
+    #   The default organizational unit (OU) for your WorkSpaces
+    #   directories. This string must be the full Lightweight Directory
+    #   Access Protocol (LDAP) distinguished name for the target domain and
+    #   OU. It must be in the form `"OU=value,DC=value,DC=value"`, where
+    #   *value* is any string of characters, and the number of domain
+    #   components (DCs) is two or more. For example,
+    #   `OU=WorkSpaces_machines,DC=machines,DC=example,DC=com`.
+    #
+    #   * To avoid errors, certain characters in the distinguished name must
+    #     be escaped. For more information, see [ Distinguished Names][1] in
+    #     the Microsoft documentation.
+    #
+    #   * The API doesn't validate whether the OU exists.
+    #
+    #
+    #
+    #   [1]: https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names
     #   @return [String]
     #
     # @!attribute [rw] custom_security_group_id

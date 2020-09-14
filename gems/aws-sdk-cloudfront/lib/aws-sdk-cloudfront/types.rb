@@ -799,6 +799,7 @@ module Aws::CloudFront
     #         min_ttl: 1, # required
     #         parameters_in_cache_key_and_forwarded_to_origin: {
     #           enable_accept_encoding_gzip: false, # required
+    #           enable_accept_encoding_brotli: false,
     #           headers_config: { # required
     #             header_behavior: "none", # required, accepts none, whitelist
     #             headers: {
@@ -1511,11 +1512,11 @@ module Aws::CloudFront
     # an origin request policy instead of this field.
     #
     # If you want to include cookies in the cache key, use `CookiesConfig`
-    # in a cache policy. See `CreateCachePolicy`.
+    # in a cache policy. See `CachePolicy`.
     #
     # If you want to send cookies to the origin but not include them in the
     # cache key, use `CookiesConfig` in an origin request policy. See
-    # `CreateOriginRequestPolicy`.
+    # `OriginRequestPolicy`.
     #
     # A complex type that specifies whether you want CloudFront to forward
     # cookies to the origin and, if so, which ones. For more information
@@ -1620,6 +1621,7 @@ module Aws::CloudFront
     #           min_ttl: 1, # required
     #           parameters_in_cache_key_and_forwarded_to_origin: {
     #             enable_accept_encoding_gzip: false, # required
+    #             enable_accept_encoding_brotli: false,
     #             headers_config: { # required
     #               header_behavior: "none", # required, accepts none, whitelist
     #               headers: {
@@ -8468,7 +8470,7 @@ module Aws::CloudFront
     #
     # CloudFront sends a request when it can’t find an object in its cache
     # that matches the request. If you want to send values to the origin and
-    # also include them in the cache key, use `CreateCachePolicy`.
+    # also include them in the cache key, use `CachePolicy`.
     #
     # @!attribute [rw] id
     #   The unique identifier for the origin request policy.
@@ -8526,7 +8528,7 @@ module Aws::CloudFront
     #
     # CloudFront sends a request when it can’t find an object in its cache
     # that matches the request. If you want to send values to the origin and
-    # also include them in the cache key, use `CreateCachePolicy`.
+    # also include them in the cache key, use `CachePolicy`.
     #
     # @note When making an API call, you may pass OriginRequestPolicyConfig
     #   data as a hash:
@@ -8900,13 +8902,14 @@ module Aws::CloudFront
     # the origin. CloudFront sends a request when it can’t find an object in
     # its cache that matches the request’s cache key. If you want to send
     # values to the origin but *not* include them in the cache key, use
-    # `CreateOriginRequestPolicy`.
+    # `OriginRequestPolicy`.
     #
     # @note When making an API call, you may pass ParametersInCacheKeyAndForwardedToOrigin
     #   data as a hash:
     #
     #       {
     #         enable_accept_encoding_gzip: false, # required
+    #         enable_accept_encoding_brotli: false,
     #         headers_config: { # required
     #           header_behavior: "none", # required, accepts none, whitelist
     #           headers: {
@@ -8931,36 +8934,69 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] enable_accept_encoding_gzip
-    #   A flag that determines whether the `Accept-Encoding` HTTP header is
+    #   A flag that can affect whether the `Accept-Encoding` HTTP header is
     #   included in the cache key and included in requests that CloudFront
     #   sends to the origin.
     #
-    #   If this field is `true` *and* the viewer request includes the
-    #   `Accept-Encoding` header, then CloudFront normalizes the value of
-    #   the viewer’s `Accept-Encoding` header to one of the following:
+    #   This field is related to the `EnableAcceptEncodingBrotli` field. If
+    #   one or both of these fields is `true` *and* the viewer request
+    #   includes the `Accept-Encoding` header, then CloudFront does the
+    #   following:
     #
-    #   * `Accept-Encoding: gzip` (if `gzip` is in the viewer’s
-    #     `Accept-Encoding` header)
+    #   * Normalizes the value of the viewer’s `Accept-Encoding` header
     #
-    #   * `Accept-Encoding: identity` (if `gzip` is *not* in the viewer’s
-    #     `Accept-Encoding` header)
+    #   * Includes the normalized header in the cache key
     #
-    #   CloudFront includes the normalized header in the cache key and
-    #   includes it in requests that CloudFront sends to the origin.
+    #   * Includes the normalized header in the request to the origin
     #
-    #   If this field is `false`, then CloudFront treats the
-    #   `Accept-Encoding` header the same as any other HTTP header in the
-    #   viewer request. By default, it’s not included in the cache key and
-    #   it’s not included in origin requests. You can manually add
-    #   `Accept-Encoding` to the headers whitelist like any other HTTP
-    #   header.
-    #
-    #   When this field is `true`, you should not whitelist the
-    #   `Accept-Encoding` header in the cache policy or in an origin request
-    #   policy attached to the same cache behavior.
+    #   If one or both of these fields are `true`, you should not whitelist
+    #   the `Accept-Encoding` header in the cache policy or in an origin
+    #   request policy attached to the same cache behavior.
     #
     #   For more information, see [Cache compressed objects][1] in the
     #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If both of these fields are `false`, then CloudFront treats the
+    #   `Accept-Encoding` header the same as any other HTTP header in the
+    #   viewer request. By default, it’s not included in the cache key and
+    #   it’s not included in origin requests. In this case, you can manually
+    #   add `Accept-Encoding` to the headers whitelist like any other HTTP
+    #   header.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-policy-compressed-objects
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_accept_encoding_brotli
+    #   A flag that can affect whether the `Accept-Encoding` HTTP header is
+    #   included in the cache key and included in requests that CloudFront
+    #   sends to the origin.
+    #
+    #   This field is related to the `EnableAcceptEncodingGzip` field. If
+    #   one or both of these fields is `true` *and* the viewer request
+    #   includes the `Accept-Encoding` header, then CloudFront does the
+    #   following:
+    #
+    #   * Normalizes the value of the viewer’s `Accept-Encoding` header
+    #
+    #   * Includes the normalized header in the cache key
+    #
+    #   * Includes the normalized header in the request to the origin
+    #
+    #   If one or both of these fields are `true`, you should not whitelist
+    #   the `Accept-Encoding` header in the cache policy or in an origin
+    #   request policy attached to the same cache behavior.
+    #
+    #   For more information, see [Cache compressed objects][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If both of these fields are `false`, then CloudFront treats the
+    #   `Accept-Encoding` header the same as any other HTTP header in the
+    #   viewer request. By default, it’s not included in the cache key and
+    #   it’s not included in origin requests. In this case, you can manually
+    #   add `Accept-Encoding` to the headers whitelist like any other HTTP
+    #   header.
     #
     #
     #
@@ -8991,6 +9027,7 @@ module Aws::CloudFront
     #
     class ParametersInCacheKeyAndForwardedToOrigin < Struct.new(
       :enable_accept_encoding_gzip,
+      :enable_accept_encoding_brotli,
       :headers_config,
       :cookies_config,
       :query_strings_config)
@@ -9328,11 +9365,11 @@ module Aws::CloudFront
     # an origin request policy instead of this field.
     #
     # If you want to include query strings in the cache key, use
-    # `QueryStringsConfig` in a cache policy. See `CreateCachePolicy`.
+    # `QueryStringsConfig` in a cache policy. See `CachePolicy`.
     #
     # If you want to send query strings to the origin but not include them
     # in the cache key, use `QueryStringsConfig` in an origin request
-    # policy. See `CreateOriginRequestPolicy`.
+    # policy. See `OriginRequestPolicy`.
     #
     # A complex type that contains information about the query string
     # parameters that you want CloudFront to use for caching for a cache
@@ -10954,6 +10991,7 @@ module Aws::CloudFront
     #           min_ttl: 1, # required
     #           parameters_in_cache_key_and_forwarded_to_origin: {
     #             enable_accept_encoding_gzip: false, # required
+    #             enable_accept_encoding_brotli: false,
     #             headers_config: { # required
     #               header_behavior: "none", # required, accepts none, whitelist
     #               headers: {

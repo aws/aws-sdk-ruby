@@ -13336,7 +13336,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] media_url
-    #   The URL of an image or video to display in the SMS message.
+    #   The URL of an image or video to display in the SMS message. This
+    #   field is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] message_type

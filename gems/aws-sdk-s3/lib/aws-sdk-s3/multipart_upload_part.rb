@@ -221,11 +221,46 @@ module Aws::S3
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
     #     request_payer: "requester", # accepts requester
+    #     expected_bucket_owner: "AccountId",
+    #     expected_source_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :copy_source
-    #   The name of the source bucket and key name of the source object,
-    #   separated by a slash (/). Must be URL-encoded.
+    #   Specifies the source object for the copy operation. You specify the
+    #   value in one of two formats, depending on whether you want to access
+    #   the source object through an [access point][1]\:
+    #
+    #   * For objects not accessed through an access point, specify the name
+    #     of the source bucket and key of the source object, separated by a
+    #     slash (/). For example, to copy the object `reports/january.pdf`
+    #     from the bucket `awsexamplebucket`, use
+    #     `awsexamplebucket/reports/january.pdf`. The value must be URL
+    #     encoded.
+    #
+    #   * For objects accessed through access points, specify the Amazon
+    #     Resource Name (ARN) of the object as accessed through the access
+    #     point, in the format
+    #     `arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through the
+    #     access point `my-access-point` owned by account `123456789012` in
+    #     Region `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
+    #     The value must be URL encoded.
+    #
+    #     <note markdown="1"> Amazon S3 supports copy operations using access points only when the
+    #     source and destination buckets are in the same AWS Region.
+    #
+    #      </note>
+    #
+    #   To copy a specific version of an object, append
+    #   `?versionId=<version-id>` to the value (for example,
+    #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
+    #   If you don't specify a version ID, Amazon S3 copies the latest
+    #   version of the source object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
     # @option options [String] :copy_source_if_match
     #   Copies the object if its entity tag (ETag) matches the specified tag.
     # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_modified_since
@@ -250,8 +285,8 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This must
-    #   be the same encryption key specified in the initiate multipart upload
+    #   `x-amz-server-side-encryption-customer-algorithm` header. This must be
+    #   the same encryption key specified in the initiate multipart upload
     #   request.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -278,6 +313,14 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected destination bucket owner. If the
+    #   destination bucket is owned by a different account, the request will
+    #   fail with an HTTP `403 (Access Denied)` error.
+    # @option options [String] :expected_source_bucket_owner
+    #   The account id of the expected source bucket owner. If the source
+    #   bucket is owned by a different account, the request will fail with an
+    #   HTTP `403 (Access Denied)` error.
     # @return [Types::UploadPartCopyOutput]
     def copy_from(options = {})
       options = options.merge(
@@ -300,6 +343,7 @@ module Aws::S3
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     request_payer: "requester", # accepts requester
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String, StringIO, File] :body
@@ -319,8 +363,8 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This must
-    #   be the same encryption key specified in the initiate multipart upload
+    #   `x-amz-server-side-encryption-customer-algorithm header`. This must be
+    #   the same encryption key specified in the initiate multipart upload
     #   request.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -336,6 +380,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::UploadPartOutput]
     def upload(options = {})
       options = options.merge(

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.369.0 (2020-09-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.368.0 (2020-09-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.367.0 (2020-09-10)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SSOAdmin`.
+
 1.366.0 (2020-09-09)
 ------------------
 

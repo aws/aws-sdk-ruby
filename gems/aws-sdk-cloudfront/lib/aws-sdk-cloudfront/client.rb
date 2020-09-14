@@ -346,7 +346,7 @@ module Aws::CloudFront
     # the origin. CloudFront sends a request when it can’t find an object in
     # its cache that matches the request’s cache key. If you want to send
     # values to the origin but *not* include them in the cache key, use
-    # `CreateOriginRequestPolicy`.
+    # `OriginRequestPolicy`.
     #
     # For more information about cache policies, see [Controlling the cache
     # key][1] in the *Amazon CloudFront Developer Guide*.
@@ -375,6 +375,7 @@ module Aws::CloudFront
     #       min_ttl: 1, # required
     #       parameters_in_cache_key_and_forwarded_to_origin: {
     #         enable_accept_encoding_gzip: false, # required
+    #         enable_accept_encoding_brotli: false,
     #         headers_config: { # required
     #           header_behavior: "none", # required, accepts none, whitelist
     #           headers: {
@@ -410,6 +411,7 @@ module Aws::CloudFront
     #   resp.cache_policy.cache_policy_config.max_ttl #=> Integer
     #   resp.cache_policy.cache_policy_config.min_ttl #=> Integer
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_brotli #=> Boolean
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
@@ -1560,8 +1562,7 @@ module Aws::CloudFront
     #
     # CloudFront sends a request when it can’t find a valid object in its
     # cache that matches the request. If you want to send values to the
-    # origin and also include them in the cache key, use
-    # `CreateCachePolicy`.
+    # origin and also include them in the cache key, use `CachePolicy`.
     #
     # For more information about origin request policies, see [Controlling
     # origin requests][1] in the *Amazon CloudFront Developer Guide*.
@@ -2350,6 +2351,7 @@ module Aws::CloudFront
     #   resp.cache_policy.cache_policy_config.max_ttl #=> Integer
     #   resp.cache_policy.cache_policy_config.min_ttl #=> Integer
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_brotli #=> Boolean
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
@@ -2408,6 +2410,7 @@ module Aws::CloudFront
     #   resp.cache_policy_config.max_ttl #=> Integer
     #   resp.cache_policy_config.min_ttl #=> Integer
     #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_brotli #=> Boolean
     #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
     #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
     #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
@@ -3492,6 +3495,7 @@ module Aws::CloudFront
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.max_ttl #=> Integer
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.min_ttl #=> Integer
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_brotli #=> Boolean
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
@@ -3855,7 +3859,7 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a list of distribution that have a cache behavior that’s
+    # Gets a list of distributions that have a cache behavior that’s
     # associated with the specified real-time log configuration.
     #
     # You can specify the real-time log configuration by its name or its
@@ -4783,6 +4787,7 @@ module Aws::CloudFront
     #       min_ttl: 1, # required
     #       parameters_in_cache_key_and_forwarded_to_origin: {
     #         enable_accept_encoding_gzip: false, # required
+    #         enable_accept_encoding_brotli: false,
     #         headers_config: { # required
     #           header_behavior: "none", # required, accepts none, whitelist
     #           headers: {
@@ -4820,6 +4825,7 @@ module Aws::CloudFront
     #   resp.cache_policy.cache_policy_config.max_ttl #=> Integer
     #   resp.cache_policy.cache_policy_config.min_ttl #=> Integer
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_gzip #=> Boolean
+    #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.enable_accept_encoding_brotli #=> Boolean
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.header_behavior #=> String, one of "none", "whitelist"
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.quantity #=> Integer
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.headers_config.headers.items #=> Array
@@ -5858,7 +5864,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

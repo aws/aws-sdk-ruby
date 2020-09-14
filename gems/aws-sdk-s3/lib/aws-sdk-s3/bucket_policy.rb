@@ -176,8 +176,14 @@ module Aws::S3
 
     # @example Request syntax with placeholder values
     #
-    #   bucket_policy.delete()
+    #   bucket_policy.delete({
+    #     expected_bucket_owner: "AccountId",
+    #   })
     # @param [Hash] options ({})
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @bucket_name)
@@ -191,6 +197,7 @@ module Aws::S3
     #     content_md5: "ContentMD5",
     #     confirm_remove_self_bucket_access: false,
     #     policy: "Policy", # required
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
@@ -200,6 +207,10 @@ module Aws::S3
     #   permissions to change this bucket policy in the future.
     # @option options [required, String] :policy
     #   The bucket policy as a JSON document.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

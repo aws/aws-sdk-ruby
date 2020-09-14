@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2020-09-14)
+------------------
+
+* Feature - This release adds support for the T4G instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.
+
 1.193.0 (2020-09-02)
 ------------------
 

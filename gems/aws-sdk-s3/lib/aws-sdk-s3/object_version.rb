@@ -234,6 +234,7 @@ module Aws::S3
     #     mfa: "MFA",
     #     request_payer: "requester", # accepts requester
     #     bypass_governance_retention: false,
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :mfa
@@ -254,6 +255,10 @@ module Aws::S3
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
       options = options.merge(
@@ -284,6 +289,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     request_payer: "requester", # accepts requester
     #     part_number: 1,
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :if_match
@@ -331,7 +337,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -351,6 +357,10 @@ module Aws::S3
     #   between 1 and 10,000. Effectively performs a 'ranged' GET request
     #   for the part specified. Useful for downloading just a part of an
     #   object.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::GetObjectOutput]
     def get(options = {}, &block)
       options = options.merge(
@@ -375,6 +385,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     request_payer: "requester", # accepts requester
     #     part_number: 1,
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :if_match
@@ -406,7 +417,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -426,6 +437,10 @@ module Aws::S3
     #   between 1 and 10,000. Effectively performs a 'ranged' HEAD request
     #   for the part specified. Useful querying about the size of the part and
     #   the number of parts in this object.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::HeadObjectOutput]
     def head(options = {})
       options = options.merge(
@@ -504,6 +519,7 @@ module Aws::S3
       #     mfa: "MFA",
       #     request_payer: "requester", # accepts requester
       #     bypass_governance_retention: false,
+      #     expected_bucket_owner: "AccountId",
       #   })
       # @param options ({})
       # @option options [String] :mfa
@@ -525,6 +541,10 @@ module Aws::S3
       #   Specifies whether you want to delete this object even if it has a
       #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
+      # @option options [String] :expected_bucket_owner
+      #   The account id of the expected bucket owner. If the bucket is owned by
+      #   a different account, the request will fail with an HTTP `403 (Access
+      #   Denied)` error.
       # @return [void]
       def batch_delete!(options = {})
         batch_enum.each do |batch|

@@ -417,6 +417,7 @@ module Aws
             'SQS' => 'sqs',
             'SSM' => 'ssm',
             'SSO' => 'portal.sso',
+            'SSOAdmin' => 'sso',
             'SSOOIDC' => 'oidc',
             'STS' => 'sts',
             'SWF' => 'swf',

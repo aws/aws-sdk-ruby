@@ -310,6 +310,8 @@ module Aws::S3
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #     expected_bucket_owner: "AccountId",
+    #     expected_source_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -327,8 +329,41 @@ module Aws::S3
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the object data.
     # @option options [required, String] :copy_source
-    #   The name of the source bucket and key name of the source object,
-    #   separated by a slash (/). Must be URL-encoded.
+    #   Specifies the source object for the copy operation. You specify the
+    #   value in one of two formats, depending on whether you want to access
+    #   the source object through an [access point][1]\:
+    #
+    #   * For objects not accessed through an access point, specify the name
+    #     of the source bucket and the key of the source object, separated by
+    #     a slash (/). For example, to copy the object `reports/january.pdf`
+    #     from the bucket `awsexamplebucket`, use
+    #     `awsexamplebucket/reports/january.pdf`. The value must be URL
+    #     encoded.
+    #
+    #   * For objects accessed through access points, specify the Amazon
+    #     Resource Name (ARN) of the object as accessed through the access
+    #     point, in the format
+    #     `arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through access
+    #     point `my-access-point` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
+    #     The value must be URL encoded.
+    #
+    #     <note markdown="1"> Amazon S3 supports copy operations using access points only when the
+    #     source and destination buckets are in the same AWS Region.
+    #
+    #      </note>
+    #
+    #   To copy a specific version of an object, append
+    #   `?versionId=<version-id>` to the value (for example,
+    #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
+    #   If you don't specify a version ID, Amazon S3 copies the latest
+    #   version of the source object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
     # @option options [String] :copy_source_if_match
     #   Copies the object if its entity tag (ETag) matches the specified tag.
     # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_modified_since
@@ -375,7 +410,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -427,6 +462,14 @@ module Aws::S3
     #   expire.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the copied object.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected destination bucket owner. If the
+    #   destination bucket is owned by a different account, the request will
+    #   fail with an HTTP `403 (Access Denied)` error.
+    # @option options [String] :expected_source_bucket_owner
+    #   The account id of the expected source bucket owner. If the source
+    #   bucket is owned by a different account, the request will fail with an
+    #   HTTP `403 (Access Denied)` error.
     # @return [Types::CopyObjectOutput]
     def copy_from(options = {})
       options = options.merge(
@@ -444,6 +487,7 @@ module Aws::S3
     #     version_id: "ObjectVersionId",
     #     request_payer: "requester", # accepts requester
     #     bypass_governance_retention: false,
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :mfa
@@ -466,6 +510,10 @@ module Aws::S3
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
       options = options.merge(
@@ -496,6 +544,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     request_payer: "requester", # accepts requester
     #     part_number: 1,
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :if_match
@@ -545,7 +594,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -565,6 +614,10 @@ module Aws::S3
     #   between 1 and 10,000. Effectively performs a 'ranged' GET request
     #   for the part specified. Useful for downloading just a part of an
     #   object.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::GetObjectOutput]
     def get(options = {}, &block)
       options = options.merge(
@@ -605,6 +658,7 @@ module Aws::S3
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -651,7 +705,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -692,6 +746,10 @@ module Aws::S3
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the uploaded
     #   object.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [MultipartUpload]
     def initiate_multipart_upload(options = {})
       options = options.merge(
@@ -740,6 +798,7 @@ module Aws::S3
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -864,7 +923,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -909,6 +968,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::PutObjectOutput]
     def put(options = {})
       options = options.merge(
@@ -1005,6 +1068,7 @@ module Aws::S3
     #       },
     #     },
     #     request_payer: "requester", # accepts requester
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :version_id
@@ -1021,6 +1085,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::RestoreObjectOutput]
     def restore_object(options = {})
       options = options.merge(
@@ -1152,6 +1220,7 @@ module Aws::S3
       #     mfa: "MFA",
       #     request_payer: "requester", # accepts requester
       #     bypass_governance_retention: false,
+      #     expected_bucket_owner: "AccountId",
       #   })
       # @param options ({})
       # @option options [String] :mfa
@@ -1173,6 +1242,10 @@ module Aws::S3
       #   Specifies whether you want to delete this object even if it has a
       #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
+      # @option options [String] :expected_bucket_owner
+      #   The account id of the expected bucket owner. If the bucket is owned by
+      #   a different account, the request will fail with an HTTP `403 (Access
+      #   Denied)` error.
       # @return [void]
       def batch_delete!(options = {})
         batch_enum.each do |batch|

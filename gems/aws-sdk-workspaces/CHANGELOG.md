@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-09-11)
+------------------
+
+* Feature - Adds API support for WorkSpaces Cross-Region Redirection feature.
+
 1.44.0 (2020-09-04)
 ------------------
 

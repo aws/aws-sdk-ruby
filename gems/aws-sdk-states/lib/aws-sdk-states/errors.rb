@@ -40,6 +40,7 @@ module Aws::States
   # * {InvalidName}
   # * {InvalidOutput}
   # * {InvalidToken}
+  # * {InvalidTracingConfiguration}
   # * {MissingRequiredParameter}
   # * {ResourceNotFound}
   # * {StateMachineAlreadyExists}
@@ -242,6 +243,21 @@ module Aws::States
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::States::Types::InvalidToken] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidTracingConfiguration < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::States::Types::InvalidTracingConfiguration] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

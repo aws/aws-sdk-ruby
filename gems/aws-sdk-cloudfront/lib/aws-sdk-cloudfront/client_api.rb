@@ -1588,6 +1588,7 @@ module Aws::CloudFront
     Origins.struct_class = Types::Origins
 
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:enable_accept_encoding_gzip, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "EnableAcceptEncodingGzip"))
+    ParametersInCacheKeyAndForwardedToOrigin.add_member(:enable_accept_encoding_brotli, Shapes::ShapeRef.new(shape: boolean, location_name: "EnableAcceptEncodingBrotli"))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:headers_config, Shapes::ShapeRef.new(shape: CachePolicyHeadersConfig, required: true, location_name: "HeadersConfig"))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:cookies_config, Shapes::ShapeRef.new(shape: CachePolicyCookiesConfig, required: true, location_name: "CookiesConfig"))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:query_strings_config, Shapes::ShapeRef.new(shape: CachePolicyQueryStringsConfig, required: true, location_name: "QueryStringsConfig"))

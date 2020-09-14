@@ -208,6 +208,7 @@ module Aws::S3
     #     grant_read_acp: "GrantReadACP",
     #     grant_write: "GrantWrite",
     #     grant_write_acp: "GrantWriteACP",
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -235,6 +236,10 @@ module Aws::S3
     #   bucket.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

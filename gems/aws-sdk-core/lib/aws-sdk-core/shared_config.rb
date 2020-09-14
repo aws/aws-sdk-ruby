@@ -160,6 +160,7 @@ module Aws
 
     config_reader(
       :region,
+      :ca_bundle,
       :credential_process,
       :endpoint_discovery_enabled,
       :max_attempts,

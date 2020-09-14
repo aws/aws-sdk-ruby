@@ -9,6 +9,7 @@ module Seahorse
 
         let(:config) do
           Configuration.new.tap do |config|
+            config.add_option(:profile, nil)
             H2.new.add_options(config)
           end.build!
         end
@@ -43,8 +44,23 @@ module Seahorse
             expect(config.ssl_verify_peer).to eq(true)
           end
 
-          it 'defaults the :ssl_ca_bundle to nil' do
-            expect(config.ssl_ca_bundle).to be(nil)
+          context ':ssl_ca_bundle' do
+            it 'adds a :ssl_ca_bundle option without default' do
+              expect(config.ssl_ca_bundle).to be(nil)
+            end
+
+            it 'can be configured with shared config' do
+              allow_any_instance_of(Aws::SharedConfig)
+                .to receive(:ca_bundle).and_return('/path/to/bundle.crt')
+              expect(config.ssl_ca_bundle).to eq('/path/to/bundle.crt')
+            end
+
+            it 'can configure ca_bundle using ENV with precedence' do
+              allow_any_instance_of(Aws::SharedConfig)
+                .to receive(:retry_mode).and_return('/other/path/to/bundle.crt')
+              ENV['AWS_CA_BUNDLE'] = '/path/to/bundle.crt'
+              expect(config.ssl_ca_bundle).to eq('/path/to/bundle.crt')
+            end
           end
 
           it 'adds a :ssl_ca_directory option without default' do

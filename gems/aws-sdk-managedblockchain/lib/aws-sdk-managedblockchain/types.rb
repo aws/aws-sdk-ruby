@@ -279,6 +279,7 @@ module Aws::ManagedBlockchain
     #               },
     #             },
     #           },
+    #           state_db: "LevelDB", # accepts LevelDB, CouchDB
     #         },
     #       }
     #
@@ -1234,6 +1235,8 @@ module Aws::ManagedBlockchain
     #   @return [Types::MemberFrameworkConfiguration]
     #
     # @!attribute [rw] log_publishing_configuration
+    #   Configuration properties for logging events associated with a member
+    #   of a Managed Blockchain network.
     #   @return [Types::MemberLogPublishingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberConfiguration AWS API Documentation
@@ -1686,7 +1689,14 @@ module Aws::ManagedBlockchain
     #   @return [Types::NodeFrameworkAttributes]
     #
     # @!attribute [rw] log_publishing_configuration
+    #   Configuration properties for logging events associated with a peer
+    #   node owned by a member in a Managed Blockchain network.
     #   @return [Types::NodeLogPublishingConfiguration]
+    #
+    # @!attribute [rw] state_db
+    #   The state database that the node uses. Values are `LevelDB` or
+    #   `CouchDB`.
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the node.
@@ -1706,6 +1716,7 @@ module Aws::ManagedBlockchain
       :availability_zone,
       :framework_attributes,
       :log_publishing_configuration,
+      :state_db,
       :status,
       :creation_date)
       SENSITIVE = []
@@ -1734,6 +1745,7 @@ module Aws::ManagedBlockchain
     #             },
     #           },
     #         },
+    #         state_db: "LevelDB", # accepts LevelDB, CouchDB
     #       }
     #
     # @!attribute [rw] instance_type
@@ -1745,14 +1757,23 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_configuration
+    #   Configuration properties for logging events associated with a peer
+    #   node owned by a member in a Managed Blockchain network.
     #   @return [Types::NodeLogPublishingConfiguration]
+    #
+    # @!attribute [rw] state_db
+    #   The state database that the node uses. Values are `LevelDB` or
+    #   `CouchDB`. When using an Amazon Managed Blockchain network with
+    #   Hyperledger Fabric version 1.4 or later, the default is `CouchDB`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeConfiguration AWS API Documentation
     #
     class NodeConfiguration < Struct.new(
       :instance_type,
       :availability_zone,
-      :log_publishing_configuration)
+      :log_publishing_configuration,
+      :state_db)
       SENSITIVE = []
       include Aws::Structure
     end

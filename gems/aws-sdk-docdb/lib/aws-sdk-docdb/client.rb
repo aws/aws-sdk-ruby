@@ -334,7 +334,7 @@ module Aws::DocDB
     #
     # @option params [required, String] :resource_name
     #   The Amazon DocumentDB resource that the tags are added to. This value
-    #   is an Amazon Resource Name (ARN).
+    #   is an Amazon Resource Name .
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to be assigned to the Amazon DocumentDB resource.
@@ -362,8 +362,8 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Applies a pending maintenance action to a resource (for example, to a
-    # DB instance).
+    # Applies a pending maintenance action to a resource (for example, to an
+    # Amazon DocumentDB instance).
     #
     # @option params [required, String] :resource_identifier
     #   The Amazon Resource Name (ARN) of the resource that the pending
@@ -436,7 +436,7 @@ module Aws::DocDB
     #
     #   * If the source parameter group is in a different AWS Region than the
     #     copy, specify a valid cluster parameter group ARN; for example,
-    #     `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
+    #     `arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group`.
     #
     # @option params [required, String] :target_db_cluster_parameter_group_identifier
     #   The identifier for the copied cluster parameter group.
@@ -497,23 +497,21 @@ module Aws::DocDB
     #
     # To copy a cluster snapshot from a shared manual cluster snapshot,
     # `SourceDBClusterSnapshotIdentifier` must be the Amazon Resource Name
-    # (ARN) of the shared cluster snapshot.
+    # (ARN) of the shared cluster snapshot. You can only copy a shared DB
+    # cluster snapshot, whether encrypted or not, in the same AWS Region.
     #
     # To cancel the copy operation after it is in progress, delete the
     # target cluster snapshot identified by
-    # `TargetDBClusterSnapshotIdentifier` while that DB cluster snapshot is
-    # in the *copying* status.
+    # `TargetDBClusterSnapshotIdentifier` while that cluster snapshot is in
+    # the *copying* status.
     #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
     #   The identifier of the cluster snapshot to copy. This parameter is not
     #   case sensitive.
     #
-    #   You can't copy an encrypted, shared cluster snapshot from one AWS
-    #   Region to another.
-    #
     #   Constraints:
     #
-    #   * Must specify a valid system snapshot in the "available" state.
+    #   * Must specify a valid system snapshot in the *available* state.
     #
     #   * If the source snapshot is in the same AWS Region as the copy,
     #     specify a valid snapshot identifier.
@@ -555,8 +553,8 @@ module Aws::DocDB
     #   `KmsKeyId` to the AWS KMS key ID that you want to use to encrypt the
     #   copy of the cluster snapshot in the destination Region. AWS KMS
     #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one Region in another
-    #   Region.
+    #   in, and you can't use encryption keys from one AWS Region in another
+    #   AWS Region.
     #
     #   If you copy an unencrypted cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
@@ -565,32 +563,33 @@ module Aws::DocDB
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
     #   source cluster snapshot to copy. You must use the `PreSignedUrl`
-    #   parameter when copying an encrypted cluster snapshot from another AWS
-    #   Region.
+    #   parameter when copying a cluster snapshot from another AWS Region.
+    #
+    #   If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
     #
     #   The presigned URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the source
-    #   AWS Region that contains the encrypted DB cluster snapshot to be
-    #   copied. The presigned URL request must contain the following parameter
-    #   values:
+    #   `CopyDBClusterSnapshot` API action that can be executed in the source
+    #   AWS Region that contains the cluster snapshot to be copied. The
+    #   presigned URL request must contain the following parameter values:
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the cluster snapshot in the destination AWS
-    #     Region. This is the same identifier for both the
-    #     `CopyDBClusterSnapshot` action that is called in the destination AWS
-    #     Region, and the action contained in the presigned URL.
+    #   * `SourceRegion` - The ID of the region that contains the snapshot to
+    #     be copied.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
-    #     snapshot will be created in.
+    #   * `SourceDBClusterSnapshotIdentifier` - The identifier for the the
+    #     encrypted cluster snapshot to be copied. This identifier must be in
+    #     the Amazon Resource Name (ARN) format for the source AWS Region. For
+    #     example, if you are copying an encrypted cluster snapshot from the
+    #     us-east-1 AWS Region, then your `SourceDBClusterSnapshotIdentifier`
+    #     looks something like the following:
+    #     `arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot`.
     #
-    #   * `SourceDBClusterSnapshotIdentifier` - The cluster snapshot
-    #     identifier for the encrypted cluster snapshot to be copied. This
-    #     identifier must be in the Amazon Resource Name (ARN) format for the
-    #     source AWS Region. For example, if you are copying an encrypted
-    #     cluster snapshot from the us-west-2 AWS Region, then your
-    #     `SourceDBClusterSnapshotIdentifier` looks like the following
-    #     example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115`.
+    #   * `TargetDBClusterSnapshotIdentifier` - The identifier for the new
+    #     cluster snapshot to be created. This parameter isn't case
+    #     sensitive.
     #
     # @option params [Boolean] :copy_tags
     #   Set to `true` to copy all tags from the source cluster snapshot to the
@@ -794,9 +793,19 @@ module Aws::DocDB
     #   destination AWS Region. This key is used to encrypt the replica in
     #   that AWS Region.
     #
+    # @option params [String] :pre_signed_url
+    #   Not currently supported.
+    #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   A list of log types that need to be enabled for exporting to Amazon
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. You can enable audit logs or profiler logs. For more
+    #   information, see [ Auditing Amazon DocumentDB Events][1] and [
+    #   Profiling Amazon DocumentDB Operations][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html
     #
     # @option params [Boolean] :deletion_protection
     #   Specifies whether this cluster can be deleted. If `DeletionProtection`
@@ -832,6 +841,7 @@ module Aws::DocDB
     #     ],
     #     storage_encrypted: false,
     #     kms_key_id: "String",
+    #     pre_signed_url: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
     #   })
@@ -890,24 +900,26 @@ module Aws::DocDB
     # Creates a new cluster parameter group.
     #
     # Parameters in a cluster parameter group apply to all of the instances
-    # in a DB cluster.
+    # in a cluster.
     #
     # A cluster parameter group is initially created with the default
     # parameters for the database engine used by instances in the cluster.
-    # To provide custom values for any of the parameters, you must modify
-    # the group after you create it. After you create a DB cluster parameter
-    # group, you must associate it with your cluster. For the new DB cluster
-    # parameter group and associated settings to take effect, you must then
-    # reboot the instances in the cluster without failover.
+    # In Amazon DocumentDB, you cannot make modifications directly to the
+    # `default.docdb3.6` cluster parameter group. If your Amazon DocumentDB
+    # cluster is using the default cluster parameter group and you want to
+    # modify a value in it, you must first [ create a new parameter
+    # group][1] or [ copy an existing parameter group][2], modify it, and
+    # then apply the modified parameter group to your cluster. For the new
+    # cluster parameter group and associated settings to take effect, you
+    # must then reboot the instances in the cluster without failover. For
+    # more information, see [ Modifying Amazon DocumentDB Cluster Parameter
+    # Groups][3].
     #
-    # After you create a cluster parameter group, you should wait at least 5
-    # minutes before creating your first cluster that uses that cluster
-    # parameter group as the default parameter group. This allows Amazon
-    # DocumentDB to fully complete the create action before the cluster
-    # parameter group is used as the default for a new cluster. This step is
-    # especially important for parameters that are critical when creating
-    # the default database for a cluster, such as the character set for the
-    # default database defined by the `character_set_database` parameter.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html
+    # [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html
+    # [3]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html
     #
     # @option params [required, String] :db_cluster_parameter_group_name
     #   The name of the cluster parameter group.
@@ -1075,10 +1087,6 @@ module Aws::DocDB
     #   AWS Region.
     #
     #   Example: `us-east-1d`
-    #
-    #   Constraint: The `AvailabilityZone` parameter can't be specified if
-    #   the `MultiAZ` parameter is set to `true`. The specified Availability
-    #   Zone must be in the same AWS Region as the current endpoint.
     #
     # @option params [String] :preferred_maintenance_window
     #   The time range each week during which system maintenance can occur, in
@@ -1636,6 +1644,8 @@ module Aws::DocDB
     #   * {Types::CertificateMessage#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::CertificateMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_certificates({
@@ -1707,6 +1717,8 @@ module Aws::DocDB
     #
     #   * {Types::DBClusterParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBClusterParameterGroupsMessage#db_cluster_parameter_groups #db_cluster_parameter_groups} => Array&lt;Types::DBClusterParameterGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1780,6 +1792,8 @@ module Aws::DocDB
     #
     #   * {Types::DBClusterParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBClusterParameterGroupDetails#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1948,6 +1962,8 @@ module Aws::DocDB
     #
     #   * {Types::DBClusterSnapshotMessage#marker #marker} => String
     #   * {Types::DBClusterSnapshotMessage#db_cluster_snapshots #db_cluster_snapshots} => Array&lt;Types::DBClusterSnapshot&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2125,7 +2141,7 @@ module Aws::DocDB
     # @option params [String] :engine_version
     #   The database engine version to return.
     #
-    #   Example: `5.1.49`
+    #   Example: `3.6.0`
     #
     # @option params [String] :db_parameter_group_family
     #   The name of a specific parameter group family to return details for.
@@ -2789,6 +2805,8 @@ module Aws::DocDB
     #
     #   * {Types::PendingMaintenanceActionsMessage#pending_maintenance_actions #pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
     #   * {Types::PendingMaintenanceActionsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4258,7 +4276,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

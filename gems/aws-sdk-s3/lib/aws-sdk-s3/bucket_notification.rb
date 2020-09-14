@@ -245,12 +245,17 @@ module Aws::S3
     #         },
     #       ],
     #     },
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::NotificationConfiguration] :notification_configuration
     #   A container for specifying the notification configuration of the
     #   bucket. If this element is empty, notifications are turned off for the
     #   bucket.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

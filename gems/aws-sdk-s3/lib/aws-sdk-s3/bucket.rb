@@ -260,8 +260,14 @@ module Aws::S3
 
     # @example Request syntax with placeholder values
     #
-    #   bucket.delete()
+    #   bucket.delete({
+    #     expected_bucket_owner: "AccountId",
+    #   })
     # @param [Hash] options ({})
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @name)
@@ -284,6 +290,7 @@ module Aws::S3
     #     mfa: "MFA",
     #     request_payer: "requester", # accepts requester
     #     bypass_governance_retention: false,
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::Delete] :delete
@@ -307,6 +314,10 @@ module Aws::S3
     #   Specifies whether you want to delete this object even if it has a
     #   Governance-type Object Lock in place. You must have sufficient
     #   permissions to perform this operation.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Types::DeleteObjectsOutput]
     def delete_objects(options = {})
       options = options.merge(bucket: @name)
@@ -348,6 +359,7 @@ module Aws::S3
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -474,7 +486,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -519,6 +531,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [Object]
     def put_object(options = {})
       options = options.merge(bucket: @name)
@@ -580,6 +596,7 @@ module Aws::S3
     #     key_marker: "KeyMarker",
     #     prefix: "Prefix",
     #     upload_id_marker: "UploadIdMarker",
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :delimiter
@@ -622,6 +639,10 @@ module Aws::S3
     #   uploads for a key equal to the key-marker might be included in the
     #   list only if they have an upload ID lexicographically greater than the
     #   specified `upload-id-marker`.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [MultipartUpload::Collection]
     def multipart_uploads(options = {})
       batches = Enumerator.new do |y|
@@ -670,6 +691,7 @@ module Aws::S3
     #     key_marker: "KeyMarker",
     #     prefix: "Prefix",
     #     version_id_marker: "VersionIdMarker",
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :delimiter
@@ -697,6 +719,10 @@ module Aws::S3
     #   result under CommonPrefixes.
     # @option options [String] :version_id_marker
     #   Specifies the object version you want to start listing from.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [ObjectVersion::Collection]
     def object_versions(options = {})
       batches = Enumerator.new do |y|
@@ -728,6 +754,7 @@ module Aws::S3
     #     fetch_owner: false,
     #     start_after: "StartAfter",
     #     request_payer: "requester", # accepts requester
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :delimiter
@@ -748,6 +775,10 @@ module Aws::S3
     #   Confirms that the requester knows that she or he will be charged for
     #   the list objects request in V2 style. Bucket owners need not specify
     #   this parameter in their requests.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [ObjectSummary::Collection]
     def objects(options = {})
       batches = Enumerator.new do |y|

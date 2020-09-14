@@ -536,6 +536,7 @@ module Aws::ManagedBlockchain
     #           },
     #         },
     #       },
+    #       state_db: "LevelDB", # accepts LevelDB, CouchDB
     #     },
     #   })
     #
@@ -800,6 +801,7 @@ module Aws::ManagedBlockchain
     #   resp.node.framework_attributes.fabric.peer_event_endpoint #=> String
     #   resp.node.log_publishing_configuration.fabric.chaincode_logs.cloudwatch.enabled #=> Boolean
     #   resp.node.log_publishing_configuration.fabric.peer_logs.cloudwatch.enabled #=> Boolean
+    #   resp.node.state_db #=> String, one of "LevelDB", "CouchDB"
     #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.node.creation_date #=> Time
     #
@@ -858,7 +860,7 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Returns a listing of all invitations made on the specified network.
+    # Returns a listing of all invitations for the current AWS account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of invitations to return.
@@ -1341,7 +1343,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

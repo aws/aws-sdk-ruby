@@ -431,9 +431,9 @@ module Aws::EBS
       req.send_request(options, &block)
     end
 
-    # Returns the block indexes and block tokens for blocks that are
-    # different between two Amazon Elastic Block Store snapshots of the same
-    # volume/snapshot lineage.
+    # Returns information about the blocks that are different between two
+    # Amazon Elastic Block Store snapshots of the same volume/snapshot
+    # lineage.
     #
     # @option params [String] :first_snapshot_id
     #   The ID of the first snapshot to use for the comparison.
@@ -499,8 +499,8 @@ module Aws::EBS
       req.send_request(options)
     end
 
-    # Returns the block indexes and block tokens for blocks in an Amazon
-    # Elastic Block Store snapshot.
+    # Returns information about the blocks in an Amazon Elastic Block Store
+    # snapshot.
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot from which to get block indexes and block
@@ -555,9 +555,9 @@ module Aws::EBS
       req.send_request(options)
     end
 
-    # Writes a block of data to a block in the snapshot. If the specified
-    # block contains data, the existing data is overwritten. The target
-    # snapshot must be in the `pending` state.
+    # Writes a block of data to a snapshot. If the specified block contains
+    # data, the existing data is overwritten. The target snapshot must be in
+    # the `pending` state.
     #
     # Data written to a snapshot must be aligned with 512-byte sectors.
     #
@@ -566,10 +566,10 @@ module Aws::EBS
     #
     # @option params [required, Integer] :block_index
     #   The block index of the block in which to write the data. A block index
-    #   is the offset position of a block within a snapshot, and it is used to
-    #   identify the block. To identify the logical offset of the data in the
-    #   logical volume, multiply the block index with the block size (Block
-    #   index * 512 bytes).
+    #   is a logical index in units of `512` KiB blocks. To identify the block
+    #   index, divide the logical offset of the data in the logical volume by
+    #   the block size (logical offset of data/`524288`). The logical offset
+    #   of the data must be `512` KiB aligned.
     #
     # @option params [required, String, IO] :block_data
     #   The data to write to the block.
@@ -806,7 +806,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

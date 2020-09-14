@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Fix circular dependency of `aws-sdk-sso` and `aws-sdk-core` (#2405).
 
+3.106.0 (2020-09-14)
+------------------
+
+* Feature - Support `AWS_CA_BUNDLE` ENV variable and `ca_bundle` shared configuration options. The `:ssl_ca_bundle` client option will override either of these options. (#1907)
+
 3.105.0 (2020-08-25)
 ------------------
 

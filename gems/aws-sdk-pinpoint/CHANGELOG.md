@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-09-10)
+------------------
+
+* Feature - Update SMS message model description to clearly indicate that the MediaUrl field is reserved for future use and is not supported by Pinpoint as of today.
+
 1.44.0 (2020-08-25)
 ------------------
 

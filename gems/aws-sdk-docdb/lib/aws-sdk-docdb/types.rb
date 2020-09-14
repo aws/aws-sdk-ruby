@@ -27,7 +27,7 @@ module Aws::DocDB
     #
     # @!attribute [rw] resource_name
     #   The Amazon DocumentDB resource that the tags are added to. This
-    #   value is an Amazon Resource Name (ARN).
+    #   value is an Amazon Resource Name .
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -267,7 +267,7 @@ module Aws::DocDB
     #   * If the source parameter group is in a different AWS Region than
     #     the copy, specify a valid cluster parameter group ARN; for
     #     example,
-    #     `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
+    #     `arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group`.
     #   @return [String]
     #
     # @!attribute [rw] target_db_cluster_parameter_group_identifier
@@ -340,12 +340,9 @@ module Aws::DocDB
     #   The identifier of the cluster snapshot to copy. This parameter is
     #   not case sensitive.
     #
-    #   You can't copy an encrypted, shared cluster snapshot from one AWS
-    #   Region to another.
-    #
     #   Constraints:
     #
-    #   * Must specify a valid system snapshot in the "available" state.
+    #   * Must specify a valid system snapshot in the *available* state.
     #
     #   * If the source snapshot is in the same AWS Region as the copy,
     #     specify a valid snapshot identifier.
@@ -389,8 +386,8 @@ module Aws::DocDB
     #   `KmsKeyId` to the AWS KMS key ID that you want to use to encrypt the
     #   copy of the cluster snapshot in the destination Region. AWS KMS
     #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one Region in another
-    #   Region.
+    #   in, and you can't use encryption keys from one AWS Region in
+    #   another AWS Region.
     #
     #   If you copy an unencrypted cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
@@ -400,32 +397,35 @@ module Aws::DocDB
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains
     #   the source cluster snapshot to copy. You must use the `PreSignedUrl`
-    #   parameter when copying an encrypted cluster snapshot from another
-    #   AWS Region.
+    #   parameter when copying a cluster snapshot from another AWS Region.
+    #
+    #   If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
     #
     #   The presigned URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the
-    #   source AWS Region that contains the encrypted DB cluster snapshot to
-    #   be copied. The presigned URL request must contain the following
-    #   parameter values:
+    #   `CopyDBClusterSnapshot` API action that can be executed in the
+    #   source AWS Region that contains the cluster snapshot to be copied.
+    #   The presigned URL request must contain the following parameter
+    #   values:
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the cluster snapshot in the destination AWS
-    #     Region. This is the same identifier for both the
-    #     `CopyDBClusterSnapshot` action that is called in the destination
-    #     AWS Region, and the action contained in the presigned URL.
+    #   * `SourceRegion` - The ID of the region that contains the snapshot
+    #     to be copied.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that the DB
-    #     cluster snapshot will be created in.
+    #   * `SourceDBClusterSnapshotIdentifier` - The identifier for the the
+    #     encrypted cluster snapshot to be copied. This identifier must be
+    #     in the Amazon Resource Name (ARN) format for the source AWS
+    #     Region. For example, if you are copying an encrypted cluster
+    #     snapshot from the us-east-1 AWS Region, then your
+    #     `SourceDBClusterSnapshotIdentifier` looks something like the
+    #     following:
+    #     `arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot`.
     #
-    #   * `SourceDBClusterSnapshotIdentifier` - The cluster snapshot
-    #     identifier for the encrypted cluster snapshot to be copied. This
-    #     identifier must be in the Amazon Resource Name (ARN) format for
-    #     the source AWS Region. For example, if you are copying an
-    #     encrypted cluster snapshot from the us-west-2 AWS Region, then
-    #     your `SourceDBClusterSnapshotIdentifier` looks like the following
-    #     example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115`.
+    #   * `TargetDBClusterSnapshotIdentifier` - The identifier for the new
+    #     cluster snapshot to be created. This parameter isn't case
+    #     sensitive.
     #   @return [String]
     #
     # @!attribute [rw] copy_tags
@@ -490,6 +490,7 @@ module Aws::DocDB
     #         ],
     #         storage_encrypted: false,
     #         kms_key_id: "String",
+    #         pre_signed_url: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
     #       }
@@ -652,9 +653,20 @@ module Aws::DocDB
     #   that AWS Region.
     #   @return [String]
     #
+    # @!attribute [rw] pre_signed_url
+    #   Not currently supported.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   A list of log types that need to be enabled for exporting to Amazon
-    #   CloudWatch Logs.
+    #   CloudWatch Logs. You can enable audit logs or profiler logs. For
+    #   more information, see [ Auditing Amazon DocumentDB Events][1] and [
+    #   Profiling Amazon DocumentDB Operations][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -684,6 +696,7 @@ module Aws::DocDB
       :tags,
       :storage_encrypted,
       :kms_key_id,
+      :pre_signed_url,
       :enable_cloudwatch_logs_exports,
       :deletion_protection)
       SENSITIVE = []
@@ -893,10 +906,6 @@ module Aws::DocDB
     #   endpoint's AWS Region.
     #
     #   Example: `us-east-1d`
-    #
-    #   Constraint: The `AvailabilityZone` parameter can't be specified if
-    #   the `MultiAZ` parameter is set to `true`. The specified Availability
-    #   Zone must be in the same AWS Region as the current endpoint.
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -2724,7 +2733,7 @@ module Aws::DocDB
     # @!attribute [rw] engine_version
     #   The database engine version to return.
     #
-    #   Example: `5.1.49`
+    #   Example: `3.6.0`
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_family

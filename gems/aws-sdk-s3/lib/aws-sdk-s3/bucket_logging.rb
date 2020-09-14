@@ -203,12 +203,17 @@ module Aws::S3
     #       },
     #     },
     #     content_md5: "ContentMD5",
+    #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::BucketLoggingStatus] :bucket_logging_status
     #   Container for logging status information.
     # @option options [String] :content_md5
     #   The MD5 hash of the `PutBucketLogging` request body.
+    # @option options [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
