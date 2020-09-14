@@ -28,11 +28,14 @@ Defaults to `true`, raises errors if exist when #wait or #join! is called upon a
         DOCS
 
         # SSL Context
-        option(:ssl_ca_bundle, default: nil, doc_type: String, docstring: <<-DOCS)
+        option(:ssl_ca_bundle, default: nil, doc_type: String, docstring: <<-DOCS) do |cfg|
 Full path to the SSL certificate authority bundle file that should be used when
 verifying peer certificates. If you do not pass `:ssl_ca_directory` or `:ssl_ca_bundle`
 the system default will be used if available.
         DOCS
+          ENV['AWS_CA_BUNDLE'] ||
+            Aws.shared_config.ca_bundle(profile: cfg.profile) if cfg.respond_to?(:profile)
+        end
 
         option(:ssl_ca_directory, default: nil, doc_type: String, docstring: <<-DOCS)
 Full path of the directory that contains the unbundled SSL certificate authority

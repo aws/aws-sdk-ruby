@@ -124,8 +124,19 @@ module Aws
       end
     end
 
+    context 'ca_bundle selection' do
+      it 'can resolve ca_bundle from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'ca_bundle'
+        )
+        expect(config.ca_bundle).to eq('/path/to/bundle.crt')
+      end
+    end
+
     context 'endpoint_discovery selection' do
-      it 'can resolves endpoint_discovery from config file' do
+      it 'can resolve endpoint_discovery from config file' do
         config = SharedConfig.new(
           config_path: mock_config_file,
           config_enabled: true,
@@ -178,7 +189,7 @@ module Aws
       end
     end
 
-    context 's3_use_arn_region' do
+    context 's3_use_arn_region selection' do
       it 'can resolve s3_use_arn_region from config file' do
         config = SharedConfig.new(
           config_path: mock_config_file,
@@ -195,8 +206,8 @@ module Aws
         expect(config.s3_use_arn_region).to eq('false')
       end
     end
-    context 'retry_mode' do
 
+    context 'retry_mode selection' do
       it 'can resolve retry_mode from config file' do
         config = SharedConfig.new(
           config_path: mock_config_file,
@@ -219,26 +230,20 @@ module Aws
         )
         expect(config.retry_mode).to eq('adaptive')
       end
-
     end
 
-    context 'max_attempts' do
-
+    context 'max_attempts selection' do
       it 'can resolve max_attempts from config file' do
-
         config = SharedConfig.new(
           config_path: mock_config_file,
           config_enabled: true,
           profile_name: 'max_attempts'
         )
         expect(config.max_attempts).to eq('1')
-
       end
-
     end
 
-    context 'adaptive_retry_wait_to_fill' do
-
+    context 'adaptive_retry_wait_to_fill selection' do
       it 'can resolve adaptive_retry_wait_to_fill from config file' do
         config = SharedConfig.new(
           config_path: mock_config_file,
@@ -249,8 +254,7 @@ module Aws
       end
     end
 
-    context 'correct_clock_skew' do
-
+    context 'correct_clock_skew selection' do
       it 'can resolve correct_clock_skew from config file' do
         config = SharedConfig.new(
           config_path: mock_config_file,
@@ -260,6 +264,5 @@ module Aws
         expect(config.correct_clock_skew).to eq('false')
       end
     end
-
   end
 end

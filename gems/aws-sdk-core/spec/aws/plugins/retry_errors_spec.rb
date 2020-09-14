@@ -125,15 +125,10 @@ module Aws
 
       let(:service_error) { RetryErrorsSvc::Errors::ServiceError.new(nil, nil) }
 
-      let(:endpoint) { 'http://example.com' }
-
       before(:each) do
         resp.context.config = config
         operation.endpoint_discovery = {}
         resp.context.operation = operation
-        resp.context.client =  Seahorse::Client::Base.new(
-          endpoint: endpoint
-        )
       end
 
       context 'standard mode' do
