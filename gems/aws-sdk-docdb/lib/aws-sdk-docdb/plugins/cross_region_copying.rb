@@ -57,7 +57,8 @@ module Aws
           Handler,
           step: :initialize,
           operations: [
-            :copy_db_cluster_snapshot
+            :copy_db_cluster_snapshot,
+            :create_db_cluster
           ]
         )
       end
