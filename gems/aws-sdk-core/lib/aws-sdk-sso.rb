@@ -8,6 +8,8 @@
 # WARNING ABOUT GENERATED CODE
 
 
+require 'aws-sdk-core' unless Module.const_defined?(:Aws)
+
 require_relative 'aws-sdk-sso/types'
 require_relative 'aws-sdk-sso/client_api'
 require_relative 'aws-sdk-sso/client'
