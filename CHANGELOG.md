@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DocDB - Updated the API, and documentation for Amazon DocumentDB with MongoDB compatibility.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ManagedBlockchain - Updated the API, and documentation for Amazon Managed Blockchain.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
 2.11.584 (2020-09-11)
 ------------------
 
