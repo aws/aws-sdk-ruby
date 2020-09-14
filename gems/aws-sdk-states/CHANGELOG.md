@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-09-14)
+------------------
+
+* Feature - This release of the AWS Step Functions SDK introduces support for AWS X-Ray.
+
 1.33.0 (2020-09-03)
 ------------------
 

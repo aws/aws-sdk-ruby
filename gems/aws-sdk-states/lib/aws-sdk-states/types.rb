@@ -221,12 +221,11 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Provides details about execution input.
+    # Provides details about execution input or output.
     #
     # @!attribute [rw] included
     #   Indicates whether input or output was included in the response.
-    #   Always `true` for API calls, but may be `false` for CloudWatch
-    #   Events.
+    #   Always `true` for API calls.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CloudWatchEventsExecutionDataDetails AWS API Documentation
@@ -363,6 +362,9 @@ module Aws::States
     #             value: "TagValue",
     #           },
     #         ],
+    #         tracing_configuration: {
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -434,6 +436,10 @@ module Aws::States
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] tracing_configuration
+    #   Selects whether AWS X-Ray tracing is enabled.
+    #   @return [Types::TracingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput AWS API Documentation
     #
     class CreateStateMachineInput < Struct.new(
@@ -442,7 +448,8 @@ module Aws::States
       :role_arn,
       :type,
       :logging_configuration,
-      :tags)
+      :tags,
+      :tracing_configuration)
       SENSITIVE = [:definition]
       include Aws::Structure
     end
@@ -632,7 +639,7 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] input_details
-    #   Provides details about execution input.
+    #   Provides details about execution input or output.
     #   @return [Types::CloudWatchEventsExecutionDataDetails]
     #
     # @!attribute [rw] output
@@ -646,8 +653,12 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] output_details
-    #   Provides details about execution input.
+    #   Provides details about execution input or output.
     #   @return [Types::CloudWatchEventsExecutionDataDetails]
+    #
+    # @!attribute [rw] trace_header
+    #   The AWS X-Ray trace header which was passed to the execution.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
     #
@@ -661,7 +672,8 @@ module Aws::States
       :input,
       :input_details,
       :output,
-      :output_details)
+      :output_details,
+      :trace_header)
       SENSITIVE = [:input, :output]
       include Aws::Structure
     end
@@ -720,6 +732,10 @@ module Aws::States
     #   options.
     #   @return [Types::LoggingConfiguration]
     #
+    # @!attribute [rw] tracing_configuration
+    #   Selects whether AWS X-Ray tracing is enabled.
+    #   @return [Types::TracingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionOutput AWS API Documentation
     #
     class DescribeStateMachineForExecutionOutput < Struct.new(
@@ -728,7 +744,8 @@ module Aws::States
       :definition,
       :role_arn,
       :update_date,
-      :logging_configuration)
+      :logging_configuration,
+      :tracing_configuration)
       SENSITIVE = [:definition]
       include Aws::Structure
     end
@@ -807,6 +824,10 @@ module Aws::States
     #   options.
     #   @return [Types::LoggingConfiguration]
     #
+    # @!attribute [rw] tracing_configuration
+    #   Selects whether AWS X-Ray tracing is enabled.
+    #   @return [Types::TracingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput AWS API Documentation
     #
     class DescribeStateMachineOutput < Struct.new(
@@ -817,7 +838,8 @@ module Aws::States
       :role_arn,
       :type,
       :creation_date,
-      :logging_configuration)
+      :logging_configuration,
+      :tracing_configuration)
       SENSITIVE = [:definition]
       include Aws::Structure
     end
@@ -1353,12 +1375,11 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about the data from an execution's events. Always
-    # `true` for API calls, but may be `false` for CloudWatch Logs.
+    # Provides details about input or output in an execution history event.
     #
     # @!attribute [rw] truncated
     #   Indicates whether input or output was truncated in the response.
-    #   Always `false`.
+    #   Always `false` for API calls.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEventExecutionDataDetails AWS API Documentation
@@ -1453,6 +1474,20 @@ module Aws::States
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidToken AWS API Documentation
     #
     class InvalidToken < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Your `tracingConfiguration` key does not match, or `enabled` has not
+    # been set to `true` or `false`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidTracingConfiguration AWS API Documentation
+    #
+    class InvalidTracingConfiguration < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2060,6 +2095,7 @@ module Aws::States
     #         state_machine_arn: "Arn", # required
     #         name: "Name",
     #         input: "SensitiveData",
+    #         trace_header: "TraceHeader",
     #       }
     #
     # @!attribute [rw] state_machine_arn
@@ -2107,12 +2143,18 @@ module Aws::States
     #   bytes in UTF-8 encoding.
     #   @return [String]
     #
+    # @!attribute [rw] trace_header
+    #   Passes the AWS X-Ray trace header. The trace header can also be
+    #   passed in the request payload.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionInput AWS API Documentation
     #
     class StartExecutionInput < Struct.new(
       :state_machine_arn,
       :name,
-      :input)
+      :input,
+      :trace_header)
       SENSITIVE = [:input]
       include Aws::Structure
     end
@@ -2715,6 +2757,28 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Selects whether or not the state machine's AWS X-Ray tracing is
+    # enabled. Default is `false`
+    #
+    # @note When making an API call, you may pass TracingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   When set to `true`, AWS X-Ray tracing is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TracingConfiguration AWS API Documentation
+    #
+    class TracingConfiguration < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceInput
     #   data as a hash:
     #
@@ -2763,6 +2827,9 @@ module Aws::States
     #             },
     #           ],
     #         },
+    #         tracing_configuration: {
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] state_machine_arn
@@ -2787,13 +2854,18 @@ module Aws::States
     #   options.
     #   @return [Types::LoggingConfiguration]
     #
+    # @!attribute [rw] tracing_configuration
+    #   Selects whether AWS X-Ray tracing is enabled.
+    #   @return [Types::TracingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput AWS API Documentation
     #
     class UpdateStateMachineInput < Struct.new(
       :state_machine_arn,
       :definition,
       :role_arn,
-      :logging_configuration)
+      :logging_configuration,
+      :tracing_configuration)
       SENSITIVE = [:definition]
       include Aws::Structure
     end

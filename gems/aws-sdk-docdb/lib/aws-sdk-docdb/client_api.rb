@@ -284,6 +284,7 @@ module Aws::DocDB
     CreateDBClusterMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDBClusterMessage.add_member(:storage_encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "StorageEncrypted"))
     CreateDBClusterMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CreateDBClusterMessage.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: String, location_name: "PreSignedUrl"))
     CreateDBClusterMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     CreateDBClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
@@ -1208,6 +1209,12 @@ module Aws::DocDB
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificatesMessage)
         o.output = Shapes::ShapeRef.new(shape: CertificateMessage)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_parameter_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1217,6 +1224,12 @@ module Aws::DocDB
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterParameterGroupsMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterParameterGroupsMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -1226,6 +1239,12 @@ module Aws::DocDB
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterParametersMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterParameterGroupDetails)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_snapshot_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -1244,6 +1263,12 @@ module Aws::DocDB
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterSnapshotsMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterSnapshotMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -1356,6 +1381,12 @@ module Aws::DocDB
         o.input = Shapes::ShapeRef.new(shape: DescribePendingMaintenanceActionsMessage)
         o.output = Shapes::ShapeRef.new(shape: PendingMaintenanceActionsMessage)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:failover_db_cluster, Seahorse::Model::Operation.new.tap do |o|

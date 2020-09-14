@@ -45,6 +45,7 @@ module Aws::States
     DescribeStateMachineForExecutionOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionOutput')
     DescribeStateMachineInput = Shapes::StructureShape.new(name: 'DescribeStateMachineInput')
     DescribeStateMachineOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineOutput')
+    Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventId = Shapes::IntegerShape.new(name: 'EventId')
     ExecutionAbortedEventDetails = Shapes::StructureShape.new(name: 'ExecutionAbortedEventDetails')
@@ -76,6 +77,7 @@ module Aws::States
     InvalidName = Shapes::StructureShape.new(name: 'InvalidName')
     InvalidOutput = Shapes::StructureShape.new(name: 'InvalidOutput')
     InvalidToken = Shapes::StructureShape.new(name: 'InvalidToken')
+    InvalidTracingConfiguration = Shapes::StructureShape.new(name: 'InvalidTracingConfiguration')
     LambdaFunctionFailedEventDetails = Shapes::StructureShape.new(name: 'LambdaFunctionFailedEventDetails')
     LambdaFunctionScheduleFailedEventDetails = Shapes::StructureShape.new(name: 'LambdaFunctionScheduleFailedEventDetails')
     LambdaFunctionScheduledEventDetails = Shapes::StructureShape.new(name: 'LambdaFunctionScheduledEventDetails')
@@ -149,6 +151,8 @@ module Aws::States
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTags = Shapes::StructureShape.new(name: 'TooManyTags')
+    TraceHeader = Shapes::StringShape.new(name: 'TraceHeader')
+    TracingConfiguration = Shapes::StructureShape.new(name: 'TracingConfiguration')
     UnsignedInteger = Shapes::IntegerShape.new(name: 'UnsignedInteger')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
@@ -219,6 +223,7 @@ module Aws::States
     CreateStateMachineInput.add_member(:type, Shapes::ShapeRef.new(shape: StateMachineType, location_name: "type"))
     CreateStateMachineInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     CreateStateMachineInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateStateMachineInput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     CreateStateMachineInput.struct_class = Types::CreateStateMachineInput
 
     CreateStateMachineOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -256,6 +261,7 @@ module Aws::States
     DescribeExecutionOutput.add_member(:input_details, Shapes::ShapeRef.new(shape: CloudWatchEventsExecutionDataDetails, location_name: "inputDetails"))
     DescribeExecutionOutput.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
     DescribeExecutionOutput.add_member(:output_details, Shapes::ShapeRef.new(shape: CloudWatchEventsExecutionDataDetails, location_name: "outputDetails"))
+    DescribeExecutionOutput.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "traceHeader"))
     DescribeExecutionOutput.struct_class = Types::DescribeExecutionOutput
 
     DescribeStateMachineForExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -267,6 +273,7 @@ module Aws::States
     DescribeStateMachineForExecutionOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
     DescribeStateMachineForExecutionOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
     DescribeStateMachineForExecutionOutput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
+    DescribeStateMachineForExecutionOutput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     DescribeStateMachineForExecutionOutput.struct_class = Types::DescribeStateMachineForExecutionOutput
 
     DescribeStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -280,6 +287,7 @@ module Aws::States
     DescribeStateMachineOutput.add_member(:type, Shapes::ShapeRef.new(shape: StateMachineType, required: true, location_name: "type"))
     DescribeStateMachineOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     DescribeStateMachineOutput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
+    DescribeStateMachineOutput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     DescribeStateMachineOutput.struct_class = Types::DescribeStateMachineOutput
 
     ExecutionAbortedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -405,6 +413,9 @@ module Aws::States
     InvalidToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidToken.struct_class = Types::InvalidToken
 
+    InvalidTracingConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidTracingConfiguration.struct_class = Types::InvalidTracingConfiguration
+
     LambdaFunctionFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
     LambdaFunctionFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     LambdaFunctionFailedEventDetails.struct_class = Types::LambdaFunctionFailedEventDetails
@@ -508,6 +519,7 @@ module Aws::States
     StartExecutionInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     StartExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     StartExecutionInput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
+    StartExecutionInput.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "traceHeader"))
     StartExecutionInput.struct_class = Types::StartExecutionInput
 
     StartExecutionOutput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -627,6 +639,9 @@ module Aws::States
     TooManyTags.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceName"))
     TooManyTags.struct_class = Types::TooManyTags
 
+    TracingConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "enabled"))
+    TracingConfiguration.struct_class = Types::TracingConfiguration
+
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
@@ -637,6 +652,7 @@ module Aws::States
     UpdateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, location_name: "definition"))
     UpdateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     UpdateStateMachineInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
+    UpdateStateMachineInput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     UpdateStateMachineInput.struct_class = Types::UpdateStateMachineInput
 
     UpdateStateMachineOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
@@ -682,6 +698,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidDefinition)
         o.errors << Shapes::ShapeRef.new(shape: InvalidName)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoggingConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTracingConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineLimitExceeded)
@@ -922,6 +939,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDefinition)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoggingConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTracingConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameter)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)

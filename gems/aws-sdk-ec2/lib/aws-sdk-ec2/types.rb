@@ -27148,7 +27148,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         instance_family: "t2", # required, accepts t2, t3, t3a
+    #         instance_family: "t2", # required, accepts t2, t3, t3a, t4g
     #       }
     #
     # @!attribute [rw] dry_run
@@ -34548,7 +34548,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         instance_family: "t2", # required, accepts t2, t3, t3a
+    #         instance_family: "t2", # required, accepts t2, t3, t3a, t4g
     #         cpu_credits: "String", # required
     #       }
     #

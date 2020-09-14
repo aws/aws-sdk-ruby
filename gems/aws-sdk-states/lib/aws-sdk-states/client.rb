@@ -446,11 +446,11 @@ module Aws::States
     # <note markdown="1"> `CreateStateMachine` is an idempotent API. Subsequent requests won’t
     # create a duplicate resource if it was already created.
     # `CreateStateMachine`'s idempotency check is based on the state
-    # machine `name`, `definition`, `type`, and `LoggingConfiguration`. If a
-    # following request has a different `roleArn` or `tags`, Step Functions
-    # will ignore these differences and treat it as an idempotent request of
-    # the previous. In this case, `roleArn` and `tags` will not be updated,
-    # even if they are different.
+    # machine `name`, `definition`, `type`, `LoggingConfiguration` and
+    # `TracingConfiguration`. If a following request has a different
+    # `roleArn` or `tags`, Step Functions will ignore these differences and
+    # treat it as an idempotent request of the previous. In this case,
+    # `roleArn` and `tags` will not be updated, even if they are different.
     #
     #  </note>
     #
@@ -521,6 +521,9 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
+    # @option params [Types::TracingConfiguration] :tracing_configuration
+    #   Selects whether AWS X-Ray tracing is enabled.
+    #
     # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStateMachineOutput#state_machine_arn #state_machine_arn} => String
@@ -550,6 +553,9 @@ module Aws::States
     #         value: "TagValue",
     #       },
     #     ],
+    #     tracing_configuration: {
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -679,6 +685,7 @@ module Aws::States
     #   * {Types::DescribeExecutionOutput#input_details #input_details} => Types::CloudWatchEventsExecutionDataDetails
     #   * {Types::DescribeExecutionOutput#output #output} => String
     #   * {Types::DescribeExecutionOutput#output_details #output_details} => Types::CloudWatchEventsExecutionDataDetails
+    #   * {Types::DescribeExecutionOutput#trace_header #trace_header} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -698,6 +705,7 @@ module Aws::States
     #   resp.input_details.included #=> Boolean
     #   resp.output #=> String
     #   resp.output_details.included #=> Boolean
+    #   resp.trace_header #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution AWS API Documentation
     #
@@ -728,6 +736,7 @@ module Aws::States
     #   * {Types::DescribeStateMachineOutput#type #type} => String
     #   * {Types::DescribeStateMachineOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeStateMachineOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #   * {Types::DescribeStateMachineOutput#tracing_configuration #tracing_configuration} => Types::TracingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -748,6 +757,7 @@ module Aws::States
     #   resp.logging_configuration.include_execution_data #=> Boolean
     #   resp.logging_configuration.destinations #=> Array
     #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
+    #   resp.tracing_configuration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine AWS API Documentation
     #
@@ -779,6 +789,7 @@ module Aws::States
     #   * {Types::DescribeStateMachineForExecutionOutput#role_arn #role_arn} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#update_date #update_date} => Time
     #   * {Types::DescribeStateMachineForExecutionOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #   * {Types::DescribeStateMachineForExecutionOutput#tracing_configuration #tracing_configuration} => Types::TracingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -797,6 +808,7 @@ module Aws::States
     #   resp.logging_configuration.include_execution_data #=> Boolean
     #   resp.logging_configuration.destinations #=> Array
     #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
+    #   resp.tracing_configuration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecution AWS API Documentation
     #
@@ -1443,6 +1455,10 @@ module Aws::States
     #   Length constraints apply to the payload size, and are expressed as
     #   bytes in UTF-8 encoding.
     #
+    # @option params [String] :trace_header
+    #   Passes the AWS X-Ray trace header. The trace header can also be passed
+    #   in the request payload.
+    #
     # @return [Types::StartExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartExecutionOutput#execution_arn #execution_arn} => String
@@ -1454,6 +1470,7 @@ module Aws::States
     #     state_machine_arn: "Arn", # required
     #     name: "Name",
     #     input: "SensitiveData",
+    #     trace_header: "TraceHeader",
     #   })
     #
     # @example Response structure
@@ -1613,6 +1630,9 @@ module Aws::States
     #   The `LoggingConfiguration` data type is used to set CloudWatch Logs
     #   options.
     #
+    # @option params [Types::TracingConfiguration] :tracing_configuration
+    #   Selects whether AWS X-Ray tracing is enabled.
+    #
     # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStateMachineOutput#update_date #update_date} => Time
@@ -1633,6 +1653,9 @@ module Aws::States
     #           },
     #         },
     #       ],
+    #     },
+    #     tracing_configuration: {
+    #       enabled: false,
     #     },
     #   })
     #
@@ -1662,7 +1685,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

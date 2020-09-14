@@ -119,6 +119,7 @@ module Aws::ManagedBlockchain
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
+    StateDBType = Shapes::StringShape.new(name: 'StateDBType')
     String = Shapes::StringShape.new(name: 'String')
     ThresholdComparator = Shapes::StringShape.new(name: 'ThresholdComparator')
     ThresholdPercentageInt = Shapes::IntegerShape.new(name: 'ThresholdPercentageInt')
@@ -404,6 +405,7 @@ module Aws::ManagedBlockchain
     Node.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneString, location_name: "AvailabilityZone"))
     Node.add_member(:framework_attributes, Shapes::ShapeRef.new(shape: NodeFrameworkAttributes, location_name: "FrameworkAttributes"))
     Node.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: NodeLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
+    Node.add_member(:state_db, Shapes::ShapeRef.new(shape: StateDBType, location_name: "StateDB"))
     Node.add_member(:status, Shapes::ShapeRef.new(shape: NodeStatus, location_name: "Status"))
     Node.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Node.struct_class = Types::Node
@@ -411,6 +413,7 @@ module Aws::ManagedBlockchain
     NodeConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, required: true, location_name: "InstanceType"))
     NodeConfiguration.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneString, required: true, location_name: "AvailabilityZone"))
     NodeConfiguration.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: NodeLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
+    NodeConfiguration.add_member(:state_db, Shapes::ShapeRef.new(shape: StateDBType, location_name: "StateDB"))
     NodeConfiguration.struct_class = Types::NodeConfiguration
 
     NodeFabricAttributes.add_member(:peer_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "PeerEndpoint"))
