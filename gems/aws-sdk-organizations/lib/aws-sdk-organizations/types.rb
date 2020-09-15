@@ -597,6 +597,12 @@ module Aws::Organizations
     #         account_name: "AccountName", # required
     #         role_name: "RoleName",
     #         iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] email
@@ -660,13 +666,32 @@ module Aws::Organizations
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created account.
+    #   For each tag in the list, you must specify both a tag key and a
+    #   value. You can set the value to an empty string, but you can't set
+    #   it to `null`. For more information about tagging, see [Tagging AWS
+    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags for an account, then the entire request fails and the
+    #   account is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountRequest AWS API Documentation
     #
     class CreateAccountRequest < Struct.new(
       :email,
       :account_name,
       :role_name,
-      :iam_user_access_to_billing)
+      :iam_user_access_to_billing,
+      :tags)
       SENSITIVE = [:email, :account_name]
       include Aws::Structure
     end
@@ -819,6 +844,12 @@ module Aws::Organizations
     #         account_name: "AccountName", # required
     #         role_name: "RoleName",
     #         iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] email
@@ -885,13 +916,37 @@ module Aws::Organizations
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created account.
+    #   These tags are attached to the commercial account associated with
+    #   the GovCloud account, and not to the GovCloud account itself. To add
+    #   tags to the actual GovCloud account, call the TagResource operation
+    #   in the GovCloud region after the new GovCloud account exists.
+    #
+    #   For each tag in the list, you must specify both a tag key and a
+    #   value. You can set the value to an empty string, but you can't set
+    #   it to `null`. For more information about tagging, see [Tagging AWS
+    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags for an account, then the entire request fails and the
+    #   account is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccountRequest AWS API Documentation
     #
     class CreateGovCloudAccountRequest < Struct.new(
       :email,
       :account_name,
       :role_name,
-      :iam_user_access_to_billing)
+      :iam_user_access_to_billing,
+      :tags)
       SENSITIVE = [:email, :account_name]
       include Aws::Structure
     end
@@ -968,6 +1023,12 @@ module Aws::Organizations
     #       {
     #         parent_id: "ParentId", # required
     #         name: "OrganizationalUnitName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] parent_id
@@ -995,11 +1056,30 @@ module Aws::Organizations
     #   The friendly name to assign to the new OU.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created OU. For
+    #   each tag in the list, you must specify both a tag key and a value.
+    #   You can set the value to an empty string, but you can't set it to
+    #   `null`. For more information about tagging, see [Tagging AWS
+    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags for an OU, then the entire request fails and the OU
+    #   is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitRequest AWS API Documentation
     #
     class CreateOrganizationalUnitRequest < Struct.new(
       :parent_id,
-      :name)
+      :name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1024,6 +1104,12 @@ module Aws::Organizations
     #         description: "PolicyDescription", # required
     #         name: "PolicyName", # required
     #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] content
@@ -1067,13 +1153,32 @@ module Aws::Organizations
     #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created policy.
+    #   For each tag in the list, you must specify both a tag key and a
+    #   value. You can set the value to an empty string, but you can't set
+    #   it to `null`. For more information about tagging, see [Tagging AWS
+    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags for a policy, then the entire request fails and the
+    #   policy is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest AWS API Documentation
     #
     class CreatePolicyRequest < Struct.new(
       :content,
       :description,
       :name,
-      :type)
+      :type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2348,6 +2453,9 @@ module Aws::Organizations
     #
     #  </note>
     #
+    # * DUPLICATE\_TAG\_KEY: Tag keys must be unique among the tags attached
+    #   to the same entity.
+    #
     # * IMMUTABLE\_POLICY: You specified a policy that is managed by AWS and
     #   can't be modified.
     #
@@ -2355,6 +2463,9 @@ module Aws::Organizations
     #   parameters.
     #
     # * INVALID\_ENUM: You specified an invalid value.
+    #
+    # * INVALID\_ENUM\_POLICY\_TYPE: You specified an invalid policy type
+    #   string.
     #
     # * INVALID\_FULL\_NAME\_TARGET: You specified a full name that contains
     #   invalid characters.
@@ -2405,6 +2516,12 @@ module Aws::Organizations
     # * MOVING\_ACCOUNT\_BETWEEN\_DIFFERENT\_ROOTS: You can move an account
     #   only between entities in the same root.
     #
+    # * TARGET\_NOT\_SUPPORTED: You can't perform the specified operation
+    #   on that target entity.
+    #
+    # * UNRECOGNIZED\_SERVICE\_PRINCIPAL: You specified a service principal
+    #   that isn't recognized.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2429,6 +2546,12 @@ module Aws::Organizations
     #           type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
     #         },
     #         notes: "HandshakeNotes",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] target
@@ -2455,11 +2578,40 @@ module Aws::Organizations
     #   email to the recipient account owner.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the account when it
+    #   becomes a member of the organization. For each tag in the list, you
+    #   must specify both a tag key and a value. You can set the value to an
+    #   empty string, but you can't set it to `null`. For more information
+    #   about tagging, see [Tagging AWS Organizations resources][1] in the
+    #   AWS Organizations User Guide.
+    #
+    #   Any tags in the request are checked for compliance with any
+    #   applicable tag policies when the request is made. The request is
+    #   rejected if the tags in the request don't match the requirements of
+    #   the policy at that time. Tag policy compliance is <i> <b>not</b>
+    #   </i> checked again when the invitation is accepted and the tags are
+    #   actually attached to the account. That means that if the tag policy
+    #   changes between the invitation and the acceptance, then that tags
+    #   could potentially be non-compliant.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags for an account, then the entire request fails and
+    #   invitations are not sent.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganizationRequest AWS API Documentation
     #
     class InviteAccountToOrganizationRequest < Struct.new(
       :target,
-      :notes)
+      :notes,
+      :tags)
       SENSITIVE = [:notes]
       include Aws::Structure
     end
@@ -3528,7 +3680,20 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource that you want to retrieve tags for.
+    #   The ID of the resource with the tags to list.
+    #
+    #   You can specify any of the following taggable resources.
+    #
+    #   * AWS account – specify the account ID number.
+    #
+    #   * Organizational unit – specify the OU ID that begins with `ou-` and
+    #     looks similar to: `ou-1a2b-34uvwxyz `
+    #
+    #   * Root – specify the root ID that begins with `r-` and looks similar
+    #     to: `r-1a2b `
+    #
+    #   * Policy – specify the policy ID that begins with `p-` andlooks
+    #     similar to: `p-12abcdefg3 `
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4428,8 +4593,18 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # A custom key-value pair associated with a resource such as an account
-    # within your organization.
+    # A custom key-value pair associated with a resource within your
+    # organization.
+    #
+    # You can attach tags to any of the following organization resources.
+    #
+    # * AWS account
+    #
+    # * Organizational unit (OU)
+    #
+    # * Organization root
+    #
+    # * Policy
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -4476,9 +4651,30 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tag to add to the specified resource. You must specify both a
-    #   tag key and value. You can set the value of a tag to an empty
-    #   string, but you can't set it to null.
+    #   A list of tags to add to the specified resource.
+    #
+    #   You can specify any of the following taggable resources.
+    #
+    #   * AWS account – specify the account ID number.
+    #
+    #   * Organizational unit – specify the OU ID that begins with `ou-` and
+    #     looks similar to: `ou-1a2b-34uvwxyz `
+    #
+    #   * Root – specify the root ID that begins with `r-` and looks similar
+    #     to: `r-1a2b `
+    #
+    #   * Policy – specify the policy ID that begins with `p-` andlooks
+    #     similar to: `p-12abcdefg3 `
+    #
+    #   For each tag in the list, you must specify both a tag key and a
+    #   value. You can set the value to an empty string, but you can't set
+    #   it to `null`.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags for an account user, then the entire request fails
+    #   and the account is not created.
+    #
+    #    </note>
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TagResourceRequest AWS API Documentation
@@ -4490,8 +4686,8 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # We can't find a root, OU, or account with the `TargetId` that you
-    # specified.
+    # We can't find a root, OU, account, or policy with the `TargetId` that
+    # you specified.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4553,11 +4749,24 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource to remove the tag from.
+    #   The ID of the resource to remove a tag from.
+    #
+    #   You can specify any of the following taggable resources.
+    #
+    #   * AWS account – specify the account ID number.
+    #
+    #   * Organizational unit – specify the OU ID that begins with `ou-` and
+    #     looks similar to: `ou-1a2b-34uvwxyz `
+    #
+    #   * Root – specify the root ID that begins with `r-` and looks similar
+    #     to: `r-1a2b `
+    #
+    #   * Policy – specify the policy ID that begins with `p-` andlooks
+    #     similar to: `p-12abcdefg3 `
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag to remove from the specified resource.
+    #   The list of keys for tags to remove from the specified resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UntagResourceRequest AWS API Documentation

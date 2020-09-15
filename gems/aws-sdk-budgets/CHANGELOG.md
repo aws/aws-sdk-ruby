@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-09-15)
+------------------
+
+* Feature - Documentation updates for Daily Cost and Usage budgets
+
 1.33.0 (2020-08-25)
 ------------------
 

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv2'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-importexport/customizations'
 # @!group service
 module Aws::ImportExport
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end

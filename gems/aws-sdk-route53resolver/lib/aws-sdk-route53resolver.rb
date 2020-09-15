@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-route53resolver/customizations'
 # @!group service
 module Aws::Route53Resolver
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

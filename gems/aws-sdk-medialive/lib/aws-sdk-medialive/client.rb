@@ -2092,7 +2092,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI
     #     vpc: {
     #       security_group_ids: ["__string"],
     #       subnet_ids: ["__string"], # required
@@ -2128,7 +2128,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -3136,7 +3136,7 @@ module Aws::MediaLive
     #   resp.region #=> String
     #   resp.reservation_id #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
@@ -3855,7 +3855,7 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4162,7 +4162,7 @@ module Aws::MediaLive
     #   resp.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.region #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
@@ -4227,7 +4227,7 @@ module Aws::MediaLive
     #   resp.region #=> String
     #   resp.reservation_id #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
@@ -4588,7 +4588,7 @@ module Aws::MediaLive
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.inputs[0].tags #=> Hash
     #   resp.inputs[0].tags["__string"] #=> String
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputs AWS API Documentation
@@ -4748,7 +4748,7 @@ module Aws::MediaLive
     #   resp.offerings[0].offering_type #=> String, one of "NO_UPFRONT"
     #   resp.offerings[0].region #=> String
     #   resp.offerings[0].resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
     #   resp.offerings[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.offerings[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.offerings[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
@@ -4828,7 +4828,7 @@ module Aws::MediaLive
     #   resp.reservations[0].region #=> String
     #   resp.reservations[0].reservation_id #=> String
     #   resp.reservations[0].resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
     #   resp.reservations[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservations[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservations[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
@@ -4927,7 +4927,7 @@ module Aws::MediaLive
     #   resp.reservation.region #=> String
     #   resp.reservation.reservation_id #=> String
     #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
     #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
@@ -8334,7 +8334,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
@@ -8619,7 +8619,7 @@ module Aws::MediaLive
     #   resp.reservation.region #=> String
     #   resp.reservation.reservation_id #=> String
     #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
     #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
@@ -8654,7 +8654,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

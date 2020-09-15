@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-elasticache/customizations'
 # @!group service
 module Aws::ElastiCache
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end

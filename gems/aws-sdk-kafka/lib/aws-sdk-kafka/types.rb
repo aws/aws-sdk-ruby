@@ -10,6 +10,51 @@
 module Aws::Kafka
   module Types
 
+    # Request body for BatchAssociateScramSecret.
+    #
+    # @note When making an API call, you may pass BatchAssociateScramSecretRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         secret_arn_list: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn_list
+    #   List of AWS Secrets Manager secret ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchAssociateScramSecretRequest AWS API Documentation
+    #
+    class BatchAssociateScramSecretRequest < Struct.new(
+      :cluster_arn,
+      :secret_arn_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for BatchAssociateScramSecret.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] unprocessed_scram_secrets
+    #   List of errors when associating secrets to cluster.
+    #   @return [Array<Types::UnprocessedScramSecret>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchAssociateScramSecretResponse AWS API Documentation
+    #
+    class BatchAssociateScramSecretResponse < Struct.new(
+      :cluster_arn,
+      :unprocessed_scram_secrets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns information about an error.
     #
     # @!attribute [rw] invalid_parameter
@@ -235,10 +280,18 @@ module Aws::Kafka
     #   data as a hash:
     #
     #       {
+    #         sasl: {
+    #           scram: {
+    #             enabled: false,
+    #           },
+    #         },
     #         tls: {
     #           certificate_authority_arn_list: ["__string"],
     #         },
     #       }
+    #
+    # @!attribute [rw] sasl
+    #   @return [Types::Sasl]
     #
     # @!attribute [rw] tls
     #   Details for ClientAuthentication using TLS.
@@ -247,6 +300,7 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClientAuthentication AWS API Documentation
     #
     class ClientAuthentication < Struct.new(
+      :sasl,
       :tls)
       SENSITIVE = []
       include Aws::Structure
@@ -630,6 +684,11 @@ module Aws::Kafka
     #           },
     #         },
     #         client_authentication: {
+    #           sasl: {
+    #             scram: {
+    #               enabled: false,
+    #             },
+    #           },
     #           tls: {
     #             certificate_authority_arn_list: ["__string"],
     #           },
@@ -1117,6 +1176,51 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for BatchDisassociateScramSecret.
+    #
+    # @note When making an API call, you may pass BatchDisassociateScramSecretRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         secret_arn_list: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn_list
+    #   List of AWS Secrets Manager secret ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchDisassociateScramSecretRequest AWS API Documentation
+    #
+    class BatchDisassociateScramSecretRequest < Struct.new(
+      :cluster_arn,
+      :secret_arn_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for BatchDisassociateScramSecret.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] unprocessed_scram_secrets
+    #   List of errors when disassociating secrets to cluster.
+    #   @return [Array<Types::UnprocessedScramSecret>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchDisassociateScramSecretResponse AWS API Documentation
+    #
+    class BatchDisassociateScramSecretResponse < Struct.new(
+      :cluster_arn,
+      :unprocessed_scram_secrets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the EBS storage volumes attached to Kafka
     # broker nodes.
     #
@@ -1353,11 +1457,19 @@ module Aws::Kafka
     #   <programlisting>\{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094" \}</programlisting>
     #   @return [String]
     #
+    # @!attribute [rw] bootstrap_broker_string_sasl_scram
+    #   A string containing one or more DNS names (or IP) and SASL SCRAM
+    #   port pairs. The following is an example.
+    #
+    #   <programlisting>\{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096" \}</programlisting>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokersResponse AWS API Documentation
     #
     class GetBootstrapBrokersResponse < Struct.new(
       :bootstrap_broker_string,
-      :bootstrap_broker_string_tls)
+      :bootstrap_broker_string_tls,
+      :bootstrap_broker_string_sasl_scram)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1716,6 +1828,53 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListScramSecretsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListScramSecretsRequest AWS API Documentation
+    #
+    class ListScramSecretsRequest < Struct.new(
+      :cluster_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about scram secrets associated to the cluster.
+    #
+    # @!attribute [rw] next_token
+    #   Paginated results marker.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn_list
+    #   The list of scram secrets associated with the cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListScramSecretsResponse AWS API Documentation
+    #
+    class ListScramSecretsResponse < Struct.new(
+      :next_token,
+      :secret_arn_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -1889,6 +2048,44 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass Sasl
+    #   data as a hash:
+    #
+    #       {
+    #         scram: {
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scram
+    #   @return [Types::Scram]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Sasl AWS API Documentation
+    #
+    class Sasl < Struct.new(
+      :scram)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass Scram
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Scram AWS API Documentation
+    #
+    class Scram < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns information about an error.
     #
     # @!attribute [rw] invalid_parameter
@@ -2030,6 +2227,25 @@ module Aws::Kafka
     class UnauthorizedException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UnprocessedScramSecret AWS API Documentation
+    #
+    class UnprocessedScramSecret < Struct.new(
+      :error_code,
+      :error_message,
+      :secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-neptune/customizations'
 # @!group service
 module Aws::Neptune
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

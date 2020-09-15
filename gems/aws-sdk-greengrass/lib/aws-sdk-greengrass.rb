@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-greengrass/customizations'
 # @!group service
 module Aws::Greengrass
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.35.0'
 
 end

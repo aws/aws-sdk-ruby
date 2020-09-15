@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-kms'
 require 'aws-sigv4'
 require 'aws-sdk-core'
@@ -68,6 +69,6 @@ require_relative 'aws-sdk-s3/event_streams'
 # @!group service
 module Aws::S3
 
-  GEM_VERSION = '1.80.0'
+  GEM_VERSION = '1.81.0'
 
 end

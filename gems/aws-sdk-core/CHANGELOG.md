@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.107.0 (2020-09-15)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Issue - Fix circular dependency of `aws-sdk-sso` and `aws-sdk-core` (#2405).
 
 3.106.0 (2020-09-14)

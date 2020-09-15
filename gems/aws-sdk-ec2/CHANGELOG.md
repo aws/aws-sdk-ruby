@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2020-09-15)
+------------------
+
+* Feature - T4g instances are powered by AWS Graviton2 processors
+
 1.194.0 (2020-09-14)
 ------------------
 

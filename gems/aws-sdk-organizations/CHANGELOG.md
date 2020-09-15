@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2020-09-15)
+------------------
+
+* Feature - AWS Organizations now enables you to add tags to the AWS accounts, organizational units, organization root, and policies in your organization.
+
 1.50.0 (2020-08-25)
 ------------------
 

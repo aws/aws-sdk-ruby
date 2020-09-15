@@ -1262,6 +1262,9 @@ module Aws::Kendra
     #   or proof of concept. Use `ENTERPRISE_EDITION` for your production
     #   databases. Once you set the edition for an index, it can't be
     #   changed.
+    #
+    #   The `Edition` parameter is optional. If you don't supply a value,
+    #   the default is `ENTERPRISE_EDITION`.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2517,6 +2520,11 @@ module Aws::Kendra
     #   `DocumentAttributeKey` provided in the query.
     #   @return [String]
     #
+    # @!attribute [rw] document_attribute_value_type
+    #   The data type of the facet value. This is the same as the type
+    #   defined for the index field when it was created.
+    #   @return [String]
+    #
     # @!attribute [rw] document_attribute_value_count_pairs
     #   An array of key/value pairs, where the key is the value of the
     #   attribute and the count is the number of documents that share the
@@ -2527,6 +2535,7 @@ module Aws::Kendra
     #
     class FacetResult < Struct.new(
       :document_attribute_key,
+      :document_attribute_value_type,
       :document_attribute_value_count_pairs)
       SENSITIVE = []
       include Aws::Structure
@@ -3295,8 +3304,9 @@ module Aws::Kendra
     #   @return [Array<Types::FacetResult>]
     #
     # @!attribute [rw] total_number_of_results
-    #   The number of items returned by the search. Use this to determine
-    #   when you have requested the last set of results.
+    #   The total number of items found by the search; however, you can only
+    #   retrieve up to 100 items. For example, if the search found 192
+    #   items, you can only retrieve the first 100 of the items.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResult AWS API Documentation
@@ -3356,13 +3366,13 @@ module Aws::Kendra
     # @!attribute [rw] score_attributes
     #   Indicates the confidence that Amazon Kendra has that a result
     #   matches the query that you provided. Each result is placed into a
-    #   bin that indicates the confidence, `VERY_HIGH`, `HIGH`, and
-    #   `MEDIUM`. You can use the score to determine if a response meets the
+    #   bin that indicates the confidence, `VERY_HIGH`, `HIGH`, `MEDIUM` and
+    #   `LOW`. You can use the score to determine if a response meets the
     #   confidence needed for your application.
     #
-    #   Confidence scores are only returned for results with the `Type`
-    #   field set to `QUESTION_ANSWER` or `ANSWER`. This field is not
-    #   returned if the `Type` field is set to `DOCUMENT`.
+    #   The field is only set to `LOW` when the `Type` field is set to
+    #   `DOCUMENT` and Amazon Kendra is not confident that the result
+    #   matches the query.
     #   @return [Types::ScoreAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResultItem AWS API Documentation

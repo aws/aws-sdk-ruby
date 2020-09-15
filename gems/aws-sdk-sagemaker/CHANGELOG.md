@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2020-09-15)
+------------------
+
+* Feature - Sagemaker Ground Truth: Added support for a new Streaming feature which helps to continuously feed data and receive labels in real time. This release adds a new input and output SNS data channel.
+
 1.66.0 (2020-08-25)
 ------------------
 

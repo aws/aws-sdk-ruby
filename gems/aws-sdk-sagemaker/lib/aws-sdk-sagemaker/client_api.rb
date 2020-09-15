@@ -468,6 +468,7 @@ module Aws::SageMaker
     LabelingJobOutputConfig = Shapes::StructureShape.new(name: 'LabelingJobOutputConfig')
     LabelingJobResourceConfig = Shapes::StructureShape.new(name: 'LabelingJobResourceConfig')
     LabelingJobS3DataSource = Shapes::StructureShape.new(name: 'LabelingJobS3DataSource')
+    LabelingJobSnsDataSource = Shapes::StructureShape.new(name: 'LabelingJobSnsDataSource')
     LabelingJobStatus = Shapes::StringShape.new(name: 'LabelingJobStatus')
     LabelingJobStoppingConditions = Shapes::StructureShape.new(name: 'LabelingJobStoppingConditions')
     LabelingJobSummary = Shapes::StructureShape.new(name: 'LabelingJobSummary')
@@ -770,6 +771,7 @@ module Aws::SageMaker
     SharingSettings = Shapes::StructureShape.new(name: 'SharingSettings')
     ShuffleConfig = Shapes::StructureShape.new(name: 'ShuffleConfig')
     SingleSignOnUserIdentifier = Shapes::StringShape.new(name: 'SingleSignOnUserIdentifier')
+    SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortExperimentsBy = Shapes::StringShape.new(name: 'SortExperimentsBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -2477,6 +2479,7 @@ module Aws::SageMaker
     LabelingJobDataAttributes.struct_class = Types::LabelingJobDataAttributes
 
     LabelingJobDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: LabelingJobS3DataSource, location_name: "S3DataSource"))
+    LabelingJobDataSource.add_member(:sns_data_source, Shapes::ShapeRef.new(shape: LabelingJobSnsDataSource, location_name: "SnsDataSource"))
     LabelingJobDataSource.struct_class = Types::LabelingJobDataSource
 
     LabelingJobForWorkteamSummary.add_member(:labeling_job_name, Shapes::ShapeRef.new(shape: LabelingJobName, location_name: "LabelingJobName"))
@@ -2499,6 +2502,7 @@ module Aws::SageMaker
 
     LabelingJobOutputConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputPath"))
     LabelingJobOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    LabelingJobOutputConfig.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "SnsTopicArn"))
     LabelingJobOutputConfig.struct_class = Types::LabelingJobOutputConfig
 
     LabelingJobResourceConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
@@ -2506,6 +2510,9 @@ module Aws::SageMaker
 
     LabelingJobS3DataSource.add_member(:manifest_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "ManifestS3Uri"))
     LabelingJobS3DataSource.struct_class = Types::LabelingJobS3DataSource
+
+    LabelingJobSnsDataSource.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, required: true, location_name: "SnsTopicArn"))
+    LabelingJobSnsDataSource.struct_class = Types::LabelingJobSnsDataSource
 
     LabelingJobStoppingConditions.add_member(:max_human_labeled_object_count, Shapes::ShapeRef.new(shape: MaxHumanLabeledObjectCount, location_name: "MaxHumanLabeledObjectCount"))
     LabelingJobStoppingConditions.add_member(:max_percentage_of_input_dataset_labeled, Shapes::ShapeRef.new(shape: MaxPercentageOfInputDatasetLabeled, location_name: "MaxPercentageOfInputDatasetLabeled"))

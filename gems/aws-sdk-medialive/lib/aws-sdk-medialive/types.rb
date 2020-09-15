@@ -3451,7 +3451,7 @@ module Aws::MediaLive
     #         tags: {
     #           "__string" => "__string",
     #         },
-    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE
+    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI
     #         vpc: {
     #           security_group_ids: ["__string"],
     #           subnet_ids: ["__string"], # required

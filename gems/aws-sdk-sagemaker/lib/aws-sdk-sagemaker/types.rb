@@ -2356,13 +2356,15 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The Amazon EC2 Container Registry (Amazon ECR) path where inference
-    #   code is stored. If you are using your own custom algorithm instead
-    #   of an algorithm provided by Amazon SageMaker, the inference code
-    #   must meet Amazon SageMaker requirements. Amazon SageMaker supports
-    #   both `registry/repository[:tag]` and `registry/repository[@digest]`
-    #   image path formats. For more information, see [Using Your Own
-    #   Algorithms with Amazon SageMaker][1]
+    #   The path where inference code is stored. This can be either in
+    #   Amazon EC2 Container Registry or in a Docker registry that is
+    #   accessible from the same VPC that you configure for your endpoint.
+    #   If you are using your own custom algorithm instead of an algorithm
+    #   provided by Amazon SageMaker, the inference code must meet Amazon
+    #   SageMaker requirements. Amazon SageMaker supports both
+    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
+    #   path formats. For more information, see [Using Your Own Algorithms
+    #   with Amazon SageMaker][1]
     #
     #
     #
@@ -2371,9 +2373,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] image_config
     #   Specifies whether the model container is in Amazon ECR or a private
-    #   Docker registry in your Amazon Virtual Private Cloud (VPC). For
-    #   information about storing containers in a private Docker registry,
-    #   see [Use a Private Docker Registry for Real-Time Inference
+    #   Docker registry accessible from your Amazon Virtual Private Cloud
+    #   (VPC). For information about storing containers in a private Docker
+    #   registry, see [Use a Private Docker Registry for Real-Time Inference
     #   Containers][1]
     #
     #
@@ -3998,6 +4000,9 @@ module Aws::SageMaker
     #             s3_data_source: {
     #               manifest_s3_uri: "S3Uri", # required
     #             },
+    #             sns_data_source: {
+    #               sns_topic_arn: "SnsTopicArn", # required
+    #             },
     #           },
     #           data_attributes: {
     #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
@@ -4006,6 +4011,7 @@ module Aws::SageMaker
     #         output_config: { # required
     #           s3_output_path: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           sns_topic_arn: "SnsTopicArn",
     #         },
     #         role_arn: "RoleArn", # required
     #         label_category_config_s3_uri: "S3Uri",
@@ -10655,12 +10661,13 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] task_availability_lifetime_in_seconds
-    #   The length of time that a task remains available for labeling by
-    #   human workers.
+    #   The length of time that a task remains available for review by human
+    #   workers.
     #   @return [Integer]
     #
     # @!attribute [rw] task_time_limit_in_seconds
-    #   The amount of time that a worker has to complete a task.
+    #   The amount of time that a worker has to complete a task. The default
+    #   value is 3,600 seconds (1 hour)
     #   @return [Integer]
     #
     # @!attribute [rw] task_keywords
@@ -12479,7 +12486,8 @@ module Aws::SageMaker
     end
 
     # Specifies whether the model container is in Amazon ECR or a private
-    # Docker registry in your Amazon Virtual Private Cloud (VPC).
+    # Docker registry accessible from your Amazon Virtual Private Cloud
+    # (VPC).
     #
     # @note When making an API call, you may pass ImageConfig
     #   data as a hash:
@@ -12493,7 +12501,7 @@ module Aws::SageMaker
     #
     #   * `Platform` - The model image is hosted in Amazon ECR.
     #
-    #   * `VPC` - The model image is hosted in a private Docker registry in
+    #   * `Vpc` - The model image is hosted in a private Docker registry in
     #     your VPC.
     #   @return [String]
     #
@@ -12928,10 +12936,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] initial_active_learning_model_arn
-    #   At the end of an auto-label job Amazon SageMaker Ground Truth sends
-    #   the Amazon Resource Nam (ARN) of the final model used for
-    #   auto-labeling. You can use this model as the starting point for
-    #   subsequent similar jobs by providing the ARN of the model here.
+    #   At the end of an auto-label job Ground Truth sends the Amazon
+    #   Resource Name (ARN) of the final model used for auto-labeling. You
+    #   can use this model as the starting point for subsequent similar jobs
+    #   by providing the ARN of the model here.
     #   @return [String]
     #
     # @!attribute [rw] labeling_job_resource_config
@@ -12975,6 +12983,18 @@ module Aws::SageMaker
 
     # Provides information about the location of input data.
     #
+    # You must specify at least one of the following: `S3DataSource` or
+    # `SnsDataSource`.
+    #
+    # Use `SnsDataSource` to specify an SNS input topic for a streaming
+    # labeling job. If you do not specify and SNS input topic ARN, Ground
+    # Truth will create a one-time labeling job.
+    #
+    # Use `S3DataSource` to specify an input manifest file for both
+    # streaming and one-time labeling jobs. Adding an `S3DataSource` is
+    # optional if you use `SnsDataSource` to create a streaming labeling
+    # job.
+    #
     # @note When making an API call, you may pass LabelingJobDataSource
     #   data as a hash:
     #
@@ -12982,16 +13002,24 @@ module Aws::SageMaker
     #         s3_data_source: {
     #           manifest_s3_uri: "S3Uri", # required
     #         },
+    #         sns_data_source: {
+    #           sns_topic_arn: "SnsTopicArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] s3_data_source
     #   The Amazon S3 location of the input data objects.
     #   @return [Types::LabelingJobS3DataSource]
     #
+    # @!attribute [rw] sns_data_source
+    #   An Amazon SNS data source used for streaming labeling jobs.
+    #   @return [Types::LabelingJobSnsDataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataSource AWS API Documentation
     #
     class LabelingJobDataSource < Struct.new(
-      :s3_data_source)
+      :s3_data_source,
+      :sns_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13045,6 +13073,9 @@ module Aws::SageMaker
     #           s3_data_source: {
     #             manifest_s3_uri: "S3Uri", # required
     #           },
+    #           sns_data_source: {
+    #             sns_topic_arn: "SnsTopicArn", # required
+    #           },
     #         },
     #         data_attributes: {
     #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
@@ -13096,6 +13127,7 @@ module Aws::SageMaker
     #       {
     #         s3_output_path: "S3Uri", # required
     #         kms_key_id: "KmsKeyId",
+    #         sns_topic_arn: "SnsTopicArn",
     #       }
     #
     # @!attribute [rw] s3_output_path
@@ -13129,11 +13161,22 @@ module Aws::SageMaker
     #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     #   @return [String]
     #
+    # @!attribute [rw] sns_topic_arn
+    #   An Amazon Simple Notification Service (Amazon SNS) output topic ARN.
+    #
+    #   When workers complete labeling tasks, Ground Truth will send
+    #   labeling task output data to the SNS output topic you specify here.
+    #
+    #   You must provide a value for this parameter if you provide an Amazon
+    #   SNS input topic in `SnsDataSource` in `InputConfig`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutputConfig AWS API Documentation
     #
     class LabelingJobOutputConfig < Struct.new(
       :s3_output_path,
-      :kms_key_id)
+      :kms_key_id,
+      :sns_topic_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13188,6 +13231,32 @@ module Aws::SageMaker
     #
     class LabelingJobS3DataSource < Struct.new(
       :manifest_s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon SNS data source used for streaming labeling jobs.
+    #
+    # @note When making an API call, you may pass LabelingJobSnsDataSource
+    #   data as a hash:
+    #
+    #       {
+    #         sns_topic_arn: "SnsTopicArn", # required
+    #       }
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The Amazon SNS input topic Amazon Resource Name (ARN). Specify the
+    #   ARN of the input topic you will use to send new data objects to a
+    #   streaming labeling job.
+    #
+    #   If you specify an input topic for `SnsTopicArn` in `InputConfig`,
+    #   you must specify a value for `SnsTopicArn` in `OutputConfig`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobSnsDataSource AWS API Documentation
+    #
+    class LabelingJobSnsDataSource < Struct.new(
+      :sns_topic_arn)
       SENSITIVE = []
       include Aws::Structure
     end

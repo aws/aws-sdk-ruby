@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -58,6 +59,6 @@ require_relative 'aws-sdk-autoscaling/customizations'
 # @!group service
 module Aws::AutoScaling
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end

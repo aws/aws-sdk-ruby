@@ -14,6 +14,10 @@ module Aws::Kafka
     include Seahorse::Model
 
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchAssociateScramSecretRequest = Shapes::StructureShape.new(name: 'BatchAssociateScramSecretRequest')
+    BatchAssociateScramSecretResponse = Shapes::StructureShape.new(name: 'BatchAssociateScramSecretResponse')
+    BatchDisassociateScramSecretRequest = Shapes::StructureShape.new(name: 'BatchDisassociateScramSecretRequest')
+    BatchDisassociateScramSecretResponse = Shapes::StructureShape.new(name: 'BatchDisassociateScramSecretResponse')
     BrokerAZDistribution = Shapes::StringShape.new(name: 'BrokerAZDistribution')
     BrokerEBSVolumeInfo = Shapes::StructureShape.new(name: 'BrokerEBSVolumeInfo')
     BrokerLogs = Shapes::StructureShape.new(name: 'BrokerLogs')
@@ -80,6 +84,8 @@ module Aws::Kafka
     ListKafkaVersionsResponse = Shapes::StructureShape.new(name: 'ListKafkaVersionsResponse')
     ListNodesRequest = Shapes::StructureShape.new(name: 'ListNodesRequest')
     ListNodesResponse = Shapes::StructureShape.new(name: 'ListNodesResponse')
+    ListScramSecretsRequest = Shapes::StructureShape.new(name: 'ListScramSecretsRequest')
+    ListScramSecretsResponse = Shapes::StructureShape.new(name: 'ListScramSecretsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LoggingInfo = Shapes::StructureShape.new(name: 'LoggingInfo')
@@ -97,6 +103,8 @@ module Aws::Kafka
     RebootBrokerRequest = Shapes::StructureShape.new(name: 'RebootBrokerRequest')
     RebootBrokerResponse = Shapes::StructureShape.new(name: 'RebootBrokerResponse')
     S3 = Shapes::StructureShape.new(name: 'S3')
+    Sasl = Shapes::StructureShape.new(name: 'Sasl')
+    Scram = Shapes::StructureShape.new(name: 'Scram')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
     StorageInfo = Shapes::StructureShape.new(name: 'StorageInfo')
@@ -104,6 +112,7 @@ module Aws::Kafka
     Tls = Shapes::StructureShape.new(name: 'Tls')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    UnprocessedScramSecret = Shapes::StructureShape.new(name: 'UnprocessedScramSecret')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateBrokerCountRequest = Shapes::StructureShape.new(name: 'UpdateBrokerCountRequest')
     UpdateBrokerCountResponse = Shapes::StructureShape.new(name: 'UpdateBrokerCountResponse')
@@ -133,6 +142,7 @@ module Aws::Kafka
     __listOfConfigurationRevision = Shapes::ListShape.new(name: '__listOfConfigurationRevision')
     __listOfKafkaVersion = Shapes::ListShape.new(name: '__listOfKafkaVersion')
     __listOfNodeInfo = Shapes::ListShape.new(name: '__listOfNodeInfo')
+    __listOfUnprocessedScramSecret = Shapes::ListShape.new(name: '__listOfUnprocessedScramSecret')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
@@ -145,6 +155,22 @@ module Aws::Kafka
     BadRequestException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    BatchAssociateScramSecretRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    BatchAssociateScramSecretRequest.add_member(:secret_arn_list, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "secretArnList"))
+    BatchAssociateScramSecretRequest.struct_class = Types::BatchAssociateScramSecretRequest
+
+    BatchAssociateScramSecretResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    BatchAssociateScramSecretResponse.add_member(:unprocessed_scram_secrets, Shapes::ShapeRef.new(shape: __listOfUnprocessedScramSecret, location_name: "unprocessedScramSecrets"))
+    BatchAssociateScramSecretResponse.struct_class = Types::BatchAssociateScramSecretResponse
+
+    BatchDisassociateScramSecretRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    BatchDisassociateScramSecretRequest.add_member(:secret_arn_list, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "secretArnList"))
+    BatchDisassociateScramSecretRequest.struct_class = Types::BatchDisassociateScramSecretRequest
+
+    BatchDisassociateScramSecretResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    BatchDisassociateScramSecretResponse.add_member(:unprocessed_scram_secrets, Shapes::ShapeRef.new(shape: __listOfUnprocessedScramSecret, location_name: "unprocessedScramSecrets"))
+    BatchDisassociateScramSecretResponse.struct_class = Types::BatchDisassociateScramSecretResponse
 
     BrokerEBSVolumeInfo.add_member(:kafka_broker_node_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "kafkaBrokerNodeId"))
     BrokerEBSVolumeInfo.add_member(:volume_size_gb, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "volumeSizeGB"))
@@ -175,6 +201,7 @@ module Aws::Kafka
     BrokerSoftwareInfo.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __string, location_name: "kafkaVersion"))
     BrokerSoftwareInfo.struct_class = Types::BrokerSoftwareInfo
 
+    ClientAuthentication.add_member(:sasl, Shapes::ShapeRef.new(shape: Sasl, location_name: "sasl"))
     ClientAuthentication.add_member(:tls, Shapes::ShapeRef.new(shape: Tls, location_name: "tls"))
     ClientAuthentication.struct_class = Types::ClientAuthentication
 
@@ -362,6 +389,7 @@ module Aws::Kafka
 
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerString"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringTls"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_scram, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslScram"))
     GetBootstrapBrokersResponse.struct_class = Types::GetBootstrapBrokersResponse
 
     GetCompatibleKafkaVersionsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "clusterArn"))
@@ -436,6 +464,15 @@ module Aws::Kafka
     ListNodesResponse.add_member(:node_info_list, Shapes::ShapeRef.new(shape: __listOfNodeInfo, location_name: "nodeInfoList"))
     ListNodesResponse.struct_class = Types::ListNodesResponse
 
+    ListScramSecretsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    ListScramSecretsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListScramSecretsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListScramSecretsRequest.struct_class = Types::ListScramSecretsRequest
+
+    ListScramSecretsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListScramSecretsResponse.add_member(:secret_arn_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "secretArnList"))
+    ListScramSecretsResponse.struct_class = Types::ListScramSecretsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -499,6 +536,12 @@ module Aws::Kafka
     S3.add_member(:prefix, Shapes::ShapeRef.new(shape: __string, location_name: "prefix"))
     S3.struct_class = Types::S3
 
+    Sasl.add_member(:scram, Shapes::ShapeRef.new(shape: Scram, location_name: "scram"))
+    Sasl.struct_class = Types::Sasl
+
+    Scram.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
+    Scram.struct_class = Types::Scram
+
     ServiceUnavailableException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -524,6 +567,11 @@ module Aws::Kafka
     UnauthorizedException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
+
+    UnprocessedScramSecret.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    UnprocessedScramSecret.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
+    UnprocessedScramSecret.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
+    UnprocessedScramSecret.struct_class = Types::UnprocessedScramSecret
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
@@ -611,6 +659,8 @@ module Aws::Kafka
 
     __listOfNodeInfo.member = Shapes::ShapeRef.new(shape: NodeInfo)
 
+    __listOfUnprocessedScramSecret.member = Shapes::ShapeRef.new(shape: UnprocessedScramSecret)
+
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
     __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
@@ -634,6 +684,21 @@ module Aws::Kafka
         "signingName" => "kafka",
         "uid" => "kafka-2018-11-14",
       }
+
+      api.add_operation(:batch_associate_scram_secret, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchAssociateScramSecret"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/scram-secrets"
+        o.input = Shapes::ShapeRef.new(shape: BatchAssociateScramSecretRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchAssociateScramSecretResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCluster"
@@ -741,6 +806,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:batch_disassociate_scram_secret, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDisassociateScramSecret"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/scram-secrets"
+        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateScramSecretRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateScramSecretResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:get_bootstrap_brokers, Seahorse::Model::Operation.new.tap do |o|
@@ -874,6 +954,27 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_scram_secrets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScramSecrets"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/scram-secrets"
+        o.input = Shapes::ShapeRef.new(shape: ListScramSecretsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListScramSecretsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

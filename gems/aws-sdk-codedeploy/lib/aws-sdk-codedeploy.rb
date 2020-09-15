@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-codedeploy/customizations'
 # @!group service
 module Aws::CodeDeploy
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end

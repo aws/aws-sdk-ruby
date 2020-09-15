@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-09-15)
+------------------
+
+* Feature - Added new API's to support SASL SCRAM Authentication with MSK Clusters.
+
 1.26.0 (2020-08-25)
 ------------------
 

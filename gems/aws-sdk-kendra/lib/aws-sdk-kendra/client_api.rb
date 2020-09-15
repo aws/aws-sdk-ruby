@@ -555,6 +555,7 @@ module Aws::Kendra
     FacetList.member = Shapes::ShapeRef.new(shape: Facet)
 
     FacetResult.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, location_name: "DocumentAttributeKey"))
+    FacetResult.add_member(:document_attribute_value_type, Shapes::ShapeRef.new(shape: DocumentAttributeValueType, location_name: "DocumentAttributeValueType"))
     FacetResult.add_member(:document_attribute_value_count_pairs, Shapes::ShapeRef.new(shape: DocumentAttributeValueCountPairList, location_name: "DocumentAttributeValueCountPairs"))
     FacetResult.struct_class = Types::FacetResult
 

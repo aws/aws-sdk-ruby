@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-09-15)
+------------------
+
+* Feature - Amazon Kendra now returns confidence scores for 'document' query responses.
+
 1.11.0 (2020-09-03)
 ------------------
 

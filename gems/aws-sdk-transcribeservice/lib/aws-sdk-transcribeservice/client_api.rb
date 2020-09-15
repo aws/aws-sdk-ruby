@@ -48,12 +48,14 @@ module Aws::TranscribeService
     GetVocabularyFilterResponse = Shapes::StructureShape.new(name: 'GetVocabularyFilterResponse')
     GetVocabularyRequest = Shapes::StructureShape.new(name: 'GetVocabularyRequest')
     GetVocabularyResponse = Shapes::StructureShape.new(name: 'GetVocabularyResponse')
+    IdentifiedLanguageScore = Shapes::FloatShape.new(name: 'IdentifiedLanguageScore')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     JobExecutionSettings = Shapes::StructureShape.new(name: 'JobExecutionSettings')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LanguageModel = Shapes::StructureShape.new(name: 'LanguageModel')
+    LanguageOptions = Shapes::ListShape.new(name: 'LanguageOptions')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListLanguageModelsRequest = Shapes::StructureShape.new(name: 'ListLanguageModelsRequest')
     ListLanguageModelsResponse = Shapes::StructureShape.new(name: 'ListLanguageModelsResponse')
@@ -271,6 +273,8 @@ module Aws::TranscribeService
     LanguageModel.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     LanguageModel.struct_class = Types::LanguageModel
 
+    LanguageOptions.member = Shapes::ShapeRef.new(shape: LanguageCode)
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -417,7 +421,7 @@ module Aws::TranscribeService
     StartMedicalTranscriptionJobResponse.struct_class = Types::StartMedicalTranscriptionJobResponse
 
     StartTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
-    StartTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     StartTranscriptionJobRequest.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
     StartTranscriptionJobRequest.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
     StartTranscriptionJobRequest.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "Media"))
@@ -427,6 +431,8 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:model_settings, Shapes::ShapeRef.new(shape: ModelSettings, location_name: "ModelSettings"))
     StartTranscriptionJobRequest.add_member(:job_execution_settings, Shapes::ShapeRef.new(shape: JobExecutionSettings, location_name: "JobExecutionSettings"))
     StartTranscriptionJobRequest.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
+    StartTranscriptionJobRequest.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
+    StartTranscriptionJobRequest.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
     StartTranscriptionJobRequest.struct_class = Types::StartTranscriptionJobRequest
 
     StartTranscriptionJobResponse.add_member(:transcription_job, Shapes::ShapeRef.new(shape: TranscriptionJob, location_name: "TranscriptionJob"))
@@ -451,6 +457,9 @@ module Aws::TranscribeService
     TranscriptionJob.add_member(:model_settings, Shapes::ShapeRef.new(shape: ModelSettings, location_name: "ModelSettings"))
     TranscriptionJob.add_member(:job_execution_settings, Shapes::ShapeRef.new(shape: JobExecutionSettings, location_name: "JobExecutionSettings"))
     TranscriptionJob.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
+    TranscriptionJob.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
+    TranscriptionJob.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
+    TranscriptionJob.add_member(:identified_language_score, Shapes::ShapeRef.new(shape: IdentifiedLanguageScore, location_name: "IdentifiedLanguageScore"))
     TranscriptionJob.struct_class = Types::TranscriptionJob
 
     TranscriptionJobSummaries.member = Shapes::ShapeRef.new(shape: TranscriptionJobSummary)
@@ -465,6 +474,8 @@ module Aws::TranscribeService
     TranscriptionJobSummary.add_member(:output_location_type, Shapes::ShapeRef.new(shape: OutputLocationType, location_name: "OutputLocationType"))
     TranscriptionJobSummary.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     TranscriptionJobSummary.add_member(:model_settings, Shapes::ShapeRef.new(shape: ModelSettings, location_name: "ModelSettings"))
+    TranscriptionJobSummary.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
+    TranscriptionJobSummary.add_member(:identified_language_score, Shapes::ShapeRef.new(shape: IdentifiedLanguageScore, location_name: "IdentifiedLanguageScore"))
     TranscriptionJobSummary.struct_class = Types::TranscriptionJobSummary
 
     UpdateMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))

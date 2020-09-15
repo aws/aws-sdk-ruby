@@ -29,7 +29,7 @@ module Aws::Budgets
     #
     # This is the ARN pattern for a budget:
     #
-    # `arn:aws:budgetservice::AccountId:budget/budgetName`
+    # `arn:aws:budgets::AccountId:budget/budgetName`
     #
     # @note When making an API call, you may pass Budget
     #   data as a hash:
@@ -158,15 +158,13 @@ module Aws::Budgets
     #   The types of costs that are included in this `COST` budget.
     #
     #   `USAGE`, `RI_UTILIZATION`, `RI_COVERAGE`,
-    #   `Savings_Plans_Utilization`, and `Savings_Plans_Coverage` budgets do
+    #   `SAVINGS_PLANS_UTILIZATION`, and `SAVINGS_PLANS_COVERAGE` budgets do
     #   not have `CostTypes`.
     #   @return [Types::CostTypes]
     #
     # @!attribute [rw] time_unit
     #   The length of time until a budget resets the actual and forecasted
-    #   spend. `DAILY` is available only for `RI_UTILIZATION`,
-    #   `RI_COVERAGE`, `Savings_Plans_Utilization`, and
-    #   `Savings_Plans_Coverage` budgets.
+    #   spend.
     #   @return [String]
     #
     # @!attribute [rw] time_period
@@ -229,7 +227,8 @@ module Aws::Budgets
     # @!attribute [rw] budget_type
     #   The type of a budget. It must be one of the following types:
     #
-    #   `COST`, `USAGE`, `RI_UTILIZATION`, or `RI_COVERAGE`.
+    #   `COST`, `USAGE`, `RI_UTILIZATION`, `RI_COVERAGE`,
+    #   `SAVINGS_PLANS_UTILIZATION`, or `SAVINGS_PLANS_COVERAGE`.
     #   @return [String]
     #
     # @!attribute [rw] cost_filters
@@ -286,9 +285,9 @@ module Aws::Budgets
     end
 
     # The spend objects that are associated with this budget. The
-    # `actualSpend` tracks how much you've used, cost, usage, or RI units,
-    # and the `forecastedSpend` tracks how much you are predicted to spend
-    # if your current usage remains steady.
+    # `actualSpend` tracks how much you've used, cost, usage, RI units, or
+    # Savings Plans units and the `forecastedSpend` tracks how much you are
+    # predicted to spend based on your historical usage profile.
     #
     # For example, if it is the 20th of the month and you have spent `50`
     # dollars on Amazon EC2, your `actualSpend` is `50 USD`, and your
@@ -309,12 +308,13 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] actual_spend
-    #   The amount of cost, usage, or RI units that you have used.
+    #   The amount of cost, usage, RI units, or Savings Plans units that you
+    #   have used.
     #   @return [Types::Spend]
     #
     # @!attribute [rw] forecasted_spend
-    #   The amount of cost, usage, or RI units that you are forecasted to
-    #   use.
+    #   The amount of cost, usage, RI units, or Savings Plans units that you
+    #   are forecasted to use.
     #   @return [Types::Spend]
     #
     class CalculatedSpend < Struct.new(
@@ -327,8 +327,8 @@ module Aws::Budgets
     # The types of cost that are included in a `COST` budget, such as tax
     # and subscriptions.
     #
-    # `USAGE`, `RI_UTILIZATION`, and `RI_COVERAGE` budgets do not have
-    # `CostTypes`.
+    # `USAGE`, `RI_UTILIZATION`, `RI_COVERAGE`, `SAVINGS_PLANS_UTILIZATION`,
+    # and `SAVINGS_PLANS_COVERAGE` budgets do not have `CostTypes`.
     #
     # @note When making an API call, you may pass CostTypes
     #   data as a hash:
@@ -1136,7 +1136,7 @@ module Aws::Budgets
     end
 
     # A notification that is associated with a budget. A budget can have up
-    # to five notifications.
+    # to ten notifications.
     #
     # Each notification must have at least one subscriber. A notification
     # can have one SNS subscriber and up to 10 email subscribers, for a
@@ -1176,7 +1176,9 @@ module Aws::Budgets
     #
     # @!attribute [rw] threshold
     #   The threshold that is associated with a notification. Thresholds are
-    #   always a percentage.
+    #   always a percentage, and many customers find value being alerted
+    #   between 50% - 200% of the budgeted amount. The maximum limit for
+    #   your threshold is 1,000,000% above the budgeted amount.
     #   @return [Float]
     #
     # @!attribute [rw] threshold_type

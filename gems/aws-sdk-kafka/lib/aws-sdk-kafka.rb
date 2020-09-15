@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -27,7 +28,7 @@ require_relative 'aws-sdk-kafka/customizations'
 # structure.
 #
 #     kafka = Aws::Kafka::Client.new
-#     resp = kafka.create_cluster(params)
+#     resp = kafka.batch_associate_scram_secret(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-kafka/customizations'
 # @!group service
 module Aws::Kafka
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

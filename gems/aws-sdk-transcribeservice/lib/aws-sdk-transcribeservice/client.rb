@@ -930,6 +930,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
     #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.transcription_job.identify_language #=> Boolean
+    #   resp.transcription_job.language_options #=> Array
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.transcription_job.identified_language_score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -1255,6 +1259,8 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].content_redaction.redaction_type #=> String, one of "PII"
     #   resp.transcription_job_summaries[0].content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.transcription_job_summaries[0].model_settings.language_model_name #=> String
+    #   resp.transcription_job_summaries[0].identify_language #=> Boolean
+    #   resp.transcription_job_summaries[0].identified_language_score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs AWS API Documentation
     #
@@ -1531,7 +1537,7 @@ module Aws::TranscribeService
     #   account. If you try to create a transcription job with the same name
     #   as a previous transcription job, you get a `ConflictException` error.
     #
-    # @option params [required, String] :language_code
+    # @option params [String] :language_code
     #   The language code for the language used in the input media file.
     #
     # @option params [Integer] :media_sample_rate_hertz
@@ -1625,6 +1631,17 @@ module Aws::TranscribeService
     # @option params [Types::ContentRedaction] :content_redaction
     #   An object that contains the request parameters for content redaction.
     #
+    # @option params [Boolean] :identify_language
+    #   Set this field to `true` to enable automatic language identification.
+    #   Automatic language identification is disabled by default. You receive
+    #   a `BadRequestException` error if you enter a value for a
+    #   `LanguageCode`.
+    #
+    # @option params [Array<String>] :language_options
+    #   An object containing a list of languages that might be present in your
+    #   collection of audio files. Automatic language identification chooses a
+    #   language that best matches the source audio from that list.
+    #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTranscriptionJobResponse#transcription_job #transcription_job} => Types::TranscriptionJob
@@ -1633,7 +1650,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac
     #     media: { # required
@@ -1662,6 +1679,8 @@ module Aws::TranscribeService
     #       redaction_type: "PII", # required, accepts PII
     #       redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #     },
+    #     identify_language: false,
+    #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #   })
     #
     # @example Response structure
@@ -1691,6 +1710,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
     #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.transcription_job.identify_language #=> Boolean
+    #   resp.transcription_job.language_options #=> Array
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.transcription_job.identified_language_score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -1914,7 +1937,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

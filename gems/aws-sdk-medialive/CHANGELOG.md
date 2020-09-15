@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-09-15)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports CDI (Cloud Digital Interface) inputs which enable uncompressed video from applications on Elastic Cloud Compute (EC2), AWS Media Services, and from AWS partners
+
 1.52.0 (2020-08-25)
 ------------------
 

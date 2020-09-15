@@ -2093,6 +2093,9 @@ module Aws::SageMaker
     #         s3_data_source: {
     #           manifest_s3_uri: "S3Uri", # required
     #         },
+    #         sns_data_source: {
+    #           sns_topic_arn: "SnsTopicArn", # required
+    #         },
     #       },
     #       data_attributes: {
     #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
@@ -2101,6 +2104,7 @@ module Aws::SageMaker
     #     output_config: { # required
     #       s3_output_path: "S3Uri", # required
     #       kms_key_id: "KmsKeyId",
+    #       sns_topic_arn: "SnsTopicArn",
     #     },
     #     role_arn: "RoleArn", # required
     #     label_category_config_s3_uri: "S3Uri",
@@ -5708,10 +5712,12 @@ module Aws::SageMaker
     #   resp.labeling_job_arn #=> String
     #   resp.label_attribute_name #=> String
     #   resp.input_config.data_source.s3_data_source.manifest_s3_uri #=> String
+    #   resp.input_config.data_source.sns_data_source.sns_topic_arn #=> String
     #   resp.input_config.data_attributes.content_classifiers #=> Array
     #   resp.input_config.data_attributes.content_classifiers[0] #=> String, one of "FreeOfPersonallyIdentifiableInformation", "FreeOfAdultContent"
     #   resp.output_config.s3_output_path #=> String
     #   resp.output_config.kms_key_id #=> String
+    #   resp.output_config.sns_topic_arn #=> String
     #   resp.role_arn #=> String
     #   resp.label_category_config_s3_uri #=> String
     #   resp.stopping_conditions.max_human_labeled_object_count #=> Integer
@@ -7859,6 +7865,7 @@ module Aws::SageMaker
     #   resp.labeling_job_summary_list[0].labeling_job_output.output_dataset_s3_uri #=> String
     #   resp.labeling_job_summary_list[0].labeling_job_output.final_active_learning_model_arn #=> String
     #   resp.labeling_job_summary_list[0].input_config.data_source.s3_data_source.manifest_s3_uri #=> String
+    #   resp.labeling_job_summary_list[0].input_config.data_source.sns_data_source.sns_topic_arn #=> String
     #   resp.labeling_job_summary_list[0].input_config.data_attributes.content_classifiers #=> Array
     #   resp.labeling_job_summary_list[0].input_config.data_attributes.content_classifiers[0] #=> String, one of "FreeOfPersonallyIdentifiableInformation", "FreeOfAdultContent"
     #   resp.next_token #=> String
@@ -10988,7 +10995,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

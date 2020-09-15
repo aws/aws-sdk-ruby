@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-09-15)
+------------------
+
+* Feature - Amazon Transcribe now supports automatic language identification, which enables you to transcribe audio files without needing to know the language in advance.
+
 1.47.0 (2020-08-25)
 ------------------
 

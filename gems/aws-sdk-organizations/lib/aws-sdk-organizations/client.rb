@@ -703,14 +703,15 @@ module Aws::Organizations
     #   [Monitoring the Activity in Your Organization][1] in the *AWS
     #   Organizations User Guide.*
     #
-    #
-    #
     # The user who calls the API to create an account must have the
     # `organizations:CreateAccount` permission. If you enabled all features
     # in the organization, AWS Organizations creates the required
     # service-linked role named `AWSServiceRoleForOrganizations`. For more
     # information, see [AWS Organizations and Service-Linked Roles][2] in
     # the *AWS Organizations User Guide*.
+    #
+    # If the request includes tags, then the requester must have the
+    # `organizations:TagResource` permission.
     #
     # AWS Organizations preconfigures the new member account with a role
     # (named `OrganizationAccountAccessRole` by default) that grants users
@@ -827,6 +828,23 @@ module Aws::Organizations
     #
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created account.
+    #   For each tag in the list, you must specify both a tag key and a value.
+    #   You can set the value to an empty string, but you can't set it to
+    #   `null`. For more information about tagging, see [Tagging AWS
+    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags for an account, then the entire request fails and the account
+    #   is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #
     # @return [Types::CreateAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccountResponse#create_account_status #create_account_status} => Types::CreateAccountStatus
@@ -859,6 +877,12 @@ module Aws::Organizations
     #     account_name: "AccountName", # required
     #     role_name: "RoleName",
     #     iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -893,11 +917,12 @@ module Aws::Organizations
     # * You call this action from the master account of your organization in
     #   the commercial Region.
     #
-    # * You have the `organizations:CreateGovCloudAccount` permission. AWS
-    #   Organizations creates the required service-linked role named
-    #   `AWSServiceRoleForOrganizations`. For more information, see [AWS
-    #   Organizations and Service-Linked Roles][2] in the *AWS Organizations
-    #   User Guide.*
+    # * You have the `organizations:CreateGovCloudAccount` permission.
+    #
+    # AWS Organizations automatically creates the required service-linked
+    # role named `AWSServiceRoleForOrganizations`. For more information, see
+    # [AWS Organizations and Service-Linked Roles][2] in the *AWS
+    # Organizations User Guide.*
     #
     # AWS automatically enables AWS CloudTrail for AWS GovCloud (US)
     # accounts, but you should also do the following:
@@ -908,6 +933,13 @@ module Aws::Organizations
     #
     #   For more information, see [Verifying AWS CloudTrail Is Enabled][3]
     #   in the *AWS GovCloud User Guide*.
+    #
+    # If the request includes tags, then the requester must have the
+    # `organizations:TagResource` permission. The tags are attached to the
+    # commercial account associated with the GovCloud account, rather than
+    # the GovCloud account itself. To add tags to the GovCloud account, call
+    # the TagResource operation in the GovCloud Region after the new
+    # GovCloud account exists.
     #
     # You call this action from the master account of your organization in
     # the commercial Region to create a standalone AWS account in the AWS
@@ -945,10 +977,10 @@ module Aws::Organizations
     # allows the master account in the organization in the commercial Region
     # to assume it. An AWS GovCloud (US) account is then created and
     # associated with the commercial account that you just created. A role
-    # is created in the new AWS GovCloud (US) account that can be assumed by
-    # the AWS GovCloud (US) account that is associated with the master
-    # account of the commercial organization. For more information and to
-    # view a diagram that explains how account access works, see [AWS
+    # is also created in the new AWS GovCloud (US) account that can be
+    # assumed by the AWS GovCloud (US) account that is associated with the
+    # master account of the commercial organization. For more information
+    # and to view a diagram that explains how account access works, see [AWS
     # Organizations][4] in the *AWS GovCloud User Guide.*
     #
     # For more information about creating accounts, see [Creating an AWS
@@ -1062,6 +1094,28 @@ module Aws::Organizations
     #
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created account.
+    #   These tags are attached to the commercial account associated with the
+    #   GovCloud account, and not to the GovCloud account itself. To add tags
+    #   to the actual GovCloud account, call the TagResource operation in the
+    #   GovCloud region after the new GovCloud account exists.
+    #
+    #   For each tag in the list, you must specify both a tag key and a value.
+    #   You can set the value to an empty string, but you can't set it to
+    #   `null`. For more information about tagging, see [Tagging AWS
+    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags for an account, then the entire request fails and the account
+    #   is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #
     # @return [Types::CreateGovCloudAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGovCloudAccountResponse#create_account_status #create_account_status} => Types::CreateAccountStatus
@@ -1073,6 +1127,12 @@ module Aws::Organizations
     #     account_name: "AccountName", # required
     #     role_name: "RoleName",
     #     iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1113,7 +1173,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_getting-started_concepts.html#account
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #
     # @option params [String] :feature_set
     #   Specifies the feature set supported by the new organization. Each
@@ -1230,6 +1290,9 @@ module Aws::Organizations
     # For more information about OUs, see [Managing Organizational Units][1]
     # in the *AWS Organizations User Guide.*
     #
+    # If the request includes tags, then the requester must have the
+    # `organizations:TagResource` permission.
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -1259,6 +1322,23 @@ module Aws::Organizations
     # @option params [required, String] :name
     #   The friendly name to assign to the new OU.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created OU. For
+    #   each tag in the list, you must specify both a tag key and a value. You
+    #   can set the value to an empty string, but you can't set it to `null`.
+    #   For more information about tagging, see [Tagging AWS Organizations
+    #   resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags for an OU, then the entire request fails and the OU is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #
     # @return [Types::CreateOrganizationalUnitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOrganizationalUnitResponse#organizational_unit #organizational_unit} => Types::OrganizationalUnit
@@ -1287,6 +1367,12 @@ module Aws::Organizations
     #   resp = client.create_organizational_unit({
     #     parent_id: "ParentId", # required
     #     name: "OrganizationalUnitName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1309,6 +1395,9 @@ module Aws::Organizations
     #
     # For more information about policies and their use, see [Managing
     # Organization Policies][1].
+    #
+    # If the request includes tags, then the requester must have the
+    # `organizations:TagResource` permission.
     #
     # This operation can be called only from the organization's master
     # account.
@@ -1354,6 +1443,23 @@ module Aws::Organizations
     #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created policy.
+    #   For each tag in the list, you must specify both a tag key and a value.
+    #   You can set the value to an empty string, but you can't set it to
+    #   `null`. For more information about tagging, see [Tagging AWS
+    #   Organizations resources][1] in the AWS Organizations User Guide.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags for a policy, then the entire request fails and the policy is
+    #   not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #
     # @return [Types::CreatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyResponse#policy #policy} => Types::Policy
@@ -1393,6 +1499,12 @@ module Aws::Organizations
     #     description: "PolicyDescription", # required
     #     name: "PolicyName", # required
     #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2726,6 +2838,9 @@ module Aws::Organizations
     #   then try again. If the error persists after an hour, contact [AWS
     #   Support][2].
     #
+    # If the request includes tags, then the requester must have the
+    # `organizations:TagResource` permission.
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -2755,6 +2870,33 @@ module Aws::Organizations
     # @option params [String] :notes
     #   Additional information that you want to include in the generated email
     #   to the recipient account owner.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the account when it becomes
+    #   a member of the organization. For each tag in the list, you must
+    #   specify both a tag key and a value. You can set the value to an empty
+    #   string, but you can't set it to `null`. For more information about
+    #   tagging, see [Tagging AWS Organizations resources][1] in the AWS
+    #   Organizations User Guide.
+    #
+    #   Any tags in the request are checked for compliance with any applicable
+    #   tag policies when the request is made. The request is rejected if the
+    #   tags in the request don't match the requirements of the policy at
+    #   that time. Tag policy compliance is <i> <b>not</b> </i> checked again
+    #   when the invitation is accepted and the tags are actually attached to
+    #   the account. That means that if the tag policy changes between the
+    #   invitation and the acceptance, then that tags could potentially be
+    #   non-compliant.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags for an account, then the entire request fails and invitations
+    #   are not sent.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
     #
     # @return [Types::InviteAccountToOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2828,6 +2970,12 @@ module Aws::Organizations
     #       type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
     #     },
     #     notes: "HandshakeNotes",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2894,6 +3042,10 @@ module Aws::Organizations
     #   to billing in your account. For more information, see [Activating
     #   Access to the Billing and Cost Management Console][2] in the *AWS
     #   Billing and Cost Management User Guide.*
+    #
+    # * After the account leaves the organization, all tags that were
+    #   attached to the account object in the organization are deleted. AWS
+    #   accounts outside of an organization do not support tags.
     #
     #
     #
@@ -4509,16 +4661,37 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists tags for the specified resource.
+    # Lists tags that are attached to the specified resource.
     #
-    # Currently, you can list tags on an account in AWS Organizations.
+    # You can attach tags to the following resources in AWS Organizations.
+    #
+    # * AWS account
+    #
+    # * Organization root
+    #
+    # * Organizational unit (OU)
+    #
+    # * Policy (any type)
     #
     # This operation can be called only from the organization's master
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the resource that you want to retrieve tags for.
+    #   The ID of the resource with the tags to list.
+    #
+    #   You can specify any of the following taggable resources.
+    #
+    #   * AWS account – specify the account ID number.
+    #
+    #   * Organizational unit – specify the OU ID that begins with `ou-` and
+    #     looks similar to: `ou-1a2b-34uvwxyz `
+    #
+    #   * Root – specify the root ID that begins with `r-` and looks similar
+    #     to: `r-1a2b `
+    #
+    #   * Policy – specify the policy ID that begins with `p-` andlooks
+    #     similar to: `p-12abcdefg3 `
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4810,20 +4983,25 @@ module Aws::Organizations
     # account. Member accounts can remove themselves with LeaveOrganization
     # instead.
     #
-    # You can remove an account from your organization only if the account
-    # is configured with the information required to operate as a standalone
-    # account. When you create an account in an organization using the AWS
-    # Organizations console, API, or CLI commands, the information required
-    # of standalone accounts is *not* automatically collected. For an
-    # account that you want to make standalone, you must choose a support
-    # plan, provide and verify the required contact information, and provide
-    # a current payment method. AWS uses the payment method to charge for
-    # any billable (not free tier) AWS activity that occurs while the
-    # account isn't attached to an organization. To remove an account that
-    # doesn't yet have this information, you must sign in as the member
-    # account and follow the steps at [ To leave an organization when all
-    # required account information has not yet been provided][1] in the *AWS
-    # Organizations User Guide.*
+    # * You can remove an account from your organization only if the account
+    #   is configured with the information required to operate as a
+    #   standalone account. When you create an account in an organization
+    #   using the AWS Organizations console, API, or CLI commands, the
+    #   information required of standalone accounts is *not* automatically
+    #   collected. For an account that you want to make standalone, you must
+    #   choose a support plan, provide and verify the required contact
+    #   information, and provide a current payment method. AWS uses the
+    #   payment method to charge for any billable (not free tier) AWS
+    #   activity that occurs while the account isn't attached to an
+    #   organization. To remove an account that doesn't yet have this
+    #   information, you must sign in as the member account and follow the
+    #   steps at [ To leave an organization when all required account
+    #   information has not yet been provided][1] in the *AWS Organizations
+    #   User Guide.*
+    #
+    # * After the account leaves the organization, all tags that were
+    #   attached to the account object in the organization are deleted. AWS
+    #   accounts outside of an organization do not support tags.
     #
     #
     #
@@ -4868,7 +5046,16 @@ module Aws::Organizations
 
     # Adds one or more tags to the specified resource.
     #
-    # Currently, you can tag and untag accounts in AWS Organizations.
+    # Currently, you can attach tags to the following resources in AWS
+    # Organizations.
+    #
+    # * AWS account
+    #
+    # * Organization root
+    #
+    # * Organizational unit (OU)
+    #
+    # * Policy (any type)
     #
     # This operation can be called only from the organization's master
     # account.
@@ -4877,9 +5064,30 @@ module Aws::Organizations
     #   The ID of the resource to add a tag to.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tag to add to the specified resource. You must specify both a tag
-    #   key and value. You can set the value of a tag to an empty string, but
-    #   you can't set it to null.
+    #   A list of tags to add to the specified resource.
+    #
+    #   You can specify any of the following taggable resources.
+    #
+    #   * AWS account – specify the account ID number.
+    #
+    #   * Organizational unit – specify the OU ID that begins with `ou-` and
+    #     looks similar to: `ou-1a2b-34uvwxyz `
+    #
+    #   * Root – specify the root ID that begins with `r-` and looks similar
+    #     to: `r-1a2b `
+    #
+    #   * Policy – specify the policy ID that begins with `p-` andlooks
+    #     similar to: `p-12abcdefg3 `
+    #
+    #   For each tag in the list, you must specify both a tag key and a value.
+    #   You can set the value to an empty string, but you can't set it to
+    #   `null`.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags for an account user, then the entire request fails and the
+    #   account is not created.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4904,18 +5112,39 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Removes a tag from the specified resource.
+    # Removes any tags with the specified keys from the specified resource.
     #
-    # Currently, you can tag and untag accounts in AWS Organizations.
+    # You can attach tags to the following resources in AWS Organizations.
+    #
+    # * AWS account
+    #
+    # * Organization root
+    #
+    # * Organizational unit (OU)
+    #
+    # * Policy (any type)
     #
     # This operation can be called only from the organization's master
     # account.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the resource to remove the tag from.
+    #   The ID of the resource to remove a tag from.
+    #
+    #   You can specify any of the following taggable resources.
+    #
+    #   * AWS account – specify the account ID number.
+    #
+    #   * Organizational unit – specify the OU ID that begins with `ou-` and
+    #     looks similar to: `ou-1a2b-34uvwxyz `
+    #
+    #   * Root – specify the root ID that begins with `r-` and looks similar
+    #     to: `r-1a2b `
+    #
+    #   * Policy – specify the policy ID that begins with `p-` andlooks
+    #     similar to: `p-12abcdefg3 `
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag to remove from the specified resource.
+    #   The list of keys for tags to remove from the specified resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5148,7 +5377,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

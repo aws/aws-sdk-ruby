@@ -843,6 +843,9 @@ module Aws::Kendra
     #   databases. Once you set the edition for an index, it can't be
     #   changed.
     #
+    #   The `Edition` parameter is optional. If you don't supply a value, the
+    #   default is `ENTERPRISE_EDITION`.
+    #
     # @option params [required, String] :role_arn
     #   An IAM role that gives Amazon Kendra permissions to access your Amazon
     #   CloudWatch logs and metrics. This is also the role used when you use
@@ -1556,6 +1559,8 @@ module Aws::Kendra
     # You can specify that the query return only one type of result using
     # the `QueryResultTypeConfig` parameter.
     #
+    # Each query returns the 100 most relevant results.
+    #
     # @option params [required, String] :index_id
     #   The unique identifier of the index to search. The identifier is
     #   returned in the response from the operation.
@@ -1745,9 +1750,10 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.string_list_value[0] #=> String
     #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
-    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM"
+    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW"
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
+    #   resp.facet_results[0].document_attribute_value_type #=> String, one of "STRING_VALUE", "STRING_LIST_VALUE", "LONG_VALUE", "DATE_VALUE"
     #   resp.facet_results[0].document_attribute_value_count_pairs #=> Array
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.string_value #=> String
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.string_list_value #=> Array
@@ -2262,7 +2268,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

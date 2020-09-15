@@ -327,6 +327,42 @@ module Aws::Kafka
 
     # @!group API Operations
 
+    # Associates one or more Scram Secrets with an Amazon MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, Array<String>] :secret_arn_list
+    #   List of AWS Secrets Manager secret ARNs.
+    #
+    # @return [Types::BatchAssociateScramSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateScramSecretResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::BatchAssociateScramSecretResponse#unprocessed_scram_secrets #unprocessed_scram_secrets} => Array&lt;Types::UnprocessedScramSecret&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_scram_secret({
+    #     cluster_arn: "__string", # required
+    #     secret_arn_list: ["__string"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.unprocessed_scram_secrets #=> Array
+    #   resp.unprocessed_scram_secrets[0].error_code #=> String
+    #   resp.unprocessed_scram_secrets[0].error_message #=> String
+    #   resp.unprocessed_scram_secrets[0].secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchAssociateScramSecret AWS API Documentation
+    #
+    # @overload batch_associate_scram_secret(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_scram_secret(params = {}, options = {})
+      req = build_request(:batch_associate_scram_secret, params)
+      req.send_request(options)
+    end
+
     # Creates a new MSK cluster.
     #
     # @option params [required, Types::BrokerNodeGroupInfo] :broker_node_group_info
@@ -384,6 +420,11 @@ module Aws::Kafka
     #       },
     #     },
     #     client_authentication: {
+    #       sasl: {
+    #         scram: {
+    #           enabled: false,
+    #         },
+    #       },
     #       tls: {
     #         certificate_authority_arn_list: ["__string"],
     #       },
@@ -592,6 +633,7 @@ module Aws::Kafka
     #   resp.cluster_info.broker_node_group_info.security_groups #=> Array
     #   resp.cluster_info.broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
     #   resp.cluster_info.cluster_arn #=> String
@@ -781,6 +823,42 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, Array<String>] :secret_arn_list
+    #   List of AWS Secrets Manager secret ARNs.
+    #
+    # @return [Types::BatchDisassociateScramSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateScramSecretResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::BatchDisassociateScramSecretResponse#unprocessed_scram_secrets #unprocessed_scram_secrets} => Array&lt;Types::UnprocessedScramSecret&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_scram_secret({
+    #     cluster_arn: "__string", # required
+    #     secret_arn_list: ["__string"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.unprocessed_scram_secrets #=> Array
+    #   resp.unprocessed_scram_secrets[0].error_code #=> String
+    #   resp.unprocessed_scram_secrets[0].error_message #=> String
+    #   resp.unprocessed_scram_secrets[0].secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchDisassociateScramSecret AWS API Documentation
+    #
+    # @overload batch_disassociate_scram_secret(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_scram_secret(params = {}, options = {})
+      req = build_request(:batch_disassociate_scram_secret, params)
+      req.send_request(options)
+    end
+
     # A list of brokers that a client application can use to bootstrap.
     #
     # @option params [required, String] :cluster_arn
@@ -789,6 +867,7 @@ module Aws::Kafka
     #
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string #bootstrap_broker_string} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_tls #bootstrap_broker_string_tls} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_scram #bootstrap_broker_string_sasl_scram} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -800,6 +879,7 @@ module Aws::Kafka
     #
     #   resp.bootstrap_broker_string #=> String
     #   resp.bootstrap_broker_string_tls #=> String
+    #   resp.bootstrap_broker_string_sasl_scram #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokers AWS API Documentation
     #
@@ -959,6 +1039,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].broker_node_group_info.security_groups #=> Array
     #   resp.cluster_info_list[0].broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info_list[0].broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info_list[0].client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list[0] #=> String
     #   resp.cluster_info_list[0].cluster_arn #=> String
@@ -1170,6 +1251,45 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_nodes(params = {}, options = {})
       req = build_request(:list_nodes, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the Scram Secrets associated with an Amazon MSK
+    # cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListScramSecretsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScramSecretsResponse#next_token #next_token} => String
+    #   * {Types::ListScramSecretsResponse#secret_arn_list #secret_arn_list} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scram_secrets({
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.secret_arn_list #=> Array
+    #   resp.secret_arn_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListScramSecrets AWS API Documentation
+    #
+    # @overload list_scram_secrets(params = {})
+    # @param [Hash] params ({})
+    def list_scram_secrets(params = {}, options = {})
+      req = build_request(:list_scram_secrets, params)
       req.send_request(options)
     end
 
@@ -1589,7 +1709,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
