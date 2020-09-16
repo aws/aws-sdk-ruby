@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.586 (2020-09-15)
 ------------------
 
