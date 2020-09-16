@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.587 (2020-09-16)
+------------------
+
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
 
 * Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
