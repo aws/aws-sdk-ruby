@@ -10,6 +10,46 @@
 module Aws::Connect
   module Types
 
+    # @note When making an API call, you may pass AssociateRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         queue_configs: [ # required
+    #           {
+    #             queue_reference: { # required
+    #               queue_id: "QueueId", # required
+    #               channel: "VOICE", # required, accepts VOICE, CHAT
+    #             },
+    #             priority: 1, # required
+    #             delay: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_configs
+    #   The queues to associate with this routing profile.
+    #   @return [Array<Types::RoutingProfileQueueConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class AssociateRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :queue_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A chat message.
     #
     # @note When making an API call, you may pass ChatMessage
@@ -33,6 +73,69 @@ module Aws::Connect
     class ChatMessage < Struct.new(
       :content_type,
       :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a contact flow.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the contact flow. For descriptions of the available
+    #   types, see [Choose a Contact Flow Type][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlow AWS API Documentation
+    #
+    class ContactFlow < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :type,
+      :description,
+      :content,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The contact flow has not been published.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowNotPublishedException AWS API Documentation
+    #
+    class ContactFlowNotPublishedException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -76,6 +179,172 @@ module Aws::Connect
     #
     class ContactNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateContactFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "ContactFlowName", # required
+    #         type: "CONTACT_FLOW", # required, accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #         description: "ContactFlowDescription",
+    #         content: "ContactFlowContent", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the contact flow. For descriptions of the available
+    #   types, see [Choose a Contact Flow Type][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowRequest AWS API Documentation
+    #
+    class CreateContactFlowRequest < Struct.new(
+      :instance_id,
+      :name,
+      :type,
+      :description,
+      :content,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_arn
+    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowResponse AWS API Documentation
+    #
+    class CreateContactFlowResponse < Struct.new(
+      :contact_flow_id,
+      :contact_flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRoutingProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "RoutingProfileName", # required
+    #         description: "RoutingProfileDescription", # required
+    #         default_outbound_queue_id: "QueueId", # required
+    #         queue_configs: [
+    #           {
+    #             queue_reference: { # required
+    #               queue_id: "QueueId", # required
+    #               channel: "VOICE", # required, accepts VOICE, CHAT
+    #             },
+    #             priority: 1, # required
+    #             delay: 1, # required
+    #           },
+    #         ],
+    #         media_concurrencies: [ # required
+    #           {
+    #             channel: "VOICE", # required, accepts VOICE, CHAT
+    #             concurrency: 1, # required
+    #           },
+    #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the routing profile. Must not be more than 127
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the routing profile. Must not be more than 250
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_outbound_queue_id
+    #   The default outbound queue for the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_configs
+    #   The inbound queues associated with the routing profile. If no queue
+    #   is added, the agent can only make outbound calls.
+    #   @return [Array<Types::RoutingProfileQueueConfig>]
+    #
+    # @!attribute [rw] media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP)
+    #   for this routing profile.
+    #   @return [Array<Types::MediaConcurrency>]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileRequest AWS API Documentation
+    #
+    class CreateRoutingProfileRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :default_outbound_queue_id,
+      :queue_configs,
+      :media_concurrencies,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routing_profile_arn
+    #   The Amazon Resource Name (ARN) of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileResponse AWS API Documentation
+    #
+    class CreateRoutingProfileResponse < Struct.new(
+      :routing_profile_arn,
+      :routing_profile_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -325,6 +594,80 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeContactFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowRequest AWS API Documentation
+    #
+    class DescribeContactFlowRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow
+    #   Information about the contact flow.
+    #   @return [Types::ContactFlow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowResponse AWS API Documentation
+    #
+    class DescribeContactFlowResponse < Struct.new(
+      :contact_flow)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRoutingProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfileRequest AWS API Documentation
+    #
+    class DescribeRoutingProfileRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routing_profile
+    #   The routing profile.
+    #   @return [Types::RoutingProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfileResponse AWS API Documentation
+    #
+    class DescribeRoutingProfileResponse < Struct.new(
+      :routing_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeUserHierarchyGroupRequest
     #   data as a hash:
     #
@@ -463,6 +806,42 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         queue_references: [ # required
+    #           {
+    #             queue_id: "QueueId", # required
+    #             channel: "VOICE", # required, accepts VOICE, CHAT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_references
+    #   The queues to disassociate from this routing profile.
+    #   @return [Array<Types::RoutingProfileQueueReference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class DisassociateRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :queue_references)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource with the specified name already exists.
     #
     # @!attribute [rw] message
@@ -569,16 +948,16 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. The only
-    #   supported channel is `VOICE`.
+    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
+    #   `CHAT` channels are supported.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
     #   The grouping applied to the metrics returned. For example, when
     #   grouped by `QUEUE`, the metrics returned apply to each queue rather
     #   than aggregated for all queues. If you group by `CHANNEL`, you
-    #   should include a Channels filter. The only supported channel is
-    #   `VOICE`.
+    #   should include a Channels filter. Both `VOICE` and `CHAT` channels
+    #   are supported.
     #
     #   If no `Grouping` is included in the request, a summary of metrics is
     #   returned.
@@ -586,65 +965,112 @@ module Aws::Connect
     #
     # @!attribute [rw] current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available. For a description of each
-    #   metric, see [Real-time Metrics Definitions][1] in the *Amazon
+    #   The following metrics are available. For a description of all the
+    #   metrics, see [Real-time Metrics Definitions][1] in the *Amazon
     #   Connect Administrator Guide*.
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [ACW][2]
+    #
     #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Available][3]
     #
     #   AGENTS\_ERROR
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Error][4]
+    #
     #   AGENTS\_NON\_PRODUCTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [NPT (Non-Productive Time)][5]
     #
     #   AGENTS\_ON\_CALL
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [On contact][6]
+    #
     #   AGENTS\_ON\_CONTACT
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [On contact][6]
     #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Online][7]
+    #
     #   AGENTS\_STAFFED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Staffed][8]
     #
     #   CONTACTS\_IN\_QUEUE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [In queue][9]
+    #
     #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Scheduled][10]
     #
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
     #
+    #     When you use groupings, Unit says SECONDS but the Value is
+    #     returned in MILLISECONDS. For example, if you get a response like
+    #     this:
+    #
+    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS"
+    #     \}, "Value": 24113.0 `\\}
+    #
+    #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
+    #
+    #     Name in real-time metrics report: [Oldest][11]
+    #
     #   SLOTS\_ACTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Active][12]
     #
     #   SLOTS\_AVAILABLE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Availability][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
+    #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
+    #   [4]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
+    #   [5]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
+    #   [6]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
+    #   [7]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
+    #   [8]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
+    #   [9]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
+    #   [10]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
+    #   [11]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
+    #   [12]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
+    #   [13]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
     #   @return [Array<Types::CurrentMetric>]
     #
     # @!attribute [rw] next_token
@@ -789,8 +1215,8 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. The only
-    #   supported channel is `VOICE`.
+    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
+    #   `CHAT` channels are supported.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
@@ -1294,6 +1720,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The contact flow is not valid.
+    #
+    # @!attribute [rw] problems
+    #   The problems with the contact flow. Please fix before trying again.
+    #   @return [Array<Types::ProblemDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidContactFlowException AWS API Documentation
+    #
+    class InvalidContactFlowException < Struct.new(
+      :problems)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more of the specified parameters are not valid.
     #
     # @!attribute [rw] message
@@ -1507,6 +1947,57 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPromptsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPromptsRequest AWS API Documentation
+    #
+    class ListPromptsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prompt_summary_list
+    #   Information about the prompts.
+    #   @return [Array<Types::PromptSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPromptsResponse AWS API Documentation
+    #
+    class ListPromptsResponse < Struct.new(
+      :prompt_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListQueuesRequest
     #   data as a hash:
     #
@@ -1560,6 +2051,63 @@ module Aws::Connect
     class ListQueuesResponse < Struct.new(
       :queue_summary_list,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class ListRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_queue_config_summary_list
+    #   Information about the routing profiles.
+    #   @return [Array<Types::RoutingProfileQueueConfigSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesResponse AWS API Documentation
+    #
+    class ListRoutingProfileQueuesResponse < Struct.new(
+      :next_token,
+      :routing_profile_queue_config_summary_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1799,6 +2347,36 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about which channels are supported, and how many
+    # contacts an agent can have on a channel simultaneously.
+    #
+    # @note When making an API call, you may pass MediaConcurrency
+    #   data as a hash:
+    #
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         concurrency: 1, # required
+    #       }
+    #
+    # @!attribute [rw] channel
+    #   The channels that agents can handle in the Contact Control Panel
+    #   (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The number of contacts an agent can have on a channel
+    #   simultaneously.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation
+    #
+    class MediaConcurrency < Struct.new(
+      :channel,
+      :concurrency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contact is not permitted.
     #
     # @!attribute [rw] message
@@ -1865,6 +2443,44 @@ module Aws::Connect
       :phone_number,
       :phone_number_type,
       :phone_number_country_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a problem detail.
+    #
+    # @!attribute [rw] message
+    #   The problem detail's message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ProblemDetail AWS API Documentation
+    #
+    class ProblemDetail < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the prompt.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PromptSummary AWS API Documentation
+    #
+    class PromptSummary < Struct.new(
+      :id,
+      :arn,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1968,6 +2584,184 @@ module Aws::Connect
     #
     class ResumeContactRecordingResponse < Aws::EmptyStructure; end
 
+    # Contains information about a routing profile.
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_arn
+    #   The Amazon Resource Name (ARN) of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP)
+    #   for this routing profile.
+    #   @return [Array<Types::MediaConcurrency>]
+    #
+    # @!attribute [rw] default_outbound_queue_id
+    #   The identifier of the default outbound queue for this routing
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
+    #
+    class RoutingProfile < Struct.new(
+      :instance_id,
+      :name,
+      :routing_profile_arn,
+      :routing_profile_id,
+      :description,
+      :media_concurrencies,
+      :default_outbound_queue_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the queue and channel for which priority
+    # and delay can be set.
+    #
+    # @note When making an API call, you may pass RoutingProfileQueueConfig
+    #   data as a hash:
+    #
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #         },
+    #         priority: 1, # required
+    #         delay: 1, # required
+    #       }
+    #
+    # @!attribute [rw] queue_reference
+    #   Contains information about a queue resource.
+    #   @return [Types::RoutingProfileQueueReference]
+    #
+    # @!attribute [rw] priority
+    #   The order in which contacts are to be handled for the queue. For
+    #   more information, see [Queues: priority and delay][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delay
+    #   The delay, in seconds, a contact should be in the queue before they
+    #   are routed to an available agent. For more information, see [Queues:
+    #   priority and delay][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileQueueConfig AWS API Documentation
+    #
+    class RoutingProfileQueueConfig < Struct.new(
+      :queue_reference,
+      :priority,
+      :delay)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a routing profile queue.
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_arn
+    #   The Amazon Resource Name (ARN) of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The order in which contacts are to be handled for the queue. For
+    #   more information, see [Queues: priority and delay][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delay
+    #   The delay, in seconds, that a contact should be in the queue before
+    #   they are routed to an available agent. For more information, see
+    #   [Queues: priority and delay][1] in the *Amazon Connect Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channel
+    #   The channels this queue supports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileQueueConfigSummary AWS API Documentation
+    #
+    class RoutingProfileQueueConfigSummary < Struct.new(
+      :queue_id,
+      :queue_arn,
+      :queue_name,
+      :priority,
+      :delay,
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the channel and queue identifier for a routing profile.
+    #
+    # @note When making an API call, you may pass RoutingProfileQueueReference
+    #   data as a hash:
+    #
+    #       {
+    #         queue_id: "QueueId", # required
+    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #       }
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   The channels agents can handle in the Contact Control Panel (CCP)
+    #   for this routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileQueueReference AWS API Documentation
+    #
+    class RoutingProfileQueueReference < Struct.new(
+      :queue_id,
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
@@ -2040,7 +2834,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the chat.
+    #   The identifier of the contact flow for initiating the chat. To see
+    #   the ContactFlowId in the Amazon Connect console user interface, on
+    #   the navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2175,7 +2976,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the outbound call.
+    #   The identifier of the contact flow for the outbound call. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2479,6 +3287,220 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesResponse AWS API Documentation
     #
     class UpdateContactAttributesResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateContactFlowContentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #         content: "ContactFlowContent", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowContentRequest AWS API Documentation
+    #
+    class UpdateContactFlowContentRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContactFlowNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #         name: "ContactFlowName",
+    #         description: "ContactFlowDescription",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowNameRequest AWS API Documentation
+    #
+    class UpdateContactFlowNameRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileConcurrencyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         media_concurrencies: [ # required
+    #           {
+    #             channel: "VOICE", # required, accepts VOICE, CHAT
+    #             concurrency: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP).
+    #   @return [Array<Types::MediaConcurrency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileConcurrencyRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileConcurrencyRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :media_concurrencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileDefaultOutboundQueueRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         default_outbound_queue_id: "QueueId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_outbound_queue_id
+    #   The identifier for the default outbound queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileDefaultOutboundQueueRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileDefaultOutboundQueueRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :default_outbound_queue_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         name: "RoutingProfileName",
+    #         description: "RoutingProfileDescription",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the routing profile. Must not be more than 127
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the routing profile. Must not be more than 250
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileNameRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileNameRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         queue_configs: [ # required
+    #           {
+    #             queue_reference: { # required
+    #               queue_id: "QueueId", # required
+    #               channel: "VOICE", # required, accepts VOICE, CHAT
+    #             },
+    #             priority: 1, # required
+    #             delay: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_configs
+    #   The queues to be updated for this routing profile.
+    #   @return [Array<Types::RoutingProfileQueueConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :queue_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateUserHierarchyRequest
     #   data as a hash:

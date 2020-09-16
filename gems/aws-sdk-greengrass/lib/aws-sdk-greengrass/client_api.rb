@@ -24,6 +24,7 @@ module Aws::Greengrass
     BulkDeploymentResults = Shapes::ListShape.new(name: 'BulkDeploymentResults')
     BulkDeploymentStatus = Shapes::StringShape.new(name: 'BulkDeploymentStatus')
     BulkDeployments = Shapes::ListShape.new(name: 'BulkDeployments')
+    ConfigurationSyncStatus = Shapes::StringShape.new(name: 'ConfigurationSyncStatus')
     ConnectivityInfo = Shapes::StructureShape.new(name: 'ConnectivityInfo')
     Connector = Shapes::StructureShape.new(name: 'Connector')
     ConnectorDefinitionVersion = Shapes::StructureShape.new(name: 'ConnectorDefinitionVersion')
@@ -153,6 +154,8 @@ module Aws::Greengrass
     GetSubscriptionDefinitionResponse = Shapes::StructureShape.new(name: 'GetSubscriptionDefinitionResponse')
     GetSubscriptionDefinitionVersionRequest = Shapes::StructureShape.new(name: 'GetSubscriptionDefinitionVersionRequest')
     GetSubscriptionDefinitionVersionResponse = Shapes::StructureShape.new(name: 'GetSubscriptionDefinitionVersionResponse')
+    GetThingRuntimeConfigurationRequest = Shapes::StructureShape.new(name: 'GetThingRuntimeConfigurationRequest')
+    GetThingRuntimeConfigurationResponse = Shapes::StructureShape.new(name: 'GetThingRuntimeConfigurationResponse')
     GroupCertificateAuthorityProperties = Shapes::StructureShape.new(name: 'GroupCertificateAuthorityProperties')
     GroupCertificateConfiguration = Shapes::StructureShape.new(name: 'GroupCertificateConfiguration')
     GroupInformation = Shapes::StructureShape.new(name: 'GroupInformation')
@@ -218,6 +221,8 @@ module Aws::Greengrass
     ResourceDataContainer = Shapes::StructureShape.new(name: 'ResourceDataContainer')
     ResourceDefinitionVersion = Shapes::StructureShape.new(name: 'ResourceDefinitionVersion')
     ResourceDownloadOwnerSetting = Shapes::StructureShape.new(name: 'ResourceDownloadOwnerSetting')
+    RuntimeConfiguration = Shapes::StructureShape.new(name: 'RuntimeConfiguration')
+    RuntimeConfigurationUpdate = Shapes::StructureShape.new(name: 'RuntimeConfigurationUpdate')
     S3MachineLearningModelResourceData = Shapes::StructureShape.new(name: 'S3MachineLearningModelResourceData')
     S3UrlSignerRole = Shapes::StringShape.new(name: 'S3UrlSignerRole')
     SageMakerMachineLearningModelResourceData = Shapes::StructureShape.new(name: 'SageMakerMachineLearningModelResourceData')
@@ -231,6 +236,9 @@ module Aws::Greengrass
     SubscriptionDefinitionVersion = Shapes::StructureShape.new(name: 'SubscriptionDefinitionVersion')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    Telemetry = Shapes::StringShape.new(name: 'Telemetry')
+    TelemetryConfiguration = Shapes::StructureShape.new(name: 'TelemetryConfiguration')
+    TelemetryConfigurationUpdate = Shapes::StructureShape.new(name: 'TelemetryConfigurationUpdate')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAgentLogLevel = Shapes::StringShape.new(name: 'UpdateAgentLogLevel')
     UpdateConnectivityInfoRequest = Shapes::StructureShape.new(name: 'UpdateConnectivityInfoRequest')
@@ -256,6 +264,8 @@ module Aws::Greengrass
     UpdateTargets = Shapes::ListShape.new(name: 'UpdateTargets')
     UpdateTargetsArchitecture = Shapes::StringShape.new(name: 'UpdateTargetsArchitecture')
     UpdateTargetsOperatingSystem = Shapes::StringShape.new(name: 'UpdateTargetsOperatingSystem')
+    UpdateThingRuntimeConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateThingRuntimeConfigurationRequest')
+    UpdateThingRuntimeConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateThingRuntimeConfigurationResponse')
     VersionInformation = Shapes::StructureShape.new(name: 'VersionInformation')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
@@ -982,6 +992,12 @@ module Aws::Greengrass
     GetSubscriptionDefinitionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
     GetSubscriptionDefinitionVersionResponse.struct_class = Types::GetSubscriptionDefinitionVersionResponse
 
+    GetThingRuntimeConfigurationRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ThingName"))
+    GetThingRuntimeConfigurationRequest.struct_class = Types::GetThingRuntimeConfigurationRequest
+
+    GetThingRuntimeConfigurationResponse.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
+    GetThingRuntimeConfigurationResponse.struct_class = Types::GetThingRuntimeConfigurationResponse
+
     GroupCertificateAuthorityProperties.add_member(:group_certificate_authority_arn, Shapes::ShapeRef.new(shape: __string, location_name: "GroupCertificateAuthorityArn"))
     GroupCertificateAuthorityProperties.add_member(:group_certificate_authority_id, Shapes::ShapeRef.new(shape: __string, location_name: "GroupCertificateAuthorityId"))
     GroupCertificateAuthorityProperties.struct_class = Types::GroupCertificateAuthorityProperties
@@ -1250,6 +1266,12 @@ module Aws::Greengrass
     ResourceDownloadOwnerSetting.add_member(:group_permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "GroupPermission"))
     ResourceDownloadOwnerSetting.struct_class = Types::ResourceDownloadOwnerSetting
 
+    RuntimeConfiguration.add_member(:telemetry_configuration, Shapes::ShapeRef.new(shape: TelemetryConfiguration, location_name: "TelemetryConfiguration"))
+    RuntimeConfiguration.struct_class = Types::RuntimeConfiguration
+
+    RuntimeConfigurationUpdate.add_member(:telemetry_configuration, Shapes::ShapeRef.new(shape: TelemetryConfigurationUpdate, location_name: "TelemetryConfiguration"))
+    RuntimeConfigurationUpdate.struct_class = Types::RuntimeConfigurationUpdate
+
     S3MachineLearningModelResourceData.add_member(:destination_path, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationPath"))
     S3MachineLearningModelResourceData.add_member(:owner_setting, Shapes::ShapeRef.new(shape: ResourceDownloadOwnerSetting, location_name: "OwnerSetting"))
     S3MachineLearningModelResourceData.add_member(:s3_uri, Shapes::ShapeRef.new(shape: __string, location_name: "S3Uri"))
@@ -1294,6 +1316,13 @@ module Aws::Greengrass
 
     Tags.key = Shapes::ShapeRef.new(shape: __string)
     Tags.value = Shapes::ShapeRef.new(shape: __string)
+
+    TelemetryConfiguration.add_member(:configuration_sync_status, Shapes::ShapeRef.new(shape: ConfigurationSyncStatus, location_name: "ConfigurationSyncStatus"))
+    TelemetryConfiguration.add_member(:telemetry, Shapes::ShapeRef.new(shape: Telemetry, required: true, location_name: "Telemetry"))
+    TelemetryConfiguration.struct_class = Types::TelemetryConfiguration
+
+    TelemetryConfigurationUpdate.add_member(:telemetry, Shapes::ShapeRef.new(shape: Telemetry, required: true, location_name: "Telemetry"))
+    TelemetryConfigurationUpdate.struct_class = Types::TelemetryConfigurationUpdate
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1365,6 +1394,12 @@ module Aws::Greengrass
     UpdateSubscriptionDefinitionResponse.struct_class = Types::UpdateSubscriptionDefinitionResponse
 
     UpdateTargets.member = Shapes::ShapeRef.new(shape: __string)
+
+    UpdateThingRuntimeConfigurationRequest.add_member(:telemetry_configuration, Shapes::ShapeRef.new(shape: TelemetryConfigurationUpdate, location_name: "TelemetryConfiguration"))
+    UpdateThingRuntimeConfigurationRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ThingName"))
+    UpdateThingRuntimeConfigurationRequest.struct_class = Types::UpdateThingRuntimeConfigurationRequest
+
+    UpdateThingRuntimeConfigurationResponse.struct_class = Types::UpdateThingRuntimeConfigurationResponse
 
     VersionInformation.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     VersionInformation.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "CreationTimestamp"))
@@ -1916,6 +1951,16 @@ module Aws::Greengrass
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_thing_runtime_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetThingRuntimeConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/things/{ThingName}/runtimeconfig"
+        o.input = Shapes::ShapeRef.new(shape: GetThingRuntimeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetThingRuntimeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:list_bulk_deployment_detailed_reports, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBulkDeploymentDetailedReports"
         o.http_method = "GET"
@@ -2233,6 +2278,16 @@ module Aws::Greengrass
         o.input = Shapes::ShapeRef.new(shape: UpdateSubscriptionDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSubscriptionDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:update_thing_runtime_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateThingRuntimeConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/greengrass/things/{ThingName}/runtimeconfig"
+        o.input = Shapes::ShapeRef.new(shape: UpdateThingRuntimeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateThingRuntimeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
     end
 

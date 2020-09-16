@@ -27,10 +27,12 @@ module Aws::Connect
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ContactFlowNotPublishedException}
   # * {ContactNotFoundException}
   # * {DestinationNotAllowedException}
   # * {DuplicateResourceException}
   # * {InternalServiceException}
+  # * {InvalidContactFlowException}
   # * {InvalidParameterException}
   # * {InvalidRequestException}
   # * {LimitExceededException}
@@ -44,6 +46,21 @@ module Aws::Connect
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ContactFlowNotPublishedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::ContactFlowNotPublishedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ContactNotFoundException < ServiceError
 
@@ -102,6 +119,21 @@ module Aws::Connect
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class InvalidContactFlowException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::InvalidContactFlowException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def problems
+        @data[:problems]
       end
     end
 

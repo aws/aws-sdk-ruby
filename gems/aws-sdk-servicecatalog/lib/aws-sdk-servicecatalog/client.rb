@@ -2185,8 +2185,19 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
-    # @option params [required, String] :id
-    #   The provisioned product identifier.
+    # @option params [String] :id
+    #   The provisioned product identifier. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
+    #
+    # @option params [String] :name
+    #   The name of the provisioned product. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #
     # @return [Types::DescribeProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2197,7 +2208,8 @@ module Aws::ServiceCatalog
     #
     #   resp = client.describe_provisioned_product({
     #     accept_language: "AcceptLanguage",
-    #     id: "Id", # required
+    #     id: "Id",
+    #     name: "ProvisionedProductName",
     #   })
     #
     # @example Response structure
@@ -5436,7 +5448,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

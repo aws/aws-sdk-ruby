@@ -3961,6 +3961,38 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetThingRuntimeConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetThingRuntimeConfigurationRequest AWS API Documentation
+    #
+    class GetThingRuntimeConfigurationRequest < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The runtime configuration for a thing.
+    #
+    # @!attribute [rw] runtime_configuration
+    #   Runtime configuration for a thing.
+    #   @return [Types::RuntimeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetThingRuntimeConfigurationResponse AWS API Documentation
+    #
+    class GetThingRuntimeConfigurationResponse < Struct.new(
+      :runtime_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a certificate authority for a group.
     #
     # @!attribute [rw] group_certificate_authority_arn
@@ -5519,6 +5551,34 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # Runtime configuration for a thing.
+    #
+    # @!attribute [rw] telemetry_configuration
+    #   Configuration for telemetry service.
+    #   @return [Types::TelemetryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/RuntimeConfiguration AWS API Documentation
+    #
+    class RuntimeConfiguration < Struct.new(
+      :telemetry_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Runtime configuration for a thing.
+    #
+    # @!attribute [rw] telemetry_configuration
+    #   Configuration for telemetry service.
+    #   @return [Types::TelemetryConfigurationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/RuntimeConfigurationUpdate AWS API Documentation
+    #
+    class RuntimeConfigurationUpdate < Struct.new(
+      :telemetry_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Attributes that define an Amazon S3 machine learning resource.
     #
     # @note When making an API call, you may pass S3MachineLearningModelResourceData
@@ -5814,6 +5874,47 @@ module Aws::Greengrass
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for running telemetry.
+    #
+    # @!attribute [rw] configuration_sync_status
+    #   Synchronization status of the device reported configuration with the
+    #   desired configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry
+    #   Configure telemetry to be on or off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TelemetryConfiguration AWS API Documentation
+    #
+    class TelemetryConfiguration < Struct.new(
+      :configuration_sync_status,
+      :telemetry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for running telemetry.
+    #
+    # @note When making an API call, you may pass TelemetryConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         telemetry: "On", # required, accepts On, Off
+    #       }
+    #
+    # @!attribute [rw] telemetry
+    #   Configure telemetry to be on or off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TelemetryConfigurationUpdate AWS API Documentation
+    #
+    class TelemetryConfigurationUpdate < Struct.new(
+      :telemetry)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6150,6 +6251,36 @@ module Aws::Greengrass
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinitionResponse AWS API Documentation
     #
     class UpdateSubscriptionDefinitionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateThingRuntimeConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         telemetry_configuration: {
+    #           telemetry: "On", # required, accepts On, Off
+    #         },
+    #         thing_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] telemetry_configuration
+    #   Configuration settings for running telemetry.
+    #   @return [Types::TelemetryConfigurationUpdate]
+    #
+    # @!attribute [rw] thing_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateThingRuntimeConfigurationRequest AWS API Documentation
+    #
+    class UpdateThingRuntimeConfigurationRequest < Struct.new(
+      :telemetry_configuration,
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateThingRuntimeConfigurationResponse AWS API Documentation
+    #
+    class UpdateThingRuntimeConfigurationResponse < Aws::EmptyStructure; end
 
     # Information about a version.
     #

@@ -2113,12 +2113,19 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # DescribeProvisionedProductAPI input structure. AcceptLanguage -
+    # \[Optional\] The language code for localization. Id - \[Optional\] The
+    # provisioned product identifier. Name - \[Optional\] Another
+    # provisioned product identifier. Customers must provide either Id or
+    # Name.
+    #
     # @note When making an API call, you may pass DescribeProvisionedProductInput
     #   data as a hash:
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
+    #         id: "Id",
+    #         name: "ProvisionedProductName",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2132,14 +2139,27 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The provisioned product identifier.
+    #   The provisioned product identifier. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the provisioned product. You must provide the name or
+    #   ID, but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductInput AWS API Documentation
     #
     class DescribeProvisionedProductInput < Struct.new(
       :accept_language,
-      :id)
+      :id,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end

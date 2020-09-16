@@ -720,7 +720,9 @@ module Aws::DLM
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] schedules
-    #   The schedule of policy-defined actions.
+    #   The schedules of policy-defined actions. A policy can have up to
+    #   four schedules - one mandatory schedule and up to three optional
+    #   schedules.
     #   @return [Array<Types::Schedule>]
     #
     # @!attribute [rw] parameters

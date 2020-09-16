@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2020-09-16)
+------------------
+
+* Feature - The ComplianceItemEntry Status description was updated to address Windows patches that aren't applicable.
+
 1.90.0 (2020-09-15)
 ------------------
 

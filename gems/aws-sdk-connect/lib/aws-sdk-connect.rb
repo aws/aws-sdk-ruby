@@ -28,7 +28,7 @@ require_relative 'aws-sdk-connect/customizations'
 # structure.
 #
 #     connect = Aws::Connect::Client.new
-#     resp = connect.create_user(params)
+#     resp = connect.associate_routing_profile_queues(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-connect/customizations'
 # @!group service
 module Aws::Connect
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end

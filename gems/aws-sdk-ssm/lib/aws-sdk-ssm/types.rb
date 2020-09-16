@@ -924,12 +924,12 @@ module Aws::SSM
     #   * For the key *SourceUrl*, the value is an S3 bucket location. For
     #     example:
     #
-    #     `"Values": [ "s3://my-bucket/my-folder" ]`
+    #     `"Values": [ "s3://doc-example-bucket/my-folder" ]`
     #
     #   * For the key *S3FileUrl*, the value is a file in an S3 bucket. For
     #     example:
     #
-    #     `"Values": [ "s3://my-bucket/my-folder/my-file.py" ]`
+    #     `"Values": [ "s3://doc-example-bucket/my-folder/my-file.py" ]`
     #
     #   * For the key *AttachmentReference*, the value is constructed from
     #     the name of another SSM document in your account, a version number
@@ -1974,14 +1974,14 @@ module Aws::SSM
     #   be stored. This was requested when issuing the command. For example,
     #   in the following response:
     #
-    #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
+    #   doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript
     #
-    #   test\_folder is the name of the S3 bucket;
+    #   doc-example-bucket is the name of the S3 bucket;
     #
     #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
     #
-    #   i-1234567876543 is the instance ID;
+    #   i-02573cafcfEXAMPLE is the instance ID;
     #
     #   awsrunShellScript is the name of the plugin.
     #   @return [String]
@@ -1991,14 +1991,14 @@ module Aws::SSM
     #   command executions should be stored. This was requested when issuing
     #   the command. For example, in the following response:
     #
-    #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
+    #   doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript
     #
-    #   test\_folder is the name of the S3 bucket;
+    #   doc-example-bucket is the name of the S3 bucket;
     #
     #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
     #
-    #   i-1234567876543 is the instance ID;
+    #   i-02573cafcfEXAMPLE is the instance ID;
     #
     #   awsrunShellScript is the name of the plugin.
     #   @return [String]
@@ -2164,8 +2164,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the compliance item. An item is either COMPLIANT or
-    #   NON\_COMPLIANT.
+    #   The status of the compliance item. An item is either COMPLIANT,
+    #   NON\_COMPLIANT, or an empty string (for Windows patches that aren't
+    #   applicable).
     #   @return [String]
     #
     # @!attribute [rw] details
@@ -11224,9 +11225,9 @@ module Aws::SSM
     # @!attribute [rw] sync_type
     #   View a list of resource data syncs according to the sync type.
     #   Specify `SyncToDestination` to view resource data syncs that
-    #   synchronize data to an Amazon S3 buckets. Specify `SyncFromSource`
-    #   to view resource data syncs from AWS Organizations or from multiple
-    #   AWS Regions.
+    #   synchronize data to an Amazon S3 bucket. Specify `SyncFromSource` to
+    #   view resource data syncs from AWS Organizations or from multiple AWS
+    #   Regions.
     #   @return [String]
     #
     # @!attribute [rw] next_token

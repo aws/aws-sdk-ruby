@@ -785,7 +785,8 @@ module Aws::ServiceCatalog
     DescribeProductViewOutput.struct_class = Types::DescribeProductViewOutput
 
     DescribeProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DescribeProvisionedProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    DescribeProvisionedProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    DescribeProvisionedProductInput.add_member(:name, Shapes::ShapeRef.new(shape: ProvisionedProductName, location_name: "Name"))
     DescribeProvisionedProductInput.struct_class = Types::DescribeProvisionedProductInput
 
     DescribeProvisionedProductOutput.add_member(:provisioned_product_detail, Shapes::ShapeRef.new(shape: ProvisionedProductDetail, location_name: "ProvisionedProductDetail"))
@@ -2116,6 +2117,7 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: DescribeProvisionedProductInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeProvisionedProductOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:describe_provisioned_product_plan, Seahorse::Model::Operation.new.tap do |o|

@@ -327,7 +327,185 @@ module Aws::Connect
 
     # @!group API Operations
 
+    # Associates a set of queues with a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [required, Array<Types::RoutingProfileQueueConfig>] :queue_configs
+    #   The queues to associate with this routing profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_routing_profile_queues({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     queue_configs: [ # required
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #         },
+    #         priority: 1, # required
+    #         delay: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateRoutingProfileQueues AWS API Documentation
+    #
+    # @overload associate_routing_profile_queues(params = {})
+    # @param [Hash] params ({})
+    def associate_routing_profile_queues(params = {}, options = {})
+      req = build_request(:associate_routing_profile_queues, params)
+      req.send_request(options)
+    end
+
+    # Creates a contact flow for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the contact flow.
+    #
+    # @option params [required, String] :type
+    #   The type of the contact flow. For descriptions of the available types,
+    #   see [Choose a Contact Flow Type][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
+    #
+    # @option params [String] :description
+    #   The description of the contact flow.
+    #
+    # @option params [required, String] :content
+    #   The content of the contact flow.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateContactFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContactFlowResponse#contact_flow_id #contact_flow_id} => String
+    #   * {Types::CreateContactFlowResponse#contact_flow_arn #contact_flow_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contact_flow({
+    #     instance_id: "InstanceId", # required
+    #     name: "ContactFlowName", # required
+    #     type: "CONTACT_FLOW", # required, accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #     description: "ContactFlowDescription",
+    #     content: "ContactFlowContent", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_id #=> String
+    #   resp.contact_flow_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlow AWS API Documentation
+    #
+    # @overload create_contact_flow(params = {})
+    # @param [Hash] params ({})
+    def create_contact_flow(params = {}, options = {})
+      req = build_request(:create_contact_flow, params)
+      req.send_request(options)
+    end
+
+    # Creates a new routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the routing profile. Must not be more than 127 characters.
+    #
+    # @option params [required, String] :description
+    #   Description of the routing profile. Must not be more than 250
+    #   characters.
+    #
+    # @option params [required, String] :default_outbound_queue_id
+    #   The default outbound queue for the routing profile.
+    #
+    # @option params [Array<Types::RoutingProfileQueueConfig>] :queue_configs
+    #   The inbound queues associated with the routing profile. If no queue is
+    #   added, the agent can only make outbound calls.
+    #
+    # @option params [required, Array<Types::MediaConcurrency>] :media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP) for
+    #   this routing profile.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateRoutingProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRoutingProfileResponse#routing_profile_arn #routing_profile_arn} => String
+    #   * {Types::CreateRoutingProfileResponse#routing_profile_id #routing_profile_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_routing_profile({
+    #     instance_id: "InstanceId", # required
+    #     name: "RoutingProfileName", # required
+    #     description: "RoutingProfileDescription", # required
+    #     default_outbound_queue_id: "QueueId", # required
+    #     queue_configs: [
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #         },
+    #         priority: 1, # required
+    #         delay: 1, # required
+    #       },
+    #     ],
+    #     media_concurrencies: [ # required
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         concurrency: 1, # required
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routing_profile_arn #=> String
+    #   resp.routing_profile_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfile AWS API Documentation
+    #
+    # @overload create_routing_profile(params = {})
+    # @param [Hash] params ({})
+    def create_routing_profile(params = {}, options = {})
+      req = build_request(:create_routing_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a user account for the specified Amazon Connect instance.
+    #
+    # For information about how to create user accounts using the Amazon
+    # Connect console, see [Add Users][1] in the *Amazon Connect
+    # Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html
     #
     # @option params [required, String] :username
     #   The user name for the account. For instances not using SAML for
@@ -421,6 +599,14 @@ module Aws::Connect
 
     # Deletes a user account from the specified Amazon Connect instance.
     #
+    # For information about what happens to a user's data when their
+    # account is deleted, see [Delete Users from Your Amazon Connect
+    # Instance][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -442,6 +628,87 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_user(params = {}, options = {})
       req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified contact flow.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow.
+    #
+    # @return [Types::DescribeContactFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContactFlowResponse#contact_flow #contact_flow} => Types::ContactFlow
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_contact_flow({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow.arn #=> String
+    #   resp.contact_flow.id #=> String
+    #   resp.contact_flow.name #=> String
+    #   resp.contact_flow.type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"
+    #   resp.contact_flow.description #=> String
+    #   resp.contact_flow.content #=> String
+    #   resp.contact_flow.tags #=> Hash
+    #   resp.contact_flow.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlow AWS API Documentation
+    #
+    # @overload describe_contact_flow(params = {})
+    # @param [Hash] params ({})
+    def describe_contact_flow(params = {}, options = {})
+      req = build_request(:describe_contact_flow, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @return [Types::DescribeRoutingProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRoutingProfileResponse#routing_profile #routing_profile} => Types::RoutingProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_routing_profile({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routing_profile.instance_id #=> String
+    #   resp.routing_profile.name #=> String
+    #   resp.routing_profile.routing_profile_arn #=> String
+    #   resp.routing_profile.routing_profile_id #=> String
+    #   resp.routing_profile.description #=> String
+    #   resp.routing_profile.media_concurrencies #=> Array
+    #   resp.routing_profile.media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT"
+    #   resp.routing_profile.media_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profile.default_outbound_queue_id #=> String
+    #   resp.routing_profile.tags #=> Hash
+    #   resp.routing_profile.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
+    #
+    # @overload describe_routing_profile(params = {})
+    # @param [Hash] params ({})
+    def describe_routing_profile(params = {}, options = {})
+      req = build_request(:describe_routing_profile, params)
       req.send_request(options)
     end
 
@@ -589,6 +856,41 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Disassociates a set of queues from a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [required, Array<Types::RoutingProfileQueueReference>] :queue_references
+    #   The queues to disassociate from this routing profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_routing_profile_queues({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     queue_references: [ # required
+    #       {
+    #         queue_id: "QueueId", # required
+    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateRoutingProfileQueues AWS API Documentation
+    #
+    # @overload disassociate_routing_profile_queues(params = {})
+    # @param [Hash] params ({})
+    def disassociate_routing_profile_queues(params = {}, options = {})
+      req = build_request(:disassociate_routing_profile_queues, params)
+      req.send_request(options)
+    end
+
     # Retrieves the contact attributes for the specified contact.
     #
     # @option params [required, String] :instance_id
@@ -625,12 +927,12 @@ module Aws::Connect
     # Gets the real-time metric data from the specified Amazon Connect
     # instance.
     #
-    # For more information, see [Real-time Metrics Reports][1] in the
-    # *Amazon Connect Administrator Guide*.
+    # For a description of each metric, see [Real-time Metrics
+    # Definitions][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-reports.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -639,79 +941,126 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. The only supported
-    #   channel is `VOICE`.
+    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
+    #   `CHAT` channels are supported.
     #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
     #   grouped by `QUEUE`, the metrics returned apply to each queue rather
     #   than aggregated for all queues. If you group by `CHANNEL`, you should
-    #   include a Channels filter. The only supported channel is `VOICE`.
+    #   include a Channels filter. Both `VOICE` and `CHAT` channels are
+    #   supported.
     #
     #   If no `Grouping` is included in the request, a summary of metrics is
     #   returned.
     #
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available. For a description of each metric,
-    #   see [Real-time Metrics Definitions][1] in the *Amazon Connect
+    #   The following metrics are available. For a description of all the
+    #   metrics, see [Real-time Metrics Definitions][1] in the *Amazon Connect
     #   Administrator Guide*.
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [ACW][2]
+    #
     #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Available][3]
     #
     #   AGENTS\_ERROR
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Error][4]
+    #
     #   AGENTS\_NON\_PRODUCTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [NPT (Non-Productive Time)][5]
     #
     #   AGENTS\_ON\_CALL
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [On contact][6]
+    #
     #   AGENTS\_ON\_CONTACT
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [On contact][6]
     #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Online][7]
+    #
     #   AGENTS\_STAFFED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Staffed][8]
     #
     #   CONTACTS\_IN\_QUEUE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [In queue][9]
+    #
     #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Scheduled][10]
     #
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
     #
+    #     When you use groupings, Unit says SECONDS but the Value is returned
+    #     in MILLISECONDS. For example, if you get a response like this:
+    #
+    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" \},
+    #     "Value": 24113.0 `\\}
+    #
+    #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
+    #
+    #     Name in real-time metrics report: [Oldest][11]
+    #
     #   SLOTS\_ACTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Active][12]
     #
     #   SLOTS\_AVAILABLE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Availability][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
+    #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
+    #   [4]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
+    #   [5]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
+    #   [6]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
+    #   [7]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
+    #   [8]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
+    #   [9]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
+    #   [10]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
+    #   [11]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
+    #   [12]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
+    #   [13]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -808,12 +1157,12 @@ module Aws::Connect
     # Gets historical metric data from the specified Amazon Connect
     # instance.
     #
-    # For more information, see [Historical Metrics Reports][1] in the
-    # *Amazon Connect Administrator Guide*.
+    # For a description of each historical metric, see [Historical Metrics
+    # Definitions][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -840,8 +1189,8 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. The only supported
-    #   channel is `VOICE`.
+    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
+    #   `CHAT` channels are supported.
     #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
@@ -1086,6 +1435,13 @@ module Aws::Connect
     # Provides information about the contact flows for the specified Amazon
     # Connect instance.
     #
+    # For more information about contact flows, see [Contact Flows][1] in
+    # the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1137,6 +1493,13 @@ module Aws::Connect
     # Provides information about the hours of operation for the specified
     # Amazon Connect instance.
     #
+    # For more information about hours of operation, see [Set the Hours of
+    # Operation for a Queue][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1182,6 +1545,14 @@ module Aws::Connect
 
     # Provides information about the phone numbers for the specified Amazon
     # Connect instance.
+    #
+    # For more information about phone numbers, see [Set Up Phone Numbers
+    # for Your Contact Center][1] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1236,8 +1607,61 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Provides information about the prompts for the specified Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListPromptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPromptsResponse#prompt_summary_list #prompt_summary_list} => Array&lt;Types::PromptSummary&gt;
+    #   * {Types::ListPromptsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_prompts({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt_summary_list #=> Array
+    #   resp.prompt_summary_list[0].id #=> String
+    #   resp.prompt_summary_list[0].arn #=> String
+    #   resp.prompt_summary_list[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPrompts AWS API Documentation
+    #
+    # @overload list_prompts(params = {})
+    # @param [Hash] params ({})
+    def list_prompts(params = {}, options = {})
+      req = build_request(:list_prompts, params)
+      req.send_request(options)
+    end
+
     # Provides information about the queues for the specified Amazon Connect
     # instance.
+    #
+    # For more information about queues, see [Queues: Standard and Agent][1]
+    # in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1287,8 +1711,69 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # List the queues associated with a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximimum number of results to return per page.
+    #
+    # @return [Types::ListRoutingProfileQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoutingProfileQueuesResponse#next_token #next_token} => String
+    #   * {Types::ListRoutingProfileQueuesResponse#routing_profile_queue_config_summary_list #routing_profile_queue_config_summary_list} => Array&lt;Types::RoutingProfileQueueConfigSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_routing_profile_queues({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.routing_profile_queue_config_summary_list #=> Array
+    #   resp.routing_profile_queue_config_summary_list[0].queue_id #=> String
+    #   resp.routing_profile_queue_config_summary_list[0].queue_arn #=> String
+    #   resp.routing_profile_queue_config_summary_list[0].queue_name #=> String
+    #   resp.routing_profile_queue_config_summary_list[0].priority #=> Integer
+    #   resp.routing_profile_queue_config_summary_list[0].delay #=> Integer
+    #   resp.routing_profile_queue_config_summary_list[0].channel #=> String, one of "VOICE", "CHAT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueues AWS API Documentation
+    #
+    # @overload list_routing_profile_queues(params = {})
+    # @param [Hash] params ({})
+    def list_routing_profile_queues(params = {}, options = {})
+      req = build_request(:list_routing_profile_queues, params)
+      req.send_request(options)
+    end
+
     # Provides summary information about the routing profiles for the
     # specified Amazon Connect instance.
+    #
+    # For more information about routing profiles, see [Routing Profiles][1]
+    # and [Create a Routing Profile][2] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1336,6 +1821,13 @@ module Aws::Connect
     # Provides summary information about the security profiles for the
     # specified Amazon Connect instance.
     #
+    # For more information about security profiles, see [Security
+    # Profiles][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1381,6 +1873,13 @@ module Aws::Connect
 
     # Lists the tags for the specified resource.
     #
+    # For sample policies that use tags, see [Amazon Connect Identity-Based
+    # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #
@@ -1410,6 +1909,13 @@ module Aws::Connect
 
     # Provides summary information about the hierarchy groups for the
     # specified Amazon Connect instance.
+    #
+    # For more information about agent hierarchies, see [Set Up Agent
+    # Hierarchies][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1545,15 +2051,35 @@ module Aws::Connect
     # [CreateParticipantConnection][1] with WEBSOCKET and
     # CONNECTION\_CREDENTIALS.
     #
+    # A 429 error occurs in two situations:
+    #
+    # * API rate limit is exceeded. API TPS throttling returns a
+    #   `TooManyRequests` exception from the API Gateway.
+    #
+    # * The [quota for concurrent active chats][2] is exceeded. Active chat
+    #   throttling returns a `LimitExceededException`.
+    #
+    # For more information about how chat works, see [Chat][3] in the
+    # *Amazon Connect Administrator Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/chat.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow for the chat.
+    #   The identifier of the contact flow for initiating the chat. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the contact
+    #   flow, choose **Show additional flow information**. The ContactFlowId
+    #   is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [Hash<String,String>] :attributes
     #   A custom key-value pair using an attribute map. The attributes are
@@ -1680,11 +2206,29 @@ module Aws::Connect
     # There is a 60 second dialing timeout for this operation. If the call
     # is not connected after 60 seconds, it fails.
     #
+    # <note markdown="1"> UK numbers with a 447 prefix are not allowed by default. Before you
+    # can dial these UK mobile numbers, you must submit a service quota
+    # increase request. For more information, see [Amazon Connect Service
+    # Quotas][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+    #
     # @option params [required, String] :destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow for the outbound call.
+    #   The identifier of the contact flow for the outbound call. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the contact
+    #   flow, choose **Show additional flow information**. The ContactFlowId
+    #   is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1857,6 +2401,13 @@ module Aws::Connect
     #
     # The supported resource type is users.
     #
+    # For sample policies that use tags, see [Amazon Connect Identity-Based
+    # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #
@@ -1970,6 +2521,213 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the specified contact flow.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow.
+    #
+    # @option params [required, String] :content
+    #   The content of the contact flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_flow_content({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #     content: "ContactFlowContent", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowContent AWS API Documentation
+    #
+    # @overload update_contact_flow_content(params = {})
+    # @param [Hash] params ({})
+    def update_contact_flow_content(params = {}, options = {})
+      req = build_request(:update_contact_flow_content, params)
+      req.send_request(options)
+    end
+
+    # The name of the contact flow.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow.
+    #
+    # @option params [String] :name
+    #   The name of the contact flow.
+    #
+    # @option params [String] :description
+    #   The description of the contact flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_flow_name({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #     name: "ContactFlowName",
+    #     description: "ContactFlowDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowName AWS API Documentation
+    #
+    # @overload update_contact_flow_name(params = {})
+    # @param [Hash] params ({})
+    def update_contact_flow_name(params = {}, options = {})
+      req = build_request(:update_contact_flow_name, params)
+      req.send_request(options)
+    end
+
+    # Updates the channels that agents can handle in the Contact Control
+    # Panel (CCP) for a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [required, Array<Types::MediaConcurrency>] :media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_routing_profile_concurrency({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     media_concurrencies: [ # required
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         concurrency: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileConcurrency AWS API Documentation
+    #
+    # @overload update_routing_profile_concurrency(params = {})
+    # @param [Hash] params ({})
+    def update_routing_profile_concurrency(params = {}, options = {})
+      req = build_request(:update_routing_profile_concurrency, params)
+      req.send_request(options)
+    end
+
+    # Updates the default outbound queue of a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [required, String] :default_outbound_queue_id
+    #   The identifier for the default outbound queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_routing_profile_default_outbound_queue({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     default_outbound_queue_id: "QueueId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileDefaultOutboundQueue AWS API Documentation
+    #
+    # @overload update_routing_profile_default_outbound_queue(params = {})
+    # @param [Hash] params ({})
+    def update_routing_profile_default_outbound_queue(params = {}, options = {})
+      req = build_request(:update_routing_profile_default_outbound_queue, params)
+      req.send_request(options)
+    end
+
+    # Updates the name and description of a routing profile. The request
+    # accepts the following data in JSON format. At least `Name` or
+    # `Description` must be provided.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [String] :name
+    #   The name of the routing profile. Must not be more than 127 characters.
+    #
+    # @option params [String] :description
+    #   The description of the routing profile. Must not be more than 250
+    #   characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_routing_profile_name({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     name: "RoutingProfileName",
+    #     description: "RoutingProfileDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileName AWS API Documentation
+    #
+    # @overload update_routing_profile_name(params = {})
+    # @param [Hash] params ({})
+    def update_routing_profile_name(params = {}, options = {})
+      req = build_request(:update_routing_profile_name, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties associated with a set of queues for a routing
+    # profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [required, Array<Types::RoutingProfileQueueConfig>] :queue_configs
+    #   The queues to be updated for this routing profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_routing_profile_queues({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     queue_configs: [ # required
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #         },
+    #         priority: 1, # required
+    #         delay: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileQueues AWS API Documentation
+    #
+    # @overload update_routing_profile_queues(params = {})
+    # @param [Hash] params ({})
+    def update_routing_profile_queues(params = {}, options = {})
+      req = build_request(:update_routing_profile_queues, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified hierarchy group to the specified user.
     #
     # @option params [String] :hierarchy_group_id
@@ -2001,6 +2759,19 @@ module Aws::Connect
     end
 
     # Updates the identity information for the specified user.
+    #
+    # Someone with the ability to invoke `UpdateUserIndentityInfo` can
+    # change the login credentials of other users by changing their email
+    # address. This poses a security risk to your organization. They can
+    # change the email address of a user to the attacker's email address,
+    # and then reset the password through email. We strongly recommend
+    # limiting who has the ability to invoke `UpdateUserIndentityInfo`. For
+    # more information, see [Best Practices for Security Profiles][1] in the
+    # *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html
     #
     # @option params [required, Types::UserIdentityInfo] :identity_info
     #   The identity information for the user.
@@ -2142,7 +2913,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

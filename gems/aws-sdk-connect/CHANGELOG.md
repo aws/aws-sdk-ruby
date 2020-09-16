@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-09-16)
+------------------
+
+* Feature - This release adds support for contact flows and routing profiles. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
 1.31.0 (2020-09-15)
 ------------------
 
