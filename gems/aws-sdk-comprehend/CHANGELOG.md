@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-09-17)
+------------------
+
+* Feature - Amazon Comprehend now supports detecting Personally Identifiable Information (PII) entities in a document.
+
 1.38.0 (2020-09-15)
 ------------------
 

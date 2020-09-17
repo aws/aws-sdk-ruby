@@ -287,6 +287,21 @@ module Aws::TranscribeStreamingService
     # @option params [Boolean] :show_speaker_label
     #   When `true`, enables speaker identification in your real-time stream.
     #
+    # @option params [Boolean] :enable_channel_identification
+    #   When `true`, instructs Amazon Transcribe to process each audio channel
+    #   separately and then merge the transcription output of each channel
+    #   into a single transcription.
+    #
+    #   Amazon Transcribe also produces a transcription of each item. An item
+    #   includes the start time, end time, and any alternative transcriptions.
+    #
+    #   You can't set both `ShowSpeakerLabel` and
+    #   `EnableChannelIdentification` in the same request. If you set both,
+    #   your request returns a `BadRequestException`.
+    #
+    # @option params [Integer] :number_of_channels
+    #   The number of channels that are in your audio stream.
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -299,6 +314,8 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_name #vocabulary_filter_name} => String
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_method #vocabulary_filter_method} => String
     #   * {Types::StartStreamTranscriptionResponse#show_speaker_label #show_speaker_label} => Boolean
+    #   * {Types::StartStreamTranscriptionResponse#enable_channel_identification #enable_channel_identification} => Boolean
+    #   * {Types::StartStreamTranscriptionResponse#number_of_channels #number_of_channels} => Integer
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -404,6 +421,8 @@ module Aws::TranscribeStreamingService
     #     vocabulary_filter_name: "VocabularyFilterName",
     #     vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #     show_speaker_label: false,
+    #     enable_channel_identification: false,
+    #     number_of_channels: 1,
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -437,6 +456,7 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items[0].content #=> String
     #   event.transcript.results[0].alternatives[0].items[0].vocabulary_filter_match #=> Boolean
     #   event.transcript.results[0].alternatives[0].items[0].speaker #=> String
+    #   event.transcript.results[0].channel_id #=> String
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -456,6 +476,8 @@ module Aws::TranscribeStreamingService
     #   resp.vocabulary_filter_name #=> String
     #   resp.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.show_speaker_label #=> Boolean
+    #   resp.enable_channel_identification #=> Boolean
+    #   resp.number_of_channels #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -500,7 +522,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1225,6 +1225,38 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePiiEntitiesDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribePiiEntitiesDetectionJobRequest AWS API Documentation
+    #
+    class DescribePiiEntitiesDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pii_entities_detection_job_properties
+    #   Provides information about a PII entities detection job.
+    #   @return [Types::PiiEntitiesDetectionJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribePiiEntitiesDetectionJobResponse AWS API Documentation
+    #
+    class DescribePiiEntitiesDetectionJobResponse < Struct.new(
+      :pii_entities_detection_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeSentimentDetectionJobRequest
     #   data as a hash:
     #
@@ -1436,6 +1468,47 @@ module Aws::Comprehend
     #
     class DetectKeyPhrasesResponse < Struct.new(
       :key_phrases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectPiiEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "String", # required
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #       }
+    #
+    # @!attribute [rw] text
+    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
+    #   of UTF-8 encoded characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectPiiEntitiesRequest AWS API Documentation
+    #
+    class DetectPiiEntitiesRequest < Struct.new(
+      :text,
+      :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   A collection of PII entities identified in the input text. For each
+    #   entity, the response provides the entity type, where the entity text
+    #   begins and ends, and the level of confidence that Amazon Comprehend
+    #   has in the detection.
+    #   @return [Array<Types::PiiEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectPiiEntitiesResponse AWS API Documentation
+    #
+    class DetectPiiEntitiesResponse < Struct.new(
+      :entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3481,6 +3554,61 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPiiEntitiesDetectionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   name, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #   @return [Types::PiiEntitiesDetectionJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListPiiEntitiesDetectionJobsRequest AWS API Documentation
+    #
+    class ListPiiEntitiesDetectionJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pii_entities_detection_job_properties_list
+    #   A list containing the properties of each job that is returned.
+    #   @return [Array<Types::PiiEntitiesDetectionJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListPiiEntitiesDetectionJobsResponse AWS API Documentation
+    #
+    class ListPiiEntitiesDetectionJobsResponse < Struct.new(
+      :pii_entities_detection_job_properties_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSentimentDetectionJobsRequest
     #   data as a hash:
     #
@@ -3703,6 +3831,228 @@ module Aws::Comprehend
     class PartOfSpeechTag < Struct.new(
       :tag,
       :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information for filtering a list of PII entity detection
+    # jobs.
+    #
+    # @note When making an API call, you may pass PiiEntitiesDetectionJobFilter
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "JobName",
+    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   Filters on the name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Filters the list of jobs based on job status. Returns only jobs with
+    #   the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted before the
+    #   specified time. Jobs are returned in ascending order, oldest to
+    #   newest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted after the
+    #   specified time. Jobs are returned in descending order, newest to
+    #   oldest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiEntitiesDetectionJobFilter AWS API Documentation
+    #
+    class PiiEntitiesDetectionJobFilter < Struct.new(
+      :job_name,
+      :job_status,
+      :submit_time_before,
+      :submit_time_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a PII entities detection job.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier assigned to the PII entities detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name that you assigned the PII entities detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the PII entities detection job. If the status
+    #   is `FAILED`, the `Message` field shows the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the status of a job.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the PII entities detection job was submitted for
+    #   processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the PII entities detection job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input properties for a PII entities detection job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The output data configuration that you supplied when you created the
+    #   PII entities detection job.
+    #   @return [Types::PiiOutputDataConfig]
+    #
+    # @!attribute [rw] redaction_config
+    #   Provides configuration parameters for PII entity redaction.
+    #
+    #   This parameter is required if you set the `Mode` parameter to
+    #   `ONLY_REDACTION`. In that case, you must provide a `RedactionConfig`
+    #   definition that includes the `PiiEntityTypes` parameter.
+    #   @return [Types::RedactionConfig]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend read
+    #   access to your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether the output provides the locations (offsets) of PII
+    #   entities or a file in which PII entities are redacted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiEntitiesDetectionJobProperties AWS API Documentation
+    #
+    class PiiEntitiesDetectionJobProperties < Struct.new(
+      :job_id,
+      :job_name,
+      :job_status,
+      :message,
+      :submit_time,
+      :end_time,
+      :input_data_config,
+      :output_data_config,
+      :redaction_config,
+      :language_code,
+      :data_access_role_arn,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a PII entity.
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend has in the accuracy
+    #   of the detection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] type
+    #   The entity's type.
+    #   @return [String]
+    #
+    # @!attribute [rw] begin_offset
+    #   A character offset in the input text that shows where the PII entity
+    #   begins (the first character is at position 0). The offset returns
+    #   the position of each UTF-8 code point in the string. A *code point*
+    #   is the abstract character from a particular graphical
+    #   representation. For example, a multi-byte UTF-8 character maps to a
+    #   single code point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   A character offset in the input text that shows where the PII entity
+    #   ends. The offset returns the position of each UTF-8 code point in
+    #   the string. A *code point* is the abstract character from a
+    #   particular graphical representation. For example, a multi-byte UTF-8
+    #   character maps to a single code point.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiEntity AWS API Documentation
+    #
+    class PiiEntity < Struct.new(
+      :score,
+      :type,
+      :begin_offset,
+      :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration parameters for the output of PII entity
+    # detection jobs.
+    #
+    # @!attribute [rw] s3_uri
+    #   When you use the `PiiOutputDataConfig` object with asynchronous
+    #   operations, you specify the Amazon S3 location where you want to
+    #   write the output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt the output results from an analysis job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiOutputDataConfig AWS API Documentation
+    #
+    class PiiOutputDataConfig < Struct.new(
+      :s3_uri,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration parameters for PII entity redaction.
+    #
+    # @note When making an API call, you may pass RedactionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #         mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
+    #         mask_character: "MaskCharacter",
+    #       }
+    #
+    # @!attribute [rw] pii_entity_types
+    #   An array of the types of PII entities that Amazon Comprehend detects
+    #   in the input text for your request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mask_mode
+    #   Specifies whether the PII entity is redacted with the mask character
+    #   or the entity type.
+    #   @return [String]
+    #
+    # @!attribute [rw] mask_character
+    #   A character that replaces each character in the redacted PII entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/RedactionConfig AWS API Documentation
+    #
+    class RedactionConfig < Struct.new(
+      :pii_entity_types,
+      :mask_mode,
+      :mask_character)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4440,6 +4790,106 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartPiiEntitiesDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         },
+    #         output_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         mode: "ONLY_REDACTION", # required, accepts ONLY_REDACTION, ONLY_OFFSETS
+    #         redaction_config: {
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #           mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
+    #           mask_character: "MaskCharacter",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         client_request_token: "ClientRequestTokenString",
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   The input properties for a PII entities detection job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Provides conﬁguration parameters for the output of PII entity
+    #   detection jobs.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether the output provides the locations (offsets) of PII
+    #   entities or a file in which PII entities are redacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] redaction_config
+    #   Provides configuration parameters for PII entity redaction.
+    #
+    #   This parameter is required if you set the `Mode` parameter to
+    #   `ONLY_REDACTION`. In that case, you must provide a `RedactionConfig`
+    #   definition that includes the `PiiEntityTypes` parameter.
+    #   @return [Types::RedactionConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartPiiEntitiesDetectionJobRequest AWS API Documentation
+    #
+    class StartPiiEntitiesDetectionJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :mode,
+      :redaction_config,
+      :data_access_role_arn,
+      :job_name,
+      :language_code,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartPiiEntitiesDetectionJobResponse AWS API Documentation
+    #
+    class StartPiiEntitiesDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartSentimentDetectionJobRequest
     #   data as a hash:
     #
@@ -4801,6 +5251,42 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopKeyPhrasesDetectionJobResponse AWS API Documentation
     #
     class StopKeyPhrasesDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopPiiEntitiesDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the PII entities detection job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopPiiEntitiesDetectionJobRequest AWS API Documentation
+    #
+    class StopPiiEntitiesDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the PII entities detection job to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the PII entities detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopPiiEntitiesDetectionJobResponse AWS API Documentation
+    #
+    class StopPiiEntitiesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
       SENSITIVE = []

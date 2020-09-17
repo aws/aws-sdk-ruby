@@ -110,6 +110,7 @@ module Aws::Kendra
     FacetList = Shapes::ListShape.new(name: 'FacetList')
     FacetResult = Shapes::StructureShape.new(name: 'FacetResult')
     FacetResultList = Shapes::ListShape.new(name: 'FacetResultList')
+    FaqFileFormat = Shapes::StringShape.new(name: 'FaqFileFormat')
     FaqId = Shapes::StringShape.new(name: 'FaqId')
     FaqName = Shapes::StringShape.new(name: 'FaqName')
     FaqStatistics = Shapes::StructureShape.new(name: 'FaqStatistics')
@@ -361,6 +362,7 @@ module Aws::Kendra
     CreateFaqRequest.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "S3Path"))
     CreateFaqRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateFaqRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFaqRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
     CreateFaqRequest.struct_class = Types::CreateFaqRequest
 
     CreateFaqResponse.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, location_name: "Id"))
@@ -483,6 +485,7 @@ module Aws::Kendra
     DescribeFaqResponse.add_member(:status, Shapes::ShapeRef.new(shape: FaqStatus, location_name: "Status"))
     DescribeFaqResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeFaqResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeFaqResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
     DescribeFaqResponse.struct_class = Types::DescribeFaqResponse
 
     DescribeIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))
@@ -569,6 +572,7 @@ module Aws::Kendra
     FaqSummary.add_member(:status, Shapes::ShapeRef.new(shape: FaqStatus, location_name: "Status"))
     FaqSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     FaqSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    FaqSummary.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
     FaqSummary.struct_class = Types::FaqSummary
 
     FaqSummaryItems.member = Shapes::ShapeRef.new(shape: FaqSummary)

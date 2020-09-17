@@ -1334,6 +1334,52 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets the properties associated with a PII entities detection job. For
+    # example, you can use this operation to get the job status.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #
+    # @return [Types::DescribePiiEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePiiEntitiesDetectionJobResponse#pii_entities_detection_job_properties #pii_entities_detection_job_properties} => Types::PiiEntitiesDetectionJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_pii_entities_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pii_entities_detection_job_properties.job_id #=> String
+    #   resp.pii_entities_detection_job_properties.job_name #=> String
+    #   resp.pii_entities_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.pii_entities_detection_job_properties.message #=> String
+    #   resp.pii_entities_detection_job_properties.submit_time #=> Time
+    #   resp.pii_entities_detection_job_properties.end_time #=> Time
+    #   resp.pii_entities_detection_job_properties.input_data_config.s3_uri #=> String
+    #   resp.pii_entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.pii_entities_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.pii_entities_detection_job_properties.output_data_config.kms_key_id #=> String
+    #   resp.pii_entities_detection_job_properties.redaction_config.pii_entity_types #=> Array
+    #   resp.pii_entities_detection_job_properties.redaction_config.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.pii_entities_detection_job_properties.redaction_config.mask_mode #=> String, one of "MASK", "REPLACE_WITH_PII_ENTITY_TYPE"
+    #   resp.pii_entities_detection_job_properties.redaction_config.mask_character #=> String
+    #   resp.pii_entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.pii_entities_detection_job_properties.data_access_role_arn #=> String
+    #   resp.pii_entities_detection_job_properties.mode #=> String, one of "ONLY_REDACTION", "ONLY_OFFSETS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribePiiEntitiesDetectionJob AWS API Documentation
+    #
+    # @overload describe_pii_entities_detection_job(params = {})
+    # @param [Hash] params ({})
+    def describe_pii_entities_detection_job(params = {}, options = {})
+      req = build_request(:describe_pii_entities_detection_job, params)
+      req.send_request(options)
+    end
+
     # Gets the properties associated with a sentiment detection job. Use
     # this operation to get the status of a detection job.
     #
@@ -1554,6 +1600,44 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def detect_key_phrases(params = {}, options = {})
       req = build_request(:detect_key_phrases, params)
+      req.send_request(options)
+    end
+
+    # Inspects the input text for entities that contain personally
+    # identifiable information (PII) and returns information about them.
+    #
+    # @option params [required, String] :text
+    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
+    #   of UTF-8 encoded characters.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents.
+    #
+    # @return [Types::DetectPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectPiiEntitiesResponse#entities #entities} => Array&lt;Types::PiiEntity&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_pii_entities({
+    #     text: "String", # required
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].score #=> Float
+    #   resp.entities[0].type #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.entities[0].begin_offset #=> Integer
+    #   resp.entities[0].end_offset #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectPiiEntities AWS API Documentation
+    #
+    # @overload detect_pii_entities(params = {})
+    # @param [Hash] params ({})
+    def detect_pii_entities(params = {}, options = {})
+      req = build_request(:detect_pii_entities, params)
       req.send_request(options)
     end
 
@@ -2118,6 +2202,68 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets a list of the PII entity detection jobs that you have submitted.
+    #
+    # @option params [Types::PiiEntitiesDetectionJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their name,
+    #   status, or the date and time that they were submitted. You can only
+    #   set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page.
+    #
+    # @return [Types::ListPiiEntitiesDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPiiEntitiesDetectionJobsResponse#pii_entities_detection_job_properties_list #pii_entities_detection_job_properties_list} => Array&lt;Types::PiiEntitiesDetectionJobProperties&gt;
+    #   * {Types::ListPiiEntitiesDetectionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pii_entities_detection_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pii_entities_detection_job_properties_list #=> Array
+    #   resp.pii_entities_detection_job_properties_list[0].job_id #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].job_name #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.pii_entities_detection_job_properties_list[0].message #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].submit_time #=> Time
+    #   resp.pii_entities_detection_job_properties_list[0].end_time #=> Time
+    #   resp.pii_entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.pii_entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].redaction_config.pii_entity_types #=> Array
+    #   resp.pii_entities_detection_job_properties_list[0].redaction_config.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.pii_entities_detection_job_properties_list[0].redaction_config.mask_mode #=> String, one of "MASK", "REPLACE_WITH_PII_ENTITY_TYPE"
+    #   resp.pii_entities_detection_job_properties_list[0].redaction_config.mask_character #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.pii_entities_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].mode #=> String, one of "ONLY_REDACTION", "ONLY_OFFSETS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListPiiEntitiesDetectionJobs AWS API Documentation
+    #
+    # @overload list_pii_entities_detection_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_pii_entities_detection_jobs(params = {}, options = {})
+      req = build_request(:list_pii_entities_detection_jobs, params)
+      req.send_request(options)
+    end
+
     # Gets a list of sentiment detection jobs that you have submitted.
     #
     # @option params [Types::SentimentDetectionJobFilter] :filter
@@ -2662,6 +2808,87 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Starts an asynchronous PII entity detection job for a collection of
+    # documents.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   The input properties for a PII entities detection job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Provides conﬁguration parameters for the output of PII entity
+    #   detection jobs.
+    #
+    # @option params [required, String] :mode
+    #   Specifies whether the output provides the locations (offsets) of PII
+    #   entities or a file in which PII entities are redacted.
+    #
+    # @option params [Types::RedactionConfig] :redaction_config
+    #   Provides configuration parameters for PII entity redaction.
+    #
+    #   This parameter is required if you set the `Mode` parameter to
+    #   `ONLY_REDACTION`. In that case, you must provide a `RedactionConfig`
+    #   definition that includes the `PiiEntityTypes` parameter.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartPiiEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartPiiEntitiesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartPiiEntitiesDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_pii_entities_detection_job({
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     mode: "ONLY_REDACTION", # required, accepts ONLY_REDACTION, ONLY_OFFSETS
+    #     redaction_config: {
+    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #       mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
+    #       mask_character: "MaskCharacter",
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #     client_request_token: "ClientRequestTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartPiiEntitiesDetectionJob AWS API Documentation
+    #
+    # @overload start_pii_entities_detection_job(params = {})
+    # @param [Hash] params ({})
+    def start_pii_entities_detection_job(params = {}, options = {})
+      req = build_request(:start_pii_entities_detection_job, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous sentiment detection job for a collection of
     # documents. use the operation to track the status of a job.
     #
@@ -2979,6 +3206,36 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Stops a PII entities detection job in progress.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the PII entities detection job to stop.
+    #
+    # @return [Types::StopPiiEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopPiiEntitiesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StopPiiEntitiesDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_pii_entities_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopPiiEntitiesDetectionJob AWS API Documentation
+    #
+    # @overload stop_pii_entities_detection_job(params = {})
+    # @param [Hash] params ({})
+    def stop_pii_entities_detection_job(params = {}, options = {})
+      req = build_request(:stop_pii_entities_detection_job, params)
+      req.send_request(options)
+    end
+
     # Stops a sentiment detection job in progress.
     #
     # If the job state is `IN_PROGRESS` the job is marked for termination
@@ -3190,7 +3447,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

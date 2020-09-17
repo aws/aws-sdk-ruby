@@ -195,6 +195,14 @@ module Aws::TranscribeStreamingService
     #   transcription.
     #   @return [Array<Types::Alternative>]
     #
+    # @!attribute [rw] channel_id
+    #   When channel identification is enabled, Amazon Transcribe
+    #   transcribes the speech from each audio channel separately.
+    #
+    #   You can use `ChannelId` to retrieve the transcription results for a
+    #   single channel in your audio stream.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Result AWS API Documentation
     #
     class Result < Struct.new(
@@ -202,7 +210,8 @@ module Aws::TranscribeStreamingService
       :start_time,
       :end_time,
       :is_partial,
-      :alternatives)
+      :alternatives,
+      :channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -234,6 +243,8 @@ module Aws::TranscribeStreamingService
     #         vocabulary_filter_name: "VocabularyFilterName",
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         show_speaker_label: false,
+    #         enable_channel_identification: false,
+    #         number_of_channels: 1,
     #       }
     #
     # @!attribute [rw] language_code
@@ -288,6 +299,24 @@ module Aws::TranscribeStreamingService
     #   stream.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_channel_identification
+    #   When `true`, instructs Amazon Transcribe to process each audio
+    #   channel separately and then merge the transcription output of each
+    #   channel into a single transcription.
+    #
+    #   Amazon Transcribe also produces a transcription of each item. An
+    #   item includes the start time, end time, and any alternative
+    #   transcriptions.
+    #
+    #   You can't set both `ShowSpeakerLabel` and
+    #   `EnableChannelIdentification` in the same request. If you set both,
+    #   your request returns a `BadRequestException`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] number_of_channels
+    #   The number of channels that are in your audio stream.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -299,7 +328,9 @@ module Aws::TranscribeStreamingService
       :audio_stream,
       :vocabulary_filter_name,
       :vocabulary_filter_method,
-      :show_speaker_label)
+      :show_speaker_label,
+      :enable_channel_identification,
+      :number_of_channels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -346,6 +377,14 @@ module Aws::TranscribeStreamingService
     #   Shows whether speaker identification was enabled in the stream.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_channel_identification
+    #   Shows whether channel identification has been enabled in the stream.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] number_of_channels
+    #   The number of channels identified in the stream.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -358,7 +397,9 @@ module Aws::TranscribeStreamingService
       :transcript_result_stream,
       :vocabulary_filter_name,
       :vocabulary_filter_method,
-      :show_speaker_label)
+      :show_speaker_label,
+      :enable_channel_identification,
+      :number_of_channels)
       SENSITIVE = []
       include Aws::Structure
     end

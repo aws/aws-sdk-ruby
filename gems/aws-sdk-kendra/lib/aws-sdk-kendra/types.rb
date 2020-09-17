@@ -1097,8 +1097,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The connector configuration information that is required to access
-    #   the repository.
+    #   The data source connector configuration information that is required
+    #   to access the repository.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
@@ -1173,6 +1173,7 @@ module Aws::Kendra
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
     #       }
     #
     # @!attribute [rw] index_id
@@ -1207,6 +1208,21 @@ module Aws::Kendra
     #   to resources.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] file_format
+    #   The format of the input file. You can choose between a basic CSV
+    #   format, a CSV format that includes customs attributes in a header,
+    #   and a JSON format that includes custom attributes.
+    #
+    #   The format must match the format of the file stored in the S3 bucket
+    #   identified in the `S3Path` parameter.
+    #
+    #   For more information, see [Adding questions and answers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateFaqRequest AWS API Documentation
     #
     class CreateFaqRequest < Struct.new(
@@ -1215,7 +1231,8 @@ module Aws::Kendra
       :description,
       :s3_path,
       :role_arn,
-      :tags)
+      :tags,
+      :file_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1524,17 +1541,18 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] s3_configuration
-    #   Provides information to create a connector for a document repository
-    #   in an Amazon S3 bucket.
+    #   Provides information to create a data source connector for a
+    #   document repository in an Amazon S3 bucket.
     #   @return [Types::S3DataSourceConfiguration]
     #
     # @!attribute [rw] share_point_configuration
-    #   Provides information necessary to create a connector for a Microsoft
-    #   SharePoint site.
+    #   Provides information necessary to create a data source connector for
+    #   a Microsoft SharePoint site.
     #   @return [Types::SharePointConfiguration]
     #
     # @!attribute [rw] database_configuration
-    #   Provides information necessary to create a connector for a database.
+    #   Provides information necessary to create a data source connector for
+    #   a database.
     #   @return [Types::DatabaseConfiguration]
     #
     # @!attribute [rw] salesforce_configuration
@@ -1647,7 +1665,7 @@ module Aws::Kendra
     # @!attribute [rw] metrics
     #   Maps a batch delete document request to a specific data source sync
     #   job. This is optional and should only be supplied when documents are
-    #   deleted by a connector.
+    #   deleted by a data source connector.
     #   @return [Types::DataSourceSyncJobMetrics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceSyncJob AWS API Documentation
@@ -1694,7 +1712,7 @@ module Aws::Kendra
 
     # Maps a batch delete document request to a specific data source sync
     # job. This is optional and should only be supplied when documents are
-    # deleted by a connector.
+    # deleted by a data source connector.
     #
     # @!attribute [rw] documents_added
     #   The number of documents added from the data source up to now in the
@@ -2115,6 +2133,10 @@ module Aws::Kendra
     #   the reason why the FAQ failed.
     #   @return [String]
     #
+    # @!attribute [rw] file_format
+    #   The file format used by the input files for the FAQ.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaqResponse AWS API Documentation
     #
     class DescribeFaqResponse < Struct.new(
@@ -2127,7 +2149,8 @@ module Aws::Kendra
       :s3_path,
       :status,
       :role_arn,
-      :error_message)
+      :error_message,
+      :file_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2582,6 +2605,10 @@ module Aws::Kendra
     #   The UNIX datetime that the FAQ was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] file_format
+    #   The file type used to create the FAQ.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/FaqSummary AWS API Documentation
     #
     class FaqSummary < Struct.new(
@@ -2589,7 +2616,8 @@ module Aws::Kendra
       :name,
       :status,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :file_format)
       SENSITIVE = []
       include Aws::Structure
     end

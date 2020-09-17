@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-09-17)
+------------------
+
+* Feature - Amazon Kendra now supports additional file formats and metadata for FAQs.
+
 1.12.0 (2020-09-15)
 ------------------
 

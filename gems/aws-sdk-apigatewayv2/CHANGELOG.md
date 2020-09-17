@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-09-17)
+------------------
+
+* Feature - Adds support for mutual TLS authentication and disableAPIExecuteEndpoint for public regional HTTP Apis
+
 1.27.0 (2020-09-15)
 ------------------
 

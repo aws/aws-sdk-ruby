@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-09-17)
+------------------
+
+* Feature - Adds support for mutual TLS authentication for public regional REST Apis
+
 1.52.0 (2020-09-15)
 ------------------
 

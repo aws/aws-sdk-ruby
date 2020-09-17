@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-09-17)
+------------------
+
+* Feature - Adds support for data plane audit logging in Amazon Elasticsearch Service.
+
 1.41.0 (2020-09-15)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-09-17)
+------------------
+
+* Feature - Amazon Transcribe now supports channel identification in real-time streaming, which enables you to transcribe multi-channel streaming audio.
+
 1.20.0 (2020-09-15)
 ------------------
 

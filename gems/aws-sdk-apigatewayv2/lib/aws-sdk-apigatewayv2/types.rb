@@ -91,6 +91,15 @@ module Aws::ApiGatewayV2
     #   for WebSocket APIs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   execute-api endpoint. By default, clients can invoke your API with
+    #   the default
+    #   https://\\\{api\_id\\}.execute-api.\\\{region\\}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] import_info
     #   The validation information during API import. This may include
     #   particular properties of your OpenAPI definition which are ignored
@@ -134,6 +143,7 @@ module Aws::ApiGatewayV2
       :created_date,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :import_info,
       :name,
       :protocol_type,
@@ -480,6 +490,9 @@ module Aws::ApiGatewayV2
     #   for WebSocket APIs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   @return [Boolean]
+    #
     # @!attribute [rw] name
     #   The name of the API.
     #   @return [String]
@@ -529,6 +542,7 @@ module Aws::ApiGatewayV2
       :credentials_arn,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :name,
       :protocol_type,
       :route_key,
@@ -651,6 +665,7 @@ module Aws::ApiGatewayV2
     #         credentials_arn: "Arn",
     #         description: "StringWithLengthBetween0And1024",
     #         disable_schema_validation: false,
+    #         disable_execute_api_endpoint: false,
     #         name: "StringWithLengthBetween1And128", # required
     #         protocol_type: "WEBSOCKET", # required, accepts WEBSOCKET, HTTP
     #         route_key: "SelectionKey",
@@ -689,6 +704,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] disable_schema_validation
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disable_execute_api_endpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -737,6 +755,7 @@ module Aws::ApiGatewayV2
       :credentials_arn,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :name,
       :protocol_type,
       :route_key,
@@ -786,6 +805,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   @return [Boolean]
+    #
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
@@ -826,6 +848,7 @@ module Aws::ApiGatewayV2
       :created_date,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :import_info,
       :name,
       :protocol_type,
@@ -1220,6 +1243,11 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   The mutual TLS authentication configuration for a custom domain
+    #   name.
+    #   @return [Types::MutualTlsAuthenticationInput]
+    #
     # @!attribute [rw] tags
     #   The collection of tags associated with a domain name.
     #   @return [Hash<String,String>]
@@ -1227,6 +1255,7 @@ module Aws::ApiGatewayV2
     class CreateDomainNameInput < Struct.new(
       :domain_name,
       :domain_name_configurations,
+      :mutual_tls_authentication,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1250,6 +1279,10 @@ module Aws::ApiGatewayV2
     #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #           },
     #         ],
+    #         mutual_tls_authentication: {
+    #           truststore_uri: "UriWithLengthBetween1And2048",
+    #           truststore_version: "StringWithLengthBetween1And64",
+    #         },
     #         tags: {
     #           "__string" => "StringWithLengthBetween1And1600",
     #         },
@@ -1263,6 +1296,12 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between
+    #   the client and the server. Clients must present a trusted
+    #   certificate to access your API.
+    #   @return [Types::MutualTlsAuthenticationInput]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -1270,6 +1309,7 @@ module Aws::ApiGatewayV2
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :domain_name_configurations,
+      :mutual_tls_authentication,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1292,6 +1332,12 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between
+    #   the client and the server. Clients must present a trusted
+    #   certificate to access your API.
+    #   @return [Types::MutualTlsAuthentication]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -1300,6 +1346,7 @@ module Aws::ApiGatewayV2
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_configurations,
+      :mutual_tls_authentication,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3240,6 +3287,11 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   The mutual TLS authentication configuration for a custom domain
+    #   name.
+    #   @return [Types::MutualTlsAuthentication]
+    #
     # @!attribute [rw] tags
     #   The collection of tags associated with a domain name.
     #   @return [Hash<String,String>]
@@ -3248,6 +3300,7 @@ module Aws::ApiGatewayV2
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_configurations,
+      :mutual_tls_authentication,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3569,6 +3622,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   @return [Boolean]
+    #
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
@@ -3609,6 +3665,7 @@ module Aws::ApiGatewayV2
       :created_date,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :import_info,
       :name,
       :protocol_type,
@@ -3922,6 +3979,12 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between
+    #   the client and the server. Clients must present a trusted
+    #   certificate to access your API.
+    #   @return [Types::MutualTlsAuthentication]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -3930,6 +3993,7 @@ module Aws::ApiGatewayV2
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_configurations,
+      :mutual_tls_authentication,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -5022,6 +5086,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   @return [Boolean]
+    #
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
@@ -5062,6 +5129,7 @@ module Aws::ApiGatewayV2
       :created_date,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :import_info,
       :name,
       :protocol_type,
@@ -5510,6 +5578,77 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # If specified, API Gateway performs two-way authentication between the
+    # client and the server. Clients must present a trusted certificate to
+    # access your API.
+    #
+    # @!attribute [rw] truststore_uri
+    #   An Amazon S3 URL that specifies the truststore for mutual TLS
+    #   authentication, for example, s3://*bucket-name*/*key-name*. The
+    #   truststore can contain certificates from public or private
+    #   certificate authorities. To update the truststore, upload a new
+    #   version to S3, and then update your custom domain name to use the
+    #   new version. To update the truststore, you must have permissions to
+    #   access the S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] truststore_version
+    #   The version of the S3 object that contains your truststore. To
+    #   specify a version, you must have versioning enabled for the S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] truststore_warnings
+    #   A list of warnings that API Gateway returns while processing your
+    #   truststore. Invalid certificates produce warnings. Mutual TLS is
+    #   still enabled, but some clients might not be able to access your
+    #   API. To resolve warnings, upload a new truststore to S3, and then
+    #   update you domain name to use the new version.
+    #   @return [Array<String>]
+    #
+    class MutualTlsAuthentication < Struct.new(
+      :truststore_uri,
+      :truststore_version,
+      :truststore_warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If specified, API Gateway performs two-way authentication between the
+    # client and the server. Clients must present a trusted certificate to
+    # access your API.
+    #
+    # @note When making an API call, you may pass MutualTlsAuthenticationInput
+    #   data as a hash:
+    #
+    #       {
+    #         truststore_uri: "UriWithLengthBetween1And2048",
+    #         truststore_version: "StringWithLengthBetween1And64",
+    #       }
+    #
+    # @!attribute [rw] truststore_uri
+    #   An Amazon S3 URL that specifies the truststore for mutual TLS
+    #   authentication, for example, s3://*bucket-name*/*key-name*. The
+    #   truststore can contain certificates from public or private
+    #   certificate authorities. To update the truststore, upload a new
+    #   version to S3, and then update your custom domain name to use the
+    #   new version. To update the truststore, you must have permissions to
+    #   access the S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] truststore_version
+    #   The version of the S3 object that contains your truststore. To
+    #   specify a version, you must have versioning enabled for the S3
+    #   bucket.
+    #   @return [String]
+    #
+    class MutualTlsAuthenticationInput < Struct.new(
+      :truststore_uri,
+      :truststore_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource specified in the request was not found. See the message
     # field for more information.
     #
@@ -5630,6 +5769,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   @return [Boolean]
+    #
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
@@ -5670,6 +5812,7 @@ module Aws::ApiGatewayV2
       :created_date,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :import_info,
       :name,
       :protocol_type,
@@ -6161,6 +6304,9 @@ module Aws::ApiGatewayV2
     #   for WebSocket APIs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   @return [Boolean]
+    #
     # @!attribute [rw] name
     #   The name of the API.
     #   @return [String]
@@ -6198,6 +6344,7 @@ module Aws::ApiGatewayV2
       :credentials_arn,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :name,
       :route_key,
       :route_selection_expression,
@@ -6324,6 +6471,7 @@ module Aws::ApiGatewayV2
     #         credentials_arn: "Arn",
     #         description: "StringWithLengthBetween0And1024",
     #         disable_schema_validation: false,
+    #         disable_execute_api_endpoint: false,
     #         name: "StringWithLengthBetween1And128",
     #         route_key: "SelectionKey",
     #         route_selection_expression: "SelectionExpression",
@@ -6361,6 +6509,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] disable_schema_validation
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disable_execute_api_endpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -6402,6 +6553,7 @@ module Aws::ApiGatewayV2
       :credentials_arn,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :name,
       :route_key,
       :route_selection_expression,
@@ -6449,6 +6601,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   @return [Boolean]
+    #
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
@@ -6489,6 +6644,7 @@ module Aws::ApiGatewayV2
       :created_date,
       :description,
       :disable_schema_validation,
+      :disable_execute_api_endpoint,
       :import_info,
       :name,
       :protocol_type,
@@ -6876,8 +7032,14 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   The mutual TLS authentication configuration for a custom domain
+    #   name.
+    #   @return [Types::MutualTlsAuthenticationInput]
+    #
     class UpdateDomainNameInput < Struct.new(
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :mutual_tls_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6900,6 +7062,10 @@ module Aws::ApiGatewayV2
     #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #           },
     #         ],
+    #         mutual_tls_authentication: {
+    #           truststore_uri: "UriWithLengthBetween1And2048",
+    #           truststore_version: "StringWithLengthBetween1And64",
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -6909,9 +7075,16 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between
+    #   the client and the server. Clients must present a trusted
+    #   certificate to access your API.
+    #   @return [Types::MutualTlsAuthenticationInput]
+    #
     class UpdateDomainNameRequest < Struct.new(
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :mutual_tls_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6933,6 +7106,12 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between
+    #   the client and the server. Clients must present a trusted
+    #   certificate to access your API.
+    #   @return [Types::MutualTlsAuthentication]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -6941,6 +7120,7 @@ module Aws::ApiGatewayV2
       :api_mapping_selection_expression,
       :domain_name,
       :domain_name_configurations,
+      :mutual_tls_authentication,
       :tags)
       SENSITIVE = []
       include Aws::Structure

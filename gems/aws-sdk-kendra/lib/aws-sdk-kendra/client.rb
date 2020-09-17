@@ -486,12 +486,10 @@ module Aws::Kendra
 
     # Creates a data source that you use to with an Amazon Kendra index.
     #
-    # You specify a name, connector type and description for your data
-    # source. You can choose between an S3 connector, a SharePoint Online
-    # connector, and a database connector.
-    #
-    # You also specify configuration information such as document metadata
-    # (author, source URI, and so on) and user context information.
+    # You specify a name, data source connector type and description for
+    # your data source. You also specify configuration information such as
+    # document metadata (author, source URI, and so on) and user context
+    # information.
     #
     # `CreateDataSource` is a synchronous operation. The operation returns
     # 200 if the data source was successfully created. Otherwise, an
@@ -509,8 +507,8 @@ module Aws::Kendra
     #   The type of repository that contains the data source.
     #
     # @option params [required, Types::DataSourceConfiguration] :configuration
-    #   The connector configuration information that is required to access the
-    #   repository.
+    #   The data source connector configuration information that is required
+    #   to access the repository.
     #
     # @option params [String] :description
     #   A description for the data source.
@@ -789,6 +787,20 @@ module Aws::Kendra
     #   to identify and organize your resources and to control access to
     #   resources.
     #
+    # @option params [String] :file_format
+    #   The format of the input file. You can choose between a basic CSV
+    #   format, a CSV format that includes customs attributes in a header, and
+    #   a JSON format that includes custom attributes.
+    #
+    #   The format must match the format of the file stored in the S3 bucket
+    #   identified in the `S3Path` parameter.
+    #
+    #   For more information, see [Adding questions and answers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
+    #
     # @return [Types::CreateFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFaqResponse#id #id} => String
@@ -810,6 +822,7 @@ module Aws::Kendra
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
     #   })
     #
     # @example Response structure
@@ -1197,6 +1210,7 @@ module Aws::Kendra
     #   * {Types::DescribeFaqResponse#status #status} => String
     #   * {Types::DescribeFaqResponse#role_arn #role_arn} => String
     #   * {Types::DescribeFaqResponse#error_message #error_message} => String
+    #   * {Types::DescribeFaqResponse#file_format #file_format} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1218,6 +1232,7 @@ module Aws::Kendra
     #   resp.status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.role_arn #=> String
     #   resp.error_message #=> String
+    #   resp.file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaq AWS API Documentation
     #
@@ -1452,6 +1467,7 @@ module Aws::Kendra
     #   resp.faq_summary_items[0].status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.faq_summary_items[0].created_at #=> Time
     #   resp.faq_summary_items[0].updated_at #=> Time
+    #   resp.faq_summary_items[0].file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListFaqs AWS API Documentation
     #
@@ -2268,7 +2284,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -48,6 +48,6 @@ require_relative 'aws-sdk-apigatewayv2/customizations'
 # @!group service
 module Aws::ApiGatewayV2
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

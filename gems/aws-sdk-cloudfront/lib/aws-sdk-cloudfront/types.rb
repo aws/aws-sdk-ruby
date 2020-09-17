@@ -4215,9 +4215,7 @@ module Aws::CloudFront
     #   Class for a CloudFront Distribution][1] in the *Amazon CloudFront
     #   Developer Guide*. For information about CloudFront pricing,
     #   including how price classes (such as Price Class 100) map to
-    #   CloudFront regions, see [Amazon CloudFront Pricing][2]. For price
-    #   class information, scroll down to see the table at the bottom of the
-    #   page.
+    #   CloudFront regions, see [Amazon CloudFront Pricing][2].
     #
     #
     #
@@ -8947,14 +8945,18 @@ module Aws::CloudFront
     #
     #   * Includes the normalized header in the cache key
     #
-    #   * Includes the normalized header in the request to the origin
-    #
-    #   If one or both of these fields are `true`, you should not whitelist
-    #   the `Accept-Encoding` header in the cache policy or in an origin
-    #   request policy attached to the same cache behavior.
+    #   * Includes the normalized header in the request to the origin, if a
+    #     request is necessary
     #
     #   For more information, see [Cache compressed objects][1] in the
     #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If you set this value to `true`, and this cache behavior also has an
+    #   origin request policy attached, do not include the `Accept-Encoding`
+    #   header in the origin request policy. CloudFront always includes the
+    #   `Accept-Encoding` header in origin requests when the value of this
+    #   field is `true`, so including this header in an origin request
+    #   policy has no effect.
     #
     #   If both of these fields are `false`, then CloudFront treats the
     #   `Accept-Encoding` header the same as any other HTTP header in the
@@ -8982,14 +8984,18 @@ module Aws::CloudFront
     #
     #   * Includes the normalized header in the cache key
     #
-    #   * Includes the normalized header in the request to the origin
-    #
-    #   If one or both of these fields are `true`, you should not whitelist
-    #   the `Accept-Encoding` header in the cache policy or in an origin
-    #   request policy attached to the same cache behavior.
+    #   * Includes the normalized header in the request to the origin, if a
+    #     request is necessary
     #
     #   For more information, see [Cache compressed objects][1] in the
     #   *Amazon CloudFront Developer Guide*.
+    #
+    #   If you set this value to `true`, and this cache behavior also has an
+    #   origin request policy attached, do not include the `Accept-Encoding`
+    #   header in the origin request policy. CloudFront always includes the
+    #   `Accept-Encoding` header in origin requests when the value of this
+    #   field is `true`, so including this header in an origin request
+    #   policy has no effect.
     #
     #   If both of these fields are `false`, then CloudFront treats the
     #   `Accept-Encoding` header the same as any other HTTP header in the
