@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.589 (2020-09-18)
+------------------
+
 * Feature - Aws::CodeStarconnections - Updated the API for AWS CodeStar connections.
 
 * Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
