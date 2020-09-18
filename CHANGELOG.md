@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeStarconnections - Updated the API for AWS CodeStar connections.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::SSOAdmin - Updated the documentation for AWS Single Sign-On Admin.
+
 2.11.588 (2020-09-17)
 ------------------
 
