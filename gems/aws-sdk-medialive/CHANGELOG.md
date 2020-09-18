@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2020-09-18)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports batch operations, which allow users to start, stop, and delete multiple MediaLive resources with a single request.
+
 1.53.0 (2020-09-15)
 ------------------
 

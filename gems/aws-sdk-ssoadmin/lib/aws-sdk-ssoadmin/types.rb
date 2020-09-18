@@ -47,7 +47,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccountAssignment AWS API Documentation
@@ -79,7 +83,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -98,7 +103,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -246,7 +255,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -263,7 +273,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateAccountAssignmentRequest AWS API Documentation
@@ -384,7 +398,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -400,7 +415,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteAccountAssignmentRequest AWS API Documentation
@@ -1537,7 +1556,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-09-18)
+------------------
+
+* Feature - New integration with the GitHub provider type.
+
 1.9.0 (2020-09-15)
 ------------------
 

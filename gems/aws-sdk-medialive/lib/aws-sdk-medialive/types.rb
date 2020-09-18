@@ -949,7 +949,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] tracks
-    #   Selects one or more unique audio tracks from within an mp4 source.
+    #   Selects one or more unique audio tracks from within a source.
     #   @return [Array<Types::AudioTrack>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioTrackSelection AWS API Documentation
@@ -1106,6 +1106,131 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BadRequestException AWS API Documentation
     #
     class BadRequestException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch delete resource request
+    #
+    # @!attribute [rw] channel_ids
+    #   List of channel IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_ids
+    #   List of input IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_security_group_ids
+    #   List of input security group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_ids
+    #   List of multiplex IDs
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchDelete AWS API Documentation
+    #
+    class BatchDelete < Struct.new(
+      :channel_ids,
+      :input_ids,
+      :input_security_group_ids,
+      :multiplex_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDeleteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_ids: ["__string"],
+    #         input_ids: ["__string"],
+    #         input_security_group_ids: ["__string"],
+    #         multiplex_ids: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_security_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_ids
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchDeleteRequest AWS API Documentation
+    #
+    class BatchDeleteRequest < Struct.new(
+      :channel_ids,
+      :input_ids,
+      :input_security_group_ids,
+      :multiplex_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed
+    #   @return [Array<Types::BatchFailedResultModel>]
+    #
+    # @!attribute [rw] successful
+    #   @return [Array<Types::BatchSuccessfulResultModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchDeleteResponse AWS API Documentation
+    #
+    class BatchDeleteResponse < Struct.new(
+      :failed,
+      :successful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch delete resource results
+    #
+    # @!attribute [rw] failed
+    #   List of failed operations
+    #   @return [Array<Types::BatchFailedResultModel>]
+    #
+    # @!attribute [rw] successful
+    #   List of successful operations
+    #   @return [Array<Types::BatchSuccessfulResultModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchDeleteResultModel AWS API Documentation
+    #
+    class BatchDeleteResultModel < Struct.new(
+      :failed,
+      :successful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details from a failed operation
+    #
+    # @!attribute [rw] arn
+    #   ARN of the resource
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   Error code for the failed operation
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   ID of the resource
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Error message for the failed operation
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchFailedResultModel AWS API Documentation
+    #
+    class BatchFailedResultModel < Struct.new(
+      :arn,
+      :code,
+      :id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1289,6 +1414,182 @@ module Aws::MediaLive
     #
     class BatchScheduleActionDeleteResult < Struct.new(
       :schedule_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch start resource request
+    #
+    # @!attribute [rw] channel_ids
+    #   List of channel IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_ids
+    #   List of multiplex IDs
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStart AWS API Documentation
+    #
+    class BatchStart < Struct.new(
+      :channel_ids,
+      :multiplex_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchStartRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_ids: ["__string"],
+    #         multiplex_ids: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_ids
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStartRequest AWS API Documentation
+    #
+    class BatchStartRequest < Struct.new(
+      :channel_ids,
+      :multiplex_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed
+    #   @return [Array<Types::BatchFailedResultModel>]
+    #
+    # @!attribute [rw] successful
+    #   @return [Array<Types::BatchSuccessfulResultModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStartResponse AWS API Documentation
+    #
+    class BatchStartResponse < Struct.new(
+      :failed,
+      :successful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch start resource results
+    #
+    # @!attribute [rw] failed
+    #   List of failed operations
+    #   @return [Array<Types::BatchFailedResultModel>]
+    #
+    # @!attribute [rw] successful
+    #   List of successful operations
+    #   @return [Array<Types::BatchSuccessfulResultModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStartResultModel AWS API Documentation
+    #
+    class BatchStartResultModel < Struct.new(
+      :failed,
+      :successful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch stop resource request
+    #
+    # @!attribute [rw] channel_ids
+    #   List of channel IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_ids
+    #   List of multiplex IDs
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStop AWS API Documentation
+    #
+    class BatchStop < Struct.new(
+      :channel_ids,
+      :multiplex_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchStopRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_ids: ["__string"],
+    #         multiplex_ids: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_ids
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStopRequest AWS API Documentation
+    #
+    class BatchStopRequest < Struct.new(
+      :channel_ids,
+      :multiplex_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed
+    #   @return [Array<Types::BatchFailedResultModel>]
+    #
+    # @!attribute [rw] successful
+    #   @return [Array<Types::BatchSuccessfulResultModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStopResponse AWS API Documentation
+    #
+    class BatchStopResponse < Struct.new(
+      :failed,
+      :successful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch stop resource results
+    #
+    # @!attribute [rw] failed
+    #   List of failed operations
+    #   @return [Array<Types::BatchFailedResultModel>]
+    #
+    # @!attribute [rw] successful
+    #   List of successful operations
+    #   @return [Array<Types::BatchSuccessfulResultModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStopResultModel AWS API Documentation
+    #
+    class BatchStopResultModel < Struct.new(
+      :failed,
+      :successful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details from a successful operation
+    #
+    # @!attribute [rw] arn
+    #   ARN of the resource
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   ID of the resource
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current state of the resource
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchSuccessfulResultModel AWS API Documentation
+    #
+    class BatchSuccessfulResultModel < Struct.new(
+      :arn,
+      :id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4391,7 +4692,6 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] accept
-    #   Accept Header
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnailRequest AWS API Documentation
@@ -6447,13 +6747,13 @@ module Aws::MediaLive
     # @!attribute [rw] destination
     #   The destination for the frame capture files. Either the URI for an
     #   Amazon S3 bucket and object, plus a file name prefix (for example,
-    #   s3ssl://sportsDelivery/highlights/20180820/curling\_) or the URI for
+    #   s3ssl://sportsDelivery/highlights/20180820/curling-) or the URI for
     #   a MediaStore container, plus a file name prefix (for example,
-    #   mediastoressl://sportsDelivery/20180820/curling\_). The final file
+    #   mediastoressl://sportsDelivery/20180820/curling-). The final file
     #   names consist of the prefix from the destination field (for example,
-    #   "curling\_") + name modifier + the counter (5 digits, starting
-    #   from 00001) + extension (which is always .jpg). For example,
-    #   curlingLow.00001.jpg
+    #   "curling-") + name modifier + the counter (5 digits, starting from
+    #   00001) + extension (which is always .jpg). For example,
+    #   curling-low.00001.jpg
     #   @return [Types::OutputLocationRef]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureGroupSettings AWS API Documentation
@@ -7747,7 +8047,7 @@ module Aws::MediaLive
     #   Applies only if Mode field is LIVE. Specifies the maximum number of
     #   segments in the media manifest file. After this maximum, older
     #   segments are removed from the media manifest. This number must be
-    #   less than or equal to the Keep Segments field.
+    #   smaller than the number in the Keep Segments field.
     #   @return [Integer]
     #
     # @!attribute [rw] input_loss_action
@@ -7771,7 +8071,14 @@ module Aws::MediaLive
     #
     # @!attribute [rw] keep_segments
     #   Applies only if Mode field is LIVE. Specifies the number of media
-    #   segments (.ts files) to retain in the destination directory.
+    #   segments to retain in the destination directory. This number should
+    #   be bigger than indexNSegments (Num segments). We recommend (value =
+    #   (2 x indexNsegments) + 1). If this "keep segments" number is too
+    #   low, the following might happen: the player is still reading a media
+    #   manifest file that lists this segment, but that segment has been
+    #   removed from the destination directory (as directed by
+    #   indexNSegments). This situation would result in a 404 HTTP error on
+    #   the player.
     #   @return [Integer]
     #
     # @!attribute [rw] key_format
@@ -10277,10 +10584,12 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] buffer_model
-    #   If set to multiplex, use multiplex buffer model for accurate
-    #   interleaving. Setting to bufferModel to none can lead to lower
-    #   latency, but low-memory devices may not be able to play back the
-    #   stream without interruptions.
+    #   Controls the timing accuracy for output network traffic. Leave as
+    #   MULTIPLEX to ensure accurate network packet timing. Or set to NONE,
+    #   which might result in lower latency but will result in more
+    #   variability in output network packet timing. This variability might
+    #   cause interruptions, jitter, or bursty behavior in your playback or
+    #   receiving devices.
     #   @return [String]
     #
     # @!attribute [rw] cc_descriptor
@@ -17125,14 +17434,17 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] respond_to_afd
-    #   Indicates how to respond to the AFD values in the input stream.
-    #   RESPOND causes input video to be clipped, depending on the AFD
-    #   value, input display aspect ratio, and output display aspect ratio,
-    #   and (except for FRAME\_CAPTURE codec) includes the values in the
-    #   output. PASSTHROUGH (does not apply to FRAME\_CAPTURE codec) ignores
-    #   the AFD values and includes the values in the output, so input video
-    #   is not clipped. NONE ignores the AFD values and does not include the
-    #   values through to the output, so input video is not clipped.
+    #   Indicates how MediaLive will respond to the AFD values that might be
+    #   in the input video. If you do not know what AFD signaling is, or if
+    #   your downstream system has not given you guidance, choose
+    #   PASSTHROUGH. RESPOND: MediaLive clips the input video using a
+    #   formula that uses the AFD values (configured in afdSignaling ), the
+    #   input display aspect ratio, and the output display aspect ratio.
+    #   MediaLive also includes the AFD values in the output, unless the
+    #   codec for this encode is FRAME\_CAPTURE. PASSTHROUGH: MediaLive
+    #   ignores the AFD values and does not clip the video. But MediaLive
+    #   does include the values in the output. NONE: MediaLive does not clip
+    #   the input video and does not include the AFD values in the output
     #   @return [String]
     #
     # @!attribute [rw] scaling_behavior

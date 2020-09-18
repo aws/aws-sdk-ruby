@@ -339,6 +339,13 @@ module Aws::SSOAdmin
 
     # Attaches an IAM managed policy ARN to a permission set.
     #
+    # <note markdown="1"> If the permission set is already referenced by one or more account
+    # assignments, you will need to call ` ProvisionPermissionSet ` after
+    # this action to apply the corresponding IAM policy updates to all
+    # assigned accounts.
+    #
+    #  </note>
+    #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
@@ -380,6 +387,16 @@ module Aws::SSOAdmin
     #
     #  </note>
     #
+    # <note markdown="1"> As part of a successful `CreateAccountAssignment` call, the specified
+    # permission set will automatically be provisioned to the account in the
+    # form of an IAM policy attached to the SSO-created IAM role. If the
+    # permission set is subsequently updated, the corresponding IAM policies
+    # attached to roles in your accounts will not be updated automatically.
+    # In this case, you will need to call ` ProvisionPermissionSet ` to make
+    # these updates.
+    #
+    #  </note>
+    #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource Names
@@ -388,7 +405,8 @@ module Aws::SSOAdmin
     #   *AWS General Reference*.
     #
     # @option params [required, String] :target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit string
+    #   (For example, 123456789012).
     #
     # @option params [required, String] :target_type
     #   The entity type for which the assignment will be created.
@@ -401,7 +419,11 @@ module Aws::SSOAdmin
     #   The entity type for which the assignment will be created.
     #
     # @option params [required, String] :principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #
     # @return [Types::CreateAccountAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -440,6 +462,11 @@ module Aws::SSOAdmin
     end
 
     # Creates a permission set within a specified SSO instance.
+    #
+    # <note markdown="1"> To grant users and groups access to AWS account resources, use `
+    # CreateAccountAssignment `.
+    #
+    #  </note>
     #
     # @option params [required, String] :name
     #   The name of the PermissionSet.
@@ -514,7 +541,8 @@ module Aws::SSOAdmin
     #   *AWS General Reference*.
     #
     # @option params [required, String] :target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit string
+    #   (For example, 123456789012).
     #
     # @option params [required, String] :target_type
     #   The entity type for which the assignment will be deleted.
@@ -526,7 +554,11 @@ module Aws::SSOAdmin
     #   The entity type for which the assignment will be deleted.
     #
     # @option params [required, String] :principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #
     # @return [Types::DeleteAccountAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1399,7 +1431,8 @@ module Aws::SSOAdmin
     #   The ARN of the permission set.
     #
     # @option params [String] :target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit string
+    #   (For example, 123456789012).
     #
     # @option params [required, String] :target_type
     #   The entity type for which the assignment will be created.
@@ -1436,6 +1469,13 @@ module Aws::SSOAdmin
     end
 
     # Attaches an IAM inline policy to a permission set.
+    #
+    # <note markdown="1"> If the permission set is already referenced by one or more account
+    # assignments, you will need to call ` ProvisionPermissionSet ` after
+    # this action to apply the corresponding IAM policy updates to all
+    # assigned accounts.
+    #
+    #  </note>
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the SSO instance under which the operation will be
@@ -1599,7 +1639,7 @@ module Aws::SSOAdmin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

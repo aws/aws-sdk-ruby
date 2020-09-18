@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-09-18)
+------------------
+
+* Feature - Documentation updates for AWS SSO APIs.
+
 1.1.0 (2020-09-15)
 ------------------
 

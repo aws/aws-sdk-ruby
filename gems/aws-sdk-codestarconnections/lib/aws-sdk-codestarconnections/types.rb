@@ -69,7 +69,7 @@ module Aws::CodeStarconnections
     #   data as a hash:
     #
     #       {
-    #         provider_type: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
+    #         provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #         connection_name: "ConnectionName", # required
     #         tags: [
     #           {
@@ -138,7 +138,7 @@ module Aws::CodeStarconnections
     #
     #       {
     #         name: "HostName", # required
-    #         provider_type: "Bitbucket", # required, accepts Bitbucket, GitHubEnterpriseServer
+    #         provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #         provider_endpoint: "Url", # required
     #         vpc_configuration: {
     #           vpc_id: "VpcId", # required
@@ -404,7 +404,7 @@ module Aws::CodeStarconnections
     #   data as a hash:
     #
     #       {
-    #         provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
+    #         provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #         host_arn_filter: "HostArn",
     #         max_results: 1,
     #         next_token: "NextToken",

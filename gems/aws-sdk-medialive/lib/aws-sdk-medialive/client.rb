@@ -327,6 +327,129 @@ module Aws::MediaLive
 
     # @!group API Operations
 
+    # Starts delete of resources.
+    #
+    # @option params [Array<String>] :channel_ids
+    #
+    # @option params [Array<String>] :input_ids
+    #
+    # @option params [Array<String>] :input_security_group_ids
+    #
+    # @option params [Array<String>] :multiplex_ids
+    #
+    # @return [Types::BatchDeleteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteResponse#failed #failed} => Array&lt;Types::BatchFailedResultModel&gt;
+    #   * {Types::BatchDeleteResponse#successful #successful} => Array&lt;Types::BatchSuccessfulResultModel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete({
+    #     channel_ids: ["__string"],
+    #     input_ids: ["__string"],
+    #     input_security_group_ids: ["__string"],
+    #     multiplex_ids: ["__string"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed #=> Array
+    #   resp.failed[0].arn #=> String
+    #   resp.failed[0].code #=> String
+    #   resp.failed[0].id #=> String
+    #   resp.failed[0].message #=> String
+    #   resp.successful #=> Array
+    #   resp.successful[0].arn #=> String
+    #   resp.successful[0].id #=> String
+    #   resp.successful[0].state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchDelete AWS API Documentation
+    #
+    # @overload batch_delete(params = {})
+    # @param [Hash] params ({})
+    def batch_delete(params = {}, options = {})
+      req = build_request(:batch_delete, params)
+      req.send_request(options)
+    end
+
+    # Starts existing resources
+    #
+    # @option params [Array<String>] :channel_ids
+    #
+    # @option params [Array<String>] :multiplex_ids
+    #
+    # @return [Types::BatchStartResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchStartResponse#failed #failed} => Array&lt;Types::BatchFailedResultModel&gt;
+    #   * {Types::BatchStartResponse#successful #successful} => Array&lt;Types::BatchSuccessfulResultModel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_start({
+    #     channel_ids: ["__string"],
+    #     multiplex_ids: ["__string"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed #=> Array
+    #   resp.failed[0].arn #=> String
+    #   resp.failed[0].code #=> String
+    #   resp.failed[0].id #=> String
+    #   resp.failed[0].message #=> String
+    #   resp.successful #=> Array
+    #   resp.successful[0].arn #=> String
+    #   resp.successful[0].id #=> String
+    #   resp.successful[0].state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStart AWS API Documentation
+    #
+    # @overload batch_start(params = {})
+    # @param [Hash] params ({})
+    def batch_start(params = {}, options = {})
+      req = build_request(:batch_start, params)
+      req.send_request(options)
+    end
+
+    # Stops running resources
+    #
+    # @option params [Array<String>] :channel_ids
+    #
+    # @option params [Array<String>] :multiplex_ids
+    #
+    # @return [Types::BatchStopResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchStopResponse#failed #failed} => Array&lt;Types::BatchFailedResultModel&gt;
+    #   * {Types::BatchStopResponse#successful #successful} => Array&lt;Types::BatchSuccessfulResultModel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_stop({
+    #     channel_ids: ["__string"],
+    #     multiplex_ids: ["__string"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed #=> Array
+    #   resp.failed[0].arn #=> String
+    #   resp.failed[0].code #=> String
+    #   resp.failed[0].id #=> String
+    #   resp.failed[0].message #=> String
+    #   resp.successful #=> Array
+    #   resp.successful[0].arn #=> String
+    #   resp.successful[0].id #=> String
+    #   resp.successful[0].state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchStop AWS API Documentation
+    #
+    # @overload batch_stop(params = {})
+    # @param [Hash] params ({})
+    def batch_stop(params = {}, options = {})
+      req = build_request(:batch_stop, params)
+      req.send_request(options)
+    end
+
     # Update a channel schedule
     #
     # @option params [required, String] :channel_id
@@ -3935,7 +4058,6 @@ module Aws::MediaLive
     # @option params [required, String] :input_device_id
     #
     # @option params [required, String] :accept
-    #   Accept Header
     #
     # @return [Types::DescribeInputDeviceThumbnailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8654,7 +8776,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -29,7 +29,7 @@ require_relative 'aws-sdk-medialive/customizations'
 # structure.
 #
 #     media_live = Aws::MediaLive::Client.new
-#     resp = media_live.batch_update_schedule(params)
+#     resp = media_live.batch_delete(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-medialive/customizations'
 # @!group service
 module Aws::MediaLive
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end

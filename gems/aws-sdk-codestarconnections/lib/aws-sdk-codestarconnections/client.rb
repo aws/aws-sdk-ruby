@@ -365,7 +365,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
-    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
+    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #     connection_name: "ConnectionName", # required
     #     tags: [
     #       {
@@ -431,7 +431,7 @@ module Aws::CodeStarconnections
     #
     #   resp = client.create_host({
     #     name: "HostName", # required
-    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHubEnterpriseServer
+    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #     provider_endpoint: "Url", # required
     #     vpc_configuration: {
     #       vpc_id: "VpcId", # required
@@ -528,7 +528,7 @@ module Aws::CodeStarconnections
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
     #   resp.connection.owner_account_id #=> String
     #   resp.connection.connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connection.host_arn #=> String
@@ -566,7 +566,7 @@ module Aws::CodeStarconnections
     #
     #   resp.name #=> String
     #   resp.status #=> String
-    #   resp.provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
     #   resp.provider_endpoint #=> String
     #   resp.vpc_configuration.vpc_id #=> String
     #   resp.vpc_configuration.subnet_ids #=> Array
@@ -613,7 +613,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_connections({
-    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
+    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #     host_arn_filter: "HostArn",
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -624,7 +624,7 @@ module Aws::CodeStarconnections
     #   resp.connections #=> Array
     #   resp.connections[0].connection_name #=> String
     #   resp.connections[0].connection_arn #=> String
-    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
     #   resp.connections[0].owner_account_id #=> String
     #   resp.connections[0].connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connections[0].host_arn #=> String
@@ -669,7 +669,7 @@ module Aws::CodeStarconnections
     #   resp.hosts #=> Array
     #   resp.hosts[0].name #=> String
     #   resp.hosts[0].host_arn #=> String
-    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
     #   resp.hosts[0].provider_endpoint #=> String
     #   resp.hosts[0].vpc_configuration.vpc_id #=> String
     #   resp.hosts[0].vpc_configuration.subnet_ids #=> Array
@@ -794,7 +794,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

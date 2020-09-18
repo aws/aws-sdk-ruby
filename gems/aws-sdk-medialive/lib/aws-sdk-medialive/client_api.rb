@@ -62,10 +62,24 @@ module Aws::MediaLive
     AvailSettings = Shapes::StructureShape.new(name: 'AvailSettings')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchDelete = Shapes::StructureShape.new(name: 'BatchDelete')
+    BatchDeleteRequest = Shapes::StructureShape.new(name: 'BatchDeleteRequest')
+    BatchDeleteResponse = Shapes::StructureShape.new(name: 'BatchDeleteResponse')
+    BatchDeleteResultModel = Shapes::StructureShape.new(name: 'BatchDeleteResultModel')
+    BatchFailedResultModel = Shapes::StructureShape.new(name: 'BatchFailedResultModel')
     BatchScheduleActionCreateRequest = Shapes::StructureShape.new(name: 'BatchScheduleActionCreateRequest')
     BatchScheduleActionCreateResult = Shapes::StructureShape.new(name: 'BatchScheduleActionCreateResult')
     BatchScheduleActionDeleteRequest = Shapes::StructureShape.new(name: 'BatchScheduleActionDeleteRequest')
     BatchScheduleActionDeleteResult = Shapes::StructureShape.new(name: 'BatchScheduleActionDeleteResult')
+    BatchStart = Shapes::StructureShape.new(name: 'BatchStart')
+    BatchStartRequest = Shapes::StructureShape.new(name: 'BatchStartRequest')
+    BatchStartResponse = Shapes::StructureShape.new(name: 'BatchStartResponse')
+    BatchStartResultModel = Shapes::StructureShape.new(name: 'BatchStartResultModel')
+    BatchStop = Shapes::StructureShape.new(name: 'BatchStop')
+    BatchStopRequest = Shapes::StructureShape.new(name: 'BatchStopRequest')
+    BatchStopResponse = Shapes::StructureShape.new(name: 'BatchStopResponse')
+    BatchStopResultModel = Shapes::StructureShape.new(name: 'BatchStopResultModel')
+    BatchSuccessfulResultModel = Shapes::StructureShape.new(name: 'BatchSuccessfulResultModel')
     BatchUpdateScheduleRequest = Shapes::StructureShape.new(name: 'BatchUpdateScheduleRequest')
     BatchUpdateScheduleResponse = Shapes::StructureShape.new(name: 'BatchUpdateScheduleResponse')
     BatchUpdateScheduleResult = Shapes::StructureShape.new(name: 'BatchUpdateScheduleResult')
@@ -635,12 +649,15 @@ module Aws::MediaLive
     __integerMin4Max20 = Shapes::IntegerShape.new(name: '__integerMin4Max20')
     __integerMin96Max600 = Shapes::IntegerShape.new(name: '__integerMin96Max600')
     __integerMinNegative1000Max1000 = Shapes::IntegerShape.new(name: '__integerMinNegative1000Max1000')
+    __integerMinNegative5Max5 = Shapes::IntegerShape.new(name: '__integerMinNegative5Max5')
     __integerMinNegative60Max6 = Shapes::IntegerShape.new(name: '__integerMinNegative60Max6')
     __integerMinNegative60Max60 = Shapes::IntegerShape.new(name: '__integerMinNegative60Max60')
     __listOfAudioChannelMapping = Shapes::ListShape.new(name: '__listOfAudioChannelMapping')
     __listOfAudioDescription = Shapes::ListShape.new(name: '__listOfAudioDescription')
     __listOfAudioSelector = Shapes::ListShape.new(name: '__listOfAudioSelector')
     __listOfAudioTrack = Shapes::ListShape.new(name: '__listOfAudioTrack')
+    __listOfBatchFailedResultModel = Shapes::ListShape.new(name: '__listOfBatchFailedResultModel')
+    __listOfBatchSuccessfulResultModel = Shapes::ListShape.new(name: '__listOfBatchSuccessfulResultModel')
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
     __listOfCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfCaptionLanguageMapping')
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
@@ -815,6 +832,32 @@ module Aws::MediaLive
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
 
+    BatchDelete.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    BatchDelete.add_member(:input_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputIds"))
+    BatchDelete.add_member(:input_security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroupIds"))
+    BatchDelete.add_member(:multiplex_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "multiplexIds"))
+    BatchDelete.struct_class = Types::BatchDelete
+
+    BatchDeleteRequest.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    BatchDeleteRequest.add_member(:input_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputIds"))
+    BatchDeleteRequest.add_member(:input_security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroupIds"))
+    BatchDeleteRequest.add_member(:multiplex_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "multiplexIds"))
+    BatchDeleteRequest.struct_class = Types::BatchDeleteRequest
+
+    BatchDeleteResponse.add_member(:failed, Shapes::ShapeRef.new(shape: __listOfBatchFailedResultModel, location_name: "failed"))
+    BatchDeleteResponse.add_member(:successful, Shapes::ShapeRef.new(shape: __listOfBatchSuccessfulResultModel, location_name: "successful"))
+    BatchDeleteResponse.struct_class = Types::BatchDeleteResponse
+
+    BatchDeleteResultModel.add_member(:failed, Shapes::ShapeRef.new(shape: __listOfBatchFailedResultModel, location_name: "failed"))
+    BatchDeleteResultModel.add_member(:successful, Shapes::ShapeRef.new(shape: __listOfBatchSuccessfulResultModel, location_name: "successful"))
+    BatchDeleteResultModel.struct_class = Types::BatchDeleteResultModel
+
+    BatchFailedResultModel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    BatchFailedResultModel.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    BatchFailedResultModel.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    BatchFailedResultModel.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BatchFailedResultModel.struct_class = Types::BatchFailedResultModel
+
     BatchScheduleActionCreateRequest.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
     BatchScheduleActionCreateRequest.struct_class = Types::BatchScheduleActionCreateRequest
 
@@ -826,6 +869,43 @@ module Aws::MediaLive
 
     BatchScheduleActionDeleteResult.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
     BatchScheduleActionDeleteResult.struct_class = Types::BatchScheduleActionDeleteResult
+
+    BatchStart.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    BatchStart.add_member(:multiplex_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "multiplexIds"))
+    BatchStart.struct_class = Types::BatchStart
+
+    BatchStartRequest.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    BatchStartRequest.add_member(:multiplex_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "multiplexIds"))
+    BatchStartRequest.struct_class = Types::BatchStartRequest
+
+    BatchStartResponse.add_member(:failed, Shapes::ShapeRef.new(shape: __listOfBatchFailedResultModel, location_name: "failed"))
+    BatchStartResponse.add_member(:successful, Shapes::ShapeRef.new(shape: __listOfBatchSuccessfulResultModel, location_name: "successful"))
+    BatchStartResponse.struct_class = Types::BatchStartResponse
+
+    BatchStartResultModel.add_member(:failed, Shapes::ShapeRef.new(shape: __listOfBatchFailedResultModel, location_name: "failed"))
+    BatchStartResultModel.add_member(:successful, Shapes::ShapeRef.new(shape: __listOfBatchSuccessfulResultModel, location_name: "successful"))
+    BatchStartResultModel.struct_class = Types::BatchStartResultModel
+
+    BatchStop.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    BatchStop.add_member(:multiplex_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "multiplexIds"))
+    BatchStop.struct_class = Types::BatchStop
+
+    BatchStopRequest.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    BatchStopRequest.add_member(:multiplex_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "multiplexIds"))
+    BatchStopRequest.struct_class = Types::BatchStopRequest
+
+    BatchStopResponse.add_member(:failed, Shapes::ShapeRef.new(shape: __listOfBatchFailedResultModel, location_name: "failed"))
+    BatchStopResponse.add_member(:successful, Shapes::ShapeRef.new(shape: __listOfBatchSuccessfulResultModel, location_name: "successful"))
+    BatchStopResponse.struct_class = Types::BatchStopResponse
+
+    BatchStopResultModel.add_member(:failed, Shapes::ShapeRef.new(shape: __listOfBatchFailedResultModel, location_name: "failed"))
+    BatchStopResultModel.add_member(:successful, Shapes::ShapeRef.new(shape: __listOfBatchSuccessfulResultModel, location_name: "successful"))
+    BatchStopResultModel.struct_class = Types::BatchStopResultModel
+
+    BatchSuccessfulResultModel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    BatchSuccessfulResultModel.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    BatchSuccessfulResultModel.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "state"))
+    BatchSuccessfulResultModel.struct_class = Types::BatchSuccessfulResultModel
 
     BatchUpdateScheduleRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     BatchUpdateScheduleRequest.add_member(:creates, Shapes::ShapeRef.new(shape: BatchScheduleActionCreateRequest, location_name: "creates"))
@@ -2721,6 +2801,10 @@ module Aws::MediaLive
 
     __listOfAudioTrack.member = Shapes::ShapeRef.new(shape: AudioTrack)
 
+    __listOfBatchFailedResultModel.member = Shapes::ShapeRef.new(shape: BatchFailedResultModel)
+
+    __listOfBatchSuccessfulResultModel.member = Shapes::ShapeRef.new(shape: BatchSuccessfulResultModel)
+
     __listOfCaptionDescription.member = Shapes::ShapeRef.new(shape: CaptionDescription)
 
     __listOfCaptionLanguageMapping.member = Shapes::ShapeRef.new(shape: CaptionLanguageMapping)
@@ -2817,6 +2901,54 @@ module Aws::MediaLive
         "signingName" => "medialive",
         "uid" => "medialive-2017-10-14",
       }
+
+      api.add_operation(:batch_delete, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDelete"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/batch/delete"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:batch_start, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchStart"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/batch/start"
+        o.input = Shapes::ShapeRef.new(shape: BatchStartRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchStartResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:batch_stop, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchStop"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/batch/stop"
+        o.input = Shapes::ShapeRef.new(shape: BatchStopRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchStopResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
 
       api.add_operation(:batch_update_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchUpdateSchedule"
