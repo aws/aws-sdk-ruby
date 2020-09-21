@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.590 (2020-09-21)
+------------------
+
 * Feature - Aws::EventBridge - Updated the API, and documentation for Amazon EventBridge.
 
 * Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
