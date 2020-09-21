@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EventBridge - Updated the API, and documentation for Amazon EventBridge.
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::IoTSiteWise - Updated the API, and documentation for AWS IoT SiteWise.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::ResourceGroups - Updated the documentation, and API for AWS Resource Groups.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the documentation for AWS Resource Groups Tagging API.
+
 2.11.589 (2020-09-18)
 ------------------
 
