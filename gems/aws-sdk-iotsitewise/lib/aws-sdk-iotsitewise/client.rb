@@ -552,17 +552,17 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Creates an access policy that grants the specified AWS Single Sign-On
-    # user or group access to the specified AWS IoT SiteWise Monitor portal
-    # or project resource.
+    # Creates an access policy that grants the specified identity (AWS SSO
+    # user, AWS SSO group, or IAM user) access to the specified AWS IoT
+    # SiteWise Monitor portal or project resource.
     #
     # @option params [required, Types::Identity] :access_policy_identity
-    #   The identity for this access policy. Choose either a `user` or a
-    #   `group` but not both.
+    #   The identity for this access policy. Choose an AWS SSO user, an AWS
+    #   SSO group, or an IAM user.
     #
     # @option params [required, Types::Resource] :access_policy_resource
     #   The AWS IoT SiteWise Monitor resource for this access policy. Choose
-    #   either `portal` or `project` but not both.
+    #   either a portal or a project.
     #
     # @option params [required, String] :access_policy_permission
     #   The permission level for this access policy. Note that a project
@@ -599,6 +599,9 @@ module Aws::IoTSiteWise
     #       },
     #       group: {
     #         id: "IdentityId", # required
+    #       },
+    #       iam_user: {
+    #         arn: "ARN", # required
     #       },
     #     },
     #     access_policy_resource: { # required
@@ -954,23 +957,19 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Creates a portal, which can contain projects and dashboards. Before
-    # you can create a portal, you must enable AWS Single Sign-On. AWS IoT
-    # SiteWise Monitor uses AWS SSO to manage user permissions. For more
-    # information, see [Enabling AWS SSO][1] in the *AWS IoT SiteWise User
-    # Guide*.
+    # Creates a portal, which can contain projects and dashboards. AWS IoT
+    # SiteWise Monitor uses AWS SSO or IAM to authenticate portal users and
+    # manage user permissions.
     #
-    # <note markdown="1"> Before you can sign in to a new portal, you must add at least one AWS
-    # SSO user or group to that portal. For more information, see [Adding or
-    # removing portal administrators][2] in the *AWS IoT SiteWise User
-    # Guide*.
+    # <note markdown="1"> Before you can sign in to a new portal, you must add at least one
+    # identity to that portal. For more information, see [Adding or removing
+    # portal administrators][1] in the *AWS IoT SiteWise User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso
-    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins
     #
     # @option params [required, String] :portal_name
     #   A friendly name for the portal.
@@ -1013,6 +1012,30 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
     #
+    # @option params [String] :portal_auth_mode
+    #   The service to use to authenticate users to the portal. Choose from
+    #   the following options:
+    #
+    #   * `SSO` – The portal uses AWS Single Sign-On to authenticate users and
+    #     manage user permissions. Before you can create a portal that uses
+    #     AWS SSO, you must enable AWS SSO. For more information, see
+    #     [Enabling AWS SSO][1] in the *AWS IoT SiteWise User Guide*. This
+    #     option is only available in AWS Regions other than the China
+    #     Regions.
+    #
+    #   * `IAM` – The portal uses AWS Identity and Access Management (IAM) to
+    #     authenticate users and manage user permissions. IAM users must have
+    #     the `iotsitewise:CreatePresignedPortalUrl` permission to sign in to
+    #     the portal. This option is only available in the China Regions.
+    #
+    #   You can't change this value after you create a portal.
+    #
+    #   Default: `SSO`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso
+    #
     # @return [Types::CreatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePortalResponse#portal_id #portal_id} => String
@@ -1036,6 +1059,7 @@ module Aws::IoTSiteWise
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     portal_auth_mode: "IAM", # accepts IAM, SSO
     #   })
     #
     # @example Response structure
@@ -1052,6 +1076,42 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def create_portal(params = {}, options = {})
       req = build_request(:create_portal, params)
+      req.send_request(options)
+    end
+
+    # Creates a pre-signed URL to a portal. Use this operation to create
+    # URLs to portals that use AWS Identity and Access Management (IAM) to
+    # authenticate users. An IAM user with access to a portal can call this
+    # API to get a URL to that portal. The URL contains a session token that
+    # lets the IAM user access the portal.
+    #
+    # @option params [required, String] :portal_id
+    #   The ID of the portal to access.
+    #
+    # @option params [Integer] :session_duration_seconds
+    #   The duration (in seconds) for which the session at the URL is valid.
+    #
+    #   Default: 900 seconds (15 minutes)
+    #
+    # @return [Types::CreatePresignedPortalUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePresignedPortalUrlResponse#presigned_portal_url #presigned_portal_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_presigned_portal_url({
+    #     portal_id: "ID", # required
+    #     session_duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.presigned_portal_url #=> String
+    #
+    # @overload create_presigned_portal_url(params = {})
+    # @param [Hash] params ({})
+    def create_presigned_portal_url(params = {}, options = {})
+      req = build_request(:create_presigned_portal_url, params)
       req.send_request(options)
     end
 
@@ -1112,10 +1172,9 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Deletes an access policy that grants the specified AWS Single Sign-On
-    # identity access to the specified AWS IoT SiteWise Monitor resource.
-    # You can use this operation to revoke access to an AWS IoT SiteWise
-    # Monitor resource.
+    # Deletes an access policy that grants the specified identity access to
+    # the specified AWS IoT SiteWise Monitor resource. You can use this
+    # operation to revoke access to an AWS IoT SiteWise Monitor resource.
     #
     # @option params [required, String] :access_policy_id
     #   The ID of the access policy to be deleted.
@@ -1270,12 +1329,6 @@ module Aws::IoTSiteWise
 
     # Deletes a gateway from AWS IoT SiteWise. When you delete a gateway,
     # some of the gateway's files remain in your gateway's file system.
-    # For more information, see [Data retention][1] in the *AWS IoT SiteWise
-    # User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-retention.html
     #
     # @option params [required, String] :gateway_id
     #   The ID of the gateway to delete.
@@ -1361,8 +1414,8 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Describes an access policy, which specifies an AWS SSO user or
-    # group's access to an AWS IoT SiteWise Monitor portal or project.
+    # Describes an access policy, which specifies an identity's access to
+    # an AWS IoT SiteWise Monitor portal or project.
     #
     # @option params [required, String] :access_policy_id
     #   The ID of the access policy.
@@ -1389,6 +1442,7 @@ module Aws::IoTSiteWise
     #   resp.access_policy_arn #=> String
     #   resp.access_policy_identity.user.id #=> String
     #   resp.access_policy_identity.group.id #=> String
+    #   resp.access_policy_identity.iam_user.arn #=> String
     #   resp.access_policy_resource.portal.id #=> String
     #   resp.access_policy_resource.project.id #=> String
     #   resp.access_policy_permission #=> String, one of "ADMINISTRATOR", "VIEWER"
@@ -1764,6 +1818,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribePortalResponse#portal_last_update_date #portal_last_update_date} => Time
     #   * {Types::DescribePortalResponse#portal_logo_image_location #portal_logo_image_location} => Types::ImageLocation
     #   * {Types::DescribePortalResponse#role_arn #role_arn} => String
+    #   * {Types::DescribePortalResponse#portal_auth_mode #portal_auth_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1788,6 +1843,7 @@ module Aws::IoTSiteWise
     #   resp.portal_logo_image_location.id #=> String
     #   resp.portal_logo_image_location.url #=> String
     #   resp.role_arn #=> String
+    #   resp.portal_auth_mode #=> String, one of "IAM", "SSO"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2152,17 +2208,17 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Retrieves a paginated list of access policies for an AWS SSO identity
-    # (a user or group) or an AWS IoT SiteWise Monitor resource (a portal or
-    # project).
+    # Retrieves a paginated list of access policies for an identity (an AWS
+    # SSO user, an AWS SSO group, or an IAM user) or an AWS IoT SiteWise
+    # Monitor resource (a portal or project).
     #
     # @option params [String] :identity_type
-    #   The type of identity (user or group). This parameter is required if
-    #   you specify `identityId`.
+    #   The type of identity (AWS SSO user, AWS SSO group, or IAM user). This
+    #   parameter is required if you specify `identityId`.
     #
     # @option params [String] :identity_id
     #   The ID of the identity. This parameter is required if you specify
-    #   `identityType`.
+    #   `USER` or `GROUP` for `identityType`.
     #
     # @option params [String] :resource_type
     #   The type of resource (portal or project). This parameter is required
@@ -2171,6 +2227,15 @@ module Aws::IoTSiteWise
     # @option params [String] :resource_id
     #   The ID of the resource. This parameter is required if you specify
     #   `resourceType`.
+    #
+    # @option params [String] :iam_arn
+    #   The ARN of the IAM user. For more information, see [IAM ARNs][1] in
+    #   the *IAM User Guide*. This parameter is required if you specify `IAM`
+    #   for `identityType`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
@@ -2190,10 +2255,11 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_access_policies({
-    #     identity_type: "USER", # accepts USER, GROUP
+    #     identity_type: "USER", # accepts USER, GROUP, IAM
     #     identity_id: "IdentityId",
     #     resource_type: "PORTAL", # accepts PORTAL, PROJECT
     #     resource_id: "ID",
+    #     iam_arn: "ARN",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -2204,6 +2270,7 @@ module Aws::IoTSiteWise
     #   resp.access_policy_summaries[0].id #=> String
     #   resp.access_policy_summaries[0].identity.user.id #=> String
     #   resp.access_policy_summaries[0].identity.group.id #=> String
+    #   resp.access_policy_summaries[0].identity.iam_user.arn #=> String
     #   resp.access_policy_summaries[0].resource.portal.id #=> String
     #   resp.access_policy_summaries[0].resource.project.id #=> String
     #   resp.access_policy_summaries[0].permission #=> String, one of "ADMINISTRATOR", "VIEWER"
@@ -2773,20 +2840,19 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Updates an existing access policy that specifies an AWS SSO user or
-    # group's access to an AWS IoT SiteWise Monitor portal or project
-    # resource.
+    # Updates an existing access policy that specifies an identity's access
+    # to an AWS IoT SiteWise Monitor portal or project resource.
     #
     # @option params [required, String] :access_policy_id
     #   The ID of the access policy.
     #
     # @option params [required, Types::Identity] :access_policy_identity
-    #   The identity for this access policy. Choose either a `user` or a
-    #   `group` but not both.
+    #   The identity for this access policy. Choose an AWS SSO user, an AWS
+    #   SSO group, or an IAM user.
     #
     # @option params [required, Types::Resource] :access_policy_resource
     #   The AWS IoT SiteWise Monitor resource for this access policy. Choose
-    #   either `portal` or `project` but not both.
+    #   either a portal or a project.
     #
     # @option params [required, String] :access_policy_permission
     #   The permission level for this access policy. Note that a project
@@ -2812,6 +2878,9 @@ module Aws::IoTSiteWise
     #       },
     #       group: {
     #         id: "IdentityId", # required
+    #       },
+    #       iam_user: {
+    #         arn: "ARN", # required
     #       },
     #     },
     #     access_policy_resource: { # required
@@ -2890,12 +2959,12 @@ module Aws::IoTSiteWise
     # must include their IDs and definitions in the updated asset model
     # payload. For more information, see [DescribeAssetModel][2].
     #
-    #  If you remove a property from an asset model or update a property's
-    # formula expression, AWS IoT SiteWise deletes all previous data for
-    # that property. If you remove a hierarchy definition from an asset
-    # model, AWS IoT SiteWise disassociates every asset associated with that
-    # hierarchy. You can't change the type or data type of an existing
-    # property.
+    #  If you remove a property from an asset model, AWS IoT SiteWise
+    # deletes
+    # all previous data for that property. If you remove a hierarchy
+    # definition from an asset model, AWS IoT SiteWise disassociates every
+    # asset associated with that hierarchy. You can't change the type or
+    # data type of an existing property.
     #
     #
     #
@@ -3348,7 +3417,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

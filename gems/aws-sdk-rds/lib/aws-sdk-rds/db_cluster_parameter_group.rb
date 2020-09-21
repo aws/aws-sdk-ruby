@@ -35,8 +35,8 @@ module Aws::RDS
     end
     alias :db_cluster_parameter_group_name :name
 
-    # Provides the name of the DB parameter group family that this DB
-    # cluster parameter group is compatible with.
+    # The name of the DB parameter group family that this DB cluster
+    # parameter group is compatible with.
     # @return [String]
     def db_parameter_group_family
       data[:db_parameter_group_family]

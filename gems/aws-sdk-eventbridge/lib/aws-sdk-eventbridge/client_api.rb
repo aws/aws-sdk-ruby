@@ -29,6 +29,8 @@ module Aws::EventBridge
     CreateEventBusResponse = Shapes::StructureShape.new(name: 'CreateEventBusResponse')
     CreatePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'CreatePartnerEventSourceRequest')
     CreatePartnerEventSourceResponse = Shapes::StructureShape.new(name: 'CreatePartnerEventSourceResponse')
+    Database = Shapes::StringShape.new(name: 'Database')
+    DbUser = Shapes::StringShape.new(name: 'DbUser')
     DeactivateEventSourceRequest = Shapes::StructureShape.new(name: 'DeactivateEventSourceRequest')
     DeleteEventBusRequest = Shapes::StructureShape.new(name: 'DeleteEventBusRequest')
     DeletePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'DeletePartnerEventSourceRequest')
@@ -128,6 +130,8 @@ module Aws::EventBridge
     QueryStringKey = Shapes::StringShape.new(name: 'QueryStringKey')
     QueryStringParametersMap = Shapes::MapShape.new(name: 'QueryStringParametersMap')
     QueryStringValue = Shapes::StringShape.new(name: 'QueryStringValue')
+    RedshiftDataParameters = Shapes::StructureShape.new(name: 'RedshiftDataParameters')
+    RedshiftSecretManagerArn = Shapes::StringShape.new(name: 'RedshiftSecretManagerArn')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RemoveTargetsRequest = Shapes::StructureShape.new(name: 'RemoveTargetsRequest')
     RemoveTargetsResponse = Shapes::StructureShape.new(name: 'RemoveTargetsResponse')
@@ -150,8 +154,10 @@ module Aws::EventBridge
     RunCommandTargetValues = Shapes::ListShape.new(name: 'RunCommandTargetValues')
     RunCommandTargets = Shapes::ListShape.new(name: 'RunCommandTargets')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    Sql = Shapes::StringShape.new(name: 'Sql')
     SqsParameters = Shapes::StructureShape.new(name: 'SqsParameters')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
+    StatementName = Shapes::StringShape.new(name: 'StatementName')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -516,6 +522,14 @@ module Aws::EventBridge
     QueryStringParametersMap.key = Shapes::ShapeRef.new(shape: QueryStringKey)
     QueryStringParametersMap.value = Shapes::ShapeRef.new(shape: QueryStringValue)
 
+    RedshiftDataParameters.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: RedshiftSecretManagerArn, location_name: "SecretManagerArn"))
+    RedshiftDataParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
+    RedshiftDataParameters.add_member(:db_user, Shapes::ShapeRef.new(shape: DbUser, location_name: "DbUser"))
+    RedshiftDataParameters.add_member(:sql, Shapes::ShapeRef.new(shape: Sql, required: true, location_name: "Sql"))
+    RedshiftDataParameters.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, location_name: "StatementName"))
+    RedshiftDataParameters.add_member(:with_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithEvent"))
+    RedshiftDataParameters.struct_class = Types::RedshiftDataParameters
+
     RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
     RemovePermissionRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: NonPartnerEventBusName, location_name: "EventBusName"))
     RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
@@ -598,6 +612,7 @@ module Aws::EventBridge
     Target.add_member(:batch_parameters, Shapes::ShapeRef.new(shape: BatchParameters, location_name: "BatchParameters"))
     Target.add_member(:sqs_parameters, Shapes::ShapeRef.new(shape: SqsParameters, location_name: "SqsParameters"))
     Target.add_member(:http_parameters, Shapes::ShapeRef.new(shape: HttpParameters, location_name: "HttpParameters"))
+    Target.add_member(:redshift_data_parameters, Shapes::ShapeRef.new(shape: RedshiftDataParameters, location_name: "RedshiftDataParameters"))
     Target.struct_class = Types::Target
 
     TargetIdList.member = Shapes::ShapeRef.new(shape: TargetId)

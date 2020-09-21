@@ -2047,6 +2047,14 @@ module Aws::CloudWatchEvents
     #                 "QueryStringKey" => "QueryStringValue",
     #               },
     #             },
+    #             redshift_data_parameters: {
+    #               secret_manager_arn: "RedshiftSecretManagerArn",
+    #               database: "Database", # required
+    #               db_user: "DbUser",
+    #               sql: "Sql", # required
+    #               statement_name: "StatementName",
+    #               with_event: false,
+    #             },
     #           },
     #         ],
     #       }
@@ -2113,6 +2121,64 @@ module Aws::CloudWatchEvents
       :target_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # These are custom parameters to be used when the target is a Redshift
+    # cluster to invoke the Redshift Data API ExecuteStatement based on
+    # EventBridge events.
+    #
+    # @note When making an API call, you may pass RedshiftDataParameters
+    #   data as a hash:
+    #
+    #       {
+    #         secret_manager_arn: "RedshiftSecretManagerArn",
+    #         database: "Database", # required
+    #         db_user: "DbUser",
+    #         sql: "Sql", # required
+    #         statement_name: "StatementName",
+    #         with_event: false,
+    #       }
+    #
+    # @!attribute [rw] secret_manager_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   Required when authenticating using AWS Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database. Required when authenticating using
+    #   temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_user
+    #   The database user name. Required when authenticating using temporary
+    #   credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql
+    #   The SQL statement text to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the SQL statement. You can name the SQL statement when
+    #   you create it to identify the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] with_event
+    #   Indicates whether to send an event back to EventBridge after the SQL
+    #   statement runs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RedshiftDataParameters AWS API Documentation
+    #
+    class RedshiftDataParameters < Struct.new(
+      :secret_manager_arn,
+      :database,
+      :db_user,
+      :sql,
+      :statement_name,
+      :with_event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2524,6 +2590,14 @@ module Aws::CloudWatchEvents
     #             "QueryStringKey" => "QueryStringValue",
     #           },
     #         },
+    #         redshift_data_parameters: {
+    #           secret_manager_arn: "RedshiftSecretManagerArn",
+    #           database: "Database", # required
+    #           db_user: "DbUser",
+    #           sql: "Sql", # required
+    #           statement_name: "StatementName",
+    #           with_event: false,
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -2617,6 +2691,15 @@ module Aws::CloudWatchEvents
     #   keys/values as part of your target invoking request.
     #   @return [Types::HttpParameters]
     #
+    # @!attribute [rw] redshift_data_parameters
+    #   Contains the Redshift Data API parameters to use when the target is
+    #   a Redshift cluster.
+    #
+    #   If you specify a Redshift Cluster as a Target, you can use this to
+    #   specify parameters to invoke the Redshift Data API ExecuteStatement
+    #   based on EventBridge events.
+    #   @return [Types::RedshiftDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
@@ -2631,7 +2714,8 @@ module Aws::CloudWatchEvents
       :ecs_parameters,
       :batch_parameters,
       :sqs_parameters,
-      :http_parameters)
+      :http_parameters,
+      :redshift_data_parameters)
       SENSITIVE = []
       include Aws::Structure
     end

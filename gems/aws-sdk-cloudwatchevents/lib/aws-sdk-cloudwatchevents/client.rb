@@ -1231,6 +1231,12 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].http_parameters.header_parameters["HeaderKey"] #=> String
     #   resp.targets[0].http_parameters.query_string_parameters #=> Hash
     #   resp.targets[0].http_parameters.query_string_parameters["QueryStringKey"] #=> String
+    #   resp.targets[0].redshift_data_parameters.secret_manager_arn #=> String
+    #   resp.targets[0].redshift_data_parameters.database #=> String
+    #   resp.targets[0].redshift_data_parameters.db_user #=> String
+    #   resp.targets[0].redshift_data_parameters.sql #=> String
+    #   resp.targets[0].redshift_data_parameters.statement_name #=> String
+    #   resp.targets[0].redshift_data_parameters.with_event #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -1597,6 +1603,8 @@ module Aws::CloudWatchEvents
     #
     # * Amazon API Gateway REST APIs
     #
+    # * Redshift Clusters to invoke Data API ExecuteStatement on
+    #
     # Creating rules with built-in targets is supported only in the AWS
     # Management Console. The built-in targets are `EC2 CreateSnapshot API
     # call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`,
@@ -1761,6 +1769,14 @@ module Aws::CloudWatchEvents
     #           query_string_parameters: {
     #             "QueryStringKey" => "QueryStringValue",
     #           },
+    #         },
+    #         redshift_data_parameters: {
+    #           secret_manager_arn: "RedshiftSecretManagerArn",
+    #           database: "Database", # required
+    #           db_user: "DbUser",
+    #           sql: "Sql", # required
+    #           statement_name: "StatementName",
+    #           with_event: false,
     #         },
     #       },
     #     ],
@@ -2004,7 +2020,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

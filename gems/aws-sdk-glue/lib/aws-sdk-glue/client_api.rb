@@ -51,6 +51,12 @@ module Aws::Glue
     BatchStopJobRunResponse = Shapes::StructureShape.new(name: 'BatchStopJobRunResponse')
     BatchStopJobRunSuccessfulSubmission = Shapes::StructureShape.new(name: 'BatchStopJobRunSuccessfulSubmission')
     BatchStopJobRunSuccessfulSubmissionList = Shapes::ListShape.new(name: 'BatchStopJobRunSuccessfulSubmissionList')
+    BatchUpdatePartitionFailureEntry = Shapes::StructureShape.new(name: 'BatchUpdatePartitionFailureEntry')
+    BatchUpdatePartitionFailureList = Shapes::ListShape.new(name: 'BatchUpdatePartitionFailureList')
+    BatchUpdatePartitionRequest = Shapes::StructureShape.new(name: 'BatchUpdatePartitionRequest')
+    BatchUpdatePartitionRequestEntry = Shapes::StructureShape.new(name: 'BatchUpdatePartitionRequestEntry')
+    BatchUpdatePartitionRequestEntryList = Shapes::ListShape.new(name: 'BatchUpdatePartitionRequestEntryList')
+    BatchUpdatePartitionResponse = Shapes::StructureShape.new(name: 'BatchUpdatePartitionResponse')
     BinaryColumnStatisticsData = Shapes::StructureShape.new(name: 'BinaryColumnStatisticsData')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -806,6 +812,27 @@ module Aws::Glue
     BatchStopJobRunSuccessfulSubmission.struct_class = Types::BatchStopJobRunSuccessfulSubmission
 
     BatchStopJobRunSuccessfulSubmissionList.member = Shapes::ShapeRef.new(shape: BatchStopJobRunSuccessfulSubmission)
+
+    BatchUpdatePartitionFailureEntry.add_member(:partition_value_list, Shapes::ShapeRef.new(shape: BoundedPartitionValueList, location_name: "PartitionValueList"))
+    BatchUpdatePartitionFailureEntry.add_member(:error_detail, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "ErrorDetail"))
+    BatchUpdatePartitionFailureEntry.struct_class = Types::BatchUpdatePartitionFailureEntry
+
+    BatchUpdatePartitionFailureList.member = Shapes::ShapeRef.new(shape: BatchUpdatePartitionFailureEntry)
+
+    BatchUpdatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    BatchUpdatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    BatchUpdatePartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    BatchUpdatePartitionRequest.add_member(:entries, Shapes::ShapeRef.new(shape: BatchUpdatePartitionRequestEntryList, required: true, location_name: "Entries"))
+    BatchUpdatePartitionRequest.struct_class = Types::BatchUpdatePartitionRequest
+
+    BatchUpdatePartitionRequestEntry.add_member(:partition_value_list, Shapes::ShapeRef.new(shape: BoundedPartitionValueList, required: true, location_name: "PartitionValueList"))
+    BatchUpdatePartitionRequestEntry.add_member(:partition_input, Shapes::ShapeRef.new(shape: PartitionInput, required: true, location_name: "PartitionInput"))
+    BatchUpdatePartitionRequestEntry.struct_class = Types::BatchUpdatePartitionRequestEntry
+
+    BatchUpdatePartitionRequestEntryList.member = Shapes::ShapeRef.new(shape: BatchUpdatePartitionRequestEntry)
+
+    BatchUpdatePartitionResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchUpdatePartitionFailureList, location_name: "Errors"))
+    BatchUpdatePartitionResponse.struct_class = Types::BatchUpdatePartitionResponse
 
     BinaryColumnStatisticsData.add_member(:maximum_length, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "MaximumLength"))
     BinaryColumnStatisticsData.add_member(:average_length, Shapes::ShapeRef.new(shape: NonNegativeDouble, required: true, location_name: "AverageLength"))
@@ -3134,6 +3161,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:batch_update_partition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdatePartition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdatePartitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdatePartitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:cancel_ml_task_run, Seahorse::Model::Operation.new.tap do |o|

@@ -143,8 +143,7 @@ module Aws::RDS
       data[:multi_az]
     end
 
-    # Provides the name of the database engine to be used for this DB
-    # cluster.
+    # The name of the database engine to be used for this DB cluster.
     # @return [String]
     def engine
       data[:engine]
@@ -904,6 +903,14 @@ module Aws::RDS
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-09-21)
+------------------
+
+* Feature - This release supports IAM mode for SiteWise Monitor portals
+
 1.10.0 (2020-09-15)
 ------------------
 

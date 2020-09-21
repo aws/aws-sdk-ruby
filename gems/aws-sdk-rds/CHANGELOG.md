@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2020-09-21)
+------------------
+
+* Feature - Documentation updates for the RDS DescribeExportTasks API
+
 1.98.0 (2020-09-15)
 ------------------
 

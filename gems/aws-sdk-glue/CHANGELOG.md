@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2020-09-21)
+------------------
+
+* Feature - Adding support to update multiple partitions of a table in a single request
+
 1.70.0 (2020-09-15)
 ------------------
 

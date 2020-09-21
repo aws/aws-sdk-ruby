@@ -1387,7 +1387,7 @@ module Aws::RDS
     end
 
     # Copies the specified DB snapshot. The source DB snapshot must be in
-    # the "available" state.
+    # the `available` or `storage-optimization` state.
     #
     # You can copy a snapshot from one AWS Region to another. In that case,
     # the AWS Region where you call the `CopyDBSnapshot` action is the
@@ -2143,6 +2143,14 @@ module Aws::RDS
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #
     #
@@ -3550,6 +3558,26 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
     #   Guide*.
+    #
+    #   **MariaDB**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Possible values are `agent` and `error`.
+    #
+    #   **MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Oracle**
+    #
+    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #
+    #   **PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #
     #
@@ -5108,8 +5136,8 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates an Aurora global database spread across multiple regions. The
-    # global database contains a single primary cluster with read-write
+    # Creates an Aurora global database spread across multiple AWS Regions.
+    # The global database contains a single primary cluster with read-write
     # capability, and a read-only secondary cluster that receives data from
     # the primary cluster through high-speed replication performed by the
     # Aurora storage subsystem.
@@ -5131,8 +5159,7 @@ module Aws::RDS
     #   global database. This parameter is optional.
     #
     # @option params [String] :engine
-    #   Provides the name of the database engine to be used for this DB
-    #   cluster.
+    #   The name of the database engine to be used for this DB cluster.
     #
     # @option params [String] :engine_version
     #   The engine version of the Aurora global database.
@@ -9350,7 +9377,11 @@ module Aws::RDS
     # the past 14 days. Events specific to a particular DB instances, DB
     # clusters, DB parameter groups, DB security groups, DB snapshots, and
     # DB cluster snapshots group can be obtained by providing the name as a
-    # parameter. By default, the past hour of events are returned.
+    # parameter.
+    #
+    # <note markdown="1"> By default, the past hour of events are returned.
+    #
+    #  </note>
     #
     # @option params [String] :source_identifier
     #   The identifier of the event source for which events are returned. If
@@ -9512,7 +9543,7 @@ module Aws::RDS
     # @option params [Array<Types::Filter>] :filters
     #   Filters specify one or more snapshot exports to describe. The filters
     #   are specified as name-value pairs that define what to include in the
-    #   output.
+    #   output. Filter names and values are case-sensitive.
     #
     #   Supported filters include the following:
     #
@@ -9524,7 +9555,8 @@ module Aws::RDS
     #   * `source-arn` - The Amazon Resource Name (ARN) of the snapshot
     #     exported to Amazon S3
     #
-    #   * `status` - The status of the export task.
+    #   * `status` - The status of the export task. Must be lowercase, for
+    #     example, `complete`.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
@@ -18629,7 +18661,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

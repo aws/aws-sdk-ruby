@@ -2063,6 +2063,14 @@ module Aws::RDS
     #   being used. For more information, see [Publishing Database Logs to
     #   Amazon CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
     #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
@@ -3312,6 +3320,26 @@ module Aws::RDS
     #   Amazon CloudWatch Logs ][1] in the *Amazon Relational Database
     #   Service User Guide*.
     #
+    #   **MariaDB**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Possible values are `agent` and `error`.
+    #
+    #   **MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Oracle**
+    #
+    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #
+    #   **PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
@@ -4516,8 +4544,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   Provides the name of the database engine to be used for this DB
-    #   cluster.
+    #   The name of the database engine to be used for this DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -4813,8 +4840,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] engine
-    #   Provides the name of the database engine to be used for this DB
-    #   cluster.
+    #   The name of the database engine to be used for this DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -5449,12 +5475,12 @@ module Aws::RDS
     # `DescribeDBClusterParameterGroups` action.
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   Provides the name of the DB cluster parameter group.
+    #   The name of the DB cluster parameter group.
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_family
-    #   Provides the name of the DB parameter group family that this DB
-    #   cluster parameter group is compatible with.
+    #   The name of the DB parameter group family that this DB cluster
+    #   parameter group is compatible with.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5994,8 +6020,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   Provides the name of the database engine to be used for this DB
-    #   instance.
+    #   The name of the database engine to be used for this DB instance.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_status
@@ -6749,12 +6774,12 @@ module Aws::RDS
     # `DescribeDBParameterGroups` action.
     #
     # @!attribute [rw] db_parameter_group_name
-    #   Provides the name of the DB parameter group.
+    #   The name of the DB parameter group.
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_family
-    #   Provides the name of the DB parameter group family that this DB
-    #   parameter group is compatible with.
+    #   The name of the DB parameter group family that this DB parameter
+    #   group is compatible with.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6809,7 +6834,7 @@ module Aws::RDS
     # `ModifyDBParameterGroup` or `ResetDBParameterGroup` action.
     #
     # @!attribute [rw] db_parameter_group_name
-    #   Provides the name of the DB parameter group.
+    #   The name of the DB parameter group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupNameMessage AWS API Documentation
@@ -10390,7 +10415,7 @@ module Aws::RDS
     # @!attribute [rw] filters
     #   Filters specify one or more snapshot exports to describe. The
     #   filters are specified as name-value pairs that define what to
-    #   include in the output.
+    #   include in the output. Filter names and values are case-sensitive.
     #
     #   Supported filters include the following:
     #
@@ -10402,7 +10427,8 @@ module Aws::RDS
     #   * `source-arn` - The Amazon Resource Name (ARN) of the snapshot
     #     exported to Amazon S3
     #
-    #   * `status` - The status of the export task.
+    #   * `status` - The status of the export task. Must be lowercase, for
+    #     example, `complete`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] marker
@@ -15568,6 +15594,17 @@ module Aws::RDS
     #
     # * `DescribeValidDBInstanceModifications`
     #
+    # If you call `DescribeDBInstances`, `ProcessorFeature` returns non-null
+    # values only if the following conditions are met:
+    #
+    # * You are accessing an Oracle DB instance.
+    #
+    # * Your Oracle DB instance class supports configuring the number of CPU
+    #   cores and threads per core.
+    #
+    # * The current number CPU cores and threads is set to a non-default
+    #   value.
+    #
     # For more information, see [Configuring the Processor of the DB
     # Instance Class][1] in the <i>Amazon RDS User Guide. </i>
     #
@@ -19698,18 +19735,18 @@ module Aws::RDS
     #   A key is the required name of the tag. The string value can be from
     #   1 to 128 Unicode characters in length and can't be prefixed with
     #   "aws:" or "rds:". The string can only contain only the set of
-    #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
-    #   '+', '-' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   Unicode letters, digits, white-space, '\_', '.', ':', '/',
+    #   '=', '+', '-', '@' (Java regex:
+    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-@\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
     #   A value is the optional value of the tag. The string value can be
     #   from 1 to 256 Unicode characters in length and can't be prefixed
     #   with "aws:" or "rds:". The string can only contain only the set
-    #   of Unicode letters, digits, white-space, '\_', '.', '/',
-    #   '=', '+', '-' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   of Unicode letters, digits, white-space, '\_', '.', ':',
+    #   '/', '=', '+', '-', '@' (Java regex:
+    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-@\]*)$").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag AWS API Documentation

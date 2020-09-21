@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-09-21)
+------------------
+
+* Feature - Documentation updates for the Resource Groups Tagging API.
+
 1.32.0 (2020-09-15)
 ------------------
 

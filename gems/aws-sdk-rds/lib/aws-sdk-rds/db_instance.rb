@@ -42,8 +42,7 @@ module Aws::RDS
       data[:db_instance_class]
     end
 
-    # Provides the name of the database engine to be used for this DB
-    # instance.
+    # The name of the database engine to be used for this DB instance.
     # @return [String]
     def engine
       data[:engine]
@@ -1478,6 +1477,26 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
     #   Guide*.
+    #
+    #   **MariaDB**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Possible values are `agent` and `error`.
+    #
+    #   **MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Oracle**
+    #
+    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #
+    #   **PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #
     #

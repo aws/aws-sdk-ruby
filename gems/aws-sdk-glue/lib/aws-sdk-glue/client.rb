@@ -1204,6 +1204,108 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates one or more partitions in a batch operation.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the catalog in which the partition is to be updated.
+    #   Currently, this should be the AWS account ID.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the metadata database in which the partition is to be
+    #   updated.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the metadata table in which the partition is to be
+    #   updated.
+    #
+    # @option params [required, Array<Types::BatchUpdatePartitionRequestEntry>] :entries
+    #   A list of up to 100 `BatchUpdatePartitionRequestEntry` objects to
+    #   update.
+    #
+    # @return [Types::BatchUpdatePartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdatePartitionResponse#errors #errors} => Array&lt;Types::BatchUpdatePartitionFailureEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_partition({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     entries: [ # required
+    #       {
+    #         partition_value_list: ["ValueString"], # required
+    #         partition_input: { # required
+    #           values: ["ValueString"],
+    #           last_access_time: Time.now,
+    #           storage_descriptor: {
+    #             columns: [
+    #               {
+    #                 name: "NameString", # required
+    #                 type: "ColumnTypeString",
+    #                 comment: "CommentString",
+    #                 parameters: {
+    #                   "KeyString" => "ParametersMapValue",
+    #                 },
+    #               },
+    #             ],
+    #             location: "LocationString",
+    #             input_format: "FormatString",
+    #             output_format: "FormatString",
+    #             compressed: false,
+    #             number_of_buckets: 1,
+    #             serde_info: {
+    #               name: "NameString",
+    #               serialization_library: "NameString",
+    #               parameters: {
+    #                 "KeyString" => "ParametersMapValue",
+    #               },
+    #             },
+    #             bucket_columns: ["NameString"],
+    #             sort_columns: [
+    #               {
+    #                 column: "NameString", # required
+    #                 sort_order: 1, # required
+    #               },
+    #             ],
+    #             parameters: {
+    #               "KeyString" => "ParametersMapValue",
+    #             },
+    #             skewed_info: {
+    #               skewed_column_names: ["NameString"],
+    #               skewed_column_values: ["ColumnValuesString"],
+    #               skewed_column_value_location_maps: {
+    #                 "ColumnValuesString" => "ColumnValuesString",
+    #               },
+    #             },
+    #             stored_as_sub_directories: false,
+    #           },
+    #           parameters: {
+    #             "KeyString" => "ParametersMapValue",
+    #           },
+    #           last_analyzed_time: Time.now,
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].partition_value_list #=> Array
+    #   resp.errors[0].partition_value_list[0] #=> String
+    #   resp.errors[0].error_detail.error_code #=> String
+    #   resp.errors[0].error_detail.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchUpdatePartition AWS API Documentation
+    #
+    # @overload batch_update_partition(params = {})
+    # @param [Hash] params ({})
+    def batch_update_partition(params = {}, options = {})
+      req = build_request(:batch_update_partition, params)
+      req.send_request(options)
+    end
+
     # Cancels (stops) a task run. Machine learning task runs are
     # asynchronous tasks that AWS Glue runs on your behalf as part of
     # various machine learning workflows. You can cancel a machine learning
@@ -8988,7 +9090,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

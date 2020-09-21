@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-09-21)
+------------------
+
+* Feature - Add support for Redshift Data API Targets
+
 1.13.0 (2020-09-15)
 ------------------
 

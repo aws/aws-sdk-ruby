@@ -764,6 +764,210 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Contains information about a batch update partition error.
+    #
+    # @!attribute [rw] partition_value_list
+    #   A list of values defining the partitions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] error_detail
+    #   The details about the batch update partition error.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchUpdatePartitionFailureEntry AWS API Documentation
+    #
+    class BatchUpdatePartitionFailureEntry < Struct.new(
+      :partition_value_list,
+      :error_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchUpdatePartitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         entries: [ # required
+    #           {
+    #             partition_value_list: ["ValueString"], # required
+    #             partition_input: { # required
+    #               values: ["ValueString"],
+    #               last_access_time: Time.now,
+    #               storage_descriptor: {
+    #                 columns: [
+    #                   {
+    #                     name: "NameString", # required
+    #                     type: "ColumnTypeString",
+    #                     comment: "CommentString",
+    #                     parameters: {
+    #                       "KeyString" => "ParametersMapValue",
+    #                     },
+    #                   },
+    #                 ],
+    #                 location: "LocationString",
+    #                 input_format: "FormatString",
+    #                 output_format: "FormatString",
+    #                 compressed: false,
+    #                 number_of_buckets: 1,
+    #                 serde_info: {
+    #                   name: "NameString",
+    #                   serialization_library: "NameString",
+    #                   parameters: {
+    #                     "KeyString" => "ParametersMapValue",
+    #                   },
+    #                 },
+    #                 bucket_columns: ["NameString"],
+    #                 sort_columns: [
+    #                   {
+    #                     column: "NameString", # required
+    #                     sort_order: 1, # required
+    #                   },
+    #                 ],
+    #                 parameters: {
+    #                   "KeyString" => "ParametersMapValue",
+    #                 },
+    #                 skewed_info: {
+    #                   skewed_column_names: ["NameString"],
+    #                   skewed_column_values: ["ColumnValuesString"],
+    #                   skewed_column_value_location_maps: {
+    #                     "ColumnValuesString" => "ColumnValuesString",
+    #                   },
+    #                 },
+    #                 stored_as_sub_directories: false,
+    #               },
+    #               parameters: {
+    #                 "KeyString" => "ParametersMapValue",
+    #               },
+    #               last_analyzed_time: Time.now,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the catalog in which the partition is to be updated.
+    #   Currently, this should be the AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the metadata database in which the partition is to be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the metadata table in which the partition is to be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   A list of up to 100 `BatchUpdatePartitionRequestEntry` objects to
+    #   update.
+    #   @return [Array<Types::BatchUpdatePartitionRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchUpdatePartitionRequest AWS API Documentation
+    #
+    class BatchUpdatePartitionRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the values and structure used to update a
+    # partition.
+    #
+    # @note When making an API call, you may pass BatchUpdatePartitionRequestEntry
+    #   data as a hash:
+    #
+    #       {
+    #         partition_value_list: ["ValueString"], # required
+    #         partition_input: { # required
+    #           values: ["ValueString"],
+    #           last_access_time: Time.now,
+    #           storage_descriptor: {
+    #             columns: [
+    #               {
+    #                 name: "NameString", # required
+    #                 type: "ColumnTypeString",
+    #                 comment: "CommentString",
+    #                 parameters: {
+    #                   "KeyString" => "ParametersMapValue",
+    #                 },
+    #               },
+    #             ],
+    #             location: "LocationString",
+    #             input_format: "FormatString",
+    #             output_format: "FormatString",
+    #             compressed: false,
+    #             number_of_buckets: 1,
+    #             serde_info: {
+    #               name: "NameString",
+    #               serialization_library: "NameString",
+    #               parameters: {
+    #                 "KeyString" => "ParametersMapValue",
+    #               },
+    #             },
+    #             bucket_columns: ["NameString"],
+    #             sort_columns: [
+    #               {
+    #                 column: "NameString", # required
+    #                 sort_order: 1, # required
+    #               },
+    #             ],
+    #             parameters: {
+    #               "KeyString" => "ParametersMapValue",
+    #             },
+    #             skewed_info: {
+    #               skewed_column_names: ["NameString"],
+    #               skewed_column_values: ["ColumnValuesString"],
+    #               skewed_column_value_location_maps: {
+    #                 "ColumnValuesString" => "ColumnValuesString",
+    #               },
+    #             },
+    #             stored_as_sub_directories: false,
+    #           },
+    #           parameters: {
+    #             "KeyString" => "ParametersMapValue",
+    #           },
+    #           last_analyzed_time: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] partition_value_list
+    #   A list of values defining the partitions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_input
+    #   The structure used to update a partition.
+    #   @return [Types::PartitionInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchUpdatePartitionRequestEntry AWS API Documentation
+    #
+    class BatchUpdatePartitionRequestEntry < Struct.new(
+      :partition_value_list,
+      :partition_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   The errors encountered when trying to update the requested
+    #   partitions. A list of `BatchUpdatePartitionFailureEntry` objects.
+    #   @return [Array<Types::BatchUpdatePartitionFailureEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchUpdatePartitionResponse AWS API Documentation
+    #
+    class BatchUpdatePartitionResponse < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a binary column statistics data.
     #
     # @note When making an API call, you may pass BinaryColumnStatisticsData
@@ -1635,6 +1839,17 @@ module Aws::Glue
     #     port pairs that are the addresses of the Apache Kafka brokers in a
     #     Kafka cluster to which a Kafka client will connect to and
     #     bootstrap itself.
+    #
+    #   * `KAFKA_SSL_ENABLED` - Whether to enable or disable SSL on an
+    #     Apache Kafka connection. Default value is "true".
+    #
+    #   * `KAFKA_CUSTOM_CERT` - The Amazon S3 URL for the private CA cert
+    #     file (.pem format). The default is an empty string.
+    #
+    #   * `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` - Whether to skip the
+    #     validation of the CA cert file or not. AWS Glue validates for
+    #     three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
+    #     Default value is "false".
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -1711,6 +1926,9 @@ module Aws::Glue
     #
     #   * `MONGODB` - Designates a connection to a MongoDB document
     #     database.
+    #
+    #   * `NETWORK` - Designates a network connection to a data source
+    #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
     #   SFTP is not supported.
     #   @return [String]

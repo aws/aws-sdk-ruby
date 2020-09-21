@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-09-21)
+------------------
+
+* Feature - Documentation updates and corrections for Resource Groups API Reference and SDKs.
+
 1.30.0 (2020-09-15)
 ------------------
 

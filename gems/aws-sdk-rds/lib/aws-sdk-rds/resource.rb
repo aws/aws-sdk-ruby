@@ -362,6 +362,14 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
     #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
@@ -1354,6 +1362,26 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
     #   Guide*.
+    #
+    #   **MariaDB**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Possible values are `agent` and `error`.
+    #
+    #   **MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Oracle**
+    #
+    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #
+    #   **PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #
     #
