@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::DynamoDBStreams - Updated the API, and documentation for Amazon DynamoDB Streams.
+
+* Feature - Aws::WorkMail - Updated the API, and documentation for Amazon WorkMail.
+
 2.11.590 (2020-09-21)
 ------------------
 
