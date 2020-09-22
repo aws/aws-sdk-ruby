@@ -706,8 +706,15 @@ module Aws::Comprehend
     #       },
     #     ],
     #     input_data_config: { # required
-    #       s3_uri: "S3Uri", # required
+    #       data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
+    #       s3_uri: "S3Uri",
     #       label_delimiter: "LabelDelimiter",
+    #       augmented_manifests: [
+    #         {
+    #           s3_uri: "S3Uri", # required
+    #           attribute_names: ["AttributeNamesListItem"], # required
+    #         },
+    #       ],
     #     },
     #     output_data_config: {
     #       s3_uri: "S3Uri",
@@ -873,12 +880,13 @@ module Aws::Comprehend
     #       },
     #     ],
     #     input_data_config: { # required
+    #       data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #       entity_types: [ # required
     #         {
     #           type: "EntityTypeName", # required
     #         },
     #       ],
-    #       documents: { # required
+    #       documents: {
     #         s3_uri: "S3Uri", # required
     #       },
     #       annotations: {
@@ -887,6 +895,12 @@ module Aws::Comprehend
     #       entity_list: {
     #         s3_uri: "S3Uri", # required
     #       },
+    #       augmented_manifests: [
+    #         {
+    #           s3_uri: "S3Uri", # required
+    #           attribute_names: ["AttributeNamesListItem"], # required
+    #         },
+    #       ],
     #     },
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
@@ -1069,8 +1083,13 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.end_time #=> Time
     #   resp.document_classifier_properties.training_start_time #=> Time
     #   resp.document_classifier_properties.training_end_time #=> Time
+    #   resp.document_classifier_properties.input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.document_classifier_properties.input_data_config.s3_uri #=> String
     #   resp.document_classifier_properties.input_data_config.label_delimiter #=> String
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests #=> Array
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].attribute_names #=> Array
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.document_classifier_properties.output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties.classifier_metadata.number_of_labels #=> Integer
@@ -1256,11 +1275,16 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.end_time #=> Time
     #   resp.entity_recognizer_properties.training_start_time #=> Time
     #   resp.entity_recognizer_properties.training_end_time #=> Time
+    #   resp.entity_recognizer_properties.input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.entity_recognizer_properties.input_data_config.entity_types #=> Array
     #   resp.entity_recognizer_properties.input_data_config.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties.input_data_config.documents.s3_uri #=> String
     #   resp.entity_recognizer_properties.input_data_config.annotations.s3_uri #=> String
     #   resp.entity_recognizer_properties.input_data_config.entity_list.s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests #=> Array
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].attribute_names #=> Array
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.entity_recognizer_properties.recognizer_metadata.number_of_trained_documents #=> Integer
     #   resp.entity_recognizer_properties.recognizer_metadata.number_of_test_documents #=> Integer
     #   resp.entity_recognizer_properties.recognizer_metadata.evaluation_metrics.precision #=> Float
@@ -1835,8 +1859,13 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].end_time #=> Time
     #   resp.document_classifier_properties_list[0].training_start_time #=> Time
     #   resp.document_classifier_properties_list[0].training_end_time #=> Time
+    #   resp.document_classifier_properties_list[0].input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.document_classifier_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.label_delimiter #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests #=> Array
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].attribute_names #=> Array
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_labels #=> Integer
@@ -2104,11 +2133,16 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].end_time #=> Time
     #   resp.entity_recognizer_properties_list[0].training_start_time #=> Time
     #   resp.entity_recognizer_properties_list[0].training_end_time #=> Time
+    #   resp.entity_recognizer_properties_list[0].input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types #=> Array
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.documents.s3_uri #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.annotations.s3_uri #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_list.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests #=> Array
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].attribute_names #=> Array
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.number_of_trained_documents #=> Integer
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.number_of_test_documents #=> Integer
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.evaluation_metrics.precision #=> Float
@@ -3447,7 +3481,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

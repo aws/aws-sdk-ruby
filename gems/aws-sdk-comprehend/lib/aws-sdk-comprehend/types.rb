@@ -10,6 +10,47 @@
 module Aws::Comprehend
   module Types
 
+    # An augmented manifest file that provides training data for your custom
+    # model. An augmented manifest file is a labeled dataset that is
+    # produced by Amazon SageMaker Ground Truth.
+    #
+    # @note When making an API call, you may pass AugmentedManifestsListItem
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #         attribute_names: ["AttributeNamesListItem"], # required
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 location of the augmented manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_names
+    #   The JSON attribute that contains the annotations for your training
+    #   documents. The number of attribute names that you specify depends on
+    #   whether your augmented manifest file is the output of a single
+    #   labeling job or a chained labeling job.
+    #
+    #   If your file is the output of a single labeling job, specify the
+    #   LabelAttributeName key that was used when the job was created in
+    #   Ground Truth.
+    #
+    #   If your file is the output of a chained labeling job, specify the
+    #   LabelAttributeName key for one or more jobs in the chain. Each
+    #   LabelAttributeName key provides the annotations from an individual
+    #   job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/AugmentedManifestsListItem AWS API Documentation
+    #
+    class AugmentedManifestsListItem < Struct.new(
+      :s3_uri,
+      :attribute_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The result of calling the operation. The operation returns one object
     # for each document that is successfully processed by the operation.
     #
@@ -604,8 +645,15 @@ module Aws::Comprehend
     #           },
     #         ],
     #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
+    #           data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
+    #           s3_uri: "S3Uri",
     #           label_delimiter: "LabelDelimiter",
+    #           augmented_manifests: [
+    #             {
+    #               s3_uri: "S3Uri", # required
+    #               attribute_names: ["AttributeNamesListItem"], # required
+    #             },
+    #           ],
     #         },
     #         output_data_config: {
     #           s3_uri: "S3Uri",
@@ -810,12 +858,13 @@ module Aws::Comprehend
     #           },
     #         ],
     #         input_data_config: { # required
+    #           data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #           entity_types: [ # required
     #             {
     #               type: "EntityTypeName", # required
     #             },
     #           ],
-    #           documents: { # required
+    #           documents: {
     #             s3_uri: "S3Uri", # required
     #           },
     #           annotations: {
@@ -824,6 +873,12 @@ module Aws::Comprehend
     #           entity_list: {
     #             s3_uri: "S3Uri", # required
     #           },
+    #           augmented_manifests: [
+    #             {
+    #               s3_uri: "S3Uri", # required
+    #               attribute_names: ["AttributeNamesListItem"], # required
+    #             },
+    #           ],
     #         },
     #         client_request_token: "ClientRequestTokenString",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
@@ -1813,9 +1868,36 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         s3_uri: "S3Uri", # required
+    #         data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
+    #         s3_uri: "S3Uri",
     #         label_delimiter: "LabelDelimiter",
+    #         augmented_manifests: [
+    #           {
+    #             s3_uri: "S3Uri", # required
+    #             attribute_names: ["AttributeNamesListItem"], # required
+    #           },
+    #         ],
     #       }
+    #
+    # @!attribute [rw] data_format
+    #   The format of your training data:
+    #
+    #   * `COMPREHEND_CSV`\: A two-column CSV file, where labels are
+    #     provided in the first column, and documents are provided in the
+    #     second. If you use this value, you must provide the `S3Uri`
+    #     parameter in your request.
+    #
+    #   * `AUGMENTED_MANIFEST`\: A labeled dataset that is produced by
+    #     Amazon SageMaker Ground Truth. This file is in JSON lines format.
+    #     Each line is a complete JSON object that contains a training
+    #     document and its associated labels.
+    #
+    #     If you use this value, you must provide the `AugmentedManifests`
+    #     parameter in your request.
+    #
+    #   If you don't specify a value, Amazon Comprehend uses
+    #   `COMPREHEND_CSV` as the default.
+    #   @return [String]
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the input data. The S3 bucket must be in the
@@ -1827,6 +1909,9 @@ module Aws::Comprehend
     #   prefix is a single file, Amazon Comprehend uses that file as input.
     #   If more than one file begins with the prefix, Amazon Comprehend uses
     #   all of them as input.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `COMPREHEND_CSV`.
     #   @return [String]
     #
     # @!attribute [rw] label_delimiter
@@ -1839,11 +1924,22 @@ module Aws::Comprehend
     #   be combined to make a single unique label, such as LABELLABELLABEL.
     #   @return [String]
     #
+    # @!attribute [rw] augmented_manifests
+    #   A list of augmented manifest files that provide training data for
+    #   your custom model. An augmented manifest file is a labeled dataset
+    #   that is produced by Amazon SageMaker Ground Truth.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `AUGMENTED_MANIFEST`.
+    #   @return [Array<Types::AugmentedManifestsListItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierInputDataConfig AWS API Documentation
     #
     class DocumentClassifierInputDataConfig < Struct.new(
+      :data_format,
       :s3_uri,
-      :label_delimiter)
+      :label_delimiter,
+      :augmented_manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2626,12 +2722,13 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
+    #         data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #         entity_types: [ # required
     #           {
     #             type: "EntityTypeName", # required
     #           },
     #         ],
-    #         documents: { # required
+    #         documents: {
     #           s3_uri: "S3Uri", # required
     #         },
     #         annotations: {
@@ -2640,33 +2737,89 @@ module Aws::Comprehend
     #         entity_list: {
     #           s3_uri: "S3Uri", # required
     #         },
+    #         augmented_manifests: [
+    #           {
+    #             s3_uri: "S3Uri", # required
+    #             attribute_names: ["AttributeNamesListItem"], # required
+    #           },
+    #         ],
     #       }
     #
+    # @!attribute [rw] data_format
+    #   The format of your training data:
+    #
+    #   * `COMPREHEND_CSV`\: A CSV file that supplements your training
+    #     documents. The CSV file contains information about the custom
+    #     entities that your trained model will detect. The required format
+    #     of the file depends on whether you are providing annotations or an
+    #     entity list.
+    #
+    #     If you use this value, you must provide your CSV file by using
+    #     either the `Annotations` or `EntityList` parameters. You must
+    #     provide your training documents by using the `Documents`
+    #     parameter.
+    #
+    #   * `AUGMENTED_MANIFEST`\: A labeled dataset that is produced by
+    #     Amazon SageMaker Ground Truth. This file is in JSON lines format.
+    #     Each line is a complete JSON object that contains a training
+    #     document and its labels. Each label annotates a named entity in
+    #     the training document.
+    #
+    #     If you use this value, you must provide the `AugmentedManifests`
+    #     parameter in your request.
+    #
+    #   If you don't specify a value, Amazon Comprehend uses
+    #   `COMPREHEND_CSV` as the default.
+    #   @return [String]
+    #
     # @!attribute [rw] entity_types
-    #   The entity types in the input data for an entity recognizer. A
-    #   maximum of 25 entity types can be used at one time to train an
-    #   entity recognizer.
+    #   The entity types in the labeled training data that Amazon Comprehend
+    #   uses to train the custom entity recognizer. Any entity types that
+    #   you don't specify are ignored.
+    #
+    #   A maximum of 25 entity types can be used at one time to train an
+    #   entity recognizer. Entity types must not contain the following
+    #   invalid characters: \\n (line break), \\\\n (escaped line break),
+    #   \\r (carriage return), \\\\r (escaped carriage return), \\t (tab),
+    #   \\\\t (escaped tab), space, and , (comma).
     #   @return [Array<Types::EntityTypesListItem>]
     #
     # @!attribute [rw] documents
-    #   S3 location of the documents folder for an entity recognizer
+    #   The S3 location of the folder that contains the training documents
+    #   for your custom entity recognizer.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `COMPREHEND_CSV`.
     #   @return [Types::EntityRecognizerDocuments]
     #
     # @!attribute [rw] annotations
-    #   S3 location of the annotations file for an entity recognizer.
+    #   The S3 location of the CSV file that annotates your training
+    #   documents.
     #   @return [Types::EntityRecognizerAnnotations]
     #
     # @!attribute [rw] entity_list
-    #   S3 location of the entity list for an entity recognizer.
+    #   The S3 location of the CSV file that has the entity list for your
+    #   custom entity recognizer.
     #   @return [Types::EntityRecognizerEntityList]
+    #
+    # @!attribute [rw] augmented_manifests
+    #   A list of augmented manifest files that provide training data for
+    #   your custom model. An augmented manifest file is a labeled dataset
+    #   that is produced by Amazon SageMaker Ground Truth.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `AUGMENTED_MANIFEST`.
+    #   @return [Array<Types::AugmentedManifestsListItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerInputDataConfig AWS API Documentation
     #
     class EntityRecognizerInputDataConfig < Struct.new(
+      :data_format,
       :entity_types,
       :documents,
       :annotations,
-      :entity_list)
+      :entity_list,
+      :augmented_manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2858,7 +3011,8 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Information about an individual item on a list of entity types.
+    # An entity type within a labeled training dataset that Amazon
+    # Comprehend uses to train a custom entity recognizer.
     #
     # @note When making an API call, you may pass EntityTypesListItem
     #   data as a hash:
@@ -2868,7 +3022,13 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] type
-    #   Entity type of an item on an entity type list.
+    #   An entity type within a labeled training dataset that Amazon
+    #   Comprehend uses to train a custom entity recognizer.
+    #
+    #   Entity types must not contain the following invalid characters: \\n
+    #   (line break), \\\\n (escaped line break, \\r (carriage return),
+    #   \\\\r (escaped carriage return), \\t (tab), \\\\t (escaped tab),
+    #   space, and , (comma).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesListItem AWS API Documentation

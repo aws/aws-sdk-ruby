@@ -409,7 +409,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
+    #   resp.locale #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-US"
     #   resp.child_directed #=> Boolean
     #   resp.enable_model_improvements #=> Boolean
     #   resp.detect_sentiment #=> Boolean
@@ -1082,7 +1082,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
+    #   resp.locale #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-US"
     #   resp.child_directed #=> Boolean
     #   resp.detect_sentiment #=> Boolean
     #
@@ -1524,7 +1524,7 @@ module Aws::LexModelBuildingService
     #
     #   resp.signature #=> String
     #   resp.supported_locales #=> Array
-    #   resp.supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
+    #   resp.supported_locales[0] #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-US"
     #   resp.slots #=> Array
     #   resp.slots[0].name #=> String
     #
@@ -1576,7 +1576,7 @@ module Aws::LexModelBuildingService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_builtin_intents({
-    #     locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
+    #     locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-US
     #     signature_contains: "String",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -1587,7 +1587,7 @@ module Aws::LexModelBuildingService
     #   resp.intents #=> Array
     #   resp.intents[0].signature #=> String
     #   resp.intents[0].supported_locales #=> Array
-    #   resp.intents[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
+    #   resp.intents[0].supported_locales[0] #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-US"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntents AWS API Documentation
@@ -1639,7 +1639,7 @@ module Aws::LexModelBuildingService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_builtin_slot_types({
-    #     locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
+    #     locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-US
     #     signature_contains: "String",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -1650,7 +1650,7 @@ module Aws::LexModelBuildingService
     #   resp.slot_types #=> Array
     #   resp.slot_types[0].signature #=> String
     #   resp.slot_types[0].supported_locales #=> Array
-    #   resp.slot_types[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
+    #   resp.slot_types[0].supported_locales[0] #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-US"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypes AWS API Documentation
@@ -2933,7 +2933,7 @@ module Aws::LexModelBuildingService
     #     voice_id: "String",
     #     checksum: "String",
     #     process_behavior: "SAVE", # accepts SAVE, BUILD
-    #     locale: "en-US", # required, accepts en-US, en-GB, de-DE, en-AU
+    #     locale: "de-DE", # required, accepts de-DE, en-AU, en-GB, en-US, es-US
     #     child_directed: false, # required
     #     detect_sentiment: false,
     #     create_version: false,
@@ -2973,7 +2973,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE", "en-AU"
+    #   resp.locale #=> String, one of "de-DE", "en-AU", "en-GB", "en-US", "es-US"
     #   resp.child_directed #=> Boolean
     #   resp.create_version #=> Boolean
     #   resp.detect_sentiment #=> Boolean
@@ -4111,7 +4111,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

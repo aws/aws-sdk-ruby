@@ -14,6 +14,9 @@ module Aws::Comprehend
     include Seahorse::Model
 
     AnyLengthString = Shapes::StringShape.new(name: 'AnyLengthString')
+    AttributeNamesList = Shapes::ListShape.new(name: 'AttributeNamesList')
+    AttributeNamesListItem = Shapes::StringShape.new(name: 'AttributeNamesListItem')
+    AugmentedManifestsListItem = Shapes::StructureShape.new(name: 'AugmentedManifestsListItem')
     BatchDetectDominantLanguageItemResult = Shapes::StructureShape.new(name: 'BatchDetectDominantLanguageItemResult')
     BatchDetectDominantLanguageRequest = Shapes::StructureShape.new(name: 'BatchDetectDominantLanguageRequest')
     BatchDetectDominantLanguageResponse = Shapes::StructureShape.new(name: 'BatchDetectDominantLanguageResponse')
@@ -94,6 +97,8 @@ module Aws::Comprehend
     DocumentClassificationJobProperties = Shapes::StructureShape.new(name: 'DocumentClassificationJobProperties')
     DocumentClassificationJobPropertiesList = Shapes::ListShape.new(name: 'DocumentClassificationJobPropertiesList')
     DocumentClassifierArn = Shapes::StringShape.new(name: 'DocumentClassifierArn')
+    DocumentClassifierAugmentedManifestsList = Shapes::ListShape.new(name: 'DocumentClassifierAugmentedManifestsList')
+    DocumentClassifierDataFormat = Shapes::StringShape.new(name: 'DocumentClassifierDataFormat')
     DocumentClassifierEndpointArn = Shapes::StringShape.new(name: 'DocumentClassifierEndpointArn')
     DocumentClassifierFilter = Shapes::StructureShape.new(name: 'DocumentClassifierFilter')
     DocumentClassifierInputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierInputDataConfig')
@@ -117,6 +122,8 @@ module Aws::Comprehend
     Entity = Shapes::StructureShape.new(name: 'Entity')
     EntityRecognizerAnnotations = Shapes::StructureShape.new(name: 'EntityRecognizerAnnotations')
     EntityRecognizerArn = Shapes::StringShape.new(name: 'EntityRecognizerArn')
+    EntityRecognizerAugmentedManifestsList = Shapes::ListShape.new(name: 'EntityRecognizerAugmentedManifestsList')
+    EntityRecognizerDataFormat = Shapes::StringShape.new(name: 'EntityRecognizerDataFormat')
     EntityRecognizerDocuments = Shapes::StructureShape.new(name: 'EntityRecognizerDocuments')
     EntityRecognizerEndpointArn = Shapes::StringShape.new(name: 'EntityRecognizerEndpointArn')
     EntityRecognizerEntityList = Shapes::StructureShape.new(name: 'EntityRecognizerEntityList')
@@ -271,6 +278,12 @@ module Aws::Comprehend
     UpdateEndpointRequest = Shapes::StructureShape.new(name: 'UpdateEndpointRequest')
     UpdateEndpointResponse = Shapes::StructureShape.new(name: 'UpdateEndpointResponse')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
+
+    AttributeNamesList.member = Shapes::ShapeRef.new(shape: AttributeNamesListItem)
+
+    AugmentedManifestsListItem.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    AugmentedManifestsListItem.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNamesList, required: true, location_name: "AttributeNames"))
+    AugmentedManifestsListItem.struct_class = Types::AugmentedManifestsListItem
 
     BatchDetectDominantLanguageItemResult.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
     BatchDetectDominantLanguageItemResult.add_member(:languages, Shapes::ShapeRef.new(shape: ListOfDominantLanguages, location_name: "Languages"))
@@ -553,13 +566,17 @@ module Aws::Comprehend
 
     DocumentClassificationJobPropertiesList.member = Shapes::ShapeRef.new(shape: DocumentClassificationJobProperties)
 
+    DocumentClassifierAugmentedManifestsList.member = Shapes::ShapeRef.new(shape: AugmentedManifestsListItem)
+
     DocumentClassifierFilter.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
     DocumentClassifierFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
     DocumentClassifierFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
     DocumentClassifierFilter.struct_class = Types::DocumentClassifierFilter
 
-    DocumentClassifierInputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    DocumentClassifierInputDataConfig.add_member(:data_format, Shapes::ShapeRef.new(shape: DocumentClassifierDataFormat, location_name: "DataFormat"))
+    DocumentClassifierInputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
     DocumentClassifierInputDataConfig.add_member(:label_delimiter, Shapes::ShapeRef.new(shape: LabelDelimiter, location_name: "LabelDelimiter"))
+    DocumentClassifierInputDataConfig.add_member(:augmented_manifests, Shapes::ShapeRef.new(shape: DocumentClassifierAugmentedManifestsList, location_name: "AugmentedManifests"))
     DocumentClassifierInputDataConfig.struct_class = Types::DocumentClassifierInputDataConfig
 
     DocumentClassifierOutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
@@ -665,6 +682,8 @@ module Aws::Comprehend
     EntityRecognizerAnnotations.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     EntityRecognizerAnnotations.struct_class = Types::EntityRecognizerAnnotations
 
+    EntityRecognizerAugmentedManifestsList.member = Shapes::ShapeRef.new(shape: AugmentedManifestsListItem)
+
     EntityRecognizerDocuments.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     EntityRecognizerDocuments.struct_class = Types::EntityRecognizerDocuments
 
@@ -681,10 +700,12 @@ module Aws::Comprehend
     EntityRecognizerFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
     EntityRecognizerFilter.struct_class = Types::EntityRecognizerFilter
 
+    EntityRecognizerInputDataConfig.add_member(:data_format, Shapes::ShapeRef.new(shape: EntityRecognizerDataFormat, location_name: "DataFormat"))
     EntityRecognizerInputDataConfig.add_member(:entity_types, Shapes::ShapeRef.new(shape: EntityTypesList, required: true, location_name: "EntityTypes"))
-    EntityRecognizerInputDataConfig.add_member(:documents, Shapes::ShapeRef.new(shape: EntityRecognizerDocuments, required: true, location_name: "Documents"))
+    EntityRecognizerInputDataConfig.add_member(:documents, Shapes::ShapeRef.new(shape: EntityRecognizerDocuments, location_name: "Documents"))
     EntityRecognizerInputDataConfig.add_member(:annotations, Shapes::ShapeRef.new(shape: EntityRecognizerAnnotations, location_name: "Annotations"))
     EntityRecognizerInputDataConfig.add_member(:entity_list, Shapes::ShapeRef.new(shape: EntityRecognizerEntityList, location_name: "EntityList"))
+    EntityRecognizerInputDataConfig.add_member(:augmented_manifests, Shapes::ShapeRef.new(shape: EntityRecognizerAugmentedManifestsList, location_name: "AugmentedManifests"))
     EntityRecognizerInputDataConfig.struct_class = Types::EntityRecognizerInputDataConfig
 
     EntityRecognizerMetadata.add_member(:number_of_trained_documents, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTrainedDocuments"))

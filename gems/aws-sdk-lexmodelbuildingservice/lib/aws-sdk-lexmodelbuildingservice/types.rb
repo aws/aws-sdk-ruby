@@ -494,7 +494,7 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] enable_model_improvements
     #   Indicates whether the bot uses accuracy improvements. `true`
-    #   indicates that the bot is using the imoprovements, otherwise,
+    #   indicates that the bot is using the improvements, otherwise,
     #   `false`.
     #   @return [Boolean]
     #
@@ -627,7 +627,7 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] kendra_configuration
-    #   Configuration information, if any, for connectin an Amazon Kendra
+    #   Configuration information, if any, for connecting an Amazon Kendra
     #   index with the `AMAZON.KendraSearchIntent` intent.
     #   @return [Types::KendraConfiguration]
     #
@@ -1458,7 +1458,7 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] enable_model_improvements
     #   Indicates whether the bot uses accuracy improvements. `true`
-    #   indicates that the bot is using the imoprovements, otherwise,
+    #   indicates that the bot is using the improvements, otherwise,
     #   `false`.
     #   @return [Boolean]
     #
@@ -1768,7 +1768,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-US
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -1838,7 +1838,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-US
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -3093,7 +3093,7 @@ module Aws::LexModelBuildingService
     #         voice_id: "String",
     #         checksum: "String",
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
-    #         locale: "en-US", # required, accepts en-US, en-GB, de-DE, en-AU
+    #         locale: "de-DE", # required, accepts de-DE, en-AU, en-GB, en-US, es-US
     #         child_directed: false, # required
     #         detect_sentiment: false,
     #         create_version: false,
@@ -3418,7 +3418,7 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] enable_model_improvements
     #   Indicates whether the bot uses accuracy improvements. `true`
-    #   indicates that the bot is using the imoprovements, otherwise,
+    #   indicates that the bot is using the improvements, otherwise,
     #   `false`.
     #   @return [Boolean]
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-09-22)
+------------------
+
+* Feature - Lex now supports es-US locales
+
 1.37.0 (2020-09-15)
 ------------------
 

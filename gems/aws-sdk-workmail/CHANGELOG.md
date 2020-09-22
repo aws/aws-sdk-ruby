@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-09-22)
+------------------
+
+* Feature - Adding support for Mailbox Export APIs
+
 1.29.0 (2020-09-15)
 ------------------
 

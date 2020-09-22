@@ -397,6 +397,44 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Cancels a mailbox export job.
+    #
+    # <note markdown="1"> If the mailbox export job is near completion, it might not be possible
+    # to cancel it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :job_id
+    #   The job ID.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_mailbox_export_job({
+    #     client_token: "IdempotencyClientToken", # required
+    #     job_id: "MailboxExportJobId", # required
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CancelMailboxExportJob AWS API Documentation
+    #
+    # @overload cancel_mailbox_export_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_mailbox_export_job(params = {}, options = {})
+      req = build_request(:cancel_mailbox_export_job, params)
+      req.send_request(options)
+    end
+
     # Adds an alias to the set of a given member (user or group) of Amazon
     # WorkMail.
     #
@@ -814,6 +852,60 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def describe_group(params = {}, options = {})
       req = build_request(:describe_group, params)
+      req.send_request(options)
+    end
+
+    # Describes the current status of a mailbox export job.
+    #
+    # @option params [required, String] :job_id
+    #   The mailbox export job ID.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @return [Types::DescribeMailboxExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMailboxExportJobResponse#entity_id #entity_id} => String
+    #   * {Types::DescribeMailboxExportJobResponse#description #description} => String
+    #   * {Types::DescribeMailboxExportJobResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeMailboxExportJobResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::DescribeMailboxExportJobResponse#s3_bucket_name #s3_bucket_name} => String
+    #   * {Types::DescribeMailboxExportJobResponse#s3_prefix #s3_prefix} => String
+    #   * {Types::DescribeMailboxExportJobResponse#s3_path #s3_path} => String
+    #   * {Types::DescribeMailboxExportJobResponse#estimated_progress #estimated_progress} => Integer
+    #   * {Types::DescribeMailboxExportJobResponse#state #state} => String
+    #   * {Types::DescribeMailboxExportJobResponse#error_info #error_info} => String
+    #   * {Types::DescribeMailboxExportJobResponse#start_time #start_time} => Time
+    #   * {Types::DescribeMailboxExportJobResponse#end_time #end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_mailbox_export_job({
+    #     job_id: "MailboxExportJobId", # required
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_id #=> String
+    #   resp.description #=> String
+    #   resp.role_arn #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.s3_bucket_name #=> String
+    #   resp.s3_prefix #=> String
+    #   resp.s3_path #=> String
+    #   resp.estimated_progress #=> Integer
+    #   resp.state #=> String, one of "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.error_info #=> String
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeMailboxExportJob AWS API Documentation
+    #
+    # @overload describe_mailbox_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_mailbox_export_job(params = {}, options = {})
+      req = build_request(:describe_mailbox_export_job, params)
       req.send_request(options)
     end
 
@@ -1331,6 +1423,56 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Lists the mailbox export jobs started for the specified organization
+    # within the last seven days.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMailboxExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMailboxExportJobsResponse#jobs #jobs} => Array&lt;Types::MailboxExportJob&gt;
+    #   * {Types::ListMailboxExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mailbox_export_jobs({
+    #     organization_id: "OrganizationId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].entity_id #=> String
+    #   resp.jobs[0].description #=> String
+    #   resp.jobs[0].s3_bucket_name #=> String
+    #   resp.jobs[0].s3_path #=> String
+    #   resp.jobs[0].estimated_progress #=> Integer
+    #   resp.jobs[0].state #=> String, one of "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.jobs[0].start_time #=> Time
+    #   resp.jobs[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxExportJobs AWS API Documentation
+    #
+    # @overload list_mailbox_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_mailbox_export_jobs(params = {}, options = {})
+      req = build_request(:list_mailbox_export_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists the mailbox permissions associated with a user, group, or
     # resource mailbox.
     #
@@ -1829,6 +1971,75 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Starts a mailbox export job to export MIME-format email messages and
+    # calendar items from the specified mailbox to the specified Amazon
+    # Simple Storage Service (Amazon S3) bucket. For more information, see
+    # [Exporting mailbox content][1] in the *Amazon WorkMail Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html
+    #
+    # @option params [required, String] :client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier associated with the organization.
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier of the user or resource associated with the mailbox.
+    #
+    # @option params [String] :description
+    #   The mailbox export job description.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   grants write permission to the S3 bucket.
+    #
+    # @option params [required, String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the symmetric AWS Key Management
+    #   Service (AWS KMS) key that encrypts the exported mailbox content.
+    #
+    # @option params [required, String] :s3_bucket_name
+    #   The name of the S3 bucket.
+    #
+    # @option params [required, String] :s3_prefix
+    #   The S3 bucket prefix.
+    #
+    # @return [Types::StartMailboxExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMailboxExportJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_mailbox_export_job({
+    #     client_token: "IdempotencyClientToken", # required
+    #     organization_id: "OrganizationId", # required
+    #     entity_id: "WorkMailIdentifier", # required
+    #     description: "Description",
+    #     role_arn: "RoleArn", # required
+    #     kms_key_arn: "KmsKeyArn", # required
+    #     s3_bucket_name: "S3BucketName", # required
+    #     s3_prefix: "S3ObjectKey", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/StartMailboxExportJob AWS API Documentation
+    #
+    # @overload start_mailbox_export_job(params = {})
+    # @param [Hash] params ({})
+    def start_mailbox_export_job(params = {}, options = {})
+      req = build_request(:start_mailbox_export_job, params)
+      req.send_request(options)
+    end
+
     # Applies the specified tags to the specified Amazon WorkMail
     # organization resource.
     #
@@ -2008,7 +2219,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

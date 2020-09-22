@@ -214,6 +214,7 @@ module Aws::DynamoDBStreams
         "jsonVersion" => "1.0",
         "protocol" => "json",
         "serviceFullName" => "Amazon DynamoDB Streams",
+        "serviceId" => "DynamoDB Streams",
         "signatureVersion" => "v4",
         "signingName" => "dynamodb",
         "targetPrefix" => "DynamoDBStreams_20120810",
