@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.591 (2020-09-22)
+------------------
+
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
 
 * Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
