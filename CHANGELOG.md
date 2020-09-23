@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Backup - Updated the API, and documentation for AWS Backup.
+
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::Translate - Updated the API, and documentation for Amazon Translate.
+
 2.11.591 (2020-09-22)
 ------------------
 
