@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.592 (2020-09-23)
+------------------
+
 * Feature - Aws::Backup - Updated the API, and documentation for AWS Backup.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
