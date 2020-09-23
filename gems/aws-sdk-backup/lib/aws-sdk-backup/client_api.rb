@@ -15,10 +15,15 @@ module Aws::Backup
 
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AdvancedBackupSetting = Shapes::StructureShape.new(name: 'AdvancedBackupSetting')
+    AdvancedBackupSettings = Shapes::ListShape.new(name: 'AdvancedBackupSettings')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     BackupJob = Shapes::StructureShape.new(name: 'BackupJob')
     BackupJobState = Shapes::StringShape.new(name: 'BackupJobState')
     BackupJobsList = Shapes::ListShape.new(name: 'BackupJobsList')
+    BackupOptionKey = Shapes::StringShape.new(name: 'BackupOptionKey')
+    BackupOptionValue = Shapes::StringShape.new(name: 'BackupOptionValue')
+    BackupOptions = Shapes::MapShape.new(name: 'BackupOptions')
     BackupPlan = Shapes::StructureShape.new(name: 'BackupPlan')
     BackupPlanInput = Shapes::StructureShape.new(name: 'BackupPlanInput')
     BackupPlanName = Shapes::StringShape.new(name: 'BackupPlanName')
@@ -181,6 +186,12 @@ module Aws::Backup
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
+    AdvancedBackupSetting.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    AdvancedBackupSetting.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
+    AdvancedBackupSetting.struct_class = Types::AdvancedBackupSetting
+
+    AdvancedBackupSettings.member = Shapes::ShapeRef.new(shape: AdvancedBackupSetting)
+
     AlreadyExistsException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     AlreadyExistsException.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
@@ -207,16 +218,23 @@ module Aws::Backup
     BackupJob.add_member(:start_by, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartBy"))
     BackupJob.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     BackupJob.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: Long, location_name: "BytesTransferred"))
+    BackupJob.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
+    BackupJob.add_member(:backup_type, Shapes::ShapeRef.new(shape: string, location_name: "BackupType"))
     BackupJob.struct_class = Types::BackupJob
 
     BackupJobsList.member = Shapes::ShapeRef.new(shape: BackupJob)
 
+    BackupOptions.key = Shapes::ShapeRef.new(shape: BackupOptionKey)
+    BackupOptions.value = Shapes::ShapeRef.new(shape: BackupOptionValue)
+
     BackupPlan.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, required: true, location_name: "BackupPlanName"))
     BackupPlan.add_member(:rules, Shapes::ShapeRef.new(shape: BackupRules, required: true, location_name: "Rules"))
+    BackupPlan.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     BackupPlan.struct_class = Types::BackupPlan
 
     BackupPlanInput.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, required: true, location_name: "BackupPlanName"))
     BackupPlanInput.add_member(:rules, Shapes::ShapeRef.new(shape: BackupRulesInput, required: true, location_name: "Rules"))
+    BackupPlanInput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     BackupPlanInput.struct_class = Types::BackupPlanInput
 
     BackupPlanTemplatesList.member = Shapes::ShapeRef.new(shape: BackupPlanTemplatesListMember)
@@ -237,6 +255,7 @@ module Aws::Backup
     BackupPlansListMember.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, location_name: "BackupPlanName"))
     BackupPlansListMember.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
     BackupPlansListMember.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastExecutionDate"))
+    BackupPlansListMember.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     BackupPlansListMember.struct_class = Types::BackupPlansListMember
 
     BackupRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: BackupRuleName, required: true, location_name: "RuleName"))
@@ -335,6 +354,7 @@ module Aws::Backup
     CreateBackupPlanOutput.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupPlanArn"))
     CreateBackupPlanOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     CreateBackupPlanOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location_name: "VersionId"))
+    CreateBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     CreateBackupPlanOutput.struct_class = Types::CreateBackupPlanOutput
 
     CreateBackupSelectionInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -411,6 +431,8 @@ module Aws::Backup
     DescribeBackupJobOutput.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: Long, location_name: "BytesTransferred"))
     DescribeBackupJobOutput.add_member(:expected_completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExpectedCompletionDate"))
     DescribeBackupJobOutput.add_member(:start_by, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartBy"))
+    DescribeBackupJobOutput.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
+    DescribeBackupJobOutput.add_member(:backup_type, Shapes::ShapeRef.new(shape: string, location_name: "BackupType"))
     DescribeBackupJobOutput.struct_class = Types::DescribeBackupJobOutput
 
     DescribeBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupVaultName"))
@@ -514,6 +536,7 @@ module Aws::Backup
     GetBackupPlanOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     GetBackupPlanOutput.add_member(:deletion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "DeletionDate"))
     GetBackupPlanOutput.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastExecutionDate"))
+    GetBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     GetBackupPlanOutput.struct_class = Types::GetBackupPlanOutput
 
     GetBackupSelectionInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -810,6 +833,7 @@ module Aws::Backup
     StartBackupJobInput.add_member(:complete_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "CompleteWindowMinutes"))
     StartBackupJobInput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     StartBackupJobInput.add_member(:recovery_point_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "RecoveryPointTags"))
+    StartBackupJobInput.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
     StartBackupJobInput.struct_class = Types::StartBackupJobInput
 
     StartBackupJobOutput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
@@ -863,6 +887,7 @@ module Aws::Backup
     UpdateBackupPlanOutput.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupPlanArn"))
     UpdateBackupPlanOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     UpdateBackupPlanOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location_name: "VersionId"))
+    UpdateBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     UpdateBackupPlanOutput.struct_class = Types::UpdateBackupPlanOutput
 
     UpdateRecoveryPointLifecycleInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))

@@ -688,14 +688,8 @@ module Aws::Translate
     #   list of available terminologies, use the ListTerminologies operation.
     #
     # @option params [required, String] :client_token
-    #   The client token of the EC2 instance calling the request. This token
-    #   is auto-generated when using the Amazon Translate SDK. Otherwise, use
-    #   the
-    #   [DescribeInstances](docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
-    #   EC2 operation to retreive an instance's client token. For more
-    #   information, see [Client
-    #   Tokens](docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens)
-    #   in the EC2 User Guide.
+    #   A unique identifier for the request. This token is auto-generated when
+    #   using the Amazon Translate SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -858,7 +852,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

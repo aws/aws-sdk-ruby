@@ -395,7 +395,9 @@ module Aws::QuickSight
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
+    Sheet = Shapes::StructureShape.new(name: 'Sheet')
     SheetControlsOption = Shapes::StructureShape.new(name: 'SheetControlsOption')
+    SheetList = Shapes::ListShape.new(name: 'SheetList')
     SheetStyle = Shapes::StructureShape.new(name: 'SheetStyle')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SnowflakeParameters = Shapes::StructureShape.new(name: 'SnowflakeParameters')
@@ -553,6 +555,7 @@ module Aws::QuickSight
     Analysis.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     Analysis.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Analysis.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    Analysis.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
     Analysis.struct_class = Types::Analysis
 
     AnalysisError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisErrorType, location_name: "Type"))
@@ -948,6 +951,7 @@ module Aws::QuickSight
     DashboardVersion.add_member(:data_set_arns, Shapes::ShapeRef.new(shape: DataSetArnsList, location_name: "DataSetArns"))
     DashboardVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     DashboardVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    DashboardVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
     DashboardVersion.struct_class = Types::DashboardVersion
 
     DashboardVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2017,8 +2021,14 @@ module Aws::QuickSight
     SessionLifetimeInMinutesInvalidException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SessionLifetimeInMinutesInvalidException.struct_class = Types::SessionLifetimeInMinutesInvalidException
 
+    Sheet.add_member(:sheet_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "SheetId"))
+    Sheet.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    Sheet.struct_class = Types::Sheet
+
     SheetControlsOption.add_member(:visibility_state, Shapes::ShapeRef.new(shape: DashboardUIState, location_name: "VisibilityState"))
     SheetControlsOption.struct_class = Types::SheetControlsOption
+
+    SheetList.member = Shapes::ShapeRef.new(shape: Sheet)
 
     SheetStyle.add_member(:tile, Shapes::ShapeRef.new(shape: TileStyle, location_name: "Tile"))
     SheetStyle.add_member(:tile_layout, Shapes::ShapeRef.new(shape: TileLayoutStyle, location_name: "TileLayout"))
@@ -2119,6 +2129,7 @@ module Aws::QuickSight
     TemplateVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     TemplateVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
     TemplateVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    TemplateVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
     TemplateVersion.struct_class = Types::TemplateVersion
 
     TemplateVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))

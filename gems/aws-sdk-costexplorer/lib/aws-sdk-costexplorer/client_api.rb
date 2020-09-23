@@ -16,6 +16,16 @@ module Aws::CostExplorer
     AccountScope = Shapes::StringShape.new(name: 'AccountScope')
     AmortizedRecurringFee = Shapes::StringShape.new(name: 'AmortizedRecurringFee')
     AmortizedUpfrontFee = Shapes::StringShape.new(name: 'AmortizedUpfrontFee')
+    Anomalies = Shapes::ListShape.new(name: 'Anomalies')
+    Anomaly = Shapes::StructureShape.new(name: 'Anomaly')
+    AnomalyDateInterval = Shapes::StructureShape.new(name: 'AnomalyDateInterval')
+    AnomalyFeedbackType = Shapes::StringShape.new(name: 'AnomalyFeedbackType')
+    AnomalyMonitor = Shapes::StructureShape.new(name: 'AnomalyMonitor')
+    AnomalyMonitors = Shapes::ListShape.new(name: 'AnomalyMonitors')
+    AnomalyScore = Shapes::StructureShape.new(name: 'AnomalyScore')
+    AnomalySubscription = Shapes::StructureShape.new(name: 'AnomalySubscription')
+    AnomalySubscriptionFrequency = Shapes::StringShape.new(name: 'AnomalySubscriptionFrequency')
+    AnomalySubscriptions = Shapes::ListShape.new(name: 'AnomalySubscriptions')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
@@ -40,11 +50,19 @@ module Aws::CostExplorer
     CoverageNormalizedUnits = Shapes::StructureShape.new(name: 'CoverageNormalizedUnits')
     CoverageNormalizedUnitsPercentage = Shapes::StringShape.new(name: 'CoverageNormalizedUnitsPercentage')
     CoveragesByTime = Shapes::ListShape.new(name: 'CoveragesByTime')
+    CreateAnomalyMonitorRequest = Shapes::StructureShape.new(name: 'CreateAnomalyMonitorRequest')
+    CreateAnomalyMonitorResponse = Shapes::StructureShape.new(name: 'CreateAnomalyMonitorResponse')
+    CreateAnomalySubscriptionRequest = Shapes::StructureShape.new(name: 'CreateAnomalySubscriptionRequest')
+    CreateAnomalySubscriptionResponse = Shapes::StructureShape.new(name: 'CreateAnomalySubscriptionResponse')
     CreateCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'CreateCostCategoryDefinitionRequest')
     CreateCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'CreateCostCategoryDefinitionResponse')
     CurrentInstance = Shapes::StructureShape.new(name: 'CurrentInstance')
     DataUnavailableException = Shapes::StructureShape.new(name: 'DataUnavailableException')
     DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
+    DeleteAnomalyMonitorRequest = Shapes::StructureShape.new(name: 'DeleteAnomalyMonitorRequest')
+    DeleteAnomalyMonitorResponse = Shapes::StructureShape.new(name: 'DeleteAnomalyMonitorResponse')
+    DeleteAnomalySubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteAnomalySubscriptionRequest')
+    DeleteAnomalySubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteAnomalySubscriptionResponse')
     DeleteCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteCostCategoryDefinitionRequest')
     DeleteCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteCostCategoryDefinitionResponse')
     DescribeCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeCostCategoryDefinitionRequest')
@@ -67,7 +85,14 @@ module Aws::CostExplorer
     ForecastResult = Shapes::StructureShape.new(name: 'ForecastResult')
     ForecastResultsByTime = Shapes::ListShape.new(name: 'ForecastResultsByTime')
     GenericBoolean = Shapes::BooleanShape.new(name: 'GenericBoolean')
+    GenericDouble = Shapes::FloatShape.new(name: 'GenericDouble')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
+    GetAnomaliesRequest = Shapes::StructureShape.new(name: 'GetAnomaliesRequest')
+    GetAnomaliesResponse = Shapes::StructureShape.new(name: 'GetAnomaliesResponse')
+    GetAnomalyMonitorsRequest = Shapes::StructureShape.new(name: 'GetAnomalyMonitorsRequest')
+    GetAnomalyMonitorsResponse = Shapes::StructureShape.new(name: 'GetAnomalyMonitorsResponse')
+    GetAnomalySubscriptionsRequest = Shapes::StructureShape.new(name: 'GetAnomalySubscriptionsRequest')
+    GetAnomalySubscriptionsResponse = Shapes::StructureShape.new(name: 'GetAnomalySubscriptionsResponse')
     GetCostAndUsageRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageRequest')
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
     GetCostAndUsageWithResourcesRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesRequest')
@@ -103,6 +128,7 @@ module Aws::CostExplorer
     GroupDefinitionType = Shapes::StringShape.new(name: 'GroupDefinitionType')
     GroupDefinitions = Shapes::ListShape.new(name: 'GroupDefinitions')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    Impact = Shapes::StructureShape.new(name: 'Impact')
     InstanceDetails = Shapes::StructureShape.new(name: 'InstanceDetails')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     Key = Shapes::StringShape.new(name: 'Key')
@@ -122,9 +148,13 @@ module Aws::CostExplorer
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     Metrics = Shapes::MapShape.new(name: 'Metrics')
     ModifyRecommendationDetail = Shapes::StructureShape.new(name: 'ModifyRecommendationDetail')
+    MonitorDimension = Shapes::StringShape.new(name: 'MonitorDimension')
+    MonitorType = Shapes::StringShape.new(name: 'MonitorType')
     NetRISavings = Shapes::StringShape.new(name: 'NetRISavings')
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
+    NullableNonNegativeDouble = Shapes::FloatShape.new(name: 'NullableNonNegativeDouble')
+    NumericOperator = Shapes::StringShape.new(name: 'NumericOperator')
     OfferingClass = Shapes::StringShape.new(name: 'OfferingClass')
     OnDemandCost = Shapes::StringShape.new(name: 'OnDemandCost')
     OnDemandCostOfRIHoursUsed = Shapes::StringShape.new(name: 'OnDemandCostOfRIHoursUsed')
@@ -133,6 +163,8 @@ module Aws::CostExplorer
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PredictionIntervalLevel = Shapes::IntegerShape.new(name: 'PredictionIntervalLevel')
+    ProvideAnomalyFeedbackRequest = Shapes::StructureShape.new(name: 'ProvideAnomalyFeedbackRequest')
+    ProvideAnomalyFeedbackResponse = Shapes::StructureShape.new(name: 'ProvideAnomalyFeedbackResponse')
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
     PurchasedUnits = Shapes::StringShape.new(name: 'PurchasedUnits')
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
@@ -165,6 +197,8 @@ module Aws::CostExplorer
     RightsizingRecommendationMetadata = Shapes::StructureShape.new(name: 'RightsizingRecommendationMetadata')
     RightsizingRecommendationSummary = Shapes::StructureShape.new(name: 'RightsizingRecommendationSummary')
     RightsizingType = Shapes::StringShape.new(name: 'RightsizingType')
+    RootCause = Shapes::StructureShape.new(name: 'RootCause')
+    RootCauses = Shapes::ListShape.new(name: 'RootCauses')
     SavingsPlanArn = Shapes::StringShape.new(name: 'SavingsPlanArn')
     SavingsPlansAmortizedCommitment = Shapes::StructureShape.new(name: 'SavingsPlansAmortizedCommitment')
     SavingsPlansCoverage = Shapes::StructureShape.new(name: 'SavingsPlansCoverage')
@@ -186,6 +220,11 @@ module Aws::CostExplorer
     SearchString = Shapes::StringShape.new(name: 'SearchString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceSpecification = Shapes::StructureShape.new(name: 'ServiceSpecification')
+    Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
+    SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
+    SubscriberStatus = Shapes::StringShape.new(name: 'SubscriberStatus')
+    SubscriberType = Shapes::StringShape.new(name: 'SubscriberType')
+    Subscribers = Shapes::ListShape.new(name: 'Subscribers')
     SupportedSavingsPlansType = Shapes::StringShape.new(name: 'SupportedSavingsPlansType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -198,12 +237,19 @@ module Aws::CostExplorer
     TotalActualHours = Shapes::StringShape.new(name: 'TotalActualHours')
     TotalActualUnits = Shapes::StringShape.new(name: 'TotalActualUnits')
     TotalAmortizedFee = Shapes::StringShape.new(name: 'TotalAmortizedFee')
+    TotalImpactFilter = Shapes::StructureShape.new(name: 'TotalImpactFilter')
     TotalPotentialRISavings = Shapes::StringShape.new(name: 'TotalPotentialRISavings')
     TotalRunningHours = Shapes::StringShape.new(name: 'TotalRunningHours')
     TotalRunningNormalizedUnits = Shapes::StringShape.new(name: 'TotalRunningNormalizedUnits')
+    UnknownMonitorException = Shapes::StructureShape.new(name: 'UnknownMonitorException')
+    UnknownSubscriptionException = Shapes::StructureShape.new(name: 'UnknownSubscriptionException')
     UnresolvableUsageUnitException = Shapes::StructureShape.new(name: 'UnresolvableUsageUnitException')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
+    UpdateAnomalyMonitorRequest = Shapes::StructureShape.new(name: 'UpdateAnomalyMonitorRequest')
+    UpdateAnomalyMonitorResponse = Shapes::StructureShape.new(name: 'UpdateAnomalyMonitorResponse')
+    UpdateAnomalySubscriptionRequest = Shapes::StructureShape.new(name: 'UpdateAnomalySubscriptionRequest')
+    UpdateAnomalySubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateAnomalySubscriptionResponse')
     UpdateCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionRequest')
     UpdateCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionResponse')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
@@ -214,6 +260,51 @@ module Aws::CostExplorer
     Values = Shapes::ListShape.new(name: 'Values')
     YearMonthDay = Shapes::StringShape.new(name: 'YearMonthDay')
     ZonedDateTime = Shapes::StringShape.new(name: 'ZonedDateTime')
+
+    Anomalies.member = Shapes::ShapeRef.new(shape: Anomaly)
+
+    Anomaly.add_member(:anomaly_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AnomalyId"))
+    Anomaly.add_member(:anomaly_start_date, Shapes::ShapeRef.new(shape: YearMonthDay, location_name: "AnomalyStartDate"))
+    Anomaly.add_member(:anomaly_end_date, Shapes::ShapeRef.new(shape: YearMonthDay, location_name: "AnomalyEndDate"))
+    Anomaly.add_member(:dimension_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "DimensionValue"))
+    Anomaly.add_member(:root_causes, Shapes::ShapeRef.new(shape: RootCauses, location_name: "RootCauses"))
+    Anomaly.add_member(:anomaly_score, Shapes::ShapeRef.new(shape: AnomalyScore, required: true, location_name: "AnomalyScore"))
+    Anomaly.add_member(:impact, Shapes::ShapeRef.new(shape: Impact, required: true, location_name: "Impact"))
+    Anomaly.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorArn"))
+    Anomaly.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, location_name: "Feedback"))
+    Anomaly.struct_class = Types::Anomaly
+
+    AnomalyDateInterval.add_member(:start_date, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "StartDate"))
+    AnomalyDateInterval.add_member(:end_date, Shapes::ShapeRef.new(shape: YearMonthDay, location_name: "EndDate"))
+    AnomalyDateInterval.struct_class = Types::AnomalyDateInterval
+
+    AnomalyMonitor.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorArn"))
+    AnomalyMonitor.add_member(:monitor_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorName"))
+    AnomalyMonitor.add_member(:creation_date, Shapes::ShapeRef.new(shape: YearMonthDay, location_name: "CreationDate"))
+    AnomalyMonitor.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: YearMonthDay, location_name: "LastUpdatedDate"))
+    AnomalyMonitor.add_member(:last_evaluated_date, Shapes::ShapeRef.new(shape: YearMonthDay, location_name: "LastEvaluatedDate"))
+    AnomalyMonitor.add_member(:monitor_type, Shapes::ShapeRef.new(shape: MonitorType, required: true, location_name: "MonitorType"))
+    AnomalyMonitor.add_member(:monitor_dimension, Shapes::ShapeRef.new(shape: MonitorDimension, location_name: "MonitorDimension"))
+    AnomalyMonitor.add_member(:monitor_specification, Shapes::ShapeRef.new(shape: Expression, location_name: "MonitorSpecification"))
+    AnomalyMonitor.add_member(:dimensional_value_count, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "DimensionalValueCount"))
+    AnomalyMonitor.struct_class = Types::AnomalyMonitor
+
+    AnomalyMonitors.member = Shapes::ShapeRef.new(shape: AnomalyMonitor)
+
+    AnomalyScore.add_member(:max_score, Shapes::ShapeRef.new(shape: GenericDouble, required: true, location_name: "MaxScore"))
+    AnomalyScore.add_member(:current_score, Shapes::ShapeRef.new(shape: GenericDouble, required: true, location_name: "CurrentScore"))
+    AnomalyScore.struct_class = Types::AnomalyScore
+
+    AnomalySubscription.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubscriptionArn"))
+    AnomalySubscription.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
+    AnomalySubscription.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: Values, required: true, location_name: "MonitorArnList"))
+    AnomalySubscription.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
+    AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, required: true, location_name: "Threshold"))
+    AnomalySubscription.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, required: true, location_name: "Frequency"))
+    AnomalySubscription.add_member(:subscription_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionName"))
+    AnomalySubscription.struct_class = Types::AnomalySubscription
+
+    AnomalySubscriptions.member = Shapes::ShapeRef.new(shape: AnomalySubscription)
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeType)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -275,6 +366,18 @@ module Aws::CostExplorer
 
     CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
 
+    CreateAnomalyMonitorRequest.add_member(:anomaly_monitor, Shapes::ShapeRef.new(shape: AnomalyMonitor, required: true, location_name: "AnomalyMonitor"))
+    CreateAnomalyMonitorRequest.struct_class = Types::CreateAnomalyMonitorRequest
+
+    CreateAnomalyMonitorResponse.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorArn"))
+    CreateAnomalyMonitorResponse.struct_class = Types::CreateAnomalyMonitorResponse
+
+    CreateAnomalySubscriptionRequest.add_member(:anomaly_subscription, Shapes::ShapeRef.new(shape: AnomalySubscription, required: true, location_name: "AnomalySubscription"))
+    CreateAnomalySubscriptionRequest.struct_class = Types::CreateAnomalySubscriptionRequest
+
+    CreateAnomalySubscriptionResponse.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
+    CreateAnomalySubscriptionResponse.struct_class = Types::CreateAnomalySubscriptionResponse
+
     CreateCostCategoryDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "Name"))
     CreateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     CreateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
@@ -303,6 +406,16 @@ module Aws::CostExplorer
     DateInterval.add_member(:start, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "Start"))
     DateInterval.add_member(:end, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "End"))
     DateInterval.struct_class = Types::DateInterval
+
+    DeleteAnomalyMonitorRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorArn"))
+    DeleteAnomalyMonitorRequest.struct_class = Types::DeleteAnomalyMonitorRequest
+
+    DeleteAnomalyMonitorResponse.struct_class = Types::DeleteAnomalyMonitorResponse
+
+    DeleteAnomalySubscriptionRequest.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
+    DeleteAnomalySubscriptionRequest.struct_class = Types::DeleteAnomalySubscriptionRequest
+
+    DeleteAnomalySubscriptionResponse.struct_class = Types::DeleteAnomalySubscriptionResponse
 
     DeleteCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
     DeleteCostCategoryDefinitionRequest.struct_class = Types::DeleteCostCategoryDefinitionRequest
@@ -391,10 +504,41 @@ module Aws::CostExplorer
 
     ForecastResultsByTime.member = Shapes::ShapeRef.new(shape: ForecastResult)
 
+    GetAnomaliesRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorArn"))
+    GetAnomaliesRequest.add_member(:date_interval, Shapes::ShapeRef.new(shape: AnomalyDateInterval, required: true, location_name: "DateInterval"))
+    GetAnomaliesRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, location_name: "Feedback"))
+    GetAnomaliesRequest.add_member(:total_impact, Shapes::ShapeRef.new(shape: TotalImpactFilter, location_name: "TotalImpact"))
+    GetAnomaliesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetAnomaliesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetAnomaliesRequest.struct_class = Types::GetAnomaliesRequest
+
+    GetAnomaliesResponse.add_member(:anomalies, Shapes::ShapeRef.new(shape: Anomalies, required: true, location_name: "Anomalies"))
+    GetAnomaliesResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetAnomaliesResponse.struct_class = Types::GetAnomaliesResponse
+
+    GetAnomalyMonitorsRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "MonitorArnList"))
+    GetAnomalyMonitorsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetAnomalyMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetAnomalyMonitorsRequest.struct_class = Types::GetAnomalyMonitorsRequest
+
+    GetAnomalyMonitorsResponse.add_member(:anomaly_monitors, Shapes::ShapeRef.new(shape: AnomalyMonitors, required: true, location_name: "AnomalyMonitors"))
+    GetAnomalyMonitorsResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetAnomalyMonitorsResponse.struct_class = Types::GetAnomalyMonitorsResponse
+
+    GetAnomalySubscriptionsRequest.add_member(:subscription_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "SubscriptionArnList"))
+    GetAnomalySubscriptionsRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorArn"))
+    GetAnomalySubscriptionsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetAnomalySubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetAnomalySubscriptionsRequest.struct_class = Types::GetAnomalySubscriptionsRequest
+
+    GetAnomalySubscriptionsResponse.add_member(:anomaly_subscriptions, Shapes::ShapeRef.new(shape: AnomalySubscriptions, required: true, location_name: "AnomalySubscriptions"))
+    GetAnomalySubscriptionsResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetAnomalySubscriptionsResponse.struct_class = Types::GetAnomalySubscriptionsResponse
+
     GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostAndUsageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetCostAndUsageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
-    GetCostAndUsageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
+    GetCostAndUsageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, required: true, location_name: "Metrics"))
     GetCostAndUsageRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
     GetCostAndUsageRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetCostAndUsageRequest.struct_class = Types::GetCostAndUsageRequest
@@ -406,7 +550,7 @@ module Aws::CostExplorer
 
     GetCostAndUsageWithResourcesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostAndUsageWithResourcesRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
-    GetCostAndUsageWithResourcesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostAndUsageWithResourcesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Filter"))
     GetCostAndUsageWithResourcesRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetCostAndUsageWithResourcesRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
     GetCostAndUsageWithResourcesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
@@ -580,6 +724,10 @@ module Aws::CostExplorer
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
 
+    Impact.add_member(:max_impact, Shapes::ShapeRef.new(shape: GenericDouble, required: true, location_name: "MaxImpact"))
+    Impact.add_member(:total_impact, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "TotalImpact"))
+    Impact.struct_class = Types::Impact
+
     InstanceDetails.add_member(:ec2_instance_details, Shapes::ShapeRef.new(shape: EC2InstanceDetails, location_name: "EC2InstanceDetails"))
     InstanceDetails.add_member(:rds_instance_details, Shapes::ShapeRef.new(shape: RDSInstanceDetails, location_name: "RDSInstanceDetails"))
     InstanceDetails.add_member(:redshift_instance_details, Shapes::ShapeRef.new(shape: RedshiftInstanceDetails, location_name: "RedshiftInstanceDetails"))
@@ -617,6 +765,13 @@ module Aws::CostExplorer
 
     ModifyRecommendationDetail.add_member(:target_instances, Shapes::ShapeRef.new(shape: TargetInstancesList, location_name: "TargetInstances"))
     ModifyRecommendationDetail.struct_class = Types::ModifyRecommendationDetail
+
+    ProvideAnomalyFeedbackRequest.add_member(:anomaly_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AnomalyId"))
+    ProvideAnomalyFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, required: true, location_name: "Feedback"))
+    ProvideAnomalyFeedbackRequest.struct_class = Types::ProvideAnomalyFeedbackRequest
+
+    ProvideAnomalyFeedbackResponse.add_member(:anomaly_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AnomalyId"))
+    ProvideAnomalyFeedbackResponse.struct_class = Types::ProvideAnomalyFeedbackResponse
 
     RDSInstanceDetails.add_member(:family, Shapes::ShapeRef.new(shape: GenericString, location_name: "Family"))
     RDSInstanceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "InstanceType"))
@@ -753,6 +908,14 @@ module Aws::CostExplorer
     RightsizingRecommendationSummary.add_member(:savings_percentage, Shapes::ShapeRef.new(shape: GenericString, location_name: "SavingsPercentage"))
     RightsizingRecommendationSummary.struct_class = Types::RightsizingRecommendationSummary
 
+    RootCause.add_member(:service, Shapes::ShapeRef.new(shape: GenericString, location_name: "Service"))
+    RootCause.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
+    RootCause.add_member(:linked_account, Shapes::ShapeRef.new(shape: GenericString, location_name: "LinkedAccount"))
+    RootCause.add_member(:usage_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "UsageType"))
+    RootCause.struct_class = Types::RootCause
+
+    RootCauses.member = Shapes::ShapeRef.new(shape: RootCause)
+
     SavingsPlansAmortizedCommitment.add_member(:amortized_recurring_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "AmortizedRecurringCommitment"))
     SavingsPlansAmortizedCommitment.add_member(:amortized_upfront_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "AmortizedUpfrontCommitment"))
     SavingsPlansAmortizedCommitment.add_member(:total_amortized_commitment, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalAmortizedCommitment"))
@@ -860,6 +1023,13 @@ module Aws::CostExplorer
     ServiceSpecification.add_member(:ec2_specification, Shapes::ShapeRef.new(shape: EC2Specification, location_name: "EC2Specification"))
     ServiceSpecification.struct_class = Types::ServiceSpecification
 
+    Subscriber.add_member(:address, Shapes::ShapeRef.new(shape: SubscriberAddress, location_name: "Address"))
+    Subscriber.add_member(:type, Shapes::ShapeRef.new(shape: SubscriberType, location_name: "Type"))
+    Subscriber.add_member(:status, Shapes::ShapeRef.new(shape: SubscriberStatus, location_name: "Status"))
+    Subscriber.struct_class = Types::Subscriber
+
+    Subscribers.member = Shapes::ShapeRef.new(shape: Subscriber)
+
     TagList.member = Shapes::ShapeRef.new(shape: Entity)
 
     TagValues.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
@@ -883,8 +1053,37 @@ module Aws::CostExplorer
     TerminateRecommendationDetail.add_member(:currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrencyCode"))
     TerminateRecommendationDetail.struct_class = Types::TerminateRecommendationDetail
 
+    TotalImpactFilter.add_member(:numeric_operator, Shapes::ShapeRef.new(shape: NumericOperator, required: true, location_name: "NumericOperator"))
+    TotalImpactFilter.add_member(:start_value, Shapes::ShapeRef.new(shape: GenericDouble, required: true, location_name: "StartValue"))
+    TotalImpactFilter.add_member(:end_value, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "EndValue"))
+    TotalImpactFilter.struct_class = Types::TotalImpactFilter
+
+    UnknownMonitorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnknownMonitorException.struct_class = Types::UnknownMonitorException
+
+    UnknownSubscriptionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnknownSubscriptionException.struct_class = Types::UnknownSubscriptionException
+
     UnresolvableUsageUnitException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UnresolvableUsageUnitException.struct_class = Types::UnresolvableUsageUnitException
+
+    UpdateAnomalyMonitorRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorArn"))
+    UpdateAnomalyMonitorRequest.add_member(:monitor_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorName"))
+    UpdateAnomalyMonitorRequest.struct_class = Types::UpdateAnomalyMonitorRequest
+
+    UpdateAnomalyMonitorResponse.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorArn"))
+    UpdateAnomalyMonitorResponse.struct_class = Types::UpdateAnomalyMonitorResponse
+
+    UpdateAnomalySubscriptionRequest.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
+    UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, location_name: "Threshold"))
+    UpdateAnomalySubscriptionRequest.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, location_name: "Frequency"))
+    UpdateAnomalySubscriptionRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "MonitorArnList"))
+    UpdateAnomalySubscriptionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, location_name: "Subscribers"))
+    UpdateAnomalySubscriptionRequest.add_member(:subscription_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubscriptionName"))
+    UpdateAnomalySubscriptionRequest.struct_class = Types::UpdateAnomalySubscriptionRequest
+
+    UpdateAnomalySubscriptionResponse.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
+    UpdateAnomalySubscriptionResponse.struct_class = Types::UpdateAnomalySubscriptionResponse
 
     UpdateCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
     UpdateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
@@ -924,6 +1123,25 @@ module Aws::CostExplorer
         "uid" => "ce-2017-10-25",
       }
 
+      api.add_operation(:create_anomaly_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAnomalyMonitor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAnomalyMonitorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAnomalyMonitorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_anomaly_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAnomalySubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAnomalySubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAnomalySubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownMonitorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCostCategoryDefinition"
         o.http_method = "POST"
@@ -932,6 +1150,26 @@ module Aws::CostExplorer
         o.output = Shapes::ShapeRef.new(shape: CreateCostCategoryDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:delete_anomaly_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAnomalyMonitor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAnomalyMonitorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAnomalyMonitorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownMonitorException)
+      end)
+
+      api.add_operation(:delete_anomaly_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAnomalySubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAnomalySubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAnomalySubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownSubscriptionException)
       end)
 
       api.add_operation(:delete_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|
@@ -952,6 +1190,38 @@ module Aws::CostExplorer
         o.output = Shapes::ShapeRef.new(shape: DescribeCostCategoryDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:get_anomalies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAnomalies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAnomaliesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAnomaliesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:get_anomaly_monitors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAnomalyMonitors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAnomalyMonitorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAnomalyMonitorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownMonitorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:get_anomaly_subscriptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAnomalySubscriptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAnomalySubscriptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAnomalySubscriptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownSubscriptionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:get_cost_and_usage, Seahorse::Model::Operation.new.tap do |o|
@@ -1137,6 +1407,36 @@ module Aws::CostExplorer
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:provide_anomaly_feedback, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ProvideAnomalyFeedback"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackRequest)
+        o.output = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:update_anomaly_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAnomalyMonitor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAnomalyMonitorRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAnomalyMonitorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownMonitorException)
+      end)
+
+      api.add_operation(:update_anomaly_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAnomalySubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAnomalySubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAnomalySubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownMonitorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownSubscriptionException)
       end)
 
       api.add_operation(:update_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|

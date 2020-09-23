@@ -374,7 +374,7 @@ module Aws::QuickSight
     # `CreateAccountCustomization` or `UpdateAccountCustomization` API
     # operation. To further customize QuickSight by removing QuickSight
     # sample assets and videos for all new users, see [Customizing
-    # QuickSight][1] in the Amazon QuickSight User Guide.
+    # QuickSight][1] in the *Amazon QuickSight User Guide.*
     #
     # You can create customizations for your AWS account or, if you specify
     # a namespace, for a QuickSight namespace instead. Customizations that
@@ -382,10 +382,14 @@ module Aws::QuickSight
     # AWS account. To find out which customizations apply, use the
     # `DescribeAccountCustomization` API operation.
     #
-    # Before you add a theme as the namespace default, make sure that you
-    # first share the theme with the namespace. If you don't share it with
-    # the namespace, the theme won't be visible to your users even if you
-    # use this API operation to make it the default theme.
+    # Before you use the `CreateAccountCustomization` API operation to add a
+    # theme as the namespace default, make sure that you first share the
+    # theme with the namespace. If you don't share it with the namespace,
+    # the theme isn't visible to your users even if you make it the default
+    # theme. To check if the theme is shared, view the current permissions
+    # by using the ` DescribeThemePermissions ` API operation. To share the
+    # theme, grant permissions by using the ` UpdateThemePermissions ` API
+    # operation.
     #
     #
     #
@@ -402,10 +406,10 @@ module Aws::QuickSight
     #   Region. You can add these to an AWS account and a QuickSight
     #   namespace.
     #
-    #   For example, you could add a default theme by setting
+    #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme: `"AccountCustomization":
-    #   \{ "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" \}. `. Or,
-    #   you could add a custom theme by specifying `"AccountCustomization": \{
+    #   \{ "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or,
+    #   you can add a custom theme by specifying `"AccountCustomization": \{
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
     #   \}`.
@@ -1869,7 +1873,7 @@ module Aws::QuickSight
     end
 
     # Deletes all Amazon QuickSight customizations in this AWS Region for
-    # the specified AWS Account and QuickSight namespace.
+    # the specified AWS account and QuickSight namespace.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that you want to delete QuickSight
@@ -2539,7 +2543,7 @@ module Aws::QuickSight
     # * `AWS Account` - The AWS account exists at the top of the hierarchy.
     #   It has the potential to use all of the AWS Regions and AWS Services.
     #   When you subscribe to QuickSight, you choose one AWS Region to use
-    #   as your home region. That's where your free SPICE capacity is
+    #   as your home Region. That's where your free SPICE capacity is
     #   located. You can use QuickSight in any supported AWS Region.
     #
     # * `AWS Region` - In each AWS Region where you sign in to QuickSight at
@@ -2549,7 +2553,7 @@ module Aws::QuickSight
     #   have access to QuickSight in any AWS Region, unless they are
     #   constrained to a namespace.
     #
-    #   To run the command in a different AWS Region, you change your region
+    #   To run the command in a different AWS Region, you change your Region
     #   settings. If you're using the AWS CLI, you can use one of the
     #   following options:
     #
@@ -2571,7 +2575,7 @@ module Aws::QuickSight
     # * `Applied customizations` - Within an AWS Region, a set of QuickSight
     #   customizations can apply to an AWS account or to a namespace.
     #   Settings that you apply to a namespace override settings that you
-    #   apply to an AWS Account. All settings are isolated to a single AWS
+    #   apply to an AWS account. All settings are isolated to a single AWS
     #   Region. To apply them in other AWS Regions, run the
     #   `CreateAccountCustomization` command in each AWS Region where you
     #   want to apply the same customizations.
@@ -2634,7 +2638,7 @@ module Aws::QuickSight
     end
 
     # Describes the settings that were used when your QuickSight
-    # subscription was first created in this AWS Account.
+    # subscription was first created in this AWS account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that contains the settings that you want to
@@ -2707,6 +2711,9 @@ module Aws::QuickSight
     #   resp.analysis.theme_arn #=> String
     #   resp.analysis.created_time #=> Time
     #   resp.analysis.last_updated_time #=> Time
+    #   resp.analysis.sheets #=> Array
+    #   resp.analysis.sheets[0].sheet_id #=> String
+    #   resp.analysis.sheets[0].name #=> String
     #   resp.status #=> Integer
     #   resp.request_id #=> String
     #
@@ -2813,6 +2820,9 @@ module Aws::QuickSight
     #   resp.dashboard.version.data_set_arns[0] #=> String
     #   resp.dashboard.version.description #=> String
     #   resp.dashboard.version.theme_arn #=> String
+    #   resp.dashboard.version.sheets #=> Array
+    #   resp.dashboard.version.sheets[0].sheet_id #=> String
+    #   resp.dashboard.version.sheets[0].name #=> String
     #   resp.dashboard.created_time #=> Time
     #   resp.dashboard.last_published_time #=> Time
     #   resp.dashboard.last_updated_time #=> Time
@@ -3448,6 +3458,9 @@ module Aws::QuickSight
     #   resp.template.version.description #=> String
     #   resp.template.version.source_entity_arn #=> String
     #   resp.template.version.theme_arn #=> String
+    #   resp.template.version.sheets #=> Array
+    #   resp.template.version.sheets[0].sheet_id #=> String
+    #   resp.template.version.sheets[0].name #=> String
     #   resp.template.template_id #=> String
     #   resp.template.last_updated_time #=> Time
     #   resp.template.created_time #=> Time
@@ -5595,16 +5608,17 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates the Amazon QuickSight settings in your AWS Account.
+    # Updates the Amazon QuickSight settings in your AWS account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that contains the QuickSight settings that
     #   you want to list.
     #
     # @option params [required, String] :default_namespace
-    #   The default namespace for this AWS Account. Currently, the default is
-    #   `default`. IAM users who register for the first time with QuickSight
-    #   provide an email that becomes associated with the default namespace.
+    #   The default namespace for this AWS account. Currently, the default is
+    #   `default`. AWS Identity and Access Management (IAM) users that
+    #   register for the first time with QuickSight provide an email that
+    #   becomes associated with the default namespace.
     #
     # @option params [String] :notification_email
     #   The email address that you want QuickSight to send notifications to
@@ -7287,7 +7301,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

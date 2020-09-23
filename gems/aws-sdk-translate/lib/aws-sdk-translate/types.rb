@@ -275,9 +275,34 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] content_type
-    #   The multipurpose internet mail extension (MIME) type of the input
-    #   files. Valid values are `text/plain` for plaintext files and
-    #   `text/html` for HTML files.
+    #   Describes the format of the data that you submit to Amazon Translate
+    #   as input. You can specify one of the following multipurpose internet
+    #   mail extension (MIME) types:
+    #
+    #   * `text/html`\: The input data consists of one or more HTML files.
+    #     Amazon Translate translates only the text that resides in the
+    #     `html` element in each file.
+    #
+    #   * `text/plain`\: The input data consists of one or more unformatted
+    #     text files. Amazon Translate translates every character in this
+    #     type of input.
+    #
+    #   * `application/vnd.openxmlformats-officedocument.wordprocessingml.document`\:
+    #     The input data consists of one or more Word documents (.docx).
+    #
+    #   * `application/vnd.openxmlformats-officedocument.presentationml.presentation`\:
+    #     The input data consists of one or more PowerPoint Presentation
+    #     files (.pptx).
+    #
+    #   * `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`\:
+    #     The input data consists of one or more Excel Workbook files
+    #     (.xlsx).
+    #
+    #   If you structure your input data as HTML, ensure that you set this
+    #   parameter to `text/html`. By doing so, you cut costs by limiting the
+    #   translation to the contents of the `html` element in each file.
+    #   Otherwise, if you set this parameter to `text/plain`, your costs
+    #   will cover the translation of every character.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/InputDataConfig AWS API Documentation
@@ -599,14 +624,8 @@ module Aws::Translate
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   The client token of the EC2 instance calling the request. This token
-    #   is auto-generated when using the Amazon Translate SDK. Otherwise,
-    #   use the
-    #   [DescribeInstances](docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
-    #   EC2 operation to retreive an instance's client token. For more
-    #   information, see [Client
-    #   Tokens](docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens)
-    #   in the EC2 User Guide.
+    #   A unique identifier for the request. This token is auto-generated
+    #   when using the Amazon Translate SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -643,7 +662,7 @@ module Aws::Translate
     #   * `COMPLETED` - The job was successfully completed and the output is
     #     available.
     #
-    #   * `COMPLETED_WITH_ERRORS` - The job was completed with errors. The
+    #   * `COMPLETED_WITH_ERROR` - The job was completed with errors. The
     #     errors can be analyzed in the job's output.
     #
     #   * `FAILED` - The job did not complete. To get details, use the

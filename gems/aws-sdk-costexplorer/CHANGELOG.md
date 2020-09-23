@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-09-23)
+------------------
+
+* Feature - This release provides access to Cost Anomaly Detection Public Preview APIs. Cost Anomaly Detection finds cost anomalies based on your historical cost and usage using Machine Learning models.
+
 1.47.0 (2020-09-15)
 ------------------
 

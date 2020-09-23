@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-09-23)
+------------------
+
+* Feature - Added Sheet information to DescribeDashboard, DescribeTemplate and DescribeAnalysis API response.
+
 1.30.0 (2020-09-15)
 ------------------
 

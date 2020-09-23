@@ -10,6 +10,322 @@
 module Aws::CostExplorer
   module Types
 
+    # An unusual cost pattern. This consists of the detailed metadata and
+    # the current status of the anomaly object.
+    #
+    # @!attribute [rw] anomaly_id
+    #   The unique identifier for the anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_start_date
+    #   The first day the anomaly is detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_end_date
+    #   The last day the anomaly is detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_value
+    #   The dimension for the anomaly. For example, an AWS service in a
+    #   service monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_causes
+    #   The list of identified root causes for the anomaly.
+    #   @return [Array<Types::RootCause>]
+    #
+    # @!attribute [rw] anomaly_score
+    #   The latest and maximum score for the anomaly.
+    #   @return [Types::AnomalyScore]
+    #
+    # @!attribute [rw] impact
+    #   The dollar impact for the anomaly.
+    #   @return [Types::Impact]
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) for the cost monitor that generated
+    #   this anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback
+    #   The feedback value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Anomaly AWS API Documentation
+    #
+    class Anomaly < Struct.new(
+      :anomaly_id,
+      :anomaly_start_date,
+      :anomaly_end_date,
+      :dimension_value,
+      :root_causes,
+      :anomaly_score,
+      :impact,
+      :monitor_arn,
+      :feedback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time period for an anomaly.
+    #
+    # @note When making an API call, you may pass AnomalyDateInterval
+    #   data as a hash:
+    #
+    #       {
+    #         start_date: "YearMonthDay", # required
+    #         end_date: "YearMonthDay",
+    #       }
+    #
+    # @!attribute [rw] start_date
+    #   The first date an anomaly was observed.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The last date an anomaly was observed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/AnomalyDateInterval AWS API Documentation
+    #
+    class AnomalyDateInterval < Struct.new(
+      :start_date,
+      :end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This object continuously inspects your account's cost data for
+    # anomalies, based on `MonitorType` and `MonitorSpecification`. The
+    # content consists of detailed metadata and the current status of the
+    # monitor object.
+    #
+    # @note When making an API call, you may pass AnomalyMonitor
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_arn: "GenericString",
+    #         monitor_name: "GenericString", # required
+    #         creation_date: "YearMonthDay",
+    #         last_updated_date: "YearMonthDay",
+    #         last_evaluated_date: "YearMonthDay",
+    #         monitor_type: "DIMENSIONAL", # required, accepts DIMENSIONAL, CUSTOM
+    #         monitor_dimension: "SERVICE", # accepts SERVICE
+    #         monitor_specification: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #         dimensional_value_count: 1,
+    #       }
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) value.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the monitor was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date
+    #   The date when the monitor was last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluated_date
+    #   The date when the monitor last evaluated for anomalies.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_type
+    #   The possible type values.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_dimension
+    #   The dimensions to evaluate.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_specification
+    #   Use `Expression` to filter by cost or by usage. There are two
+    #   patterns:
+    #
+    #   * Simple dimension values - You can set the dimension name and
+    #     values for the filters that you plan to use. For example, you can
+    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. The
+    #     `Expression` for that looks like this:
+    #
+    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #     “us-west-1” ] \} \}`
+    #
+    #     The list of dimension values are OR'd together to retrieve cost
+    #     or usage data. You can create `Expression` and `DimensionValues`
+    #     objects using either `with*` methods or `set*` methods in multiple
+    #     lines.
+    #
+    #   * Compound dimension values with logical operations - You can use
+    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
+    #     to create a list of one or more `Expression` objects. This allows
+    #     you to filter on more advanced options. For example, you can
+    #     filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
+    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
+    #     `Expression` for that looks like this:
+    #
+    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
+    #     \}\}\} ] \} `
+    #
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error.
+    #
+    #      </note>
+    #
+    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
+    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
+    #
+    #   <note markdown="1"> For `GetRightsizingRecommendation` action, a combination of OR and
+    #   NOT is not supported. OR is not supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    </note>
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] dimensional_value_count
+    #   The value for evaluated dimensions.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/AnomalyMonitor AWS API Documentation
+    #
+    class AnomalyMonitor < Struct.new(
+      :monitor_arn,
+      :monitor_name,
+      :creation_date,
+      :last_updated_date,
+      :last_evaluated_date,
+      :monitor_type,
+      :monitor_dimension,
+      :monitor_specification,
+      :dimensional_value_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Quantifies the anomaly. The higher score means that it is more
+    # anomalous.
+    #
+    # @!attribute [rw] max_score
+    #   The maximum score observed during the `AnomalyDateInterval`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] current_score
+    #   The last observed score.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/AnomalyScore AWS API Documentation
+    #
+    class AnomalyScore < Struct.new(
+      :max_score,
+      :current_score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The association between a monitor, threshold, and list of subscribers
+    # used to deliver notifications about anomalies detected by a monitor
+    # that exceeds a threshold. The content consists of the detailed
+    # metadata and the current status of the `AnomalySubscription` object.
+    #
+    # @note When making an API call, you may pass AnomalySubscription
+    #   data as a hash:
+    #
+    #       {
+    #         subscription_arn: "GenericString",
+    #         account_id: "GenericString",
+    #         monitor_arn_list: ["Value"], # required
+    #         subscribers: [ # required
+    #           {
+    #             address: "SubscriberAddress",
+    #             type: "EMAIL", # accepts EMAIL, SNS
+    #             status: "CONFIRMED", # accepts CONFIRMED, DECLINED
+    #           },
+    #         ],
+    #         threshold: 1.0, # required
+    #         frequency: "DAILY", # required, accepts DAILY, IMMEDIATE, WEEKLY
+    #         subscription_name: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] subscription_arn
+    #   The `AnomalySubscription` Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Your unique account identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_arn_list
+    #   A list of cost anomaly monitors.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subscribers
+    #   A list of subscribers to notify.
+    #   @return [Array<Types::Subscriber>]
+    #
+    # @!attribute [rw] threshold
+    #   The dollar value that triggers a notification if the threshold is
+    #   exceeded.
+    #   @return [Float]
+    #
+    # @!attribute [rw] frequency
+    #   The frequency at which anomaly reports are sent over email.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_name
+    #   The name for the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/AnomalySubscription AWS API Documentation
+    #
+    class AnomalySubscription < Struct.new(
+      :subscription_arn,
+      :account_id,
+      :monitor_arn_list,
+      :subscribers,
+      :threshold,
+      :frequency,
+      :subscription_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested report expired. Update the date interval and try again.
     #
     # @!attribute [rw] message
@@ -150,7 +466,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] rule
     #   An [Expression][1] object used to categorize costs. This supports
-    #   dimensions, Tags, and nested expressions. Currently the only
+    #   dimensions, tags, and nested expressions. Currently the only
     #   dimensions supported are `LINKED_ACCOUNT`, `SERVICE_CODE`,
     #   `RECORD_TYPE`, and `LINKED_ACCOUNT_NAME`.
     #
@@ -345,6 +661,122 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateAnomalyMonitorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_monitor: { # required
+    #           monitor_arn: "GenericString",
+    #           monitor_name: "GenericString", # required
+    #           creation_date: "YearMonthDay",
+    #           last_updated_date: "YearMonthDay",
+    #           last_evaluated_date: "YearMonthDay",
+    #           monitor_type: "DIMENSIONAL", # required, accepts DIMENSIONAL, CUSTOM
+    #           monitor_dimension: "SERVICE", # accepts SERVICE
+    #           monitor_specification: {
+    #             or: [
+    #               {
+    #                 # recursive Expression
+    #               },
+    #             ],
+    #             and: [
+    #               {
+    #                 # recursive Expression
+    #               },
+    #             ],
+    #             not: {
+    #               # recursive Expression
+    #             },
+    #             dimensions: {
+    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #               values: ["Value"],
+    #               match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
+    #             },
+    #             tags: {
+    #               key: "TagKey",
+    #               values: ["Value"],
+    #               match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
+    #             },
+    #             cost_categories: {
+    #               key: "CostCategoryName",
+    #               values: ["Value"],
+    #             },
+    #           },
+    #           dimensional_value_count: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] anomaly_monitor
+    #   The cost anomaly detection monitor object that you want to create.
+    #   @return [Types::AnomalyMonitor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalyMonitorRequest AWS API Documentation
+    #
+    class CreateAnomalyMonitorRequest < Struct.new(
+      :anomaly_monitor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_arn
+    #   The unique identifier of your newly created cost anomaly detection
+    #   monitor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalyMonitorResponse AWS API Documentation
+    #
+    class CreateAnomalyMonitorResponse < Struct.new(
+      :monitor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAnomalySubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_subscription: { # required
+    #           subscription_arn: "GenericString",
+    #           account_id: "GenericString",
+    #           monitor_arn_list: ["Value"], # required
+    #           subscribers: [ # required
+    #             {
+    #               address: "SubscriberAddress",
+    #               type: "EMAIL", # accepts EMAIL, SNS
+    #               status: "CONFIRMED", # accepts CONFIRMED, DECLINED
+    #             },
+    #           ],
+    #           threshold: 1.0, # required
+    #           frequency: "DAILY", # required, accepts DAILY, IMMEDIATE, WEEKLY
+    #           subscription_name: "GenericString", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] anomaly_subscription
+    #   The cost anomaly subscription object that you want to create.
+    #   @return [Types::AnomalySubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalySubscriptionRequest AWS API Documentation
+    #
+    class CreateAnomalySubscriptionRequest < Struct.new(
+      :anomaly_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription_arn
+    #   The unique identifier of your newly created cost anomaly
+    #   subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalySubscriptionResponse AWS API Documentation
+    #
+    class CreateAnomalySubscriptionResponse < Struct.new(
+      :subscription_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateCostCategoryDefinitionRequest
     #   data as a hash:
     #
@@ -464,7 +896,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] on_demand_hours_in_lookback_period
-    #   Number of hours during the lookback period billed at On Demand
+    #   Number of hours during the lookback period billed at On-Demand
     #   rates.
     #   @return [String]
     #
@@ -474,13 +906,13 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] monthly_cost
-    #   Current On Demand cost of operating this instance on a monthly
+    #   Current On-Demand cost of operating this instance on a monthly
     #   basis.
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   The currency code that Amazon Web Services used to calculate the
-    #   costs for this instance.
+    #   The currency code that AWS used to calculate the costs for this
+    #   instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CurrentInstance AWS API Documentation
@@ -546,6 +978,54 @@ module Aws::CostExplorer
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteAnomalyMonitorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] monitor_arn
+    #   The unique identifier of the cost anomaly monitor that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteAnomalyMonitorRequest AWS API Documentation
+    #
+    class DeleteAnomalyMonitorRequest < Struct.new(
+      :monitor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteAnomalyMonitorResponse AWS API Documentation
+    #
+    class DeleteAnomalyMonitorResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteAnomalySubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         subscription_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] subscription_arn
+    #   The unique identifier of the cost anomaly subscription that you want
+    #   to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteAnomalySubscriptionRequest AWS API Documentation
+    #
+    class DeleteAnomalySubscriptionRequest < Struct.new(
+      :subscription_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteAnomalySubscriptionResponse AWS API Documentation
+    #
+    class DeleteAnomalySubscriptionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteCostCategoryDefinitionRequest
     #   data as a hash:
@@ -649,7 +1129,7 @@ module Aws::CostExplorer
     # @!attribute [rw] match_options
     #   The match options that you can use to filter your results.
     #   `MatchOptions` is only applicable for actions related to Cost
-    #   Category. The default values for `MatchOptions` is `EQUALS` and
+    #   Category. The default values for `MatchOptions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
     #   @return [Array<String>]
     #
@@ -739,21 +1219,21 @@ module Aws::CostExplorer
     # Details on the Amazon EC2 Resource.
     #
     # @!attribute [rw] hourly_on_demand_rate
-    #   Hourly public On Demand rate for the instance type.
+    #   Hourly public On-Demand rate for the instance type.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The type of Amazon Web Services instance.
+    #   The type of AWS instance.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the Amazon Web Services instance. The platform is
-    #   the specific combination of operating system, license model, and
-    #   software on an instance.
+    #   The platform of the AWS instance. The platform is the specific
+    #   combination of operating system, license model, and software on an
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Amazon Web Services Region of the instance.
+    #   The AWS Region of the instance.
     #   @return [String]
     #
     # @!attribute [rw] sku
@@ -761,20 +1241,19 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] memory
-    #   Memory capacity of Amazon Web Services instance.
+    #   Memory capacity of the AWS instance.
     #   @return [String]
     #
     # @!attribute [rw] network_performance
-    #   Network performance capacity of the Amazon Web Services instance.
+    #   Network performance capacity of the AWS instance.
     #   @return [String]
     #
     # @!attribute [rw] storage
-    #   The disk storage of the Amazon Web Services instance (Not EBS
-    #   storage).
+    #   The disk storage of the AWS instance (not EBS storage).
     #   @return [String]
     #
     # @!attribute [rw] vcpu
-    #   Number of VCPU cores in the Amazon Web Services instance type.
+    #   Number of VCPU cores in the AWS instance type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceDetails AWS API Documentation
@@ -1130,6 +1609,201 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAnomaliesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_arn: "GenericString",
+    #         date_interval: { # required
+    #           start_date: "YearMonthDay", # required
+    #           end_date: "YearMonthDay",
+    #         },
+    #         feedback: "YES", # accepts YES, NO, PLANNED_ACTIVITY
+    #         total_impact: {
+    #           numeric_operator: "EQUAL", # required, accepts EQUAL, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, BETWEEN
+    #           start_value: 1.0, # required
+    #           end_value: 1.0,
+    #         },
+    #         next_page_token: "NextPageToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] monitor_arn
+    #   Retrieves all of the cost anomalies detected for a specific cost
+    #   anomaly monitor Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] date_interval
+    #   Assigns the start and end dates for retrieving cost anomalies. The
+    #   returned anomaly object will have an `AnomalyEndDate` in the
+    #   specified time range.
+    #   @return [Types::AnomalyDateInterval]
+    #
+    # @!attribute [rw] feedback
+    #   Filters anomaly results by the feedback field on the anomaly object.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_impact
+    #   Filters anomaly results by the total impact field on the anomaly
+    #   object. For example, you can filter anomalies `GREATER_THAN 200.00`
+    #   to retrieve anomalies, with an estimated dollar impact greater than
+    #   200.
+    #   @return [Types::TotalImpactFilter]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results. AWS provides the
+    #   token when the response from a previous call has more results than
+    #   the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of entries a paginated response contains.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomaliesRequest AWS API Documentation
+    #
+    class GetAnomaliesRequest < Struct.new(
+      :monitor_arn,
+      :date_interval,
+      :feedback,
+      :total_impact,
+      :next_page_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomalies
+    #   A list of cost anomalies.
+    #   @return [Array<Types::Anomaly>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results. AWS provides the
+    #   token when the response from a previous call has more results than
+    #   the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomaliesResponse AWS API Documentation
+    #
+    class GetAnomaliesResponse < Struct.new(
+      :anomalies,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAnomalyMonitorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_arn_list: ["Value"],
+    #         next_page_token: "NextPageToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] monitor_arn_list
+    #   A list of cost anomaly monitor ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results. AWS provides the
+    #   token when the response from a previous call has more results than
+    #   the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of entries a paginated response contains.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomalyMonitorsRequest AWS API Documentation
+    #
+    class GetAnomalyMonitorsRequest < Struct.new(
+      :monitor_arn_list,
+      :next_page_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_monitors
+    #   A list of cost anomaly monitors that includes the detailed metadata
+    #   for each monitor.
+    #   @return [Array<Types::AnomalyMonitor>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results. AWS provides the
+    #   token when the response from a previous call has more results than
+    #   the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomalyMonitorsResponse AWS API Documentation
+    #
+    class GetAnomalyMonitorsResponse < Struct.new(
+      :anomaly_monitors,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAnomalySubscriptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         subscription_arn_list: ["Value"],
+    #         monitor_arn: "GenericString",
+    #         next_page_token: "NextPageToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] subscription_arn_list
+    #   A list of cost anomaly subscription ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] monitor_arn
+    #   Cost anomaly monitor ARNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results. AWS provides the
+    #   token when the response from a previous call has more results than
+    #   the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of entries a paginated response contains.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomalySubscriptionsRequest AWS API Documentation
+    #
+    class GetAnomalySubscriptionsRequest < Struct.new(
+      :subscription_arn_list,
+      :monitor_arn,
+      :next_page_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_subscriptions
+    #   A list of cost anomaly subscriptions that includes the detailed
+    #   metadata for each one.
+    #   @return [Array<Types::AnomalySubscription>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results. AWS provides the
+    #   token when the response from a previous call has more results than
+    #   the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomalySubscriptionsResponse AWS API Documentation
+    #
+    class GetAnomalySubscriptionsResponse < Struct.new(
+      :anomaly_subscriptions,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCostAndUsageRequest
     #   data as a hash:
     #
@@ -1168,7 +1842,7 @@ module Aws::CostExplorer
     #             values: ["Value"],
     #           },
     #         },
-    #         metrics: ["MetricName"],
+    #         metrics: ["MetricName"], # required
     #         group_by: [
     #           {
     #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
@@ -1232,7 +1906,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] group_by
     #   You can group AWS costs using up to two different groups, either
-    #   dimensions, tag keys, or both.
+    #   dimensions, tag keys, cost categories, or any two group by types.
     #
     #   When you group by tag key, you get all tag values, including empty
     #   strings.
@@ -1295,7 +1969,7 @@ module Aws::CostExplorer
     #           end: "YearMonthDay", # required
     #         },
     #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
+    #         filter: { # required
     #           or: [
     #             {
     #               # recursive Expression
@@ -1358,7 +2032,9 @@ module Aws::CostExplorer
     #   of dimension filters. For more information, see [Expression][1].
     #
     #   The `GetCostAndUsageWithResources` operation requires that you
-    #   either group by or filter by a `ResourceId`.
+    #   either group by or filter by a `ResourceId`. It requires the
+    #   [Expression][1] `"SERVICE = Amazon Elastic Compute Cloud - Compute"`
+    #   in the filter.
     #
     #
     #
@@ -1483,7 +2159,9 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] time_period
-    #   The period of time that you want the forecast to cover.
+    #   The period of time that you want the forecast to cover. The start
+    #   date must be equal to or no later than the current date to avoid a
+    #   validation error.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] metric
@@ -1642,6 +2320,8 @@ module Aws::CostExplorer
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An
     #     example is Amazon EC2: CloudWatch – Alarms. The response for this
     #     operation includes a unit attribute.
+    #
+    #   * REGION - The AWS Region.
     #
     #   * RECORD\_TYPE - The different types of charges such as RI fees,
     #     usage costs, tax refunds, and credits.
@@ -3085,7 +3765,8 @@ module Aws::CostExplorer
     #   exclusive. For example, if `start` is `2017-01-01` and `end` is
     #   `2017-05-01`, then the cost and usage data is retrieved from
     #   `2017-01-01` up to and including `2017-04-30` but not including
-    #   `2017-05-01`.
+    #   `2017-05-01`. The start date must be equal to or later than the
+    #   current date to avoid a validation error.
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] metric
@@ -3194,6 +3875,25 @@ module Aws::CostExplorer
     class GroupDefinition < Struct.new(
       :type,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The anomaly's dollar value.
+    #
+    # @!attribute [rw] max_impact
+    #   The maximum dollar value observed for an anomaly.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_impact
+    #   The cumulative dollar value observed for an anomaly.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Impact AWS API Documentation
+    #
+    class Impact < Struct.new(
+      :max_impact,
+      :total_impact)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3333,14 +4033,52 @@ module Aws::CostExplorer
     # Details on the modification recommendation.
     #
     # @!attribute [rw] target_instances
-    #   Identifies whether this instance type is the Amazon Web Services
-    #   default recommendation.
+    #   Identifies whether this instance type is the AWS default
+    #   recommendation.
     #   @return [Array<Types::TargetInstance>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ModifyRecommendationDetail AWS API Documentation
     #
     class ModifyRecommendationDetail < Struct.new(
       :target_instances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ProvideAnomalyFeedbackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_id: "GenericString", # required
+    #         feedback: "YES", # required, accepts YES, NO, PLANNED_ACTIVITY
+    #       }
+    #
+    # @!attribute [rw] anomaly_id
+    #   A cost anomaly ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback
+    #   Describes whether the cost anomaly was a planned activity or you
+    #   considered it an anomaly.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ProvideAnomalyFeedbackRequest AWS API Documentation
+    #
+    class ProvideAnomalyFeedbackRequest < Struct.new(
+      :anomaly_id,
+      :feedback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_id
+    #   The ID of the modified cost anomaly.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ProvideAnomalyFeedbackResponse AWS API Documentation
+    #
+    class ProvideAnomalyFeedbackResponse < Struct.new(
+      :anomaly_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3843,7 +4581,7 @@ module Aws::CostExplorer
     # Resource utilization of current resource.
     #
     # @!attribute [rw] ec2_resource_utilization
-    #   Utilization of current Amazon EC2 Instance
+    #   Utilization of current Amazon EC2 instance.
     #   @return [Types::EC2ResourceUtilization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceUtilization AWS API Documentation
@@ -3959,12 +4697,12 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] generation_timestamp
-    #   The timestamp for when Amazon Web Services made this recommendation.
+    #   The timestamp for when AWS made this recommendation.
     #   @return [String]
     #
     # @!attribute [rw] lookback_period_in_days
-    #   How many days of previous usage that Amazon Web Services considers
-    #   when making this recommendation.
+    #   How many days of previous usage that AWS considers when making this
+    #   recommendation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationMetadata AWS API Documentation
@@ -3989,8 +4727,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] savings_currency_code
-    #   The currency code that Amazon Web Services used to calculate the
-    #   savings.
+    #   The currency code that AWS used to calculate the savings.
     #   @return [String]
     #
     # @!attribute [rw] savings_percentage
@@ -4005,6 +4742,36 @@ module Aws::CostExplorer
       :estimated_total_monthly_savings_amount,
       :savings_currency_code,
       :savings_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The combination of AWS service, linked account, Region, and usage type
+    # where a cost anomaly is observed.
+    #
+    # @!attribute [rw] service
+    #   The AWS service name associated with the cost anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region associated with the cost anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_account
+    #   The linked account value associated with the cost anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_type
+    #   The `UsageType` value associated with the cost anomaly.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RootCause AWS API Documentation
+    #
+    class RootCause < Struct.new(
+      :service,
+      :region,
+      :linked_account,
+      :usage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4068,18 +4835,16 @@ module Aws::CostExplorer
     # Savings Plans, and total Savings Plans costs for an account.
     #
     # @!attribute [rw] spend_covered_by_savings_plans
-    #   The amount of your Amazon Web Services usage that is covered by a
-    #   Savings Plans.
+    #   The amount of your AWS usage that is covered by a Savings Plans.
     #   @return [String]
     #
     # @!attribute [rw] on_demand_cost
-    #   The cost of your Amazon Web Services usage at the public On-Demand
-    #   rate.
+    #   The cost of your AWS usage at the public On-Demand rate.
     #   @return [String]
     #
     # @!attribute [rw] total_cost
-    #   The total cost of your Amazon Web Services usage, regardless of your
-    #   purchase option.
+    #   The total cost of your AWS usage, regardless of your purchase
+    #   option.
     #   @return [String]
     #
     # @!attribute [rw] coverage_percentage
@@ -4128,11 +4893,10 @@ module Aws::CostExplorer
     # Summary, and Details.
     #
     # @!attribute [rw] account_scope
-    #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the payer account and
-    #   linked accounts if the value is set to `PAYER`. If the value is
-    #   `LINKED`, recommendations are calculated for individual linked
-    #   accounts only.
+    #   The account scope that you want your recommendations for. AWS
+    #   calculates recommendations including the payer account and linked
+    #   accounts if the value is set to `PAYER`. If the value is `LINKED`,
+    #   recommendations are calculated for individual linked accounts only.
     #   @return [String]
     #
     # @!attribute [rw] savings_plans_type
@@ -4197,8 +4961,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   The currency code Amazon Web Services used to generate the
-    #   recommendations and present potential savings.
+    #   The currency code AWS used to generate the recommendations and
+    #   present potential savings.
     #   @return [String]
     #
     # @!attribute [rw] estimated_sp_cost
@@ -4306,8 +5070,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   The currency code Amazon Web Services used to generate the
-    #   recommendations and present potential savings.
+    #   The currency code AWS used to generate the recommendations and
+    #   present potential savings.
     #   @return [String]
     #
     # @!attribute [rw] estimated_total_cost
@@ -4537,7 +5301,7 @@ module Aws::CostExplorer
     end
 
     # You've reached the limit on the number of resources you can create,
-    # or exceeded the size of an individual resources.
+    # or exceeded the size of an individual resource.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4575,6 +5339,40 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The recipient of `AnomalySubscription` notifications.
+    #
+    # @note When making an API call, you may pass Subscriber
+    #   data as a hash:
+    #
+    #       {
+    #         address: "SubscriberAddress",
+    #         type: "EMAIL", # accepts EMAIL, SNS
+    #         status: "CONFIRMED", # accepts CONFIRMED, DECLINED
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The email address or SNS Amazon Resource Name (ARN), depending on
+    #   the `Type`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The notification delivery channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates if the subscriber accepts the notifications.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Subscriber AWS API Documentation
+    #
+    class Subscriber < Struct.new(
+      :address,
+      :type,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The values that are available for a tag.
     #
     # @note When making an API call, you may pass TagValues
@@ -4596,9 +5394,9 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] match_options
     #   The match options that you can use to filter your results.
-    #   `MatchOptions` is only applicable for only applicable for actions
-    #   related to Cost Category. The default values for `MatchOptions` is
-    #   `EQUALS` and `CASE_SENSITIVE`.
+    #   `MatchOptions` is only applicable for actions related to Cost
+    #   Category. The default values for `MatchOptions` are `EQUALS` and
+    #   `CASE_SENSITIVE`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TagValues AWS API Documentation
@@ -4622,13 +5420,13 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   The currency code that Amazon Web Services used to calculate the
-    #   costs for this instance.
+    #   The currency code that AWS used to calculate the costs for this
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] default_target_instance
-    #   Indicates whether or not this recommendation is the defaulted Amazon
-    #   Web Services recommendation.
+    #   Indicates whether this recommendation is the defaulted AWS
+    #   recommendation.
     #   @return [Boolean]
     #
     # @!attribute [rw] resource_details
@@ -4659,8 +5457,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   The currency code that Amazon Web Services used to calculate the
-    #   costs for this instance.
+    #   The currency code that AWS used to calculate the costs for this
+    #   instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TerminateRecommendationDetail AWS API Documentation
@@ -4668,6 +5466,65 @@ module Aws::CostExplorer
     class TerminateRecommendationDetail < Struct.new(
       :estimated_monthly_savings,
       :currency_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters cost anomalies based on the total impact.
+    #
+    # @note When making an API call, you may pass TotalImpactFilter
+    #   data as a hash:
+    #
+    #       {
+    #         numeric_operator: "EQUAL", # required, accepts EQUAL, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, BETWEEN
+    #         start_value: 1.0, # required
+    #         end_value: 1.0,
+    #       }
+    #
+    # @!attribute [rw] numeric_operator
+    #   The comparing value used in the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_value
+    #   The lower bound dollar value used in the filter.
+    #   @return [Float]
+    #
+    # @!attribute [rw] end_value
+    #   The upper bound dollar value used in the filter.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TotalImpactFilter AWS API Documentation
+    #
+    class TotalImpactFilter < Struct.new(
+      :numeric_operator,
+      :start_value,
+      :end_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cost anomaly monitor does not exist for the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UnknownMonitorException AWS API Documentation
+    #
+    class UnknownMonitorException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cost anomaly subscription does not exist for the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UnknownSubscriptionException AWS API Documentation
+    #
+    class UnknownSubscriptionException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4683,6 +5540,111 @@ module Aws::CostExplorer
     #
     class UnresolvableUsageUnitException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAnomalyMonitorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_arn: "GenericString", # required
+    #         monitor_name: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] monitor_arn
+    #   Cost anomaly monitor Amazon Resource Names (ARNs).
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_name
+    #   The new name for the cost anomaly monitor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalyMonitorRequest AWS API Documentation
+    #
+    class UpdateAnomalyMonitorRequest < Struct.new(
+      :monitor_arn,
+      :monitor_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_arn
+    #   A cost anomaly monitor ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalyMonitorResponse AWS API Documentation
+    #
+    class UpdateAnomalyMonitorResponse < Struct.new(
+      :monitor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAnomalySubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         subscription_arn: "GenericString", # required
+    #         threshold: 1.0,
+    #         frequency: "DAILY", # accepts DAILY, IMMEDIATE, WEEKLY
+    #         monitor_arn_list: ["Value"],
+    #         subscribers: [
+    #           {
+    #             address: "SubscriberAddress",
+    #             type: "EMAIL", # accepts EMAIL, SNS
+    #             status: "CONFIRMED", # accepts CONFIRMED, DECLINED
+    #           },
+    #         ],
+    #         subscription_name: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] subscription_arn
+    #   A cost anomaly subscription Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The update to the threshold value for receiving notifications.
+    #   @return [Float]
+    #
+    # @!attribute [rw] frequency
+    #   The update to the frequency value at which subscribers will receive
+    #   notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_arn_list
+    #   A list of cost anomaly subscription ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subscribers
+    #   The update to the subscriber list.
+    #   @return [Array<Types::Subscriber>]
+    #
+    # @!attribute [rw] subscription_name
+    #   The subscription's new name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalySubscriptionRequest AWS API Documentation
+    #
+    class UpdateAnomalySubscriptionRequest < Struct.new(
+      :subscription_arn,
+      :threshold,
+      :frequency,
+      :monitor_arn_list,
+      :subscribers,
+      :subscription_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription_arn
+    #   A cost anomaly subscription ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalySubscriptionResponse AWS API Documentation
+    #
+    class UpdateAnomalySubscriptionResponse < Struct.new(
+      :subscription_arn)
       SENSITIVE = []
       include Aws::Structure
     end

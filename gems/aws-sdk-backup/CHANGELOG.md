@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-09-23)
+------------------
+
+* Feature - This release allows customers to enable or disable advanced backup settings in backup plan. As part of this feature AWS Backup added support for  Windows VSS backup option for EC2 resources.
+
 1.21.0 (2020-09-15)
 ------------------
 

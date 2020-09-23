@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-09-23)
+------------------
+
+* Feature - Improvements to DeleteTerminology API.
+
 1.26.0 (2020-09-15)
 ------------------
 
