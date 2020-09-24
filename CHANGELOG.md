@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.593 (2020-09-24)
+------------------
+
 * Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
 
 * Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
