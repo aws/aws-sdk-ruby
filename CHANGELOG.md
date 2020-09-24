@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::SavingsPlans - Updated the API, and documentation for AWS Savings Plans.
+
+* Feature - Aws::Synthetics - Updated the API, and documentation for Synthetics.
+
+* Feature - Aws::Textract - Updated the API, and documentation for Amazon Textract.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
 2.11.592 (2020-09-23)
 ------------------
 
