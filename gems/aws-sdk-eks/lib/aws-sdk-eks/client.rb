@@ -412,6 +412,9 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #
+    # @option params [Types::KubernetesNetworkConfigRequest] :kubernetes_network_config
+    #   The Kubernetes network configuration for the cluster.
+    #
     # @option params [Types::Logging] :logging
     #   Enable or disable exporting the Kubernetes control plane logs for your
     #   cluster to CloudWatch Logs. By default, cluster control plane logs
@@ -487,6 +490,9 @@ module Aws::EKS
     #       endpoint_private_access: false,
     #       public_access_cidrs: ["String"],
     #     },
+    #     kubernetes_network_config: {
+    #       service_ipv_4_cidr: "String",
+    #     },
     #     logging: {
     #       cluster_logging: [
     #         {
@@ -527,6 +533,7 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -759,13 +766,13 @@ module Aws::EKS
     #
     # @option params [String] :ami_type
     #   The AMI type for your node group. GPU instance types should use the
-    #   `AL2_x86_64_GPU` AMI type, which uses the Amazon EKS-optimized Linux
-    #   AMI with GPU support. Non-GPU instances should use the `AL2_x86_64`
-    #   AMI type, which uses the Amazon EKS-optimized Linux AMI. If you
-    #   specify `launchTemplate`, and your launch template uses a custom AMI,
-    #   then don't specify `amiType`, or the node group deployment will fail.
-    #   For more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][1] in the Amazon EKS User Guide.
+    #   `AL2_x86_64_GPU` AMI type. Non-GPU instances should use the
+    #   `AL2_x86_64` AMI type. Arm instances should use the `AL2_ARM_64` AMI
+    #   type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI. If
+    #   you specify `launchTemplate`, and your launch template uses a custom
+    #   AMI, then don't specify `amiType`, or the node group deployment will
+    #   fail. For more information about using launch templates with Amazon
+    #   EKS, see [Launch template support][1] in the Amazon EKS User Guide.
     #
     #
     #
@@ -823,8 +830,8 @@ module Aws::EKS
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   An object representing a node group's launch template specification.
     #   If specified, then do not specify `instanceTypes`, `diskSize`, or
-    #   `remoteAccess`. If specified, make sure that the launch template meets
-    #   the requirements in `launchTemplateSpecification`.
+    #   `remoteAccess` and make sure that the launch template meets the
+    #   requirements in `launchTemplateSpecification`.
     #
     # @option params [String] :version
     #   The Kubernetes version to use for your managed nodes. By default, the
@@ -1003,6 +1010,7 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -1234,6 +1242,7 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -2187,7 +2196,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

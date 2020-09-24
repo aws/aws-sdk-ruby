@@ -19,6 +19,9 @@ module Aws::SavingsPlans
     CreateSavingsPlanResponse = Shapes::StructureShape.new(name: 'CreateSavingsPlanResponse')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     CurrencyList = Shapes::ListShape.new(name: 'CurrencyList')
+    DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DeleteQueuedSavingsPlanRequest = Shapes::StructureShape.new(name: 'DeleteQueuedSavingsPlanRequest')
+    DeleteQueuedSavingsPlanResponse = Shapes::StructureShape.new(name: 'DeleteQueuedSavingsPlanResponse')
     DescribeSavingsPlanRatesRequest = Shapes::StructureShape.new(name: 'DescribeSavingsPlanRatesRequest')
     DescribeSavingsPlanRatesResponse = Shapes::StructureShape.new(name: 'DescribeSavingsPlanRatesResponse')
     DescribeSavingsPlansOfferingRatesRequest = Shapes::StructureShape.new(name: 'DescribeSavingsPlansOfferingRatesRequest')
@@ -117,6 +120,7 @@ module Aws::SavingsPlans
     CreateSavingsPlanRequest.add_member(:savings_plan_offering_id, Shapes::ShapeRef.new(shape: SavingsPlanOfferingId, required: true, location_name: "savingsPlanOfferingId"))
     CreateSavingsPlanRequest.add_member(:commitment, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "commitment"))
     CreateSavingsPlanRequest.add_member(:upfront_payment_amount, Shapes::ShapeRef.new(shape: Amount, location_name: "upfrontPaymentAmount"))
+    CreateSavingsPlanRequest.add_member(:purchase_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "purchaseTime"))
     CreateSavingsPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateSavingsPlanRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSavingsPlanRequest.struct_class = Types::CreateSavingsPlanRequest
@@ -125,6 +129,11 @@ module Aws::SavingsPlans
     CreateSavingsPlanResponse.struct_class = Types::CreateSavingsPlanResponse
 
     CurrencyList.member = Shapes::ShapeRef.new(shape: CurrencyCode)
+
+    DeleteQueuedSavingsPlanRequest.add_member(:savings_plan_id, Shapes::ShapeRef.new(shape: SavingsPlanId, required: true, location_name: "savingsPlanId"))
+    DeleteQueuedSavingsPlanRequest.struct_class = Types::DeleteQueuedSavingsPlanRequest
+
+    DeleteQueuedSavingsPlanResponse.struct_class = Types::DeleteQueuedSavingsPlanResponse
 
     DescribeSavingsPlanRatesRequest.add_member(:savings_plan_id, Shapes::ShapeRef.new(shape: SavingsPlanId, required: true, location_name: "savingsPlanId"))
     DescribeSavingsPlanRatesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SavingsPlanRateFilterList, location_name: "filters"))
@@ -391,6 +400,18 @@ module Aws::SavingsPlans
         o.output = Shapes::ShapeRef.new(shape: CreateSavingsPlanResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:delete_queued_savings_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueuedSavingsPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteQueuedSavingsPlan"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueuedSavingsPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteQueuedSavingsPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)

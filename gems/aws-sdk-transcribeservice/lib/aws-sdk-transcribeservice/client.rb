@@ -819,7 +819,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
+    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
     #   resp.medical_transcription_job.transcript.transcript_file_uri #=> String
     #   resp.medical_transcription_job.start_time #=> Time
@@ -909,7 +909,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
+    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
     #   resp.transcription_job.transcript.redacted_transcript_file_uri #=> String
@@ -1428,6 +1428,28 @@ module Aws::TranscribeService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #
+    # @option params [String] :output_key
+    #   You can specify a location in an Amazon S3 bucket to store the output
+    #   of your medical transcription job.
+    #
+    #   If you don't specify an output key, Amazon Transcribe Medical stores
+    #   the output of your transcription job in the Amazon S3 bucket you
+    #   specified. By default, the object key is
+    #   "your-transcription-job-name.json".
+    #
+    #   You can use output keys to specify the Amazon S3 prefix and file name
+    #   of the transcription output. For example, specifying the Amazon S3
+    #   prefix, "folder1/folder2/", as an output key would lead to the
+    #   output being stored as
+    #   "folder1/folder2/your-transcription-job-name.json". If you specify
+    #   "my-other-job-name.json" as the output key, the object key is
+    #   changed to "my-other-job-name.json". You can use an output key to
+    #   change both the prefix and the file name, for example
+    #   "folder/my-other-job-name.json".
+    #
+    #   If you specify an output key, you must also specify an S3 bucket in
+    #   the `OutputBucketName` parameter.
+    #
     # @option params [String] :output_encryption_kms_key_id
     #   The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS)
     #   key used to encrypt the output of the transcription job. The user
@@ -1480,11 +1502,12 @@ module Aws::TranscribeService
     #     medical_transcription_job_name: "TranscriptionJobName", # required
     #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     media_sample_rate_hertz: 1,
-    #     media_format: "mp3", # accepts mp3, mp4, wav, flac
+    #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #     media: { # required
     #       media_file_uri: "Uri",
     #     },
     #     output_bucket_name: "OutputBucketName", # required
+    #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     settings: {
     #       show_speaker_labels: false,
@@ -1504,7 +1527,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
+    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
     #   resp.medical_transcription_job.transcript.transcript_file_uri #=> String
     #   resp.medical_transcription_job.start_time #=> Time
@@ -1584,6 +1607,28 @@ module Aws::TranscribeService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #
+    # @option params [String] :output_key
+    #   You can specify a location in an Amazon S3 bucket to store the output
+    #   of your transcription job.
+    #
+    #   If you don't specify an output key, Amazon Transcribe stores the
+    #   output of your transcription job in the Amazon S3 bucket you
+    #   specified. By default, the object key is
+    #   "your-transcription-job-name.json".
+    #
+    #   You can use output keys to specify the Amazon S3 prefix and file name
+    #   of the transcription output. For example, specifying the Amazon S3
+    #   prefix, "folder1/folder2/", as an output key would lead to the
+    #   output being stored as
+    #   "folder1/folder2/your-transcription-job-name.json". If you specify
+    #   "my-other-job-name.json" as the output key, the object key is
+    #   changed to "my-other-job-name.json". You can use an output key to
+    #   change both the prefix and the file name, for example
+    #   "folder/my-other-job-name.json".
+    #
+    #   If you specify an output key, you must also specify an S3 bucket in
+    #   the `OutputBucketName` parameter.
+    #
     # @option params [String] :output_encryption_kms_key_id
     #   The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS)
     #   key used to encrypt the output of the transcription job. The user
@@ -1652,11 +1697,12 @@ module Aws::TranscribeService
     #     transcription_job_name: "TranscriptionJobName", # required
     #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     media_sample_rate_hertz: 1,
-    #     media_format: "mp3", # accepts mp3, mp4, wav, flac
+    #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #     media: { # required
     #       media_file_uri: "Uri",
     #     },
     #     output_bucket_name: "OutputBucketName",
+    #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     settings: {
     #       vocabulary_name: "VocabularyName",
@@ -1689,7 +1735,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
+    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
     #   resp.transcription_job.transcript.redacted_transcript_file_uri #=> String
@@ -1937,7 +1983,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

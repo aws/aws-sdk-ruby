@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-09-24)
+------------------
+
+* Feature - AWS Textract now supports output results for asynchronous jobs to customer specified s3 bucket.
+
 1.19.0 (2020-09-15)
 ------------------
 

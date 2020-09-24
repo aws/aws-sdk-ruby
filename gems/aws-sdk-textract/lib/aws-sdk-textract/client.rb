@@ -444,7 +444,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -534,7 +534,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -660,7 +660,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -777,7 +777,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -857,6 +857,11 @@ module Aws::Textract
     #   The Amazon SNS topic ARN that you want Amazon Textract to publish the
     #   completion status of the operation to.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   Sets if the output will go to a customer defined bucket. By default,
+    #   Amazon Textract will save the results internally to be accessed by the
+    #   GetDocumentAnalysis operation.
+    #
     # @return [Types::StartDocumentAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentAnalysisResponse#job_id #job_id} => String
@@ -877,6 +882,10 @@ module Aws::Textract
     #     notification_channel: {
     #       sns_topic_arn: "SNSTopicArn", # required
     #       role_arn: "RoleArn", # required
+    #     },
+    #     output_config: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3ObjectName",
     #     },
     #   })
     #
@@ -943,6 +952,11 @@ module Aws::Textract
     #   The Amazon SNS topic ARN that you want Amazon Textract to publish the
     #   completion status of the operation to.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   Sets if the output will go to a customer defined bucket. By default
+    #   Amazon Textract will save the results internally to be accessed with
+    #   the GetDocumentTextDetection operation.
+    #
     # @return [Types::StartDocumentTextDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentTextDetectionResponse#job_id #job_id} => String
@@ -962,6 +976,10 @@ module Aws::Textract
     #     notification_channel: {
     #       sns_topic_arn: "SNSTopicArn", # required
     #       role_arn: "RoleArn", # required
+    #     },
+    #     output_config: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3ObjectName",
     #     },
     #   })
     #
@@ -991,7 +1009,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

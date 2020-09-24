@@ -65,6 +65,7 @@ module Aws::Textract
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
+    OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     Pages = Shapes::ListShape.new(name: 'Pages')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Percent = Shapes::FloatShape.new(name: 'Percent')
@@ -227,6 +228,10 @@ module Aws::Textract
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     NotificationChannel.struct_class = Types::NotificationChannel
 
+    OutputConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
+    OutputConfig.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "S3Prefix"))
+    OutputConfig.struct_class = Types::OutputConfig
+
     Pages.member = Shapes::ShapeRef.new(shape: UInteger)
 
     Point.add_member(:x, Shapes::ShapeRef.new(shape: Float, location_name: "X"))
@@ -253,6 +258,7 @@ module Aws::Textract
     StartDocumentAnalysisRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     StartDocumentAnalysisRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     StartDocumentAnalysisRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartDocumentAnalysisRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
     StartDocumentAnalysisRequest.struct_class = Types::StartDocumentAnalysisRequest
 
     StartDocumentAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -262,6 +268,7 @@ module Aws::Textract
     StartDocumentTextDetectionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     StartDocumentTextDetectionRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     StartDocumentTextDetectionRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartDocumentTextDetectionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
     StartDocumentTextDetectionRequest.struct_class = Types::StartDocumentTextDetectionRequest
 
     StartDocumentTextDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -342,6 +349,7 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
       end)
 
       api.add_operation(:get_document_text_detection, Seahorse::Model::Operation.new.tap do |o|
@@ -356,6 +364,7 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
       end)
 
       api.add_operation(:start_document_analysis, Seahorse::Model::Operation.new.tap do |o|

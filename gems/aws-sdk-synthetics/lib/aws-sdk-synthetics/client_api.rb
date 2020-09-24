@@ -13,11 +13,11 @@ module Aws::Synthetics
 
     include Seahorse::Model
 
-    Arn = Shapes::StringShape.new(name: 'Arn')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Canaries = Shapes::ListShape.new(name: 'Canaries')
     CanariesLastRun = Shapes::ListShape.new(name: 'CanariesLastRun')
     Canary = Shapes::StructureShape.new(name: 'Canary')
+    CanaryArn = Shapes::StringShape.new(name: 'CanaryArn')
     CanaryCodeInput = Shapes::StructureShape.new(name: 'CanaryCodeInput')
     CanaryCodeOutput = Shapes::StructureShape.new(name: 'CanaryCodeOutput')
     CanaryLastRun = Shapes::StructureShape.new(name: 'CanaryLastRun')
@@ -48,6 +48,7 @@ module Aws::Synthetics
     DescribeRuntimeVersionsRequest = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsRequest')
     DescribeRuntimeVersionsResponse = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsResponse')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GetCanaryRequest = Shapes::StructureShape.new(name: 'GetCanaryRequest')
     GetCanaryResponse = Shapes::StructureShape.new(name: 'GetCanaryResponse')
     GetCanaryRunsRequest = Shapes::StructureShape.new(name: 'GetCanaryRunsRequest')
@@ -61,7 +62,9 @@ module Aws::Synthetics
     MaxSize100 = Shapes::IntegerShape.new(name: 'MaxSize100')
     MaxSize1024 = Shapes::IntegerShape.new(name: 'MaxSize1024')
     MaxSize3008 = Shapes::IntegerShape.new(name: 'MaxSize3008')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RuntimeVersion = Shapes::StructureShape.new(name: 'RuntimeVersion')
     RuntimeVersionList = Shapes::ListShape.new(name: 'RuntimeVersionList')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
@@ -98,7 +101,7 @@ module Aws::Synthetics
     Canary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
     Canary.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name"))
     Canary.add_member(:code, Shapes::ShapeRef.new(shape: CanaryCodeOutput, location_name: "Code"))
-    Canary.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ExecutionRoleArn"))
+    Canary.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
     Canary.add_member(:schedule, Shapes::ShapeRef.new(shape: CanaryScheduleOutput, location_name: "Schedule"))
     Canary.add_member(:run_config, Shapes::ShapeRef.new(shape: CanaryRunConfigOutput, location_name: "RunConfig"))
     Canary.add_member(:success_retention_period_in_days, Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
@@ -106,7 +109,7 @@ module Aws::Synthetics
     Canary.add_member(:status, Shapes::ShapeRef.new(shape: CanaryStatus, location_name: "Status"))
     Canary.add_member(:timeline, Shapes::ShapeRef.new(shape: CanaryTimeline, location_name: "Timeline"))
     Canary.add_member(:artifact_s3_location, Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
-    Canary.add_member(:engine_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EngineArn"))
+    Canary.add_member(:engine_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "EngineArn"))
     Canary.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion"))
     Canary.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigOutput, location_name: "VpcConfig"))
     Canary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -127,18 +130,21 @@ module Aws::Synthetics
     CanaryLastRun.add_member(:last_run, Shapes::ShapeRef.new(shape: CanaryRun, location_name: "LastRun"))
     CanaryLastRun.struct_class = Types::CanaryLastRun
 
+    CanaryRun.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
     CanaryRun.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name"))
     CanaryRun.add_member(:status, Shapes::ShapeRef.new(shape: CanaryRunStatus, location_name: "Status"))
     CanaryRun.add_member(:timeline, Shapes::ShapeRef.new(shape: CanaryRunTimeline, location_name: "Timeline"))
     CanaryRun.add_member(:artifact_s3_location, Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
     CanaryRun.struct_class = Types::CanaryRun
 
-    CanaryRunConfigInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, required: true, location_name: "TimeoutInSeconds"))
+    CanaryRunConfigInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
     CanaryRunConfigInput.add_member(:memory_in_mb, Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
+    CanaryRunConfigInput.add_member(:active_tracing, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ActiveTracing"))
     CanaryRunConfigInput.struct_class = Types::CanaryRunConfigInput
 
     CanaryRunConfigOutput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
     CanaryRunConfigOutput.add_member(:memory_in_mb, Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
+    CanaryRunConfigOutput.add_member(:active_tracing, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ActiveTracing"))
     CanaryRunConfigOutput.struct_class = Types::CanaryRunConfigOutput
 
     CanaryRunStatus.add_member(:state, Shapes::ShapeRef.new(shape: CanaryRunState, location_name: "State"))
@@ -177,7 +183,7 @@ module Aws::Synthetics
     CreateCanaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, required: true, location_name: "Name"))
     CreateCanaryRequest.add_member(:code, Shapes::ShapeRef.new(shape: CanaryCodeInput, required: true, location_name: "Code"))
     CreateCanaryRequest.add_member(:artifact_s3_location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ArtifactS3Location"))
-    CreateCanaryRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ExecutionRoleArn"))
+    CreateCanaryRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateCanaryRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: CanaryScheduleInput, required: true, location_name: "Schedule"))
     CreateCanaryRequest.add_member(:run_config, Shapes::ShapeRef.new(shape: CanaryRunConfigInput, location_name: "RunConfig"))
     CreateCanaryRequest.add_member(:success_retention_period_in_days, Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
@@ -237,7 +243,7 @@ module Aws::Synthetics
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -273,13 +279,13 @@ module Aws::Synthetics
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
-    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CanaryArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -287,7 +293,7 @@ module Aws::Synthetics
 
     UpdateCanaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, required: true, location: "uri", location_name: "name"))
     UpdateCanaryRequest.add_member(:code, Shapes::ShapeRef.new(shape: CanaryCodeInput, location_name: "Code"))
-    UpdateCanaryRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ExecutionRoleArn"))
+    UpdateCanaryRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
     UpdateCanaryRequest.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion"))
     UpdateCanaryRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: CanaryScheduleInput, location_name: "Schedule"))
     UpdateCanaryRequest.add_member(:run_config, Shapes::ShapeRef.new(shape: CanaryRunConfigInput, location_name: "RunConfig"))

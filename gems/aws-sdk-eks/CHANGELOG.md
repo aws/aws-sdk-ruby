@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-09-24)
+------------------
+
+* Feature - Amazon EKS now supports configuring your cluster's service CIDR during cluster creation.
+
 1.42.0 (2020-09-15)
 ------------------
 

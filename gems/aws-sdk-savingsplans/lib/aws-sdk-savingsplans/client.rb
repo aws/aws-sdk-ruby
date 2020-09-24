@@ -342,6 +342,10 @@ module Aws::SavingsPlans
     #   percent of the total value of the Savings Plan. This parameter is
     #   supported only if the payment option is `Partial Upfront`.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :purchase_time
+    #   The time at which to purchase the Savings Plan, in UTC format
+    #   (YYYY-MM-DDTHH:MM:SSZ).
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -362,6 +366,7 @@ module Aws::SavingsPlans
     #     savings_plan_offering_id: "SavingsPlanOfferingId", # required
     #     commitment: "Amount", # required
     #     upfront_payment_amount: "Amount",
+    #     purchase_time: Time.now,
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -378,6 +383,28 @@ module Aws::SavingsPlans
     # @param [Hash] params ({})
     def create_savings_plan(params = {}, options = {})
       req = build_request(:create_savings_plan, params)
+      req.send_request(options)
+    end
+
+    # Deletes the queued purchase for the specified Savings Plan.
+    #
+    # @option params [required, String] :savings_plan_id
+    #   The ID of the Savings Plan.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queued_savings_plan({
+    #     savings_plan_id: "SavingsPlanId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/DeleteQueuedSavingsPlan AWS API Documentation
+    #
+    # @overload delete_queued_savings_plan(params = {})
+    # @param [Hash] params ({})
+    def delete_queued_savings_plan(params = {}, options = {})
+      req = build_request(:delete_queued_savings_plan, params)
       req.send_request(options)
     end
 
@@ -425,7 +452,7 @@ module Aws::SavingsPlans
     #   resp.search_results[0].currency #=> String, one of "CNY", "USD"
     #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
     #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AWSLambda"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -476,7 +503,7 @@ module Aws::SavingsPlans
     #     savings_plan_ids: ["SavingsPlanId"],
     #     next_token: "PaginationToken",
     #     max_results: 1,
-    #     states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired
+    #     states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted
     #     filters: [
     #       {
     #         name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end
@@ -494,7 +521,7 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].description #=> String
     #   resp.savings_plans[0].start #=> String
     #   resp.savings_plans[0].end #=> String
-    #   resp.savings_plans[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired"
+    #   resp.savings_plans[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted"
     #   resp.savings_plans[0].region #=> String
     #   resp.savings_plans[0].ec2_instance_family #=> String
     #   resp.savings_plans[0].savings_plan_type #=> String, one of "Compute", "EC2Instance"
@@ -565,7 +592,7 @@ module Aws::SavingsPlans
     #     savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
     #     savings_plan_types: ["Compute"], # accepts Compute, EC2Instance
     #     products: ["EC2"], # accepts EC2, Fargate, Lambda
-    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda
+    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AWSLambda
     #     usage_types: ["SavingsPlanRateUsageType"],
     #     operations: ["SavingsPlanRateOperation"],
     #     filters: [
@@ -590,7 +617,7 @@ module Aws::SavingsPlans
     #   resp.search_results[0].rate #=> String
     #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
     #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AWSLambda"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -803,7 +830,7 @@ module Aws::SavingsPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

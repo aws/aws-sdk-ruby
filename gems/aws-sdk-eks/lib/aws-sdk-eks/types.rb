@@ -126,6 +126,10 @@ module Aws::EKS
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigResponse]
     #
+    # @!attribute [rw] kubernetes_network_config
+    #   Network configuration settings for your cluster.
+    #   @return [Types::KubernetesNetworkConfigResponse]
+    #
     # @!attribute [rw] logging
     #   The logging configuration for your cluster.
     #   @return [Types::Logging]
@@ -178,6 +182,7 @@ module Aws::EKS
       :endpoint,
       :role_arn,
       :resources_vpc_config,
+      :kubernetes_network_config,
       :logging,
       :identity,
       :status,
@@ -203,6 +208,9 @@ module Aws::EKS
     #           endpoint_public_access: false,
     #           endpoint_private_access: false,
     #           public_access_cidrs: ["String"],
+    #         },
+    #         kubernetes_network_config: {
+    #           service_ipv_4_cidr: "String",
     #         },
     #         logging: {
     #           cluster_logging: [
@@ -262,6 +270,10 @@ module Aws::EKS
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigRequest]
     #
+    # @!attribute [rw] kubernetes_network_config
+    #   The Kubernetes network configuration for the cluster.
+    #   @return [Types::KubernetesNetworkConfigRequest]
+    #
     # @!attribute [rw] logging
     #   Enable or disable exporting the Kubernetes control plane logs for
     #   your cluster to CloudWatch Logs. By default, cluster control plane
@@ -306,6 +318,7 @@ module Aws::EKS
       :version,
       :role_arn,
       :resources_vpc_config,
+      :kubernetes_network_config,
       :logging,
       :client_request_token,
       :tags,
@@ -519,10 +532,10 @@ module Aws::EKS
     #
     # @!attribute [rw] ami_type
     #   The AMI type for your node group. GPU instance types should use the
-    #   `AL2_x86_64_GPU` AMI type, which uses the Amazon EKS-optimized Linux
-    #   AMI with GPU support. Non-GPU instances should use the `AL2_x86_64`
-    #   AMI type, which uses the Amazon EKS-optimized Linux AMI. If you
-    #   specify `launchTemplate`, and your launch template uses a custom
+    #   `AL2_x86_64_GPU` AMI type. Non-GPU instances should use the
+    #   `AL2_x86_64` AMI type. Arm instances should use the `AL2_ARM_64` AMI
+    #   type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI. If
+    #   you specify `launchTemplate`, and your launch template uses a custom
     #   AMI, then don't specify `amiType`, or the node group deployment
     #   will fail. For more information about using launch templates with
     #   Amazon EKS, see [Launch template support][1] in the Amazon EKS User
@@ -591,9 +604,8 @@ module Aws::EKS
     # @!attribute [rw] launch_template
     #   An object representing a node group's launch template
     #   specification. If specified, then do not specify `instanceTypes`,
-    #   `diskSize`, or `remoteAccess`. If specified, make sure that the
-    #   launch template meets the requirements in
-    #   `launchTemplateSpecification`.
+    #   `diskSize`, or `remoteAccess` and make sure that the launch template
+    #   meets the requirements in `launchTemplateSpecification`.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] version
@@ -1253,6 +1265,61 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The Kubernetes network configuration for the cluster.
+    #
+    # @note When making an API call, you may pass KubernetesNetworkConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_ipv_4_cidr: "String",
+    #       }
+    #
+    # @!attribute [rw] service_ipv_4_cidr
+    #   The CIDR block to assign Kubernetes service IP addresses from. If
+    #   you don't specify a block, Kubernetes assigns addresses from either
+    #   the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that
+    #   you specify a block that does not overlap with resources in other
+    #   networks that are peered or connected to your VPC. The block must
+    #   meet the following requirements:
+    #
+    #   * Within one of the following private IP address blocks: 10.0.0.0/8,
+    #     172.16.0.0.0/12, or 192.168.0.0/16.
+    #
+    #   * Doesn't overlap with any CIDR block assigned to the VPC that you
+    #     selected for VPC.
+    #
+    #   * Between /24 and /12.
+    #
+    #   You can only specify a custom CIDR block when you create a cluster
+    #   and can't change this value once the cluster is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubernetesNetworkConfigRequest AWS API Documentation
+    #
+    class KubernetesNetworkConfigRequest < Struct.new(
+      :service_ipv_4_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Kubernetes network configuration for the cluster.
+    #
+    # @!attribute [rw] service_ipv_4_cidr
+    #   The CIDR block that Kubernetes service IP addresses are assigned
+    #   from. If you didn't specify a CIDR block, then Kubernetes assigns
+    #   addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR
+    #   blocks. If this was specified, then it was specified when the
+    #   cluster was created and it cannot be changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubernetesNetworkConfigResponse AWS API Documentation
+    #
+    class KubernetesNetworkConfigResponse < Struct.new(
+      :service_ipv_4_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a node group launch template specification. The
     # launch template cannot include [ `SubnetId` ][1], [
     # `IamInstanceProfile` ][2], [ `RequestSpotInstances` ][3], [
@@ -1707,8 +1774,7 @@ module Aws::EKS
     # @!attribute [rw] instance_types
     #   If the node group wasn't deployed with a launch template, then this
     #   is the instance type that is associated with the node group. If the
-    #   node group was deployed with a launch template, then `instanceTypes`
-    #   is `null`.
+    #   node group was deployed with a launch template, then this is `null`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnets
@@ -1720,7 +1786,7 @@ module Aws::EKS
     #   If the node group wasn't deployed with a launch template, then this
     #   is the remote access configuration that is associated with the node
     #   group. If the node group was deployed with a launch template, then
-    #   `remoteAccess` is `null`.
+    #   this is `null`.
     #   @return [Types::RemoteAccessConfig]
     #
     # @!attribute [rw] ami_type
@@ -1755,7 +1821,7 @@ module Aws::EKS
     # @!attribute [rw] disk_size
     #   If the node group wasn't deployed with a launch template, then this
     #   is the disk size in the node group configuration. If the node group
-    #   was deployed with a launch template, then `diskSize` is `null`.
+    #   was deployed with a launch template, then this is `null`.
     #   @return [Integer]
     #
     # @!attribute [rw] health

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-09-24)
+------------------
+
+* Feature - AWS Synthetics now supports AWS X-Ray Active Tracing feature. RunConfig is now an optional parameter with timeout updated from (60 - 900 seconds) to (3 - 840 seconds).
+
 1.7.0 (2020-09-15)
 ------------------
 

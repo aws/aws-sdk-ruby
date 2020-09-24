@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-09-24)
+------------------
+
+* Feature - Allow Oauth Token in CreateApp call to be a maximum of 1000 characters instead of 100
+
 1.23.0 (2020-09-15)
 ------------------
 

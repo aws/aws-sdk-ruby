@@ -37,7 +37,7 @@ module Aws::Synthetics
     #   @return [Types::CanaryScheduleOutput]
     #
     # @!attribute [rw] run_config
-    #   A structure that contains information for a canary run.
+    #   A structure that contains information about a canary run.
     #   @return [Types::CanaryRunConfigOutput]
     #
     # @!attribute [rw] success_retention_period_in_days
@@ -76,8 +76,9 @@ module Aws::Synthetics
     #
     # @!attribute [rw] runtime_version
     #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid value is `syn-1.0`. For more information about runtime
-    #   versions, see [ Canary Runtime Versions][1].
+    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
+    #   `syn-1.0`. For more information about runtime versions, see [ Canary
+    #   Runtime Versions][1].
     #
     #
     #
@@ -224,6 +225,10 @@ module Aws::Synthetics
 
     # This structure contains the details about one run of one canary.
     #
+    # @!attribute [rw] id
+    #   A unique ID that identifies this canary run.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the canary.
     #   @return [String]
@@ -244,6 +249,7 @@ module Aws::Synthetics
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRun AWS API Documentation
     #
     class CanaryRun < Struct.new(
+      :id,
       :name,
       :status,
       :timeline,
@@ -258,31 +264,52 @@ module Aws::Synthetics
     #   data as a hash:
     #
     #       {
-    #         timeout_in_seconds: 1, # required
+    #         timeout_in_seconds: 1,
     #         memory_in_mb: 1,
+    #         active_tracing: false,
     #       }
     #
     # @!attribute [rw] timeout_in_seconds
-    #   How long the canary is allowed to run before it must stop. If you
-    #   omit this field, the frequency of the canary is used as this value,
-    #   up to a maximum of 14 minutes.
+    #   How long the canary is allowed to run before it must stop. You
+    #   can't set this time to be longer than the frequency of the runs of
+    #   this canary.
+    #
+    #   If you omit this field, the frequency of the canary is used as this
+    #   value, up to a maximum of 14 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_in_mb
     #   The maximum amount of memory available to the canary while it is
-    #   running, in MB. The value you specify must be a multiple of 64.
+    #   running, in MB. This value must be a multiple of 64.
     #   @return [Integer]
+    #
+    # @!attribute [rw] active_tracing
+    #   Specifies whether this canary is to use active AWS X-Ray tracing
+    #   when it runs. Active tracing enables this canary run to be displayed
+    #   in the ServiceLens and X-Ray service maps even if the canary does
+    #   not hit an endpoint that has X-ray tracing enabled. Using X-Ray
+    #   tracing incurs charges. For more information, see [ Canaries and
+    #   X-Ray tracing][1].
+    #
+    #   You can enable active tracing only for canaries that use version
+    #   `syn-nodejs-2.0` or later for their canary runtime.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigInput AWS API Documentation
     #
     class CanaryRunConfigInput < Struct.new(
       :timeout_in_seconds,
-      :memory_in_mb)
+      :memory_in_mb,
+      :active_tracing)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A structure that contains information for a canary run.
+    # A structure that contains information about a canary run.
     #
     # @!attribute [rw] timeout_in_seconds
     #   How long the canary is allowed to run before it must stop.
@@ -290,14 +317,19 @@ module Aws::Synthetics
     #
     # @!attribute [rw] memory_in_mb
     #   The maximum amount of memory available to the canary while it is
-    #   running, in MB. The value you must be a multiple of 64.
+    #   running, in MB. This value must be a multiple of 64.
     #   @return [Integer]
+    #
+    # @!attribute [rw] active_tracing
+    #   Displays whether this canary run used active AWS X-Ray tracing.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigOutput AWS API Documentation
     #
     class CanaryRunConfigOutput < Struct.new(
       :timeout_in_seconds,
-      :memory_in_mb)
+      :memory_in_mb,
+      :active_tracing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -503,14 +535,15 @@ module Aws::Synthetics
     #           handler: "String", # required
     #         },
     #         artifact_s3_location: "String", # required
-    #         execution_role_arn: "Arn", # required
+    #         execution_role_arn: "RoleArn", # required
     #         schedule: { # required
     #           expression: "String", # required
     #           duration_in_seconds: 1,
     #         },
     #         run_config: {
-    #           timeout_in_seconds: 1, # required
+    #           timeout_in_seconds: 1,
     #           memory_in_mb: 1,
+    #           active_tracing: false,
     #         },
     #         success_retention_period_in_days: 1,
     #         failure_retention_period_in_days: 1,
@@ -569,7 +602,7 @@ module Aws::Synthetics
     #
     #   * `logs:CreateLogStream`
     #
-    #   * `logs:CreateLogStream`
+    #   * `logs:PutLogEvents`
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -596,8 +629,9 @@ module Aws::Synthetics
     #
     # @!attribute [rw] runtime_version
     #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid value is `syn-1.0`. For more information about runtime
-    #   versions, see [ Canary Runtime Versions][1].
+    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
+    #   `syn-1.0`. For more information about runtime versions, see [ Canary
+    #   Runtime Versions][1].
     #
     #
     #
@@ -932,7 +966,7 @@ module Aws::Synthetics
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "Arn", # required
+    #         resource_arn: "CanaryArn", # required
     #       }
     #
     # @!attribute [rw] resource_arn
@@ -985,11 +1019,8 @@ module Aws::Synthetics
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
     #
     # @!attribute [rw] version_name
-    #   The name of the runtime version. Currently, the only valid value is
-    #   `syn-1.0`.
-    #
-    #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid value is `syn-1.0`.
+    #   The name of the runtime version. Currently, the only valid values
+    #   are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and `syn-1.0`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1076,7 +1107,7 @@ module Aws::Synthetics
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "Arn", # required
+    #         resource_arn: "CanaryArn", # required
     #         tags: { # required
     #           "TagKey" => "TagValue",
     #         },
@@ -1110,7 +1141,7 @@ module Aws::Synthetics
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "Arn", # required
+    #         resource_arn: "CanaryArn", # required
     #         tag_keys: ["TagKey"], # required
     #       }
     #
@@ -1150,15 +1181,16 @@ module Aws::Synthetics
     #           zip_file: "data",
     #           handler: "String", # required
     #         },
-    #         execution_role_arn: "Arn",
+    #         execution_role_arn: "RoleArn",
     #         runtime_version: "String",
     #         schedule: {
     #           expression: "String", # required
     #           duration_in_seconds: 1,
     #         },
     #         run_config: {
-    #           timeout_in_seconds: 1, # required
+    #           timeout_in_seconds: 1,
     #           memory_in_mb: 1,
+    #           active_tracing: false,
     #         },
     #         success_retention_period_in_days: 1,
     #         failure_retention_period_in_days: 1,
@@ -1209,8 +1241,9 @@ module Aws::Synthetics
     #
     # @!attribute [rw] runtime_version
     #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid value is `syn-1.0`. For more information about runtime
-    #   versions, see [ Canary Runtime Versions][1].
+    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
+    #   `syn-1.0`. For more information about runtime versions, see [ Canary
+    #   Runtime Versions][1].
     #
     #
     #

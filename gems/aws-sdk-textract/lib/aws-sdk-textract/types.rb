@@ -10,7 +10,8 @@
 module Aws::Textract
   module Types
 
-    # You aren't authorized to perform the action.
+    # You aren't authorized to perform the action. Use the Amazon Resource
+    # Name (ARN) of an authorized user or IAM role to perform the operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AccessDeniedException AWS API Documentation
     #
@@ -102,7 +103,8 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # Amazon Textract isn't able to read the document.
+    # Amazon Textract isn't able to read the document. For more information
+    # on the document limits in Amazon Textract, see limits.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BadDocumentException AWS API Documentation
     #
@@ -579,7 +581,8 @@ module Aws::Textract
     #   @return [Array<Types::Warning>]
     #
     # @!attribute [rw] status_message
-    #   The current status of an asynchronous document-analysis operation.
+    #   Returns if the detection job could not be completed. Contains
+    #   explanation for what error occured.
     #   @return [String]
     #
     # @!attribute [rw] analyze_document_model_version
@@ -664,8 +667,8 @@ module Aws::Textract
     #   @return [Array<Types::Warning>]
     #
     # @!attribute [rw] status_message
-    #   The current status of an asynchronous text-detection operation for
-    #   the document.
+    #   Returns if the detection job could not be completed. Contains
+    #   explanation for what error occured.
     #   @return [String]
     #
     # @!attribute [rw] detect_document_text_model_version
@@ -777,12 +780,15 @@ module Aws::Textract
     # loop workflows available
     #
     # @!attribute [rw] resource_type
+    #   The resource type.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
+    #   The quota code.
     #   @return [String]
     #
     # @!attribute [rw] service_code
+    #   The service code.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/HumanLoopQuotaExceededException AWS API Documentation
@@ -827,7 +833,13 @@ module Aws::Textract
     class InvalidParameterException < Aws::EmptyStructure; end
 
     # Amazon Textract is unable to access the S3 object that's specified in
-    # the request.
+    # the request. for more information, [Configure Access to Amazon S3][1]
+    # For troubleshooting information, see [Troubleshooting Amazon S3][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InvalidS3ObjectException AWS API Documentation
     #
@@ -871,6 +883,35 @@ module Aws::Textract
     class NotificationChannel < Struct.new(
       :sns_topic_arn,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sets whether or not your output will go to a user created bucket. Used
+    # to set the name of the bucket, and the prefix on the output file.
+    #
+    # @note When making an API call, you may pass OutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_prefix: "S3ObjectName",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the bucket your output will go to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The prefix of the object key that the output will be saved to. When
+    #   not enabled, the prefix will be “textract\_output".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/OutputConfig AWS API Documentation
+    #
+    class OutputConfig < Struct.new(
+      :s3_bucket,
+      :s3_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -923,7 +964,8 @@ module Aws::Textract
     #   relationship of type VALUE is a list that contains the ID of the
     #   VALUE block that's associated with the KEY of a key-value pair. A
     #   relationship of type CHILD is a list of IDs that identify WORD
-    #   blocks.
+    #   blocks in the case of lines Cell blocks in the case of Tables, and
+    #   WORD blocks in the case of Selection Elements.
     #   @return [String]
     #
     # @!attribute [rw] ids
@@ -1000,6 +1042,10 @@ module Aws::Textract
     #           sns_topic_arn: "SNSTopicArn", # required
     #           role_arn: "RoleArn", # required
     #         },
+    #         output_config: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_prefix: "S3ObjectName",
+    #         },
     #       }
     #
     # @!attribute [rw] document_location
@@ -1041,6 +1087,12 @@ module Aws::Textract
     #   the completion status of the operation to.
     #   @return [Types::NotificationChannel]
     #
+    # @!attribute [rw] output_config
+    #   Sets if the output will go to a customer defined bucket. By default,
+    #   Amazon Textract will save the results internally to be accessed by
+    #   the GetDocumentAnalysis operation.
+    #   @return [Types::OutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentAnalysisRequest AWS API Documentation
     #
     class StartDocumentAnalysisRequest < Struct.new(
@@ -1048,7 +1100,8 @@ module Aws::Textract
       :feature_types,
       :client_request_token,
       :job_tag,
-      :notification_channel)
+      :notification_channel,
+      :output_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1084,6 +1137,10 @@ module Aws::Textract
     #           sns_topic_arn: "SNSTopicArn", # required
     #           role_arn: "RoleArn", # required
     #         },
+    #         output_config: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_prefix: "S3ObjectName",
+    #         },
     #       }
     #
     # @!attribute [rw] document_location
@@ -1115,13 +1172,20 @@ module Aws::Textract
     #   the completion status of the operation to.
     #   @return [Types::NotificationChannel]
     #
+    # @!attribute [rw] output_config
+    #   Sets if the output will go to a customer defined bucket. By default
+    #   Amazon Textract will save the results internally to be accessed with
+    #   the GetDocumentTextDetection operation.
+    #   @return [Types::OutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentTextDetectionRequest AWS API Documentation
     #
     class StartDocumentTextDetectionRequest < Struct.new(
       :document_location,
       :client_request_token,
       :job_tag,
-      :notification_channel)
+      :notification_channel,
+      :output_config)
       SENSITIVE = []
       include Aws::Structure
     end

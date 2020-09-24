@@ -395,7 +395,7 @@ module Aws::Synthetics
     #
     #   * `logs:CreateLogStream`
     #
-    #   * `logs:CreateLogStream`
+    #   * `logs:PutLogEvents`
     #
     # @option params [required, Types::CanaryScheduleInput] :schedule
     #   A structure that contains information about how often the canary is to
@@ -417,8 +417,9 @@ module Aws::Synthetics
     #
     # @option params [required, String] :runtime_version
     #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid value is `syn-1.0`. For more information about runtime
-    #   versions, see [ Canary Runtime Versions][1].
+    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
+    #   `syn-1.0`. For more information about runtime versions, see [ Canary
+    #   Runtime Versions][1].
     #
     #
     #
@@ -457,14 +458,15 @@ module Aws::Synthetics
     #       handler: "String", # required
     #     },
     #     artifact_s3_location: "String", # required
-    #     execution_role_arn: "Arn", # required
+    #     execution_role_arn: "RoleArn", # required
     #     schedule: { # required
     #       expression: "String", # required
     #       duration_in_seconds: 1,
     #     },
     #     run_config: {
-    #       timeout_in_seconds: 1, # required
+    #       timeout_in_seconds: 1,
     #       memory_in_mb: 1,
+    #       active_tracing: false,
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -489,6 +491,7 @@ module Aws::Synthetics
     #   resp.canary.schedule.duration_in_seconds #=> Integer
     #   resp.canary.run_config.timeout_in_seconds #=> Integer
     #   resp.canary.run_config.memory_in_mb #=> Integer
+    #   resp.canary.run_config.active_tracing #=> Boolean
     #   resp.canary.success_retention_period_in_days #=> Integer
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -614,6 +617,7 @@ module Aws::Synthetics
     #   resp.canaries[0].schedule.duration_in_seconds #=> Integer
     #   resp.canaries[0].run_config.timeout_in_seconds #=> Integer
     #   resp.canaries[0].run_config.memory_in_mb #=> Integer
+    #   resp.canaries[0].run_config.active_tracing #=> Boolean
     #   resp.canaries[0].success_retention_period_in_days #=> Integer
     #   resp.canaries[0].failure_retention_period_in_days #=> Integer
     #   resp.canaries[0].status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -675,6 +679,7 @@ module Aws::Synthetics
     #
     #   resp.canaries_last_run #=> Array
     #   resp.canaries_last_run[0].canary_name #=> String
+    #   resp.canaries_last_run[0].last_run.id #=> String
     #   resp.canaries_last_run[0].last_run.name #=> String
     #   resp.canaries_last_run[0].last_run.status.state #=> String, one of "RUNNING", "PASSED", "FAILED"
     #   resp.canaries_last_run[0].last_run.status.state_reason #=> String
@@ -774,6 +779,7 @@ module Aws::Synthetics
     #   resp.canary.schedule.duration_in_seconds #=> Integer
     #   resp.canary.run_config.timeout_in_seconds #=> Integer
     #   resp.canary.run_config.memory_in_mb #=> Integer
+    #   resp.canary.run_config.active_tracing #=> Boolean
     #   resp.canary.success_retention_period_in_days #=> Integer
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -836,6 +842,7 @@ module Aws::Synthetics
     # @example Response structure
     #
     #   resp.canary_runs #=> Array
+    #   resp.canary_runs[0].id #=> String
     #   resp.canary_runs[0].name #=> String
     #   resp.canary_runs[0].status.state #=> String, one of "RUNNING", "PASSED", "FAILED"
     #   resp.canary_runs[0].status.state_reason #=> String
@@ -869,7 +876,7 @@ module Aws::Synthetics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_arn: "Arn", # required
+    #     resource_arn: "CanaryArn", # required
     #   })
     #
     # @example Response structure
@@ -984,7 +991,7 @@ module Aws::Synthetics
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     resource_arn: "Arn", # required
+    #     resource_arn: "CanaryArn", # required
     #     tags: { # required
     #       "TagKey" => "TagValue",
     #     },
@@ -1015,7 +1022,7 @@ module Aws::Synthetics
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     resource_arn: "Arn", # required
+    #     resource_arn: "CanaryArn", # required
     #     tag_keys: ["TagKey"], # required
     #   })
     #
@@ -1076,8 +1083,9 @@ module Aws::Synthetics
     #
     # @option params [String] :runtime_version
     #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid value is `syn-1.0`. For more information about runtime
-    #   versions, see [ Canary Runtime Versions][1].
+    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
+    #   `syn-1.0`. For more information about runtime versions, see [ Canary
+    #   Runtime Versions][1].
     #
     #
     #
@@ -1120,15 +1128,16 @@ module Aws::Synthetics
     #       zip_file: "data",
     #       handler: "String", # required
     #     },
-    #     execution_role_arn: "Arn",
+    #     execution_role_arn: "RoleArn",
     #     runtime_version: "String",
     #     schedule: {
     #       expression: "String", # required
     #       duration_in_seconds: 1,
     #     },
     #     run_config: {
-    #       timeout_in_seconds: 1, # required
+    #       timeout_in_seconds: 1,
     #       memory_in_mb: 1,
+    #       active_tracing: false,
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -1160,7 +1169,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

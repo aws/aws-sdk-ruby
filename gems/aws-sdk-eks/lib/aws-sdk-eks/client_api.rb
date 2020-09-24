@@ -62,6 +62,8 @@ module Aws::EKS
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     Issue = Shapes::StructureShape.new(name: 'Issue')
     IssueList = Shapes::ListShape.new(name: 'IssueList')
+    KubernetesNetworkConfigRequest = Shapes::StructureShape.new(name: 'KubernetesNetworkConfigRequest')
+    KubernetesNetworkConfigResponse = Shapes::StructureShape.new(name: 'KubernetesNetworkConfigResponse')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersRequestMaxResults = Shapes::IntegerShape.new(name: 'ListClustersRequestMaxResults')
@@ -153,6 +155,7 @@ module Aws::EKS
     Cluster.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     Cluster.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
     Cluster.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigResponse, location_name: "resourcesVpcConfig"))
+    Cluster.add_member(:kubernetes_network_config, Shapes::ShapeRef.new(shape: KubernetesNetworkConfigResponse, location_name: "kubernetesNetworkConfig"))
     Cluster.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     Cluster.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, location_name: "identity"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "status"))
@@ -167,6 +170,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     CreateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
     CreateClusterRequest.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigRequest, required: true, location_name: "resourcesVpcConfig"))
+    CreateClusterRequest.add_member(:kubernetes_network_config, Shapes::ShapeRef.new(shape: KubernetesNetworkConfigRequest, location_name: "kubernetesNetworkConfig"))
     CreateClusterRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     CreateClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -309,6 +313,12 @@ module Aws::EKS
     Issue.struct_class = Types::Issue
 
     IssueList.member = Shapes::ShapeRef.new(shape: Issue)
+
+    KubernetesNetworkConfigRequest.add_member(:service_ipv_4_cidr, Shapes::ShapeRef.new(shape: String, location_name: "serviceIpv4Cidr"))
+    KubernetesNetworkConfigRequest.struct_class = Types::KubernetesNetworkConfigRequest
+
+    KubernetesNetworkConfigResponse.add_member(:service_ipv_4_cidr, Shapes::ShapeRef.new(shape: String, location_name: "serviceIpv4Cidr"))
+    KubernetesNetworkConfigResponse.struct_class = Types::KubernetesNetworkConfigResponse
 
     LaunchTemplateSpecification.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))

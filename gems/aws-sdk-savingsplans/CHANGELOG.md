@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-09-24)
+------------------
+
+* Feature - Introducing Queued SavingsPlans that will enable customers to queue their purchase request of Savings Plans for future dates.
+
 1.10.0 (2020-09-15)
 ------------------
 
