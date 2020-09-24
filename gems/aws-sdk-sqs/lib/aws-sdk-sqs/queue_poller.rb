@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 require 'set'
@@ -290,7 +291,7 @@ module Aws
       # @option options [Integer] :visibility_timeout (nil)
       #   The number of seconds you have to process a message before
       #   it is put back into the queue and can be received again.
-      #   By default, the queue's
+      #   By default, the queue's visibility timeout is not set.
       #
       # @option options [Array<String>] :attribute_names ([])
       #   The list of attributes that need to be returned along with each
