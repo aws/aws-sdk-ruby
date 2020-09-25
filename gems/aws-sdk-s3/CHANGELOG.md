@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Ignore `amz-sdk-request` header (used for standard and adaptive retries) in the pre-signer.
+* Issue - Ignore `amz-sdk-request` header (used for standard and adaptive retries) in the pre-signer. (#2411)
 
 1.81.0 (2020-09-15)
 ------------------
