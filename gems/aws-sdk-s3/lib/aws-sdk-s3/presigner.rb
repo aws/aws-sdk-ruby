@@ -12,6 +12,7 @@ module Aws
       # @api private
       BLACKLISTED_HEADERS = [
         'accept',
+        'amz-sdk-request',
         'cache-control',
         'content-length', # due to a ELB bug
         'expect',
