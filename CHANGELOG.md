@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.594 (2020-09-25)
+------------------
+
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
 
 * Feature - Aws::ConfigService - Updated the API for AWS Config.
