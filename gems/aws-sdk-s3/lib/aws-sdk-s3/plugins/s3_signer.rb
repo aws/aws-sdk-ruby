@@ -12,12 +12,14 @@ module Aws
 
         option(:sigv4_signer) do |cfg|
           S3Signer.build_v4_signer(
+            service: 's3',
             region: cfg.sigv4_region,
             credentials: cfg.credentials
           )
         end
 
         option(:sigv4_region) do |cfg|
+          # S3 removes core's signature_v4 plugin that checks for this
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
 
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
@@ -67,11 +69,26 @@ module Aws
             if context[:cached_sigv4_region] &&
                context[:cached_sigv4_region] != context.config.sigv4_signer.region
               S3Signer.build_v4_signer(
+                service: 's3',
                 region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
               )
             else
-              context.config.sigv4_signer
+              resolved_region, arn = ARN.resolve_arn!(
+                context.params[:bucket],
+                context.config.sigv4_signer.region,
+                context.config.s3_use_arn_region
+              )
+
+              if arn
+                S3Signer.build_v4_signer(
+                  service: arn.respond_to?(:outpost_id) ? 's3-outposts' : 's3',
+                  region: resolved_region,
+                  credentials: context.config.credentials
+                )
+              else
+                context.config.sigv4_signer
+              end
             end
           end
         end
@@ -90,7 +107,9 @@ module Aws
           def check_for_cached_region(context, bucket)
             cached_region = S3::BUCKET_REGIONS[bucket]
             if cached_region && cached_region != context.config.region
-              context.http_request.endpoint.host = S3Signer.new_hostname(context, cached_region)
+              context.http_request.endpoint.host = S3Signer.new_hostname(
+                context, cached_region
+              )
               context[:cached_sigv4_region] = cached_region
             end
           end
@@ -150,11 +169,14 @@ module Aws
 
           def resign_with_new_region(context, actual_region)
             context.http_response.body.truncate(0)
-            context.http_request.endpoint.host = S3Signer.new_hostname(context, actual_region)
+            context.http_request.endpoint.host = S3Signer.new_hostname(
+              context, actual_region
+            )
             context.metadata[:redirect_region] = actual_region
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
               signer: S3Signer.build_v4_signer(
+                service: 's3',
                 region: actual_region,
                 credentials: context.config.credentials
               )
@@ -189,7 +211,7 @@ module Aws
           # @api private
           def build_v4_signer(options = {})
             Aws::Sigv4::Signer.new(
-              service: 's3',
+              service: options[:service],
               region: options[:region],
               credentials_provider: options[:credentials],
               uri_escape_path: false,
@@ -200,7 +222,7 @@ module Aws
           def new_hostname(context, region)
             # Check to see if the bucket is actually an ARN and resolve it
             # Otherwise it will retry with the ARN as the bucket name.
-            resolved_bucket, resolved_region, arn = BucketARN.resolve_arn!(
+            resolved_region, arn = ARN.resolve_arn!(
               context.params[:bucket],
               region,
               context.config.s3_use_arn_region
@@ -210,9 +232,9 @@ module Aws
             )
 
             if arn
-              BucketARN.resolve_url!(uri, arn).host
+              ARN.resolve_url!(uri, arn).host
             else
-              resolved_bucket + '.' + uri.host
+              "#{context.params[:bucket]}.#{uri.host}"
             end
           end
         end

@@ -28,9 +28,9 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
-require 'aws-sdk-s3control/plugins/s3_control_dns.rb'
-require 'aws-sdk-s3control/plugins/s3_signer.rb'
+require 'aws-sdk-s3control/plugins/arn.rb'
 require 'aws-sdk-s3control/plugins/dualstack.rb'
+require 'aws-sdk-s3control/plugins/s3_control_signer.rb'
 require 'aws-sdk-s3control/plugins/s3_host_id.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
@@ -77,9 +77,9 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::Protocols::RestXml)
-    add_plugin(Aws::S3Control::Plugins::S3ControlDns)
-    add_plugin(Aws::S3Control::Plugins::S3Signer)
+    add_plugin(Aws::S3Control::Plugins::ARN)
     add_plugin(Aws::S3Control::Plugins::Dualstack)
+    add_plugin(Aws::S3Control::Plugins::S3ControlSigner)
     add_plugin(Aws::S3Control::Plugins::S3HostId)
 
     # @overload initialize(options)
@@ -268,6 +268,12 @@ module Aws::S3Control
     #       in the future.
     #
     #
+    #   @option options [Boolean] :s3_use_arn_region (true)
+    #     For S3 and S3 Outposts ARNs passed into the `:bucket` or `:name`
+    #     parameter, this option will use the region in the ARN, allowing
+    #     for cross-region requests to be made. Set to `false` to use the
+    #     client's region instead.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -365,7 +371,9 @@ module Aws::S3Control
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessPointResult#access_point_arn #access_point_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -384,12 +392,72 @@ module Aws::S3Control
     #     },
     #   })
     #
+    # @example Response structure
+    #
+    #   resp.access_point_arn #=> String
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPoint AWS API Documentation
     #
     # @overload create_access_point(params = {})
     # @param [Hash] params ({})
     def create_access_point(params = {}, options = {})
       req = build_request(:create_access_point, params)
+      req.send_request(options)
+    end
+
+    # @option params [String] :acl
+    #
+    # @option params [required, String] :bucket
+    #
+    # @option params [Types::CreateBucketConfiguration] :create_bucket_configuration
+    #
+    # @option params [String] :grant_full_control
+    #
+    # @option params [String] :grant_read
+    #
+    # @option params [String] :grant_read_acp
+    #
+    # @option params [String] :grant_write
+    #
+    # @option params [String] :grant_write_acp
+    #
+    # @option params [Boolean] :object_lock_enabled_for_bucket
+    #
+    # @option params [String] :outpost_id
+    #
+    # @return [Types::CreateBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBucketResult#location #location} => String
+    #   * {Types::CreateBucketResult#bucket_arn #bucket_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bucket({
+    #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read
+    #     bucket: "BucketName", # required
+    #     create_bucket_configuration: {
+    #       location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #     },
+    #     grant_full_control: "GrantFullControl",
+    #     grant_read: "GrantRead",
+    #     grant_read_acp: "GrantReadACP",
+    #     grant_write: "GrantWrite",
+    #     grant_write_acp: "GrantWriteACP",
+    #     object_lock_enabled_for_bucket: false,
+    #     outpost_id: "NonEmptyMaxLength64String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location #=> String
+    #   resp.bucket_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucket AWS API Documentation
+    #
+    # @overload create_bucket(params = {})
+    # @param [Hash] params ({})
+    def create_bucket(params = {}, options = {})
+      req = build_request(:create_bucket, params)
       req.send_request(options)
     end
 
@@ -658,6 +726,94 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def delete_access_point_policy(params = {}, options = {})
       req = build_request(:delete_access_point_policy, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucket AWS API Documentation
+    #
+    # @overload delete_bucket(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket(params = {}, options = {})
+      req = build_request(:delete_bucket, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_lifecycle_configuration({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketLifecycleConfiguration AWS API Documentation
+    #
+    # @overload delete_bucket_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:delete_bucket_lifecycle_configuration, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_policy({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketPolicy AWS API Documentation
+    #
+    # @overload delete_bucket_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_policy(params = {}, options = {})
+      req = build_request(:delete_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_tagging({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketTagging AWS API Documentation
+    #
+    # @overload delete_bucket_tagging(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_tagging(params = {}, options = {})
+      req = build_request(:delete_bucket_tagging, params)
       req.send_request(options)
     end
 
@@ -976,6 +1132,145 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Types::GetBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketResult#bucket #bucket} => String
+    #   * {Types::GetBucketResult#public_access_block_enabled #public_access_block_enabled} => Boolean
+    #   * {Types::GetBucketResult#creation_date #creation_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bucket #=> String
+    #   resp.public_access_block_enabled #=> Boolean
+    #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucket AWS API Documentation
+    #
+    # @overload get_bucket(params = {})
+    # @param [Hash] params ({})
+    def get_bucket(params = {}, options = {})
+      req = build_request(:get_bucket, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Types::GetBucketLifecycleConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketLifecycleConfigurationResult#rules #rules} => Array&lt;Types::LifecycleRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_lifecycle_configuration({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].expiration.date #=> Time
+    #   resp.rules[0].expiration.days #=> Integer
+    #   resp.rules[0].expiration.expired_object_delete_marker #=> Boolean
+    #   resp.rules[0].id #=> String
+    #   resp.rules[0].filter.prefix #=> String
+    #   resp.rules[0].filter.tag.key #=> String
+    #   resp.rules[0].filter.tag.value #=> String
+    #   resp.rules[0].filter.and.prefix #=> String
+    #   resp.rules[0].filter.and.tags #=> Array
+    #   resp.rules[0].filter.and.tags[0].key #=> String
+    #   resp.rules[0].filter.and.tags[0].value #=> String
+    #   resp.rules[0].status #=> String, one of "Enabled", "Disabled"
+    #   resp.rules[0].transitions #=> Array
+    #   resp.rules[0].transitions[0].date #=> Time
+    #   resp.rules[0].transitions[0].days #=> Integer
+    #   resp.rules[0].transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].noncurrent_version_transitions #=> Array
+    #   resp.rules[0].noncurrent_version_transitions[0].noncurrent_days #=> Integer
+    #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
+    #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketLifecycleConfiguration AWS API Documentation
+    #
+    # @overload get_bucket_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:get_bucket_lifecycle_configuration, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Types::GetBucketPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketPolicyResult#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_policy({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketPolicy AWS API Documentation
+    #
+    # @overload get_bucket_policy(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_policy(params = {}, options = {})
+      req = build_request(:get_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @return [Types::GetBucketTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketTaggingResult#tag_set #tag_set} => Array&lt;Types::S3Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_tagging({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_set #=> Array
+    #   resp.tag_set[0].key #=> String
+    #   resp.tag_set[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketTagging AWS API Documentation
+    #
+    # @overload get_bucket_tagging(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_tagging(params = {}, options = {})
+      req = build_request(:get_bucket_tagging, params)
+      req.send_request(options)
+    end
+
     # Returns the tags on an Amazon S3 Batch Operations job. To use this
     # operation, you must have permission to perform the `s3:GetJobTagging`
     # action. For more information, see [Using Job Tags][1] in the *Amazon
@@ -1111,6 +1406,7 @@ module Aws::S3Control
     #   resp.access_point_list[0].network_origin #=> String, one of "Internet", "VPC"
     #   resp.access_point_list[0].vpc_configuration.vpc_id #=> String
     #   resp.access_point_list[0].bucket #=> String
+    #   resp.access_point_list[0].access_point_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPoints AWS API Documentation
@@ -1200,6 +1496,47 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # @option params [required, String] :account_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :outpost_id
+    #
+    # @return [Types::ListRegionalBucketsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegionalBucketsResult#regional_bucket_list #regional_bucket_list} => Array&lt;Types::RegionalBucket&gt;
+    #   * {Types::ListRegionalBucketsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_regional_buckets({
+    #     account_id: "AccountId", # required
+    #     next_token: "NonEmptyMaxLength1024String",
+    #     max_results: 1,
+    #     outpost_id: "NonEmptyMaxLength64String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.regional_bucket_list #=> Array
+    #   resp.regional_bucket_list[0].bucket #=> String
+    #   resp.regional_bucket_list[0].bucket_arn #=> String
+    #   resp.regional_bucket_list[0].public_access_block_enabled #=> Boolean
+    #   resp.regional_bucket_list[0].creation_date #=> Time
+    #   resp.regional_bucket_list[0].outpost_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListRegionalBuckets AWS API Documentation
+    #
+    # @overload list_regional_buckets(params = {})
+    # @param [Hash] params ({})
+    def list_regional_buckets(params = {}, options = {})
+      req = build_request(:list_regional_buckets, params)
+      req.send_request(options)
+    end
+
     # Associates an access policy with the specified access point. Each
     # access point can have only one policy, so a request made to this API
     # replaces any existing policy associated with the specified access
@@ -1239,6 +1576,138 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def put_access_point_policy(params = {}, options = {})
       req = build_request(:put_access_point_policy, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_lifecycle_configuration({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #     lifecycle_configuration: {
+    #       rules: [
+    #         {
+    #           expiration: {
+    #             date: Time.now,
+    #             days: 1,
+    #             expired_object_delete_marker: false,
+    #           },
+    #           id: "ID",
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "TagKeyString", # required
+    #                   value: "TagValueString", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #           transitions: [
+    #             {
+    #               date: Time.now,
+    #               days: 1,
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             },
+    #           ],
+    #           noncurrent_version_transitions: [
+    #             {
+    #               noncurrent_days: 1,
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             },
+    #           ],
+    #           noncurrent_version_expiration: {
+    #             noncurrent_days: 1,
+    #           },
+    #           abort_incomplete_multipart_upload: {
+    #             days_after_initiation: 1,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketLifecycleConfiguration AWS API Documentation
+    #
+    # @overload put_bucket_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:put_bucket_lifecycle_configuration, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @option params [Boolean] :confirm_remove_self_bucket_access
+    #
+    # @option params [required, String] :policy
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_policy({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #     confirm_remove_self_bucket_access: false,
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketPolicy AWS API Documentation
+    #
+    # @overload put_bucket_policy(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_policy(params = {}, options = {})
+      req = build_request(:put_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :account_id
+    #
+    # @option params [required, String] :bucket
+    #
+    # @option params [required, Types::Tagging] :tagging
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_tagging({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #     tagging: { # required
+    #       tag_set: [ # required
+    #         {
+    #           key: "TagKeyString", # required
+    #           value: "TagValueString", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketTagging AWS API Documentation
+    #
+    # @overload put_bucket_tagging(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_tagging(params = {}, options = {})
+      req = build_request(:put_bucket_tagging, params)
       req.send_request(options)
     end
 

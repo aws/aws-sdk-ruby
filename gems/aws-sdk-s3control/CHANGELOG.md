@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support Outpost Access Point and Outpost Bucket ARNs.
+
 1.23.0 (2020-09-15)
 ------------------
 

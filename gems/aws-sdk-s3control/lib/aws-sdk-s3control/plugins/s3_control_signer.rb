@@ -7,10 +7,15 @@ module Aws
     module Plugins
       # This plugin is an implementation detail and may be modified.
       # @api private
-      class S3Signer < Seahorse::Client::Plugin
+      class S3ControlSigner < Seahorse::Client::Plugin
+        SPECIAL_OUTPOST_OPERATIONS = [
+          'CreateBucket',
+          'ListRegionalBuckets'
+        ].freeze
 
         option(:sigv4_signer) do |cfg|
-          S3Signer.build_v4_signer(
+          S3ControlSigner.build_v4_signer(
+            service: 's3',
             region: cfg.sigv4_region,
             credentials: cfg.credentials
           )
@@ -22,12 +27,11 @@ module Aws
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 
-        def add_handlers(handlers, cfg)
+        def add_handlers(handlers, _cfg)
           handlers.add(V4Handler, step: :sign)
         end
 
         class V4Handler < Seahorse::Client::Handler
-
           def call(context)
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
@@ -39,47 +43,48 @@ module Aws
           private
 
           def sigv4_signer(context)
-            # If the client was configured with the wrong region,
-            # we have to build a new signer.
-            if
-              context[:cached_sigv4_region] &&
-                context[:cached_sigv4_region] != context.config.sigv4_signer.region
-              then
-              S3Signer.build_v4_signer(
-                region: context[:cached_sigv4_region],
+            if (arn = context.metadata[:s3_arn]) &&
+               arn[:arn].respond_to?(:outpost_id)
+              S3ControlSigner.build_v4_signer(
+                service: 's3-outposts',
+                region: arn[:resolved_region],
+                credentials: context.config.credentials
+              )
+            elsif outpost_operation?(context)
+              context.http_request.endpoint.host =
+                "s3-outposts.#{context.config.region}.amazonaws.com"
+              S3ControlSigner.build_v4_signer(
+                service: 's3-outposts',
+                region: context.config.region,
                 credentials: context.config.credentials
               )
             else
               context.config.sigv4_signer
             end
           end
+
+          # Some operations do not take an ARN parameter and are special cases
+          # For these operations, the presence of the outpost_id parameter
+          # must trigger special endpoint and signer redirection
+          def outpost_operation?(context)
+            SPECIAL_OUTPOST_OPERATIONS.include?(context.operation.name) &&
+              context.params[:outpost_id]
+          end
         end
 
         class << self
-
           # @option options [required, String] :region
           # @option options [required, #credentials] :credentials
           # @api private
           def build_v4_signer(options = {})
-            Aws::Sigv4::Signer.new({
-              service: 's3',
+            Aws::Sigv4::Signer.new(
+              service: options[:service],
               region: options[:region],
               credentials_provider: options[:credentials],
               uri_escape_path: false,
-              unsigned_headers: ['content-length', 'x-amzn-trace-id'],
-            })
+              unsigned_headers: ['content-length', 'x-amzn-trace-id']
+            )
           end
-
-          def new_hostname(context, region)
-            bucket = context.params[:bucket]
-            if region == 'us-east-1'
-              "#{bucket}.s3.amazonaws.com"
-            else
-              endpoint = Aws::Partitions::EndpointProvider.resolve(region, 's3')
-              bucket + '.' + URI.parse(endpoint).host
-            end
-          end
-
         end
       end
     end

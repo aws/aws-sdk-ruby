@@ -38,7 +38,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           end
 
           # check region is a valid RFC host label
-          unless cfg.region =~ /^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$/
+          unless Seahorse::Util.host_label?(cfg.region)
             raise Errors::InvalidRegionError
           end
 
