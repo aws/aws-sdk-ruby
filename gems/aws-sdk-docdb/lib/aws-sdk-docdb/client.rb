@@ -702,7 +702,10 @@ module Aws::DocDB
     #   Valid values: `docdb`
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use.
+    #   The version number of the database engine to use. The --engine-version
+    #   will default to the latest major engine version. For production
+    #   workloads, we recommend explicitly declaring this parameter with the
+    #   intended major engine version.
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the cluster accept
@@ -4276,7 +4279,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-09-25)
+------------------
+
+* Feature - Increased maximum length of eventVariables values for GetEventPrediction from 256 to 1024.
+
 1.11.0 (2020-09-15)
 ------------------
 

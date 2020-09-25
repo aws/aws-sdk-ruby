@@ -6050,6 +6050,8 @@ module Aws::EC2
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #   resp.route.local_gateway_route_table_id #=> String
+    #   resp.route.local_gateway_route_table_arn #=> String
+    #   resp.route.owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRoute AWS API Documentation
     #
@@ -6105,8 +6107,10 @@ module Aws::EC2
     #
     #   resp.local_gateway_route_table_vpc_association.local_gateway_route_table_vpc_association_id #=> String
     #   resp.local_gateway_route_table_vpc_association.local_gateway_route_table_id #=> String
+    #   resp.local_gateway_route_table_vpc_association.local_gateway_route_table_arn #=> String
     #   resp.local_gateway_route_table_vpc_association.local_gateway_id #=> String
     #   resp.local_gateway_route_table_vpc_association.vpc_id #=> String
+    #   resp.local_gateway_route_table_vpc_association.owner_id #=> String
     #   resp.local_gateway_route_table_vpc_association.state #=> String
     #   resp.local_gateway_route_table_vpc_association.tags #=> Array
     #   resp.local_gateway_route_table_vpc_association.tags[0].key #=> String
@@ -10791,6 +10795,8 @@ module Aws::EC2
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #   resp.route.local_gateway_route_table_id #=> String
+    #   resp.route.local_gateway_route_table_arn #=> String
+    #   resp.route.owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayRoute AWS API Documentation
     #
@@ -10828,8 +10834,10 @@ module Aws::EC2
     #
     #   resp.local_gateway_route_table_vpc_association.local_gateway_route_table_vpc_association_id #=> String
     #   resp.local_gateway_route_table_vpc_association.local_gateway_route_table_id #=> String
+    #   resp.local_gateway_route_table_vpc_association.local_gateway_route_table_arn #=> String
     #   resp.local_gateway_route_table_vpc_association.local_gateway_id #=> String
     #   resp.local_gateway_route_table_vpc_association.vpc_id #=> String
+    #   resp.local_gateway_route_table_vpc_association.owner_id #=> String
     #   resp.local_gateway_route_table_vpc_association.state #=> String
     #   resp.local_gateway_route_table_vpc_association.tags #=> Array
     #   resp.local_gateway_route_table_vpc_association.tags[0].key #=> String
@@ -18502,6 +18510,8 @@ module Aws::EC2
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].local_gateway_virtual_interface_group_id #=> String
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].local_gateway_id #=> String
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].local_gateway_route_table_id #=> String
+    #   resp.local_gateway_route_table_virtual_interface_group_associations[0].local_gateway_route_table_arn #=> String
+    #   resp.local_gateway_route_table_virtual_interface_group_associations[0].owner_id #=> String
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].state #=> String
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].tags #=> Array
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].tags[0].key #=> String
@@ -18579,8 +18589,10 @@ module Aws::EC2
     #   resp.local_gateway_route_table_vpc_associations #=> Array
     #   resp.local_gateway_route_table_vpc_associations[0].local_gateway_route_table_vpc_association_id #=> String
     #   resp.local_gateway_route_table_vpc_associations[0].local_gateway_route_table_id #=> String
+    #   resp.local_gateway_route_table_vpc_associations[0].local_gateway_route_table_arn #=> String
     #   resp.local_gateway_route_table_vpc_associations[0].local_gateway_id #=> String
     #   resp.local_gateway_route_table_vpc_associations[0].vpc_id #=> String
+    #   resp.local_gateway_route_table_vpc_associations[0].owner_id #=> String
     #   resp.local_gateway_route_table_vpc_associations[0].state #=> String
     #   resp.local_gateway_route_table_vpc_associations[0].tags #=> Array
     #   resp.local_gateway_route_table_vpc_associations[0].tags[0].key #=> String
@@ -18655,8 +18667,10 @@ module Aws::EC2
     #
     #   resp.local_gateway_route_tables #=> Array
     #   resp.local_gateway_route_tables[0].local_gateway_route_table_id #=> String
+    #   resp.local_gateway_route_tables[0].local_gateway_route_table_arn #=> String
     #   resp.local_gateway_route_tables[0].local_gateway_id #=> String
     #   resp.local_gateway_route_tables[0].outpost_arn #=> String
+    #   resp.local_gateway_route_tables[0].owner_id #=> String
     #   resp.local_gateway_route_tables[0].state #=> String
     #   resp.local_gateway_route_tables[0].tags #=> Array
     #   resp.local_gateway_route_tables[0].tags[0].key #=> String
@@ -37668,6 +37682,8 @@ module Aws::EC2
     #   resp.routes[0].type #=> String, one of "static", "propagated"
     #   resp.routes[0].state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #   resp.routes[0].local_gateway_route_table_id #=> String
+    #   resp.routes[0].local_gateway_route_table_arn #=> String
+    #   resp.routes[0].owner_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchLocalGatewayRoutes AWS API Documentation
@@ -38770,7 +38786,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.195.0'
+      context[:gem_version] = '1.196.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

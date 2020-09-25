@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-09-25)
+------------------
+
+* Feature - Make the delivery-s3-bucket as an optional parameter for conformance packs and organizational conformance packs
+
 1.51.0 (2020-09-15)
 ------------------
 

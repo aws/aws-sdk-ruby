@@ -33962,7 +33962,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account ID that owns the local gateway.
+    #   The AWS account ID that owns the local gateway.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -34007,6 +34007,14 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] local_gateway_route_table_arn
+    #   The Amazon Resource Name (ARN) of the local gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID that owns the local gateway route.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRoute AWS API Documentation
     #
     class LocalGatewayRoute < Struct.new(
@@ -34014,7 +34022,9 @@ module Aws::EC2
       :local_gateway_virtual_interface_group_id,
       :type,
       :state,
-      :local_gateway_route_table_id)
+      :local_gateway_route_table_id,
+      :local_gateway_route_table_arn,
+      :owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34025,12 +34035,20 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] local_gateway_route_table_arn
+    #   The Amazon Resource Name (ARN) of the local gateway route table.
+    #   @return [String]
+    #
     # @!attribute [rw] local_gateway_id
     #   The ID of the local gateway.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID that owns the local gateway route table.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -34045,8 +34063,10 @@ module Aws::EC2
     #
     class LocalGatewayRouteTable < Struct.new(
       :local_gateway_route_table_id,
+      :local_gateway_route_table_arn,
       :local_gateway_id,
       :outpost_arn,
+      :owner_id,
       :state,
       :tags)
       SENSITIVE = []
@@ -34072,6 +34092,16 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] local_gateway_route_table_arn
+    #   The Amazon Resource Name (ARN) of the local gateway route table for
+    #   the virtual interface group.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID that owns the local gateway virtual interface
+    #   group association.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The state of the association.
     #   @return [String]
@@ -34087,6 +34117,8 @@ module Aws::EC2
       :local_gateway_virtual_interface_group_id,
       :local_gateway_id,
       :local_gateway_route_table_id,
+      :local_gateway_route_table_arn,
+      :owner_id,
       :state,
       :tags)
       SENSITIVE = []
@@ -34104,12 +34136,22 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] local_gateway_route_table_arn
+    #   The Amazon Resource Name (ARN) of the local gateway route table for
+    #   the association.
+    #   @return [String]
+    #
     # @!attribute [rw] local_gateway_id
     #   The ID of the local gateway.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID that owns the local gateway route table for the
+    #   association.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -34125,8 +34167,10 @@ module Aws::EC2
     class LocalGatewayRouteTableVpcAssociation < Struct.new(
       :local_gateway_route_table_vpc_association_id,
       :local_gateway_route_table_id,
+      :local_gateway_route_table_arn,
       :local_gateway_id,
       :vpc_id,
+      :owner_id,
       :state,
       :tags)
       SENSITIVE = []

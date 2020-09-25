@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.196.0 (2020-09-25)
+------------------
+
+* Feature - This release supports returning additional information about local gateway resources, such as the local gateway route table.
+
 1.195.0 (2020-09-15)
 ------------------
 

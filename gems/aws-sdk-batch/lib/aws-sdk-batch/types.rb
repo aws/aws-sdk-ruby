@@ -134,16 +134,15 @@ module Aws::Batch
     #   @return [Types::AttemptContainerDetail]
     #
     # @!attribute [rw] started_at
-    #   The Unix timestamp (in seconds and milliseconds) for when the
-    #   attempt was started (when the attempt transitioned from the
-    #   `STARTING` state to the `RUNNING` state).
+    #   The Unix timestamp (in milliseconds) for when the attempt was
+    #   started (when the attempt transitioned from the `STARTING` state to
+    #   the `RUNNING` state).
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_at
-    #   The Unix timestamp (in seconds and milliseconds) for when the
-    #   attempt was stopped (when the attempt transitioned from the
-    #   `RUNNING` state to a terminal state, such as `SUCCEEDED` or
-    #   `FAILED`).
+    #   The Unix timestamp (in milliseconds) for when the attempt was
+    #   stopped (when the attempt transitioned from the `RUNNING` state to a
+    #   terminal state, such as `SUCCEEDED` or `FAILED`).
     #   @return [Integer]
     #
     # @!attribute [rw] status_reason
@@ -580,6 +579,16 @@ module Aws::Batch
     #   execution.
     #   @return [String]
     #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the execution role that AWS Batch
+    #   can assume. For more information, see [Amazon ECS task execution IAM
+    #   role][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
+    #   @return [String]
+    #
     # @!attribute [rw] volumes
     #   A list of volumes associated with the job.
     #   @return [Array<Types::Volume>]
@@ -663,6 +672,63 @@ module Aws::Batch
     #   as details for device mappings.
     #   @return [Types::LinuxParameters]
     #
+    # @!attribute [rw] log_configuration
+    #   The log configuration specification for the container.
+    #
+    #   This parameter maps to `LogConfig` in the [Create a container][1]
+    #   section of the [Docker Remote API][2] and the `--log-driver` option
+    #   to [docker run][3]. By default, containers use the same logging
+    #   driver that the Docker daemon uses. However the container may use a
+    #   different logging driver than the Docker daemon by specifying a log
+    #   driver with this parameter in the container definition. To use a
+    #   different logging driver for a container, the log system must be
+    #   configured properly on the container instance (or on a different log
+    #   server for remote logging options). For more information on the
+    #   options for different supported log drivers, see [Configure logging
+    #   drivers][4] in the Docker documentation.
+    #
+    #   <note markdown="1"> AWS Batch currently supports a subset of the logging drivers
+    #   available to the Docker daemon (shown in the LogConfiguration data
+    #   type). Additional log drivers may be available in future releases of
+    #   the Amazon ECS container agent.
+    #
+    #    </note>
+    #
+    #   This parameter requires version 1.18 of the Docker Remote API or
+    #   greater on your container instance. To check the Docker Remote API
+    #   version on your container instance, log into your container instance
+    #   and run the following command: `sudo docker version | grep "Server
+    #   API version"`
+    #
+    #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
+    #   register the logging drivers available on that instance with the
+    #   `ECS_AVAILABLE_LOGGING_DRIVERS` environment variable before
+    #   containers placed on that instance can use these log configuration
+    #   options. For more information, see [Amazon ECS Container Agent
+    #   Configuration][5] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   [4]: https://docs.docker.com/engine/admin/logging/overview/
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   @return [Types::LogConfiguration]
+    #
+    # @!attribute [rw] secrets
+    #   The secrets to pass to the container. For more information, see
+    #   [Specifying Sensitive Data][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+    #   @return [Array<Types::Secret>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -671,6 +737,7 @@ module Aws::Batch
       :memory,
       :command,
       :job_role_arn,
+      :execution_role_arn,
       :volumes,
       :environment,
       :mount_points,
@@ -686,7 +753,9 @@ module Aws::Batch
       :instance_type,
       :network_interfaces,
       :resource_requirements,
-      :linux_parameters)
+      :linux_parameters,
+      :log_configuration,
+      :secrets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -779,6 +848,7 @@ module Aws::Batch
     #         memory: 1,
     #         command: ["String"],
     #         job_role_arn: "String",
+    #         execution_role_arn: "String",
     #         volumes: [
     #           {
     #             host: {
@@ -825,7 +895,36 @@ module Aws::Batch
     #               permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #             },
     #           ],
+    #           init_process_enabled: false,
+    #           shared_memory_size: 1,
+    #           tmpfs: [
+    #             {
+    #               container_path: "String", # required
+    #               size: 1, # required
+    #               mount_options: ["String"],
+    #             },
+    #           ],
+    #           max_swap: 1,
+    #           swappiness: 1,
     #         },
+    #         log_configuration: {
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #           secret_options: [
+    #             {
+    #               name: "String", # required
+    #               value_from: "String", # required
+    #             },
+    #           ],
+    #         },
+    #         secrets: [
+    #           {
+    #             name: "String", # required
+    #             value_from: "String", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] image
@@ -863,7 +962,9 @@ module Aws::Batch
     #   to `CpuShares` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cpu-shares` option to [docker run][3].
     #   Each vCPU is equivalent to 1,024 CPU shares. You must specify at
-    #   least one vCPU.
+    #   least one vCPU. This is required but can be specified in several
+    #   places for multi-node parallel (MNP) jobs; it must be specified for
+    #   each node at least once.
     #
     #
     #
@@ -878,7 +979,9 @@ module Aws::Batch
     #   container is killed. This parameter maps to `Memory` in the [Create
     #   a container][1] section of the [Docker Remote API][2] and the
     #   `--memory` option to [docker run][3]. You must specify at least 4
-    #   MiB of memory for a job.
+    #   MiB of memory for a job. This is required but can be specified in
+    #   several places for multi-node parallel (MNP) jobs; it must be
+    #   specified for each node at least once.
     #
     #   <note markdown="1"> If you are trying to maximize your resource utilization by providing
     #   your jobs as much memory as possible for a particular instance type,
@@ -912,6 +1015,16 @@ module Aws::Batch
     # @!attribute [rw] job_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that the container
     #   can assume for AWS permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the execution role that AWS Batch
+    #   can assume. For more information, see [Amazon ECS task execution IAM
+    #   role][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] volumes
@@ -1018,6 +1131,62 @@ module Aws::Batch
     #   as details for device mappings.
     #   @return [Types::LinuxParameters]
     #
+    # @!attribute [rw] log_configuration
+    #   The log configuration specification for the container.
+    #
+    #   This parameter maps to `LogConfig` in the [Create a container][1]
+    #   section of the [Docker Remote API][2] and the `--log-driver` option
+    #   to [docker run][3]. By default, containers use the same logging
+    #   driver that the Docker daemon uses. However the container may use a
+    #   different logging driver than the Docker daemon by specifying a log
+    #   driver with this parameter in the container definition. To use a
+    #   different logging driver for a container, the log system must be
+    #   configured properly on the container instance (or on a different log
+    #   server for remote logging options). For more information on the
+    #   options for different supported log drivers, see [Configure logging
+    #   drivers][4] in the Docker documentation.
+    #
+    #   <note markdown="1"> AWS Batch currently supports a subset of the logging drivers
+    #   available to the Docker daemon (shown in the LogConfiguration data
+    #   type).
+    #
+    #    </note>
+    #
+    #   This parameter requires version 1.18 of the Docker Remote API or
+    #   greater on your container instance. To check the Docker Remote API
+    #   version on your container instance, log into your container instance
+    #   and run the following command: `sudo docker version | grep "Server
+    #   API version"`
+    #
+    #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
+    #   register the logging drivers available on that instance with the
+    #   `ECS_AVAILABLE_LOGGING_DRIVERS` environment variable before
+    #   containers placed on that instance can use these log configuration
+    #   options. For more information, see [Amazon ECS Container Agent
+    #   Configuration][5] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   [4]: https://docs.docker.com/engine/admin/logging/overview/
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   @return [Types::LogConfiguration]
+    #
+    # @!attribute [rw] secrets
+    #   The secrets for the container. For more information, see [Specifying
+    #   Sensitive Data][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+    #   @return [Array<Types::Secret>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
     #
     class ContainerProperties < Struct.new(
@@ -1026,6 +1195,7 @@ module Aws::Batch
       :memory,
       :command,
       :job_role_arn,
+      :execution_role_arn,
       :volumes,
       :environment,
       :mount_points,
@@ -1035,7 +1205,9 @@ module Aws::Batch
       :user,
       :instance_type,
       :resource_requirements,
-      :linux_parameters)
+      :linux_parameters,
+      :log_configuration,
+      :secrets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1193,7 +1365,9 @@ module Aws::Batch
     #
     # @!attribute [rw] state
     #   The state of the job queue. If the job queue state is `ENABLED`, it
-    #   is able to accept jobs.
+    #   is able to accept jobs. If the job queue state is `DISABLED`, new
+    #   jobs cannot be added to the queue, but jobs already in the queue can
+    #   finish.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -1779,11 +1953,11 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp (in seconds and milliseconds) for when the job
-    #   was created. For non-array jobs and parent array jobs, this is when
-    #   the job entered the `SUBMITTED` state (at the time SubmitJob was
-    #   called). For array child jobs, this is when the child job was
-    #   spawned by its parent and entered the `PENDING` state.
+    #   The Unix timestamp (in milliseconds) for when the job was created.
+    #   For non-array jobs and parent array jobs, this is when the job
+    #   entered the `SUBMITTED` state (at the time SubmitJob was called).
+    #   For array child jobs, this is when the child job was spawned by its
+    #   parent and entered the `PENDING` state.
     #   @return [Integer]
     #
     # @!attribute [rw] retry_strategy
@@ -1791,15 +1965,16 @@ module Aws::Batch
     #   @return [Types::RetryStrategy]
     #
     # @!attribute [rw] started_at
-    #   The Unix timestamp (in seconds and milliseconds) for when the job
-    #   was started (when the job transitioned from the `STARTING` state to
-    #   the `RUNNING` state).
+    #   The Unix timestamp (in milliseconds) for when the job was started
+    #   (when the job transitioned from the `STARTING` state to the
+    #   `RUNNING` state). This parameter is not provided for child jobs of
+    #   array jobs or multi-node parallel jobs.
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_at
-    #   The Unix timestamp (in seconds and milliseconds) for when the job
-    #   was stopped (when the job transitioned from the `RUNNING` state to a
-    #   terminal state, such as `SUCCEEDED` or `FAILED`).
+    #   The Unix timestamp (in milliseconds) for when the job was stopped
+    #   (when the job transitioned from the `RUNNING` state to a terminal
+    #   state, such as `SUCCEEDED` or `FAILED`).
     #   @return [Integer]
     #
     # @!attribute [rw] depends_on
@@ -1875,7 +2050,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Describes the ability of the queue to accept new jobs.
+    #   Describes the ability of the queue to accept new jobs. If the job
+    #   queue state is `ENABLED`, it is able to accept jobs. If the job
+    #   queue state is `DISABLED`, new jobs cannot be added to the queue,
+    #   but jobs already in the queue can finish.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2053,9 +2231,13 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number of the launch template.
+    #   The version number of the launch template, `$Latest`, or `$Default`.
     #
-    #   Default: The default version of the launch template.
+    #   If the value is `$Latest`, the latest version of the launch template
+    #   is used. If the value is `$Default`, the default version of the
+    #   launch template is used.
+    #
+    #   Default: `$Default`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecification AWS API Documentation
@@ -2082,6 +2264,17 @@ module Aws::Batch
     #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #           },
     #         ],
+    #         init_process_enabled: false,
+    #         shared_memory_size: 1,
+    #         tmpfs: [
+    #           {
+    #             container_path: "String", # required
+    #             size: 1, # required
+    #             mount_options: ["String"],
+    #           },
+    #         ],
+    #         max_swap: 1,
+    #         swappiness: 1,
     #       }
     #
     # @!attribute [rw] devices
@@ -2096,10 +2289,82 @@ module Aws::Batch
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Device>]
     #
+    # @!attribute [rw] init_process_enabled
+    #   Run an `init` process inside the container that forwards signals and
+    #   reaps processes. This parameter maps to the `--init` option to
+    #   [docker run][1]. This parameter requires version 1.25 of the Docker
+    #   Remote API or greater on your container instance. To check the
+    #   Docker Remote API version on your container instance, log into your
+    #   container instance and run the following command: `sudo docker
+    #   version | grep "Server API version"`
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] shared_memory_size
+    #   The value for the size (in MiB) of the `/dev/shm` volume. This
+    #   parameter maps to the `--shm-size` option to [docker run][1].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tmpfs
+    #   The container path, mount options, and size (in MiB) of the tmpfs
+    #   mount. This parameter maps to the `--tmpfs` option to [docker
+    #   run][1].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::Tmpfs>]
+    #
+    # @!attribute [rw] max_swap
+    #   The total amount of swap memory (in MiB) a container can use. This
+    #   parameter will be translated to the `--memory-swap` option to
+    #   [docker run][1] where the value would be the sum of the container
+    #   memory plus the `maxSwap` value.
+    #
+    #   If a `maxSwap` value of `0` is specified, the container will not use
+    #   swap. Accepted values are `0` or any positive integer. If the
+    #   `maxSwap` parameter is omitted, the container will use the swap
+    #   configuration for the container instance it is running on. A
+    #   `maxSwap` value must be set for the `swappiness` parameter to be
+    #   used.
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
+    # @!attribute [rw] swappiness
+    #   This allows you to tune a container's memory swappiness behavior. A
+    #   `swappiness` value of `0` will cause swapping to not happen unless
+    #   absolutely necessary. A `swappiness` value of `100` will cause pages
+    #   to be swapped very aggressively. Accepted values are whole numbers
+    #   between `0` and `100`. If the `swappiness` parameter is not
+    #   specified, a default value of `60` is used. If a value is not
+    #   specified for `maxSwap` then this parameter is ignored. This
+    #   parameter maps to the `--memory-swappiness` option to [docker
+    #   run][1].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LinuxParameters AWS API Documentation
     #
     class LinuxParameters < Struct.new(
-      :devices)
+      :devices,
+      :init_process_enabled,
+      :shared_memory_size,
+      :tmpfs,
+      :max_swap,
+      :swappiness)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2191,6 +2456,87 @@ module Aws::Batch
     class ListJobsResponse < Struct.new(
       :job_summary_list,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Log configuration options to send to a custom log driver for the
+    # container.
+    #
+    # @note When making an API call, you may pass LogConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #         options: {
+    #           "String" => "String",
+    #         },
+    #         secret_options: [
+    #           {
+    #             name: "String", # required
+    #             value_from: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] log_driver
+    #   The log driver to use for the container. The valid values listed for
+    #   this parameter are log drivers that the Amazon ECS container agent
+    #   can communicate with by default.
+    #
+    #   The supported log drivers are `awslogs`, `fluentd`, `gelf`,
+    #   `json-file`, `journald`, `logentries`, `syslog`, and `splunk`.
+    #
+    #   For more information about using the `awslogs` log driver, see
+    #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #   <note markdown="1"> If you have a custom driver that is not listed earlier that you
+    #   would like to work with the Amazon ECS container agent, you can fork
+    #   the Amazon ECS container agent project that is [available on
+    #   GitHub][2] and customize it to work with that driver. We encourage
+    #   you to submit pull requests for changes that you would like to have
+    #   included. However, Amazon Web Services does not currently support
+    #   running modified copies of this software.
+    #
+    #    </note>
+    #
+    #   This parameter requires version 1.18 of the Docker Remote API or
+    #   greater on your container instance. To check the Docker Remote API
+    #   version on your container instance, log into your container instance
+    #   and run the following command: `sudo docker version | grep "Server
+    #   API version"`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
+    #   [2]: https://github.com/aws/amazon-ecs-agent
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The configuration options to send to the log driver. This parameter
+    #   requires version 1.19 of the Docker Remote API or greater on your
+    #   container instance. To check the Docker Remote API version on your
+    #   container instance, log into your container instance and run the
+    #   following command: `sudo docker version | grep "Server API version"`
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] secret_options
+    #   The secrets to pass to the log configuration. For more information,
+    #   see [Specifying Sensitive Data][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+    #   @return [Array<Types::Secret>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LogConfiguration AWS API Documentation
+    #
+    class LogConfiguration < Struct.new(
+      :log_driver,
+      :options,
+      :secret_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2364,6 +2710,7 @@ module Aws::Batch
     #               memory: 1,
     #               command: ["String"],
     #               job_role_arn: "String",
+    #               execution_role_arn: "String",
     #               volumes: [
     #                 {
     #                   host: {
@@ -2410,7 +2757,36 @@ module Aws::Batch
     #                     permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #                   },
     #                 ],
+    #                 init_process_enabled: false,
+    #                 shared_memory_size: 1,
+    #                 tmpfs: [
+    #                   {
+    #                     container_path: "String", # required
+    #                     size: 1, # required
+    #                     mount_options: ["String"],
+    #                   },
+    #                 ],
+    #                 max_swap: 1,
+    #                 swappiness: 1,
     #               },
+    #               log_configuration: {
+    #                 log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #                 options: {
+    #                   "String" => "String",
+    #                 },
+    #                 secret_options: [
+    #                   {
+    #                     name: "String", # required
+    #                     value_from: "String", # required
+    #                   },
+    #                 ],
+    #               },
+    #               secrets: [
+    #                 {
+    #                   name: "String", # required
+    #                   value_from: "String", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -2531,6 +2907,7 @@ module Aws::Batch
     #           memory: 1,
     #           command: ["String"],
     #           job_role_arn: "String",
+    #           execution_role_arn: "String",
     #           volumes: [
     #             {
     #               host: {
@@ -2577,7 +2954,36 @@ module Aws::Batch
     #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #               },
     #             ],
+    #             init_process_enabled: false,
+    #             shared_memory_size: 1,
+    #             tmpfs: [
+    #               {
+    #                 container_path: "String", # required
+    #                 size: 1, # required
+    #                 mount_options: ["String"],
+    #               },
+    #             ],
+    #             max_swap: 1,
+    #             swappiness: 1,
     #           },
+    #           log_configuration: {
+    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #             options: {
+    #               "String" => "String",
+    #             },
+    #             secret_options: [
+    #               {
+    #                 name: "String", # required
+    #                 value_from: "String", # required
+    #               },
+    #             ],
+    #           },
+    #           secrets: [
+    #             {
+    #               name: "String", # required
+    #               value_from: "String", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -2620,6 +3026,7 @@ module Aws::Batch
     #           memory: 1,
     #           command: ["String"],
     #           job_role_arn: "String",
+    #           execution_role_arn: "String",
     #           volumes: [
     #             {
     #               host: {
@@ -2666,7 +3073,36 @@ module Aws::Batch
     #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #               },
     #             ],
+    #             init_process_enabled: false,
+    #             shared_memory_size: 1,
+    #             tmpfs: [
+    #               {
+    #                 container_path: "String", # required
+    #                 size: 1, # required
+    #                 mount_options: ["String"],
+    #               },
+    #             ],
+    #             max_swap: 1,
+    #             swappiness: 1,
     #           },
+    #           log_configuration: {
+    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #             options: {
+    #               "String" => "String",
+    #             },
+    #             secret_options: [
+    #               {
+    #                 name: "String", # required
+    #                 value_from: "String", # required
+    #               },
+    #             ],
+    #           },
+    #           secrets: [
+    #             {
+    #               name: "String", # required
+    #               value_from: "String", # required
+    #             },
+    #           ],
     #         },
     #         node_properties: {
     #           num_nodes: 1, # required
@@ -2680,6 +3116,7 @@ module Aws::Batch
     #                 memory: 1,
     #                 command: ["String"],
     #                 job_role_arn: "String",
+    #                 execution_role_arn: "String",
     #                 volumes: [
     #                   {
     #                     host: {
@@ -2726,7 +3163,36 @@ module Aws::Batch
     #                       permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #                     },
     #                   ],
+    #                   init_process_enabled: false,
+    #                   shared_memory_size: 1,
+    #                   tmpfs: [
+    #                     {
+    #                       container_path: "String", # required
+    #                       size: 1, # required
+    #                       mount_options: ["String"],
+    #                     },
+    #                   ],
+    #                   max_swap: 1,
+    #                   swappiness: 1,
     #                 },
+    #                 log_configuration: {
+    #                   log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #                   options: {
+    #                     "String" => "String",
+    #                   },
+    #                   secret_options: [
+    #                     {
+    #                       name: "String", # required
+    #                       value_from: "String", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 secrets: [
+    #                   {
+    #                     name: "String", # required
+    #                     value_from: "String", # required
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],
@@ -2886,6 +3352,56 @@ module Aws::Batch
     #
     class RetryStrategy < Struct.new(
       :attempts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the secret to expose to your container. Secrets
+    # can be exposed to a container in the following ways:
+    #
+    # * To inject sensitive data into your containers as environment
+    #   variables, use the `secrets` container definition parameter.
+    #
+    # * To reference sensitive information in the log configuration of a
+    #   container, use the `secretOptions` container definition parameter.
+    #
+    # For more information, see [Specifying Sensitive Data][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+    #
+    # @note When making an API call, you may pass Secret
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         value_from: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_from
+    #   The secret to expose to the container. The supported values are
+    #   either the full ARN of the AWS Secrets Manager secret or the full
+    #   ARN of the parameter in the AWS Systems Manager Parameter Store.
+    #
+    #   <note markdown="1"> If the AWS Systems Manager Parameter Store parameter exists in the
+    #   same Region as the task you are launching, then you can use either
+    #   the full ARN or name of the parameter. If the parameter exists in a
+    #   different Region, then the full ARN must be specified.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Secret AWS API Documentation
+    #
+    class Secret < Struct.new(
+      :name,
+      :value_from)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3125,6 +3641,47 @@ module Aws::Batch
     #
     class TerminateJobResponse < Aws::EmptyStructure; end
 
+    # The container path, mount options, and size of the tmpfs mount.
+    #
+    # @note When making an API call, you may pass Tmpfs
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "String", # required
+    #         size: 1, # required
+    #         mount_options: ["String"],
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The absolute file path where the tmpfs volume is to be mounted.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size (in MiB) of the tmpfs volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_options
+    #   The list of tmpfs volume mount options.
+    #
+    #   Valid values: `"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev"
+    #   | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" |
+    #   "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
+    #   "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" |
+    #   "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" |
+    #   "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode"
+    #   | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Tmpfs AWS API Documentation
+    #
+    class Tmpfs < Struct.new(
+      :container_path,
+      :size,
+      :mount_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `ulimit` settings to pass to the container.
     #
     # @note When making an API call, you may pass Ulimit
@@ -3254,7 +3811,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Describes the queue's ability to accept new jobs.
+    #   Describes the queue's ability to accept new jobs. If the job queue
+    #   state is `ENABLED`, it is able to accept jobs. If the job queue
+    #   state is `DISABLED`, new jobs cannot be added to the queue, but jobs
+    #   already in the queue can finish.
     #   @return [String]
     #
     # @!attribute [rw] priority

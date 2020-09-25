@@ -5991,7 +5991,7 @@ module Aws::ConfigService
     #         conformance_pack_name: "ConformancePackName", # required
     #         template_s3_uri: "TemplateS3Uri",
     #         template_body: "TemplateBody",
-    #         delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #         delivery_s3_bucket: "DeliveryS3Bucket",
     #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
     #         conformance_pack_input_parameters: [
     #           {
@@ -6236,7 +6236,7 @@ module Aws::ConfigService
     #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
     #         template_s3_uri: "TemplateS3Uri",
     #         template_body: "TemplateBody",
-    #         delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #         delivery_s3_bucket: "DeliveryS3Bucket",
     #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
     #         conformance_pack_input_parameters: [
     #           {

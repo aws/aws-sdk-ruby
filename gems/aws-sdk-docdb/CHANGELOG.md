@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-09-25)
+------------------
+
+* Feature - Documentation updates for docdb
+
 1.23.0 (2020-09-15)
 ------------------
 

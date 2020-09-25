@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.81.1 (2020-09-25)
+------------------
+
 * Issue - Ignore `amz-sdk-request` header (used for standard and adaptive retries) in the pre-signer. (#2411)
 
 1.81.0 (2020-09-15)

@@ -3713,7 +3713,7 @@ module Aws::ConfigService
     #
     #    </note>
     #
-    # @option params [required, String] :delivery_s3_bucket
+    # @option params [String] :delivery_s3_bucket
     #   AWS Config stores intermediate files while processing conformance pack
     #   template.
     #
@@ -3733,7 +3733,7 @@ module Aws::ConfigService
     #     conformance_pack_name: "ConformancePackName", # required
     #     template_s3_uri: "TemplateS3Uri",
     #     template_body: "TemplateBody",
-    #     delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #     delivery_s3_bucket: "DeliveryS3Bucket",
     #     delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
     #     conformance_pack_input_parameters: [
     #       {
@@ -4015,7 +4015,7 @@ module Aws::ConfigService
     #   containing the template body with a minimum length of 1 byte and a
     #   maximum length of 51,200 bytes.
     #
-    # @option params [required, String] :delivery_s3_bucket
+    # @option params [String] :delivery_s3_bucket
     #   Location of an Amazon S3 bucket where AWS Config can deliver
     #   evaluation results. AWS Config stores intermediate files while
     #   processing conformance pack template.
@@ -4049,7 +4049,7 @@ module Aws::ConfigService
     #     organization_conformance_pack_name: "OrganizationConformancePackName", # required
     #     template_s3_uri: "TemplateS3Uri",
     #     template_body: "TemplateBody",
-    #     delivery_s3_bucket: "DeliveryS3Bucket", # required
+    #     delivery_s3_bucket: "DeliveryS3Bucket",
     #     delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
     #     conformance_pack_input_parameters: [
     #       {
@@ -4692,7 +4692,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

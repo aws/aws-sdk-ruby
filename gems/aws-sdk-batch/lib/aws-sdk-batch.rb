@@ -48,6 +48,6 @@ require_relative 'aws-sdk-batch/customizations'
 # @!group service
 module Aws::Batch
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end

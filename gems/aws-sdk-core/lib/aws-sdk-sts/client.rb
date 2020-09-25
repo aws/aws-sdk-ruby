@@ -1278,7 +1278,7 @@ module Aws::STS
     # [15]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
     # [16]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
     # [17]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
-    # [18]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
+    # [18]: https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/
     # [19]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
     #
     # @option params [required, String] :role_arn
@@ -2204,7 +2204,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.107.0'
+      context[:gem_version] = '3.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

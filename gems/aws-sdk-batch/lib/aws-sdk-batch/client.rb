@@ -624,7 +624,9 @@ module Aws::Batch
     #
     # @option params [String] :state
     #   The state of the job queue. If the job queue state is `ENABLED`, it is
-    #   able to accept jobs.
+    #   able to accept jobs. If the job queue state is `DISABLED`, new jobs
+    #   cannot be added to the queue, but jobs already in the queue can
+    #   finish.
     #
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -1097,6 +1099,7 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.command #=> Array
     #   resp.job_definitions[0].container_properties.command[0] #=> String
     #   resp.job_definitions[0].container_properties.job_role_arn #=> String
+    #   resp.job_definitions[0].container_properties.execution_role_arn #=> String
     #   resp.job_definitions[0].container_properties.volumes #=> Array
     #   resp.job_definitions[0].container_properties.volumes[0].host.source_path #=> String
     #   resp.job_definitions[0].container_properties.volumes[0].name #=> String
@@ -1123,6 +1126,24 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].container_path #=> String
     #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions #=> Array
     #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.job_definitions[0].container_properties.linux_parameters.init_process_enabled #=> Boolean
+    #   resp.job_definitions[0].container_properties.linux_parameters.shared_memory_size #=> Integer
+    #   resp.job_definitions[0].container_properties.linux_parameters.tmpfs #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.job_definitions[0].container_properties.linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.max_swap #=> Integer
+    #   resp.job_definitions[0].container_properties.linux_parameters.swappiness #=> Integer
+    #   resp.job_definitions[0].container_properties.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].container_properties.log_configuration.options #=> Hash
+    #   resp.job_definitions[0].container_properties.log_configuration.options["String"] #=> String
+    #   resp.job_definitions[0].container_properties.log_configuration.secret_options #=> Array
+    #   resp.job_definitions[0].container_properties.log_configuration.secret_options[0].name #=> String
+    #   resp.job_definitions[0].container_properties.log_configuration.secret_options[0].value_from #=> String
+    #   resp.job_definitions[0].container_properties.secrets #=> Array
+    #   resp.job_definitions[0].container_properties.secrets[0].name #=> String
+    #   resp.job_definitions[0].container_properties.secrets[0].value_from #=> String
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1134,6 +1155,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.command #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.command[0] #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.job_role_arn #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.execution_role_arn #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
@@ -1160,6 +1182,24 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.init_process_enabled #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.shared_memory_size #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.max_swap #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.swappiness #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.options #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.options["String"] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.secret_options #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.secret_options[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.secret_options[0].value_from #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1371,6 +1411,7 @@ module Aws::Batch
     #   resp.jobs[0].container.command #=> Array
     #   resp.jobs[0].container.command[0] #=> String
     #   resp.jobs[0].container.job_role_arn #=> String
+    #   resp.jobs[0].container.execution_role_arn #=> String
     #   resp.jobs[0].container.volumes #=> Array
     #   resp.jobs[0].container.volumes[0].host.source_path #=> String
     #   resp.jobs[0].container.volumes[0].name #=> String
@@ -1406,6 +1447,24 @@ module Aws::Batch
     #   resp.jobs[0].container.linux_parameters.devices[0].container_path #=> String
     #   resp.jobs[0].container.linux_parameters.devices[0].permissions #=> Array
     #   resp.jobs[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.jobs[0].container.linux_parameters.init_process_enabled #=> Boolean
+    #   resp.jobs[0].container.linux_parameters.shared_memory_size #=> Integer
+    #   resp.jobs[0].container.linux_parameters.tmpfs #=> Array
+    #   resp.jobs[0].container.linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.jobs[0].container.linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.jobs[0].container.linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.jobs[0].container.linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.jobs[0].container.linux_parameters.max_swap #=> Integer
+    #   resp.jobs[0].container.linux_parameters.swappiness #=> Integer
+    #   resp.jobs[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].container.log_configuration.options #=> Hash
+    #   resp.jobs[0].container.log_configuration.options["String"] #=> String
+    #   resp.jobs[0].container.log_configuration.secret_options #=> Array
+    #   resp.jobs[0].container.log_configuration.secret_options[0].name #=> String
+    #   resp.jobs[0].container.log_configuration.secret_options[0].value_from #=> String
+    #   resp.jobs[0].container.secrets #=> Array
+    #   resp.jobs[0].container.secrets[0].name #=> String
+    #   resp.jobs[0].container.secrets[0].value_from #=> String
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1418,6 +1477,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.command #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.command[0] #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.job_role_arn #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.execution_role_arn #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
@@ -1444,6 +1504,24 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.init_process_enabled #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.shared_memory_size #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.max_swap #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.swappiness #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.options #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.options["String"] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.secret_options #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.secret_options[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.secret_options[0].value_from #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -1697,6 +1775,7 @@ module Aws::Batch
     #       memory: 1,
     #       command: ["String"],
     #       job_role_arn: "String",
+    #       execution_role_arn: "String",
     #       volumes: [
     #         {
     #           host: {
@@ -1743,7 +1822,36 @@ module Aws::Batch
     #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #           },
     #         ],
+    #         init_process_enabled: false,
+    #         shared_memory_size: 1,
+    #         tmpfs: [
+    #           {
+    #             container_path: "String", # required
+    #             size: 1, # required
+    #             mount_options: ["String"],
+    #           },
+    #         ],
+    #         max_swap: 1,
+    #         swappiness: 1,
     #       },
+    #       log_configuration: {
+    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #         options: {
+    #           "String" => "String",
+    #         },
+    #         secret_options: [
+    #           {
+    #             name: "String", # required
+    #             value_from: "String", # required
+    #           },
+    #         ],
+    #       },
+    #       secrets: [
+    #         {
+    #           name: "String", # required
+    #           value_from: "String", # required
+    #         },
+    #       ],
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -1757,6 +1865,7 @@ module Aws::Batch
     #             memory: 1,
     #             command: ["String"],
     #             job_role_arn: "String",
+    #             execution_role_arn: "String",
     #             volumes: [
     #               {
     #                 host: {
@@ -1803,7 +1912,36 @@ module Aws::Batch
     #                   permissions: ["READ"], # accepts READ, WRITE, MKNOD
     #                 },
     #               ],
+    #               init_process_enabled: false,
+    #               shared_memory_size: 1,
+    #               tmpfs: [
+    #                 {
+    #                   container_path: "String", # required
+    #                   size: 1, # required
+    #                   mount_options: ["String"],
+    #                 },
+    #               ],
+    #               max_swap: 1,
+    #               swappiness: 1,
     #             },
+    #             log_configuration: {
+    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #               options: {
+    #                 "String" => "String",
+    #               },
+    #               secret_options: [
+    #                 {
+    #                   name: "String", # required
+    #                   value_from: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             secrets: [
+    #               {
+    #                 name: "String", # required
+    #                 value_from: "String", # required
+    #               },
+    #             ],
     #           },
     #         },
     #       ],
@@ -2146,7 +2284,10 @@ module Aws::Batch
     #   The name or the Amazon Resource Name (ARN) of the job queue.
     #
     # @option params [String] :state
-    #   Describes the queue's ability to accept new jobs.
+    #   Describes the queue's ability to accept new jobs. If the job queue
+    #   state is `ENABLED`, it is able to accept jobs. If the job queue state
+    #   is `DISABLED`, new jobs cannot be added to the queue, but jobs already
+    #   in the queue can finish.
     #
     # @option params [Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -2224,7 +2365,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

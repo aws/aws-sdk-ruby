@@ -553,7 +553,10 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version number of the database engine to use.
+    #   The version number of the database engine to use. The
+    #   --engine-version will default to the latest major engine version.
+    #   For production workloads, we recommend explicitly declaring this
+    #   parameter with the intended major engine version.
     #   @return [String]
     #
     # @!attribute [rw] port
