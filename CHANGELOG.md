@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.595 (2020-09-28)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
