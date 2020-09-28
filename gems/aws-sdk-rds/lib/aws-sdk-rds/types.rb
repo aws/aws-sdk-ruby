@@ -12218,6 +12218,15 @@ module Aws::RDS
     #
     class InstanceQuotaExceededFault < Aws::EmptyStructure; end
 
+    # The requested operation can't be performed because there aren't
+    # enough available IP addresses in the proxy's subnets. Add more CIDR
+    # blocks to the VPC or remove IP address that aren't required from the
+    # subnets.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientAvailableIPsInSubnetFault AWS API Documentation
+    #
+    class InsufficientAvailableIPsInSubnetFault < Aws::EmptyStructure; end
+
     # The DB cluster doesn't have enough capacity for the current
     # operation.
     #
@@ -15399,9 +15408,12 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] forced_apply_date
-    #   The date when the maintenance action is automatically applied. The
-    #   maintenance action is applied to the resource on this date
-    #   regardless of the maintenance window for the resource.
+    #   The date when the maintenance action is automatically applied.
+    #
+    #   On this date, the maintenance action is applied to the resource as
+    #   soon as possible, regardless of the maintenance window for the
+    #   resource. There might be a delay of one or more days from this date
+    #   before the maintenance action is applied.
     #   @return [Time]
     #
     # @!attribute [rw] opt_in_status

@@ -132,7 +132,7 @@ module Aws::ApplicationAutoScaling
     #         policy_name: "ResourceIdMaxLen1600", # required
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #       }
     #
     # @!attribute [rw] policy_name
@@ -189,6 +189,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -245,6 +250,10 @@ module Aws::ApplicationAutoScaling
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
     #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
+    #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
@@ -277,7 +286,7 @@ module Aws::ApplicationAutoScaling
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -334,6 +343,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -390,6 +404,10 @@ module Aws::ApplicationAutoScaling
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
     #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
+    #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
@@ -421,7 +439,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -473,6 +491,11 @@ module Aws::ApplicationAutoScaling
     #     type and unique identifier are specified using the endpoint ARN.
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
+    #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
     #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
@@ -531,6 +554,10 @@ module Aws::ApplicationAutoScaling
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
     #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
+    #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
@@ -561,7 +588,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -617,6 +644,11 @@ module Aws::ApplicationAutoScaling
     #     type and unique identifier are specified using the endpoint ARN.
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
+    #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
     #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
@@ -675,6 +707,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -737,7 +773,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -793,6 +829,11 @@ module Aws::ApplicationAutoScaling
     #     type and unique identifier are specified using the endpoint ARN.
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
+    #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
     #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
@@ -850,6 +891,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -913,7 +958,7 @@ module Aws::ApplicationAutoScaling
     #         policy_names: ["ResourceIdMaxLen1600"],
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -974,6 +1019,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -1030,6 +1080,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -1094,7 +1148,7 @@ module Aws::ApplicationAutoScaling
     #         scheduled_action_names: ["ResourceIdMaxLen1600"],
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -1155,6 +1209,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -1211,6 +1270,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -1410,9 +1473,9 @@ module Aws::ApplicationAutoScaling
     #   `ALBRequestCountPerTarget` and there is a target group attached to
     #   the Spot Fleet request or ECS service.
     #
-    #   Elastic Load Balancing sends data about your load balancers to
-    #   Amazon CloudWatch. CloudWatch collects the data and specifies the
-    #   format to use to access the data. The format is
+    #   You create the resource label by appending the final portion of the
+    #   load balancer ARN and the final portion of the target group ARN into
+    #   a single value, separated by a forward slash (/). The format is
     #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
     #   where:
     #
@@ -1421,6 +1484,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
     #     the final portion of the target group ARN.
+    #
+    #   This is an example:
+    #   app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
     #
     #   To find the ARN for an Application Load Balancer, use the
     #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
@@ -1448,7 +1514,7 @@ module Aws::ApplicationAutoScaling
     #         policy_name: "PolicyName", # required
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -1541,6 +1607,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -1596,6 +1667,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -1683,7 +1758,7 @@ module Aws::ApplicationAutoScaling
     #         schedule: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1774,6 +1849,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -1830,6 +1910,10 @@ module Aws::ApplicationAutoScaling
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
     #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
+    #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
@@ -1882,7 +1966,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
@@ -1944,6 +2028,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -2001,6 +2090,10 @@ module Aws::ApplicationAutoScaling
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
     #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
+    #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
@@ -2031,6 +2124,19 @@ module Aws::ApplicationAutoScaling
     #   demand.
     #
     #   This parameter is required if you are registering a scalable target.
+    #
+    #   Although you can specify a large maximum capacity, note that service
+    #   quotas may impose lower limits. Each service has its own default
+    #   quotas for the maximum capacity of the resource. If you want to
+    #   specify a higher limit, you can request an increase. For more
+    #   information, consult the documentation for that service. For
+    #   information about the default quotas for each service, see [Service
+    #   Endpoints and Quotas][1] in the *Amazon Web Services General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
@@ -2147,6 +2253,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -2203,6 +2314,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -2264,12 +2379,27 @@ module Aws::ApplicationAutoScaling
     # @!attribute [rw] min_capacity
     #   The minimum capacity.
     #
-    #   For Lambda provisioned concurrency, the minimum value allowed is 0.
-    #   For all other resources, the minimum value allowed is 1.
+    #   For certain resources, the minimum value allowed is 0. This includes
+    #   Lambda provisioned concurrency, Spot Fleet, ECS services, Aurora DB
+    #   clusters, EMR clusters, and custom resources. For all other
+    #   resources, the minimum value allowed is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
     #   The maximum capacity.
+    #
+    #   Although you can specify a large maximum capacity, note that service
+    #   quotas may impose lower limits. Each service has its own default
+    #   quotas for the maximum capacity of the resource. If you want to
+    #   specify a higher limit, you can request an increase. For more
+    #   information, consult the documentation for that service. For
+    #   information about the default quotas for each service, see [Service
+    #   Endpoints and Quotas][1] in the *Amazon Web Services General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalableTargetAction AWS API Documentation
@@ -2336,6 +2466,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -2391,6 +2526,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -2508,6 +2647,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -2563,6 +2707,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -2697,6 +2845,11 @@ module Aws::ApplicationAutoScaling
     #     Example:
     #     `arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE`.
     #
+    #   * Amazon Comprehend entity recognizer endpoint - The resource type
+    #     and unique identifier are specified using the endpoint ARN.
+    #     Example:
+    #     `arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE`.
+    #
     #   * Lambda provisioned concurrency - The resource type is `function`
     #     and the unique identifier is the function name with a function
     #     version or alias name suffix that is not `$LATEST`. Example:
@@ -2752,6 +2905,10 @@ module Aws::ApplicationAutoScaling
     #   * `comprehend:document-classifier-endpoint:DesiredInferenceUnits` -
     #     The number of inference units for an Amazon Comprehend document
     #     classification endpoint.
+    #
+    #   * `comprehend:entity-recognizer-endpoint:DesiredInferenceUnits` -
+    #     The number of inference units for an Amazon Comprehend entity
+    #     recognizer endpoint.
     #
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
@@ -2868,7 +3025,8 @@ module Aws::ApplicationAutoScaling
     # @!attribute [rw] scaling_adjustment
     #   The amount by which to scale, based on the specified adjustment
     #   type. A positive value adds to the current capacity while a negative
-    #   number removes from the current capacity.
+    #   number removes from the current capacity. For exact capacity, you
+    #   must specify a positive value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/StepAdjustment AWS API Documentation
@@ -2902,9 +3060,10 @@ module Aws::ApplicationAutoScaling
     #       }
     #
     # @!attribute [rw] adjustment_type
-    #   Specifies whether the `ScalingAdjustment` value in a
-    #   [StepAdjustment][1] is an absolute number or a percentage of the
-    #   current capacity.
+    #   Specifies how the `ScalingAdjustment` value in a [StepAdjustment][1]
+    #   is interpreted (for example, an absolute number or a percentage).
+    #   The valid values are `ChangeInCapacity`, `ExactCapacity`, and
+    #   `PercentChangeInCapacity`.
     #
     #   `AdjustmentType` is required if you are adding a new step scaling
     #   policy configuration.
@@ -2923,15 +3082,13 @@ module Aws::ApplicationAutoScaling
     #   @return [Array<Types::StepAdjustment>]
     #
     # @!attribute [rw] min_adjustment_magnitude
-    #   The minimum value to scale by when scaling by percentages. For
-    #   example, suppose that you create a step scaling policy to scale out
-    #   an Amazon ECS service by 25 percent and you specify a
-    #   `MinAdjustmentMagnitude` of 2. If the service has 4 tasks and the
-    #   scaling policy is performed, 25 percent of 4 is 1. However, because
-    #   you specified a `MinAdjustmentMagnitude` of 2, Application Auto
-    #   Scaling scales out the service by 2 tasks.
-    #
-    #   Valid only if the adjustment type is `PercentChangeInCapacity`.
+    #   The minimum value to scale by when the adjustment type is
+    #   `PercentChangeInCapacity`. For example, suppose that you create a
+    #   step scaling policy to scale out an Amazon ECS service by 25 percent
+    #   and you specify a `MinAdjustmentMagnitude` of 2. If the service has
+    #   4 tasks and the scaling policy is performed, 25 percent of 4 is 1.
+    #   However, because you specified a `MinAdjustmentMagnitude` of 2,
+    #   Application Auto Scaling scales out the service by 2 tasks.
     #   @return [Integer]
     #
     # @!attribute [rw] cooldown
@@ -2982,7 +3139,8 @@ module Aws::ApplicationAutoScaling
     #
     #   * DynamoDB global secondary indexes
     #
-    #   * Amazon Comprehend document classification endpoints
+    #   * Amazon Comprehend document classification and entity recognizer
+    #     endpoints
     #
     #   * Lambda provisioned concurrency
     #
@@ -3128,7 +3286,8 @@ module Aws::ApplicationAutoScaling
     #
     #   * DynamoDB global secondary indexes
     #
-    #   * Amazon Comprehend document classification endpoints
+    #   * Amazon Comprehend document classification and entity recognizer
+    #     endpoints
     #
     #   * Lambda provisioned concurrency
     #
@@ -3170,7 +3329,8 @@ module Aws::ApplicationAutoScaling
     #
     #   * DynamoDB global secondary indexes
     #
-    #   * Amazon Comprehend document classification endpoints
+    #   * Amazon Comprehend document classification and entity recognizer
+    #     endpoints
     #
     #   * Lambda provisioned concurrency
     #

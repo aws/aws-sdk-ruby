@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2020-09-28)
+------------------
+
+* Feature - This release adds the InsufficientAvailableIPsInSubnetFault error for RDS Proxy.
+
 1.99.0 (2020-09-21)
 ------------------
 

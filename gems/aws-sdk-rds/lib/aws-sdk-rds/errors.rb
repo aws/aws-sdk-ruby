@@ -90,6 +90,7 @@ module Aws::RDS
   # * {InstallationMediaAlreadyExistsFault}
   # * {InstallationMediaNotFoundFault}
   # * {InstanceQuotaExceededFault}
+  # * {InsufficientAvailableIPsInSubnetFault}
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
   # * {InsufficientStorageClusterCapacityFault}
@@ -771,6 +772,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InstanceQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InsufficientAvailableIPsInSubnetFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InsufficientAvailableIPsInSubnetFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

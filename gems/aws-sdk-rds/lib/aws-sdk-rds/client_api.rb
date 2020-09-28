@@ -341,6 +341,7 @@ module Aws::RDS
     InstallationMediaMessage = Shapes::StructureShape.new(name: 'InstallationMediaMessage')
     InstallationMediaNotFoundFault = Shapes::StructureShape.new(name: 'InstallationMediaNotFoundFault')
     InstanceQuotaExceededFault = Shapes::StructureShape.new(name: 'InstanceQuotaExceededFault')
+    InsufficientAvailableIPsInSubnetFault = Shapes::StructureShape.new(name: 'InsufficientAvailableIPsInSubnetFault')
     InsufficientDBClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientDBClusterCapacityFault')
     InsufficientDBInstanceCapacityFault = Shapes::StructureShape.new(name: 'InsufficientDBInstanceCapacityFault')
     InsufficientStorageClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientStorageClusterCapacityFault')
@@ -2162,6 +2163,8 @@ module Aws::RDS
     InstallationMediaNotFoundFault.struct_class = Types::InstallationMediaNotFoundFault
 
     InstanceQuotaExceededFault.struct_class = Types::InstanceQuotaExceededFault
+
+    InsufficientAvailableIPsInSubnetFault.struct_class = Types::InsufficientAvailableIPsInSubnetFault
 
     InsufficientDBClusterCapacityFault.struct_class = Types::InsufficientDBClusterCapacityFault
 
@@ -4627,6 +4630,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientAvailableIPsInSubnetFault)
       end)
 
       api.add_operation(:remove_from_global_cluster, Seahorse::Model::Operation.new.tap do |o|
