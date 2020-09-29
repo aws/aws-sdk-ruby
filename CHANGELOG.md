@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.596 (2020-09-29)
+------------------
+
 * Feature - Aws::Connect - Updated the documentation for Amazon Connect Service.
 
 * Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
