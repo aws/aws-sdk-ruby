@@ -318,8 +318,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | MarketplaceCatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
@@ -455,8 +455,8 @@ to be backwards compatible.
 | Amazon Route 53 Resolver                              | Route53Resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | SageMaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | SES                             | 2010-12-01  |
 | Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
+| Amazon Simple Email Service                           | SES                             | 2010-12-01  |
 | Amazon Simple Notification Service                    | SNS                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | SQS                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | S3                              | 2006-03-01  |
@@ -464,6 +464,8 @@ to be backwards compatible.
 | Amazon Simple Workflow Service                        | SWF                             | 2012-01-25  |
 | Amazon SimpleDB                                       | SimpleDB                        | 2009-04-15  |
 | Amazon Textract                                       | Textract                        | 2018-06-27  |
+| Amazon Timestream Query                               | TimestreamQuery                 | 2018-11-01  |
+| Amazon Timestream Write                               | TimestreamWrite                 | 2018-11-01  |
 | Amazon Transcribe Service                             | TranscribeService               | 2017-10-26  |
 | Amazon Translate                                      | Translate                       | 2017-07-01  |
 | Amazon WorkDocs                                       | WorkDocs                        | 2016-05-01  |

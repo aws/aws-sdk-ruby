@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Connect - Updated the documentation for Amazon Connect Service.
+
+* Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Schemas - Updated the API, and documentation for Schemas.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::TimestreamQuery - Added support for a new service, Amazon Timestream Query.
+
+* Feature - Aws::TimestreamWrite - Added support for a new service, Amazon Timestream Write.
+
 * Issue - Fix Struct::Tms deprecation warnings
 
 2.11.595 (2020-09-28)

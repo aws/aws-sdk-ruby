@@ -242,6 +242,8 @@ module Aws
     Support
     Synthetics
     Textract
+    TimestreamQuery
+    TimestreamWrite
     TranscribeService
     Transfer
     Translate

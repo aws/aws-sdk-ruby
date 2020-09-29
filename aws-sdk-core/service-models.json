@@ -874,6 +874,14 @@
     "models": "textract/2018-06-27",
     "endpoint": "textract"
   },
+  "TimestreamQuery": {
+    "models": "timestream-query/2018-11-01",
+    "endpoint": "query.timestream"
+  },
+  "TimestreamWrite": {
+    "models": "timestream-write/2018-11-01",
+    "endpoint": "ingest.timestream"
+  },
   "TranscribeService": {
     "models": "transcribe/2017-10-26",
     "endpoint": "transcribe"
