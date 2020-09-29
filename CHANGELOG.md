@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix Struct::Tms deprecation warnings
+
 2.11.595 (2020-09-28)
 ------------------
 
