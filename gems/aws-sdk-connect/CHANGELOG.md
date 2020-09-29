@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-09-29)
+------------------
+
+* Feature - Update TagResource API documentation to include Contact Flows and Routing Profiles as supported resources.
+
 1.32.0 (2020-09-16)
 ------------------
 

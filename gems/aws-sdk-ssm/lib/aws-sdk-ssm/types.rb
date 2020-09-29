@@ -2096,8 +2096,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the compliance item. An item is either COMPLIANT or
-    #   NON\_COMPLIANT.
+    #   The status of the compliance item. An item is either COMPLIANT,
+    #   NON\_COMPLIANT, or an empty string (for Windows patches that aren't
+    #   applicable).
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -2164,9 +2165,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the compliance item. An item is either COMPLIANT,
-    #   NON\_COMPLIANT, or an empty string (for Windows patches that aren't
-    #   applicable).
+    #   The status of the compliance item. An item is either COMPLIANT or
+    #   NON\_COMPLIANT.
     #   @return [String]
     #
     # @!attribute [rw] details
@@ -8969,6 +8969,10 @@ module Aws::SSM
     #
     # @!attribute [rw] ping_status
     #   Connection status of SSM Agent.
+    #
+    #   <note markdown="1"> The status `Inactive` has been deprecated and is no longer in use.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] last_ping_date_time
@@ -16691,7 +16695,8 @@ module Aws::SSM
     # The specified target instance for the session is not fully configured
     # for use with Session Manager. For more information, see [Getting
     # started with Session Manager][1] in the *AWS Systems Manager User
-    # Guide*.
+    # Guide*. This error is also returned if you attempt to start a session
+    # on an instance that is located in a different account or Region
     #
     #
     #

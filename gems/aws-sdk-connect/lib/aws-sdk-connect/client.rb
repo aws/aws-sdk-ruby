@@ -368,6 +368,13 @@ module Aws::Connect
 
     # Creates a contact flow for the specified Amazon Connect instance.
     #
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -632,6 +639,13 @@ module Aws::Connect
     end
 
     # Describes the specified contact flow.
+    #
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1435,12 +1449,16 @@ module Aws::Connect
     # Provides information about the contact flows for the specified Amazon
     # Connect instance.
     #
-    # For more information about contact flows, see [Contact Flows][1] in
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    # For more information about contact flows, see [Contact Flows][2] in
     # the *Amazon Connect Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -2399,7 +2417,8 @@ module Aws::Connect
 
     # Adds the specified tags to the specified resource.
     #
-    # The supported resource type is users.
+    # The supported resource types are users, routing profiles, and contact
+    # flows.
     #
     # For sample policies that use tags, see [Amazon Connect Identity-Based
     # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
@@ -2477,6 +2496,9 @@ module Aws::Connect
     # Contact attributes are available in Amazon Connect for 24 months, and
     # are then deleted.
     #
+    # This operation is also available in the Amazon Connect Flow language.
+    # See [UpdateContactAttributes][1].
+    #
     # **Important:** You cannot use the operation to update attributes for
     # contacts that occurred prior to the release of the API, September 12,
     # 2018. You can update attributes only for contacts that started after
@@ -2484,6 +2506,10 @@ module Aws::Connect
     # contact that occurred prior to the release of the API, a 400 error is
     # returned. This applies also to queued callbacks that were initiated
     # prior to the release of the API but are still active in your instance.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-actions-updatecontactattributes.html
     #
     # @option params [required, String] :initial_contact_id
     #   The identifier of the contact. This is the identifier of the contact
@@ -2523,6 +2549,13 @@ module Aws::Connect
 
     # Updates the specified contact flow.
     #
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -2530,7 +2563,13 @@ module Aws::Connect
     #   The identifier of the contact flow.
     #
     # @option params [required, String] :content
-    #   The content of the contact flow.
+    #   The JSON string that represents contact flow’s content. For an
+    #   example, see [Example contact flow in Amazon Connect Flow language][1]
+    #   in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language-example.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2913,7 +2952,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.197.0 (2020-09-29)
+------------------
+
+* Feature - This release adds support for Client to Client routing for AWS Client VPN.
+
 1.196.0 (2020-09-25)
 ------------------
 

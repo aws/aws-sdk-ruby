@@ -232,6 +232,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-support', '~> 1')
   spec.add_dependency('aws-sdk-synthetics', '~> 1')
   spec.add_dependency('aws-sdk-textract', '~> 1')
+  spec.add_dependency('aws-sdk-timestreamquery', '~> 1')
+  spec.add_dependency('aws-sdk-timestreamwrite', '~> 1')
   spec.add_dependency('aws-sdk-transcribeservice', '~> 1')
   spec.add_dependency('aws-sdk-transcribestreamingservice', '~> 1')
   spec.add_dependency('aws-sdk-transfer', '~> 1')

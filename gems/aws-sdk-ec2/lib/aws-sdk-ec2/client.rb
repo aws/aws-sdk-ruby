@@ -3984,13 +3984,15 @@ module Aws::EC2
     #   * To add a route for an on-premises network, enter the AWS
     #     Site-to-Site VPN connection's IPv4 CIDR range
     #
-    #   Route address ranges cannot overlap with the CIDR range specified for
-    #   client allocation.
+    #   * To add a route for the local network, enter the client CIDR range
     #
     # @option params [required, String] :target_vpc_subnet_id
     #   The ID of the subnet through which you want to route traffic. The
     #   specified subnet must be an existing target network of the Client VPN
     #   endpoint.
+    #
+    #   Alternatively, if you're adding a route for the local network,
+    #   specify `local`.
     #
     # @option params [String] :description
     #   A brief description of the route.
@@ -33178,8 +33180,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the connection options for your Site-to-Site VPN VPN
-    # connection.
+    # Modifies the connection options for your Site-to-Site VPN connection.
     #
     # When you modify the VPN connection options, the VPN endpoint IP
     # addresses on the AWS side do not change, and the tunnel options do not
@@ -33187,7 +33188,7 @@ module Aws::EC2
     # brief period while the VPN connection is updated.
     #
     # @option params [required, String] :vpn_connection_id
-    #   The ID of the Site-to-Site VPN VPN connection.
+    #   The ID of the Site-to-Site VPN connection.
     #
     # @option params [String] :local_ipv_4_network_cidr
     #   The IPv4 CIDR on the customer gateway (on-premises) side of the VPN
@@ -38786,7 +38787,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.196.0'
+      context[:gem_version] = '1.197.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

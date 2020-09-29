@@ -5195,14 +5195,16 @@ module Aws::EC2
     #   * To add a route for an on-premises network, enter the AWS
     #     Site-to-Site VPN connection's IPv4 CIDR range
     #
-    #   Route address ranges cannot overlap with the CIDR range specified
-    #   for client allocation.
+    #   * To add a route for the local network, enter the client CIDR range
     #   @return [String]
     #
     # @!attribute [rw] target_vpc_subnet_id
     #   The ID of the subnet through which you want to route traffic. The
     #   specified subnet must be an existing target network of the Client
     #   VPN endpoint.
+    #
+    #   Alternatively, if you're adding a route for the local network,
+    #   specify `local`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -37295,7 +37297,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] vpn_connection_id
-    #   The ID of the Site-to-Site VPN VPN connection.
+    #   The ID of the Site-to-Site VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] local_ipv_4_network_cidr

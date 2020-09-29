@@ -982,6 +982,7 @@ module Aws::Schemas
     #   resp.schema_versions[0].schema_arn #=> String
     #   resp.schema_versions[0].schema_name #=> String
     #   resp.schema_versions[0].schema_version #=> String
+    #   resp.schema_versions[0].type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListSchemaVersions AWS API Documentation
     #
@@ -1182,6 +1183,7 @@ module Aws::Schemas
     #   resp.schemas[0].schema_versions #=> Array
     #   resp.schemas[0].schema_versions[0].created_date #=> Time
     #   resp.schemas[0].schema_versions[0].schema_version #=> String
+    #   resp.schemas[0].schema_versions[0].type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/SearchSchemas AWS API Documentation
     #
@@ -1442,6 +1444,50 @@ module Aws::Schemas
       req.send_request(options)
     end
 
+    # Exports a schema to a different specification.
+    #
+    # @option params [required, String] :registry_name
+    #
+    # @option params [required, String] :schema_name
+    #
+    # @option params [String] :schema_version
+    #
+    # @option params [required, String] :type
+    #
+    # @return [Types::ExportSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportSchemaResponse#content #content} => String
+    #   * {Types::ExportSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::ExportSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::ExportSchemaResponse#schema_version #schema_version} => String
+    #   * {Types::ExportSchemaResponse#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_schema({
+    #     registry_name: "__string", # required
+    #     schema_name: "__string", # required
+    #     schema_version: "__string",
+    #     type: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content #=> String
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.schema_version #=> String
+    #   resp.type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ExportSchema AWS API Documentation
+    #
+    # @overload export_schema(params = {})
+    # @param [Hash] params ({})
+    def export_schema(params = {}, options = {})
+      req = build_request(:export_schema, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1455,7 +1501,7 @@ module Aws::Schemas
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-schemas'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

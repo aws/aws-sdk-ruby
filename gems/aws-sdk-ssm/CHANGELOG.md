@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2020-09-29)
+------------------
+
+* Feature - Simple update to description of ComplianceItemStatus.
+
 1.91.0 (2020-09-16)
 ------------------
 

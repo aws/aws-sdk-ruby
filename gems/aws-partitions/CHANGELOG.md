@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.377.0 (2020-09-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::TimestreamWrite`.
+
+* Feature - Added support for enumerating regions for `Aws::TimestreamQuery`.
+
 1.376.0 (2020-09-25)
 ------------------
 

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.83.0 (2020-09-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-timestreamwrite` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-timestreamquery` gem.
+
 3.82.0 (2020-09-10)
 ------------------
 

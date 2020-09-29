@@ -142,6 +142,13 @@ module Aws::Connect
 
     # Contains summary information about a contact flow.
     #
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    #
     # @!attribute [rw] id
     #   The identifier of the contact flow.
     #   @return [String]
@@ -3306,7 +3313,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the contact flow.
+    #   The JSON string that represents contact flow’s content. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language-example.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowContentRequest AWS API Documentation

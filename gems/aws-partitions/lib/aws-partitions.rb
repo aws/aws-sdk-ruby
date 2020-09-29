@@ -440,6 +440,8 @@ module Aws
             'Support' => 'support',
             'Synthetics' => 'synthetics',
             'Textract' => 'textract',
+            'TimestreamQuery' => 'query.timestream',
+            'TimestreamWrite' => 'ingest.timestream',
             'TranscribeService' => 'transcribe',
             'TranscribeStreamingService' => 'transcribestreaming',
             'Transfer' => 'transfer',

@@ -753,6 +753,12 @@
   "Textract": {
     "models": "textract/2018-06-27"
   },
+  "TimestreamQuery": {
+    "models": "timestream-query/2018-11-01"
+  },
+  "TimestreamWrite": {
+    "models": "timestream-write/2018-11-01"
+  },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"
   },

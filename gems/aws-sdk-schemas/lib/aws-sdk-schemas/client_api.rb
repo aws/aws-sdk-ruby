@@ -46,6 +46,9 @@ module Aws::Schemas
     DiscovererStateOutput = Shapes::StructureShape.new(name: 'DiscovererStateOutput')
     DiscovererSummary = Shapes::StructureShape.new(name: 'DiscovererSummary')
     ErrorOutput = Shapes::StructureShape.new(name: 'ErrorOutput')
+    ExportSchemaOutput = Shapes::StructureShape.new(name: 'ExportSchemaOutput')
+    ExportSchemaRequest = Shapes::StructureShape.new(name: 'ExportSchemaRequest')
+    ExportSchemaResponse = Shapes::StructureShape.new(name: 'ExportSchemaResponse')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GetCodeBindingSourceOutput = Shapes::StringShape.new(name: 'GetCodeBindingSourceOutput')
     GetCodeBindingSourceRequest = Shapes::StructureShape.new(name: 'GetCodeBindingSourceRequest')
@@ -315,6 +318,26 @@ module Aws::Schemas
     ErrorOutput.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     ErrorOutput.struct_class = Types::ErrorOutput
 
+    ExportSchemaOutput.add_member(:content, Shapes::ShapeRef.new(shape: __string, location_name: "Content"))
+    ExportSchemaOutput.add_member(:schema_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaArn"))
+    ExportSchemaOutput.add_member(:schema_name, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaName"))
+    ExportSchemaOutput.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaVersion"))
+    ExportSchemaOutput.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "Type"))
+    ExportSchemaOutput.struct_class = Types::ExportSchemaOutput
+
+    ExportSchemaRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "registryName"))
+    ExportSchemaRequest.add_member(:schema_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "schemaName"))
+    ExportSchemaRequest.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "schemaVersion"))
+    ExportSchemaRequest.add_member(:type, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "type"))
+    ExportSchemaRequest.struct_class = Types::ExportSchemaRequest
+
+    ExportSchemaResponse.add_member(:content, Shapes::ShapeRef.new(shape: __string, location_name: "Content"))
+    ExportSchemaResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaArn"))
+    ExportSchemaResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaName"))
+    ExportSchemaResponse.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaVersion"))
+    ExportSchemaResponse.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "Type"))
+    ExportSchemaResponse.struct_class = Types::ExportSchemaResponse
+
     ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Code"))
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     ForbiddenException.struct_class = Types::ForbiddenException
@@ -514,6 +537,7 @@ module Aws::Schemas
     SchemaVersionSummary.add_member(:schema_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaArn"))
     SchemaVersionSummary.add_member(:schema_name, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaName"))
     SchemaVersionSummary.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaVersion"))
+    SchemaVersionSummary.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "Type"))
     SchemaVersionSummary.struct_class = Types::SchemaVersionSummary
 
     SearchSchemaSummary.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, location_name: "RegistryName"))
@@ -524,6 +548,7 @@ module Aws::Schemas
 
     SearchSchemaVersionSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "CreatedDate"))
     SearchSchemaVersionSummary.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaVersion"))
+    SearchSchemaVersionSummary.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "Type"))
     SearchSchemaVersionSummary.struct_class = Types::SearchSchemaVersionSummary
 
     SearchSchemasOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
@@ -1110,6 +1135,21 @@ module Aws::Schemas
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:export_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportSchema"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/registries/name/{registryName}/schemas/name/{schemaName}/export"
+        o.input = Shapes::ShapeRef.new(shape: ExportSchemaRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end
 

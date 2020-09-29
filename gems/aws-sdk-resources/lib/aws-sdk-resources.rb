@@ -224,6 +224,8 @@ module Aws
   autoload :Support, 'aws-sdk-support'
   autoload :Synthetics, 'aws-sdk-synthetics'
   autoload :Textract, 'aws-sdk-textract'
+  autoload :TimestreamQuery, 'aws-sdk-timestreamquery'
+  autoload :TimestreamWrite, 'aws-sdk-timestreamwrite'
   autoload :TranscribeService, 'aws-sdk-transcribeservice'
   autoload :TranscribeStreamingService, 'aws-sdk-transcribestreamingservice'
   autoload :Transfer, 'aws-sdk-transfer'
