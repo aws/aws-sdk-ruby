@@ -1264,8 +1264,8 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] number_of_connections
-    #   The number of physical connections initially provisioned and bundled
-    #   by the LAG.
+    #   The number of physical dedicated connections initially provisioned
+    #   and bundled by the LAG.
     #   @return [Integer]
     #
     # @!attribute [rw] location
@@ -1273,9 +1273,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] connections_bandwidth
-    #   The bandwidth of the individual physical connections bundled by the
-    #   LAG. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps,
-    #   400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
+    #   The bandwidth of the individual physical dedicated connections
+    #   bundled by the LAG. The possible values are 1Gbps and 10Gbps.
     #   @return [String]
     #
     # @!attribute [rw] lag_name
@@ -1283,7 +1282,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] connection_id
-    #   The ID of an existing connection to migrate to the LAG.
+    #   The ID of an existing dedicated connection to migrate to the LAG.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2711,8 +2710,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] number_of_connections
-    #   The number of physical connections bundled by the LAG, up to a
-    #   maximum of 10.
+    #   The number of physical dedicated connections bundled by the LAG, up
+    #   to a maximum of 10.
     #   @return [Integer]
     #
     # @!attribute [rw] lag_id
@@ -2757,8 +2756,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] minimum_links
-    #   The minimum number of physical connections that must be operational
-    #   for the LAG itself to be operational.
+    #   The minimum number of physical dedicated connections that must be
+    #   operational for the LAG itself to be operational.
     #   @return [Integer]
     #
     # @!attribute [rw] aws_device

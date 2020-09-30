@@ -845,6 +845,9 @@ module Aws::EMR
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.outpost_arn #=> String
     #   resp.cluster.step_concurrency_level #=> Integer
+    #   resp.cluster.placement_groups #=> Array
+    #   resp.cluster.placement_groups[0].instance_role #=> String, one of "MASTER", "CORE", "TASK"
+    #   resp.cluster.placement_groups[0].placement_strategy #=> String, one of "SPREAD", "PARTITION", "CLUSTER", "NONE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2399,6 +2402,8 @@ module Aws::EMR
     # @option params [Types::ManagedScalingPolicy] :managed_scaling_policy
     #   The specified managed scaling policy for an Amazon EMR cluster.
     #
+    # @option params [Array<Types::PlacementGroupConfig>] :placement_group_configs
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -2642,6 +2647,12 @@ module Aws::EMR
     #         maximum_core_capacity_units: 1,
     #       },
     #     },
+    #     placement_group_configs: [
+    #       {
+    #         instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
+    #         placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2897,7 +2908,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

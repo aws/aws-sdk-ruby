@@ -648,6 +648,9 @@
       "Aws::S3Control::Plugins::S3HostId"
     ]
   },
+  "S3Outposts": {
+    "models": "s3outposts/2017-07-25"
+  },
   "SES": {
     "models": "email/2010-12-01"
   },

@@ -13,13 +13,13 @@ module Aws::Imagebuilder
 
     include Seahorse::Model
 
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
     Ami = Shapes::StructureShape.new(name: 'Ami')
     AmiDistributionConfiguration = Shapes::StructureShape.new(name: 'AmiDistributionConfiguration')
     AmiList = Shapes::ListShape.new(name: 'AmiList')
     AmiNameString = Shapes::StringShape.new(name: 'AmiNameString')
     Arn = Shapes::StringShape.new(name: 'Arn')
-    ArnList = Shapes::ListShape.new(name: 'ArnList')
     CallRateLimitExceededException = Shapes::StructureShape.new(name: 'CallRateLimitExceededException')
     CancelImageCreationRequest = Shapes::StructureShape.new(name: 'CancelImageCreationRequest')
     CancelImageCreationResponse = Shapes::StructureShape.new(name: 'CancelImageCreationResponse')
@@ -139,6 +139,8 @@ module Aws::Imagebuilder
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidVersionNumberException = Shapes::StructureShape.new(name: 'InvalidVersionNumberException')
     LaunchPermissionConfiguration = Shapes::StructureShape.new(name: 'LaunchPermissionConfiguration')
+    LicenseConfigurationArn = Shapes::StringShape.new(name: 'LicenseConfigurationArn')
+    LicenseConfigurationArnList = Shapes::ListShape.new(name: 'LicenseConfigurationArnList')
     ListComponentBuildVersionsRequest = Shapes::StructureShape.new(name: 'ListComponentBuildVersionsRequest')
     ListComponentBuildVersionsResponse = Shapes::StructureShape.new(name: 'ListComponentBuildVersionsResponse')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
@@ -210,25 +212,25 @@ module Aws::Imagebuilder
     Uri = Shapes::StringShape.new(name: 'Uri')
     VersionNumber = Shapes::StringShape.new(name: 'VersionNumber')
 
-    AccountList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+    AccountList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     Ami.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "region"))
     Ami.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "image"))
     Ami.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
     Ami.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     Ami.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "state"))
+    Ami.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "accountId"))
     Ami.struct_class = Types::Ami
 
     AmiDistributionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: AmiNameString, location_name: "name"))
     AmiDistributionConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    AmiDistributionConfiguration.add_member(:target_account_ids, Shapes::ShapeRef.new(shape: AccountList, location_name: "targetAccountIds"))
     AmiDistributionConfiguration.add_member(:ami_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "amiTags"))
     AmiDistributionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
     AmiDistributionConfiguration.add_member(:launch_permission, Shapes::ShapeRef.new(shape: LaunchPermissionConfiguration, location_name: "launchPermission"))
     AmiDistributionConfiguration.struct_class = Types::AmiDistributionConfiguration
 
     AmiList.member = Shapes::ShapeRef.new(shape: Ami)
-
-    ArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
     CallRateLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     CallRateLimitExceededException.struct_class = Types::CallRateLimitExceededException
@@ -436,7 +438,7 @@ module Aws::Imagebuilder
 
     Distribution.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "region"))
     Distribution.add_member(:ami_distribution_configuration, Shapes::ShapeRef.new(shape: AmiDistributionConfiguration, location_name: "amiDistributionConfiguration"))
-    Distribution.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "licenseConfigurationArns"))
+    Distribution.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: LicenseConfigurationArnList, location_name: "licenseConfigurationArns"))
     Distribution.struct_class = Types::Distribution
 
     DistributionConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -721,6 +723,8 @@ module Aws::Imagebuilder
     LaunchPermissionConfiguration.add_member(:user_ids, Shapes::ShapeRef.new(shape: AccountList, location_name: "userIds"))
     LaunchPermissionConfiguration.add_member(:user_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "userGroups"))
     LaunchPermissionConfiguration.struct_class = Types::LaunchPermissionConfiguration
+
+    LicenseConfigurationArnList.member = Shapes::ShapeRef.new(shape: LicenseConfigurationArn)
 
     ListComponentBuildVersionsRequest.add_member(:component_version_arn, Shapes::ShapeRef.new(shape: ComponentVersionArn, required: true, location_name: "componentVersionArn"))
     ListComponentBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))

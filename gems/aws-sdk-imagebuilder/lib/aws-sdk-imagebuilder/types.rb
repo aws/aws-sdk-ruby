@@ -32,6 +32,10 @@ module Aws::Imagebuilder
     #   Image state shows the image status and the reason for that status.
     #   @return [Types::ImageState]
     #
+    # @!attribute [rw] account_id
+    #   The account ID of the owner of the AMI.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Ami AWS API Documentation
     #
     class Ami < Struct.new(
@@ -39,7 +43,8 @@ module Aws::Imagebuilder
       :image,
       :name,
       :description,
-      :state)
+      :state,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52,12 +57,13 @@ module Aws::Imagebuilder
     #       {
     #         name: "AmiNameString",
     #         description: "NonEmptyString",
+    #         target_account_ids: ["AccountId"],
     #         ami_tags: {
     #           "TagKey" => "TagValue",
     #         },
     #         kms_key_id: "NonEmptyString",
     #         launch_permission: {
-    #           user_ids: ["NonEmptyString"],
+    #           user_ids: ["AccountId"],
     #           user_groups: ["NonEmptyString"],
     #         },
     #       }
@@ -69,6 +75,10 @@ module Aws::Imagebuilder
     # @!attribute [rw] description
     #   The description of the distribution configuration.
     #   @return [String]
+    #
+    # @!attribute [rw] target_account_ids
+    #   The ID of an account to which you want to distribute an image.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] ami_tags
     #   The tags to apply to AMIs distributed to this Region.
@@ -88,6 +98,7 @@ module Aws::Imagebuilder
     class AmiDistributionConfiguration < Struct.new(
       :name,
       :description,
+      :target_account_ids,
       :ami_tags,
       :kms_key_id,
       :launch_permission)
@@ -535,16 +546,17 @@ module Aws::Imagebuilder
     #             ami_distribution_configuration: {
     #               name: "AmiNameString",
     #               description: "NonEmptyString",
+    #               target_account_ids: ["AccountId"],
     #               ami_tags: {
     #                 "TagKey" => "TagValue",
     #               },
     #               kms_key_id: "NonEmptyString",
     #               launch_permission: {
-    #                 user_ids: ["NonEmptyString"],
+    #                 user_ids: ["AccountId"],
     #                 user_groups: ["NonEmptyString"],
     #               },
     #             },
-    #             license_configuration_arns: ["Arn"],
+    #             license_configuration_arns: ["LicenseConfigurationArn"],
     #           },
     #         ],
     #         tags: {
@@ -754,7 +766,7 @@ module Aws::Imagebuilder
     #               kms_key_id: "NonEmptyString",
     #               snapshot_id: "NonEmptyString",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #             },
     #             virtual_name: "NonEmptyString",
     #             no_device: "EmptyString",
@@ -787,9 +799,7 @@ module Aws::Imagebuilder
     #   The parent image of the image recipe. The value of the string can be
     #   the ARN of the parent image or an AMI ID. The format for the ARN
     #   follows this example:
-    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x`.
-    #   The ARN ends with `/20xx.x.x`, which communicates to EC2 Image
-    #   Builder that you want to use the latest AMI created in 20xx (year).
+    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x`.
     #   You can provide the specific version that you want to use, or you
     #   can use a wildcard in all of the fields. If you enter an AMI ID for
     #   the string value, you must have access to the AMI, and the AMI must
@@ -1315,16 +1325,17 @@ module Aws::Imagebuilder
     #         ami_distribution_configuration: {
     #           name: "AmiNameString",
     #           description: "NonEmptyString",
+    #           target_account_ids: ["AccountId"],
     #           ami_tags: {
     #             "TagKey" => "TagValue",
     #           },
     #           kms_key_id: "NonEmptyString",
     #           launch_permission: {
-    #             user_ids: ["NonEmptyString"],
+    #             user_ids: ["AccountId"],
     #             user_groups: ["NonEmptyString"],
     #           },
     #         },
-    #         license_configuration_arns: ["Arn"],
+    #         license_configuration_arns: ["LicenseConfigurationArn"],
     #       }
     #
     # @!attribute [rw] region
@@ -1451,7 +1462,7 @@ module Aws::Imagebuilder
     #         kms_key_id: "NonEmptyString",
     #         snapshot_id: "NonEmptyString",
     #         volume_size: 1,
-    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #       }
     #
     # @!attribute [rw] encrypted
@@ -2613,7 +2624,7 @@ module Aws::Imagebuilder
     #           kms_key_id: "NonEmptyString",
     #           snapshot_id: "NonEmptyString",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #         },
     #         virtual_name: "NonEmptyString",
     #         no_device: "EmptyString",
@@ -2743,7 +2754,7 @@ module Aws::Imagebuilder
     #   data as a hash:
     #
     #       {
-    #         user_ids: ["NonEmptyString"],
+    #         user_ids: ["AccountId"],
     #         user_groups: ["NonEmptyString"],
     #       }
     #
@@ -3662,17 +3673,33 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] schedule_expression
-    #   The expression determines how often EC2 Image Builder evaluates your
-    #   `pipelineExecutionStartCondition`.
+    #   The cron expression determines how often EC2 Image Builder evaluates
+    #   your `pipelineExecutionStartCondition`.
+    #
+    #   For information on how to format a cron expression in Image Builder,
+    #   see [Use cron expressions in EC2 Image Builder][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html
     #   @return [String]
     #
     # @!attribute [rw] pipeline_execution_start_condition
     #   The condition configures when the pipeline should trigger a new
     #   image build. When the `pipelineExecutionStartCondition` is set to
-    #   `EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE`, EC2 Image
-    #   Builder will build a new image only when there are known changes
-    #   pending. When it is set to `EXPRESSION_MATCH_ONLY`, it will build a
-    #   new image every time the CRON expression matches the current time.
+    #   `EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE`, and you use
+    #   semantic version filters on the source image or components in your
+    #   image recipe, EC2 Image Builder will build a new image only when
+    #   there are new versions of the image or components in your recipe
+    #   that match the semantic version filter. When it is set to
+    #   `EXPRESSION_MATCH_ONLY`, it will build a new image every time the
+    #   CRON expression matches the current time. For semantic version
+    #   syntax, see [CreateComponent][1] in the <i> EC2 Image Builder API
+    #   Reference</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Schedule AWS API Documentation
@@ -3855,16 +3882,17 @@ module Aws::Imagebuilder
     #             ami_distribution_configuration: {
     #               name: "AmiNameString",
     #               description: "NonEmptyString",
+    #               target_account_ids: ["AccountId"],
     #               ami_tags: {
     #                 "TagKey" => "TagValue",
     #               },
     #               kms_key_id: "NonEmptyString",
     #               launch_permission: {
-    #                 user_ids: ["NonEmptyString"],
+    #                 user_ids: ["AccountId"],
     #                 user_groups: ["NonEmptyString"],
     #               },
     #             },
-    #             license_configuration_arns: ["Arn"],
+    #             license_configuration_arns: ["LicenseConfigurationArn"],
     #           },
     #         ],
     #         client_token: "ClientToken", # required

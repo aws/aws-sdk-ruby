@@ -410,6 +410,7 @@ module Aws
             'Route53Resolver' => 'route53resolver',
             'S3' => 's3',
             'S3Control' => 's3-control',
+            'S3Outposts' => 's3-outposts',
             'SES' => 'email',
             'SESV2' => 'email',
             'SMS' => 'sms',

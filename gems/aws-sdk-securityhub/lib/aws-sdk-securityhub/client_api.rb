@@ -25,17 +25,50 @@ module Aws::SecurityHub
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+    AwsApiGatewayAccessLogSettings = Shapes::StructureShape.new(name: 'AwsApiGatewayAccessLogSettings')
+    AwsApiGatewayCanarySettings = Shapes::StructureShape.new(name: 'AwsApiGatewayCanarySettings')
+    AwsApiGatewayEndpointConfiguration = Shapes::StructureShape.new(name: 'AwsApiGatewayEndpointConfiguration')
+    AwsApiGatewayMethodSettings = Shapes::StructureShape.new(name: 'AwsApiGatewayMethodSettings')
+    AwsApiGatewayMethodSettingsList = Shapes::ListShape.new(name: 'AwsApiGatewayMethodSettingsList')
+    AwsApiGatewayRestApiDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayRestApiDetails')
+    AwsApiGatewayStageDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayStageDetails')
+    AwsApiGatewayV2ApiDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayV2ApiDetails')
+    AwsApiGatewayV2RouteSettings = Shapes::StructureShape.new(name: 'AwsApiGatewayV2RouteSettings')
+    AwsApiGatewayV2StageDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayV2StageDetails')
     AwsAutoScalingAutoScalingGroupDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupDetails')
+    AwsCertificateManagerCertificateDetails = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateDetails')
+    AwsCertificateManagerCertificateDomainValidationOption = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateDomainValidationOption')
+    AwsCertificateManagerCertificateDomainValidationOptions = Shapes::ListShape.new(name: 'AwsCertificateManagerCertificateDomainValidationOptions')
+    AwsCertificateManagerCertificateExtendedKeyUsage = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateExtendedKeyUsage')
+    AwsCertificateManagerCertificateExtendedKeyUsages = Shapes::ListShape.new(name: 'AwsCertificateManagerCertificateExtendedKeyUsages')
+    AwsCertificateManagerCertificateKeyUsage = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateKeyUsage')
+    AwsCertificateManagerCertificateKeyUsages = Shapes::ListShape.new(name: 'AwsCertificateManagerCertificateKeyUsages')
+    AwsCertificateManagerCertificateOptions = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateOptions')
+    AwsCertificateManagerCertificateRenewalSummary = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateRenewalSummary')
+    AwsCertificateManagerCertificateResourceRecord = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateResourceRecord')
+    AwsCloudFrontDistributionCacheBehavior = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionCacheBehavior')
+    AwsCloudFrontDistributionCacheBehaviors = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionCacheBehaviors')
+    AwsCloudFrontDistributionCacheBehaviorsItemList = Shapes::ListShape.new(name: 'AwsCloudFrontDistributionCacheBehaviorsItemList')
+    AwsCloudFrontDistributionDefaultCacheBehavior = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionDefaultCacheBehavior')
     AwsCloudFrontDistributionDetails = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionDetails')
     AwsCloudFrontDistributionLogging = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionLogging')
+    AwsCloudFrontDistributionOriginGroup = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginGroup')
+    AwsCloudFrontDistributionOriginGroupFailover = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginGroupFailover')
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodes = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginGroupFailoverStatusCodes')
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList = Shapes::ListShape.new(name: 'AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList')
+    AwsCloudFrontDistributionOriginGroups = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginGroups')
+    AwsCloudFrontDistributionOriginGroupsItemList = Shapes::ListShape.new(name: 'AwsCloudFrontDistributionOriginGroupsItemList')
     AwsCloudFrontDistributionOriginItem = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginItem')
     AwsCloudFrontDistributionOriginItemList = Shapes::ListShape.new(name: 'AwsCloudFrontDistributionOriginItemList')
+    AwsCloudFrontDistributionOriginS3OriginConfig = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOriginS3OriginConfig')
     AwsCloudFrontDistributionOrigins = Shapes::StructureShape.new(name: 'AwsCloudFrontDistributionOrigins')
+    AwsCloudTrailTrailDetails = Shapes::StructureShape.new(name: 'AwsCloudTrailTrailDetails')
     AwsCodeBuildProjectDetails = Shapes::StructureShape.new(name: 'AwsCodeBuildProjectDetails')
     AwsCodeBuildProjectEnvironment = Shapes::StructureShape.new(name: 'AwsCodeBuildProjectEnvironment')
     AwsCodeBuildProjectEnvironmentRegistryCredential = Shapes::StructureShape.new(name: 'AwsCodeBuildProjectEnvironmentRegistryCredential')
     AwsCodeBuildProjectSource = Shapes::StructureShape.new(name: 'AwsCodeBuildProjectSource')
     AwsCodeBuildProjectVpcConfig = Shapes::StructureShape.new(name: 'AwsCodeBuildProjectVpcConfig')
+    AwsCorsConfiguration = Shapes::StructureShape.new(name: 'AwsCorsConfiguration')
     AwsDynamoDbTableAttributeDefinition = Shapes::StructureShape.new(name: 'AwsDynamoDbTableAttributeDefinition')
     AwsDynamoDbTableAttributeDefinitionList = Shapes::ListShape.new(name: 'AwsDynamoDbTableAttributeDefinitionList')
     AwsDynamoDbTableBillingModeSummary = Shapes::StructureShape.new(name: 'AwsDynamoDbTableBillingModeSummary')
@@ -82,17 +115,49 @@ module Aws::SecurityHub
     AwsElasticsearchDomainEncryptionAtRestOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainEncryptionAtRestOptions')
     AwsElasticsearchDomainNodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainNodeToNodeEncryptionOptions')
     AwsElasticsearchDomainVPCOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainVPCOptions')
+    AwsElbAppCookieStickinessPolicies = Shapes::ListShape.new(name: 'AwsElbAppCookieStickinessPolicies')
+    AwsElbAppCookieStickinessPolicy = Shapes::StructureShape.new(name: 'AwsElbAppCookieStickinessPolicy')
+    AwsElbLbCookieStickinessPolicies = Shapes::ListShape.new(name: 'AwsElbLbCookieStickinessPolicies')
+    AwsElbLbCookieStickinessPolicy = Shapes::StructureShape.new(name: 'AwsElbLbCookieStickinessPolicy')
+    AwsElbLoadBalancerAccessLog = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerAccessLog')
+    AwsElbLoadBalancerAttributes = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerAttributes')
+    AwsElbLoadBalancerBackendServerDescription = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerBackendServerDescription')
+    AwsElbLoadBalancerBackendServerDescriptions = Shapes::ListShape.new(name: 'AwsElbLoadBalancerBackendServerDescriptions')
+    AwsElbLoadBalancerConnectionDraining = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerConnectionDraining')
+    AwsElbLoadBalancerConnectionSettings = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerConnectionSettings')
+    AwsElbLoadBalancerCrossZoneLoadBalancing = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerCrossZoneLoadBalancing')
+    AwsElbLoadBalancerDetails = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerDetails')
+    AwsElbLoadBalancerHealthCheck = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerHealthCheck')
+    AwsElbLoadBalancerInstance = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerInstance')
+    AwsElbLoadBalancerInstances = Shapes::ListShape.new(name: 'AwsElbLoadBalancerInstances')
+    AwsElbLoadBalancerListener = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerListener')
+    AwsElbLoadBalancerListenerDescription = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerListenerDescription')
+    AwsElbLoadBalancerListenerDescriptions = Shapes::ListShape.new(name: 'AwsElbLoadBalancerListenerDescriptions')
+    AwsElbLoadBalancerPolicies = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerPolicies')
+    AwsElbLoadBalancerSourceSecurityGroup = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerSourceSecurityGroup')
     AwsElbv2LoadBalancerDetails = Shapes::StructureShape.new(name: 'AwsElbv2LoadBalancerDetails')
     AwsIamAccessKeyDetails = Shapes::StructureShape.new(name: 'AwsIamAccessKeyDetails')
+    AwsIamAccessKeySessionContext = Shapes::StructureShape.new(name: 'AwsIamAccessKeySessionContext')
+    AwsIamAccessKeySessionContextAttributes = Shapes::StructureShape.new(name: 'AwsIamAccessKeySessionContextAttributes')
+    AwsIamAccessKeySessionContextSessionIssuer = Shapes::StructureShape.new(name: 'AwsIamAccessKeySessionContextSessionIssuer')
     AwsIamAccessKeyStatus = Shapes::StringShape.new(name: 'AwsIamAccessKeyStatus')
     AwsIamAttachedManagedPolicy = Shapes::StructureShape.new(name: 'AwsIamAttachedManagedPolicy')
     AwsIamAttachedManagedPolicyList = Shapes::ListShape.new(name: 'AwsIamAttachedManagedPolicyList')
+    AwsIamGroupDetails = Shapes::StructureShape.new(name: 'AwsIamGroupDetails')
+    AwsIamGroupPolicy = Shapes::StructureShape.new(name: 'AwsIamGroupPolicy')
+    AwsIamGroupPolicyList = Shapes::ListShape.new(name: 'AwsIamGroupPolicyList')
+    AwsIamInstanceProfile = Shapes::StructureShape.new(name: 'AwsIamInstanceProfile')
+    AwsIamInstanceProfileList = Shapes::ListShape.new(name: 'AwsIamInstanceProfileList')
+    AwsIamInstanceProfileRole = Shapes::StructureShape.new(name: 'AwsIamInstanceProfileRole')
+    AwsIamInstanceProfileRoles = Shapes::ListShape.new(name: 'AwsIamInstanceProfileRoles')
     AwsIamPermissionsBoundary = Shapes::StructureShape.new(name: 'AwsIamPermissionsBoundary')
     AwsIamPolicyDetails = Shapes::StructureShape.new(name: 'AwsIamPolicyDetails')
     AwsIamPolicyVersion = Shapes::StructureShape.new(name: 'AwsIamPolicyVersion')
     AwsIamPolicyVersionList = Shapes::ListShape.new(name: 'AwsIamPolicyVersionList')
     AwsIamRoleAssumeRolePolicyDocument = Shapes::StringShape.new(name: 'AwsIamRoleAssumeRolePolicyDocument')
     AwsIamRoleDetails = Shapes::StructureShape.new(name: 'AwsIamRoleDetails')
+    AwsIamRolePolicy = Shapes::StructureShape.new(name: 'AwsIamRolePolicy')
+    AwsIamRolePolicyList = Shapes::ListShape.new(name: 'AwsIamRolePolicyList')
     AwsIamUserDetails = Shapes::StructureShape.new(name: 'AwsIamUserDetails')
     AwsIamUserPolicy = Shapes::StructureShape.new(name: 'AwsIamUserPolicy')
     AwsIamUserPolicyList = Shapes::ListShape.new(name: 'AwsIamUserPolicyList')
@@ -139,6 +204,28 @@ module Aws::SecurityHub
     AwsRdsDbSubnetGroupSubnetAvailabilityZone = Shapes::StructureShape.new(name: 'AwsRdsDbSubnetGroupSubnetAvailabilityZone')
     AwsRdsDbSubnetGroupSubnets = Shapes::ListShape.new(name: 'AwsRdsDbSubnetGroupSubnets')
     AwsRdsPendingCloudWatchLogsExports = Shapes::StructureShape.new(name: 'AwsRdsPendingCloudWatchLogsExports')
+    AwsRedshiftClusterClusterNode = Shapes::StructureShape.new(name: 'AwsRedshiftClusterClusterNode')
+    AwsRedshiftClusterClusterNodes = Shapes::ListShape.new(name: 'AwsRedshiftClusterClusterNodes')
+    AwsRedshiftClusterClusterParameterGroup = Shapes::StructureShape.new(name: 'AwsRedshiftClusterClusterParameterGroup')
+    AwsRedshiftClusterClusterParameterGroups = Shapes::ListShape.new(name: 'AwsRedshiftClusterClusterParameterGroups')
+    AwsRedshiftClusterClusterParameterStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterClusterParameterStatus')
+    AwsRedshiftClusterClusterParameterStatusList = Shapes::ListShape.new(name: 'AwsRedshiftClusterClusterParameterStatusList')
+    AwsRedshiftClusterClusterSecurityGroup = Shapes::StructureShape.new(name: 'AwsRedshiftClusterClusterSecurityGroup')
+    AwsRedshiftClusterClusterSecurityGroups = Shapes::ListShape.new(name: 'AwsRedshiftClusterClusterSecurityGroups')
+    AwsRedshiftClusterClusterSnapshotCopyStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterClusterSnapshotCopyStatus')
+    AwsRedshiftClusterDeferredMaintenanceWindow = Shapes::StructureShape.new(name: 'AwsRedshiftClusterDeferredMaintenanceWindow')
+    AwsRedshiftClusterDeferredMaintenanceWindows = Shapes::ListShape.new(name: 'AwsRedshiftClusterDeferredMaintenanceWindows')
+    AwsRedshiftClusterDetails = Shapes::StructureShape.new(name: 'AwsRedshiftClusterDetails')
+    AwsRedshiftClusterElasticIpStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterElasticIpStatus')
+    AwsRedshiftClusterEndpoint = Shapes::StructureShape.new(name: 'AwsRedshiftClusterEndpoint')
+    AwsRedshiftClusterHsmStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterHsmStatus')
+    AwsRedshiftClusterIamRole = Shapes::StructureShape.new(name: 'AwsRedshiftClusterIamRole')
+    AwsRedshiftClusterIamRoles = Shapes::ListShape.new(name: 'AwsRedshiftClusterIamRoles')
+    AwsRedshiftClusterPendingModifiedValues = Shapes::StructureShape.new(name: 'AwsRedshiftClusterPendingModifiedValues')
+    AwsRedshiftClusterResizeInfo = Shapes::StructureShape.new(name: 'AwsRedshiftClusterResizeInfo')
+    AwsRedshiftClusterRestoreStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterRestoreStatus')
+    AwsRedshiftClusterVpcSecurityGroup = Shapes::StructureShape.new(name: 'AwsRedshiftClusterVpcSecurityGroup')
+    AwsRedshiftClusterVpcSecurityGroups = Shapes::ListShape.new(name: 'AwsRedshiftClusterVpcSecurityGroups')
     AwsS3BucketDetails = Shapes::StructureShape.new(name: 'AwsS3BucketDetails')
     AwsS3BucketServerSideEncryptionByDefault = Shapes::StructureShape.new(name: 'AwsS3BucketServerSideEncryptionByDefault')
     AwsS3BucketServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'AwsS3BucketServerSideEncryptionConfiguration')
@@ -270,6 +357,7 @@ module Aws::SecurityHub
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LoadBalancerState = Shapes::StructureShape.new(name: 'LoadBalancerState')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     Malware = Shapes::StructureShape.new(name: 'Malware')
     MalwareList = Shapes::ListShape.new(name: 'MalwareList')
     MalwareState = Shapes::StringShape.new(name: 'MalwareState')
@@ -414,6 +502,97 @@ module Aws::SecurityHub
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
+    AwsApiGatewayAccessLogSettings.add_member(:format, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Format"))
+    AwsApiGatewayAccessLogSettings.add_member(:destination_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DestinationArn"))
+    AwsApiGatewayAccessLogSettings.struct_class = Types::AwsApiGatewayAccessLogSettings
+
+    AwsApiGatewayCanarySettings.add_member(:percent_traffic, Shapes::ShapeRef.new(shape: Double, location_name: "PercentTraffic"))
+    AwsApiGatewayCanarySettings.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeploymentId"))
+    AwsApiGatewayCanarySettings.add_member(:stage_variable_overrides, Shapes::ShapeRef.new(shape: FieldMap, location_name: "StageVariableOverrides"))
+    AwsApiGatewayCanarySettings.add_member(:use_stage_cache, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseStageCache"))
+    AwsApiGatewayCanarySettings.struct_class = Types::AwsApiGatewayCanarySettings
+
+    AwsApiGatewayEndpointConfiguration.add_member(:types, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Types"))
+    AwsApiGatewayEndpointConfiguration.struct_class = Types::AwsApiGatewayEndpointConfiguration
+
+    AwsApiGatewayMethodSettings.add_member(:metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MetricsEnabled"))
+    AwsApiGatewayMethodSettings.add_member(:logging_level, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LoggingLevel"))
+    AwsApiGatewayMethodSettings.add_member(:data_trace_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DataTraceEnabled"))
+    AwsApiGatewayMethodSettings.add_member(:throttling_burst_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "ThrottlingBurstLimit"))
+    AwsApiGatewayMethodSettings.add_member(:throttling_rate_limit, Shapes::ShapeRef.new(shape: Double, location_name: "ThrottlingRateLimit"))
+    AwsApiGatewayMethodSettings.add_member(:caching_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CachingEnabled"))
+    AwsApiGatewayMethodSettings.add_member(:cache_ttl_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "CacheTtlInSeconds"))
+    AwsApiGatewayMethodSettings.add_member(:cache_data_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "CacheDataEncrypted"))
+    AwsApiGatewayMethodSettings.add_member(:require_authorization_for_cache_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequireAuthorizationForCacheControl"))
+    AwsApiGatewayMethodSettings.add_member(:unauthorized_cache_control_header_strategy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UnauthorizedCacheControlHeaderStrategy"))
+    AwsApiGatewayMethodSettings.add_member(:http_method, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpMethod"))
+    AwsApiGatewayMethodSettings.add_member(:resource_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourcePath"))
+    AwsApiGatewayMethodSettings.struct_class = Types::AwsApiGatewayMethodSettings
+
+    AwsApiGatewayMethodSettingsList.member = Shapes::ShapeRef.new(shape: AwsApiGatewayMethodSettings)
+
+    AwsApiGatewayRestApiDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
+    AwsApiGatewayRestApiDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsApiGatewayRestApiDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsApiGatewayRestApiDetails.add_member(:created_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedDate"))
+    AwsApiGatewayRestApiDetails.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
+    AwsApiGatewayRestApiDetails.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "BinaryMediaTypes"))
+    AwsApiGatewayRestApiDetails.add_member(:minimum_compression_size, Shapes::ShapeRef.new(shape: Integer, location_name: "MinimumCompressionSize"))
+    AwsApiGatewayRestApiDetails.add_member(:api_key_source, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApiKeySource"))
+    AwsApiGatewayRestApiDetails.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: AwsApiGatewayEndpointConfiguration, location_name: "EndpointConfiguration"))
+    AwsApiGatewayRestApiDetails.struct_class = Types::AwsApiGatewayRestApiDetails
+
+    AwsApiGatewayStageDetails.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeploymentId"))
+    AwsApiGatewayStageDetails.add_member(:client_certificate_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientCertificateId"))
+    AwsApiGatewayStageDetails.add_member(:stage_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StageName"))
+    AwsApiGatewayStageDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsApiGatewayStageDetails.add_member(:cache_cluster_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CacheClusterEnabled"))
+    AwsApiGatewayStageDetails.add_member(:cache_cluster_size, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CacheClusterSize"))
+    AwsApiGatewayStageDetails.add_member(:cache_cluster_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CacheClusterStatus"))
+    AwsApiGatewayStageDetails.add_member(:method_settings, Shapes::ShapeRef.new(shape: AwsApiGatewayMethodSettingsList, location_name: "MethodSettings"))
+    AwsApiGatewayStageDetails.add_member(:variables, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Variables"))
+    AwsApiGatewayStageDetails.add_member(:documentation_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DocumentationVersion"))
+    AwsApiGatewayStageDetails.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AwsApiGatewayAccessLogSettings, location_name: "AccessLogSettings"))
+    AwsApiGatewayStageDetails.add_member(:canary_settings, Shapes::ShapeRef.new(shape: AwsApiGatewayCanarySettings, location_name: "CanarySettings"))
+    AwsApiGatewayStageDetails.add_member(:tracing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "TracingEnabled"))
+    AwsApiGatewayStageDetails.add_member(:created_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedDate"))
+    AwsApiGatewayStageDetails.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastUpdatedDate"))
+    AwsApiGatewayStageDetails.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "WebAclArn"))
+    AwsApiGatewayStageDetails.struct_class = Types::AwsApiGatewayStageDetails
+
+    AwsApiGatewayV2ApiDetails.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApiEndpoint"))
+    AwsApiGatewayV2ApiDetails.add_member(:api_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApiId"))
+    AwsApiGatewayV2ApiDetails.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApiKeySelectionExpression"))
+    AwsApiGatewayV2ApiDetails.add_member(:created_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedDate"))
+    AwsApiGatewayV2ApiDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsApiGatewayV2ApiDetails.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
+    AwsApiGatewayV2ApiDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsApiGatewayV2ApiDetails.add_member(:protocol_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProtocolType"))
+    AwsApiGatewayV2ApiDetails.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RouteSelectionExpression"))
+    AwsApiGatewayV2ApiDetails.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: AwsCorsConfiguration, location_name: "CorsConfiguration"))
+    AwsApiGatewayV2ApiDetails.struct_class = Types::AwsApiGatewayV2ApiDetails
+
+    AwsApiGatewayV2RouteSettings.add_member(:detailed_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DetailedMetricsEnabled"))
+    AwsApiGatewayV2RouteSettings.add_member(:logging_level, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LoggingLevel"))
+    AwsApiGatewayV2RouteSettings.add_member(:data_trace_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DataTraceEnabled"))
+    AwsApiGatewayV2RouteSettings.add_member(:throttling_burst_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "ThrottlingBurstLimit"))
+    AwsApiGatewayV2RouteSettings.add_member(:throttling_rate_limit, Shapes::ShapeRef.new(shape: Double, location_name: "ThrottlingRateLimit"))
+    AwsApiGatewayV2RouteSettings.struct_class = Types::AwsApiGatewayV2RouteSettings
+
+    AwsApiGatewayV2StageDetails.add_member(:created_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedDate"))
+    AwsApiGatewayV2StageDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsApiGatewayV2StageDetails.add_member(:default_route_settings, Shapes::ShapeRef.new(shape: AwsApiGatewayV2RouteSettings, location_name: "DefaultRouteSettings"))
+    AwsApiGatewayV2StageDetails.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeploymentId"))
+    AwsApiGatewayV2StageDetails.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastUpdatedDate"))
+    AwsApiGatewayV2StageDetails.add_member(:route_settings, Shapes::ShapeRef.new(shape: AwsApiGatewayV2RouteSettings, location_name: "RouteSettings"))
+    AwsApiGatewayV2StageDetails.add_member(:stage_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StageName"))
+    AwsApiGatewayV2StageDetails.add_member(:stage_variables, Shapes::ShapeRef.new(shape: FieldMap, location_name: "StageVariables"))
+    AwsApiGatewayV2StageDetails.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AwsApiGatewayAccessLogSettings, location_name: "AccessLogSettings"))
+    AwsApiGatewayV2StageDetails.add_member(:auto_deploy, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoDeploy"))
+    AwsApiGatewayV2StageDetails.add_member(:last_deployment_status_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastDeploymentStatusMessage"))
+    AwsApiGatewayV2StageDetails.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApiGatewayManaged"))
+    AwsApiGatewayV2StageDetails.struct_class = Types::AwsApiGatewayV2StageDetails
+
     AwsAutoScalingAutoScalingGroupDetails.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchConfigurationName"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: StringList, location_name: "LoadBalancerNames"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:health_check_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HealthCheckType"))
@@ -421,11 +600,86 @@ module Aws::SecurityHub
     AwsAutoScalingAutoScalingGroupDetails.add_member(:created_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedTime"))
     AwsAutoScalingAutoScalingGroupDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupDetails
 
+    AwsCertificateManagerCertificateDetails.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CertificateAuthorityArn"))
+    AwsCertificateManagerCertificateDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
+    AwsCertificateManagerCertificateDetails.add_member(:domain_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DomainName"))
+    AwsCertificateManagerCertificateDetails.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateDomainValidationOptions, location_name: "DomainValidationOptions"))
+    AwsCertificateManagerCertificateDetails.add_member(:extended_key_usages, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateExtendedKeyUsages, location_name: "ExtendedKeyUsages"))
+    AwsCertificateManagerCertificateDetails.add_member(:failure_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FailureReason"))
+    AwsCertificateManagerCertificateDetails.add_member(:imported_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ImportedAt"))
+    AwsCertificateManagerCertificateDetails.add_member(:in_use_by, Shapes::ShapeRef.new(shape: StringList, location_name: "InUseBy"))
+    AwsCertificateManagerCertificateDetails.add_member(:issued_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "IssuedAt"))
+    AwsCertificateManagerCertificateDetails.add_member(:issuer, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Issuer"))
+    AwsCertificateManagerCertificateDetails.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KeyAlgorithm"))
+    AwsCertificateManagerCertificateDetails.add_member(:key_usages, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateKeyUsages, location_name: "KeyUsages"))
+    AwsCertificateManagerCertificateDetails.add_member(:not_after, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NotAfter"))
+    AwsCertificateManagerCertificateDetails.add_member(:not_before, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NotBefore"))
+    AwsCertificateManagerCertificateDetails.add_member(:options, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateOptions, location_name: "Options"))
+    AwsCertificateManagerCertificateDetails.add_member(:renewal_eligibility, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RenewalEligibility"))
+    AwsCertificateManagerCertificateDetails.add_member(:renewal_summary, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateRenewalSummary, location_name: "RenewalSummary"))
+    AwsCertificateManagerCertificateDetails.add_member(:serial, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Serial"))
+    AwsCertificateManagerCertificateDetails.add_member(:signature_algorithm, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SignatureAlgorithm"))
+    AwsCertificateManagerCertificateDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsCertificateManagerCertificateDetails.add_member(:subject, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Subject"))
+    AwsCertificateManagerCertificateDetails.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: StringList, location_name: "SubjectAlternativeNames"))
+    AwsCertificateManagerCertificateDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsCertificateManagerCertificateDetails.struct_class = Types::AwsCertificateManagerCertificateDetails
+
+    AwsCertificateManagerCertificateDomainValidationOption.add_member(:domain_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DomainName"))
+    AwsCertificateManagerCertificateDomainValidationOption.add_member(:resource_record, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateResourceRecord, location_name: "ResourceRecord"))
+    AwsCertificateManagerCertificateDomainValidationOption.add_member(:validation_domain, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ValidationDomain"))
+    AwsCertificateManagerCertificateDomainValidationOption.add_member(:validation_emails, Shapes::ShapeRef.new(shape: StringList, location_name: "ValidationEmails"))
+    AwsCertificateManagerCertificateDomainValidationOption.add_member(:validation_method, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ValidationMethod"))
+    AwsCertificateManagerCertificateDomainValidationOption.add_member(:validation_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ValidationStatus"))
+    AwsCertificateManagerCertificateDomainValidationOption.struct_class = Types::AwsCertificateManagerCertificateDomainValidationOption
+
+    AwsCertificateManagerCertificateDomainValidationOptions.member = Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateDomainValidationOption)
+
+    AwsCertificateManagerCertificateExtendedKeyUsage.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsCertificateManagerCertificateExtendedKeyUsage.add_member(:o_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OId"))
+    AwsCertificateManagerCertificateExtendedKeyUsage.struct_class = Types::AwsCertificateManagerCertificateExtendedKeyUsage
+
+    AwsCertificateManagerCertificateExtendedKeyUsages.member = Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateExtendedKeyUsage)
+
+    AwsCertificateManagerCertificateKeyUsage.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsCertificateManagerCertificateKeyUsage.struct_class = Types::AwsCertificateManagerCertificateKeyUsage
+
+    AwsCertificateManagerCertificateKeyUsages.member = Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateKeyUsage)
+
+    AwsCertificateManagerCertificateOptions.add_member(:certificate_transparency_logging_preference, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CertificateTransparencyLoggingPreference"))
+    AwsCertificateManagerCertificateOptions.struct_class = Types::AwsCertificateManagerCertificateOptions
+
+    AwsCertificateManagerCertificateRenewalSummary.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateDomainValidationOptions, location_name: "DomainValidationOptions"))
+    AwsCertificateManagerCertificateRenewalSummary.add_member(:renewal_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RenewalStatus"))
+    AwsCertificateManagerCertificateRenewalSummary.add_member(:renewal_status_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RenewalStatusReason"))
+    AwsCertificateManagerCertificateRenewalSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UpdatedAt"))
+    AwsCertificateManagerCertificateRenewalSummary.struct_class = Types::AwsCertificateManagerCertificateRenewalSummary
+
+    AwsCertificateManagerCertificateResourceRecord.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsCertificateManagerCertificateResourceRecord.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsCertificateManagerCertificateResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsCertificateManagerCertificateResourceRecord.struct_class = Types::AwsCertificateManagerCertificateResourceRecord
+
+    AwsCloudFrontDistributionCacheBehavior.add_member(:viewer_protocol_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ViewerProtocolPolicy"))
+    AwsCloudFrontDistributionCacheBehavior.struct_class = Types::AwsCloudFrontDistributionCacheBehavior
+
+    AwsCloudFrontDistributionCacheBehaviors.add_member(:items, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionCacheBehaviorsItemList, location_name: "Items"))
+    AwsCloudFrontDistributionCacheBehaviors.struct_class = Types::AwsCloudFrontDistributionCacheBehaviors
+
+    AwsCloudFrontDistributionCacheBehaviorsItemList.member = Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionCacheBehavior)
+
+    AwsCloudFrontDistributionDefaultCacheBehavior.add_member(:viewer_protocol_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ViewerProtocolPolicy"))
+    AwsCloudFrontDistributionDefaultCacheBehavior.struct_class = Types::AwsCloudFrontDistributionDefaultCacheBehavior
+
+    AwsCloudFrontDistributionDetails.add_member(:cache_behaviors, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionCacheBehaviors, location_name: "CacheBehaviors"))
+    AwsCloudFrontDistributionDetails.add_member(:default_cache_behavior, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionDefaultCacheBehavior, location_name: "DefaultCacheBehavior"))
+    AwsCloudFrontDistributionDetails.add_member(:default_root_object, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultRootObject"))
     AwsCloudFrontDistributionDetails.add_member(:domain_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DomainName"))
     AwsCloudFrontDistributionDetails.add_member(:etag, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ETag"))
     AwsCloudFrontDistributionDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastModifiedTime"))
     AwsCloudFrontDistributionDetails.add_member(:logging, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionLogging, location_name: "Logging"))
     AwsCloudFrontDistributionDetails.add_member(:origins, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOrigins, location_name: "Origins"))
+    AwsCloudFrontDistributionDetails.add_member(:origin_groups, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginGroups, location_name: "OriginGroups"))
     AwsCloudFrontDistributionDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
     AwsCloudFrontDistributionDetails.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "WebAclId"))
     AwsCloudFrontDistributionDetails.struct_class = Types::AwsCloudFrontDistributionDetails
@@ -436,15 +690,53 @@ module Aws::SecurityHub
     AwsCloudFrontDistributionLogging.add_member(:prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Prefix"))
     AwsCloudFrontDistributionLogging.struct_class = Types::AwsCloudFrontDistributionLogging
 
+    AwsCloudFrontDistributionOriginGroup.add_member(:failover_criteria, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginGroupFailover, location_name: "FailoverCriteria"))
+    AwsCloudFrontDistributionOriginGroup.struct_class = Types::AwsCloudFrontDistributionOriginGroup
+
+    AwsCloudFrontDistributionOriginGroupFailover.add_member(:status_codes, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginGroupFailoverStatusCodes, location_name: "StatusCodes"))
+    AwsCloudFrontDistributionOriginGroupFailover.struct_class = Types::AwsCloudFrontDistributionOriginGroupFailover
+
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodes.add_member(:items, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList, location_name: "Items"))
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodes.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "Quantity"))
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodes.struct_class = Types::AwsCloudFrontDistributionOriginGroupFailoverStatusCodes
+
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList.member = Shapes::ShapeRef.new(shape: Integer)
+
+    AwsCloudFrontDistributionOriginGroups.add_member(:items, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginGroupsItemList, location_name: "Items"))
+    AwsCloudFrontDistributionOriginGroups.struct_class = Types::AwsCloudFrontDistributionOriginGroups
+
+    AwsCloudFrontDistributionOriginGroupsItemList.member = Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginGroup)
+
     AwsCloudFrontDistributionOriginItem.add_member(:domain_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DomainName"))
     AwsCloudFrontDistributionOriginItem.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
     AwsCloudFrontDistributionOriginItem.add_member(:origin_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OriginPath"))
+    AwsCloudFrontDistributionOriginItem.add_member(:s3_origin_config, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginS3OriginConfig, location_name: "S3OriginConfig"))
     AwsCloudFrontDistributionOriginItem.struct_class = Types::AwsCloudFrontDistributionOriginItem
 
     AwsCloudFrontDistributionOriginItemList.member = Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginItem)
 
+    AwsCloudFrontDistributionOriginS3OriginConfig.add_member(:origin_access_identity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OriginAccessIdentity"))
+    AwsCloudFrontDistributionOriginS3OriginConfig.struct_class = Types::AwsCloudFrontDistributionOriginS3OriginConfig
+
     AwsCloudFrontDistributionOrigins.add_member(:items, Shapes::ShapeRef.new(shape: AwsCloudFrontDistributionOriginItemList, location_name: "Items"))
     AwsCloudFrontDistributionOrigins.struct_class = Types::AwsCloudFrontDistributionOrigins
+
+    AwsCloudTrailTrailDetails.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudWatchLogsLogGroupArn"))
+    AwsCloudTrailTrailDetails.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudWatchLogsRoleArn"))
+    AwsCloudTrailTrailDetails.add_member(:has_custom_event_selectors, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasCustomEventSelectors"))
+    AwsCloudTrailTrailDetails.add_member(:home_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HomeRegion"))
+    AwsCloudTrailTrailDetails.add_member(:include_global_service_events, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeGlobalServiceEvents"))
+    AwsCloudTrailTrailDetails.add_member(:is_multi_region_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMultiRegionTrail"))
+    AwsCloudTrailTrailDetails.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
+    AwsCloudTrailTrailDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
+    AwsCloudTrailTrailDetails.add_member(:log_file_validation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LogFileValidationEnabled"))
+    AwsCloudTrailTrailDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsCloudTrailTrailDetails.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3BucketName"))
+    AwsCloudTrailTrailDetails.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3KeyPrefix"))
+    AwsCloudTrailTrailDetails.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnsTopicArn"))
+    AwsCloudTrailTrailDetails.add_member(:sns_topic_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnsTopicName"))
+    AwsCloudTrailTrailDetails.add_member(:trail_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TrailArn"))
+    AwsCloudTrailTrailDetails.struct_class = Types::AwsCloudTrailTrailDetails
 
     AwsCodeBuildProjectDetails.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EncryptionKey"))
     AwsCodeBuildProjectDetails.add_member(:environment, Shapes::ShapeRef.new(shape: AwsCodeBuildProjectEnvironment, location_name: "Environment"))
@@ -474,6 +766,14 @@ module Aws::SecurityHub
     AwsCodeBuildProjectVpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Subnets"))
     AwsCodeBuildProjectVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SecurityGroupIds"))
     AwsCodeBuildProjectVpcConfig.struct_class = Types::AwsCodeBuildProjectVpcConfig
+
+    AwsCorsConfiguration.add_member(:allow_origins, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AllowOrigins"))
+    AwsCorsConfiguration.add_member(:allow_credentials, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowCredentials"))
+    AwsCorsConfiguration.add_member(:expose_headers, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "ExposeHeaders"))
+    AwsCorsConfiguration.add_member(:max_age, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxAge"))
+    AwsCorsConfiguration.add_member(:allow_methods, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AllowMethods"))
+    AwsCorsConfiguration.add_member(:allow_headers, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AllowHeaders"))
+    AwsCorsConfiguration.struct_class = Types::AwsCorsConfiguration
 
     AwsDynamoDbTableAttributeDefinition.add_member(:attribute_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AttributeName"))
     AwsDynamoDbTableAttributeDefinition.add_member(:attribute_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AttributeType"))
@@ -719,6 +1019,99 @@ module Aws::SecurityHub
     AwsElasticsearchDomainVPCOptions.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VPCId"))
     AwsElasticsearchDomainVPCOptions.struct_class = Types::AwsElasticsearchDomainVPCOptions
 
+    AwsElbAppCookieStickinessPolicies.member = Shapes::ShapeRef.new(shape: AwsElbAppCookieStickinessPolicy)
+
+    AwsElbAppCookieStickinessPolicy.add_member(:cookie_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CookieName"))
+    AwsElbAppCookieStickinessPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PolicyName"))
+    AwsElbAppCookieStickinessPolicy.struct_class = Types::AwsElbAppCookieStickinessPolicy
+
+    AwsElbLbCookieStickinessPolicies.member = Shapes::ShapeRef.new(shape: AwsElbLbCookieStickinessPolicy)
+
+    AwsElbLbCookieStickinessPolicy.add_member(:cookie_expiration_period, Shapes::ShapeRef.new(shape: Long, location_name: "CookieExpirationPeriod"))
+    AwsElbLbCookieStickinessPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PolicyName"))
+    AwsElbLbCookieStickinessPolicy.struct_class = Types::AwsElbLbCookieStickinessPolicy
+
+    AwsElbLoadBalancerAccessLog.add_member(:emit_interval, Shapes::ShapeRef.new(shape: Integer, location_name: "EmitInterval"))
+    AwsElbLoadBalancerAccessLog.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsElbLoadBalancerAccessLog.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3BucketName"))
+    AwsElbLoadBalancerAccessLog.add_member(:s3_bucket_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3BucketPrefix"))
+    AwsElbLoadBalancerAccessLog.struct_class = Types::AwsElbLoadBalancerAccessLog
+
+    AwsElbLoadBalancerAttributes.add_member(:access_log, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerAccessLog, location_name: "AccessLog"))
+    AwsElbLoadBalancerAttributes.add_member(:connection_draining, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerConnectionDraining, location_name: "ConnectionDraining"))
+    AwsElbLoadBalancerAttributes.add_member(:connection_settings, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerConnectionSettings, location_name: "ConnectionSettings"))
+    AwsElbLoadBalancerAttributes.add_member(:cross_zone_load_balancing, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerCrossZoneLoadBalancing, location_name: "CrossZoneLoadBalancing"))
+    AwsElbLoadBalancerAttributes.struct_class = Types::AwsElbLoadBalancerAttributes
+
+    AwsElbLoadBalancerBackendServerDescription.add_member(:instance_port, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancePort"))
+    AwsElbLoadBalancerBackendServerDescription.add_member(:policy_names, Shapes::ShapeRef.new(shape: StringList, location_name: "PolicyNames"))
+    AwsElbLoadBalancerBackendServerDescription.struct_class = Types::AwsElbLoadBalancerBackendServerDescription
+
+    AwsElbLoadBalancerBackendServerDescriptions.member = Shapes::ShapeRef.new(shape: AwsElbLoadBalancerBackendServerDescription)
+
+    AwsElbLoadBalancerConnectionDraining.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsElbLoadBalancerConnectionDraining.add_member(:timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "Timeout"))
+    AwsElbLoadBalancerConnectionDraining.struct_class = Types::AwsElbLoadBalancerConnectionDraining
+
+    AwsElbLoadBalancerConnectionSettings.add_member(:idle_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "IdleTimeout"))
+    AwsElbLoadBalancerConnectionSettings.struct_class = Types::AwsElbLoadBalancerConnectionSettings
+
+    AwsElbLoadBalancerCrossZoneLoadBalancing.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsElbLoadBalancerCrossZoneLoadBalancing.struct_class = Types::AwsElbLoadBalancerCrossZoneLoadBalancing
+
+    AwsElbLoadBalancerDetails.add_member(:availability_zones, Shapes::ShapeRef.new(shape: StringList, location_name: "AvailabilityZones"))
+    AwsElbLoadBalancerDetails.add_member(:backend_server_descriptions, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerBackendServerDescriptions, location_name: "BackendServerDescriptions"))
+    AwsElbLoadBalancerDetails.add_member(:canonical_hosted_zone_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CanonicalHostedZoneName"))
+    AwsElbLoadBalancerDetails.add_member(:canonical_hosted_zone_name_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CanonicalHostedZoneNameID"))
+    AwsElbLoadBalancerDetails.add_member(:created_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedTime"))
+    AwsElbLoadBalancerDetails.add_member(:dns_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DnsName"))
+    AwsElbLoadBalancerDetails.add_member(:health_check, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerHealthCheck, location_name: "HealthCheck"))
+    AwsElbLoadBalancerDetails.add_member(:instances, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerInstances, location_name: "Instances"))
+    AwsElbLoadBalancerDetails.add_member(:listener_descriptions, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerListenerDescriptions, location_name: "ListenerDescriptions"))
+    AwsElbLoadBalancerDetails.add_member(:load_balancer_attributes, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerAttributes, location_name: "LoadBalancerAttributes"))
+    AwsElbLoadBalancerDetails.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LoadBalancerName"))
+    AwsElbLoadBalancerDetails.add_member(:policies, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerPolicies, location_name: "Policies"))
+    AwsElbLoadBalancerDetails.add_member(:scheme, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Scheme"))
+    AwsElbLoadBalancerDetails.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
+    AwsElbLoadBalancerDetails.add_member(:source_security_group, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerSourceSecurityGroup, location_name: "SourceSecurityGroup"))
+    AwsElbLoadBalancerDetails.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "Subnets"))
+    AwsElbLoadBalancerDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
+    AwsElbLoadBalancerDetails.struct_class = Types::AwsElbLoadBalancerDetails
+
+    AwsElbLoadBalancerHealthCheck.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: Integer, location_name: "HealthyThreshold"))
+    AwsElbLoadBalancerHealthCheck.add_member(:interval, Shapes::ShapeRef.new(shape: Integer, location_name: "Interval"))
+    AwsElbLoadBalancerHealthCheck.add_member(:target, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Target"))
+    AwsElbLoadBalancerHealthCheck.add_member(:timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "Timeout"))
+    AwsElbLoadBalancerHealthCheck.add_member(:unhealthy_threshold, Shapes::ShapeRef.new(shape: Integer, location_name: "UnhealthyThreshold"))
+    AwsElbLoadBalancerHealthCheck.struct_class = Types::AwsElbLoadBalancerHealthCheck
+
+    AwsElbLoadBalancerInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceId"))
+    AwsElbLoadBalancerInstance.struct_class = Types::AwsElbLoadBalancerInstance
+
+    AwsElbLoadBalancerInstances.member = Shapes::ShapeRef.new(shape: AwsElbLoadBalancerInstance)
+
+    AwsElbLoadBalancerListener.add_member(:instance_port, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancePort"))
+    AwsElbLoadBalancerListener.add_member(:instance_protocol, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceProtocol"))
+    AwsElbLoadBalancerListener.add_member(:load_balancer_port, Shapes::ShapeRef.new(shape: Integer, location_name: "LoadBalancerPort"))
+    AwsElbLoadBalancerListener.add_member(:protocol, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Protocol"))
+    AwsElbLoadBalancerListener.add_member(:ssl_certificate_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SslCertificateId"))
+    AwsElbLoadBalancerListener.struct_class = Types::AwsElbLoadBalancerListener
+
+    AwsElbLoadBalancerListenerDescription.add_member(:listener, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerListener, location_name: "Listener"))
+    AwsElbLoadBalancerListenerDescription.add_member(:policy_names, Shapes::ShapeRef.new(shape: StringList, location_name: "PolicyNames"))
+    AwsElbLoadBalancerListenerDescription.struct_class = Types::AwsElbLoadBalancerListenerDescription
+
+    AwsElbLoadBalancerListenerDescriptions.member = Shapes::ShapeRef.new(shape: AwsElbLoadBalancerListenerDescription)
+
+    AwsElbLoadBalancerPolicies.add_member(:app_cookie_stickiness_policies, Shapes::ShapeRef.new(shape: AwsElbAppCookieStickinessPolicies, location_name: "AppCookieStickinessPolicies"))
+    AwsElbLoadBalancerPolicies.add_member(:lb_cookie_stickiness_policies, Shapes::ShapeRef.new(shape: AwsElbLbCookieStickinessPolicies, location_name: "LbCookieStickinessPolicies"))
+    AwsElbLoadBalancerPolicies.add_member(:other_policies, Shapes::ShapeRef.new(shape: StringList, location_name: "OtherPolicies"))
+    AwsElbLoadBalancerPolicies.struct_class = Types::AwsElbLoadBalancerPolicies
+
+    AwsElbLoadBalancerSourceSecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GroupName"))
+    AwsElbLoadBalancerSourceSecurityGroup.add_member(:owner_alias, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerAlias"))
+    AwsElbLoadBalancerSourceSecurityGroup.struct_class = Types::AwsElbLoadBalancerSourceSecurityGroup
+
     AwsElbv2LoadBalancerDetails.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     AwsElbv2LoadBalancerDetails.add_member(:canonical_hosted_zone_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CanonicalHostedZoneId"))
     AwsElbv2LoadBalancerDetails.add_member(:created_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedTime"))
@@ -737,13 +1130,64 @@ module Aws::SecurityHub
     AwsIamAccessKeyDetails.add_member(:principal_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrincipalId"))
     AwsIamAccessKeyDetails.add_member(:principal_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrincipalType"))
     AwsIamAccessKeyDetails.add_member(:principal_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrincipalName"))
+    AwsIamAccessKeyDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
+    AwsIamAccessKeyDetails.add_member(:access_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccessKeyId"))
+    AwsIamAccessKeyDetails.add_member(:session_context, Shapes::ShapeRef.new(shape: AwsIamAccessKeySessionContext, location_name: "SessionContext"))
     AwsIamAccessKeyDetails.struct_class = Types::AwsIamAccessKeyDetails
+
+    AwsIamAccessKeySessionContext.add_member(:attributes, Shapes::ShapeRef.new(shape: AwsIamAccessKeySessionContextAttributes, location_name: "Attributes"))
+    AwsIamAccessKeySessionContext.add_member(:session_issuer, Shapes::ShapeRef.new(shape: AwsIamAccessKeySessionContextSessionIssuer, location_name: "SessionIssuer"))
+    AwsIamAccessKeySessionContext.struct_class = Types::AwsIamAccessKeySessionContext
+
+    AwsIamAccessKeySessionContextAttributes.add_member(:mfa_authenticated, Shapes::ShapeRef.new(shape: Boolean, location_name: "MfaAuthenticated"))
+    AwsIamAccessKeySessionContextAttributes.add_member(:creation_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreationDate"))
+    AwsIamAccessKeySessionContextAttributes.struct_class = Types::AwsIamAccessKeySessionContextAttributes
+
+    AwsIamAccessKeySessionContextSessionIssuer.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsIamAccessKeySessionContextSessionIssuer.add_member(:principal_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrincipalId"))
+    AwsIamAccessKeySessionContextSessionIssuer.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsIamAccessKeySessionContextSessionIssuer.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
+    AwsIamAccessKeySessionContextSessionIssuer.add_member(:user_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserName"))
+    AwsIamAccessKeySessionContextSessionIssuer.struct_class = Types::AwsIamAccessKeySessionContextSessionIssuer
 
     AwsIamAttachedManagedPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PolicyName"))
     AwsIamAttachedManagedPolicy.add_member(:policy_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PolicyArn"))
     AwsIamAttachedManagedPolicy.struct_class = Types::AwsIamAttachedManagedPolicy
 
     AwsIamAttachedManagedPolicyList.member = Shapes::ShapeRef.new(shape: AwsIamAttachedManagedPolicy)
+
+    AwsIamGroupDetails.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: AwsIamAttachedManagedPolicyList, location_name: "AttachedManagedPolicies"))
+    AwsIamGroupDetails.add_member(:create_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreateDate"))
+    AwsIamGroupDetails.add_member(:group_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GroupId"))
+    AwsIamGroupDetails.add_member(:group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GroupName"))
+    AwsIamGroupDetails.add_member(:group_policy_list, Shapes::ShapeRef.new(shape: AwsIamGroupPolicyList, location_name: "GroupPolicyList"))
+    AwsIamGroupDetails.add_member(:path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Path"))
+    AwsIamGroupDetails.struct_class = Types::AwsIamGroupDetails
+
+    AwsIamGroupPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PolicyName"))
+    AwsIamGroupPolicy.struct_class = Types::AwsIamGroupPolicy
+
+    AwsIamGroupPolicyList.member = Shapes::ShapeRef.new(shape: AwsIamGroupPolicy)
+
+    AwsIamInstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsIamInstanceProfile.add_member(:create_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreateDate"))
+    AwsIamInstanceProfile.add_member(:instance_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceProfileId"))
+    AwsIamInstanceProfile.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceProfileName"))
+    AwsIamInstanceProfile.add_member(:path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Path"))
+    AwsIamInstanceProfile.add_member(:roles, Shapes::ShapeRef.new(shape: AwsIamInstanceProfileRoles, location_name: "Roles"))
+    AwsIamInstanceProfile.struct_class = Types::AwsIamInstanceProfile
+
+    AwsIamInstanceProfileList.member = Shapes::ShapeRef.new(shape: AwsIamInstanceProfile)
+
+    AwsIamInstanceProfileRole.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsIamInstanceProfileRole.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: AwsIamRoleAssumeRolePolicyDocument, location_name: "AssumeRolePolicyDocument"))
+    AwsIamInstanceProfileRole.add_member(:create_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreateDate"))
+    AwsIamInstanceProfileRole.add_member(:path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Path"))
+    AwsIamInstanceProfileRole.add_member(:role_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleId"))
+    AwsIamInstanceProfileRole.add_member(:role_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleName"))
+    AwsIamInstanceProfileRole.struct_class = Types::AwsIamInstanceProfileRole
+
+    AwsIamInstanceProfileRoles.member = Shapes::ShapeRef.new(shape: AwsIamInstanceProfileRole)
 
     AwsIamPermissionsBoundary.add_member(:permissions_boundary_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PermissionsBoundaryArn"))
     AwsIamPermissionsBoundary.add_member(:permissions_boundary_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PermissionsBoundaryType"))
@@ -770,12 +1214,21 @@ module Aws::SecurityHub
     AwsIamPolicyVersionList.member = Shapes::ShapeRef.new(shape: AwsIamPolicyVersion)
 
     AwsIamRoleDetails.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: AwsIamRoleAssumeRolePolicyDocument, location_name: "AssumeRolePolicyDocument"))
+    AwsIamRoleDetails.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: AwsIamAttachedManagedPolicyList, location_name: "AttachedManagedPolicies"))
     AwsIamRoleDetails.add_member(:create_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreateDate"))
+    AwsIamRoleDetails.add_member(:instance_profile_list, Shapes::ShapeRef.new(shape: AwsIamInstanceProfileList, location_name: "InstanceProfileList"))
+    AwsIamRoleDetails.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AwsIamPermissionsBoundary, location_name: "PermissionsBoundary"))
     AwsIamRoleDetails.add_member(:role_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleId"))
     AwsIamRoleDetails.add_member(:role_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleName"))
+    AwsIamRoleDetails.add_member(:role_policy_list, Shapes::ShapeRef.new(shape: AwsIamRolePolicyList, location_name: "RolePolicyList"))
     AwsIamRoleDetails.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionDuration"))
     AwsIamRoleDetails.add_member(:path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Path"))
     AwsIamRoleDetails.struct_class = Types::AwsIamRoleDetails
+
+    AwsIamRolePolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PolicyName"))
+    AwsIamRolePolicy.struct_class = Types::AwsIamRolePolicy
+
+    AwsIamRolePolicyList.member = Shapes::ShapeRef.new(shape: AwsIamRolePolicy)
 
     AwsIamUserDetails.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: AwsIamAttachedManagedPolicyList, location_name: "AttachedManagedPolicies"))
     AwsIamUserDetails.add_member(:create_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreateDate"))
@@ -1114,6 +1567,141 @@ module Aws::SecurityHub
     AwsRdsPendingCloudWatchLogsExports.add_member(:log_types_to_enable, Shapes::ShapeRef.new(shape: StringList, location_name: "LogTypesToEnable"))
     AwsRdsPendingCloudWatchLogsExports.add_member(:log_types_to_disable, Shapes::ShapeRef.new(shape: StringList, location_name: "LogTypesToDisable"))
     AwsRdsPendingCloudWatchLogsExports.struct_class = Types::AwsRdsPendingCloudWatchLogsExports
+
+    AwsRedshiftClusterClusterNode.add_member(:node_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NodeRole"))
+    AwsRedshiftClusterClusterNode.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrivateIpAddress"))
+    AwsRedshiftClusterClusterNode.add_member(:public_ip_address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PublicIpAddress"))
+    AwsRedshiftClusterClusterNode.struct_class = Types::AwsRedshiftClusterClusterNode
+
+    AwsRedshiftClusterClusterNodes.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterNode)
+
+    AwsRedshiftClusterClusterParameterGroup.add_member(:cluster_parameter_status_list, Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterParameterStatusList, location_name: "ClusterParameterStatusList"))
+    AwsRedshiftClusterClusterParameterGroup.add_member(:parameter_apply_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ParameterApplyStatus"))
+    AwsRedshiftClusterClusterParameterGroup.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ParameterGroupName"))
+    AwsRedshiftClusterClusterParameterGroup.struct_class = Types::AwsRedshiftClusterClusterParameterGroup
+
+    AwsRedshiftClusterClusterParameterGroups.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterParameterGroup)
+
+    AwsRedshiftClusterClusterParameterStatus.add_member(:parameter_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ParameterName"))
+    AwsRedshiftClusterClusterParameterStatus.add_member(:parameter_apply_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ParameterApplyStatus"))
+    AwsRedshiftClusterClusterParameterStatus.add_member(:parameter_apply_error_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ParameterApplyErrorDescription"))
+    AwsRedshiftClusterClusterParameterStatus.struct_class = Types::AwsRedshiftClusterClusterParameterStatus
+
+    AwsRedshiftClusterClusterParameterStatusList.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterParameterStatus)
+
+    AwsRedshiftClusterClusterSecurityGroup.add_member(:cluster_security_group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterSecurityGroupName"))
+    AwsRedshiftClusterClusterSecurityGroup.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsRedshiftClusterClusterSecurityGroup.struct_class = Types::AwsRedshiftClusterClusterSecurityGroup
+
+    AwsRedshiftClusterClusterSecurityGroups.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterSecurityGroup)
+
+    AwsRedshiftClusterClusterSnapshotCopyStatus.add_member(:destination_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DestinationRegion"))
+    AwsRedshiftClusterClusterSnapshotCopyStatus.add_member(:manual_snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "ManualSnapshotRetentionPeriod"))
+    AwsRedshiftClusterClusterSnapshotCopyStatus.add_member(:retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "RetentionPeriod"))
+    AwsRedshiftClusterClusterSnapshotCopyStatus.add_member(:snapshot_copy_grant_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotCopyGrantName"))
+    AwsRedshiftClusterClusterSnapshotCopyStatus.struct_class = Types::AwsRedshiftClusterClusterSnapshotCopyStatus
+
+    AwsRedshiftClusterDeferredMaintenanceWindow.add_member(:defer_maintenance_end_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeferMaintenanceEndTime"))
+    AwsRedshiftClusterDeferredMaintenanceWindow.add_member(:defer_maintenance_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeferMaintenanceIdentifier"))
+    AwsRedshiftClusterDeferredMaintenanceWindow.add_member(:defer_maintenance_start_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeferMaintenanceStartTime"))
+    AwsRedshiftClusterDeferredMaintenanceWindow.struct_class = Types::AwsRedshiftClusterDeferredMaintenanceWindow
+
+    AwsRedshiftClusterDeferredMaintenanceWindows.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterDeferredMaintenanceWindow)
+
+    AwsRedshiftClusterDetails.add_member(:allow_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowVersionUpgrade"))
+    AwsRedshiftClusterDetails.add_member(:automated_snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "AutomatedSnapshotRetentionPeriod"))
+    AwsRedshiftClusterDetails.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AvailabilityZone"))
+    AwsRedshiftClusterDetails.add_member(:cluster_availability_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterAvailabilityStatus"))
+    AwsRedshiftClusterDetails.add_member(:cluster_create_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterCreateTime"))
+    AwsRedshiftClusterDetails.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterIdentifier"))
+    AwsRedshiftClusterDetails.add_member(:cluster_nodes, Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterNodes, location_name: "ClusterNodes"))
+    AwsRedshiftClusterDetails.add_member(:cluster_parameter_groups, Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterParameterGroups, location_name: "ClusterParameterGroups"))
+    AwsRedshiftClusterDetails.add_member(:cluster_public_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterPublicKey"))
+    AwsRedshiftClusterDetails.add_member(:cluster_revision_number, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterRevisionNumber"))
+    AwsRedshiftClusterDetails.add_member(:cluster_security_groups, Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterSecurityGroups, location_name: "ClusterSecurityGroups"))
+    AwsRedshiftClusterDetails.add_member(:cluster_snapshot_copy_status, Shapes::ShapeRef.new(shape: AwsRedshiftClusterClusterSnapshotCopyStatus, location_name: "ClusterSnapshotCopyStatus"))
+    AwsRedshiftClusterDetails.add_member(:cluster_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterStatus"))
+    AwsRedshiftClusterDetails.add_member(:cluster_subnet_group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterSubnetGroupName"))
+    AwsRedshiftClusterDetails.add_member(:cluster_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterVersion"))
+    AwsRedshiftClusterDetails.add_member(:db_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DBName"))
+    AwsRedshiftClusterDetails.add_member(:deferred_maintenance_windows, Shapes::ShapeRef.new(shape: AwsRedshiftClusterDeferredMaintenanceWindows, location_name: "DeferredMaintenanceWindows"))
+    AwsRedshiftClusterDetails.add_member(:elastic_ip_status, Shapes::ShapeRef.new(shape: AwsRedshiftClusterElasticIpStatus, location_name: "ElasticIpStatus"))
+    AwsRedshiftClusterDetails.add_member(:elastic_resize_number_of_node_options, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ElasticResizeNumberOfNodeOptions"))
+    AwsRedshiftClusterDetails.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
+    AwsRedshiftClusterDetails.add_member(:endpoint, Shapes::ShapeRef.new(shape: AwsRedshiftClusterEndpoint, location_name: "Endpoint"))
+    AwsRedshiftClusterDetails.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnhancedVpcRouting"))
+    AwsRedshiftClusterDetails.add_member(:expected_next_snapshot_schedule_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExpectedNextSnapshotScheduleTime"))
+    AwsRedshiftClusterDetails.add_member(:expected_next_snapshot_schedule_time_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExpectedNextSnapshotScheduleTimeStatus"))
+    AwsRedshiftClusterDetails.add_member(:hsm_status, Shapes::ShapeRef.new(shape: AwsRedshiftClusterHsmStatus, location_name: "HsmStatus"))
+    AwsRedshiftClusterDetails.add_member(:iam_roles, Shapes::ShapeRef.new(shape: AwsRedshiftClusterIamRoles, location_name: "IamRoles"))
+    AwsRedshiftClusterDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
+    AwsRedshiftClusterDetails.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MaintenanceTrackName"))
+    AwsRedshiftClusterDetails.add_member(:manual_snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "ManualSnapshotRetentionPeriod"))
+    AwsRedshiftClusterDetails.add_member(:master_username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MasterUsername"))
+    AwsRedshiftClusterDetails.add_member(:next_maintenance_window_start_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextMaintenanceWindowStartTime"))
+    AwsRedshiftClusterDetails.add_member(:node_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NodeType"))
+    AwsRedshiftClusterDetails.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
+    AwsRedshiftClusterDetails.add_member(:pending_actions, Shapes::ShapeRef.new(shape: StringList, location_name: "PendingActions"))
+    AwsRedshiftClusterDetails.add_member(:pending_modified_values, Shapes::ShapeRef.new(shape: AwsRedshiftClusterPendingModifiedValues, location_name: "PendingModifiedValues"))
+    AwsRedshiftClusterDetails.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PreferredMaintenanceWindow"))
+    AwsRedshiftClusterDetails.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAccessible"))
+    AwsRedshiftClusterDetails.add_member(:resize_info, Shapes::ShapeRef.new(shape: AwsRedshiftClusterResizeInfo, location_name: "ResizeInfo"))
+    AwsRedshiftClusterDetails.add_member(:restore_status, Shapes::ShapeRef.new(shape: AwsRedshiftClusterRestoreStatus, location_name: "RestoreStatus"))
+    AwsRedshiftClusterDetails.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotScheduleIdentifier"))
+    AwsRedshiftClusterDetails.add_member(:snapshot_schedule_state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotScheduleState"))
+    AwsRedshiftClusterDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
+    AwsRedshiftClusterDetails.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: AwsRedshiftClusterVpcSecurityGroups, location_name: "VpcSecurityGroups"))
+    AwsRedshiftClusterDetails.struct_class = Types::AwsRedshiftClusterDetails
+
+    AwsRedshiftClusterElasticIpStatus.add_member(:elastic_ip, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ElasticIp"))
+    AwsRedshiftClusterElasticIpStatus.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsRedshiftClusterElasticIpStatus.struct_class = Types::AwsRedshiftClusterElasticIpStatus
+
+    AwsRedshiftClusterEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Address"))
+    AwsRedshiftClusterEndpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
+    AwsRedshiftClusterEndpoint.struct_class = Types::AwsRedshiftClusterEndpoint
+
+    AwsRedshiftClusterHsmStatus.add_member(:hsm_client_certificate_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HsmClientCertificateIdentifier"))
+    AwsRedshiftClusterHsmStatus.add_member(:hsm_configuration_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HsmConfigurationIdentifier"))
+    AwsRedshiftClusterHsmStatus.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsRedshiftClusterHsmStatus.struct_class = Types::AwsRedshiftClusterHsmStatus
+
+    AwsRedshiftClusterIamRole.add_member(:apply_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApplyStatus"))
+    AwsRedshiftClusterIamRole.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "IamRoleArn"))
+    AwsRedshiftClusterIamRole.struct_class = Types::AwsRedshiftClusterIamRole
+
+    AwsRedshiftClusterIamRoles.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterIamRole)
+
+    AwsRedshiftClusterPendingModifiedValues.add_member(:automated_snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "AutomatedSnapshotRetentionPeriod"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterIdentifier"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:cluster_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterType"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:cluster_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterVersion"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:encryption_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EncryptionType"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnhancedVpcRouting"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MaintenanceTrackName"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MasterUserPassword"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:node_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NodeType"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
+    AwsRedshiftClusterPendingModifiedValues.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAccessible"))
+    AwsRedshiftClusterPendingModifiedValues.struct_class = Types::AwsRedshiftClusterPendingModifiedValues
+
+    AwsRedshiftClusterResizeInfo.add_member(:allow_cancel_resize, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowCancelResize"))
+    AwsRedshiftClusterResizeInfo.add_member(:resize_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResizeType"))
+    AwsRedshiftClusterResizeInfo.struct_class = Types::AwsRedshiftClusterResizeInfo
+
+    AwsRedshiftClusterRestoreStatus.add_member(:current_restore_rate_in_mega_bytes_per_second, Shapes::ShapeRef.new(shape: Double, location_name: "CurrentRestoreRateInMegaBytesPerSecond"))
+    AwsRedshiftClusterRestoreStatus.add_member(:elapsed_time_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "ElapsedTimeInSeconds"))
+    AwsRedshiftClusterRestoreStatus.add_member(:estimated_time_to_completion_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "EstimatedTimeToCompletionInSeconds"))
+    AwsRedshiftClusterRestoreStatus.add_member(:progress_in_mega_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "ProgressInMegaBytes"))
+    AwsRedshiftClusterRestoreStatus.add_member(:snapshot_size_in_mega_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "SnapshotSizeInMegaBytes"))
+    AwsRedshiftClusterRestoreStatus.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsRedshiftClusterRestoreStatus.struct_class = Types::AwsRedshiftClusterRestoreStatus
+
+    AwsRedshiftClusterVpcSecurityGroup.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsRedshiftClusterVpcSecurityGroup.add_member(:vpc_security_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcSecurityGroupId"))
+    AwsRedshiftClusterVpcSecurityGroup.struct_class = Types::AwsRedshiftClusterVpcSecurityGroup
+
+    AwsRedshiftClusterVpcSecurityGroups.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterVpcSecurityGroup)
 
     AwsS3BucketDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerId"))
     AwsS3BucketDetails.add_member(:owner_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerName"))
@@ -1822,6 +2410,7 @@ module Aws::SecurityHub
     Resource.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
     Resource.add_member(:partition, Shapes::ShapeRef.new(shape: Partition, location_name: "Partition"))
     Resource.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Region"))
+    Resource.add_member(:resource_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceRole"))
     Resource.add_member(:tags, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Tags"))
     Resource.add_member(:details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "Details"))
     Resource.struct_class = Types::Resource
@@ -1847,7 +2436,16 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_iam_access_key, Shapes::ShapeRef.new(shape: AwsIamAccessKeyDetails, location_name: "AwsIamAccessKey"))
     ResourceDetails.add_member(:aws_iam_user, Shapes::ShapeRef.new(shape: AwsIamUserDetails, location_name: "AwsIamUser"))
     ResourceDetails.add_member(:aws_iam_policy, Shapes::ShapeRef.new(shape: AwsIamPolicyDetails, location_name: "AwsIamPolicy"))
+    ResourceDetails.add_member(:aws_api_gateway_v2_stage, Shapes::ShapeRef.new(shape: AwsApiGatewayV2StageDetails, location_name: "AwsApiGatewayV2Stage"))
+    ResourceDetails.add_member(:aws_api_gateway_v2_api, Shapes::ShapeRef.new(shape: AwsApiGatewayV2ApiDetails, location_name: "AwsApiGatewayV2Api"))
     ResourceDetails.add_member(:aws_dynamo_db_table, Shapes::ShapeRef.new(shape: AwsDynamoDbTableDetails, location_name: "AwsDynamoDbTable"))
+    ResourceDetails.add_member(:aws_api_gateway_stage, Shapes::ShapeRef.new(shape: AwsApiGatewayStageDetails, location_name: "AwsApiGatewayStage"))
+    ResourceDetails.add_member(:aws_api_gateway_rest_api, Shapes::ShapeRef.new(shape: AwsApiGatewayRestApiDetails, location_name: "AwsApiGatewayRestApi"))
+    ResourceDetails.add_member(:aws_cloud_trail_trail, Shapes::ShapeRef.new(shape: AwsCloudTrailTrailDetails, location_name: "AwsCloudTrailTrail"))
+    ResourceDetails.add_member(:aws_certificate_manager_certificate, Shapes::ShapeRef.new(shape: AwsCertificateManagerCertificateDetails, location_name: "AwsCertificateManagerCertificate"))
+    ResourceDetails.add_member(:aws_redshift_cluster, Shapes::ShapeRef.new(shape: AwsRedshiftClusterDetails, location_name: "AwsRedshiftCluster"))
+    ResourceDetails.add_member(:aws_elb_load_balancer, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerDetails, location_name: "AwsElbLoadBalancer"))
+    ResourceDetails.add_member(:aws_iam_group, Shapes::ShapeRef.new(shape: AwsIamGroupDetails, location_name: "AwsIamGroup"))
     ResourceDetails.add_member(:aws_iam_role, Shapes::ShapeRef.new(shape: AwsIamRoleDetails, location_name: "AwsIamRole"))
     ResourceDetails.add_member(:aws_kms_key, Shapes::ShapeRef.new(shape: AwsKmsKeyDetails, location_name: "AwsKmsKey"))
     ResourceDetails.add_member(:aws_lambda_function, Shapes::ShapeRef.new(shape: AwsLambdaFunctionDetails, location_name: "AwsLambdaFunction"))

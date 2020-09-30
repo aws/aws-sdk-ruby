@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.84.0 (2020-09-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-s3outposts` gem.
+
 3.83.0 (2020-09-29)
 ------------------
 

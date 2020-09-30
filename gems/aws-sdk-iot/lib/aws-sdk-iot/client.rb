@@ -2587,6 +2587,21 @@ module Aws::IoT
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
     #           },
+    #           timestream: {
+    #             role_arn: "AwsArn", # required
+    #             database_name: "TimestreamDatabaseName", # required
+    #             table_name: "TimestreamTableName", # required
+    #             dimensions: [ # required
+    #               {
+    #                 name: "TimestreamDimensionName", # required
+    #                 value: "TimestreamDimensionValue", # required
+    #               },
+    #             ],
+    #             timestamp: {
+    #               value: "TimestreamTimestampValue", # required
+    #               unit: "TimestreamTimestampUnit", # required
+    #             },
+    #           },
     #           http: {
     #             url: "Url", # required
     #             confirmation_url: "Url",
@@ -2730,6 +2745,21 @@ module Aws::IoT
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
+    #         },
+    #         timestream: {
+    #           role_arn: "AwsArn", # required
+    #           database_name: "TimestreamDatabaseName", # required
+    #           table_name: "TimestreamTableName", # required
+    #           dimensions: [ # required
+    #             {
+    #               name: "TimestreamDimensionName", # required
+    #               value: "TimestreamDimensionValue", # required
+    #             },
+    #           ],
+    #           timestamp: {
+    #             value: "TimestreamTimestampValue", # required
+    #             unit: "TimestreamTimestampUnit", # required
+    #           },
     #         },
     #         http: {
     #           url: "Url", # required
@@ -5449,6 +5479,14 @@ module Aws::IoT
     #   resp.rule.actions[0].step_functions.execution_name_prefix #=> String
     #   resp.rule.actions[0].step_functions.state_machine_name #=> String
     #   resp.rule.actions[0].step_functions.role_arn #=> String
+    #   resp.rule.actions[0].timestream.role_arn #=> String
+    #   resp.rule.actions[0].timestream.database_name #=> String
+    #   resp.rule.actions[0].timestream.table_name #=> String
+    #   resp.rule.actions[0].timestream.dimensions #=> Array
+    #   resp.rule.actions[0].timestream.dimensions[0].name #=> String
+    #   resp.rule.actions[0].timestream.dimensions[0].value #=> String
+    #   resp.rule.actions[0].timestream.timestamp.value #=> String
+    #   resp.rule.actions[0].timestream.timestamp.unit #=> String
     #   resp.rule.actions[0].http.url #=> String
     #   resp.rule.actions[0].http.confirmation_url #=> String
     #   resp.rule.actions[0].http.headers #=> Array
@@ -5533,6 +5571,14 @@ module Aws::IoT
     #   resp.rule.error_action.step_functions.execution_name_prefix #=> String
     #   resp.rule.error_action.step_functions.state_machine_name #=> String
     #   resp.rule.error_action.step_functions.role_arn #=> String
+    #   resp.rule.error_action.timestream.role_arn #=> String
+    #   resp.rule.error_action.timestream.database_name #=> String
+    #   resp.rule.error_action.timestream.table_name #=> String
+    #   resp.rule.error_action.timestream.dimensions #=> Array
+    #   resp.rule.error_action.timestream.dimensions[0].name #=> String
+    #   resp.rule.error_action.timestream.dimensions[0].value #=> String
+    #   resp.rule.error_action.timestream.timestamp.value #=> String
+    #   resp.rule.error_action.timestream.timestamp.unit #=> String
     #   resp.rule.error_action.http.url #=> String
     #   resp.rule.error_action.http.confirmation_url #=> String
     #   resp.rule.error_action.http.headers #=> Array
@@ -5718,7 +5764,7 @@ module Aws::IoT
 
     # Lists the findings (results) of a Device Defender audit or of the
     # audits performed during a specified time period. (Findings are
-    # retained for 180 days.)
+    # retained for 90 days.)
     #
     # @option params [String] :task_id
     #   A filter to limit results to the audit with the specified ID. You must
@@ -6036,7 +6082,7 @@ module Aws::IoT
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The beginning of the time period. Audit information is retained for a
-    #   limited time (180 days). Requesting a start time prior to what is
+    #   limited time (90 days). Requesting a start time prior to what is
     #   retained results in an "InvalidRequestException".
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
@@ -8405,6 +8451,21 @@ module Aws::IoT
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
     #           },
+    #           timestream: {
+    #             role_arn: "AwsArn", # required
+    #             database_name: "TimestreamDatabaseName", # required
+    #             table_name: "TimestreamTableName", # required
+    #             dimensions: [ # required
+    #               {
+    #                 name: "TimestreamDimensionName", # required
+    #                 value: "TimestreamDimensionValue", # required
+    #               },
+    #             ],
+    #             timestamp: {
+    #               value: "TimestreamTimestampValue", # required
+    #               unit: "TimestreamTimestampUnit", # required
+    #             },
+    #           },
     #           http: {
     #             url: "Url", # required
     #             confirmation_url: "Url",
@@ -8548,6 +8609,21 @@ module Aws::IoT
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
+    #         },
+    #         timestream: {
+    #           role_arn: "AwsArn", # required
+    #           database_name: "TimestreamDatabaseName", # required
+    #           table_name: "TimestreamTableName", # required
+    #           dimensions: [ # required
+    #             {
+    #               name: "TimestreamDimensionName", # required
+    #               value: "TimestreamDimensionValue", # required
+    #             },
+    #           ],
+    #           timestamp: {
+    #             value: "TimestreamTimestampValue", # required
+    #             unit: "TimestreamTimestampUnit", # required
+    #           },
     #         },
     #         http: {
     #           url: "Url", # required
@@ -10407,7 +10483,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

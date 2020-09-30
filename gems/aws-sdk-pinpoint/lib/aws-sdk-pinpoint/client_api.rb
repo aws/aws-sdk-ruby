@@ -60,6 +60,7 @@ module Aws::Pinpoint
     ChannelsResponse = Shapes::StructureShape.new(name: 'ChannelsResponse')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionalSplitActivity = Shapes::StructureShape.new(name: 'ConditionalSplitActivity')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAppRequest = Shapes::StructureShape.new(name: 'CreateAppRequest')
     CreateAppResponse = Shapes::StructureShape.new(name: 'CreateAppResponse')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
@@ -158,7 +159,9 @@ module Aws::Pinpoint
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCondition = Shapes::StructureShape.new(name: 'EventCondition')
     EventDimensions = Shapes::StructureShape.new(name: 'EventDimensions')
+    EventFilter = Shapes::StructureShape.new(name: 'EventFilter')
     EventItemResponse = Shapes::StructureShape.new(name: 'EventItemResponse')
+    EventStartCondition = Shapes::StructureShape.new(name: 'EventStartCondition')
     EventStream = Shapes::StructureShape.new(name: 'EventStream')
     EventsBatch = Shapes::StructureShape.new(name: 'EventsBatch')
     EventsRequest = Shapes::StructureShape.new(name: 'EventsRequest')
@@ -871,6 +874,10 @@ module Aws::Pinpoint
     ConditionalSplitActivity.add_member(:true_activity, Shapes::ShapeRef.new(shape: __string, location_name: "TrueActivity"))
     ConditionalSplitActivity.struct_class = Types::ConditionalSplitActivity
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    ConflictException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateAppRequest.add_member(:create_application_request, Shapes::ShapeRef.new(shape: CreateApplicationRequest, required: true, location_name: "CreateApplicationRequest"))
     CreateAppRequest.struct_class = Types::CreateAppRequest
     CreateAppRequest[:payload] = :create_application_request
@@ -1404,7 +1411,7 @@ module Aws::Pinpoint
     Event.add_member(:timestamp, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Timestamp"))
     Event.struct_class = Types::Event
 
-    EventCondition.add_member(:dimensions, Shapes::ShapeRef.new(shape: EventDimensions, required: true, location_name: "Dimensions"))
+    EventCondition.add_member(:dimensions, Shapes::ShapeRef.new(shape: EventDimensions, location_name: "Dimensions"))
     EventCondition.add_member(:message_activity, Shapes::ShapeRef.new(shape: __string, location_name: "MessageActivity"))
     EventCondition.struct_class = Types::EventCondition
 
@@ -1413,9 +1420,17 @@ module Aws::Pinpoint
     EventDimensions.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOfMetricDimension, location_name: "Metrics"))
     EventDimensions.struct_class = Types::EventDimensions
 
+    EventFilter.add_member(:dimensions, Shapes::ShapeRef.new(shape: EventDimensions, required: true, location_name: "Dimensions"))
+    EventFilter.add_member(:filter_type, Shapes::ShapeRef.new(shape: FilterType, required: true, location_name: "FilterType"))
+    EventFilter.struct_class = Types::EventFilter
+
     EventItemResponse.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     EventItemResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: __integer, location_name: "StatusCode"))
     EventItemResponse.struct_class = Types::EventItemResponse
+
+    EventStartCondition.add_member(:event_filter, Shapes::ShapeRef.new(shape: EventFilter, location_name: "EventFilter"))
+    EventStartCondition.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, location_name: "SegmentId"))
+    EventStartCondition.struct_class = Types::EventStartCondition
 
     EventStream.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
     EventStream.add_member(:destination_stream_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DestinationStreamArn"))
@@ -2610,6 +2625,7 @@ module Aws::Pinpoint
     SimpleEmailPart.struct_class = Types::SimpleEmailPart
 
     StartCondition.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
+    StartCondition.add_member(:event_start_condition, Shapes::ShapeRef.new(shape: EventStartCondition, location_name: "EventStartCondition"))
     StartCondition.add_member(:segment_start_condition, Shapes::ShapeRef.new(shape: SegmentCondition, location_name: "SegmentStartCondition"))
     StartCondition.struct_class = Types::StartCondition
 
@@ -4604,6 +4620,7 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_journey_state, Seahorse::Model::Operation.new.tap do |o|

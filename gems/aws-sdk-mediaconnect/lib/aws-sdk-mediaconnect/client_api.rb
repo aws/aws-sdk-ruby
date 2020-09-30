@@ -30,6 +30,11 @@ module Aws::MediaConnect
     DeleteFlowResponse = Shapes::StructureShape.new(name: 'DeleteFlowResponse')
     DescribeFlowRequest = Shapes::StructureShape.new(name: 'DescribeFlowRequest')
     DescribeFlowResponse = Shapes::StructureShape.new(name: 'DescribeFlowResponse')
+    DescribeOfferingRequest = Shapes::StructureShape.new(name: 'DescribeOfferingRequest')
+    DescribeOfferingResponse = Shapes::StructureShape.new(name: 'DescribeOfferingResponse')
+    DescribeReservationRequest = Shapes::StructureShape.new(name: 'DescribeReservationRequest')
+    DescribeReservationResponse = Shapes::StructureShape.new(name: 'DescribeReservationResponse')
+    DurationUnits = Shapes::StringShape.new(name: 'DurationUnits')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
     EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
@@ -46,6 +51,10 @@ module Aws::MediaConnect
     ListEntitlementsResponse = Shapes::StructureShape.new(name: 'ListEntitlementsResponse')
     ListFlowsRequest = Shapes::StructureShape.new(name: 'ListFlowsRequest')
     ListFlowsResponse = Shapes::StructureShape.new(name: 'ListFlowsResponse')
+    ListOfferingsRequest = Shapes::StructureShape.new(name: 'ListOfferingsRequest')
+    ListOfferingsResponse = Shapes::StructureShape.new(name: 'ListOfferingsResponse')
+    ListReservationsRequest = Shapes::StructureShape.new(name: 'ListReservationsRequest')
+    ListReservationsResponse = Shapes::StructureShape.new(name: 'ListReservationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListedEntitlement = Shapes::StructureShape.new(name: 'ListedEntitlement')
@@ -53,14 +62,22 @@ module Aws::MediaConnect
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Messages = Shapes::StructureShape.new(name: 'Messages')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    Offering = Shapes::StructureShape.new(name: 'Offering')
     Output = Shapes::StructureShape.new(name: 'Output')
+    PriceUnits = Shapes::StringShape.new(name: 'PriceUnits')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
+    PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
     RemoveFlowOutputRequest = Shapes::StructureShape.new(name: 'RemoveFlowOutputRequest')
     RemoveFlowOutputResponse = Shapes::StructureShape.new(name: 'RemoveFlowOutputResponse')
     RemoveFlowSourceRequest = Shapes::StructureShape.new(name: 'RemoveFlowSourceRequest')
     RemoveFlowSourceResponse = Shapes::StructureShape.new(name: 'RemoveFlowSourceResponse')
     RemoveFlowVpcInterfaceRequest = Shapes::StructureShape.new(name: 'RemoveFlowVpcInterfaceRequest')
     RemoveFlowVpcInterfaceResponse = Shapes::StructureShape.new(name: 'RemoveFlowVpcInterfaceResponse')
+    Reservation = Shapes::StructureShape.new(name: 'Reservation')
+    ReservationState = Shapes::StringShape.new(name: 'ReservationState')
+    ResourceSpecification = Shapes::StructureShape.new(name: 'ResourceSpecification')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseError = Shapes::StructureShape.new(name: 'ResponseError')
     RevokeFlowEntitlementRequest = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementRequest')
     RevokeFlowEntitlementResponse = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementResponse')
@@ -99,7 +116,9 @@ module Aws::MediaConnect
     __listOfGrantEntitlementRequest = Shapes::ListShape.new(name: '__listOfGrantEntitlementRequest')
     __listOfListedEntitlement = Shapes::ListShape.new(name: '__listOfListedEntitlement')
     __listOfListedFlow = Shapes::ListShape.new(name: '__listOfListedFlow')
+    __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
+    __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
     __listOfSetSourceRequest = Shapes::ListShape.new(name: '__listOfSetSourceRequest')
     __listOfSource = Shapes::ListShape.new(name: '__listOfSource')
     __listOfVpcInterface = Shapes::ListShape.new(name: '__listOfVpcInterface')
@@ -186,6 +205,18 @@ module Aws::MediaConnect
     DescribeFlowResponse.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, location_name: "messages"))
     DescribeFlowResponse.struct_class = Types::DescribeFlowResponse
 
+    DescribeOfferingRequest.add_member(:offering_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringArn"))
+    DescribeOfferingRequest.struct_class = Types::DescribeOfferingRequest
+
+    DescribeOfferingResponse.add_member(:offering, Shapes::ShapeRef.new(shape: Offering, location_name: "offering"))
+    DescribeOfferingResponse.struct_class = Types::DescribeOfferingResponse
+
+    DescribeReservationRequest.add_member(:reservation_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationArn"))
+    DescribeReservationRequest.struct_class = Types::DescribeReservationRequest
+
+    DescribeReservationResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    DescribeReservationResponse.struct_class = Types::DescribeReservationResponse
+
     Encryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, required: true, location_name: "algorithm"))
     Encryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
     Encryption.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, location_name: "deviceId"))
@@ -265,6 +296,22 @@ module Aws::MediaConnect
     ListFlowsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListFlowsResponse.struct_class = Types::ListFlowsResponse
 
+    ListOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListOfferingsRequest.struct_class = Types::ListOfferingsRequest
+
+    ListOfferingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListOfferingsResponse.add_member(:offerings, Shapes::ShapeRef.new(shape: __listOfOffering, location_name: "offerings"))
+    ListOfferingsResponse.struct_class = Types::ListOfferingsResponse
+
+    ListReservationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListReservationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListReservationsRequest.struct_class = Types::ListReservationsRequest
+
+    ListReservationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListReservationsResponse.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
+    ListReservationsResponse.struct_class = Types::ListReservationsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -290,6 +337,16 @@ module Aws::MediaConnect
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    Offering.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currencyCode"))
+    Offering.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "duration"))
+    Offering.add_member(:duration_units, Shapes::ShapeRef.new(shape: DurationUnits, required: true, location_name: "durationUnits"))
+    Offering.add_member(:offering_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "offeringArn"))
+    Offering.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "offeringDescription"))
+    Offering.add_member(:price_per_unit, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "pricePerUnit"))
+    Offering.add_member(:price_units, Shapes::ShapeRef.new(shape: PriceUnits, required: true, location_name: "priceUnits"))
+    Offering.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ResourceSpecification, required: true, location_name: "resourceSpecification"))
+    Offering.struct_class = Types::Offering
+
     Output.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "dataTransferSubscriberFeePercent"))
     Output.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Output.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
@@ -302,6 +359,14 @@ module Aws::MediaConnect
     Output.add_member(:transport, Shapes::ShapeRef.new(shape: Transport, location_name: "transport"))
     Output.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
     Output.struct_class = Types::Output
+
+    PurchaseOfferingRequest.add_member(:offering_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringArn"))
+    PurchaseOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "reservationName"))
+    PurchaseOfferingRequest.add_member(:start, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "start"))
+    PurchaseOfferingRequest.struct_class = Types::PurchaseOfferingRequest
+
+    PurchaseOfferingResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    PurchaseOfferingResponse.struct_class = Types::PurchaseOfferingResponse
 
     RemoveFlowOutputRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     RemoveFlowOutputRequest.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "outputArn"))
@@ -327,6 +392,25 @@ module Aws::MediaConnect
     RemoveFlowVpcInterfaceResponse.add_member(:non_deleted_network_interface_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nonDeletedNetworkInterfaceIds"))
     RemoveFlowVpcInterfaceResponse.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
     RemoveFlowVpcInterfaceResponse.struct_class = Types::RemoveFlowVpcInterfaceResponse
+
+    Reservation.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currencyCode"))
+    Reservation.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "duration"))
+    Reservation.add_member(:duration_units, Shapes::ShapeRef.new(shape: DurationUnits, required: true, location_name: "durationUnits"))
+    Reservation.add_member(:end, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "end"))
+    Reservation.add_member(:offering_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "offeringArn"))
+    Reservation.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "offeringDescription"))
+    Reservation.add_member(:price_per_unit, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "pricePerUnit"))
+    Reservation.add_member(:price_units, Shapes::ShapeRef.new(shape: PriceUnits, required: true, location_name: "priceUnits"))
+    Reservation.add_member(:reservation_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "reservationArn"))
+    Reservation.add_member(:reservation_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "reservationName"))
+    Reservation.add_member(:reservation_state, Shapes::ShapeRef.new(shape: ReservationState, required: true, location_name: "reservationState"))
+    Reservation.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ResourceSpecification, required: true, location_name: "resourceSpecification"))
+    Reservation.add_member(:start, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "start"))
+    Reservation.struct_class = Types::Reservation
+
+    ResourceSpecification.add_member(:reserved_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "reservedBitrate"))
+    ResourceSpecification.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    ResourceSpecification.struct_class = Types::ResourceSpecification
 
     ResponseError.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ResponseError.struct_class = Types::ResponseError
@@ -499,7 +583,11 @@ module Aws::MediaConnect
 
     __listOfListedFlow.member = Shapes::ShapeRef.new(shape: ListedFlow)
 
+    __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
+
     __listOfOutput.member = Shapes::ShapeRef.new(shape: Output)
+
+    __listOfReservation.member = Shapes::ShapeRef.new(shape: Reservation)
 
     __listOfSetSourceRequest.member = Shapes::ShapeRef.new(shape: SetSourceRequest)
 
@@ -619,6 +707,32 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:describe_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOffering"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/offerings/{offeringArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:describe_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservation"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/reservations/{reservationArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:grant_flow_entitlements, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GrantFlowEntitlements"
         o.http_method = "POST"
@@ -670,6 +784,42 @@ module Aws::MediaConnect
         )
       end)
 
+      api.add_operation(:list_offerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOfferings"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/offerings"
+        o.input = Shapes::ShapeRef.new(shape: ListOfferingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOfferingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_reservations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReservations"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/reservations"
+        o.input = Shapes::ShapeRef.new(shape: ListReservationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReservationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -679,6 +829,20 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:purchase_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PurchaseOffering"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/offerings/{offeringArn}"
+        o.input = Shapes::ShapeRef.new(shape: PurchaseOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PurchaseOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:remove_flow_output, Seahorse::Model::Operation.new.tap do |o|

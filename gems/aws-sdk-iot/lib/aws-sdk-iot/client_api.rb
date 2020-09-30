@@ -1009,6 +1009,16 @@ module Aws::IoT
     TimedOutThings = Shapes::IntegerShape.new(name: 'TimedOutThings')
     TimeoutConfig = Shapes::StructureShape.new(name: 'TimeoutConfig')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TimestreamAction = Shapes::StructureShape.new(name: 'TimestreamAction')
+    TimestreamDatabaseName = Shapes::StringShape.new(name: 'TimestreamDatabaseName')
+    TimestreamDimension = Shapes::StructureShape.new(name: 'TimestreamDimension')
+    TimestreamDimensionList = Shapes::ListShape.new(name: 'TimestreamDimensionList')
+    TimestreamDimensionName = Shapes::StringShape.new(name: 'TimestreamDimensionName')
+    TimestreamDimensionValue = Shapes::StringShape.new(name: 'TimestreamDimensionValue')
+    TimestreamTableName = Shapes::StringShape.new(name: 'TimestreamTableName')
+    TimestreamTimestamp = Shapes::StructureShape.new(name: 'TimestreamTimestamp')
+    TimestreamTimestampUnit = Shapes::StringShape.new(name: 'TimestreamTimestampUnit')
+    TimestreamTimestampValue = Shapes::StringShape.new(name: 'TimestreamTimestampValue')
     TlsContext = Shapes::StructureShape.new(name: 'TlsContext')
     Token = Shapes::StringShape.new(name: 'Token')
     TokenKeyName = Shapes::StringShape.new(name: 'TokenKeyName')
@@ -1137,6 +1147,7 @@ module Aws::IoT
     Action.add_member(:iot_events, Shapes::ShapeRef.new(shape: IotEventsAction, location_name: "iotEvents"))
     Action.add_member(:iot_site_wise, Shapes::ShapeRef.new(shape: IotSiteWiseAction, location_name: "iotSiteWise"))
     Action.add_member(:step_functions, Shapes::ShapeRef.new(shape: StepFunctionsAction, location_name: "stepFunctions"))
+    Action.add_member(:timestream, Shapes::ShapeRef.new(shape: TimestreamAction, location_name: "timestream"))
     Action.add_member(:http, Shapes::ShapeRef.new(shape: HttpAction, location_name: "http"))
     Action.struct_class = Types::Action
 
@@ -3834,6 +3845,23 @@ module Aws::IoT
 
     TimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: InProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes"))
     TimeoutConfig.struct_class = Types::TimeoutConfig
+
+    TimestreamAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    TimestreamAction.add_member(:database_name, Shapes::ShapeRef.new(shape: TimestreamDatabaseName, required: true, location_name: "databaseName"))
+    TimestreamAction.add_member(:table_name, Shapes::ShapeRef.new(shape: TimestreamTableName, required: true, location_name: "tableName"))
+    TimestreamAction.add_member(:dimensions, Shapes::ShapeRef.new(shape: TimestreamDimensionList, required: true, location_name: "dimensions"))
+    TimestreamAction.add_member(:timestamp, Shapes::ShapeRef.new(shape: TimestreamTimestamp, location_name: "timestamp"))
+    TimestreamAction.struct_class = Types::TimestreamAction
+
+    TimestreamDimension.add_member(:name, Shapes::ShapeRef.new(shape: TimestreamDimensionName, required: true, location_name: "name"))
+    TimestreamDimension.add_member(:value, Shapes::ShapeRef.new(shape: TimestreamDimensionValue, required: true, location_name: "value"))
+    TimestreamDimension.struct_class = Types::TimestreamDimension
+
+    TimestreamDimensionList.member = Shapes::ShapeRef.new(shape: TimestreamDimension)
+
+    TimestreamTimestamp.add_member(:value, Shapes::ShapeRef.new(shape: TimestreamTimestampValue, required: true, location_name: "value"))
+    TimestreamTimestamp.add_member(:unit, Shapes::ShapeRef.new(shape: TimestreamTimestampUnit, required: true, location_name: "unit"))
+    TimestreamTimestamp.struct_class = Types::TimestreamTimestamp
 
     TlsContext.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, location_name: "serverName"))
     TlsContext.struct_class = Types::TlsContext
@@ -6810,6 +6838,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: NotConfiguredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:set_v2_logging_options, Seahorse::Model::Operation.new.tap do |o|

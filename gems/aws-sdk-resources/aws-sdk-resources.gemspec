@@ -204,6 +204,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-route53resolver', '~> 1')
   spec.add_dependency('aws-sdk-s3', '~> 1')
   spec.add_dependency('aws-sdk-s3control', '~> 1')
+  spec.add_dependency('aws-sdk-s3outposts', '~> 1')
   spec.add_dependency('aws-sdk-ses', '~> 1')
   spec.add_dependency('aws-sdk-sesv2', '~> 1')
   spec.add_dependency('aws-sdk-sms', '~> 1')

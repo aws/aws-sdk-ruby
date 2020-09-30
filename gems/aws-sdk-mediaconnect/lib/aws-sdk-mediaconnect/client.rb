@@ -989,6 +989,86 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Displays the details of an offering. The response includes the
+    # offering description, duration, outbound bandwidth, price, and Amazon
+    # Resource Name (ARN).
+    #
+    # @option params [required, String] :offering_arn
+    #
+    # @return [Types::DescribeOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOfferingResponse#offering #offering} => Types::Offering
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_offering({
+    #     offering_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.offering.currency_code #=> String
+    #   resp.offering.duration #=> Integer
+    #   resp.offering.duration_units #=> String, one of "MONTHS"
+    #   resp.offering.offering_arn #=> String
+    #   resp.offering.offering_description #=> String
+    #   resp.offering.price_per_unit #=> String
+    #   resp.offering.price_units #=> String, one of "HOURLY"
+    #   resp.offering.resource_specification.reserved_bitrate #=> Integer
+    #   resp.offering.resource_specification.resource_type #=> String, one of "Mbps_Outbound_Bandwidth"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeOffering AWS API Documentation
+    #
+    # @overload describe_offering(params = {})
+    # @param [Hash] params ({})
+    def describe_offering(params = {}, options = {})
+      req = build_request(:describe_offering, params)
+      req.send_request(options)
+    end
+
+    # Displays the details of a reservation. The response includes the
+    # reservation name, state, start date and time, and the details of the
+    # offering that make up the rest of the reservation (such as price,
+    # duration, and outbound bandwidth).
+    #
+    # @option params [required, String] :reservation_arn
+    #
+    # @return [Types::DescribeReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservationResponse#reservation #reservation} => Types::Reservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reservation({
+    #     reservation_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reservation.currency_code #=> String
+    #   resp.reservation.duration #=> Integer
+    #   resp.reservation.duration_units #=> String, one of "MONTHS"
+    #   resp.reservation.end #=> String
+    #   resp.reservation.offering_arn #=> String
+    #   resp.reservation.offering_description #=> String
+    #   resp.reservation.price_per_unit #=> String
+    #   resp.reservation.price_units #=> String, one of "HOURLY"
+    #   resp.reservation.reservation_arn #=> String
+    #   resp.reservation.reservation_name #=> String
+    #   resp.reservation.reservation_state #=> String, one of "ACTIVE", "EXPIRED", "PROCESSING", "CANCELED"
+    #   resp.reservation.resource_specification.reserved_bitrate #=> Integer
+    #   resp.reservation.resource_specification.resource_type #=> String, one of "Mbps_Outbound_Bandwidth"
+    #   resp.reservation.start #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeReservation AWS API Documentation
+    #
+    # @overload describe_reservation(params = {})
+    # @param [Hash] params ({})
+    def describe_reservation(params = {}, options = {})
+      req = build_request(:describe_reservation, params)
+      req.send_request(options)
+    end
+
     # Grants entitlements to an existing flow.
     #
     # @option params [required, Array<Types::GrantEntitlementRequest>] :entitlements
@@ -1136,6 +1216,102 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Displays a list of all offerings that are available to this account in
+    # the current AWS Region. If you have an active reservation (which means
+    # you've purchased an offering that has already started and hasn't
+    # expired yet), your account isn't eligible for other offerings.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListOfferingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOfferingsResponse#next_token #next_token} => String
+    #   * {Types::ListOfferingsResponse#offerings #offerings} => Array&lt;Types::Offering&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_offerings({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.offerings #=> Array
+    #   resp.offerings[0].currency_code #=> String
+    #   resp.offerings[0].duration #=> Integer
+    #   resp.offerings[0].duration_units #=> String, one of "MONTHS"
+    #   resp.offerings[0].offering_arn #=> String
+    #   resp.offerings[0].offering_description #=> String
+    #   resp.offerings[0].price_per_unit #=> String
+    #   resp.offerings[0].price_units #=> String, one of "HOURLY"
+    #   resp.offerings[0].resource_specification.reserved_bitrate #=> Integer
+    #   resp.offerings[0].resource_specification.resource_type #=> String, one of "Mbps_Outbound_Bandwidth"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListOfferings AWS API Documentation
+    #
+    # @overload list_offerings(params = {})
+    # @param [Hash] params ({})
+    def list_offerings(params = {}, options = {})
+      req = build_request(:list_offerings, params)
+      req.send_request(options)
+    end
+
+    # Displays a list of all reservations that have been purchased by this
+    # account in the current AWS Region. This list includes all reservations
+    # in all states (such as active and expired).
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListReservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReservationsResponse#next_token #next_token} => String
+    #   * {Types::ListReservationsResponse#reservations #reservations} => Array&lt;Types::Reservation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_reservations({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reservations #=> Array
+    #   resp.reservations[0].currency_code #=> String
+    #   resp.reservations[0].duration #=> Integer
+    #   resp.reservations[0].duration_units #=> String, one of "MONTHS"
+    #   resp.reservations[0].end #=> String
+    #   resp.reservations[0].offering_arn #=> String
+    #   resp.reservations[0].offering_description #=> String
+    #   resp.reservations[0].price_per_unit #=> String
+    #   resp.reservations[0].price_units #=> String, one of "HOURLY"
+    #   resp.reservations[0].reservation_arn #=> String
+    #   resp.reservations[0].reservation_name #=> String
+    #   resp.reservations[0].reservation_state #=> String, one of "ACTIVE", "EXPIRED", "PROCESSING", "CANCELED"
+    #   resp.reservations[0].resource_specification.reserved_bitrate #=> Integer
+    #   resp.reservations[0].resource_specification.resource_type #=> String, one of "Mbps_Outbound_Bandwidth"
+    #   resp.reservations[0].start #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListReservations AWS API Documentation
+    #
+    # @overload list_reservations(params = {})
+    # @param [Hash] params ({})
+    def list_reservations(params = {}, options = {})
+      req = build_request(:list_reservations, params)
+      req.send_request(options)
+    end
+
     # List all tags on an AWS Elemental MediaConnect resource
     #
     # @option params [required, String] :resource_arn
@@ -1161,6 +1337,61 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Submits a request to purchase an offering. If you already have an
+    # active reservation, you can't purchase another offering.
+    #
+    # @option params [required, String] :offering_arn
+    #
+    # @option params [required, String] :reservation_name
+    #   The name that you want to use for the reservation.
+    #
+    # @option params [required, String] :start
+    #   The date and time that you want the reservation to begin, in
+    #   Coordinated Universal Time (UTC). You can specify any date and time
+    #   between 12:00am on the first day of the current month to the current
+    #   time on today's date, inclusive. Specify the start in a 24-hour
+    #   notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and
+    #   Z are literal characters. For example, to specify 11:30pm on March 5,
+    #   2020, enter 2020-03-05T23:30:00Z.
+    #
+    # @return [Types::PurchaseOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PurchaseOfferingResponse#reservation #reservation} => Types::Reservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.purchase_offering({
+    #     offering_arn: "__string", # required
+    #     reservation_name: "__string", # required
+    #     start: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reservation.currency_code #=> String
+    #   resp.reservation.duration #=> Integer
+    #   resp.reservation.duration_units #=> String, one of "MONTHS"
+    #   resp.reservation.end #=> String
+    #   resp.reservation.offering_arn #=> String
+    #   resp.reservation.offering_description #=> String
+    #   resp.reservation.price_per_unit #=> String
+    #   resp.reservation.price_units #=> String, one of "HOURLY"
+    #   resp.reservation.reservation_arn #=> String
+    #   resp.reservation.reservation_name #=> String
+    #   resp.reservation.reservation_state #=> String, one of "ACTIVE", "EXPIRED", "PROCESSING", "CANCELED"
+    #   resp.reservation.resource_specification.reserved_bitrate #=> Integer
+    #   resp.reservation.resource_specification.resource_type #=> String, one of "Mbps_Outbound_Bandwidth"
+    #   resp.reservation.start #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PurchaseOffering AWS API Documentation
+    #
+    # @overload purchase_offering(params = {})
+    # @param [Hash] params ({})
+    def purchase_offering(params = {}, options = {})
+      req = build_request(:purchase_offering, params)
       req.send_request(options)
     end
 
@@ -1895,7 +2126,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

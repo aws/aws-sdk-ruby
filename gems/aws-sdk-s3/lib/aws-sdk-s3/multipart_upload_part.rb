@@ -241,9 +241,9 @@ module Aws::S3
     #     Resource Name (ARN) of the object as accessed through the access
     #     point, in the format
     #     `arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>`.
-    #     For example, to copy the object `reports/january.pdf` through the
-    #     access point `my-access-point` owned by account `123456789012` in
-    #     Region `us-west-2`, use the URL encoding of
+    #     For example, to copy the object `reports/january.pdf` through access
+    #     point `my-access-point` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
     #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
     #     The value must be URL encoded.
     #
@@ -251,6 +251,15 @@ module Aws::S3
     #     source and destination buckets are in the same AWS Region.
     #
     #      </note>
+    #
+    #     Alternatively, for objects accessed through Amazon S3 on Outposts,
+    #     specify the ARN of the object as accessed in the format
+    #     `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     outpost `my-outpost` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
+    #     The value must be URL encoded.
     #
     #   To copy a specific version of an object, append
     #   `?versionId=<version-id>` to the value (for example,

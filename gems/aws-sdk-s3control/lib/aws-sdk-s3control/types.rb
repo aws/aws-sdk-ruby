@@ -10,6 +10,8 @@
 module Aws::S3Control
   module Types
 
+    # The container for abort incomplete multipart upload
+    #
     # @note When making an API call, you may pass AbortIncompleteMultipartUpload
     #   data as a hash:
     #
@@ -18,6 +20,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] days_after_initiation
+    #   Specifies the number of days after which Amazon S3 aborts an
+    #   incomplete multipart upload to the Outposts bucket.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AbortIncompleteMultipartUpload AWS API Documentation
@@ -53,6 +57,7 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] access_point_arn
+    #   The ARN for the access point.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessPoint AWS API Documentation
@@ -78,10 +83,17 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The requested Outposts bucket name is not available. The bucket
+    # namespace is shared by all users of the AWS Outposts in this Region.
+    # Select a different name and try again.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketAlreadyExists AWS API Documentation
     #
     class BucketAlreadyExists < Aws::EmptyStructure; end
 
+    # The Outposts bucket you tried to create already exists, and you own
+    # it.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketAlreadyOwnedByYou AWS API Documentation
     #
     class BucketAlreadyOwnedByYou < Aws::EmptyStructure; end
@@ -116,11 +128,25 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The name of the bucket that you want to associate this access point
     #   with.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @!attribute [rw] vpc_configuration
     #   If you include this field, Amazon S3 restricts access to this access
     #   point to requests from the specified virtual private cloud (VPC).
+    #
+    #   <note markdown="1"> This is required for creating an access point for Amazon S3 on
+    #   Outposts buckets.
+    #
+    #    </note>
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -128,7 +154,9 @@ module Aws::S3Control
     #   Amazon S3 bucket. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   Amazon Simple Storage Service Developer Guide.
+    #   *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
     #
     #
     #
@@ -148,6 +176,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] access_point_arn
+    #   The ARN of the access point.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointResult AWS API Documentation
@@ -158,6 +187,12 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container for the bucket configuration.
+    #
+    # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass CreateBucketConfiguration
     #   data as a hash:
     #
@@ -166,6 +201,13 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] location_constraint
+    #   Specifies the Region where the bucket will be created. If you are
+    #   creating a bucket on the US East (N. Virginia) Region (us-east-1),
+    #   you do not need to specify the location.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucketConfiguration AWS API Documentation
@@ -195,33 +237,82 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] acl
+    #   The canned ACL to apply to the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The name of the bucket.
     #   @return [String]
     #
     # @!attribute [rw] create_bucket_configuration
+    #   The configuration information for the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [Types::CreateBucketConfiguration]
     #
     # @!attribute [rw] grant_full_control
+    #   Allows grantee the read, write, read ACP, and write ACP permissions
+    #   on the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] grant_read
+    #   Allows grantee to list the objects in the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] grant_read_acp
+    #   Allows grantee to read the bucket ACL.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] grant_write
+    #   Allows grantee to create, overwrite, and delete any object in the
+    #   bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] grant_write_acp
+    #   Allows grantee to write the ACL for the applicable bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] object_lock_enabled_for_bucket
+    #   Specifies whether you want S3 Object Lock to be enabled for the new
+    #   bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] outpost_id
+    #   The ID of the Outposts where the bucket is being created.
+    #
+    #   <note markdown="1"> This is required by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucketRequest AWS API Documentation
@@ -242,9 +333,20 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] location
+    #   The location of the bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucketResult AWS API Documentation
@@ -389,6 +491,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID that creates the job.
     #   @return [String]
     #
     # @!attribute [rw] confirmation_required
@@ -400,8 +503,8 @@ module Aws::S3Control
     # @!attribute [rw] operation
     #   The operation that you want this job to perform on each object
     #   listed in the manifest. For more information about the available
-    #   operations, see [Available Operations][1] in the *Amazon Simple
-    #   Storage Service Developer Guide*.
+    #   operations, see [Operations][1] in the *Amazon Simple Storage
+    #   Service Developer Guide*.
     #
     #
     #
@@ -438,13 +541,13 @@ module Aws::S3Control
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) for the AWS Identity and Access
-    #   Management (IAM) role that Batch Operations will use to execute this
+    #   Management (IAM) role that Batch Operations will use to run this
     #   job's operation on each object in the manifest.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A set of tags to associate with the Amazon S3 Batch Operations job.
-    #   This is an optional parameter.
+    #   A set of tags to associate with the S3 Batch Operations job. This is
+    #   an optional parameter.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateJobRequest AWS API Documentation
@@ -491,6 +594,15 @@ module Aws::S3Control
     #
     # @!attribute [rw] name
     #   The name of the access point whose policy you want to delete.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the access point
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointPolicyRequest AWS API Documentation
@@ -516,6 +628,15 @@ module Aws::S3Control
     #
     # @!attribute [rw] name
     #   The name of the access point you want to delete.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the access point
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointRequest AWS API Documentation
@@ -536,9 +657,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The account ID of the lifecycle configuration to delete.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The bucket ARN of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketLifecycleConfigurationRequest AWS API Documentation
@@ -559,9 +691,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The ARN of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketPolicyRequest AWS API Documentation
@@ -582,9 +725,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The account ID that owns the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   Specifies the bucket being deleted.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketRequest AWS API Documentation
@@ -605,9 +759,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket tag set to be removed.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The bucket ARN that has the tag set to be removed.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketTaggingRequest AWS API Documentation
@@ -628,12 +793,11 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID associated with the Amazon S3 Batch Operations
-    #   job.
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   The ID for the S3 Batch Operations job whose tags you want to
     #   delete.
     #   @return [String]
     #
@@ -658,8 +822,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the Amazon Web Services account whose
-    #   `PublicAccessBlock` configuration you want to remove.
+    #   The account ID for the AWS account whose `PublicAccessBlock`
+    #   configuration you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeletePublicAccessBlockRequest AWS API Documentation
@@ -721,6 +885,15 @@ module Aws::S3Control
     #
     # @!attribute [rw] name
     #   The name of the access point whose policy you want to retrieve.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the access point
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyRequest AWS API Documentation
@@ -797,6 +970,15 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point whose configuration information you
     #   want to retrieve.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the access point
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointRequest AWS API Documentation
@@ -823,6 +1005,8 @@ module Aws::S3Control
     #   access from the public internet. Otherwise, `NetworkOrigin` is
     #   `Internet`, and the access point allows access from the public
     #   internet, subject to the access point and bucket access policies.
+    #
+    #   This will always be true for an Amazon S3 on Outposts access point
     #   @return [String]
     #
     # @!attribute [rw] vpc_configuration
@@ -835,7 +1019,9 @@ module Aws::S3Control
     #   Amazon S3 bucket. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   Amazon Simple Storage Service Developer Guide.
+    #   *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
     #
     #
     #
@@ -868,9 +1054,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The Amazon Resource Name (ARN) of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketLifecycleConfigurationRequest AWS API Documentation
@@ -883,6 +1080,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] rules
+    #   Container for the lifecycle rule of the Outposts bucket.
     #   @return [Array<Types::LifecycleRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketLifecycleConfigurationResult AWS API Documentation
@@ -902,9 +1100,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The ARN of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketPolicyRequest AWS API Documentation
@@ -917,6 +1126,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] policy
+    #   The policy of the Outposts bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketPolicyResult AWS API Documentation
@@ -936,9 +1146,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The ARN of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketRequest AWS API Documentation
@@ -951,12 +1172,14 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] bucket
+    #   The Outposts bucket requested.
     #   @return [String]
     #
     # @!attribute [rw] public_access_block_enabled
     #   @return [Boolean]
     #
     # @!attribute [rw] creation_date
+    #   The creation date of the Outposts bucket.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketResult AWS API Documentation
@@ -978,9 +1201,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The ARN of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketTaggingRequest AWS API Documentation
@@ -993,6 +1227,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] tag_set
+    #   The tags set of the Outposts bucket.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketTaggingResult AWS API Documentation
@@ -1012,12 +1247,11 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID associated with the Amazon S3 Batch Operations
-    #   job.
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   The ID for the S3 Batch Operations job whose tags you want to
     #   retrieve.
     #   @return [String]
     #
@@ -1031,7 +1265,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] tags
-    #   The set of tags associated with the Amazon S3 Batch Operations job.
+    #   The set of tags associated with the S3 Batch Operations job.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetJobTaggingResult AWS API Documentation
@@ -1044,7 +1278,7 @@ module Aws::S3Control
 
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration currently in effect for this
-    #   Amazon Web Services account.
+    #   AWS account.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockOutput AWS API Documentation
@@ -1063,8 +1297,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the Amazon Web Services account whose
-    #   `PublicAccessBlock` configuration you want to retrieve.
+    #   The account ID for the AWS account whose `PublicAccessBlock`
+    #   configuration you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockRequest AWS API Documentation
@@ -1151,7 +1385,7 @@ module Aws::S3Control
     #   @return [Types::JobManifest]
     #
     # @!attribute [rw] operation
-    #   The operation that the specified job is configured to execute on the
+    #   The operation that the specified job is configured to run on the
     #   objects listed in the manifest.
     #   @return [Types::JobOperation]
     #
@@ -1160,12 +1394,13 @@ module Aws::S3Control
     #   @return [Integer]
     #
     # @!attribute [rw] progress_summary
-    #   Describes the total number of tasks that the specified job has
-    #   executed, the number of tasks that succeeded, and the number of
-    #   tasks that failed.
+    #   Describes the total number of tasks that the specified job has run,
+    #   the number of tasks that succeeded, and the number of tasks that
+    #   failed.
     #   @return [Types::JobProgressSummary]
     #
     # @!attribute [rw] status_update_reason
+    #   The reason for updating the job.
     #   @return [String]
     #
     # @!attribute [rw] failure_reasons
@@ -1190,7 +1425,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) for the AWS Identity and Access
-    #   Management (IAM) role assigned to execute the tasks for this job.
+    #   Management (IAM) role assigned to run the tasks for this job.
     #   @return [String]
     #
     # @!attribute [rw] suspended_date
@@ -1284,9 +1519,9 @@ module Aws::S3Control
     #   @return [Time]
     #
     # @!attribute [rw] progress_summary
-    #   Describes the total number of tasks that the specified job has
-    #   executed, the number of tasks that succeeded, and the number of
-    #   tasks that failed.
+    #   Describes the total number of tasks that the specified job has run,
+    #   the number of tasks that succeeded, and the number of tasks that
+    #   failed.
     #   @return [Types::JobProgressSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobListDescriptor AWS API Documentation
@@ -1408,8 +1643,8 @@ module Aws::S3Control
 
     # The operation that you want this job to perform on each object listed
     # in the manifest. For more information about the available operations,
-    # see [Available Operations][1] in the *Amazon Simple Storage Service
-    # Developer Guide*.
+    # see [Operations][1] in the *Amazon Simple Storage Service Developer
+    # Guide*.
     #
     #
     #
@@ -1521,45 +1756,48 @@ module Aws::S3Control
     #   @return [Types::LambdaInvokeOperation]
     #
     # @!attribute [rw] s3_put_object_copy
-    #   Directs the specified job to execute a PUT Copy object call on each
+    #   Directs the specified job to run a PUT Copy object call on each
     #   object in the manifest.
     #   @return [Types::S3CopyObjectOperation]
     #
     # @!attribute [rw] s3_put_object_acl
-    #   Directs the specified job to execute a PUT Object acl call on each
+    #   Directs the specified job to run a PUT Object acl call on each
     #   object in the manifest.
     #   @return [Types::S3SetObjectAclOperation]
     #
     # @!attribute [rw] s3_put_object_tagging
-    #   Directs the specified job to execute a PUT Object tagging call on
-    #   each object in the manifest.
+    #   Directs the specified job to run a PUT Object tagging call on each
+    #   object in the manifest.
     #   @return [Types::S3SetObjectTaggingOperation]
     #
     # @!attribute [rw] s3_initiate_restore_object
-    #   Directs the specified job to execute an Initiate Glacier Restore
-    #   call on each object in the manifest.
+    #   Directs the specified job to run an Initiate Glacier Restore call on
+    #   each object in the manifest.
     #   @return [Types::S3InitiateRestoreObjectOperation]
     #
     # @!attribute [rw] s3_put_object_legal_hold
-    #   Contains the configuration parameters for a Set Object Legal Hold
-    #   operation. Amazon S3 Batch Operations passes each value through to
-    #   the underlying PUT Object Legal Hold API. For more information about
-    #   the parameters for this operation, see [PUT Object Legal Hold][1].
+    #   Contains the configuration for an S3 Object Lock legal hold
+    #   operation that an S3 Batch Operations job passes each object through
+    #   to the underlying `PutObjectLegalHold` API. For more information,
+    #   see [Using S3 Object Lock legal hold with S3 Batch Operations][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.htmll#object-lock-legal-holds
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html
     #   @return [Types::S3SetObjectLegalHoldOperation]
     #
     # @!attribute [rw] s3_put_object_retention
-    #   Contains the configuration parameters for a Set Object Retention
-    #   operation. Amazon S3 Batch Operations passes each value through to
-    #   the underlying PUT Object Retention API. For more information about
-    #   the parameters for this operation, see [PUT Object Retention][1].
+    #   Contains the configuration parameters for the Object Lock retention
+    #   action for an S3 Batch Operations job. Batch Operations passes each
+    #   value through to the underlying `PutObjectRetention` API. For more
+    #   information, see [Using S3 Object Lock retention with S3 Batch
+    #   Operations][1] in the *Amazon Simple Storage Service Developer
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html#object-lock-retention-modes
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
     #   @return [Types::S3SetObjectRetentionOperation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobOperation AWS API Documentation
@@ -1577,7 +1815,7 @@ module Aws::S3Control
     end
 
     # Describes the total number of tasks that the specified job has
-    # executed, the number of tasks that succeeded, and the number of tasks
+    # started, the number of tasks that succeeded, and the number of tasks
     # that failed.
     #
     # @!attribute [rw] total_number_of_tasks
@@ -1628,9 +1866,8 @@ module Aws::S3Control
     #
     # @!attribute [rw] prefix
     #   An optional prefix to describe where in the specified bucket the
-    #   job-completion report will be stored. Amazon S3 will store the
-    #   job-completion report at
-    #   &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
+    #   job-completion report will be stored. Amazon S3 stores the
+    #   job-completion report at `<prefix>/job-<job-id>/report.json`.
     #   @return [String]
     #
     # @!attribute [rw] report_scope
@@ -1683,6 +1920,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container for the Outposts bucket lifecycle configuration.
+    #
     # @note When making an API call, you may pass LifecycleConfiguration
     #   data as a hash:
     #
@@ -1736,6 +1975,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] rules
+    #   A lifecycle rule for individual objects in an Outposts bucket.
     #   @return [Array<Types::LifecycleRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleConfiguration AWS API Documentation
@@ -1746,6 +1986,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container of the Outposts bucket lifecycle expiration.
+    #
     # @note When making an API call, you may pass LifecycleExpiration
     #   data as a hash:
     #
@@ -1756,12 +1998,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] date
+    #   Indicates at what date the object is to be deleted. Should be in GMT
+    #   ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] days
+    #   Indicates the lifetime, in days, of the objects that are subject to
+    #   the rule. The value must be a non-zero positive integer.
     #   @return [Integer]
     #
     # @!attribute [rw] expired_object_delete_marker
+    #   Indicates whether Amazon S3 will remove a delete marker with no
+    #   noncurrent versions. If set to true, the delete marker will be
+    #   expired. If set to false, the policy takes no action. This cannot be
+    #   specified with Days or Date in a Lifecycle Expiration Policy.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleExpiration AWS API Documentation
@@ -1774,6 +2024,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container for the Outposts bucket lifecycle rule.
+    #
     # @note When making an API call, you may pass LifecycleRule
     #   data as a hash:
     #
@@ -1823,27 +2075,64 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] expiration
+    #   Specifies the expiration for the lifecycle of the object in the form
+    #   of date, days and, whether the object has a delete marker.
     #   @return [Types::LifecycleExpiration]
     #
     # @!attribute [rw] id
+    #   Unique identifier for the rule. The value cannot be longer than 255
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] filter
+    #   The container for the filter of lifecycle rule.
     #   @return [Types::LifecycleRuleFilter]
     #
     # @!attribute [rw] status
+    #   If 'Enabled', the rule is currently being applied. If
+    #   'Disabled', the rule is not currently being applied.
     #   @return [String]
     #
     # @!attribute [rw] transitions
+    #   Specifies when an Amazon S3 object transitions to a specified
+    #   storage class.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [Array<Types::Transition>]
     #
     # @!attribute [rw] noncurrent_version_transitions
+    #   Specifies the transition rule for the lifecycle rule that describes
+    #   when noncurrent objects transition to a specific storage class. If
+    #   your bucket is versioning-enabled (or versioning is suspended), you
+    #   can set this action to request that Amazon S3 transition noncurrent
+    #   object versions to a specific storage class at a set period in the
+    #   object's lifetime.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [Array<Types::NoncurrentVersionTransition>]
     #
     # @!attribute [rw] noncurrent_version_expiration
+    #   The noncurrent version expiration of the lifecycle rule.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [Types::NoncurrentVersionExpiration]
     #
     # @!attribute [rw] abort_incomplete_multipart_upload
+    #   Specifies the days since the initiation of an incomplete multipart
+    #   upload that Amazon S3 waits before permanently removing all parts of
+    #   the upload. For more information, see [ Aborting Incomplete
+    #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
+    #   Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
     #   @return [Types::AbortIncompleteMultipartUpload]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRule AWS API Documentation
@@ -1861,6 +2150,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container for the Outposts bucket lifecycle rule and operator.
+    #
     # @note When making an API call, you may pass LifecycleRuleAndOperator
     #   data as a hash:
     #
@@ -1875,9 +2166,12 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] prefix
+    #   Prefix identifying one or more objects to which the rule applies.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   All of these tags must exist in the object's tag set in order for
+    #   the rule to apply.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRuleAndOperator AWS API Documentation
@@ -1889,6 +2183,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container for the filter of the lifecycle rule.
+    #
     # @note When making an API call, you may pass LifecycleRuleFilter
     #   data as a hash:
     #
@@ -1910,12 +2206,14 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] prefix
+    #   Prefix identifying one or more objects to which the rule applies.
     #   @return [String]
     #
     # @!attribute [rw] tag
     #   @return [Types::S3Tag]
     #
     # @!attribute [rw] and
+    #   The container for the `AND` condition for the lifecycle rule.
     #   @return [Types::LifecycleRuleAndOperator]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRuleFilter AWS API Documentation
@@ -1946,6 +2244,15 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The name of the bucket whose associated access points you want to
     #   list.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1981,9 +2288,9 @@ module Aws::S3Control
     #
     # @!attribute [rw] next_token
     #   If the specified bucket has more access points than can be returned
-    #   in one call to this API, then this field contains a continuation
-    #   token that you can provide in subsequent calls to this API to
-    #   retrieve additional access points.
+    #   in one call to this API, this field contains a continuation token
+    #   that you can provide in subsequent calls to this API to retrieve
+    #   additional access points.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsResult AWS API Documentation
@@ -2068,6 +2375,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2077,6 +2385,11 @@ module Aws::S3Control
     #   @return [Integer]
     #
     # @!attribute [rw] outpost_id
+    #   The ID of the AWS Outposts.
+    #
+    #   <note markdown="1"> This is required by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListRegionalBucketsRequest AWS API Documentation
@@ -2094,6 +2407,10 @@ module Aws::S3Control
     #   @return [Array<Types::RegionalBucket>]
     #
     # @!attribute [rw] next_token
+    #   `NextToken` is sent when `isTruncated` is true, which means there
+    #   are more buckets that can be listed. The next list requests to
+    #   Amazon S3 can be continued with this `NextToken`. `NextToken` is
+    #   obfuscated and is not a real key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListRegionalBucketsResult AWS API Documentation
@@ -2120,6 +2437,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container of the noncurrent version expiration.
+    #
     # @note When making an API call, you may pass NoncurrentVersionExpiration
     #   data as a hash:
     #
@@ -2128,6 +2447,15 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] noncurrent_days
+    #   Specifies the number of days an object is noncurrent before Amazon
+    #   S3 can perform the associated action. For information about the
+    #   noncurrent days calculations, see [How Amazon S3 Calculates When an
+    #   Object Became Noncurrent][1] in the *Amazon Simple Storage Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/NoncurrentVersionExpiration AWS API Documentation
@@ -2138,6 +2466,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container for the noncurrent version transition.
+    #
     # @note When making an API call, you may pass NoncurrentVersionTransition
     #   data as a hash:
     #
@@ -2147,9 +2477,19 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] noncurrent_days
+    #   Specifies the number of days an object is noncurrent before Amazon
+    #   S3 can perform the associated action. For information about the
+    #   noncurrent days calculations, see [ How Amazon S3 Calculates How
+    #   Long an Object Has Been Noncurrent][1] in the *Amazon Simple Storage
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
+    #   The class of storage used to store the object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/NoncurrentVersionTransition AWS API Documentation
@@ -2196,7 +2536,9 @@ module Aws::S3Control
     # Amazon S3 bucket. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
     # bucket or object public, see [The Meaning of "Public"][1] in the
-    # Amazon Simple Storage Service Developer Guide.
+    # *Amazon Simple Storage Service Developer Guide*.
+    #
+    # This is not supported for Amazon S3 on Outposts.
     #
     #
     #
@@ -2225,6 +2567,8 @@ module Aws::S3Control
     #   * PUT Bucket calls fail if the request includes a public ACL.
     #
     #   Enabling this setting doesn't affect existing policies or ACLs.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @!attribute [rw] ignore_public_acls
@@ -2235,6 +2579,8 @@ module Aws::S3Control
     #
     #   Enabling this setting doesn't affect the persistence of any
     #   existing ACLs and doesn't prevent new public ACLs from being set.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @!attribute [rw] block_public_policy
@@ -2244,6 +2590,8 @@ module Aws::S3Control
     #   bucket policy allows public access.
     #
     #   Enabling this setting doesn't affect existing bucket policies.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @!attribute [rw] restrict_public_buckets
@@ -2256,6 +2604,8 @@ module Aws::S3Control
     #   policies, except that public and cross-account access within any
     #   public bucket policy, including non-public delegation to specific
     #   accounts, is blocked.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PublicAccessBlockConfiguration AWS API Documentation
@@ -2286,6 +2636,15 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point that you want to associate with the
     #   specified policy.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the access point
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -2366,12 +2725,15 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The name of the bucket for which to set the configuration.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_configuration
+    #   Container for lifecycle rules. You can add as many as 1,000 rules.
     #   @return [Types::LifecycleConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketLifecycleConfigurationRequest AWS API Documentation
@@ -2395,15 +2757,33 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The ARN of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @!attribute [rw] confirm_remove_self_bucket_access
+    #   Set this parameter to true to confirm that you want to remove your
+    #   permissions to change this bucket policy in the future.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] policy
+    #   The bucket policy as a JSON document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketPolicyRequest AWS API Documentation
@@ -2434,9 +2814,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   The Amazon Resource Name (ARN) of the bucket.
+    #
+    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
+    #   the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #   @return [String]
     #
     # @!attribute [rw] tagging
@@ -2467,18 +2858,16 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID associated with the Amazon S3 Batch Operations
-    #   job.
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   The ID for the S3 Batch Operations job whose tags you want to
     #   replace.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The set of tags to associate with the Amazon S3 Batch Operations
-    #   job.
+    #   The set of tags to associate with the S3 Batch Operations job.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutJobTaggingRequest AWS API Documentation
@@ -2510,12 +2899,12 @@ module Aws::S3Control
     #
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to the
-    #   specified Amazon Web Services account.
+    #   specified AWS account.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @!attribute [rw] account_id
-    #   The account ID for the Amazon Web Services account whose
-    #   `PublicAccessBlock` configuration you want to set.
+    #   The account ID for the AWS account whose `PublicAccessBlock`
+    #   configuration you want to set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutPublicAccessBlockRequest AWS API Documentation
@@ -2527,19 +2916,24 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container for the regional bucket.
+    #
     # @!attribute [rw] bucket
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) for the regional bucket.
     #   @return [String]
     #
     # @!attribute [rw] public_access_block_enabled
     #   @return [Boolean]
     #
     # @!attribute [rw] creation_date
+    #   The creation date of the regional bucket
     #   @return [Time]
     #
     # @!attribute [rw] outpost_id
+    #   The AWS Outposts ID of the regional bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/RegionalBucket AWS API Documentation
@@ -2628,9 +3022,9 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a PUT Copy object operation.
-    # Amazon S3 Batch Operations passes each value through to the underlying
-    # PUT Copy object API. For more information about the parameters for
-    # this operation, see [PUT Object - Copy][1].
+    # S3 Batch Operations passes each value through to the underlying PUT
+    # Copy object API. For more information about the parameters for this
+    # operation, see [PUT Object - Copy][1].
     #
     #
     #
@@ -2726,18 +3120,18 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] object_lock_legal_hold_status
-    #   The Legal Hold status to be applied to all objects in the Batch
+    #   The legal hold status to be applied to all objects in the Batch
     #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
-    #   The Retention mode to be applied to all objects in the Batch
+    #   The retention mode to be applied to all objects in the Batch
     #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
-    #   The date when the applied Object Retention configuration will expire
-    #   on all objects in the Batch Operations job.
+    #   The date when the applied object retention configuration expires on
+    #   all objects in the Batch Operations job.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
@@ -2819,9 +3213,9 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for an Initiate Glacier Restore
-    # job. Amazon S3 Batch Operations passes each value through to the
-    # underlying POST Object restore API. For more information about the
-    # parameters for this operation, see [Restoring Archives][1].
+    # job. S3 Batch Operations passes each value through to the underlying
+    # POST Object restore API. For more information about the parameters for
+    # this operation, see [RestoreObject][1].
     #
     #
     #
@@ -2850,6 +3244,9 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Whether S3 Object Lock legal hold will be applied to objects in an S3
+    # Batch Operations job.
+    #
     # @note When making an API call, you may pass S3ObjectLockLegalHold
     #   data as a hash:
     #
@@ -2858,8 +3255,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] status
-    #   The Legal Hold status to be applied to all objects in the Batch
-    #   Operations job.
+    #   The Object Lock legal hold status to be applied to all objects in
+    #   the Batch Operations job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectLockLegalHold AWS API Documentation
@@ -2963,6 +3360,17 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Contains the S3 Object Lock retention mode to be applied to all
+    # objects in the S3 Batch Operations job. If you don't provide `Mode`
+    # and `RetainUntilDate` data types in your operation, you will remove
+    # the retention from your objects. For more information, see [Using S3
+    # Object Lock retention with S3 Batch Operations][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
+    #
     # @note When making an API call, you may pass S3Retention
     #   data as a hash:
     #
@@ -2972,13 +3380,13 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] retain_until_date
-    #   The date when the applied Object Retention will expire on all
-    #   objects in the Batch Operations job.
+    #   The date when the applied Object Lock retention will expire on all
+    #   objects set by the Batch Operations job.
     #   @return [Time]
     #
     # @!attribute [rw] mode
-    #   The Retention mode to be applied to all objects in the Batch
-    #   Operations job.
+    #   The Object Lock retention mode to be applied to all objects in the
+    #   Batch Operations job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Retention AWS API Documentation
@@ -2991,8 +3399,8 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a Set Object ACL operation.
-    # Amazon S3 Batch Operations passes each value through to the underlying
-    # PUT Object acl API. For more information about the parameters for this
+    # S3 Batch Operations passes each value through to the underlying PUT
+    # Object acl API. For more information about the parameters for this
     # operation, see [PUT Object acl][1].
     #
     #
@@ -3035,14 +3443,15 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # Contains the configuration parameters for a Set Object Legal Hold
-    # operation. Amazon S3 Batch Operations passes each value through to the
-    # underlying PUT Object Legal Hold API. For more information about the
-    # parameters for this operation, see [PUT Object Legal Hold][1].
+    # Contains the configuration for an S3 Object Lock legal hold operation
+    # that an S3 Batch Operations job passes each object through to the
+    # underlying `PutObjectLegalHold` API. For more information, see [Using
+    # S3 Object Lock legal hold with S3 Batch Operations][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.htmll#object-lock-legal-holds
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html
     #
     # @note When making an API call, you may pass S3SetObjectLegalHoldOperation
     #   data as a hash:
@@ -3054,8 +3463,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] legal_hold
-    #   The Legal Hold contains the status to be applied to all objects in
-    #   the Batch Operations job.
+    #   Contains the Object Lock legal hold status to be applied to all
+    #   objects in the Batch Operations job.
     #   @return [Types::S3ObjectLockLegalHold]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3SetObjectLegalHoldOperation AWS API Documentation
@@ -3066,14 +3475,15 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # Contains the configuration parameters for a Set Object Retention
-    # operation. Amazon S3 Batch Operations passes each value through to the
-    # underlying PUT Object Retention API. For more information about the
-    # parameters for this operation, see [PUT Object Retention][1].
+    # Contains the configuration parameters for the Object Lock retention
+    # action for an S3 Batch Operations job. Batch Operations passes each
+    # value through to the underlying `PutObjectRetention` API. For more
+    # information, see [Using S3 Object Lock retention with S3 Batch
+    # Operations][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html#object-lock-retention-modes
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
     #
     # @note When making an API call, you may pass S3SetObjectRetentionOperation
     #   data as a hash:
@@ -3087,14 +3497,20 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] bypass_governance_retention
-    #   Indicates if the operation should be applied to objects in the Batch
-    #   Operations job even if they have Governance-type Object Lock in
+    #   Indicates if the action should be applied to objects in the Batch
+    #   Operations job even if they have Object Lock ` GOVERNANCE` type in
     #   place.
     #   @return [Boolean]
     #
     # @!attribute [rw] retention
-    #   Amazon S3 object lock Retention contains the retention mode to be
-    #   applied to all objects in the Batch Operations job.
+    #   Contains the Object Lock retention mode to be applied to all objects
+    #   in the Batch Operations job. For more information, see [Using S3
+    #   Object Lock retention with S3 Batch Operations][1] in the *Amazon
+    #   Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
     #   @return [Types::S3Retention]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3SetObjectRetentionOperation AWS API Documentation
@@ -3107,7 +3523,7 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a Set Object Tagging
-    # operation. Amazon S3 Batch Operations passes each value through to the
+    # operation. S3 Batch Operations passes each value through to the
     # underlying PUT Object tagging API. For more information about the
     # parameters for this operation, see [PUT Object tagging][1].
     #
@@ -3174,6 +3590,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] tag_set
+    #   A collection for a set of tags.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Tagging AWS API Documentation
@@ -3195,6 +3612,9 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Amazon S3 throws this exception if you have too many tags in your tag
+    # set.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3206,6 +3626,15 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Specifies when an object transitions to a specified storage class. For
+    # more information about Amazon S3 Lifecycle configuration rules, see [
+    # Transitioning Objects Using Amazon S3 Lifecycle][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html
+    #
     # @note When making an API call, you may pass Transition
     #   data as a hash:
     #
@@ -3216,12 +3645,19 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] date
+    #   Indicates when objects are transitioned to the specified storage
+    #   class. The date value must be in ISO 8601 format. The time is always
+    #   midnight UTC.
     #   @return [Time]
     #
     # @!attribute [rw] days
+    #   Indicates the number of days after creation when objects are
+    #   transitioned to the specified storage class. The value must be a
+    #   positive integer.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
+    #   The storage class to which you want the object to transition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Transition AWS API Documentation

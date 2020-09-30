@@ -378,7 +378,7 @@ module Aws::DataSync
     #
     # You can activate the agent in a VPC (virtual private cloud) or provide
     # the agent access to a VPC endpoint so you can run tasks without going
-    # over the public Internet.
+    # over the public internet.
     #
     # You can use an agent for more than one location. If a task uses
     # multiple agents, all of them need to have status AVAILABLE for the
@@ -731,7 +731,9 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for a self-managed object storage bucket.
+    # Creates an endpoint for a self-managed object storage bucket. For more
+    # information about self-managed object storage locations, see
+    # create-object-location.
     #
     # @option params [required, String] :server_hostname
     #   The name of the self-managed object storage server. This value is the
@@ -759,11 +761,15 @@ module Aws::DataSync
     #
     # @option params [String] :access_key
     #   Optional. The access key is used if credentials are required to access
-    #   the self-managed object storage server.
+    #   the self-managed object storage server. If your object storage
+    #   requires a user name and password to authenticate, use `AccessKey` and
+    #   `SecretKey` to provide the user name and password, respectively.
     #
     # @option params [String] :secret_key
     #   Optional. The secret key is used if credentials are required to access
-    #   the self-managed object storage server.
+    #   the self-managed object storage server. If your object storage
+    #   requires a user name and password to authenticate, use `AccessKey` and
+    #   `SecretKey` to provide the user name and password, respectively.
     #
     # @option params [required, Array<String>] :agent_arns
     #   The Amazon Resource Name (ARN) of the agents associated with the
@@ -812,16 +818,9 @@ module Aws::DataSync
 
     # Creates an endpoint for an Amazon S3 bucket.
     #
-    # For AWS DataSync to access a destination S3 bucket, it needs an AWS
-    # Identity and Access Management (IAM) role that has the required
-    # permissions. You can set up the required permissions by creating an
-    # IAM policy that grants the required permissions and attaching the
-    # policy to the role. An example of such a policy is shown in the
-    # examples section.
-    #
     # For more information, see
-    # https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location
-    # in the *AWS DataSync User Guide.*
+    # https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
+    # in the *AWS DataSync User Guide*.
     #
     # @option params [String] :subdirectory
     #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3
@@ -829,15 +828,19 @@ module Aws::DataSync
     #   S3 destination.
     #
     # @option params [required, String] :s3_bucket_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the bucket
+    #   is on an AWS Outpost, this must be an access point ARN.
     #
     # @option params [String] :s3_storage_class
     #   The Amazon S3 storage class that you want to store your files in when
-    #   this location is used as a task destination. For more information
-    #   about S3 storage classes, see [Amazon S3 Storage Classes][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*. Some storage classes
-    #   have behaviors that can affect your S3 storage cost. For detailed
-    #   information, see using-storage-classes.
+    #   this location is used as a task destination. For buckets in AWS
+    #   Regions, the storage class defaults to Standard. For buckets on AWS
+    #   Outposts, the storage class defaults to AWS S3 Outposts.
+    #
+    #   For more information about S3 storage classes, see [Amazon S3 Storage
+    #   Classes][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Some storage classes have behaviors that can affect your S3 storage
+    #   cost. For detailed information, see using-storage-classes.
     #
     #
     #
@@ -849,6 +852,12 @@ module Aws::DataSync
     #
     #   For detailed information about using such a role, see Creating a
     #   Location for Amazon S3 in the *AWS DataSync User Guide*.
+    #
+    # @option params [Array<String>] :agent_arns
+    #   If you are using DataSync on an AWS Outpost, specify the Amazon
+    #   Resource Names (ARNs) of the DataSync agents deployed on your AWS
+    #   Outpost. For more information about launching a DataSync agent on an
+    #   Amazon Outpost, see outposts-agent.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -864,10 +873,11 @@ module Aws::DataSync
     #   resp = client.create_location_s3({
     #     subdirectory: "S3Subdirectory",
     #     s3_bucket_arn: "S3BucketArn", # required
-    #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     s3_config: { # required
     #       bucket_access_role_arn: "IamRoleArn", # required
     #     },
+    #     agent_arns: ["AgentArn"],
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1001,7 +1011,7 @@ module Aws::DataSync
     # minutes, it means that your agent might be having trouble mounting the
     # source NFS file system. Check the task's ErrorCode and ErrorDetail.
     # Mount issues are often caused by either a misconfigured firewall or a
-    # mistyped NFS server host name.
+    # mistyped NFS server hostname.
     #
     # @option params [required, String] :source_location_arn
     #   The Amazon Resource Name (ARN) of the source location for the task.
@@ -1335,6 +1345,8 @@ module Aws::DataSync
     end
 
     # Returns metadata about a self-managed object storage server location.
+    # For more information about self-managed object storage locations, see
+    # create-object-location.
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the self-managed object storage
@@ -1389,6 +1401,7 @@ module Aws::DataSync
     #   * {Types::DescribeLocationS3Response#location_uri #location_uri} => String
     #   * {Types::DescribeLocationS3Response#s3_storage_class #s3_storage_class} => String
     #   * {Types::DescribeLocationS3Response#s3_config #s3_config} => Types::S3Config
+    #   * {Types::DescribeLocationS3Response#agent_arns #agent_arns} => Array&lt;String&gt;
     #   * {Types::DescribeLocationS3Response#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -1401,8 +1414,10 @@ module Aws::DataSync
     #
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
-    #   resp.s3_storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
+    #   resp.s3_storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.s3_config.bucket_access_role_arn #=> String
+    #   resp.agent_arns #=> Array
+    #   resp.agent_arns[0] #=> String
     #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationS3 AWS API Documentation
@@ -1668,6 +1683,10 @@ module Aws::DataSync
     #   next list of locations.
     #
     # @option params [Array<Types::LocationFilter>] :filters
+    #   You can use API filters to narrow down the list of resources returned
+    #   by `ListLocations`. For example, to retrieve all tasks on a specific
+    #   source location, you can use `ListLocations` with filter name
+    #   `LocationType S3` and `Operator Equals`.
     #
     # @return [Types::ListLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1803,6 +1822,10 @@ module Aws::DataSync
     #   next list of tasks.
     #
     # @option params [Array<Types::TaskFilter>] :filters
+    #   You can use API filters to narrow down the list of resources returned
+    #   by `ListTasks`. For example, to retrieve all tasks on a specific
+    #   source location, you can use `ListTasks` with filter name `LocationId`
+    #   and `Operator Equals` with the ARN for the location.
     #
     # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2094,7 +2117,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1000,6 +1000,9 @@ module Aws::EMR
     #   Specifies the number of steps that can be executed concurrently.
     #   @return [Integer]
     #
+    # @!attribute [rw] placement_groups
+    #   @return [Array<Types::PlacementGroupConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1031,7 +1034,8 @@ module Aws::EMR
       :kerberos_attributes,
       :cluster_arn,
       :outpost_arn,
-      :step_concurrency_level)
+      :step_concurrency_level,
+      :placement_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4810,6 +4814,29 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PlacementGroupConfig
+    #   data as a hash:
+    #
+    #       {
+    #         instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
+    #         placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
+    #       }
+    #
+    # @!attribute [rw] instance_role
+    #   @return [String]
+    #
+    # @!attribute [rw] placement_strategy
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PlacementGroupConfig AWS API Documentation
+    #
+    class PlacementGroupConfig < Struct.new(
+      :instance_role,
+      :placement_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon EC2 Availability Zone configuration of the cluster (job
     # flow).
     #
@@ -5394,6 +5421,12 @@ module Aws::EMR
     #             maximum_core_capacity_units: 1,
     #           },
     #         },
+    #         placement_group_configs: [
+    #           {
+    #             instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
+    #             placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -5632,6 +5665,9 @@ module Aws::EMR
     #   The specified managed scaling policy for an Amazon EMR cluster.
     #   @return [Types::ManagedScalingPolicy]
     #
+    # @!attribute [rw] placement_group_configs
+    #   @return [Array<Types::PlacementGroupConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -5660,7 +5696,8 @@ module Aws::EMR
       :repo_upgrade_on_boot,
       :kerberos_attributes,
       :step_concurrency_level,
-      :managed_scaling_policy)
+      :managed_scaling_policy,
+      :placement_group_configs)
       SENSITIVE = []
       include Aws::Structure
     end

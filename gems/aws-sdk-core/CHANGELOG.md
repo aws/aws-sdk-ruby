@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.109.0 (2020-09-30)
+------------------
+
 * Feature - Add `Seahorse::Util.host_label?` to check strings for valid RFC-3986 host labels.
 * Feature - Add `Aws::ARN#to_h`.
 

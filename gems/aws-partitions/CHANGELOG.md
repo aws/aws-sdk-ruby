@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.378.0 (2020-09-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::S3Outposts`.
+
 1.377.0 (2020-09-29)
 ------------------
 

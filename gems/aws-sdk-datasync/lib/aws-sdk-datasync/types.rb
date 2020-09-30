@@ -526,12 +526,18 @@ module Aws::DataSync
     #
     # @!attribute [rw] access_key
     #   Optional. The access key is used if credentials are required to
-    #   access the self-managed object storage server.
+    #   access the self-managed object storage server. If your object
+    #   storage requires a user name and password to authenticate, use
+    #   `AccessKey` and `SecretKey` to provide the user name and password,
+    #   respectively.
     #   @return [String]
     #
     # @!attribute [rw] secret_key
     #   Optional. The secret key is used if credentials are required to
-    #   access the self-managed object storage server.
+    #   access the self-managed object storage server. If your object
+    #   storage requires a user name and password to authenticate, use
+    #   `AccessKey` and `SecretKey` to provide the user name and password,
+    #   respectively.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -584,10 +590,11 @@ module Aws::DataSync
     #       {
     #         subdirectory: "S3Subdirectory",
     #         s3_bucket_arn: "S3BucketArn", # required
-    #         s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #         s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #         s3_config: { # required
     #           bucket_access_role_arn: "IamRoleArn", # required
     #         },
+    #         agent_arns: ["AgentArn"],
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -603,16 +610,20 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the
+    #   bucket is on an AWS Outpost, this must be an access point ARN.
     #   @return [String]
     #
     # @!attribute [rw] s3_storage_class
     #   The Amazon S3 storage class that you want to store your files in
-    #   when this location is used as a task destination. For more
-    #   information about S3 storage classes, see [Amazon S3 Storage
-    #   Classes][1] in the *Amazon Simple Storage Service Developer Guide*.
-    #   Some storage classes have behaviors that can affect your S3 storage
-    #   cost. For detailed information, see using-storage-classes.
+    #   when this location is used as a task destination. For buckets in AWS
+    #   Regions, the storage class defaults to Standard. For buckets on AWS
+    #   Outposts, the storage class defaults to AWS S3 Outposts.
+    #
+    #   For more information about S3 storage classes, see [Amazon S3
+    #   Storage Classes][1] in the *Amazon Simple Storage Service Developer
+    #   Guide*. Some storage classes have behaviors that can affect your S3
+    #   storage cost. For detailed information, see using-storage-classes.
     #
     #
     #
@@ -627,6 +638,13 @@ module Aws::DataSync
     #   Location for Amazon S3 in the *AWS DataSync User Guide*.
     #   @return [Types::S3Config]
     #
+    # @!attribute [rw] agent_arns
+    #   If you are using DataSync on an AWS Outpost, specify the Amazon
+    #   Resource Names (ARNs) of the DataSync agents deployed on your AWS
+    #   Outpost. For more information about launching a DataSync agent on an
+    #   Amazon Outpost, see outposts-agent.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tags
     #   The key-value pair that represents the tag that you want to add to
     #   the location. The value can be an empty string. We recommend using
@@ -640,6 +658,7 @@ module Aws::DataSync
       :s3_bucket_arn,
       :s3_storage_class,
       :s3_config,
+      :agent_arns,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1257,7 +1276,10 @@ module Aws::DataSync
     #
     # @!attribute [rw] access_key
     #   Optional. The access key is used if credentials are required to
-    #   access the self-managed object storage server.
+    #   access the self-managed object storage server. If your object
+    #   storage requires a user name and password to authenticate, use
+    #   `AccessKey` and `SecretKey` to provide the user name and password,
+    #   respectively.
     #   @return [String]
     #
     # @!attribute [rw] server_port
@@ -1320,7 +1342,8 @@ module Aws::DataSync
     # DescribeLocationS3Response
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket or access
+    #   point.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
@@ -1348,6 +1371,13 @@ module Aws::DataSync
     #   Location for Amazon S3 in the *AWS DataSync User Guide*.
     #   @return [Types::S3Config]
     #
+    # @!attribute [rw] agent_arns
+    #   If you are using DataSync on an Amazon Outpost, the Amazon Resource
+    #   Name (ARNs) of the EC2 agents deployed on your AWS Outpost. For more
+    #   information about launching a DataSync agent on an Amazon Outpost,
+    #   see outposts-agent.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] creation_time
     #   The time that the Amazon S3 bucket location was created.
     #   @return [Time]
@@ -1359,6 +1389,7 @@ module Aws::DataSync
       :location_uri,
       :s3_storage_class,
       :s3_config,
+      :agent_arns,
       :creation_time)
       SENSITIVE = []
       include Aws::Structure
@@ -1870,6 +1901,10 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   You can use API filters to narrow down the list of resources
+    #   returned by `ListLocations`. For example, to retrieve all tasks on a
+    #   specific source location, you can use `ListLocations` with filter
+    #   name `LocationType S3` and `Operator Equals`.
     #   @return [Array<Types::LocationFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListLocationsRequest AWS API Documentation
@@ -2038,6 +2073,10 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   You can use API filters to narrow down the list of resources
+    #   returned by `ListTasks`. For example, to retrieve all tasks on a
+    #   specific source location, you can use `ListTasks` with filter name
+    #   `LocationId` and `Operator Equals` with the ARN for the location.
     #   @return [Array<Types::TaskFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTasksRequest AWS API Documentation
@@ -2070,6 +2109,11 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # You can use API filters to narrow down the list of resources returned
+    # by `ListLocations`. For example, to retrieve all your Amazon S3
+    # locations, you can use `ListLocations` with filter name `LocationType
+    # S3` and `Operator Equals`.
+    #
     # @note When making an API call, you may pass LocationFilter
     #   data as a hash:
     #
@@ -2080,12 +2124,20 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the filter being used. Each API call supports a list of
+    #   filters that are available for it (for example, `LocationType` for
+    #   `ListLocations`).
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   The values that you want to filter for. For example, you might want
+    #   to display only Amazon S3 locations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operator
+    #   The operator that is used to compare filter values (for example,
+    #   `Equals` or `Contains`). For more about API filtering operators, see
+    #   query-resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/LocationFilter AWS API Documentation
@@ -2192,7 +2244,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] agent_arns
-    #   ARNs)of the agents to use for an NFS location.
+    #   ARNs of the agents to use for an NFS location.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/OnPremConfig AWS API Documentation
@@ -2414,11 +2466,17 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] transfer_mode
-    #   TransferMode has two values: CHANGED and ALL. CHANGED performs an
-    #   "incremental" or "delta sync", it compares file modification
-    #   time between source and destination to determine which files need to
-    #   be transferred. ALL skips destination inventory and transfers all
-    #   files discovered on the source.
+    #   A value that determines whether DataSync transfers only the data and
+    #   metadata that differ between the source and the destination
+    #   location, or whether DataSync transfers all the content from the
+    #   source, without comparing to the destination location.
+    #
+    #   CHANGED: DataSync copies only data or metadata that is new or
+    #   different content from the source location to the destination
+    #   location.
+    #
+    #   ALL: DataSync copies all source location content to the destination,
+    #   without comparing to existing content on the destination.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
@@ -2763,6 +2821,11 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # You can use API filters to narrow down the list of resources returned
+    # by `ListTasks`. For example, to retrieve all tasks on a source
+    # location, you can use `ListTasks` with filter name `LocationId` and
+    # `Operator Equals` with the ARN for the location.
+    #
     # @note When making an API call, you may pass TaskFilter
     #   data as a hash:
     #
@@ -2773,12 +2836,20 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the filter being used. Each API call supports a list of
+    #   filters that are available for it. For example, `LocationId` for
+    #   `ListTasks`.
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   The values that you want to filter for. For example, you might want
+    #   to display only tasks for a specific destination location.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operator
+    #   The operator that is used to compare filter values (for example,
+    #   `Equals` or `Contains`). For more about API filtering operators, see
+    #   query-resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskFilter AWS API Documentation

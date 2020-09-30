@@ -130,9 +130,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #       }
     #
     # @!attribute [rw] policy_name
@@ -203,6 +203,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -262,6 +266,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -283,10 +290,10 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -357,6 +364,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -416,6 +427,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -437,9 +451,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -506,6 +520,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -566,6 +584,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -586,9 +607,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -659,6 +680,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -720,6 +745,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -771,9 +799,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -844,6 +872,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -904,6 +936,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -956,9 +991,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -1033,6 +1068,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1093,6 +1132,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1146,9 +1188,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -1223,6 +1265,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1283,6 +1329,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1458,7 +1507,7 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization
     #         resource_label: "ResourceLabel",
     #       }
     #
@@ -1512,9 +1561,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -1532,7 +1581,7 @@ module Aws::ApplicationAutoScaling
     #         target_tracking_scaling_policy_configuration: {
     #           target_value: 1.0, # required
     #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization
+    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization
     #             resource_label: "ResourceLabel",
     #           },
     #           customized_metric_specification: {
@@ -1621,6 +1670,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1680,6 +1733,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1691,7 +1747,7 @@ module Aws::ApplicationAutoScaling
     #   `TargetTrackingScaling`—Not supported for Amazon EMR
     #
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
-    #   or Amazon Keyspaces (for Apache Cassandra).
+    #   Amazon Keyspaces (for Apache Cassandra), or Amazon MSK.
     #
     #   For more information, see [Target Tracking Scaling Policies][1] and
     #   [Step Scaling Policies][2] in the *Application Auto Scaling User
@@ -1754,11 +1810,11 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         schedule: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1863,6 +1919,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1922,6 +1982,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -1964,9 +2027,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
@@ -2042,6 +2105,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2102,6 +2169,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2267,6 +2337,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2327,6 +2401,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2480,6 +2557,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2539,6 +2620,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2589,6 +2673,14 @@ module Aws::ApplicationAutoScaling
     end
 
     # Represents a scaling policy to use with Application Auto Scaling.
+    #
+    # For more information about configuring scaling policies for a specific
+    # service, see [Getting started with Application Auto Scaling][1] in the
+    # *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/getting-started.html
     #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the scaling policy.
@@ -2661,6 +2753,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2720,6 +2816,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -2859,6 +2958,10 @@ module Aws::ApplicationAutoScaling
     #     unique identifier is the table name. Example:
     #     `keyspace/mykeyspace/table/mytable`.
     #
+    #   * Amazon MSK cluster - The resource type and unique identifier are
+    #     specified using the cluster ARN. Example:
+    #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2918,6 +3021,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
     #     capacity for an Amazon Keyspaces table.
+    #
+    #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
+    #     (in GiB) for brokers in an Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3098,12 +3204,14 @@ module Aws::ApplicationAutoScaling
     #   With scale-out policies, the intention is to continuously (but not
     #   excessively) scale out. After Application Auto Scaling successfully
     #   scales out using a step scaling policy, it starts to calculate the
-    #   cooldown time. While the cooldown period is in effect, capacity
-    #   added by the initiating scale-out activity is calculated as part of
-    #   the desired capacity for the next scale-out activity. For example,
-    #   when an alarm triggers a step scaling policy to increase the
-    #   capacity by 2, the scaling activity completes successfully, and a
-    #   cooldown period starts. If the alarm triggers again during the
+    #   cooldown time. The scaling policy won't increase the desired
+    #   capacity again unless either a larger scale out is triggered or the
+    #   cooldown period ends. While the cooldown period is in effect,
+    #   capacity added by the initiating scale-out activity is calculated as
+    #   part of the desired capacity for the next scale-out activity. For
+    #   example, when an alarm triggers a step scaling policy to increase
+    #   the capacity by 2, the scaling activity completes successfully, and
+    #   a cooldown period starts. If the alarm triggers again during the
     #   cooldown period but at a more aggressive step adjustment of 3, the
     #   previous increase of 2 is considered part of the current capacity.
     #   Therefore, only 1 is added to the capacity.
@@ -3145,6 +3253,8 @@ module Aws::ApplicationAutoScaling
     #   * Lambda provisioned concurrency
     #
     #   * Amazon Keyspaces tables
+    #
+    #   * Amazon MSK cluster storage
     #   @return [Integer]
     #
     # @!attribute [rw] metric_aggregation_type
@@ -3216,7 +3326,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         target_value: 1.0, # required
     #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization
+    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization
     #           resource_label: "ResourceLabel",
     #         },
     #         customized_metric_specification: {
@@ -3258,10 +3368,12 @@ module Aws::ApplicationAutoScaling
     #   With the *scale-out cooldown period*, the intention is to
     #   continuously (but not excessively) scale out. After Application Auto
     #   Scaling successfully scales out using a target tracking scaling
-    #   policy, it starts to calculate the cooldown time. While the
-    #   scale-out cooldown period is in effect, the capacity added by the
-    #   initiating scale-out activity is calculated as part of the desired
-    #   capacity for the next scale-out activity.
+    #   policy, it starts to calculate the cooldown time. The scaling policy
+    #   won't increase the desired capacity again unless either a larger
+    #   scale out is triggered or the cooldown period ends. While the
+    #   cooldown period is in effect, the capacity added by the initiating
+    #   scale-out activity is calculated as part of the desired capacity for
+    #   the next scale-out activity.
     #
     #   Application Auto Scaling provides a default value of 300 for the
     #   following scalable targets:
@@ -3292,6 +3404,8 @@ module Aws::ApplicationAutoScaling
     #   * Lambda provisioned concurrency
     #
     #   * Amazon Keyspaces tables
+    #
+    #   * Amazon MSK cluster storage
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_cooldown
@@ -3335,6 +3449,8 @@ module Aws::ApplicationAutoScaling
     #   * Lambda provisioned concurrency
     #
     #   * Amazon Keyspaces tables
+    #
+    #   * Amazon MSK cluster storage
     #   @return [Integer]
     #
     # @!attribute [rw] disable_scale_in

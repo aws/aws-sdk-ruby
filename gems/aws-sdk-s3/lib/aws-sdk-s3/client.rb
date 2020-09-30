@@ -455,9 +455,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, String] :key
     #   Key of the object for which the multipart upload was initiated.
@@ -906,6 +916,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The name of the destination bucket.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
+    #
     # @option params [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
     #
@@ -949,6 +981,15 @@ module Aws::S3
     #     source and destination buckets are in the same AWS Region.
     #
     #      </note>
+    #
+    #     Alternatively, for objects accessed through Amazon S3 on Outposts,
+    #     specify the ARN of the object as accessed in the format
+    #     `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     outpost `my-outpost` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
+    #     The value must be URL encoded.
     #
     #   To copy a specific version of an object, append
     #   `?versionId=<version-id>` to the value (for example,
@@ -1200,13 +1241,16 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Creates a new bucket. To create a bucket, you must register with
+    # Creates a new S3 bucket. To create a bucket, you must register with
     # Amazon S3 and have a valid AWS Access Key ID to authenticate requests.
     # Anonymous requests are never allowed to create buckets. By creating
     # the bucket, you become the bucket owner.
     #
-    # Not every string is an acceptable bucket name. For information on
+    # Not every string is an acceptable bucket name. For information about
     # bucket naming restrictions, see [Working with Amazon S3 Buckets][1].
+    #
+    # If you want to create an **Amazon S3 on Outposts** bucket, see [Create
+    # Bucket][2].
     #
     # By default, the bucket is created in the US East (N. Virginia) Region.
     # You can optionally specify a Region in the request body. You might
@@ -1214,7 +1258,7 @@ module Aws::S3
     # regulatory requirements. For example, if you reside in Europe, you
     # will probably find it advantageous to create buckets in the Europe
     # (Ireland) Region. For more information, see [How to Select a Region
-    # for Your Buckets][2].
+    # for Your Buckets][3].
     #
     # <note markdown="1"> If you send your create bucket request to the `s3.amazonaws.com`
     # endpoint, the request goes to the us-east-1 Region. Accordingly, the
@@ -1223,7 +1267,7 @@ module Aws::S3
     # another Region where the bucket is to be created. If you create a
     # bucket in a Region other than US East (N. Virginia), your application
     # must be able to handle 307 redirect. For more information, see
-    # [Virtual Hosting of Buckets][3].
+    # [Virtual Hosting of Buckets][4].
     #
     #  </note>
     #
@@ -1235,14 +1279,14 @@ module Aws::S3
     # * Specify a canned ACL using the `x-amz-acl` request header. Amazon S3
     #   supports a set of predefined ACLs, known as *canned ACLs*. Each
     #   canned ACL has a predefined set of grantees and permissions. For
-    #   more information, see [Canned ACL][4].
+    #   more information, see [Canned ACL][5].
     #
     # * Specify access permissions explicitly using the `x-amz-grant-read`,
     #   `x-amz-grant-write`, `x-amz-grant-read-acp`,
     #   `x-amz-grant-write-acp`, and `x-amz-grant-full-control` headers.
     #   These headers map to the set of permissions Amazon S3 supports in an
     #   ACL. For more information, see [Access Control List (ACL)
-    #   Overview][5].
+    #   Overview][6].
     #
     #   You specify each grantee as a type=value pair, where the type is one
     #   of the following:
@@ -1275,7 +1319,7 @@ module Aws::S3
     #     * South America (São Paulo)
     #
     #      For a list of all the Amazon S3 supported Regions and endpoints,
-    #     see [Regions and Endpoints][6] in the AWS General Reference.
+    #     see [Regions and Endpoints][7] in the AWS General Reference.
     #
     #      </note>
     #
@@ -1292,20 +1336,21 @@ module Aws::S3
     #
     # The following operations are related to `CreateBucket`\:
     #
-    # * [PutObject][7]
+    # * [PutObject][8]
     #
-    # * [DeleteBucket][8]
+    # * [DeleteBucket][9]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [6]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [7]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -1342,19 +1387,6 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
-    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -1369,6 +1401,19 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1639,6 +1684,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The name of the bucket to which to initiate the upload
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
+    #
     # @option params [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
     #
@@ -1843,7 +1910,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Deletes the bucket. All objects (including all object versions and
+    # Deletes the S3 bucket. All objects (including all object versions and
     # delete markers) in the bucket must be deleted before the bucket itself
     # can be deleted.
     #
@@ -2551,9 +2618,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, String] :key
     #   Key name of the object to delete.
@@ -2594,6 +2671,15 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -2606,15 +2692,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
-    #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2677,9 +2754,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, String] :key
     #   Name of the object key.
@@ -2697,6 +2784,21 @@ module Aws::S3
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
     #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To remove tag set from an object version
     #
     #   # The following example removes tag set associated with the specified object version. The request specifies both the
@@ -2711,21 +2813,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2814,9 +2901,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, Types::Delete] :delete
     #   Container for the request.
@@ -2855,42 +2952,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -2923,6 +2984,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -3061,7 +3158,7 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which the accelerate configuration is
+    #   The name of the bucket for which the accelerate configuration is
     #   retrieved.
     #
     # @option params [String] :expected_bucket_owner
@@ -3578,8 +3675,8 @@ module Aws::S3
     # combination of both. Accordingly, this section describes the latest
     # API. The response describes the new filter element that you can use to
     # specify a filter to select a subset of objects to which the rule
-    # applies. If you are still using previous version of the lifecycle
-    # configuration, it works. For the earlier API description, see
+    # applies. If you are using a previous version of the lifecycle
+    # configuration, it still works. For the earlier API description, see
     # [GetBucketLifecycle][1].
     #
     #  </note>
@@ -3907,7 +4004,8 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which to get the notification configuration.
+    #   The name of the bucket for which to get the notification
+    #   configuration.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -4040,7 +4138,8 @@ module Aws::S3
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotification.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which to get the notification configuration.
+    #   The name of the bucket for which to get the notification
+    #   configuration.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -4823,9 +4922,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [String] :if_match
     #   Return the object only if its entity tag (ETag) is the same as the one
@@ -4955,6 +5064,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -4976,28 +5107,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -5101,7 +5210,9 @@ module Aws::S3
     end
 
     # Returns the access control list (ACL) of an object. To use this
-    # operation, you must have READ\_ACP access to the object.
+    # operation, you must have `READ_ACP` access to the object.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # **Versioning**
     #
@@ -5254,6 +5365,8 @@ module Aws::S3
     # Gets an object's current Legal Hold status. For more information, see
     # [Locking Objects][1].
     #
+    # This action is not supported by Amazon S3 on Outposts.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
@@ -5337,6 +5450,18 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The bucket whose Object Lock configuration you want to retrieve.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -5371,6 +5496,8 @@ module Aws::S3
 
     # Retrieves an object's retention settings. For more information, see
     # [Locking Objects][1].
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     #
     #
@@ -5483,9 +5610,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, String] :key
     #   Object key for which to get the tagging information.
@@ -5503,6 +5640,27 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#version_id #version_id} => String
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
     #
     # @example Example: To retrieve tag set of an object
     #
@@ -5526,27 +5684,6 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -5574,17 +5711,19 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Return torrent files from a bucket. BitTorrent can save you bandwidth
+    # Returns torrent files from a bucket. BitTorrent can save you bandwidth
     # when you're distributing large files. For more information about
-    # BitTorrent, see [Amazon S3 Torrent][1].
+    # BitTorrent, see [Using BitTorrent with Amazon S3][1].
     #
-    # <note markdown="1"> You can get torrent only for objects that are less than 5 GB in size
-    # and that are not encrypted using server-side encryption with
+    # <note markdown="1"> You can get torrent only for objects that are less than 5 GB in size,
+    # and that are not encrypted using server-side encryption with a
     # customer-provided encryption key.
     #
     #  </note>
     #
     # To use GET, you must have READ access to the object.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # The following operation is related to `GetObjectTorrent`\:
     #
@@ -5757,6 +5896,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The bucket name.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -5881,6 +6042,28 @@ module Aws::S3
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the object.
+    #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [String] :if_match
     #   Return the object only if its entity tag (ETag) is the same as the one
@@ -6472,7 +6655,7 @@ module Aws::S3
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket to which the multipart upload was initiated.
+    #   The name of the bucket to which the multipart upload was initiated.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
@@ -6482,9 +6665,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [String] :delimiter
     #   Character you use to group keys.
@@ -6700,7 +6893,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Returns metadata about all of the versions of objects in a bucket. You
+    # Returns metadata about all versions of the objects in a bucket. You
     # can also use request parameters as selection criteria to return
     # metadata about a subset of all the object versions.
     #
@@ -6711,6 +6904,8 @@ module Aws::S3
     #  </note>
     #
     # To use this operation, you must have READ access to the bucket.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # The following operations are related to `ListObjectVersions`\:
     #
@@ -6731,18 +6926,6 @@ module Aws::S3
     #
     # @option params [required, String] :bucket
     #   The bucket name that contains the objects.
-    #
-    #   When using this API with an access point, you must direct requests to
-    #   the access point hostname. The access point hostname takes the form
-    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For more
-    #   information about access point ARNs, see [Using Access Points][1] in
-    #   the *Amazon Simple Storage Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #
     # @option params [String] :delimiter
     #   A delimiter is a character that you specify to group keys. All keys
@@ -6936,6 +7119,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The name of the bucket containing the objects.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
+    #
     # @option params [String] :delimiter
     #   A delimiter is a character you use to group keys.
     #
@@ -7116,9 +7321,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [String] :delimiter
     #   A delimiter is a character you use to group keys.
@@ -7302,7 +7517,7 @@ module Aws::S3
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket to which the parts are being uploaded.
+    #   The name of the bucket to which the parts are being uploaded.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
@@ -7312,9 +7527,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, String] :key
     #   Object key for which the multipart upload was initiated.
@@ -7494,7 +7719,7 @@ module Aws::S3
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which the accelerate configuration is set.
+    #   The name of the bucket for which the accelerate configuration is set.
     #
     # @option params [required, Types::AccelerateConfiguration] :accelerate_configuration
     #   Container for setting the transfer acceleration state.
@@ -9928,7 +10153,7 @@ module Aws::S3
     #   Object data.
     #
     # @option params [required, String] :bucket
-    #   Bucket name to which the PUT operation was initiated.
+    #   The bucket name to which the PUT operation was initiated.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
@@ -9938,9 +10163,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [String] :cache_control
     #   Can be used to specify caching behavior along the request/reply chain.
@@ -10147,6 +10382,44 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
     # @example Example: To upload an object and specify server-side encryption and object tags
     #
     #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
@@ -10165,22 +10438,6 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
-    #   }
-    #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Example: To upload an object and specify optional tags
@@ -10221,27 +10478,6 @@ module Aws::S3
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
-    # @example Example: To upload object and specify user-defined metadata
-    #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
-    #   }
-    #
     # @example Example: To upload an object and specify canned ACL.
     #
     #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
@@ -10260,21 +10496,20 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To upload an object
+    # @example Example: To create an object.
     #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Streaming a file from disk
@@ -10343,10 +10578,12 @@ module Aws::S3
     end
 
     # Uses the `acl` subresource to set the access control list (ACL)
-    # permissions for an object that already exists in an S3 bucket. You
-    # must have `WRITE_ACP` permission to set the ACL of an object. For more
+    # permissions for a new or existing object in an S3 bucket. You must
+    # have `WRITE_ACP` permission to set the ACL of an object. For more
     # information, see [What permissions can I grant?][1] in the *Amazon
     # Simple Storage Service Developer Guide*.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # Depending on your application needs, you can choose to set the ACL on
     # an object using either the request body or the headers. For example,
@@ -10550,6 +10787,28 @@ module Aws::S3
     # @option params [required, String] :key
     #   Key for which the PUT operation was initiated.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
+    #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -10641,6 +10900,8 @@ module Aws::S3
     end
 
     # Applies a Legal Hold configuration to the specified object.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # **Related Resources**
     #
@@ -10816,6 +11077,8 @@ module Aws::S3
 
     # Places an Object Retention configuration on an object.
     #
+    # This action is not supported by Amazon S3 on Outposts.
+    #
     # **Related Resources**
     #
     # * [Locking Objects][1]
@@ -10933,17 +11196,13 @@ module Aws::S3
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * <i>Code: InvalidTagError </i>
+    # * * <i>Code: InvalidTagError </i>
     #
     #   * *Cause: The tag provided was not a valid tag. This error can occur
     #     if the tag did not pass input validation. For more information,
     #     see [Object Tagging][3].*
     #
-    # * ****
-    #
-    #   * <i>Code: MalformedXMLError </i>
+    # * * <i>Code: MalformedXMLError </i>
     #
     #   * *Cause: The XML provided does not match the schema.*
     #
@@ -10980,9 +11239,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, String] :key
     #   Name of the object key.
@@ -11148,7 +11417,9 @@ module Aws::S3
 
     # Restores an archived copy of an object back into Amazon S3
     #
-    # This operation performs the following types of requests:
+    # This action is not supported by Amazon S3 on Outposts.
+    #
+    # This action performs the following types of requests:
     #
     # * `select` - Perform a select query on an archived object
     #
@@ -11340,9 +11611,7 @@ module Aws::S3
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * *Code: RestoreAlreadyInProgress*
+    # * * *Code: RestoreAlreadyInProgress*
     #
     #   * *Cause: Object restore is already in progress. (This error does
     #     not apply to SELECT type requests.)*
@@ -11351,9 +11620,7 @@ module Aws::S3
     #
     #   * *SOAP Fault Code Prefix: Client*
     #
-    # * ****
-    #
-    #   * *Code: GlacierExpeditedRetrievalNotAvailable*
+    # * * *Code: GlacierExpeditedRetrievalNotAvailable*
     #
     #   * *Cause: S3 Glacier expedited retrievals are currently not
     #     available. Try again later. (Returned if there is insufficient
@@ -11401,9 +11668,19 @@ module Aws::S3
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [required, String] :key
     #   Object key for which the operation was initiated.
@@ -11567,6 +11844,8 @@ module Aws::S3
     # Amazon S3 uses this format to parse object data into records, and
     # returns only records that match the specified SQL expression. You must
     # also specify the data serialization format for the response.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # For more information about Amazon S3 Select, see [Selecting Content
     # from Objects][1] in the *Amazon Simple Storage Service Developer
@@ -12044,9 +12323,7 @@ module Aws::S3
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * *Code: NoSuchUpload*
+    # * * *Code: NoSuchUpload*
     #
     #   * *Cause: The specified multipart upload does not exist. The upload
     #     ID might be invalid, or the multipart upload might have been
@@ -12084,7 +12361,29 @@ module Aws::S3
     #   Object data.
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket to which the multipart upload was initiated.
+    #   The name of the bucket to which the multipart upload was initiated.
+    #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
     #
     # @option params [Integer] :content_length
     #   Size of the body in bytes. This parameter is useful when the size of
@@ -12291,9 +12590,7 @@ module Aws::S3
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * *Code: NoSuchUpload*
+    # * * *Code: NoSuchUpload*
     #
     #   * *Cause: The specified multipart upload does not exist. The upload
     #     ID might be invalid, or the multipart upload might have been
@@ -12301,9 +12598,7 @@ module Aws::S3
     #
     #   * *HTTP Status Code: 404 Not Found*
     #
-    # * ****
-    #
-    #   * *Code: InvalidRequest*
+    # * * *Code: InvalidRequest*
     #
     #   * *Cause: The specified copy source is not supported as a byte-range
     #     copy source.*
@@ -12341,6 +12636,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The bucket name.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/
+    #
     # @option params [required, String] :copy_source
     #   Specifies the source object for the copy operation. You specify the
     #   value in one of two formats, depending on whether you want to access
@@ -12357,9 +12674,9 @@ module Aws::S3
     #     Resource Name (ARN) of the object as accessed through the access
     #     point, in the format
     #     `arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>`.
-    #     For example, to copy the object `reports/january.pdf` through the
-    #     access point `my-access-point` owned by account `123456789012` in
-    #     Region `us-west-2`, use the URL encoding of
+    #     For example, to copy the object `reports/january.pdf` through access
+    #     point `my-access-point` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
     #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
     #     The value must be URL encoded.
     #
@@ -12367,6 +12684,15 @@ module Aws::S3
     #     source and destination buckets are in the same AWS Region.
     #
     #      </note>
+    #
+    #     Alternatively, for objects accessed through Amazon S3 on Outposts,
+    #     specify the ARN of the object as accessed in the format
+    #     `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     outpost `my-outpost` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
+    #     The value must be URL encoded.
     #
     #   To copy a specific version of an object, append
     #   `?versionId=<version-id>` to the value (for example,
@@ -12572,7 +12898,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.81.1'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

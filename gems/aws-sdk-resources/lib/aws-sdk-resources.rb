@@ -194,6 +194,7 @@ module Aws
   autoload :Route53Resolver, 'aws-sdk-route53resolver'
   autoload :S3, 'aws-sdk-s3'
   autoload :S3Control, 'aws-sdk-s3control'
+  autoload :S3Outposts, 'aws-sdk-s3outposts'
   autoload :SES, 'aws-sdk-ses'
   autoload :SESV2, 'aws-sdk-sesv2'
   autoload :SMS, 'aws-sdk-sms'

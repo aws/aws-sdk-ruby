@@ -48,6 +48,6 @@ require_relative 'aws-sdk-servicediscovery/customizations'
 # @!group service
 module Aws::ServiceDiscovery
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

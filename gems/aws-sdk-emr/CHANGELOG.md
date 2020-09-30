@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-09-30)
+------------------
+
+* Feature - Amazon EMR customers can now use EC2 placement group to influence the placement of master nodes in a high-availability (HA) cluster across distinct underlying hardware to improve cluster availability.
+
 1.37.0 (2020-09-15)
 ------------------
 

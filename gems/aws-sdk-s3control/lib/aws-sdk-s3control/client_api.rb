@@ -264,7 +264,7 @@ module Aws::S3Control
     CreateBucketResult.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3RegionalBucketArn, location_name: "BucketArn"))
     CreateBucketResult.struct_class = Types::CreateBucketResult
 
-    CreateJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    CreateJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     CreateJobRequest.add_member(:confirmation_required, Shapes::ShapeRef.new(shape: ConfirmationRequired, location_name: "ConfirmationRequired", metadata: {"box"=>true}))
     CreateJobRequest.add_member(:operation, Shapes::ShapeRef.new(shape: JobOperation, required: true, location_name: "Operation"))
     CreateJobRequest.add_member(:report, Shapes::ShapeRef.new(shape: JobReport, required: true, location_name: "Report"))
@@ -303,7 +303,7 @@ module Aws::S3Control
     DeleteBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
     DeleteBucketTaggingRequest.struct_class = Types::DeleteBucketTaggingRequest
 
-    DeleteJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    DeleteJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     DeleteJobTaggingRequest.struct_class = Types::DeleteJobTaggingRequest
 
@@ -312,7 +312,7 @@ module Aws::S3Control
     DeletePublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeletePublicAccessBlockRequest.struct_class = Types::DeletePublicAccessBlockRequest
 
-    DescribeJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    DescribeJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DescribeJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     DescribeJobRequest.struct_class = Types::DescribeJobRequest
 
@@ -375,7 +375,7 @@ module Aws::S3Control
     GetBucketTaggingResult.add_member(:tag_set, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "TagSet"))
     GetBucketTaggingResult.struct_class = Types::GetBucketTaggingResult
 
-    GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     GetJobTaggingRequest.struct_class = Types::GetJobTaggingRequest
 
@@ -522,7 +522,7 @@ module Aws::S3Control
     ListAccessPointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
     ListAccessPointsResult.struct_class = Types::ListAccessPointsResult
 
-    ListJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    ListJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListJobsRequest.add_member(:job_statuses, Shapes::ShapeRef.new(shape: JobStatusList, location: "querystring", location_name: "jobStatuses"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: StringForNextToken, location: "querystring", location_name: "nextToken"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
@@ -591,7 +591,7 @@ module Aws::S3Control
     PutBucketTaggingRequest[:payload] = :tagging
     PutBucketTaggingRequest[:payload_member] = PutBucketTaggingRequest.member(:tagging)
 
-    PutJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    PutJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     PutJobTaggingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "Tags"))
     PutJobTaggingRequest.struct_class = Types::PutJobTaggingRequest
@@ -695,7 +695,7 @@ module Aws::S3Control
     S3Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))
     S3Tag.struct_class = Types::S3Tag
 
-    S3TagSet.member = Shapes::ShapeRef.new(shape: S3Tag, location_name: "Tag")
+    S3TagSet.member = Shapes::ShapeRef.new(shape: S3Tag)
 
     S3UserMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
     S3UserMetadata.value = Shapes::ShapeRef.new(shape: MaxLength1024String)
@@ -716,7 +716,7 @@ module Aws::S3Control
 
     TransitionList.member = Shapes::ShapeRef.new(shape: Transition, location_name: "Transition")
 
-    UpdateJobPriorityRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    UpdateJobPriorityRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     UpdateJobPriorityRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     UpdateJobPriorityRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location: "querystring", location_name: "priority"))
     UpdateJobPriorityRequest.struct_class = Types::UpdateJobPriorityRequest
@@ -725,7 +725,7 @@ module Aws::S3Control
     UpdateJobPriorityResult.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location_name: "Priority"))
     UpdateJobPriorityResult.struct_class = Types::UpdateJobPriorityResult
 
-    UpdateJobStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    UpdateJobStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     UpdateJobStatusRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     UpdateJobStatusRequest.add_member(:requested_job_status, Shapes::ShapeRef.new(shape: RequestedJobStatus, required: true, location: "querystring", location_name: "requestedJobStatus"))
     UpdateJobStatusRequest.add_member(:status_update_reason, Shapes::ShapeRef.new(shape: JobStatusUpdateReason, location: "querystring", location_name: "statusUpdateReason"))
@@ -787,6 +787,9 @@ module Aws::S3Control
         o.name = "CreateJob"
         o.http_method = "POST"
         o.http_request_uri = "/v20180820/jobs"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: CreateJobRequest,
           location_name: "CreateJobRequest",
           metadata: {
@@ -870,6 +873,9 @@ module Aws::S3Control
         o.name = "DeleteJobTagging"
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/jobs/{id}/tagging"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: DeleteJobTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteJobTaggingResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
@@ -892,6 +898,9 @@ module Aws::S3Control
         o.name = "DescribeJob"
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/jobs/{id}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: DescribeJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeJobResult)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -981,6 +990,9 @@ module Aws::S3Control
         o.name = "GetJobTagging"
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/jobs/{id}/tagging"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: GetJobTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetJobTaggingResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
@@ -1021,6 +1033,9 @@ module Aws::S3Control
         o.name = "ListJobs"
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/jobs"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: ListJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListJobsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1043,6 +1058,12 @@ module Aws::S3Control
         }
         o.input = Shapes::ShapeRef.new(shape: ListRegionalBucketsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRegionalBucketsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_access_point_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1106,6 +1127,9 @@ module Aws::S3Control
         o.name = "PutJobTagging"
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/jobs/{id}/tagging"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: PutJobTaggingRequest,
           location_name: "PutJobTaggingRequest",
           metadata: {
@@ -1134,6 +1158,9 @@ module Aws::S3Control
         o.name = "UpdateJobPriority"
         o.http_method = "POST"
         o.http_request_uri = "/v20180820/jobs/{id}/priority"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateJobPriorityRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateJobPriorityResult)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1146,6 +1173,9 @@ module Aws::S3Control
         o.name = "UpdateJobStatus"
         o.http_method = "POST"
         o.http_request_uri = "/v20180820/jobs/{id}/status"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateJobStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateJobStatusResult)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

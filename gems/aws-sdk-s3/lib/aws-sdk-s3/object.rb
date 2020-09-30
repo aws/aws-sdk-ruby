@@ -590,6 +590,15 @@ module Aws::S3
     #
     #      </note>
     #
+    #     Alternatively, for objects accessed through Amazon S3 on Outposts,
+    #     specify the ARN of the object as accessed in the format
+    #     `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     outpost `my-outpost` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
+    #     The value must be URL encoded.
+    #
     #   To copy a specific version of an object, append
     #   `?versionId=<version-id>` to the value (for example,
     #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).

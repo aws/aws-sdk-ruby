@@ -617,6 +617,77 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeOfferingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         offering_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] offering_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeOfferingRequest AWS API Documentation
+    #
+    class DescribeOfferingRequest < Struct.new(
+      :offering_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful DescribeOffering request.
+    #
+    # @!attribute [rw] offering
+    #   A savings plan that reserves a certain amount of outbound bandwidth
+    #   usage at a discounted rate each month over a period of time.
+    #   @return [Types::Offering]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeOfferingResponse AWS API Documentation
+    #
+    class DescribeOfferingResponse < Struct.new(
+      :offering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeReservationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reservation_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] reservation_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeReservationRequest AWS API Documentation
+    #
+    class DescribeReservationRequest < Struct.new(
+      :reservation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful DescribeReservation request.
+    #
+    # @!attribute [rw] reservation
+    #   A pricing agreement for a discounted rate for a specific outbound
+    #   bandwidth that your MediaConnect account will use each month over a
+    #   specific time period. The discounted rate in the reservation applies
+    #   to outbound bandwidth for all flows from your account until your
+    #   account reaches the amount of bandwidth in your reservation. If you
+    #   use more outbound bandwidth than the agreed upon amount in a single
+    #   month, the overage is charged at the on-demand rate.
+    #   @return [Types::Reservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeReservationResponse AWS API Documentation
+    #
+    class DescribeReservationResponse < Struct.new(
+      :reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the encryption of the flow.
     #
     # @note When making an API call, you may pass Encryption
@@ -1128,6 +1199,112 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOfferingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListOfferingsRequest AWS API Documentation
+    #
+    class ListOfferingsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListOfferings request. The response
+    # includes the details of each offering that your account is eligible
+    # for. The response includes the following information for each
+    # offering: description, duration, outbound bandwidth, price, Amazon
+    # Resource Name (ARN), and the NextToken to use in a subsequent
+    # ListOfferings request.
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies which batch of results that you want to
+    #   see. For example, you submit a ListOfferings request with MaxResults
+    #   set at 5. The service returns the first batch of results (up to 5)
+    #   and a NextToken value. To see the next batch of results, you can
+    #   submit the ListOfferings request a second time and specify the
+    #   NextToken value.
+    #   @return [String]
+    #
+    # @!attribute [rw] offerings
+    #   A list of offerings that are available to this account in the
+    #   current AWS Region.
+    #   @return [Array<Types::Offering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListOfferingsResponse AWS API Documentation
+    #
+    class ListOfferingsResponse < Struct.new(
+      :next_token,
+      :offerings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListReservationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListReservationsRequest AWS API Documentation
+    #
+    class ListReservationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListReservations request. The response
+    # includes the details of each offering that your account is eligible
+    # for. The response includes the following information for each
+    # offering: description, duration, outbound bandwidth, price, Amazon
+    # Resource Name (ARN), and the NextToken to use in a subsequent
+    # ListOfferings request.
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies which batch of results that you want to
+    #   see. For example, you submit a ListReservations request with
+    #   MaxResults set at 5. The service returns the first batch of results
+    #   (up to 5) and a NextToken value. To see the next batch of results,
+    #   you can submit the ListReservations request a second time and
+    #   specify the NextToken value.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservations
+    #   A list of all reservations that have been purchased by this account
+    #   in the current AWS Region.
+    #   @return [Array<Types::Reservation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListReservationsResponse AWS API Documentation
+    #
+    class ListReservationsResponse < Struct.new(
+      :next_token,
+      :reservations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -1260,6 +1437,61 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # A savings plan that reserves a certain amount of outbound bandwidth
+    # usage at a discounted rate each month over a period of time.
+    #
+    # @!attribute [rw] currency_code
+    #   The type of currency that is used for billing. The currencyCode used
+    #   for all reservations is US dollars.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The length of time that your reservation would be active.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_units
+    #   The unit of measurement for the duration of the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_arn
+    #   The Amazon Resource Name (ARN) that MediaConnect assigns to the
+    #   offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_description
+    #   A description of the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_per_unit
+    #   The cost of a single unit. This value, in combination with
+    #   priceUnits, makes up the rate.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_units
+    #   The unit of measurement that is used for billing. This value, in
+    #   combination with pricePerUnit, makes up the rate.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   A definition of the amount of outbound bandwidth that you would be
+    #   reserving if you purchase the offering.
+    #   @return [Types::ResourceSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Offering AWS API Documentation
+    #
+    class Offering < Struct.new(
+      :currency_code,
+      :duration,
+      :duration_units,
+      :offering_arn,
+      :offering_description,
+      :price_per_unit,
+      :price_units,
+      :resource_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings for an output.
     #
     # @!attribute [rw] data_transfer_subscriber_fee_percent
@@ -1327,6 +1559,66 @@ module Aws::MediaConnect
       :port,
       :transport,
       :vpc_interface_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Submits a request to purchase an offering, which creates a reservation
+    # in your AWS account. If you already have an active reservation, you
+    # can't purchase another offering.
+    #
+    # @note When making an API call, you may pass PurchaseOfferingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         offering_arn: "__string", # required
+    #         reservation_name: "__string", # required
+    #         start: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] offering_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_name
+    #   The name that you want to use for the reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start
+    #   The date and time that you want the reservation to begin, in
+    #   Coordinated Universal Time (UTC). You can specify any date and time
+    #   between 12:00am on the first day of the current month to the current
+    #   time on today's date, inclusive. Specify the start in a 24-hour
+    #   notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T
+    #   and Z are literal characters. For example, to specify 11:30pm on
+    #   March 5, 2020, enter 2020-03-05T23:30:00Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PurchaseOfferingRequest AWS API Documentation
+    #
+    class PurchaseOfferingRequest < Struct.new(
+      :offering_arn,
+      :reservation_name,
+      :start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful PurchaseOffering request.
+    #
+    # @!attribute [rw] reservation
+    #   A pricing agreement for a discounted rate for a specific outbound
+    #   bandwidth that your MediaConnect account will use each month over a
+    #   specific time period. The discounted rate in the reservation applies
+    #   to outbound bandwidth for all flows from your account until your
+    #   account reaches the amount of bandwidth in your reservation. If you
+    #   use more outbound bandwidth than the agreed upon amount in a single
+    #   month, the overage is charged at the on-demand rate.
+    #   @return [Types::Reservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PurchaseOfferingResponse AWS API Documentation
+    #
+    class PurchaseOfferingResponse < Struct.new(
+      :reservation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1463,6 +1755,122 @@ module Aws::MediaConnect
       :flow_arn,
       :non_deleted_network_interface_ids,
       :vpc_interface_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A pricing agreement for a discounted rate for a specific outbound
+    # bandwidth that your MediaConnect account will use each month over a
+    # specific time period. The discounted rate in the reservation applies
+    # to outbound bandwidth for all flows from your account until your
+    # account reaches the amount of bandwidth in your reservation. If you
+    # use more outbound bandwidth than the agreed upon amount in a single
+    # month, the overage is charged at the on-demand rate.
+    #
+    # @!attribute [rw] currency_code
+    #   The type of currency that is used for billing. The currencyCode used
+    #   for your reservation is US dollars.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The length of time that this reservation is active. MediaConnect
+    #   defines this value in the offering.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_units
+    #   The unit of measurement for the duration of the reservation.
+    #   MediaConnect defines this value in the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] end
+    #   The day and time that this reservation expires. This value is
+    #   calculated based on the start date and time that you set and the
+    #   offering's duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_arn
+    #   The Amazon Resource Name (ARN) that MediaConnect assigns to the
+    #   offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_description
+    #   A description of the offering. MediaConnect defines this value in
+    #   the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_per_unit
+    #   The cost of a single unit. This value, in combination with
+    #   priceUnits, makes up the rate. MediaConnect defines this value in
+    #   the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_units
+    #   The unit of measurement that is used for billing. This value, in
+    #   combination with pricePerUnit, makes up the rate. MediaConnect
+    #   defines this value in the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_arn
+    #   The Amazon Resource Name (ARN) that MediaConnect assigns to the
+    #   reservation when you purchase an offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_name
+    #   The name that you assigned to the reservation when you purchased the
+    #   offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_state
+    #   The status of your reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   A definition of the amount of outbound bandwidth that you would be
+    #   reserving if you purchase the offering. MediaConnect defines the
+    #   values that make up the resourceSpecification in the offering.
+    #   @return [Types::ResourceSpecification]
+    #
+    # @!attribute [rw] start
+    #   The day and time that the reservation becomes active. You set this
+    #   value when you purchase the offering.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Reservation AWS API Documentation
+    #
+    class Reservation < Struct.new(
+      :currency_code,
+      :duration,
+      :duration_units,
+      :end,
+      :offering_arn,
+      :offering_description,
+      :price_per_unit,
+      :price_units,
+      :reservation_arn,
+      :reservation_name,
+      :reservation_state,
+      :resource_specification,
+      :start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A definition of what is being billed for, including the type and
+    # amount.
+    #
+    # @!attribute [rw] reserved_bitrate
+    #   The amount of outbound bandwidth that is discounted in the offering.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource and the unit that is being billed for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ResourceSpecification AWS API Documentation
+    #
+    class ResourceSpecification < Struct.new(
+      :reserved_bitrate,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2096,7 +2504,7 @@ module Aws::MediaConnect
     # entitlement configuration.
     #
     # @!attribute [rw] entitlement
-    #   The settings for a flow entitlement.
+    #   The new configuration of the entitlement that you updated.
     #   @return [Types::Entitlement]
     #
     # @!attribute [rw] flow_arn
@@ -2232,7 +2640,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The settings for an output.
+    #   The new settings of the output that you updated.
     #   @return [Types::Output]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputResponse AWS API Documentation

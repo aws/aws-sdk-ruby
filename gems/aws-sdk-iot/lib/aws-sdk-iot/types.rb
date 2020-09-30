@@ -232,6 +232,21 @@ module Aws::IoT
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
     #         },
+    #         timestream: {
+    #           role_arn: "AwsArn", # required
+    #           database_name: "TimestreamDatabaseName", # required
+    #           table_name: "TimestreamTableName", # required
+    #           dimensions: [ # required
+    #             {
+    #               name: "TimestreamDimensionName", # required
+    #               value: "TimestreamDimensionValue", # required
+    #             },
+    #           ],
+    #           timestamp: {
+    #             value: "TimestreamTimestampValue", # required
+    #             unit: "TimestreamTimestampUnit", # required
+    #           },
+    #         },
     #         http: {
     #           url: "Url", # required
     #           confirmation_url: "Url",
@@ -326,6 +341,16 @@ module Aws::IoT
     #   Starts execution of a Step Functions state machine.
     #   @return [Types::StepFunctionsAction]
     #
+    # @!attribute [rw] timestream
+    #   The Timestream rule action writes attributes (measures) from an MQTT
+    #   message into an Amazon Timestream table. For more information, see
+    #   the [Timestream][1] topic rule action documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html
+    #   @return [Types::TimestreamAction]
+    #
     # @!attribute [rw] http
     #   Send data to an HTTPS endpoint.
     #   @return [Types::HttpAction]
@@ -349,6 +374,7 @@ module Aws::IoT
       :iot_events,
       :iot_site_wise,
       :step_functions,
+      :timestream,
       :http)
       SENSITIVE = []
       include Aws::Structure
@@ -4528,6 +4554,21 @@ module Aws::IoT
     #                 state_machine_name: "StateMachineName", # required
     #                 role_arn: "AwsArn", # required
     #               },
+    #               timestream: {
+    #                 role_arn: "AwsArn", # required
+    #                 database_name: "TimestreamDatabaseName", # required
+    #                 table_name: "TimestreamTableName", # required
+    #                 dimensions: [ # required
+    #                   {
+    #                     name: "TimestreamDimensionName", # required
+    #                     value: "TimestreamDimensionValue", # required
+    #                   },
+    #                 ],
+    #                 timestamp: {
+    #                   value: "TimestreamTimestampValue", # required
+    #                   unit: "TimestreamTimestampUnit", # required
+    #                 },
+    #               },
     #               http: {
     #                 url: "Url", # required
     #                 confirmation_url: "Url",
@@ -4671,6 +4712,21 @@ module Aws::IoT
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
+    #             },
+    #             timestream: {
+    #               role_arn: "AwsArn", # required
+    #               database_name: "TimestreamDatabaseName", # required
+    #               table_name: "TimestreamTableName", # required
+    #               dimensions: [ # required
+    #                 {
+    #                   name: "TimestreamDimensionName", # required
+    #                   value: "TimestreamDimensionValue", # required
+    #                 },
+    #               ],
+    #               timestamp: {
+    #                 value: "TimestreamTimestampValue", # required
+    #                 unit: "TimestreamTimestampUnit", # required
+    #               },
     #             },
     #             http: {
     #               url: "Url", # required
@@ -9391,7 +9447,7 @@ module Aws::IoT
     #
     # @!attribute [rw] start_time
     #   The beginning of the time period. Audit information is retained for
-    #   a limited time (180 days). Requesting a start time prior to what is
+    #   a limited time (90 days). Requesting a start time prior to what is
     #   retained results in an "InvalidRequestException".
     #   @return [Time]
     #
@@ -12948,6 +13004,21 @@ module Aws::IoT
     #                 state_machine_name: "StateMachineName", # required
     #                 role_arn: "AwsArn", # required
     #               },
+    #               timestream: {
+    #                 role_arn: "AwsArn", # required
+    #                 database_name: "TimestreamDatabaseName", # required
+    #                 table_name: "TimestreamTableName", # required
+    #                 dimensions: [ # required
+    #                   {
+    #                     name: "TimestreamDimensionName", # required
+    #                     value: "TimestreamDimensionValue", # required
+    #                   },
+    #                 ],
+    #                 timestamp: {
+    #                   value: "TimestreamTimestampValue", # required
+    #                   unit: "TimestreamTimestampUnit", # required
+    #                 },
+    #               },
     #               http: {
     #                 url: "Url", # required
     #                 confirmation_url: "Url",
@@ -13091,6 +13162,21 @@ module Aws::IoT
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
+    #             },
+    #             timestream: {
+    #               role_arn: "AwsArn", # required
+    #               database_name: "TimestreamDatabaseName", # required
+    #               table_name: "TimestreamTableName", # required
+    #               dimensions: [ # required
+    #                 {
+    #                   name: "TimestreamDimensionName", # required
+    #                   value: "TimestreamDimensionValue", # required
+    #                 },
+    #               ],
+    #               timestamp: {
+    #                 value: "TimestreamTimestampValue", # required
+    #                 unit: "TimestreamTimestampUnit", # required
+    #               },
     #             },
     #             http: {
     #               url: "Url", # required
@@ -15071,6 +15157,136 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The Timestream rule action writes attributes (measures) from an MQTT
+    # message into an Amazon Timestream table. For more information, see the
+    # [Timestream][1] topic rule action documentation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html
+    #
+    # @note When making an API call, you may pass TimestreamAction
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "AwsArn", # required
+    #         database_name: "TimestreamDatabaseName", # required
+    #         table_name: "TimestreamTableName", # required
+    #         dimensions: [ # required
+    #           {
+    #             name: "TimestreamDimensionName", # required
+    #             value: "TimestreamDimensionValue", # required
+    #           },
+    #         ],
+    #         timestamp: {
+    #           value: "TimestreamTimestampValue", # required
+    #           unit: "TimestreamTimestampUnit", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants permission to write to the Amazon
+    #   Timestream database table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of an Amazon Timestream database.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the database table into which to write the measure
+    #   records.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   Metadata attributes of the time series that are written in each
+    #   measure record.
+    #   @return [Array<Types::TimestreamDimension>]
+    #
+    # @!attribute [rw] timestamp
+    #   Specifies an application-defined value to replace the default value
+    #   assigned to the Timestream record's timestamp in the `time` column.
+    #
+    #   You can use this property to specify the value and the precision of
+    #   the Timestream record's timestamp. You can specify a value from the
+    #   message payload or a value computed by a substitution template.
+    #
+    #   If omitted, the topic rule action assigns the timestamp, in
+    #   milliseconds, at the time it processed the rule.
+    #   @return [Types::TimestreamTimestamp]
+    #
+    class TimestreamAction < Struct.new(
+      :role_arn,
+      :database_name,
+      :table_name,
+      :dimensions,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata attributes of the time series that are written in each
+    # measure record.
+    #
+    # @note When making an API call, you may pass TimestreamDimension
+    #   data as a hash:
+    #
+    #       {
+    #         name: "TimestreamDimensionName", # required
+    #         value: "TimestreamDimensionValue", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The metadata dimension name. This is the name of the column in the
+    #   Amazon Timestream database table record.
+    #
+    #   Dimensions cannot be named: `measure_name`, `measure_value`, or
+    #   `time`. These names are reserved. Dimension names cannot start with
+    #   `ts_` or `measure_value` and they cannot contain the colon (`:`)
+    #   character.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to write in this column of the database record.
+    #   @return [String]
+    #
+    class TimestreamDimension < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes how to interpret an application-defined timestamp value from
+    # an MQTT message payload and the precision of that value.
+    #
+    # @note When making an API call, you may pass TimestreamTimestamp
+    #   data as a hash:
+    #
+    #       {
+    #         value: "TimestreamTimestampValue", # required
+    #         unit: "TimestreamTimestampUnit", # required
+    #       }
+    #
+    # @!attribute [rw] value
+    #   An expression that returns a long epoch time value.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The precision of the timestamp value that results from the
+    #   expression described in `value`.
+    #
+    #   Valid values: `SECONDS` \| `MILLISECONDS` \| `MICROSECONDS` \|
+    #   `NANOSECONDS`. The default is `MILLISECONDS`.
+    #   @return [String]
+    #
+    class TimestreamTimestamp < Struct.new(
+      :value,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the TLS context to use for the test authorizer request.
     #
     # @note When making an API call, you may pass TlsContext
@@ -15436,6 +15652,21 @@ module Aws::IoT
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
     #             },
+    #             timestream: {
+    #               role_arn: "AwsArn", # required
+    #               database_name: "TimestreamDatabaseName", # required
+    #               table_name: "TimestreamTableName", # required
+    #               dimensions: [ # required
+    #                 {
+    #                   name: "TimestreamDimensionName", # required
+    #                   value: "TimestreamDimensionValue", # required
+    #                 },
+    #               ],
+    #               timestamp: {
+    #                 value: "TimestreamTimestampValue", # required
+    #                 unit: "TimestreamTimestampUnit", # required
+    #               },
+    #             },
     #             http: {
     #               url: "Url", # required
     #               confirmation_url: "Url",
@@ -15579,6 +15810,21 @@ module Aws::IoT
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
+    #           },
+    #           timestream: {
+    #             role_arn: "AwsArn", # required
+    #             database_name: "TimestreamDatabaseName", # required
+    #             table_name: "TimestreamTableName", # required
+    #             dimensions: [ # required
+    #               {
+    #                 name: "TimestreamDimensionName", # required
+    #                 value: "TimestreamDimensionValue", # required
+    #               },
+    #             ],
+    #             timestamp: {
+    #               value: "TimestreamTimestampValue", # required
+    #               unit: "TimestreamTimestampUnit", # required
+    #             },
     #           },
     #           http: {
     #             url: "Url", # required

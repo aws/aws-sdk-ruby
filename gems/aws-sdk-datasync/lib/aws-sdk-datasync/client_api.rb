@@ -253,6 +253,7 @@ module Aws::DataSync
     CreateLocationS3Request.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "S3BucketArn"))
     CreateLocationS3Request.add_member(:s3_storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
     CreateLocationS3Request.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, required: true, location_name: "S3Config"))
+    CreateLocationS3Request.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     CreateLocationS3Request.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationS3Request.struct_class = Types::CreateLocationS3Request
 
@@ -361,6 +362,7 @@ module Aws::DataSync
     DescribeLocationS3Response.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     DescribeLocationS3Response.add_member(:s3_storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
     DescribeLocationS3Response.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
+    DescribeLocationS3Response.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     DescribeLocationS3Response.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationS3Response.struct_class = Types::DescribeLocationS3Response
 

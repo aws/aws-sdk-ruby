@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-09-30)
+------------------
+
+* Feature - Amazon Pinpoint - Features - Customers can start a journey based on an event being triggered by an endpoint or user.
+
 1.46.0 (2020-09-15)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-09-30)
+------------------
+
+* Feature - Documentation updates for AWS Direct Connect.
+
 1.36.0 (2020-09-15)
 ------------------
 

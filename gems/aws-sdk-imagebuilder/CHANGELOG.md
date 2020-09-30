@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2020-09-30)
+------------------
+
+* Feature - EC2 Image Builder adds support for copying AMIs created by Image Builder to accounts specific to each Region.
+
 1.14.0 (2020-09-15)
 ------------------
 

@@ -195,6 +195,9 @@ module Aws::EMR
     OnDemandProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'OnDemandProvisioningAllocationStrategy')
     OnDemandProvisioningSpecification = Shapes::StructureShape.new(name: 'OnDemandProvisioningSpecification')
     OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
+    PlacementGroupConfig = Shapes::StructureShape.new(name: 'PlacementGroupConfig')
+    PlacementGroupConfigList = Shapes::ListShape.new(name: 'PlacementGroupConfigList')
+    PlacementGroupStrategy = Shapes::StringShape.new(name: 'PlacementGroupStrategy')
     PlacementType = Shapes::StructureShape.new(name: 'PlacementType')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
@@ -400,6 +403,7 @@ module Aws::EMR
     Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     Cluster.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "OutpostArn"))
     Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
+    Cluster.add_member(:placement_groups, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroups"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -969,6 +973,12 @@ module Aws::EMR
     OnDemandProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandProvisioningAllocationStrategy, required: true, location_name: "AllocationStrategy"))
     OnDemandProvisioningSpecification.struct_class = Types::OnDemandProvisioningSpecification
 
+    PlacementGroupConfig.add_member(:instance_role, Shapes::ShapeRef.new(shape: InstanceRoleType, required: true, location_name: "InstanceRole"))
+    PlacementGroupConfig.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementGroupStrategy, location_name: "PlacementStrategy"))
+    PlacementGroupConfig.struct_class = Types::PlacementGroupConfig
+
+    PlacementGroupConfigList.member = Shapes::ShapeRef.new(shape: PlacementGroupConfig)
+
     PlacementType.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlString, location_name: "AvailabilityZone"))
     PlacementType.add_member(:availability_zones, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "AvailabilityZones"))
     PlacementType.struct_class = Types::PlacementType
@@ -1044,6 +1054,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
     RunJobFlowInput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     RunJobFlowInput.add_member(:managed_scaling_policy, Shapes::ShapeRef.new(shape: ManagedScalingPolicy, location_name: "ManagedScalingPolicy"))
+    RunJobFlowInput.add_member(:placement_group_configs, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroupConfigs"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))

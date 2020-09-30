@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2020-09-30)
+------------------
+
+* Feature - AWS IoT Rules Engine adds Timestream action. The Timestream rule action lets you stream time-series data from IoT sensors and applications to Amazon Timestream databases for time series analysis.
+
 1.57.0 (2020-09-15)
 ------------------
 
