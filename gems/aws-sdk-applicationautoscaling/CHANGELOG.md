@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.49.0 (2020-09-30)
-------------------
-
-* Feature - This release extends Auto Scaling support for cluster storage of Managed Streaming for Kafka. Auto Scaling monitors and automatically expands storage capacity when a critical usage threshold is met.
-
 1.48.0 (2020-09-30)
 ------------------
 

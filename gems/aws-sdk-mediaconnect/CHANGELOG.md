@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.29.0 (2020-09-30)
-------------------
-
-* Feature - MediaConnect now supports reservations to provide a discounted rate for a specific outbound bandwidth over a period of time.
-
 1.28.0 (2020-09-30)
 ------------------
 

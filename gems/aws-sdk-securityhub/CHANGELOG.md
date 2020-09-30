@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.36.0 (2020-09-30)
-------------------
-
-* Feature - Added several new resource details objects. Added additional details for CloudFront distributions, IAM roles, and IAM access keys. Added a new ResourceRole attribute for resources.
-
 1.35.0 (2020-09-30)
 ------------------
 
