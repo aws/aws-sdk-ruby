@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.597 (2020-09-30)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
