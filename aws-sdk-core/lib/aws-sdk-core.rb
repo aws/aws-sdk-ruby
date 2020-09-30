@@ -212,6 +212,7 @@ module Aws
     Route53Resolver
     S3
     S3Control
+    S3Outposts
     SES
     SESV2
     SMS

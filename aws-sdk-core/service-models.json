@@ -754,6 +754,10 @@
     "models": "s3control/2018-08-20",
     "endpoint": "s3-control"
   },
+  "S3Outposts": {
+    "models": "s3outposts/2017-07-25",
+    "endpoint": "s3-outposts"
+  },
   "SES": {
     "models": "email/2010-12-01",
     "endpoint": "email"

@@ -318,8 +318,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | MarketplaceCatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
@@ -453,6 +453,7 @@ to be backwards compatible.
 | Amazon Route 53                                       | Route53                         | 2013-04-01  |
 | Amazon Route 53 Domains                               | Route53Domains                  | 2014-05-15  |
 | Amazon Route 53 Resolver                              | Route53Resolver                 | 2018-04-01  |
+| Amazon S3 on Outposts                                 | S3Outposts                      | 2017-07-25  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | SageMaker                       | 2017-07-24  |
 | Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
