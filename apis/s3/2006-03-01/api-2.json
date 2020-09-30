@@ -4882,8 +4882,7 @@
         "STANDARD_IA",
         "ONEZONE_IA",
         "INTELLIGENT_TIERING",
-        "DEEP_ARCHIVE",
-        "OUTPOSTS"
+        "DEEP_ARCHIVE"
       ]
     },
     "ObjectVersion":{
@@ -6718,8 +6717,7 @@
         "ONEZONE_IA",
         "INTELLIGENT_TIERING",
         "GLACIER",
-        "DEEP_ARCHIVE",
-        "OUTPOSTS"
+        "DEEP_ARCHIVE"
       ]
     },
     "StorageClassAnalysis":{
