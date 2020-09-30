@@ -10,6 +10,24 @@
 module Aws::S3Control
   module Types
 
+    # @note When making an API call, you may pass AbortIncompleteMultipartUpload
+    #   data as a hash:
+    #
+    #       {
+    #         days_after_initiation: 1,
+    #       }
+    #
+    # @!attribute [rw] days_after_initiation
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AbortIncompleteMultipartUpload AWS API Documentation
+    #
+    class AbortIncompleteMultipartUpload < Struct.new(
+      :days_after_initiation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An access point used to access a bucket.
     #
     # @!attribute [rw] name
@@ -34,13 +52,17 @@ module Aws::S3Control
     #   The name of the bucket associated with this access point.
     #   @return [String]
     #
+    # @!attribute [rw] access_point_arn
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessPoint AWS API Documentation
     #
     class AccessPoint < Struct.new(
       :name,
       :network_origin,
       :vpc_configuration,
-      :bucket)
+      :bucket,
+      :access_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55,6 +77,14 @@ module Aws::S3Control
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketAlreadyExists AWS API Documentation
+    #
+    class BucketAlreadyExists < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketAlreadyOwnedByYou AWS API Documentation
+    #
+    class BucketAlreadyOwnedByYou < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateAccessPointRequest
     #   data as a hash:
@@ -113,6 +143,115 @@ module Aws::S3Control
       :bucket,
       :vpc_configuration,
       :public_access_block_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_point_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointResult AWS API Documentation
+    #
+    class CreateAccessPointResult < Struct.new(
+      :access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateBucketConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #       }
+    #
+    # @!attribute [rw] location_constraint
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucketConfiguration AWS API Documentation
+    #
+    class CreateBucketConfiguration < Struct.new(
+      :location_constraint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateBucketRequest
+    #   data as a hash:
+    #
+    #       {
+    #         acl: "private", # accepts private, public-read, public-read-write, authenticated-read
+    #         bucket: "BucketName", # required
+    #         create_bucket_configuration: {
+    #           location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #         },
+    #         grant_full_control: "GrantFullControl",
+    #         grant_read: "GrantRead",
+    #         grant_read_acp: "GrantReadACP",
+    #         grant_write: "GrantWrite",
+    #         grant_write_acp: "GrantWriteACP",
+    #         object_lock_enabled_for_bucket: false,
+    #         outpost_id: "NonEmptyMaxLength64String",
+    #       }
+    #
+    # @!attribute [rw] acl
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @!attribute [rw] create_bucket_configuration
+    #   @return [Types::CreateBucketConfiguration]
+    #
+    # @!attribute [rw] grant_full_control
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_read
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_read_acp
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_write
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_write_acp
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_enabled_for_bucket
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] outpost_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucketRequest AWS API Documentation
+    #
+    class CreateBucketRequest < Struct.new(
+      :acl,
+      :bucket,
+      :create_bucket_configuration,
+      :grant_full_control,
+      :grant_read,
+      :grant_read_acp,
+      :grant_write,
+      :grant_write_acp,
+      :object_lock_enabled_for_bucket,
+      :outpost_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucketResult AWS API Documentation
+    #
+    class CreateBucketResult < Struct.new(
+      :location,
+      :bucket_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -388,6 +527,98 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteBucketLifecycleConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketLifecycleConfigurationRequest AWS API Documentation
+    #
+    class DeleteBucketLifecycleConfigurationRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBucketPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketPolicyRequest AWS API Documentation
+    #
+    class DeleteBucketPolicyRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBucketRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketRequest AWS API Documentation
+    #
+    class DeleteBucketRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBucketTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketTaggingRequest AWS API Documentation
+    #
+    class DeleteBucketTaggingRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteJobTaggingRequest
     #   data as a hash:
     #
@@ -624,6 +855,150 @@ module Aws::S3Control
       :vpc_configuration,
       :public_access_block_configuration,
       :creation_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBucketLifecycleConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketLifecycleConfigurationRequest AWS API Documentation
+    #
+    class GetBucketLifecycleConfigurationRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   @return [Array<Types::LifecycleRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketLifecycleConfigurationResult AWS API Documentation
+    #
+    class GetBucketLifecycleConfigurationResult < Struct.new(
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBucketPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketPolicyRequest AWS API Documentation
+    #
+    class GetBucketPolicyRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketPolicyResult AWS API Documentation
+    #
+    class GetBucketPolicyResult < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBucketRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketRequest AWS API Documentation
+    #
+    class GetBucketRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] creation_date
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketResult AWS API Documentation
+    #
+    class GetBucketResult < Struct.new(
+      :bucket,
+      :public_access_block_enabled,
+      :creation_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBucketTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketTaggingRequest AWS API Documentation
+    #
+    class GetBucketTaggingRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_set
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketTaggingResult AWS API Documentation
+    #
+    class GetBucketTaggingResult < Struct.new(
+      :tag_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1308,6 +1683,251 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass LifecycleConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [
+    #           {
+    #             expiration: {
+    #               date: Time.now,
+    #               days: 1,
+    #               expired_object_delete_marker: false,
+    #             },
+    #             id: "ID",
+    #             filter: {
+    #               prefix: "Prefix",
+    #               tag: {
+    #                 key: "TagKeyString", # required
+    #                 value: "TagValueString", # required
+    #               },
+    #               and: {
+    #                 prefix: "Prefix",
+    #                 tags: [
+    #                   {
+    #                     key: "TagKeyString", # required
+    #                     value: "TagValueString", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             status: "Enabled", # required, accepts Enabled, Disabled
+    #             transitions: [
+    #               {
+    #                 date: Time.now,
+    #                 days: 1,
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #               },
+    #             ],
+    #             noncurrent_version_transitions: [
+    #               {
+    #                 noncurrent_days: 1,
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #               },
+    #             ],
+    #             noncurrent_version_expiration: {
+    #               noncurrent_days: 1,
+    #             },
+    #             abort_incomplete_multipart_upload: {
+    #               days_after_initiation: 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   @return [Array<Types::LifecycleRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleConfiguration AWS API Documentation
+    #
+    class LifecycleConfiguration < Struct.new(
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LifecycleExpiration
+    #   data as a hash:
+    #
+    #       {
+    #         date: Time.now,
+    #         days: 1,
+    #         expired_object_delete_marker: false,
+    #       }
+    #
+    # @!attribute [rw] date
+    #   @return [Time]
+    #
+    # @!attribute [rw] days
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expired_object_delete_marker
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleExpiration AWS API Documentation
+    #
+    class LifecycleExpiration < Struct.new(
+      :date,
+      :days,
+      :expired_object_delete_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LifecycleRule
+    #   data as a hash:
+    #
+    #       {
+    #         expiration: {
+    #           date: Time.now,
+    #           days: 1,
+    #           expired_object_delete_marker: false,
+    #         },
+    #         id: "ID",
+    #         filter: {
+    #           prefix: "Prefix",
+    #           tag: {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #           and: {
+    #             prefix: "Prefix",
+    #             tags: [
+    #               {
+    #                 key: "TagKeyString", # required
+    #                 value: "TagValueString", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         status: "Enabled", # required, accepts Enabled, Disabled
+    #         transitions: [
+    #           {
+    #             date: Time.now,
+    #             days: 1,
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #           },
+    #         ],
+    #         noncurrent_version_transitions: [
+    #           {
+    #             noncurrent_days: 1,
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #           },
+    #         ],
+    #         noncurrent_version_expiration: {
+    #           noncurrent_days: 1,
+    #         },
+    #         abort_incomplete_multipart_upload: {
+    #           days_after_initiation: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] expiration
+    #   @return [Types::LifecycleExpiration]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   @return [Types::LifecycleRuleFilter]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] transitions
+    #   @return [Array<Types::Transition>]
+    #
+    # @!attribute [rw] noncurrent_version_transitions
+    #   @return [Array<Types::NoncurrentVersionTransition>]
+    #
+    # @!attribute [rw] noncurrent_version_expiration
+    #   @return [Types::NoncurrentVersionExpiration]
+    #
+    # @!attribute [rw] abort_incomplete_multipart_upload
+    #   @return [Types::AbortIncompleteMultipartUpload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRule AWS API Documentation
+    #
+    class LifecycleRule < Struct.new(
+      :expiration,
+      :id,
+      :filter,
+      :status,
+      :transitions,
+      :noncurrent_version_transitions,
+      :noncurrent_version_expiration,
+      :abort_incomplete_multipart_upload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LifecycleRuleAndOperator
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tags: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRuleAndOperator AWS API Documentation
+    #
+    class LifecycleRuleAndOperator < Struct.new(
+      :prefix,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LifecycleRuleFilter
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tag: {
+    #           key: "TagKeyString", # required
+    #           value: "TagValueString", # required
+    #         },
+    #         and: {
+    #           prefix: "Prefix",
+    #           tags: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   @return [Types::S3Tag]
+    #
+    # @!attribute [rw] and
+    #   @return [Types::LifecycleRuleAndOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRuleFilter AWS API Documentation
+    #
+    class LifecycleRuleFilter < Struct.new(
+      :prefix,
+      :tag,
+      :and)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAccessPointsRequest
     #   data as a hash:
     #
@@ -1437,6 +2057,54 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRegionalBucketsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         next_token: "NonEmptyMaxLength1024String",
+    #         max_results: 1,
+    #         outpost_id: "NonEmptyMaxLength64String",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] outpost_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListRegionalBucketsRequest AWS API Documentation
+    #
+    class ListRegionalBucketsRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results,
+      :outpost_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regional_bucket_list
+    #   @return [Array<Types::RegionalBucket>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListRegionalBucketsResult AWS API Documentation
+    #
+    class ListRegionalBucketsResult < Struct.new(
+      :regional_bucket_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon S3 throws this exception if you make a `GetPublicAccessBlock`
     # request against an account that doesn't have a
     # `PublicAccessBlockConfiguration` set.
@@ -1448,6 +2116,47 @@ module Aws::S3Control
     #
     class NoSuchPublicAccessBlockConfiguration < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass NoncurrentVersionExpiration
+    #   data as a hash:
+    #
+    #       {
+    #         noncurrent_days: 1,
+    #       }
+    #
+    # @!attribute [rw] noncurrent_days
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/NoncurrentVersionExpiration AWS API Documentation
+    #
+    class NoncurrentVersionExpiration < Struct.new(
+      :noncurrent_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass NoncurrentVersionTransition
+    #   data as a hash:
+    #
+    #       {
+    #         noncurrent_days: 1,
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #       }
+    #
+    # @!attribute [rw] noncurrent_days
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_class
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/NoncurrentVersionTransition AWS API Documentation
+    #
+    class NoncurrentVersionTransition < Struct.new(
+      :noncurrent_days,
+      :storage_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1600,6 +2309,149 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutBucketLifecycleConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #         lifecycle_configuration: {
+    #           rules: [
+    #             {
+    #               expiration: {
+    #                 date: Time.now,
+    #                 days: 1,
+    #                 expired_object_delete_marker: false,
+    #               },
+    #               id: "ID",
+    #               filter: {
+    #                 prefix: "Prefix",
+    #                 tag: {
+    #                   key: "TagKeyString", # required
+    #                   value: "TagValueString", # required
+    #                 },
+    #                 and: {
+    #                   prefix: "Prefix",
+    #                   tags: [
+    #                     {
+    #                       key: "TagKeyString", # required
+    #                       value: "TagValueString", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #               transitions: [
+    #                 {
+    #                   date: Time.now,
+    #                   days: 1,
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 },
+    #               ],
+    #               noncurrent_version_transitions: [
+    #                 {
+    #                   noncurrent_days: 1,
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 },
+    #               ],
+    #               noncurrent_version_expiration: {
+    #                 noncurrent_days: 1,
+    #               },
+    #               abort_incomplete_multipart_upload: {
+    #                 days_after_initiation: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_configuration
+    #   @return [Types::LifecycleConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketLifecycleConfigurationRequest AWS API Documentation
+    #
+    class PutBucketLifecycleConfigurationRequest < Struct.new(
+      :account_id,
+      :bucket,
+      :lifecycle_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutBucketPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #         confirm_remove_self_bucket_access: false,
+    #         policy: "Policy", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @!attribute [rw] confirm_remove_self_bucket_access
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] policy
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketPolicyRequest AWS API Documentation
+    #
+    class PutBucketPolicyRequest < Struct.new(
+      :account_id,
+      :bucket,
+      :confirm_remove_self_bucket_access,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutBucketTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #         tagging: { # required
+    #           tag_set: [ # required
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @!attribute [rw] tagging
+    #   @return [Types::Tagging]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketTaggingRequest AWS API Documentation
+    #
+    class PutBucketTaggingRequest < Struct.new(
+      :account_id,
+      :bucket,
+      :tagging)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutJobTaggingRequest
     #   data as a hash:
     #
@@ -1671,6 +2523,33 @@ module Aws::S3Control
     class PutPublicAccessBlockRequest < Struct.new(
       :public_access_block_configuration,
       :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] creation_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] outpost_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/RegionalBucket AWS API Documentation
+    #
+    class RegionalBucket < Struct.new(
+      :bucket,
+      :bucket_arn,
+      :public_access_block_enabled,
+      :creation_date,
+      :outpost_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2282,6 +3161,29 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass Tagging
+    #   data as a hash:
+    #
+    #       {
+    #         tag_set: [ # required
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] tag_set
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Tagging AWS API Documentation
+    #
+    class Tagging < Struct.new(
+      :tag_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2300,6 +3202,34 @@ module Aws::S3Control
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass Transition
+    #   data as a hash:
+    #
+    #       {
+    #         date: Time.now,
+    #         days: 1,
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #       }
+    #
+    # @!attribute [rw] date
+    #   @return [Time]
+    #
+    # @!attribute [rw] days
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_class
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Transition AWS API Documentation
+    #
+    class Transition < Struct.new(
+      :date,
+      :days,
+      :storage_class)
       SENSITIVE = []
       include Aws::Structure
     end

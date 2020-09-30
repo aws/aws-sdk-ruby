@@ -17,12 +17,9 @@ def whitelist
     },
     's3' => {
       'location_constraint.rb' => 14,
-      'bucket.rb' => 147,
+      'bucket.rb' => 150,
       'presigned_post.rb' => 623,
       'iad_regional_endpoint.rb' => 'SKIP_FILE'
-    },
-    's3control' => {
-      's3_signer.rb' => 74
     }
   }
 end

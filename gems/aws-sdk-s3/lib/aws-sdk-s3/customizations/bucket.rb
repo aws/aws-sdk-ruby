@@ -12,13 +12,12 @@ module Aws
       # Define a new initialize method that extracts out a bucket ARN.
       define_method(:initialize) do |*args|
         old_initialize.bind(self).call(*args)
-        bucket_name, region, arn = Plugins::BucketARN.resolve_arn!(
+        resolved_region, arn = Plugins::ARN.resolve_arn!(
           name,
           client.config.region,
           client.config.s3_use_arn_region
         )
-        @name = bucket_name
-        @client.config.region = region
+        @resolved_region = resolved_region
         @arn = arn
       end
 
@@ -102,7 +101,11 @@ module Aws
         if options[:virtual_host]
           "http://#{name}"
         elsif @arn
-          Plugins::BucketARN.resolve_url!(URI.parse(s3_bucket_url), @arn).to_s
+          Plugins::ARN.resolve_url!(
+            client.config.endpoint.dup,
+            @arn,
+            @resolved_region
+          ).to_s
         else
           s3_bucket_url
         end

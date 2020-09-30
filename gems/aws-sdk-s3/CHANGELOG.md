@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support Outpost Access Point ARNs.
+
 1.81.1 (2020-09-25)
 ------------------
 

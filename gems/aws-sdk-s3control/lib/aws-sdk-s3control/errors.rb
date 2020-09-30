@@ -28,6 +28,8 @@ module Aws::S3Control
   #
   # ## Error Classes
   # * {BadRequestException}
+  # * {BucketAlreadyExists}
+  # * {BucketAlreadyOwnedByYou}
   # * {IdempotencyException}
   # * {InternalServiceException}
   # * {InvalidNextTokenException}
@@ -56,6 +58,26 @@ module Aws::S3Control
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class BucketAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3Control::Types::BucketAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class BucketAlreadyOwnedByYou < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3Control::Types::BucketAlreadyOwnedByYou] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
     end
 

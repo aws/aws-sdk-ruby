@@ -73,8 +73,6 @@ request URI and never moved to the host as a sub-domain.
             end
           end
 
-          # Checks for a valid RFC-3986 host name
-          # @see https://tools.ietf.org/html/rfc3986#section-3.2.2
           # @param [String] bucket_name
           # @return [Boolean]
           def valid_subdomain?(bucket_name)
