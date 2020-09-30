@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-09-30)
+------------------
+
+* Feature - This release enables customers to create s3 location for S3 bucket's located on an AWS Outpost.
+
 1.27.0 (2020-09-30)
 ------------------
 
