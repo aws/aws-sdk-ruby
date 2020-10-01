@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
+
+* Feature - Aws::EMR - Updated the documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::QuickSight - Updated the API for Amazon QuickSight.
+
+* Feature - Aws::WAFV2 - Updated the API, and documentation for AWS WAFV2.
+
 2.11.598 (2020-09-30)
 ------------------
 
