@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.599 (2020-10-01)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::EMR - Updated the documentation for Amazon Elastic MapReduce.
