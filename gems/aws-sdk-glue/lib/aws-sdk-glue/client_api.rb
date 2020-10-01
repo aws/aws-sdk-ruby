@@ -16,6 +16,7 @@ module Aws::Glue
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Action = Shapes::StructureShape.new(name: 'Action')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
+    AdditionalPlanOptionsMap = Shapes::MapShape.new(name: 'AdditionalPlanOptionsMap')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     AttemptCount = Shapes::IntegerShape.new(name: 'AttemptCount')
     BatchCreatePartitionRequest = Shapes::StructureShape.new(name: 'BatchCreatePartitionRequest')
@@ -689,6 +690,9 @@ module Aws::Glue
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
+
+    AdditionalPlanOptionsMap.key = Shapes::ShapeRef.new(shape: GenericString)
+    AdditionalPlanOptionsMap.value = Shapes::ShapeRef.new(shape: GenericString)
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
@@ -1828,6 +1832,7 @@ module Aws::Glue
     GetPlanRequest.add_member(:sinks, Shapes::ShapeRef.new(shape: CatalogEntries, location_name: "Sinks"))
     GetPlanRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "Location"))
     GetPlanRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "Language"))
+    GetPlanRequest.add_member(:additional_plan_options_map, Shapes::ShapeRef.new(shape: AdditionalPlanOptionsMap, location_name: "AdditionalPlanOptionsMap"))
     GetPlanRequest.struct_class = Types::GetPlanRequest
 
     GetPlanResponse.add_member(:python_script, Shapes::ShapeRef.new(shape: PythonScript, location_name: "PythonScript"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2020-10-01)
+------------------
+
+* Feature - Adding additional optional map parameter to get-plan api
+
 1.72.0 (2020-09-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-10-01)
+------------------
+
+* Feature - AWS WAF is now available for AWS AppSync GraphQL APIs. AWS WAF protects against malicious attacks with AWS Managed Rules or your own custom rules. For more information see the AWS WAF Developer Guide.
+
 1.13.0 (2020-09-30)
 ------------------
 

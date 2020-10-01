@@ -458,6 +458,7 @@ module Aws::AppSync
     #   resp.api_key.id #=> String
     #   resp.api_key.description #=> String
     #   resp.api_key.expires #=> Integer
+    #   resp.api_key.deletes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKey AWS API Documentation
     #
@@ -762,6 +763,7 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #   resp.graphql_api.xray_enabled #=> Boolean
+    #   resp.graphql_api.waf_web_acl_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -1302,6 +1304,7 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #   resp.graphql_api.xray_enabled #=> Boolean
+    #   resp.graphql_api.waf_web_acl_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -1471,10 +1474,10 @@ module Aws::AppSync
 
     # Lists the API keys for a given API.
     #
-    # <note markdown="1"> API keys are deleted automatically sometime after they expire.
-    # However, they may still be included in the response until they have
-    # actually been deleted. You can safely call `DeleteApiKey` to manually
-    # delete a key before it's automatically deleted.
+    # <note markdown="1"> API keys are deleted automatically 60 days after they expire. However,
+    # they may still be included in the response until they have actually
+    # been deleted. You can safely call `DeleteApiKey` to manually delete a
+    # key before it's automatically deleted.
     #
     #  </note>
     #
@@ -1508,6 +1511,7 @@ module Aws::AppSync
     #   resp.api_keys[0].id #=> String
     #   resp.api_keys[0].description #=> String
     #   resp.api_keys[0].expires #=> Integer
+    #   resp.api_keys[0].deletes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApiKeys AWS API Documentation
@@ -1686,6 +1690,7 @@ module Aws::AppSync
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #   resp.graphql_apis[0].xray_enabled #=> Boolean
+    #   resp.graphql_apis[0].waf_web_acl_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -2071,7 +2076,7 @@ module Aws::AppSync
       req.send_request(options)
     end
 
-    # Updates an API key.
+    # Updates an API key. The key can be updated while it is not deleted.
     #
     # @option params [required, String] :api_id
     #   The ID for the GraphQL API.
@@ -2104,6 +2109,7 @@ module Aws::AppSync
     #   resp.api_key.id #=> String
     #   resp.api_key.description #=> String
     #   resp.api_key.expires #=> Integer
+    #   resp.api_key.deletes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKey AWS API Documentation
     #
@@ -2406,6 +2412,7 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #   resp.graphql_api.xray_enabled #=> Boolean
+    #   resp.graphql_api.waf_web_acl_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -2579,7 +2586,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

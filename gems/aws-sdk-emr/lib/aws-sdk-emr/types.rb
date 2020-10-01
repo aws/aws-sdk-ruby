@@ -1001,6 +1001,7 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] placement_groups
+    #   Placement group configured for an Amazon EMR cluster.
     #   @return [Array<Types::PlacementGroupConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
@@ -4814,6 +4815,13 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Placement group configuration for an Amazon EMR cluster. The
+    # configuration specifies the placement strategy that can be applied to
+    # instance roles during cluster creation.
+    #
+    # To use this configuration, consider attaching managed policy
+    # AmazonElasticMapReducePlacementGroupPolicy to the EMR role.
+    #
     # @note When making an API call, you may pass PlacementGroupConfig
     #   data as a hash:
     #
@@ -4823,9 +4831,17 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] instance_role
+    #   Role of the instance in the cluster.
+    #
+    #   Starting with Amazon EMR version 5.23.0, the only supported instance
+    #   role is `MASTER`.
     #   @return [String]
     #
     # @!attribute [rw] placement_strategy
+    #   EC2 Placement Group strategy associated with instance role.
+    #
+    #   Starting with Amazon EMR version 5.23.0, the only supported
+    #   placement strategy is `SPREAD` for the `MASTER` instance role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PlacementGroupConfig AWS API Documentation
@@ -5666,6 +5682,8 @@ module Aws::EMR
     #   @return [Types::ManagedScalingPolicy]
     #
     # @!attribute [rw] placement_group_configs
+    #   The specified placement group configuration for an Amazon EMR
+    #   cluster.
     #   @return [Array<Types::PlacementGroupConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation

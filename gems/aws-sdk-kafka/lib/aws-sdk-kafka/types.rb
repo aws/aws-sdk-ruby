@@ -414,6 +414,11 @@ module Aws::Kafka
     #   cluster.
     #   @return [String]
     #
+    # @!attribute [rw] zookeeper_connect_string_tls
+    #   The connection string to use to connect to zookeeper cluster on Tls
+    #   port.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterInfo AWS API Documentation
     #
     class ClusterInfo < Struct.new(
@@ -432,7 +437,8 @@ module Aws::Kafka
       :open_monitoring,
       :state,
       :tags,
-      :zookeeper_connect_string)
+      :zookeeper_connect_string,
+      :zookeeper_connect_string_tls)
       SENSITIVE = []
       include Aws::Structure
     end

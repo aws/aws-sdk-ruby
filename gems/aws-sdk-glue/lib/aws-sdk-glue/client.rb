@@ -5226,6 +5226,9 @@ module Aws::Glue
     # @option params [String] :language
     #   The programming language of the code to perform the mapping.
     #
+    # @option params [Hash<String,String>] :additional_plan_options_map
+    #   A map to hold additional optional key-value parameters.
+    #
     # @return [Types::GetPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPlanResponse#python_script #python_script} => String
@@ -5278,6 +5281,9 @@ module Aws::Glue
     #       ],
     #     },
     #     language: "PYTHON", # accepts PYTHON, SCALA
+    #     additional_plan_options_map: {
+    #       "GenericString" => "GenericString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -9090,7 +9096,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

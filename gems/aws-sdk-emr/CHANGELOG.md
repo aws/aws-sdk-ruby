@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-10-01)
+------------------
+
+* Feature - Documentation updates for elasticmapreduce
+
 1.38.0 (2020-09-30)
 ------------------
 

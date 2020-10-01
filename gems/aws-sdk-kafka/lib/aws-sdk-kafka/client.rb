@@ -661,6 +661,7 @@ module Aws::Kafka
     #   resp.cluster_info.tags #=> Hash
     #   resp.cluster_info.tags["__string"] #=> String
     #   resp.cluster_info.zookeeper_connect_string #=> String
+    #   resp.cluster_info.zookeeper_connect_string_tls #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeCluster AWS API Documentation
     #
@@ -1067,6 +1068,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].tags #=> Hash
     #   resp.cluster_info_list[0].tags["__string"] #=> String
     #   resp.cluster_info_list[0].zookeeper_connect_string #=> String
+    #   resp.cluster_info_list[0].zookeeper_connect_string_tls #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusters AWS API Documentation
@@ -1709,7 +1711,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

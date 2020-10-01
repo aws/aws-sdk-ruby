@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-10-01)
+------------------
+
+* Feature - QuickSight now supports connecting to AWS Timestream data source
+
 1.32.0 (2020-09-30)
 ------------------
 

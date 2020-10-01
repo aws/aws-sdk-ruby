@@ -2403,6 +2403,7 @@ module Aws::EMR
     #   The specified managed scaling policy for an Amazon EMR cluster.
     #
     # @option params [Array<Types::PlacementGroupConfig>] :placement_group_configs
+    #   The specified placement group configuration for an Amazon EMR cluster.
     #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2908,7 +2909,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

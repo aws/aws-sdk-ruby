@@ -7527,6 +7527,9 @@ module Aws::Glue
     #           ],
     #         },
     #         language: "PYTHON", # accepts PYTHON, SCALA
+    #         additional_plan_options_map: {
+    #           "GenericString" => "GenericString",
+    #         },
     #       }
     #
     # @!attribute [rw] mapping
@@ -7549,6 +7552,10 @@ module Aws::Glue
     #   The programming language of the code to perform the mapping.
     #   @return [String]
     #
+    # @!attribute [rw] additional_plan_options_map
+    #   A map to hold additional optional key-value parameters.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlanRequest AWS API Documentation
     #
     class GetPlanRequest < Struct.new(
@@ -7556,7 +7563,8 @@ module Aws::Glue
       :source,
       :sinks,
       :location,
-      :language)
+      :language,
+      :additional_plan_options_map)
       SENSITIVE = []
       include Aws::Structure
     end

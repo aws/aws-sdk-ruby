@@ -308,8 +308,11 @@ module Aws::WAFV2
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
-    #   * For an Amazon API Gateway stage:
+    #   * For an API Gateway REST API:
     #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
+    #
+    #   * For an AppSync GraphQL API:
+    #     `arn:aws:appsync:region:account-id:apis/GraphQLApiId `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociateWebACLRequest AWS API Documentation
@@ -756,7 +759,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -840,7 +844,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -955,7 +960,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1260,7 +1266,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1598,7 +1605,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1777,7 +1785,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1889,7 +1898,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1951,7 +1961,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2013,7 +2024,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2079,7 +2091,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2139,8 +2152,11 @@ module Aws::WAFV2
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
-    #   * For an Amazon API Gateway stage:
+    #   * For an API Gateway REST API:
     #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
+    #
+    #   * For an AppSync GraphQL API:
+    #     `arn:aws:appsync:region:account-id:apis/GraphQLApiId `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLRequest AWS API Documentation
@@ -2551,7 +2567,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2679,7 +2696,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2750,7 +2768,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2818,7 +2837,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2896,7 +2916,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3016,7 +3037,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3477,7 +3499,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3545,7 +3568,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3615,7 +3639,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3683,7 +3708,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3744,7 +3770,7 @@ module Aws::WAFV2
     #
     #       {
     #         web_acl_arn: "ResourceArn", # required
-    #         resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY
+    #         resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY, APPSYNC
     #       }
     #
     # @!attribute [rw] web_acl_arn
@@ -3753,8 +3779,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] resource_type
     #   Used for web ACLs that are scoped for regional applications. A
-    #   regional application can be an Application Load Balancer (ALB) or an
-    #   API Gateway stage.
+    #   regional application can be an Application Load Balancer (ALB), an
+    #   API Gateway REST API, or an AppSync GraphQL API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListResourcesForWebACLRequest AWS API Documentation
@@ -3791,7 +3817,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3918,7 +3945,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7813,7 +7841,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7933,7 +7962,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -8245,7 +8275,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -8573,7 +8604,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an AWS CloudFront distribution or for
     #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB) or an API Gateway stage.
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -9013,8 +9045,8 @@ module Aws::WAFV2
     # does not match any of the rules. The rules in a Web ACL can be a
     # combination of the types Rule, RuleGroup, and managed rule group. You
     # can associate a Web ACL with one or more AWS resources to protect. The
-    # resources can be Amazon CloudFront, an Amazon API Gateway API, or an
-    # Application Load Balancer.
+    # resources can be Amazon CloudFront, an Amazon API Gateway REST API, an
+    # Application Load Balancer, or an AWS AppSync GraphQL API.
     #
     #
     #

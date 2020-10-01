@@ -193,6 +193,7 @@ module Aws::AppSync
     ApiKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     ApiKey.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ApiKey.add_member(:expires, Shapes::ShapeRef.new(shape: Long, location_name: "expires"))
+    ApiKey.add_member(:deletes, Shapes::ShapeRef.new(shape: Long, location_name: "deletes"))
     ApiKey.struct_class = Types::ApiKey
 
     ApiKeyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -476,6 +477,7 @@ module Aws::AppSync
     GraphqlApi.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GraphqlApi.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
     GraphqlApi.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
+    GraphqlApi.add_member(:waf_web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "wafWebAclArn"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)

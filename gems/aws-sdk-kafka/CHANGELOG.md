@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-10-01)
+------------------
+
+* Feature - Added support for Enabling Zookeeper Encryption in Transit for AWS MSK.
+
 1.28.0 (2020-09-30)
 ------------------
 
