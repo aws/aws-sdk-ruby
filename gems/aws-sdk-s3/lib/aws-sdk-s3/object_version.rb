@@ -403,12 +403,16 @@ module Aws::S3
     # @option options [String] :range
     #   Downloads the specified range bytes of an object. For more information
     #   about the HTTP Range header, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
     #
     #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
     #   `GET` request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use to when encrypting the object (for
     #   example, AES256).

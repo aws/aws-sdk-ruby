@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-10-02)
+------------------
+
+* Feature - This release adds support for tagging listeners, rules, and target groups on creation. This release also supported tagging operations through tagging api's for listeners and rules.
+
 1.52.0 (2020-09-30)
 ------------------
 

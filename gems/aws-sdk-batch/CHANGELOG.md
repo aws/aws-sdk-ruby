@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-10-02)
+------------------
+
+* Feature - Support tagging for Batch resources (compute environment, job queue, job definition and job) and tag based access control on Batch APIs
+
 1.38.0 (2020-09-30)
 ------------------
 

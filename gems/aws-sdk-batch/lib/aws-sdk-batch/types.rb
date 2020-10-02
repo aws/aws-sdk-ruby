@@ -224,6 +224,10 @@ module Aws::Batch
     #   used by the compute environment.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags applied to the compute environment.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   The type of the compute environment.
     #   @return [String]
@@ -270,6 +274,7 @@ module Aws::Batch
       :compute_environment_name,
       :compute_environment_arn,
       :ecs_cluster_arn,
+      :tags,
       :type,
       :state,
       :status,
@@ -441,7 +446,11 @@ module Aws::Batch
     #   the compute environment. For AWS Batch, these take the form of
     #   "String1": "String2", where String1 is the tag key and String2
     #   is the tag value—for example, \\\{ "Name": "AWS Batch Instance -
-    #   C4OnDemand" \\}.
+    #   C4OnDemand" \\}. These tags can not be updated or removed after the
+    #   compute environment has been created; any changes require creating a
+    #   new compute environment and removing the old compute environment.
+    #   These tags are not seen when using the AWS Batch ListTagsForResource
+    #   API operation.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] placement_group
@@ -563,11 +572,13 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] vcpus
-    #   The number of VCPUs allocated for the job.
+    #   The number of VCPUs allocated for the job. This is a required
+    #   parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] memory
-    #   The number of MiB of memory reserved for the job.
+    #   The number of MiB of memory reserved for the job. This is a required
+    #   parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] command
@@ -581,12 +592,12 @@ module Aws::Batch
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the execution role that AWS Batch
-    #   can assume. For more information, see [Amazon ECS task execution IAM
+    #   can assume. For more information, see [AWS Batch execution IAM
     #   role][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html
     #   @return [String]
     #
     # @!attribute [rw] volumes
@@ -1019,12 +1030,12 @@ module Aws::Batch
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the execution role that AWS Batch
-    #   can assume. For more information, see [Amazon ECS task execution IAM
+    #   can assume. For more information, see [AWS Batch execution IAM
     #   role][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html
     #   @return [String]
     #
     # @!attribute [rw] volumes
@@ -1264,6 +1275,9 @@ module Aws::Batch
     #           },
     #         },
     #         service_role: "String", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] compute_environment_name
@@ -1315,6 +1329,23 @@ module Aws::Batch
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the compute environment to help you
+    #   categorize and organize your resources. Each tag consists of a key
+    #   and an optional value. For more information, see [Tagging AWS
+    #   Resources][1] in *AWS General Reference*.
+    #
+    #   These tags can be updated or removed using the [TagResource][2] and
+    #   [UntagResource][3] API operations. These tags do not propagate to
+    #   the underlying compute resources.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentRequest AWS API Documentation
     #
     class CreateComputeEnvironmentRequest < Struct.new(
@@ -1322,7 +1353,8 @@ module Aws::Batch
       :type,
       :state,
       :compute_resources,
-      :service_role)
+      :service_role,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1357,6 +1389,9 @@ module Aws::Batch
     #             compute_environment: "String", # required
     #           },
     #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] job_queue_name
@@ -1388,13 +1423,25 @@ module Aws::Batch
     #   compute environments with a job queue.
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the job queue to help you categorize and
+    #   organize your resources. Each tag consists of a key and an optional
+    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
+    #   General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueRequest AWS API Documentation
     #
     class CreateJobQueueRequest < Struct.new(
       :job_queue_name,
       :state,
       :priority,
-      :compute_environment_order)
+      :compute_environment_order,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1870,6 +1917,10 @@ module Aws::Batch
     #   jobs.
     #   @return [Types::NodeProperties]
     #
+    # @!attribute [rw] tags
+    #   The tags applied to the job definition.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDefinition AWS API Documentation
     #
     class JobDefinition < Struct.new(
@@ -1882,7 +1933,8 @@ module Aws::Batch
       :retry_strategy,
       :container_properties,
       :timeout,
-      :node_properties)
+      :node_properties,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1915,6 +1967,10 @@ module Aws::Batch
     end
 
     # An object representing an AWS Batch job.
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the job.
+    #   @return [String]
     #
     # @!attribute [rw] job_name
     #   The name of the job.
@@ -2014,9 +2070,14 @@ module Aws::Batch
     #   The timeout configuration for the job.
     #   @return [Types::JobTimeout]
     #
+    # @!attribute [rw] tags
+    #   The tags applied to the job.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDetail AWS API Documentation
     #
     class JobDetail < Struct.new(
+      :job_arn,
       :job_name,
       :job_id,
       :job_queue,
@@ -2034,7 +2095,8 @@ module Aws::Batch
       :node_details,
       :node_properties,
       :array_properties,
-      :timeout)
+      :timeout,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2075,6 +2137,10 @@ module Aws::Batch
     #   selected for job placement in ascending order.
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @!attribute [rw] tags
+    #   The tags applied to the job queue.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobQueueDetail AWS API Documentation
     #
     class JobQueueDetail < Struct.new(
@@ -2084,12 +2150,17 @@ module Aws::Batch
       :status,
       :status_reason,
       :priority,
-      :compute_environment_order)
+      :compute_environment_order,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # An object representing summary details of a job.
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the job.
+    #   @return [String]
     #
     # @!attribute [rw] job_id
     #   The ID of the job.
@@ -2143,6 +2214,7 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobSummary AWS API Documentation
     #
     class JobSummary < Struct.new(
+      :job_arn,
       :job_id,
       :job_name,
       :created_at,
@@ -2290,13 +2362,13 @@ module Aws::Batch
     #   @return [Array<Types::Device>]
     #
     # @!attribute [rw] init_process_enabled
-    #   Run an `init` process inside the container that forwards signals and
-    #   reaps processes. This parameter maps to the `--init` option to
-    #   [docker run][1]. This parameter requires version 1.25 of the Docker
-    #   Remote API or greater on your container instance. To check the
-    #   Docker Remote API version on your container instance, log into your
-    #   container instance and run the following command: `sudo docker
-    #   version | grep "Server API version"`
+    #   If true, run an `init` process inside the container that forwards
+    #   signals and reaps processes. This parameter maps to the `--init`
+    #   option to [docker run][1]. This parameter requires version 1.25 of
+    #   the Docker Remote API or greater on your container instance. To
+    #   check the Docker Remote API version on your container instance, log
+    #   into your container instance and run the following command: `sudo
+    #   docker version | grep "Server API version"`
     #
     #
     #
@@ -2460,6 +2532,41 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. AWS Batch resources that support tags are
+    #   compute environments, jobs, job definitions, and job queues. ARNs
+    #   for child jobs of array and multi-node parallel (MNP) jobs are not
+    #   supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Log configuration options to send to a custom log driver for the
     # container.
     #
@@ -2487,14 +2594,53 @@ module Aws::Batch
     #   The supported log drivers are `awslogs`, `fluentd`, `gelf`,
     #   `json-file`, `journald`, `logentries`, `syslog`, and `splunk`.
     #
-    #   For more information about using the `awslogs` log driver, see
-    #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
+    #   awslogs
+    #
+    #   : Specifies the Amazon CloudWatch Logs logging driver. For more
+    #     information, see [Using the awslogs Log Driver][1] in the *AWS
+    #     Batch User Guide* and [Amazon CloudWatch Logs logging driver][2]
+    #     in the Docker documentation.
+    #
+    #   fluentd
+    #
+    #   : Specifies the Fluentd logging driver. For more information,
+    #     including usage and options, see [Fluentd logging driver][3] in
+    #     the Docker documentation.
+    #
+    #   gelf
+    #
+    #   : Specifies the Graylog Extended Format (GELF) logging driver. For
+    #     more information, including usage and options, see [Graylog
+    #     Extended Format logging driver][4] in the Docker documentation.
+    #
+    #   journald
+    #
+    #   : Specifies the journald logging driver. For more information,
+    #     including usage and options, see [Journald logging driver][5] in
+    #     the Docker documentation.
+    #
+    #   json-file
+    #
+    #   : Specifies the JSON file logging driver. For more information,
+    #     including usage and options, see [JSON File logging driver][6] in
+    #     the Docker documentation.
+    #
+    #   splunk
+    #
+    #   : Specifies the Splunk logging driver. For more information,
+    #     including usage and options, see [Splunk logging driver][7] in the
+    #     Docker documentation.
+    #
+    #   syslog
+    #
+    #   : Specifies the syslog logging driver. For more information,
+    #     including usage and options, see [Syslog logging driver][8] in the
+    #     Docker documentation.
     #
     #   <note markdown="1"> If you have a custom driver that is not listed earlier that you
     #   would like to work with the Amazon ECS container agent, you can fork
     #   the Amazon ECS container agent project that is [available on
-    #   GitHub][2] and customize it to work with that driver. We encourage
+    #   GitHub][9] and customize it to work with that driver. We encourage
     #   you to submit pull requests for changes that you would like to have
     #   included. However, Amazon Web Services does not currently support
     #   running modified copies of this software.
@@ -2509,8 +2655,15 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-    #   [2]: https://github.com/aws/amazon-ecs-agent
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html
+    #   [2]: https://docs.docker.com/config/containers/logging/awslogs/
+    #   [3]: https://docs.docker.com/config/containers/logging/fluentd/
+    #   [4]: https://docs.docker.com/config/containers/logging/gelf/
+    #   [5]: https://docs.docker.com/config/containers/logging/journald/
+    #   [6]: https://docs.docker.com/config/containers/logging/json-file/
+    #   [7]: https://docs.docker.com/config/containers/logging/splunk/
+    #   [8]: https://docs.docker.com/config/containers/logging/syslog/
+    #   [9]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -2523,12 +2676,11 @@ module Aws::Batch
     #
     # @!attribute [rw] secret_options
     #   The secrets to pass to the log configuration. For more information,
-    #   see [Specifying Sensitive Data][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
+    #   see [Specifying Sensitive Data][1] in the *AWS Batch User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html
     #   @return [Array<Types::Secret>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LogConfiguration AWS API Documentation
@@ -3203,6 +3355,9 @@ module Aws::Batch
     #         timeout: {
     #           attempt_duration_seconds: 1,
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] job_definition_name
@@ -3264,6 +3419,17 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #   @return [Types::JobTimeout]
     #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the job definition to help you categorize
+    #   and organize your resources. Each tag consists of a key and an
+    #   optional value. For more information, see [Tagging AWS Resources][1]
+    #   in *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest AWS API Documentation
     #
     class RegisterJobDefinitionRequest < Struct.new(
@@ -3273,7 +3439,8 @@ module Aws::Batch
       :container_properties,
       :node_properties,
       :retry_strategy,
-      :timeout)
+      :timeout,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3488,6 +3655,9 @@ module Aws::Batch
     #         timeout: {
     #           attempt_duration_seconds: 1,
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -3575,6 +3745,17 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #   @return [Types::JobTimeout]
     #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the job request to help you categorize
+    #   and organize your resources. Each tag consists of a key and an
+    #   optional value. For more information, see [Tagging AWS Resources][1]
+    #   in *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest AWS API Documentation
     #
     class SubmitJobRequest < Struct.new(
@@ -3587,11 +3768,16 @@ module Aws::Batch
       :container_overrides,
       :node_overrides,
       :retry_strategy,
-      :timeout)
+      :timeout,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) for the job.
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name of the job.
     #   @return [String]
@@ -3603,11 +3789,53 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobResponse AWS API Documentation
     #
     class SubmitJobResponse < Struct.new(
+      :job_arn,
       :job_name,
       :job_id)
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   AWS Batch resources that support tags are compute environments,
+    #   jobs, job definitions, and job queues. ARNs for child jobs of array
+    #   and multi-node parallel (MNP) jobs are not supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the resource to help you categorize and
+    #   organize your resources. Each tag consists of a key and an optional
+    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
+    #   General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass TerminateJobRequest
     #   data as a hash:
@@ -3653,7 +3881,8 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] container_path
-    #   The absolute file path where the tmpfs volume is to be mounted.
+    #   The absolute file path in the container where the tmpfs volume is to
+    #   be mounted.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -3663,13 +3892,16 @@ module Aws::Batch
     # @!attribute [rw] mount_options
     #   The list of tmpfs volume mount options.
     #
-    #   Valid values: `"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev"
-    #   | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" |
-    #   "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
-    #   "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" |
-    #   "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" |
-    #   "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode"
-    #   | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"`
+    #   Valid values: "`defaults`" \| "`ro`" \| "`rw`" \| "`suid`"
+    #   \| "`nosuid`" \| "`dev`" \| "`nodev`" \| "`exec`" \|
+    #   "`noexec`" \| "`sync`" \| "`async`" \| "`dirsync`" \|
+    #   "`remount`" \| "`mand`" \| "`nomand`" \| "`atime`" \|
+    #   "`noatime`" \| "`diratime`" \| "`nodiratime`" \| "`bind`" \|
+    #   "`rbind" | "unbindable" | "runbindable" | "private" | "rprivate" |
+    #   "shared" | "rshared" | "slave" | "rslave" | "relatime`" \|
+    #   "`norelatime`" \| "`strictatime`" \| "`nostrictatime`" \|
+    #   "`mode`" \| "`uid`" \| "`gid`" \| "`nr_inodes`" \|
+    #   "`nr_blocks`" \| "`mpol`"
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Tmpfs AWS API Documentation
@@ -3714,6 +3946,38 @@ module Aws::Batch
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. AWS Batch resources that support tags are compute
+    #   environments, jobs, job definitions, and job queues. ARNs for child
+    #   jobs of array and multi-node parallel (MNP) jobs are not supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateComputeEnvironmentRequest
     #   data as a hash:

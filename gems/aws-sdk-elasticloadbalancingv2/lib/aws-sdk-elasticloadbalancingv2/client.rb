@@ -385,7 +385,7 @@ module Aws::ElasticLoadBalancingV2
 
     # Adds the specified tags to the specified Elastic Load Balancing
     # resource. You can tag your Application Load Balancers, Network Load
-    # Balancers, and your target groups.
+    # Balancers, target groups, listeners, and rules.
     #
     # Each tag consists of a key and an optional value. If a resource
     # already has a tag with the same key, `AddTags` updates its value.
@@ -561,6 +561,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the listener.
+    #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateListenerOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
@@ -724,6 +727,12 @@ module Aws::ElasticLoadBalancingV2
     #       },
     #     ],
     #     alpn_policy: ["AlpnPolicyValue"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -884,7 +893,7 @@ module Aws::ElasticLoadBalancingV2
     #   The default is an Internet-facing load balancer.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   One or more tags to assign to the load balancer.
+    #   The tags to assign to the load balancer.
     #
     # @option params [String] :type
     #   The type of load balancer. The default is `application`.
@@ -1110,6 +1119,9 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
     #   you drop specified client requests and return a custom HTTP response.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the rule.
+    #
     # @return [Types::CreateRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleOutput#rules #rules} => Array&lt;Types::Rule&gt;
@@ -1257,6 +1269,12 @@ module Aws::ElasticLoadBalancingV2
     #             duration_seconds: 1,
     #           },
     #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -1458,6 +1476,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `lambda` - The target groups contains a single Lambda function.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the target group.
+    #
     # @return [Types::CreateTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTargetGroupOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
@@ -1517,6 +1538,12 @@ module Aws::ElasticLoadBalancingV2
     #       http_code: "HttpCode", # required
     #     },
     #     target_type: "instance", # accepts instance, ip, lambda
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2465,9 +2492,9 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Describes the tags for the specified resources. You can describe the
-    # tags for one or more Application Load Balancers, Network Load
-    # Balancers, and target groups.
+    # Describes the tags for the specified Elastic Load Balancing resources.
+    # You can describe the tags for one or more Application Load Balancers,
+    # Network Load Balancers, target groups, listeners, or rules.
     #
     # @option params [required, Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources. You can specify up
@@ -3933,7 +3960,8 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Removes the specified tags from the specified Elastic Load Balancing
-    # resource.
+    # resources. You can remove the tags for one or more Application Load
+    # Balancers, Network Load Balancers, target groups, listeners, or rules.
     #
     # To list the current tags for your resources, use DescribeTags.
     #
@@ -4313,7 +4341,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

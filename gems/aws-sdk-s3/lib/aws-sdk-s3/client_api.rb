@@ -115,6 +115,7 @@ module Aws::S3
     DeleteBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketInventoryConfigurationRequest')
     DeleteBucketLifecycleRequest = Shapes::StructureShape.new(name: 'DeleteBucketLifecycleRequest')
     DeleteBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketMetricsConfigurationRequest')
+    DeleteBucketOwnershipControlsRequest = Shapes::StructureShape.new(name: 'DeleteBucketOwnershipControlsRequest')
     DeleteBucketPolicyRequest = Shapes::StructureShape.new(name: 'DeleteBucketPolicyRequest')
     DeleteBucketReplicationRequest = Shapes::StructureShape.new(name: 'DeleteBucketReplicationRequest')
     DeleteBucketRequest = Shapes::StructureShape.new(name: 'DeleteBucketRequest')
@@ -193,6 +194,8 @@ module Aws::S3
     GetBucketMetricsConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketMetricsConfigurationOutput')
     GetBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketMetricsConfigurationRequest')
     GetBucketNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketNotificationConfigurationRequest')
+    GetBucketOwnershipControlsOutput = Shapes::StructureShape.new(name: 'GetBucketOwnershipControlsOutput')
+    GetBucketOwnershipControlsRequest = Shapes::StructureShape.new(name: 'GetBucketOwnershipControlsRequest')
     GetBucketPolicyOutput = Shapes::StructureShape.new(name: 'GetBucketPolicyOutput')
     GetBucketPolicyRequest = Shapes::StructureShape.new(name: 'GetBucketPolicyRequest')
     GetBucketPolicyStatusOutput = Shapes::StructureShape.new(name: 'GetBucketPolicyStatusOutput')
@@ -362,6 +365,7 @@ module Aws::S3
     ObjectLockRule = Shapes::StructureShape.new(name: 'ObjectLockRule')
     ObjectLockToken = Shapes::StringShape.new(name: 'ObjectLockToken')
     ObjectNotInActiveTierError = Shapes::StructureShape.new(name: 'ObjectNotInActiveTierError')
+    ObjectOwnership = Shapes::StringShape.new(name: 'ObjectOwnership')
     ObjectStorageClass = Shapes::StringShape.new(name: 'ObjectStorageClass')
     ObjectVersion = Shapes::StructureShape.new(name: 'ObjectVersion')
     ObjectVersionId = Shapes::StringShape.new(name: 'ObjectVersionId')
@@ -371,6 +375,9 @@ module Aws::S3
     OutputSerialization = Shapes::StructureShape.new(name: 'OutputSerialization')
     Owner = Shapes::StructureShape.new(name: 'Owner')
     OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
+    OwnershipControls = Shapes::StructureShape.new(name: 'OwnershipControls')
+    OwnershipControlsRule = Shapes::StructureShape.new(name: 'OwnershipControlsRule')
+    OwnershipControlsRules = Shapes::ListShape.new(name: 'OwnershipControlsRules', flattened: true)
     ParquetInput = Shapes::StructureShape.new(name: 'ParquetInput')
     Part = Shapes::StructureShape.new(name: 'Part')
     PartNumber = Shapes::IntegerShape.new(name: 'PartNumber')
@@ -399,6 +406,7 @@ module Aws::S3
     PutBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketMetricsConfigurationRequest')
     PutBucketNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketNotificationConfigurationRequest')
     PutBucketNotificationRequest = Shapes::StructureShape.new(name: 'PutBucketNotificationRequest')
+    PutBucketOwnershipControlsRequest = Shapes::StructureShape.new(name: 'PutBucketOwnershipControlsRequest')
     PutBucketPolicyRequest = Shapes::StructureShape.new(name: 'PutBucketPolicyRequest')
     PutBucketReplicationRequest = Shapes::StructureShape.new(name: 'PutBucketReplicationRequest')
     PutBucketRequestPaymentRequest = Shapes::StructureShape.new(name: 'PutBucketRequestPaymentRequest')
@@ -839,6 +847,10 @@ module Aws::S3
     DeleteBucketMetricsConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     DeleteBucketMetricsConfigurationRequest.struct_class = Types::DeleteBucketMetricsConfigurationRequest
 
+    DeleteBucketOwnershipControlsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    DeleteBucketOwnershipControlsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    DeleteBucketOwnershipControlsRequest.struct_class = Types::DeleteBucketOwnershipControlsRequest
+
     DeleteBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     DeleteBucketPolicyRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     DeleteBucketPolicyRequest.struct_class = Types::DeleteBucketPolicyRequest
@@ -1056,6 +1068,15 @@ module Aws::S3
     GetBucketNotificationConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     GetBucketNotificationConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     GetBucketNotificationConfigurationRequest.struct_class = Types::GetBucketNotificationConfigurationRequest
+
+    GetBucketOwnershipControlsOutput.add_member(:ownership_controls, Shapes::ShapeRef.new(shape: OwnershipControls, location_name: "OwnershipControls"))
+    GetBucketOwnershipControlsOutput.struct_class = Types::GetBucketOwnershipControlsOutput
+    GetBucketOwnershipControlsOutput[:payload] = :ownership_controls
+    GetBucketOwnershipControlsOutput[:payload_member] = GetBucketOwnershipControlsOutput.member(:ownership_controls)
+
+    GetBucketOwnershipControlsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetBucketOwnershipControlsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    GetBucketOwnershipControlsRequest.struct_class = Types::GetBucketOwnershipControlsRequest
 
     GetBucketPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     GetBucketPolicyOutput.struct_class = Types::GetBucketPolicyOutput
@@ -1692,6 +1713,14 @@ module Aws::S3
     Owner.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     Owner.struct_class = Types::Owner
 
+    OwnershipControls.add_member(:rules, Shapes::ShapeRef.new(shape: OwnershipControlsRules, required: true, location_name: "Rule"))
+    OwnershipControls.struct_class = Types::OwnershipControls
+
+    OwnershipControlsRule.add_member(:object_ownership, Shapes::ShapeRef.new(shape: ObjectOwnership, required: true, location_name: "ObjectOwnership"))
+    OwnershipControlsRule.struct_class = Types::OwnershipControlsRule
+
+    OwnershipControlsRules.member = Shapes::ShapeRef.new(shape: OwnershipControlsRule)
+
     ParquetInput.struct_class = Types::ParquetInput
 
     Part.add_member(:part_number, Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
@@ -1817,6 +1846,14 @@ module Aws::S3
     PutBucketNotificationRequest.struct_class = Types::PutBucketNotificationRequest
     PutBucketNotificationRequest[:payload] = :notification_configuration
     PutBucketNotificationRequest[:payload_member] = PutBucketNotificationRequest.member(:notification_configuration)
+
+    PutBucketOwnershipControlsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutBucketOwnershipControlsRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketOwnershipControlsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    PutBucketOwnershipControlsRequest.add_member(:ownership_controls, Shapes::ShapeRef.new(shape: OwnershipControls, required: true, location_name: "OwnershipControls", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutBucketOwnershipControlsRequest.struct_class = Types::PutBucketOwnershipControlsRequest
+    PutBucketOwnershipControlsRequest[:payload] = :ownership_controls
+    PutBucketOwnershipControlsRequest[:payload_member] = PutBucketOwnershipControlsRequest.member(:ownership_controls)
 
     PutBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketPolicyRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
@@ -2415,6 +2452,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:delete_bucket_ownership_controls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBucketOwnershipControls"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/{Bucket}?ownershipControls"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBucketOwnershipControlsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:delete_bucket_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketPolicy"
         o.http_method = "DELETE"
@@ -2584,6 +2629,14 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}?notification"
         o.input = Shapes::ShapeRef.new(shape: GetBucketNotificationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: NotificationConfiguration)
+      end)
+
+      api.add_operation(:get_bucket_ownership_controls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketOwnershipControls"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?ownershipControls"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketOwnershipControlsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketOwnershipControlsOutput)
       end)
 
       api.add_operation(:get_bucket_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2938,6 +2991,14 @@ module Aws::S3
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?notification"
         o.input = Shapes::ShapeRef.new(shape: PutBucketNotificationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:put_bucket_ownership_controls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBucketOwnershipControls"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}?ownershipControls"
+        o.input = Shapes::ShapeRef.new(shape: PutBucketOwnershipControlsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 

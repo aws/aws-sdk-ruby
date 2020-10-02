@@ -551,6 +551,8 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :acl
     #   The canned ACL to apply to the object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
     # @option options [String] :content_disposition
@@ -623,12 +625,20 @@ module Aws::S3
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :metadata_directive
@@ -641,7 +651,16 @@ module Aws::S3
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
@@ -907,6 +926,8 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :acl
     #   The canned ACL to apply to the object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
     # @option options [String] :content_disposition
@@ -924,19 +945,36 @@ module Aws::S3
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
@@ -1049,6 +1087,8 @@ module Aws::S3
     #   The canned ACL to apply to the object. For more information, see
     #   [Canned ACL][1].
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
@@ -1120,20 +1160,36 @@ module Aws::S3
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   If you don't specify, S3 Standard is the default storage class.
-    #   Amazon S3 supports other storage classes.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.

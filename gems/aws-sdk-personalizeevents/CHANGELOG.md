@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-10-02)
+------------------
+
+* Feature - Adds new APIs to write item and user records to Datasets.
+
 1.13.0 (2020-09-30)
 ------------------
 

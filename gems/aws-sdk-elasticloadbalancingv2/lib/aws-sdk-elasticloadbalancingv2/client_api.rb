@@ -383,6 +383,7 @@ module Aws::ElasticLoadBalancingV2
     CreateListenerInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     CreateListenerInput.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "DefaultActions"))
     CreateListenerInput.add_member(:alpn_policy, Shapes::ShapeRef.new(shape: AlpnPolicyName, location_name: "AlpnPolicy"))
+    CreateListenerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateListenerInput.struct_class = Types::CreateListenerInput
 
     CreateListenerOutput.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "Listeners"))
@@ -406,6 +407,7 @@ module Aws::ElasticLoadBalancingV2
     CreateRuleInput.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleConditionList, required: true, location_name: "Conditions"))
     CreateRuleInput.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "Priority"))
     CreateRuleInput.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "Actions"))
+    CreateRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateRuleInput.struct_class = Types::CreateRuleInput
 
     CreateRuleOutput.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
@@ -425,6 +427,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupInput.add_member(:unhealthy_threshold_count, Shapes::ShapeRef.new(shape: HealthCheckThresholdCount, location_name: "UnhealthyThresholdCount"))
     CreateTargetGroupInput.add_member(:matcher, Shapes::ShapeRef.new(shape: Matcher, location_name: "Matcher"))
     CreateTargetGroupInput.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
+    CreateTargetGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTargetGroupInput.struct_class = Types::CreateTargetGroupInput
 
     CreateTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
@@ -1004,6 +1007,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
         o.errors << Shapes::ShapeRef.new(shape: ALPNPolicyNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -1047,6 +1051,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_target_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1058,6 +1063,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: DuplicateTargetGroupNameException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetGroupsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:delete_listener, Seahorse::Model::Operation.new.tap do |o|

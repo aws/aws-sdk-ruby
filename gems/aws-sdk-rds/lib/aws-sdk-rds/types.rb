@@ -2415,6 +2415,7 @@ module Aws::RDS
     #         iops: 1,
     #         option_group_name: "String",
     #         character_set_name: "String",
+    #         nchar_character_set_name: "String",
     #         publicly_accessible: false,
     #         tags: [
     #           {
@@ -3073,6 +3074,10 @@ module Aws::RDS
     #   more information, see `CreateDBCluster`.
     #   @return [String]
     #
+    # @!attribute [rw] nchar_character_set_name
+    #   The name of the NCHAR character set for the Oracle DB instance.
+    #   @return [String]
+    #
     # @!attribute [rw] publicly_accessible
     #   A value that indicates whether the DB instance is publicly
     #   accessible.
@@ -3399,6 +3404,7 @@ module Aws::RDS
       :iops,
       :option_group_name,
       :character_set_name,
+      :nchar_character_set_name,
       :publicly_accessible,
       :tags,
       :db_cluster_identifier,
@@ -5895,7 +5901,13 @@ module Aws::RDS
     #
     # @!attribute [rw] supported_character_sets
     #   A list of the character sets supported by this engine for the
-    #   `CharacterSetName` parameter of the `CreateDBInstance` action.
+    #   `CharacterSetName` parameter of the `CreateDBInstance` operation.
+    #   @return [Array<Types::CharacterSet>]
+    #
+    # @!attribute [rw] supported_nchar_character_sets
+    #   A list of the character sets supported by the Oracle DB engine for
+    #   the `NcharCharacterSetName` parameter of the `CreateDBInstance`
+    #   operation.
     #   @return [Array<Types::CharacterSet>]
     #
     # @!attribute [rw] valid_upgrade_target
@@ -5968,6 +5980,7 @@ module Aws::RDS
       :db_engine_version_description,
       :default_character_set,
       :supported_character_sets,
+      :supported_nchar_character_sets,
       :valid_upgrade_target,
       :supported_timezones,
       :exportable_log_types,
@@ -6188,6 +6201,12 @@ module Aws::RDS
     # @!attribute [rw] character_set_name
     #   If present, specifies the name of the character set that this
     #   instance is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] nchar_character_set_name
+    #   The name of the NCHAR character set for the Oracle DB instance. This
+    #   character set specifies the Unicode encoding for data stored in
+    #   table columns of type NCHAR, NCLOB, or NVARCHAR2.
     #   @return [String]
     #
     # @!attribute [rw] secondary_availability_zone
@@ -6414,6 +6433,7 @@ module Aws::RDS
       :iops,
       :option_group_memberships,
       :character_set_name,
+      :nchar_character_set_name,
       :secondary_availability_zone,
       :publicly_accessible,
       :status_infos,

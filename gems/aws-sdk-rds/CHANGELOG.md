@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2020-10-02)
+------------------
+
+* Feature - Adds the NCHAR Character Set ID parameter to the CreateDbInstance API for RDS Oracle.
+
 1.101.0 (2020-09-30)
 ------------------
 

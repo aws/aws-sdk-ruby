@@ -253,15 +253,23 @@ module Aws::S3
     # @option options [String] :grant_full_control
     #   Allows grantee the read, write, read ACP, and write ACP permissions on
     #   the bucket.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read
     #   Allows grantee to list the objects in the bucket.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the bucket ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write
     #   Allows grantee to create, overwrite, and delete any object in the
     #   bucket.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their

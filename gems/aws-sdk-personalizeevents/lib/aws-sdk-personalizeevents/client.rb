@@ -382,6 +382,72 @@ module Aws::PersonalizeEvents
       req.send_request(options)
     end
 
+    # Adds one or more items to an Items dataset. For more information see
+    # importing-items.
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Number (ARN) of the Items dataset you are adding
+    #   the item or items to.
+    #
+    # @option params [required, Array<Types::Item>] :items
+    #   A list of item data.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_items({
+    #     dataset_arn: "Arn", # required
+    #     items: [ # required
+    #       {
+    #         item_id: "StringType", # required
+    #         properties: "ItemProperties",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/PutItems AWS API Documentation
+    #
+    # @overload put_items(params = {})
+    # @param [Hash] params ({})
+    def put_items(params = {}, options = {})
+      req = build_request(:put_items, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more users to a Users dataset. For more information see
+    # importing-users.
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Number (ARN) of the Users dataset you are adding
+    #   the user or users to.
+    #
+    # @option params [required, Array<Types::User>] :users
+    #   A list of user data.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_users({
+    #     dataset_arn: "Arn", # required
+    #     users: [ # required
+    #       {
+    #         user_id: "StringType", # required
+    #         properties: "UserProperties",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/PutUsers AWS API Documentation
+    #
+    # @overload put_users(params = {})
+    # @param [Hash] params ({})
+    def put_users(params = {}, options = {})
+      req = build_request(:put_users, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -395,7 +461,7 @@ module Aws::PersonalizeEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeevents'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

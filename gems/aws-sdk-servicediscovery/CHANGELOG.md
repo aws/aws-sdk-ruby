@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-10-02)
+------------------
+
+* Feature - Added support for optional parameters for DiscoverInstances API in AWS Cloud Map
+
 1.30.0 (2020-09-30)
 ------------------
 

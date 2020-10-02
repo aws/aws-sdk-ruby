@@ -71,10 +71,17 @@ module Aws::RDS
     end
 
     # A list of the character sets supported by this engine for the
-    # `CharacterSetName` parameter of the `CreateDBInstance` action.
+    # `CharacterSetName` parameter of the `CreateDBInstance` operation.
     # @return [Array<Types::CharacterSet>]
     def supported_character_sets
       data[:supported_character_sets]
+    end
+
+    # A list of the character sets supported by the Oracle DB engine for the
+    # `NcharCharacterSetName` parameter of the `CreateDBInstance` operation.
+    # @return [Array<Types::CharacterSet>]
+    def supported_nchar_character_sets
+      data[:supported_nchar_character_sets]
     end
 
     # A list of engine versions that this database engine version can be

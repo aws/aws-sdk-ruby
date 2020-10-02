@@ -265,6 +265,14 @@ module Aws::RDS
       data[:character_set_name]
     end
 
+    # The name of the NCHAR character set for the Oracle DB instance. This
+    # character set specifies the Unicode encoding for data stored in table
+    # columns of type NCHAR, NCLOB, or NVARCHAR2.
+    # @return [String]
+    def nchar_character_set_name
+      data[:nchar_character_set_name]
+    end
+
     # If present, specifies the name of the secondary Availability Zone for
     # a DB instance with multi-AZ support.
     # @return [String]
@@ -673,6 +681,7 @@ module Aws::RDS
     #     iops: 1,
     #     option_group_name: "String",
     #     character_set_name: "String",
+    #     nchar_character_set_name: "String",
     #     publicly_accessible: false,
     #     tags: [
     #       {
@@ -1270,6 +1279,8 @@ module Aws::RDS
     #
     #   Not applicable. The character set is managed by the DB cluster. For
     #   more information, see `CreateDBCluster`.
+    # @option options [String] :nchar_character_set_name
+    #   The name of the NCHAR character set for the Oracle DB instance.
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #

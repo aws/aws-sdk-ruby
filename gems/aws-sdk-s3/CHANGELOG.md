@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2020-10-02)
+------------------
+
+* Feature - Amazon S3 Object Ownership is a new S3 feature that enables bucket owners to automatically assume ownership of objects that are uploaded to their buckets by other AWS Accounts.
+
 1.82.0 (2020-09-30)
 ------------------
 

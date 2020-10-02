@@ -470,6 +470,22 @@ module Aws::Batch
     #
     #    </note>
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the compute environment to help you
+    #   categorize and organize your resources. Each tag consists of a key and
+    #   an optional value. For more information, see [Tagging AWS
+    #   Resources][1] in *AWS General Reference*.
+    #
+    #   These tags can be updated or removed using the [TagResource][2] and
+    #   [UntagResource][3] API operations. These tags do not propagate to the
+    #   underlying compute resources.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html
+    #
     # @return [Types::CreateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
@@ -593,6 +609,9 @@ module Aws::Batch
     #       },
     #     },
     #     service_role: "String", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -643,6 +662,16 @@ module Aws::Batch
     #   Compute environments must be in the `VALID` state before you can
     #   associate them with a job queue. You can associate up to three compute
     #   environments with a job queue.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the job queue to help you categorize and
+    #   organize your resources. Each tag consists of a key and an optional
+    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
+    #   General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -711,6 +740,9 @@ module Aws::Batch
     #         compute_environment: "String", # required
     #       },
     #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -951,6 +983,8 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_environment_name #=> String
     #   resp.compute_environments[0].compute_environment_arn #=> String
     #   resp.compute_environments[0].ecs_cluster_arn #=> String
+    #   resp.compute_environments[0].tags #=> Hash
+    #   resp.compute_environments[0].tags["TagKey"] #=> String
     #   resp.compute_environments[0].type #=> String, one of "MANAGED", "UNMANAGED"
     #   resp.compute_environments[0].state #=> String, one of "ENABLED", "DISABLED"
     #   resp.compute_environments[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
@@ -1200,6 +1234,8 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
+    #   resp.job_definitions[0].tags #=> Hash
+    #   resp.job_definitions[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1298,6 +1334,8 @@ module Aws::Batch
     #   resp.job_queues[0].compute_environment_order #=> Array
     #   resp.job_queues[0].compute_environment_order[0].order #=> Integer
     #   resp.job_queues[0].compute_environment_order[0].compute_environment #=> String
+    #   resp.job_queues[0].tags #=> Hash
+    #   resp.job_queues[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues AWS API Documentation
@@ -1377,6 +1415,7 @@ module Aws::Batch
     # @example Response structure
     #
     #   resp.jobs #=> Array
+    #   resp.jobs[0].job_arn #=> String
     #   resp.jobs[0].job_name #=> String
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].job_queue #=> String
@@ -1527,6 +1566,8 @@ module Aws::Batch
     #   resp.jobs[0].array_properties.size #=> Integer
     #   resp.jobs[0].array_properties.index #=> Integer
     #   resp.jobs[0].timeout.attempt_duration_seconds #=> Integer
+    #   resp.jobs[0].tags #=> Hash
+    #   resp.jobs[0].tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -1650,6 +1691,7 @@ module Aws::Batch
     # @example Response structure
     #
     #   resp.job_summary_list #=> Array
+    #   resp.job_summary_list[0].job_arn #=> String
     #   resp.job_summary_list[0].job_id #=> String
     #   resp.job_summary_list[0].job_name #=> String
     #   resp.job_summary_list[0].created_at #=> Integer
@@ -1672,6 +1714,59 @@ module Aws::Batch
     # @param [Hash] params ({})
     def list_jobs(params = {}, options = {})
       req = build_request(:list_jobs, params)
+      req.send_request(options)
+    end
+
+    # List the tags for an AWS Batch resource. AWS Batch resources that
+    # support tags are compute environments, jobs, job definitions, and job
+    # queues. ARNs for child jobs of array and multi-node parallel (MNP)
+    # jobs are not supported.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. AWS Batch resources that support tags are compute
+    #   environments, jobs, job definitions, and job queues. ARNs for child
+    #   jobs of array and multi-node parallel (MNP) jobs are not supported.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: ListTagsForResource Example
+    #
+    #   # This demonstrates calling the ListTagsForResource action.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:batch:us-east-1:123456789012:job-definition/sleep30:1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "Department" => "Engineering", 
+    #       "Stage" => "Alpha", 
+    #       "User" => "JaneDoe", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1729,6 +1824,16 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the job definition to help you categorize
+    #   and organize your resources. Each tag consists of a key and an
+    #   optional value. For more information, see [Tagging AWS Resources][1]
+    #   in *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterJobDefinitionResponse#job_definition_name #job_definition_name} => String
@@ -1758,6 +1863,35 @@ module Aws::Batch
     #   {
     #     job_definition_arn: "arn:aws:batch:us-east-1:012345678910:job-definition/sleep10:1", 
     #     job_definition_name: "sleep10", 
+    #     revision: 1, 
+    #   }
+    #
+    # @example Example: RegisterJobDefinition with tags
+    #
+    #   # This demonstrates calling the RegisterJobDefinition action, including tags.
+    #
+    #   resp = client.register_job_definition({
+    #     type: "container", 
+    #     container_properties: {
+    #       command: [
+    #         "sleep", 
+    #         "30", 
+    #       ], 
+    #       image: "busybox", 
+    #       memory: 128, 
+    #       vcpus: 1, 
+    #     }, 
+    #     job_definition_name: "sleep30", 
+    #     tags: {
+    #       "Department" => "Engineering", 
+    #       "User" => "JaneDoe", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_definition_arn: "arn:aws:batch:us-east-1:012345678910:job-definition/sleep30:1", 
+    #     job_definition_name: "sleep30", 
     #     revision: 1, 
     #   }
     #
@@ -1952,6 +2086,9 @@ module Aws::Batch
     #     timeout: {
     #       attempt_duration_seconds: 1,
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2047,8 +2184,19 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the job request to help you categorize and
+    #   organize your resources. Each tag consists of a key and an optional
+    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
+    #   General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SubmitJobResponse#job_arn #job_arn} => String
     #   * {Types::SubmitJobResponse#job_name #job_name} => String
     #   * {Types::SubmitJobResponse#job_id #job_id} => String
     #
@@ -2137,10 +2285,14 @@ module Aws::Batch
     #     timeout: {
     #       attempt_duration_seconds: 1,
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.job_arn #=> String
     #   resp.job_name #=> String
     #   resp.job_id #=> String
     #
@@ -2150,6 +2302,66 @@ module Aws::Batch
     # @param [Hash] params ({})
     def submit_job(params = {}, options = {})
       req = build_request(:submit_job, params)
+      req.send_request(options)
+    end
+
+    # Associates the specified tags to a resource with the specified
+    # `resourceArn`. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well. AWS Batch
+    # resources that support tags are compute environments, jobs, job
+    # definitions, and job queues. ARNs for child jobs of array and
+    # multi-node parallel (MNP) jobs are not supported.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   AWS Batch resources that support tags are compute environments, jobs,
+    #   job definitions, and job queues. ARNs for child jobs of array and
+    #   multi-node parallel (MNP) jobs are not supported.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags that you apply to the resource to help you categorize and
+    #   organize your resources. Each tag consists of a key and an optional
+    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
+    #   General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: TagResource Example
+    #
+    #   # This demonstrates calling the TagResource action.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:batch:us-east-1:123456789012:job-definition/sleep30:1", 
+    #     tags: {
+    #       "Stage" => "Alpha", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -2195,6 +2407,51 @@ module Aws::Batch
     # @param [Hash] params ({})
     def terminate_job(params = {}, options = {})
       req = build_request(:terminate_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from an AWS Batch resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. AWS Batch resources that support tags are compute environments,
+    #   jobs, job definitions, and job queues. ARNs for child jobs of array
+    #   and multi-node parallel (MNP) jobs are not supported.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UntagResource Example
+    #
+    #   # This demonstrates calling the UntagResource action.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:batch:us-east-1:123456789012:job-definition/sleep30:1", 
+    #     tag_keys: [
+    #       "Stage", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2365,7 +2622,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

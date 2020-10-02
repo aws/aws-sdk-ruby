@@ -545,6 +545,7 @@ module Aws::RDS
     #     iops: 1,
     #     option_group_name: "String",
     #     character_set_name: "String",
+    #     nchar_character_set_name: "String",
     #     publicly_accessible: false,
     #     tags: [
     #       {
@@ -1155,6 +1156,8 @@ module Aws::RDS
     #
     #   Not applicable. The character set is managed by the DB cluster. For
     #   more information, see `CreateDBCluster`.
+    # @option options [String] :nchar_character_set_name
+    #   The name of the NCHAR character set for the Oracle DB instance.
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #

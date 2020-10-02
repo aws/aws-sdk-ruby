@@ -3332,6 +3332,9 @@ module Aws::RDS
     #   Not applicable. The character set is managed by the DB cluster. For
     #   more information, see `CreateDBCluster`.
     #
+    # @option params [String] :nchar_character_set_name
+    #   The name of the NCHAR character set for the Oracle DB instance.
+    #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #
@@ -3658,6 +3661,7 @@ module Aws::RDS
     #     iops: 1,
     #     option_group_name: "String",
     #     character_set_name: "String",
+    #     nchar_character_set_name: "String",
     #     publicly_accessible: false,
     #     tags: [
     #       {
@@ -3765,6 +3769,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -4399,6 +4404,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -5923,6 +5929,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -7707,6 +7714,9 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supported_character_sets #=> Array
     #   resp.db_engine_versions[0].supported_character_sets[0].character_set_name #=> String
     #   resp.db_engine_versions[0].supported_character_sets[0].character_set_description #=> String
+    #   resp.db_engine_versions[0].supported_nchar_character_sets #=> Array
+    #   resp.db_engine_versions[0].supported_nchar_character_sets[0].character_set_name #=> String
+    #   resp.db_engine_versions[0].supported_nchar_character_sets[0].character_set_description #=> String
     #   resp.db_engine_versions[0].valid_upgrade_target #=> Array
     #   resp.db_engine_versions[0].valid_upgrade_target[0].engine #=> String
     #   resp.db_engine_versions[0].valid_upgrade_target[0].engine_version #=> String
@@ -8021,6 +8031,7 @@ module Aws::RDS
     #   resp.db_instances[0].option_group_memberships[0].option_group_name #=> String
     #   resp.db_instances[0].option_group_memberships[0].status #=> String
     #   resp.db_instances[0].character_set_name #=> String
+    #   resp.db_instances[0].nchar_character_set_name #=> String
     #   resp.db_instances[0].secondary_availability_zone #=> String
     #   resp.db_instances[0].publicly_accessible #=> Boolean
     #   resp.db_instances[0].status_infos #=> Array
@@ -12822,6 +12833,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -13906,6 +13918,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -14299,6 +14312,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -16575,6 +16589,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -17134,6 +17149,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -17713,6 +17729,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -18138,6 +18155,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -18593,6 +18611,7 @@ module Aws::RDS
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
     #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
     #   resp.db_instance.secondary_availability_zone #=> String
     #   resp.db_instance.publicly_accessible #=> Boolean
     #   resp.db_instance.status_infos #=> Array
@@ -18661,7 +18680,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

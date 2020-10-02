@@ -597,6 +597,12 @@ module Aws::ElasticLoadBalancingV2
     #           },
     #         ],
     #         alpn_policy: ["AlpnPolicyValue"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] load_balancer_arn
@@ -704,6 +710,10 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the listener.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
     #
     class CreateListenerInput < Struct.new(
@@ -713,7 +723,8 @@ module Aws::ElasticLoadBalancingV2
       :ssl_policy,
       :certificates,
       :default_actions,
-      :alpn_policy)
+      :alpn_policy,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -827,7 +838,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags to assign to the load balancer.
+    #   The tags to assign to the load balancer.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] type
@@ -970,6 +981,12 @@ module Aws::ElasticLoadBalancingV2
     #             },
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] listener_arn
@@ -1015,13 +1032,18 @@ module Aws::ElasticLoadBalancingV2
     #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the rule.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput AWS API Documentation
     #
     class CreateRuleInput < Struct.new(
       :listener_arn,
       :conditions,
       :priority,
-      :actions)
+      :actions,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1058,6 +1080,12 @@ module Aws::ElasticLoadBalancingV2
     #           http_code: "HttpCode", # required
     #         },
     #         target_type: "instance", # accepts instance, ip, lambda
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1172,6 +1200,10 @@ module Aws::ElasticLoadBalancingV2
     #   * `lambda` - The target groups contains a single Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the target group.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
     #
     class CreateTargetGroupInput < Struct.new(
@@ -1188,7 +1220,8 @@ module Aws::ElasticLoadBalancingV2
       :healthy_threshold_count,
       :unhealthy_threshold_count,
       :matcher,
-      :target_type)
+      :target_type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
