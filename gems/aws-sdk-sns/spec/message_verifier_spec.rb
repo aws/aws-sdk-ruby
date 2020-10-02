@@ -123,6 +123,13 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
           }.to raise_error(MessageVerifier::VerificationError, /cannot be verified/)
         end
 
+        it 'can use a configured :http_proxy' do
+          proxy_url = 'https://peccy:password@amazonaws.com:12345'
+          verifier = MessageVerifier.new(http_proxy: proxy_url)
+          verifier.authenticate!(message)
+          expect(a_request(:get, signing_cert_url)).to have_been_made
+        end
+
         it 'caches the pem file' do
           verifier.authenticate!(message)
           verifier.authenticate!(message)
