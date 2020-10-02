@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Use `:http_proxy` configuration when fetching PEM files with `Aws::SNS::MessageVerifier`. (#1683)
+
 1.32.0 (2020-09-30)
 ------------------
 
