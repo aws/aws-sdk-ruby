@@ -16,9 +16,9 @@ module Aws
       # @param [Aws::Structure] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         @code = self.class.code
-        @message = message if message && !message.empty?
         @context = context
         @data = data
+        message = message && !message.empty? ? message : self.class
         super(message)
       end
 

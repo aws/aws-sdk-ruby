@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - For errors without a message, default to the error class. (#2388)
+
 3.109.0 (2020-09-30)
 ------------------
 
