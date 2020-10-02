@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.600 (2020-10-02)
+------------------
+
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
 
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
