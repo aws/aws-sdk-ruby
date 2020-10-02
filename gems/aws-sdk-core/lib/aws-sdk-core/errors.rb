@@ -18,8 +18,8 @@ module Aws
         @code = self.class.code
         @context = context
         @data = data
-        message = message && !message.empty? ? message : self.class
-        super(message)
+        @message = message && !message.empty? ? message : self.class
+        super(@message)
       end
 
       # @return [String]
