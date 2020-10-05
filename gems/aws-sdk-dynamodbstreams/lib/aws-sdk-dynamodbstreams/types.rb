@@ -399,7 +399,7 @@ module Aws::DynamoDBStreams
     # time; however, if the table or index specifications are complex,
     # DynamoDB might temporarily reduce the number of concurrent operations.
     #
-    # There is a soft account limit of 256 tables.
+    # There is a soft account quota of 256 tables.
     #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.

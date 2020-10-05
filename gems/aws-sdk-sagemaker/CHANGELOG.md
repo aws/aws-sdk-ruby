@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2020-10-05)
+------------------
+
+* Feature - This release adds support for launching Amazon SageMaker Studio in your VPC. Use AppNetworkAccessType in CreateDomain API to disable access to public internet and restrict the network traffic to VPC.
+
 1.68.0 (2020-09-30)
 ------------------
 

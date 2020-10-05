@@ -1455,7 +1455,7 @@ module Aws::SageMaker
     # @!attribute [rw] s3_data_source
     #   The Amazon S3 location of the input data.
     #
-    #   <note markdown="1"> The input data must be in CSV format and contain at least 1000 rows.
+    #   <note markdown="1"> The input data must be in CSV format and contain at least 500 rows.
     #
     #    </note>
     #   @return [Types::AutoMLS3DataSource]
@@ -2395,6 +2395,11 @@ module Aws::SageMaker
     #   algorithms. For more information on built-in algorithms, see [Common
     #   Parameters][1].
     #
+    #   <note markdown="1"> The model artifacts must be in an S3 bucket that is in the same
+    #   region as the model or endpoint you are creating.
+    #
+    #    </note>
+    #
     #   If you provide a value for this parameter, Amazon SageMaker uses AWS
     #   Security Token Service to download model artifacts from the S3 path
     #   you provide. AWS STS is activated in your IAM user account by
@@ -2909,7 +2914,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] input_data_config
     #   Similar to InputDataConfig supported by Tuning. Format(s) supported:
-    #   CSV. Minimum of 1000 rows.
+    #   CSV. Minimum of 500 rows.
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -3168,6 +3173,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #         home_efs_file_system_kms_key_id: "KmsKeyId",
+    #         app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
     #       }
     #
     # @!attribute [rw] domain_name
@@ -3183,12 +3189,12 @@ module Aws::SageMaker
     #   @return [Types::UserSettings]
     #
     # @!attribute [rw] subnet_ids
-    #   The VPC subnets to use for communication with the EFS volume.
+    #   The VPC subnets that Studio uses for communication.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the Amazon Virtual Private Cloud (VPC) to use for
-    #   communication with the EFS volume.
+    #   The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses
+    #   for communication.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3202,6 +3208,17 @@ module Aws::SageMaker
     #   with a customer master key (CMK) is not supported.
     #   @return [String]
     #
+    # @!attribute [rw] app_network_access_type
+    #   Specifies the VPC used for non-EFS traffic. The default value is
+    #   `PublicInternetOnly`.
+    #
+    #   * `PublicInternetOnly` - Non-EFS traffic is through a VPC managed by
+    #     Amazon SageMaker, which allows direct internet access
+    #
+    #   * `VpcOnly` - All Studio traffic is through the specified VPC and
+    #     subnets
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -3211,7 +3228,8 @@ module Aws::SageMaker
       :subnet_ids,
       :vpc_id,
       :tags,
-      :home_efs_file_system_kms_key_id)
+      :home_efs_file_system_kms_key_id,
+      :app_network_access_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7523,7 +7541,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   Security setting to limit to a set of subnets.
+    #   The VPC subnets that Studio uses for communication.
     #   @return [Array<String>]
     #
     # @!attribute [rw] url
@@ -7531,7 +7549,19 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the Amazon Virtual Private Cloud.
+    #   The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses
+    #   for communication.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_network_access_type
+    #   Specifies the VPC used for non-EFS traffic. The default value is
+    #   `PublicInternetOnly`.
+    #
+    #   * `PublicInternetOnly` - Non-EFS traffic is through a VPC managed by
+    #     Amazon SageMaker, which allows direct internet access
+    #
+    #   * `VpcOnly` - All Studio traffic is through the specified VPC and
+    #     subnets
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
@@ -7551,7 +7581,8 @@ module Aws::SageMaker
       :home_efs_file_system_kms_key_id,
       :subnet_ids,
       :url,
-      :vpc_id)
+      :vpc_id,
+      :app_network_access_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16282,6 +16313,11 @@ module Aws::SageMaker
     #   The Amazon S3 path where the model artifacts, which result from
     #   model training, are stored. This path must point to a single `gzip`
     #   compressed tar archive (`.tar.gz` suffix).
+    #
+    #   <note markdown="1"> The model artifacts must be in an S3 bucket that is in the same
+    #   region as the model package.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -19831,8 +19867,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_output_path
     #   When `NotebookOutputOption` is `Allowed`, the Amazon S3 bucket used
-    #   to save the notebook cell output. If `S3OutputPath` isn't
-    #   specified, a default bucket is used.
+    #   to save the notebook cell output.
     #   @return [String]
     #
     # @!attribute [rw] s3_kms_key_id
@@ -19904,6 +19939,11 @@ module Aws::SageMaker
     #   The Amazon S3 path where the model artifacts, which result from
     #   model training, are stored. This path must point to a single `gzip`
     #   compressed tar archive (`.tar.gz` suffix).
+    #
+    #   <note markdown="1"> The model artifacts must be in an S3 bucket that is in the same
+    #   region as the algorithm.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] algorithm_name
@@ -22098,7 +22138,7 @@ module Aws::SageMaker
     #   @return [Types::ProcessingJob]
     #
     # @!attribute [rw] transform_job
-    #   Information about a transform job that's the source of the trial
+    #   Information about a transform job that's the source of a trial
     #   component.
     #   @return [Types::TransformJob]
     #

@@ -2309,6 +2309,13 @@ module Aws::Glue
     #             exclusions: ["Path"],
     #           },
     #         ],
+    #         mongo_db_targets: [
+    #           {
+    #             connection_name: "ConnectionName",
+    #             path: "Path",
+    #             scan_all: false,
+    #           },
+    #         ],
     #         dynamo_db_targets: [
     #           {
     #             path: "Path",
@@ -2332,6 +2339,10 @@ module Aws::Glue
     #   Specifies JDBC targets.
     #   @return [Array<Types::JdbcTarget>]
     #
+    # @!attribute [rw] mongo_db_targets
+    #   Specifies Amazon DocumentDB or MongoDB targets.
+    #   @return [Array<Types::MongoDBTarget>]
+    #
     # @!attribute [rw] dynamo_db_targets
     #   Specifies Amazon DynamoDB targets.
     #   @return [Array<Types::DynamoDBTarget>]
@@ -2345,6 +2356,7 @@ module Aws::Glue
     class CrawlerTargets < Struct.new(
       :s3_targets,
       :jdbc_targets,
+      :mongo_db_targets,
       :dynamo_db_targets,
       :catalog_targets)
       SENSITIVE = []
@@ -2476,6 +2488,13 @@ module Aws::Glue
     #               connection_name: "ConnectionName",
     #               path: "Path",
     #               exclusions: ["Path"],
+    #             },
+    #           ],
+    #           mongo_db_targets: [
+    #             {
+    #               connection_name: "ConnectionName",
+    #               path: "Path",
+    #               scan_all: false,
     #             },
     #           ],
     #           dynamo_db_targets: [
@@ -10207,6 +10226,47 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Amazon DocumentDB or MongoDB data store to crawl.
+    #
+    # @note When making an API call, you may pass MongoDBTarget
+    #   data as a hash:
+    #
+    #       {
+    #         connection_name: "ConnectionName",
+    #         path: "Path",
+    #         scan_all: false,
+    #       }
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to use to connect to the Amazon
+    #   DocumentDB or MongoDB target.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the Amazon DocumentDB or MongoDB target
+    #   (database/collection).
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_all
+    #   Indicates whether to scan all the records, or to sample rows from
+    #   the table. Scanning all the records can take a long time when the
+    #   table is not a high throughput table.
+    #
+    #   A value of `true` means to scan all records, while a value of
+    #   `false` means to sample the records. If no value is specified, the
+    #   value defaults to `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MongoDBTarget AWS API Documentation
+    #
+    class MongoDBTarget < Struct.new(
+      :connection_name,
+      :path,
+      :scan_all)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There is no applicable schedule.
     #
     # @!attribute [rw] message
@@ -13415,6 +13475,13 @@ module Aws::Glue
     #               connection_name: "ConnectionName",
     #               path: "Path",
     #               exclusions: ["Path"],
+    #             },
+    #           ],
+    #           mongo_db_targets: [
+    #             {
+    #               connection_name: "ConnectionName",
+    #               path: "Path",
+    #               scan_all: false,
     #             },
     #           ],
     #           dynamo_db_targets: [

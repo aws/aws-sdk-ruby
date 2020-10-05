@@ -748,7 +748,7 @@ module Aws::SageMaker
     #
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
     #   Similar to InputDataConfig supported by Tuning. Format(s) supported:
-    #   CSV. Minimum of 1000 rows.
+    #   CSV. Minimum of 500 rows.
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
     #   Similar to OutputDataConfig supported by Tuning. Format(s) supported:
@@ -1012,26 +1012,65 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a `Domain` used by SageMaker Studio. A domain consists of an
-    # associated directory, a list of authorized users, and a variety of
-    # security, application, policy, and Amazon Virtual Private Cloud (VPC)
-    # configurations. An AWS account is limited to one domain per region.
-    # Users within a domain can share notebook files and other artifacts
-    # with each other.
+    # Creates a `Domain` used by Amazon SageMaker Studio. A domain consists
+    # of an associated Amazon Elastic File System (EFS) volume, a list of
+    # authorized users, and a variety of security, application, policy, and
+    # Amazon Virtual Private Cloud (VPC) configurations. An AWS account is
+    # limited to one domain per region. Users within a domain can share
+    # notebook files and other artifacts with each other.
     #
-    # When a domain is created, an Amazon Elastic File System (EFS) volume
-    # is also created for use by all of the users within the domain. Each
-    # user receives a private home directory within the EFS for notebooks,
-    # Git repositories, and data files.
+    # When a domain is created, an EFS volume is created for use by all of
+    # the users within the domain. Each user receives a private home
+    # directory within the EFS volume for notebooks, Git repositories, and
+    # data files.
     #
-    # All traffic between the domain and the EFS volume is communicated
-    # through the specified subnet IDs. All other traffic goes over the
-    # Internet through an Amazon SageMaker system VPC. The EFS traffic uses
-    # the NFS/TCP protocol over port 2049.
+    # **VPC configuration**
     #
-    # NFS traffic over TCP on port 2049 needs to be allowed in both inbound
-    # and outbound rules in order to launch a SageMaker Studio app
-    # successfully.
+    # All SageMaker Studio traffic between the domain and the EFS volume is
+    # through the specified VPC and subnets. For other Studio traffic, you
+    # specify the `AppNetworkAccessType` parameter. `AppNetworkAccessType`
+    # corresponds to the VPC mode that's chosen when you onboard to Studio.
+    # The following options are available:
+    #
+    # * `PublicInternetOnly` - Non-EFS traffic goes through a VPC managed by
+    #   Amazon SageMaker, which allows internet access. This is the default
+    #   value.
+    #
+    # * `VpcOnly` - All Studio traffic is through the specified VPC and
+    #   subnets. Internet access is disabled by default. To allow internet
+    #   access, you must specify a NAT gateway.
+    #
+    #   When internet access is disabled, you won't be able to train or
+    #   host models unless your VPC has an interface endpoint (PrivateLink)
+    #   or a NAT gateway and your security groups allow outbound
+    #   connections.
+    #
+    # <b> <code>VpcOnly</code> mode</b>
+    #
+    # When you specify `VpcOnly`, you must specify the following:
+    #
+    # * Security group inbound and outbound rules to allow NFS traffic over
+    #   TCP on port 2049 between the domain and the EFS volume
+    #
+    # * Security group inbound and outbound rules to allow traffic between
+    #   the JupyterServer app and the KernelGateway apps
+    #
+    # * Interface endpoints to access the SageMaker API and SageMaker
+    #   runtime
+    #
+    # For more information, see:
+    #
+    # * [Security groups for your VPC][1]
+    #
+    # * [VPC with public and private subnets (NAT)][2]
+    #
+    # * [Connect to SageMaker through a VPC interface endpoint][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/interface-vpc-endpoint.html
     #
     # @option params [required, String] :domain_name
     #   A name for the domain.
@@ -1043,11 +1082,11 @@ module Aws::SageMaker
     #   The default user settings.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   The VPC subnets to use for communication with the EFS volume.
+    #   The VPC subnets that Studio uses for communication.
     #
     # @option params [required, String] :vpc_id
-    #   The ID of the Amazon Virtual Private Cloud (VPC) to use for
-    #   communication with the EFS volume.
+    #   The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for
+    #   communication.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associated with the Domain. Each tag consists of a key and an
@@ -1057,6 +1096,16 @@ module Aws::SageMaker
     # @option params [String] :home_efs_file_system_kms_key_id
     #   The AWS Key Management Service (KMS) encryption key ID. Encryption
     #   with a customer master key (CMK) is not supported.
+    #
+    # @option params [String] :app_network_access_type
+    #   Specifies the VPC used for non-EFS traffic. The default value is
+    #   `PublicInternetOnly`.
+    #
+    #   * `PublicInternetOnly` - Non-EFS traffic is through a VPC managed by
+    #     Amazon SageMaker, which allows direct internet access
+    #
+    #   * `VpcOnly` - All Studio traffic is through the specified VPC and
+    #     subnets
     #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1104,6 +1153,7 @@ module Aws::SageMaker
     #       },
     #     ],
     #     home_efs_file_system_kms_key_id: "KmsKeyId",
+    #     app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
     #   })
     #
     # @example Response structure
@@ -2845,6 +2895,12 @@ module Aws::SageMaker
     # associated with the Domain's Amazon Elastic File System (EFS) volume.
     # This operation can only be called when the authentication mode equals
     # IAM.
+    #
+    # <note markdown="1"> The URL that you get from a call to `CreatePresignedDomainUrl` is
+    # valid only for 5 minutes. If you try to use the URL after the 5-minute
+    # limit expires, you are directed to the AWS console sign-in page.
+    #
+    #  </note>
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -5126,6 +5182,7 @@ module Aws::SageMaker
     #   * {Types::DescribeDomainResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::DescribeDomainResponse#url #url} => String
     #   * {Types::DescribeDomainResponse#vpc_id #vpc_id} => String
+    #   * {Types::DescribeDomainResponse#app_network_access_type #app_network_access_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5162,6 +5219,7 @@ module Aws::SageMaker
     #   resp.subnet_ids[0] #=> String
     #   resp.url #=> String
     #   resp.vpc_id #=> String
+    #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomain AWS API Documentation
     #
@@ -10995,7 +11053,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

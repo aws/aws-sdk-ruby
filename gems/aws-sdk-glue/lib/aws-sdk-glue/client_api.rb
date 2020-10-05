@@ -437,6 +437,8 @@ module Aws::Glue
     MessagePrefix = Shapes::StringShape.new(name: 'MessagePrefix')
     MessageString = Shapes::StringShape.new(name: 'MessageString')
     MillisecondsCount = Shapes::IntegerShape.new(name: 'MillisecondsCount')
+    MongoDBTarget = Shapes::StructureShape.new(name: 'MongoDBTarget')
+    MongoDBTargetList = Shapes::ListShape.new(name: 'MongoDBTargetList')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NameStringList = Shapes::ListShape.new(name: 'NameStringList')
     NoScheduleException = Shapes::StructureShape.new(name: 'NoScheduleException')
@@ -1067,6 +1069,7 @@ module Aws::Glue
 
     CrawlerTargets.add_member(:s3_targets, Shapes::ShapeRef.new(shape: S3TargetList, location_name: "S3Targets"))
     CrawlerTargets.add_member(:jdbc_targets, Shapes::ShapeRef.new(shape: JdbcTargetList, location_name: "JdbcTargets"))
+    CrawlerTargets.add_member(:mongo_db_targets, Shapes::ShapeRef.new(shape: MongoDBTargetList, location_name: "MongoDBTargets"))
     CrawlerTargets.add_member(:dynamo_db_targets, Shapes::ShapeRef.new(shape: DynamoDBTargetList, location_name: "DynamoDBTargets"))
     CrawlerTargets.add_member(:catalog_targets, Shapes::ShapeRef.new(shape: CatalogTargetList, location_name: "CatalogTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
@@ -2264,6 +2267,13 @@ module Aws::Glue
     MappingList.member = Shapes::ShapeRef.new(shape: MappingEntry)
 
     MatchCriteria.member = Shapes::ShapeRef.new(shape: NameString)
+
+    MongoDBTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
+    MongoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    MongoDBTarget.add_member(:scan_all, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ScanAll"))
+    MongoDBTarget.struct_class = Types::MongoDBTarget
+
+    MongoDBTargetList.member = Shapes::ShapeRef.new(shape: MongoDBTarget)
 
     NameStringList.member = Shapes::ShapeRef.new(shape: NameString)
 

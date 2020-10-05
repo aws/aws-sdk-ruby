@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2020-10-05)
+------------------
+
+* Feature - AWS Glue crawlers now support Amazon DocumentDB (with MongoDB compatibility) and MongoDB collections. You can choose to crawl the entire data set or only a small sample to reduce crawl time.
+
 1.73.0 (2020-10-01)
 ------------------
 

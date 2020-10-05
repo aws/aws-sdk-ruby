@@ -1036,7 +1036,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -1044,6 +1044,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -1237,7 +1238,8 @@ module Aws::DynamoDB
     #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -1479,7 +1481,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -1487,6 +1489,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -1973,7 +1976,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -1981,6 +1984,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -2220,7 +2224,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -2228,6 +2232,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -2272,7 +2277,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -2332,28 +2337,28 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Returns the current provisioned-capacity limits for your AWS account
+    # Returns the current provisioned-capacity quotas for your AWS account
     # in a Region, both for the Region as a whole and for any one DynamoDB
     # table that you create there.
     #
-    # When you establish an AWS account, the account has initial limits on
+    # When you establish an AWS account, the account has initial quotas on
     # the maximum read capacity units and write capacity units that you can
     # provision across all of your DynamoDB tables in a given Region. Also,
-    # there are per-table limits that apply when you create a table there.
-    # For more information, see [Limits][1] page in the *Amazon DynamoDB
-    # Developer Guide*.
+    # there are per-table quotas that apply when you create a table there.
+    # For more information, see [Service, Account, and Table Quotas][1] page
+    # in the *Amazon DynamoDB Developer Guide*.
     #
-    # Although you can increase these limits by filing a case at [AWS
+    # Although you can increase these quotas by filing a case at [AWS
     # Support Center][2], obtaining the increase is not instantaneous. The
     # `DescribeLimits` action lets you write code to compare the capacity
-    # you are currently using to those limits imposed by your account so
+    # you are currently using to those quotas imposed by your account so
     # that you have enough time to apply for an increase before you hit a
-    # limit.
+    # quota.
     #
     # For example, you could use one of the AWS SDKs to do the following:
     #
     # 1.  Call `DescribeLimits` for a particular Region to obtain your
-    #     current account limits on provisioned capacity there.
+    #     current account quotas on provisioned capacity there.
     #
     # 2.  Create a variable to hold the aggregate read capacity units
     #     provisioned for all your tables in that Region, and one to hold
@@ -2373,21 +2378,21 @@ module Aws::DynamoDB
     #       loop over these GSIs and add their provisioned capacity values
     #       to your variables as well.
     #
-    # 5.  Report the account limits for that Region returned by
+    # 5.  Report the account quotas for that Region returned by
     #     `DescribeLimits`, along with the total current provisioned
     #     capacity levels you have calculated.
     #
     # This will let you see whether you are getting close to your
-    # account-level limits.
+    # account-level quotas.
     #
-    # The per-table limits apply only when you are creating a new table.
+    # The per-table quotas apply only when you are creating a new table.
     # They restrict the sum of the provisioned capacity of the new table
     # itself and all its global secondary indexes.
     #
     # For existing tables and their GSIs, DynamoDB doesn't let you increase
-    # provisioned capacity extremely rapidly. But the only upper limit that
+    # provisioned capacity extremely rapidly, but the only quota that
     # applies is that the aggregate provisioned capacity over all your
-    # tables and GSIs cannot exceed either of the per-account limits.
+    # tables and GSIs cannot exceed either of the per-account quotas.
     #
     # <note markdown="1"> `DescribeLimits` should only be called periodically. You can expect
     # throttling errors if you call it more than once in a minute.
@@ -2570,7 +2575,7 @@ module Aws::DynamoDB
     #   resp.table.global_table_version #=> String
     #   resp.table.replicas #=> Array
     #   resp.table.replicas[0].region_name #=> String
-    #   resp.table.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.table.replicas[0].replica_status_description #=> String
     #   resp.table.replicas[0].replica_status_percent_progress #=> String
     #   resp.table.replicas[0].kms_master_key_id #=> String
@@ -2578,6 +2583,7 @@ module Aws::DynamoDB
     #   resp.table.replicas[0].global_secondary_indexes #=> Array
     #   resp.table.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table.restore_summary.source_backup_arn #=> String
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
@@ -2679,7 +2685,7 @@ module Aws::DynamoDB
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableReplicaAutoScaling AWS API Documentation
     #
@@ -2918,12 +2924,11 @@ module Aws::DynamoDB
     # List backups associated with an AWS account. To list backups for a
     # given table, specify `TableName`. `ListBackups` returns a paginated
     # list of results with at most 1 MB worth of items in a page. You can
-    # also specify a limit for the maximum number of entries to be returned
-    # in a page.
+    # also specify a maximum number of entries to be returned in a page.
     #
     # In the request, start time is inclusive, but end time is exclusive.
-    # Note that these limits are for the time at which the original backup
-    # was requested.
+    # Note that these boundaries are for the time at which the original
+    # backup was requested.
     #
     # You can call `ListBackups` a maximum of five times per second.
     #
@@ -4246,7 +4251,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -4254,6 +4259,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -4468,7 +4474,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -4476,6 +4482,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -5472,7 +5479,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -5480,6 +5487,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -5629,7 +5637,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -6390,7 +6398,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -6398,6 +6406,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -6579,7 +6588,7 @@ module Aws::DynamoDB
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableReplicaAutoScaling AWS API Documentation
     #
@@ -6675,7 +6684,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

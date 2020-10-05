@@ -663,6 +663,10 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.mongo_db_targets #=> Array
+    #   resp.crawlers[0].targets.mongo_db_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.mongo_db_targets[0].path #=> String
+    #   resp.crawlers[0].targets.mongo_db_targets[0].scan_all #=> Boolean
     #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
     #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
     #   resp.crawlers[0].targets.dynamo_db_targets[0].scan_all #=> Boolean
@@ -1529,6 +1533,13 @@ module Aws::Glue
     #           connection_name: "ConnectionName",
     #           path: "Path",
     #           exclusions: ["Path"],
+    #         },
+    #       ],
+    #       mongo_db_targets: [
+    #         {
+    #           connection_name: "ConnectionName",
+    #           path: "Path",
+    #           scan_all: false,
     #         },
     #       ],
     #       dynamo_db_targets: [
@@ -3727,6 +3738,10 @@ module Aws::Glue
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
     #   resp.crawler.targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawler.targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.mongo_db_targets #=> Array
+    #   resp.crawler.targets.mongo_db_targets[0].connection_name #=> String
+    #   resp.crawler.targets.mongo_db_targets[0].path #=> String
+    #   resp.crawler.targets.mongo_db_targets[0].scan_all #=> Boolean
     #   resp.crawler.targets.dynamo_db_targets #=> Array
     #   resp.crawler.targets.dynamo_db_targets[0].path #=> String
     #   resp.crawler.targets.dynamo_db_targets[0].scan_all #=> Boolean
@@ -3852,6 +3867,10 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.mongo_db_targets #=> Array
+    #   resp.crawlers[0].targets.mongo_db_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.mongo_db_targets[0].path #=> String
+    #   resp.crawlers[0].targets.mongo_db_targets[0].scan_all #=> Boolean
     #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
     #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
     #   resp.crawlers[0].targets.dynamo_db_targets[0].scan_all #=> Boolean
@@ -8331,6 +8350,13 @@ module Aws::Glue
     #           exclusions: ["Path"],
     #         },
     #       ],
+    #       mongo_db_targets: [
+    #         {
+    #           connection_name: "ConnectionName",
+    #           path: "Path",
+    #           scan_all: false,
+    #         },
+    #       ],
     #       dynamo_db_targets: [
     #         {
     #           path: "Path",
@@ -9096,7 +9122,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

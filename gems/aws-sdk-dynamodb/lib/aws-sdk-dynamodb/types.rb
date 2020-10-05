@@ -1721,7 +1721,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -2097,7 +2098,8 @@ module Aws::DynamoDB
     #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -3661,7 +3663,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -3795,7 +3798,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -4415,7 +4419,7 @@ module Aws::DynamoDB
     # time; however, if the table or index specifications are complex,
     # DynamoDB might temporarily reduce the number of concurrent operations.
     #
-    # There is a soft account limit of 256 tables.
+    # There is a soft account quota of 256 tables.
     #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.
@@ -4986,9 +4990,9 @@ module Aws::DynamoDB
     #   * `KEYS_ONLY` - Only the index and primary keys are projected into
     #     the index.
     #
-    #   * `INCLUDE` - Only the specified table attributes are projected into
-    #     the index. The list of projected attributes is in
-    #     `NonKeyAttributes`.
+    #   * `INCLUDE` - In addition to the attributes described in
+    #     `KEYS_ONLY`, the secondary index will include other non-key
+    #     attributes that you specify.
     #
     #   * `ALL` - All of the table attributes are projected into the index.
     #   @return [String]
@@ -5017,7 +5021,8 @@ module Aws::DynamoDB
     # operation.
     #
     # For current minimum and maximum provisioned throughput values, see
-    # [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    # [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    # Developer Guide*.
     #
     #
     #
@@ -5085,8 +5090,8 @@ module Aws::DynamoDB
     # @!attribute [rw] number_of_decreases_today
     #   The number of provisioned throughput decreases for this table during
     #   this UTC calendar day. For current maximums on provisioned
-    #   throughput decreases, see [Limits][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   throughput decreases, see [Service, Account, and Table Quotas][1] in
+    #   the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
@@ -6257,6 +6262,16 @@ module Aws::DynamoDB
     #   * `DELETING` - The replica is being deleted.
     #
     #   * `ACTIVE` - The replica is ready for use.
+    #
+    #   * `REGION_DISABLED` - The replica is inaccessible because the AWS
+    #     Region has been disabled.
+    #
+    #     <note markdown="1"> If the AWS Region remains inaccessible for more than 20 hours,
+    #     DynamoDB will remove this replica from the replication group. The
+    #     replica will not be deleted and replication will stop from and to
+    #     this region.
+    #
+    #      </note>
     #   @return [String]
     #
     # @!attribute [rw] replica_status_description
@@ -6282,6 +6297,12 @@ module Aws::DynamoDB
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndexDescription>]
     #
+    # @!attribute [rw] replica_inaccessible_date_time
+    #   The time at which the replica was first detected as inaccessible. To
+    #   determine cause of inaccessibility check the `ReplicaStatus`
+    #   property.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription AWS API Documentation
     #
     class ReplicaDescription < Struct.new(
@@ -6291,7 +6312,8 @@ module Aws::DynamoDB
       :replica_status_percent_progress,
       :kms_master_key_id,
       :provisioned_throughput_override,
-      :global_secondary_indexes)
+      :global_secondary_indexes,
+      :replica_inaccessible_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6813,8 +6835,8 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Throughput exceeds the current throughput limit for your account.
-    # Please contact AWS Support at [AWS Support][1] to request a limit
+    # Throughput exceeds the current throughput quota for your account.
+    # Please contact AWS Support at [AWS Support][1] to request a quota
     # increase.
     #
     #
@@ -8086,9 +8108,9 @@ module Aws::DynamoDB
     #       * `KEYS_ONLY` - Only the index and primary keys are projected
     #         into the index.
     #
-    #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes is in
-    #         `NonKeyAttributes`.
+    #       * `INCLUDE` - In addition to the attributes described in
+    #         `KEYS_ONLY`, the secondary index will include other non-key
+    #         attributes that you specify.
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
@@ -9112,7 +9134,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
