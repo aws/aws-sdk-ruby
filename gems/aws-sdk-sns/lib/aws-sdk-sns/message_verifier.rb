@@ -6,7 +6,6 @@ require 'base64'
 
 module Aws
   module SNS
-
     # A utility class that can be used to verify the authenticity of messages
     # sent by Amazon SNS.
     #
@@ -33,16 +32,20 @@ module Aws
         'Timestamp',
         'Token',
         'TopicArn',
-        'Type',
+        'Type'
       ].freeze
 
       # @api private
       AWS_HOSTNAMES = [
         /^sns\.[a-zA-Z0-9\-]{3,}\.amazonaws\.com(\.cn)?$/
-      ]
+      ].freeze
 
-      def initialize
+      # @param [Hash] http_options Supported options to be passed to Net::HTTP.
+      # @option http_options [String] :http_proxy A proxy to send
+      #   requests through.  Formatted like 'http://proxy.com:123'.
+      def initialize(http_options = {})
         @cached_pems = {}
+        @http_proxy = http_options[:http_proxy]
       end
 
       # @param [String<JSON>] message_body
@@ -151,7 +154,11 @@ module Aws
       end
 
       def https_get(uri, failed_attempts = 0)
-        http = Net::HTTP.new(uri.host, uri.port)
+        args = []
+        args << uri.host
+        args << uri.port
+        args += http_proxy_parts
+        http = Net::HTTP.new(*args.compact)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http.start
@@ -168,6 +175,16 @@ module Aws
         raise VerificationError, error.message
       end
 
+      def http_proxy_parts
+        # empty string if not configured, URI parts return nil
+        http_proxy = URI.parse(@http_proxy.to_s)
+        [
+          http_proxy.host,
+          http_proxy.port,
+          (http_proxy.user && CGI.unescape(http_proxy.user)),
+          (http_proxy.password && CGI.unescape(http_proxy.password))
+        ]
+      end
     end
   end
 end
