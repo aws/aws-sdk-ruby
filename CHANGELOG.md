@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.601 (2020-10-05)
+------------------
+
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
