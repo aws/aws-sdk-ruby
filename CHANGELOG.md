@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::KinesisAnalyticsV2 - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::MarketplaceCatalog - Updated the API, and documentation for AWS Marketplace Catalog Service.
+
 2.11.601 (2020-10-05)
 ------------------
 
