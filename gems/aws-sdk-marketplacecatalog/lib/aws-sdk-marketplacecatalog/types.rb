@@ -142,6 +142,14 @@ module Aws::MarketplaceCatalog
     #   contain at least one entity.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] failure_code
+    #   Returned if the change set is in `FAILED` status. Can be either
+    #   `CLIENT_ERROR`, which means that there are issues with the request
+    #   (see the `ErrorDetailList` of `DescribeChangeSet`), or
+    #   `SERVER_FAULT`, which means that there is a problem in the system,
+    #   and you should retry your request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ChangeSetSummaryListItem AWS API Documentation
     #
     class ChangeSetSummaryListItem < Struct.new(
@@ -151,7 +159,8 @@ module Aws::MarketplaceCatalog
       :start_time,
       :end_time,
       :status,
-      :entity_id_list)
+      :entity_id_list,
+      :failure_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -245,6 +254,13 @@ module Aws::MarketplaceCatalog
     #   The status of the change request.
     #   @return [String]
     #
+    # @!attribute [rw] failure_code
+    #   Returned if the change set is in `FAILED` status. Can be either
+    #   `CLIENT_ERROR`, which means that there are issues with the request
+    #   (see the `ErrorDetailList`), or `SERVER_FAULT`, which means that
+    #   there is a problem in the system, and you should retry your request.
+    #   @return [String]
+    #
     # @!attribute [rw] failure_description
     #   Returned if there is a failure on the change set, but that failure
     #   is not related to any of the changes in the request.
@@ -263,6 +279,7 @@ module Aws::MarketplaceCatalog
       :start_time,
       :end_time,
       :status,
+      :failure_code,
       :failure_description,
       :change_set)
       SENSITIVE = []

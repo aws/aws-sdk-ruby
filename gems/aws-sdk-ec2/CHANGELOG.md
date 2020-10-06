@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.199.0 (2020-10-06)
+------------------
+
+* Feature - This release supports returning additional information about local gateway virtual interfaces, and virtual interface groups.
+
 1.198.0 (2020-09-30)
 ------------------
 

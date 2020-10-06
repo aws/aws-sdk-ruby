@@ -967,6 +967,7 @@ module Aws::KinesisAnalyticsV2
     StartApplicationResponse.struct_class = Types::StartApplicationResponse
 
     StopApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    StopApplicationRequest.add_member(:force, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Force"))
     StopApplicationRequest.struct_class = Types::StopApplicationRequest
 
     StopApplicationResponse.struct_class = Types::StopApplicationResponse
@@ -1348,6 +1349,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

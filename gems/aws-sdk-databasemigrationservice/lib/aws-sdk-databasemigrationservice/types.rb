@@ -368,6 +368,9 @@ module Aws::DatabaseMigrationService
     #           timestamp_column_name: "String",
     #           parquet_timestamp_in_millisecond: false,
     #           cdc_inserts_and_updates: false,
+    #           date_partition_enabled: false,
+    #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -453,26 +456,59 @@ module Aws::DatabaseMigrationService
     #           write_buffer_size: 1,
     #         },
     #         postgre_sql_settings: {
+    #           after_connect_script: "String",
+    #           capture_ddls: false,
+    #           max_file_size: 1,
     #           database_name: "String",
+    #           ddl_artifacts_schema: "String",
+    #           execute_timeout: 1,
+    #           fail_tasks_on_lob_truncation: false,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
     #           username: "String",
+    #           slot_name: "String",
     #         },
     #         my_sql_settings: {
+    #           after_connect_script: "String",
     #           database_name: "String",
+    #           events_poll_interval: 1,
+    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #           max_file_size: 1,
+    #           parallel_load_threads: 1,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           server_timezone: "String",
     #           username: "String",
     #         },
     #         oracle_settings: {
+    #           add_supplemental_logging: false,
+    #           archived_log_dest_id: 1,
+    #           additional_archived_log_dest_id: 1,
+    #           allow_select_nested_tables: false,
+    #           parallel_asm_read_threads: 1,
+    #           read_ahead_blocks: 1,
+    #           access_alternate_directly: false,
+    #           use_alternate_folder_for_online: false,
+    #           oracle_path_prefix: "String",
+    #           use_path_prefix: "String",
+    #           replace_path_prefix: false,
+    #           enable_homogenous_tablespace: false,
+    #           direct_path_no_log: false,
+    #           archived_logs_only: false,
     #           asm_password: "SecretString",
     #           asm_server: "String",
     #           asm_user: "String",
+    #           char_length_semantics: "default", # accepts default, char, byte
     #           database_name: "String",
+    #           direct_path_parallel_load: false,
+    #           fail_tasks_on_lob_truncation: false,
+    #           number_datatype_scale: 1,
     #           password: "SecretString",
     #           port: 1,
+    #           read_table_space_name: false,
+    #           retry_interval: 1,
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
@@ -487,16 +523,24 @@ module Aws::DatabaseMigrationService
     #         },
     #         microsoft_sql_server_settings: {
     #           port: 1,
+    #           bcp_packet_size: 1,
     #           database_name: "String",
+    #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           read_backup_only: false,
+    #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
+    #           use_bcp_full_load: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           set_data_capture_changes: false,
+    #           current_lsn: "String",
+    #           max_k_bytes_per_read: 1,
     #           username: "String",
     #         },
     #       }
@@ -3016,12 +3060,19 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] endpoint_uri
-    #   The endpoint for the Elasticsearch cluster.
+    #   The endpoint for the Elasticsearch cluster. AWS DMS uses HTTPS if a
+    #   transport protocol (http/https) is not specified.
     #   @return [String]
     #
     # @!attribute [rw] full_load_error_percentage
     #   The maximum percentage of records that can fail to be written before
     #   a full load operation stops.
+    #
+    #   To avoid early failure, this counter is only effective after 1000
+    #   records are transferred. Elasticsearch also has the concept of error
+    #   monitoring during the last 10 minutes of an Observation Window. If
+    #   transfer of all records fail in the last 10 minutes, the full load
+    #   operation stops.
     #   @return [Integer]
     #
     # @!attribute [rw] error_retry_duration
@@ -3411,7 +3462,8 @@ module Aws::DatabaseMigrationService
 
     # Identifies the name and value of a filter object. This filter is used
     # to limit the number and type of AWS DMS objects that are returned for
-    # a particular `Describe*` or similar operation.
+    # a particular `Describe*` call or similar operation. Filters are used
+    # as an optional parameter to the following APIs.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -3450,6 +3502,9 @@ module Aws::DatabaseMigrationService
     #         password: "SecretString",
     #         port: 1,
     #         server_name: "String",
+    #         set_data_capture_changes: false,
+    #         current_lsn: "String",
+    #         max_k_bytes_per_read: 1,
     #         username: "String",
     #       }
     #
@@ -3469,6 +3524,21 @@ module Aws::DatabaseMigrationService
     #   Fully qualified domain name of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] set_data_capture_changes
+    #   Enables ongoing replication (CDC) as a BOOLEAN value. The default is
+    #   true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] current_lsn
+    #   For ongoing replication (CDC), use CurrentLSN to specify a log
+    #   sequence number (LSN) where you want the replication to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_k_bytes_per_read
+    #   Maximum number of bytes per read, as a NUMBER value. The default is
+    #   64 KB.
+    #   @return [Integer]
+    #
     # @!attribute [rw] username
     #   Endpoint connection user name.
     #   @return [String]
@@ -3480,6 +3550,9 @@ module Aws::DatabaseMigrationService
       :password,
       :port,
       :server_name,
+      :set_data_capture_changes,
+      :current_lsn,
+      :max_k_bytes_per_read,
       :username)
       SENSITIVE = [:password]
       include Aws::Structure
@@ -3926,22 +3999,70 @@ module Aws::DatabaseMigrationService
     #
     #       {
     #         port: 1,
+    #         bcp_packet_size: 1,
     #         database_name: "String",
+    #         control_tables_file_group: "String",
     #         password: "SecretString",
+    #         read_backup_only: false,
+    #         safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #         server_name: "String",
     #         username: "String",
+    #         use_bcp_full_load: false,
     #       }
     #
     # @!attribute [rw] port
     #   Endpoint TCP port.
     #   @return [Integer]
     #
+    # @!attribute [rw] bcp_packet_size
+    #   The maximum size of the packets (in bytes) used to transfer data
+    #   using BCP.
+    #   @return [Integer]
+    #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] control_tables_file_group
+    #   Specify a filegroup for the AWS DMS internal tables. When the
+    #   replication task starts, all the internal AWS DMS control tables
+    #   (awsdms\_ apply\_exception, awsdms\_apply, awsdms\_changes) are
+    #   created on the specified filegroup.
+    #   @return [String]
+    #
     # @!attribute [rw] password
     #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_backup_only
+    #   When this attribute is set to `Y`, AWS DMS only reads changes from
+    #   transaction log backups and doesn't read from the active
+    #   transaction log file during ongoing replication. Setting this
+    #   parameter to `Y` enables you to control active transaction log file
+    #   growth during full load and ongoing replication tasks. However, it
+    #   can add some source latency to ongoing replication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] safeguard_policy
+    #   Use this attribute to minimize the need to access the backup log and
+    #   enable AWS DMS to prevent truncation using one of the following two
+    #   methods.
+    #
+    #   *Start transactions in the database:* This is the default method.
+    #   When this method is used, AWS DMS prevents TLOG truncation by
+    #   mimicking a transaction in the database. As long as such a
+    #   transaction is open, changes that appear after the transaction
+    #   started aren't truncated. If you need Microsoft Replication to be
+    #   enabled in your database, then you must choose this method.
+    #
+    #   *Exclusively use sp\_repldone within a single task*\: When this
+    #   method is used, AWS DMS reads the changes and then uses sp\_repldone
+    #   to mark the TLOG transactions as ready for truncation. Although this
+    #   method doesn't involve any transactional activities, it can only be
+    #   used when Microsoft Replication isn't running. Also, when using
+    #   this method, only one AWS DMS task can access the database at any
+    #   given time. Therefore, if you need to run parallel AWS DMS tasks
+    #   against the same database, use the default method.
     #   @return [String]
     #
     # @!attribute [rw] server_name
@@ -3952,14 +4073,26 @@ module Aws::DatabaseMigrationService
     #   Endpoint connection user name.
     #   @return [String]
     #
+    # @!attribute [rw] use_bcp_full_load
+    #   Use this to attribute to transfer data for full-load operations
+    #   using BCP. When the target table contains an identity column that
+    #   does not exist in the source table, you must disable the use BCP for
+    #   loading table option.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
     #
     class MicrosoftSQLServerSettings < Struct.new(
       :port,
+      :bcp_packet_size,
       :database_name,
+      :control_tables_file_group,
       :password,
+      :read_backup_only,
+      :safeguard_policy,
       :server_name,
-      :username)
+      :username,
+      :use_bcp_full_load)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -4007,6 +4140,9 @@ module Aws::DatabaseMigrationService
     #           timestamp_column_name: "String",
     #           parquet_timestamp_in_millisecond: false,
     #           cdc_inserts_and_updates: false,
+    #           date_partition_enabled: false,
+    #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -4092,26 +4228,59 @@ module Aws::DatabaseMigrationService
     #           write_buffer_size: 1,
     #         },
     #         postgre_sql_settings: {
+    #           after_connect_script: "String",
+    #           capture_ddls: false,
+    #           max_file_size: 1,
     #           database_name: "String",
+    #           ddl_artifacts_schema: "String",
+    #           execute_timeout: 1,
+    #           fail_tasks_on_lob_truncation: false,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
     #           username: "String",
+    #           slot_name: "String",
     #         },
     #         my_sql_settings: {
+    #           after_connect_script: "String",
     #           database_name: "String",
+    #           events_poll_interval: 1,
+    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #           max_file_size: 1,
+    #           parallel_load_threads: 1,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           server_timezone: "String",
     #           username: "String",
     #         },
     #         oracle_settings: {
+    #           add_supplemental_logging: false,
+    #           archived_log_dest_id: 1,
+    #           additional_archived_log_dest_id: 1,
+    #           allow_select_nested_tables: false,
+    #           parallel_asm_read_threads: 1,
+    #           read_ahead_blocks: 1,
+    #           access_alternate_directly: false,
+    #           use_alternate_folder_for_online: false,
+    #           oracle_path_prefix: "String",
+    #           use_path_prefix: "String",
+    #           replace_path_prefix: false,
+    #           enable_homogenous_tablespace: false,
+    #           direct_path_no_log: false,
+    #           archived_logs_only: false,
     #           asm_password: "SecretString",
     #           asm_server: "String",
     #           asm_user: "String",
+    #           char_length_semantics: "default", # accepts default, char, byte
     #           database_name: "String",
+    #           direct_path_parallel_load: false,
+    #           fail_tasks_on_lob_truncation: false,
+    #           number_datatype_scale: 1,
     #           password: "SecretString",
     #           port: 1,
+    #           read_table_space_name: false,
+    #           retry_interval: 1,
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
@@ -4126,16 +4295,24 @@ module Aws::DatabaseMigrationService
     #         },
     #         microsoft_sql_server_settings: {
     #           port: 1,
+    #           bcp_packet_size: 1,
     #           database_name: "String",
+    #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           read_backup_only: false,
+    #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
+    #           use_bcp_full_load: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           set_data_capture_changes: false,
+    #           current_lsn: "String",
+    #           max_k_bytes_per_read: 1,
     #           username: "String",
     #         },
     #       }
@@ -4951,16 +5128,62 @@ module Aws::DatabaseMigrationService
     #   data as a hash:
     #
     #       {
+    #         after_connect_script: "String",
     #         database_name: "String",
+    #         events_poll_interval: 1,
+    #         target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #         max_file_size: 1,
+    #         parallel_load_threads: 1,
     #         password: "SecretString",
     #         port: 1,
     #         server_name: "String",
+    #         server_timezone: "String",
     #         username: "String",
     #       }
+    #
+    # @!attribute [rw] after_connect_script
+    #   Specifies a script to run immediately after AWS DMS connects to the
+    #   endpoint. The migration task continues running regardless if the SQL
+    #   statement succeeds or fails.
+    #   @return [String]
     #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
+    #
+    # @!attribute [rw] events_poll_interval
+    #   Specifies how often to check the binary log for new changes/events
+    #   when the database is idle.
+    #
+    #   Example: `eventsPollInterval=5;`
+    #
+    #   In the example, AWS DMS checks for changes in the binary logs every
+    #   five seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_db_type
+    #   Specifies where to migrate source tables on the target, either to a
+    #   single database or multiple databases.
+    #
+    #   Example: `targetDbType=MULTIPLE_DATABASES`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_file_size
+    #   Specifies the maximum size (in KB) of any .csv file used to transfer
+    #   data to a MySQL-compatible database.
+    #
+    #   Example: `maxFileSize=512`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parallel_load_threads
+    #   Improves performance when loading data into the MySQLcompatible
+    #   target database. Specifies how many threads to use to load the data
+    #   into the MySQL-compatible target database. Setting a large number of
+    #   threads can have an adverse effect on database performance, because
+    #   a separate connection is required for each thread.
+    #
+    #   Example: `parallelLoadThreads=1`
+    #   @return [Integer]
     #
     # @!attribute [rw] password
     #   Endpoint connection password.
@@ -4974,6 +5197,14 @@ module Aws::DatabaseMigrationService
     #   Fully qualified domain name of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] server_timezone
+    #   Specifies the time zone for the source MySQL database.
+    #
+    #   Example: `serverTimezone=US/Pacific;`
+    #
+    #   Note: Do not enclose time zones in single quotes.
+    #   @return [String]
+    #
     # @!attribute [rw] username
     #   Endpoint connection user name.
     #   @return [String]
@@ -4981,10 +5212,16 @@ module Aws::DatabaseMigrationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySQLSettings AWS API Documentation
     #
     class MySQLSettings < Struct.new(
+      :after_connect_script,
       :database_name,
+      :events_poll_interval,
+      :target_db_type,
+      :max_file_size,
+      :parallel_load_threads,
       :password,
       :port,
       :server_name,
+      :server_timezone,
       :username)
       SENSITIVE = [:password]
       include Aws::Structure
@@ -5075,17 +5312,136 @@ module Aws::DatabaseMigrationService
     #   data as a hash:
     #
     #       {
+    #         add_supplemental_logging: false,
+    #         archived_log_dest_id: 1,
+    #         additional_archived_log_dest_id: 1,
+    #         allow_select_nested_tables: false,
+    #         parallel_asm_read_threads: 1,
+    #         read_ahead_blocks: 1,
+    #         access_alternate_directly: false,
+    #         use_alternate_folder_for_online: false,
+    #         oracle_path_prefix: "String",
+    #         use_path_prefix: "String",
+    #         replace_path_prefix: false,
+    #         enable_homogenous_tablespace: false,
+    #         direct_path_no_log: false,
+    #         archived_logs_only: false,
     #         asm_password: "SecretString",
     #         asm_server: "String",
     #         asm_user: "String",
+    #         char_length_semantics: "default", # accepts default, char, byte
     #         database_name: "String",
+    #         direct_path_parallel_load: false,
+    #         fail_tasks_on_lob_truncation: false,
+    #         number_datatype_scale: 1,
     #         password: "SecretString",
     #         port: 1,
+    #         read_table_space_name: false,
+    #         retry_interval: 1,
     #         security_db_encryption: "SecretString",
     #         security_db_encryption_name: "String",
     #         server_name: "String",
     #         username: "String",
     #       }
+    #
+    # @!attribute [rw] add_supplemental_logging
+    #   Set this attribute to set up table-level supplemental logging for
+    #   the Oracle database. This attribute enables PRIMARY KEY supplemental
+    #   logging on all tables selected for a migration task.
+    #
+    #   If you use this option, you still need to enable database-level
+    #   supplemental logging.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] archived_log_dest_id
+    #   Specifies the destination of the archived redo logs. The value
+    #   should be the same as the DEST\_ID number in the v$archived\_log
+    #   table. When working with multiple log destinations (DEST\_ID), we
+    #   recommend that you to specify an archived redo logs location
+    #   identifier. Doing this improves performance by ensuring that the
+    #   correct logs are accessed from the outset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_archived_log_dest_id
+    #   Set this attribute with `archivedLogDestId` in a primary/ standby
+    #   setup. This attribute is useful in the case of a switchover. In this
+    #   case, AWS DMS needs to know which destination to get archive redo
+    #   logs from to read changes. This need arises because the previous
+    #   primary instance is now a standby instance after switchover.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allow_select_nested_tables
+    #   Set this attribute to `true` to enable replication of Oracle tables
+    #   containing columns that are nested tables or defined types.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parallel_asm_read_threads
+    #   Set this attribute to change the number of threads that DMS
+    #   configures to perform a Change Data Capture (CDC) load using Oracle
+    #   Automatic Storage Management (ASM). You can specify an integer value
+    #   between 2 (the default) and 8 (the maximum). Use this attribute
+    #   together with the `readAheadBlocks` attribute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] read_ahead_blocks
+    #   Set this attribute to change the number of read-ahead blocks that
+    #   DMS configures to perform a Change Data Capture (CDC) load using
+    #   Oracle Automatic Storage Management (ASM). You can specify an
+    #   integer value between 1000 (the default) and 200,000 (the maximum).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] access_alternate_directly
+    #   Set this attribute to `false` in order to use the Binary Reader to
+    #   capture change data for an Amazon RDS for Oracle as the source. This
+    #   tells the DMS instance to not access redo logs through any specified
+    #   path prefix replacement using direct file access.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_alternate_folder_for_online
+    #   Set this attribute to `true` in order to use the Binary Reader to
+    #   capture change data for an Amazon RDS for Oracle as the source. This
+    #   tells the DMS instance to use any specified prefix replacement to
+    #   access all online redo logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] oracle_path_prefix
+    #   Set this string attribute to the required value in order to use the
+    #   Binary Reader to capture change data for an Amazon RDS for Oracle as
+    #   the source. This value specifies the default Oracle root used to
+    #   access the redo logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_path_prefix
+    #   Set this string attribute to the required value in order to use the
+    #   Binary Reader to capture change data for an Amazon RDS for Oracle as
+    #   the source. This value specifies the path prefix used to replace the
+    #   default Oracle root to access the redo logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] replace_path_prefix
+    #   Set this attribute to true in order to use the Binary Reader to
+    #   capture change data for an Amazon RDS for Oracle as the source. This
+    #   setting tells DMS instance to replace the default Oracle root with
+    #   the specified `usePathPrefix` setting to access the redo logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_homogenous_tablespace
+    #   Set this attribute to enable homogenous tablespace replication and
+    #   create existing tables or indexes under the same tablespace on the
+    #   target.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] direct_path_no_log
+    #   When set to `true`, this attribute helps to increase the commit rate
+    #   on the Oracle target database by writing directly to tables and not
+    #   writing a trail to database logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] archived_logs_only
+    #   When this field is set to `Y`, AWS DMS only accesses the archived
+    #   redo logs. If the archived redo logs are stored on Oracle ASM only,
+    #   the AWS DMS user account needs to be granted ASM privileges.
+    #   @return [Boolean]
     #
     # @!attribute [rw] asm_password
     #   For an Oracle source endpoint, your Oracle Automatic Storage
@@ -5127,9 +5483,42 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration
     #   @return [String]
     #
+    # @!attribute [rw] char_length_semantics
+    #   Specifies whether the length of a character column is in bytes or in
+    #   characters. To indicate that the character column length is in
+    #   characters, set this attribute to `CHAR`. Otherwise, the character
+    #   column length is in bytes.
+    #
+    #   Example: `charLengthSemantics=CHAR;`
+    #   @return [String]
+    #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
+    #
+    # @!attribute [rw] direct_path_parallel_load
+    #   When set to `true`, this attribute specifies a parallel load when
+    #   `useDirectPathFullLoad` is set to `Y`. This attribute also only
+    #   applies when you use the AWS DMS parallel load feature. Note that
+    #   the target table cannot have any constraints or indexes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fail_tasks_on_lob_truncation
+    #   When set to `true`, this attribute causes a task to fail if the
+    #   actual size of an LOB column is greater than the specified
+    #   `LobMaxSize`.
+    #
+    #   If a task is set to limited LOB mode and this option is set to
+    #   `true`, the task fails instead of truncating the LOB data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] number_datatype_scale
+    #   Specifies the number scale. You can select a scale up to 38, or you
+    #   can select FLOAT. By default, the NUMBER data type is converted to
+    #   precision 38, scale 10.
+    #
+    #   Example: `numberDataTypeScale=12`
+    #   @return [Integer]
     #
     # @!attribute [rw] password
     #   Endpoint connection password.
@@ -5137,6 +5526,17 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] port
     #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] read_table_space_name
+    #   When set to `true`, this attribute supports tablespace replication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retry_interval
+    #   Specifies the number of seconds that the system waits before
+    #   resending a query.
+    #
+    #   Example: `retryInterval=6;`
     #   @return [Integer]
     #
     # @!attribute [rw] security_db_encryption
@@ -5182,12 +5582,32 @@ module Aws::DatabaseMigrationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
     #
     class OracleSettings < Struct.new(
+      :add_supplemental_logging,
+      :archived_log_dest_id,
+      :additional_archived_log_dest_id,
+      :allow_select_nested_tables,
+      :parallel_asm_read_threads,
+      :read_ahead_blocks,
+      :access_alternate_directly,
+      :use_alternate_folder_for_online,
+      :oracle_path_prefix,
+      :use_path_prefix,
+      :replace_path_prefix,
+      :enable_homogenous_tablespace,
+      :direct_path_no_log,
+      :archived_logs_only,
       :asm_password,
       :asm_server,
       :asm_user,
+      :char_length_semantics,
       :database_name,
+      :direct_path_parallel_load,
+      :fail_tasks_on_lob_truncation,
+      :number_datatype_scale,
       :password,
       :port,
+      :read_table_space_name,
+      :retry_interval,
       :security_db_encryption,
       :security_db_encryption_name,
       :server_name,
@@ -5335,16 +5755,69 @@ module Aws::DatabaseMigrationService
     #   data as a hash:
     #
     #       {
+    #         after_connect_script: "String",
+    #         capture_ddls: false,
+    #         max_file_size: 1,
     #         database_name: "String",
+    #         ddl_artifacts_schema: "String",
+    #         execute_timeout: 1,
+    #         fail_tasks_on_lob_truncation: false,
     #         password: "SecretString",
     #         port: 1,
     #         server_name: "String",
     #         username: "String",
+    #         slot_name: "String",
     #       }
+    #
+    # @!attribute [rw] after_connect_script
+    #   For use with change data capture (CDC) only, this attribute has AWS
+    #   DMS bypass foreign keys and user triggers to reduce the time it
+    #   takes to bulk load data.
+    #
+    #   Example: `afterConnectScript=SET session_replication_role='replica'`
+    #   @return [String]
+    #
+    # @!attribute [rw] capture_ddls
+    #   To capture DDL events, AWS DMS creates various artifacts in the
+    #   PostgreSQL database when the task starts. You can later remove these
+    #   artifacts.
+    #
+    #   If this value is set to `N`, you don't have to create tables or
+    #   triggers on the source database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_file_size
+    #   Specifies the maximum size (in KB) of any .csv file used to transfer
+    #   data to PostgreSQL.
+    #
+    #   Example: `maxFileSize=512`
+    #   @return [Integer]
     #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
+    #
+    # @!attribute [rw] ddl_artifacts_schema
+    #   The schema in which the operational DDL database artifacts are
+    #   created.
+    #
+    #   Example: `ddlArtifactsSchema=xyzddlschema;`
+    #   @return [String]
+    #
+    # @!attribute [rw] execute_timeout
+    #   Sets the client statement timeout for the PostgreSQL instance, in
+    #   seconds. The default value is 60 seconds.
+    #
+    #   Example: `executeTimeout=100;`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fail_tasks_on_lob_truncation
+    #   When set to `true`, this value causes a task to fail if the actual
+    #   size of a LOB column is greater than the specified `LobMaxSize`.
+    #
+    #   If task is set to Limited LOB mode and this option is set to true,
+    #   the task fails instead of truncating the LOB data.
+    #   @return [Boolean]
     #
     # @!attribute [rw] password
     #   Endpoint connection password.
@@ -5362,14 +5835,29 @@ module Aws::DatabaseMigrationService
     #   Endpoint connection user name.
     #   @return [String]
     #
+    # @!attribute [rw] slot_name
+    #   Sets the name of a previously created logical replication slot for a
+    #   CDC load of the PostgreSQL source instance.
+    #
+    #   When used with the AWS DMS API `CdcStartPosition` request parameter,
+    #   this attribute also enables using native CDC start points.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
+      :after_connect_script,
+      :capture_ddls,
+      :max_file_size,
       :database_name,
+      :ddl_artifacts_schema,
+      :execute_timeout,
+      :fail_tasks_on_lob_truncation,
       :password,
       :port,
       :server_name,
-      :username)
+      :username,
+      :slot_name)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -5463,12 +5951,28 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] bucket_folder
-    #   The location where the comma-separated value (.csv) files are stored
-    #   before being uploaded to the S3 bucket.
+    #   An S3 folder where the comma-separated-value (.csv) files are stored
+    #   before being uploaded to the target Redshift cluster.
+    #
+    #   For full load mode, AWS DMS converts source records into .csv files
+    #   and loads them to the *BucketFolder/TableID* path. AWS DMS uses the
+    #   Redshift `COPY` command to upload the .csv files to the target
+    #   table. The files are deleted once the `COPY` operation has finished.
+    #   For more information, see [Amazon Redshift Database Developer
+    #   Guide][1]
+    #
+    #   For change-data-capture (CDC) mode, AWS DMS creates a *NetChanges*
+    #   table, and loads the .csv files to this
+    #   *BucketFolder/NetChangesTableID* path.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_name
-    #   The name of the S3 bucket you want to use
+    #   The name of the intermediate S3 bucket used to store .csv files
+    #   before uploading data to Redshift.
     #   @return [String]
     #
     # @!attribute [rw] connection_timeout
@@ -5519,17 +6023,29 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] file_transfer_upload_streams
     #   The number of threads used to upload a single file. This parameter
     #   accepts a value from 1 through 64. It defaults to 10.
+    #
+    #   The number of parallel streams used to upload a single .csv file to
+    #   an S3 bucket using S3 Multipart Upload. For more information, see
+    #   [Multipart upload overview][1].
+    #
+    #   `FileTransferUploadStreams` accepts a value from 1 through 64. It
+    #   defaults to 10.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
     #   @return [Integer]
     #
     # @!attribute [rw] load_timeout
-    #   The amount of time to wait (in milliseconds) before timing out,
-    #   beginning from when you begin loading.
+    #   The amount of time to wait (in milliseconds) before timing out of
+    #   operations performed by AWS DMS on a Redshift cluster, such as
+    #   Redshift COPY, INSERT, DELETE, and UPDATE.
     #   @return [Integer]
     #
     # @!attribute [rw] max_file_size
-    #   The maximum size (in KB) of any .csv file used to transfer data to
-    #   Amazon Redshift. This accepts a value from 1 through 1,048,576. It
-    #   defaults to 32,768 KB (32 MB).
+    #   The maximum size (in KB) of any .csv file used to load data on an S3
+    #   bucket and transfer data to Amazon Redshift. It defaults to
+    #   1048576KB (1 GB).
     #   @return [Integer]
     #
     # @!attribute [rw] password
@@ -5605,9 +6121,9 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] write_buffer_size
-    #   The size of the write buffer to use in rows. Valid values range from
-    #   1 through 2,048. The default is 1,024. Use this setting to tune
-    #   performance.
+    #   The size (in KB) of the in-memory file write buffer used when
+    #   generating .csv files on the local disk at the DMS replication
+    #   instance. The default value is 1000 (buffer size is 1000KB).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftSettings AWS API Documentation
@@ -6075,7 +6591,7 @@ module Aws::DatabaseMigrationService
     end
 
     # Describes a subnet group in response to a request by the
-    # `DescribeReplicationSubnetGroup` operation.
+    # `DescribeReplicationSubnetGroups` operation.
     #
     # @!attribute [rw] replication_subnet_group_identifier
     #   The identifier of the replication instance subnet group.
@@ -6701,6 +7217,9 @@ module Aws::DatabaseMigrationService
     #         timestamp_column_name: "String",
     #         parquet_timestamp_in_millisecond: false,
     #         cdc_inserts_and_updates: false,
+    #         date_partition_enabled: false,
+    #         date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #         date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -7021,6 +7540,29 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps
     #   @return [Boolean]
     #
+    # @!attribute [rw] date_partition_enabled
+    #   When set to `true`, this parameter partitions S3 bucket folders
+    #   based on transaction commit dates. The default value is `false`. For
+    #   more information about date-based folder partitoning, see [Using
+    #   date-based folder partitioning][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] date_partition_sequence
+    #   Identifies the sequence of the date format to use during folder
+    #   partitioning. The default value is `YYYYMMDD`. Use this parameter
+    #   when `DatePartitionedEnabled` is set to `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_partition_delimiter
+    #   Specifies a date separating delimiter to use during folder
+    #   partitioning. The default value is `SLASH` (/). Use this parameter
+    #   when `DatePartitionedEnabled` is set to `true`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -7044,7 +7586,10 @@ module Aws::DatabaseMigrationService
       :cdc_inserts_only,
       :timestamp_column_name,
       :parquet_timestamp_in_millisecond,
-      :cdc_inserts_and_updates)
+      :cdc_inserts_and_updates,
+      :date_partition_enabled,
+      :date_partition_sequence,
+      :date_partition_delimiter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7362,7 +7907,7 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # In response to a request by the `DescribeReplicationSubnetGroup`
+    # In response to a request by the `DescribeReplicationSubnetGroups`
     # operation, this object identifies a subnet by its given Availability
     # Zone, subnet identifier, and status.
     #

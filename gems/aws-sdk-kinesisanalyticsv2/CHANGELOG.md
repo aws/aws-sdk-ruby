@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-10-06)
+------------------
+
+* Feature - Amazon Kinesis Analytics now supports StopApplication with 'force' option
+
 1.22.0 (2020-09-30)
 ------------------
 

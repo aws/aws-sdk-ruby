@@ -34210,6 +34210,10 @@ module Aws::EC2
     #   The peer BGP ASN.
     #   @return [Integer]
     #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID that owns the local gateway virtual interface.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the virtual interface.
     #   @return [Array<Types::Tag>]
@@ -34224,6 +34228,7 @@ module Aws::EC2
       :peer_address,
       :local_bgp_asn,
       :peer_bgp_asn,
+      :owner_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -34243,6 +34248,11 @@ module Aws::EC2
     #   The ID of the local gateway.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID that owns the local gateway virtual interface
+    #   group.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the virtual interface group.
     #   @return [Array<Types::Tag>]
@@ -34253,6 +34263,7 @@ module Aws::EC2
       :local_gateway_virtual_interface_group_id,
       :local_gateway_virtual_interface_ids,
       :local_gateway_id,
+      :owner_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure

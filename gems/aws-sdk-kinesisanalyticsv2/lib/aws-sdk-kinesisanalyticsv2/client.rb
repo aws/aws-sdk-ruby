@@ -384,8 +384,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Adds a streaming source to your SQL-based Amazon Kinesis Data
-    # Analytics application.
+    # Adds a streaming source to your SQL-based Kinesis Data Analytics
+    # application.
     #
     # You can add a streaming source when you create an application, or you
     # can use this operation to add a streaming source after you create an
@@ -495,14 +495,14 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Adds an InputProcessingConfiguration to an SQL-based Kinesis Data
+    # Adds an InputProcessingConfiguration to a SQL-based Kinesis Data
     # Analytics application. An input processor pre-processes records on the
     # input stream before the application's SQL code executes. Currently,
     # the only input processor available is [AWS Lambda][1].
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/lambda/
+    # [1]: https://docs.aws.amazon.com/lambda/
     #
     # @option params [required, String] :application_name
     #   The name of the application to which you want to add the input
@@ -560,8 +560,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Adds an external destination to your SQL-based Amazon Kinesis Data
-    # Analytics application.
+    # Adds an external destination to your SQL-based Kinesis Data Analytics
+    # application.
     #
     # If you want Kinesis Data Analytics to deliver data from an
     # in-application stream within your application to an external
@@ -650,8 +650,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Adds a reference data source to an existing SQL-based Amazon Kinesis
-    # Data Analytics application.
+    # Adds a reference data source to an existing SQL-based Kinesis Data
+    # Analytics application.
     #
     # Kinesis Data Analytics reads reference data (that is, an Amazon S3
     # object) and creates an in-application table within your application.
@@ -763,11 +763,10 @@ module Aws::KinesisAnalyticsV2
     #   The name of an existing application.
     #
     # @option params [required, Integer] :current_application_version_id
-    #   The version of the application to which you want to add the input
-    #   processing configuration. You can use the DescribeApplication
-    #   operation to get the current application version. If the version
-    #   specified is not the current version, the
-    #   `ConcurrentModificationException` is returned.
+    #   The version of the application to which you want to add the VPC
+    #   configuration. You can use the DescribeApplication operation to get
+    #   the current application version. If the version specified is not the
+    #   current version, the `ConcurrentModificationException` is returned.
     #
     # @option params [required, Types::VpcConfiguration] :vpc_configuration
     #   Description of the VPC to add to the application.
@@ -809,8 +808,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Creates an Amazon Kinesis Data Analytics application. For information
-    # about creating a Kinesis Data Analytics application, see [Creating an
+    # Creates a Kinesis Data Analytics application. For information about
+    # creating a Kinesis Data Analytics application, see [Creating an
     # Application][1].
     #
     #
@@ -824,8 +823,8 @@ module Aws::KinesisAnalyticsV2
     #   A summary description of the application.
     #
     # @option params [required, String] :runtime_environment
-    #   The runtime environment for the application (`SQL-1.0` or
-    #   `FLINK-1_6`).
+    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
+    #   or `FLINK-1_8`).
     #
     # @option params [required, String] :service_execution_role
     #   The IAM role used by the application to access Kinesis data streams,
@@ -1024,7 +1023,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1177,8 +1176,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data
-    # Analytics application.
+    # Deletes an Amazon CloudWatch log stream from an Kinesis Data Analytics
+    # application.
     #
     # @option params [required, String] :application_name
     #   The application name.
@@ -1268,8 +1267,8 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Deletes the output destination configuration from your SQL-based
-    # Amazon Kinesis Data Analytics application's configuration. Kinesis
-    # Data Analytics will no longer write data from the corresponding
+    # Kinesis Data Analytics application's configuration. Kinesis Data
+    # Analytics will no longer write data from the corresponding
     # in-application stream to the external output destination.
     #
     # @option params [required, String] :application_name
@@ -1317,7 +1316,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Deletes a reference data source configuration from the specified
-    # SQL-based Amazon Kinesis Data Analytics application's configuration.
+    # SQL-based Kinesis Data Analytics application's configuration.
     #
     # If the application is running, Kinesis Data Analytics immediately
     # removes the in-application table that you created using the
@@ -1436,7 +1435,7 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Returns information about a specific Amazon Kinesis Data Analytics
+    # Returns information about a specific Kinesis Data Analytics
     # application.
     #
     # If you want to retrieve a list of all applications in your account,
@@ -1467,7 +1466,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1603,12 +1602,11 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Infers a schema for an SQL-based Amazon Kinesis Data Analytics
-    # application by evaluating sample records on the specified streaming
-    # source (Kinesis data stream or Kinesis Data Firehose delivery stream)
-    # or Amazon S3 object. In the response, the operation returns the
-    # inferred schema and also the sample records that the operation used to
-    # infer the schema.
+    # Infers a schema for a SQL-based Kinesis Data Analytics application by
+    # evaluating sample records on the specified streaming source (Kinesis
+    # data stream or Kinesis Data Firehose delivery stream) or Amazon S3
+    # object. In the response, the operation returns the inferred schema and
+    # also the sample records that the operation used to infer the schema.
     #
     # You can use the inferred schema when configuring a streaming source
     # for your application. When you create an application using the Kinesis
@@ -1732,9 +1730,9 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Returns a list of Amazon Kinesis Data Analytics applications in your
-    # account. For each application, the response includes the application
-    # name, Amazon Resource Name (ARN), and status.
+    # Returns a list of Kinesis Data Analytics applications in your account.
+    # For each application, the response includes the application name,
+    # Amazon Resource Name (ARN), and status.
     #
     # If you want detailed information about a specific application, use
     # DescribeApplication.
@@ -1769,7 +1767,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries #=> Array
     #   resp.application_summaries[0].application_name #=> String
     #   resp.application_summaries[0].application_arn #=> String
-    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
+    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_summaries[0].application_version_id #=> Integer
     #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.next_token #=> String
@@ -1818,7 +1816,7 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Starts the specified Amazon Kinesis Data Analytics application. After
+    # Starts the specified Kinesis Data Analytics application. After
     # creating an application, you must exclusively call this operation to
     # start your application.
     #
@@ -1870,12 +1868,25 @@ module Aws::KinesisAnalyticsV2
     # @option params [required, String] :application_name
     #   The name of the running application to stop.
     #
+    # @option params [Boolean] :force
+    #   Set to `true` to force the application to stop. If you set `Force` to
+    #   `true`, Kinesis Data Analytics stops the application without taking a
+    #   snapshot.
+    #
+    #   You can only force stop a Flink-based Kinesis Data Analytics
+    #   application. You can't force stop a SQL-based Kinesis Data Analytics
+    #   application.
+    #
+    #   The application must be in the `STARTING`, `UPDATING`, `STOPPING`,
+    #   `AUTOSCALING`, or `RUNNING` state.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_application({
     #     application_name: "ApplicationName", # required
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplication AWS API Documentation
@@ -1887,10 +1898,10 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Adds one or more key-value tags to a Kinesis Analytics application.
-    # Note that the maximum number of application tags includes system tags.
-    # The maximum number of user-defined application tags is 50. For more
-    # information, see [Using Tagging][1].
+    # Adds one or more key-value tags to a Kinesis Data Analytics
+    # application. Note that the maximum number of application tags includes
+    # system tags. The maximum number of user-defined application tags is
+    # 50. For more information, see [Using Tagging][1].
     #
     #
     #
@@ -1925,16 +1936,16 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Removes one or more tags from a Kinesis Analytics application. For
-    # more information, see [Using Tagging][1].
+    # Removes one or more tags from a Kinesis Data Analytics application.
+    # For more information, see [Using Tagging][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the Kinesis Analytics application from which to remove the
-    #   tags.
+    #   The ARN of the Kinesis Data Analytics application from which to remove
+    #   the tags.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of keys of tags to remove from the specified application.
@@ -1957,12 +1968,18 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Kinesis Data Analytics application. Using
-    # this operation, you can update application code, input configuration,
-    # and output configuration.
+    # Updates an existing Kinesis Data Analytics application. Using this
+    # operation, you can update application code, input configuration, and
+    # output configuration.
     #
     # Kinesis Data Analytics updates the `ApplicationVersionId` each time
     # you update your application.
+    #
+    # <note markdown="1"> You cannot update the `RuntimeEnvironment` of an existing application.
+    # If you need to update an application's `RuntimeEnvironment`, you must
+    # delete the application and create it again.
+    #
+    #  </note>
     #
     # @option params [required, String] :application_name
     #   The name of the application to update.
@@ -2167,7 +2184,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -2280,7 +2297,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

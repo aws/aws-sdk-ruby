@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-10-06)
+------------------
+
+* Feature - AWS Marketplace Catalog now supports FailureCode for change workflows to help differentiate client errors and server faults.
+
 1.8.0 (2020-09-30)
 ------------------
 

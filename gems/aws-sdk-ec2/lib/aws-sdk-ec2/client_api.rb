@@ -7209,12 +7209,14 @@ module Aws::EC2
     LocalGatewayVirtualInterface.add_member(:peer_address, Shapes::ShapeRef.new(shape: String, location_name: "peerAddress"))
     LocalGatewayVirtualInterface.add_member(:local_bgp_asn, Shapes::ShapeRef.new(shape: Integer, location_name: "localBgpAsn"))
     LocalGatewayVirtualInterface.add_member(:peer_bgp_asn, Shapes::ShapeRef.new(shape: Integer, location_name: "peerBgpAsn"))
+    LocalGatewayVirtualInterface.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     LocalGatewayVirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGatewayVirtualInterface.struct_class = Types::LocalGatewayVirtualInterface
 
     LocalGatewayVirtualInterfaceGroup.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, location_name: "localGatewayVirtualInterfaceGroupId"))
     LocalGatewayVirtualInterfaceGroup.add_member(:local_gateway_virtual_interface_ids, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceIdSet, location_name: "localGatewayVirtualInterfaceIdSet"))
     LocalGatewayVirtualInterfaceGroup.add_member(:local_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayId"))
+    LocalGatewayVirtualInterfaceGroup.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     LocalGatewayVirtualInterfaceGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGatewayVirtualInterfaceGroup.struct_class = Types::LocalGatewayVirtualInterfaceGroup
 

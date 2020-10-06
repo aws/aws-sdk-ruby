@@ -18747,6 +18747,7 @@ module Aws::EC2
     #   resp.local_gateway_virtual_interface_groups[0].local_gateway_virtual_interface_ids #=> Array
     #   resp.local_gateway_virtual_interface_groups[0].local_gateway_virtual_interface_ids[0] #=> String
     #   resp.local_gateway_virtual_interface_groups[0].local_gateway_id #=> String
+    #   resp.local_gateway_virtual_interface_groups[0].owner_id #=> String
     #   resp.local_gateway_virtual_interface_groups[0].tags #=> Array
     #   resp.local_gateway_virtual_interface_groups[0].tags[0].key #=> String
     #   resp.local_gateway_virtual_interface_groups[0].tags[0].value #=> String
@@ -18815,6 +18816,7 @@ module Aws::EC2
     #   resp.local_gateway_virtual_interfaces[0].peer_address #=> String
     #   resp.local_gateway_virtual_interfaces[0].local_bgp_asn #=> Integer
     #   resp.local_gateway_virtual_interfaces[0].peer_bgp_asn #=> Integer
+    #   resp.local_gateway_virtual_interfaces[0].owner_id #=> String
     #   resp.local_gateway_virtual_interfaces[0].tags #=> Array
     #   resp.local_gateway_virtual_interfaces[0].tags[0].key #=> String
     #   resp.local_gateway_virtual_interfaces[0].tags[0].value #=> String
@@ -38787,7 +38789,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.198.0'
+      context[:gem_version] = '1.199.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

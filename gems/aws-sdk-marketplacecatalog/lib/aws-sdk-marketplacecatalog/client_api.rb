@@ -38,6 +38,7 @@ module Aws::MarketplaceCatalog
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetailList = Shapes::ListShape.new(name: 'ErrorDetailList')
+    FailureCode = Shapes::StringShape.new(name: 'FailureCode')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
@@ -94,6 +95,7 @@ module Aws::MarketplaceCatalog
     ChangeSetSummaryListItem.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "EndTime"))
     ChangeSetSummaryListItem.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, location_name: "Status"))
     ChangeSetSummaryListItem.add_member(:entity_id_list, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "EntityIdList"))
+    ChangeSetSummaryListItem.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
     ChangeSetSummaryListItem.struct_class = Types::ChangeSetSummaryListItem
 
     ChangeSummary.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, location_name: "ChangeType"))
@@ -112,6 +114,7 @@ module Aws::MarketplaceCatalog
     DescribeChangeSetResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "StartTime"))
     DescribeChangeSetResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "EndTime"))
     DescribeChangeSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, location_name: "Status"))
+    DescribeChangeSetResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
     DescribeChangeSetResponse.add_member(:failure_description, Shapes::ShapeRef.new(shape: StringValue, location_name: "FailureDescription"))
     DescribeChangeSetResponse.add_member(:change_set, Shapes::ShapeRef.new(shape: ChangeSetDescription, location_name: "ChangeSet"))
     DescribeChangeSetResponse.struct_class = Types::DescribeChangeSetResponse
