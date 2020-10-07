@@ -34,9 +34,7 @@ When(/^I make start_stream_transcription async call$/) do
 end
 
 When(/^I signal events at audio stream$/) do
-  # TODO: is this broken?
-  # while !@file.eof?
-  3.times do
+  while !@file.eof?
     @input_stream.signal_audio_event_event(audio_chunk: @file.read(2000))
   end
   @input_stream.signal_end_stream
