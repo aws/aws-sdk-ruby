@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.603 (2020-10-07)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::ComputeOptimizer - Updated the API, and documentation for AWS Compute Optimizer.
