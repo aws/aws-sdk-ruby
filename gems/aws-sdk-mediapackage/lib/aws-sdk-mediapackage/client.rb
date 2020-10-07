@@ -327,6 +327,62 @@ module Aws::MediaPackage
 
     # @!group API Operations
 
+    # Changes the Channel's properities to configure log subscription
+    #
+    # @option params [Types::EgressAccessLogs] :egress_access_logs
+    #   Configure egress access logging.
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [Types::IngressAccessLogs] :ingress_access_logs
+    #   Configure ingress access logging.
+    #
+    # @return [Types::ConfigureLogsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfigureLogsResponse#arn #arn} => String
+    #   * {Types::ConfigureLogsResponse#description #description} => String
+    #   * {Types::ConfigureLogsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
+    #   * {Types::ConfigureLogsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
+    #   * {Types::ConfigureLogsResponse#id #id} => String
+    #   * {Types::ConfigureLogsResponse#ingress_access_logs #ingress_access_logs} => Types::IngressAccessLogs
+    #   * {Types::ConfigureLogsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.configure_logs({
+    #     egress_access_logs: {
+    #       log_group_name: "__string",
+    #     },
+    #     id: "__string", # required
+    #     ingress_access_logs: {
+    #       log_group_name: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
+    #   resp.hls_ingest.ingest_endpoints #=> Array
+    #   resp.hls_ingest.ingest_endpoints[0].id #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].password #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].url #=> String
+    #   resp.hls_ingest.ingest_endpoints[0].username #=> String
+    #   resp.id #=> String
+    #   resp.ingress_access_logs.log_group_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ConfigureLogs AWS API Documentation
+    #
+    # @overload configure_logs(params = {})
+    # @param [Hash] params ({})
+    def configure_logs(params = {}, options = {})
+      req = build_request(:configure_logs, params)
+      req.send_request(options)
+    end
+
     # Creates a new Channel.
     #
     # @option params [String] :description
@@ -340,8 +396,10 @@ module Aws::MediaPackage
     #
     #   * {Types::CreateChannelResponse#arn #arn} => String
     #   * {Types::CreateChannelResponse#description #description} => String
+    #   * {Types::CreateChannelResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::CreateChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::CreateChannelResponse#id #id} => String
+    #   * {Types::CreateChannelResponse#ingress_access_logs #ingress_access_logs} => Types::IngressAccessLogs
     #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -358,12 +416,14 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.description #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
     #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.ingress_access_logs.log_group_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -780,8 +840,10 @@ module Aws::MediaPackage
     #
     #   * {Types::DescribeChannelResponse#arn #arn} => String
     #   * {Types::DescribeChannelResponse#description #description} => String
+    #   * {Types::DescribeChannelResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::DescribeChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::DescribeChannelResponse#id #id} => String
+    #   * {Types::DescribeChannelResponse#ingress_access_logs #ingress_access_logs} => Types::IngressAccessLogs
     #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -794,12 +856,14 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.description #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
     #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.ingress_access_logs.log_group_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -1018,12 +1082,14 @@ module Aws::MediaPackage
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].description #=> String
+    #   resp.channels[0].egress_access_logs.log_group_name #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints #=> Array
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.channels[0].id #=> String
+    #   resp.channels[0].ingress_access_logs.log_group_name #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["__string"] #=> String
     #   resp.next_token #=> String
@@ -1256,8 +1322,10 @@ module Aws::MediaPackage
     #
     #   * {Types::RotateChannelCredentialsResponse#arn #arn} => String
     #   * {Types::RotateChannelCredentialsResponse#description #description} => String
+    #   * {Types::RotateChannelCredentialsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::RotateChannelCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::RotateChannelCredentialsResponse#id #id} => String
+    #   * {Types::RotateChannelCredentialsResponse#ingress_access_logs #ingress_access_logs} => Types::IngressAccessLogs
     #   * {Types::RotateChannelCredentialsResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1270,12 +1338,14 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.description #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
     #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.ingress_access_logs.log_group_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -1299,8 +1369,10 @@ module Aws::MediaPackage
     #
     #   * {Types::RotateIngestEndpointCredentialsResponse#arn #arn} => String
     #   * {Types::RotateIngestEndpointCredentialsResponse#description #description} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::RotateIngestEndpointCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::RotateIngestEndpointCredentialsResponse#id #id} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#ingress_access_logs #ingress_access_logs} => Types::IngressAccessLogs
     #   * {Types::RotateIngestEndpointCredentialsResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1314,12 +1386,14 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.description #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
     #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.ingress_access_logs.log_group_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -1388,8 +1462,10 @@ module Aws::MediaPackage
     #
     #   * {Types::UpdateChannelResponse#arn #arn} => String
     #   * {Types::UpdateChannelResponse#description #description} => String
+    #   * {Types::UpdateChannelResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::UpdateChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::UpdateChannelResponse#id #id} => String
+    #   * {Types::UpdateChannelResponse#ingress_access_logs #ingress_access_logs} => Types::IngressAccessLogs
     #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1403,12 +1479,14 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.description #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
     #   resp.hls_ingest.ingest_endpoints[0].id #=> String
     #   resp.hls_ingest.ingest_endpoints[0].password #=> String
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.ingress_access_logs.log_group_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -1716,7 +1794,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

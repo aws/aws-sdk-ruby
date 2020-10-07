@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-10-07)
+------------------
+
+* Feature - Enables Rightsizing Recommendations to analyze and present EC2 instance-level EBS metrics when generating recommendations. Returns AccessDeniedException if the account is not opted into Rightsizing
+
 1.49.0 (2020-09-30)
 ------------------
 

@@ -44,6 +44,9 @@ module Aws::ElastiCache
   # * {CacheSubnetGroupQuotaExceededFault}
   # * {CacheSubnetQuotaExceededFault}
   # * {ClusterQuotaForCustomerExceededFault}
+  # * {DefaultUserAssociatedToUserGroupFault}
+  # * {DefaultUserRequired}
+  # * {DuplicateUserNameFault}
   # * {GlobalReplicationGroupAlreadyExistsFault}
   # * {GlobalReplicationGroupNotFoundFault}
   # * {InsufficientCacheClusterCapacityFault}
@@ -58,6 +61,8 @@ module Aws::ElastiCache
   # * {InvalidReplicationGroupStateFault}
   # * {InvalidSnapshotStateFault}
   # * {InvalidSubnet}
+  # * {InvalidUserGroupStateFault}
+  # * {InvalidUserStateFault}
   # * {InvalidVPCNetworkStateFault}
   # * {NoOperationFault}
   # * {NodeGroupNotFoundFault}
@@ -79,9 +84,16 @@ module Aws::ElastiCache
   # * {SnapshotNotFoundFault}
   # * {SnapshotQuotaExceededFault}
   # * {SubnetInUse}
+  # * {SubnetNotAllowedFault}
   # * {TagNotFoundFault}
   # * {TagQuotaPerResourceExceeded}
   # * {TestFailoverNotAvailableFault}
+  # * {UserAlreadyExistsFault}
+  # * {UserGroupAlreadyExistsFault}
+  # * {UserGroupNotFoundFault}
+  # * {UserGroupQuotaExceededFault}
+  # * {UserNotFoundFault}
+  # * {UserQuotaExceededFault}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -259,6 +271,36 @@ module Aws::ElastiCache
       end
     end
 
+    class DefaultUserAssociatedToUserGroupFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::DefaultUserAssociatedToUserGroupFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DefaultUserRequired < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::DefaultUserRequired] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DuplicateUserNameFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::DuplicateUserNameFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class GlobalReplicationGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -404,6 +446,26 @@ module Aws::ElastiCache
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElastiCache::Types::InvalidSubnet] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidUserGroupStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::InvalidUserGroupStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidUserStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::InvalidUserStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -619,6 +681,16 @@ module Aws::ElastiCache
       end
     end
 
+    class SubnetNotAllowedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::SubnetNotAllowedFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class TagNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -644,6 +716,66 @@ module Aws::ElastiCache
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElastiCache::Types::TestFailoverNotAvailableFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UserAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::UserAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UserGroupAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::UserGroupAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UserGroupNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::UserGroupNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UserGroupQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::UserGroupQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UserNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::UserNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UserQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::UserQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

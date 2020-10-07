@@ -445,7 +445,13 @@ module Aws::ComputeOptimizer
     #   set of Auto Scaling group recommendations.
     #
     # @option params [Array<String>] :fields_to_export
-    #   The recommendations data to include in the export file.
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
     #
     # @option params [required, Types::S3DestinationConfig] :s3_destination_config
     #   An object to specify the destination Amazon Simple Storage Service
@@ -501,7 +507,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
+    #     fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -562,7 +568,13 @@ module Aws::ComputeOptimizer
     #   set of instance recommendations.
     #
     # @option params [Array<String>] :fields_to_export
-    #   The recommendations data to include in the export file.
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
     #
     # @option params [required, Types::S3DestinationConfig] :s3_destination_config
     #   An object to specify the destination Amazon Simple Storage Service
@@ -615,7 +627,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
+    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -642,18 +654,14 @@ module Aws::ComputeOptimizer
 
     # Returns Auto Scaling group recommendations.
     #
-    # AWS Compute Optimizer currently generates recommendations for Auto
-    # Scaling groups that are configured to run instances of the M, C, R, T,
-    # and X instance families. The service does not generate recommendations
-    # for Auto Scaling groups that have a scaling policy attached to them,
-    # or that do not have the same values for desired, minimum, and maximum
-    # capacity. In order for Compute Optimizer to analyze your Auto Scaling
-    # groups, they must be of a fixed size. For more information, see the
-    # [AWS Compute Optimizer User Guide][1].
+    # AWS Compute Optimizer generates recommendations for Amazon EC2 Auto
+    # Scaling groups that meet a specific set of requirements. For more
+    # information, see the [Supported resources and requirements][1] in the
+    # *AWS Compute Optimizer User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is.html
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
     #
     # @option params [Array<String>] :account_ids
     #   The IDs of the AWS accounts for which to return Auto Scaling group
@@ -714,7 +722,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].auto_scaling_group_name #=> String
     #   resp.auto_scaling_group_recommendations[0].finding #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics #=> Array
-    #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory"
+    #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].value #=> Float
     #   resp.auto_scaling_group_recommendations[0].look_back_period_in_days #=> Float
@@ -728,7 +736,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].configuration.max_size #=> Integer
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].configuration.instance_type #=> String
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics #=> Array
-    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory"
+    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].value #=> Float
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].performance_risk #=> Float
@@ -750,14 +758,14 @@ module Aws::ComputeOptimizer
 
     # Returns Amazon EC2 instance recommendations.
     #
-    # AWS Compute Optimizer currently generates recommendations for Amazon
-    # Elastic Compute Cloud (Amazon EC2) and Amazon EC2 Auto Scaling. It
-    # generates recommendations for M, C, R, T, and X instance families. For
-    # more information, see the [AWS Compute Optimizer User Guide][1].
+    # AWS Compute Optimizer generates recommendations for Amazon Elastic
+    # Compute Cloud (Amazon EC2) instances that meet a specific set of
+    # requirements. For more information, see the [Supported resources and
+    # requirements][1] in the *AWS Compute Optimizer User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is.html
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
     #
     # @option params [Array<String>] :instance_arns
     #   The Amazon Resource Name (ARN) of the instances for which to return
@@ -818,14 +826,14 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].current_instance_type #=> String
     #   resp.instance_recommendations[0].finding #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.instance_recommendations[0].utilization_metrics #=> Array
-    #   resp.instance_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory"
+    #   resp.instance_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
     #   resp.instance_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.instance_recommendations[0].utilization_metrics[0].value #=> Float
     #   resp.instance_recommendations[0].look_back_period_in_days #=> Float
     #   resp.instance_recommendations[0].recommendation_options #=> Array
     #   resp.instance_recommendations[0].recommendation_options[0].instance_type #=> String
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics #=> Array
-    #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory"
+    #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].value #=> Float
     #   resp.instance_recommendations[0].recommendation_options[0].performance_risk #=> Float
@@ -850,6 +858,18 @@ module Aws::ComputeOptimizer
 
     # Returns the projected utilization metrics of Amazon EC2 instance
     # recommendations.
+    #
+    # <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
+    # metrics returned when you run this action. Additionally, the `Memory`
+    # metric is returned only for resources that have the unified CloudWatch
+    # agent installed on them. For more information, see [Enabling Memory
+    # Utilization with the CloudWatch Agent][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
     #
     # @option params [required, String] :instance_arn
     #   The Amazon Resource Name (ARN) of the instances for which to return
@@ -887,7 +907,7 @@ module Aws::ComputeOptimizer
     #   resp.recommended_option_projected_metrics[0].recommended_instance_type #=> String
     #   resp.recommended_option_projected_metrics[0].rank #=> Integer
     #   resp.recommended_option_projected_metrics[0].projected_metrics #=> Array
-    #   resp.recommended_option_projected_metrics[0].projected_metrics[0].name #=> String, one of "Cpu", "Memory"
+    #   resp.recommended_option_projected_metrics[0].projected_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND"
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].timestamps #=> Array
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].timestamps[0] #=> Time
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].values #=> Array
@@ -1044,7 +1064,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

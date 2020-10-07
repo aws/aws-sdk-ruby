@@ -875,7 +875,7 @@ module Aws::CostExplorer
     # `UsageQuantity`, that you want the request to return. You can also
     # filter and group your data by various dimensions, such as `SERVICE` or
     # `AZ`, in a specific time range. For a complete list of valid
-    # dimensions, see the [GetDimensionValues][1] operation. Master accounts
+    # dimensions, see the [GetDimensionValues][1] operation. Master account
     # in an organization in AWS Organizations have access to all member
     # accounts.
     #
@@ -1035,7 +1035,7 @@ module Aws::CostExplorer
     # return. You can also filter and group your data by various dimensions,
     # such as `SERVICE` or `AZ`, in a specific time range. For a complete
     # list of valid dimensions, see the [GetDimensionValues][1] operation.
-    # Master accounts in an organization in AWS Organizations have access to
+    # Master account in an organization in AWS Organizations have access to
     # all member accounts. This API is currently available for the Amazon
     # Elastic Compute Cloud – Compute service only.
     #
@@ -1743,9 +1743,9 @@ module Aws::CostExplorer
     #
     # @option params [String] :account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the payer account and
-    #   linked accounts if the value is set to `PAYER`. If the value is
-    #   `LINKED`, recommendations are calculated for individual linked
+    #   Services calculates recommendations including the master account and
+    #   member accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #
     # @option params [String] :lookback_period_in_days
@@ -1871,11 +1871,11 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves the reservation utilization for your account. Master
-    # accounts in an organization have access to member accounts. You can
-    # filter data by dimensions in a time period. You can use
-    # `GetDimensionValues` to determine the possible dimension values.
-    # Currently, you can group only by `SUBSCRIPTION_ID`.
+    # Retrieves the reservation utilization for your account. Master account
+    # in an organization have access to member accounts. You can filter data
+    # by dimensions in a time period. You can use `GetDimensionValues` to
+    # determine the possible dimension values. Currently, you can group only
+    # by `SUBSCRIPTION_ID`.
     #
     # @option params [required, Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving RI utilization. The start
@@ -2070,8 +2070,10 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values - You can set the dimension name and values
     #     for the filters that you plan to use. For example, you can filter
-    #     for `REGION==us-east-1 OR REGION==us-west-1`. The `Expression` for
-    #     that looks like this:
+    #     for `REGION==us-east-1 OR REGION==us-west-1`. For
+    #     `GetRightsizingRecommendation`, the Region is a full name (for
+    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
+    #     looks like:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -2210,6 +2212,10 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_bytes_per_second #=> String
     #   resp.rightsizing_recommendations[0].current_instance.reservation_covered_hours_in_lookback_period #=> String
     #   resp.rightsizing_recommendations[0].current_instance.savings_plans_covered_hours_in_lookback_period #=> String
     #   resp.rightsizing_recommendations[0].current_instance.on_demand_hours_in_lookback_period #=> String
@@ -2234,6 +2240,10 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_bytes_per_second #=> String
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.estimated_monthly_savings #=> String
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.currency_code #=> String
     #   resp.next_page_token #=> String
@@ -2411,9 +2421,9 @@ module Aws::CostExplorer
     #
     # @option params [String] :account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the payer account and
-    #   linked accounts if the value is set to `PAYER`. If the value is
-    #   `LINKED`, recommendations are calculated for individual linked
+    #   Services calculates recommendations including the master account and
+    #   member accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #
     # @option params [String] :next_page_token
@@ -2540,7 +2550,7 @@ module Aws::CostExplorer
     end
 
     # Retrieves the Savings Plans utilization for your account across date
-    # ranges with daily or monthly granularity. Master accounts in an
+    # ranges with daily or monthly granularity. Master account in an
     # organization have access to member accounts. You can use
     # `GetDimensionValues` in `SAVINGS_PLANS` to determine the possible
     # dimension values.
@@ -3232,7 +3242,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -176,8 +176,10 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values - You can set the dimension name and
     #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. The
-    #     `Expression` for that looks like this:
+    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
+    #     `GetRightsizingRecommendation`, the Region is a full name (for
+    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
+    #     looks like:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -1164,6 +1166,36 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The EBS field that contains a list of EBS metrics associated with the
+    # current instance.
+    #
+    # @!attribute [rw] ebs_read_ops_per_second
+    #   The maximum number of read operations per second.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_write_ops_per_second
+    #   The maximum number of write operations per second.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_read_bytes_per_second
+    #   The maximum size of read operations per second
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_write_bytes_per_second
+    #   The maximum size of write operations per second.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EBSResourceUtilization AWS API Documentation
+    #
+    class EBSResourceUtilization < Struct.new(
+      :ebs_read_ops_per_second,
+      :ebs_write_ops_per_second,
+      :ebs_read_bytes_per_second,
+      :ebs_write_bytes_per_second)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the Amazon EC2 instances that AWS recommends that you
     # purchase.
     #
@@ -1287,12 +1319,18 @@ module Aws::CostExplorer
     #   (does not measure EBS storage).
     #   @return [String]
     #
+    # @!attribute [rw] ebs_resource_utilization
+    #   The EBS field that contains a list of EBS metrics associated with
+    #   the current instance.
+    #   @return [Types::EBSResourceUtilization]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceUtilization AWS API Documentation
     #
     class EC2ResourceUtilization < Struct.new(
       :max_cpu_utilization_percentage,
       :max_memory_utilization_percentage,
-      :max_storage_utilization_percentage)
+      :max_storage_utilization_percentage,
+      :ebs_resource_utilization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1400,8 +1438,10 @@ module Aws::CostExplorer
     #
     # * Simple dimension values - You can set the dimension name and values
     #   for the filters that you plan to use. For example, you can filter
-    #   for `REGION==us-east-1 OR REGION==us-west-1`. The `Expression` for
-    #   that looks like this:
+    #   for `REGION==us-east-1 OR REGION==us-west-1`. For
+    #   `GetRightsizingRecommendation`, the Region is a full name (for
+    #   example, `REGION==US East (N. Virginia)`. The `Expression` example
+    #   looks like:
     #
     #   `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #   “us-west-1” ] \} \}`
@@ -2750,9 +2790,9 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the payer account and
-    #   linked accounts if the value is set to `PAYER`. If the value is
-    #   `LINKED`, recommendations are calculated for individual linked
+    #   Services calculates recommendations including the master account and
+    #   member accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #   @return [String]
     #
@@ -3019,8 +3059,10 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values - You can set the dimension name and
     #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. The
-    #     `Expression` for that looks like this:
+    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
+    #     `GetRightsizingRecommendation`, the Region is a full name (for
+    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
+    #     looks like:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -3334,9 +3376,9 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the payer account and
-    #   linked accounts if the value is set to `PAYER`. If the value is
-    #   `LINKED`, recommendations are calculated for individual linked
+    #   Services calculates recommendations including the master account and
+    #   member accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #   @return [String]
     #
@@ -4893,10 +4935,11 @@ module Aws::CostExplorer
     # Summary, and Details.
     #
     # @!attribute [rw] account_scope
-    #   The account scope that you want your recommendations for. AWS
-    #   calculates recommendations including the payer account and linked
-    #   accounts if the value is set to `PAYER`. If the value is `LINKED`,
-    #   recommendations are calculated for individual linked accounts only.
+    #   The account scope that you want your recommendations for. Amazon Web
+    #   Services calculates recommendations including the master account and
+    #   member accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual member
+    #   accounts only.
     #   @return [String]
     #
     # @!attribute [rw] savings_plans_type
@@ -5259,7 +5302,7 @@ module Aws::CostExplorer
     end
 
     # A single daily or monthly Savings Plans utilization rate, and details
-    # for your account. Master accounts in an organization have access to
+    # for your account. A master account in an organization have access to
     # member accounts. You can use `GetDimensionValues` to determine the
     # possible dimension values.
     #

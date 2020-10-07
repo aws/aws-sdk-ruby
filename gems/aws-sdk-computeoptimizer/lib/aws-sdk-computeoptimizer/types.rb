@@ -142,6 +142,18 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
     #   of the Auto Scaling group recommendation option.
+    #
+    #   <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
+    #   metrics returned. Additionally, the `Memory` metric is returned only
+    #   for resources that have the unified CloudWatch agent installed on
+    #   them. For more information, see [Enabling Memory Utilization with
+    #   the CloudWatch Agent][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
     #   @return [Array<Types::UtilizationMetric>]
     #
     # @!attribute [rw] performance_risk
@@ -256,7 +268,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -289,7 +301,13 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] fields_to_export
-    #   The recommendations data to include in the export file.
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
     #   @return [Array<String>]
     #
     # @!attribute [rw] s3_destination_config
@@ -396,7 +414,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -429,7 +447,13 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] fields_to_export
-    #   The recommendations data to include in the export file.
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
     #   @return [Array<String>]
     #
     # @!attribute [rw] s3_destination_config
@@ -1014,6 +1038,18 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
     #   of the instance recommendation option.
+    #
+    #   <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
+    #   metrics returned. Additionally, the `Memory` metric is returned only
+    #   for resources that have the unified CloudWatch agent installed on
+    #   them. For more information, see [Enabling Memory Utilization with
+    #   the CloudWatch Agent][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
     #   @return [Array<Types::UtilizationMetric>]
     #
     # @!attribute [rw] performance_risk
@@ -1155,18 +1191,21 @@ module Aws::ComputeOptimizer
     # Describes a projected utilization metric of a recommendation option,
     # such as an Amazon EC2 instance.
     #
+    # <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
+    # metrics returned when you run the
+    # `GetEC2RecommendationProjectedMetrics` action. Additionally, the
+    # `Memory` metric is returned only for resources that have the unified
+    # CloudWatch agent installed on them. For more information, see
+    # [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    #
     # @!attribute [rw] name
     #   The name of the projected utilization metric.
-    #
-    #   <note markdown="1"> Memory metrics are only returned for resources that have the unified
-    #   CloudWatch agent installed on them. For more information, see
-    #   [Enabling Memory Utilization with the CloudWatch Agent][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
     #   @return [String]
     #
     # @!attribute [rw] timestamps
@@ -1283,6 +1322,19 @@ module Aws::ComputeOptimizer
     end
 
     # Describes a projected utilization metric of a recommendation option.
+    #
+    # <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
+    # metrics returned when you run the
+    # `GetEC2RecommendationProjectedMetrics` action. Additionally, the
+    # `Memory` metric is returned only for resources that have the unified
+    # CloudWatch agent installed on them. For more information, see
+    # [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
     #
     # @!attribute [rw] recommended_instance_type
     #   The recommended instance type.
@@ -1501,15 +1553,15 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] name
     #   The name of the utilization metric.
     #
-    #   <note markdown="1"> Memory metrics are only returned for resources that have the unified
-    #   CloudWatch agent installed on them. For more information, see
-    #   [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #   <note markdown="1"> The `Memory` metric is returned only for resources that have the
+    #   unified CloudWatch agent installed on them. For more information,
+    #   see [Enabling Memory Utilization with the CloudWatch Agent][1].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
     #   @return [String]
     #
     # @!attribute [rw] statistic

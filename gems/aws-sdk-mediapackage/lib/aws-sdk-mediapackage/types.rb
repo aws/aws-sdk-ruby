@@ -50,6 +50,10 @@ module Aws::MediaPackage
     #   A short text description of the Channel.
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] hls_ingest
     #   An HTTP Live Streaming (HLS) ingest resource configuration.
     #   @return [Types::HlsIngest]
@@ -57,6 +61,10 @@ module Aws::MediaPackage
     # @!attribute [rw] id
     #   The ID of the Channel.
     #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
     #
     # @!attribute [rw] tags
     #   A collection of tags associated with a resource
@@ -67,8 +75,10 @@ module Aws::MediaPackage
     class Channel < Struct.new(
       :arn,
       :description,
+      :egress_access_logs,
       :hls_ingest,
       :id,
+      :ingress_access_logs,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -276,6 +286,98 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # The configuration parameters for ingress and egress access logging.
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ConfigureLogsParameters AWS API Documentation
+    #
+    class ConfigureLogsParameters < Struct.new(
+      :egress_access_logs,
+      :ingress_access_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ConfigureLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         egress_access_logs: {
+    #           log_group_name: "__string",
+    #         },
+    #         id: "__string", # required
+    #         ingress_access_logs: {
+    #           log_group_name: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ConfigureLogsRequest AWS API Documentation
+    #
+    class ConfigureLogsRequest < Struct.new(
+      :egress_access_logs,
+      :id,
+      :ingress_access_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @!attribute [rw] hls_ingest
+    #   An HTTP Live Streaming (HLS) ingest resource configuration.
+    #   @return [Types::HlsIngest]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ConfigureLogsResponse AWS API Documentation
+    #
+    class ConfigureLogsResponse < Struct.new(
+      :arn,
+      :description,
+      :egress_access_logs,
+      :hls_ingest,
+      :id,
+      :ingress_access_logs,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateChannelRequest
     #   data as a hash:
     #
@@ -313,12 +415,20 @@ module Aws::MediaPackage
     # @!attribute [rw] description
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] hls_ingest
     #   An HTTP Live Streaming (HLS) ingest resource configuration.
     #   @return [Types::HlsIngest]
     #
     # @!attribute [rw] id
     #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
     #
     # @!attribute [rw] tags
     #   A collection of tags associated with a resource
@@ -329,8 +439,10 @@ module Aws::MediaPackage
     class CreateChannelResponse < Struct.new(
       :arn,
       :description,
+      :egress_access_logs,
       :hls_ingest,
       :id,
+      :ingress_access_logs,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -960,12 +1072,20 @@ module Aws::MediaPackage
     # @!attribute [rw] description
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] hls_ingest
     #   An HTTP Live Streaming (HLS) ingest resource configuration.
     #   @return [Types::HlsIngest]
     #
     # @!attribute [rw] id
     #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
     #
     # @!attribute [rw] tags
     #   A collection of tags associated with a resource
@@ -976,8 +1096,10 @@ module Aws::MediaPackage
     class DescribeChannelResponse < Struct.new(
       :arn,
       :description,
+      :egress_access_logs,
       :hls_ingest,
       :id,
+      :ingress_access_logs,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1138,6 +1260,27 @@ module Aws::MediaPackage
       :time_delay_seconds,
       :url,
       :whitelist)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configure egress access logging.
+    #
+    # @note When making an API call, you may pass EgressAccessLogs
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   Customize the log group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/EgressAccessLogs AWS API Documentation
+    #
+    class EgressAccessLogs < Struct.new(
+      :log_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1668,6 +1811,27 @@ module Aws::MediaPackage
       :password,
       :url,
       :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configure ingress access logging.
+    #
+    # @note When making an API call, you may pass IngressAccessLogs
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   Customize the log group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/IngressAccessLogs AWS API Documentation
+    #
+    class IngressAccessLogs < Struct.new(
+      :log_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2241,12 +2405,20 @@ module Aws::MediaPackage
     # @!attribute [rw] description
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] hls_ingest
     #   An HTTP Live Streaming (HLS) ingest resource configuration.
     #   @return [Types::HlsIngest]
     #
     # @!attribute [rw] id
     #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
     #
     # @!attribute [rw] tags
     #   A collection of tags associated with a resource
@@ -2257,8 +2429,10 @@ module Aws::MediaPackage
     class RotateChannelCredentialsResponse < Struct.new(
       :arn,
       :description,
+      :egress_access_logs,
       :hls_ingest,
       :id,
+      :ingress_access_logs,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2293,12 +2467,20 @@ module Aws::MediaPackage
     # @!attribute [rw] description
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] hls_ingest
     #   An HTTP Live Streaming (HLS) ingest resource configuration.
     #   @return [Types::HlsIngest]
     #
     # @!attribute [rw] id
     #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
     #
     # @!attribute [rw] tags
     #   A collection of tags associated with a resource
@@ -2309,8 +2491,10 @@ module Aws::MediaPackage
     class RotateIngestEndpointCredentialsResponse < Struct.new(
       :arn,
       :description,
+      :egress_access_logs,
       :hls_ingest,
       :id,
+      :ingress_access_logs,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2555,12 +2739,20 @@ module Aws::MediaPackage
     # @!attribute [rw] description
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] hls_ingest
     #   An HTTP Live Streaming (HLS) ingest resource configuration.
     #   @return [Types::HlsIngest]
     #
     # @!attribute [rw] id
     #   @return [String]
+    #
+    # @!attribute [rw] ingress_access_logs
+    #   Configure ingress access logging.
+    #   @return [Types::IngressAccessLogs]
     #
     # @!attribute [rw] tags
     #   A collection of tags associated with a resource
@@ -2571,8 +2763,10 @@ module Aws::MediaPackage
     class UpdateChannelResponse < Struct.new(
       :arn,
       :description,
+      :egress_access_logs,
       :hls_ingest,
       :id,
+      :ingress_access_logs,
       :tags)
       SENSITIVE = []
       include Aws::Structure
