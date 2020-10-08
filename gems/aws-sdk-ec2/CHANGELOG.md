@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.200.0 (2020-10-08)
+------------------
+
+* Feature - AWS EC2 RevokeSecurityGroupIngress and RevokeSecurityGroupEgress APIs will return IpPermissions which do not match with any existing IpPermissions for security groups in default VPC and EC2-Classic.
+
 1.199.0 (2020-10-06)
 ------------------
 

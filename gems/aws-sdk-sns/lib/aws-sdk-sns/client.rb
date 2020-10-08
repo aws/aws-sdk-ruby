@@ -1900,15 +1900,12 @@ module Aws::SNS
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   * If you set this parameter to `true`, the response includes the ARN
-    #     in all cases, even if the subscription is not yet confirmed. In
-    #     addition to the ARN for confirmed subscriptions, the response also
-    #     includes the `pending subscription` ARN value for subscriptions that
-    #     aren't yet confirmed. A subscription becomes confirmed when the
-    #     subscriber calls the `ConfirmSubscription` action with a
-    #     confirmation token.
-    #
-    #   ^
+    #   If you set this parameter to `true`, the response includes the ARN in
+    #   all cases, even if the subscription is not yet confirmed. In addition
+    #   to the ARN for confirmed subscriptions, the response also includes the
+    #   `pending subscription` ARN value for subscriptions that aren't yet
+    #   confirmed. A subscription becomes confirmed when the subscriber calls
+    #   the `ConfirmSubscription` action with a confirmation token.
     #
     #
     #
@@ -2071,7 +2068,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.32.1'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

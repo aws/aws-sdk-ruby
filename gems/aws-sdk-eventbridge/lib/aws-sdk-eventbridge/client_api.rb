@@ -32,6 +32,7 @@ module Aws::EventBridge
     Database = Shapes::StringShape.new(name: 'Database')
     DbUser = Shapes::StringShape.new(name: 'DbUser')
     DeactivateEventSourceRequest = Shapes::StructureShape.new(name: 'DeactivateEventSourceRequest')
+    DeadLetterConfig = Shapes::StructureShape.new(name: 'DeadLetterConfig')
     DeleteEventBusRequest = Shapes::StructureShape.new(name: 'DeleteEventBusRequest')
     DeletePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'DeletePartnerEventSourceRequest')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
@@ -94,6 +95,8 @@ module Aws::EventBridge
     ListTargetsByRuleResponse = Shapes::StructureShape.new(name: 'ListTargetsByRuleResponse')
     ManagedBy = Shapes::StringShape.new(name: 'ManagedBy')
     ManagedRuleException = Shapes::StructureShape.new(name: 'ManagedRuleException')
+    MaximumEventAgeInSeconds = Shapes::IntegerShape.new(name: 'MaximumEventAgeInSeconds')
+    MaximumRetryAttempts = Shapes::IntegerShape.new(name: 'MaximumRetryAttempts')
     MessageGroupId = Shapes::StringShape.new(name: 'MessageGroupId')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -138,7 +141,9 @@ module Aws::EventBridge
     RemoveTargetsResultEntry = Shapes::StructureShape.new(name: 'RemoveTargetsResultEntry')
     RemoveTargetsResultEntryList = Shapes::ListShape.new(name: 'RemoveTargetsResultEntryList')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetryPolicy = Shapes::StructureShape.new(name: 'RetryPolicy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleArn = Shapes::StringShape.new(name: 'RuleArn')
@@ -227,6 +232,9 @@ module Aws::EventBridge
 
     DeactivateEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
     DeactivateEventSourceRequest.struct_class = Types::DeactivateEventSourceRequest
+
+    DeadLetterConfig.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    DeadLetterConfig.struct_class = Types::DeadLetterConfig
 
     DeleteEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, required: true, location_name: "Name"))
     DeleteEventBusRequest.struct_class = Types::DeleteEventBusRequest
@@ -555,6 +563,10 @@ module Aws::EventBridge
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RetryPolicy.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttempts, location_name: "MaximumRetryAttempts"))
+    RetryPolicy.add_member(:maximum_event_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumEventAgeInSeconds, location_name: "MaximumEventAgeInSeconds"))
+    RetryPolicy.struct_class = Types::RetryPolicy
+
     Rule.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, location_name: "Name"))
     Rule.add_member(:arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "Arn"))
     Rule.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
@@ -613,6 +625,8 @@ module Aws::EventBridge
     Target.add_member(:sqs_parameters, Shapes::ShapeRef.new(shape: SqsParameters, location_name: "SqsParameters"))
     Target.add_member(:http_parameters, Shapes::ShapeRef.new(shape: HttpParameters, location_name: "HttpParameters"))
     Target.add_member(:redshift_data_parameters, Shapes::ShapeRef.new(shape: RedshiftDataParameters, location_name: "RedshiftDataParameters"))
+    Target.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    Target.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "RetryPolicy"))
     Target.struct_class = Types::Target
 
     TargetIdList.member = Shapes::ShapeRef.new(shape: TargetId)

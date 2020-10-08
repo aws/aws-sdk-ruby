@@ -1093,8 +1093,8 @@ module Aws::RDS
     #
     #   **Microsoft SQL Server**
     #
-    #   See [Version and Feature Support on Amazon RDS][2] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Microsoft SQL Server Versions on Amazon RDS][2] in the *Amazon
+    #   RDS User Guide.*
     #
     #   **MySQL**
     #
@@ -1113,7 +1113,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
@@ -1365,6 +1365,10 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
     #   Guide*.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. CloudWatch Logs exports are managed by the DB cluster.
     #
     #   **MariaDB**
     #

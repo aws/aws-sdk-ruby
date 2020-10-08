@@ -1216,8 +1216,8 @@ module Aws::RDS
     #
     #   **Microsoft SQL Server**
     #
-    #   See [Version and Feature Support on Amazon RDS][2] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Microsoft SQL Server Versions on Amazon RDS][2] in the *Amazon
+    #   RDS User Guide.*
     #
     #   **MySQL**
     #
@@ -1236,7 +1236,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
@@ -1488,6 +1488,10 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
     #   Guide*.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. CloudWatch Logs exports are managed by the DB cluster.
     #
     #   **MariaDB**
     #
@@ -2809,6 +2813,7 @@ module Aws::RDS
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
     #     source_dbi_resource_id: "String",
+    #     max_allocated_storage: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -3059,6 +3064,9 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [String] :source_dbi_resource_id
     #   The resource ID of the source DB instance from which to restore.
+    # @option options [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

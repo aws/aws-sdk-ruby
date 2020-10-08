@@ -313,6 +313,7 @@ module Aws::Rekognition
     UnindexedFaces = Shapes::ListShape.new(name: 'UnindexedFaces')
     Url = Shapes::StringShape.new(name: 'Url')
     Urls = Shapes::ListShape.new(name: 'Urls')
+    ValidationData = Shapes::StructureShape.new(name: 'ValidationData')
     VersionName = Shapes::StringShape.new(name: 'VersionName')
     VersionNames = Shapes::ListShape.new(name: 'VersionNames')
     Video = Shapes::StructureShape.new(name: 'Video')
@@ -975,6 +976,7 @@ module Aws::Rekognition
     ProjectVersionDescription.add_member(:training_data_result, Shapes::ShapeRef.new(shape: TrainingDataResult, location_name: "TrainingDataResult"))
     ProjectVersionDescription.add_member(:testing_data_result, Shapes::ShapeRef.new(shape: TestingDataResult, location_name: "TestingDataResult"))
     ProjectVersionDescription.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "EvaluationResult"))
+    ProjectVersionDescription.add_member(:manifest_summary, Shapes::ShapeRef.new(shape: GroundTruthManifest, location_name: "ManifestSummary"))
     ProjectVersionDescription.struct_class = Types::ProjectVersionDescription
 
     ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)
@@ -1211,6 +1213,7 @@ module Aws::Rekognition
 
     TestingDataResult.add_member(:input, Shapes::ShapeRef.new(shape: TestingData, location_name: "Input"))
     TestingDataResult.add_member(:output, Shapes::ShapeRef.new(shape: TestingData, location_name: "Output"))
+    TestingDataResult.add_member(:validation, Shapes::ShapeRef.new(shape: ValidationData, location_name: "Validation"))
     TestingDataResult.struct_class = Types::TestingDataResult
 
     TextDetection.add_member(:detected_text, Shapes::ShapeRef.new(shape: String, location_name: "DetectedText"))
@@ -1236,6 +1239,7 @@ module Aws::Rekognition
 
     TrainingDataResult.add_member(:input, Shapes::ShapeRef.new(shape: TrainingData, location_name: "Input"))
     TrainingDataResult.add_member(:output, Shapes::ShapeRef.new(shape: TrainingData, location_name: "Output"))
+    TrainingDataResult.add_member(:validation, Shapes::ShapeRef.new(shape: ValidationData, location_name: "Validation"))
     TrainingDataResult.struct_class = Types::TrainingDataResult
 
     UnindexedFace.add_member(:reasons, Shapes::ShapeRef.new(shape: Reasons, location_name: "Reasons"))
@@ -1245,6 +1249,9 @@ module Aws::Rekognition
     UnindexedFaces.member = Shapes::ShapeRef.new(shape: UnindexedFace)
 
     Urls.member = Shapes::ShapeRef.new(shape: Url)
+
+    ValidationData.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "Assets"))
+    ValidationData.struct_class = Types::ValidationData
 
     VersionNames.member = Shapes::ShapeRef.new(shape: VersionName)
 

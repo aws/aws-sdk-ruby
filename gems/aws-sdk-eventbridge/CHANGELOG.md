@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-10-08)
+------------------
+
+* Feature - Amazon EventBridge adds support for target Dead Letter Queues (DLQs) and custom retry policies.
+
 1.15.0 (2020-09-30)
 ------------------
 

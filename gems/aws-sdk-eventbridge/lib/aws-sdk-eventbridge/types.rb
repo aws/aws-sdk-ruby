@@ -338,6 +338,29 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # A `DeadLetterConfig` object that contains information about a
+    # dead-letter queue configuration.
+    #
+    # @note When making an API call, you may pass DeadLetterConfig
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "ResourceArn",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the SQS queue specified as the target for the dead-letter
+    #   queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeadLetterConfig AWS API Documentation
+    #
+    class DeadLetterConfig < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEventBusRequest
     #   data as a hash:
     #
@@ -2055,6 +2078,13 @@ module Aws::EventBridge
     #               statement_name: "StatementName",
     #               with_event: false,
     #             },
+    #             dead_letter_config: {
+    #               arn: "ResourceArn",
+    #             },
+    #             retry_policy: {
+    #               maximum_retry_attempts: 1,
+    #               maximum_event_age_in_seconds: 1,
+    #             },
     #           },
     #         ],
     #       }
@@ -2305,6 +2335,38 @@ module Aws::EventBridge
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # A `RetryPolicy` object that includes information about the retry
+    # policy settings.
+    #
+    # @note When making an API call, you may pass RetryPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_retry_attempts: 1,
+    #         maximum_event_age_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   The maximum number of retry attempts to make before the request
+    #   fails. Retry attempts continue until either the maximum number of
+    #   attempts is made or until the duration of the
+    #   `MaximumEventAgeInSeconds` is met.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_event_age_in_seconds
+    #   The maximum amount of time, in seconds, to continue to make retry
+    #   attempts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RetryPolicy AWS API Documentation
+    #
+    class RetryPolicy < Struct.new(
+      :maximum_retry_attempts,
+      :maximum_event_age_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains information about a rule in Amazon EventBridge.
     #
@@ -2598,6 +2660,13 @@ module Aws::EventBridge
     #           statement_name: "StatementName",
     #           with_event: false,
     #         },
+    #         dead_letter_config: {
+    #           arn: "ResourceArn",
+    #         },
+    #         retry_policy: {
+    #           maximum_retry_attempts: 1,
+    #           maximum_event_age_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -2700,6 +2769,16 @@ module Aws::EventBridge
     #   based on EventBridge events.
     #   @return [Types::RedshiftDataParameters]
     #
+    # @!attribute [rw] dead_letter_config
+    #   The `DeadLetterConfig` that defines the target queue to send
+    #   dead-letter queue events to.
+    #   @return [Types::DeadLetterConfig]
+    #
+    # @!attribute [rw] retry_policy
+    #   The `RetryPolicy` object that contains the retry policy
+    #   configuration to use for the dead-letter queue.
+    #   @return [Types::RetryPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
@@ -2715,7 +2794,9 @@ module Aws::EventBridge
       :batch_parameters,
       :sqs_parameters,
       :http_parameters,
-      :redshift_data_parameters)
+      :redshift_data_parameters,
+      :dead_letter_config,
+      :retry_policy)
       SENSITIVE = []
       include Aws::Structure
     end

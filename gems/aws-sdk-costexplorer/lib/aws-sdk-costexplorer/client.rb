@@ -385,6 +385,7 @@ module Aws::CostExplorer
     #         cost_categories: {
     #           key: "CostCategoryName",
     #           values: ["Value"],
+    #           match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #         },
     #       },
     #       dimensional_value_count: 1,
@@ -505,6 +506,7 @@ module Aws::CostExplorer
     #           cost_categories: {
     #             key: "CostCategoryName",
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #         },
     #       },
@@ -655,6 +657,11 @@ module Aws::CostExplorer
     #   resp.cost_category.rules[0].rule.cost_categories.key #=> String
     #   resp.cost_category.rules[0].rule.cost_categories.values #=> Array
     #   resp.cost_category.rules[0].rule.cost_categories.values[0] #=> String
+    #   resp.cost_category.rules[0].rule.cost_categories.match_options #=> Array
+    #   resp.cost_category.rules[0].rule.cost_categories.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.cost_category.processing_status #=> Array
+    #   resp.cost_category.processing_status[0].component #=> String, one of "COST_EXPLORER"
+    #   resp.cost_category.processing_status[0].status #=> String, one of "PROCESSING", "APPLIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinition AWS API Documentation
     #
@@ -801,6 +808,8 @@ module Aws::CostExplorer
     #   resp.anomaly_monitors[0].monitor_specification.cost_categories.key #=> String
     #   resp.anomaly_monitors[0].monitor_specification.cost_categories.values #=> Array
     #   resp.anomaly_monitors[0].monitor_specification.cost_categories.values[0] #=> String
+    #   resp.anomaly_monitors[0].monitor_specification.cost_categories.match_options #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.cost_categories.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
     #   resp.anomaly_monitors[0].dimensional_value_count #=> Integer
     #   resp.next_page_token #=> String
     #
@@ -988,6 +997,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     metrics: ["MetricName"], # required
@@ -1155,6 +1165,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     metrics: ["MetricName"],
@@ -1286,6 +1297,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     prediction_interval_level: 1,
@@ -1662,6 +1674,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     metrics: ["MetricName"],
@@ -1983,6 +1996,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     next_page_token: "NextPageToken",
@@ -2170,6 +2184,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     configuration: {
@@ -2377,6 +2392,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     metrics: ["MetricName"],
@@ -2495,6 +2511,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #   })
@@ -2637,6 +2654,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #   })
@@ -2768,6 +2786,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     next_token: "NextPageToken",
@@ -2950,6 +2969,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     prediction_interval_level: 1,
@@ -3018,6 +3038,11 @@ module Aws::CostExplorer
     #   resp.cost_category_references[0].effective_start #=> String
     #   resp.cost_category_references[0].effective_end #=> String
     #   resp.cost_category_references[0].number_of_rules #=> Integer
+    #   resp.cost_category_references[0].processing_status #=> Array
+    #   resp.cost_category_references[0].processing_status[0].component #=> String, one of "COST_EXPLORER"
+    #   resp.cost_category_references[0].processing_status[0].status #=> String, one of "PROCESSING", "APPLIED"
+    #   resp.cost_category_references[0].values #=> Array
+    #   resp.cost_category_references[0].values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitions AWS API Documentation
@@ -3209,6 +3234,7 @@ module Aws::CostExplorer
     #           cost_categories: {
     #             key: "CostCategoryName",
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #         },
     #       },
@@ -3242,7 +3268,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

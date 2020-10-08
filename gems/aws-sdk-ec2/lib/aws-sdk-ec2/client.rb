@@ -36461,9 +36461,18 @@ module Aws::EC2
     end
 
     # \[VPC only\] Removes the specified egress rules from a security group
-    # for EC2-VPC. This action doesn't apply to security groups for use in
+    # for EC2-VPC. This action does not apply to security groups for use in
     # EC2-Classic. To remove a rule, the values that you specify (for
     # example, ports) must match the existing rule's values exactly.
+    #
+    # <note markdown="1"> \[Default VPC\] If the values you specify do not match the existing
+    # rule's values, no error is returned, and the output describes the
+    # security group rules that were not revoked.
+    #
+    #  AWS recommends that you use DescribeSecurityGroups to verify that the
+    # rule has been removed.
+    #
+    #  </note>
     #
     # Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or
     # source security group. For the TCP and UDP protocols, you must also
@@ -36509,7 +36518,10 @@ module Aws::EC2
     #   Not supported. Use a set of IP permissions to specify a destination
     #   security group.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::RevokeSecurityGroupEgressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RevokeSecurityGroupEgressResult#return #return} => Boolean
+    #   * {Types::RevokeSecurityGroupEgressResult#unknown_ip_permissions #unknown_ip_permissions} => Array&lt;Types::IpPermission&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -36560,6 +36572,31 @@ module Aws::EC2
     #     source_security_group_owner_id: "String",
     #   })
     #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #   resp.unknown_ip_permissions #=> Array
+    #   resp.unknown_ip_permissions[0].from_port #=> Integer
+    #   resp.unknown_ip_permissions[0].ip_protocol #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.unknown_ip_permissions[0].to_port #=> Integer
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs #=> Array
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].description #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgress AWS API Documentation
     #
     # @overload revoke_security_group_egress(params = {})
@@ -36573,9 +36610,12 @@ module Aws::EC2
     # rule, the values that you specify (for example, ports) must match the
     # existing rule's values exactly.
     #
-    # <note markdown="1"> \[EC2-Classic only\] If the values you specify do not match the
-    # existing rule's values, no error is returned. Use
-    # DescribeSecurityGroups to verify that the rule has been removed.
+    # <note markdown="1"> \[EC2-Classic , default VPC\] If the values you specify do not match
+    # the existing rule's values, no error is returned, and the output
+    # describes the security group rules that were not revoked.
+    #
+    #  AWS recommends that you use DescribeSecurityGroups to verify that the
+    # rule has been removed.
     #
     #  </note>
     #
@@ -36647,7 +36687,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::RevokeSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RevokeSecurityGroupIngressResult#return #return} => Boolean
+    #   * {Types::RevokeSecurityGroupIngressResult#unknown_ip_permissions #unknown_ip_permissions} => Array&lt;Types::IpPermission&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -36698,6 +36741,31 @@ module Aws::EC2
     #     to_port: 1,
     #     dry_run: false,
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #   resp.unknown_ip_permissions #=> Array
+    #   resp.unknown_ip_permissions[0].from_port #=> Integer
+    #   resp.unknown_ip_permissions[0].ip_protocol #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.unknown_ip_permissions[0].to_port #=> Integer
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs #=> Array
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].description #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngress AWS API Documentation
     #
@@ -38789,7 +38857,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.199.0'
+      context[:gem_version] = '1.200.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

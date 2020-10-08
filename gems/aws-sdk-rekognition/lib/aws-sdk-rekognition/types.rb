@@ -37,8 +37,8 @@ module Aws::Rekognition
     end
 
     # Assets are the images that you use to train and evaluate a model
-    # version. Assets are referenced by Sagemaker GroundTruth manifest
-    # files.
+    # version. Assets can also contain validation information that you use
+    # to debug a failed model training.
     #
     # @note When making an API call, you may pass Asset
     #   data as a hash:
@@ -54,7 +54,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] ground_truth_manifest
-    #   The S3 bucket that contains the Ground Truth manifest file.
+    #   The S3 bucket that contains an Amazon Sagemaker Ground Truth format
+    #   manifest file.
     #   @return [Types::GroundTruthManifest]
     #
     class Asset < Struct.new(
@@ -80,7 +81,7 @@ module Aws::Rekognition
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_channels
-    #   The number of audio channels in the segement.
+    #   The number of audio channels in the segment.
     #   @return [Integer]
     #
     class AudioMetadata < Struct.new(
@@ -2578,7 +2579,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] segments
-    #   An array of segments detected in a video.
+    #   An array of segments detected in a video. The array is sorted by the
+    #   segment types (TECHNICAL\_CUE or SHOT) specified in the
+    #   `SegmentTypes` input parameter of `StartSegmentDetection`. Within
+    #   each segment type the array is sorted by timestamp values.
     #   @return [Array<Types::SegmentDetection>]
     #
     # @!attribute [rw] selected_segment_types
@@ -2676,7 +2680,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The S3 bucket that contains the Ground Truth manifest file.
+    # The S3 bucket that contains an Amazon Sagemaker Ground Truth format
+    # manifest file.
     #
     # @note When making an API call, you may pass GroundTruthManifest
     #   data as a hash:
@@ -3205,17 +3210,17 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] x
-    #   The x-coordinate from the top left of the landmark expressed as the
-    #   ratio of the width of the image. For example, if the image is 700 x
-    #   200 and the x-coordinate of the landmark is at 350 pixels, this
-    #   value is 0.5.
+    #   The x-coordinate of the landmark expressed as a ratio of the width
+    #   of the image. The x-coordinate is measured from the left-side of the
+    #   image. For example, if the image is 700 pixels wide and the
+    #   x-coordinate of the landmark is at 350 pixels, this value is 0.5.
     #   @return [Float]
     #
     # @!attribute [rw] y
-    #   The y-coordinate from the top left of the landmark expressed as the
-    #   ratio of the height of the image. For example, if the image is 700 x
-    #   200 and the y-coordinate of the landmark is at 100 pixels, this
-    #   value is 0.5.
+    #   The y-coordinate of the landmark expressed as a ratio of the height
+    #   of the image. The y-coordinate is measured from the top of the
+    #   image. For example, if the image height is 200 pixels and the
+    #   y-coordinate of the landmark is at 50 pixels, this value is 0.25.
     #   @return [Float]
     #
     class Landmark < Struct.new(
@@ -3702,17 +3707,23 @@ module Aws::Rekognition
     #   @return [Types::OutputConfig]
     #
     # @!attribute [rw] training_data_result
-    #   The manifest file that represents the training results.
+    #   Contains information about the training results.
     #   @return [Types::TrainingDataResult]
     #
     # @!attribute [rw] testing_data_result
-    #   The manifest file that represents the testing results.
+    #   Contains information about the testing results.
     #   @return [Types::TestingDataResult]
     #
     # @!attribute [rw] evaluation_result
     #   The training results. `EvaluationResult` is only returned if
     #   training is successful.
     #   @return [Types::EvaluationResult]
+    #
+    # @!attribute [rw] manifest_summary
+    #   The location of the summary manifest. The summary manifest provides
+    #   aggregate data validation results for the training and test
+    #   datasets.
+    #   @return [Types::GroundTruthManifest]
     #
     class ProjectVersionDescription < Struct.new(
       :project_version_arn,
@@ -3725,7 +3736,8 @@ module Aws::Rekognition
       :output_config,
       :training_data_result,
       :testing_data_result,
-      :evaluation_result)
+      :evaluation_result,
+      :manifest_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3768,7 +3780,7 @@ module Aws::Rekognition
 
     # @!attribute [rw] celebrity_faces
     #   Details about each celebrity found in the image. Amazon Rekognition
-    #   can detect a maximum of 15 celebrities in an image.
+    #   can detect a maximum of 64 celebrities in an image.
     #   @return [Array<Types::Celebrity>]
     #
     # @!attribute [rw] unrecognized_faces
@@ -4059,12 +4071,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] start_timestamp_millis
     #   The start time of the detected segment in milliseconds from the
-    #   start of the video.
+    #   start of the video. This value is rounded down. For example, if the
+    #   actual timestamp is 100.6667 milliseconds, Amazon Rekognition Video
+    #   returns a value of 100 millis.
     #   @return [Integer]
     #
     # @!attribute [rw] end_timestamp_millis
     #   The end time of the detected segment, in milliseconds, from the
-    #   start of the video.
+    #   start of the video. This value is rounded down.
     #   @return [Integer]
     #
     # @!attribute [rw] duration_millis
@@ -4135,7 +4149,7 @@ module Aws::Rekognition
     # more information, see SegmentDetection.
     #
     # @!attribute [rw] index
-    #   An Identifier for a shot detection segment detected in a video
+    #   An Identifier for a shot detection segment detected in a video.
     #   @return [Integer]
     #
     # @!attribute [rw] confidence
@@ -5207,8 +5221,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A Sagemaker Groundtruth format manifest file representing the dataset
-    # used for testing.
+    # Sagemaker Groundtruth format manifest files for the input, output and
+    # validation datasets that are used and created during testing.
     #
     # @!attribute [rw] input
     #   The testing dataset that was supplied for training.
@@ -5220,9 +5234,15 @@ module Aws::Rekognition
     #   issues.
     #   @return [Types::TestingData]
     #
+    # @!attribute [rw] validation
+    #   The location of the data validation manifest. The data validation
+    #   manifest is created for the test dataset during model training.
+    #   @return [Types::ValidationData]
+    #
     class TestingDataResult < Struct.new(
       :input,
-      :output)
+      :output,
+      :validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5337,8 +5357,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A Sagemaker Groundtruth format manifest file that represents the
-    # dataset used for training.
+    # Sagemaker Groundtruth format manifest files for the input, output and
+    # validation datasets that are used and created during testing.
     #
     # @!attribute [rw] input
     #   The training assets that you supplied for training.
@@ -5349,9 +5369,15 @@ module Aws::Rekognition
     #   Custom Labels.
     #   @return [Types::TrainingData]
     #
+    # @!attribute [rw] validation
+    #   The location of the data validation manifest. The data validation
+    #   manifest is created for the training dataset during model training.
+    #   @return [Types::ValidationData]
+    #
     class TrainingDataResult < Struct.new(
       :input,
-      :output)
+      :output,
+      :validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5387,6 +5413,32 @@ module Aws::Rekognition
     class UnindexedFace < Struct.new(
       :reasons,
       :face_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Amazon S3 bucket location of the validation data for a
+    # model training job.
+    #
+    # The validation data includes error information for individual JSON
+    # lines in the dataset. For more information, see Debugging a Failed
+    # Model Training in the Amazon Rekognition Custom Labels Developer
+    # Guide.
+    #
+    # You get the `ValidationData` object for the training dataset
+    # (TrainingDataResult) and the test dataset (TestingDataResult) by
+    # calling DescribeProjectVersions.
+    #
+    # The assets array contains a single Asset object. The
+    # GroundTruthManifest field of the Asset object contains the S3 bucket
+    # location of the validation data.
+    #
+    # @!attribute [rw] assets
+    #   The assets that comprise the validation data.
+    #   @return [Array<Types::Asset>]
+    #
+    class ValidationData < Struct.new(
+      :assets)
       SENSITIVE = []
       include Aws::Structure
     end

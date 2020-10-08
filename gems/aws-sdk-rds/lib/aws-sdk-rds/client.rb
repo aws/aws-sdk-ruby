@@ -1637,25 +1637,13 @@ module Aws::RDS
     # Copies the specified option group.
     #
     # @option params [required, String] :source_option_group_identifier
-    #   The identifier or ARN for the source option group. For information
-    #   about creating an ARN, see [ Constructing an ARN for Amazon RDS][1] in
-    #   the *Amazon RDS User Guide*.
+    #   The identifier for the source option group.
     #
     #   Constraints:
     #
     #   * Must specify a valid option group.
     #
-    #   * If the source option group is in the same AWS Region as the copy,
-    #     specify a valid option group identifier, for example
-    #     `my-option-group`, or a valid ARN.
-    #
-    #   * If the source option group is in a different AWS Region than the
-    #     copy, specify a valid option group ARN, for example
-    #     `arn:aws:rds:us-west-2:123456789012:og:special-options`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   ^
     #
     # @option params [required, String] :target_option_group_identifier
     #   The identifier for the copied option group.
@@ -3263,8 +3251,8 @@ module Aws::RDS
     #
     #   **Microsoft SQL Server**
     #
-    #   See [Version and Feature Support on Amazon RDS][2] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Microsoft SQL Server Versions on Amazon RDS][2] in the *Amazon
+    #   RDS User Guide.*
     #
     #   **MySQL**
     #
@@ -3283,7 +3271,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
@@ -3561,6 +3549,10 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
     #   Guide*.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. CloudWatch Logs exports are managed by the DB cluster.
     #
     #   **MariaDB**
     #
@@ -11001,12 +10993,12 @@ module Aws::RDS
     #
     #   **Microsoft SQL Server**
     #
-    #   See [Version and Feature Support on Amazon RDS][1] in the *Amazon RDS
-    #   User Guide.*
+    #   See [ Microsoft SQL Server Versions on Amazon RDS][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #
     # @option params [required, String] :engine_installation_media_path
     #   The path to the installation medium for the specified DB engine.
@@ -16335,11 +16327,11 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   CloudWatch Logs][1] in the *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
@@ -17015,6 +17007,10 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
+    # @option params [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -17075,6 +17071,7 @@ module Aws::RDS
     #     ],
     #     use_default_processor_features: false,
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -17511,6 +17508,10 @@ module Aws::RDS
     # @option params [String] :source_dbi_resource_id
     #   The resource ID of the source DB instance from which to restore.
     #
+    # @option params [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -17655,6 +17656,7 @@ module Aws::RDS
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
     #     source_dbi_resource_id: "String",
+    #     max_allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -18680,7 +18682,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

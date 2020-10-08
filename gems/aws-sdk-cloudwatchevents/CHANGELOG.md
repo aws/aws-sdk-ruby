@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-10-08)
+------------------
+
+* Feature - Amazon EventBridge (formerly called CloudWatch Events) adds support for target Dead-letter Queues and custom retry policies.
+
 1.37.0 (2020-09-30)
 ------------------
 

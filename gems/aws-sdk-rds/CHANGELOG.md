@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2020-10-08)
+------------------
+
+* Feature - Supports a new parameter to set the max allocated storage in gigabytes for restore database instance from S3 and restore database instance to a point in time APIs.
+
 1.102.0 (2020-10-02)
 ------------------
 

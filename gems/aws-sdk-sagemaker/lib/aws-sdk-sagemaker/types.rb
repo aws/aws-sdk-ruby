@@ -3040,7 +3040,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -12711,6 +12711,76 @@ module Aws::SageMaker
     #       [1,3,224,224]]`
     #
     #   * `XGBOOST`\: input data name and shape are not needed.
+    #
+    #   `DataInputConfig` supports the following parameters for `CoreML`
+    #   OutputConfig$TargetDevice (ML Model format):
+    #
+    #   * `shape`\: Input shape, for example `\{"input_1": \{"shape":
+    #     [1,224,224,3]\}\}`. In addition to static input shapes, CoreML
+    #     converter supports Flexible input shapes:
+    #
+    #     * Range Dimension. You can use the Range Dimension feature if you
+    #       know the input shape will be within some specific interval in
+    #       that dimension, for example: `\{"input_1": \{"shape": ["1..10",
+    #       224, 224, 3]\}\}`
+    #
+    #     * Enumerated shapes. Sometimes, the models are trained to work
+    #       only on a select set of inputs. You can enumerate all supported
+    #       input shapes, for example: `\{"input_1": \{"shape": [[1, 224,
+    #       224, 3], [1, 160, 160, 3]]\}\}`
+    #
+    #   * `default_shape`\: Default input shape. You can set a default shape
+    #     during conversion for both Range Dimension and Enumerated Shapes.
+    #     For example `\{"input_1": \{"shape": ["1..10", 224, 224, 3],
+    #     "default_shape": [1, 224, 224, 3]\}\}`
+    #
+    #   * `type`\: Input type. Allowed values: `Image` and `Tensor`. By
+    #     default, the converter generates an ML Model with inputs of type
+    #     Tensor (MultiArray). User can set input type to be Image. Image
+    #     input type requires additional input parameters such as `bias` and
+    #     `scale`.
+    #
+    #   * `bias`\: If the input type is an Image, you need to provide the
+    #     bias vector.
+    #
+    #   * `scale`\: If the input type is an Image, you need to provide a
+    #     scale factor.
+    #
+    #   CoreML `ClassifierConfig` parameters can be specified using
+    #   OutputConfig$CompilerOptions. CoreML converter supports Tensorflow
+    #   and PyTorch models. CoreML conversion examples:
+    #
+    #   * Tensor type input:
+    #
+    #     * `"DataInputConfig": \{"input_1": \{"shape": [[1,224,224,3],
+    #       [1,160,160,3]], "default_shape": [1,224,224,3]\}\}`
+    #
+    #     ^
+    #
+    #   * Tensor type input without input name (PyTorch):
+    #
+    #     * `"DataInputConfig": [\{"shape": [[1,3,224,224], [1,3,160,160]],
+    #       "default_shape": [1,3,224,224]\}]`
+    #
+    #     ^
+    #
+    #   * Image type input:
+    #
+    #     * `"DataInputConfig": \{"input_1": \{"shape": [[1,224,224,3],
+    #       [1,160,160,3]], "default_shape": [1,224,224,3], "type": "Image",
+    #       "bias": [-1,-1,-1], "scale": 0.007843137255\}\}`
+    #
+    #     * `"CompilerOptions": \{"class_labels":
+    #       "imagenet_labels_1000.txt"\}`
+    #
+    #   * Image type input without input name (PyTorch):
+    #
+    #     * `"DataInputConfig": [\{"shape": [[1,3,224,224], [1,3,160,160]],
+    #       "default_shape": [1,3,224,224], "type": "Image", "bias":
+    #       [-1,-1,-1], "scale": 0.007843137255\}]`
+    #
+    #     * `"CompilerOptions": \{"class_labels":
+    #       "imagenet_labels_1000.txt"\}`
     #   @return [String]
     #
     # @!attribute [rw] framework
@@ -17704,7 +17774,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -17778,7 +17848,7 @@ module Aws::SageMaker
     # @!attribute [rw] compiler_options
     #   Specifies additional parameters for compiler options in JSON format.
     #   The compiler options are `TargetPlatform` specific. It is required
-    #   for NVIDIA accelerators and highly recommended for CPU compliations.
+    #   for NVIDIA accelerators and highly recommended for CPU compilations.
     #   For any other cases, it is optional to specify `CompilerOptions.`
     #
     #   * `CPU`\: Compilation for CPU supports the following compiler
@@ -17820,6 +17890,16 @@ module Aws::SageMaker
     #
     #     * `mattr`\: Add `\{'mattr': ['+neon']\}` to compiler options if
     #       compiling for ARM 32-bit platform with NEON support.
+    #
+    #   * `CoreML`\: Compilation for the CoreML OutputConfig$TargetDevice
+    #     supports the following compiler options:
+    #
+    #     * `class_labels`\: Specifies the classification labels file name
+    #       inside input tar.gz file. For example, `\{"class_labels":
+    #       "imagenet_labels_1000.txt"\}`. Labels inside the txt file should
+    #       be separated by newlines.
+    #
+    #     ^
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig AWS API Documentation

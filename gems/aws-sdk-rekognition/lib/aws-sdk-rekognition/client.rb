@@ -378,12 +378,6 @@ module Aws::Rekognition
     # want to filter detected faces, specify `NONE`. The default value is
     # `NONE`.
     #
-    # <note markdown="1"> To use quality filtering, you need a collection associated with
-    # version 3 of the face model or higher. To get the version of the face
-    # model associated with a collection, call DescribeCollection.
-    #
-    #  </note>
-    #
     # If the image doesn't contain Exif metadata, `CompareFaces` returns
     # orientation information for the source and target images. Use these
     # values to display the images with the correct image orientation.
@@ -1124,6 +1118,10 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].training_data_result.output.assets[0].ground_truth_manifest.s3_object.bucket #=> String
     #   resp.project_version_descriptions[0].training_data_result.output.assets[0].ground_truth_manifest.s3_object.name #=> String
     #   resp.project_version_descriptions[0].training_data_result.output.assets[0].ground_truth_manifest.s3_object.version #=> String
+    #   resp.project_version_descriptions[0].training_data_result.validation.assets #=> Array
+    #   resp.project_version_descriptions[0].training_data_result.validation.assets[0].ground_truth_manifest.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].training_data_result.validation.assets[0].ground_truth_manifest.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].training_data_result.validation.assets[0].ground_truth_manifest.s3_object.version #=> String
     #   resp.project_version_descriptions[0].testing_data_result.input.assets #=> Array
     #   resp.project_version_descriptions[0].testing_data_result.input.assets[0].ground_truth_manifest.s3_object.bucket #=> String
     #   resp.project_version_descriptions[0].testing_data_result.input.assets[0].ground_truth_manifest.s3_object.name #=> String
@@ -1134,10 +1132,17 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].testing_data_result.output.assets[0].ground_truth_manifest.s3_object.name #=> String
     #   resp.project_version_descriptions[0].testing_data_result.output.assets[0].ground_truth_manifest.s3_object.version #=> String
     #   resp.project_version_descriptions[0].testing_data_result.output.auto_create #=> Boolean
+    #   resp.project_version_descriptions[0].testing_data_result.validation.assets #=> Array
+    #   resp.project_version_descriptions[0].testing_data_result.validation.assets[0].ground_truth_manifest.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.validation.assets[0].ground_truth_manifest.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.validation.assets[0].ground_truth_manifest.s3_object.version #=> String
     #   resp.project_version_descriptions[0].evaluation_result.f1_score #=> Float
     #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.bucket #=> String
     #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.name #=> String
     #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.version #=> String
+    #   resp.project_version_descriptions[0].manifest_summary.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].manifest_summary.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].manifest_summary.s3_object.version #=> String
     #   resp.next_token #=> String
     #
     #
@@ -3672,11 +3677,11 @@ module Aws::Rekognition
     # more information, see Recognizing Celebrities in the Amazon
     # Rekognition Developer Guide.
     #
-    # `RecognizeCelebrities` returns the 100 largest faces in the image. It
+    # `RecognizeCelebrities` returns the 64 largest faces in the image. It
     # lists recognized celebrities in the `CelebrityFaces` array and
     # unrecognized faces in the `UnrecognizedFaces` array.
     # `RecognizeCelebrities` doesn't return celebrities whose faces aren't
-    # among the largest 100 faces in the image.
+    # among the largest 64 faces in the image.
     #
     # For each celebrity recognized, `RecognizeCelebrities` returns a
     # `Celebrity` object. The `Celebrity` object contains the celebrity
@@ -4885,7 +4890,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

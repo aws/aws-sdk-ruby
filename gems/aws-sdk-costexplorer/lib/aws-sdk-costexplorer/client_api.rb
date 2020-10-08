@@ -35,13 +35,18 @@ module Aws::CostExplorer
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
     CostCategoryMaxResults = Shapes::IntegerShape.new(name: 'CostCategoryMaxResults')
     CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
+    CostCategoryProcessingStatus = Shapes::StructureShape.new(name: 'CostCategoryProcessingStatus')
+    CostCategoryProcessingStatusList = Shapes::ListShape.new(name: 'CostCategoryProcessingStatusList')
     CostCategoryReference = Shapes::StructureShape.new(name: 'CostCategoryReference')
     CostCategoryReferencesList = Shapes::ListShape.new(name: 'CostCategoryReferencesList')
     CostCategoryRule = Shapes::StructureShape.new(name: 'CostCategoryRule')
     CostCategoryRuleVersion = Shapes::StringShape.new(name: 'CostCategoryRuleVersion')
     CostCategoryRulesList = Shapes::ListShape.new(name: 'CostCategoryRulesList')
+    CostCategoryStatus = Shapes::StringShape.new(name: 'CostCategoryStatus')
+    CostCategoryStatusComponent = Shapes::StringShape.new(name: 'CostCategoryStatusComponent')
     CostCategoryValue = Shapes::StringShape.new(name: 'CostCategoryValue')
     CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
+    CostCategoryValuesList = Shapes::ListShape.new(name: 'CostCategoryValuesList')
     Coverage = Shapes::StructureShape.new(name: 'Coverage')
     CoverageByTime = Shapes::StructureShape.new(name: 'CoverageByTime')
     CoverageCost = Shapes::StructureShape.new(name: 'CoverageCost')
@@ -319,13 +324,22 @@ module Aws::CostExplorer
     CostCategory.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "Name"))
     CostCategory.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     CostCategory.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
+    CostCategory.add_member(:processing_status, Shapes::ShapeRef.new(shape: CostCategoryProcessingStatusList, location_name: "ProcessingStatus"))
     CostCategory.struct_class = Types::CostCategory
+
+    CostCategoryProcessingStatus.add_member(:component, Shapes::ShapeRef.new(shape: CostCategoryStatusComponent, location_name: "Component"))
+    CostCategoryProcessingStatus.add_member(:status, Shapes::ShapeRef.new(shape: CostCategoryStatus, location_name: "Status"))
+    CostCategoryProcessingStatus.struct_class = Types::CostCategoryProcessingStatus
+
+    CostCategoryProcessingStatusList.member = Shapes::ShapeRef.new(shape: CostCategoryProcessingStatus)
 
     CostCategoryReference.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
     CostCategoryReference.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "Name"))
     CostCategoryReference.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
     CostCategoryReference.add_member(:effective_end, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveEnd"))
     CostCategoryReference.add_member(:number_of_rules, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "NumberOfRules"))
+    CostCategoryReference.add_member(:processing_status, Shapes::ShapeRef.new(shape: CostCategoryProcessingStatusList, location_name: "ProcessingStatus"))
+    CostCategoryReference.add_member(:values, Shapes::ShapeRef.new(shape: CostCategoryValuesList, location_name: "Values"))
     CostCategoryReference.struct_class = Types::CostCategoryReference
 
     CostCategoryReferencesList.member = Shapes::ShapeRef.new(shape: CostCategoryReference)
@@ -338,7 +352,10 @@ module Aws::CostExplorer
 
     CostCategoryValues.add_member(:key, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "Key"))
     CostCategoryValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    CostCategoryValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
     CostCategoryValues.struct_class = Types::CostCategoryValues
+
+    CostCategoryValuesList.member = Shapes::ShapeRef.new(shape: CostCategoryValue)
 
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
     Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))

@@ -1695,7 +1695,9 @@ module Aws::EC2
     RevokeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressRequest')
     RevokeClientVpnIngressResult = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressResult')
     RevokeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressRequest')
+    RevokeSecurityGroupEgressResult = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressResult')
     RevokeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressRequest')
+    RevokeSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressResult')
     RootDeviceType = Shapes::StringShape.new(name: 'RootDeviceType')
     RootDeviceTypeList = Shapes::ListShape.new(name: 'RootDeviceTypeList')
     Route = Shapes::StructureShape.new(name: 'Route')
@@ -8713,6 +8715,10 @@ module Aws::EC2
     RevokeSecurityGroupEgressRequest.add_member(:source_security_group_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceSecurityGroupOwnerId"))
     RevokeSecurityGroupEgressRequest.struct_class = Types::RevokeSecurityGroupEgressRequest
 
+    RevokeSecurityGroupEgressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    RevokeSecurityGroupEgressResult.add_member(:unknown_ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "unknownIpPermissionSet"))
+    RevokeSecurityGroupEgressResult.struct_class = Types::RevokeSecurityGroupEgressResult
+
     RevokeSecurityGroupIngressRequest.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: String, location_name: "CidrIp"))
     RevokeSecurityGroupIngressRequest.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "FromPort"))
     RevokeSecurityGroupIngressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "GroupId"))
@@ -8724,6 +8730,10 @@ module Aws::EC2
     RevokeSecurityGroupIngressRequest.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
     RevokeSecurityGroupIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RevokeSecurityGroupIngressRequest.struct_class = Types::RevokeSecurityGroupIngressRequest
+
+    RevokeSecurityGroupIngressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    RevokeSecurityGroupIngressResult.add_member(:unknown_ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "unknownIpPermissionSet"))
+    RevokeSecurityGroupIngressResult.struct_class = Types::RevokeSecurityGroupIngressResult
 
     RootDeviceTypeList.member = Shapes::ShapeRef.new(shape: RootDeviceType, location_name: "item")
 
@@ -13983,7 +13993,7 @@ module Aws::EC2
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RevokeSecurityGroupEgressRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: RevokeSecurityGroupEgressResult)
       end)
 
       api.add_operation(:revoke_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -13991,7 +14001,7 @@ module Aws::EC2
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RevokeSecurityGroupIngressRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: RevokeSecurityGroupIngressResult)
       end)
 
       api.add_operation(:run_instances, Seahorse::Model::Operation.new.tap do |o|

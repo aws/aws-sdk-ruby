@@ -43581,6 +43581,25 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, returns an error.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] unknown_ip_permissions
+    #   The outbound rules that were unknown to the service. In some cases,
+    #   `unknownIpPermissionSet` might be in a different format from the
+    #   request parameter.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressResult AWS API Documentation
+    #
+    class RevokeSecurityGroupEgressResult < Struct.new(
+      :return,
+      :unknown_ip_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RevokeSecurityGroupIngressRequest
     #   data as a hash:
     #
@@ -43714,6 +43733,25 @@ module Aws::EC2
       :source_security_group_owner_id,
       :to_port,
       :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, returns an error.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] unknown_ip_permissions
+    #   The inbound rules that were unknown to the service. In some cases,
+    #   `unknownIpPermissionSet` might be in a different format from the
+    #   request parameter.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressResult AWS API Documentation
+    #
+    class RevokeSecurityGroupIngressResult < Struct.new(
+      :return,
+      :unknown_ip_permissions)
       SENSITIVE = []
       include Aws::Structure
     end

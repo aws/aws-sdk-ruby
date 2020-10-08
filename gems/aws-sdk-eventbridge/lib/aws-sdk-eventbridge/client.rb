@@ -1237,6 +1237,9 @@ module Aws::EventBridge
     #   resp.targets[0].redshift_data_parameters.sql #=> String
     #   resp.targets[0].redshift_data_parameters.statement_name #=> String
     #   resp.targets[0].redshift_data_parameters.with_event #=> Boolean
+    #   resp.targets[0].dead_letter_config.arn #=> String
+    #   resp.targets[0].retry_policy.maximum_retry_attempts #=> Integer
+    #   resp.targets[0].retry_policy.maximum_event_age_in_seconds #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -1778,6 +1781,13 @@ module Aws::EventBridge
     #           statement_name: "StatementName",
     #           with_event: false,
     #         },
+    #         dead_letter_config: {
+    #           arn: "ResourceArn",
+    #         },
+    #         retry_policy: {
+    #           maximum_retry_attempts: 1,
+    #           maximum_event_age_in_seconds: 1,
+    #         },
     #       },
     #     ],
     #   })
@@ -2020,7 +2030,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

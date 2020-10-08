@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2020-10-08)
+------------------
+
+* Feature - This release enables Sagemaker customers to convert Tensorflow and PyTorch models to CoreML (ML Model) format.
+
 1.69.0 (2020-10-05)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-10-08)
+------------------
+
+* Feature - This release provides location information for the manifest validation files.
+
 1.45.0 (2020-09-30)
 ------------------
 
