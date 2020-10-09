@@ -170,6 +170,7 @@ module Aws::Amplify
     #         },
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         enable_basic_auth: false,
+    #         enable_performance_mode: false,
     #         build_spec: "BuildSpec",
     #         enable_pull_request_preview: false,
     #         pull_request_environment_name: "PullRequestEnvironmentName",
@@ -199,6 +200,13 @@ module Aws::Amplify
     #   Enables basic authorization for the autocreated branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. Enabling
+    #   performance mode will mean that hosting configuration or code
+    #   changes can take up to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] build_spec
     #   The build specification (build spec) for the autocreated branch.
     #   @return [String]
@@ -220,6 +228,7 @@ module Aws::Amplify
       :environment_variables,
       :basic_auth_credentials,
       :enable_basic_auth,
+      :enable_performance_mode,
       :build_spec,
       :enable_pull_request_preview,
       :pull_request_environment_name)
@@ -353,6 +362,13 @@ module Aws::Amplify
     #   Enables basic authorization for a branch of an Amplify app.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. Enabling
+    #   performance mode will mean that hosting configuration or code
+    #   changes can take up to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] thumbnail_url
     #   The thumbnail URL for the branch of an Amplify app.
     #   @return [String]
@@ -414,6 +430,7 @@ module Aws::Amplify
       :active_job_id,
       :total_number_of_jobs,
       :enable_basic_auth,
+      :enable_performance_mode,
       :thumbnail_url,
       :basic_auth_credentials,
       :build_spec,
@@ -471,6 +488,7 @@ module Aws::Amplify
     #           },
     #           basic_auth_credentials: "BasicAuthCredentials",
     #           enable_basic_auth: false,
+    #           enable_performance_mode: false,
     #           build_spec: "BuildSpec",
     #           enable_pull_request_preview: false,
     #           pull_request_environment_name: "PullRequestEnvironmentName",
@@ -665,6 +683,7 @@ module Aws::Amplify
     #         },
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         enable_basic_auth: false,
+    #         enable_performance_mode: false,
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -716,6 +735,13 @@ module Aws::Amplify
     #   Enables basic authorization for the branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. Enabling
+    #   performance mode will mean that hosting configuration or code
+    #   changes can take up to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The tag for the branch.
     #   @return [Hash<String,String>]
@@ -759,6 +785,7 @@ module Aws::Amplify
       :environment_variables,
       :basic_auth_credentials,
       :enable_basic_auth,
+      :enable_performance_mode,
       :tags,
       :build_spec,
       :ttl,
@@ -2704,6 +2731,7 @@ module Aws::Amplify
     #           },
     #           basic_auth_credentials: "BasicAuthCredentials",
     #           enable_basic_auth: false,
+    #           enable_performance_mode: false,
     #           build_spec: "BuildSpec",
     #           enable_pull_request_preview: false,
     #           pull_request_environment_name: "PullRequestEnvironmentName",
@@ -2849,6 +2877,7 @@ module Aws::Amplify
     #         },
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         enable_basic_auth: false,
+    #         enable_performance_mode: false,
     #         build_spec: "BuildSpec",
     #         ttl: "TTL",
     #         display_name: "DisplayName",
@@ -2897,6 +2926,13 @@ module Aws::Amplify
     #   Enables basic authorization for the branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. Enabling
+    #   performance mode will mean that hosting configuration or code
+    #   changes can take up to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] build_spec
     #   The build specification (build spec) for the branch.
     #   @return [String]
@@ -2936,6 +2972,7 @@ module Aws::Amplify
       :environment_variables,
       :basic_auth_credentials,
       :enable_basic_auth,
+      :enable_performance_mode,
       :build_spec,
       :ttl,
       :display_name,

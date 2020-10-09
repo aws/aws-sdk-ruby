@@ -434,6 +434,7 @@ module Aws::Amplify
     #       },
     #       basic_auth_credentials: "BasicAuthCredentials",
     #       enable_basic_auth: false,
+    #       enable_performance_mode: false,
     #       build_spec: "BuildSpec",
     #       enable_pull_request_preview: false,
     #       pull_request_environment_name: "PullRequestEnvironmentName",
@@ -480,6 +481,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.enable_performance_mode #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
@@ -570,6 +572,12 @@ module Aws::Amplify
     # @option params [Boolean] :enable_basic_auth
     #   Enables basic authorization for the branch.
     #
+    # @option params [Boolean] :enable_performance_mode
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. Enabling performance
+    #   mode will mean that hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tag for the branch.
     #
@@ -612,6 +620,7 @@ module Aws::Amplify
     #     },
     #     basic_auth_credentials: "BasicAuthCredentials",
     #     enable_basic_auth: false,
+    #     enable_performance_mode: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -644,6 +653,7 @@ module Aws::Amplify
     #   resp.branch.active_job_id #=> String
     #   resp.branch.total_number_of_jobs #=> String
     #   resp.branch.enable_basic_auth #=> Boolean
+    #   resp.branch.enable_performance_mode #=> Boolean
     #   resp.branch.thumbnail_url #=> String
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
@@ -877,6 +887,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.enable_performance_mode #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
@@ -967,6 +978,7 @@ module Aws::Amplify
     #   resp.branch.active_job_id #=> String
     #   resp.branch.total_number_of_jobs #=> String
     #   resp.branch.enable_basic_auth #=> Boolean
+    #   resp.branch.enable_performance_mode #=> Boolean
     #   resp.branch.thumbnail_url #=> String
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
@@ -1209,6 +1221,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.enable_performance_mode #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
@@ -1329,6 +1342,7 @@ module Aws::Amplify
     #   resp.branch.active_job_id #=> String
     #   resp.branch.total_number_of_jobs #=> String
     #   resp.branch.enable_basic_auth #=> Boolean
+    #   resp.branch.enable_performance_mode #=> Boolean
     #   resp.branch.thumbnail_url #=> String
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
@@ -1549,6 +1563,7 @@ module Aws::Amplify
     #   resp.apps[0].auto_branch_creation_config.environment_variables["EnvKey"] #=> String
     #   resp.apps[0].auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.apps[0].auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.apps[0].auto_branch_creation_config.enable_performance_mode #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.build_spec #=> String
     #   resp.apps[0].auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.pull_request_environment_name #=> String
@@ -1711,6 +1726,7 @@ module Aws::Amplify
     #   resp.branches[0].active_job_id #=> String
     #   resp.branches[0].total_number_of_jobs #=> String
     #   resp.branches[0].enable_basic_auth #=> Boolean
+    #   resp.branches[0].enable_performance_mode #=> Boolean
     #   resp.branches[0].thumbnail_url #=> String
     #   resp.branches[0].basic_auth_credentials #=> String
     #   resp.branches[0].build_spec #=> String
@@ -2237,6 +2253,7 @@ module Aws::Amplify
     #       },
     #       basic_auth_credentials: "BasicAuthCredentials",
     #       enable_basic_auth: false,
+    #       enable_performance_mode: false,
     #       build_spec: "BuildSpec",
     #       enable_pull_request_preview: false,
     #       pull_request_environment_name: "PullRequestEnvironmentName",
@@ -2286,6 +2303,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
     #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
     #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.enable_performance_mode #=> Boolean
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
@@ -2331,6 +2349,12 @@ module Aws::Amplify
     # @option params [Boolean] :enable_basic_auth
     #   Enables basic authorization for the branch.
     #
+    # @option params [Boolean] :enable_performance_mode
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. Enabling performance
+    #   mode will mean that hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
+    #
     # @option params [String] :build_spec
     #   The build specification (build spec) for the branch.
     #
@@ -2370,6 +2394,7 @@ module Aws::Amplify
     #     },
     #     basic_auth_credentials: "BasicAuthCredentials",
     #     enable_basic_auth: false,
+    #     enable_performance_mode: false,
     #     build_spec: "BuildSpec",
     #     ttl: "TTL",
     #     display_name: "DisplayName",
@@ -2399,6 +2424,7 @@ module Aws::Amplify
     #   resp.branch.active_job_id #=> String
     #   resp.branch.total_number_of_jobs #=> String
     #   resp.branch.enable_basic_auth #=> Boolean
+    #   resp.branch.enable_performance_mode #=> Boolean
     #   resp.branch.thumbnail_url #=> String
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
@@ -2542,7 +2568,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

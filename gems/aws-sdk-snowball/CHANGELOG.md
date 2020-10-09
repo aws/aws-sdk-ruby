@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-10-09)
+------------------
+
+* Feature - We added new APIs to allow customers to better manage their device shipping. You can check if your shipping label expired, generate a new label, and tell us that you received or shipped your job.
+
 1.34.0 (2020-09-30)
 ------------------
 

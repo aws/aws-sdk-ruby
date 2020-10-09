@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-10-09)
+------------------
+
+* Feature - This new API takes either a ProvisonedProductId or a ProvisionedProductName, along with a list of 1 or more output keys and responds with the (key,value) pairs of those outputs.
+
 1.49.0 (2020-09-30)
 ------------------
 

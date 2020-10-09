@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-10-09)
+------------------
+
+* Feature - WAV audio output. Extracting ancillary captions in MP4 file inputs. Priority on channels feeding a multiplex (higher priority channels will tend to have higher video quality).
+
 1.55.0 (2020-09-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-10-09)
+------------------
+
+* Feature - This release introduces a new Amazon EKS error code: "ClusterUnreachable"
+
 1.44.0 (2020-09-30)
 ------------------
 

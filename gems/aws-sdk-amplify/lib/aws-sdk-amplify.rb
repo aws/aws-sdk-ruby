@@ -48,6 +48,6 @@ require_relative 'aws-sdk-amplify/customizations'
 # @!group service
 module Aws::Amplify
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

@@ -162,6 +162,8 @@ module Aws::ServiceCatalog
     FailedServiceActionAssociations = Shapes::ListShape.new(name: 'FailedServiceActionAssociations')
     GetAWSOrganizationsAccessStatusInput = Shapes::StructureShape.new(name: 'GetAWSOrganizationsAccessStatusInput')
     GetAWSOrganizationsAccessStatusOutput = Shapes::StructureShape.new(name: 'GetAWSOrganizationsAccessStatusOutput')
+    GetProvisionedProductOutputsInput = Shapes::StructureShape.new(name: 'GetProvisionedProductOutputsInput')
+    GetProvisionedProductOutputsOutput = Shapes::StructureShape.new(name: 'GetProvisionedProductOutputsOutput')
     HasDefaultPath = Shapes::BooleanShape.new(name: 'HasDefaultPath')
     Id = Shapes::StringShape.new(name: 'Id')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
@@ -227,6 +229,7 @@ module Aws::ServiceCatalog
     OrganizationNodes = Shapes::ListShape.new(name: 'OrganizationNodes')
     OutputDescription = Shapes::StringShape.new(name: 'OutputDescription')
     OutputKey = Shapes::StringShape.new(name: 'OutputKey')
+    OutputKeys = Shapes::ListShape.new(name: 'OutputKeys')
     OutputValue = Shapes::StringShape.new(name: 'OutputValue')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
@@ -954,6 +957,18 @@ module Aws::ServiceCatalog
     GetAWSOrganizationsAccessStatusOutput.add_member(:access_status, Shapes::ShapeRef.new(shape: AccessStatus, location_name: "AccessStatus"))
     GetAWSOrganizationsAccessStatusOutput.struct_class = Types::GetAWSOrganizationsAccessStatusOutput
 
+    GetProvisionedProductOutputsInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    GetProvisionedProductOutputsInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisionedProductId"))
+    GetProvisionedProductOutputsInput.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductName, location_name: "ProvisionedProductName"))
+    GetProvisionedProductOutputsInput.add_member(:output_keys, Shapes::ShapeRef.new(shape: OutputKeys, location_name: "OutputKeys"))
+    GetProvisionedProductOutputsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    GetProvisionedProductOutputsInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    GetProvisionedProductOutputsInput.struct_class = Types::GetProvisionedProductOutputsInput
+
+    GetProvisionedProductOutputsOutput.add_member(:outputs, Shapes::ShapeRef.new(shape: RecordOutputs, location_name: "Outputs"))
+    GetProvisionedProductOutputsOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
+    GetProvisionedProductOutputsOutput.struct_class = Types::GetProvisionedProductOutputsOutput
+
     InvalidParametersException.struct_class = Types::InvalidParametersException
 
     InvalidStateException.struct_class = Types::InvalidStateException
@@ -1175,6 +1190,8 @@ module Aws::ServiceCatalog
     OrganizationNode.struct_class = Types::OrganizationNode
 
     OrganizationNodes.member = Shapes::ShapeRef.new(shape: OrganizationNode)
+
+    OutputKeys.member = Shapes::ShapeRef.new(shape: OutputKey)
 
     ParameterConstraints.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValues, location_name: "AllowedValues"))
     ParameterConstraints.struct_class = Types::ParameterConstraints
@@ -2289,6 +2306,22 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: GetAWSOrganizationsAccessStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
+      api.add_operation(:get_provisioned_product_outputs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProvisionedProductOutputs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetProvisionedProductOutputsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetProvisionedProductOutputsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_accepted_portfolio_shares, Seahorse::Model::Operation.new.tap do |o|

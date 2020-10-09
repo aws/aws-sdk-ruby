@@ -355,8 +355,8 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to accept. The default is to accept
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the master account
-    #     of your organization.
+    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the management
+    #     account of your organization.
     #
     #   * `IMPORTED` - Accept imported portfolios.
     #
@@ -974,7 +974,7 @@ module Aws::ServiceCatalog
 
     # Shares the specified portfolio with the specified account or
     # organization node. Shares to an organization node can only be created
-    # by the master account of an organization or by a delegated
+    # by the management account of an organization or by a delegated
     # administrator. You can share portfolios to an organization, an
     # organizational unit, or a specific account.
     #
@@ -1005,9 +1005,10 @@ module Aws::ServiceCatalog
     # @option params [Types::OrganizationNode] :organization_node
     #   The organization node to whom you are going to share. If
     #   `OrganizationNode` is passed in, `PortfolioShare` will be created for
-    #   the node and its children (when applies), and a `PortfolioShareToken`
-    #   will be returned in the output in order for the administrator to
-    #   monitor the status of the `PortfolioShare` creation process.
+    #   the node an ListOrganizationPortfolioAccessd its children (when
+    #   applies), and a `PortfolioShareToken` will be returned in the output
+    #   in order for the administrator to monitor the status of the
+    #   `PortfolioShare` creation process.
     #
     # @return [Types::CreatePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1557,7 +1558,7 @@ module Aws::ServiceCatalog
 
     # Stops sharing the specified portfolio with the specified account or
     # organization node. Shares to an organization node can only be deleted
-    # by the master account of an organization or by a delegated
+    # by the management account of an organization or by a delegated
     # administrator.
     #
     # Note that if a delegated admin is de-registered, portfolio shares
@@ -1932,8 +1933,8 @@ module Aws::ServiceCatalog
     end
 
     # Gets the status of the specified portfolio share operation. This API
-    # can only be called by the master account in the organization or by a
-    # delegated admin.
+    # can only be called by the management account in the organization or by
+    # a delegated admin.
     #
     # @option params [required, String] :portfolio_share_token
     #   The token for the portfolio share operation. This token is returned
@@ -2186,18 +2187,10 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [String] :id
-    #   The provisioned product identifier. You must provide the name or ID,
-    #   but not both.
-    #
-    #   If you do not provide a name or ID, or you provide both name and ID,
-    #   an `InvalidParametersException` will occur.
+    #   The provisioned product identifier.
     #
     # @option params [String] :name
-    #   The name of the provisioned product. You must provide the name or ID,
-    #   but not both.
-    #
-    #   If you do not provide a name or ID, or you provide both name and ID,
-    #   an `InvalidParametersException` will occur.
+    #   The name of the provisioned product.
     #
     # @return [Types::DescribeProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2702,7 +2695,7 @@ module Aws::ServiceCatalog
     # feature will not delete your current shares but it will prevent you
     # from creating new shares throughout your organization. Current shares
     # will not be in sync with your organization structure if it changes
-    # after calling this API. This API can only be called by the master
+    # after calling this API. This API can only be called by the management
     # account in the organization.
     #
     # This API can't be invoked if there are active delegated
@@ -2895,7 +2888,7 @@ module Aws::ServiceCatalog
     # Enable portfolio sharing feature through AWS Organizations. This API
     # will allow Service Catalog to receive updates on your organization in
     # order to sync your shares with the current structure. This API can
-    # only be called by the master account in the organization.
+    # only be called by the management account in the organization.
     #
     # By calling this API Service Catalog will make a call to
     # organizations:EnableAWSServiceAccess on your behalf so that your
@@ -3057,8 +3050,8 @@ module Aws::ServiceCatalog
     end
 
     # Get the Access Status for AWS Organization portfolio share feature.
-    # This API can only be called by the master account in the organization
-    # or by a delegated admin.
+    # This API can only be called by the management account in the
+    # organization or by a delegated admin.
     #
     # @return [Types::GetAWSOrganizationsAccessStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3074,6 +3067,73 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def get_aws_organizations_access_status(params = {}, options = {})
       req = build_request(:get_aws_organizations_access_status, params)
+      req.send_request(options)
+    end
+
+    # This API takes either a `ProvisonedProductId` or a
+    # `ProvisionedProductName`, along with a list of one or more output
+    # keys, and responds with the key/value pairs of those outputs.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [String] :provisioned_product_id
+    #   The identifier of the provisioned product that you want the outputs
+    #   from.
+    #
+    # @option params [String] :provisioned_product_name
+    #   The name of the provisioned product that you want the outputs from.
+    #
+    # @option params [Array<String>] :output_keys
+    #   The list of keys that the API should return with their values. If none
+    #   are provided, the API will return all outputs of the provisioned
+    #   product.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @return [Types::GetProvisionedProductOutputsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProvisionedProductOutputsOutput#outputs #outputs} => Array&lt;Types::RecordOutput&gt;
+    #   * {Types::GetProvisionedProductOutputsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_provisioned_product_outputs({
+    #     accept_language: "AcceptLanguage",
+    #     provisioned_product_id: "Id",
+    #     provisioned_product_name: "ProvisionedProductName",
+    #     output_keys: ["OutputKey"],
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].output_key #=> String
+    #   resp.outputs[0].output_value #=> String
+    #   resp.outputs[0].description #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetProvisionedProductOutputs AWS API Documentation
+    #
+    # @overload get_provisioned_product_outputs(params = {})
+    # @param [Hash] params ({})
+    def get_provisioned_product_outputs(params = {}, options = {})
+      req = build_request(:get_provisioned_product_outputs, params)
       req.send_request(options)
     end
 
@@ -3099,8 +3159,8 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to list. The default is to list imported
     #   portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the master account
-    #     of your organization
+    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the management
+    #     account of your organization
     #
     #   * `AWS_SERVICECATALOG` - List default portfolios
     #
@@ -3317,8 +3377,8 @@ module Aws::ServiceCatalog
     end
 
     # Lists the organization nodes that have access to the specified
-    # portfolio. This API can only be called by the master account in the
-    # organization or by a delegated admin.
+    # portfolio. This API can only be called by the management account in
+    # the organization or by a delegated admin.
     #
     # If a delegated admin is de-registered, they can no longer perform this
     # operation.
@@ -4295,8 +4355,8 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to reject. The default is to reject
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the master account
-    #     of your organization.
+    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the management
+    #     account of your organization.
     #
     #   * `IMPORTED` - Reject imported portfolios.
     #
@@ -5448,7 +5508,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
