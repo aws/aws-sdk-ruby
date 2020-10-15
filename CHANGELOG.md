@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AccessAnalyzer - Updated the API, and documentation for Access Analyzer.
+
+* Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
+
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::Glue - Updated the documentation for AWS Glue.
+
+* Feature - Aws::GroundStation - Updated the API, and documentation for AWS Ground Station.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer Family.
+
+* Feature - Aws::WorkMail - Updated the API, and documentation for Amazon WorkMail.
+
+* Feature - Aws::WorkSpaces - Updated the documentation for Amazon WorkSpaces.
+
+* Feature - Aws::XRay - Updated the API, and documentation for AWS X-Ray.
+
 2.11.605 (2020-10-09)
 ------------------
 
