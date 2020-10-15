@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.606 (2020-10-15)
+------------------
+
 * Feature - Aws::AccessAnalyzer - Updated the API, and documentation for Access Analyzer.
 
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
