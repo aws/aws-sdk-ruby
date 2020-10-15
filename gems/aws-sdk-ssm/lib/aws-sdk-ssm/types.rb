@@ -3316,7 +3316,7 @@ module Aws::SSM
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -3327,7 +3327,7 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],
@@ -8303,7 +8303,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of a parameter you want to query.
+    #   The name of the parameter for which you want to review history.
     #   @return [String]
     #
     # @!attribute [rw] with_decryption
@@ -13323,8 +13323,11 @@ module Aws::SSM
     # Represents metadata about a patch.
     #
     # @!attribute [rw] id
-    #   The ID of the patch (this is different than the Microsoft Knowledge
-    #   Base ID).
+    #   The ID of the patch. Applies to Windows patches only.
+    #
+    #   <note markdown="1"> This ID is not the same as the Microsoft Knowledge Base ID.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] release_date
@@ -13348,35 +13351,93 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] product_family
-    #   The product family the patch is applicable for (for example,
-    #   Windows).
+    #   The product family the patch is applicable for. For example,
+    #   `Windows` or `Amazon Linux 2`.
     #   @return [String]
     #
     # @!attribute [rw] product
-    #   The specific product the patch is applicable for (for example,
-    #   WindowsServer2016).
+    #   The specific product the patch is applicable for. For example,
+    #   `WindowsServer2016` or `AmazonLinux2018.03`.
     #   @return [String]
     #
     # @!attribute [rw] classification
-    #   The classification of the patch (for example, SecurityUpdates,
-    #   Updates, CriticalUpdates).
+    #   The classification of the patch. For example, `SecurityUpdates`,
+    #   `Updates`, or `CriticalUpdates`.
     #   @return [String]
     #
     # @!attribute [rw] msrc_severity
-    #   The severity of the patch (for example Critical, Important,
-    #   Moderate).
+    #   The severity of the patch, such as `Critical`, `Important`, or
+    #   `Moderate`. Applies to Windows patches only.
     #   @return [String]
     #
     # @!attribute [rw] kb_number
-    #   The Microsoft Knowledge Base ID of the patch.
+    #   The Microsoft Knowledge Base ID of the patch. Applies to Windows
+    #   patches only.
     #   @return [String]
     #
     # @!attribute [rw] msrc_number
-    #   The ID of the MSRC bulletin the patch is related to.
+    #   The ID of the Microsoft Security Response Center (MSRC) bulletin the
+    #   patch is related to. For example, `MS14-045`. Applies to Windows
+    #   patches only.
     #   @return [String]
     #
     # @!attribute [rw] language
     #   The language of the patch if it's language-specific.
+    #   @return [String]
+    #
+    # @!attribute [rw] advisory_ids
+    #   The Advisory ID of the patch. For example, `RHSA-2020:3779`. Applies
+    #   to Linux-based instances only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bugzilla_ids
+    #   The Bugzilla ID of the patch. For example, `1600646`. Applies to
+    #   Linux-based instances only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cve_ids
+    #   The Common Vulnerabilities and Exposures (CVE) ID of the patch. For
+    #   example, `CVE-1999-0067`. Applies to Linux-based instances only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the patch. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] epoch
+    #   The epoch of the patch. For example in
+    #   `pkg-example-EE-20180914-2.2.amzn1.noarch`, the epoch value is
+    #   `20180914-2`. Applies to Linux-based instances only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version
+    #   The version number of the patch. For example, in
+    #   `example-pkg-1.710.10-2.7.abcd.x86_64`, the version number is
+    #   indicated by `-1`. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] release
+    #   The particular release of a patch. For example, in
+    #   `pkg-example-EE-20180914-2.2.amzn1.noarch`, the release is
+    #   `2.amaz1`. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] arch
+    #   The architecture of the patch. For example, in
+    #   `example-pkg-0.710.10-2.7.abcd.x86_64`, the architecture is
+    #   indicated by `x86_64`. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity level of the patch. For example, `CRITICAL` or
+    #   `MODERATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The source patch repository for the operating system and version,
+    #   such as `trusty-security` for Ubuntu Server 14.04 LTE and
+    #   `focal-security` for Ubuntu Server 20.04 LTE. Applies to Linux-based
+    #   instances only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Patch AWS API Documentation
@@ -13394,7 +13455,17 @@ module Aws::SSM
       :msrc_severity,
       :kb_number,
       :msrc_number,
-      :language)
+      :language,
+      :advisory_ids,
+      :bugzilla_ids,
+      :cve_ids,
+      :name,
+      :epoch,
+      :version,
+      :release,
+      :arch,
+      :severity,
+      :repository)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13508,7 +13579,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #         key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #         values: ["PatchFilterValue"], # required
     #       }
     #
@@ -13543,7 +13614,7 @@ module Aws::SSM
     #       {
     #         patch_filters: [ # required
     #           {
-    #             key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #             key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #             values: ["PatchFilterValue"], # required
     #           },
     #         ],
@@ -13617,7 +13688,7 @@ module Aws::SSM
     #         patch_filter_group: { # required
     #           patch_filters: [ # required
     #             {
-    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -13682,7 +13753,7 @@ module Aws::SSM
     #             patch_filter_group: { # required
     #               patch_filters: [ # required
     #                 {
-    #                   key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                   key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                   values: ["PatchFilterValue"], # required
     #                 },
     #               ],
@@ -18050,7 +18121,7 @@ module Aws::SSM
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -18061,7 +18132,7 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],

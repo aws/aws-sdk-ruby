@@ -181,6 +181,42 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # Retroactively applies an archive rule.
+    #
+    # @note When making an API call, you may pass ApplyArchiveRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         analyzer_arn: "AnalyzerArn", # required
+    #         client_token: "String",
+    #         rule_name: "Name", # required
+    #       }
+    #
+    # @!attribute [rw] analyzer_arn
+    #   The Amazon resource name (ARN) of the analyzer.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule to apply.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ApplyArchiveRuleRequest AWS API Documentation
+    #
+    class ApplyArchiveRuleRequest < Struct.new(
+      :analyzer_arn,
+      :client_token,
+      :rule_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an archive rule.
     #
     # @!attribute [rw] created_at
@@ -901,7 +937,7 @@ module Aws::AccessAnalyzer
     #         analyzer_arn: "AnalyzerArn", # required
     #         max_results: 1,
     #         next_token: "Token",
-    #         resource_type: "AWS::IAM::Role", # accepts AWS::IAM::Role, AWS::KMS::Key, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::S3::Bucket, AWS::SQS::Queue
+    #         resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key
     #       }
     #
     # @!attribute [rw] analyzer_arn

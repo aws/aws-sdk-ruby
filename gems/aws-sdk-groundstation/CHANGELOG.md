@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2020-10-15)
+------------------
+
+* Feature - Adds error message attribute to DescribeContact DataflowDetails
+
 1.14.0 (2020-09-30)
 ------------------
 

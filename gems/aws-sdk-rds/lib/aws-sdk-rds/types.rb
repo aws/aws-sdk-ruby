@@ -2072,15 +2072,23 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   The DB engine mode of the DB cluster, either `provisioned`
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
-    #   <note markdown="1"> `global` engine mode only applies for global database clusters
-    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
-    #   versions, the clusters in a global database use `provisioned` engine
-    #   mode.
+    #   The `parallelquery` engine mode isn't required for Aurora MySQL
+    #   version 1.23 and higher 1.x versions, and version 2.09 and higher
+    #   2.x versions.
     #
-    #    </note>
+    #   The `global` engine mode isn't required for Aurora MySQL version
+    #   1.22 and higher 1.x versions, and `global` engine mode isn't
+    #   required for any 2.x versions.
+    #
+    #   The `multimaster` engine mode only applies for DB clusters created
+    #   with Aurora MySQL version 5.6.10a.
+    #
+    #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
+    #   both the `parallelquery` and the `multimaster` engine modes
+    #   currently aren't supported.
     #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
@@ -2090,7 +2098,7 @@ module Aws::RDS
     #
     #   * [ Limitations of Parallel Query][2]
     #
-    #   * [ Requirements for Aurora Global Databases][3]
+    #   * [ Limitations of Aurora Global Databases][3]
     #
     #   * [ Limitations of Multi-Master Clusters][4]
     #
@@ -4988,14 +4996,11 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
-    #   <note markdown="1"> `global` engine mode only applies for global database clusters
-    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
-    #   versions, the clusters in a global database use `provisioned` engine
-    #   mode. To check if a DB cluster is part of a global database, use
-    #   `DescribeGlobalClusters` instead of checking the `EngineMode` return
-    #   value from `DescribeDBClusters`.
+    #   For more information, see [ CreateDBCluster][1].
     #
-    #    </note>
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration_info
@@ -5068,6 +5073,15 @@ module Aws::RDS
     #   DB cluster.
     #   @return [Array<Types::DomainMembership>]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] global_write_forwarding_status
     #   Specifies whether a secondary cluster in an Aurora global database
     #   has write forwarding enabled, not enabled, or is in the process of
@@ -5138,6 +5152,7 @@ module Aws::RDS
       :copy_tags_to_snapshot,
       :cross_account_clone,
       :domain_memberships,
+      :tag_list,
       :global_write_forwarding_status,
       :global_write_forwarding_requested)
       SENSITIVE = []
@@ -5746,6 +5761,15 @@ module Aws::RDS
     #   to database accounts is enabled, and otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -5768,7 +5792,8 @@ module Aws::RDS
       :kms_key_id,
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5937,13 +5962,6 @@ module Aws::RDS
     #
     # @!attribute [rw] supported_engine_modes
     #   A list of the supported DB engine modes.
-    #
-    #   <note markdown="1"> `global` engine mode only applies for global database clusters
-    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
-    #   versions, the clusters in a global database use `provisioned` engine
-    #   mode.
-    #
-    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_feature_names
@@ -6400,6 +6418,15 @@ module Aws::RDS
     #   storage of the DB instance.
     #   @return [Integer]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -6462,7 +6489,8 @@ module Aws::RDS
       :deletion_protection,
       :associated_roles,
       :listener_endpoint,
-      :max_allocated_storage)
+      :max_allocated_storage,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7457,6 +7485,15 @@ module Aws::RDS
     #   and which is unique to an AWS Region.
     #   @return [String]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -7487,7 +7524,8 @@ module Aws::RDS
       :timezone,
       :iam_database_authentication_enabled,
       :processor_features,
-      :dbi_resource_id)
+      :dbi_resource_id,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15188,13 +15226,6 @@ module Aws::RDS
     #
     # @!attribute [rw] supported_engine_modes
     #   A list of the supported DB engine modes.
-    #
-    #   <note markdown="1"> `global` engine mode only applies for global database clusters
-    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
-    #   versions, the clusters in a global database use `provisioned` engine
-    #   mode.
-    #
-    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] supports_storage_autoscaling
@@ -17221,6 +17252,12 @@ module Aws::RDS
     # @!attribute [rw] engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #
+    #   For more information, see [ CreateDBCluster][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration

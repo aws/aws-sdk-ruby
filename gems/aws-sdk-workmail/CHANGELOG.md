@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-10-15)
+------------------
+
+* Feature - Add CreateOrganization and DeleteOrganization API operations.
+
 1.31.0 (2020-09-30)
 ------------------
 

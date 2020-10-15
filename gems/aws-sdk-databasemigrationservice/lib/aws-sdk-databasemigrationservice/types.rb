@@ -433,11 +433,14 @@ module Aws::DatabaseMigrationService
     #           after_connect_script: "String",
     #           bucket_folder: "String",
     #           bucket_name: "String",
+    #           case_sensitive_names: false,
+    #           comp_update: false,
     #           connection_timeout: 1,
     #           database_name: "String",
     #           date_format: "String",
     #           empty_as_null: false,
     #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           explicit_ids: false,
     #           file_transfer_upload_streams: 1,
     #           load_timeout: 1,
     #           max_file_size: 1,
@@ -543,6 +546,7 @@ module Aws::DatabaseMigrationService
     #           max_k_bytes_per_read: 1,
     #           username: "String",
     #         },
+    #         resource_identifier: "String",
     #       }
     #
     # @!attribute [rw] endpoint_identifier
@@ -816,6 +820,20 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two
+    #   consecutive hyphens, and can only begin with a letter, such as
+    #   `Example-App-ARN1`. For example, this value might result in the
+    #   `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
     class CreateEndpointMessage < Struct.new(
@@ -848,7 +866,8 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :resource_identifier)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -984,6 +1003,7 @@ module Aws::DatabaseMigrationService
     #         kms_key_id: "String",
     #         publicly_accessible: false,
     #         dns_name_servers: "String",
+    #         resource_identifier: "String",
     #       }
     #
     # @!attribute [rw] replication_instance_identifier
@@ -1105,6 +1125,20 @@ module Aws::DatabaseMigrationService
     #   `"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"`
     #   @return [String]
     #
+    # @!attribute [rw] resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two
+    #   consecutive hyphens, and can only begin with a letter, such as
+    #   `Example-App-ARN1`. For example, this value might result in the
+    #   `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceMessage AWS API Documentation
     #
     class CreateReplicationInstanceMessage < Struct.new(
@@ -1121,7 +1155,8 @@ module Aws::DatabaseMigrationService
       :tags,
       :kms_key_id,
       :publicly_accessible,
-      :dns_name_servers)
+      :dns_name_servers,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1219,6 +1254,7 @@ module Aws::DatabaseMigrationService
     #           },
     #         ],
     #         task_data: "String",
+    #         resource_identifier: "String",
     #       }
     #
     # @!attribute [rw] replication_task_identifier
@@ -1336,6 +1372,20 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #   @return [String]
     #
+    # @!attribute [rw] resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two
+    #   consecutive hyphens, and can only begin with a letter, such as
+    #   `Example-App-ARN1`. For example, this value might result in the
+    #   `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTaskMessage AWS API Documentation
     #
     class CreateReplicationTaskMessage < Struct.new(
@@ -1350,7 +1400,8 @@ module Aws::DatabaseMigrationService
       :cdc_start_position,
       :cdc_stop_position,
       :tags,
-      :task_data)
+      :task_data,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4205,11 +4256,14 @@ module Aws::DatabaseMigrationService
     #           after_connect_script: "String",
     #           bucket_folder: "String",
     #           bucket_name: "String",
+    #           case_sensitive_names: false,
+    #           comp_update: false,
     #           connection_timeout: 1,
     #           database_name: "String",
     #           date_format: "String",
     #           empty_as_null: false,
     #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           explicit_ids: false,
     #           file_transfer_upload_streams: 1,
     #           load_timeout: 1,
     #           max_file_size: 1,
@@ -5911,11 +5965,14 @@ module Aws::DatabaseMigrationService
     #         after_connect_script: "String",
     #         bucket_folder: "String",
     #         bucket_name: "String",
+    #         case_sensitive_names: false,
+    #         comp_update: false,
     #         connection_timeout: 1,
     #         database_name: "String",
     #         date_format: "String",
     #         empty_as_null: false,
     #         encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #         explicit_ids: false,
     #         file_transfer_upload_streams: 1,
     #         load_timeout: 1,
     #         max_file_size: 1,
@@ -5975,6 +6032,19 @@ module Aws::DatabaseMigrationService
     #   before uploading data to Redshift.
     #   @return [String]
     #
+    # @!attribute [rw] case_sensitive_names
+    #   If Amazon Redshift is configured to support case sensitive schema
+    #   names, set `CaseSensitiveNames` to `true`. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] comp_update
+    #   If you set `CompUpdate` to `true` Amazon Redshift applies automatic
+    #   compression if the table is empty. This applies even if the table
+    #   columns already have encodings other than `RAW`. If you set
+    #   `CompUpdate` to `false`, automatic compression is disabled and
+    #   existing column encodings aren't changed. The default is `true`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] connection_timeout
     #   A value that sets the amount of time to wait (in milliseconds)
     #   before timing out, beginning from when you initially establish a
@@ -6019,6 +6089,14 @@ module Aws::DatabaseMigrationService
     #   role with a policy that allows `"arn:aws:s3:::*"` to use the
     #   following actions: `"s3:PutObject", "s3:ListBucket"`
     #   @return [String]
+    #
+    # @!attribute [rw] explicit_ids
+    #   This setting is only valid for a full-load migration task. Set
+    #   `ExplicitIds` to `true` to have tables with `IDENTITY` columns
+    #   override their auto-generated values with explicit values loaded
+    #   from the source data files used to populate the tables. The default
+    #   is `false`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] file_transfer_upload_streams
     #   The number of threads used to upload a single file. This parameter
@@ -6133,11 +6211,14 @@ module Aws::DatabaseMigrationService
       :after_connect_script,
       :bucket_folder,
       :bucket_name,
+      :case_sensitive_names,
+      :comp_update,
       :connection_timeout,
       :database_name,
       :date_format,
       :empty_as_null,
       :encryption_mode,
+      :explicit_ids,
       :file_transfer_upload_streams,
       :load_timeout,
       :max_file_size,
@@ -7559,8 +7640,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] date_partition_delimiter
     #   Specifies a date separating delimiter to use during folder
-    #   partitioning. The default value is `SLASH` (/). Use this parameter
-    #   when `DatePartitionedEnabled` is set to `true`.
+    #   partitioning. The default value is `SLASH`. Use this parameter when
+    #   `DatePartitionedEnabled` is set to `true`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
@@ -7787,7 +7868,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] start_replication_task_type
-    #   The type of replication task.
+    #   A type of replication task.
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time

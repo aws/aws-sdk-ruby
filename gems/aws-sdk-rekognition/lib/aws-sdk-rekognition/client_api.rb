@@ -22,6 +22,8 @@ module Aws::Rekognition
     AudioMetadata = Shapes::StructureShape.new(name: 'AudioMetadata')
     AudioMetadataList = Shapes::ListShape.new(name: 'AudioMetadataList')
     Beard = Shapes::StructureShape.new(name: 'Beard')
+    BodyPart = Shapes::StringShape.new(name: 'BodyPart')
+    BodyParts = Shapes::ListShape.new(name: 'BodyParts')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
     BoundingBoxHeight = Shapes::FloatShape.new(name: 'BoundingBoxHeight')
@@ -48,6 +50,7 @@ module Aws::Rekognition
     ContentModerationDetection = Shapes::StructureShape.new(name: 'ContentModerationDetection')
     ContentModerationDetections = Shapes::ListShape.new(name: 'ContentModerationDetections')
     ContentModerationSortBy = Shapes::StringShape.new(name: 'ContentModerationSortBy')
+    CoversBodyPart = Shapes::StructureShape.new(name: 'CoversBodyPart')
     CreateCollectionRequest = Shapes::StructureShape.new(name: 'CreateCollectionRequest')
     CreateCollectionResponse = Shapes::StructureShape.new(name: 'CreateCollectionResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
@@ -86,6 +89,8 @@ module Aws::Rekognition
     DetectLabelsResponse = Shapes::StructureShape.new(name: 'DetectLabelsResponse')
     DetectModerationLabelsRequest = Shapes::StructureShape.new(name: 'DetectModerationLabelsRequest')
     DetectModerationLabelsResponse = Shapes::StructureShape.new(name: 'DetectModerationLabelsResponse')
+    DetectProtectiveEquipmentRequest = Shapes::StructureShape.new(name: 'DetectProtectiveEquipmentRequest')
+    DetectProtectiveEquipmentResponse = Shapes::StructureShape.new(name: 'DetectProtectiveEquipmentResponse')
     DetectTextFilters = Shapes::StructureShape.new(name: 'DetectTextFilters')
     DetectTextRequest = Shapes::StructureShape.new(name: 'DetectTextRequest')
     DetectTextResponse = Shapes::StructureShape.new(name: 'DetectTextResponse')
@@ -93,6 +98,8 @@ module Aws::Rekognition
     Emotion = Shapes::StructureShape.new(name: 'Emotion')
     EmotionName = Shapes::StringShape.new(name: 'EmotionName')
     Emotions = Shapes::ListShape.new(name: 'Emotions')
+    EquipmentDetection = Shapes::StructureShape.new(name: 'EquipmentDetection')
+    EquipmentDetections = Shapes::ListShape.new(name: 'EquipmentDetections')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     ExtendedPaginationToken = Shapes::StringShape.new(name: 'ExtendedPaginationToken')
     ExternalImageId = Shapes::StringShape.new(name: 'ExternalImageId')
@@ -220,6 +227,14 @@ module Aws::Rekognition
     ProjectVersionStatus = Shapes::StringShape.new(name: 'ProjectVersionStatus')
     ProjectVersionsPageSize = Shapes::IntegerShape.new(name: 'ProjectVersionsPageSize')
     ProjectsPageSize = Shapes::IntegerShape.new(name: 'ProjectsPageSize')
+    ProtectiveEquipmentBodyPart = Shapes::StructureShape.new(name: 'ProtectiveEquipmentBodyPart')
+    ProtectiveEquipmentPerson = Shapes::StructureShape.new(name: 'ProtectiveEquipmentPerson')
+    ProtectiveEquipmentPersonIds = Shapes::ListShape.new(name: 'ProtectiveEquipmentPersonIds')
+    ProtectiveEquipmentPersons = Shapes::ListShape.new(name: 'ProtectiveEquipmentPersons')
+    ProtectiveEquipmentSummarizationAttributes = Shapes::StructureShape.new(name: 'ProtectiveEquipmentSummarizationAttributes')
+    ProtectiveEquipmentSummary = Shapes::StructureShape.new(name: 'ProtectiveEquipmentSummary')
+    ProtectiveEquipmentType = Shapes::StringShape.new(name: 'ProtectiveEquipmentType')
+    ProtectiveEquipmentTypes = Shapes::ListShape.new(name: 'ProtectiveEquipmentTypes')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
     QualityFilter = Shapes::StringShape.new(name: 'QualityFilter')
     Reason = Shapes::StringShape.new(name: 'Reason')
@@ -251,6 +266,7 @@ module Aws::Rekognition
     SegmentTypeInfo = Shapes::StructureShape.new(name: 'SegmentTypeInfo')
     SegmentTypes = Shapes::ListShape.new(name: 'SegmentTypes')
     SegmentTypesInfo = Shapes::ListShape.new(name: 'SegmentTypesInfo')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShotSegment = Shapes::StructureShape.new(name: 'ShotSegment')
     Smile = Shapes::StructureShape.new(name: 'Smile')
     StartCelebrityRecognitionRequest = Shapes::StructureShape.new(name: 'StartCelebrityRecognitionRequest')
@@ -347,6 +363,8 @@ module Aws::Rekognition
     Beard.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Beard.struct_class = Types::Beard
 
+    BodyParts.member = Shapes::ShapeRef.new(shape: ProtectiveEquipmentBodyPart)
+
     BoundingBox.add_member(:width, Shapes::ShapeRef.new(shape: Float, location_name: "Width"))
     BoundingBox.add_member(:height, Shapes::ShapeRef.new(shape: Float, location_name: "Height"))
     BoundingBox.add_member(:left, Shapes::ShapeRef.new(shape: Float, location_name: "Left"))
@@ -419,6 +437,10 @@ module Aws::Rekognition
     ContentModerationDetection.struct_class = Types::ContentModerationDetection
 
     ContentModerationDetections.member = Shapes::ShapeRef.new(shape: ContentModerationDetection)
+
+    CoversBodyPart.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    CoversBodyPart.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
+    CoversBodyPart.struct_class = Types::CoversBodyPart
 
     CreateCollectionRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     CreateCollectionRequest.struct_class = Types::CreateCollectionRequest
@@ -570,6 +592,15 @@ module Aws::Rekognition
     DetectModerationLabelsResponse.add_member(:human_loop_activation_output, Shapes::ShapeRef.new(shape: HumanLoopActivationOutput, location_name: "HumanLoopActivationOutput"))
     DetectModerationLabelsResponse.struct_class = Types::DetectModerationLabelsResponse
 
+    DetectProtectiveEquipmentRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    DetectProtectiveEquipmentRequest.add_member(:summarization_attributes, Shapes::ShapeRef.new(shape: ProtectiveEquipmentSummarizationAttributes, location_name: "SummarizationAttributes"))
+    DetectProtectiveEquipmentRequest.struct_class = Types::DetectProtectiveEquipmentRequest
+
+    DetectProtectiveEquipmentResponse.add_member(:protective_equipment_model_version, Shapes::ShapeRef.new(shape: String, location_name: "ProtectiveEquipmentModelVersion"))
+    DetectProtectiveEquipmentResponse.add_member(:persons, Shapes::ShapeRef.new(shape: ProtectiveEquipmentPersons, location_name: "Persons"))
+    DetectProtectiveEquipmentResponse.add_member(:summary, Shapes::ShapeRef.new(shape: ProtectiveEquipmentSummary, location_name: "Summary"))
+    DetectProtectiveEquipmentResponse.struct_class = Types::DetectProtectiveEquipmentResponse
+
     DetectTextFilters.add_member(:word_filter, Shapes::ShapeRef.new(shape: DetectionFilter, location_name: "WordFilter"))
     DetectTextFilters.add_member(:regions_of_interest, Shapes::ShapeRef.new(shape: RegionsOfInterest, location_name: "RegionsOfInterest"))
     DetectTextFilters.struct_class = Types::DetectTextFilters
@@ -592,6 +623,14 @@ module Aws::Rekognition
     Emotion.struct_class = Types::Emotion
 
     Emotions.member = Shapes::ShapeRef.new(shape: Emotion)
+
+    EquipmentDetection.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    EquipmentDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    EquipmentDetection.add_member(:type, Shapes::ShapeRef.new(shape: ProtectiveEquipmentType, location_name: "Type"))
+    EquipmentDetection.add_member(:covers_body_part, Shapes::ShapeRef.new(shape: CoversBodyPart, location_name: "CoversBodyPart"))
+    EquipmentDetection.struct_class = Types::EquipmentDetection
+
+    EquipmentDetections.member = Shapes::ShapeRef.new(shape: EquipmentDetection)
 
     EvaluationResult.add_member(:f1_score, Shapes::ShapeRef.new(shape: Float, location_name: "F1Score"))
     EvaluationResult.add_member(:summary, Shapes::ShapeRef.new(shape: Summary, location_name: "Summary"))
@@ -981,6 +1020,32 @@ module Aws::Rekognition
 
     ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)
 
+    ProtectiveEquipmentBodyPart.add_member(:name, Shapes::ShapeRef.new(shape: BodyPart, location_name: "Name"))
+    ProtectiveEquipmentBodyPart.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    ProtectiveEquipmentBodyPart.add_member(:equipment_detections, Shapes::ShapeRef.new(shape: EquipmentDetections, location_name: "EquipmentDetections"))
+    ProtectiveEquipmentBodyPart.struct_class = Types::ProtectiveEquipmentBodyPart
+
+    ProtectiveEquipmentPerson.add_member(:body_parts, Shapes::ShapeRef.new(shape: BodyParts, location_name: "BodyParts"))
+    ProtectiveEquipmentPerson.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    ProtectiveEquipmentPerson.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    ProtectiveEquipmentPerson.add_member(:id, Shapes::ShapeRef.new(shape: UInteger, location_name: "Id"))
+    ProtectiveEquipmentPerson.struct_class = Types::ProtectiveEquipmentPerson
+
+    ProtectiveEquipmentPersonIds.member = Shapes::ShapeRef.new(shape: UInteger)
+
+    ProtectiveEquipmentPersons.member = Shapes::ShapeRef.new(shape: ProtectiveEquipmentPerson)
+
+    ProtectiveEquipmentSummarizationAttributes.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, required: true, location_name: "MinConfidence"))
+    ProtectiveEquipmentSummarizationAttributes.add_member(:required_equipment_types, Shapes::ShapeRef.new(shape: ProtectiveEquipmentTypes, required: true, location_name: "RequiredEquipmentTypes"))
+    ProtectiveEquipmentSummarizationAttributes.struct_class = Types::ProtectiveEquipmentSummarizationAttributes
+
+    ProtectiveEquipmentSummary.add_member(:persons_with_required_equipment, Shapes::ShapeRef.new(shape: ProtectiveEquipmentPersonIds, location_name: "PersonsWithRequiredEquipment"))
+    ProtectiveEquipmentSummary.add_member(:persons_without_required_equipment, Shapes::ShapeRef.new(shape: ProtectiveEquipmentPersonIds, location_name: "PersonsWithoutRequiredEquipment"))
+    ProtectiveEquipmentSummary.add_member(:persons_indeterminate, Shapes::ShapeRef.new(shape: ProtectiveEquipmentPersonIds, location_name: "PersonsIndeterminate"))
+    ProtectiveEquipmentSummary.struct_class = Types::ProtectiveEquipmentSummary
+
+    ProtectiveEquipmentTypes.member = Shapes::ShapeRef.new(shape: ProtectiveEquipmentType)
+
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
     Reasons.member = Shapes::ShapeRef.new(shape: Reason)
@@ -1055,6 +1120,8 @@ module Aws::Rekognition
     SegmentTypes.member = Shapes::ShapeRef.new(shape: SegmentType)
 
     SegmentTypesInfo.member = Shapes::ShapeRef.new(shape: SegmentTypeInfo)
+
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ShotSegment.add_member(:index, Shapes::ShapeRef.new(shape: ULong, location_name: "Index"))
     ShotSegment.add_member(:confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "Confidence"))
@@ -1574,6 +1641,22 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: HumanLoopQuotaExceededException)
       end)
 
+      api.add_operation(:detect_protective_equipment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectProtectiveEquipment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectProtectiveEquipmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectProtectiveEquipmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
+      end)
+
       api.add_operation(:detect_text, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetectText"
         o.http_method = "POST"
@@ -1787,6 +1870,7 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:list_collections, Seahorse::Model::Operation.new.tap do |o|

@@ -743,6 +743,18 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html
     #
+    # @option params [String] :resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two consecutive
+    #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
+    #   For example, this value might result in the `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -901,11 +913,14 @@ module Aws::DatabaseMigrationService
     #       after_connect_script: "String",
     #       bucket_folder: "String",
     #       bucket_name: "String",
+    #       case_sensitive_names: false,
+    #       comp_update: false,
     #       connection_timeout: 1,
     #       database_name: "String",
     #       date_format: "String",
     #       empty_as_null: false,
     #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       explicit_ids: false,
     #       file_transfer_upload_streams: 1,
     #       load_timeout: 1,
     #       max_file_size: 1,
@@ -1011,6 +1026,7 @@ module Aws::DatabaseMigrationService
     #       max_k_bytes_per_read: 1,
     #       username: "String",
     #     },
+    #     resource_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -1105,11 +1121,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
     #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoint.redshift_settings.comp_update #=> Boolean
     #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
     #   resp.endpoint.redshift_settings.database_name #=> String
     #   resp.endpoint.redshift_settings.date_format #=> String
     #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoint.redshift_settings.load_timeout #=> Integer
     #   resp.endpoint.redshift_settings.max_file_size #=> Integer
@@ -1440,6 +1459,18 @@ module Aws::DatabaseMigrationService
     #   for up to four on-premise DNS name servers. For example:
     #   `"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"`
     #
+    # @option params [String] :resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two consecutive
+    #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
+    #   For example, this value might result in the `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #
     # @return [Types::CreateReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
@@ -1547,6 +1578,7 @@ module Aws::DatabaseMigrationService
     #     kms_key_id: "String",
     #     publicly_accessible: false,
     #     dns_name_servers: "String",
+    #     resource_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -1787,6 +1819,18 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #
+    # @option params [String] :resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two consecutive
+    #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
+    #   For example, this value might result in the `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #
     # @return [Types::CreateReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
@@ -1849,6 +1893,7 @@ module Aws::DatabaseMigrationService
     #       },
     #     ],
     #     task_data: "String",
+    #     resource_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -2135,11 +2180,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
     #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoint.redshift_settings.comp_update #=> Boolean
     #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
     #   resp.endpoint.redshift_settings.database_name #=> String
     #   resp.endpoint.redshift_settings.date_format #=> String
     #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoint.redshift_settings.load_timeout #=> Integer
     #   resp.endpoint.redshift_settings.max_file_size #=> Integer
@@ -3170,11 +3218,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.after_connect_script #=> String
     #   resp.endpoints[0].redshift_settings.bucket_folder #=> String
     #   resp.endpoints[0].redshift_settings.bucket_name #=> String
+    #   resp.endpoints[0].redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoints[0].redshift_settings.comp_update #=> Boolean
     #   resp.endpoints[0].redshift_settings.connection_timeout #=> Integer
     #   resp.endpoints[0].redshift_settings.database_name #=> String
     #   resp.endpoints[0].redshift_settings.date_format #=> String
     #   resp.endpoints[0].redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoints[0].redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoints[0].redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoints[0].redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoints[0].redshift_settings.load_timeout #=> Integer
     #   resp.endpoints[0].redshift_settings.max_file_size #=> Integer
@@ -4953,11 +5004,14 @@ module Aws::DatabaseMigrationService
     #       after_connect_script: "String",
     #       bucket_folder: "String",
     #       bucket_name: "String",
+    #       case_sensitive_names: false,
+    #       comp_update: false,
     #       connection_timeout: 1,
     #       database_name: "String",
     #       date_format: "String",
     #       empty_as_null: false,
     #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       explicit_ids: false,
     #       file_transfer_upload_streams: 1,
     #       load_timeout: 1,
     #       max_file_size: 1,
@@ -5157,11 +5211,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
     #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoint.redshift_settings.comp_update #=> Boolean
     #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
     #   resp.endpoint.redshift_settings.database_name #=> String
     #   resp.endpoint.redshift_settings.date_format #=> String
     #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoint.redshift_settings.load_timeout #=> Integer
     #   resp.endpoint.redshift_settings.max_file_size #=> Integer
@@ -6013,7 +6070,7 @@ module Aws::DatabaseMigrationService
     #   The Amazon Resource Name (ARN) of the replication task to be started.
     #
     # @option params [required, String] :start_replication_task_type
-    #   The type of replication task.
+    #   A type of replication task.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
     #   Indicates the start time for a change data capture (CDC) operation.
@@ -6465,7 +6522,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

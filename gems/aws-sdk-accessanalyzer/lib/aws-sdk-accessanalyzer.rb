@@ -28,7 +28,7 @@ require_relative 'aws-sdk-accessanalyzer/customizations'
 # structure.
 #
 #     access_analyzer = Aws::AccessAnalyzer::Client.new
-#     resp = access_analyzer.create_analyzer(params)
+#     resp = access_analyzer.apply_archive_rule(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-accessanalyzer/customizations'
 # @!group service
 module Aws::AccessAnalyzer
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

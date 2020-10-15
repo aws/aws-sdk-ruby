@@ -216,6 +216,7 @@ module Aws::GroundStation
     CreateMissionProfileRequest.struct_class = Types::CreateMissionProfileRequest
 
     DataflowDetail.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
+    DataflowDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
     DataflowDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     DataflowDetail.struct_class = Types::DataflowDetail
 

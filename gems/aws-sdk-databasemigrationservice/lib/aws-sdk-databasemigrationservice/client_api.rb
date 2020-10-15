@@ -346,6 +346,7 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:sybase_settings, Shapes::ShapeRef.new(shape: SybaseSettings, location_name: "SybaseSettings"))
     CreateEndpointMessage.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
     CreateEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
+    CreateEndpointMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
     CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -377,6 +378,7 @@ module Aws::DatabaseMigrationService
     CreateReplicationInstanceMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateReplicationInstanceMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     CreateReplicationInstanceMessage.add_member(:dns_name_servers, Shapes::ShapeRef.new(shape: String, location_name: "DnsNameServers"))
+    CreateReplicationInstanceMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
     CreateReplicationInstanceMessage.struct_class = Types::CreateReplicationInstanceMessage
 
     CreateReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))
@@ -403,6 +405,7 @@ module Aws::DatabaseMigrationService
     CreateReplicationTaskMessage.add_member(:cdc_stop_position, Shapes::ShapeRef.new(shape: String, location_name: "CdcStopPosition"))
     CreateReplicationTaskMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateReplicationTaskMessage.add_member(:task_data, Shapes::ShapeRef.new(shape: String, location_name: "TaskData"))
+    CreateReplicationTaskMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
     CreateReplicationTaskMessage.struct_class = Types::CreateReplicationTaskMessage
 
     CreateReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
@@ -1041,11 +1044,14 @@ module Aws::DatabaseMigrationService
     RedshiftSettings.add_member(:after_connect_script, Shapes::ShapeRef.new(shape: String, location_name: "AfterConnectScript"))
     RedshiftSettings.add_member(:bucket_folder, Shapes::ShapeRef.new(shape: String, location_name: "BucketFolder"))
     RedshiftSettings.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
+    RedshiftSettings.add_member(:case_sensitive_names, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CaseSensitiveNames"))
+    RedshiftSettings.add_member(:comp_update, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CompUpdate"))
     RedshiftSettings.add_member(:connection_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ConnectionTimeout"))
     RedshiftSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     RedshiftSettings.add_member(:date_format, Shapes::ShapeRef.new(shape: String, location_name: "DateFormat"))
     RedshiftSettings.add_member(:empty_as_null, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EmptyAsNull"))
     RedshiftSettings.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionModeValue, location_name: "EncryptionMode"))
+    RedshiftSettings.add_member(:explicit_ids, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExplicitIds"))
     RedshiftSettings.add_member(:file_transfer_upload_streams, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "FileTransferUploadStreams"))
     RedshiftSettings.add_member(:load_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "LoadTimeout"))
     RedshiftSettings.add_member(:max_file_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxFileSize"))

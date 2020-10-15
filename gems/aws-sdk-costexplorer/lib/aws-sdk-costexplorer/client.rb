@@ -1117,7 +1117,7 @@ module Aws::CostExplorer
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   You can group Amazon Web Services costs using up to two different
-    #   groups: either dimensions, tag keys, or both.
+    #   groups: `DIMENSION`, `TAG`, `COST_CATEGORY`.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -3268,7 +3268,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

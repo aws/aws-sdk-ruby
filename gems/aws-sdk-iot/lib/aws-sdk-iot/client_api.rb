@@ -2130,6 +2130,7 @@ module Aws::IoT
     DescribeDomainConfigurationResponse.add_member(:domain_configuration_status, Shapes::ShapeRef.new(shape: DomainConfigurationStatus, location_name: "domainConfigurationStatus"))
     DescribeDomainConfigurationResponse.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "serviceType"))
     DescribeDomainConfigurationResponse.add_member(:domain_type, Shapes::ShapeRef.new(shape: DomainType, location_name: "domainType"))
+    DescribeDomainConfigurationResponse.add_member(:last_status_change_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastStatusChangeDate"))
     DescribeDomainConfigurationResponse.struct_class = Types::DescribeDomainConfigurationResponse
 
     DescribeEndpointRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location: "querystring", location_name: "endpointType"))
@@ -4962,6 +4963,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
@@ -4976,6 +4978,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
       end)
 

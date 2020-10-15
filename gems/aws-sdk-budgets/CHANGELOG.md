@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-10-15)
+------------------
+
+* Feature - This release introduces AWS Budgets Actions, allowing you to define an explicit response(or set of responses)  to take when your budget exceeds it's action threshold.
+
 1.35.0 (2020-09-30)
 ------------------
 

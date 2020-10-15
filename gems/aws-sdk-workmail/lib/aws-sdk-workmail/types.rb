@@ -295,6 +295,78 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId",
+    #         alias: "OrganizationName", # required
+    #         client_token: "IdempotencyClientToken",
+    #         domains: [
+    #           {
+    #             domain_name: "DomainName",
+    #             hosted_zone_id: "HostedZoneId",
+    #           },
+    #         ],
+    #         kms_key_arn: "KmsKeyArn",
+    #         enable_interoperability: false,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The AWS Directory Service directory ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The organization alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   The email domains to associate with the organization.
+    #   @return [Array<Types::Domain>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of a customer managed master key from
+    #   AWS KMS.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_interoperability
+    #   When `true`, allows organization interoperability between Amazon
+    #   WorkMail and Microsoft Exchange. Can only be set to `true` if an AD
+    #   Connector directory ID is included in the request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateOrganizationRequest AWS API Documentation
+    #
+    class CreateOrganizationRequest < Struct.new(
+      :directory_id,
+      :alias,
+      :client_token,
+      :domains,
+      :kms_key_arn,
+      :enable_interoperability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateOrganizationResponse AWS API Documentation
+    #
+    class CreateOrganizationResponse < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateResourceRequest
     #   data as a hash:
     #
@@ -522,7 +594,7 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier of the member (user or group)that owns the mailbox.
+    #   The identifier of the member (user or group) that owns the mailbox.
     #   @return [String]
     #
     # @!attribute [rw] grantee_id
@@ -543,6 +615,58 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissionsResponse AWS API Documentation
     #
     class DeleteMailboxPermissionsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyClientToken",
+    #         organization_id: "OrganizationId", # required
+    #         delete_directory: false, # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_directory
+    #   If true, deletes the AWS Directory Service directory associated with
+    #   the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganizationRequest AWS API Documentation
+    #
+    class DeleteOrganizationRequest < Struct.new(
+      :client_token,
+      :organization_id,
+      :delete_directory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganizationResponse AWS API Documentation
+    #
+    class DeleteOrganizationResponse < Struct.new(
+      :organization_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteResourceRequest
     #   data as a hash:
@@ -1055,6 +1179,20 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # The directory is already in use by another WorkMail organization in
+    # the same account and Region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DirectoryInUseException AWS API Documentation
+    #
+    class DirectoryInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The directory service doesn't recognize the credentials supplied by
     # WorkMail.
     #
@@ -1069,8 +1207,8 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # The directory on which you are trying to perform operations isn't
-    # available.
+    # The directory is unavailable. It might be located in another Region or
+    # deleted.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1154,6 +1292,43 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateMemberFromGroupResponse AWS API Documentation
     #
     class DisassociateMemberFromGroupResponse < Aws::EmptyStructure; end
+
+    # The domain to associate with an Amazon WorkMail organization.
+    #
+    # When you configure a domain hosted in Amazon Route 53 (Route 53), all
+    # recommended DNS records are added to the organization when you create
+    # it. For more information, see [Adding a domain][1] in the *Amazon
+    # WorkMail Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html
+    #
+    # @note When making an API call, you may pass Domain
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName",
+    #         hosted_zone_id: "HostedZoneId",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The hosted zone ID for a domain hosted in Route 53. Required when
+    #   configuring a domain hosted in Route 53.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Domain AWS API Documentation
+    #
+    class Domain < Struct.new(
+      :domain_name,
+      :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The email address that you're trying to assign is already created for
     # a different user, group, or resource.
@@ -2179,8 +2354,8 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # The organization must have a valid state (Active or Synchronizing) to
-    # perform certain operations on the organization or its members.
+    # The organization must have a valid state to perform certain operations
+    # on the organization or its members.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2203,6 +2378,10 @@ module Aws::WorkMail
     #   The alias associated with the organization.
     #   @return [String]
     #
+    # @!attribute [rw] default_mail_domain
+    #   The default email domain associated with the organization.
+    #   @return [String]
+    #
     # @!attribute [rw] error_message
     #   The error message associated with the organization. It is only
     #   present if unexpected behavior has occurred with regards to the
@@ -2219,6 +2398,7 @@ module Aws::WorkMail
     class OrganizationSummary < Struct.new(
       :organization_id,
       :alias,
+      :default_mail_domain,
       :error_message,
       :state)
       SENSITIVE = []

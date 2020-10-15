@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-10-15)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for pausing and resuming classification jobs. Also, sensitive data findings now include location data for up to 15 occurrences of sensitive data.
+
 1.12.0 (2020-09-30)
 ------------------
 

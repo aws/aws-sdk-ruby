@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2020-10-15)
+------------------
+
+* Feature - Add new variable, lastStatusChangeDate, to DescribeDomainConfiguration  API
+
 1.58.0 (2020-09-30)
 ------------------
 

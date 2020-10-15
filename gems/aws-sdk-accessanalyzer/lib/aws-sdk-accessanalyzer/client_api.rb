@@ -22,6 +22,7 @@ module Aws::AccessAnalyzer
     AnalyzerStatus = Shapes::StringShape.new(name: 'AnalyzerStatus')
     AnalyzerSummary = Shapes::StructureShape.new(name: 'AnalyzerSummary')
     AnalyzersList = Shapes::ListShape.new(name: 'AnalyzersList')
+    ApplyArchiveRuleRequest = Shapes::StructureShape.new(name: 'ApplyArchiveRuleRequest')
     ArchiveRuleSummary = Shapes::StructureShape.new(name: 'ArchiveRuleSummary')
     ArchiveRulesList = Shapes::ListShape.new(name: 'ArchiveRulesList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -135,6 +136,11 @@ module Aws::AccessAnalyzer
     AnalyzerSummary.struct_class = Types::AnalyzerSummary
 
     AnalyzersList.member = Shapes::ShapeRef.new(shape: AnalyzerSummary)
+
+    ApplyArchiveRuleRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
+    ApplyArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ApplyArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ruleName"))
+    ApplyArchiveRuleRequest.struct_class = Types::ApplyArchiveRuleRequest
 
     ArchiveRuleSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ArchiveRuleSummary.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, required: true, location_name: "filter"))
@@ -403,6 +409,19 @@ module Aws::AccessAnalyzer
         "signingName" => "access-analyzer",
         "uid" => "accessanalyzer-2019-11-01",
       }
+
+      api.add_operation(:apply_archive_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ApplyArchiveRule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/archive-rule"
+        o.input = Shapes::ShapeRef.new(shape: ApplyArchiveRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
 
       api.add_operation(:create_analyzer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAnalyzer"

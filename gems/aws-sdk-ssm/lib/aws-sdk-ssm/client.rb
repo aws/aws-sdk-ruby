@@ -1522,7 +1522,7 @@ module Aws::SSM
     #     global_filters: {
     #       patch_filters: [ # required
     #         {
-    #           key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #           key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #           values: ["PatchFilterValue"], # required
     #         },
     #       ],
@@ -1533,7 +1533,7 @@ module Aws::SSM
     #           patch_filter_group: { # required
     #             patch_filters: [ # required
     #               {
-    #                 key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                 key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                 values: ["PatchFilterValue"], # required
     #               },
     #             ],
@@ -2651,6 +2651,19 @@ module Aws::SSM
     #   resp.patches[0].kb_number #=> String
     #   resp.patches[0].msrc_number #=> String
     #   resp.patches[0].language #=> String
+    #   resp.patches[0].advisory_ids #=> Array
+    #   resp.patches[0].advisory_ids[0] #=> String
+    #   resp.patches[0].bugzilla_ids #=> Array
+    #   resp.patches[0].bugzilla_ids[0] #=> String
+    #   resp.patches[0].cve_ids #=> Array
+    #   resp.patches[0].cve_ids[0] #=> String
+    #   resp.patches[0].name #=> String
+    #   resp.patches[0].epoch #=> Integer
+    #   resp.patches[0].version #=> String
+    #   resp.patches[0].release #=> String
+    #   resp.patches[0].arch #=> String
+    #   resp.patches[0].severity #=> String
+    #   resp.patches[0].repository #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatches AWS API Documentation
@@ -2865,6 +2878,19 @@ module Aws::SSM
     #   resp.effective_patches[0].patch.kb_number #=> String
     #   resp.effective_patches[0].patch.msrc_number #=> String
     #   resp.effective_patches[0].patch.language #=> String
+    #   resp.effective_patches[0].patch.advisory_ids #=> Array
+    #   resp.effective_patches[0].patch.advisory_ids[0] #=> String
+    #   resp.effective_patches[0].patch.bugzilla_ids #=> Array
+    #   resp.effective_patches[0].patch.bugzilla_ids[0] #=> String
+    #   resp.effective_patches[0].patch.cve_ids #=> Array
+    #   resp.effective_patches[0].patch.cve_ids[0] #=> String
+    #   resp.effective_patches[0].patch.name #=> String
+    #   resp.effective_patches[0].patch.epoch #=> Integer
+    #   resp.effective_patches[0].patch.version #=> String
+    #   resp.effective_patches[0].patch.release #=> String
+    #   resp.effective_patches[0].patch.arch #=> String
+    #   resp.effective_patches[0].patch.severity #=> String
+    #   resp.effective_patches[0].patch.repository #=> String
     #   resp.effective_patches[0].patch_status.deployment_status #=> String, one of "APPROVED", "PENDING_APPROVAL", "EXPLICIT_APPROVED", "EXPLICIT_REJECTED"
     #   resp.effective_patches[0].patch_status.compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.effective_patches[0].patch_status.approval_date #=> Time
@@ -5469,10 +5495,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Query a list of all parameters used by the AWS account.
+    # Retrieves the history of all changes to a parameter.
     #
     # @option params [required, String] :name
-    #   The name of a parameter you want to query.
+    #   The name of the parameter for which you want to review history.
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted values for secure string parameters. This flag is
@@ -5716,12 +5742,12 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
     #   resp.global_filters.patch_filters #=> Array
-    #   resp.global_filters.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.global_filters.patch_filters[0].values #=> Array
     #   resp.global_filters.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
-    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
@@ -9543,7 +9569,7 @@ module Aws::SSM
     #     global_filters: {
     #       patch_filters: [ # required
     #         {
-    #           key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #           key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #           values: ["PatchFilterValue"], # required
     #         },
     #       ],
@@ -9554,7 +9580,7 @@ module Aws::SSM
     #           patch_filter_group: { # required
     #             patch_filters: [ # required
     #               {
-    #                 key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                 key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                 values: ["PatchFilterValue"], # required
     #               },
     #             ],
@@ -9588,12 +9614,12 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
     #   resp.global_filters.patch_filters #=> Array
-    #   resp.global_filters.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.global_filters.patch_filters[0].values #=> Array
     #   resp.global_filters.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
-    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
@@ -9755,7 +9781,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-10-15)
+------------------
+
+* Feature - Enhancing CreateGroup, UpdateGroup, GetGroup and GetGroups APIs to support configuring X-Ray Insights Notifications. Adding TraceLimit information into X-Ray BatchGetTraces API response.
+
 1.33.0 (2020-09-30)
 ------------------
 

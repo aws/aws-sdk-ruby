@@ -1814,6 +1814,115 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Detects Personal Protective Equipment (PPE) worn by people detected in
+    # an image. Amazon Rekognition can detect the following types of PPE.
+    #
+    # * Face cover
+    #
+    # * Hand cover
+    #
+    # * Head cover
+    #
+    # You pass the input image as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. The image must be either
+    # a PNG or JPG formatted file.
+    #
+    # `DetectProtectiveEquipment` detects PPE worn by up to 15 persons
+    # detected in an image.
+    #
+    # For each person detected in the image the API returns an array of body
+    # parts (face, head, left-hand, right-hand). For each body part, an
+    # array of detected items of PPE is returned, including an indicator of
+    # whether or not the PPE covers the body part. The API returns the
+    # confidence it has in each detection (person, PPE, body part and body
+    # part coverage). It also returns a bounding box (BoundingBox) for each
+    # detected person and each detected item of PPE.
+    #
+    # You can optionally request a summary of detected PPE items with the
+    # `SummarizationAttributes` input parameter. The summary provides the
+    # following information.
+    #
+    # * The persons detected as wearing all of the types of PPE that you
+    #   specify.
+    #
+    # * The persons detected as not wearing all of the types PPE that you
+    #   specify.
+    #
+    # * The persons detected where PPE adornment could not be determined.
+    #
+    # This is a stateless API operation. That is, the operation does not
+    # persist any data.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DetectProtectiveEquipment` action.
+    #
+    # @option params [required, Types::Image] :image
+    #   The image in which you want to detect PPE on detected persons. The
+    #   image can be passed as image bytes or you can reference an image
+    #   stored in an Amazon S3 bucket.
+    #
+    # @option params [Types::ProtectiveEquipmentSummarizationAttributes] :summarization_attributes
+    #   An array of PPE types that you want to summarize.
+    #
+    # @return [Types::DetectProtectiveEquipmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectProtectiveEquipmentResponse#protective_equipment_model_version #protective_equipment_model_version} => String
+    #   * {Types::DetectProtectiveEquipmentResponse#persons #persons} => Array&lt;Types::ProtectiveEquipmentPerson&gt;
+    #   * {Types::DetectProtectiveEquipmentResponse#summary #summary} => Types::ProtectiveEquipmentSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_protective_equipment({
+    #     image: { # required
+    #       bytes: "data",
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     summarization_attributes: {
+    #       min_confidence: 1.0, # required
+    #       required_equipment_types: ["FACE_COVER"], # required, accepts FACE_COVER, HAND_COVER, HEAD_COVER
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protective_equipment_model_version #=> String
+    #   resp.persons #=> Array
+    #   resp.persons[0].body_parts #=> Array
+    #   resp.persons[0].body_parts[0].name #=> String, one of "FACE", "HEAD", "LEFT_HAND", "RIGHT_HAND"
+    #   resp.persons[0].body_parts[0].confidence #=> Float
+    #   resp.persons[0].body_parts[0].equipment_detections #=> Array
+    #   resp.persons[0].body_parts[0].equipment_detections[0].bounding_box.width #=> Float
+    #   resp.persons[0].body_parts[0].equipment_detections[0].bounding_box.height #=> Float
+    #   resp.persons[0].body_parts[0].equipment_detections[0].bounding_box.left #=> Float
+    #   resp.persons[0].body_parts[0].equipment_detections[0].bounding_box.top #=> Float
+    #   resp.persons[0].body_parts[0].equipment_detections[0].confidence #=> Float
+    #   resp.persons[0].body_parts[0].equipment_detections[0].type #=> String, one of "FACE_COVER", "HAND_COVER", "HEAD_COVER"
+    #   resp.persons[0].body_parts[0].equipment_detections[0].covers_body_part.confidence #=> Float
+    #   resp.persons[0].body_parts[0].equipment_detections[0].covers_body_part.value #=> Boolean
+    #   resp.persons[0].bounding_box.width #=> Float
+    #   resp.persons[0].bounding_box.height #=> Float
+    #   resp.persons[0].bounding_box.left #=> Float
+    #   resp.persons[0].bounding_box.top #=> Float
+    #   resp.persons[0].confidence #=> Float
+    #   resp.persons[0].id #=> Integer
+    #   resp.summary.persons_with_required_equipment #=> Array
+    #   resp.summary.persons_with_required_equipment[0] #=> Integer
+    #   resp.summary.persons_without_required_equipment #=> Array
+    #   resp.summary.persons_without_required_equipment[0] #=> Integer
+    #   resp.summary.persons_indeterminate #=> Array
+    #   resp.summary.persons_indeterminate[0] #=> Integer
+    #
+    # @overload detect_protective_equipment(params = {})
+    # @param [Hash] params ({})
+    def detect_protective_equipment(params = {}, options = {})
+      req = build_request(:detect_protective_equipment, params)
+      req.send_request(options)
+    end
+
     # Detects text in the input image and converts it into machine-readable
     # text.
     #
@@ -4890,7 +4999,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

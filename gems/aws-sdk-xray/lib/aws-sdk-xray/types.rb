@@ -35,7 +35,7 @@ module Aws::XRay
     end
 
     # Value of a segment annotation. Has one of three value types: Number,
-    # Boolean or String.
+    # Boolean, or String.
     #
     # @!attribute [rw] number_value
     #   Value for a Number annotation.
@@ -59,10 +59,10 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # A list of availability zones corresponding to the segments in a trace.
+    # A list of Availability Zones corresponding to the segments in a trace.
     #
     # @!attribute [rw] name
-    #   The name of a corresponding availability zone.
+    #   The name of a corresponding Availability Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AvailabilityZoneDetail AWS API Documentation
@@ -171,6 +171,7 @@ module Aws::XRay
     #         filter_expression: "FilterExpression",
     #         insights_configuration: {
     #           insights_enabled: false,
+    #           notifications_enabled: false,
     #         },
     #         tags: [
     #           {
@@ -190,9 +191,14 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for
-    #   the new group or false to disable insights for the new group.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the new group or false to disable insights for the new group.
+    #
+    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #     insights notifications for the new group. Notifications may only
+    #     be enabled on a group with InsightsEnabled set to true.
     #   @return [Types::InsightsConfiguration]
     #
     # @!attribute [rw] tags
@@ -234,9 +240,9 @@ module Aws::XRay
 
     # @!attribute [rw] group
     #   The group that was created. Contains the name of the group that was
-    #   created, the ARN of the group that was generated based on the group
-    #   name, the filter expression, and the insight configuration that was
-    #   assigned to the group.
+    #   created, the Amazon Resource Name (ARN) of the group that was
+    #   generated based on the group name, the filter expression, and the
+    #   insight configuration that was assigned to the group.
     #   @return [Types::Group]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroupResult AWS API Documentation
@@ -767,8 +773,8 @@ module Aws::XRay
 
     # @!attribute [rw] group
     #   The group that was requested. Contains the name of the group, the
-    #   ARN of the group, and the filter expression that assigned to the
-    #   group.
+    #   ARN of the group, the filter expression, and the insight
+    #   configuration assigned to the group.
     #   @return [Types::Group]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupResult AWS API Documentation
@@ -963,11 +969,12 @@ module Aws::XRay
     #   @return [Time]
     #
     # @!attribute [rw] group_name
-    #   The name of a group to generate a graph based on.
+    #   The name of a group based on which you want to generate a graph.
     #   @return [String]
     #
     # @!attribute [rw] group_arn
-    #   The ARN of a group to generate a graph based on.
+    #   The Amazon Resource Name (ARN) of a group based on which you want to
+    #   generate a graph.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1048,7 +1055,8 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] group_arn
-    #   The ARN of the group for which to pull statistics from.
+    #   The Amazon Resource Name (ARN) of the group for which to pull
+    #   statistics from.
     #   @return [String]
     #
     # @!attribute [rw] entity_selector_expression
@@ -1085,7 +1093,7 @@ module Aws::XRay
     #
     # @!attribute [rw] contains_old_group_versions
     #   A flag indicating whether or not a group's filter expression has
-    #   been consistent, or if a returned aggregation may show statistics
+    #   been consistent, or if a returned aggregation might show statistics
     #   from an older version of the group's filter expression.
     #   @return [Boolean]
     #
@@ -1180,7 +1188,7 @@ module Aws::XRay
     #   @return [Boolean]
     #
     # @!attribute [rw] sampling_strategy
-    #   A paramater to indicate whether to enable sampling on trace
+    #   A parameter to indicate whether to enable sampling on trace
     #   summaries. Input parameters are Name and Value.
     #   @return [Types::SamplingStrategy]
     #
@@ -1225,8 +1233,8 @@ module Aws::XRay
     # @!attribute [rw] next_token
     #   If the requested time frame contained more than one page of results,
     #   you can use this token to retrieve the next page. The first page
-    #   contains the most most recent results, closest to the end of the
-    #   time frame.
+    #   contains the most recent results, closest to the end of the time
+    #   frame.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummariesResult AWS API Documentation
@@ -1247,7 +1255,8 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] group_arn
-    #   The ARN of the group generated based on the GroupName.
+    #   The Amazon Resource Name (ARN) of the group generated based on the
+    #   GroupName.
     #   @return [String]
     #
     # @!attribute [rw] filter_expression
@@ -1255,9 +1264,13 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for
-    #   the group or false to disable insights for the group.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the group or false to disable insights for the group.
+    #
+    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #     insights notifications through Amazon EventBridge for the group.
     #   @return [Types::InsightsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Group AWS API Documentation
@@ -1286,9 +1299,14 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for
-    #   the groups or false to disable insights for the groups.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the group or false to disable insights for the group.
+    #
+    #   * The NotificationsEnabled boolean can be set to true to enable
+    #     insights notifications. Notifications can only be enabled on a
+    #     group with InsightsEnabled set to true.
     #   @return [Types::InsightsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GroupSummary AWS API Documentation
@@ -1364,6 +1382,7 @@ module Aws::XRay
     #
     #       {
     #         insights_enabled: false,
+    #         notifications_enabled: false,
     #       }
     #
     # @!attribute [rw] insights_enabled
@@ -1371,10 +1390,17 @@ module Aws::XRay
     #   disable insights.
     #   @return [Boolean]
     #
+    # @!attribute [rw] notifications_enabled
+    #   Set the NotificationsEnabled value to true to enable insights
+    #   notifications. Notifications can only be enabled on a group with
+    #   InsightsEnabled set to true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InsightsConfiguration AWS API Documentation
     #
     class InsightsConfiguration < Struct.new(
-      :insights_enabled)
+      :insights_enabled,
+      :notifications_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1604,8 +1630,8 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # The resource was not found. Verify that the name or ARN of the
-    # resource is correct.
+    # The resource was not found. Verify that the name or Amazon Resource
+    # Name (ARN) of the resource is correct.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1650,7 +1676,7 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] coverage
-    #   The types and messages of the exceptions.
+    #   The type and messages of the exceptions.
     #   @return [Float]
     #
     # @!attribute [rw] remote
@@ -1966,7 +1992,7 @@ module Aws::XRay
     end
 
     # Aggregated request sampling data for a sampling rule across all
-    # services for a 10 second window.
+    # services for a 10-second window.
     #
     # @!attribute [rw] rule_name
     #   The name of the sampling rule.
@@ -2095,7 +2121,8 @@ module Aws::XRay
     #   @return [Float]
     #
     # @!attribute [rw] reservoir_quota
-    #   The number of requests per second that X-Ray allocated this service.
+    #   The number of requests per second that X-Ray allocated for this
+    #   service.
     #   @return [Integer]
     #
     # @!attribute [rw] reservoir_quota_ttl
@@ -2149,8 +2176,8 @@ module Aws::XRay
     end
 
     # Information about an application that processed requests, users that
-    # made requests, or downstream services, resources and applications that
-    # an application used.
+    # made requests, or downstream services, resources, and applications
+    # that an application used.
     #
     # @!attribute [rw] reference_id
     #   Identifier for the service. Unique within the service map.
@@ -2177,7 +2204,7 @@ module Aws::XRay
     #   The type of service.
     #
     #   * AWS Resource - The type of an AWS resource. For example,
-    #     `AWS::EC2::Instance` for a application running on Amazon EC2 or
+    #     `AWS::EC2::Instance` for an application running on Amazon EC2 or
     #     `AWS::DynamoDB::Table` for an Amazon DynamoDB table that the
     #     application used.
     #
@@ -2526,6 +2553,16 @@ module Aws::XRay
     #   segment and the end time of the last segment that completed.
     #   @return [Float]
     #
+    # @!attribute [rw] limit_exceeded
+    #   LimitExceeded is set to true when the trace has exceeded one of the
+    #   defined quotas. For more information about quotas, see [AWS X-Ray
+    #   endpoints and quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/xray.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] segments
     #   Segment documents for the segments and subsegments that comprise the
     #   trace.
@@ -2536,6 +2573,7 @@ module Aws::XRay
     class Trace < Struct.new(
       :id,
       :duration,
+      :limit_exceeded,
       :segments)
       SENSITIVE = []
       include Aws::Structure
@@ -2604,7 +2642,7 @@ module Aws::XRay
     #   @return [Array<Types::InstanceIdDetail>]
     #
     # @!attribute [rw] availability_zones
-    #   A list of availability zones for any zone corresponding to the trace
+    #   A list of Availability Zones for any zone corresponding to the trace
     #   segments.
     #   @return [Array<Types::AvailabilityZoneDetail>]
     #
@@ -2613,8 +2651,8 @@ module Aws::XRay
     #   @return [Types::ServiceId]
     #
     # @!attribute [rw] fault_root_causes
-    #   A collection of FaultRootCause structures corresponding to the the
-    #   trace segments.
+    #   A collection of FaultRootCause structures corresponding to the trace
+    #   segments.
     #   @return [Array<Types::FaultRootCause>]
     #
     # @!attribute [rw] error_root_causes
@@ -2769,6 +2807,7 @@ module Aws::XRay
     #         filter_expression: "FilterExpression",
     #         insights_configuration: {
     #           insights_enabled: false,
+    #           notifications_enabled: false,
     #         },
     #       }
     #
@@ -2786,9 +2825,14 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for
-    #   the group or false to disable insights for the group.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the group or false to disable insights for the group.
+    #
+    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #     insights notifications for the group. Notifications can only be
+    #     enabled on a group with InsightsEnabled set to true.
     #   @return [Types::InsightsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroupRequest AWS API Documentation

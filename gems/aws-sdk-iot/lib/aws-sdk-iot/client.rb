@@ -2101,12 +2101,12 @@ module Aws::IoT
     #   (thing) violates a behavior.
     #
     # @option params [Array<String>] :additional_metrics_to_retain
+    #   *Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data is
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #
     # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
     #   A list of metrics whose data is retained (stored). By default, data is
@@ -4074,6 +4074,7 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#domain_configuration_status #domain_configuration_status} => String
     #   * {Types::DescribeDomainConfigurationResponse#service_type #service_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
+    #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -4095,6 +4096,7 @@ module Aws::IoT
     #   resp.domain_configuration_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.service_type #=> String, one of "DATA", "CREDENTIAL_PROVIDER", "JOBS"
     #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
+    #   resp.last_status_change_date #=> Time
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -10039,12 +10041,12 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #
     # @option params [Array<String>] :additional_metrics_to_retain
+    #   *Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data is
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #
     # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
     #   A list of metrics whose data is retained (stored). By default, data is
@@ -10483,7 +10485,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

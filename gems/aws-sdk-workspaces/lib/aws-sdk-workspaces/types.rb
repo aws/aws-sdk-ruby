@@ -529,9 +529,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags. If
-    #   you want to add new tags to a set of existing tags, you must submit
-    #   all of the existing tags along with the new ones.
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
@@ -1592,7 +1590,12 @@ module Aws::WorkSpaces
     end
 
     # Describes the AWS accounts that have been granted permission to use a
-    # shared image.
+    # shared image. For more information about sharing images, see [ Share
+    # or Unshare a Custom WorkSpaces Image][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html
     #
     # @!attribute [rw] shared_account_id
     #   The identifier of the AWS account that an image has been shared
@@ -2879,6 +2882,9 @@ module Aws::WorkSpaces
     # @!attribute [rw] shared_account_id
     #   The identifier of the AWS account to share or unshare the image
     #   with.
+    #
+    #   Before sharing the image, confirm that you are sharing to the
+    #   correct AWS account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermissionRequest AWS API Documentation
@@ -2930,6 +2936,19 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] state
     #   The operational state of the WorkSpace.
+    #
+    #   <note markdown="1"> After a WorkSpace is terminated, the `TERMINATED` state is returned
+    #   only briefly before the WorkSpace directory metadata is cleaned up,
+    #   so this state is rarely returned. To confirm that a WorkSpace is
+    #   terminated, check for the WorkSpace ID by using [
+    #   DescribeWorkSpaces][1]. If the WorkSpace ID isn't returned, then
+    #   the WorkSpace has been successfully terminated.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -3325,6 +3344,16 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] state
     #   The state of the directory's registration with Amazon WorkSpaces.
+    #   After a directory is deregistered, the `DEREGISTERED` state is
+    #   returned very briefly before the directory metadata is cleaned up,
+    #   so this state is rarely returned. To confirm that a directory is
+    #   deregistered, check for the directory ID by using [
+    #   DescribeWorkspaceDirectories][1]. If the directory ID isn't
+    #   returned, then the directory has been successfully deregistered.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceDirectories.html
     #   @return [String]
     #
     # @!attribute [rw] workspace_creation_properties

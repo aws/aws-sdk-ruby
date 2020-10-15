@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-10-15)
+------------------
+
+* Feature - This release adds support for the ApplyArchiveRule api in IAM Access Analyzer.  The ApplyArchiveRule api allows users to apply an archive rule retroactively to existing findings in an analyzer.
+
 1.12.0 (2020-09-30)
 ------------------
 

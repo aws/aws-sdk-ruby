@@ -1281,6 +1281,9 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshot.tag_list #=> Array
+    #   resp.db_cluster_snapshot.tag_list[0].key #=> String
+    #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -1387,7 +1390,7 @@ module Aws::RDS
     end
 
     # Copies the specified DB snapshot. The source DB snapshot must be in
-    # the `available` or `storage-optimization` state.
+    # the `available` state.
     #
     # You can copy a snapshot from one AWS Region to another. In that case,
     # the AWS Region where you call the `CopyDBSnapshot` action is the
@@ -1624,6 +1627,9 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
     #   resp.db_snapshot.dbi_resource_id #=> String
+    #   resp.db_snapshot.tag_list #=> Array
+    #   resp.db_snapshot.tag_list[0].key #=> String
+    #   resp.db_snapshot.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2145,14 +2151,23 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   The DB engine mode of the DB cluster, either `provisioned`
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
-    #   <note markdown="1"> `global` engine mode only applies for global database clusters created
-    #   with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
-    #   the clusters in a global database use `provisioned` engine mode.
+    #   The `parallelquery` engine mode isn't required for Aurora MySQL
+    #   version 1.23 and higher 1.x versions, and version 2.09 and higher 2.x
+    #   versions.
     #
-    #    </note>
+    #   The `global` engine mode isn't required for Aurora MySQL version 1.22
+    #   and higher 1.x versions, and `global` engine mode isn't required for
+    #   any 2.x versions.
+    #
+    #   The `multimaster` engine mode only applies for DB clusters created
+    #   with Aurora MySQL version 5.6.10a.
+    #
+    #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
+    #   both the `parallelquery` and the `multimaster` engine modes currently
+    #   aren't supported.
     #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
@@ -2162,7 +2177,7 @@ module Aws::RDS
     #
     #   * [ Limitations of Parallel Query][2]
     #
-    #   * [ Requirements for Aurora Global Databases][3]
+    #   * [ Limitations of Aurora Global Databases][3]
     #
     #   * [ Limitations of Multi-Master Clusters][4]
     #
@@ -2393,6 +2408,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -2710,6 +2728,9 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshot.tag_list #=> Array
+    #   resp.db_cluster_snapshot.tag_list[0].key #=> String
+    #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -3807,6 +3828,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4442,6 +4466,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -4772,8 +4799,8 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates a DBSnapshot. The source DBInstance must be in "available"
-    # state.
+    # Creates a snapshot of a DB instance. The source DB instance must be in
+    # the `available` or `storage-optimization`state.
     #
     # @option params [required, String] :db_snapshot_identifier
     #   The identifier for the DB snapshot.
@@ -4873,6 +4900,9 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
     #   resp.db_snapshot.dbi_resource_id #=> String
+    #   resp.db_snapshot.tag_list #=> Array
+    #   resp.db_snapshot.tag_list[0].key #=> String
+    #   resp.db_snapshot.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -5535,6 +5565,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -5726,6 +5759,9 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshot.tag_list #=> Array
+    #   resp.db_cluster_snapshot.tag_list[0].key #=> String
+    #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -5967,6 +6003,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -6238,6 +6277,9 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
     #   resp.db_snapshot.dbi_resource_id #=> String
+    #   resp.db_snapshot.tag_list #=> Array
+    #   resp.db_snapshot.tag_list[0].key #=> String
+    #   resp.db_snapshot.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -7386,6 +7428,9 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshots[0].tag_list #=> Array
+    #   resp.db_cluster_snapshots[0].tag_list[0].key #=> String
+    #   resp.db_cluster_snapshots[0].tag_list[0].value #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -7573,6 +7618,9 @@ module Aws::RDS
     #   resp.db_clusters[0].domain_memberships[0].status #=> String
     #   resp.db_clusters[0].domain_memberships[0].fqdn #=> String
     #   resp.db_clusters[0].domain_memberships[0].iam_role_name #=> String
+    #   resp.db_clusters[0].tag_list #=> Array
+    #   resp.db_clusters[0].tag_list[0].key #=> String
+    #   resp.db_clusters[0].tag_list[0].value #=> String
     #   resp.db_clusters[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_clusters[0].global_write_forwarding_requested #=> Boolean
     #
@@ -8069,6 +8117,9 @@ module Aws::RDS
     #   resp.db_instances[0].listener_endpoint.port #=> Integer
     #   resp.db_instances[0].listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instances[0].max_allocated_storage #=> Integer
+    #   resp.db_instances[0].tag_list #=> Array
+    #   resp.db_instances[0].tag_list[0].key #=> String
+    #   resp.db_instances[0].tag_list[0].value #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -8935,6 +8986,9 @@ module Aws::RDS
     #   resp.db_snapshots[0].processor_features[0].name #=> String
     #   resp.db_snapshots[0].processor_features[0].value #=> String
     #   resp.db_snapshots[0].dbi_resource_id #=> String
+    #   resp.db_snapshots[0].tag_list #=> Array
+    #   resp.db_snapshots[0].tag_list[0].key #=> String
+    #   resp.db_snapshots[0].tag_list[0].value #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10947,6 +11001,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -11725,6 +11782,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -12871,6 +12931,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -13245,6 +13308,9 @@ module Aws::RDS
     #   resp.db_snapshot.processor_features[0].name #=> String
     #   resp.db_snapshot.processor_features[0].value #=> String
     #   resp.db_snapshot.dbi_resource_id #=> String
+    #   resp.db_snapshot.tag_list #=> Array
+    #   resp.db_snapshot.tag_list[0].key #=> String
+    #   resp.db_snapshot.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -13956,6 +14022,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -14071,6 +14140,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -14350,6 +14422,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -15296,6 +15371,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -15499,6 +15577,12 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
+    #   For more information, see [ CreateDBCluster][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
+    #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -15682,6 +15766,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -16052,6 +16139,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -16627,6 +16717,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -17192,6 +17285,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -17777,6 +17873,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -18044,6 +18143,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -18203,6 +18305,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -18493,6 +18598,9 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.tag_list #=> Array
+    #   resp.db_cluster.tag_list[0].key #=> String
+    #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
@@ -18659,6 +18767,9 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -18682,7 +18793,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

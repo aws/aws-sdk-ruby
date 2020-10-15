@@ -499,6 +499,90 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Creates a new Amazon WorkMail organization. Optionally, you can choose
+    # to associate an existing AWS Directory Service directory with your
+    # organization. If an AWS Directory Service directory ID is specified,
+    # the organization alias must match the directory alias. If you choose
+    # not to associate an existing directory with your organization, then we
+    # create a new Amazon WorkMail directory for you. For more information,
+    # see [Adding an organization][1] in the *Amazon WorkMail Administrator
+    # Guide*.
+    #
+    # You can associate multiple email domains with an organization, then
+    # set your default email domain from the Amazon WorkMail console. You
+    # can also associate a domain that is managed in an Amazon Route 53
+    # public hosted zone. For more information, see [Adding a domain][2] and
+    # [Choosing the default domain][3] in the *Amazon WorkMail Administrator
+    # Guide*.
+    #
+    # Optionally, you can use a customer managed master key from AWS Key
+    # Management Service (AWS KMS) to encrypt email for your organization.
+    # If you don't associate an AWS KMS key, Amazon WorkMail creates a
+    # default AWS managed master key for you.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html
+    # [2]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html
+    # [3]: https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html
+    #
+    # @option params [String] :directory_id
+    #   The AWS Directory Service directory ID.
+    #
+    # @option params [required, String] :alias
+    #   The organization alias.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Domain>] :domains
+    #   The email domains to associate with the organization.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of a customer managed master key from
+    #   AWS KMS.
+    #
+    # @option params [Boolean] :enable_interoperability
+    #   When `true`, allows organization interoperability between Amazon
+    #   WorkMail and Microsoft Exchange. Can only be set to `true` if an AD
+    #   Connector directory ID is included in the request.
+    #
+    # @return [Types::CreateOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOrganizationResponse#organization_id #organization_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_organization({
+    #     directory_id: "DirectoryId",
+    #     alias: "OrganizationName", # required
+    #     client_token: "IdempotencyClientToken",
+    #     domains: [
+    #       {
+    #         domain_name: "DomainName",
+    #         hosted_zone_id: "HostedZoneId",
+    #       },
+    #     ],
+    #     kms_key_arn: "KmsKeyArn",
+    #     enable_interoperability: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateOrganization AWS API Documentation
+    #
+    # @overload create_organization(params = {})
+    # @param [Hash] params ({})
+    def create_organization(params = {}, options = {})
+      req = build_request(:create_organization, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon WorkMail resource.
     #
     # @option params [required, String] :organization_id
@@ -673,7 +757,7 @@ module Aws::WorkMail
     #   group) exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the member (user or group)that owns the mailbox.
+    #   The identifier of the member (user or group) that owns the mailbox.
     #
     # @option params [required, String] :grantee_id
     #   The identifier of the member (user or group) for which to delete
@@ -695,6 +779,56 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def delete_mailbox_permissions(params = {}, options = {})
       req = build_request(:delete_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon WorkMail organization and all underlying AWS
+    # resources managed by Amazon WorkMail as part of the organization. You
+    # can choose whether to delete the associated directory. For more
+    # information, see [Removing an organization][1] in the *Amazon WorkMail
+    # Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html
+    #
+    # @option params [String] :client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @option params [required, Boolean] :delete_directory
+    #   If true, deletes the AWS Directory Service directory associated with
+    #   the organization.
+    #
+    # @return [Types::DeleteOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteOrganizationResponse#organization_id #organization_id} => String
+    #   * {Types::DeleteOrganizationResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_organization({
+    #     client_token: "IdempotencyClientToken",
+    #     organization_id: "OrganizationId", # required
+    #     delete_directory: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #   resp.state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganization AWS API Documentation
+    #
+    # @overload delete_organization(params = {})
+    # @param [Hash] params ({})
+    def delete_organization(params = {}, options = {})
+      req = build_request(:delete_organization, params)
       req.send_request(options)
     end
 
@@ -1553,6 +1687,7 @@ module Aws::WorkMail
     #   resp.organization_summaries #=> Array
     #   resp.organization_summaries[0].organization_id #=> String
     #   resp.organization_summaries[0].alias #=> String
+    #   resp.organization_summaries[0].default_mail_domain #=> String
     #   resp.organization_summaries[0].error_message #=> String
     #   resp.organization_summaries[0].state #=> String
     #   resp.next_token #=> String
@@ -2219,7 +2354,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

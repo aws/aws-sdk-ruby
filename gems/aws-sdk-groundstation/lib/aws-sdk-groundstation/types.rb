@@ -640,6 +640,10 @@ module Aws::GroundStation
     #   Dataflow details for the destination side.
     #   @return [Types::Destination]
     #
+    # @!attribute [rw] error_message
+    #   Error message for a dataflow.
+    #   @return [String]
+    #
     # @!attribute [rw] source
     #   Dataflow details for the source side.
     #   @return [Types::Source]
@@ -648,6 +652,7 @@ module Aws::GroundStation
     #
     class DataflowDetail < Struct.new(
       :destination,
+      :error_message,
       :source)
       SENSITIVE = []
       include Aws::Structure
@@ -1548,7 +1553,7 @@ module Aws::GroundStation
     #         next_token: "String",
     #         satellite_arn: "satelliteArn",
     #         start_time: Time.now, # required
-    #         status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
+    #         status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, AWS_FAILED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
     #       }
     #
     # @!attribute [rw] end_time

@@ -40,6 +40,8 @@ module Aws::Macie2
     BucketPolicy = Shapes::StructureShape.new(name: 'BucketPolicy')
     BucketPublicAccess = Shapes::StructureShape.new(name: 'BucketPublicAccess')
     BucketSortCriteria = Shapes::StructureShape.new(name: 'BucketSortCriteria')
+    Cell = Shapes::StructureShape.new(name: 'Cell')
+    Cells = Shapes::ListShape.new(name: 'Cells')
     ClassificationDetails = Shapes::StructureShape.new(name: 'ClassificationDetails')
     ClassificationExportConfiguration = Shapes::StructureShape.new(name: 'ClassificationExportConfiguration')
     ClassificationResult = Shapes::StructureShape.new(name: 'ClassificationResult')
@@ -184,10 +186,17 @@ module Aws::Macie2
     MonthlySchedule = Shapes::StructureShape.new(name: 'MonthlySchedule')
     ObjectCountByEncryptionType = Shapes::StructureShape.new(name: 'ObjectCountByEncryptionType')
     ObjectLevelStatistics = Shapes::StructureShape.new(name: 'ObjectLevelStatistics')
+    Occurrences = Shapes::StructureShape.new(name: 'Occurrences')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
+    Page = Shapes::StructureShape.new(name: 'Page')
+    Pages = Shapes::ListShape.new(name: 'Pages')
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
     PutClassificationExportConfigurationRequest = Shapes::StructureShape.new(name: 'PutClassificationExportConfigurationRequest')
     PutClassificationExportConfigurationResponse = Shapes::StructureShape.new(name: 'PutClassificationExportConfigurationResponse')
+    Range = Shapes::StructureShape.new(name: 'Range')
+    Ranges = Shapes::ListShape.new(name: 'Ranges')
+    Record = Shapes::StructureShape.new(name: 'Record')
+    Records = Shapes::ListShape.new(name: 'Records')
     RelationshipStatus = Shapes::StringShape.new(name: 'RelationshipStatus')
     ReplicationDetails = Shapes::StructureShape.new(name: 'ReplicationDetails')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -251,6 +260,7 @@ module Aws::Macie2
     UserIdentity = Shapes::StructureShape.new(name: 'UserIdentity')
     UserIdentityRoot = Shapes::StructureShape.new(name: 'UserIdentityRoot')
     UserIdentityType = Shapes::StringShape.new(name: 'UserIdentityType')
+    UserPausedDetails = Shapes::StructureShape.new(name: 'UserPausedDetails')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WeeklySchedule = Shapes::StructureShape.new(name: 'WeeklySchedule')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
@@ -351,6 +361,7 @@ module Aws::Macie2
     BucketCountByEffectivePermission.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __long, location_name: "publiclyAccessible"))
     BucketCountByEffectivePermission.add_member(:publicly_readable, Shapes::ShapeRef.new(shape: __long, location_name: "publiclyReadable"))
     BucketCountByEffectivePermission.add_member(:publicly_writable, Shapes::ShapeRef.new(shape: __long, location_name: "publiclyWritable"))
+    BucketCountByEffectivePermission.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     BucketCountByEffectivePermission.struct_class = Types::BucketCountByEffectivePermission
 
     BucketCountByEncryptionType.add_member(:kms_managed, Shapes::ShapeRef.new(shape: __long, location_name: "kmsManaged"))
@@ -361,6 +372,7 @@ module Aws::Macie2
     BucketCountBySharedAccessType.add_member(:external, Shapes::ShapeRef.new(shape: __long, location_name: "external"))
     BucketCountBySharedAccessType.add_member(:internal, Shapes::ShapeRef.new(shape: __long, location_name: "internal"))
     BucketCountBySharedAccessType.add_member(:not_shared, Shapes::ShapeRef.new(shape: __long, location_name: "notShared"))
+    BucketCountBySharedAccessType.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     BucketCountBySharedAccessType.struct_class = Types::BucketCountBySharedAccessType
 
     BucketCriteria.key = Shapes::ShapeRef.new(shape: __string)
@@ -417,6 +429,14 @@ module Aws::Macie2
     BucketSortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     BucketSortCriteria.struct_class = Types::BucketSortCriteria
 
+    Cell.add_member(:cell_reference, Shapes::ShapeRef.new(shape: __string, location_name: "cellReference"))
+    Cell.add_member(:column, Shapes::ShapeRef.new(shape: __long, location_name: "column"))
+    Cell.add_member(:column_name, Shapes::ShapeRef.new(shape: __string, location_name: "columnName"))
+    Cell.add_member(:row, Shapes::ShapeRef.new(shape: __long, location_name: "row"))
+    Cell.struct_class = Types::Cell
+
+    Cells.member = Shapes::ShapeRef.new(shape: Cell)
+
     ClassificationDetails.add_member(:detailed_results_location, Shapes::ShapeRef.new(shape: __string, location_name: "detailedResultsLocation"))
     ClassificationDetails.add_member(:job_arn, Shapes::ShapeRef.new(shape: __string, location_name: "jobArn"))
     ClassificationDetails.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
@@ -426,6 +446,7 @@ module Aws::Macie2
     ClassificationExportConfiguration.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
     ClassificationExportConfiguration.struct_class = Types::ClassificationExportConfiguration
 
+    ClassificationResult.add_member(:additional_occurrences, Shapes::ShapeRef.new(shape: __boolean, location_name: "additionalOccurrences"))
     ClassificationResult.add_member(:custom_data_identifiers, Shapes::ShapeRef.new(shape: CustomDataIdentifiers, location_name: "customDataIdentifiers"))
     ClassificationResult.add_member(:mime_type, Shapes::ShapeRef.new(shape: __string, location_name: "mimeType"))
     ClassificationResult.add_member(:sensitive_data, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "sensitiveData"))
@@ -527,6 +548,7 @@ module Aws::Macie2
     CustomDetection.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     CustomDetection.add_member(:count, Shapes::ShapeRef.new(shape: __long, location_name: "count"))
     CustomDetection.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CustomDetection.add_member(:occurrences, Shapes::ShapeRef.new(shape: Occurrences, location_name: "occurrences"))
     CustomDetection.struct_class = Types::CustomDetection
 
     CustomDetections.member = Shapes::ShapeRef.new(shape: CustomDetection)
@@ -540,6 +562,7 @@ module Aws::Macie2
     DeclineInvitationsResponse.struct_class = Types::DeclineInvitationsResponse
 
     DefaultDetection.add_member(:count, Shapes::ShapeRef.new(shape: __long, location_name: "count"))
+    DefaultDetection.add_member(:occurrences, Shapes::ShapeRef.new(shape: Occurrences, location_name: "occurrences"))
     DefaultDetection.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "type"))
     DefaultDetection.struct_class = Types::DefaultDetection
 
@@ -595,6 +618,7 @@ module Aws::Macie2
     DescribeClassificationJobResponse.add_member(:schedule_frequency, Shapes::ShapeRef.new(shape: JobScheduleFrequency, location_name: "scheduleFrequency"))
     DescribeClassificationJobResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: Statistics, location_name: "statistics"))
     DescribeClassificationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeClassificationJobResponse.add_member(:user_paused_details, Shapes::ShapeRef.new(shape: UserPausedDetails, location_name: "userPausedDetails"))
     DescribeClassificationJobResponse.struct_class = Types::DescribeClassificationJobResponse
 
     DescribeOrganizationConfigurationRequest.struct_class = Types::DescribeOrganizationConfigurationRequest
@@ -864,6 +888,7 @@ module Aws::Macie2
     JobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     JobSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     JobSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    JobSummary.add_member(:user_paused_details, Shapes::ShapeRef.new(shape: UserPausedDetails, location_name: "userPausedDetails"))
     JobSummary.struct_class = Types::JobSummary
 
     KeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: __string, location_name: "key"))
@@ -976,6 +1001,20 @@ module Aws::Macie2
     ObjectLevelStatistics.add_member(:total, Shapes::ShapeRef.new(shape: __long, location_name: "total"))
     ObjectLevelStatistics.struct_class = Types::ObjectLevelStatistics
 
+    Occurrences.add_member(:cells, Shapes::ShapeRef.new(shape: Cells, location_name: "cells"))
+    Occurrences.add_member(:line_ranges, Shapes::ShapeRef.new(shape: Ranges, location_name: "lineRanges"))
+    Occurrences.add_member(:offset_ranges, Shapes::ShapeRef.new(shape: Ranges, location_name: "offsetRanges"))
+    Occurrences.add_member(:pages, Shapes::ShapeRef.new(shape: Pages, location_name: "pages"))
+    Occurrences.add_member(:records, Shapes::ShapeRef.new(shape: Records, location_name: "records"))
+    Occurrences.struct_class = Types::Occurrences
+
+    Page.add_member(:line_range, Shapes::ShapeRef.new(shape: Range, location_name: "lineRange"))
+    Page.add_member(:offset_range, Shapes::ShapeRef.new(shape: Range, location_name: "offsetRange"))
+    Page.add_member(:page_number, Shapes::ShapeRef.new(shape: __long, location_name: "pageNumber"))
+    Page.struct_class = Types::Page
+
+    Pages.member = Shapes::ShapeRef.new(shape: Page)
+
     PolicyDetails.add_member(:action, Shapes::ShapeRef.new(shape: FindingAction, location_name: "action"))
     PolicyDetails.add_member(:actor, Shapes::ShapeRef.new(shape: FindingActor, location_name: "actor"))
     PolicyDetails.struct_class = Types::PolicyDetails
@@ -985,6 +1024,18 @@ module Aws::Macie2
 
     PutClassificationExportConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ClassificationExportConfiguration, location_name: "configuration"))
     PutClassificationExportConfigurationResponse.struct_class = Types::PutClassificationExportConfigurationResponse
+
+    Range.add_member(:end, Shapes::ShapeRef.new(shape: __long, location_name: "end"))
+    Range.add_member(:start, Shapes::ShapeRef.new(shape: __long, location_name: "start"))
+    Range.add_member(:start_column, Shapes::ShapeRef.new(shape: __long, location_name: "startColumn"))
+    Range.struct_class = Types::Range
+
+    Ranges.member = Shapes::ShapeRef.new(shape: Range)
+
+    Record.add_member(:record_index, Shapes::ShapeRef.new(shape: __long, location_name: "recordIndex"))
+    Record.struct_class = Types::Record
+
+    Records.member = Shapes::ShapeRef.new(shape: Record)
 
     ReplicationDetails.add_member(:replicated, Shapes::ShapeRef.new(shape: __boolean, location_name: "replicated"))
     ReplicationDetails.add_member(:replicated_externally, Shapes::ShapeRef.new(shape: __boolean, location_name: "replicatedExternally"))
@@ -1209,6 +1260,11 @@ module Aws::Macie2
     UserIdentityRoot.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     UserIdentityRoot.add_member(:principal_id, Shapes::ShapeRef.new(shape: __string, location_name: "principalId"))
     UserIdentityRoot.struct_class = Types::UserIdentityRoot
+
+    UserPausedDetails.add_member(:job_expires_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "jobExpiresAt"))
+    UserPausedDetails.add_member(:job_imminent_expiration_health_event_arn, Shapes::ShapeRef.new(shape: __string, location_name: "jobImminentExpirationHealthEventArn"))
+    UserPausedDetails.add_member(:job_paused_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "jobPausedAt"))
+    UserPausedDetails.struct_class = Types::UserPausedDetails
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException

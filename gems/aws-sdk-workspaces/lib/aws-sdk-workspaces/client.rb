@@ -445,7 +445,20 @@ module Aws::WorkSpaces
     end
 
     # Copies the specified image from the specified Region to the current
-    # Region.
+    # Region. For more information about copying images, see [ Copy a Custom
+    # WorkSpaces Image][1].
+    #
+    # Before copying a shared image, be sure to verify that it has been
+    # shared from the correct AWS account. To determine if an image has been
+    # shared and to see the AWS account ID that owns an image, use the
+    # [DescribeWorkSpaceImages][2] and
+    # [DescribeWorkspaceImagePermissions][3] API operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html
+    # [2]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html
+    # [3]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html
     #
     # @option params [required, String] :name
     #   The name of the image.
@@ -616,9 +629,7 @@ module Aws::WorkSpaces
     #   IP access control groups, and connection aliases.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags. If
-    #   you want to add new tags to a set of existing tags, you must submit
-    #   all of the existing tags along with the new ones.
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1693,6 +1704,10 @@ module Aws::WorkSpaces
     # that you can use for the network management interface when you enable
     # Bring Your Own License (BYOL).
     #
+    # This operation can be run only by AWS accounts that are enabled for
+    # BYOL. If your account isn't enabled for BYOL, you'll receive an
+    # `AccessDeniedException` error.
+    #
     # The management network interface is connected to a secure Amazon
     # WorkSpaces management network. It is used for interactive streaming of
     # the WorkSpace desktop to Amazon WorkSpaces clients, and to allow
@@ -2340,12 +2355,21 @@ module Aws::WorkSpaces
     #
     # Terminating a WorkSpace is a permanent action and cannot be undone.
     # The user's data is destroyed. If you need to archive any user data,
-    # contact Amazon Web Services before terminating the WorkSpace.
+    # contact AWS Support before terminating the WorkSpace.
     #
     # You can terminate a WorkSpace that is in any state except `SUSPENDED`.
     #
     # This operation is asynchronous and returns before the WorkSpaces have
-    # been completely terminated.
+    # been completely terminated. After a WorkSpace is terminated, the
+    # `TERMINATED` state is returned only briefly before the WorkSpace
+    # directory metadata is cleaned up, so this state is rarely returned. To
+    # confirm that a WorkSpace is terminated, check for the WorkSpace ID by
+    # using [ DescribeWorkSpaces][1]. If the WorkSpace ID isn't returned,
+    # then the WorkSpace has been successfully terminated.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html
     #
     # @option params [required, Array<Types::TerminateRequest>] :terminate_workspace_requests
     #   The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
@@ -2471,7 +2495,8 @@ module Aws::WorkSpaces
     # that account has permission to copy the image. If the copy image
     # permission is granted, the image is shared with that account. If the
     # copy image permission is revoked, the image is unshared with the
-    # account.
+    # account. For more information about sharing images, see [ Share or
+    # Unshare a Custom WorkSpaces Image][1].
     #
     # <note markdown="1"> * To delete an image that has been shared, you must unshare the image
     #   before you delete it.
@@ -2483,6 +2508,10 @@ module Aws::WorkSpaces
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html
+    #
     # @option params [required, String] :image_id
     #   The identifier of the image.
     #
@@ -2492,6 +2521,9 @@ module Aws::WorkSpaces
     #
     # @option params [required, String] :shared_account_id
     #   The identifier of the AWS account to share or unshare the image with.
+    #
+    #   Before sharing the image, confirm that you are sharing to the correct
+    #   AWS account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2525,7 +2557,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -35,6 +35,7 @@ module Aws::Budgets
   # * {InvalidNextTokenException}
   # * {InvalidParameterException}
   # * {NotFoundException}
+  # * {ResourceLockedException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -152,6 +153,21 @@ module Aws::Budgets
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Budgets::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceLockedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Budgets::Types::ResourceLockedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

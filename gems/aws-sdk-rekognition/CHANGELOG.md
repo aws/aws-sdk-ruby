@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-10-15)
+------------------
+
+* Feature - This SDK Release introduces new API (DetectProtectiveEquipment) for Amazon Rekognition. This release also adds ServiceQuotaExceeded exception to Amazon Rekognition IndexFaces API.
+
 1.46.0 (2020-10-08)
 ------------------
 

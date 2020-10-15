@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-10-15)
+------------------
+
+* Feature - This release improves email validation for subscriptions on the SDK endpoints.
+
 1.51.0 (2020-10-08)
 ------------------
 

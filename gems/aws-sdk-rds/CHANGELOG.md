@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2020-10-15)
+------------------
+
+* Feature - Return tags for all resources in the output of DescribeDBInstances, DescribeDBSnapshots, DescribeDBClusters, and DescribeDBClusterSnapshots API operations.
+
 1.103.0 (2020-10-08)
 ------------------
 

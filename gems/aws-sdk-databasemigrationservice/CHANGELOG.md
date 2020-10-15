@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-10-15)
+------------------
+
+* Feature - When creating Endpoints, Replication Instances, and Replication Tasks, the feature provides you the option to specify friendly name to the resources.
+
 1.44.0 (2020-10-06)
 ------------------
 

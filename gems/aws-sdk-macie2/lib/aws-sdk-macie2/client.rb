@@ -968,8 +968,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the status and settings for a
-    # classification job.
+    # Retrieves the status and settings for a classification job.
     #
     # @option params [required, String] :job_id
     #
@@ -991,6 +990,7 @@ module Aws::Macie2
     #   * {Types::DescribeClassificationJobResponse#schedule_frequency #schedule_frequency} => Types::JobScheduleFrequency
     #   * {Types::DescribeClassificationJobResponse#statistics #statistics} => Types::Statistics
     #   * {Types::DescribeClassificationJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeClassificationJobResponse#user_paused_details #user_paused_details} => Types::UserPausedDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -1008,7 +1008,7 @@ module Aws::Macie2
     #   resp.initial_run #=> Boolean
     #   resp.job_arn #=> String
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE"
+    #   resp.job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
     #   resp.job_type #=> String, one of "ONE_TIME", "SCHEDULED"
     #   resp.last_run_time #=> Time
     #   resp.name #=> String
@@ -1045,6 +1045,9 @@ module Aws::Macie2
     #   resp.statistics.number_of_runs #=> Float
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.user_paused_details.job_expires_at #=> Time
+    #   resp.user_paused_details.job_imminent_expiration_health_event_arn #=> String
+    #   resp.user_paused_details.job_paused_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJob AWS API Documentation
     #
@@ -1055,8 +1058,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the Amazon Macie configuration settings
-    # for an AWS organization.
+    # Retrieves the Amazon Macie configuration settings for an AWS
+    # organization.
     #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1241,12 +1244,14 @@ module Aws::Macie2
     #   resp.bucket_count_by_effective_permission.publicly_accessible #=> Integer
     #   resp.bucket_count_by_effective_permission.publicly_readable #=> Integer
     #   resp.bucket_count_by_effective_permission.publicly_writable #=> Integer
+    #   resp.bucket_count_by_effective_permission.unknown #=> Integer
     #   resp.bucket_count_by_encryption_type.kms_managed #=> Integer
     #   resp.bucket_count_by_encryption_type.s3_managed #=> Integer
     #   resp.bucket_count_by_encryption_type.unencrypted #=> Integer
     #   resp.bucket_count_by_shared_access_type.external #=> Integer
     #   resp.bucket_count_by_shared_access_type.internal #=> Integer
     #   resp.bucket_count_by_shared_access_type.not_shared #=> Integer
+    #   resp.bucket_count_by_shared_access_type.unknown #=> Integer
     #   resp.classifiable_object_count #=> Integer
     #   resp.classifiable_size_in_bytes #=> Integer
     #   resp.last_updated #=> Time
@@ -1291,8 +1296,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the criteria and other settings for a
-    # custom data identifier.
+    # Retrieves the criteria and other settings for a custom data
+    # identifier.
     #
     # @option params [required, String] :id
     #
@@ -1398,13 +1403,12 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about one or more findings.
+    # Retrieves the details of one or more findings.
     #
     # @option params [required, Array<String>] :finding_ids
     #
     # @option params [Types::SortCriteria] :sort_criteria
-    #   Specifies criteria for sorting the results of a request for
-    #   information about findings.
+    #   Specifies criteria for sorting the results of a request for findings.
     #
     # @return [Types::GetFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1429,16 +1433,63 @@ module Aws::Macie2
     #   resp.findings[0].classification_details.detailed_results_location #=> String
     #   resp.findings[0].classification_details.job_arn #=> String
     #   resp.findings[0].classification_details.job_id #=> String
+    #   resp.findings[0].classification_details.result.additional_occurrences #=> Boolean
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections #=> Array
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].arn #=> String
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].count #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].name #=> String
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.cells #=> Array
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.cells[0].cell_reference #=> String
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.cells[0].column #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.cells[0].column_name #=> String
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.cells[0].row #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.line_ranges #=> Array
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].end #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].start #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].start_column #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.offset_ranges #=> Array
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].end #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].start #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].start_column #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages #=> Array
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.end #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.start #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.start_column #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.end #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].page_number #=> Integer
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records #=> Array
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records[0].record_index #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.total_count #=> Integer
     #   resp.findings[0].classification_details.result.mime_type #=> String
     #   resp.findings[0].classification_details.result.sensitive_data #=> Array
     #   resp.findings[0].classification_details.result.sensitive_data[0].category #=> String, one of "FINANCIAL_INFORMATION", "PERSONAL_INFORMATION", "CREDENTIALS", "CUSTOM_IDENTIFIER"
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections #=> Array
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].count #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.cells #=> Array
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.cells[0].cell_reference #=> String
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.cells[0].column #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.cells[0].column_name #=> String
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.cells[0].row #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.line_ranges #=> Array
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].end #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].start #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].start_column #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.offset_ranges #=> Array
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].end #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].start #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].start_column #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages #=> Array
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.end #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.start #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.start_column #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.end #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].page_number #=> Integer
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records #=> Array
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records[0].record_index #=> Integer
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].type #=> String
     #   resp.findings[0].classification_details.result.sensitive_data[0].total_count #=> Integer
     #   resp.findings[0].classification_details.result.size_classified #=> Integer
@@ -1554,8 +1605,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the criteria and other settings for a
-    # findings filter.
+    # Retrieves the criteria and other settings for a findings filter.
     #
     # @option params [required, String] :id
     #
@@ -1625,8 +1675,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the current status and configuration
-    # settings for an Amazon Macie account.
+    # Retrieves the current status and configuration settings for an Amazon
+    # Macie account.
     #
     # @return [Types::GetMacieSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1860,9 +1910,12 @@ module Aws::Macie2
     #   resp.items[0].bucket_definitions[0].buckets[0] #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].job_id #=> String
-    #   resp.items[0].job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE"
+    #   resp.items[0].job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
     #   resp.items[0].job_type #=> String, one of "ONE_TIME", "SCHEDULED"
     #   resp.items[0].name #=> String
+    #   resp.items[0].user_paused_details.job_expires_at #=> Time
+    #   resp.items[0].user_paused_details.job_imminent_expiration_health_event_arn #=> String
+    #   resp.items[0].user_paused_details.job_paused_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationJobs AWS API Documentation
@@ -1925,8 +1978,7 @@ module Aws::Macie2
     # @option params [String] :next_token
     #
     # @option params [Types::SortCriteria] :sort_criteria
-    #   Specifies criteria for sorting the results of a request for
-    #   information about findings.
+    #   Specifies criteria for sorting the results of a request for findings.
     #
     # @return [Types::ListFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2301,7 +2353,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Cancels a classification job.
+    # Changes the status of a classification job.
     #
     # @option params [required, String] :job_id
     #
@@ -2314,7 +2366,7 @@ module Aws::Macie2
     #
     #   resp = client.update_classification_job({
     #     job_id: "__string", # required
-    #     job_status: "RUNNING", # required, accepts RUNNING, PAUSED, CANCELLED, COMPLETE, IDLE
+    #     job_status: "RUNNING", # required, accepts RUNNING, PAUSED, CANCELLED, COMPLETE, IDLE, USER_PAUSED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationJob AWS API Documentation
@@ -2476,7 +2528,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1062,6 +1062,7 @@ module Aws::RDS
     DBCluster.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
     DBCluster.add_member(:cross_account_clone, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CrossAccountClone"))
     DBCluster.add_member(:domain_memberships, Shapes::ShapeRef.new(shape: DomainMembershipList, location_name: "DomainMemberships"))
+    DBCluster.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBCluster.add_member(:global_write_forwarding_status, Shapes::ShapeRef.new(shape: WriteForwardingStatus, location_name: "GlobalWriteForwardingStatus"))
     DBCluster.add_member(:global_write_forwarding_requested, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "GlobalWriteForwardingRequested"))
     DBCluster.struct_class = Types::DBCluster
@@ -1193,6 +1194,7 @@ module Aws::RDS
     DBClusterSnapshot.add_member(:db_cluster_snapshot_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterSnapshotArn"))
     DBClusterSnapshot.add_member(:source_db_cluster_snapshot_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBClusterSnapshotArn"))
     DBClusterSnapshot.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMDatabaseAuthenticationEnabled"))
+    DBClusterSnapshot.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBClusterSnapshot.struct_class = Types::DBClusterSnapshot
 
     DBClusterSnapshotAlreadyExistsFault.struct_class = Types::DBClusterSnapshotAlreadyExistsFault
@@ -1301,6 +1303,7 @@ module Aws::RDS
     DBInstance.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBInstanceRoles, location_name: "AssociatedRoles"))
     DBInstance.add_member(:listener_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ListenerEndpoint"))
     DBInstance.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    DBInstance.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1510,6 +1513,7 @@ module Aws::RDS
     DBSnapshot.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMDatabaseAuthenticationEnabled"))
     DBSnapshot.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
     DBSnapshot.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbiResourceId"))
+    DBSnapshot.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault

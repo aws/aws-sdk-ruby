@@ -35,6 +35,8 @@ module Aws::WorkMail
     CreateAliasResponse = Shapes::StructureShape.new(name: 'CreateAliasResponse')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
+    CreateOrganizationRequest = Shapes::StructureShape.new(name: 'CreateOrganizationRequest')
+    CreateOrganizationResponse = Shapes::StructureShape.new(name: 'CreateOrganizationResponse')
     CreateResourceRequest = Shapes::StructureShape.new(name: 'CreateResourceRequest')
     CreateResourceResponse = Shapes::StructureShape.new(name: 'CreateResourceResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
@@ -48,6 +50,8 @@ module Aws::WorkMail
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
     DeleteMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsRequest')
     DeleteMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsResponse')
+    DeleteOrganizationRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationRequest')
+    DeleteOrganizationResponse = Shapes::StructureShape.new(name: 'DeleteOrganizationResponse')
     DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
     DeleteResourceResponse = Shapes::StructureShape.new(name: 'DeleteResourceResponse')
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
@@ -67,12 +71,17 @@ module Aws::WorkMail
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
+    DirectoryInUseException = Shapes::StructureShape.new(name: 'DirectoryInUseException')
     DirectoryServiceAuthenticationFailedException = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationFailedException')
     DirectoryUnavailableException = Shapes::StructureShape.new(name: 'DirectoryUnavailableException')
     DisassociateDelegateFromResourceRequest = Shapes::StructureShape.new(name: 'DisassociateDelegateFromResourceRequest')
     DisassociateDelegateFromResourceResponse = Shapes::StructureShape.new(name: 'DisassociateDelegateFromResourceResponse')
     DisassociateMemberFromGroupRequest = Shapes::StructureShape.new(name: 'DisassociateMemberFromGroupRequest')
     DisassociateMemberFromGroupResponse = Shapes::StructureShape.new(name: 'DisassociateMemberFromGroupResponse')
+    Domain = Shapes::StructureShape.new(name: 'Domain')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
+    Domains = Shapes::ListShape.new(name: 'Domains')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailAddressInUseException = Shapes::StructureShape.new(name: 'EmailAddressInUseException')
     EntityAlreadyRegisteredException = Shapes::StructureShape.new(name: 'EntityAlreadyRegisteredException')
@@ -91,6 +100,7 @@ module Aws::WorkMail
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    HostedZoneId = Shapes::StringShape.new(name: 'HostedZoneId')
     IdempotencyClientToken = Shapes::StringShape.new(name: 'IdempotencyClientToken')
     InvalidConfigurationException = Shapes::StructureShape.new(name: 'InvalidConfigurationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -263,6 +273,17 @@ module Aws::WorkMail
     CreateGroupResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GroupId"))
     CreateGroupResponse.struct_class = Types::CreateGroupResponse
 
+    CreateOrganizationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    CreateOrganizationRequest.add_member(:alias, Shapes::ShapeRef.new(shape: OrganizationName, required: true, location_name: "Alias"))
+    CreateOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateOrganizationRequest.add_member(:domains, Shapes::ShapeRef.new(shape: Domains, location_name: "Domains"))
+    CreateOrganizationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    CreateOrganizationRequest.add_member(:enable_interoperability, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInteroperability"))
+    CreateOrganizationRequest.struct_class = Types::CreateOrganizationRequest
+
+    CreateOrganizationResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    CreateOrganizationResponse.struct_class = Types::CreateOrganizationResponse
+
     CreateResourceRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CreateResourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateResourceRequest.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Type"))
@@ -309,6 +330,15 @@ module Aws::WorkMail
     DeleteMailboxPermissionsRequest.struct_class = Types::DeleteMailboxPermissionsRequest
 
     DeleteMailboxPermissionsResponse.struct_class = Types::DeleteMailboxPermissionsResponse
+
+    DeleteOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteOrganizationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteOrganizationRequest.add_member(:delete_directory, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DeleteDirectory"))
+    DeleteOrganizationRequest.struct_class = Types::DeleteOrganizationRequest
+
+    DeleteOrganizationResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    DeleteOrganizationResponse.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    DeleteOrganizationResponse.struct_class = Types::DeleteOrganizationResponse
 
     DeleteResourceRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
@@ -406,6 +436,9 @@ module Aws::WorkMail
     DescribeUserResponse.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
+    DirectoryInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DirectoryInUseException.struct_class = Types::DirectoryInUseException
+
     DirectoryServiceAuthenticationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DirectoryServiceAuthenticationFailedException.struct_class = Types::DirectoryServiceAuthenticationFailedException
 
@@ -425,6 +458,12 @@ module Aws::WorkMail
     DisassociateMemberFromGroupRequest.struct_class = Types::DisassociateMemberFromGroupRequest
 
     DisassociateMemberFromGroupResponse.struct_class = Types::DisassociateMemberFromGroupResponse
+
+    Domain.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    Domain.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: HostedZoneId, location_name: "HostedZoneId"))
+    Domain.struct_class = Types::Domain
+
+    Domains.member = Shapes::ShapeRef.new(shape: Domain)
 
     EmailAddressInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     EmailAddressInUseException.struct_class = Types::EmailAddressInUseException
@@ -634,6 +673,7 @@ module Aws::WorkMail
 
     OrganizationSummary.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
     OrganizationSummary.add_member(:alias, Shapes::ShapeRef.new(shape: OrganizationName, location_name: "Alias"))
+    OrganizationSummary.add_member(:default_mail_domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "DefaultMailDomain"))
     OrganizationSummary.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     OrganizationSummary.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     OrganizationSummary.struct_class = Types::OrganizationSummary
@@ -878,6 +918,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:create_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NameAvailabilityException)
+      end)
+
       api.add_operation(:create_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateResource"
         o.http_method = "POST"
@@ -956,6 +1009,17 @@ module Aws::WorkMail
         o.output = Shapes::ShapeRef.new(shape: DeleteMailboxPermissionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:delete_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOrganizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)

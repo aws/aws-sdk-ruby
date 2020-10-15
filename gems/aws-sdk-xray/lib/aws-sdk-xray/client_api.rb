@@ -465,6 +465,7 @@ module Aws::XRay
     Http.struct_class = Types::Http
 
     InsightsConfiguration.add_member(:insights_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "InsightsEnabled"))
+    InsightsConfiguration.add_member(:notifications_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "NotificationsEnabled"))
     InsightsConfiguration.struct_class = Types::InsightsConfiguration
 
     InstanceIdDetail.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
@@ -690,6 +691,7 @@ module Aws::XRay
 
     Trace.add_member(:id, Shapes::ShapeRef.new(shape: TraceId, location_name: "Id"))
     Trace.add_member(:duration, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Duration"))
+    Trace.add_member(:limit_exceeded, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "LimitExceeded"))
     Trace.add_member(:segments, Shapes::ShapeRef.new(shape: SegmentList, location_name: "Segments"))
     Trace.struct_class = Types::Trace
 

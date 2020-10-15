@@ -4061,12 +4061,12 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
@@ -6087,6 +6087,11 @@ module Aws::IoT
     #   The type of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] last_status_change_date
+    #   The date and time the domain configuration's status was last
+    #   changed.
+    #   @return [Time]
+    #
     class DescribeDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
@@ -6095,7 +6100,8 @@ module Aws::IoT
       :authorizer_config,
       :domain_configuration_status,
       :service_type,
-      :domain_type)
+      :domain_type,
+      :last_status_change_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6620,12 +6626,13 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use
+    #   DescribeSecurityProfileResponse$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
@@ -7462,13 +7469,13 @@ module Aws::IoT
     #
     # @!attribute [rw] increment_factor
     #   The exponential factor to increase the rate of rollout for a job.
+    #
+    #   AWS IoT supports up to one digit after the decimal (for example,
+    #   1.5, but not 1.55).
     #   @return [Float]
     #
     # @!attribute [rw] rate_increase_criteria
     #   The criteria to initiate the increase in rate of rollout for a job.
-    #
-    #   AWS IoT supports up to one digit after the decimal (for example,
-    #   1.5, but not 1.55).
     #   @return [Types::RateIncreaseCriteria]
     #
     class ExponentialRolloutRate < Struct.new(
@@ -15852,7 +15859,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -17019,12 +17026,12 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
@@ -17095,12 +17102,12 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use
+    #   UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the security profile's
     #   `behaviors`, but it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2

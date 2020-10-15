@@ -119,12 +119,6 @@ module Aws::RDS
     end
 
     # A list of the supported DB engine modes.
-    #
-    # <note markdown="1"> `global` engine mode only applies for global database clusters created
-    # with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
-    # the clusters in a global database use `provisioned` engine mode.
-    #
-    #  </note>
     # @return [Array<String>]
     def supported_engine_modes
       data[:supported_engine_modes]

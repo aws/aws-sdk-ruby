@@ -15,6 +15,17 @@ module Aws::Budgets
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    Action = Shapes::StructureShape.new(name: 'Action')
+    ActionHistories = Shapes::ListShape.new(name: 'ActionHistories')
+    ActionHistory = Shapes::StructureShape.new(name: 'ActionHistory')
+    ActionHistoryDetails = Shapes::StructureShape.new(name: 'ActionHistoryDetails')
+    ActionId = Shapes::StringShape.new(name: 'ActionId')
+    ActionStatus = Shapes::StringShape.new(name: 'ActionStatus')
+    ActionSubType = Shapes::StringShape.new(name: 'ActionSubType')
+    ActionThreshold = Shapes::StructureShape.new(name: 'ActionThreshold')
+    ActionType = Shapes::StringShape.new(name: 'ActionType')
+    Actions = Shapes::ListShape.new(name: 'Actions')
+    ApprovalModel = Shapes::StringShape.new(name: 'ApprovalModel')
     Budget = Shapes::StructureShape.new(name: 'Budget')
     BudgetName = Shapes::StringShape.new(name: 'BudgetName')
     BudgetPerformanceHistory = Shapes::StructureShape.new(name: 'BudgetPerformanceHistory')
@@ -26,6 +37,8 @@ module Aws::Budgets
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     CostFilters = Shapes::MapShape.new(name: 'CostFilters')
     CostTypes = Shapes::StructureShape.new(name: 'CostTypes')
+    CreateBudgetActionRequest = Shapes::StructureShape.new(name: 'CreateBudgetActionRequest')
+    CreateBudgetActionResponse = Shapes::StructureShape.new(name: 'CreateBudgetActionResponse')
     CreateBudgetRequest = Shapes::StructureShape.new(name: 'CreateBudgetRequest')
     CreateBudgetResponse = Shapes::StructureShape.new(name: 'CreateBudgetResponse')
     CreateNotificationRequest = Shapes::StructureShape.new(name: 'CreateNotificationRequest')
@@ -33,12 +46,23 @@ module Aws::Budgets
     CreateSubscriberRequest = Shapes::StructureShape.new(name: 'CreateSubscriberRequest')
     CreateSubscriberResponse = Shapes::StructureShape.new(name: 'CreateSubscriberResponse')
     CreationLimitExceededException = Shapes::StructureShape.new(name: 'CreationLimitExceededException')
+    Definition = Shapes::StructureShape.new(name: 'Definition')
+    DeleteBudgetActionRequest = Shapes::StructureShape.new(name: 'DeleteBudgetActionRequest')
+    DeleteBudgetActionResponse = Shapes::StructureShape.new(name: 'DeleteBudgetActionResponse')
     DeleteBudgetRequest = Shapes::StructureShape.new(name: 'DeleteBudgetRequest')
     DeleteBudgetResponse = Shapes::StructureShape.new(name: 'DeleteBudgetResponse')
     DeleteNotificationRequest = Shapes::StructureShape.new(name: 'DeleteNotificationRequest')
     DeleteNotificationResponse = Shapes::StructureShape.new(name: 'DeleteNotificationResponse')
     DeleteSubscriberRequest = Shapes::StructureShape.new(name: 'DeleteSubscriberRequest')
     DeleteSubscriberResponse = Shapes::StructureShape.new(name: 'DeleteSubscriberResponse')
+    DescribeBudgetActionHistoriesRequest = Shapes::StructureShape.new(name: 'DescribeBudgetActionHistoriesRequest')
+    DescribeBudgetActionHistoriesResponse = Shapes::StructureShape.new(name: 'DescribeBudgetActionHistoriesResponse')
+    DescribeBudgetActionRequest = Shapes::StructureShape.new(name: 'DescribeBudgetActionRequest')
+    DescribeBudgetActionResponse = Shapes::StructureShape.new(name: 'DescribeBudgetActionResponse')
+    DescribeBudgetActionsForAccountRequest = Shapes::StructureShape.new(name: 'DescribeBudgetActionsForAccountRequest')
+    DescribeBudgetActionsForAccountResponse = Shapes::StructureShape.new(name: 'DescribeBudgetActionsForAccountResponse')
+    DescribeBudgetActionsForBudgetRequest = Shapes::StructureShape.new(name: 'DescribeBudgetActionsForBudgetRequest')
+    DescribeBudgetActionsForBudgetResponse = Shapes::StructureShape.new(name: 'DescribeBudgetActionsForBudgetResponse')
     DescribeBudgetPerformanceHistoryRequest = Shapes::StructureShape.new(name: 'DescribeBudgetPerformanceHistoryRequest')
     DescribeBudgetPerformanceHistoryResponse = Shapes::StructureShape.new(name: 'DescribeBudgetPerformanceHistoryResponse')
     DescribeBudgetRequest = Shapes::StructureShape.new(name: 'DescribeBudgetRequest')
@@ -51,9 +75,18 @@ module Aws::Budgets
     DescribeSubscribersForNotificationResponse = Shapes::StructureShape.new(name: 'DescribeSubscribersForNotificationResponse')
     DimensionValues = Shapes::ListShape.new(name: 'DimensionValues')
     DuplicateRecordException = Shapes::StructureShape.new(name: 'DuplicateRecordException')
+    EventType = Shapes::StringShape.new(name: 'EventType')
+    ExecuteBudgetActionRequest = Shapes::StructureShape.new(name: 'ExecuteBudgetActionRequest')
+    ExecuteBudgetActionResponse = Shapes::StructureShape.new(name: 'ExecuteBudgetActionResponse')
+    ExecutionType = Shapes::StringShape.new(name: 'ExecutionType')
     ExpiredNextTokenException = Shapes::StructureShape.new(name: 'ExpiredNextTokenException')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GenericTimestamp = Shapes::TimestampShape.new(name: 'GenericTimestamp')
+    Group = Shapes::StringShape.new(name: 'Group')
+    Groups = Shapes::ListShape.new(name: 'Groups')
+    IamActionDefinition = Shapes::StructureShape.new(name: 'IamActionDefinition')
+    InstanceId = Shapes::StringShape.new(name: 'InstanceId')
+    InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -69,25 +102,70 @@ module Aws::Budgets
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NumericValue = Shapes::StringShape.new(name: 'NumericValue')
     PlannedBudgetLimits = Shapes::MapShape.new(name: 'PlannedBudgetLimits')
+    PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
+    PolicyId = Shapes::StringShape.new(name: 'PolicyId')
+    Region = Shapes::StringShape.new(name: 'Region')
+    ResourceLockedException = Shapes::StructureShape.new(name: 'ResourceLockedException')
+    Role = Shapes::StringShape.new(name: 'Role')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    Roles = Shapes::ListShape.new(name: 'Roles')
+    ScpActionDefinition = Shapes::StructureShape.new(name: 'ScpActionDefinition')
     Spend = Shapes::StructureShape.new(name: 'Spend')
+    SsmActionDefinition = Shapes::StructureShape.new(name: 'SsmActionDefinition')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
     SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
     Subscribers = Shapes::ListShape.new(name: 'Subscribers')
     SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
+    TargetId = Shapes::StringShape.new(name: 'TargetId')
+    TargetIds = Shapes::ListShape.new(name: 'TargetIds')
     ThresholdType = Shapes::StringShape.new(name: 'ThresholdType')
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     UnitValue = Shapes::StringShape.new(name: 'UnitValue')
+    UpdateBudgetActionRequest = Shapes::StructureShape.new(name: 'UpdateBudgetActionRequest')
+    UpdateBudgetActionResponse = Shapes::StructureShape.new(name: 'UpdateBudgetActionResponse')
     UpdateBudgetRequest = Shapes::StructureShape.new(name: 'UpdateBudgetRequest')
     UpdateBudgetResponse = Shapes::StructureShape.new(name: 'UpdateBudgetResponse')
     UpdateNotificationRequest = Shapes::StructureShape.new(name: 'UpdateNotificationRequest')
     UpdateNotificationResponse = Shapes::StructureShape.new(name: 'UpdateNotificationResponse')
     UpdateSubscriberRequest = Shapes::StructureShape.new(name: 'UpdateSubscriberRequest')
     UpdateSubscriberResponse = Shapes::StructureShape.new(name: 'UpdateSubscriberResponse')
+    User = Shapes::StringShape.new(name: 'User')
+    Users = Shapes::ListShape.new(name: 'Users')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    Action.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    Action.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    Action.add_member(:notification_type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "NotificationType"))
+    Action.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "ActionType"))
+    Action.add_member(:action_threshold, Shapes::ShapeRef.new(shape: ActionThreshold, required: true, location_name: "ActionThreshold"))
+    Action.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "Definition"))
+    Action.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
+    Action.add_member(:approval_model, Shapes::ShapeRef.new(shape: ApprovalModel, required: true, location_name: "ApprovalModel"))
+    Action.add_member(:status, Shapes::ShapeRef.new(shape: ActionStatus, required: true, location_name: "Status"))
+    Action.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
+    Action.struct_class = Types::Action
+
+    ActionHistories.member = Shapes::ShapeRef.new(shape: ActionHistory)
+
+    ActionHistory.add_member(:timestamp, Shapes::ShapeRef.new(shape: GenericTimestamp, required: true, location_name: "Timestamp"))
+    ActionHistory.add_member(:status, Shapes::ShapeRef.new(shape: ActionStatus, required: true, location_name: "Status"))
+    ActionHistory.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "EventType"))
+    ActionHistory.add_member(:action_history_details, Shapes::ShapeRef.new(shape: ActionHistoryDetails, required: true, location_name: "ActionHistoryDetails"))
+    ActionHistory.struct_class = Types::ActionHistory
+
+    ActionHistoryDetails.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Message"))
+    ActionHistoryDetails.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    ActionHistoryDetails.struct_class = Types::ActionHistoryDetails
+
+    ActionThreshold.add_member(:action_threshold_value, Shapes::ShapeRef.new(shape: NotificationThreshold, required: true, location_name: "ActionThresholdValue"))
+    ActionThreshold.add_member(:action_threshold_type, Shapes::ShapeRef.new(shape: ThresholdType, required: true, location_name: "ActionThresholdType"))
+    ActionThreshold.struct_class = Types::ActionThreshold
+
+    Actions.member = Shapes::ShapeRef.new(shape: Action)
 
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetLimit"))
@@ -138,6 +216,22 @@ module Aws::Budgets
     CostTypes.add_member(:use_amortized, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseAmortized"))
     CostTypes.struct_class = Types::CostTypes
 
+    CreateBudgetActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    CreateBudgetActionRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    CreateBudgetActionRequest.add_member(:notification_type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "NotificationType"))
+    CreateBudgetActionRequest.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "ActionType"))
+    CreateBudgetActionRequest.add_member(:action_threshold, Shapes::ShapeRef.new(shape: ActionThreshold, required: true, location_name: "ActionThreshold"))
+    CreateBudgetActionRequest.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "Definition"))
+    CreateBudgetActionRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
+    CreateBudgetActionRequest.add_member(:approval_model, Shapes::ShapeRef.new(shape: ApprovalModel, required: true, location_name: "ApprovalModel"))
+    CreateBudgetActionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
+    CreateBudgetActionRequest.struct_class = Types::CreateBudgetActionRequest
+
+    CreateBudgetActionResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    CreateBudgetActionResponse.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    CreateBudgetActionResponse.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    CreateBudgetActionResponse.struct_class = Types::CreateBudgetActionResponse
+
     CreateBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     CreateBudgetRequest.add_member(:budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "Budget"))
     CreateBudgetRequest.add_member(:notifications_with_subscribers, Shapes::ShapeRef.new(shape: NotificationWithSubscribersList, location_name: "NotificationsWithSubscribers"))
@@ -164,6 +258,21 @@ module Aws::Budgets
     CreationLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     CreationLimitExceededException.struct_class = Types::CreationLimitExceededException
 
+    Definition.add_member(:iam_action_definition, Shapes::ShapeRef.new(shape: IamActionDefinition, location_name: "IamActionDefinition"))
+    Definition.add_member(:scp_action_definition, Shapes::ShapeRef.new(shape: ScpActionDefinition, location_name: "ScpActionDefinition"))
+    Definition.add_member(:ssm_action_definition, Shapes::ShapeRef.new(shape: SsmActionDefinition, location_name: "SsmActionDefinition"))
+    Definition.struct_class = Types::Definition
+
+    DeleteBudgetActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DeleteBudgetActionRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DeleteBudgetActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    DeleteBudgetActionRequest.struct_class = Types::DeleteBudgetActionRequest
+
+    DeleteBudgetActionResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DeleteBudgetActionResponse.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DeleteBudgetActionResponse.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    DeleteBudgetActionResponse.struct_class = Types::DeleteBudgetActionResponse
+
     DeleteBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     DeleteBudgetRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     DeleteBudgetRequest.struct_class = Types::DeleteBudgetRequest
@@ -184,6 +293,47 @@ module Aws::Budgets
     DeleteSubscriberRequest.struct_class = Types::DeleteSubscriberRequest
 
     DeleteSubscriberResponse.struct_class = Types::DeleteSubscriberResponse
+
+    DescribeBudgetActionHistoriesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DescribeBudgetActionHistoriesRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DescribeBudgetActionHistoriesRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    DescribeBudgetActionHistoriesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "TimePeriod"))
+    DescribeBudgetActionHistoriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeBudgetActionHistoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetActionHistoriesRequest.struct_class = Types::DescribeBudgetActionHistoriesRequest
+
+    DescribeBudgetActionHistoriesResponse.add_member(:action_histories, Shapes::ShapeRef.new(shape: ActionHistories, required: true, location_name: "ActionHistories"))
+    DescribeBudgetActionHistoriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetActionHistoriesResponse.struct_class = Types::DescribeBudgetActionHistoriesResponse
+
+    DescribeBudgetActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DescribeBudgetActionRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DescribeBudgetActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    DescribeBudgetActionRequest.struct_class = Types::DescribeBudgetActionRequest
+
+    DescribeBudgetActionResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DescribeBudgetActionResponse.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DescribeBudgetActionResponse.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    DescribeBudgetActionResponse.struct_class = Types::DescribeBudgetActionResponse
+
+    DescribeBudgetActionsForAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DescribeBudgetActionsForAccountRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeBudgetActionsForAccountRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetActionsForAccountRequest.struct_class = Types::DescribeBudgetActionsForAccountRequest
+
+    DescribeBudgetActionsForAccountResponse.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "Actions"))
+    DescribeBudgetActionsForAccountResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetActionsForAccountResponse.struct_class = Types::DescribeBudgetActionsForAccountResponse
+
+    DescribeBudgetActionsForBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DescribeBudgetActionsForBudgetRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DescribeBudgetActionsForBudgetRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeBudgetActionsForBudgetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetActionsForBudgetRequest.struct_class = Types::DescribeBudgetActionsForBudgetRequest
+
+    DescribeBudgetActionsForBudgetResponse.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "Actions"))
+    DescribeBudgetActionsForBudgetResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetActionsForBudgetResponse.struct_class = Types::DescribeBudgetActionsForBudgetResponse
 
     DescribeBudgetPerformanceHistoryRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     DescribeBudgetPerformanceHistoryRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
@@ -238,8 +388,30 @@ module Aws::Budgets
     DuplicateRecordException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     DuplicateRecordException.struct_class = Types::DuplicateRecordException
 
+    ExecuteBudgetActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    ExecuteBudgetActionRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    ExecuteBudgetActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    ExecuteBudgetActionRequest.add_member(:execution_type, Shapes::ShapeRef.new(shape: ExecutionType, required: true, location_name: "ExecutionType"))
+    ExecuteBudgetActionRequest.struct_class = Types::ExecuteBudgetActionRequest
+
+    ExecuteBudgetActionResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    ExecuteBudgetActionResponse.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    ExecuteBudgetActionResponse.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    ExecuteBudgetActionResponse.add_member(:execution_type, Shapes::ShapeRef.new(shape: ExecutionType, required: true, location_name: "ExecutionType"))
+    ExecuteBudgetActionResponse.struct_class = Types::ExecuteBudgetActionResponse
+
     ExpiredNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
+
+    Groups.member = Shapes::ShapeRef.new(shape: Group)
+
+    IamActionDefinition.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
+    IamActionDefinition.add_member(:roles, Shapes::ShapeRef.new(shape: Roles, location_name: "Roles"))
+    IamActionDefinition.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
+    IamActionDefinition.add_member(:users, Shapes::ShapeRef.new(shape: Users, location_name: "Users"))
+    IamActionDefinition.struct_class = Types::IamActionDefinition
+
+    InstanceIds.member = Shapes::ShapeRef.new(shape: InstanceId)
 
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     InternalErrorException.struct_class = Types::InternalErrorException
@@ -271,9 +443,23 @@ module Aws::Budgets
     PlannedBudgetLimits.key = Shapes::ShapeRef.new(shape: GenericString)
     PlannedBudgetLimits.value = Shapes::ShapeRef.new(shape: Spend)
 
+    ResourceLockedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ResourceLockedException.struct_class = Types::ResourceLockedException
+
+    Roles.member = Shapes::ShapeRef.new(shape: Role)
+
+    ScpActionDefinition.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
+    ScpActionDefinition.add_member(:target_ids, Shapes::ShapeRef.new(shape: TargetIds, required: true, location_name: "TargetIds"))
+    ScpActionDefinition.struct_class = Types::ScpActionDefinition
+
     Spend.add_member(:amount, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "Amount"))
     Spend.add_member(:unit, Shapes::ShapeRef.new(shape: UnitValue, required: true, location_name: "Unit"))
     Spend.struct_class = Types::Spend
+
+    SsmActionDefinition.add_member(:action_sub_type, Shapes::ShapeRef.new(shape: ActionSubType, required: true, location_name: "ActionSubType"))
+    SsmActionDefinition.add_member(:region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "Region"))
+    SsmActionDefinition.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIds, required: true, location_name: "InstanceIds"))
+    SsmActionDefinition.struct_class = Types::SsmActionDefinition
 
     Subscriber.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, required: true, location_name: "SubscriptionType"))
     Subscriber.add_member(:address, Shapes::ShapeRef.new(shape: SubscriberAddress, required: true, location_name: "Address"))
@@ -281,9 +467,28 @@ module Aws::Budgets
 
     Subscribers.member = Shapes::ShapeRef.new(shape: Subscriber)
 
+    TargetIds.member = Shapes::ShapeRef.new(shape: TargetId)
+
     TimePeriod.add_member(:start, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "Start"))
     TimePeriod.add_member(:end, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "End"))
     TimePeriod.struct_class = Types::TimePeriod
+
+    UpdateBudgetActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    UpdateBudgetActionRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    UpdateBudgetActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "ActionId"))
+    UpdateBudgetActionRequest.add_member(:notification_type, Shapes::ShapeRef.new(shape: NotificationType, location_name: "NotificationType"))
+    UpdateBudgetActionRequest.add_member(:action_threshold, Shapes::ShapeRef.new(shape: ActionThreshold, location_name: "ActionThreshold"))
+    UpdateBudgetActionRequest.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, location_name: "Definition"))
+    UpdateBudgetActionRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
+    UpdateBudgetActionRequest.add_member(:approval_model, Shapes::ShapeRef.new(shape: ApprovalModel, location_name: "ApprovalModel"))
+    UpdateBudgetActionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, location_name: "Subscribers"))
+    UpdateBudgetActionRequest.struct_class = Types::UpdateBudgetActionRequest
+
+    UpdateBudgetActionResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    UpdateBudgetActionResponse.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    UpdateBudgetActionResponse.add_member(:old_action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "OldAction"))
+    UpdateBudgetActionResponse.add_member(:new_action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "NewAction"))
+    UpdateBudgetActionResponse.struct_class = Types::UpdateBudgetActionResponse
 
     UpdateBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     UpdateBudgetRequest.add_member(:new_budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "NewBudget"))
@@ -307,6 +512,8 @@ module Aws::Budgets
     UpdateSubscriberRequest.struct_class = Types::UpdateSubscriberRequest
 
     UpdateSubscriberResponse.struct_class = Types::UpdateSubscriberResponse
+
+    Users.member = Shapes::ShapeRef.new(shape: User)
 
 
     # @api private
@@ -337,6 +544,20 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_budget_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBudgetAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBudgetActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBudgetActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -380,6 +601,19 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_budget_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBudgetAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBudgetActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBudgetActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLockedException)
+      end)
+
       api.add_operation(:delete_notification, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteNotification"
         o.http_method = "POST"
@@ -414,6 +648,74 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_budget_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBudgetAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBudgetActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBudgetActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_budget_action_histories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBudgetActionHistories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBudgetActionHistoriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBudgetActionHistoriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_budget_actions_for_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBudgetActionsForAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBudgetActionsForAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBudgetActionsForAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_budget_actions_for_budget, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBudgetActionsForBudget"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBudgetActionsForBudgetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBudgetActionsForBudgetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_budget_performance_history, Seahorse::Model::Operation.new.tap do |o|
@@ -496,6 +798,19 @@ module Aws::Budgets
         )
       end)
 
+      api.add_operation(:execute_budget_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExecuteBudgetAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExecuteBudgetActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExecuteBudgetActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLockedException)
+      end)
+
       api.add_operation(:update_budget, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateBudget"
         o.http_method = "POST"
@@ -506,6 +821,19 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_budget_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBudgetAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBudgetActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBudgetActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLockedException)
       end)
 
       api.add_operation(:update_notification, Seahorse::Model::Operation.new.tap do |o|

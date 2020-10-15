@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2020-10-15)
+------------------
+
+* Feature - API Documentation updates for Glue Get-Plan API
+
 1.74.0 (2020-10-05)
 ------------------
 

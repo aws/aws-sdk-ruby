@@ -2165,7 +2165,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] group_by
     #   You can group Amazon Web Services costs using up to two different
-    #   groups: either dimensions, tag keys, or both.
+    #   groups: `DIMENSION`, `TAG`, `COST_CATEGORY`.
     #   @return [Array<Types::GroupDefinition>]
     #
     # @!attribute [rw] next_page_token

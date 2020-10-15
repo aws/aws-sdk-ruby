@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2020-10-15)
+------------------
+
+* Feature - This Patch Manager release now supports searching for available packages from Amazon Linux and Amazon Linux 2 via the DescribeAvailablePatches API.
+
 1.93.0 (2020-09-30)
 ------------------
 

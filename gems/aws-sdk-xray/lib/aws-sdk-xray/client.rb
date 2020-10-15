@@ -357,6 +357,7 @@ module Aws::XRay
     #   resp.traces #=> Array
     #   resp.traces[0].id #=> String
     #   resp.traces[0].duration #=> Float
+    #   resp.traces[0].limit_exceeded #=> Boolean
     #   resp.traces[0].segments #=> Array
     #   resp.traces[0].segments[0].id #=> String
     #   resp.traces[0].segments[0].document #=> String
@@ -383,9 +384,14 @@ module Aws::XRay
     #   The filter expression defining criteria by which to group traces.
     #
     # @option params [Types::InsightsConfiguration] :insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for the
-    #   new group or false to disable insights for the new group.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the new group or false to disable insights for the new group.
+    #
+    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #     insights notifications for the new group. Notifications may only be
+    #     enabled on a group with InsightsEnabled set to true.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A map that contains one or more tag keys and tag values to attach to
@@ -422,6 +428,7 @@ module Aws::XRay
     #     filter_expression: "FilterExpression",
     #     insights_configuration: {
     #       insights_enabled: false,
+    #       notifications_enabled: false,
     #     },
     #     tags: [
     #       {
@@ -437,6 +444,7 @@ module Aws::XRay
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
     #   resp.group.insights_configuration.insights_enabled #=> Boolean
+    #   resp.group.insights_configuration.notifications_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup AWS API Documentation
     #
@@ -664,6 +672,7 @@ module Aws::XRay
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
     #   resp.group.insights_configuration.insights_enabled #=> Boolean
+    #   resp.group.insights_configuration.notifications_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup AWS API Documentation
     #
@@ -699,6 +708,7 @@ module Aws::XRay
     #   resp.groups[0].group_arn #=> String
     #   resp.groups[0].filter_expression #=> String
     #   resp.groups[0].insights_configuration.insights_enabled #=> Boolean
+    #   resp.groups[0].insights_configuration.notifications_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups AWS API Documentation
@@ -864,10 +874,11 @@ module Aws::XRay
     #   The end of the timeframe for which to generate a graph.
     #
     # @option params [String] :group_name
-    #   The name of a group to generate a graph based on.
+    #   The name of a group based on which you want to generate a graph.
     #
     # @option params [String] :group_arn
-    #   The ARN of a group to generate a graph based on.
+    #   The Amazon Resource Name (ARN) of a group based on which you want to
+    #   generate a graph.
     #
     # @option params [String] :next_token
     #   Pagination token.
@@ -967,7 +978,8 @@ module Aws::XRay
     #   from.
     #
     # @option params [String] :group_arn
-    #   The ARN of the group for which to pull statistics from.
+    #   The Amazon Resource Name (ARN) of the group for which to pull
+    #   statistics from.
     #
     # @option params [String] :entity_selector_expression
     #   A filter expression defining entities that will be aggregated for
@@ -1153,7 +1165,7 @@ module Aws::XRay
     #   Set to `true` to get summaries for only a subset of available traces.
     #
     # @option params [Types::SamplingStrategy] :sampling_strategy
-    #   A paramater to indicate whether to enable sampling on trace summaries.
+    #   A parameter to indicate whether to enable sampling on trace summaries.
     #   Input parameters are Name and Value.
     #
     # @option params [String] :filter_expression
@@ -1439,7 +1451,7 @@ module Aws::XRay
     # document schema, see [AWS X-Ray Segment Documents][2] in the *AWS
     # X-Ray Developer Guide*.
     #
-    # **Required Segment Document Fields**
+    # **Required segment document fields**
     #
     # * `name` - The name of the service that handled the request.
     #
@@ -1459,17 +1471,17 @@ module Aws::XRay
     #
     # * `in_progress` - Set to `true` instead of specifying an `end_time` to
     #   record that a segment has been started, but is not complete. Send an
-    #   in progress segment when your application receives a request that
-    #   will take a long time to serve, to trace the fact that the request
-    #   was received. When the response is sent, send the complete segment
-    #   to overwrite the in-progress segment.
+    #   in-progress segment when your application receives a request that
+    #   will take a long time to serve, to trace that the request was
+    #   received. When the response is sent, send the complete segment to
+    #   overwrite the in-progress segment.
     #
     # A `trace_id` consists of three numbers separated by hyphens. For
     # example, 1-58406520-a006649127e371903a2de979. This includes:
     #
     # **Trace ID Format**
     #
-    # * The version number, i.e. `1`.
+    # * The version number, for instance, `1`.
     #
     # * The time of the original request, in Unix epoch time, in 8
     #   hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in
@@ -1608,9 +1620,14 @@ module Aws::XRay
     #   traces.
     #
     # @option params [Types::InsightsConfiguration] :insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for the
-    #   group or false to disable insights for the group.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the group or false to disable insights for the group.
+    #
+    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #     insights notifications for the group. Notifications can only be
+    #     enabled on a group with InsightsEnabled set to true.
     #
     # @return [Types::UpdateGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1624,6 +1641,7 @@ module Aws::XRay
     #     filter_expression: "FilterExpression",
     #     insights_configuration: {
     #       insights_enabled: false,
+    #       notifications_enabled: false,
     #     },
     #   })
     #
@@ -1633,6 +1651,7 @@ module Aws::XRay
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
     #   resp.group.insights_configuration.insights_enabled #=> Boolean
+    #   resp.group.insights_configuration.notifications_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup AWS API Documentation
     #
@@ -1714,7 +1733,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
