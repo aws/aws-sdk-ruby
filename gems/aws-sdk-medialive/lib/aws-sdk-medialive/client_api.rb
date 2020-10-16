@@ -28,6 +28,8 @@ module Aws::MediaLive
     Ac3MetadataControl = Shapes::StringShape.new(name: 'Ac3MetadataControl')
     Ac3Settings = Shapes::StructureShape.new(name: 'Ac3Settings')
     AcceptHeader = Shapes::StringShape.new(name: 'AcceptHeader')
+    AcceptInputDeviceTransferRequest = Shapes::StructureShape.new(name: 'AcceptInputDeviceTransferRequest')
+    AcceptInputDeviceTransferResponse = Shapes::StructureShape.new(name: 'AcceptInputDeviceTransferResponse')
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
@@ -94,6 +96,8 @@ module Aws::MediaLive
     BurnInOutlineColor = Shapes::StringShape.new(name: 'BurnInOutlineColor')
     BurnInShadowColor = Shapes::StringShape.new(name: 'BurnInShadowColor')
     BurnInTeletextGridControl = Shapes::StringShape.new(name: 'BurnInTeletextGridControl')
+    CancelInputDeviceTransferRequest = Shapes::StructureShape.new(name: 'CancelInputDeviceTransferRequest')
+    CancelInputDeviceTransferResponse = Shapes::StructureShape.new(name: 'CancelInputDeviceTransferResponse')
     CaptionDescription = Shapes::StructureShape.new(name: 'CaptionDescription')
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionLanguageMapping = Shapes::StructureShape.new(name: 'CaptionLanguageMapping')
@@ -328,6 +332,7 @@ module Aws::MediaLive
     InputDeviceState = Shapes::StringShape.new(name: 'InputDeviceState')
     InputDeviceSummary = Shapes::StructureShape.new(name: 'InputDeviceSummary')
     InputDeviceThumbnail = Shapes::BlobShape.new(name: 'InputDeviceThumbnail', streaming: true)
+    InputDeviceTransferType = Shapes::StringShape.new(name: 'InputDeviceTransferType')
     InputDeviceType = Shapes::StringShape.new(name: 'InputDeviceType')
     InputFilter = Shapes::StringShape.new(name: 'InputFilter')
     InputLocation = Shapes::StructureShape.new(name: 'InputLocation')
@@ -366,6 +371,9 @@ module Aws::MediaLive
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListChannelsResultModel = Shapes::StructureShape.new(name: 'ListChannelsResultModel')
+    ListInputDeviceTransfersRequest = Shapes::StructureShape.new(name: 'ListInputDeviceTransfersRequest')
+    ListInputDeviceTransfersResponse = Shapes::StructureShape.new(name: 'ListInputDeviceTransfersResponse')
+    ListInputDeviceTransfersResultModel = Shapes::StructureShape.new(name: 'ListInputDeviceTransfersResultModel')
     ListInputDevicesRequest = Shapes::StructureShape.new(name: 'ListInputDevicesRequest')
     ListInputDevicesResponse = Shapes::StructureShape.new(name: 'ListInputDevicesResponse')
     ListInputDevicesResultModel = Shapes::StructureShape.new(name: 'ListInputDevicesResultModel')
@@ -483,6 +491,8 @@ module Aws::MediaLive
     RawSettings = Shapes::StructureShape.new(name: 'RawSettings')
     Rec601Settings = Shapes::StructureShape.new(name: 'Rec601Settings')
     Rec709Settings = Shapes::StructureShape.new(name: 'Rec709Settings')
+    RejectInputDeviceTransferRequest = Shapes::StructureShape.new(name: 'RejectInputDeviceTransferRequest')
+    RejectInputDeviceTransferResponse = Shapes::StructureShape.new(name: 'RejectInputDeviceTransferResponse')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
     Reservation = Shapes::StructureShape.new(name: 'Reservation')
     ReservationCodec = Shapes::StringShape.new(name: 'ReservationCodec')
@@ -561,9 +571,14 @@ module Aws::MediaLive
     TemporalFilterPostFilterSharpening = Shapes::StringShape.new(name: 'TemporalFilterPostFilterSharpening')
     TemporalFilterSettings = Shapes::StructureShape.new(name: 'TemporalFilterSettings')
     TemporalFilterStrength = Shapes::StringShape.new(name: 'TemporalFilterStrength')
+    ThumbnailData = Shapes::StructureShape.new(name: 'ThumbnailData')
     TimecodeConfig = Shapes::StructureShape.new(name: 'TimecodeConfig')
     TimecodeConfigSource = Shapes::StringShape.new(name: 'TimecodeConfigSource')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TransferInputDevice = Shapes::StructureShape.new(name: 'TransferInputDevice')
+    TransferInputDeviceRequest = Shapes::StructureShape.new(name: 'TransferInputDeviceRequest')
+    TransferInputDeviceResponse = Shapes::StructureShape.new(name: 'TransferInputDeviceResponse')
+    TransferringInputDeviceSummary = Shapes::StructureShape.new(name: 'TransferringInputDeviceSummary')
     TtmlDestinationSettings = Shapes::StructureShape.new(name: 'TtmlDestinationSettings')
     TtmlDestinationStyleControl = Shapes::StringShape.new(name: 'TtmlDestinationStyleControl')
     UdpContainerSettings = Shapes::StructureShape.new(name: 'UdpContainerSettings')
@@ -711,6 +726,7 @@ module Aws::MediaLive
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
+    __listOfTransferringInputDeviceSummary = Shapes::ListShape.new(name: '__listOfTransferringInputDeviceSummary')
     __listOfValidationError = Shapes::ListShape.new(name: '__listOfValidationError')
     __listOfVideoDescription = Shapes::ListShape.new(name: '__listOfVideoDescription')
     __listOf__integer = Shapes::ListShape.new(name: '__listOf__integer')
@@ -753,6 +769,11 @@ module Aws::MediaLive
     Ac3Settings.add_member(:lfe_filter, Shapes::ShapeRef.new(shape: Ac3LfeFilter, location_name: "lfeFilter"))
     Ac3Settings.add_member(:metadata_control, Shapes::ShapeRef.new(shape: Ac3MetadataControl, location_name: "metadataControl"))
     Ac3Settings.struct_class = Types::Ac3Settings
+
+    AcceptInputDeviceTransferRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    AcceptInputDeviceTransferRequest.struct_class = Types::AcceptInputDeviceTransferRequest
+
+    AcceptInputDeviceTransferResponse.struct_class = Types::AcceptInputDeviceTransferResponse
 
     AccessDenied.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     AccessDenied.struct_class = Types::AccessDenied
@@ -968,6 +989,11 @@ module Aws::MediaLive
     BurnInDestinationSettings.add_member(:x_position, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "xPosition"))
     BurnInDestinationSettings.add_member(:y_position, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "yPosition"))
     BurnInDestinationSettings.struct_class = Types::BurnInDestinationSettings
+
+    CancelInputDeviceTransferRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    CancelInputDeviceTransferRequest.struct_class = Types::CancelInputDeviceTransferRequest
+
+    CancelInputDeviceTransferResponse.struct_class = Types::CancelInputDeviceTransferResponse
 
     CaptionDescription.add_member(:caption_selector_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "captionSelectorName"))
     CaptionDescription.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, location_name: "destinationSettings"))
@@ -1946,6 +1972,19 @@ module Aws::MediaLive
     ListChannelsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListChannelsResultModel.struct_class = Types::ListChannelsResultModel
 
+    ListInputDeviceTransfersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListInputDeviceTransfersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListInputDeviceTransfersRequest.add_member(:transfer_type, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "transferType"))
+    ListInputDeviceTransfersRequest.struct_class = Types::ListInputDeviceTransfersRequest
+
+    ListInputDeviceTransfersResponse.add_member(:input_device_transfers, Shapes::ShapeRef.new(shape: __listOfTransferringInputDeviceSummary, location_name: "inputDeviceTransfers"))
+    ListInputDeviceTransfersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListInputDeviceTransfersResponse.struct_class = Types::ListInputDeviceTransfersResponse
+
+    ListInputDeviceTransfersResultModel.add_member(:input_device_transfers, Shapes::ShapeRef.new(shape: __listOfTransferringInputDeviceSummary, location_name: "inputDeviceTransfers"))
+    ListInputDeviceTransfersResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListInputDeviceTransfersResultModel.struct_class = Types::ListInputDeviceTransfersResultModel
+
     ListInputDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListInputDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListInputDevicesRequest.struct_class = Types::ListInputDevicesRequest
@@ -2399,6 +2438,11 @@ module Aws::MediaLive
 
     Rec709Settings.struct_class = Types::Rec709Settings
 
+    RejectInputDeviceTransferRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    RejectInputDeviceTransferRequest.struct_class = Types::RejectInputDeviceTransferRequest
+
+    RejectInputDeviceTransferResponse.struct_class = Types::RejectInputDeviceTransferResponse
+
     RemixSettings.add_member(:channel_mappings, Shapes::ShapeRef.new(shape: __listOfAudioChannelMapping, required: true, location_name: "channelMappings"))
     RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "channelsIn"))
     RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channelsOut"))
@@ -2660,12 +2704,32 @@ module Aws::MediaLive
     TemporalFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: TemporalFilterStrength, location_name: "strength"))
     TemporalFilterSettings.struct_class = Types::TemporalFilterSettings
 
+    ThumbnailData.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "body"))
+    ThumbnailData.struct_class = Types::ThumbnailData
+
     TimecodeConfig.add_member(:source, Shapes::ShapeRef.new(shape: TimecodeConfigSource, required: true, location_name: "source"))
     TimecodeConfig.add_member(:sync_threshold, Shapes::ShapeRef.new(shape: __integerMin1Max1000000, location_name: "syncThreshold"))
     TimecodeConfig.struct_class = Types::TimecodeConfig
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    TransferInputDevice.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferInputDevice.add_member(:transfer_message, Shapes::ShapeRef.new(shape: __string, location_name: "transferMessage"))
+    TransferInputDevice.struct_class = Types::TransferInputDevice
+
+    TransferInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    TransferInputDeviceRequest.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferInputDeviceRequest.add_member(:transfer_message, Shapes::ShapeRef.new(shape: __string, location_name: "transferMessage"))
+    TransferInputDeviceRequest.struct_class = Types::TransferInputDeviceRequest
+
+    TransferInputDeviceResponse.struct_class = Types::TransferInputDeviceResponse
+
+    TransferringInputDeviceSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    TransferringInputDeviceSummary.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TransferringInputDeviceSummary.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferringInputDeviceSummary.add_member(:transfer_type, Shapes::ShapeRef.new(shape: InputDeviceTransferType, location_name: "transferType"))
+    TransferringInputDeviceSummary.struct_class = Types::TransferringInputDeviceSummary
 
     TtmlDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: TtmlDestinationStyleControl, location_name: "styleControl"))
     TtmlDestinationSettings.struct_class = Types::TtmlDestinationSettings
@@ -2951,6 +3015,8 @@ module Aws::MediaLive
 
     __listOfScte35Descriptor.member = Shapes::ShapeRef.new(shape: Scte35Descriptor)
 
+    __listOfTransferringInputDeviceSummary.member = Shapes::ShapeRef.new(shape: TransferringInputDeviceSummary)
+
     __listOfValidationError.member = Shapes::ShapeRef.new(shape: ValidationError)
 
     __listOfVideoDescription.member = Shapes::ShapeRef.new(shape: VideoDescription)
@@ -2977,6 +3043,23 @@ module Aws::MediaLive
         "signingName" => "medialive",
         "uid" => "medialive-2017-10-14",
       }
+
+      api.add_operation(:accept_input_device_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptInputDeviceTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}/accept"
+        o.input = Shapes::ShapeRef.new(shape: AcceptInputDeviceTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptInputDeviceTransferResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
 
       api.add_operation(:batch_delete, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDelete"
@@ -3040,6 +3123,23 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:cancel_input_device_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelInputDeviceTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelInputDeviceTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelInputDeviceTransferResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -3428,6 +3528,27 @@ module Aws::MediaLive
         )
       end)
 
+      api.add_operation(:list_input_device_transfers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInputDeviceTransfers"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/inputDeviceTransfers"
+        o.input = Shapes::ShapeRef.new(shape: ListInputDeviceTransfersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInputDeviceTransfersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_input_devices, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListInputDevices"
         o.http_method = "GET"
@@ -3597,6 +3718,23 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:reject_input_device_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectInputDeviceTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}/reject"
+        o.input = Shapes::ShapeRef.new(shape: RejectInputDeviceTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectInputDeviceTransferResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:start_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartChannel"
         o.http_method = "POST"
@@ -3652,6 +3790,23 @@ module Aws::MediaLive
         o.input = Shapes::ShapeRef.new(shape: StopMultiplexRequest)
         o.output = Shapes::ShapeRef.new(shape: StopMultiplexResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:transfer_input_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TransferInputDevice"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}/transfer"
+        o.input = Shapes::ShapeRef.new(shape: TransferInputDeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TransferInputDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)

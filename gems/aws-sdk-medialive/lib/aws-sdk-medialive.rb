@@ -29,7 +29,7 @@ require_relative 'aws-sdk-medialive/customizations'
 # structure.
 #
 #     media_live = Aws::MediaLive::Client.new
-#     resp = media_live.batch_delete(params)
+#     resp = media_live.accept_input_device_transfer(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-medialive/customizations'
 # @!group service
 module Aws::MediaLive
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.57.0'
 
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-10-16)
+------------------
+
+* Feature - The AWS Elemental MediaLive APIs and SDKs now support the ability to transfer the ownership of MediaLive Link devices across AWS accounts.
+
 1.56.0 (2020-10-09)
 ------------------
 

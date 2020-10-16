@@ -358,13 +358,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
     #
-    #   * Account: A string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
     #     the root that contains the OU). This string is followed by a
-    #     second "-" dash and from 8 to 32 additional lower-case letters
-    #     or digits.
+    #     second "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -730,7 +730,7 @@ module Aws::Organizations
     #   create the account.
     #
     #   The [regex pattern][1] for a create account request ID string
-    #   requires "car-" followed by from 8 to 32 lower-case letters or
+    #   requires "car-" followed by from 8 to 32 lowercase letters or
     #   digits.
     #
     #
@@ -1147,10 +1147,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1455,8 +1455,9 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] create_account_request_id
-    #   Specifies the `operationId` that uniquely identifies the request.
-    #   You can get the ID from the response to an earlier CreateAccount
+    #   Specifies the `Id` value that uniquely identifies the
+    #   `CreateAccount` request. You can get the value from the
+    #   `CreateAccountStatus.Id` response in an earlier CreateAccount
     #   request, or from the ListCreateAccountStatus operation.
     #
     #   The [regex pattern][1] for a create account request ID string
@@ -1509,9 +1510,9 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -1808,10 +1809,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -2028,10 +2029,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -2114,7 +2115,7 @@ module Aws::Organizations
     #   creates the ID when it initiates the handshake.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -2322,7 +2323,7 @@ module Aws::Organizations
     #   `ActionType`.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -2365,7 +2366,7 @@ module Aws::Organizations
     #   The unique identifier (ID) for the party.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -3470,10 +3471,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3552,10 +3553,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3925,7 +3926,7 @@ module Aws::Organizations
     #   The unique identifier (ID) of an organization.
     #
     #   The [regex pattern][1] for an organization ID string requires "o-"
-    #   followed by from 10 to 32 lower-case letters or digits.
+    #   followed by from 10 to 32 lowercase letters or digits.
     #
     #
     #
@@ -4033,9 +4034,9 @@ module Aws::Organizations
     #   The unique identifier (ID) associated with this OU.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
-    #   "ou-" followed by from 4 to 32 lower-case letters or digits (the
-    #   ID of the root that contains the OU). This string is followed by a
-    #   second "-" dash and from 8 to 32 additional lower-case letters or
+    #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
+    #   of the root that contains the OU). This string is followed by a
+    #   second "-" dash and from 8 to 32 additional lowercase letters or
     #   digits.
     #
     #
@@ -4113,13 +4114,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lowercase letters or digits.
     #
-    #   * Organizational unit (OU): A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
     #     the root that the OU is in). This string is followed by a second
-    #     "-" dash and from 8 to 32 additional lower-case letters or
+    #     "-" dash and from 8 to 32 additional lowercase letters or
     #     digits.
     #
     #
@@ -4236,7 +4237,8 @@ module Aws::Organizations
     #   The unique identifier (ID) of the policy.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lower-case letters or digits.
+    #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
+    #   the underscore character (\_).
     #
     #
     #
@@ -4302,15 +4304,15 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lowercase letters or digits.
     #
-    #   * Account: A string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
     #     the root that the OU is in). This string is followed by a second
-    #     "-" dash and from 8 to 32 additional lower-case letters or
+    #     "-" dash and from 8 to 32 additional lowercase letters or
     #     digits.
     #
     #
@@ -4490,16 +4492,14 @@ module Aws::Organizations
 
     # Contains details about a root. A root is a top-level parent node in
     # the hierarchy of an organization that can contain organizational units
-    # (OUs) and accounts. Every root contains every AWS account in the
-    # organization. Each root enables the accounts to be organized in a
-    # different way and to have different policy types enabled for use in
-    # that root.
+    # (OUs) and accounts. The root contains every AWS account in the
+    # organization.
     #
     # @!attribute [rw] id
     #   The unique identifier (ID) for the root.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
-    #   by from 4 to 32 lower-case letters or digits.
+    #   by from 4 to 32 lowercase letters or digits.
     #
     #
     #

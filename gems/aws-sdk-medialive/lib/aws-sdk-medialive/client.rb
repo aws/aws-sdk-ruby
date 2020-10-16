@@ -327,6 +327,28 @@ module Aws::MediaLive
 
     # @!group API Operations
 
+    # Accept an incoming input device transfer. The ownership of the device
+    # will transfer to your AWS account.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_input_device_transfer({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AcceptInputDeviceTransfer AWS API Documentation
+    #
+    # @overload accept_input_device_transfer(params = {})
+    # @param [Hash] params ({})
+    def accept_input_device_transfer(params = {}, options = {})
+      req = build_request(:accept_input_device_transfer, params)
+      req.send_request(options)
+    end
+
     # Starts delete of resources.
     #
     # @option params [Array<String>] :channel_ids
@@ -707,6 +729,27 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def batch_update_schedule(params = {}, options = {})
       req = build_request(:batch_update_schedule, params)
+      req.send_request(options)
+    end
+
+    # Cancel an input device transfer that you have requested.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_input_device_transfer({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CancelInputDeviceTransfer AWS API Documentation
+    #
+    # @overload cancel_input_device_transfer(params = {})
+    # @param [Hash] params ({})
+    def cancel_input_device_transfer(params = {}, options = {})
+      req = build_request(:cancel_input_device_transfer, params)
       req.send_request(options)
     end
 
@@ -4684,6 +4727,49 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # List input devices that are currently being transferred. List input
+    # devices that you are transferring from your AWS account or input
+    # devices that another AWS account is transferring to you.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [required, String] :transfer_type
+    #
+    # @return [Types::ListInputDeviceTransfersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInputDeviceTransfersResponse#input_device_transfers #input_device_transfers} => Array&lt;Types::TransferringInputDeviceSummary&gt;
+    #   * {Types::ListInputDeviceTransfersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_input_device_transfers({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     transfer_type: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.input_device_transfers #=> Array
+    #   resp.input_device_transfers[0].id #=> String
+    #   resp.input_device_transfers[0].message #=> String
+    #   resp.input_device_transfers[0].target_customer_id #=> String
+    #   resp.input_device_transfers[0].transfer_type #=> String, one of "OUTGOING", "INCOMING"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDeviceTransfers AWS API Documentation
+    #
+    # @overload list_input_device_transfers(params = {})
+    # @param [Hash] params ({})
+    def list_input_device_transfers(params = {}, options = {})
+      req = build_request(:list_input_device_transfers, params)
+      req.send_request(options)
+    end
+
     # List input devices
     #
     # @option params [Integer] :max_results
@@ -5191,6 +5277,27 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def purchase_offering(params = {}, options = {})
       req = build_request(:purchase_offering, params)
+      req.send_request(options)
+    end
+
+    # Reject the transfer of the specified input device to your AWS account.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_input_device_transfer({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RejectInputDeviceTransfer AWS API Documentation
+    #
+    # @overload reject_input_device_transfer(params = {})
+    # @param [Hash] params ({})
+    def reject_input_device_transfer(params = {}, options = {})
+      req = build_request(:reject_input_device_transfer, params)
       req.send_request(options)
     end
 
@@ -6515,6 +6622,34 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def stop_multiplex(params = {}, options = {})
       req = build_request(:stop_multiplex, params)
+      req.send_request(options)
+    end
+
+    # Start an input device transfer to another AWS account. After you make
+    # the request, the other account must accept or reject the transfer.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @option params [String] :target_customer_id
+    #
+    # @option params [String] :transfer_message
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transfer_input_device({
+    #     input_device_id: "__string", # required
+    #     target_customer_id: "__string",
+    #     transfer_message: "__string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TransferInputDevice AWS API Documentation
+    #
+    # @overload transfer_input_device(params = {})
+    # @param [Hash] params ({})
+    def transfer_input_device(params = {}, options = {})
+      req = build_request(:transfer_input_device, params)
       req.send_request(options)
     end
 
@@ -9032,7 +9167,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

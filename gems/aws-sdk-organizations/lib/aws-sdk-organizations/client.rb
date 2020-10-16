@@ -492,10 +492,10 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to attach to
@@ -695,8 +695,9 @@ module Aws::Organizations
     # successfully access the account. To check the status of the request,
     # do one of the following:
     #
-    # * Use the `OperationId` response element from this operation to
-    #   provide as a parameter to the DescribeCreateAccountStatus operation.
+    # * Use the `Id` member of the `CreateAccountStatus` response element
+    #   from this operation to provide as a parameter to the
+    #   DescribeCreateAccountStatus operation.
     #
     # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
     #   For information on using AWS CloudTrail with AWS Organizations, see
@@ -912,7 +913,8 @@ module Aws::Organizations
     #   the [ *AWS GovCloud User Guide*.][1]
     #
     # * You already have an account in the AWS GovCloud (US) Region that is
-    #   associated with your master account in the commercial Region.
+    #   paired with a master account of an organization in the commercial
+    #   Region.
     #
     # * You call this action from the master account of your organization in
     #   the commercial Region.
@@ -1438,10 +1440,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags that you want to attach to the newly created policy.
@@ -1877,9 +1879,10 @@ module Aws::Organizations
     # an AWS service.
     #
     # @option params [required, String] :create_account_request_id
-    #   Specifies the `operationId` that uniquely identifies the request. You
-    #   can get the ID from the response to an earlier CreateAccount request,
-    #   or from the ListCreateAccountStatus operation.
+    #   Specifies the `Id` value that uniquely identifies the `CreateAccount`
+    #   request. You can get the value from the `CreateAccountStatus.Id`
+    #   response in an earlier CreateAccount request, or from the
+    #   ListCreateAccountStatus operation.
     #
     #   The [regex pattern][1] for a create account request ID string requires
     #   "car-" followed by from 8 to 32 lowercase letters or digits.
@@ -1969,9 +1972,9 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [String] :target_id
     #   When you're signed in as the master account, specify the ID of the
@@ -2508,10 +2511,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @return [Types::DisablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2758,10 +2761,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @return [Types::EnablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4325,10 +4328,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4474,10 +4477,10 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -5377,7 +5380,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

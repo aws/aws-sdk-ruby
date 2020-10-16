@@ -159,6 +159,28 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AcceptInputDeviceTransferRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AcceptInputDeviceTransferRequest AWS API Documentation
+    #
+    class AcceptInputDeviceTransferRequest < Struct.new(
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AcceptInputDeviceTransferResponse AWS API Documentation
+    #
+    class AcceptInputDeviceTransferResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2063,6 +2085,28 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CancelInputDeviceTransferRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CancelInputDeviceTransferRequest AWS API Documentation
+    #
+    class CancelInputDeviceTransferRequest < Struct.new(
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CancelInputDeviceTransferResponse AWS API Documentation
+    #
+    class CancelInputDeviceTransferResponse < Aws::EmptyStructure; end
 
     # Caption Description
     #
@@ -10138,6 +10182,70 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListInputDeviceTransfersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #         transfer_type: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDeviceTransfersRequest AWS API Documentation
+    #
+    class ListInputDeviceTransfersRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :transfer_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] input_device_transfers
+    #   @return [Array<Types::TransferringInputDeviceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDeviceTransfersResponse AWS API Documentation
+    #
+    class ListInputDeviceTransfersResponse < Struct.new(
+      :input_device_transfers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of input devices in the transferred state. The recipient
+    # hasn't yet accepted or rejected the transfer.
+    #
+    # @!attribute [rw] input_device_transfers
+    #   The list of devices that you are transferring or are being
+    #   transferred to you.
+    #   @return [Array<Types::TransferringInputDeviceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to get additional list results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDeviceTransfersResultModel AWS API Documentation
+    #
+    class ListInputDeviceTransfersResultModel < Struct.new(
+      :input_device_transfers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListInputDevicesRequest
     #   data as a hash:
     #
@@ -13853,6 +13961,28 @@ module Aws::MediaLive
     #
     class Rec709Settings < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass RejectInputDeviceTransferRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RejectInputDeviceTransferRequest AWS API Documentation
+    #
+    class RejectInputDeviceTransferRequest < Struct.new(
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RejectInputDeviceTransferResponse AWS API Documentation
+    #
+    class RejectInputDeviceTransferResponse < Aws::EmptyStructure; end
+
     # Remix Settings
     #
     # @note When making an API call, you may pass RemixSettings
@@ -15710,6 +15840,22 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # The binary data for the thumbnail that the Link device has most
+    # recently sent to MediaLive.
+    #
+    # @!attribute [rw] body
+    #   The binary data for the thumbnail that the Link device has most
+    #   recently sent to MediaLive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ThumbnailData AWS API Documentation
+    #
+    class ThumbnailData < Struct.new(
+      :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Timecode Config
     #
     # @note When making an API call, you may pass TimecodeConfig
@@ -15753,6 +15899,87 @@ module Aws::MediaLive
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The transfer details of the input device.
+    #
+    # @!attribute [rw] target_customer_id
+    #   The AWS account ID (12 digits) for the recipient of the device
+    #   transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_message
+    #   An optional message for the recipient. Maximum 280 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TransferInputDevice AWS API Documentation
+    #
+    class TransferInputDevice < Struct.new(
+      :target_customer_id,
+      :transfer_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TransferInputDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #         target_customer_id: "__string",
+    #         transfer_message: "__string",
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @!attribute [rw] target_customer_id
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TransferInputDeviceRequest AWS API Documentation
+    #
+    class TransferInputDeviceRequest < Struct.new(
+      :input_device_id,
+      :target_customer_id,
+      :transfer_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TransferInputDeviceResponse AWS API Documentation
+    #
+    class TransferInputDeviceResponse < Aws::EmptyStructure; end
+
+    # Details about the input device that is being transferred.
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The optional message that the sender has attached to the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_customer_id
+    #   The AWS account ID for the recipient of the input device transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_type
+    #   The type (direction) of the input device transfer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TransferringInputDeviceSummary AWS API Documentation
+    #
+    class TransferringInputDeviceSummary < Struct.new(
+      :id,
+      :message,
+      :target_customer_id,
+      :transfer_type)
       SENSITIVE = []
       include Aws::Structure
     end
