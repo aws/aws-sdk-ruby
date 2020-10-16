@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
 2.11.606 (2020-10-15)
 ------------------
 
