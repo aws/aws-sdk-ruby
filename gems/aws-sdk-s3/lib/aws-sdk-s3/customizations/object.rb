@@ -282,8 +282,8 @@ module Aws
       #     # small files are uploaded in a single API call
       #     obj.upload_file('/path/to/file')
       #
-      # Files larger than `:multipart_threshold` are uploaded using the
-      # Amazon S3 multipart upload APIs.
+      # Files larger than or equal to `:multipart_threshold` are uploaded
+      # using the Amazon S3 multipart upload APIs.
       #
       #     # large files are automatically split into parts
       #     # and the parts are uploaded in parallel
@@ -313,7 +313,8 @@ module Aws
       #   will be empty.
       #
       # @option options [Integer] :multipart_threshold (15728640) Files larger
-      #   than `:multipart_threshold` are uploaded using the S3 multipart APIs.
+      #   than or equal to `:multipart_threshold` are uploaded using the S3
+      #   multipart APIs.
       #   Default threshold is 15MB.
       #
       # @option options [Integer] :thread_count (10) The number of parallel
