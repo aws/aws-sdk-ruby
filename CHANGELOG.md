@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Backup - Updated the documentation for AWS Backup.
+
+* Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
+
+* Feature - Aws::DocDB - Updated the documentation for Amazon DocumentDB with MongoDB compatibility.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.607 (2020-10-16)
 ------------------
 
