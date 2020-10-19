@@ -22,7 +22,7 @@ module Aws
       # @return [Client]
       attr_reader :client
 
-      # @return [Integer] Files larger than this in bytes are uploaded
+      # @return [Integer] Files larger than or equal to this in bytes are uploaded
       #   using a {MultipartFileUploader}.
       attr_reader :multipart_threshold
 
