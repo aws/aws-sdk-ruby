@@ -775,6 +775,7 @@ module Aws::SSM
     PatchBugzillaIdList = Shapes::ListShape.new(name: 'PatchBugzillaIdList')
     PatchCVEId = Shapes::StringShape.new(name: 'PatchCVEId')
     PatchCVEIdList = Shapes::ListShape.new(name: 'PatchCVEIdList')
+    PatchCVEIds = Shapes::StringShape.new(name: 'PatchCVEIds')
     PatchClassification = Shapes::StringShape.new(name: 'PatchClassification')
     PatchComplianceData = Shapes::StructureShape.new(name: 'PatchComplianceData')
     PatchComplianceDataList = Shapes::ListShape.new(name: 'PatchComplianceDataList')
@@ -3358,6 +3359,7 @@ module Aws::SSM
     PatchComplianceData.add_member(:severity, Shapes::ShapeRef.new(shape: PatchSeverity, required: true, location_name: "Severity"))
     PatchComplianceData.add_member(:state, Shapes::ShapeRef.new(shape: PatchComplianceDataState, required: true, location_name: "State"))
     PatchComplianceData.add_member(:installed_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "InstalledTime"))
+    PatchComplianceData.add_member(:cve_ids, Shapes::ShapeRef.new(shape: PatchCVEIds, location_name: "CVEIds"))
     PatchComplianceData.struct_class = Types::PatchComplianceData
 
     PatchComplianceDataList.member = Shapes::ShapeRef.new(shape: PatchComplianceData)

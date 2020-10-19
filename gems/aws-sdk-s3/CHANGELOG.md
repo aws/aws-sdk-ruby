@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.83.1 (2020-10-19)
+------------------
+
 * Issue - Fix `multipart_threshold` documentation.
 
 1.83.0 (2020-10-02)

@@ -2187,10 +2187,18 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [String] :id
-    #   The provisioned product identifier.
+    #   The provisioned product identifier. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #
     # @option params [String] :name
-    #   The name of the provisioned product.
+    #   The name of the provisioned product. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #
     # @return [Types::DescribeProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2220,6 +2228,7 @@ module Aws::ServiceCatalog
     #   resp.provisioned_product_detail.last_successful_provisioning_record_id #=> String
     #   resp.provisioned_product_detail.product_id #=> String
     #   resp.provisioned_product_detail.provisioning_artifact_id #=> String
+    #   resp.provisioned_product_detail.launch_role_arn #=> String
     #   resp.cloud_watch_dashboards #=> Array
     #   resp.cloud_watch_dashboards[0].name #=> String
     #
@@ -2554,6 +2563,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #   resp.record_outputs #=> Array
     #   resp.record_outputs[0].output_key #=> String
     #   resp.record_outputs[0].output_value #=> String
@@ -2963,6 +2973,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlan AWS API Documentation
     #
@@ -3039,6 +3050,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceAction AWS API Documentation
     #
@@ -3915,6 +3927,7 @@ module Aws::ServiceCatalog
     #   resp.record_details[0].record_tags #=> Array
     #   resp.record_details[0].record_tags[0].key #=> String
     #   resp.record_details[0].record_tags[0].value #=> String
+    #   resp.record_details[0].launch_role_arn #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistory AWS API Documentation
@@ -4327,6 +4340,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProduct AWS API Documentation
     #
@@ -4441,6 +4455,7 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].last_successful_provisioning_record_id #=> String
     #   resp.provisioned_products[0].product_id #=> String
     #   resp.provisioned_products[0].provisioning_artifact_id #=> String
+    #   resp.provisioned_products[0].launch_role_arn #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts AWS API Documentation
@@ -4787,6 +4802,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProduct AWS API Documentation
     #
@@ -5223,6 +5239,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProduct AWS API Documentation
     #
@@ -5251,9 +5268,20 @@ module Aws::ServiceCatalog
     # @option params [required, Hash<String,String>] :provisioned_product_properties
     #   A map that contains the provisioned product properties to be updated.
     #
+    #   The `LAUNCH_ROLE` key accepts user ARNs and role ARNs. This key allows
+    #   an administrator to call `UpdateProvisionedProductProperties` to
+    #   update the launch role that is associated with a provisioned product.
+    #   This role is used when an end-user calls a provisioning operation such
+    #   as `UpdateProvisionedProduct`, `TerminateProvisionedProduct`, or
+    #   `ExecuteProvisionedProductServiceAction`. Only an ARN role or `null`
+    #   is valid. A user ARN is invalid. For example, if an admin user passes
+    #   `null` as the value for the key `LAUNCH_ROLE`, the admin removes the
+    #   launch role that is associated with the provisioned product. As a
+    #   result, the end user operations use the credentials of the end user.
+    #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the user
-    #   that is allowed to see, update, terminate, and execute service actions
-    #   in the provisioned product.
+    #   that has permission to see, update, terminate, and execute service
+    #   actions in the provisioned product.
     #
     #   The administrator can change the owner of a provisioned product to
     #   another IAM user within the same account. Both end user owners and
@@ -5508,7 +5536,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

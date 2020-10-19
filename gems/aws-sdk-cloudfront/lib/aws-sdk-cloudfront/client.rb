@@ -554,6 +554,10 @@ module Aws::CloudFront
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
+    #             origin_shield: {
+    #               enabled: false, # required
+    #               origin_shield_region: "OriginShieldRegion",
+    #             },
     #           },
     #         ],
     #       },
@@ -775,6 +779,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -957,6 +963,10 @@ module Aws::CloudFront
     #               },
     #               connection_attempts: 1,
     #               connection_timeout: 1,
+    #               origin_shield: {
+    #                 enabled: false, # required
+    #                 origin_shield_region: "OriginShieldRegion",
+    #               },
     #             },
     #           ],
     #         },
@@ -1187,6 +1197,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -2555,6 +2567,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -2731,6 +2745,8 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution_config.origin_groups.items #=> Array
     #   resp.distribution_config.origin_groups.items[0].id #=> String
@@ -3627,6 +3643,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -3941,6 +3959,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -4131,6 +4151,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -5028,6 +5050,10 @@ module Aws::CloudFront
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
+    #             origin_shield: {
+    #               enabled: false, # required
+    #               origin_shield_region: "OriginShieldRegion",
+    #             },
     #           },
     #         ],
     #       },
@@ -5251,6 +5277,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -5864,7 +5892,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

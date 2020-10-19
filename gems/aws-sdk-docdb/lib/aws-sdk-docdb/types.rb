@@ -637,23 +637,14 @@ module Aws::DocDB
     #
     #   If an encryption key is not specified in `KmsKeyId`\:
     #
-    #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
-    #     then Amazon DocumentDB uses the encryption key that is used to
-    #     encrypt the source. Otherwise, Amazon DocumentDB uses your default
-    #     encryption key.
-    #
-    #   * If the `StorageEncrypted` parameter is `true` and
-    #     `ReplicationSourceIdentifier` is not specified, Amazon DocumentDB
+    #   * If the `StorageEncrypted` parameter is `true`, Amazon DocumentDB
     #     uses your default encryption key.
+    #
+    #   ^
     #
     #   AWS KMS creates the default encryption key for your AWS account.
     #   Your AWS account has a different default encryption key for each AWS
     #   Region.
-    #
-    #   If you create a replica of an encrypted cluster in another AWS
-    #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination AWS Region. This key is used to encrypt the replica in
-    #   that AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] pre_signed_url

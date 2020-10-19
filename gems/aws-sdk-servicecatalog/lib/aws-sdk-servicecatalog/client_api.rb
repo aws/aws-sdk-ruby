@@ -361,6 +361,7 @@ module Aws::ServiceCatalog
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTargetDefinition = Shapes::StructureShape.new(name: 'ResourceTargetDefinition')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ScanProvisionedProductsInput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsInput')
     ScanProvisionedProductsOutput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsOutput')
     Scope = Shapes::ListShape.new(name: 'Scope')
@@ -1303,6 +1304,7 @@ module Aws::ServiceCatalog
     ProvisionedProductDetail.add_member(:last_successful_provisioning_record_id, Shapes::ShapeRef.new(shape: Id, location_name: "LastSuccessfulProvisioningRecordId"))
     ProvisionedProductDetail.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
     ProvisionedProductDetail.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisioningArtifactId"))
+    ProvisionedProductDetail.add_member(:launch_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "LaunchRoleArn"))
     ProvisionedProductDetail.struct_class = Types::ProvisionedProductDetail
 
     ProvisionedProductDetails.member = Shapes::ShapeRef.new(shape: ProvisionedProductDetail)
@@ -1434,6 +1436,7 @@ module Aws::ServiceCatalog
     RecordDetail.add_member(:path_id, Shapes::ShapeRef.new(shape: Id, location_name: "PathId"))
     RecordDetail.add_member(:record_errors, Shapes::ShapeRef.new(shape: RecordErrors, location_name: "RecordErrors"))
     RecordDetail.add_member(:record_tags, Shapes::ShapeRef.new(shape: RecordTags, location_name: "RecordTags"))
+    RecordDetail.add_member(:launch_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "LaunchRoleArn"))
     RecordDetail.struct_class = Types::RecordDetail
 
     RecordDetails.member = Shapes::ShapeRef.new(shape: RecordDetail)

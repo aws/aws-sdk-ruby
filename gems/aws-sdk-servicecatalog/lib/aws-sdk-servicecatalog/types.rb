@@ -2139,11 +2139,19 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The provisioned product identifier.
+    #   The provisioned product identifier. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the provisioned product.
+    #   The name of the provisioned product. You must provide the name or
+    #   ID, but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductInput AWS API Documentation
@@ -5035,6 +5043,10 @@ module Aws::ServiceCatalog
     #   `pa-4abcdjnxjj6ne`.
     #   @return [String]
     #
+    # @!attribute [rw] launch_role_arn
+    #   The ARN of the launch role associated with the provisioned product.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail AWS API Documentation
     #
     class ProvisionedProductDetail < Struct.new(
@@ -5050,7 +5062,8 @@ module Aws::ServiceCatalog
       :last_provisioning_record_id,
       :last_successful_provisioning_record_id,
       :product_id,
-      :provisioning_artifact_id)
+      :provisioning_artifact_id,
+      :launch_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5715,6 +5728,10 @@ module Aws::ServiceCatalog
     #   One or more tags.
     #   @return [Array<Types::RecordTag>]
     #
+    # @!attribute [rw] launch_role_arn
+    #   The ARN of the launch role associated with the provisioned product.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordDetail AWS API Documentation
     #
     class RecordDetail < Struct.new(
@@ -5730,7 +5747,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :path_id,
       :record_errors,
-      :record_tags)
+      :record_tags,
+      :launch_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7175,9 +7193,22 @@ module Aws::ServiceCatalog
     #   A map that contains the provisioned product properties to be
     #   updated.
     #
+    #   The `LAUNCH_ROLE` key accepts user ARNs and role ARNs. This key
+    #   allows an administrator to call `UpdateProvisionedProductProperties`
+    #   to update the launch role that is associated with a provisioned
+    #   product. This role is used when an end-user calls a provisioning
+    #   operation such as `UpdateProvisionedProduct`,
+    #   `TerminateProvisionedProduct`, or
+    #   `ExecuteProvisionedProductServiceAction`. Only an ARN role or `null`
+    #   is valid. A user ARN is invalid. For example, if an admin user
+    #   passes `null` as the value for the key `LAUNCH_ROLE`, the admin
+    #   removes the launch role that is associated with the provisioned
+    #   product. As a result, the end user operations use the credentials of
+    #   the end user.
+    #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the
-    #   user that is allowed to see, update, terminate, and execute service
-    #   actions in the provisioned product.
+    #   user that has permission to see, update, terminate, and execute
+    #   service actions in the provisioned product.
     #
     #   The administrator can change the owner of a provisioned product to
     #   another IAM user within the same account. Both end user owners and

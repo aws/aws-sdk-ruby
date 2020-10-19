@@ -1784,6 +1784,10 @@ module Aws::CloudFront
     #                 },
     #                 connection_attempts: 1,
     #                 connection_timeout: 1,
+    #                 origin_shield: {
+    #                   enabled: false, # required
+    #                   origin_shield_region: "OriginShieldRegion",
+    #                 },
     #               },
     #             ],
     #           },
@@ -2048,6 +2052,10 @@ module Aws::CloudFront
     #                   },
     #                   connection_attempts: 1,
     #                   connection_timeout: 1,
+    #                   origin_shield: {
+    #                     enabled: false, # required
+    #                     origin_shield_region: "OriginShieldRegion",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -3908,6 +3916,10 @@ module Aws::CloudFront
     #               },
     #               connection_attempts: 1,
     #               connection_timeout: 1,
+    #               origin_shield: {
+    #                 enabled: false, # required
+    #                 origin_shield_region: "OriginShieldRegion",
+    #               },
     #             },
     #           ],
     #         },
@@ -4389,6 +4401,10 @@ module Aws::CloudFront
     #                 },
     #                 connection_attempts: 1,
     #                 connection_timeout: 1,
+    #                 origin_shield: {
+    #                   enabled: false, # required
+    #                   origin_shield_region: "OriginShieldRegion",
+    #                 },
     #               },
     #             ],
     #           },
@@ -8068,17 +8084,17 @@ module Aws::CloudFront
     # An origin is the location where content is stored, and from which
     # CloudFront gets content to serve to viewers. To specify an origin:
     #
-    # * Use the `S3OriginConfig` type to specify an Amazon S3 bucket that is
-    #   <i> <b>not</b> </i> configured with static website hosting.
+    # * Use `S3OriginConfig` to specify an Amazon S3 bucket that is not
+    #   configured with static website hosting.
     #
-    # * Use the `CustomOriginConfig` type to specify various other kinds of
-    #   content containers or HTTP servers, including:
+    # * Use `CustomOriginConfig` to specify all other kinds of origins,
+    #   including:
     #
     #   * An Amazon S3 bucket that is configured with static website hosting
     #
     #   * An Elastic Load Balancing load balancer
     #
-    #   * An AWS Elemental MediaPackage origin
+    #   * An AWS Elemental MediaPackage endpoint
     #
     #   * An AWS Elemental MediaStore container
     #
@@ -8126,6 +8142,10 @@ module Aws::CloudFront
     #         },
     #         connection_attempts: 1,
     #         connection_timeout: 1,
+    #         origin_shield: {
+    #           enabled: false, # required
+    #           origin_shield_region: "OriginShieldRegion",
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -8160,8 +8180,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] custom_headers
-    #   A list of HTTP header names and values that CloudFront adds to
-    #   requests it sends to the origin.
+    #   A list of HTTP header names and values that CloudFront adds to the
+    #   requests that it sends to the origin.
     #
     #   For more information, see [Adding Custom Headers to Origin
     #   Requests][1] in the *Amazon CloudFront Developer Guide*.
@@ -8173,18 +8193,18 @@ module Aws::CloudFront
     #
     # @!attribute [rw] s3_origin_config
     #   Use this type to specify an origin that is an Amazon S3 bucket that
-    #   is <i> <b>not</b> </i> configured with static website hosting. To
-    #   specify any other type of origin, including an Amazon S3 bucket that
-    #   is configured with static website hosting, use the
-    #   `CustomOriginConfig` type instead.
+    #   is not configured with static website hosting. To specify any other
+    #   type of origin, including an Amazon S3 bucket that is configured
+    #   with static website hosting, use the `CustomOriginConfig` type
+    #   instead.
     #   @return [Types::S3OriginConfig]
     #
     # @!attribute [rw] custom_origin_config
-    #   Use this type to specify an origin that is a content container or
-    #   HTTP server, including an Amazon S3 bucket that is configured with
-    #   static website hosting. To specify an Amazon S3 bucket that is <i>
-    #   <b>not</b> </i> configured with static website hosting, use the
-    #   `S3OriginConfig` type instead.
+    #   Use this type to specify an origin that is not an Amazon S3 bucket,
+    #   with one exception. If the Amazon S3 bucket is configured with
+    #   static website hosting, use this type. If the Amazon S3 bucket is
+    #   not configured with static website hosting, use the `S3OriginConfig`
+    #   type instead.
     #   @return [Types::CustomOriginConfig]
     #
     # @!attribute [rw] connection_attempts
@@ -8220,6 +8240,18 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-timeout
     #   @return [Integer]
     #
+    # @!attribute [rw] origin_shield
+    #   CloudFront Origin Shield. Using Origin Shield can help reduce the
+    #   load on your origin.
+    #
+    #   For more information, see [Using Origin Shield][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html
+    #   @return [Types::OriginShield]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Origin AWS API Documentation
     #
     class Origin < Struct.new(
@@ -8230,7 +8262,8 @@ module Aws::CloudFront
       :s3_origin_config,
       :custom_origin_config,
       :connection_attempts,
-      :connection_timeout)
+      :connection_timeout,
+      :origin_shield)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8799,6 +8832,60 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # CloudFront Origin Shield.
+    #
+    # Using Origin Shield can help reduce the load on your origin. For more
+    # information, see [Using Origin Shield][1] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html
+    #
+    # @note When making an API call, you may pass OriginShield
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         origin_shield_region: "OriginShieldRegion",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   A flag that specifies whether Origin Shield is enabled.
+    #
+    #   When it’s enabled, CloudFront routes all requests through Origin
+    #   Shield, which can help protect your origin. When it’s disabled,
+    #   CloudFront might send requests directly to your origin from multiple
+    #   edge locations or regional edge caches.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] origin_shield_region
+    #   The AWS Region for Origin Shield.
+    #
+    #   Specify the AWS Region that has the lowest latency to your origin.
+    #   To specify a region, use the region code, not the region name. For
+    #   example, specify the US East (Ohio) region as `us-east-2`.
+    #
+    #   When you enable CloudFront Origin Shield, you must specify the AWS
+    #   Region for Origin Shield. For the list of AWS Regions that you can
+    #   specify, and for help choosing the best Region for your origin, see
+    #   [Choosing the AWS Region for Origin Shield][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginShield AWS API Documentation
+    #
+    class OriginShield < Struct.new(
+      :enabled,
+      :origin_shield_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that contains information about the SSL/TLS protocols
     # that CloudFront can use when establishing an HTTPS connection with
     # your origin.
@@ -8830,8 +8917,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that contains information about origins and origin
-    # groups for this distribution.
+    # Contains information about the origins for this distribution.
     #
     # @note When making an API call, you may pass Origins
     #   data as a hash:
@@ -8868,17 +8954,20 @@ module Aws::CloudFront
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
+    #             origin_shield: {
+    #               enabled: false, # required
+    #               origin_shield_region: "OriginShieldRegion",
+    #             },
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] quantity
-    #   The number of origins or origin groups for this distribution.
+    #   The number of origins for this distribution.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   A complex type that contains origins or origin groups for this
-    #   distribution.
+    #   A list of origins.
     #   @return [Array<Types::Origin>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Origins AWS API Documentation
@@ -8948,8 +9037,8 @@ module Aws::CloudFront
     #   * Includes the normalized header in the request to the origin, if a
     #     request is necessary
     #
-    #   For more information, see [Cache compressed objects][1] in the
-    #   *Amazon CloudFront Developer Guide*.
+    #   For more information, see [Compression support][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
     #   If you set this value to `true`, and this cache behavior also has an
     #   origin request policy attached, do not include the `Accept-Encoding`
@@ -8987,8 +9076,8 @@ module Aws::CloudFront
     #   * Includes the normalized header in the request to the origin, if a
     #     request is necessary
     #
-    #   For more information, see [Cache compressed objects][1] in the
-    #   *Amazon CloudFront Developer Guide*.
+    #   For more information, see [Compression support][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
     #   If you set this value to `true`, and this cache behavior also has an
     #   origin request policy attached, do not include the `Accept-Encoding`
@@ -11170,6 +11259,10 @@ module Aws::CloudFront
     #                 },
     #                 connection_attempts: 1,
     #                 connection_timeout: 1,
+    #                 origin_shield: {
+    #                   enabled: false, # required
+    #                   origin_shield_region: "OriginShieldRegion",
+    #                 },
     #               },
     #             ],
     #           },

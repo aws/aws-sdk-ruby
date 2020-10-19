@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-10-19)
+------------------
+
+* Feature - Documentation updates for Cryo
+
 1.23.0 (2020-09-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2020-10-19)
+------------------
+
+* Feature - This Patch Manager release now supports Common Vulnerabilities and Exposure (CVE) Ids for missing packages via the DescribeInstancePatches API.
+
 1.94.0 (2020-10-15)
 ------------------
 

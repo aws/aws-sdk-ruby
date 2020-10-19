@@ -13544,6 +13544,11 @@ module Aws::SSM
     #   all operating systems provide this level of information.
     #   @return [Time]
     #
+    # @!attribute [rw] cve_ids
+    #   The IDs of one or more Common Vulnerabilities and Exposure (CVE)
+    #   issues that are resolved by the patch.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchComplianceData AWS API Documentation
     #
     class PatchComplianceData < Struct.new(
@@ -13552,7 +13557,8 @@ module Aws::SSM
       :classification,
       :severity,
       :state,
-      :installed_time)
+      :installed_time,
+      :cve_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14142,7 +14148,7 @@ module Aws::SSM
     #   The type of parameter that you want to add to the system.
     #
     #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
-    #   templates or in the China Regions.
+    #   templates.
     #
     #    </note>
     #

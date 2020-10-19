@@ -33,8 +33,10 @@ module Aws::Backup
     #   Specifies the backup option for a selected resource. This option is
     #   only available for Windows VSS backup jobs.
     #
-    #   Valid value: `"WindowsVSS”:“enabled"`. If enabled, creates a VSS
-    #   Windows backup; otherwise, creates a regular backup.
+    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
+    #   backup option and create a VSS Windows backup. Set to
+    #   “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS
+    #   option is not enabled by default.
     #
     #   If you specify an invalid option, you get an
     #   `InvalidParameterValueException` exception.
@@ -200,8 +202,9 @@ module Aws::Backup
     #   Specifies the backup option for a selected resource. This option is
     #   only available for Windows VSS backup jobs.
     #
-    #   Valid value: `"WindowsVSS”:“enabled"`. If enabled, creates a VSS
-    #   Windows backup; otherwise, creates a regular backup. If you specify
+    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
+    #   backup option and create a VSS Windows backup. Set to
+    #   “WindowsVSS”:”disabled” to create a regular backup. If you specify
     #   an invalid option, you get an `InvalidParameterValueException`
     #   exception.
     #   @return [Hash<String,String>]
@@ -437,6 +440,15 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression specifying when AWS Backup initiates a backup job.
+    #   For more information about cron expressions, see [Schedule
+    #   Expressions for Rules][1] in the *Amazon CloudWatch Events User
+    #   Guide.*. Prior to specifying a value for this parameter, we
+    #   recommend testing your cron expression using one of the many
+    #   available cron generator and testing tools.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
@@ -3934,8 +3946,10 @@ module Aws::Backup
     #   Specifies the backup option for a selected resource. This option is
     #   only available for Windows VSS backup jobs.
     #
-    #   Valid value: `"WindowsVSS”:“enabled"`. If enabled, creates a VSS
-    #   Windows backup; otherwise, creates a regular backup.
+    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
+    #   backup option and create a VSS Windows backup. Set to
+    #   “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS
+    #   option is not enabled by default.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJobInput AWS API Documentation
@@ -4111,7 +4125,9 @@ module Aws::Backup
     #     must be set to `true`.
     #
     #   * `KmsKeyId`\: Specifies the AWS KMS key that is used to encrypt the
-    #     restored file system.
+    #     restored file system. You can specify a key from another AWS
+    #     account provided that key it is properly shared with your account
+    #     via AWS KMS.
     #
     #   * `PerformanceMode`\: Specifies the throughput mode of the file
     #     system.
@@ -4121,6 +4137,11 @@ module Aws::Backup
     #
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that
     #     the recovery point is restored to a new Amazon EFS file system.
+    #
+    #   * `ItemsToRestore `\: A serialized list of up to five strings where
+    #     each string is a file path. Use `ItemsToRestore` to restore
+    #     specific files or directories rather than the entire file system.
+    #     This parameter is optional.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] iam_role_arn

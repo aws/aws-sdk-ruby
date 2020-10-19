@@ -296,6 +296,8 @@ module Aws::CloudFront
     OriginRequestPolicySummary = Shapes::StructureShape.new(name: 'OriginRequestPolicySummary')
     OriginRequestPolicySummaryList = Shapes::ListShape.new(name: 'OriginRequestPolicySummaryList')
     OriginRequestPolicyType = Shapes::StringShape.new(name: 'OriginRequestPolicyType')
+    OriginShield = Shapes::StructureShape.new(name: 'OriginShield')
+    OriginShieldRegion = Shapes::StringShape.new(name: 'OriginShieldRegion')
     OriginSslProtocols = Shapes::StructureShape.new(name: 'OriginSslProtocols')
     Origins = Shapes::StructureShape.new(name: 'Origins')
     ParametersInCacheKeyAndForwardedToOrigin = Shapes::StructureShape.new(name: 'ParametersInCacheKeyAndForwardedToOrigin')
@@ -1504,6 +1506,7 @@ module Aws::CloudFront
     Origin.add_member(:custom_origin_config, Shapes::ShapeRef.new(shape: CustomOriginConfig, location_name: "CustomOriginConfig"))
     Origin.add_member(:connection_attempts, Shapes::ShapeRef.new(shape: integer, location_name: "ConnectionAttempts"))
     Origin.add_member(:connection_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "ConnectionTimeout"))
+    Origin.add_member(:origin_shield, Shapes::ShapeRef.new(shape: OriginShield, location_name: "OriginShield"))
     Origin.struct_class = Types::Origin
 
     OriginCustomHeader.add_member(:header_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "HeaderName"))
@@ -1578,6 +1581,10 @@ module Aws::CloudFront
     OriginRequestPolicySummary.struct_class = Types::OriginRequestPolicySummary
 
     OriginRequestPolicySummaryList.member = Shapes::ShapeRef.new(shape: OriginRequestPolicySummary, location_name: "OriginRequestPolicySummary")
+
+    OriginShield.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
+    OriginShield.add_member(:origin_shield_region, Shapes::ShapeRef.new(shape: OriginShieldRegion, location_name: "OriginShieldRegion"))
+    OriginShield.struct_class = Types::OriginShield
 
     OriginSslProtocols.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     OriginSslProtocols.add_member(:items, Shapes::ShapeRef.new(shape: SslProtocolsList, required: true, location_name: "Items"))

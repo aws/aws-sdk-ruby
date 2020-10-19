@@ -2352,8 +2352,10 @@ module Aws::Backup
     #   Specifies the backup option for a selected resource. This option is
     #   only available for Windows VSS backup jobs.
     #
-    #   Valid value: `"WindowsVSS”:“enabled"`. If enabled, creates a VSS
-    #   Windows backup; otherwise, creates a regular backup.
+    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
+    #   backup option and create a VSS Windows backup. Set to
+    #   “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS
+    #   option is not enabled by default.
     #
     # @return [Types::StartBackupJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2469,10 +2471,6 @@ module Aws::Backup
     # Recovers the saved resource identified by an Amazon Resource Name
     # (ARN).
     #
-    # If the resource ARN is included in the request, then the last complete
-    # backup of that resource is recovered. If the ARN of a recovery point
-    # is supplied, then that recovery point is restored.
-    #
     # @option params [required, String] :recovery_point_arn
     #   An ARN that uniquely identifies a recovery point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
@@ -2500,7 +2498,9 @@ module Aws::Backup
     #     set to `true`.
     #
     #   * `KmsKeyId`\: Specifies the AWS KMS key that is used to encrypt the
-    #     restored file system.
+    #     restored file system. You can specify a key from another AWS account
+    #     provided that key it is properly shared with your account via AWS
+    #     KMS.
     #
     #   * `PerformanceMode`\: Specifies the throughput mode of the file
     #     system.
@@ -2510,6 +2510,11 @@ module Aws::Backup
     #
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that the
     #     recovery point is restored to a new Amazon EFS file system.
+    #
+    #   * `ItemsToRestore `\: A serialized list of up to five strings where
+    #     each string is a file path. Use `ItemsToRestore` to restore specific
+    #     files or directories rather than the entire file system. This
+    #     parameter is optional.
     #
     # @option params [required, String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to
@@ -2841,7 +2846,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

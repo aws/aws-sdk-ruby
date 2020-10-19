@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-10-19)
+------------------
+
+* Feature - Amazon CloudFront adds support for Origin Shield.
+
 1.43.0 (2020-09-30)
 ------------------
 

@@ -3251,6 +3251,7 @@ module Aws::SSM
     #   resp.patches[0].severity #=> String
     #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "INSTALLED_PENDING_REBOOT", "INSTALLED_REJECTED", "MISSING", "NOT_APPLICABLE", "FAILED"
     #   resp.patches[0].installed_time #=> Time
+    #   resp.patches[0].cve_ids #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatches AWS API Documentation
@@ -7090,7 +7091,7 @@ module Aws::SSM
     #   The type of parameter that you want to add to the system.
     #
     #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
-    #   templates or in the China Regions.
+    #   templates.
     #
     #    </note>
     #
@@ -9781,7 +9782,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
