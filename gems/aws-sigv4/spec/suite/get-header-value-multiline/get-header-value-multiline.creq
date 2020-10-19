@@ -2,7 +2,7 @@ GET
 /
 
 host:example.amazonaws.com
-my-header1:value1,value2,value3
+my-header1:value1 value2 value3
 x-amz-date:20150830T123600Z
 
 host;my-header1;x-amz-date
