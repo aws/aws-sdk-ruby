@@ -8,7 +8,7 @@ module Aws
 
       let(:mod) {
         mod = Module.new
-        mod.send(:extend, DynamicErrors)
+        mod.extend DynamicErrors
         mod
       }
 

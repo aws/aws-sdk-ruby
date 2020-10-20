@@ -4,7 +4,7 @@
 require 'aws-sdk-ec2/customizations/resource'
 require 'aws-sdk-ec2/customizations/instance'
 
-Aws::EC2::Instance::Collection.send(:extend, Aws::Deprecations)
+Aws::EC2::Instance::Collection.extend Aws::Deprecations
 {
   create_tags: :batch_create_tags,
   monitor: :batch_create_tags,
@@ -19,5 +19,5 @@ Aws::EC2::Instance::Collection.send(:extend, Aws::Deprecations)
 end
 
 Aws::EC2::Tag::Collection.send(:alias_method, :delete, :batch_delete!)
-Aws::EC2::Tag::Collection.send(:extend, Aws::Deprecations)
+Aws::EC2::Tag::Collection.extend Aws::Deprecations
 Aws::EC2::Tag::Collection.send(:deprecated, :delete, use: :batch_delete!)
