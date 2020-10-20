@@ -1830,6 +1830,59 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Specifies a set of conditions to be met, and an action to take
+    # (`RETRY` or `EXIT`) if all conditions are met.
+    #
+    # @note When making an API call, you may pass EvaluateOnExit
+    #   data as a hash:
+    #
+    #       {
+    #         on_status_reason: "String",
+    #         on_reason: "String",
+    #         on_exit_code: "String",
+    #         action: "RETRY", # required, accepts RETRY, EXIT
+    #       }
+    #
+    # @!attribute [rw] on_status_reason
+    #   Contains a glob pattern to match against the `StatusReason` returned
+    #   for a job. The patten can be up to 512 characters long, can contain
+    #   letters, numbers, periods (.), colons (:), and whitespace (spaces,
+    #   tabs). and can optionally end with an asterisk (*) so that only the
+    #   start of the string needs to be an exact match.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_reason
+    #   Contains a glob pattern to match against the `Reason` returned for a
+    #   job. The patten can be up to 512 characters long, can contain
+    #   letters, numbers, periods (.), colons (:), and whitespace (spaces,
+    #   tabs), and can optionally end with an asterisk (*) so that only the
+    #   start of the string needs to be an exact match.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_exit_code
+    #   Contains a glob pattern to match against the decimal representation
+    #   of the `ExitCode` returned for a job. The patten can be up to 512
+    #   characters long, can contain only numbers, and can optionally end
+    #   with an asterisk (*) so that only the start of the string needs to
+    #   be an exact match.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   Specifies the action to take if all of the specified conditions
+    #   (`onStatusReason`, `onReason`, and `onExitCode`) are met.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EvaluateOnExit AWS API Documentation
+    #
+    class EvaluateOnExit < Struct.new(
+      :on_status_reason,
+      :on_reason,
+      :on_exit_code,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Determine whether your data volume persists on the host container
     # instance and where it is stored. If this parameter is empty, then the
     # Docker daemon assigns a host path for your data volume, but the data
@@ -2398,7 +2451,8 @@ module Aws::Batch
     #   The total amount of swap memory (in MiB) a container can use. This
     #   parameter will be translated to the `--memory-swap` option to
     #   [docker run][1] where the value would be the sum of the container
-    #   memory plus the `maxSwap` value.
+    #   memory plus the `maxSwap` value. For more information, see [
+    #   `--memory-swap` details][2] in the Docker documentation.
     #
     #   If a `maxSwap` value of `0` is specified, the container will not use
     #   swap. Accepted values are `0` or any positive integer. If the
@@ -2410,6 +2464,7 @@ module Aws::Batch
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/run/
+    #   [2]: https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details
     #   @return [Integer]
     #
     # @!attribute [rw] swappiness
@@ -3351,6 +3406,14 @@ module Aws::Batch
     #         },
     #         retry_strategy: {
     #           attempts: 1,
+    #           evaluate_on_exit: [
+    #             {
+    #               on_status_reason: "String",
+    #               on_reason: "String",
+    #               on_exit_code: "String",
+    #               action: "RETRY", # required, accepts RETRY, EXIT
+    #             },
+    #           ],
     #         },
     #         timeout: {
     #           attempt_duration_seconds: 1,
@@ -3506,6 +3569,14 @@ module Aws::Batch
     #
     #       {
     #         attempts: 1,
+    #         evaluate_on_exit: [
+    #           {
+    #             on_status_reason: "String",
+    #             on_reason: "String",
+    #             on_exit_code: "String",
+    #             action: "RETRY", # required, accepts RETRY, EXIT
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] attempts
@@ -3515,10 +3586,17 @@ module Aws::Batch
     #   attempts as the value.
     #   @return [Integer]
     #
+    # @!attribute [rw] evaluate_on_exit
+    #   Array of up to 5 objects that specify conditions under which the job
+    #   should be retried or failed. If this parameter is specified, then
+    #   the `attempts` parameter must also be specified.
+    #   @return [Array<Types::EvaluateOnExit>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RetryStrategy AWS API Documentation
     #
     class RetryStrategy < Struct.new(
-      :attempts)
+      :attempts,
+      :evaluate_on_exit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3651,6 +3729,14 @@ module Aws::Batch
     #         },
     #         retry_strategy: {
     #           attempts: 1,
+    #           evaluate_on_exit: [
+    #             {
+    #               on_status_reason: "String",
+    #               on_reason: "String",
+    #               on_exit_code: "String",
+    #               action: "RETRY", # required, accepts RETRY, EXIT
+    #             },
+    #           ],
     #         },
     #         timeout: {
     #           attempt_duration_seconds: 1,

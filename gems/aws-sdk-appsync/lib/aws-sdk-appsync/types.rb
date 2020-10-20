@@ -79,7 +79,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -116,7 +116,7 @@ module Aws::AppSync
     #   As of July 2020, this is deprecated, and the generic identifiers
     #   above should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
@@ -473,7 +473,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -500,7 +500,7 @@ module Aws::AppSync
     #   As of July 2020, this is deprecated, and the generic identifiers
     #   above should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
@@ -1895,8 +1895,8 @@ module Aws::AppSync
     #   @return [Boolean]
     #
     # @!attribute [rw] waf_web_acl_arn
-    #   The ARN of the AWS WAF ACL associated with this `GraphqlApi` if one
-    #   exists.
+    #   The ARN of the AWS Web Application Firewall (WAF) ACL associated
+    #   with this `GraphqlApi`, if one exists.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
@@ -2941,7 +2941,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -2968,7 +2968,7 @@ module Aws::AppSync
     #   As of July 2020, this is deprecated, and the generic identifiers
     #   above should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.

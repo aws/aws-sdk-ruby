@@ -63,6 +63,8 @@ module Aws::Batch
     DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
     DevicesList = Shapes::ListShape.new(name: 'DevicesList')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    EvaluateOnExit = Shapes::StructureShape.new(name: 'EvaluateOnExit')
+    EvaluateOnExitList = Shapes::ListShape.new(name: 'EvaluateOnExitList')
     Host = Shapes::StructureShape.new(name: 'Host')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
@@ -109,6 +111,7 @@ module Aws::Batch
     ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
     ResourceRequirements = Shapes::ListShape.new(name: 'ResourceRequirements')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RetryAction = Shapes::StringShape.new(name: 'RetryAction')
     RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     Secret = Shapes::StructureShape.new(name: 'Secret')
     SecretList = Shapes::ListShape.new(name: 'SecretList')
@@ -364,6 +367,14 @@ module Aws::Batch
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
+    EvaluateOnExit.add_member(:on_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "onStatusReason"))
+    EvaluateOnExit.add_member(:on_reason, Shapes::ShapeRef.new(shape: String, location_name: "onReason"))
+    EvaluateOnExit.add_member(:on_exit_code, Shapes::ShapeRef.new(shape: String, location_name: "onExitCode"))
+    EvaluateOnExit.add_member(:action, Shapes::ShapeRef.new(shape: RetryAction, required: true, location_name: "action"))
+    EvaluateOnExit.struct_class = Types::EvaluateOnExit
+
+    EvaluateOnExitList.member = Shapes::ShapeRef.new(shape: EvaluateOnExit)
+
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
     Host.struct_class = Types::Host
 
@@ -554,6 +565,7 @@ module Aws::Batch
     ResourceRequirements.member = Shapes::ShapeRef.new(shape: ResourceRequirement)
 
     RetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "attempts"))
+    RetryStrategy.add_member(:evaluate_on_exit, Shapes::ShapeRef.new(shape: EvaluateOnExitList, location_name: "evaluateOnExit"))
     RetryStrategy.struct_class = Types::RetryStrategy
 
     Secret.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))

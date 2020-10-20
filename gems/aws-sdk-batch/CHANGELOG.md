@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-10-20)
+------------------
+
+* Feature - Adding evaluateOnExit to job retry strategies.
+
 1.39.0 (2020-10-02)
 ------------------
 

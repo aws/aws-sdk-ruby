@@ -1127,6 +1127,11 @@ module Aws::Batch
     #   resp.job_definitions[0].parameters #=> Hash
     #   resp.job_definitions[0].parameters["String"] #=> String
     #   resp.job_definitions[0].retry_strategy.attempts #=> Integer
+    #   resp.job_definitions[0].retry_strategy.evaluate_on_exit #=> Array
+    #   resp.job_definitions[0].retry_strategy.evaluate_on_exit[0].on_status_reason #=> String
+    #   resp.job_definitions[0].retry_strategy.evaluate_on_exit[0].on_reason #=> String
+    #   resp.job_definitions[0].retry_strategy.evaluate_on_exit[0].on_exit_code #=> String
+    #   resp.job_definitions[0].retry_strategy.evaluate_on_exit[0].action #=> String, one of "RETRY", "EXIT"
     #   resp.job_definitions[0].container_properties.image #=> String
     #   resp.job_definitions[0].container_properties.vcpus #=> Integer
     #   resp.job_definitions[0].container_properties.memory #=> Integer
@@ -1436,6 +1441,11 @@ module Aws::Batch
     #   resp.jobs[0].status_reason #=> String
     #   resp.jobs[0].created_at #=> Integer
     #   resp.jobs[0].retry_strategy.attempts #=> Integer
+    #   resp.jobs[0].retry_strategy.evaluate_on_exit #=> Array
+    #   resp.jobs[0].retry_strategy.evaluate_on_exit[0].on_status_reason #=> String
+    #   resp.jobs[0].retry_strategy.evaluate_on_exit[0].on_reason #=> String
+    #   resp.jobs[0].retry_strategy.evaluate_on_exit[0].on_exit_code #=> String
+    #   resp.jobs[0].retry_strategy.evaluate_on_exit[0].action #=> String, one of "RETRY", "EXIT"
     #   resp.jobs[0].started_at #=> Integer
     #   resp.jobs[0].stopped_at #=> Integer
     #   resp.jobs[0].depends_on #=> Array
@@ -2082,6 +2092,14 @@ module Aws::Batch
     #     },
     #     retry_strategy: {
     #       attempts: 1,
+    #       evaluate_on_exit: [
+    #         {
+    #           on_status_reason: "String",
+    #           on_reason: "String",
+    #           on_exit_code: "String",
+    #           action: "RETRY", # required, accepts RETRY, EXIT
+    #         },
+    #       ],
     #     },
     #     timeout: {
     #       attempt_duration_seconds: 1,
@@ -2281,6 +2299,14 @@ module Aws::Batch
     #     },
     #     retry_strategy: {
     #       attempts: 1,
+    #       evaluate_on_exit: [
+    #         {
+    #           on_status_reason: "String",
+    #           on_reason: "String",
+    #           on_exit_code: "String",
+    #           action: "RETRY", # required, accepts RETRY, EXIT
+    #         },
+    #       ],
     #     },
     #     timeout: {
     #       attempt_duration_seconds: 1,
@@ -2622,7 +2648,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -549,7 +549,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].cname #=> String
     #   resp.environments[0].date_created #=> Time
     #   resp.environments[0].date_updated #=> Time
-    #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
+    #   resp.environments[0].status #=> String, one of "Aborting", "Launching", "Updating", "LinkingFrom", "LinkingTo", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
     #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
@@ -1268,7 +1268,7 @@ module Aws::ElasticBeanstalk
     #   resp.cname #=> String
     #   resp.date_created #=> Time
     #   resp.date_updated #=> Time
-    #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
+    #   resp.status #=> String, one of "Aborting", "Launching", "Updating", "LinkingFrom", "LinkingTo", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
     #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
@@ -2531,7 +2531,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].cname #=> String
     #   resp.environments[0].date_created #=> Time
     #   resp.environments[0].date_updated #=> Time
-    #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
+    #   resp.environments[0].status #=> String, one of "Aborting", "Launching", "Updating", "LinkingFrom", "LinkingTo", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
     #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
@@ -3686,7 +3686,7 @@ module Aws::ElasticBeanstalk
     #   resp.cname #=> String
     #   resp.date_created #=> Time
     #   resp.date_updated #=> Time
-    #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
+    #   resp.status #=> String, one of "Aborting", "Launching", "Updating", "LinkingFrom", "LinkingTo", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
     #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
@@ -4304,7 +4304,7 @@ module Aws::ElasticBeanstalk
     #   resp.cname #=> String
     #   resp.date_created #=> Time
     #   resp.date_updated #=> Time
-    #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
+    #   resp.status #=> String, one of "Aborting", "Launching", "Updating", "LinkingFrom", "LinkingTo", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
     #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
@@ -4501,7 +4501,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

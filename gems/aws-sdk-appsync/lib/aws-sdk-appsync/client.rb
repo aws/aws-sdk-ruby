@@ -350,7 +350,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #
     # @option params [required, String] :type
@@ -376,7 +376,7 @@ module Aws::AppSync
     #   of July 2020, this is deprecated, and the generic identifiers above
     #   should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
@@ -2002,7 +2002,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #
     # @option params [required, String] :type
@@ -2028,7 +2028,7 @@ module Aws::AppSync
     #   of July 2020, this is deprecated, and the generic identifiers above
     #   should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
@@ -2586,7 +2586,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

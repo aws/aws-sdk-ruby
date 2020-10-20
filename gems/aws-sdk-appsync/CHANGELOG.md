@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-10-20)
+------------------
+
+* Feature - Documentation updates to AppSync to correct several typos.
+
 1.36.0 (2020-10-01)
 ------------------
 
