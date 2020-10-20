@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.609 (2020-10-20)
+------------------
+
 * Feature - Aws::AppSync - Updated the documentation for AWS AppSync.
 
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
