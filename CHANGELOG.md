@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppSync - Updated the documentation for AWS AppSync.
+
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API for AWS Elastic Beanstalk.
+
 2.11.608 (2020-10-19)
 ------------------
 
