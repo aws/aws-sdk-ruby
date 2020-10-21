@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-10-21)
+------------------
+
+* Feature - AWS Organizations renamed the 'master account' to 'management account'.
+
 1.54.0 (2020-10-21)
 ------------------
 

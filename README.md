@@ -483,8 +483,8 @@ RubyGems.org page under "LINKS" section.
 | Amazon S3 on Outposts                                 | Aws::S3Outposts                      | aws-sdk-s3outposts                      | 2017-07-25  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                | aws-sdk-sagemakerruntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                       | aws-sdk-sagemaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
 | Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
+| Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | Aws::SNS                             | aws-sdk-sns                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | Aws::SQS                             | aws-sdk-sqs                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | Aws::S3                              | aws-sdk-s3                              | 2006-03-01  |
@@ -510,8 +510,8 @@ RubyGems.org page under "LINKS" section.
 | Braket                                                | Aws::Braket                          | aws-sdk-braket                          | 2019-09-01  |
 | CodeArtifact                                          | Aws::CodeArtifact                    | aws-sdk-codeartifact                    | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |

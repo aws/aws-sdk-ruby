@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-10-21)
+------------------
+
+* Feature - This release adds support for specifying port overrides on AWS Global Accelerator endpoint groups.
+
 1.24.0 (2020-10-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-10-21)
+------------------
+
+* Feature - This release adds custom data sources: a new data source type that gives you full control of the documents added, modified or deleted during a data source sync while providing run history metrics.
+
 1.15.0 (2020-10-21)
 ------------------
 
