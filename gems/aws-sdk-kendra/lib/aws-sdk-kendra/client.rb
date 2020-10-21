@@ -506,9 +506,15 @@ module Aws::Kendra
     # @option params [required, String] :type
     #   The type of repository that contains the data source.
     #
-    # @option params [required, Types::DataSourceConfiguration] :configuration
-    #   The data source connector configuration information that is required
-    #   to access the repository.
+    # @option params [Types::DataSourceConfiguration] :configuration
+    #   The connector configuration information that is required to access the
+    #   repository.
+    #
+    #   You can't specify the `Configuration` parameter when the `Type`
+    #   parameter is set to `CUSTOM`. If you do, you receive a
+    #   `ValidationException` exception.
+    #
+    #   The `Configuration` parameter is required for all other data sources.
     #
     # @option params [String] :description
     #   A description for the data source.
@@ -519,10 +525,20 @@ module Aws::Kendra
     #   Kendra will not periodically update the index. You can call the
     #   `StartDataSourceSyncJob` operation to update the index.
     #
-    # @option params [required, String] :role_arn
+    #   You can't specify the `Schedule` parameter when the `Type` parameter
+    #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
+    #   exception.
+    #
+    # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
     #   data source. For more information, see [IAM Roles for Amazon
     #   Kendra][1].
+    #
+    #   You can't specify the `RoleArn` parameter when the `Type` parameter
+    #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
+    #   exception.
+    #
+    #   The `RoleArn` parameter is required for all other data sources.
     #
     #
     #
@@ -533,6 +549,14 @@ module Aws::Kendra
     #   the tags to identify and organize your resources and to control access
     #   to resources.
     #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a data
+    #   source. Multiple calls to the `CreateDataSource` operation with the
+    #   same client token will create only one data source.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#id #id} => String
@@ -542,11 +566,12 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW
-    #     configuration: { # required
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM
+    #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
     #         inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         documents_metadata_configuration: {
     #           s3_prefix: "S3ObjectKey",
@@ -736,13 +761,14 @@ module Aws::Kendra
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
-    #     role_arn: "RoleArn", # required
+    #     role_arn: "RoleArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     client_token: "ClientTokenName",
     #   })
     #
     # @example Response structure
@@ -801,6 +827,14 @@ module Aws::Kendra
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
     #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a FAQ.
+    #   Multiple calls to the `CreateFaqRequest` operation with the same
+    #   client token will create only one FAQ.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFaqResponse#id #id} => String
@@ -823,6 +857,7 @@ module Aws::Kendra
     #       },
     #     ],
     #     file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
+    #     client_token: "ClientTokenName",
     #   })
     #
     # @example Response structure
@@ -860,10 +895,10 @@ module Aws::Kendra
     #   default is `ENTERPRISE_EDITION`.
     #
     # @option params [required, String] :role_arn
-    #   An IAM role that gives Amazon Kendra permissions to access your Amazon
-    #   CloudWatch logs and metrics. This is also the role used when you use
-    #   the `BatchPutDocument` operation to index documents from an Amazon S3
-    #   bucket.
+    #   An AWS Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access your Amazon CloudWatch logs and metrics.
+    #   This is also the role used when you use the `BatchPutDocument`
+    #   operation to index documents from an Amazon S3 bucket.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   The identifier of the AWS KMS customer managed key (CMK) to use to
@@ -876,7 +911,7 @@ module Aws::Kendra
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create an index.
     #   Multiple calls to the `CreateIndex` operation with the same client
-    #   token will create only one index.”
+    #   token will create only one index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1042,10 +1077,12 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
+    #   resp.configuration.s3_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.s3_configuration.inclusion_patterns[0] #=> String
     #   resp.configuration.s3_configuration.exclusion_patterns #=> Array
     #   resp.configuration.s3_configuration.exclusion_patterns[0] #=> String
     #   resp.configuration.s3_configuration.documents_metadata_configuration.s3_prefix #=> String
@@ -1416,7 +1453,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -1999,6 +2036,7 @@ module Aws::Kendra
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
     #         inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         documents_metadata_configuration: {
     #           s3_prefix: "S3ObjectKey",
@@ -2284,7 +2322,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

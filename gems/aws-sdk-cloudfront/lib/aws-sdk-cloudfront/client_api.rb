@@ -14,6 +14,7 @@ module Aws::CloudFront
     include Seahorse::Model
 
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
+    ActiveTrustedKeyGroups = Shapes::StructureShape.new(name: 'ActiveTrustedKeyGroups')
     ActiveTrustedSigners = Shapes::StructureShape.new(name: 'ActiveTrustedSigners')
     AliasICPRecordal = Shapes::StructureShape.new(name: 'AliasICPRecordal')
     AliasICPRecordals = Shapes::ListShape.new(name: 'AliasICPRecordals')
@@ -72,6 +73,8 @@ module Aws::CloudFront
     CreateFieldLevelEncryptionProfileResult = Shapes::StructureShape.new(name: 'CreateFieldLevelEncryptionProfileResult')
     CreateInvalidationRequest = Shapes::StructureShape.new(name: 'CreateInvalidationRequest')
     CreateInvalidationResult = Shapes::StructureShape.new(name: 'CreateInvalidationResult')
+    CreateKeyGroupRequest = Shapes::StructureShape.new(name: 'CreateKeyGroupRequest')
+    CreateKeyGroupResult = Shapes::StructureShape.new(name: 'CreateKeyGroupResult')
     CreateMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateMonitoringSubscriptionRequest')
     CreateMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'CreateMonitoringSubscriptionResult')
     CreateOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'CreateOriginRequestPolicyRequest')
@@ -95,6 +98,7 @@ module Aws::CloudFront
     DeleteDistributionRequest = Shapes::StructureShape.new(name: 'DeleteDistributionRequest')
     DeleteFieldLevelEncryptionConfigRequest = Shapes::StructureShape.new(name: 'DeleteFieldLevelEncryptionConfigRequest')
     DeleteFieldLevelEncryptionProfileRequest = Shapes::StructureShape.new(name: 'DeleteFieldLevelEncryptionProfileRequest')
+    DeleteKeyGroupRequest = Shapes::StructureShape.new(name: 'DeleteKeyGroupRequest')
     DeleteMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteMonitoringSubscriptionRequest')
     DeleteMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteMonitoringSubscriptionResult')
     DeleteOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'DeleteOriginRequestPolicyRequest')
@@ -161,6 +165,10 @@ module Aws::CloudFront
     GetFieldLevelEncryptionResult = Shapes::StructureShape.new(name: 'GetFieldLevelEncryptionResult')
     GetInvalidationRequest = Shapes::StructureShape.new(name: 'GetInvalidationRequest')
     GetInvalidationResult = Shapes::StructureShape.new(name: 'GetInvalidationResult')
+    GetKeyGroupConfigRequest = Shapes::StructureShape.new(name: 'GetKeyGroupConfigRequest')
+    GetKeyGroupConfigResult = Shapes::StructureShape.new(name: 'GetKeyGroupConfigResult')
+    GetKeyGroupRequest = Shapes::StructureShape.new(name: 'GetKeyGroupRequest')
+    GetKeyGroupResult = Shapes::StructureShape.new(name: 'GetKeyGroupResult')
     GetMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'GetMonitoringSubscriptionRequest')
     GetMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'GetMonitoringSubscriptionResult')
     GetOriginRequestPolicyConfigRequest = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyConfigRequest')
@@ -214,6 +222,14 @@ module Aws::CloudFront
     InvalidationSummary = Shapes::StructureShape.new(name: 'InvalidationSummary')
     InvalidationSummaryList = Shapes::ListShape.new(name: 'InvalidationSummaryList')
     ItemSelection = Shapes::StringShape.new(name: 'ItemSelection')
+    KGKeyPairIds = Shapes::StructureShape.new(name: 'KGKeyPairIds')
+    KGKeyPairIdsList = Shapes::ListShape.new(name: 'KGKeyPairIdsList')
+    KeyGroup = Shapes::StructureShape.new(name: 'KeyGroup')
+    KeyGroupAlreadyExists = Shapes::StructureShape.new(name: 'KeyGroupAlreadyExists')
+    KeyGroupConfig = Shapes::StructureShape.new(name: 'KeyGroupConfig')
+    KeyGroupList = Shapes::StructureShape.new(name: 'KeyGroupList')
+    KeyGroupSummary = Shapes::StructureShape.new(name: 'KeyGroupSummary')
+    KeyGroupSummaryList = Shapes::ListShape.new(name: 'KeyGroupSummaryList')
     KeyPairIdList = Shapes::ListShape.new(name: 'KeyPairIdList')
     KeyPairIds = Shapes::StructureShape.new(name: 'KeyPairIds')
     KinesisStreamConfig = Shapes::StructureShape.new(name: 'KinesisStreamConfig')
@@ -227,6 +243,8 @@ module Aws::CloudFront
     ListCloudFrontOriginAccessIdentitiesResult = Shapes::StructureShape.new(name: 'ListCloudFrontOriginAccessIdentitiesResult')
     ListDistributionsByCachePolicyIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByCachePolicyIdRequest')
     ListDistributionsByCachePolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByCachePolicyIdResult')
+    ListDistributionsByKeyGroupRequest = Shapes::StructureShape.new(name: 'ListDistributionsByKeyGroupRequest')
+    ListDistributionsByKeyGroupResult = Shapes::StructureShape.new(name: 'ListDistributionsByKeyGroupResult')
     ListDistributionsByOriginRequestPolicyIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByOriginRequestPolicyIdRequest')
     ListDistributionsByOriginRequestPolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByOriginRequestPolicyIdResult')
     ListDistributionsByRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'ListDistributionsByRealtimeLogConfigRequest')
@@ -241,6 +259,8 @@ module Aws::CloudFront
     ListFieldLevelEncryptionProfilesResult = Shapes::StructureShape.new(name: 'ListFieldLevelEncryptionProfilesResult')
     ListInvalidationsRequest = Shapes::StructureShape.new(name: 'ListInvalidationsRequest')
     ListInvalidationsResult = Shapes::StructureShape.new(name: 'ListInvalidationsResult')
+    ListKeyGroupsRequest = Shapes::StructureShape.new(name: 'ListKeyGroupsRequest')
+    ListKeyGroupsResult = Shapes::StructureShape.new(name: 'ListKeyGroupsResult')
     ListOriginRequestPoliciesRequest = Shapes::StructureShape.new(name: 'ListOriginRequestPoliciesRequest')
     ListOriginRequestPoliciesResult = Shapes::StructureShape.new(name: 'ListOriginRequestPoliciesResult')
     ListPublicKeysRequest = Shapes::StructureShape.new(name: 'ListPublicKeysRequest')
@@ -308,6 +328,7 @@ module Aws::CloudFront
     PublicKey = Shapes::StructureShape.new(name: 'PublicKey')
     PublicKeyAlreadyExists = Shapes::StructureShape.new(name: 'PublicKeyAlreadyExists')
     PublicKeyConfig = Shapes::StructureShape.new(name: 'PublicKeyConfig')
+    PublicKeyIdList = Shapes::ListShape.new(name: 'PublicKeyIdList')
     PublicKeyInUse = Shapes::StructureShape.new(name: 'PublicKeyInUse')
     PublicKeyList = Shapes::StructureShape.new(name: 'PublicKeyList')
     PublicKeySummary = Shapes::StructureShape.new(name: 'PublicKeySummary')
@@ -329,6 +350,7 @@ module Aws::CloudFront
     RealtimeMetricsSubscriptionConfig = Shapes::StructureShape.new(name: 'RealtimeMetricsSubscriptionConfig')
     RealtimeMetricsSubscriptionStatus = Shapes::StringShape.new(name: 'RealtimeMetricsSubscriptionStatus')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
+    ResourceInUse = Shapes::StructureShape.new(name: 'ResourceInUse')
     Restrictions = Shapes::StructureShape.new(name: 'Restrictions')
     S3Origin = Shapes::StructureShape.new(name: 'S3Origin')
     S3OriginConfig = Shapes::StructureShape.new(name: 'S3OriginConfig')
@@ -367,6 +389,7 @@ module Aws::CloudFront
     TooManyDistributions = Shapes::StructureShape.new(name: 'TooManyDistributions')
     TooManyDistributionsAssociatedToCachePolicy = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToCachePolicy')
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToFieldLevelEncryptionConfig')
+    TooManyDistributionsAssociatedToKeyGroup = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToKeyGroup')
     TooManyDistributionsAssociatedToOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToOriginRequestPolicy')
     TooManyDistributionsWithLambdaAssociations = Shapes::StructureShape.new(name: 'TooManyDistributionsWithLambdaAssociations')
     TooManyDistributionsWithSingleFunctionARN = Shapes::StructureShape.new(name: 'TooManyDistributionsWithSingleFunctionARN')
@@ -380,12 +403,15 @@ module Aws::CloudFront
     TooManyHeadersInForwardedValues = Shapes::StructureShape.new(name: 'TooManyHeadersInForwardedValues')
     TooManyHeadersInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyHeadersInOriginRequestPolicy')
     TooManyInvalidationsInProgress = Shapes::StructureShape.new(name: 'TooManyInvalidationsInProgress')
+    TooManyKeyGroups = Shapes::StructureShape.new(name: 'TooManyKeyGroups')
+    TooManyKeyGroupsAssociatedToDistribution = Shapes::StructureShape.new(name: 'TooManyKeyGroupsAssociatedToDistribution')
     TooManyLambdaFunctionAssociations = Shapes::StructureShape.new(name: 'TooManyLambdaFunctionAssociations')
     TooManyOriginCustomHeaders = Shapes::StructureShape.new(name: 'TooManyOriginCustomHeaders')
     TooManyOriginGroupsPerDistribution = Shapes::StructureShape.new(name: 'TooManyOriginGroupsPerDistribution')
     TooManyOriginRequestPolicies = Shapes::StructureShape.new(name: 'TooManyOriginRequestPolicies')
     TooManyOrigins = Shapes::StructureShape.new(name: 'TooManyOrigins')
     TooManyPublicKeys = Shapes::StructureShape.new(name: 'TooManyPublicKeys')
+    TooManyPublicKeysInKeyGroup = Shapes::StructureShape.new(name: 'TooManyPublicKeysInKeyGroup')
     TooManyQueryStringParameters = Shapes::StructureShape.new(name: 'TooManyQueryStringParameters')
     TooManyQueryStringsInCachePolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInCachePolicy')
     TooManyQueryStringsInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInOriginRequestPolicy')
@@ -393,6 +419,9 @@ module Aws::CloudFront
     TooManyStreamingDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyStreamingDistributionCNAMEs')
     TooManyStreamingDistributions = Shapes::StructureShape.new(name: 'TooManyStreamingDistributions')
     TooManyTrustedSigners = Shapes::StructureShape.new(name: 'TooManyTrustedSigners')
+    TrustedKeyGroupDoesNotExist = Shapes::StructureShape.new(name: 'TrustedKeyGroupDoesNotExist')
+    TrustedKeyGroupIdList = Shapes::ListShape.new(name: 'TrustedKeyGroupIdList')
+    TrustedKeyGroups = Shapes::StructureShape.new(name: 'TrustedKeyGroups')
     TrustedSignerDoesNotExist = Shapes::StructureShape.new(name: 'TrustedSignerDoesNotExist')
     TrustedSigners = Shapes::StructureShape.new(name: 'TrustedSigners')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -406,6 +435,8 @@ module Aws::CloudFront
     UpdateFieldLevelEncryptionConfigResult = Shapes::StructureShape.new(name: 'UpdateFieldLevelEncryptionConfigResult')
     UpdateFieldLevelEncryptionProfileRequest = Shapes::StructureShape.new(name: 'UpdateFieldLevelEncryptionProfileRequest')
     UpdateFieldLevelEncryptionProfileResult = Shapes::StructureShape.new(name: 'UpdateFieldLevelEncryptionProfileResult')
+    UpdateKeyGroupRequest = Shapes::StructureShape.new(name: 'UpdateKeyGroupRequest')
+    UpdateKeyGroupResult = Shapes::StructureShape.new(name: 'UpdateKeyGroupResult')
     UpdateOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'UpdateOriginRequestPolicyRequest')
     UpdateOriginRequestPolicyResult = Shapes::StructureShape.new(name: 'UpdateOriginRequestPolicyResult')
     UpdatePublicKeyRequest = Shapes::StructureShape.new(name: 'UpdatePublicKeyRequest')
@@ -424,6 +455,11 @@ module Aws::CloudFront
 
     AccessDenied.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     AccessDenied.struct_class = Types::AccessDenied
+
+    ActiveTrustedKeyGroups.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
+    ActiveTrustedKeyGroups.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ActiveTrustedKeyGroups.add_member(:items, Shapes::ShapeRef.new(shape: KGKeyPairIdsList, location_name: "Items"))
+    ActiveTrustedKeyGroups.struct_class = Types::ActiveTrustedKeyGroups
 
     ActiveTrustedSigners.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
     ActiveTrustedSigners.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
@@ -457,7 +493,8 @@ module Aws::CloudFront
 
     CacheBehavior.add_member(:path_pattern, Shapes::ShapeRef.new(shape: string, required: true, location_name: "PathPattern"))
     CacheBehavior.add_member(:target_origin_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "TargetOriginId"))
-    CacheBehavior.add_member(:trusted_signers, Shapes::ShapeRef.new(shape: TrustedSigners, required: true, location_name: "TrustedSigners"))
+    CacheBehavior.add_member(:trusted_signers, Shapes::ShapeRef.new(shape: TrustedSigners, location_name: "TrustedSigners"))
+    CacheBehavior.add_member(:trusted_key_groups, Shapes::ShapeRef.new(shape: TrustedKeyGroups, location_name: "TrustedKeyGroups"))
     CacheBehavior.add_member(:viewer_protocol_policy, Shapes::ShapeRef.new(shape: ViewerProtocolPolicy, required: true, location_name: "ViewerProtocolPolicy"))
     CacheBehavior.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
     CacheBehavior.add_member(:smooth_streaming, Shapes::ShapeRef.new(shape: boolean, location_name: "SmoothStreaming"))
@@ -668,6 +705,18 @@ module Aws::CloudFront
     CreateInvalidationResult[:payload] = :invalidation
     CreateInvalidationResult[:payload_member] = CreateInvalidationResult.member(:invalidation)
 
+    CreateKeyGroupRequest.add_member(:key_group_config, Shapes::ShapeRef.new(shape: KeyGroupConfig, required: true, location_name: "KeyGroupConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    CreateKeyGroupRequest.struct_class = Types::CreateKeyGroupRequest
+    CreateKeyGroupRequest[:payload] = :key_group_config
+    CreateKeyGroupRequest[:payload_member] = CreateKeyGroupRequest.member(:key_group_config)
+
+    CreateKeyGroupResult.add_member(:key_group, Shapes::ShapeRef.new(shape: KeyGroup, location_name: "KeyGroup"))
+    CreateKeyGroupResult.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
+    CreateKeyGroupResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    CreateKeyGroupResult.struct_class = Types::CreateKeyGroupResult
+    CreateKeyGroupResult[:payload] = :key_group
+    CreateKeyGroupResult[:payload_member] = CreateKeyGroupResult.member(:key_group)
+
     CreateMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
     CreateMonitoringSubscriptionRequest.add_member(:monitoring_subscription, Shapes::ShapeRef.new(shape: MonitoringSubscription, required: true, location_name: "MonitoringSubscription", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateMonitoringSubscriptionRequest.struct_class = Types::CreateMonitoringSubscriptionRequest
@@ -761,7 +810,8 @@ module Aws::CloudFront
     CustomOriginConfig.struct_class = Types::CustomOriginConfig
 
     DefaultCacheBehavior.add_member(:target_origin_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "TargetOriginId"))
-    DefaultCacheBehavior.add_member(:trusted_signers, Shapes::ShapeRef.new(shape: TrustedSigners, required: true, location_name: "TrustedSigners"))
+    DefaultCacheBehavior.add_member(:trusted_signers, Shapes::ShapeRef.new(shape: TrustedSigners, location_name: "TrustedSigners"))
+    DefaultCacheBehavior.add_member(:trusted_key_groups, Shapes::ShapeRef.new(shape: TrustedKeyGroups, location_name: "TrustedKeyGroups"))
     DefaultCacheBehavior.add_member(:viewer_protocol_policy, Shapes::ShapeRef.new(shape: ViewerProtocolPolicy, required: true, location_name: "ViewerProtocolPolicy"))
     DefaultCacheBehavior.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
     DefaultCacheBehavior.add_member(:smooth_streaming, Shapes::ShapeRef.new(shape: boolean, location_name: "SmoothStreaming"))
@@ -797,6 +847,10 @@ module Aws::CloudFront
     DeleteFieldLevelEncryptionProfileRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     DeleteFieldLevelEncryptionProfileRequest.struct_class = Types::DeleteFieldLevelEncryptionProfileRequest
 
+    DeleteKeyGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    DeleteKeyGroupRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    DeleteKeyGroupRequest.struct_class = Types::DeleteKeyGroupRequest
+
     DeleteMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
     DeleteMonitoringSubscriptionRequest.struct_class = Types::DeleteMonitoringSubscriptionRequest
 
@@ -824,7 +878,8 @@ module Aws::CloudFront
     Distribution.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
     Distribution.add_member(:in_progress_invalidation_batches, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "InProgressInvalidationBatches"))
     Distribution.add_member(:domain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "DomainName"))
-    Distribution.add_member(:active_trusted_signers, Shapes::ShapeRef.new(shape: ActiveTrustedSigners, required: true, location_name: "ActiveTrustedSigners"))
+    Distribution.add_member(:active_trusted_signers, Shapes::ShapeRef.new(shape: ActiveTrustedSigners, location_name: "ActiveTrustedSigners"))
+    Distribution.add_member(:active_trusted_key_groups, Shapes::ShapeRef.new(shape: ActiveTrustedKeyGroups, location_name: "ActiveTrustedKeyGroups"))
     Distribution.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig"))
     Distribution.add_member(:alias_icp_recordals, Shapes::ShapeRef.new(shape: AliasICPRecordals, location_name: "AliasICPRecordals"))
     Distribution.struct_class = Types::Distribution
@@ -1102,6 +1157,24 @@ module Aws::CloudFront
     GetInvalidationResult[:payload] = :invalidation
     GetInvalidationResult[:payload_member] = GetInvalidationResult.member(:invalidation)
 
+    GetKeyGroupConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetKeyGroupConfigRequest.struct_class = Types::GetKeyGroupConfigRequest
+
+    GetKeyGroupConfigResult.add_member(:key_group_config, Shapes::ShapeRef.new(shape: KeyGroupConfig, location_name: "KeyGroupConfig"))
+    GetKeyGroupConfigResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetKeyGroupConfigResult.struct_class = Types::GetKeyGroupConfigResult
+    GetKeyGroupConfigResult[:payload] = :key_group_config
+    GetKeyGroupConfigResult[:payload_member] = GetKeyGroupConfigResult.member(:key_group_config)
+
+    GetKeyGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetKeyGroupRequest.struct_class = Types::GetKeyGroupRequest
+
+    GetKeyGroupResult.add_member(:key_group, Shapes::ShapeRef.new(shape: KeyGroup, location_name: "KeyGroup"))
+    GetKeyGroupResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetKeyGroupResult.struct_class = Types::GetKeyGroupResult
+    GetKeyGroupResult[:payload] = :key_group
+    GetKeyGroupResult[:payload_member] = GetKeyGroupResult.member(:key_group)
+
     GetMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
     GetMonitoringSubscriptionRequest.struct_class = Types::GetMonitoringSubscriptionRequest
 
@@ -1283,6 +1356,36 @@ module Aws::CloudFront
 
     InvalidationSummaryList.member = Shapes::ShapeRef.new(shape: InvalidationSummary, location_name: "InvalidationSummary")
 
+    KGKeyPairIds.add_member(:key_group_id, Shapes::ShapeRef.new(shape: string, location_name: "KeyGroupId"))
+    KGKeyPairIds.add_member(:key_pair_ids, Shapes::ShapeRef.new(shape: KeyPairIds, location_name: "KeyPairIds"))
+    KGKeyPairIds.struct_class = Types::KGKeyPairIds
+
+    KGKeyPairIdsList.member = Shapes::ShapeRef.new(shape: KGKeyPairIds, location_name: "KeyGroup")
+
+    KeyGroup.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+    KeyGroup.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
+    KeyGroup.add_member(:key_group_config, Shapes::ShapeRef.new(shape: KeyGroupConfig, required: true, location_name: "KeyGroupConfig"))
+    KeyGroup.struct_class = Types::KeyGroup
+
+    KeyGroupAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    KeyGroupAlreadyExists.struct_class = Types::KeyGroupAlreadyExists
+
+    KeyGroupConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
+    KeyGroupConfig.add_member(:items, Shapes::ShapeRef.new(shape: PublicKeyIdList, required: true, location_name: "Items"))
+    KeyGroupConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
+    KeyGroupConfig.struct_class = Types::KeyGroupConfig
+
+    KeyGroupList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    KeyGroupList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
+    KeyGroupList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    KeyGroupList.add_member(:items, Shapes::ShapeRef.new(shape: KeyGroupSummaryList, location_name: "Items"))
+    KeyGroupList.struct_class = Types::KeyGroupList
+
+    KeyGroupSummary.add_member(:key_group, Shapes::ShapeRef.new(shape: KeyGroup, required: true, location_name: "KeyGroup"))
+    KeyGroupSummary.struct_class = Types::KeyGroupSummary
+
+    KeyGroupSummaryList.member = Shapes::ShapeRef.new(shape: KeyGroupSummary, location_name: "KeyGroupSummary")
+
     KeyPairIdList.member = Shapes::ShapeRef.new(shape: string, location_name: "KeyPairId")
 
     KeyPairIds.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
@@ -1332,6 +1435,16 @@ module Aws::CloudFront
     ListDistributionsByCachePolicyIdResult.struct_class = Types::ListDistributionsByCachePolicyIdResult
     ListDistributionsByCachePolicyIdResult[:payload] = :distribution_id_list
     ListDistributionsByCachePolicyIdResult[:payload_member] = ListDistributionsByCachePolicyIdResult.member(:distribution_id_list)
+
+    ListDistributionsByKeyGroupRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListDistributionsByKeyGroupRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListDistributionsByKeyGroupRequest.add_member(:key_group_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "KeyGroupId"))
+    ListDistributionsByKeyGroupRequest.struct_class = Types::ListDistributionsByKeyGroupRequest
+
+    ListDistributionsByKeyGroupResult.add_member(:distribution_id_list, Shapes::ShapeRef.new(shape: DistributionIdList, location_name: "DistributionIdList"))
+    ListDistributionsByKeyGroupResult.struct_class = Types::ListDistributionsByKeyGroupResult
+    ListDistributionsByKeyGroupResult[:payload] = :distribution_id_list
+    ListDistributionsByKeyGroupResult[:payload_member] = ListDistributionsByKeyGroupResult.member(:distribution_id_list)
 
     ListDistributionsByOriginRequestPolicyIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListDistributionsByOriginRequestPolicyIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
@@ -1400,6 +1513,15 @@ module Aws::CloudFront
     ListInvalidationsResult.struct_class = Types::ListInvalidationsResult
     ListInvalidationsResult[:payload] = :invalidation_list
     ListInvalidationsResult[:payload_member] = ListInvalidationsResult.member(:invalidation_list)
+
+    ListKeyGroupsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListKeyGroupsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListKeyGroupsRequest.struct_class = Types::ListKeyGroupsRequest
+
+    ListKeyGroupsResult.add_member(:key_group_list, Shapes::ShapeRef.new(shape: KeyGroupList, location_name: "KeyGroupList"))
+    ListKeyGroupsResult.struct_class = Types::ListKeyGroupsResult
+    ListKeyGroupsResult[:payload] = :key_group_list
+    ListKeyGroupsResult[:payload_member] = ListKeyGroupsResult.member(:key_group_list)
 
     ListOriginRequestPoliciesRequest.add_member(:type, Shapes::ShapeRef.new(shape: OriginRequestPolicyType, location: "querystring", location_name: "Type"))
     ListOriginRequestPoliciesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
@@ -1624,6 +1746,8 @@ module Aws::CloudFront
     PublicKeyConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
     PublicKeyConfig.struct_class = Types::PublicKeyConfig
 
+    PublicKeyIdList.member = Shapes::ShapeRef.new(shape: string, location_name: "PublicKey")
+
     PublicKeyInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     PublicKeyInUse.struct_class = Types::PublicKeyInUse
 
@@ -1695,6 +1819,9 @@ module Aws::CloudFront
 
     RealtimeMetricsSubscriptionConfig.add_member(:realtime_metrics_subscription_status, Shapes::ShapeRef.new(shape: RealtimeMetricsSubscriptionStatus, required: true, location_name: "RealtimeMetricsSubscriptionStatus"))
     RealtimeMetricsSubscriptionConfig.struct_class = Types::RealtimeMetricsSubscriptionConfig
+
+    ResourceInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ResourceInUse.struct_class = Types::ResourceInUse
 
     Restrictions.add_member(:geo_restriction, Shapes::ShapeRef.new(shape: GeoRestriction, required: true, location_name: "GeoRestriction"))
     Restrictions.struct_class = Types::Restrictions
@@ -1830,6 +1957,9 @@ module Aws::CloudFront
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig.struct_class = Types::TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
 
+    TooManyDistributionsAssociatedToKeyGroup.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionsAssociatedToKeyGroup.struct_class = Types::TooManyDistributionsAssociatedToKeyGroup
+
     TooManyDistributionsAssociatedToOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionsAssociatedToOriginRequestPolicy.struct_class = Types::TooManyDistributionsAssociatedToOriginRequestPolicy
 
@@ -1869,6 +1999,12 @@ module Aws::CloudFront
     TooManyInvalidationsInProgress.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyInvalidationsInProgress.struct_class = Types::TooManyInvalidationsInProgress
 
+    TooManyKeyGroups.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyKeyGroups.struct_class = Types::TooManyKeyGroups
+
+    TooManyKeyGroupsAssociatedToDistribution.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyKeyGroupsAssociatedToDistribution.struct_class = Types::TooManyKeyGroupsAssociatedToDistribution
+
     TooManyLambdaFunctionAssociations.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyLambdaFunctionAssociations.struct_class = Types::TooManyLambdaFunctionAssociations
 
@@ -1886,6 +2022,9 @@ module Aws::CloudFront
 
     TooManyPublicKeys.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyPublicKeys.struct_class = Types::TooManyPublicKeys
+
+    TooManyPublicKeysInKeyGroup.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyPublicKeysInKeyGroup.struct_class = Types::TooManyPublicKeysInKeyGroup
 
     TooManyQueryStringParameters.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyQueryStringParameters.struct_class = Types::TooManyQueryStringParameters
@@ -1907,6 +2046,16 @@ module Aws::CloudFront
 
     TooManyTrustedSigners.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyTrustedSigners.struct_class = Types::TooManyTrustedSigners
+
+    TrustedKeyGroupDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TrustedKeyGroupDoesNotExist.struct_class = Types::TrustedKeyGroupDoesNotExist
+
+    TrustedKeyGroupIdList.member = Shapes::ShapeRef.new(shape: string, location_name: "KeyGroup")
+
+    TrustedKeyGroups.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
+    TrustedKeyGroups.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    TrustedKeyGroups.add_member(:items, Shapes::ShapeRef.new(shape: TrustedKeyGroupIdList, location_name: "Items"))
+    TrustedKeyGroups.struct_class = Types::TrustedKeyGroups
 
     TrustedSignerDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TrustedSignerDoesNotExist.struct_class = Types::TrustedSignerDoesNotExist
@@ -1986,6 +2135,19 @@ module Aws::CloudFront
     UpdateFieldLevelEncryptionProfileResult.struct_class = Types::UpdateFieldLevelEncryptionProfileResult
     UpdateFieldLevelEncryptionProfileResult[:payload] = :field_level_encryption_profile
     UpdateFieldLevelEncryptionProfileResult[:payload_member] = UpdateFieldLevelEncryptionProfileResult.member(:field_level_encryption_profile)
+
+    UpdateKeyGroupRequest.add_member(:key_group_config, Shapes::ShapeRef.new(shape: KeyGroupConfig, required: true, location_name: "KeyGroupConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    UpdateKeyGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    UpdateKeyGroupRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    UpdateKeyGroupRequest.struct_class = Types::UpdateKeyGroupRequest
+    UpdateKeyGroupRequest[:payload] = :key_group_config
+    UpdateKeyGroupRequest[:payload_member] = UpdateKeyGroupRequest.member(:key_group_config)
+
+    UpdateKeyGroupResult.add_member(:key_group, Shapes::ShapeRef.new(shape: KeyGroup, location_name: "KeyGroup"))
+    UpdateKeyGroupResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    UpdateKeyGroupResult.struct_class = Types::UpdateKeyGroupResult
+    UpdateKeyGroupResult[:payload] = :key_group
+    UpdateKeyGroupResult[:payload_member] = UpdateKeyGroupResult.member(:key_group)
 
     UpdateOriginRequestPolicyRequest.add_member(:origin_request_policy_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyConfig, required: true, location_name: "OriginRequestPolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateOriginRequestPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
@@ -2147,6 +2309,9 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
       end)
 
       api.add_operation(:create_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -2205,6 +2370,9 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
       end)
 
       api.add_operation(:create_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2252,6 +2420,18 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: BatchTooLarge)
         o.errors << Shapes::ShapeRef.new(shape: TooManyInvalidationsInProgress)
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+      end)
+
+      api.add_operation(:create_key_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKeyGroup2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/key-group"
+        o.input = Shapes::ShapeRef.new(shape: CreateKeyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateKeyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: KeyGroupAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroups)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeysInKeyGroup)
       end)
 
       api.add_operation(:create_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -2305,6 +2485,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRealtimeLogConfigs)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -2414,6 +2595,18 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileInUse)
       end)
 
+      api.add_operation(:delete_key_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKeyGroup2020_05_31"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-05-31/key-group/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKeyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
       api.add_operation(:delete_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMonitoringSubscription2020_05_31"
         o.http_method = "DELETE"
@@ -2465,6 +2658,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigInUse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -2591,6 +2785,24 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
+      api.add_operation(:get_key_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetKeyGroup2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/key-group/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetKeyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetKeyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+      end)
+
+      api.add_operation(:get_key_group_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetKeyGroupConfig2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/key-group/{Id}/config"
+        o.input = Shapes::ShapeRef.new(shape: GetKeyGroupConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetKeyGroupConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+      end)
+
       api.add_operation(:get_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMonitoringSubscription2020_05_31"
         o.http_method = "GET"
@@ -2654,6 +2866,7 @@ module Aws::CloudFront
         o.output = Shapes::ShapeRef.new(shape: GetRealtimeLogConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:get_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -2730,6 +2943,16 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
+      api.add_operation(:list_distributions_by_key_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDistributionsByKeyGroup2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/distributionsByKeyGroupId/{KeyGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: ListDistributionsByKeyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDistributionsByKeyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
       api.add_operation(:list_distributions_by_origin_request_policy_id, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDistributionsByOriginRequestPolicyId2020_05_31"
         o.http_method = "GET"
@@ -2801,6 +3024,15 @@ module Aws::CloudFront
         )
       end)
 
+      api.add_operation(:list_key_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKeyGroups2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/key-group"
+        o.input = Shapes::ShapeRef.new(shape: ListKeyGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKeyGroupsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
       api.add_operation(:list_origin_request_policies, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListOriginRequestPolicies2020_05_31"
         o.http_method = "GET"
@@ -2827,6 +3059,9 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/realtime-log-config"
         o.input = Shapes::ShapeRef.new(shape: ListRealtimeLogConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRealtimeLogConfigsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
       end)
 
       api.add_operation(:list_streaming_distributions, Seahorse::Model::Operation.new.tap do |o|
@@ -2971,6 +3206,9 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
       end)
 
       api.add_operation(:update_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3010,6 +3248,20 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileSizeExceeded)
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionEncryptionEntities)
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionFieldPatterns)
+      end)
+
+      api.add_operation(:update_key_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKeyGroup2020_05_31"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-05-31/key-group/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKeyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKeyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: KeyGroupAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeysInKeyGroup)
       end)
 
       api.add_operation(:update_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3059,6 +3311,7 @@ module Aws::CloudFront
         o.output = Shapes::ShapeRef.new(shape: UpdateRealtimeLogConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|

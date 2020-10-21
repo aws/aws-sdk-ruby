@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.201.0 (2020-10-21)
+------------------
+
+* Feature - instance-storage-info nvmeSupport added to DescribeInstanceTypes API
+
 1.200.0 (2020-10-08)
 ------------------
 

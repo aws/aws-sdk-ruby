@@ -879,11 +879,12 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW
-    #         configuration: { # required
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM
+    #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
     #             inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             documents_metadata_configuration: {
     #               s3_prefix: "S3ObjectKey",
@@ -1073,13 +1074,14 @@ module Aws::Kendra
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
-    #         role_arn: "RoleArn", # required
+    #         role_arn: "RoleArn",
     #         tags: [
     #           {
     #             key: "TagKey", # required
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         client_token: "ClientTokenName",
     #       }
     #
     # @!attribute [rw] name
@@ -1097,8 +1099,15 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The data source connector configuration information that is required
-    #   to access the repository.
+    #   The connector configuration information that is required to access
+    #   the repository.
+    #
+    #   You can't specify the `Configuration` parameter when the `Type`
+    #   parameter is set to `CUSTOM`. If you do, you receive a
+    #   `ValidationException` exception.
+    #
+    #   The `Configuration` parameter is required for all other data
+    #   sources.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
@@ -1110,12 +1119,22 @@ module Aws::Kendra
     #   your repository and update the index. If you don't set a schedule
     #   Amazon Kendra will not periodically update the index. You can call
     #   the `StartDataSourceSyncJob` operation to update the index.
+    #
+    #   You can't specify the `Schedule` parameter when the `Type`
+    #   parameter is set to `CUSTOM`. If you do, you receive a
+    #   `ValidationException` exception.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
     #   the data source. For more information, see [IAM Roles for Amazon
     #   Kendra][1].
+    #
+    #   You can't specify the `RoleArn` parameter when the `Type` parameter
+    #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
+    #   exception.
+    #
+    #   The `RoleArn` parameter is required for all other data sources.
     #
     #
     #
@@ -1128,6 +1147,15 @@ module Aws::Kendra
     #   access to resources.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create a data
+    #   source. Multiple calls to the `CreateDataSource` operation with the
+    #   same client token will create only one data source.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -1138,7 +1166,8 @@ module Aws::Kendra
       :description,
       :schedule,
       :role_arn,
-      :tags)
+      :tags,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1174,6 +1203,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
+    #         client_token: "ClientTokenName",
     #       }
     #
     # @!attribute [rw] index_id
@@ -1223,6 +1253,15 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create a FAQ.
+    #   Multiple calls to the `CreateFaqRequest` operation with the same
+    #   client token will create only one FAQ.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateFaqRequest AWS API Documentation
     #
     class CreateFaqRequest < Struct.new(
@@ -1232,7 +1271,8 @@ module Aws::Kendra
       :s3_path,
       :role_arn,
       :tags,
-      :file_format)
+      :file_format,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1285,10 +1325,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   An IAM role that gives Amazon Kendra permissions to access your
-    #   Amazon CloudWatch logs and metrics. This is also the role used when
-    #   you use the `BatchPutDocument` operation to index documents from an
-    #   Amazon S3 bucket.
+    #   An AWS Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access your Amazon CloudWatch logs and
+    #   metrics. This is also the role used when you use the
+    #   `BatchPutDocument` operation to index documents from an Amazon S3
+    #   bucket.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -1304,7 +1345,7 @@ module Aws::Kendra
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create an index.
     #   Multiple calls to the `CreateIndex` operation with the same client
-    #   token will create only one index.”
+    #   token will create only one index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1352,6 +1393,7 @@ module Aws::Kendra
     #         s3_configuration: {
     #           bucket_name: "S3BucketName", # required
     #           inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           documents_metadata_configuration: {
     #             s3_prefix: "S3ObjectKey",
@@ -3585,6 +3627,7 @@ module Aws::Kendra
     #       {
     #         bucket_name: "S3BucketName", # required
     #         inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         documents_metadata_configuration: {
     #           s3_prefix: "S3ObjectKey",
@@ -3603,10 +3646,23 @@ module Aws::Kendra
     #   the index.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of glob patterns for documents that should be indexed. If a
+    #   document that matches an inclusion pattern also matches an exclusion
+    #   pattern, the document is not indexed.
+    #
+    #   For more information about glob patterns, see [glob
+    #   (programming)][1] in *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Glob_(programming)
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] exclusion_patterns
     #   A list of glob patterns for documents that should not be indexed. If
-    #   a document that matches an inclusion prefix also matches an
-    #   exclusion pattern, the document is not indexed.
+    #   a document that matches an inclusion prefix or inclusion pattern
+    #   also matches an exclusion pattern, the document is not indexed.
     #
     #   For more information about glob patterns, see [glob
     #   (programming)][1] in *Wikipedia*.
@@ -3633,6 +3689,7 @@ module Aws::Kendra
     class S3DataSourceConfiguration < Struct.new(
       :bucket_name,
       :inclusion_prefixes,
+      :inclusion_patterns,
       :exclusion_patterns,
       :documents_metadata_configuration,
       :access_control_list_configuration)
@@ -4954,6 +5011,7 @@ module Aws::Kendra
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
     #             inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             documents_metadata_configuration: {
     #               s3_prefix: "S3ObjectKey",

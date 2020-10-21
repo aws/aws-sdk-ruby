@@ -294,9 +294,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   A history of status changes for an IP address range that that you
-    #   bring to AWS Global Accelerator through bring your own IP address
-    #   (BYOIP).
+    #   A history of status changes for an IP address range that you bring
+    #   to AWS Global Accelerator through bring your own IP address (BYOIP).
     #   @return [Array<Types::ByoipCidrEvent>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ByoipCidr AWS API Documentation
@@ -411,13 +410,19 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] ip_addresses
     #   Optionally, if you've added your own IP address pool to Global
-    #   Accelerator, you can choose IP addresses from your own pool to use
-    #   for the accelerator's static IP addresses. You can specify one or
-    #   two addresses, separated by a comma. Do not include the /32 suffix.
+    #   Accelerator (BYOIP), you can choose IP addresses from your own pool
+    #   to use for the accelerator's static IP addresses when you create an
+    #   accelerator. You can specify one or two addresses, separated by a
+    #   comma. Do not include the /32 suffix.
     #
-    #   If you specify only one IP address from your IP address range,
-    #   Global Accelerator assigns a second static IP address for the
-    #   accelerator from the AWS IP address pool.
+    #   Only one IP address from each of your IP address ranges can be used
+    #   for each accelerator. If you specify only one IP address from your
+    #   IP address range, Global Accelerator assigns a second static IP
+    #   address for the accelerator from the AWS IP address pool.
+    #
+    #   Note that you can't update IP addresses for an existing
+    #   accelerator. To change them, you must create a new accelerator with
+    #   the new addresses.
     #
     #   For more information, see [Bring Your Own IP Addresses (BYOIP)][1]
     #   in the *AWS Global Accelerator Developer Guide*.
@@ -500,6 +505,12 @@ module Aws::GlobalAccelerator
     #         health_check_interval_seconds: 1,
     #         threshold_count: 1,
     #         idempotency_token: "IdempotencyToken", # required
+    #         port_overrides: [
+    #           {
+    #             listener_port: 1,
+    #             endpoint_port: 1,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] listener_arn
@@ -507,8 +518,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] endpoint_group_region
-    #   The name of the AWS Region where the endpoint group is located. A
-    #   listener can have only one endpoint group in a specific Region.
+    #   The AWS Region where the endpoint group is located. A listener can
+    #   have only one endpoint group in a specific Region.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_configurations
@@ -566,6 +577,21 @@ module Aws::GlobalAccelerator
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] port_overrides
+    #   Override specific listener ports used to route traffic to endpoints
+    #   that are part of this endpoint group. For example, you can create a
+    #   port override in which the listener receives user traffic on ports
+    #   80 and 443, but your accelerator routes that traffic to ports 1080
+    #   and 1443, respectively, on the endpoints.
+    #
+    #   For more information, see [ Port overrides][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html
+    #   @return [Array<Types::PortOverride>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateEndpointGroupRequest AWS API Documentation
     #
     class CreateEndpointGroupRequest < Struct.new(
@@ -578,7 +604,8 @@ module Aws::GlobalAccelerator
       :health_check_path,
       :health_check_interval_seconds,
       :threshold_count,
-      :idempotency_token)
+      :idempotency_token,
+      :port_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -627,7 +654,7 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] client_affinity
     #   Client affinity lets you direct all requests from a user to the same
     #   endpoint, if you have stateful applications, regardless of the port
-    #   and protocol of the client request. Clienty affinity gives you
+    #   and protocol of the client request. Client affinity gives you
     #   control over whether to always route each client to the same
     #   specific endpoint.
     #
@@ -896,7 +923,8 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # A complex type for endpoints.
+    # A complex type for endpoints. A resource must be valid and active when
+    # you add it as an endpoint.
     #
     # @note When making an API call, you may pass EndpointConfiguration
     #   data as a hash:
@@ -911,8 +939,9 @@ module Aws::GlobalAccelerator
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
     #   of the resource. If the endpoint is an Elastic IP address, this is
-    #   the Elastic IP address allocation ID. For EC2 instances, this is the
-    #   EC2 instance ID.
+    #   the Elastic IP address allocation ID. For Amazon EC2 instances, this
+    #   is the EC2 instance ID. A resource must be valid and active when you
+    #   add it as an endpoint.
     #
     #   An Application Load Balancer can be either internal or
     #   internet-facing.
@@ -1060,7 +1089,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] endpoint_group_region
-    #   The AWS Region that this endpoint group belongs.
+    #   The AWS Region where the endpoint group is located.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_descriptions
@@ -1111,6 +1140,14 @@ module Aws::GlobalAccelerator
     #   healthy. The default value is 3.
     #   @return [Integer]
     #
+    # @!attribute [rw] port_overrides
+    #   Allows you to override the destination ports used to route traffic
+    #   to an endpoint. Using a port override lets you to map a list of
+    #   external destination ports (that your users send traffic to) to a
+    #   list of internal destination ports that you want an application
+    #   endpoint to receive traffic on.
+    #   @return [Array<Types::PortOverride>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroup AWS API Documentation
     #
     class EndpointGroup < Struct.new(
@@ -1122,7 +1159,8 @@ module Aws::GlobalAccelerator
       :health_check_protocol,
       :health_check_path,
       :health_check_interval_seconds,
-      :threshold_count)
+      :threshold_count,
+      :port_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1496,7 +1534,7 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] client_affinity
     #   Client affinity lets you direct all requests from a user to the same
     #   endpoint, if you have stateful applications, regardless of the port
-    #   and protocol of the client request. Clienty affinity gives you
+    #   and protocol of the client request. Client affinity gives you
     #   control over whether to always route each client to the same
     #   specific endpoint.
     #
@@ -1539,6 +1577,48 @@ module Aws::GlobalAccelerator
     #
     class ListenerNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Override specific listener ports used to route traffic to endpoints
+    # that are part of an endpoint group. For example, you can create a port
+    # override in which the listener receives user traffic on ports 80 and
+    # 443, but your accelerator routes that traffic to ports 1080 and 1443,
+    # respectively, on the endpoints.
+    #
+    # For more information, see [ Port overrides][1] in the *AWS Global
+    # Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html
+    #
+    # @note When making an API call, you may pass PortOverride
+    #   data as a hash:
+    #
+    #       {
+    #         listener_port: 1,
+    #         endpoint_port: 1,
+    #       }
+    #
+    # @!attribute [rw] listener_port
+    #   The listener port that you want to map to a specific endpoint port.
+    #   This is the port that user traffic arrives to the Global Accelerator
+    #   on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] endpoint_port
+    #   The endpoint port that you want a listener port to be mapped to.
+    #   This is the port on the endpoint, such as the Application Load
+    #   Balancer or Amazon EC2 instance.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/PortOverride AWS API Documentation
+    #
+    class PortOverride < Struct.new(
+      :listener_port,
+      :endpoint_port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1851,6 +1931,12 @@ module Aws::GlobalAccelerator
     #         health_check_path: "GenericString",
     #         health_check_interval_seconds: 1,
     #         threshold_count: 1,
+    #         port_overrides: [
+    #           {
+    #             listener_port: 1,
+    #             endpoint_port: 1,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] endpoint_group_arn
@@ -1858,7 +1944,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] endpoint_configurations
-    #   The list of endpoint objects.
+    #   The list of endpoint objects. A resource must be valid and active
+    #   when you add it as an endpoint.
     #   @return [Array<Types::EndpointConfiguration>]
     #
     # @!attribute [rw] traffic_dial_percentage
@@ -1904,6 +1991,21 @@ module Aws::GlobalAccelerator
     #   healthy. The default value is 3.
     #   @return [Integer]
     #
+    # @!attribute [rw] port_overrides
+    #   Override specific listener ports used to route traffic to endpoints
+    #   that are part of this endpoint group. For example, you can create a
+    #   port override in which the listener receives user traffic on ports
+    #   80 and 443, but your accelerator routes that traffic to ports 1080
+    #   and 1443, respectively, on the endpoints.
+    #
+    #   For more information, see [ Port overrides][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html
+    #   @return [Array<Types::PortOverride>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateEndpointGroupRequest AWS API Documentation
     #
     class UpdateEndpointGroupRequest < Struct.new(
@@ -1914,7 +2016,8 @@ module Aws::GlobalAccelerator
       :health_check_protocol,
       :health_check_path,
       :health_check_interval_seconds,
-      :threshold_count)
+      :threshold_count,
+      :port_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1963,7 +2066,7 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] client_affinity
     #   Client affinity lets you direct all requests from a user to the same
     #   endpoint, if you have stateful applications, regardless of the port
-    #   and protocol of the client request. Clienty affinity gives you
+    #   and protocol of the client request. Client affinity gives you
     #   control over whether to always route each client to the same
     #   specific endpoint.
     #

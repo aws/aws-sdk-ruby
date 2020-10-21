@@ -69,6 +69,7 @@ module Aws::CloudFront
   # * {InvalidTagging}
   # * {InvalidViewerCertificate}
   # * {InvalidWebACLId}
+  # * {KeyGroupAlreadyExists}
   # * {MissingBody}
   # * {NoSuchCachePolicy}
   # * {NoSuchCloudFrontOriginAccessIdentity}
@@ -90,6 +91,7 @@ module Aws::CloudFront
   # * {QueryArgProfileEmpty}
   # * {RealtimeLogConfigAlreadyExists}
   # * {RealtimeLogConfigInUse}
+  # * {ResourceInUse}
   # * {StreamingDistributionAlreadyExists}
   # * {StreamingDistributionNotDisabled}
   # * {TooManyCacheBehaviors}
@@ -103,6 +105,7 @@ module Aws::CloudFront
   # * {TooManyDistributions}
   # * {TooManyDistributionsAssociatedToCachePolicy}
   # * {TooManyDistributionsAssociatedToFieldLevelEncryptionConfig}
+  # * {TooManyDistributionsAssociatedToKeyGroup}
   # * {TooManyDistributionsAssociatedToOriginRequestPolicy}
   # * {TooManyDistributionsWithLambdaAssociations}
   # * {TooManyDistributionsWithSingleFunctionARN}
@@ -116,12 +119,15 @@ module Aws::CloudFront
   # * {TooManyHeadersInForwardedValues}
   # * {TooManyHeadersInOriginRequestPolicy}
   # * {TooManyInvalidationsInProgress}
+  # * {TooManyKeyGroups}
+  # * {TooManyKeyGroupsAssociatedToDistribution}
   # * {TooManyLambdaFunctionAssociations}
   # * {TooManyOriginCustomHeaders}
   # * {TooManyOriginGroupsPerDistribution}
   # * {TooManyOriginRequestPolicies}
   # * {TooManyOrigins}
   # * {TooManyPublicKeys}
+  # * {TooManyPublicKeysInKeyGroup}
   # * {TooManyQueryStringParameters}
   # * {TooManyQueryStringsInCachePolicy}
   # * {TooManyQueryStringsInOriginRequestPolicy}
@@ -129,6 +135,7 @@ module Aws::CloudFront
   # * {TooManyStreamingDistributionCNAMEs}
   # * {TooManyStreamingDistributions}
   # * {TooManyTrustedSigners}
+  # * {TrustedKeyGroupDoesNotExist}
   # * {TrustedSignerDoesNotExist}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -767,6 +774,21 @@ module Aws::CloudFront
       end
     end
 
+    class KeyGroupAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::KeyGroupAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class MissingBody < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1082,6 +1104,21 @@ module Aws::CloudFront
       end
     end
 
+    class ResourceInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::ResourceInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class StreamingDistributionAlreadyExists < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1267,6 +1304,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToFieldLevelEncryptionConfig] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyDistributionsAssociatedToKeyGroup < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToKeyGroup] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1472,6 +1524,36 @@ module Aws::CloudFront
       end
     end
 
+    class TooManyKeyGroups < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyKeyGroups] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyKeyGroupsAssociatedToDistribution < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyKeyGroupsAssociatedToDistribution] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class TooManyLambdaFunctionAssociations < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1552,6 +1634,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyPublicKeys] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyPublicKeysInKeyGroup < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyPublicKeysInKeyGroup] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1657,6 +1754,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyTrustedSigners] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TrustedKeyGroupDoesNotExist < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TrustedKeyGroupDoesNotExist] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

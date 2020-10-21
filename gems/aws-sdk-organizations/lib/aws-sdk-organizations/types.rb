@@ -221,7 +221,7 @@ module Aws::Organizations
     end
 
     # You can't invite an existing account to your organization until you
-    # verify that you own the email address associated with the master
+    # verify that you own the email address associated with the management
     # account. For more information, see [Email Address Verification][1] in
     # the *AWS Organizations User Guide.*
     #
@@ -425,9 +425,9 @@ module Aws::Organizations
     #  </note>
     #
     # * ACCOUNT\_CANNOT\_LEAVE\_ORGANIZAION: You attempted to remove the
-    #   master account from the organization. You can't remove the master
-    #   account. Instead, after you remove all member accounts, delete the
-    #   organization itself.
+    #   management account from the organization. You can't remove the
+    #   management account. Instead, after you remove all member accounts,
+    #   delete the organization itself.
     #
     # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_EULA: You attempted to remove an
     #   account from the organization that doesn't yet have enough
@@ -466,8 +466,8 @@ module Aws::Organizations
     #   Support][2].
     #
     # * CANNOT\_REGISTER\_MASTER\_AS\_DELEGATED\_ADMINISTRATOR: You
-    #   attempted to register the master account of the organization as a
-    #   delegated administrator for an AWS service integrated with
+    #   attempted to register the management account of the organization as
+    #   a delegated administrator for an AWS service integrated with
     #   Organizations. You can designate only a member account as a
     #   delegated administrator.
     #
@@ -496,11 +496,11 @@ module Aws::Organizations
     #
     # * MASTER\_ACCOUNT\_ADDRESS\_DOES\_NOT\_MATCH\_MARKETPLACE: To create
     #   an account in this organization, you first must migrate the
-    #   organization's master account to the marketplace that corresponds
-    #   to the master account's address. For example, accounts with India
-    #   addresses must be associated with the AISPL marketplace. All
-    #   accounts in an organization must be associated with the same
-    #   marketplace.
+    #   organization's management account to the marketplace that
+    #   corresponds to the management account's address. For example,
+    #   accounts with India addresses must be associated with the AISPL
+    #   marketplace. All accounts in an organization must be associated with
+    #   the same marketplace.
     #
     # * MASTER\_ACCOUNT\_MISSING\_BUSINESS\_LICENSE: Applies only to the AWS
     #   Regions in China. To create an organization, the master must have an
@@ -509,16 +509,16 @@ module Aws::Organizations
     #
     # * MASTER\_ACCOUNT\_MISSING\_CONTACT\_INFO: To complete this operation,
     #   you must first provide a valid contact address and phone number for
-    #   the master account. Then try the operation again.
+    #   the management account. Then try the operation again.
     #
     # * MASTER\_ACCOUNT\_NOT\_GOVCLOUD\_ENABLED: To complete this operation,
-    #   the master account must have an associated account in the AWS
+    #   the management account must have an associated account in the AWS
     #   GovCloud (US-West) Region. For more information, see [AWS
     #   Organizations][3] in the *AWS GovCloud User Guide.*
     #
     # * MASTER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To create an
-    #   organization with this master account, you first must associate a
-    #   valid payment instrument, such as a credit card, with the account.
+    #   organization with this management account, you first must associate
+    #   a valid payment instrument, such as a credit card, with the account.
     #   Follow the steps at [To leave an organization when all required
     #   account information has not yet been provided][4] in the *AWS
     #   Organizations User Guide.*
@@ -621,10 +621,11 @@ module Aws::Organizations
     #   (Optional)
     #
     #   The name of an IAM role that AWS Organizations automatically
-    #   preconfigures in the new member account. This role trusts the master
-    #   account, allowing users in the master account to assume the role, as
-    #   permitted by the master account administrator. The role has
-    #   administrator permissions in the new member account.
+    #   preconfigures in the new member account. This role trusts the
+    #   management account, allowing users in the management account to
+    #   assume the role, as permitted by the management account
+    #   administrator. The role has administrator permissions in the new
+    #   member account.
     #
     #   If you don't specify this parameter, the role name defaults to
     #   `OrganizationAccountAccessRole`.
@@ -803,7 +804,7 @@ module Aws::Organizations
     #   * MISSING\_BUSINESS\_VALIDATION: The AWS account that owns your
     #     organization has not received Business Validation.
     #
-    #   * MISSING\_PAYMENT\_INSTRUMENT: You must configure the master
+    #   * MISSING\_PAYMENT\_INSTRUMENT: You must configure the management
     #     account with a valid payment method, such as a credit card.
     #   @return [String]
     #
@@ -874,9 +875,10 @@ module Aws::Organizations
     #   The name of an IAM role that AWS Organizations automatically
     #   preconfigures in the new member accounts in both the AWS GovCloud
     #   (US) Region and in the commercial Region. This role trusts the
-    #   master account, allowing users in the master account to assume the
-    #   role, as permitted by the master account administrator. The role has
-    #   administrator permissions in the new member account.
+    #   management account, allowing users in the management account to
+    #   assume the role, as permitted by the management account
+    #   administrator. The role has administrator permissions in the new
+    #   member account.
     #
     #   If you don't specify this parameter, the role name defaults to
     #   `OrganizationAccountAccessRole`.
@@ -977,7 +979,7 @@ module Aws::Organizations
     #   feature set supports different levels of functionality.
     #
     #   * `CONSOLIDATED_BILLING`\: All member accounts have their bills
-    #     consolidated to and paid by the master account. For more
+    #     consolidated to and paid by the management account. For more
     #     information, see [Consolidated billing][1] in the *AWS
     #     Organizations User Guide.*
     #
@@ -985,7 +987,7 @@ module Aws::Organizations
     #     organizations in the AWS GovCloud (US) Region.
     #
     #   * `ALL`\: In addition to all the features supported by the
-    #     consolidated billing feature set, the master account can also
+    #     consolidated billing feature set, the management account can also
     #     apply any policy type to any member account in the organization.
     #     For more information, see [All features][2] in the *AWS
     #     Organizations User Guide.*
@@ -1516,9 +1518,9 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   When you're signed in as the master account, specify the ID of the
-    #   account that you want details about. Specifying an organization root
-    #   or organizational unit (OU) as the target is not supported.
+    #   When you're signed in as the management account, specify the ID of
+    #   the account that you want details about. Specifying an organization
+    #   root or organizational unit (OU) as the target is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicyRequest AWS API Documentation
@@ -1938,8 +1940,8 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # If you ran this action on the master account, this policy type is not
-    # enabled. If you ran the action on a member account, the account
+    # If you ran this action on the management account, this policy type is
+    # not enabled. If you ran the action on a member account, the account
     # doesn't have an effective policy of this type. Contact the
     # administrator of your organization about attaching a policy of this
     # type to the account.
@@ -2102,9 +2104,10 @@ module Aws::Organizations
 
     # Contains information that must be exchanged to securely establish a
     # relationship between two accounts (an *originator* and a *recipient*).
-    # For example, when a master account (the originator) invites another
-    # account (the recipient) to join its organization, the two accounts
-    # exchange information as a series of handshake requests and responses.
+    # For example, when a management account (the originator) invites
+    # another account (the recipient) to join its organization, the two
+    # accounts exchange information as a series of handshake requests and
+    # responses.
     #
     # **Note:** Handshakes that are CANCELED, ACCEPTED, or DECLINED show up
     # in lists for only 30 days after entering that state After that they
@@ -2184,20 +2187,20 @@ module Aws::Organizations
     #   supported:
     #
     #   * **INVITE**\: This type of handshake represents a request to join
-    #     an organization. It is always sent from the master account to only
-    #     non-member accounts.
+    #     an organization. It is always sent from the management account to
+    #     only non-member accounts.
     #
     #   * **ENABLE\_ALL\_FEATURES**\: This type of handshake represents a
     #     request to enable all features in an organization. It is always
-    #     sent from the master account to only *invited* member accounts.
-    #     Created accounts do not receive this because those accounts were
-    #     created by the organization's master account and approval is
-    #     inferred.
+    #     sent from the management account to only *invited* member
+    #     accounts. Created accounts do not receive this because those
+    #     accounts were created by the organization's management account
+    #     and approval is inferred.
     #
     #   * **APPROVE\_ALL\_FEATURES**\: This type of handshake is sent from
     #     the Organizations service when all member accounts have approved
     #     the `ENABLE_ALL_FEATURES` invitation. It is sent only to the
-    #     master account and signals the master that it can finalize the
+    #     management account and signals the master that it can finalize the
     #     process to enable all features.
     #   @return [String]
     #
@@ -2406,9 +2409,9 @@ module Aws::Organizations
     #     account that receives the handshake.
     #
     #   * `OWNER_EMAIL` - Specifies the email address associated with the
-    #     master account. Included as information about an organization.
+    #     management account. Included as information about an organization.
     #
-    #   * `OWNER_NAME` - Specifies the name associated with the master
+    #   * `OWNER_NAME` - Specifies the name associated with the management
     #     account. Included as information about an organization.
     #
     #   * `NOTES` - Additional text provided by the handshake initiator and
@@ -3830,9 +3833,10 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # You can't remove a master account from an organization. If you want
-    # the master account to become a member account in another organization,
-    # you must first delete the current organization of the master account.
+    # You can't remove a management account from an organization. If you
+    # want the management account to become a member account in another
+    # organization, you must first delete the current organization of the
+    # management account.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3961,7 +3965,7 @@ module Aws::Organizations
     #
     # @!attribute [rw] master_account_arn
     #   The Amazon Resource Name (ARN) of the account that is designated as
-    #   the master account for the organization.
+    #   the management account for the organization.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
     #   Supported by Organizations][1] in the *AWS Organizations User
@@ -3973,7 +3977,8 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] master_account_id
-    #   The unique identifier (ID) of the master account of an organization.
+    #   The unique identifier (ID) of the management account of an
+    #   organization.
     #
     #   The [regex pattern][1] for an account ID string requires exactly 12
     #   digits.
@@ -3985,7 +3990,7 @@ module Aws::Organizations
     #
     # @!attribute [rw] master_account_email
     #   The email address that is associated with the AWS account that is
-    #   designated as the master account for the organization.
+    #   designated as the management account for the organization.
     #   @return [String]
     #
     # @!attribute [rw] available_policy_types
@@ -4011,8 +4016,8 @@ module Aws::Organizations
     end
 
     # The organization isn't empty. To delete an organization, you must
-    # first remove all accounts except the master account, delete all OUs,
-    # and delete all policies.
+    # first remove all accounts except the management account, delete all
+    # OUs, and delete all policies.
     #
     # @!attribute [rw] message
     #   @return [String]

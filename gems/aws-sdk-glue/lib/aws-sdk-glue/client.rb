@@ -679,6 +679,7 @@ module Aws::Glue
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
     #   resp.crawlers[0].classifiers[0] #=> String
+    #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
     #   resp.crawlers[0].state #=> String, one of "READY", "RUNNING", "STOPPING"
@@ -1489,6 +1490,10 @@ module Aws::Glue
     # @option params [Types::SchemaChangePolicy] :schema_change_policy
     #   The policy for the crawler's update and deletion behavior.
     #
+    # @option params [Types::RecrawlPolicy] :recrawl_policy
+    #   A policy that specifies whether to crawl the entire dataset again, or
+    #   to crawl only folders that were added since the last crawler run.
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -1562,6 +1567,9 @@ module Aws::Glue
     #     schema_change_policy: {
     #       update_behavior: "LOG", # accepts LOG, UPDATE_IN_DATABASE
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
+    #     },
+    #     recrawl_policy: {
+    #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -3754,6 +3762,7 @@ module Aws::Glue
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
     #   resp.crawler.classifiers[0] #=> String
+    #   resp.crawler.recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawler.schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawler.schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
     #   resp.crawler.state #=> String, one of "READY", "RUNNING", "STOPPING"
@@ -3883,6 +3892,7 @@ module Aws::Glue
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
     #   resp.crawlers[0].classifiers[0] #=> String
+    #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
     #   resp.crawlers[0].state #=> String, one of "READY", "RUNNING", "STOPPING"
@@ -8322,6 +8332,10 @@ module Aws::Glue
     # @option params [Types::SchemaChangePolicy] :schema_change_policy
     #   The policy for the crawler's update and deletion behavior.
     #
+    # @option params [Types::RecrawlPolicy] :recrawl_policy
+    #   A policy that specifies whether to crawl the entire dataset again, or
+    #   to crawl only folders that were added since the last crawler run.
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -8386,6 +8400,9 @@ module Aws::Glue
     #     schema_change_policy: {
     #       update_behavior: "LOG", # accepts LOG, UPDATE_IN_DATABASE
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
+    #     },
+    #     recrawl_policy: {
+    #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -9131,7 +9148,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

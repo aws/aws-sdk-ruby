@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-10-21)
+------------------
+
+* Feature - CloudFront adds support for managing the public keys for signed URLs and signed cookies directly in CloudFront (it no longer requires the AWS root account).
+
 1.44.0 (2020-10-19)
 ------------------
 

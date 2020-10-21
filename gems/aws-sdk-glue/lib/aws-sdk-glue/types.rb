@@ -2103,6 +2103,11 @@ module Aws::Glue
     #   associated with the crawler.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] recrawl_policy
+    #   A policy that specifies whether to crawl the entire dataset again,
+    #   or to crawl only folders that were added since the last crawler run.
+    #   @return [Types::RecrawlPolicy]
+    #
     # @!attribute [rw] schema_change_policy
     #   The policy that specifies update and delete behaviors for the
     #   crawler.
@@ -2167,6 +2172,7 @@ module Aws::Glue
       :database_name,
       :description,
       :classifiers,
+      :recrawl_policy,
       :schema_change_policy,
       :state,
       :table_prefix,
@@ -2518,6 +2524,9 @@ module Aws::Glue
     #           update_behavior: "LOG", # accepts LOG, UPDATE_IN_DATABASE
     #           delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #         },
+    #         recrawl_policy: {
+    #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #         },
     #         configuration: "CrawlerConfiguration",
     #         crawler_security_configuration: "CrawlerSecurityConfiguration",
     #         tags: {
@@ -2572,6 +2581,11 @@ module Aws::Glue
     #   The policy for the crawler's update and deletion behavior.
     #   @return [Types::SchemaChangePolicy]
     #
+    # @!attribute [rw] recrawl_policy
+    #   A policy that specifies whether to crawl the entire dataset again,
+    #   or to crawl only folders that were added since the last crawler run.
+    #   @return [Types::RecrawlPolicy]
+    #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -2609,6 +2623,7 @@ module Aws::Glue
       :classifiers,
       :table_prefix,
       :schema_change_policy,
+      :recrawl_policy,
       :configuration,
       :crawler_security_configuration,
       :tags)
@@ -10945,6 +10960,42 @@ module Aws::Glue
     #
     class PutWorkflowRunPropertiesResponse < Aws::EmptyStructure; end
 
+    # When crawling an Amazon S3 data source after the first crawl is
+    # complete, specifies whether to crawl the entire dataset again or to
+    # crawl only folders that were added since the last crawler run. For
+    # more information, see [Incremental Crawls in AWS Glue][1] in the
+    # developer guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html
+    #
+    # @note When making an API call, you may pass RecrawlPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #       }
+    #
+    # @!attribute [rw] recrawl_behavior
+    #   Specifies whether to crawl the entire dataset again or to crawl only
+    #   folders that were added since the last crawler run.
+    #
+    #   A value of `CRAWL_EVERYTHING` specifies crawling the entire dataset
+    #   again.
+    #
+    #   A value of `CRAWL_NEW_FOLDERS_ONLY` specifies crawling only folders
+    #   that were added since the last crawler run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RecrawlPolicy AWS API Documentation
+    #
+    class RecrawlPolicy < Struct.new(
+      :recrawl_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ResetJobBookmarkRequest
     #   data as a hash:
     #
@@ -13514,6 +13565,9 @@ module Aws::Glue
     #           update_behavior: "LOG", # accepts LOG, UPDATE_IN_DATABASE
     #           delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #         },
+    #         recrawl_policy: {
+    #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #         },
     #         configuration: "CrawlerConfiguration",
     #         crawler_security_configuration: "CrawlerSecurityConfiguration",
     #       }
@@ -13565,6 +13619,11 @@ module Aws::Glue
     #   The policy for the crawler's update and deletion behavior.
     #   @return [Types::SchemaChangePolicy]
     #
+    # @!attribute [rw] recrawl_policy
+    #   A policy that specifies whether to crawl the entire dataset again,
+    #   or to crawl only folders that were added since the last crawler run.
+    #   @return [Types::RecrawlPolicy]
+    #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -13592,6 +13651,7 @@ module Aws::Glue
       :classifiers,
       :table_prefix,
       :schema_change_policy,
+      :recrawl_policy,
       :configuration,
       :crawler_security_configuration)
       SENSITIVE = []

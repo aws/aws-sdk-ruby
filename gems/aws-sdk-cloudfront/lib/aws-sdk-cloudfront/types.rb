@@ -23,40 +23,55 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that lists the AWS accounts, if any, that you included
-    # in the `TrustedSigners` complex type for this distribution. These are
-    # the accounts that you want to allow to create signed URLs for private
-    # content.
-    #
-    # The `Signer` complex type lists the AWS account number of the trusted
-    # signer or `self` if the signer is the AWS account that created the
-    # distribution. The `Signer` element also includes the IDs of any active
-    # CloudFront key pairs that are associated with the trusted signer's
-    # AWS account. If no `KeyPairId` element appears for a `Signer`, that
-    # signer can't create signed URLs.
-    #
-    # For more information, see [Serving Private Content through
-    # CloudFront][1] in the *Amazon CloudFront Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    # A list of key groups, and the public keys in each key group, that
+    # CloudFront can use to verify the signatures of signed URLs and signed
+    # cookies.
     #
     # @!attribute [rw] enabled
-    #   Enabled is `true` if any of the AWS accounts listed in the
-    #   `TrustedSigners` complex type for this distribution have active
-    #   CloudFront key pairs. If not, `Enabled` is `false`.
+    #   This field is `true` if any of the key groups have public keys that
+    #   CloudFront can use to verify the signatures of signed URLs and
+    #   signed cookies. If not, this field is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] quantity
-    #   The number of trusted signers specified in the `TrustedSigners`
-    #   complex type.
+    #   The number of key groups in the list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   A complex type that contains one `Signer` complex type for each
-    #   trusted signer that is specified in the `TrustedSigners` complex
-    #   type.
+    #   A list of key groups, including the identifiers of the public keys
+    #   in each key group that CloudFront can use to verify the signatures
+    #   of signed URLs and signed cookies.
+    #   @return [Array<Types::KGKeyPairIds>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ActiveTrustedKeyGroups AWS API Documentation
+    #
+    class ActiveTrustedKeyGroups < Struct.new(
+      :enabled,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of AWS accounts and the active CloudFront key pairs in each
+    # account that CloudFront can use to verify the signatures of signed
+    # URLs and signed cookies.
+    #
+    # @!attribute [rw] enabled
+    #   This field is `true` if any of the AWS accounts in the list have
+    #   active CloudFront key pairs that CloudFront can use to verify the
+    #   signatures of signed URLs and signed cookies. If not, this field is
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of AWS accounts in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A list of AWS accounts and the identifiers of active CloudFront key
+    #   pairs in each account that CloudFront can use to verify the
+    #   signatures of signed URLs and signed cookies.
     #   @return [Array<Types::Signer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ActiveTrustedSigners AWS API Documentation
@@ -281,7 +296,12 @@ module Aws::CloudFront
     #       {
     #         path_pattern: "string", # required
     #         target_origin_id: "string", # required
-    #         trusted_signers: { # required
+    #         trusted_signers: {
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         trusted_key_groups: {
     #           enabled: false, # required
     #           quantity: 1, # required
     #           items: ["string"],
@@ -365,29 +385,42 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] trusted_signers
-    #   A complex type that specifies the AWS accounts, if any, that you
-    #   want to allow to create signed URLs for private content.
+    #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   If you want to require signed URLs in requests for objects in the
-    #   target origin that match the `PathPattern` for this cache behavior,
-    #   specify `true` for `Enabled`, and specify the applicable values for
-    #   `Quantity` and `Items`. For more information, see [Serving Private
-    #   Content with Signed URLs and Signed Cookies][1] in the *Amazon
-    #   CloudFront Developer Guide*.
+    #   A list of AWS account IDs whose public keys CloudFront can use to
+    #   validate signed URLs or signed cookies.
     #
-    #   If you don’t want to require signed URLs in requests for objects
-    #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
-    #   `Quantity`. Omit `Items`.
-    #
-    #   To add, change, or remove one or more trusted signers, change
-    #   `Enabled` to `true` (if it’s currently `false`), change `Quantity`
-    #   as applicable, and specify all of the trusted signers that you want
-    #   to include in the updated distribution.
+    #   When a cache behavior contains trusted signers, CloudFront requires
+    #   signed URLs or signed cookies for all requests that match the cache
+    #   behavior. The URLs or cookies must be signed with the private key of
+    #   a CloudFront key pair in the trusted signer’s AWS account. The
+    #   signed URL or cookie contains information about which public key
+    #   CloudFront should use to verify the signature. For more information,
+    #   see [Serving private content][1] in the *Amazon CloudFront Developer
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [Types::TrustedSigners]
+    #
+    # @!attribute [rw] trusted_key_groups
+    #   A list of key groups that CloudFront can use to validate signed URLs
+    #   or signed cookies.
+    #
+    #   When a cache behavior contains trusted key groups, CloudFront
+    #   requires signed URLs or signed cookies for all requests that match
+    #   the cache behavior. The URLs or cookies must be signed with a
+    #   private key whose corresponding public key is in the key group. The
+    #   signed URL or cookie contains information about which public key
+    #   CloudFront should use to verify the signature. For more information,
+    #   see [Serving private content][1] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   @return [Types::TrustedKeyGroups]
     #
     # @!attribute [rw] viewer_protocol_policy
     #   The protocol that viewers can use to access the files in the origin
@@ -611,6 +644,7 @@ module Aws::CloudFront
       :path_pattern,
       :target_origin_id,
       :trusted_signers,
+      :trusted_key_groups,
       :viewer_protocol_policy,
       :allowed_methods,
       :smooth_streaming,
@@ -639,7 +673,12 @@ module Aws::CloudFront
     #           {
     #             path_pattern: "string", # required
     #             target_origin_id: "string", # required
-    #             trusted_signers: { # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             trusted_key_groups: {
     #               enabled: false, # required
     #               quantity: 1, # required
     #               items: ["string"],
@@ -1815,7 +1854,12 @@ module Aws::CloudFront
     #           },
     #           default_cache_behavior: { # required
     #             target_origin_id: "string", # required
-    #             trusted_signers: { # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             trusted_key_groups: {
     #               enabled: false, # required
     #               quantity: 1, # required
     #               items: ["string"],
@@ -1873,7 +1917,12 @@ module Aws::CloudFront
     #               {
     #                 path_pattern: "string", # required
     #                 target_origin_id: "string", # required
-    #                 trusted_signers: { # required
+    #                 trusted_signers: {
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 trusted_key_groups: {
     #                   enabled: false, # required
     #                   quantity: 1, # required
     #                   items: ["string"],
@@ -2083,7 +2132,12 @@ module Aws::CloudFront
     #             },
     #             default_cache_behavior: { # required
     #               target_origin_id: "string", # required
-    #               trusted_signers: { # required
+    #               trusted_signers: {
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               trusted_key_groups: {
     #                 enabled: false, # required
     #                 quantity: 1, # required
     #                 items: ["string"],
@@ -2141,7 +2195,12 @@ module Aws::CloudFront
     #                 {
     #                   path_pattern: "string", # required
     #                   target_origin_id: "string", # required
-    #                   trusted_signers: { # required
+    #                   trusted_signers: {
+    #                     enabled: false, # required
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                   trusted_key_groups: {
     #                     enabled: false, # required
     #                     quantity: 1, # required
     #                     items: ["string"],
@@ -2466,6 +2525,51 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateKeyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_group_config: { # required
+    #           name: "string", # required
+    #           items: ["string"], # required
+    #           comment: "string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] key_group_config
+    #   A key group configuration.
+    #   @return [Types::KeyGroupConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyGroupRequest AWS API Documentation
+    #
+    class CreateKeyGroupRequest < Struct.new(
+      :key_group_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_group
+    #   The key group that was just created.
+    #   @return [Types::KeyGroup]
+    #
+    # @!attribute [rw] location
+    #   The URL of the key group.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The identifier for this version of the key group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyGroupResult AWS API Documentation
+    #
+    class CreateKeyGroupResult < Struct.new(
+      :key_group,
+      :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateMonitoringSubscriptionRequest
     #   data as a hash:
     #
@@ -2589,7 +2693,7 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] public_key_config
-    #   The request to add a public key to CloudFront.
+    #   A CloudFront public key configuration.
     #   @return [Types::PublicKeyConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreatePublicKeyRequest AWS API Documentation
@@ -2601,16 +2705,15 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] public_key
-    #   Returned when you add a public key.
+    #   The public key.
     #   @return [Types::PublicKey]
     #
     # @!attribute [rw] location
-    #   The fully qualified URI of the new public key resource just created.
+    #   The URL of the public key.
     #   @return [String]
     #
     # @!attribute [rw] etag
-    #   The current version of the public key. For example:
-    #   `E2QWRUHAPOMQZL`.
+    #   The identifier for this version of the public key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreatePublicKeyResult AWS API Documentation
@@ -3145,7 +3248,12 @@ module Aws::CloudFront
     #
     #       {
     #         target_origin_id: "string", # required
-    #         trusted_signers: { # required
+    #         trusted_signers: {
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         trusted_key_groups: {
     #           enabled: false, # required
     #           quantity: 1, # required
     #           items: ["string"],
@@ -3204,29 +3312,42 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] trusted_signers
-    #   A complex type that specifies the AWS accounts, if any, that you
-    #   want to allow to create signed URLs for private content.
+    #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   If you want to require signed URLs in requests for objects in the
-    #   target origin that match the `PathPattern` for this cache behavior,
-    #   specify `true` for `Enabled`, and specify the applicable values for
-    #   `Quantity` and `Items`. For more information, see [Serving Private
-    #   Content with Signed URLs and Signed Cookies][1] in the *Amazon
-    #   CloudFront Developer Guide*.
+    #   A list of AWS account IDs whose public keys CloudFront can use to
+    #   validate signed URLs or signed cookies.
     #
-    #   If you don’t want to require signed URLs in requests for objects
-    #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
-    #   `Quantity`. Omit `Items`.
-    #
-    #   To add, change, or remove one or more trusted signers, change
-    #   `Enabled` to `true` (if it’s currently `false`), change `Quantity`
-    #   as applicable, and specify all of the trusted signers that you want
-    #   to include in the updated distribution.
+    #   When a cache behavior contains trusted signers, CloudFront requires
+    #   signed URLs or signed cookies for all requests that match the cache
+    #   behavior. The URLs or cookies must be signed with the private key of
+    #   a CloudFront key pair in a trusted signer’s AWS account. The signed
+    #   URL or cookie contains information about which public key CloudFront
+    #   should use to verify the signature. For more information, see
+    #   [Serving private content][1] in the *Amazon CloudFront Developer
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [Types::TrustedSigners]
+    #
+    # @!attribute [rw] trusted_key_groups
+    #   A list of key groups that CloudFront can use to validate signed URLs
+    #   or signed cookies.
+    #
+    #   When a cache behavior contains trusted key groups, CloudFront
+    #   requires signed URLs or signed cookies for all requests that match
+    #   the cache behavior. The URLs or cookies must be signed with a
+    #   private key whose corresponding public key is in the key group. The
+    #   signed URL or cookie contains information about which public key
+    #   CloudFront should use to verify the signature. For more information,
+    #   see [Serving private content][1] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   @return [Types::TrustedKeyGroups]
     #
     # @!attribute [rw] viewer_protocol_policy
     #   The protocol that viewers can use to access the files in the origin
@@ -3449,6 +3570,7 @@ module Aws::CloudFront
     class DefaultCacheBehavior < Struct.new(
       :target_origin_id,
       :trusted_signers,
+      :trusted_key_groups,
       :viewer_protocol_policy,
       :allowed_methods,
       :smooth_streaming,
@@ -3644,6 +3766,34 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteKeyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the key group that you are deleting. To get the
+    #   identifier, use `ListKeyGroups`.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The version of the key group that you are deleting. The version is
+    #   the key group’s `ETag` value. To get the `ETag`, use `GetKeyGroup`
+    #   or `GetKeyGroupConfig`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyGroupRequest AWS API Documentation
+    #
+    class DeleteKeyGroupRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteMonitoringSubscriptionRequest
     #   data as a hash:
     #
@@ -3810,16 +3960,23 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] active_trusted_signers
-    #   CloudFront automatically adds this element to the response only if
-    #   you've set up the distribution to serve private content with signed
-    #   URLs. The element lists the key pair IDs that CloudFront is aware of
-    #   for each trusted signer. The `Signer` child element lists the AWS
-    #   account number of the trusted signer (or an empty `Self` element if
-    #   the signer is you). The `Signer` element also includes the IDs of
-    #   any active key pairs associated with the trusted signer's AWS
-    #   account. If no `KeyPairId` element appears for a `Signer`, that
-    #   signer can't create working signed URLs.
+    #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
+    #
+    #   CloudFront automatically adds this field to the response if you’ve
+    #   configured a cache behavior in this distribution to serve private
+    #   content using trusted signers. This field contains a list of AWS
+    #   account IDs and the active CloudFront key pairs in each account that
+    #   CloudFront can use to verify the signatures of signed URLs or signed
+    #   cookies.
     #   @return [Types::ActiveTrustedSigners]
+    #
+    # @!attribute [rw] active_trusted_key_groups
+    #   CloudFront automatically adds this field to the response if you’ve
+    #   configured a cache behavior in this distribution to serve private
+    #   content using key groups. This field contains a list of key groups
+    #   and the public keys in each key group that CloudFront can use to
+    #   verify the signatures of signed URLs or signed cookies.
+    #   @return [Types::ActiveTrustedKeyGroups]
     #
     # @!attribute [rw] distribution_config
     #   The current configuration information for the distribution. Send a
@@ -3852,6 +4009,7 @@ module Aws::CloudFront
       :in_progress_invalidation_batches,
       :domain_name,
       :active_trusted_signers,
+      :active_trusted_key_groups,
       :distribution_config,
       :alias_icp_recordals)
       SENSITIVE = []
@@ -3947,7 +4105,12 @@ module Aws::CloudFront
     #         },
     #         default_cache_behavior: { # required
     #           target_origin_id: "string", # required
-    #           trusted_signers: { # required
+    #           trusted_signers: {
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           trusted_key_groups: {
     #             enabled: false, # required
     #             quantity: 1, # required
     #             items: ["string"],
@@ -4005,7 +4168,12 @@ module Aws::CloudFront
     #             {
     #               path_pattern: "string", # required
     #               target_origin_id: "string", # required
-    #               trusted_signers: { # required
+    #               trusted_signers: {
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               trusted_key_groups: {
     #                 enabled: false, # required
     #                 quantity: 1, # required
     #                 items: ["string"],
@@ -4432,7 +4600,12 @@ module Aws::CloudFront
     #           },
     #           default_cache_behavior: { # required
     #             target_origin_id: "string", # required
-    #             trusted_signers: { # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             trusted_key_groups: {
     #               enabled: false, # required
     #               quantity: 1, # required
     #               items: ["string"],
@@ -4490,7 +4663,12 @@ module Aws::CloudFront
     #               {
     #                 path_pattern: "string", # required
     #                 target_origin_id: "string", # required
-    #                 trusted_signers: { # required
+    #                 trusted_signers: {
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 trusted_key_groups: {
     #                   enabled: false, # required
     #                   quantity: 1, # required
     #                   items: ["string"],
@@ -6062,6 +6240,80 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetKeyGroupConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the key group whose configuration you are getting.
+    #   To get the identifier, use `ListKeyGroups`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroupConfigRequest AWS API Documentation
+    #
+    class GetKeyGroupConfigRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_group_config
+    #   The key group configuration.
+    #   @return [Types::KeyGroupConfig]
+    #
+    # @!attribute [rw] etag
+    #   The identifier for this version of the key group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroupConfigResult AWS API Documentation
+    #
+    class GetKeyGroupConfigResult < Struct.new(
+      :key_group_config,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetKeyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the key group that you are getting. To get the
+    #   identifier, use `ListKeyGroups`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroupRequest AWS API Documentation
+    #
+    class GetKeyGroupRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_group
+    #   The key group.
+    #   @return [Types::KeyGroup]
+    #
+    # @!attribute [rw] etag
+    #   The identifier for this version of the key group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroupResult AWS API Documentation
+    #
+    class GetKeyGroupResult < Struct.new(
+      :key_group,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMonitoringSubscriptionRequest
     #   data as a hash:
     #
@@ -6186,7 +6438,8 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] id
-    #   Request the ID for the public key configuration.
+    #   The identifier of the public key whose configuration you are
+    #   getting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfigRequest AWS API Documentation
@@ -6198,12 +6451,11 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] public_key_config
-    #   Return the result for the public key configuration.
+    #   A public key configuration.
     #   @return [Types::PublicKeyConfig]
     #
     # @!attribute [rw] etag
-    #   The current version of the public key configuration. For example:
-    #   `E2QWRUHAPOMQZL`.
+    #   The identifier for this version of the public key configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfigResult AWS API Documentation
@@ -6223,7 +6475,7 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] id
-    #   Request the ID for the public key.
+    #   The identifier of the public key you are getting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyRequest AWS API Documentation
@@ -6235,12 +6487,11 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] public_key
-    #   Return the public key.
+    #   The public key.
     #   @return [Types::PublicKey]
     #
     # @!attribute [rw] etag
-    #   The current version of the public key. For example:
-    #   `E2QWRUHAPOMQZL`.
+    #   The identifier for this version of the public key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyResult AWS API Documentation
@@ -6927,34 +7178,165 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that lists the active CloudFront key pairs, if any,
-    # that are associated with `AwsAccountNumber`.
+    # A list of identifiers for the public keys that CloudFront can use to
+    # verify the signatures of signed URLs and signed cookies.
     #
-    # For more information, see [ActiveTrustedSigners][1].
+    # @!attribute [rw] key_group_id
+    #   The identifier of the key group that contains the public keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_ids
+    #   A list of CloudFront key pair identifiers.
+    #   @return [Types::KeyPairIds]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KGKeyPairIds AWS API Documentation
+    #
+    class KGKeyPairIds < Struct.new(
+      :key_group_id,
+      :key_pair_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key group.
+    #
+    # A key group contains a list of public keys that you can use with
+    # [CloudFront signed URLs and signed cookies][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #
+    # @!attribute [rw] id
+    #   The identifier for the key group.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the key group was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] key_group_config
+    #   The key group configuration.
+    #   @return [Types::KeyGroupConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyGroup AWS API Documentation
+    #
+    class KeyGroup < Struct.new(
+      :id,
+      :last_modified_time,
+      :key_group_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key group with this name already exists. You must provide a unique
+    # name. To modify an existing key group, use `UpdateKeyGroup`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyGroupAlreadyExists AWS API Documentation
+    #
+    class KeyGroupAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key group configuration.
+    #
+    # A key group contains a list of public keys that you can use with
+    # [CloudFront signed URLs and signed cookies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #
+    # @note When making an API call, you may pass KeyGroupConfig
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         items: ["string"], # required
+    #         comment: "string",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A name to identify the key group.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   A list of the identifiers of the public keys in the key group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] comment
+    #   A comment to describe the key group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyGroupConfig AWS API Documentation
+    #
+    class KeyGroupConfig < Struct.new(
+      :name,
+      :items,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of key groups.
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value that you should use in the
+    #   `Marker` field of a subsequent request to continue listing key
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of key groups requested.
+    #   @return [Integer]
     #
     # @!attribute [rw] quantity
-    #   The number of active CloudFront key pairs for `AwsAccountNumber`.
-    #
-    #   For more information, see [ActiveTrustedSigners][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html
+    #   The number of key groups returned in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   A complex type that lists the active CloudFront key pairs, if any,
-    #   that are associated with `AwsAccountNumber`.
+    #   A list of key groups.
+    #   @return [Array<Types::KeyGroupSummary>]
     #
-    #   For more information, see [ActiveTrustedSigners][1].
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyGroupList AWS API Documentation
     #
+    class KeyGroupList < Struct.new(
+      :next_marker,
+      :max_items,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a key group.
     #
+    # @!attribute [rw] key_group
+    #   A key group.
+    #   @return [Types::KeyGroup]
     #
-    #   [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyGroupSummary AWS API Documentation
+    #
+    class KeyGroupSummary < Struct.new(
+      :key_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CloudFront key pair identifiers.
+    #
+    # @!attribute [rw] quantity
+    #   The number of key pair identifiers in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A list of CloudFront key pair identifiers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyPairIds AWS API Documentation
@@ -7256,6 +7638,55 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByCachePolicyIdResult AWS API Documentation
     #
     class ListDistributionsByCachePolicyIdResult < Struct.new(
+      :distribution_id_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDistributionsByKeyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #         key_group_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distribution IDs. The response includes distribution
+    #   IDs in the list that occur after the marker. To get the next page of
+    #   the list, set this field’s value to the value of `NextMarker` from
+    #   the current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distribution IDs that you want in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_group_id
+    #   The ID of the key group whose associated distribution IDs you are
+    #   listing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByKeyGroupRequest AWS API Documentation
+    #
+    class ListDistributionsByKeyGroupRequest < Struct.new(
+      :marker,
+      :max_items,
+      :key_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_id_list
+    #   A list of distribution IDs.
+    #   @return [Types::DistributionIdList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByKeyGroupResult AWS API Documentation
+    #
+    class ListDistributionsByKeyGroupResult < Struct.new(
       :distribution_id_list)
       SENSITIVE = []
       include Aws::Structure
@@ -7608,6 +8039,47 @@ module Aws::CloudFront
     #
     class ListInvalidationsResult < Struct.new(
       :invalidation_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListKeyGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of key groups. The response includes key groups in the
+    #   list that occur after the marker. To get the next page of the list,
+    #   set this field’s value to the value of `NextMarker` from the current
+    #   page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of key groups that you want in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyGroupsRequest AWS API Documentation
+    #
+    class ListKeyGroupsRequest < Struct.new(
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_group_list
+    #   A list of key groups.
+    #   @return [Types::KeyGroupList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyGroupsResult AWS API Documentation
+    #
+    class ListKeyGroupsResult < Struct.new(
+      :key_group_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9179,20 +9651,31 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex data type of public keys you add to CloudFront to use with
-    # features like field-level encryption.
+    # A public key that you can use with [signed URLs and signed
+    # cookies][1], or with [field-level encryption][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html
     #
     # @!attribute [rw] id
-    #   A unique ID assigned to a public key you've added to CloudFront.
+    #   The identifier of the public key.
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   A time you added a public key to CloudFront.
+    #   The date and time when the public key was uploaded.
     #   @return [Time]
     #
     # @!attribute [rw] public_key_config
-    #   A complex data type for a public key you add to CloudFront to use
-    #   with features like field-level encryption.
+    #   Configuration information about a public key that you can use with
+    #   [signed URLs and signed cookies][1], or with [field-level
+    #   encryption][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html
     #   @return [Types::PublicKeyConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKey AWS API Documentation
@@ -9218,8 +9701,14 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # Information about a public key you add to CloudFront to use with
-    # features like field-level encryption.
+    # Configuration information about a public key that you can use with
+    # [signed URLs and signed cookies][1], or with [field-level
+    # encryption][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html
     #
     # @note When making an API call, you may pass PublicKeyConfig
     #   data as a hash:
@@ -9232,21 +9721,26 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] caller_reference
-    #   A unique number that ensures that the request can't be replayed.
+    #   A string included in the request to help make sure that the request
+    #   can’t be replayed.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name for a public key you add to CloudFront to use with features
-    #   like field-level encryption.
+    #   A name to help identify the public key.
     #   @return [String]
     #
     # @!attribute [rw] encoded_key
-    #   The encoded public key that you want to add to CloudFront to use
-    #   with features like field-level encryption.
+    #   The public key that you can use with [signed URLs and signed
+    #   cookies][1], or with [field-level encryption][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   An optional comment about a public key.
+    #   A comment to describe the public key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyConfig AWS API Documentation
@@ -9273,8 +9767,13 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A list of public keys you've added to CloudFront to use with features
-    # like field-level encryption.
+    # A list of public keys that you can use with [signed URLs and signed
+    # cookies][1], or with [field-level encryption][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html
     #
     # @!attribute [rw] next_marker
     #   If there are more elements to be listed, this element is present and
@@ -9283,17 +9782,15 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   The maximum number of public keys you want in the response body.
+    #   The maximum number of public keys you want in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] quantity
-    #   The number of public keys you added to CloudFront to use with
-    #   features like field-level encryption.
+    #   The number of public keys in the list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   An array of information about a public key you add to CloudFront to
-    #   use with features like field-level encryption.
+    #   A list of public keys.
     #   @return [Array<Types::PublicKeySummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyList AWS API Documentation
@@ -9307,26 +9804,26 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex data type for public key information.
+    # Contains information about a public key.
     #
     # @!attribute [rw] id
-    #   ID for public key information summary.
+    #   The identifier of the public key.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name for public key information summary.
+    #   A name to help identify the public key.
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   Creation time for public key information summary.
+    #   The date and time when the public key was uploaded.
     #   @return [Time]
     #
     # @!attribute [rw] encoded_key
-    #   Encoded key for public key information summary.
+    #   The public key.
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   Comment for public key information summary.
+    #   A comment to describe the public key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeySummary AWS API Documentation
@@ -9663,6 +10160,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # Cannot delete this resource because it is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResourceInUse AWS API Documentation
+    #
+    class ResourceInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that identifies ways in which you want to restrict
     # distribution of your content.
     #
@@ -9793,22 +10303,20 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that lists the AWS accounts that were included in the
-    # `TrustedSigners` complex type, as well as their active CloudFront key
-    # pair IDs, if any.
+    # A list of AWS accounts and the active CloudFront key pairs in each
+    # account that CloudFront can use to verify the signatures of signed
+    # URLs and signed cookies.
     #
     # @!attribute [rw] aws_account_number
-    #   An AWS account that is included in the `TrustedSigners` complex type
-    #   for this distribution. Valid values include:
-    #
-    #   * `self`, which is the AWS account used to create the distribution.
-    #
-    #   * An AWS account number.
+    #   An AWS account number that contains active CloudFront key pairs that
+    #   CloudFront can use to verify the signatures of signed URLs and
+    #   signed cookies. If the AWS account that owns the key pairs is the
+    #   same account that owns the CloudFront distribution, the value of
+    #   this field is `self`.
     #   @return [String]
     #
     # @!attribute [rw] key_pair_ids
-    #   A complex type that lists the active CloudFront key pairs, if any,
-    #   that are associated with `AwsAccountNumber`.
+    #   A list of CloudFront key pair identifiers.
     #   @return [Types::KeyPairIds]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Signer AWS API Documentation
@@ -10577,6 +11085,25 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The number of distributions that reference this key group is more than
+    # the maximum allowed. For more information, see [Quotas][1] (formerly
+    # known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsAssociatedToKeyGroup AWS API Documentation
+    #
+    class TooManyDistributionsAssociatedToKeyGroup < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The maximum number of distributions have been associated with the
     # specified origin request policy. For more information, see [Quotas][1]
     # (formerly known as limits) in the *Amazon CloudFront Developer Guide*.
@@ -10774,6 +11301,44 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # You have reached the maximum number of key groups for this AWS
+    # account. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyKeyGroups AWS API Documentation
+    #
+    class TooManyKeyGroups < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of key groups referenced by this distribution is more than
+    # the maximum allowed. For more information, see [Quotas][1] (formerly
+    # known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyKeyGroupsAssociatedToDistribution AWS API Documentation
+    #
+    class TooManyKeyGroupsAssociatedToDistribution < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request contains more Lambda function associations than are
     # allowed per distribution.
     #
@@ -10856,6 +11421,25 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyPublicKeys AWS API Documentation
     #
     class TooManyPublicKeys < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of public keys in this key group is more than the maximum
+    # allowed. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyPublicKeysInKeyGroup AWS API Documentation
+    #
+    class TooManyPublicKeysInKeyGroup < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -10972,6 +11556,55 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The specified key group does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustedKeyGroupDoesNotExist AWS API Documentation
+    #
+    class TrustedKeyGroupDoesNotExist < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of key groups whose public keys CloudFront can use to verify
+    # the signatures of signed URLs and signed cookies.
+    #
+    # @note When making an API call, you may pass TrustedKeyGroups
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   This field is `true` if any of the key groups in the list have
+    #   public keys that CloudFront can use to verify the signatures of
+    #   signed URLs and signed cookies. If not, this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of key groups in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A list of key groups identifiers.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustedKeyGroups AWS API Documentation
+    #
+    class TrustedKeyGroups < Struct.new(
+      :enabled,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more of your trusted signers don't exist.
     #
     # @!attribute [rw] message
@@ -10985,32 +11618,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that specifies the AWS accounts, if any, that you want
-    # to allow to create signed URLs for private content.
-    #
-    # If you want to require signed URLs in requests for objects in the
-    # target origin that match the `PathPattern` for this cache behavior,
-    # specify `true` for `Enabled`, and specify the applicable values for
-    # `Quantity` and `Items`. For more information, see [Serving Private
-    # Content through CloudFront][1] in the <i> Amazon CloudFront Developer
-    # Guide</i>.
-    #
-    # If you don't want to require signed URLs in requests for objects that
-    # match `PathPattern`, specify `false` for `Enabled` and `0` for
-    # `Quantity`. Omit `Items`.
-    #
-    # To add, change, or remove one or more trusted signers, change
-    # `Enabled` to `true` (if it's currently `false`), change `Quantity` as
-    # applicable, and specify all of the trusted signers that you want to
-    # include in the updated distribution.
-    #
-    # For more information about updating the distribution configuration,
-    # see [DistributionConfig][2] in the *Amazon CloudFront API Reference*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-    # [2]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/DistributionConfig.html
+    # A list of AWS accounts whose public keys CloudFront can use to verify
+    # the signatures of signed URLs and signed cookies.
     #
     # @note When making an API call, you may pass TrustedSigners
     #   data as a hash:
@@ -11022,17 +11631,17 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] enabled
-    #   Specifies whether you want to require viewers to use signed URLs to
-    #   access the files specified by `PathPattern` and `TargetOriginId`.
+    #   This field is `true` if any of the AWS accounts have public keys
+    #   that CloudFront can use to verify the signatures of signed URLs and
+    #   signed cookies. If not, this field is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] quantity
-    #   The number of trusted signers for this cache behavior.
+    #   The number of AWS accounts in the list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   **Optional**\: A complex type that contains trusted signers for this
-    #   cache behavior. If `Quantity` is `0`, you can omit `Items`.
+    #   A list of AWS account identifiers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustedSigners AWS API Documentation
@@ -11290,7 +11899,12 @@ module Aws::CloudFront
     #           },
     #           default_cache_behavior: { # required
     #             target_origin_id: "string", # required
-    #             trusted_signers: { # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             trusted_key_groups: {
     #               enabled: false, # required
     #               quantity: 1, # required
     #               items: ["string"],
@@ -11348,7 +11962,12 @@ module Aws::CloudFront
     #               {
     #                 path_pattern: "string", # required
     #                 target_origin_id: "string", # required
-    #                 trusted_signers: { # required
+    #                 trusted_signers: {
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 trusted_key_groups: {
     #                   enabled: false, # required
     #                   quantity: 1, # required
     #                   items: ["string"],
@@ -11633,6 +12252,59 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateKeyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_group_config: { # required
+    #           name: "string", # required
+    #           items: ["string"], # required
+    #           comment: "string",
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] key_group_config
+    #   The key group configuration.
+    #   @return [Types::KeyGroupConfig]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the key group that you are updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The version of the key group that you are updating. The version is
+    #   the key group’s `ETag` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyGroupRequest AWS API Documentation
+    #
+    class UpdateKeyGroupRequest < Struct.new(
+      :key_group_config,
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_group
+    #   The key group that was just updated.
+    #   @return [Types::KeyGroup]
+    #
+    # @!attribute [rw] etag
+    #   The identifier for this version of the key group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyGroupResult AWS API Documentation
+    #
+    class UpdateKeyGroupResult < Struct.new(
+      :key_group,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateOriginRequestPolicyRequest
     #   data as a hash:
     #
@@ -11725,11 +12397,11 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] public_key_config
-    #   Request to update public key information.
+    #   A public key configuration.
     #   @return [Types::PublicKeyConfig]
     #
     # @!attribute [rw] id
-    #   ID of the public key to be updated.
+    #   The identifier of the public key that you are updating.
     #   @return [String]
     #
     # @!attribute [rw] if_match
@@ -11748,12 +12420,11 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] public_key
-    #   Return the results of updating the public key.
+    #   The public key.
     #   @return [Types::PublicKey]
     #
     # @!attribute [rw] etag
-    #   The current version of the update public key result. For example:
-    #   `E2QWRUHAPOMQZL`.
+    #   The identifier of the current version of the public key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdatePublicKeyResult AWS API Documentation

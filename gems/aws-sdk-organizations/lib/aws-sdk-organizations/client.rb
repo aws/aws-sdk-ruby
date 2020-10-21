@@ -356,7 +356,7 @@ module Aws::Organizations
     #   User Guide*.
     #
     # * **Enable all features final confirmation** handshake: only a
-    #   principal from the master account.
+    #   principal from the management account.
     #
     #   For more information about invitations, see [Inviting an AWS Account
     #   to Join Your Organization][2] in the *AWS Organizations User Guide.*
@@ -487,7 +487,7 @@ module Aws::Organizations
     #
     # * [TAG\_POLICY][4]
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -716,12 +716,12 @@ module Aws::Organizations
     #
     # AWS Organizations preconfigures the new member account with a role
     # (named `OrganizationAccountAccessRole` by default) that grants users
-    # in the master account administrator permissions in the new member
-    # account. Principals in the master account can assume the role. AWS
+    # in the management account administrator permissions in the new member
+    # account. Principals in the management account can assume the role. AWS
     # Organizations clones the company name and address information for the
-    # new account from the organization's master account.
+    # new account from the organization's management account.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # For more information about creating accounts, see [Creating an AWS
@@ -786,10 +786,10 @@ module Aws::Organizations
     #   (Optional)
     #
     #   The name of an IAM role that AWS Organizations automatically
-    #   preconfigures in the new member account. This role trusts the master
-    #   account, allowing users in the master account to assume the role, as
-    #   permitted by the master account administrator. The role has
-    #   administrator permissions in the new member account.
+    #   preconfigures in the new member account. This role trusts the
+    #   management account, allowing users in the management account to assume
+    #   the role, as permitted by the management account administrator. The
+    #   role has administrator permissions in the new member account.
     #
     #   If you don't specify this parameter, the role name defaults to
     #   `OrganizationAccountAccessRole`.
@@ -913,11 +913,11 @@ module Aws::Organizations
     #   the [ *AWS GovCloud User Guide*.][1]
     #
     # * You already have an account in the AWS GovCloud (US) Region that is
-    #   paired with a master account of an organization in the commercial
-    #   Region.
+    #   paired with a management account of an organization in the
+    #   commercial Region.
     #
-    # * You call this action from the master account of your organization in
-    #   the commercial Region.
+    # * You call this action from the management account of your
+    #   organization in the commercial Region.
     #
     # * You have the `organizations:CreateGovCloudAccount` permission.
     #
@@ -943,11 +943,11 @@ module Aws::Organizations
     # the TagResource operation in the GovCloud Region after the new
     # GovCloud account exists.
     #
-    # You call this action from the master account of your organization in
-    # the commercial Region to create a standalone AWS account in the AWS
-    # GovCloud (US) Region. After the account is created, the master account
-    # of an organization in the AWS GovCloud (US) Region can invite it to
-    # that organization. For more information on inviting standalone
+    # You call this action from the management account of your organization
+    # in the commercial Region to create a standalone AWS account in the AWS
+    # GovCloud (US) Region. After the account is created, the management
+    # account of an organization in the AWS GovCloud (US) Region can invite
+    # it to that organization. For more information on inviting standalone
     # accounts in the AWS GovCloud (US) to join an organization, see [AWS
     # Organizations][4] in the *AWS GovCloud User Guide.*
     #
@@ -976,14 +976,14 @@ module Aws::Organizations
     # accounts are associated with the same email address.
     #
     # A role is created in the new account in the commercial Region that
-    # allows the master account in the organization in the commercial Region
-    # to assume it. An AWS GovCloud (US) account is then created and
+    # allows the management account in the organization in the commercial
+    # Region to assume it. An AWS GovCloud (US) account is then created and
     # associated with the commercial account that you just created. A role
     # is also created in the new AWS GovCloud (US) account that can be
     # assumed by the AWS GovCloud (US) account that is associated with the
-    # master account of the commercial organization. For more information
-    # and to view a diagram that explains how account access works, see [AWS
-    # Organizations][4] in the *AWS GovCloud User Guide.*
+    # management account of the commercial organization. For more
+    # information and to view a diagram that explains how account access
+    # works, see [AWS Organizations][4] in the *AWS GovCloud User Guide.*
     #
     # For more information about creating accounts, see [Creating an AWS
     # Account in Your Organization][6] in the *AWS Organizations User
@@ -1056,9 +1056,9 @@ module Aws::Organizations
     #
     #   The name of an IAM role that AWS Organizations automatically
     #   preconfigures in the new member accounts in both the AWS GovCloud (US)
-    #   Region and in the commercial Region. This role trusts the master
-    #   account, allowing users in the master account to assume the role, as
-    #   permitted by the master account administrator. The role has
+    #   Region and in the commercial Region. This role trusts the management
+    #   account, allowing users in the management account to assume the role,
+    #   as permitted by the management account administrator. The role has
     #   administrator permissions in the new member account.
     #
     #   If you don't specify this parameter, the role name defaults to
@@ -1158,11 +1158,11 @@ module Aws::Organizations
     end
 
     # Creates an AWS organization. The account whose user is calling the
-    # `CreateOrganization` operation automatically becomes the [master
+    # `CreateOrganization` operation automatically becomes the [management
     # account][1] of the new organization.
     #
     # This operation must be called using credentials from the account that
-    # is to become the new organization's master account. The principal
+    # is to become the new organization's management account. The principal
     # must also have the relevant IAM permissions.
     #
     # By default (or if you set the `FeatureSet` parameter to `ALL`), the
@@ -1182,7 +1182,7 @@ module Aws::Organizations
     #   feature set supports different levels of functionality.
     #
     #   * `CONSOLIDATED_BILLING`\: All member accounts have their bills
-    #     consolidated to and paid by the master account. For more
+    #     consolidated to and paid by the management account. For more
     #     information, see [Consolidated billing][1] in the *AWS Organizations
     #     User Guide.*
     #
@@ -1190,10 +1190,10 @@ module Aws::Organizations
     #     organizations in the AWS GovCloud (US) Region.
     #
     #   * `ALL`\: In addition to all the features supported by the
-    #     consolidated billing feature set, the master account can also apply
-    #     any policy type to any member account in the organization. For more
-    #     information, see [All features][2] in the *AWS Organizations User
-    #     Guide.*
+    #     consolidated billing feature set, the management account can also
+    #     apply any policy type to any member account in the organization. For
+    #     more information, see [All features][2] in the *AWS Organizations
+    #     User Guide.*
     #
     #
     #
@@ -1295,7 +1295,7 @@ module Aws::Organizations
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -1401,7 +1401,7 @@ module Aws::Organizations
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -1642,8 +1642,8 @@ module Aws::Organizations
     end
 
     # Deletes the organization. You can delete an organization only by using
-    # credentials from the master account. The organization must be empty of
-    # member accounts.
+    # credentials from the management account. The organization must be
+    # empty of member accounts.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1660,7 +1660,7 @@ module Aws::Organizations
     # must first remove all accounts and child OUs from the OU that you want
     # to delete.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # @option params [required, String] :organizational_unit_id
@@ -1708,7 +1708,7 @@ module Aws::Organizations
     # perform this operation, you must first detach the policy from all
     # organizational units (OUs), roots, and accounts.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # @option params [required, String] :policy_id
@@ -1765,7 +1765,7 @@ module Aws::Organizations
     # Services that you can use with AWS Organizations][1] in the *AWS
     # Organizations User Guide.*
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -1807,7 +1807,7 @@ module Aws::Organizations
     # Retrieves AWS Organizations-related information about the specified
     # account.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -1874,7 +1874,7 @@ module Aws::Organizations
     # Retrieves the current status of an asynchronous request to create an
     # account.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -1952,7 +1952,7 @@ module Aws::Organizations
     # For more information about policy inheritance, see [How Policy
     # Inheritance Works][1] in the *AWS Organizations User Guide*.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -1977,9 +1977,9 @@ module Aws::Organizations
     #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [String] :target_id
-    #   When you're signed in as the master account, specify the ID of the
-    #   account that you want details about. Specifying an organization root
-    #   or organizational unit (OU) as the target is not supported.
+    #   When you're signed in as the management account, specify the ID of
+    #   the account that you want details about. Specifying an organization
+    #   root or organizational unit (OU) as the target is not supported.
     #
     # @return [Types::DescribeEffectivePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2182,7 +2182,7 @@ module Aws::Organizations
 
     # Retrieves information about an organizational unit (OU).
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -2245,7 +2245,7 @@ module Aws::Organizations
 
     # Retrieves information about a policy.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -2333,7 +2333,7 @@ module Aws::Organizations
     # attached SCP), you're using the authorization strategy of a "[deny
     # list][2]".
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -2432,7 +2432,7 @@ module Aws::Organizations
     # Organizations, see [Integrating AWS Organizations with Other AWS
     # Services][2] in the *AWS Organizations User Guide.*
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -2476,7 +2476,7 @@ module Aws::Organizations
     # status of policy types for a specified root, and then use this
     # operation.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # To view the status of available policy types in the organization, use
@@ -2586,7 +2586,7 @@ module Aws::Organizations
     # Organizations, see [Integrating AWS Organizations with Other AWS
     # Services][2] in the *AWS Organizations User Guide.*
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account and only if the organization has [enabled all features][3].
     #
     #
@@ -2641,14 +2641,14 @@ module Aws::Organizations
     # the feature set change by accepting the handshake that contains
     # `"Action": "ENABLE_ALL_FEATURES"`. This completes the change.
     #
-    # After you enable all features in your organization, the master account
-    # in the organization can apply policies on all member accounts. These
-    # policies can restrict what users and even administrators in those
-    # accounts can do. The master account can apply policies that prevent
-    # accounts from leaving the organization. Ensure that your account
-    # administrators are aware of this.
+    # After you enable all features in your organization, the management
+    # account in the organization can apply policies on all member accounts.
+    # These policies can restrict what users and even administrators in
+    # those accounts can do. The management account can apply policies that
+    # prevent accounts from leaving the organization. Ensure that your
+    # account administrators are aware of this.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -2729,7 +2729,7 @@ module Aws::Organizations
     # AWS recommends that you first use ListRoots to see the status of
     # policy types for a specified root, and then use this operation.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # You can enable a policy type in a root only if that policy type is
@@ -2827,12 +2827,12 @@ module Aws::Organizations
     # invitation is implemented as a Handshake whose details are in the
     # response.
     #
-    # * You can invite AWS accounts only from the same seller as the master
-    #   account. For example, if your organization's master account was
-    #   created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS seller
-    #   in India, you can invite only other AISPL accounts to your
-    #   organization. You can't combine accounts from AISPL and AWS or from
-    #   any other AWS seller. For more information, see [Consolidated
+    # * You can invite AWS accounts only from the same seller as the
+    #   management account. For example, if your organization's management
+    #   account was created by Amazon Internet Services Pvt. Ltd (AISPL), an
+    #   AWS seller in India, you can invite only other AISPL accounts to
+    #   your organization. You can't combine accounts from AISPL and AWS or
+    #   from any other AWS seller. For more information, see [Consolidated
     #   Billing in India][1].
     #
     # * If you receive an exception that indicates that you exceeded your
@@ -2844,7 +2844,7 @@ module Aws::Organizations
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -3008,14 +3008,14 @@ module Aws::Organizations
 
     # Removes a member account from its parent organization. This version of
     # the operation is performed by the account that wants to leave. To
-    # remove a member account as a user in the master account, use
+    # remove a member account as a user in the management account, use
     # RemoveAccountFromOrganization instead.
     #
     # This operation can be called only from a member account in the
     # organization.
     #
-    # * The master account in an organization with all features enabled can
-    #   set service control policies (SCPs) that can restrict what
+    # * The management account in an organization with all features enabled
+    #   can set service control policies (SCPs) that can restrict what
     #   administrators of member accounts can do. This includes preventing
     #   them from successfully calling `LeaveOrganization` and leaving the
     #   organization.
@@ -3084,7 +3084,7 @@ module Aws::Organizations
     # Organizations, see [Integrating AWS Organizations with Other AWS
     # Services][1] in the *AWS Organizations User Guide.*
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -3153,7 +3153,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -3276,7 +3276,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -3385,7 +3385,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -3497,7 +3497,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -3614,7 +3614,7 @@ module Aws::Organizations
     # Lists the AWS accounts that are designated as delegated administrators
     # in this organization.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -3684,7 +3684,7 @@ module Aws::Organizations
     # List the AWS services for which the specified account is a delegated
     # administrator.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -3906,7 +3906,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4092,7 +4092,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4204,7 +4204,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4310,7 +4310,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4438,7 +4438,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4573,7 +4573,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4676,7 +4676,7 @@ module Aws::Organizations
     #
     # * Policy (any type)
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4744,7 +4744,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an AWS service.
     #
@@ -4849,7 +4849,7 @@ module Aws::Organizations
     # Moves an account from its current source parent root or organizational
     # unit (OU) to the specified destination parent root or OU.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # @option params [required, String] :account_id
@@ -4941,7 +4941,7 @@ module Aws::Organizations
     # Services that you can use with AWS Organizations][1] in the *AWS
     # Organizations User Guide.*
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     #
@@ -4978,11 +4978,11 @@ module Aws::Organizations
     #
     # The removed account becomes a standalone account that isn't a member
     # of any organization. It's no longer subject to any policies and is
-    # responsible for its own bill payments. The organization's master
+    # responsible for its own bill payments. The organization's management
     # account is no longer charged for any expenses accrued by the member
     # account after it's removed from the organization.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account. Member accounts can remove themselves with LeaveOrganization
     # instead.
     #
@@ -5060,7 +5060,7 @@ module Aws::Organizations
     #
     # * Policy (any type)
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # @option params [required, String] :resource_id
@@ -5127,7 +5127,7 @@ module Aws::Organizations
     #
     # * Policy (any type)
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # @option params [required, String] :resource_id
@@ -5171,7 +5171,7 @@ module Aws::Organizations
     # change. The child OUs and accounts remain in place, and any attached
     # policies of the OU remain attached.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # @option params [required, String] :organizational_unit_id
@@ -5246,7 +5246,7 @@ module Aws::Organizations
     # If you don't supply any parameter, that value remains unchanged. You
     # can't change a policy's type.
     #
-    # This operation can be called only from the organization's master
+    # This operation can be called only from the organization's management
     # account.
     #
     # @option params [required, String] :policy_id
@@ -5380,7 +5380,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

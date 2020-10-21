@@ -498,6 +498,8 @@ module Aws::Glue
     PythonScript = Shapes::StringShape.new(name: 'PythonScript')
     PythonVersionString = Shapes::StringShape.new(name: 'PythonVersionString')
     RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
+    RecrawlBehavior = Shapes::StringShape.new(name: 'RecrawlBehavior')
+    RecrawlPolicy = Shapes::StructureShape.new(name: 'RecrawlPolicy')
     ReplaceBoolean = Shapes::BooleanShape.new(name: 'ReplaceBoolean')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
@@ -1026,6 +1028,7 @@ module Aws::Glue
     Crawler.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "DatabaseName"))
     Crawler.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     Crawler.add_member(:classifiers, Shapes::ShapeRef.new(shape: ClassifierNameList, location_name: "Classifiers"))
+    Crawler.add_member(:recrawl_policy, Shapes::ShapeRef.new(shape: RecrawlPolicy, location_name: "RecrawlPolicy"))
     Crawler.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
     Crawler.add_member(:state, Shapes::ShapeRef.new(shape: CrawlerState, location_name: "State"))
     Crawler.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
@@ -1097,6 +1100,7 @@ module Aws::Glue
     CreateCrawlerRequest.add_member(:classifiers, Shapes::ShapeRef.new(shape: ClassifierNameList, location_name: "Classifiers"))
     CreateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     CreateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    CreateCrawlerRequest.add_member(:recrawl_policy, Shapes::ShapeRef.new(shape: RecrawlPolicy, location_name: "RecrawlPolicy"))
     CreateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     CreateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     CreateCrawlerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
@@ -2408,6 +2412,9 @@ module Aws::Glue
 
     PutWorkflowRunPropertiesResponse.struct_class = Types::PutWorkflowRunPropertiesResponse
 
+    RecrawlPolicy.add_member(:recrawl_behavior, Shapes::ShapeRef.new(shape: RecrawlBehavior, location_name: "RecrawlBehavior"))
+    RecrawlPolicy.struct_class = Types::RecrawlPolicy
+
     ResetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     ResetJobBookmarkRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
     ResetJobBookmarkRequest.struct_class = Types::ResetJobBookmarkRequest
@@ -2823,6 +2830,7 @@ module Aws::Glue
     UpdateCrawlerRequest.add_member(:classifiers, Shapes::ShapeRef.new(shape: ClassifierNameList, location_name: "Classifiers"))
     UpdateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     UpdateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    UpdateCrawlerRequest.add_member(:recrawl_policy, Shapes::ShapeRef.new(shape: RecrawlPolicy, location_name: "RecrawlPolicy"))
     UpdateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     UpdateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     UpdateCrawlerRequest.struct_class = Types::UpdateCrawlerRequest

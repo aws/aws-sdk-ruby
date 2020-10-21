@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2020-10-21)
+------------------
+
+* Feature - AWS Glue crawlers now support incremental crawls for the Amazon Simple Storage Service (Amazon S3) data source.
+
 1.75.0 (2020-10-15)
 ------------------
 

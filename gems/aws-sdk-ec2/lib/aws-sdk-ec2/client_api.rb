@@ -880,6 +880,7 @@ module Aws::EC2
     EnableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'EnableVpcClassicLinkResult')
     EndDateType = Shapes::StringShape.new(name: 'EndDateType')
     EndpointSet = Shapes::ListShape.new(name: 'EndpointSet')
+    EphemeralNvmeSupport = Shapes::StringShape.new(name: 'EphemeralNvmeSupport')
     ErrorSet = Shapes::ListShape.new(name: 'ErrorSet')
     EventCode = Shapes::StringShape.new(name: 'EventCode')
     EventInformation = Shapes::StructureShape.new(name: 'EventInformation')
@@ -6700,6 +6701,7 @@ module Aws::EC2
 
     InstanceStorageInfo.add_member(:total_size_in_gb, Shapes::ShapeRef.new(shape: DiskSize, location_name: "totalSizeInGB"))
     InstanceStorageInfo.add_member(:disks, Shapes::ShapeRef.new(shape: DiskInfoList, location_name: "disks"))
+    InstanceStorageInfo.add_member(:nvme_support, Shapes::ShapeRef.new(shape: EphemeralNvmeSupport, location_name: "nvmeSupport"))
     InstanceStorageInfo.struct_class = Types::InstanceStorageInfo
 
     InstanceTagKeySet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")

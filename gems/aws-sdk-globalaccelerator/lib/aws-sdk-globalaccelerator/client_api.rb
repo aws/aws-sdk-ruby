@@ -94,6 +94,8 @@ module Aws::GlobalAccelerator
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
+    PortOverride = Shapes::StructureShape.new(name: 'PortOverride')
+    PortOverrides = Shapes::ListShape.new(name: 'PortOverrides')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PortRanges = Shapes::ListShape.new(name: 'PortRanges')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
@@ -203,6 +205,7 @@ module Aws::GlobalAccelerator
     CreateEndpointGroupRequest.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckIntervalSeconds, location_name: "HealthCheckIntervalSeconds"))
     CreateEndpointGroupRequest.add_member(:threshold_count, Shapes::ShapeRef.new(shape: ThresholdCount, location_name: "ThresholdCount"))
     CreateEndpointGroupRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateEndpointGroupRequest.add_member(:port_overrides, Shapes::ShapeRef.new(shape: PortOverrides, location_name: "PortOverrides"))
     CreateEndpointGroupRequest.struct_class = Types::CreateEndpointGroupRequest
 
     CreateEndpointGroupResponse.add_member(:endpoint_group, Shapes::ShapeRef.new(shape: EndpointGroup, location_name: "EndpointGroup"))
@@ -282,6 +285,7 @@ module Aws::GlobalAccelerator
     EndpointGroup.add_member(:health_check_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "HealthCheckPath"))
     EndpointGroup.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckIntervalSeconds, location_name: "HealthCheckIntervalSeconds"))
     EndpointGroup.add_member(:threshold_count, Shapes::ShapeRef.new(shape: ThresholdCount, location_name: "ThresholdCount"))
+    EndpointGroup.add_member(:port_overrides, Shapes::ShapeRef.new(shape: PortOverrides, location_name: "PortOverrides"))
     EndpointGroup.struct_class = Types::EndpointGroup
 
     EndpointGroupAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -369,6 +373,12 @@ module Aws::GlobalAccelerator
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
 
+    PortOverride.add_member(:listener_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "ListenerPort"))
+    PortOverride.add_member(:endpoint_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "EndpointPort"))
+    PortOverride.struct_class = Types::PortOverride
+
+    PortOverrides.member = Shapes::ShapeRef.new(shape: PortOverride)
+
     PortRange.add_member(:from_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "FromPort"))
     PortRange.add_member(:to_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "ToPort"))
     PortRange.struct_class = Types::PortRange
@@ -428,6 +438,7 @@ module Aws::GlobalAccelerator
     UpdateEndpointGroupRequest.add_member(:health_check_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "HealthCheckPath"))
     UpdateEndpointGroupRequest.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckIntervalSeconds, location_name: "HealthCheckIntervalSeconds"))
     UpdateEndpointGroupRequest.add_member(:threshold_count, Shapes::ShapeRef.new(shape: ThresholdCount, location_name: "ThresholdCount"))
+    UpdateEndpointGroupRequest.add_member(:port_overrides, Shapes::ShapeRef.new(shape: PortOverrides, location_name: "PortOverrides"))
     UpdateEndpointGroupRequest.struct_class = Types::UpdateEndpointGroupRequest
 
     UpdateEndpointGroupResponse.add_member(:endpoint_group, Shapes::ShapeRef.new(shape: EndpointGroup, location_name: "EndpointGroup"))

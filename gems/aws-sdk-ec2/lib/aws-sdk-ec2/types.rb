@@ -8054,7 +8054,13 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] bucket
-    #   The Amazon S3 bucket in which to store the Spot Instance data feed.
+    #   The name of the Amazon S3 bucket in which to store the Spot Instance
+    #   data feed. For more information about bucket names, see [Rules for
+    #   bucket naming][1] in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -8065,7 +8071,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] prefix
-    #   A prefix for the data feed file names.
+    #   The prefix for the data feed file names.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionRequest AWS API Documentation
@@ -16215,25 +16221,25 @@ module Aws::EC2
     #     baseline bandwidth performance for an EBS-optimized instance type,
     #     in Mbps.
     #
-    #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
-    #     baseline throughput performance for an EBS-optimized instance
-    #     type, in MBps.
-    #
     #   * `ebs-info.ebs-optimized-info.baseline-iops` - The baseline
     #     input/output storage operations per second for an EBS-optimized
     #     instance type.
+    #
+    #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
+    #     baseline throughput performance for an EBS-optimized instance
+    #     type, in MBps.
     #
     #   * `ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps` - The
     #     maximum bandwidth performance for an EBS-optimized instance type,
     #     in Mbps.
     #
-    #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
-    #     maximum throughput performance for an EBS-optimized instance type,
-    #     in MBps.
-    #
     #   * `ebs-info.ebs-optimized-info.maximum-iops` - The maximum
     #     input/output storage operations per second for an EBS-optimized
     #     instance type.
+    #
+    #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
+    #     maximum throughput performance for an EBS-optimized instance type,
+    #     in MBps.
     #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
     #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
@@ -16242,7 +16248,7 @@ module Aws::EC2
     #     is supported. (`supported` \| `unsupported`)
     #
     #   * `ebs-info.nvme-support` - Indicates whether non-volatile memory
-    #     express (NVMe) is supported or required. (`required` \|
+    #     express (NVMe) is supported for EBS volumes. (`required` \|
     #     `supported` \| `unsupported`)
     #
     #   * `free-tier-eligible` - Indicates whether the instance type is
@@ -16251,7 +16257,7 @@ module Aws::EC2
     #   * `hibernation-supported` - Indicates whether On-Demand hibernation
     #     is supported. (`true` \| `false`)
     #
-    #   * `hypervisor` - The hypervisor used. (`nitro` \| `xen`)
+    #   * `hypervisor` - The hypervisor. (`nitro` \| `xen`)
     #
     #   * `instance-storage-info.disk.count` - The number of local disks.
     #
@@ -16261,20 +16267,27 @@ module Aws::EC2
     #   * `instance-storage-info.disk.type` - The storage technology for the
     #     local instance storage disks. (`hdd` \| `ssd`)
     #
+    #   * `instance-storage-info.nvme-support` - Indicates whether
+    #     non-volatile memory express (NVMe) is supported for instance
+    #     store. (`required` \| `supported`) \| `unsupported`)
+    #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
     #
     #   * `instance-storage-supported` - Indicates whether the instance type
     #     has local instance storage. (`true` \| `false`)
     #
+    #   * `instance-type` - The instance type (for example `c5.2xlarge` or
+    #     c5*).
+    #
     #   * `memory-info.size-in-mib` - The memory size.
+    #
+    #   * `network-info.efa-supported` - Indicates whether the instance type
+    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
     #
     #   * `network-info.ena-support` - Indicates whether Elastic Network
     #     Adapter (ENA) is supported or required. (`required` \| `supported`
     #     \| `unsupported`)
-    #
-    #   * `network-info.efa-supported` - Indicates whether the instance type
-    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
     #
     #   * `network-info.ipv4-addresses-per-interface` - The maximum number
     #     of private IPv4 addresses per network interface.
@@ -16288,11 +16301,22 @@ module Aws::EC2
     #   * `network-info.maximum-network-interfaces` - The maximum number of
     #     network interfaces per instance.
     #
-    #   * `network-info.network-performance` - Describes the network
-    #     performance.
+    #   * `network-info.network-performance` - The network performance (for
+    #     example, "25 Gigabit").
+    #
+    #   * `processor-info.supported-architecture` - The CPU architecture.
+    #     (`arm64` \| `i386` \| `x86_64`)
     #
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock
     #     speed, in GHz.
+    #
+    #   * `supported-root-device-type` - The root device type. (`ebs` \|
+    #     `instance-store`)
+    #
+    #   * `supported-usage-class` - The usage class. (`on-demand` \| `spot`)
+    #
+    #   * `supported-virtualization-type` - The virtualization type. (`hvm`
+    #     \| `paravirtual`)
     #
     #   * `vcpu-info.default-cores` - The default number of cores for the
     #     instance type.
@@ -16302,6 +16326,13 @@ module Aws::EC2
     #
     #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
     #     instance type.
+    #
+    #   * `vcpu-info.valid-cores` - The number of cores that can be
+    #     configured for the instance type.
+    #
+    #   * `vcpu-info.valid-threads-per-core` - The number of threads per
+    #     core that can be configured for the instance type. For example,
+    #     "1" or "1,2".
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -20474,8 +20505,10 @@ module Aws::EC2
     #   * `instance-type` - The type of instance (for example, `m3.medium`).
     #
     #   * `product-description` - The product description for the Spot price
-    #     (`Linux/UNIX` \| `SUSE Linux` \| `Windows` \| `Linux/UNIX (Amazon
-    #     VPC)` \| `SUSE Linux (Amazon VPC)` \| `Windows (Amazon VPC)`).
+    #     (`Linux/UNIX` \| `Red Hat Enterprise Linux` \| `SUSE Linux` \|
+    #     `Windows` \| `Linux/UNIX (Amazon VPC)` \| `Red Hat Enterprise
+    #     Linux (Amazon VPC)` \| `SUSE Linux (Amazon VPC)` \| `Windows
+    #     (Amazon VPC)`).
     #
     #   * `spot-price` - The Spot price. The value must match exactly (or
     #     use wildcards; greater than or less than comparison is not
@@ -31573,11 +31606,17 @@ module Aws::EC2
     #   Array describing the disks that are available for the instance type.
     #   @return [Array<Types::DiskInfo>]
     #
+    # @!attribute [rw] nvme_support
+    #   Indicates whether non-volatile memory express (NVMe) is supported
+    #   for instance store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStorageInfo AWS API Documentation
     #
     class InstanceStorageInfo < Struct.new(
       :total_size_in_gb,
-      :disks)
+      :disks,
+      :nvme_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42086,6 +42125,10 @@ module Aws::EC2
     #
     #   You can't specify an Availability Zone group or a launch group if
     #   you specify a duration.
+    #
+    #   New accounts or accounts with no previous billing history with AWS
+    #   are not eligible for Spot Instances with a defined duration (also
+    #   known as Spot blocks).
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -42147,11 +42190,17 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] valid_until
-    #   The end date of the request. If this is a one-time request, the
-    #   request remains active until all instances launch, the request is
-    #   canceled, or this date is reached. If the request is persistent, it
-    #   remains active until it is canceled or this date is reached. The
-    #   default end date is 7 days from the current date.
+    #   The end date of the request, in UTC format
+    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #
+    #   * For a persistent request, the request remains active until the
+    #     `ValidUntil` date and time is reached. Otherwise, the request
+    #     remains active until you cancel it.
+    #
+    #   * For a one-time request, the request remains active until all
+    #     instances launch, the request is canceled, or the `ValidUntil`
+    #     date and time is reached. By default, the request is valid for 7
+    #     days from the date the request was created.
     #   @return [Time]
     #
     # @!attribute [rw] tag_specifications
@@ -42388,7 +42437,9 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a reservation.
+    # Describes a launch request for one or more instances, and includes
+    # owner, requester, and security group information that applies to all
+    # instances in the launch request.
     #
     # @!attribute [rw] groups
     #   \[EC2-Classic only\] The security groups.
@@ -46435,7 +46486,8 @@ module Aws::EC2
     # Describes the data feed for a Spot Instance.
     #
     # @!attribute [rw] bucket
-    #   The Amazon S3 bucket where the Spot Instance data feed is located.
+    #   The name of the Amazon S3 bucket where the Spot Instance data feed
+    #   is located.
     #   @return [String]
     #
     # @!attribute [rw] fault
@@ -46447,7 +46499,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   The prefix that is prepended to data feed files.
+    #   The prefix for the data feed files.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -46467,7 +46519,8 @@ module Aws::EC2
     end
 
     # Describes the launch specification for one or more Spot Instances. If
-    # you include On-Demand capacity in your fleet request, you can't use
+    # you include On-Demand capacity in your fleet request or want to
+    # specify an EFA network device, you can't use
     # `SpotFleetLaunchSpecification`; you must use
     # [LaunchTemplateConfig][1].
     #
@@ -46622,6 +46675,16 @@ module Aws::EC2
     #   One or more network interfaces. If you specify a network interface,
     #   you must specify subnet IDs and security group IDs using the network
     #   interface.
+    #
+    #   <note markdown="1"> `SpotFleetLaunchSpecification` currently does not support Elastic
+    #   Fabric Adapter (EFA). To specify an EFA, you must use
+    #   [LaunchTemplateConfig][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] placement
@@ -47279,12 +47342,17 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] valid_until
-    #   The end date of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). If this is a one-time request,
-    #   it remains active until all instances launch, the request is
-    #   canceled, or this date is reached. If the request is persistent, it
-    #   remains active until it is canceled or this date is reached. The
-    #   default end date is 7 days from the current date.
+    #   The end date of the request, in UTC format
+    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #
+    #   * For a persistent request, the request remains active until the
+    #     `validUntil` date and time is reached. Otherwise, the request
+    #     remains active until you cancel it.
+    #
+    #   * For a one-time request, the request remains active until all
+    #     instances launch, the request is canceled, or the `validUntil`
+    #     date and time is reached. By default, the request is valid for 7
+    #     days from the date the request was created.
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
@@ -47399,14 +47467,33 @@ module Aws::EC2
     #   The required duration for the Spot Instances (also known as Spot
     #   blocks), in minutes. This value must be a multiple of 60 (60, 120,
     #   180, 240, 300, or 360).
+    #
+    #   The duration period starts as soon as your Spot Instance receives
+    #   its instance ID. At the end of the duration period, Amazon EC2 marks
+    #   the Spot Instance for termination and provides a Spot Instance
+    #   termination notice, which gives the instance a two-minute warning
+    #   before it terminates.
+    #
+    #   You can't specify an Availability Zone group or a launch group if
+    #   you specify a duration.
+    #
+    #   New accounts or accounts with no previous billing history with AWS
+    #   are not eligible for Spot Instances with a defined duration (also
+    #   known as Spot blocks).
     #   @return [Integer]
     #
     # @!attribute [rw] valid_until
-    #   The end date of the request. For a one-time request, the request
-    #   remains active until all instances launch, the request is canceled,
-    #   or this date is reached. If the request is persistent, it remains
-    #   active until it is canceled or this date and time is reached. The
-    #   default end date is 7 days from the current date.
+    #   The end date of the request, in UTC format
+    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). Supported only for persistent
+    #   requests.
+    #
+    #   * For a persistent request, the request remains active until the
+    #     `ValidUntil` date and time is reached. Otherwise, the request
+    #     remains active until you cancel it.
+    #
+    #   * For a one-time request, `ValidUntil` is not supported. The request
+    #     remains active until all instances launch or you cancel the
+    #     request.
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
