@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::GlobalAccelerator - Updated the API, and documentation for AWS Global Accelerator.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
 2.11.609 (2020-10-20)
 ------------------
 
