@@ -456,8 +456,8 @@ to be backwards compatible.
 | Amazon S3 on Outposts                                 | S3Outposts                      | 2017-07-25  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | SageMaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Email Service                           | SES                             | 2010-12-01  |
+| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | SNS                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | SQS                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | S3                              | 2006-03-01  |
