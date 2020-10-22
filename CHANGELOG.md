@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.612 (2020-10-22)
+------------------
+
 * Feature - Aws::AccessAnalyzer - Updated the documentation for Access Analyzer.
 
 * Feature - Aws::Appflow - Updated the API, and documentation for Amazon Appflow.
