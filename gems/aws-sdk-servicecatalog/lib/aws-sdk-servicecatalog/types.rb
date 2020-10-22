@@ -7199,12 +7199,8 @@ module Aws::ServiceCatalog
     #   product. This role is used when an end-user calls a provisioning
     #   operation such as `UpdateProvisionedProduct`,
     #   `TerminateProvisionedProduct`, or
-    #   `ExecuteProvisionedProductServiceAction`. Only an ARN role or `null`
-    #   is valid. A user ARN is invalid. For example, if an admin user
-    #   passes `null` as the value for the key `LAUNCH_ROLE`, the admin
-    #   removes the launch role that is associated with the provisioned
-    #   product. As a result, the end user operations use the credentials of
-    #   the end user.
+    #   `ExecuteProvisionedProductServiceAction`. Only an ARN role is valid.
+    #   A user ARN is invalid.
     #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the
     #   user that has permission to see, update, terminate, and execute

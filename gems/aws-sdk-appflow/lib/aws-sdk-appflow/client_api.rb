@@ -32,6 +32,7 @@ module Aws::Appflow
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
+    ClientCredentialsArn = Shapes::StringShape.new(name: 'ClientCredentialsArn')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -71,6 +72,7 @@ module Aws::Appflow
     DatadogMetadata = Shapes::StructureShape.new(name: 'DatadogMetadata')
     DatadogSourceProperties = Shapes::StructureShape.new(name: 'DatadogSourceProperties')
     Date = Shapes::TimestampShape.new(name: 'Date')
+    DatetimeTypeFieldName = Shapes::StringShape.new(name: 'DatetimeTypeFieldName')
     DeleteConnectorProfileRequest = Shapes::StructureShape.new(name: 'DeleteConnectorProfileRequest')
     DeleteConnectorProfileResponse = Shapes::StructureShape.new(name: 'DeleteConnectorProfileResponse')
     DeleteFlowRequest = Shapes::StructureShape.new(name: 'DeleteFlowRequest')
@@ -126,7 +128,9 @@ module Aws::Appflow
     GoogleAnalyticsMetadata = Shapes::StructureShape.new(name: 'GoogleAnalyticsMetadata')
     GoogleAnalyticsSourceProperties = Shapes::StructureShape.new(name: 'GoogleAnalyticsSourceProperties')
     Group = Shapes::StringShape.new(name: 'Group')
+    IdFieldNameList = Shapes::ListShape.new(name: 'IdFieldNameList')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    IncrementalPullConfig = Shapes::StructureShape.new(name: 'IncrementalPullConfig')
     InforNexusConnectorOperator = Shapes::StringShape.new(name: 'InforNexusConnectorOperator')
     InforNexusConnectorProfileCredentials = Shapes::StructureShape.new(name: 'InforNexusConnectorProfileCredentials')
     InforNexusConnectorProfileProperties = Shapes::StructureShape.new(name: 'InforNexusConnectorProfileProperties')
@@ -222,6 +226,7 @@ module Aws::Appflow
     String = Shapes::StringShape.new(name: 'String')
     SupportedFieldTypeDetails = Shapes::StructureShape.new(name: 'SupportedFieldTypeDetails')
     SupportedValueList = Shapes::ListShape.new(name: 'SupportedValueList')
+    SupportedWriteOperationList = Shapes::ListShape.new(name: 'SupportedWriteOperationList')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -259,6 +264,7 @@ module Aws::Appflow
     VeevaMetadata = Shapes::StructureShape.new(name: 'VeevaMetadata')
     VeevaSourceProperties = Shapes::StructureShape.new(name: 'VeevaSourceProperties')
     Warehouse = Shapes::StringShape.new(name: 'Warehouse')
+    WriteOperationType = Shapes::StringShape.new(name: 'WriteOperationType')
     ZendeskConnectorOperator = Shapes::StringShape.new(name: 'ZendeskConnectorOperator')
     ZendeskConnectorProfileCredentials = Shapes::StructureShape.new(name: 'ZendeskConnectorProfileCredentials')
     ZendeskConnectorProfileProperties = Shapes::StructureShape.new(name: 'ZendeskConnectorProfileProperties')
@@ -528,6 +534,8 @@ module Aws::Appflow
     DestinationFieldProperties.add_member(:is_creatable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCreatable"))
     DestinationFieldProperties.add_member(:is_nullable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isNullable"))
     DestinationFieldProperties.add_member(:is_upsertable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isUpsertable"))
+    DestinationFieldProperties.add_member(:is_updatable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isUpdatable"))
+    DestinationFieldProperties.add_member(:supported_write_operations, Shapes::ShapeRef.new(shape: SupportedWriteOperationList, location_name: "supportedWriteOperations"))
     DestinationFieldProperties.struct_class = Types::DestinationFieldProperties
 
     DestinationFlowConfig.add_member(:connector_type, Shapes::ShapeRef.new(shape: ConnectorType, required: true, location_name: "connectorType"))
@@ -621,6 +629,11 @@ module Aws::Appflow
 
     GoogleAnalyticsSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
     GoogleAnalyticsSourceProperties.struct_class = Types::GoogleAnalyticsSourceProperties
+
+    IdFieldNameList.member = Shapes::ShapeRef.new(shape: Name)
+
+    IncrementalPullConfig.add_member(:datetime_type_field_name, Shapes::ShapeRef.new(shape: DatetimeTypeFieldName, location_name: "datetimeTypeFieldName"))
+    IncrementalPullConfig.struct_class = Types::IncrementalPullConfig
 
     InforNexusConnectorProfileCredentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyId, required: true, location_name: "accessKeyId"))
     InforNexusConnectorProfileCredentials.add_member(:user_id, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "userId"))
@@ -723,6 +736,7 @@ module Aws::Appflow
     SalesforceConnectorProfileCredentials.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
     SalesforceConnectorProfileCredentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
     SalesforceConnectorProfileCredentials.add_member(:o_auth_request, Shapes::ShapeRef.new(shape: ConnectorOAuthRequest, location_name: "oAuthRequest"))
+    SalesforceConnectorProfileCredentials.add_member(:client_credentials_arn, Shapes::ShapeRef.new(shape: ClientCredentialsArn, location_name: "clientCredentialsArn"))
     SalesforceConnectorProfileCredentials.struct_class = Types::SalesforceConnectorProfileCredentials
 
     SalesforceConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, location_name: "instanceUrl"))
@@ -730,7 +744,9 @@ module Aws::Appflow
     SalesforceConnectorProfileProperties.struct_class = Types::SalesforceConnectorProfileProperties
 
     SalesforceDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    SalesforceDestinationProperties.add_member(:id_field_names, Shapes::ShapeRef.new(shape: IdFieldNameList, location_name: "idFieldNames"))
     SalesforceDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    SalesforceDestinationProperties.add_member(:write_operation_type, Shapes::ShapeRef.new(shape: WriteOperationType, location_name: "writeOperationType"))
     SalesforceDestinationProperties.struct_class = Types::SalesforceDestinationProperties
 
     SalesforceMetadata.add_member(:o_auth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oAuthScopes"))
@@ -837,6 +853,7 @@ module Aws::Appflow
     SourceFlowConfig.add_member(:connector_type, Shapes::ShapeRef.new(shape: ConnectorType, required: true, location_name: "connectorType"))
     SourceFlowConfig.add_member(:connector_profile_name, Shapes::ShapeRef.new(shape: ConnectorProfileName, location_name: "connectorProfileName"))
     SourceFlowConfig.add_member(:source_connector_properties, Shapes::ShapeRef.new(shape: SourceConnectorProperties, required: true, location_name: "sourceConnectorProperties"))
+    SourceFlowConfig.add_member(:incremental_pull_config, Shapes::ShapeRef.new(shape: IncrementalPullConfig, location_name: "incrementalPullConfig"))
     SourceFlowConfig.struct_class = Types::SourceFlowConfig
 
     StartFlowRequest.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "flowName"))
@@ -844,6 +861,7 @@ module Aws::Appflow
 
     StartFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
     StartFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))
+    StartFlowResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "executionId"))
     StartFlowResponse.struct_class = Types::StartFlowResponse
 
     StopFlowRequest.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "flowName"))
@@ -857,6 +875,8 @@ module Aws::Appflow
     SupportedFieldTypeDetails.struct_class = Types::SupportedFieldTypeDetails
 
     SupportedValueList.member = Shapes::ShapeRef.new(shape: Value)
+
+    SupportedWriteOperationList.member = Shapes::ShapeRef.new(shape: WriteOperationType)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 

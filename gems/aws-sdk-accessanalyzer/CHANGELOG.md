@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-10-22)
+------------------
+
+* Feature - API Documentation updates for IAM Access Analyzer.
+
 1.13.0 (2020-10-15)
 ------------------
 

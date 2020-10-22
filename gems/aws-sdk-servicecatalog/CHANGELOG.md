@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-10-22)
+------------------
+
+* Feature - Documentation updates for servicecatalog
+
 1.51.0 (2020-10-19)
 ------------------
 

@@ -319,6 +319,9 @@ module Aws::SNS
     #   Constraints: Topic names must be made up of only uppercase and
     #   lowercase ASCII letters, numbers, underscores, and hyphens, and must
     #   be between 1 and 256 characters long.
+    #
+    #   For a FIFO (first-in-first-out) topic, the name must end with the
+    #   `.fifo` suffix.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -333,6 +336,8 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
+    #   * `FifoTopic` – Set to true to create a FIFO topic.
+    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the
     #     topic.
@@ -340,12 +345,27 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see
     #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
+    #
+    #   The following attribute applies only to FIFO topics:
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
+    #     Amazon SNS uses a SHA-256 hash to generate the
+    #     `MessageDeduplicationId` using the body of the message (but not
+    #     the attributes of the message).
+    #
+    #   * When `ContentBasedDeduplication` is in effect, messages with
+    #     identical content sent within the deduplication interval are
+    #     treated as duplicates and only one copy of the message is
+    #     delivered.
+    #
+    #   * If the queue has `ContentBasedDeduplication` set, your
+    #     `MessageDeduplicationId` overrides the generated one.
     #
     #
     #
@@ -1397,6 +1417,8 @@ module Aws::SNS
     #             binary_value: "data",
     #           },
     #         },
+    #         message_deduplication_id: "String",
+    #         message_group_id: "String",
     #       }
     #
     # @!attribute [rw] topic_arn
@@ -1511,6 +1533,36 @@ module Aws::SNS
     #   Message attributes for Publish action.
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
+    # @!attribute [rw] message_deduplication_id
+    #   This parameter applies only to FIFO (first-in-first-out) topics. The
+    #   `MessageDeduplicationId` can contain up to 128 alphanumeric
+    #   characters (a-z, A-Z, 0-9) and punctuation ``
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #
+    #   Every message must have a unique `MessageDeduplicationId`, which is
+    #   a token used for deduplication of sent messages. If a message with a
+    #   particular `MessageDeduplicationId` is sent successfully, any
+    #   message sent with the same `MessageDeduplicationId` during the
+    #   5-minute deduplication interval is treated as a duplicate.
+    #
+    #   If the topic has `ContentBasedDeduplication` set, the system
+    #   generates a `MessageDeduplicationId` based on the contents of the
+    #   message. Your `MessageDeduplicationId` overrides the generated one.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_group_id
+    #   This parameter applies only to FIFO (first-in-first-out) topics. The
+    #   `MessageGroupId` can contain up to 128 alphanumeric characters (a-z,
+    #   A-Z, 0-9) and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~)
+    #   ``.
+    #
+    #   The `MessageGroupId` is a tag that specifies that a message belongs
+    #   to a specific message group. Messages that belong to the same
+    #   message group are processed in a FIFO manner (however, messages in
+    #   different message groups might be processed out of order). Every
+    #   message must include a `MessageGroupId`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishInput AWS API Documentation
     #
     class PublishInput < Struct.new(
@@ -1520,7 +1572,9 @@ module Aws::SNS
       :message,
       :subject,
       :message_structure,
-      :message_attributes)
+      :message_attributes,
+      :message_deduplication_id,
+      :message_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1533,10 +1587,21 @@ module Aws::SNS
     #   Length Constraint: Maximum 100 characters
     #   @return [String]
     #
+    # @!attribute [rw] sequence_number
+    #   This response element applies only to FIFO (first-in-first-out)
+    #   topics.
+    #
+    #   The sequence number is a large, non-consecutive number that Amazon
+    #   SNS assigns to each message. The length of `SequenceNumber` is 128
+    #   bits. `SequenceNumber` continues to increase for each
+    #   `MessageGroupId`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishResponse AWS API Documentation
     #
     class PublishResponse < Struct.new(
-      :message_id)
+      :message_id,
+      :sequence_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1891,12 +1956,27 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see
     #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
+    #
+    #   The following attribute applies only to FIFO topics:
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
+    #     Amazon SNS uses a SHA-256 hash to generate the
+    #     `MessageDeduplicationId` using the body of the message (but not
+    #     the attributes of the message).
+    #
+    #   * When `ContentBasedDeduplication` is in effect, messages with
+    #     identical content sent within the deduplication interval are
+    #     treated as duplicates and only one copy of the message is
+    #     delivered.
+    #
+    #   * If the queue has `ContentBasedDeduplication` set, your
+    #     `MessageDeduplicationId` overrides the generated one.
     #
     #
     #
@@ -2033,13 +2113,15 @@ module Aws::SNS
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   If you set this parameter to `true`, the response includes the ARN
-    #   in all cases, even if the subscription is not yet confirmed. In
-    #   addition to the ARN for confirmed subscriptions, the response also
-    #   includes the `pending subscription` ARN value for subscriptions that
-    #   aren't yet confirmed. A subscription becomes confirmed when the
-    #   subscriber calls the `ConfirmSubscription` action with a
-    #   confirmation token.
+    #   * If you set this parameter to `true`, the response includes the ARN
+    #     in all cases, even if the subscription is not yet confirmed. In
+    #     addition to the ARN for confirmed subscriptions, the response also
+    #     includes the `pending subscription` ARN value for subscriptions
+    #     that aren't yet confirmed. A subscription becomes confirmed when
+    #     the subscriber calls the `ConfirmSubscription` action with a
+    #     confirmation token.
+    #
+    #   ^
     #
     #
     #

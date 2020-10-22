@@ -467,6 +467,7 @@ module Aws::Appflow
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
     #           },
+    #           client_credentials_arn: "ClientCredentialsArn",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -632,6 +633,9 @@ module Aws::Appflow
     #           object: "Object", # required
     #         },
     #       },
+    #       incremental_pull_config: {
+    #         datetime_type_field_name: "DatetimeTypeFieldName",
+    #       },
     #     },
     #     destination_flow_config_list: [ # required
     #       {
@@ -664,11 +668,13 @@ module Aws::Appflow
     #           },
     #           salesforce: {
     #             object: "Object", # required
+    #             id_field_names: ["Name"],
     #             error_handling_config: {
     #               fail_on_first_destination_error: false,
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
     #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -836,6 +842,9 @@ module Aws::Appflow
     #   resp.connector_entity_fields[0].destination_properties.is_creatable #=> Boolean
     #   resp.connector_entity_fields[0].destination_properties.is_nullable #=> Boolean
     #   resp.connector_entity_fields[0].destination_properties.is_upsertable #=> Boolean
+    #   resp.connector_entity_fields[0].destination_properties.is_updatable #=> Boolean
+    #   resp.connector_entity_fields[0].destination_properties.supported_write_operations #=> Array
+    #   resp.connector_entity_fields[0].destination_properties.supported_write_operations[0] #=> String, one of "INSERT", "UPSERT", "UPDATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnectorEntity AWS API Documentation
     #
@@ -1047,6 +1056,7 @@ module Aws::Appflow
     #   resp.source_flow_config.source_connector_properties.trendmicro.object #=> String
     #   resp.source_flow_config.source_connector_properties.veeva.object #=> String
     #   resp.source_flow_config.source_connector_properties.zendesk.object #=> String
+    #   resp.source_flow_config.incremental_pull_config.datetime_type_field_name #=> String
     #   resp.destination_flow_config_list #=> Array
     #   resp.destination_flow_config_list[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge"
     #   resp.destination_flow_config_list[0].connector_profile_name #=> String
@@ -1063,9 +1073,12 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.prefix_format #=> String, one of "YEAR", "MONTH", "DAY", "HOUR", "MINUTE"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.aggregation_config.aggregation_type #=> String, one of "None", "SingleFile"
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.object #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.id_field_names #=> Array
+    #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.id_field_names[0] #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.error_handling_config.fail_on_first_destination_error #=> Boolean
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.error_handling_config.bucket_prefix #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.error_handling_config.bucket_name #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.write_operation_type #=> String, one of "INSERT", "UPSERT", "UPDATE"
     #   resp.destination_flow_config_list[0].destination_connector_properties.snowflake.object #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.snowflake.intermediate_bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.snowflake.bucket_prefix #=> String
@@ -1318,6 +1331,7 @@ module Aws::Appflow
     #
     #   * {Types::StartFlowResponse#flow_arn #flow_arn} => String
     #   * {Types::StartFlowResponse#flow_status #flow_status} => String
+    #   * {Types::StartFlowResponse#execution_id #execution_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1329,6 +1343,7 @@ module Aws::Appflow
     #
     #   resp.flow_arn #=> String
     #   resp.flow_status #=> String, one of "Active", "Deprecated", "Deleted", "Draft", "Errored", "Suspended"
+    #   resp.execution_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/StartFlow AWS API Documentation
     #
@@ -1550,6 +1565,7 @@ module Aws::Appflow
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
     #           },
+    #           client_credentials_arn: "ClientCredentialsArn",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -1699,6 +1715,9 @@ module Aws::Appflow
     #           object: "Object", # required
     #         },
     #       },
+    #       incremental_pull_config: {
+    #         datetime_type_field_name: "DatetimeTypeFieldName",
+    #       },
     #     },
     #     destination_flow_config_list: [ # required
     #       {
@@ -1731,11 +1750,13 @@ module Aws::Appflow
     #           },
     #           salesforce: {
     #             object: "Object", # required
+    #             id_field_names: ["Name"],
     #             error_handling_config: {
     #               fail_on_first_destination_error: false,
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
     #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -1812,7 +1833,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

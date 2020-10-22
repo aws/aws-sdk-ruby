@@ -647,6 +647,7 @@ module Aws::Appflow
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
     #             },
+    #             client_credentials_arn: "ClientCredentialsArn",
     #           },
     #           service_now: {
     #             username: "Username", # required
@@ -757,6 +758,7 @@ module Aws::Appflow
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
     #           },
+    #           client_credentials_arn: "ClientCredentialsArn",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -1144,6 +1146,7 @@ module Aws::Appflow
     #                 auth_code: "AuthCode",
     #                 redirect_uri: "RedirectUri",
     #               },
+    #               client_credentials_arn: "ClientCredentialsArn",
     #             },
     #             service_now: {
     #               username: "Username", # required
@@ -1305,6 +1308,9 @@ module Aws::Appflow
     #               object: "Object", # required
     #             },
     #           },
+    #           incremental_pull_config: {
+    #             datetime_type_field_name: "DatetimeTypeFieldName",
+    #           },
     #         },
     #         destination_flow_config_list: [ # required
     #           {
@@ -1337,11 +1343,13 @@ module Aws::Appflow
     #               },
     #               salesforce: {
     #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
     #                 error_handling_config: {
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #               },
     #               snowflake: {
     #                 object: "Object", # required
@@ -1960,11 +1968,13 @@ module Aws::Appflow
     #         },
     #         salesforce: {
     #           object: "Object", # required
+    #           id_field_names: ["Name"],
     #           error_handling_config: {
     #             fail_on_first_destination_error: false,
     #             bucket_prefix: "BucketPrefix",
     #             bucket_name: "BucketName",
     #           },
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #         },
     #         snowflake: {
     #           object: "Object", # required
@@ -2036,12 +2046,25 @@ module Aws::Appflow
     #   they do.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_updatable
+    #   Specifies whether the field can be updated during an `UPDATE` or
+    #   `UPSERT` write operation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_write_operations
+    #   A list of supported write operations. For each write operation
+    #   listed, this field can be used in `idFieldNames` when that write
+    #   operation is present as a destination option.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationFieldProperties AWS API Documentation
     #
     class DestinationFieldProperties < Struct.new(
       :is_creatable,
       :is_nullable,
-      :is_upsertable)
+      :is_upsertable,
+      :is_updatable,
+      :supported_write_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2082,11 +2105,13 @@ module Aws::Appflow
     #           },
     #           salesforce: {
     #             object: "Object", # required
+    #             id_field_names: ["Name"],
     #             error_handling_config: {
     #               fail_on_first_destination_error: false,
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
     #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -2523,7 +2548,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -2538,7 +2563,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #
@@ -2595,6 +2620,29 @@ module Aws::Appflow
     #
     class GoogleAnalyticsSourceProperties < Struct.new(
       :object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration used when importing incremental records
+    # from the source.
+    #
+    # @note When making an API call, you may pass IncrementalPullConfig
+    #   data as a hash:
+    #
+    #       {
+    #         datetime_type_field_name: "DatetimeTypeFieldName",
+    #       }
+    #
+    # @!attribute [rw] datetime_type_field_name
+    #   A field that specifies the date time or timestamp field as the
+    #   criteria to use when importing incremental records from the source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/IncrementalPullConfig AWS API Documentation
+    #
+    class IncrementalPullConfig < Struct.new(
+      :datetime_type_field_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2848,7 +2896,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -2857,7 +2905,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #
@@ -3227,6 +3275,7 @@ module Aws::Appflow
     #           auth_code: "AuthCode",
     #           redirect_uri: "RedirectUri",
     #         },
+    #         client_credentials_arn: "ClientCredentialsArn",
     #       }
     #
     # @!attribute [rw] access_token
@@ -3238,17 +3287,23 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
+    #
+    # @!attribute [rw] client_credentials_arn
+    #   The secret manager ARN, which contains the client ID and client
+    #   secret of the connected app.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceConnectorProfileCredentials AWS API Documentation
     #
     class SalesforceConnectorProfileCredentials < Struct.new(
       :access_token,
       :refresh_token,
-      :o_auth_request)
-      SENSITIVE = [:access_token]
+      :o_auth_request,
+      :client_credentials_arn)
+      SENSITIVE = [:access_token, :client_credentials_arn]
       include Aws::Structure
     end
 
@@ -3289,16 +3344,23 @@ module Aws::Appflow
     #
     #       {
     #         object: "Object", # required
+    #         id_field_names: ["Name"],
     #         error_handling_config: {
     #           fail_on_first_destination_error: false,
     #           bucket_prefix: "BucketPrefix",
     #           bucket_name: "BucketName",
     #         },
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Salesforce flow destination.
     #   @return [String]
+    #
+    # @!attribute [rw] id_field_names
+    #   The name of the field that Amazon AppFlow uses as an ID when
+    #   performing a write operation such as update or delete.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] error_handling_config
     #   The settings that determine how Amazon AppFlow handles an error when
@@ -3309,11 +3371,19 @@ module Aws::Appflow
     #   destination connector details.
     #   @return [Types::ErrorHandlingConfig]
     #
+    # @!attribute [rw] write_operation_type
+    #   This specifies the type of write operation to be performed in
+    #   Salesforce. When the value is `UPSERT`, then `idFieldNames` is
+    #   required.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceDestinationProperties AWS API Documentation
     #
     class SalesforceDestinationProperties < Struct.new(
       :object,
-      :error_handling_config)
+      :id_field_names,
+      :error_handling_config,
+      :write_operation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3590,7 +3660,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -3599,7 +3669,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #
@@ -4034,6 +4104,9 @@ module Aws::Appflow
     #             object: "Object", # required
     #           },
     #         },
+    #         incremental_pull_config: {
+    #           datetime_type_field_name: "DatetimeTypeFieldName",
+    #         },
     #       }
     #
     # @!attribute [rw] connector_type
@@ -4050,12 +4123,19 @@ module Aws::Appflow
     #   source connector.
     #   @return [Types::SourceConnectorProperties]
     #
+    # @!attribute [rw] incremental_pull_config
+    #   Defines the configuration for a scheduled incremental data pull. If
+    #   a valid configuration is provided, the fields specified in the
+    #   configuration are used when querying for the incremental data pull.
+    #   @return [Types::IncrementalPullConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SourceFlowConfig AWS API Documentation
     #
     class SourceFlowConfig < Struct.new(
       :connector_type,
       :connector_profile_name,
-      :source_connector_properties)
+      :source_connector_properties,
+      :incremental_pull_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4088,11 +4168,18 @@ module Aws::Appflow
     #   Indicates the current status of the flow.
     #   @return [String]
     #
+    # @!attribute [rw] execution_id
+    #   Returns the internal execution ID of an on-demand flow when the flow
+    #   is started. For scheduled or event-triggered flows, this value is
+    #   null.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/StartFlowResponse AWS API Documentation
     #
     class StartFlowResponse < Struct.new(
       :flow_arn,
-      :flow_status)
+      :flow_status,
+      :execution_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4526,6 +4613,7 @@ module Aws::Appflow
     #                 auth_code: "AuthCode",
     #                 redirect_uri: "RedirectUri",
     #               },
+    #               client_credentials_arn: "ClientCredentialsArn",
     #             },
     #             service_now: {
     #               username: "Username", # required
@@ -4671,6 +4759,9 @@ module Aws::Appflow
     #               object: "Object", # required
     #             },
     #           },
+    #           incremental_pull_config: {
+    #             datetime_type_field_name: "DatetimeTypeFieldName",
+    #           },
     #         },
     #         destination_flow_config_list: [ # required
     #           {
@@ -4703,11 +4794,13 @@ module Aws::Appflow
     #               },
     #               salesforce: {
     #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
     #                 error_handling_config: {
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #               },
     #               snowflake: {
     #                 object: "Object", # required
@@ -4920,7 +5013,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -4929,7 +5022,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #
