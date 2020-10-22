@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AccessAnalyzer - Updated the documentation for Access Analyzer.
+
+* Feature - Aws::Appflow - Updated the API, and documentation for Amazon Appflow.
+
+* Feature - Aws::ServiceCatalog - Updated the documentation for AWS Service Catalog.
+
+* Feature - Aws::SNS - Updated the API, and documentation for Amazon Simple Notification Service.
+
 2.11.611 (2020-10-21)
 ------------------
 
