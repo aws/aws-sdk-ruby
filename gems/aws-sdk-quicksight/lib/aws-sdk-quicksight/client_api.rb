@@ -53,6 +53,8 @@ module Aws::QuickSight
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     ColorList = Shapes::ListShape.new(name: 'ColorList')
     ColumnDataType = Shapes::StringShape.new(name: 'ColumnDataType')
+    ColumnDescription = Shapes::StructureShape.new(name: 'ColumnDescription')
+    ColumnDescriptiveText = Shapes::StringShape.new(name: 'ColumnDescriptiveText')
     ColumnGroup = Shapes::StructureShape.new(name: 'ColumnGroup')
     ColumnGroupColumnSchema = Shapes::StructureShape.new(name: 'ColumnGroupColumnSchema')
     ColumnGroupColumnSchemaList = Shapes::ListShape.new(name: 'ColumnGroupColumnSchemaList')
@@ -632,6 +634,9 @@ module Aws::QuickSight
 
     ColorList.member = Shapes::ShapeRef.new(shape: HexColor)
 
+    ColumnDescription.add_member(:text, Shapes::ShapeRef.new(shape: ColumnDescriptiveText, location_name: "Text"))
+    ColumnDescription.struct_class = Types::ColumnDescription
+
     ColumnGroup.add_member(:geo_spatial_column_group, Shapes::ShapeRef.new(shape: GeoSpatialColumnGroup, location_name: "GeoSpatialColumnGroup"))
     ColumnGroup.struct_class = Types::ColumnGroup
 
@@ -658,6 +663,7 @@ module Aws::QuickSight
     ColumnSchemaList.member = Shapes::ShapeRef.new(shape: ColumnSchema)
 
     ColumnTag.add_member(:column_geographic_role, Shapes::ShapeRef.new(shape: GeoSpatialDataRole, location_name: "ColumnGeographicRole"))
+    ColumnTag.add_member(:column_description, Shapes::ShapeRef.new(shape: ColumnDescription, location_name: "ColumnDescription"))
     ColumnTag.struct_class = Types::ColumnTag
 
     ColumnTagList.member = Shapes::ShapeRef.new(shape: ColumnTag)
@@ -1859,6 +1865,7 @@ module Aws::QuickSight
     Namespaces.member = Shapes::ShapeRef.new(shape: NamespaceInfoV2)
 
     OutputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "Name"))
+    OutputColumn.add_member(:description, Shapes::ShapeRef.new(shape: ColumnDescriptiveText, location_name: "Description"))
     OutputColumn.add_member(:type, Shapes::ShapeRef.new(shape: ColumnDataType, location_name: "Type"))
     OutputColumn.struct_class = Types::OutputColumn
 

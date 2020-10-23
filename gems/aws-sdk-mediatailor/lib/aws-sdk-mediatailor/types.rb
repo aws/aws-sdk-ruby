@@ -10,6 +10,24 @@
 module Aws::MediaTailor
   module Types
 
+    # @note When making an API call, you may pass AdMarkerPassthrough
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdMarkerPassthrough AWS API Documentation
+    #
+    class AdMarkerPassthrough < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AvailSuppression
     #   data as a hash:
     #
@@ -275,6 +293,12 @@ module Aws::MediaTailor
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
     #
+    # @!attribute [rw] manifest_processing_rules
+    #   The configuration for manifest processing rules. Manifest processing
+    #   rules enable customization of the personalized manifests created by
+    #   MediaTailor.
+    #   @return [Types::ManifestProcessingRules]
+    #
     # @!attribute [rw] name
     #   The identifier for the playback configuration.
     #   @return [String]
@@ -330,6 +354,7 @@ module Aws::MediaTailor
       :dash_configuration,
       :hls_configuration,
       :live_pre_roll_configuration,
+      :manifest_processing_rules,
       :name,
       :playback_configuration_arn,
       :playback_endpoint_prefix,
@@ -426,6 +451,37 @@ module Aws::MediaTailor
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for manifest processing rules. Manifest processing
+    # rules enable customization of the personalized manifests created by
+    # MediaTailor.
+    #
+    # @note When making an API call, you may pass ManifestProcessingRules
+    #   data as a hash:
+    #
+    #       {
+    #         ad_marker_passthrough: {
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ad_marker_passthrough
+    #   For HLS, when set to `true`, MediaTailor passes through
+    #   EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers
+    #   from the origin manifest to the MediaTailor personalized manifest.
+    #
+    #   No logic is applied to these ad markers. For example, if
+    #   EXT-X-CUE-OUT has a value of `60`, but no ads are filled for that ad
+    #   break, MediaTailor will not set the value to 0.
+    #   @return [Types::AdMarkerPassthrough]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ManifestProcessingRules AWS API Documentation
+    #
+    class ManifestProcessingRules < Struct.new(
+      :ad_marker_passthrough)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -554,6 +610,11 @@ module Aws::MediaTailor
     #           ad_decision_server_url: "__string",
     #           max_duration_seconds: 1,
     #         },
+    #         manifest_processing_rules: {
+    #           ad_marker_passthrough: {
+    #             enabled: false,
+    #           },
+    #         },
     #         name: "__string",
     #         slate_ad_url: "__string",
     #         tags: {
@@ -599,6 +660,12 @@ module Aws::MediaTailor
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
     #
+    # @!attribute [rw] manifest_processing_rules
+    #   The configuration for manifest processing rules. Manifest processing
+    #   rules enable customization of the personalized manifests created by
+    #   MediaTailor.
+    #   @return [Types::ManifestProcessingRules]
+    #
     # @!attribute [rw] name
     #   The identifier for the playback configuration.
     #   @return [String]
@@ -639,6 +706,7 @@ module Aws::MediaTailor
       :personalization_threshold_seconds,
       :dash_configuration,
       :live_pre_roll_configuration,
+      :manifest_processing_rules,
       :name,
       :slate_ad_url,
       :tags,
@@ -679,6 +747,12 @@ module Aws::MediaTailor
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] manifest_processing_rules
+    #   The configuration for manifest processing rules. Manifest processing
+    #   rules enable customization of the personalized manifests created by
+    #   MediaTailor.
+    #   @return [Types::ManifestProcessingRules]
+    #
     # @!attribute [rw] playback_configuration_arn
     #   @return [String]
     #
@@ -711,6 +785,7 @@ module Aws::MediaTailor
       :hls_configuration,
       :live_pre_roll_configuration,
       :name,
+      :manifest_processing_rules,
       :playback_configuration_arn,
       :playback_endpoint_prefix,
       :session_initialization_endpoint_prefix,

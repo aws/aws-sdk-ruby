@@ -624,6 +624,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Metadata that contains a description for a column.
+    #
+    # @note When making an API call, you may pass ColumnDescription
+    #   data as a hash:
+    #
+    #       {
+    #         text: "ColumnDescriptiveText",
+    #       }
+    #
+    # @!attribute [rw] text
+    #   The text of a description for a column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnDescription AWS API Documentation
+    #
+    class ColumnDescription < Struct.new(
+      :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Groupings of columns that work together in certain Amazon QuickSight
     # features. This is a variant type structure. For this structure to be
     # valid, only one of the attributes can be non-null.
@@ -718,16 +739,24 @@ module Aws::QuickSight
     #
     #       {
     #         column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #         column_description: {
+    #           text: "ColumnDescriptiveText",
+    #         },
     #       }
     #
     # @!attribute [rw] column_geographic_role
     #   A geospatial role for a column.
     #   @return [String]
     #
+    # @!attribute [rw] column_description
+    #   A description for a column.
+    #   @return [Types::ColumnDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnTag AWS API Documentation
     #
     class ColumnTag < Struct.new(
-      :column_geographic_role)
+      :column_geographic_role,
+      :column_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1331,6 +1360,9 @@ module Aws::QuickSight
     #                   tags: [ # required
     #                     {
     #                       column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                       column_description: {
+    #                         text: "ColumnDescriptiveText",
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -2718,7 +2750,7 @@ module Aws::QuickSight
     #   data source parameters when you copy a data source by using a create
     #   or update request. The API operation compares the
     #   `DataSourceParameters` structure that's in the request with the
-    #   structures in the `AlternateDataSourceParameters` allowlist. If the
+    #   structures in the `AlternateDataSourceParameters` allow list. If the
     #   structures are an exact match, the request is allowed to use the new
     #   data source with the existing credentials. If the
     #   `AlternateDataSourceParameters` list is null, the
@@ -3125,7 +3157,7 @@ module Aws::QuickSight
     end
 
     # The theme colors that are used for data colors in charts. The colors
-    # description is a hexidecimal color code that consists of six
+    # description is a hexadecimal color code that consists of six
     # alphanumerical characters, prefixed with `#`, for example #37BFF5.
     #
     # @note When making an API call, you may pass DataColorPalette
@@ -3388,10 +3420,10 @@ module Aws::QuickSight
     #   applied in tandem with the data source parameters when you copy a
     #   data source by using a create or update request. The API operation
     #   compares the `DataSourceParameters` structure that's in the request
-    #   with the structures in the `AlternateDataSourceParameters`
-    #   allowlist. If the structures are an exact match, the request is
-    #   allowed to use the credentials from this existing data source. If
-    #   the `AlternateDataSourceParameters` list is null, the `Credentials`
+    #   with the structures in the `AlternateDataSourceParameters` allow
+    #   list. If the structures are an exact match, the request is allowed
+    #   to use the credentials from this existing data source. If the
+    #   `AlternateDataSourceParameters` list is null, the `Credentials`
     #   originally used with this `DataSourceParameters` are automatically
     #   allowed.
     #   @return [Array<Types::DataSourceParameters>]
@@ -7929,6 +7961,9 @@ module Aws::QuickSight
     #               tags: [ # required
     #                 {
     #                   column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                   column_description: {
+    #                     text: "ColumnDescriptiveText",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -8180,6 +8215,10 @@ module Aws::QuickSight
     #   A display name for the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   A description for a column.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   Type.
     #   @return [String]
@@ -8188,6 +8227,7 @@ module Aws::QuickSight
     #
     class OutputColumn < Struct.new(
       :name,
+      :description,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -8832,8 +8872,12 @@ module Aws::QuickSight
     #   The Amazon Resource Name (ARN) of the principal. This can be one of
     #   the following:
     #
-    #   * The ARN of an Amazon QuickSight user, group, or namespace. (This
-    #     is most common.)
+    #   * The ARN of an Amazon QuickSight user or group associated with a
+    #     data source or dataset. (This is common.)
+    #
+    #   * The ARN of an Amazon QuickSight user, group, or namespace
+    #     associated with an analysis, dashboard, template, or theme. (This
+    #     is common.)
     #
     #   * The ARN of an AWS account root: This is an IAM ARN rather than a
     #     QuickSight ARN. Use this option only to share resources
@@ -9240,20 +9284,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A sheet is an object that contains a set of visuals that are viewed
-    # together on one page in the Amazon QuickSight console. Every analysis
-    # and dashboard contains at least one sheet. Each sheet contains at
-    # least one visualization widget, for example a chart, pivot table, or
-    # narrative insight. Sheets can be associated with other components,
-    # such as controls, filters, and so on.
+    # A *sheet*, which is an object that contains a set of visuals that are
+    # viewed together on one page in the Amazon QuickSight console. Every
+    # analysis and dashboard contains at least one sheet. Each sheet
+    # contains at least one visualization widget, for example a chart, pivot
+    # table, or narrative insight. Sheets can be associated with other
+    # components, such as controls, filters, and so on.
     #
     # @!attribute [rw] sheet_id
     #   The unique identifier associated with a sheet.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of a sheet. This is displayed on the sheet's tab in the
-    #   QuickSight console.
+    #   The name of a sheet. This name is displayed on the sheet's tab in
+    #   the QuickSight console.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Sheet AWS API Documentation
@@ -9504,6 +9548,9 @@ module Aws::QuickSight
     #         tags: [ # required
     #           {
     #             column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #             column_description: {
+    #               text: "ColumnDescriptiveText",
+    #             },
     #           },
     #         ],
     #       }
@@ -10322,6 +10369,9 @@ module Aws::QuickSight
     #           tags: [ # required
     #             {
     #               column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #               column_description: {
+    #                 text: "ColumnDescriptiveText",
+    #               },
     #             },
     #           ],
     #         },
@@ -10394,7 +10444,7 @@ module Aws::QuickSight
     end
 
     # The theme colors that apply to UI and to charts, excluding data
-    # colors. The colors description is a hexidecimal color code that
+    # colors. The colors description is a hexadecimal color code that
     # consists of six alphanumerical characters, prefixed with `#`, for
     # example #37BFF5. For more information, see [Using Themes in Amazon
     # QuickSight][1] in the *Amazon QuickSight User Guide.*
@@ -11405,6 +11455,9 @@ module Aws::QuickSight
     #                   tags: [ # required
     #                     {
     #                       column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                       column_description: {
+    #                         text: "ColumnDescriptiveText",
+    #                       },
     #                     },
     #                   ],
     #                 },

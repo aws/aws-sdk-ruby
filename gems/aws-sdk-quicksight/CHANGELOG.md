@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-10-23)
+------------------
+
+* Feature - Support description on columns.
+
 1.33.0 (2020-10-01)
 ------------------
 

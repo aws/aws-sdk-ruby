@@ -886,6 +886,9 @@ module Aws::QuickSight
     #               tags: [ # required
     #                 {
     #                   column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                   column_description: {
+    #                     text: "ColumnDescriptiveText",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -2951,6 +2954,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags #=> Array
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_geographic_role #=> String, one of "COUNTRY", "STATE", "COUNTY", "CITY", "POSTCODE", "LONGITUDE", "LATITUDE"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_description.text #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.right_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.type #=> String, one of "INNER", "OUTER", "LEFT", "RIGHT"
@@ -2958,6 +2962,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].source.physical_table_id #=> String
     #   resp.data_set.output_columns #=> Array
     #   resp.data_set.output_columns[0].name #=> String
+    #   resp.data_set.output_columns[0].description #=> String
     #   resp.data_set.output_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
     #   resp.data_set.import_mode #=> String, one of "SPICE", "DIRECT_QUERY"
     #   resp.data_set.consumed_spice_capacity_in_bytes #=> Integer
@@ -6187,6 +6192,9 @@ module Aws::QuickSight
     #               tags: [ # required
     #                 {
     #                   column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                   column_description: {
+    #                     text: "ColumnDescriptiveText",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -7301,7 +7309,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

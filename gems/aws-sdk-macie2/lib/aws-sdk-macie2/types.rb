@@ -120,15 +120,15 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an account that's designated as a
-    # delegated administrator of Amazon Macie for an AWS organization.
+    # Provides information about the delegated Amazon Macie administrator
+    # account for an AWS organization.
     #
     # @!attribute [rw] account_id
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of an account as a delegated administrator of
-    #   Amazon Macie for an AWS organization.
+    #   The current status of an account as the delegated Amazon Macie
+    #   administrator account for an AWS organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AdminAccount AWS API Documentation
@@ -779,9 +779,9 @@ module Aws::Macie2
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_data_identifiers
-    #   Provides information about the number of occurrences of the data
-    #   that produced a sensitive data finding, and the custom data
-    #   identifiers that detected the data for the finding.
+    #   Provides information about custom data identifiers that produced a
+    #   sensitive data finding, and the number of occurrences of the data
+    #   that they detected for the finding.
     #   @return [Types::CustomDataIdentifiers]
     #
     # @!attribute [rw] mime_type
@@ -1367,9 +1367,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the number of occurrences of the data that
-    # produced a sensitive data finding, and the custom data identifiers
-    # that detected the data for the finding.
+    # Provides information about custom data identifiers that produced a
+    # sensitive data finding, and the number of occurrences of the data that
+    # they detected for the finding.
     #
     # @!attribute [rw] detections
     #   Provides information about custom data identifiers that produced a
@@ -1707,7 +1707,7 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Possible values are:
+    #   The status of a classification job. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] job_type
@@ -1924,9 +1924,9 @@ module Aws::Macie2
     #
     class EnableMacieResponse < Aws::EmptyStructure; end
 
-    # Specifies an account to designate as a delegated administrator of
-    # Amazon Macie for an AWS organization. To submit this request, you must
-    # be a user of the master account for the AWS organization.
+    # Specifies an account to designate as a delegated Amazon Macie
+    # administrator account for an AWS organization. To submit this request,
+    # you must be a user of the management account for the AWS organization.
     #
     # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
     #   data as a hash:
@@ -3183,7 +3183,7 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Possible values are:
+    #   The status of a classification job. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] job_type
@@ -3674,8 +3674,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the accounts that are designated as
-    # delegated administrators of Amazon Macie for an AWS organization.
+    # Provides information about the delegated Amazon Macie administrator
+    # accounts for an AWS organization.
     #
     # @!attribute [rw] admin_accounts
     #   @return [Array<Types::AdminAccount>]
@@ -4915,7 +4915,7 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Possible values are:
+    #   The status of a classification job. Possible values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationJobRequest AWS API Documentation

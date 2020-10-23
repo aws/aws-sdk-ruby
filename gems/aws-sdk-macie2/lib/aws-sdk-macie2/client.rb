@@ -1094,8 +1094,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Disables an account as a delegated administrator of Amazon Macie for
-    # an AWS organization.
+    # Disables an account as the delegated Amazon Macie administrator
+    # account for an AWS organization.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -1185,8 +1185,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Enables an account as a delegated administrator of Amazon Macie for an
-    # AWS organization.
+    # Designates an account as the delegated Amazon Macie administrator
+    # account for an AWS organization.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -2152,8 +2152,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the account that's designated as the
-    # delegated administrator of Amazon Macie for an AWS organization.
+    # Retrieves information about the delegated Amazon Macie administrator
+    # account for an AWS organization.
     #
     # @option params [Integer] :max_results
     #
@@ -2358,7 +2358,7 @@ module Aws::Macie2
     # @option params [required, String] :job_id
     #
     # @option params [required, String] :job_status
-    #   The current status of a classification job. Possible values are:
+    #   The status of a classification job. Possible values are:
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2494,7 +2494,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Updates Amazon Macie configuration settings for an AWS organization.
+    # Updates the Amazon Macie configuration settings for an AWS
+    # organization.
     #
     # @option params [required, Boolean] :auto_enable
     #
@@ -2528,7 +2529,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

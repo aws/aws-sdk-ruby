@@ -362,6 +362,7 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
     #   * {Types::GetPlaybackConfigurationResponse#name #name} => String
     #   * {Types::GetPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::GetPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
@@ -393,6 +394,7 @@ module Aws::MediaTailor
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
@@ -526,6 +528,11 @@ module Aws::MediaTailor
     # @option params [Types::LivePreRollConfiguration] :live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
     #
+    # @option params [Types::ManifestProcessingRules] :manifest_processing_rules
+    #   The configuration for manifest processing rules. Manifest processing
+    #   rules enable customization of the personalized manifests created by
+    #   MediaTailor.
+    #
     # @option params [String] :name
     #   The identifier for the playback configuration.
     #
@@ -561,6 +568,7 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#name #name} => String
+    #   * {Types::PutPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
     #   * {Types::PutPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::PutPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
     #   * {Types::PutPlaybackConfigurationResponse#session_initialization_endpoint_prefix #session_initialization_endpoint_prefix} => String
@@ -594,6 +602,11 @@ module Aws::MediaTailor
     #       ad_decision_server_url: "__string",
     #       max_duration_seconds: 1,
     #     },
+    #     manifest_processing_rules: {
+    #       ad_marker_passthrough: {
+    #         enabled: false,
+    #       },
+    #     },
     #     name: "__string",
     #     slate_ad_url: "__string",
     #     tags: {
@@ -619,6 +632,7 @@ module Aws::MediaTailor
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
     #   resp.name #=> String
+    #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
     #   resp.session_initialization_endpoint_prefix #=> String
@@ -702,7 +716,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
