@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Macie2 - Updated the documentation for Amazon Macie 2.
+
+* Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
 2.11.612 (2020-10-22)
 ------------------
 
