@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.613 (2020-10-23)
+------------------
+
 * Feature - Aws::Macie2 - Updated the documentation for Amazon Macie 2.
 
 * Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
