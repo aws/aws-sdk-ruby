@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
+
+* Feature - Aws::Neptune - Updated the API, and documentation for Amazon Neptune.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
 2.11.613 (2020-10-23)
 ------------------
 
