@@ -41,6 +41,26 @@ module Aws::Kendra
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConfluenceAttachmentConfiguration = Shapes::StructureShape.new(name: 'ConfluenceAttachmentConfiguration')
+    ConfluenceAttachmentFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceAttachmentFieldMappingsList')
+    ConfluenceAttachmentFieldName = Shapes::StringShape.new(name: 'ConfluenceAttachmentFieldName')
+    ConfluenceAttachmentToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceAttachmentToIndexFieldMapping')
+    ConfluenceBlogConfiguration = Shapes::StructureShape.new(name: 'ConfluenceBlogConfiguration')
+    ConfluenceBlogFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceBlogFieldMappingsList')
+    ConfluenceBlogFieldName = Shapes::StringShape.new(name: 'ConfluenceBlogFieldName')
+    ConfluenceBlogToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceBlogToIndexFieldMapping')
+    ConfluenceConfiguration = Shapes::StructureShape.new(name: 'ConfluenceConfiguration')
+    ConfluencePageConfiguration = Shapes::StructureShape.new(name: 'ConfluencePageConfiguration')
+    ConfluencePageFieldMappingsList = Shapes::ListShape.new(name: 'ConfluencePageFieldMappingsList')
+    ConfluencePageFieldName = Shapes::StringShape.new(name: 'ConfluencePageFieldName')
+    ConfluencePageToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluencePageToIndexFieldMapping')
+    ConfluenceSpaceConfiguration = Shapes::StructureShape.new(name: 'ConfluenceSpaceConfiguration')
+    ConfluenceSpaceFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceSpaceFieldMappingsList')
+    ConfluenceSpaceFieldName = Shapes::StringShape.new(name: 'ConfluenceSpaceFieldName')
+    ConfluenceSpaceIdentifier = Shapes::StringShape.new(name: 'ConfluenceSpaceIdentifier')
+    ConfluenceSpaceList = Shapes::ListShape.new(name: 'ConfluenceSpaceList')
+    ConfluenceSpaceToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceSpaceToIndexFieldMapping')
+    ConfluenceVersion = Shapes::StringShape.new(name: 'ConfluenceVersion')
     ConnectionConfiguration = Shapes::StructureShape.new(name: 'ConnectionConfiguration')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
@@ -336,6 +356,65 @@ module Aws::Kendra
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConfluenceAttachmentConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    ConfluenceAttachmentConfiguration.add_member(:attachment_field_mappings, Shapes::ShapeRef.new(shape: ConfluenceAttachmentFieldMappingsList, location_name: "AttachmentFieldMappings"))
+    ConfluenceAttachmentConfiguration.struct_class = Types::ConfluenceAttachmentConfiguration
+
+    ConfluenceAttachmentFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluenceAttachmentToIndexFieldMapping)
+
+    ConfluenceAttachmentToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluenceAttachmentFieldName, location_name: "DataSourceFieldName"))
+    ConfluenceAttachmentToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluenceAttachmentToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluenceAttachmentToIndexFieldMapping.struct_class = Types::ConfluenceAttachmentToIndexFieldMapping
+
+    ConfluenceBlogConfiguration.add_member(:blog_field_mappings, Shapes::ShapeRef.new(shape: ConfluenceBlogFieldMappingsList, location_name: "BlogFieldMappings"))
+    ConfluenceBlogConfiguration.struct_class = Types::ConfluenceBlogConfiguration
+
+    ConfluenceBlogFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluenceBlogToIndexFieldMapping)
+
+    ConfluenceBlogToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluenceBlogFieldName, location_name: "DataSourceFieldName"))
+    ConfluenceBlogToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluenceBlogToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluenceBlogToIndexFieldMapping.struct_class = Types::ConfluenceBlogToIndexFieldMapping
+
+    ConfluenceConfiguration.add_member(:server_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "ServerUrl"))
+    ConfluenceConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    ConfluenceConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: ConfluenceVersion, required: true, location_name: "Version"))
+    ConfluenceConfiguration.add_member(:space_configuration, Shapes::ShapeRef.new(shape: ConfluenceSpaceConfiguration, location_name: "SpaceConfiguration"))
+    ConfluenceConfiguration.add_member(:page_configuration, Shapes::ShapeRef.new(shape: ConfluencePageConfiguration, location_name: "PageConfiguration"))
+    ConfluenceConfiguration.add_member(:blog_configuration, Shapes::ShapeRef.new(shape: ConfluenceBlogConfiguration, location_name: "BlogConfiguration"))
+    ConfluenceConfiguration.add_member(:attachment_configuration, Shapes::ShapeRef.new(shape: ConfluenceAttachmentConfiguration, location_name: "AttachmentConfiguration"))
+    ConfluenceConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    ConfluenceConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    ConfluenceConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    ConfluenceConfiguration.struct_class = Types::ConfluenceConfiguration
+
+    ConfluencePageConfiguration.add_member(:page_field_mappings, Shapes::ShapeRef.new(shape: ConfluencePageFieldMappingsList, location_name: "PageFieldMappings"))
+    ConfluencePageConfiguration.struct_class = Types::ConfluencePageConfiguration
+
+    ConfluencePageFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluencePageToIndexFieldMapping)
+
+    ConfluencePageToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluencePageFieldName, location_name: "DataSourceFieldName"))
+    ConfluencePageToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluencePageToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluencePageToIndexFieldMapping.struct_class = Types::ConfluencePageToIndexFieldMapping
+
+    ConfluenceSpaceConfiguration.add_member(:crawl_personal_spaces, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlPersonalSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:crawl_archived_spaces, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlArchivedSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:include_spaces, Shapes::ShapeRef.new(shape: ConfluenceSpaceList, location_name: "IncludeSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:exclude_spaces, Shapes::ShapeRef.new(shape: ConfluenceSpaceList, location_name: "ExcludeSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:space_field_mappings, Shapes::ShapeRef.new(shape: ConfluenceSpaceFieldMappingsList, location_name: "SpaceFieldMappings"))
+    ConfluenceSpaceConfiguration.struct_class = Types::ConfluenceSpaceConfiguration
+
+    ConfluenceSpaceFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluenceSpaceToIndexFieldMapping)
+
+    ConfluenceSpaceList.member = Shapes::ShapeRef.new(shape: ConfluenceSpaceIdentifier)
+
+    ConfluenceSpaceToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluenceSpaceFieldName, location_name: "DataSourceFieldName"))
+    ConfluenceSpaceToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluenceSpaceToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluenceSpaceToIndexFieldMapping.struct_class = Types::ConfluenceSpaceToIndexFieldMapping
+
     ConnectionConfiguration.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, required: true, location_name: "DatabaseHost"))
     ConnectionConfiguration.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, required: true, location_name: "DatabasePort"))
     ConnectionConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
@@ -388,6 +467,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:salesforce_configuration, Shapes::ShapeRef.new(shape: SalesforceConfiguration, location_name: "SalesforceConfiguration"))
     DataSourceConfiguration.add_member(:one_drive_configuration, Shapes::ShapeRef.new(shape: OneDriveConfiguration, location_name: "OneDriveConfiguration"))
     DataSourceConfiguration.add_member(:service_now_configuration, Shapes::ShapeRef.new(shape: ServiceNowConfiguration, location_name: "ServiceNowConfiguration"))
+    DataSourceConfiguration.add_member(:confluence_configuration, Shapes::ShapeRef.new(shape: ConfluenceConfiguration, location_name: "ConfluenceConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceInclusionsExclusionsStrings.member = Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStringsMember)

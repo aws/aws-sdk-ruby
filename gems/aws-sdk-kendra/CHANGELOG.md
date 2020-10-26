@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-10-26)
+------------------
+
+* Feature - Amazon Kendra now supports indexing data from Confluence Server.
+
 1.16.0 (2020-10-21)
 ------------------
 

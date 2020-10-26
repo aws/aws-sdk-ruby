@@ -265,7 +265,7 @@ module Aws::SageMaker
     #         training_job_definition: { # required
     #           training_input_mode: "Pipe", # required, accepts Pipe, File
     #           hyper_parameters: {
-    #             "ParameterKey" => "ParameterValue",
+    #             "HyperParameterKey" => "HyperParameterValue",
     #           },
     #           input_data_config: [ # required
     #             {
@@ -298,7 +298,7 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #             instance_count: 1, # required
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
@@ -379,7 +379,7 @@ module Aws::SageMaker
     #             training_job_definition: { # required
     #               training_input_mode: "Pipe", # required, accepts Pipe, File
     #               hyper_parameters: {
-    #                 "ParameterKey" => "ParameterValue",
+    #                 "HyperParameterKey" => "HyperParameterValue",
     #               },
     #               input_data_config: [ # required
     #                 {
@@ -412,7 +412,7 @@ module Aws::SageMaker
     #                 s3_output_path: "S3Uri", # required
     #               },
     #               resource_config: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #                 instance_count: 1, # required
     #                 volume_size_in_gb: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
@@ -1171,7 +1171,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The app's details.
+    # Details about an Amazon SageMaker app.
     #
     # @!attribute [rw] domain_id
     #   The domain ID.
@@ -1206,6 +1206,41 @@ module Aws::SageMaker
       :app_name,
       :status,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for running an Amazon SageMaker image as a
+    # KernelGateway app.
+    #
+    # @!attribute [rw] app_image_config_arn
+    #   The Amazon Resource Name (ARN) of the AppImageConfig.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_image_config_name
+    #   The name of the AppImageConfig.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the AppImageConfig was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the AppImageConfig was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kernel_gateway_image_config
+    #   The KernelGateway app.
+    #   @return [Types::KernelGatewayImageConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppImageConfigDetails AWS API Documentation
+    #
+    class AppImageConfigDetails < Struct.new(
+      :app_image_config_arn,
+      :app_image_config_name,
+      :creation_time,
+      :last_modified_time,
+      :kernel_gateway_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2331,7 +2366,7 @@ module Aws::SageMaker
     #         environment: {
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
-    #         model_package_name: "ArnOrName",
+    #         model_package_name: "VersionedArnOrName",
     #       }
     #
     # @!attribute [rw] container_hostname
@@ -2574,10 +2609,10 @@ module Aws::SageMaker
     #               },
     #               is_tunable: false,
     #               is_required: false,
-    #               default_value: "ParameterValue",
+    #               default_value: "HyperParameterValue",
     #             },
     #           ],
-    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           supports_distributed_training: false,
     #           metric_definitions: [
     #             {
@@ -2625,7 +2660,7 @@ module Aws::SageMaker
     #               training_job_definition: { # required
     #                 training_input_mode: "Pipe", # required, accepts Pipe, File
     #                 hyper_parameters: {
-    #                   "ParameterKey" => "ParameterValue",
+    #                   "HyperParameterKey" => "HyperParameterValue",
     #                 },
     #                 input_data_config: [ # required
     #                   {
@@ -2658,7 +2693,7 @@ module Aws::SageMaker
     #                   s3_output_path: "S3Uri", # required
     #                 },
     #                 resource_config: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #                   instance_count: 1, # required
     #                   volume_size_in_gb: 1, # required
     #                   volume_kms_key_id: "KmsKeyId",
@@ -2786,6 +2821,66 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateAppImageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_image_config_name: "AppImageConfigName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         kernel_gateway_image_config: {
+    #           kernel_specs: [ # required
+    #             {
+    #               name: "KernelName", # required
+    #               display_name: "KernelDisplayName",
+    #             },
+    #           ],
+    #           file_system_config: {
+    #             mount_path: "MountPath",
+    #             default_uid: 1,
+    #             default_gid: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] app_image_config_name
+    #   The name of the AppImageConfig. Must be unique to your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the AppImageConfig.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] kernel_gateway_image_config
+    #   The KernelGatewayImageConfig.
+    #   @return [Types::KernelGatewayImageConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfigRequest AWS API Documentation
+    #
+    class CreateAppImageConfigRequest < Struct.new(
+      :app_image_config_name,
+      :tags,
+      :kernel_gateway_image_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_image_config_arn
+    #   The Amazon Resource Name (ARN) of the AppImageConfig.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfigResponse AWS API Documentation
+    #
+    class CreateAppImageConfigResponse < Struct.new(
+      :app_image_config_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAppRequest
     #   data as a hash:
     #
@@ -2802,6 +2897,7 @@ module Aws::SageMaker
     #         ],
     #         resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       }
@@ -2846,7 +2942,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] app_arn
-    #   The App's Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppResponse AWS API Documentation
@@ -3036,7 +3132,7 @@ module Aws::SageMaker
     #         input_config: { # required
     #           s3_uri: "S3Uri", # required
     #           data_input_config: "DataInputConfig", # required
-    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE
+    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
@@ -3052,6 +3148,12 @@ module Aws::SageMaker
     #           max_runtime_in_seconds: 1,
     #           max_wait_time_in_seconds: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] compilation_job_name
@@ -3100,6 +3202,17 @@ module Aws::SageMaker
     #   compilation job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs that you want to use to organize and
+    #   track your AWS resource costs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJobRequest AWS API Documentation
     #
     class CreateCompilationJobRequest < Struct.new(
@@ -3107,7 +3220,8 @@ module Aws::SageMaker
       :role_arn,
       :input_config,
       :output_config,
-      :stopping_condition)
+      :stopping_condition,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3148,18 +3262,28 @@ module Aws::SageMaker
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -3172,8 +3296,8 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         home_efs_file_system_kms_key_id: "KmsKeyId",
     #         app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
+    #         home_efs_file_system_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] domain_name
@@ -3203,11 +3327,6 @@ module Aws::SageMaker
     #   searchable using the Search API.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] home_efs_file_system_kms_key_id
-    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
-    #   with a customer master key (CMK) is not supported.
-    #   @return [String]
-    #
     # @!attribute [rw] app_network_access_type
     #   Specifies the VPC used for non-EFS traffic. The default value is
     #   `PublicInternetOnly`.
@@ -3219,6 +3338,11 @@ module Aws::SageMaker
     #     subnets
     #   @return [String]
     #
+    # @!attribute [rw] home_efs_file_system_kms_key_id
+    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
+    #   with a customer master key (CMK) is not supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -3228,8 +3352,8 @@ module Aws::SageMaker
       :subnet_ids,
       :vpc_id,
       :tags,
-      :home_efs_file_system_kms_key_id,
-      :app_network_access_type)
+      :app_network_access_type,
+      :home_efs_file_system_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3399,8 +3523,9 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the endpoint. The name must be unique within an AWS
-    #   Region in your AWS account.
+    #   The name of the endpoint.The name must be unique within an AWS
+    #   Region in your AWS account. The name is case-insensitive in
+    #   `CreateEndpoint`, but the case is preserved and must be matched in .
     #   @return [String]
     #
     # @!attribute [rw] endpoint_config_name
@@ -3732,7 +3857,7 @@ module Aws::SageMaker
     #             ],
     #           },
     #           static_hyper_parameters: {
-    #             "ParameterKey" => "ParameterValue",
+    #             "HyperParameterKey" => "HyperParameterValue",
     #           },
     #           algorithm_specification: { # required
     #             training_image: "AlgorithmImage",
@@ -3781,7 +3906,7 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #             instance_count: 1, # required
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
@@ -3830,7 +3955,7 @@ module Aws::SageMaker
     #               ],
     #             },
     #             static_hyper_parameters: {
-    #               "ParameterKey" => "ParameterValue",
+    #               "HyperParameterKey" => "HyperParameterValue",
     #             },
     #             algorithm_specification: { # required
     #               training_image: "AlgorithmImage",
@@ -3879,7 +4004,7 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #               instance_count: 1, # required
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
@@ -3917,8 +4042,8 @@ module Aws::SageMaker
     #   The name of the tuning job. This name is the prefix for the names of
     #   all training jobs that this tuning job launches. The name must be
     #   unique within the same AWS account and AWS Region. The name must
-    #   have \\\{ \\} to \\\{ \\} characters. Valid characters are a-z, A-Z,
-    #   0-9, and : + = @ \_ % - (hyphen). The name is not case sensitive.
+    #   have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9, and : +
+    #   = @ \_ % - (hyphen). The name is not case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_config
@@ -4003,6 +4128,120 @@ module Aws::SageMaker
     #
     class CreateHyperParameterTuningJobResponse < Struct.new(
       :hyper_parameter_tuning_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "ImageDescription",
+    #         display_name: "ImageDisplayName",
+    #         image_name: "ImageName", # required
+    #         role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the image. When the image is added to a domain,
+    #   `DisplayName` must be unique to the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image. Must be unique to your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the image.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageRequest AWS API Documentation
+    #
+    class CreateImageRequest < Struct.new(
+      :description,
+      :display_name,
+      :image_name,
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageResponse AWS API Documentation
+    #
+    class CreateImageResponse < Struct.new(
+      :image_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateImageVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         base_image: "ImageBaseImage", # required
+    #         client_token: "ClientToken", # required
+    #         image_name: "ImageName", # required
+    #       }
+    #
+    # @!attribute [rw] base_image
+    #   The registry path of the container image to use as the starting
+    #   point for this version. The path is an Amazon Container Registry
+    #   (ECR) URI in the following format:
+    #
+    #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
+    #   [@digest]>`
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the
+    #   SDK for Python (Boto3), add a unique value to the call.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_name
+    #   The `ImageName` of the `Image` to create a version of.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageVersionRequest AWS API Documentation
+    #
+    class CreateImageVersionRequest < Struct.new(
+      :base_image,
+      :client_token,
+      :image_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_version_arn
+    #   The Amazon Resource Name (ARN) of the image version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageVersionResponse AWS API Documentation
+    #
+    class CreateImageVersionResponse < Struct.new(
+      :image_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4111,7 +4350,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] label_category_config_s3_uri
-    #   The S3 URL of the file that defines the categories used to label the
+    #   The S3 URI of the file that defines the categories used to label the
     #   data objects.
     #
     #   For 3D point cloud task types, see [Create a Labeling Category
@@ -4232,7 +4471,7 @@ module Aws::SageMaker
     #           environment: {
     #             "EnvironmentKey" => "EnvironmentValue",
     #           },
-    #           model_package_name: "ArnOrName",
+    #           model_package_name: "VersionedArnOrName",
     #         },
     #         containers: [
     #           {
@@ -4246,7 +4485,7 @@ module Aws::SageMaker
     #             environment: {
     #               "EnvironmentKey" => "EnvironmentValue",
     #             },
-    #             model_package_name: "ArnOrName",
+    #             model_package_name: "VersionedArnOrName",
     #           },
     #         ],
     #         execution_role_arn: "RoleArn", # required
@@ -4353,7 +4592,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         model_package_name: "EntityName", # required
+    #         model_package_name: "EntityName",
     #         model_package_description: "EntityDescription",
     #         inference_specification: {
     #           containers: [ # required
@@ -5102,7 +5341,7 @@ module Aws::SageMaker
     #       {
     #         training_job_name: "TrainingJobName", # required
     #         hyper_parameters: {
-    #           "ParameterKey" => "ParameterValue",
+    #           "HyperParameterKey" => "HyperParameterValue",
     #         },
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
@@ -5148,7 +5387,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -5846,18 +6085,28 @@ module Aws::SageMaker
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -6126,6 +6375,39 @@ module Aws::SageMaker
     #
     class CreateWorkteamResponse < Struct.new(
       :workteam_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom image.
+    #
+    # @note When making an API call, you may pass CustomImage
+    #   data as a hash:
+    #
+    #       {
+    #         image_name: "ImageName", # required
+    #         image_version_number: 1,
+    #         app_image_config_name: "AppImageConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] image_name
+    #   The name of the CustomImage. Must be unique to your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_version_number
+    #   The version number of the CustomImage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] app_image_config_name
+    #   The name of the AppImageConfig.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomImage AWS API Documentation
+    #
+    class CustomImage < Struct.new(
+      :image_name,
+      :image_version_number,
+      :app_image_config_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6493,6 +6775,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAppImageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_image_config_name: "AppImageConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] app_image_config_name
+    #   The name of the AppImageConfig to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAppImageConfigRequest AWS API Documentation
+    #
+    class DeleteAppImageConfigRequest < Struct.new(
+      :app_image_config_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAppRequest
     #   data as a hash:
     #
@@ -6695,6 +6996,58 @@ module Aws::SageMaker
     #
     class DeleteHumanTaskUiResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_name: "ImageName", # required
+    #       }
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImageRequest AWS API Documentation
+    #
+    class DeleteImageRequest < Struct.new(
+      :image_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImageResponse AWS API Documentation
+    #
+    class DeleteImageResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteImageVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_name: "ImageName", # required
+    #         version: 1, # required
+    #       }
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version to delete.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImageVersionRequest AWS API Documentation
+    #
+    class DeleteImageVersionRequest < Struct.new(
+      :image_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImageVersionResponse AWS API Documentation
+    #
+    class DeleteImageVersionResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteModelInput
     #   data as a hash:
     #
@@ -6718,7 +7071,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         model_package_name: "EntityName", # required
+    #         model_package_name: "VersionedArnOrName", # required
     #       }
     #
     # @!attribute [rw] model_package_name
@@ -7084,6 +7437,57 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAppImageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_image_config_name: "AppImageConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] app_image_config_name
+    #   The name of the AppImageConfig to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfigRequest AWS API Documentation
+    #
+    class DescribeAppImageConfigRequest < Struct.new(
+      :app_image_config_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_image_config_arn
+    #   The Amazon Resource Name (ARN) of the AppImageConfig.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_image_config_name
+    #   The name of the AppImageConfig.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the AppImageConfig was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the AppImageConfig was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kernel_gateway_image_config
+    #   The KernelGateway app.
+    #   @return [Types::KernelGatewayImageConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfigResponse AWS API Documentation
+    #
+    class DescribeAppImageConfigResponse < Struct.new(
+      :app_image_config_arn,
+      :app_image_config_name,
+      :creation_time,
+      :last_modified_time,
+      :kernel_gateway_image_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAppRequest
     #   data as a hash:
     #
@@ -7122,7 +7526,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] app_arn
-    #   The app's Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the app.
     #   @return [String]
     #
     # @!attribute [rw] app_type
@@ -7536,6 +7940,17 @@ module Aws::SageMaker
     #   settings are not explicitly specified in a given UserProfile.
     #   @return [Types::UserSettings]
     #
+    # @!attribute [rw] app_network_access_type
+    #   Specifies the VPC used for non-EFS traffic. The default value is
+    #   `PublicInternetOnly`.
+    #
+    #   * `PublicInternetOnly` - Non-EFS traffic is through a VPC managed by
+    #     Amazon SageMaker, which allows direct internet access
+    #
+    #   * `VpcOnly` - All Studio traffic is through the specified VPC and
+    #     subnets
+    #   @return [String]
+    #
     # @!attribute [rw] home_efs_file_system_kms_key_id
     #   The AWS Key Management Service encryption key ID.
     #   @return [String]
@@ -7553,17 +7968,6 @@ module Aws::SageMaker
     #   for communication.
     #   @return [String]
     #
-    # @!attribute [rw] app_network_access_type
-    #   Specifies the VPC used for non-EFS traffic. The default value is
-    #   `PublicInternetOnly`.
-    #
-    #   * `PublicInternetOnly` - Non-EFS traffic is through a VPC managed by
-    #     Amazon SageMaker, which allows direct internet access
-    #
-    #   * `VpcOnly` - All Studio traffic is through the specified VPC and
-    #     subnets
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
     #
     class DescribeDomainResponse < Struct.new(
@@ -7578,11 +7982,11 @@ module Aws::SageMaker
       :failure_reason,
       :auth_mode,
       :default_user_settings,
+      :app_network_access_type,
       :home_efs_file_system_kms_key_id,
       :subnet_ids,
       :url,
-      :vpc_id,
-      :app_network_access_type)
+      :vpc_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8072,6 +8476,159 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_name: "ImageName", # required
+    #       }
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageRequest AWS API Documentation
+    #
+    class DescribeImageRequest < Struct.new(
+      :image_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time
+    #   When the image was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the image as displayed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   When a create, update, or delete operation fails, the reason for the
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_status
+    #   The status of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the image was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageResponse AWS API Documentation
+    #
+    class DescribeImageResponse < Struct.new(
+      :creation_time,
+      :description,
+      :display_name,
+      :failure_reason,
+      :image_arn,
+      :image_name,
+      :image_status,
+      :last_modified_time,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeImageVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_name: "ImageName", # required
+    #         version: 1,
+    #       }
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the image. If not specified, the latest version is
+    #   described.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageVersionRequest AWS API Documentation
+    #
+    class DescribeImageVersionRequest < Struct.new(
+      :image_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] base_image
+    #   The registry path of the container image on which this image version
+    #   is based.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_image
+    #   The registry path of the container image that contains this image
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   When a create or delete operation fails, the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the image the version is based on.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_version_arn
+    #   The ARN of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_version_status
+    #   The status of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the version was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageVersionResponse AWS API Documentation
+    #
+    class DescribeImageVersionResponse < Struct.new(
+      :base_image,
+      :container_image,
+      :creation_time,
+      :failure_reason,
+      :image_arn,
+      :image_version_arn,
+      :image_version_status,
+      :last_modified_time,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeLabelingJobRequest
     #   data as a hash:
     #
@@ -8321,7 +8878,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         model_package_name: "ArnOrName", # required
+    #         model_package_name: "VersionedArnOrName", # required
     #       }
     #
     # @!attribute [rw] model_package_name
@@ -10156,6 +10713,42 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The Amazon Elastic File System (EFS) storage configuration for an
+    # image.
+    #
+    # @note When making an API call, you may pass FileSystemConfig
+    #   data as a hash:
+    #
+    #       {
+    #         mount_path: "MountPath",
+    #         default_uid: 1,
+    #         default_gid: 1,
+    #       }
+    #
+    # @!attribute [rw] mount_path
+    #   The path within the image to mount the user's EFS home directory.
+    #   The directory should be empty. If not specified, defaults to
+    #   */home/sagemaker-user*.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_uid
+    #   The default POSIX user ID. If not specified, defaults to `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_gid
+    #   The default POSIX group ID. If not specified, defaults to `100`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FileSystemConfig AWS API Documentation
+    #
+    class FileSystemConfig < Struct.new(
+      :mount_path,
+      :default_uid,
+      :default_gid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a file system data source for a channel.
     #
     # @note When making an API call, you may pass FileSystemDataSource
@@ -11839,7 +12432,7 @@ module Aws::SageMaker
     #         },
     #         is_tunable: false,
     #         is_required: false,
-    #         default_value: "ParameterValue",
+    #         default_value: "HyperParameterValue",
     #       }
     #
     # @!attribute [rw] name
@@ -11923,7 +12516,7 @@ module Aws::SageMaker
     #           ],
     #         },
     #         static_hyper_parameters: {
-    #           "ParameterKey" => "ParameterValue",
+    #           "HyperParameterKey" => "HyperParameterValue",
     #         },
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
@@ -11972,7 +12565,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -12516,6 +13109,58 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A SageMaker image. A SageMaker image represents a set of container
+    # images that are derived from a common base container image. Each of
+    # these container images is represented by a SageMaker `ImageVersion`.
+    #
+    # @!attribute [rw] creation_time
+    #   When the image was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the image as displayed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   When a create, update, or delete operation fails, the reason for the
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_status
+    #   The status of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the image was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Image AWS API Documentation
+    #
+    class Image < Struct.new(
+      :creation_time,
+      :description,
+      :display_name,
+      :failure_reason,
+      :image_arn,
+      :image_name,
+      :image_status,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies whether the model container is in Amazon ECR or a private
     # Docker registry accessible from your Amazon Virtual Private Cloud
     # (VPC).
@@ -12540,6 +13185,51 @@ module Aws::SageMaker
     #
     class ImageConfig < Struct.new(
       :repository_access_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A version of a SageMaker `Image`. A version represents an existing
+    # container image.
+    #
+    # @!attribute [rw] creation_time
+    #   When the version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   When a create or delete operation fails, the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the image the version is based on.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_version_arn
+    #   The ARN of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_version_status
+    #   The status of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the version was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImageVersion AWS API Documentation
+    #
+    class ImageVersion < Struct.new(
+      :creation_time,
+      :failure_reason,
+      :image_arn,
+      :image_version_arn,
+      :image_version_status,
+      :last_modified_time,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12611,7 +13301,7 @@ module Aws::SageMaker
     #       {
     #         s3_uri: "S3Uri", # required
     #         data_input_config: "DataInputConfig", # required
-    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE
+    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -12898,6 +13588,7 @@ module Aws::SageMaker
     #       {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       }
@@ -12915,7 +13606,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The kernel gateway app settings.
+    # The KernelGateway app settings.
     #
     # @note When making an API call, you may pass KernelGatewayAppSettings
     #   data as a hash:
@@ -12923,19 +13614,98 @@ module Aws::SageMaker
     #       {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
-    #   SageMaker image created on the instance.
+    #   default SageMaker image used by the KernelGateway app.
     #   @return [Types::ResourceSpec]
+    #
+    # @!attribute [rw] custom_images
+    #   A list of custom images that are configured to run as a
+    #   KernelGateway app.
+    #   @return [Array<Types::CustomImage>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
     #
     class KernelGatewayAppSettings < Struct.new(
-      :default_resource_spec)
+      :default_resource_spec,
+      :custom_images)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Amazon SageMaker KernelGateway app.
+    #
+    # @note When making an API call, you may pass KernelGatewayImageConfig
+    #   data as a hash:
+    #
+    #       {
+    #         kernel_specs: [ # required
+    #           {
+    #             name: "KernelName", # required
+    #             display_name: "KernelDisplayName",
+    #           },
+    #         ],
+    #         file_system_config: {
+    #           mount_path: "MountPath",
+    #           default_uid: 1,
+    #           default_gid: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kernel_specs
+    #   Defines how a kernel is started and the arguments, environment
+    #   variables, and metadata that are available to the kernel.
+    #   @return [Array<Types::KernelSpec>]
+    #
+    # @!attribute [rw] file_system_config
+    #   The file system configuration.
+    #   @return [Types::FileSystemConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayImageConfig AWS API Documentation
+    #
+    class KernelGatewayImageConfig < Struct.new(
+      :kernel_specs,
+      :file_system_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines how a kernel is started and the arguments, environment
+    # variables, and metadata that are available to the kernel.
+    #
+    # @note When making an API call, you may pass KernelSpec
+    #   data as a hash:
+    #
+    #       {
+    #         name: "KernelName", # required
+    #         display_name: "KernelDisplayName",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the kernel. Must be unique to your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the kernel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelSpec AWS API Documentation
+    #
+    class KernelSpec < Struct.new(
+      :name,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13552,6 +14322,100 @@ module Aws::SageMaker
     class ListAlgorithmsOutput < Struct.new(
       :algorithm_summary_list,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAppImageConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         name_contains: "AppImageConfigName",
+    #         creation_time_before: Time.now,
+    #         creation_time_after: Time.now,
+    #         modified_time_before: Time.now,
+    #         modified_time_after: Time.now,
+    #         sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime, Name
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of AppImageConfigs to return in the response. The
+    #   default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous call to `ListImages` didn't return the full set of
+    #   AppImageConfigs, the call returns a token for getting the next set
+    #   of AppImageConfigs.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A filter that returns only AppImageConfigs whose name contains the
+    #   specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only AppImageConfigs created on or before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only AppImageConfigs created on or after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_time_before
+    #   A filter that returns only AppImageConfigs modified on or before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_time_after
+    #   A filter that returns only AppImageConfigs modified on or after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The property used to sort results. The default value is
+    #   `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order. The default value is `Descending`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAppImageConfigsRequest AWS API Documentation
+    #
+    class ListAppImageConfigsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :name_contains,
+      :creation_time_before,
+      :creation_time_after,
+      :modified_time_before,
+      :modified_time_after,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of AppImageConfigs, if there are
+    #   any.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_image_configs
+    #   A list of AppImageConfigs and their properties.
+    #   @return [Array<Types::AppImageConfigDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAppImageConfigsResponse AWS API Documentation
+    #
+    class ListAppImageConfigsResponse < Struct.new(
+      :next_token,
+      :app_image_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14526,6 +15390,190 @@ module Aws::SageMaker
     #
     class ListHyperParameterTuningJobsResponse < Struct.new(
       :hyper_parameter_tuning_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListImageVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         image_name: "ImageName", # required
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         sort_by: "CREATION_TIME", # accepts CREATION_TIME, LAST_MODIFIED_TIME, VERSION
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only versions created on or after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only versions created on or before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image to list the versions of.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only versions modified on or after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only versions modified on or before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of versions to return in the response. The
+    #   default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous call to `ListImageVersions` didn't return the full
+    #   set of versions, the call returns a token for getting the next set
+    #   of versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The property used to sort results. The default value is
+    #   `CREATION_TIME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order. The default value is `DESCENDING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListImageVersionsRequest AWS API Documentation
+    #
+    class ListImageVersionsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :image_name,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_versions
+    #   A list of versions and their properties.
+    #   @return [Array<Types::ImageVersion>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of versions, if there are any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListImageVersionsResponse AWS API Documentation
+    #
+    class ListImageVersionsResponse < Struct.new(
+      :image_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListImagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         max_results: 1,
+    #         name_contains: "ImageNameContains",
+    #         next_token: "NextToken",
+    #         sort_by: "CREATION_TIME", # accepts CREATION_TIME, LAST_MODIFIED_TIME, IMAGE_NAME
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only images created on or after the specified
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only images created on or before the specified
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only images modified on or after the specified
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only images modified on or before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of images to return in the response. The default
+    #   value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name_contains
+    #   A filter that returns only images whose name contains the specified
+    #   string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous call to `ListImages` didn't return the full set of
+    #   images, the call returns a token for getting the next set of images.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The property used to sort results. The default value is
+    #   `CREATION_TIME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order. The default value is `DESCENDING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListImagesRequest AWS API Documentation
+    #
+    class ListImagesRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :max_results,
+      :name_contains,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] images
+    #   A list of images and their properties.
+    #   @return [Array<Types::Image>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of images, if there are any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListImagesResponse AWS API Documentation
+    #
+    class ListImagesResponse < Struct.new(
+      :images,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -17891,6 +18939,13 @@ module Aws::SageMaker
     #     * `mattr`\: Add `\{'mattr': ['+neon']\}` to compiler options if
     #       compiling for ARM 32-bit platform with NEON support.
     #
+    #   * `INFERENTIA`\: Compilation for target ml\_inf1 uses compiler
+    #     options passed in as a JSON string. For example,
+    #     `"CompilerOptions": ""--verbose 1 --num-neuroncores 2 -O2""`.
+    #
+    #     For information about supported compiler options, see [ Neuron
+    #     Compiler CLI][1].
+    #
     #   * `CoreML`\: Compilation for the CoreML OutputConfig$TargetDevice
     #     supports the following compiler options:
     #
@@ -17900,6 +18955,10 @@ module Aws::SageMaker
     #       be separated by newlines.
     #
     #     ^
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig AWS API Documentation
@@ -19172,7 +20231,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
@@ -19336,31 +20395,35 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The instance type and the Amazon Resource Name (ARN) of the SageMaker
-    # image created on the instance. The ARN is stored as metadata in
-    # SageMaker Studio notebooks.
+    # Specifies the ARN's of a SageMaker image and SageMaker image version,
+    # and the instance type that the version runs on.
     #
     # @note When making an API call, you may pass ResourceSpec
     #   data as a hash:
     #
     #       {
     #         sage_maker_image_arn: "ImageArn",
+    #         sage_maker_image_version_arn: "ImageVersionArn",
     #         instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #       }
     #
     # @!attribute [rw] sage_maker_image_arn
-    #   The Amazon Resource Name (ARN) of the SageMaker image created on the
-    #   instance.
+    #   The ARN of the SageMaker image that the image version belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sage_maker_image_version_arn
+    #   The ARN of the image version created on the instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type.
+    #   The instance type that the image version runs on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceSpec AWS API Documentation
     #
     class ResourceSpec < Struct.new(
       :sage_maker_image_arn,
+      :sage_maker_image_version_arn,
       :instance_type)
       SENSITIVE = []
       include Aws::Structure
@@ -20529,6 +21592,7 @@ module Aws::SageMaker
     #       {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       }
@@ -20897,7 +21961,7 @@ module Aws::SageMaker
     #       {
     #         training_input_mode: "Pipe", # required, accepts Pipe, File
     #         hyper_parameters: {
-    #           "ParameterKey" => "ParameterValue",
+    #           "HyperParameterKey" => "HyperParameterValue",
     #         },
     #         input_data_config: [ # required
     #           {
@@ -20930,7 +21994,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -21110,10 +22174,10 @@ module Aws::SageMaker
     #             },
     #             is_tunable: false,
     #             is_required: false,
-    #             default_value: "ParameterValue",
+    #             default_value: "HyperParameterValue",
     #           },
     #         ],
-    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #         supports_distributed_training: false,
     #         metric_definitions: [
     #           {
@@ -22570,6 +23634,55 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateAppImageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_image_config_name: "AppImageConfigName", # required
+    #         kernel_gateway_image_config: {
+    #           kernel_specs: [ # required
+    #             {
+    #               name: "KernelName", # required
+    #               display_name: "KernelDisplayName",
+    #             },
+    #           ],
+    #           file_system_config: {
+    #             mount_path: "MountPath",
+    #             default_uid: 1,
+    #             default_gid: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] app_image_config_name
+    #   The name of the AppImageConfig to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_gateway_image_config
+    #   The new KernelGateway app to run on the image.
+    #   @return [Types::KernelGatewayImageConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateAppImageConfigRequest AWS API Documentation
+    #
+    class UpdateAppImageConfigRequest < Struct.new(
+      :app_image_config_name,
+      :kernel_gateway_image_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_image_config_arn
+    #   The Amazon Resource Name (ARN) for the AppImageConfig.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateAppImageConfigResponse AWS API Documentation
+    #
+    class UpdateAppImageConfigResponse < Struct.new(
+      :app_image_config_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateCodeRepositoryInput
     #   data as a hash:
     #
@@ -22631,18 +23744,28 @@ module Aws::SageMaker
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -22826,6 +23949,63 @@ module Aws::SageMaker
     #
     class UpdateExperimentResponse < Struct.new(
       :experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         delete_properties: ["ImageDeleteProperty"],
+    #         description: "ImageDescription",
+    #         display_name: "ImageDisplayName",
+    #         image_name: "ImageName", # required
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] delete_properties
+    #   A list of properties to delete. Only the `Description` and
+    #   `DisplayName` properties can be deleted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   The new description for the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The new display name for the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_name
+    #   The name of the image to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The new Amazon Resource Name (ARN) for the IAM role that enables
+    #   Amazon SageMaker to perform tasks on your behalf.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImageRequest AWS API Documentation
+    #
+    class UpdateImageRequest < Struct.new(
+      :delete_properties,
+      :description,
+      :display_name,
+      :image_name,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImageResponse AWS API Documentation
+    #
+    class UpdateImageResponse < Struct.new(
+      :image_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23318,18 +24498,28 @@ module Aws::SageMaker
     #           jupyter_server_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #             },
     #           },
@@ -23607,18 +24797,28 @@ module Aws::SageMaker
     #         jupyter_server_app_settings: {
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
+    #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           },
     #         },
     #         kernel_gateway_app_settings: {
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
+    #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           },
+    #           custom_images: [
+    #             {
+    #               image_name: "ImageName", # required
+    #               image_version_number: 1,
+    #               app_image_config_name: "AppImageConfigName", # required
+    #             },
+    #           ],
     #         },
     #         tensor_board_app_settings: {
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
+    #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           },
     #         },
@@ -23629,7 +24829,14 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   The security groups.
+    #   The security groups for the Amazon Virtual Private Cloud (VPC) that
+    #   Studio uses for communication.
+    #
+    #   Optional when the `CreateDomain.AppNetworkAccessType` parameter is
+    #   set to `PublicInternetOnly`.
+    #
+    #   Required when the `CreateDomain.AppNetworkAccessType` parameter is
+    #   set to `VpcOnly`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sharing_settings

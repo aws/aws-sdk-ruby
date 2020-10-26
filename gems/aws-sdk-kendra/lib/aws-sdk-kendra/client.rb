@@ -566,7 +566,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -757,6 +757,58 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #       },
+    #       confluence_configuration: {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         version: "SERVER", # required, accepts SERVER
+    #         space_configuration: {
+    #           crawl_personal_spaces: false,
+    #           crawl_archived_spaces: false,
+    #           include_spaces: ["ConfluenceSpaceIdentifier"],
+    #           exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #           space_field_mappings: [
+    #             {
+    #               data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         page_configuration: {
+    #           page_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         blog_configuration: {
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         attachment_configuration: {
+    #           crawl_attachments: false,
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #       },
     #     },
     #     description: "Description",
@@ -1077,7 +1129,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -1210,6 +1262,40 @@ module Aws::Kendra
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.server_url #=> String
+    #   resp.configuration.confluence_configuration.secret_arn #=> String
+    #   resp.configuration.confluence_configuration.version #=> String, one of "SERVER"
+    #   resp.configuration.confluence_configuration.space_configuration.crawl_personal_spaces #=> Boolean
+    #   resp.configuration.confluence_configuration.space_configuration.crawl_archived_spaces #=> Boolean
+    #   resp.configuration.confluence_configuration.space_configuration.include_spaces #=> Array
+    #   resp.configuration.confluence_configuration.space_configuration.include_spaces[0] #=> String
+    #   resp.configuration.confluence_configuration.space_configuration.exclude_spaces #=> Array
+    #   resp.configuration.confluence_configuration.space_configuration.exclude_spaces[0] #=> String
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings[0].data_source_field_name #=> String, one of "DISPLAY_URL", "ITEM_TYPE", "SPACE_KEY", "URL"
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings[0].data_source_field_name #=> String, one of "AUTHOR", "CONTENT_STATUS", "CREATED_DATE", "DISPLAY_URL", "ITEM_TYPE", "LABELS", "MODIFIED_DATE", "PARENT_ID", "SPACE_KEY", "SPACE_NAME", "URL", "VERSION"
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings[0].data_source_field_name #=> String, one of "AUTHOR", "DISPLAY_URL", "ITEM_TYPE", "LABELS", "PUBLISH_DATE", "SPACE_KEY", "SPACE_NAME", "URL", "VERSION"
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.attachment_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings[0].data_source_field_name #=> String, one of "AUTHOR", "CONTENT_TYPE", "CREATED_DATE", "DISPLAY_URL", "FILE_SIZE", "ITEM_TYPE", "PARENT_ID", "SPACE_KEY", "SPACE_NAME", "URL", "VERSION"
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.confluence_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.confluence_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.confluence_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.confluence_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.confluence_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.confluence_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.confluence_configuration.exclusion_patterns[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -1453,7 +1539,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -2223,6 +2309,58 @@ module Aws::Kendra
     #           ],
     #         },
     #       },
+    #       confluence_configuration: {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         version: "SERVER", # required, accepts SERVER
+    #         space_configuration: {
+    #           crawl_personal_spaces: false,
+    #           crawl_archived_spaces: false,
+    #           include_spaces: ["ConfluenceSpaceIdentifier"],
+    #           exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #           space_field_mappings: [
+    #             {
+    #               data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         page_configuration: {
+    #           page_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         blog_configuration: {
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         attachment_configuration: {
+    #           crawl_attachments: false,
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -2322,7 +2460,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

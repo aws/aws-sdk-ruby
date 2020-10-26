@@ -34,6 +34,11 @@ module Aws::SageMaker
     AnnotationConsolidationConfig = Shapes::StructureShape.new(name: 'AnnotationConsolidationConfig')
     AppArn = Shapes::StringShape.new(name: 'AppArn')
     AppDetails = Shapes::StructureShape.new(name: 'AppDetails')
+    AppImageConfigArn = Shapes::StringShape.new(name: 'AppImageConfigArn')
+    AppImageConfigDetails = Shapes::StructureShape.new(name: 'AppImageConfigDetails')
+    AppImageConfigList = Shapes::ListShape.new(name: 'AppImageConfigList')
+    AppImageConfigName = Shapes::StringShape.new(name: 'AppImageConfigName')
+    AppImageConfigSortKey = Shapes::StringShape.new(name: 'AppImageConfigSortKey')
     AppInstanceType = Shapes::StringShape.new(name: 'AppInstanceType')
     AppList = Shapes::ListShape.new(name: 'AppList')
     AppName = Shapes::StringShape.new(name: 'AppName')
@@ -111,6 +116,7 @@ module Aws::SageMaker
     Cidrs = Shapes::ListShape.new(name: 'Cidrs')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CodeRepositoryArn = Shapes::StringShape.new(name: 'CodeRepositoryArn')
     CodeRepositoryContains = Shapes::StringShape.new(name: 'CodeRepositoryContains')
     CodeRepositoryNameContains = Shapes::StringShape.new(name: 'CodeRepositoryNameContains')
@@ -155,6 +161,8 @@ module Aws::SageMaker
     ContinuousParameterRanges = Shapes::ListShape.new(name: 'ContinuousParameterRanges')
     CreateAlgorithmInput = Shapes::StructureShape.new(name: 'CreateAlgorithmInput')
     CreateAlgorithmOutput = Shapes::StructureShape.new(name: 'CreateAlgorithmOutput')
+    CreateAppImageConfigRequest = Shapes::StructureShape.new(name: 'CreateAppImageConfigRequest')
+    CreateAppImageConfigResponse = Shapes::StructureShape.new(name: 'CreateAppImageConfigResponse')
     CreateAppRequest = Shapes::StructureShape.new(name: 'CreateAppRequest')
     CreateAppResponse = Shapes::StructureShape.new(name: 'CreateAppResponse')
     CreateAutoMLJobRequest = Shapes::StructureShape.new(name: 'CreateAutoMLJobRequest')
@@ -177,6 +185,10 @@ module Aws::SageMaker
     CreateHumanTaskUiResponse = Shapes::StructureShape.new(name: 'CreateHumanTaskUiResponse')
     CreateHyperParameterTuningJobRequest = Shapes::StructureShape.new(name: 'CreateHyperParameterTuningJobRequest')
     CreateHyperParameterTuningJobResponse = Shapes::StructureShape.new(name: 'CreateHyperParameterTuningJobResponse')
+    CreateImageRequest = Shapes::StructureShape.new(name: 'CreateImageRequest')
+    CreateImageResponse = Shapes::StructureShape.new(name: 'CreateImageResponse')
+    CreateImageVersionRequest = Shapes::StructureShape.new(name: 'CreateImageVersionRequest')
+    CreateImageVersionResponse = Shapes::StructureShape.new(name: 'CreateImageVersionResponse')
     CreateLabelingJobRequest = Shapes::StructureShape.new(name: 'CreateLabelingJobRequest')
     CreateLabelingJobResponse = Shapes::StructureShape.new(name: 'CreateLabelingJobResponse')
     CreateModelInput = Shapes::StructureShape.new(name: 'CreateModelInput')
@@ -212,6 +224,8 @@ module Aws::SageMaker
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
     CsvContentType = Shapes::StringShape.new(name: 'CsvContentType')
     CsvContentTypes = Shapes::ListShape.new(name: 'CsvContentTypes')
+    CustomImage = Shapes::StructureShape.new(name: 'CustomImage')
+    CustomImages = Shapes::ListShape.new(name: 'CustomImages')
     DataCaptureConfig = Shapes::StructureShape.new(name: 'DataCaptureConfig')
     DataCaptureConfigSummary = Shapes::StructureShape.new(name: 'DataCaptureConfigSummary')
     DataExplorationNotebookLocation = Shapes::StringShape.new(name: 'DataExplorationNotebookLocation')
@@ -223,7 +237,10 @@ module Aws::SageMaker
     DebugRuleConfigurations = Shapes::ListShape.new(name: 'DebugRuleConfigurations')
     DebugRuleEvaluationStatus = Shapes::StructureShape.new(name: 'DebugRuleEvaluationStatus')
     DebugRuleEvaluationStatuses = Shapes::ListShape.new(name: 'DebugRuleEvaluationStatuses')
+    DefaultGid = Shapes::IntegerShape.new(name: 'DefaultGid')
+    DefaultUid = Shapes::IntegerShape.new(name: 'DefaultUid')
     DeleteAlgorithmInput = Shapes::StructureShape.new(name: 'DeleteAlgorithmInput')
+    DeleteAppImageConfigRequest = Shapes::StructureShape.new(name: 'DeleteAppImageConfigRequest')
     DeleteAppRequest = Shapes::StructureShape.new(name: 'DeleteAppRequest')
     DeleteCodeRepositoryInput = Shapes::StructureShape.new(name: 'DeleteCodeRepositoryInput')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
@@ -235,6 +252,10 @@ module Aws::SageMaker
     DeleteFlowDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteFlowDefinitionResponse')
     DeleteHumanTaskUiRequest = Shapes::StructureShape.new(name: 'DeleteHumanTaskUiRequest')
     DeleteHumanTaskUiResponse = Shapes::StructureShape.new(name: 'DeleteHumanTaskUiResponse')
+    DeleteImageRequest = Shapes::StructureShape.new(name: 'DeleteImageRequest')
+    DeleteImageResponse = Shapes::StructureShape.new(name: 'DeleteImageResponse')
+    DeleteImageVersionRequest = Shapes::StructureShape.new(name: 'DeleteImageVersionRequest')
+    DeleteImageVersionResponse = Shapes::StructureShape.new(name: 'DeleteImageVersionResponse')
     DeleteModelInput = Shapes::StructureShape.new(name: 'DeleteModelInput')
     DeleteModelPackageInput = Shapes::StructureShape.new(name: 'DeleteModelPackageInput')
     DeleteMonitoringScheduleRequest = Shapes::StructureShape.new(name: 'DeleteMonitoringScheduleRequest')
@@ -255,6 +276,8 @@ module Aws::SageMaker
     DeployedImages = Shapes::ListShape.new(name: 'DeployedImages')
     DescribeAlgorithmInput = Shapes::StructureShape.new(name: 'DescribeAlgorithmInput')
     DescribeAlgorithmOutput = Shapes::StructureShape.new(name: 'DescribeAlgorithmOutput')
+    DescribeAppImageConfigRequest = Shapes::StructureShape.new(name: 'DescribeAppImageConfigRequest')
+    DescribeAppImageConfigResponse = Shapes::StructureShape.new(name: 'DescribeAppImageConfigResponse')
     DescribeAppRequest = Shapes::StructureShape.new(name: 'DescribeAppRequest')
     DescribeAppResponse = Shapes::StructureShape.new(name: 'DescribeAppResponse')
     DescribeAutoMLJobRequest = Shapes::StructureShape.new(name: 'DescribeAutoMLJobRequest')
@@ -277,6 +300,10 @@ module Aws::SageMaker
     DescribeHumanTaskUiResponse = Shapes::StructureShape.new(name: 'DescribeHumanTaskUiResponse')
     DescribeHyperParameterTuningJobRequest = Shapes::StructureShape.new(name: 'DescribeHyperParameterTuningJobRequest')
     DescribeHyperParameterTuningJobResponse = Shapes::StructureShape.new(name: 'DescribeHyperParameterTuningJobResponse')
+    DescribeImageRequest = Shapes::StructureShape.new(name: 'DescribeImageRequest')
+    DescribeImageResponse = Shapes::StructureShape.new(name: 'DescribeImageResponse')
+    DescribeImageVersionRequest = Shapes::StructureShape.new(name: 'DescribeImageVersionRequest')
+    DescribeImageVersionResponse = Shapes::StructureShape.new(name: 'DescribeImageVersionResponse')
     DescribeLabelingJobRequest = Shapes::StructureShape.new(name: 'DescribeLabelingJobRequest')
     DescribeLabelingJobResponse = Shapes::StructureShape.new(name: 'DescribeLabelingJobResponse')
     DescribeModelInput = Shapes::StructureShape.new(name: 'DescribeModelInput')
@@ -362,6 +389,7 @@ module Aws::SageMaker
     ExperimentSummary = Shapes::StructureShape.new(name: 'ExperimentSummary')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FileSystemAccessMode = Shapes::StringShape.new(name: 'FileSystemAccessMode')
+    FileSystemConfig = Shapes::StructureShape.new(name: 'FileSystemConfig')
     FileSystemDataSource = Shapes::StructureShape.new(name: 'FileSystemDataSource')
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
     FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
@@ -407,6 +435,7 @@ module Aws::SageMaker
     HumanTaskUiSummaries = Shapes::ListShape.new(name: 'HumanTaskUiSummaries')
     HumanTaskUiSummary = Shapes::StructureShape.new(name: 'HumanTaskUiSummary')
     HyperParameterAlgorithmSpecification = Shapes::StructureShape.new(name: 'HyperParameterAlgorithmSpecification')
+    HyperParameterKey = Shapes::StringShape.new(name: 'HyperParameterKey')
     HyperParameterScalingType = Shapes::StringShape.new(name: 'HyperParameterScalingType')
     HyperParameterSpecification = Shapes::StructureShape.new(name: 'HyperParameterSpecification')
     HyperParameterSpecifications = Shapes::ListShape.new(name: 'HyperParameterSpecifications')
@@ -428,11 +457,32 @@ module Aws::SageMaker
     HyperParameterTuningJobSummary = Shapes::StructureShape.new(name: 'HyperParameterTuningJobSummary')
     HyperParameterTuningJobWarmStartConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobWarmStartConfig')
     HyperParameterTuningJobWarmStartType = Shapes::StringShape.new(name: 'HyperParameterTuningJobWarmStartType')
+    HyperParameterValue = Shapes::StringShape.new(name: 'HyperParameterValue')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
+    Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
+    ImageBaseImage = Shapes::StringShape.new(name: 'ImageBaseImage')
     ImageConfig = Shapes::StructureShape.new(name: 'ImageConfig')
+    ImageContainerImage = Shapes::StringShape.new(name: 'ImageContainerImage')
+    ImageDeleteProperty = Shapes::StringShape.new(name: 'ImageDeleteProperty')
+    ImageDeletePropertyList = Shapes::ListShape.new(name: 'ImageDeletePropertyList')
+    ImageDescription = Shapes::StringShape.new(name: 'ImageDescription')
     ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
+    ImageDisplayName = Shapes::StringShape.new(name: 'ImageDisplayName')
+    ImageName = Shapes::StringShape.new(name: 'ImageName')
+    ImageNameContains = Shapes::StringShape.new(name: 'ImageNameContains')
+    ImageSortBy = Shapes::StringShape.new(name: 'ImageSortBy')
+    ImageSortOrder = Shapes::StringShape.new(name: 'ImageSortOrder')
+    ImageStatus = Shapes::StringShape.new(name: 'ImageStatus')
     ImageUri = Shapes::StringShape.new(name: 'ImageUri')
+    ImageVersion = Shapes::StructureShape.new(name: 'ImageVersion')
+    ImageVersionArn = Shapes::StringShape.new(name: 'ImageVersionArn')
+    ImageVersionNumber = Shapes::IntegerShape.new(name: 'ImageVersionNumber')
+    ImageVersionSortBy = Shapes::StringShape.new(name: 'ImageVersionSortBy')
+    ImageVersionSortOrder = Shapes::StringShape.new(name: 'ImageVersionSortOrder')
+    ImageVersionStatus = Shapes::StringShape.new(name: 'ImageVersionStatus')
+    ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
+    Images = Shapes::ListShape.new(name: 'Images')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
     InputConfig = Shapes::StructureShape.new(name: 'InputConfig')
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
@@ -450,7 +500,12 @@ module Aws::SageMaker
     JsonContentTypes = Shapes::ListShape.new(name: 'JsonContentTypes')
     JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     JupyterServerAppSettings = Shapes::StructureShape.new(name: 'JupyterServerAppSettings')
+    KernelDisplayName = Shapes::StringShape.new(name: 'KernelDisplayName')
     KernelGatewayAppSettings = Shapes::StructureShape.new(name: 'KernelGatewayAppSettings')
+    KernelGatewayImageConfig = Shapes::StructureShape.new(name: 'KernelGatewayImageConfig')
+    KernelName = Shapes::StringShape.new(name: 'KernelName')
+    KernelSpec = Shapes::StructureShape.new(name: 'KernelSpec')
+    KernelSpecs = Shapes::ListShape.new(name: 'KernelSpecs')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LabelAttributeName = Shapes::StringShape.new(name: 'LabelAttributeName')
     LabelCounter = Shapes::IntegerShape.new(name: 'LabelCounter')
@@ -478,6 +533,8 @@ module Aws::SageMaker
     LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime')
     ListAlgorithmsInput = Shapes::StructureShape.new(name: 'ListAlgorithmsInput')
     ListAlgorithmsOutput = Shapes::StructureShape.new(name: 'ListAlgorithmsOutput')
+    ListAppImageConfigsRequest = Shapes::StructureShape.new(name: 'ListAppImageConfigsRequest')
+    ListAppImageConfigsResponse = Shapes::StructureShape.new(name: 'ListAppImageConfigsResponse')
     ListAppsRequest = Shapes::StructureShape.new(name: 'ListAppsRequest')
     ListAppsResponse = Shapes::StructureShape.new(name: 'ListAppsResponse')
     ListAutoMLJobsRequest = Shapes::StructureShape.new(name: 'ListAutoMLJobsRequest')
@@ -503,6 +560,10 @@ module Aws::SageMaker
     ListHumanTaskUisResponse = Shapes::StructureShape.new(name: 'ListHumanTaskUisResponse')
     ListHyperParameterTuningJobsRequest = Shapes::StructureShape.new(name: 'ListHyperParameterTuningJobsRequest')
     ListHyperParameterTuningJobsResponse = Shapes::StructureShape.new(name: 'ListHyperParameterTuningJobsResponse')
+    ListImageVersionsRequest = Shapes::StructureShape.new(name: 'ListImageVersionsRequest')
+    ListImageVersionsResponse = Shapes::StructureShape.new(name: 'ListImageVersionsResponse')
+    ListImagesRequest = Shapes::StructureShape.new(name: 'ListImagesRequest')
+    ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
     ListLabelingJobsForWorkteamRequest = Shapes::StructureShape.new(name: 'ListLabelingJobsForWorkteamRequest')
     ListLabelingJobsForWorkteamResponse = Shapes::StructureShape.new(name: 'ListLabelingJobsForWorkteamResponse')
     ListLabelingJobsForWorkteamSortByOptions = Shapes::StringShape.new(name: 'ListLabelingJobsForWorkteamSortByOptions')
@@ -616,6 +677,7 @@ module Aws::SageMaker
     MonitoringScheduleSummaryList = Shapes::ListShape.new(name: 'MonitoringScheduleSummaryList')
     MonitoringStatisticsResource = Shapes::StructureShape.new(name: 'MonitoringStatisticsResource')
     MonitoringStoppingCondition = Shapes::StructureShape.new(name: 'MonitoringStoppingCondition')
+    MountPath = Shapes::StringShape.new(name: 'MountPath')
     NameContains = Shapes::StringShape.new(name: 'NameContains')
     NestedFilters = Shapes::StructureShape.new(name: 'NestedFilters')
     NestedFiltersList = Shapes::ListShape.new(name: 'NestedFiltersList')
@@ -903,6 +965,8 @@ module Aws::SageMaker
     UiConfig = Shapes::StructureShape.new(name: 'UiConfig')
     UiTemplate = Shapes::StructureShape.new(name: 'UiTemplate')
     UiTemplateInfo = Shapes::StructureShape.new(name: 'UiTemplateInfo')
+    UpdateAppImageConfigRequest = Shapes::StructureShape.new(name: 'UpdateAppImageConfigRequest')
+    UpdateAppImageConfigResponse = Shapes::StructureShape.new(name: 'UpdateAppImageConfigResponse')
     UpdateCodeRepositoryInput = Shapes::StructureShape.new(name: 'UpdateCodeRepositoryInput')
     UpdateCodeRepositoryOutput = Shapes::StructureShape.new(name: 'UpdateCodeRepositoryOutput')
     UpdateDomainRequest = Shapes::StructureShape.new(name: 'UpdateDomainRequest')
@@ -913,6 +977,8 @@ module Aws::SageMaker
     UpdateEndpointWeightsAndCapacitiesOutput = Shapes::StructureShape.new(name: 'UpdateEndpointWeightsAndCapacitiesOutput')
     UpdateExperimentRequest = Shapes::StructureShape.new(name: 'UpdateExperimentRequest')
     UpdateExperimentResponse = Shapes::StructureShape.new(name: 'UpdateExperimentResponse')
+    UpdateImageRequest = Shapes::StructureShape.new(name: 'UpdateImageRequest')
+    UpdateImageResponse = Shapes::StructureShape.new(name: 'UpdateImageResponse')
     UpdateMonitoringScheduleRequest = Shapes::StructureShape.new(name: 'UpdateMonitoringScheduleRequest')
     UpdateMonitoringScheduleResponse = Shapes::StructureShape.new(name: 'UpdateMonitoringScheduleResponse')
     UpdateNotebookInstanceInput = Shapes::StructureShape.new(name: 'UpdateNotebookInstanceInput')
@@ -943,6 +1009,7 @@ module Aws::SageMaker
     VariantPropertyList = Shapes::ListShape.new(name: 'VariantPropertyList')
     VariantPropertyType = Shapes::StringShape.new(name: 'VariantPropertyType')
     VariantWeight = Shapes::FloatShape.new(name: 'VariantWeight')
+    VersionedArnOrName = Shapes::StringShape.new(name: 'VersionedArnOrName')
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -1013,6 +1080,15 @@ module Aws::SageMaker
     AppDetails.add_member(:status, Shapes::ShapeRef.new(shape: AppStatus, location_name: "Status"))
     AppDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     AppDetails.struct_class = Types::AppDetails
+
+    AppImageConfigDetails.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
+    AppImageConfigDetails.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, location_name: "AppImageConfigName"))
+    AppImageConfigDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    AppImageConfigDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    AppImageConfigDetails.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    AppImageConfigDetails.struct_class = Types::AppImageConfigDetails
+
+    AppImageConfigList.member = Shapes::ShapeRef.new(shape: AppImageConfigDetails)
 
     AppList.member = Shapes::ShapeRef.new(shape: AppDetails)
 
@@ -1208,7 +1284,7 @@ module Aws::SageMaker
     ContainerDefinition.add_member(:mode, Shapes::ShapeRef.new(shape: ContainerMode, location_name: "Mode"))
     ContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
-    ContainerDefinition.add_member(:model_package_name, Shapes::ShapeRef.new(shape: ArnOrName, location_name: "ModelPackageName"))
+    ContainerDefinition.add_member(:model_package_name, Shapes::ShapeRef.new(shape: VersionedArnOrName, location_name: "ModelPackageName"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitionList.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
@@ -1241,6 +1317,14 @@ module Aws::SageMaker
 
     CreateAlgorithmOutput.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: AlgorithmArn, required: true, location_name: "AlgorithmArn"))
     CreateAlgorithmOutput.struct_class = Types::CreateAlgorithmOutput
+
+    CreateAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
+    CreateAppImageConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    CreateAppImageConfigRequest.struct_class = Types::CreateAppImageConfigRequest
+
+    CreateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
+    CreateAppImageConfigResponse.struct_class = Types::CreateAppImageConfigResponse
 
     CreateAppRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     CreateAppRequest.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, required: true, location_name: "UserProfileName"))
@@ -1279,6 +1363,7 @@ module Aws::SageMaker
     CreateCompilationJobRequest.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfig, required: true, location_name: "InputConfig"))
     CreateCompilationJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
     CreateCompilationJobRequest.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
+    CreateCompilationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCompilationJobRequest.struct_class = Types::CreateCompilationJobRequest
 
     CreateCompilationJobResponse.add_member(:compilation_job_arn, Shapes::ShapeRef.new(shape: CompilationJobArn, required: true, location_name: "CompilationJobArn"))
@@ -1290,8 +1375,8 @@ module Aws::SageMaker
     CreateDomainRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "SubnetIds"))
     CreateDomainRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateDomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateDomainRequest.add_member(:home_efs_file_system_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "HomeEfsFileSystemKmsKeyId"))
     CreateDomainRequest.add_member(:app_network_access_type, Shapes::ShapeRef.new(shape: AppNetworkAccessType, location_name: "AppNetworkAccessType"))
+    CreateDomainRequest.add_member(:home_efs_file_system_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "HomeEfsFileSystemKmsKeyId"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
@@ -1356,6 +1441,24 @@ module Aws::SageMaker
     CreateHyperParameterTuningJobResponse.add_member(:hyper_parameter_tuning_job_arn, Shapes::ShapeRef.new(shape: HyperParameterTuningJobArn, required: true, location_name: "HyperParameterTuningJobArn"))
     CreateHyperParameterTuningJobResponse.struct_class = Types::CreateHyperParameterTuningJobResponse
 
+    CreateImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
+    CreateImageRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageDisplayName, location_name: "DisplayName"))
+    CreateImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    CreateImageRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateImageRequest.struct_class = Types::CreateImageRequest
+
+    CreateImageResponse.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "ImageArn"))
+    CreateImageResponse.struct_class = Types::CreateImageResponse
+
+    CreateImageVersionRequest.add_member(:base_image, Shapes::ShapeRef.new(shape: ImageBaseImage, required: true, location_name: "BaseImage"))
+    CreateImageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateImageVersionRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    CreateImageVersionRequest.struct_class = Types::CreateImageVersionRequest
+
+    CreateImageVersionResponse.add_member(:image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, location_name: "ImageVersionArn"))
+    CreateImageVersionResponse.struct_class = Types::CreateImageVersionResponse
+
     CreateLabelingJobRequest.add_member(:labeling_job_name, Shapes::ShapeRef.new(shape: LabelingJobName, required: true, location_name: "LabelingJobName"))
     CreateLabelingJobRequest.add_member(:label_attribute_name, Shapes::ShapeRef.new(shape: LabelAttributeName, required: true, location_name: "LabelAttributeName"))
     CreateLabelingJobRequest.add_member(:input_config, Shapes::ShapeRef.new(shape: LabelingJobInputConfig, required: true, location_name: "InputConfig"))
@@ -1383,7 +1486,7 @@ module Aws::SageMaker
     CreateModelOutput.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "ModelArn"))
     CreateModelOutput.struct_class = Types::CreateModelOutput
 
-    CreateModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageName"))
+    CreateModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageName"))
     CreateModelPackageInput.add_member(:model_package_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ModelPackageDescription"))
     CreateModelPackageInput.add_member(:inference_specification, Shapes::ShapeRef.new(shape: InferenceSpecification, location_name: "InferenceSpecification"))
     CreateModelPackageInput.add_member(:validation_specification, Shapes::ShapeRef.new(shape: ModelPackageValidationSpecification, location_name: "ValidationSpecification"))
@@ -1558,6 +1661,13 @@ module Aws::SageMaker
 
     CsvContentTypes.member = Shapes::ShapeRef.new(shape: CsvContentType)
 
+    CustomImage.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    CustomImage.add_member(:image_version_number, Shapes::ShapeRef.new(shape: ImageVersionNumber, location_name: "ImageVersionNumber", metadata: {"box"=>true}))
+    CustomImage.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
+    CustomImage.struct_class = Types::CustomImage
+
+    CustomImages.member = Shapes::ShapeRef.new(shape: CustomImage)
+
     DataCaptureConfig.add_member(:enable_capture, Shapes::ShapeRef.new(shape: EnableCapture, location_name: "EnableCapture"))
     DataCaptureConfig.add_member(:initial_sampling_percentage, Shapes::ShapeRef.new(shape: SamplingPercentage, required: true, location_name: "InitialSamplingPercentage"))
     DataCaptureConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DestinationS3Uri"))
@@ -1611,6 +1721,9 @@ module Aws::SageMaker
     DeleteAlgorithmInput.add_member(:algorithm_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "AlgorithmName"))
     DeleteAlgorithmInput.struct_class = Types::DeleteAlgorithmInput
 
+    DeleteAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
+    DeleteAppImageConfigRequest.struct_class = Types::DeleteAppImageConfigRequest
+
     DeleteAppRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     DeleteAppRequest.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, required: true, location_name: "UserProfileName"))
     DeleteAppRequest.add_member(:app_type, Shapes::ShapeRef.new(shape: AppType, required: true, location_name: "AppType"))
@@ -1646,10 +1759,21 @@ module Aws::SageMaker
 
     DeleteHumanTaskUiResponse.struct_class = Types::DeleteHumanTaskUiResponse
 
+    DeleteImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    DeleteImageRequest.struct_class = Types::DeleteImageRequest
+
+    DeleteImageResponse.struct_class = Types::DeleteImageResponse
+
+    DeleteImageVersionRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    DeleteImageVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: ImageVersionNumber, required: true, location_name: "Version"))
+    DeleteImageVersionRequest.struct_class = Types::DeleteImageVersionRequest
+
+    DeleteImageVersionResponse.struct_class = Types::DeleteImageVersionResponse
+
     DeleteModelInput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DeleteModelInput.struct_class = Types::DeleteModelInput
 
-    DeleteModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageName"))
+    DeleteModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: VersionedArnOrName, required: true, location_name: "ModelPackageName"))
     DeleteModelPackageInput.struct_class = Types::DeleteModelPackageInput
 
     DeleteMonitoringScheduleRequest.add_member(:monitoring_schedule_name, Shapes::ShapeRef.new(shape: MonitoringScheduleName, required: true, location_name: "MonitoringScheduleName"))
@@ -1716,6 +1840,16 @@ module Aws::SageMaker
     DescribeAlgorithmOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, location_name: "ProductId"))
     DescribeAlgorithmOutput.add_member(:certify_for_marketplace, Shapes::ShapeRef.new(shape: CertifyForMarketplace, location_name: "CertifyForMarketplace"))
     DescribeAlgorithmOutput.struct_class = Types::DescribeAlgorithmOutput
+
+    DescribeAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
+    DescribeAppImageConfigRequest.struct_class = Types::DescribeAppImageConfigRequest
+
+    DescribeAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
+    DescribeAppImageConfigResponse.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, location_name: "AppImageConfigName"))
+    DescribeAppImageConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeAppImageConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeAppImageConfigResponse.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    DescribeAppImageConfigResponse.struct_class = Types::DescribeAppImageConfigResponse
 
     DescribeAppRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     DescribeAppRequest.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, required: true, location_name: "UserProfileName"))
@@ -1801,11 +1935,11 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeDomainResponse.add_member(:auth_mode, Shapes::ShapeRef.new(shape: AuthMode, location_name: "AuthMode"))
     DescribeDomainResponse.add_member(:default_user_settings, Shapes::ShapeRef.new(shape: UserSettings, location_name: "DefaultUserSettings"))
+    DescribeDomainResponse.add_member(:app_network_access_type, Shapes::ShapeRef.new(shape: AppNetworkAccessType, location_name: "AppNetworkAccessType"))
     DescribeDomainResponse.add_member(:home_efs_file_system_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "HomeEfsFileSystemKmsKeyId"))
     DescribeDomainResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: Subnets, location_name: "SubnetIds"))
     DescribeDomainResponse.add_member(:url, Shapes::ShapeRef.new(shape: String1024, location_name: "Url"))
     DescribeDomainResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    DescribeDomainResponse.add_member(:app_network_access_type, Shapes::ShapeRef.new(shape: AppNetworkAccessType, location_name: "AppNetworkAccessType"))
     DescribeDomainResponse.struct_class = Types::DescribeDomainResponse
 
     DescribeEndpointConfigInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
@@ -1892,6 +2026,35 @@ module Aws::SageMaker
     DescribeHyperParameterTuningJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeHyperParameterTuningJobResponse.struct_class = Types::DescribeHyperParameterTuningJobResponse
 
+    DescribeImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    DescribeImageRequest.struct_class = Types::DescribeImageRequest
+
+    DescribeImageResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeImageResponse.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
+    DescribeImageResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageDisplayName, location_name: "DisplayName"))
+    DescribeImageResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    DescribeImageResponse.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "ImageArn"))
+    DescribeImageResponse.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, location_name: "ImageName"))
+    DescribeImageResponse.add_member(:image_status, Shapes::ShapeRef.new(shape: ImageStatus, location_name: "ImageStatus"))
+    DescribeImageResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeImageResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeImageResponse.struct_class = Types::DescribeImageResponse
+
+    DescribeImageVersionRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    DescribeImageVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: ImageVersionNumber, location_name: "Version"))
+    DescribeImageVersionRequest.struct_class = Types::DescribeImageVersionRequest
+
+    DescribeImageVersionResponse.add_member(:base_image, Shapes::ShapeRef.new(shape: ImageBaseImage, location_name: "BaseImage"))
+    DescribeImageVersionResponse.add_member(:container_image, Shapes::ShapeRef.new(shape: ImageContainerImage, location_name: "ContainerImage"))
+    DescribeImageVersionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeImageVersionResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    DescribeImageVersionResponse.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "ImageArn"))
+    DescribeImageVersionResponse.add_member(:image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, location_name: "ImageVersionArn"))
+    DescribeImageVersionResponse.add_member(:image_version_status, Shapes::ShapeRef.new(shape: ImageVersionStatus, location_name: "ImageVersionStatus"))
+    DescribeImageVersionResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeImageVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: ImageVersionNumber, location_name: "Version"))
+    DescribeImageVersionResponse.struct_class = Types::DescribeImageVersionResponse
+
     DescribeLabelingJobRequest.add_member(:labeling_job_name, Shapes::ShapeRef.new(shape: LabelingJobName, required: true, location_name: "LabelingJobName"))
     DescribeLabelingJobRequest.struct_class = Types::DescribeLabelingJobRequest
 
@@ -1928,7 +2091,7 @@ module Aws::SageMaker
     DescribeModelOutput.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     DescribeModelOutput.struct_class = Types::DescribeModelOutput
 
-    DescribeModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: ArnOrName, required: true, location_name: "ModelPackageName"))
+    DescribeModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: VersionedArnOrName, required: true, location_name: "ModelPackageName"))
     DescribeModelPackageInput.struct_class = Types::DescribeModelPackageInput
 
     DescribeModelPackageOutput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageName"))
@@ -2234,6 +2397,11 @@ module Aws::SageMaker
     ExperimentSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     ExperimentSummary.struct_class = Types::ExperimentSummary
 
+    FileSystemConfig.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, location_name: "MountPath"))
+    FileSystemConfig.add_member(:default_uid, Shapes::ShapeRef.new(shape: DefaultUid, location_name: "DefaultUid", metadata: {"box"=>true}))
+    FileSystemConfig.add_member(:default_gid, Shapes::ShapeRef.new(shape: DefaultGid, location_name: "DefaultGid", metadata: {"box"=>true}))
+    FileSystemConfig.struct_class = Types::FileSystemConfig
+
     FileSystemDataSource.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     FileSystemDataSource.add_member(:file_system_access_mode, Shapes::ShapeRef.new(shape: FileSystemAccessMode, required: true, location_name: "FileSystemAccessMode"))
     FileSystemDataSource.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FileSystemType, required: true, location_name: "FileSystemType"))
@@ -2347,7 +2515,7 @@ module Aws::SageMaker
     HyperParameterSpecification.add_member(:range, Shapes::ShapeRef.new(shape: ParameterRange, location_name: "Range"))
     HyperParameterSpecification.add_member(:is_tunable, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsTunable"))
     HyperParameterSpecification.add_member(:is_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRequired"))
-    HyperParameterSpecification.add_member(:default_value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "DefaultValue"))
+    HyperParameterSpecification.add_member(:default_value, Shapes::ShapeRef.new(shape: HyperParameterValue, location_name: "DefaultValue"))
     HyperParameterSpecification.struct_class = Types::HyperParameterSpecification
 
     HyperParameterSpecifications.member = Shapes::ShapeRef.new(shape: HyperParameterSpecification)
@@ -2419,11 +2587,36 @@ module Aws::SageMaker
     HyperParameterTuningJobWarmStartConfig.add_member(:warm_start_type, Shapes::ShapeRef.new(shape: HyperParameterTuningJobWarmStartType, required: true, location_name: "WarmStartType"))
     HyperParameterTuningJobWarmStartConfig.struct_class = Types::HyperParameterTuningJobWarmStartConfig
 
-    HyperParameters.key = Shapes::ShapeRef.new(shape: ParameterKey)
-    HyperParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)
+    HyperParameters.key = Shapes::ShapeRef.new(shape: HyperParameterKey)
+    HyperParameters.value = Shapes::ShapeRef.new(shape: HyperParameterValue)
+
+    Image.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    Image.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
+    Image.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageDisplayName, location_name: "DisplayName"))
+    Image.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    Image.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageArn, required: true, location_name: "ImageArn"))
+    Image.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    Image.add_member(:image_status, Shapes::ShapeRef.new(shape: ImageStatus, required: true, location_name: "ImageStatus"))
+    Image.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
+    Image.struct_class = Types::Image
 
     ImageConfig.add_member(:repository_access_mode, Shapes::ShapeRef.new(shape: RepositoryAccessMode, required: true, location_name: "RepositoryAccessMode"))
     ImageConfig.struct_class = Types::ImageConfig
+
+    ImageDeletePropertyList.member = Shapes::ShapeRef.new(shape: ImageDeleteProperty)
+
+    ImageVersion.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    ImageVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    ImageVersion.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageArn, required: true, location_name: "ImageArn"))
+    ImageVersion.add_member(:image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, required: true, location_name: "ImageVersionArn"))
+    ImageVersion.add_member(:image_version_status, Shapes::ShapeRef.new(shape: ImageVersionStatus, required: true, location_name: "ImageVersionStatus"))
+    ImageVersion.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
+    ImageVersion.add_member(:version, Shapes::ShapeRef.new(shape: ImageVersionNumber, required: true, location_name: "Version"))
+    ImageVersion.struct_class = Types::ImageVersion
+
+    ImageVersions.member = Shapes::ShapeRef.new(shape: ImageVersion)
+
+    Images.member = Shapes::ShapeRef.new(shape: Image)
 
     InferenceSpecification.add_member(:containers, Shapes::ShapeRef.new(shape: ModelPackageContainerDefinitionList, required: true, location_name: "Containers"))
     InferenceSpecification.add_member(:supported_transform_instance_types, Shapes::ShapeRef.new(shape: TransformInstanceTypes, required: true, location_name: "SupportedTransformInstanceTypes"))
@@ -2459,7 +2652,18 @@ module Aws::SageMaker
     JupyterServerAppSettings.struct_class = Types::JupyterServerAppSettings
 
     KernelGatewayAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    KernelGatewayAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     KernelGatewayAppSettings.struct_class = Types::KernelGatewayAppSettings
+
+    KernelGatewayImageConfig.add_member(:kernel_specs, Shapes::ShapeRef.new(shape: KernelSpecs, required: true, location_name: "KernelSpecs"))
+    KernelGatewayImageConfig.add_member(:file_system_config, Shapes::ShapeRef.new(shape: FileSystemConfig, location_name: "FileSystemConfig"))
+    KernelGatewayImageConfig.struct_class = Types::KernelGatewayImageConfig
+
+    KernelSpec.add_member(:name, Shapes::ShapeRef.new(shape: KernelName, required: true, location_name: "Name"))
+    KernelSpec.add_member(:display_name, Shapes::ShapeRef.new(shape: KernelDisplayName, location_name: "DisplayName"))
+    KernelSpec.struct_class = Types::KernelSpec
+
+    KernelSpecs.member = Shapes::ShapeRef.new(shape: KernelSpec)
 
     LabelCounters.add_member(:total_labeled, Shapes::ShapeRef.new(shape: LabelCounter, location_name: "TotalLabeled"))
     LabelCounters.add_member(:human_labeled, Shapes::ShapeRef.new(shape: LabelCounter, location_name: "HumanLabeled"))
@@ -2549,6 +2753,21 @@ module Aws::SageMaker
     ListAlgorithmsOutput.add_member(:algorithm_summary_list, Shapes::ShapeRef.new(shape: AlgorithmSummaryList, required: true, location_name: "AlgorithmSummaryList"))
     ListAlgorithmsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAlgorithmsOutput.struct_class = Types::ListAlgorithmsOutput
+
+    ListAppImageConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAppImageConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppImageConfigsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: AppImageConfigName, location_name: "NameContains"))
+    ListAppImageConfigsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListAppImageConfigsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListAppImageConfigsRequest.add_member(:modified_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ModifiedTimeBefore"))
+    ListAppImageConfigsRequest.add_member(:modified_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ModifiedTimeAfter"))
+    ListAppImageConfigsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: AppImageConfigSortKey, location_name: "SortBy"))
+    ListAppImageConfigsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListAppImageConfigsRequest.struct_class = Types::ListAppImageConfigsRequest
+
+    ListAppImageConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppImageConfigsResponse.add_member(:app_image_configs, Shapes::ShapeRef.new(shape: AppImageConfigList, location_name: "AppImageConfigs"))
+    ListAppImageConfigsResponse.struct_class = Types::ListAppImageConfigsResponse
 
     ListAppsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -2708,6 +2927,36 @@ module Aws::SageMaker
     ListHyperParameterTuningJobsResponse.add_member(:hyper_parameter_tuning_job_summaries, Shapes::ShapeRef.new(shape: HyperParameterTuningJobSummaries, required: true, location_name: "HyperParameterTuningJobSummaries"))
     ListHyperParameterTuningJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListHyperParameterTuningJobsResponse.struct_class = Types::ListHyperParameterTuningJobsResponse
+
+    ListImageVersionsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListImageVersionsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListImageVersionsRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    ListImageVersionsRequest.add_member(:last_modified_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeAfter"))
+    ListImageVersionsRequest.add_member(:last_modified_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeBefore"))
+    ListImageVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListImageVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListImageVersionsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ImageVersionSortBy, location_name: "SortBy"))
+    ListImageVersionsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: ImageVersionSortOrder, location_name: "SortOrder"))
+    ListImageVersionsRequest.struct_class = Types::ListImageVersionsRequest
+
+    ListImageVersionsResponse.add_member(:image_versions, Shapes::ShapeRef.new(shape: ImageVersions, location_name: "ImageVersions"))
+    ListImageVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListImageVersionsResponse.struct_class = Types::ListImageVersionsResponse
+
+    ListImagesRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListImagesRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListImagesRequest.add_member(:last_modified_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeAfter"))
+    ListImagesRequest.add_member(:last_modified_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeBefore"))
+    ListImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListImagesRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ImageNameContains, location_name: "NameContains"))
+    ListImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListImagesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ImageSortBy, location_name: "SortBy"))
+    ListImagesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: ImageSortOrder, location_name: "SortOrder"))
+    ListImagesRequest.struct_class = Types::ListImagesRequest
+
+    ListImagesResponse.add_member(:images, Shapes::ShapeRef.new(shape: Images, location_name: "Images"))
+    ListImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListImagesResponse.struct_class = Types::ListImagesResponse
 
     ListLabelingJobsForWorkteamRequest.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, required: true, location_name: "WorkteamArn"))
     ListLabelingJobsForWorkteamRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -3400,6 +3649,7 @@ module Aws::SageMaker
     ResourceNotFound.struct_class = Types::ResourceNotFound
 
     ResourceSpec.add_member(:sage_maker_image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "SageMakerImageArn"))
+    ResourceSpec.add_member(:sage_maker_image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, location_name: "SageMakerImageVersionArn"))
     ResourceSpec.add_member(:instance_type, Shapes::ShapeRef.new(shape: AppInstanceType, location_name: "InstanceType"))
     ResourceSpec.struct_class = Types::ResourceSpec
 
@@ -3828,6 +4078,13 @@ module Aws::SageMaker
     UiTemplateInfo.add_member(:content_sha_256, Shapes::ShapeRef.new(shape: TemplateContentSha256, location_name: "ContentSha256"))
     UiTemplateInfo.struct_class = Types::UiTemplateInfo
 
+    UpdateAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
+    UpdateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    UpdateAppImageConfigRequest.struct_class = Types::UpdateAppImageConfigRequest
+
+    UpdateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
+    UpdateAppImageConfigResponse.struct_class = Types::UpdateAppImageConfigResponse
+
     UpdateCodeRepositoryInput.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
     UpdateCodeRepositoryInput.add_member(:git_config, Shapes::ShapeRef.new(shape: GitConfigForUpdate, location_name: "GitConfig"))
     UpdateCodeRepositoryInput.struct_class = Types::UpdateCodeRepositoryInput
@@ -3865,6 +4122,16 @@ module Aws::SageMaker
 
     UpdateExperimentResponse.add_member(:experiment_arn, Shapes::ShapeRef.new(shape: ExperimentArn, location_name: "ExperimentArn"))
     UpdateExperimentResponse.struct_class = Types::UpdateExperimentResponse
+
+    UpdateImageRequest.add_member(:delete_properties, Shapes::ShapeRef.new(shape: ImageDeletePropertyList, location_name: "DeleteProperties"))
+    UpdateImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
+    UpdateImageRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageDisplayName, location_name: "DisplayName"))
+    UpdateImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
+    UpdateImageRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    UpdateImageRequest.struct_class = Types::UpdateImageRequest
+
+    UpdateImageResponse.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "ImageArn"))
+    UpdateImageResponse.struct_class = Types::UpdateImageResponse
 
     UpdateMonitoringScheduleRequest.add_member(:monitoring_schedule_name, Shapes::ShapeRef.new(shape: MonitoringScheduleName, required: true, location_name: "MonitoringScheduleName"))
     UpdateMonitoringScheduleRequest.add_member(:monitoring_schedule_config, Shapes::ShapeRef.new(shape: MonitoringScheduleConfig, required: true, location_name: "MonitoringScheduleConfig"))
@@ -4060,6 +4327,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
+      api.add_operation(:create_app_image_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppImageConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAppImageConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppImageConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
       api.add_operation(:create_auto_ml_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAutoMLJob"
         o.http_method = "POST"
@@ -4155,6 +4431,27 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:create_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:create_image_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateImageVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateImageVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateImageVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:create_labeling_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLabelingJob"
         o.http_method = "POST"
@@ -4180,6 +4477,8 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateModelPackageInput)
         o.output = Shapes::ShapeRef.new(shape: CreateModelPackageOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
       api.add_operation(:create_monitoring_schedule, Seahorse::Model::Operation.new.tap do |o|
@@ -4325,6 +4624,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:delete_app_image_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppImageConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppImageConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:delete_code_repository, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCodeRepository"
         o.http_method = "POST"
@@ -4387,6 +4695,26 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:delete_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:delete_image_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteImageVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteImageVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteImageVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:delete_model, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteModel"
         o.http_method = "POST"
@@ -4401,6 +4729,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteModelPackageInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_monitoring_schedule, Seahorse::Model::Operation.new.tap do |o|
@@ -4498,6 +4827,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:describe_app_image_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppImageConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppImageConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppImageConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:describe_auto_ml_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAutoMLJob"
         o.http_method = "POST"
@@ -4582,6 +4920,24 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeHyperParameterTuningJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeHyperParameterTuningJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_image_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImageVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImageVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImageVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
@@ -4742,6 +5098,14 @@ module Aws::SageMaker
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_app_image_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppImageConfigs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAppImageConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppImageConfigsResponse)
       end)
 
       api.add_operation(:list_apps, Seahorse::Model::Operation.new.tap do |o|
@@ -4905,6 +5269,35 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListHyperParameterTuningJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListHyperParameterTuningJobsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_image_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImageVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListImageVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImageVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_images, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImages"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListImagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImagesResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -5304,6 +5697,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:update_app_image_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppImageConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppImageConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppImageConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:update_code_repository, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateCodeRepository"
         o.http_method = "POST"
@@ -5348,6 +5750,16 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: UpdateExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 

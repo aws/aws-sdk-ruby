@@ -523,10 +523,10 @@ module Aws::SageMaker
     #           },
     #           is_tunable: false,
     #           is_required: false,
-    #           default_value: "ParameterValue",
+    #           default_value: "HyperParameterValue",
     #         },
     #       ],
-    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #       supports_distributed_training: false,
     #       metric_definitions: [
     #         {
@@ -574,7 +574,7 @@ module Aws::SageMaker
     #           training_job_definition: { # required
     #             training_input_mode: "Pipe", # required, accepts Pipe, File
     #             hyper_parameters: {
-    #               "ParameterKey" => "ParameterValue",
+    #               "HyperParameterKey" => "HyperParameterValue",
     #             },
     #             input_data_config: [ # required
     #               {
@@ -607,7 +607,7 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #               instance_count: 1, # required
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
@@ -711,6 +711,7 @@ module Aws::SageMaker
     #     ],
     #     resource_spec: {
     #       sage_maker_image_arn: "ImageArn",
+    #       sage_maker_image_version_arn: "ImageVersionArn",
     #       instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #     },
     #   })
@@ -725,6 +726,60 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_app(params = {}, options = {})
       req = build_request(:create_app, params)
+      req.send_request(options)
+    end
+
+    # Creates a configuration for running an Amazon SageMaker image as a
+    # KernelGateway app.
+    #
+    # @option params [required, String] :app_image_config_name
+    #   The name of the AppImageConfig. Must be unique to your account.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to apply to the AppImageConfig.
+    #
+    # @option params [Types::KernelGatewayImageConfig] :kernel_gateway_image_config
+    #   The KernelGatewayImageConfig.
+    #
+    # @return [Types::CreateAppImageConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppImageConfigResponse#app_image_config_arn #app_image_config_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_image_config({
+    #     app_image_config_name: "AppImageConfigName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     kernel_gateway_image_config: {
+    #       kernel_specs: [ # required
+    #         {
+    #           name: "KernelName", # required
+    #           display_name: "KernelDisplayName",
+    #         },
+    #       ],
+    #       file_system_config: {
+    #         mount_path: "MountPath",
+    #         default_uid: 1,
+    #         default_gid: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_image_config_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfig AWS API Documentation
+    #
+    # @overload create_app_image_config(params = {})
+    # @param [Hash] params ({})
+    def create_app_image_config(params = {}, options = {})
+      req = build_request(:create_app_image_config, params)
       req.send_request(options)
     end
 
@@ -969,6 +1024,16 @@ module Aws::SageMaker
     #   the job reaches the time limit, Amazon SageMaker ends the compilation
     #   job. Use this API to cap model training costs.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs that you want to use to organize and track
+    #   your AWS resource costs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #
     # @return [Types::CreateCompilationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCompilationJobResponse#compilation_job_arn #compilation_job_arn} => String
@@ -981,7 +1046,7 @@ module Aws::SageMaker
     #     input_config: { # required
     #       s3_uri: "S3Uri", # required
     #       data_input_config: "DataInputConfig", # required
-    #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE
+    #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
@@ -997,6 +1062,12 @@ module Aws::SageMaker
     #       max_runtime_in_seconds: 1,
     #       max_wait_time_in_seconds: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1041,37 +1112,17 @@ module Aws::SageMaker
     #   subnets. Internet access is disabled by default. To allow internet
     #   access, you must specify a NAT gateway.
     #
-    #   When internet access is disabled, you won't be able to train or
-    #   host models unless your VPC has an interface endpoint (PrivateLink)
-    #   or a NAT gateway and your security groups allow outbound
-    #   connections.
+    #   When internet access is disabled, you won't be able to run a Studio
+    #   notebook or to train or host models unless your VPC has an interface
+    #   endpoint to the SageMaker API and runtime or a NAT gateway and your
+    #   security groups allow outbound connections.
     #
-    # <b> <code>VpcOnly</code> network access type</b>
-    #
-    # When you choose `VpcOnly`, you must specify the following:
-    #
-    # * Security group inbound and outbound rules to allow NFS traffic over
-    #   TCP on port 2049 between the domain and the EFS volume
-    #
-    # * Security group inbound and outbound rules to allow traffic between
-    #   the JupyterServer app and the KernelGateway apps
-    #
-    # * Interface endpoints to access the SageMaker API and SageMaker
-    #   runtime
-    #
-    # For more information, see:
-    #
-    # * [Security groups for your VPC][1]
-    #
-    # * [VPC with public and private subnets (NAT)][2]
-    #
-    # * [Connect to SageMaker through a VPC interface endpoint][3]
+    # For more information, see [Connect SageMaker Studio Notebooks to
+    # Resources in a VPC][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/interface-vpc-endpoint.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html
     #
     # @option params [required, String] :domain_name
     #   A name for the domain.
@@ -1094,10 +1145,6 @@ module Aws::SageMaker
     #   optional value. Tag keys must be unique per resource. Tags are
     #   searchable using the Search API.
     #
-    # @option params [String] :home_efs_file_system_kms_key_id
-    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
-    #   with a customer master key (CMK) is not supported.
-    #
     # @option params [String] :app_network_access_type
     #   Specifies the VPC used for non-EFS traffic. The default value is
     #   `PublicInternetOnly`.
@@ -1107,6 +1154,10 @@ module Aws::SageMaker
     #
     #   * `VpcOnly` - All Studio traffic is through the specified VPC and
     #     subnets
+    #
+    # @option params [String] :home_efs_file_system_kms_key_id
+    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
+    #   with a customer master key (CMK) is not supported.
     #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1129,18 +1180,28 @@ module Aws::SageMaker
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -1153,8 +1214,8 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     home_efs_file_system_kms_key_id: "KmsKeyId",
     #     app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
+    #     home_efs_file_system_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1232,8 +1293,9 @@ module Aws::SageMaker
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :endpoint_name
-    #   The name of the endpoint. The name must be unique within an AWS Region
-    #   in your AWS account.
+    #   The name of the endpoint.The name must be unique within an AWS Region
+    #   in your AWS account. The name is case-insensitive in `CreateEndpoint`,
+    #   but the case is preserved and must be matched in .
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of an endpoint configuration. For more information, see
@@ -1667,8 +1729,8 @@ module Aws::SageMaker
     #   The name of the tuning job. This name is the prefix for the names of
     #   all training jobs that this tuning job launches. The name must be
     #   unique within the same AWS account and AWS Region. The name must have
-    #   \\\{ \\} to \\\{ \\} characters. Valid characters are a-z, A-Z, 0-9,
-    #   and : + = @ \_ % - (hyphen). The name is not case sensitive.
+    #   1 to 32 characters. Valid characters are a-z, A-Z, 0-9, and : + = @ \_
+    #   % - (hyphen). The name is not case sensitive.
     #
     # @option params [required, Types::HyperParameterTuningJobConfig] :hyper_parameter_tuning_job_config
     #   The HyperParameterTuningJobConfig object that describes the tuning
@@ -1802,7 +1864,7 @@ module Aws::SageMaker
     #         ],
     #       },
     #       static_hyper_parameters: {
-    #         "ParameterKey" => "ParameterValue",
+    #         "HyperParameterKey" => "HyperParameterValue",
     #       },
     #       algorithm_specification: { # required
     #         training_image: "AlgorithmImage",
@@ -1851,7 +1913,7 @@ module Aws::SageMaker
     #         s3_output_path: "S3Uri", # required
     #       },
     #       resource_config: { # required
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
@@ -1900,7 +1962,7 @@ module Aws::SageMaker
     #           ],
     #         },
     #         static_hyper_parameters: {
-    #           "ParameterKey" => "ParameterValue",
+    #           "HyperParameterKey" => "HyperParameterValue",
     #         },
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
@@ -1949,7 +2011,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -1993,6 +2055,106 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_hyper_parameter_tuning_job(params = {}, options = {})
       req = build_request(:create_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a SageMaker `Image`. A SageMaker image represents a set of
+    # container images. Each of these container images is represented by a
+    # SageMaker `ImageVersion`.
+    #
+    # @option params [String] :description
+    #   The description of the image.
+    #
+    # @option params [String] :display_name
+    #   The display name of the image. When the image is added to a domain,
+    #   `DisplayName` must be unique to the domain.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image. Must be unique to your account.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to apply to the image.
+    #
+    # @return [Types::CreateImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateImageResponse#image_arn #image_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_image({
+    #     description: "ImageDescription",
+    #     display_name: "ImageDisplayName",
+    #     image_name: "ImageName", # required
+    #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImage AWS API Documentation
+    #
+    # @overload create_image(params = {})
+    # @param [Hash] params ({})
+    def create_image(params = {}, options = {})
+      req = build_request(:create_image, params)
+      req.send_request(options)
+    end
+
+    # Creates a version of the SageMaker image specified by `ImageName`. The
+    # version represents the Amazon Container Registry (ECR) container image
+    # specified by `BaseImage`.
+    #
+    # @option params [required, String] :base_image
+    #   The registry path of the container image to use as the starting point
+    #   for this version. The path is an Amazon Container Registry (ECR) URI
+    #   in the following format:
+    #
+    #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
+    #   [@digest]>`
+    #
+    # @option params [required, String] :client_token
+    #   A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the
+    #   SDK for Python (Boto3), add a unique value to the call.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :image_name
+    #   The `ImageName` of the `Image` to create a version of.
+    #
+    # @return [Types::CreateImageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateImageVersionResponse#image_version_arn #image_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_image_version({
+    #     base_image: "ImageBaseImage", # required
+    #     client_token: "ClientToken", # required
+    #     image_name: "ImageName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageVersion AWS API Documentation
+    #
+    # @overload create_image_version(params = {})
+    # @param [Hash] params ({})
+    def create_image_version(params = {}, options = {})
+      req = build_request(:create_image_version, params)
       req.send_request(options)
     end
 
@@ -2060,7 +2222,7 @@ module Aws::SageMaker
     #   successfully complete data labeling.
     #
     # @option params [String] :label_category_config_s3_uri
-    #   The S3 URL of the file that defines the categories used to label the
+    #   The S3 URI of the file that defines the categories used to label the
     #   data objects.
     #
     #   For 3D point cloud task types, see [Create a Labeling Category
@@ -2325,7 +2487,7 @@ module Aws::SageMaker
     #       environment: {
     #         "EnvironmentKey" => "EnvironmentValue",
     #       },
-    #       model_package_name: "ArnOrName",
+    #       model_package_name: "VersionedArnOrName",
     #     },
     #     containers: [
     #       {
@@ -2339,7 +2501,7 @@ module Aws::SageMaker
     #         environment: {
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
-    #         model_package_name: "ArnOrName",
+    #         model_package_name: "VersionedArnOrName",
     #       },
     #     ],
     #     execution_role_arn: "RoleArn", # required
@@ -2380,7 +2542,7 @@ module Aws::SageMaker
     # model from an algorithm resource that you created or subscribed to in
     # AWS Marketplace, provide a value for `SourceAlgorithmSpecification`.
     #
-    # @option params [required, String] :model_package_name
+    # @option params [String] :model_package_name
     #   The name of the model package. The name must have 1 to 63 characters.
     #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
     #
@@ -2417,7 +2579,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_model_package({
-    #     model_package_name: "EntityName", # required
+    #     model_package_name: "EntityName",
     #     model_package_description: "EntityDescription",
     #     inference_specification: {
     #       containers: [ # required
@@ -3376,7 +3538,7 @@ module Aws::SageMaker
     #   resp = client.create_training_job({
     #     training_job_name: "TrainingJobName", # required
     #     hyper_parameters: {
-    #       "ParameterKey" => "ParameterValue",
+    #       "HyperParameterKey" => "HyperParameterValue",
     #     },
     #     algorithm_specification: { # required
     #       training_image: "AlgorithmImage",
@@ -3422,7 +3584,7 @@ module Aws::SageMaker
     #       s3_output_path: "S3Uri", # required
     #     },
     #     resource_config: { # required
-    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
+    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #       instance_count: 1, # required
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
@@ -3951,18 +4113,28 @@ module Aws::SageMaker
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -4246,6 +4418,28 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an AppImageConfig.
+    #
+    # @option params [required, String] :app_image_config_name
+    #   The name of the AppImageConfig to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_image_config({
+    #     app_image_config_name: "AppImageConfigName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAppImageConfig AWS API Documentation
+    #
+    # @overload delete_app_image_config(params = {})
+    # @param [Hash] params ({})
+    def delete_app_image_config(params = {}, options = {})
+      req = build_request(:delete_app_image_config, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Git repository from your account.
     #
     # @option params [required, String] :code_repository_name
@@ -4443,6 +4637,56 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes a SageMaker image and all versions of the image. The container
+    # images aren't deleted.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_image({
+    #     image_name: "ImageName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImage AWS API Documentation
+    #
+    # @overload delete_image(params = {})
+    # @param [Hash] params ({})
+    def delete_image(params = {}, options = {})
+      req = build_request(:delete_image, params)
+      req.send_request(options)
+    end
+
+    # Deletes a version of a SageMaker image. The container image the
+    # version represents isn't deleted.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image.
+    #
+    # @option params [required, Integer] :version
+    #   The version to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_image_version({
+    #     image_name: "ImageName", # required
+    #     version: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImageVersion AWS API Documentation
+    #
+    # @overload delete_image_version(params = {})
+    # @param [Hash] params ({})
+    def delete_image_version(params = {}, options = {})
+      req = build_request(:delete_image_version, params)
+      req.send_request(options)
+    end
+
     # Deletes a model. The `DeleteModel` API deletes only the model entry
     # that was created in Amazon SageMaker when you called the CreateModel
     # API. It does not delete model artifacts, inference code, or the IAM
@@ -4483,7 +4727,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_model_package({
-    #     model_package_name: "EntityName", # required
+    #     model_package_name: "VersionedArnOrName", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackage AWS API Documentation
@@ -4800,7 +5044,7 @@ module Aws::SageMaker
     #   resp.training_specification.supported_hyper_parameters[0].is_required #=> Boolean
     #   resp.training_specification.supported_hyper_parameters[0].default_value #=> String
     #   resp.training_specification.supported_training_instance_types #=> Array
-    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
+    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.training_specification.supports_distributed_training #=> Boolean
     #   resp.training_specification.metric_definitions #=> Array
     #   resp.training_specification.metric_definitions[0].name #=> String
@@ -4837,7 +5081,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].profile_name #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.training_input_mode #=> String, one of "Pipe", "File"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.hyper_parameters #=> Hash
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.hyper_parameters["ParameterKey"] #=> String
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config #=> Array
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].channel_name #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_type #=> String, one of "ManifestFile", "S3Prefix", "AugmentedManifestFile"
@@ -4856,7 +5100,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_count #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_kms_key_id #=> String
@@ -4950,6 +5194,7 @@ module Aws::SageMaker
     #   resp.creation_time #=> Time
     #   resp.failure_reason #=> String
     #   resp.resource_spec.sage_maker_image_arn #=> String
+    #   resp.resource_spec.sage_maker_image_version_arn #=> String
     #   resp.resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeApp AWS API Documentation
@@ -4958,6 +5203,47 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_app(params = {}, options = {})
       req = build_request(:describe_app, params)
+      req.send_request(options)
+    end
+
+    # Describes an AppImageConfig.
+    #
+    # @option params [required, String] :app_image_config_name
+    #   The name of the AppImageConfig to describe.
+    #
+    # @return [Types::DescribeAppImageConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppImageConfigResponse#app_image_config_arn #app_image_config_arn} => String
+    #   * {Types::DescribeAppImageConfigResponse#app_image_config_name #app_image_config_name} => String
+    #   * {Types::DescribeAppImageConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeAppImageConfigResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeAppImageConfigResponse#kernel_gateway_image_config #kernel_gateway_image_config} => Types::KernelGatewayImageConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_image_config({
+    #     app_image_config_name: "AppImageConfigName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_image_config_arn #=> String
+    #   resp.app_image_config_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.kernel_gateway_image_config.kernel_specs #=> Array
+    #   resp.kernel_gateway_image_config.kernel_specs[0].name #=> String
+    #   resp.kernel_gateway_image_config.kernel_specs[0].display_name #=> String
+    #   resp.kernel_gateway_image_config.file_system_config.mount_path #=> String
+    #   resp.kernel_gateway_image_config.file_system_config.default_uid #=> Integer
+    #   resp.kernel_gateway_image_config.file_system_config.default_gid #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfig AWS API Documentation
+    #
+    # @overload describe_app_image_config(params = {})
+    # @param [Hash] params ({})
+    def describe_app_image_config(params = {}, options = {})
+      req = build_request(:describe_app_image_config, params)
       req.send_request(options)
     end
 
@@ -5144,7 +5430,7 @@ module Aws::SageMaker
     #   resp.role_arn #=> String
     #   resp.input_config.s3_uri #=> String
     #   resp.input_config.data_input_config #=> String
-    #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST", "TFLITE"
+    #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST", "TFLITE", "DARKNET"
     #   resp.output_config.s3_output_location #=> String
     #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "x86_win32", "x86_win64", "coreml"
     #   resp.output_config.target_platform.os #=> String, one of "ANDROID", "LINUX"
@@ -5179,11 +5465,11 @@ module Aws::SageMaker
     #   * {Types::DescribeDomainResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeDomainResponse#auth_mode #auth_mode} => String
     #   * {Types::DescribeDomainResponse#default_user_settings #default_user_settings} => Types::UserSettings
+    #   * {Types::DescribeDomainResponse#app_network_access_type #app_network_access_type} => String
     #   * {Types::DescribeDomainResponse#home_efs_file_system_kms_key_id #home_efs_file_system_kms_key_id} => String
     #   * {Types::DescribeDomainResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::DescribeDomainResponse#url #url} => String
     #   * {Types::DescribeDomainResponse#vpc_id #vpc_id} => String
-    #   * {Types::DescribeDomainResponse#app_network_access_type #app_network_access_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5198,7 +5484,7 @@ module Aws::SageMaker
     #   resp.domain_name #=> String
     #   resp.home_efs_file_system_id #=> String
     #   resp.single_sign_on_managed_application_instance_id #=> String
-    #   resp.status #=> String, one of "Deleting", "Failed", "InService", "Pending"
+    #   resp.status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -5210,17 +5496,24 @@ module Aws::SageMaker
     #   resp.default_user_settings.sharing_settings.s3_output_path #=> String
     #   resp.default_user_settings.sharing_settings.s3_kms_key_id #=> String
     #   resp.default_user_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.default_user_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.jupyter_server_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.default_user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.default_user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.kernel_gateway_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
+    #   resp.default_user_settings.kernel_gateway_app_settings.custom_images #=> Array
+    #   resp.default_user_settings.kernel_gateway_app_settings.custom_images[0].image_name #=> String
+    #   resp.default_user_settings.kernel_gateway_app_settings.custom_images[0].image_version_number #=> Integer
+    #   resp.default_user_settings.kernel_gateway_app_settings.custom_images[0].app_image_config_name #=> String
     #   resp.default_user_settings.tensor_board_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.default_user_settings.tensor_board_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.tensor_board_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
+    #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
     #   resp.url #=> String
     #   resp.vpc_id #=> String
-    #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomain AWS API Documentation
     #
@@ -5566,7 +5859,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].values #=> Array
     #   resp.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
     #   resp.training_job_definition.static_hyper_parameters #=> Hash
-    #   resp.training_job_definition.static_hyper_parameters["ParameterKey"] #=> String
+    #   resp.training_job_definition.static_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.training_job_definition.algorithm_specification.training_image #=> String
     #   resp.training_job_definition.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
     #   resp.training_job_definition.algorithm_specification.algorithm_name #=> String
@@ -5596,7 +5889,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.vpc_config.subnets[0] #=> String
     #   resp.training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
+    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.training_job_definition.resource_config.instance_count #=> Integer
     #   resp.training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definition.resource_config.volume_kms_key_id #=> String
@@ -5626,7 +5919,7 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].values #=> Array
     #   resp.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
     #   resp.training_job_definitions[0].static_hyper_parameters #=> Hash
-    #   resp.training_job_definitions[0].static_hyper_parameters["ParameterKey"] #=> String
+    #   resp.training_job_definitions[0].static_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.training_job_definitions[0].algorithm_specification.training_image #=> String
     #   resp.training_job_definitions[0].algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
     #   resp.training_job_definitions[0].algorithm_specification.algorithm_name #=> String
@@ -5656,7 +5949,7 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].vpc_config.subnets[0] #=> String
     #   resp.training_job_definitions[0].output_data_config.kms_key_id #=> String
     #   resp.training_job_definitions[0].output_data_config.s3_output_path #=> String
-    #   resp.training_job_definitions[0].resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
+    #   resp.training_job_definitions[0].resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.training_job_definitions[0].resource_config.instance_count #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_kms_key_id #=> String
@@ -5688,7 +5981,7 @@ module Aws::SageMaker
     #   resp.best_training_job.training_end_time #=> Time
     #   resp.best_training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.best_training_job.tuned_hyper_parameters #=> Hash
-    #   resp.best_training_job.tuned_hyper_parameters["ParameterKey"] #=> String
+    #   resp.best_training_job.tuned_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.best_training_job.failure_reason #=> String
     #   resp.best_training_job.final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
     #   resp.best_training_job.final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
@@ -5703,7 +5996,7 @@ module Aws::SageMaker
     #   resp.overall_best_training_job.training_end_time #=> Time
     #   resp.overall_best_training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.overall_best_training_job.tuned_hyper_parameters #=> Hash
-    #   resp.overall_best_training_job.tuned_hyper_parameters["ParameterKey"] #=> String
+    #   resp.overall_best_training_job.tuned_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.overall_best_training_job.failure_reason #=> String
     #   resp.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
     #   resp.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
@@ -5720,6 +6013,99 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_hyper_parameter_tuning_job(params = {}, options = {})
       req = build_request(:describe_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
+    # Describes a SageMaker image.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image to describe.
+    #
+    # @return [Types::DescribeImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeImageResponse#description #description} => String
+    #   * {Types::DescribeImageResponse#display_name #display_name} => String
+    #   * {Types::DescribeImageResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeImageResponse#image_arn #image_arn} => String
+    #   * {Types::DescribeImageResponse#image_name #image_name} => String
+    #   * {Types::DescribeImageResponse#image_status #image_status} => String
+    #   * {Types::DescribeImageResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeImageResponse#role_arn #role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image({
+    #     image_name: "ImageName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.description #=> String
+    #   resp.display_name #=> String
+    #   resp.failure_reason #=> String
+    #   resp.image_arn #=> String
+    #   resp.image_name #=> String
+    #   resp.image_status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.last_modified_time #=> Time
+    #   resp.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImage AWS API Documentation
+    #
+    # @overload describe_image(params = {})
+    # @param [Hash] params ({})
+    def describe_image(params = {}, options = {})
+      req = build_request(:describe_image, params)
+      req.send_request(options)
+    end
+
+    # Describes a version of a SageMaker image.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image.
+    #
+    # @option params [Integer] :version
+    #   The version of the image. If not specified, the latest version is
+    #   described.
+    #
+    # @return [Types::DescribeImageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageVersionResponse#base_image #base_image} => String
+    #   * {Types::DescribeImageVersionResponse#container_image #container_image} => String
+    #   * {Types::DescribeImageVersionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeImageVersionResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeImageVersionResponse#image_arn #image_arn} => String
+    #   * {Types::DescribeImageVersionResponse#image_version_arn #image_version_arn} => String
+    #   * {Types::DescribeImageVersionResponse#image_version_status #image_version_status} => String
+    #   * {Types::DescribeImageVersionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeImageVersionResponse#version #version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_version({
+    #     image_name: "ImageName", # required
+    #     version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.base_image #=> String
+    #   resp.container_image #=> String
+    #   resp.creation_time #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.image_arn #=> String
+    #   resp.image_version_arn #=> String
+    #   resp.image_version_status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.last_modified_time #=> Time
+    #   resp.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageVersion AWS API Documentation
+    #
+    # @overload describe_image_version(params = {})
+    # @param [Hash] params ({})
+    def describe_image_version(params = {}, options = {})
+      req = build_request(:describe_image_version, params)
       req.send_request(options)
     end
 
@@ -5900,7 +6286,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_model_package({
-    #     model_package_name: "ArnOrName", # required
+    #     model_package_name: "VersionedArnOrName", # required
     #   })
     #
     # @example Response structure
@@ -6368,7 +6754,7 @@ module Aws::SageMaker
     #   resp.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded"
     #   resp.failure_reason #=> String
     #   resp.hyper_parameters #=> Hash
-    #   resp.hyper_parameters["ParameterKey"] #=> String
+    #   resp.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.algorithm_specification.training_image #=> String
     #   resp.algorithm_specification.algorithm_name #=> String
     #   resp.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
@@ -6395,7 +6781,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
-    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
@@ -6716,7 +7102,7 @@ module Aws::SageMaker
     #   resp.user_profile_arn #=> String
     #   resp.user_profile_name #=> String
     #   resp.home_efs_file_system_uid #=> String
-    #   resp.status #=> String, one of "Deleting", "Failed", "InService", "Pending"
+    #   resp.status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
     #   resp.last_modified_time #=> Time
     #   resp.creation_time #=> Time
     #   resp.failure_reason #=> String
@@ -6729,10 +7115,17 @@ module Aws::SageMaker
     #   resp.user_settings.sharing_settings.s3_output_path #=> String
     #   resp.user_settings.sharing_settings.s3_kms_key_id #=> String
     #   resp.user_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.user_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.jupyter_server_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.kernel_gateway_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
+    #   resp.user_settings.kernel_gateway_app_settings.custom_images #=> Array
+    #   resp.user_settings.kernel_gateway_app_settings.custom_images[0].image_name #=> String
+    #   resp.user_settings.kernel_gateway_app_settings.custom_images[0].image_version_number #=> Integer
+    #   resp.user_settings.kernel_gateway_app_settings.custom_images[0].app_image_config_name #=> String
     #   resp.user_settings.tensor_board_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.user_settings.tensor_board_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.tensor_board_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
@@ -6990,6 +7383,89 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_algorithms(params = {}, options = {})
       req = build_request(:list_algorithms, params)
+      req.send_request(options)
+    end
+
+    # Lists the AppImageConfigs in your account and their properties. The
+    # list can be filtered by creation time or modified time, and whether
+    # the AppImageConfig name contains a specified string.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of AppImageConfigs to return in the response. The
+    #   default value is 10.
+    #
+    # @option params [String] :next_token
+    #   If the previous call to `ListImages` didn't return the full set of
+    #   AppImageConfigs, the call returns a token for getting the next set of
+    #   AppImageConfigs.
+    #
+    # @option params [String] :name_contains
+    #   A filter that returns only AppImageConfigs whose name contains the
+    #   specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only AppImageConfigs created on or before the
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only AppImageConfigs created on or after the
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :modified_time_before
+    #   A filter that returns only AppImageConfigs modified on or before the
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :modified_time_after
+    #   A filter that returns only AppImageConfigs modified on or after the
+    #   specified time.
+    #
+    # @option params [String] :sort_by
+    #   The property used to sort results. The default value is
+    #   `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order. The default value is `Descending`.
+    #
+    # @return [Types::ListAppImageConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppImageConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListAppImageConfigsResponse#app_image_configs #app_image_configs} => Array&lt;Types::AppImageConfigDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_image_configs({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     name_contains: "AppImageConfigName",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     modified_time_before: Time.now,
+    #     modified_time_after: Time.now,
+    #     sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime, Name
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.app_image_configs #=> Array
+    #   resp.app_image_configs[0].app_image_config_arn #=> String
+    #   resp.app_image_configs[0].app_image_config_name #=> String
+    #   resp.app_image_configs[0].creation_time #=> Time
+    #   resp.app_image_configs[0].last_modified_time #=> Time
+    #   resp.app_image_configs[0].kernel_gateway_image_config.kernel_specs #=> Array
+    #   resp.app_image_configs[0].kernel_gateway_image_config.kernel_specs[0].name #=> String
+    #   resp.app_image_configs[0].kernel_gateway_image_config.kernel_specs[0].display_name #=> String
+    #   resp.app_image_configs[0].kernel_gateway_image_config.file_system_config.mount_path #=> String
+    #   resp.app_image_configs[0].kernel_gateway_image_config.file_system_config.default_uid #=> Integer
+    #   resp.app_image_configs[0].kernel_gateway_image_config.file_system_config.default_gid #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAppImageConfigs AWS API Documentation
+    #
+    # @overload list_app_image_configs(params = {})
+    # @param [Hash] params ({})
+    def list_app_image_configs(params = {}, options = {})
+      req = build_request(:list_app_image_configs, params)
       req.send_request(options)
     end
 
@@ -7406,7 +7882,7 @@ module Aws::SageMaker
     #   resp.domains[0].domain_arn #=> String
     #   resp.domains[0].domain_id #=> String
     #   resp.domains[0].domain_name #=> String
-    #   resp.domains[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending"
+    #   resp.domains[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
     #   resp.domains[0].creation_time #=> Time
     #   resp.domains[0].last_modified_time #=> Time
     #   resp.domains[0].url #=> String
@@ -7839,6 +8315,168 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_hyper_parameter_tuning_jobs(params = {}, options = {})
       req = build_request(:list_hyper_parameter_tuning_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of a specified image and their properties. The list
+    # can be filtered by creation time or modified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only versions created on or after the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only versions created on or before the specified
+    #   time.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image to list the versions of.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   A filter that returns only versions modified on or after the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   A filter that returns only versions modified on or before the
+    #   specified time.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of versions to return in the response. The default
+    #   value is 10.
+    #
+    # @option params [String] :next_token
+    #   If the previous call to `ListImageVersions` didn't return the full
+    #   set of versions, the call returns a token for getting the next set of
+    #   versions.
+    #
+    # @option params [String] :sort_by
+    #   The property used to sort results. The default value is
+    #   `CREATION_TIME`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order. The default value is `DESCENDING`.
+    #
+    # @return [Types::ListImageVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImageVersionsResponse#image_versions #image_versions} => Array&lt;Types::ImageVersion&gt;
+    #   * {Types::ListImageVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_image_versions({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     image_name: "ImageName", # required
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort_by: "CREATION_TIME", # accepts CREATION_TIME, LAST_MODIFIED_TIME, VERSION
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_versions #=> Array
+    #   resp.image_versions[0].creation_time #=> Time
+    #   resp.image_versions[0].failure_reason #=> String
+    #   resp.image_versions[0].image_arn #=> String
+    #   resp.image_versions[0].image_version_arn #=> String
+    #   resp.image_versions[0].image_version_status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.image_versions[0].last_modified_time #=> Time
+    #   resp.image_versions[0].version #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListImageVersions AWS API Documentation
+    #
+    # @overload list_image_versions(params = {})
+    # @param [Hash] params ({})
+    def list_image_versions(params = {}, options = {})
+      req = build_request(:list_image_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the images in your account and their properties. The list can be
+    # filtered by creation time or modified time, and whether the image name
+    # contains a specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only images created on or after the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only images created on or before the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   A filter that returns only images modified on or after the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   A filter that returns only images modified on or before the specified
+    #   time.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of images to return in the response. The default
+    #   value is 10.
+    #
+    # @option params [String] :name_contains
+    #   A filter that returns only images whose name contains the specified
+    #   string.
+    #
+    # @option params [String] :next_token
+    #   If the previous call to `ListImages` didn't return the full set of
+    #   images, the call returns a token for getting the next set of images.
+    #
+    # @option params [String] :sort_by
+    #   The property used to sort results. The default value is
+    #   `CREATION_TIME`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order. The default value is `DESCENDING`.
+    #
+    # @return [Types::ListImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImagesResponse#images #images} => Array&lt;Types::Image&gt;
+    #   * {Types::ListImagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_images({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     max_results: 1,
+    #     name_contains: "ImageNameContains",
+    #     next_token: "NextToken",
+    #     sort_by: "CREATION_TIME", # accepts CREATION_TIME, LAST_MODIFIED_TIME, IMAGE_NAME
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.images #=> Array
+    #   resp.images[0].creation_time #=> Time
+    #   resp.images[0].description #=> String
+    #   resp.images[0].display_name #=> String
+    #   resp.images[0].failure_reason #=> String
+    #   resp.images[0].image_arn #=> String
+    #   resp.images[0].image_name #=> String
+    #   resp.images[0].image_status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.images[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListImages AWS API Documentation
+    #
+    # @overload list_images(params = {})
+    # @param [Hash] params ({})
+    def list_images(params = {}, options = {})
+      req = build_request(:list_images, params)
       req.send_request(options)
     end
 
@@ -8833,7 +9471,7 @@ module Aws::SageMaker
     #   resp.training_job_summaries[0].training_end_time #=> Time
     #   resp.training_job_summaries[0].training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.training_job_summaries[0].tuned_hyper_parameters #=> Hash
-    #   resp.training_job_summaries[0].tuned_hyper_parameters["ParameterKey"] #=> String
+    #   resp.training_job_summaries[0].tuned_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.training_job_summaries[0].failure_reason #=> String
     #   resp.training_job_summaries[0].final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
     #   resp.training_job_summaries[0].final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
@@ -9157,7 +9795,7 @@ module Aws::SageMaker
     #   resp.user_profiles #=> Array
     #   resp.user_profiles[0].domain_id #=> String
     #   resp.user_profiles[0].user_profile_name #=> String
-    #   resp.user_profiles[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending"
+    #   resp.user_profiles[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
     #   resp.user_profiles[0].creation_time #=> Time
     #   resp.user_profiles[0].last_modified_time #=> Time
     #   resp.next_token #=> String
@@ -9454,7 +10092,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded"
     #   resp.results[0].training_job.failure_reason #=> String
     #   resp.results[0].training_job.hyper_parameters #=> Hash
-    #   resp.results[0].training_job.hyper_parameters["ParameterKey"] #=> String
+    #   resp.results[0].training_job.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.results[0].training_job.algorithm_specification.training_image #=> String
     #   resp.results[0].training_job.algorithm_specification.algorithm_name #=> String
     #   resp.results[0].training_job.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
@@ -9481,7 +10119,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.results[0].training_job.output_data_config.kms_key_id #=> String
     #   resp.results[0].training_job.output_data_config.s3_output_path #=> String
-    #   resp.results[0].training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
+    #   resp.results[0].training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.results[0].training_job.resource_config.instance_count #=> Integer
     #   resp.results[0].training_job.resource_config.volume_size_in_gb #=> Integer
     #   resp.results[0].training_job.resource_config.volume_kms_key_id #=> String
@@ -9632,7 +10270,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded"
     #   resp.results[0].trial_component.source_detail.training_job.failure_reason #=> String
     #   resp.results[0].trial_component.source_detail.training_job.hyper_parameters #=> Hash
-    #   resp.results[0].trial_component.source_detail.training_job.hyper_parameters["ParameterKey"] #=> String
+    #   resp.results[0].trial_component.source_detail.training_job.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.training_image #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.algorithm_name #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
@@ -9659,7 +10297,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.output_data_config.kms_key_id #=> String
     #   resp.results[0].trial_component.source_detail.training_job.output_data_config.s3_output_path #=> String
-    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
+    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_count #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.volume_size_in_gb #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.volume_kms_key_id #=> String
@@ -10117,6 +10755,50 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates the properties of an AppImageConfig.
+    #
+    # @option params [required, String] :app_image_config_name
+    #   The name of the AppImageConfig to update.
+    #
+    # @option params [Types::KernelGatewayImageConfig] :kernel_gateway_image_config
+    #   The new KernelGateway app to run on the image.
+    #
+    # @return [Types::UpdateAppImageConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppImageConfigResponse#app_image_config_arn #app_image_config_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_image_config({
+    #     app_image_config_name: "AppImageConfigName", # required
+    #     kernel_gateway_image_config: {
+    #       kernel_specs: [ # required
+    #         {
+    #           name: "KernelName", # required
+    #           display_name: "KernelDisplayName",
+    #         },
+    #       ],
+    #       file_system_config: {
+    #         mount_path: "MountPath",
+    #         default_uid: 1,
+    #         default_gid: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_image_config_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateAppImageConfig AWS API Documentation
+    #
+    # @overload update_app_image_config(params = {})
+    # @param [Hash] params ({})
+    def update_app_image_config(params = {}, options = {})
+      req = build_request(:update_app_image_config, params)
+      req.send_request(options)
+    end
+
     # Updates the specified Git repository with the specified values.
     #
     # @option params [required, String] :code_repository_name
@@ -10184,18 +10866,28 @@ module Aws::SageMaker
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -10368,6 +11060,53 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_experiment(params = {}, options = {})
       req = build_request(:update_experiment, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of a SageMaker image. To change the image's
+    # tags, use the AddTags and DeleteTags APIs.
+    #
+    # @option params [Array<String>] :delete_properties
+    #   A list of properties to delete. Only the `Description` and
+    #   `DisplayName` properties can be deleted.
+    #
+    # @option params [String] :description
+    #   The new description for the image.
+    #
+    # @option params [String] :display_name
+    #   The new display name for the image.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image to update.
+    #
+    # @option params [String] :role_arn
+    #   The new Amazon Resource Name (ARN) for the IAM role that enables
+    #   Amazon SageMaker to perform tasks on your behalf.
+    #
+    # @return [Types::UpdateImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateImageResponse#image_arn #image_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_image({
+    #     delete_properties: ["ImageDeleteProperty"],
+    #     description: "ImageDescription",
+    #     display_name: "ImageDisplayName",
+    #     image_name: "ImageName", # required
+    #     role_arn: "RoleArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImage AWS API Documentation
+    #
+    # @overload update_image(params = {})
+    # @param [Hash] params ({})
+    def update_image(params = {}, options = {})
+      req = build_request(:update_image, params)
       req.send_request(options)
     end
 
@@ -10813,18 +11552,28 @@ module Aws::SageMaker
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -11054,7 +11803,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -30,6 +30,9 @@ module Aws::Neptune
   # * {AuthorizationNotFoundFault}
   # * {CertificateNotFoundFault}
   # * {DBClusterAlreadyExistsFault}
+  # * {DBClusterEndpointAlreadyExistsFault}
+  # * {DBClusterEndpointNotFoundFault}
+  # * {DBClusterEndpointQuotaExceededFault}
   # * {DBClusterNotFoundFault}
   # * {DBClusterParameterGroupNotFoundFault}
   # * {DBClusterQuotaExceededFault}
@@ -58,6 +61,7 @@ module Aws::Neptune
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
   # * {InsufficientStorageClusterCapacityFault}
+  # * {InvalidDBClusterEndpointStateFault}
   # * {InvalidDBClusterSnapshotStateFault}
   # * {InvalidDBClusterStateFault}
   # * {InvalidDBInstanceStateFault}
@@ -118,6 +122,36 @@ module Aws::Neptune
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Neptune::Types::DBClusterAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBClusterEndpointAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::DBClusterEndpointAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBClusterEndpointNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::DBClusterEndpointNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBClusterEndpointQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::DBClusterEndpointQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -398,6 +432,16 @@ module Aws::Neptune
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Neptune::Types::InsufficientStorageClusterCapacityFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidDBClusterEndpointStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::InvalidDBClusterEndpointStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

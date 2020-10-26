@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2020-10-26)
+------------------
+
+* Feature - This release enables customers to bring custom images for use with SageMaker Studio notebooks.
+
 1.70.0 (2020-10-08)
 ------------------
 

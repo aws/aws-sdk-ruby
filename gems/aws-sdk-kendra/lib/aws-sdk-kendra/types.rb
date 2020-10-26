@@ -818,6 +818,491 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Specifies the attachment settings for the Confluence data source.
+    # Attachment settings are optional, if you don't specify settings
+    # attachments, Amazon Kendra won't index them.
+    #
+    # @note When making an API call, you may pass ConfluenceAttachmentConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         crawl_attachments: false,
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] crawl_attachments
+    #   Indicates whether Amazon Kendra indexes attachments to the pages and
+    #   blogs in the Confluence data source.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] attachment_field_mappings
+    #   Defines how attachment metadata fields should be mapped to index
+    #   fields. Before you can map a field, you must first create an index
+    #   field with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `AttachentFieldMappings` parameter, you must
+    #   specify at least one field mapping.
+    #   @return [Array<Types::ConfluenceAttachmentToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceAttachmentConfiguration AWS API Documentation
+    #
+    class ConfluenceAttachmentConfiguration < Struct.new(
+      :crawl_attachments,
+      :attachment_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a field in the Confluence data source to a
+    # Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluenceAttachmentToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #
+    #   You must first create the index field using the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceAttachmentToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluenceAttachmentToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the blog settings for the Confluence data source. Blogs are
+    # always indexed unless filtered from the index by the
+    # `ExclusionPatterns` or `InclusionPatterns` fields in the data type.
+    #
+    # @note When making an API call, you may pass ConfluenceBlogConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] blog_field_mappings
+    #   Defines how blog metadata fields should be mapped to index fields.
+    #   Before you can map a field, you must first create an index field
+    #   with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `BlogFieldMappings` parameter, you must specify
+    #   at least one field mapping.
+    #   @return [Array<Types::ConfluenceBlogToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceBlogConfiguration AWS API Documentation
+    #
+    class ConfluenceBlogConfiguration < Struct.new(
+      :blog_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a blog field in the Confluence data source
+    # to a Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluenceBlogToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceBlogToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluenceBlogToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration information for data sources that connect to
+    # Confluence.
+    #
+    # @note When making an API call, you may pass ConfluenceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         version: "SERVER", # required, accepts SERVER
+    #         space_configuration: {
+    #           crawl_personal_spaces: false,
+    #           crawl_archived_spaces: false,
+    #           include_spaces: ["ConfluenceSpaceIdentifier"],
+    #           exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #           space_field_mappings: [
+    #             {
+    #               data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         page_configuration: {
+    #           page_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         blog_configuration: {
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         attachment_configuration: {
+    #           crawl_attachments: false,
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #       }
+    #
+    # @!attribute [rw] server_url
+    #   The URL of your Confluence instance. Use the full URL of the server.
+    #   For example, `https://server.example.com:port/`. You can also use an
+    #   IP address, for example, `https://192.168.1.113/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   contains the key/value pairs required to connect to your Confluence
+    #   server. The secret must contain a JSON structure with the following
+    #   keys:
+    #
+    #   * username - The user name of a user with administrative privileges
+    #     for the Confluence server.
+    #
+    #   * password - The password associated with the user logging in to the
+    #     Confluence server.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Specifies the version of the Confluence installation that you are
+    #   connecting to.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_configuration
+    #   Specifies configuration information for indexing Confluence spaces.
+    #   @return [Types::ConfluenceSpaceConfiguration]
+    #
+    # @!attribute [rw] page_configuration
+    #   Specifies configuration information for indexing Confluence pages.
+    #   @return [Types::ConfluencePageConfiguration]
+    #
+    # @!attribute [rw] blog_configuration
+    #   Specifies configuration information for indexing Confluence blogs.
+    #   @return [Types::ConfluenceBlogConfiguration]
+    #
+    # @!attribute [rw] attachment_configuration
+    #   Specifies configuration information for indexing attachments to
+    #   Confluence blogs and pages.
+    #   @return [Types::ConfluenceAttachmentConfiguration]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Specifies the information for connecting to an Amazon VPC.
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns that apply to a URL on the
+    #   Confluence server. An inclusion pattern can apply to a blog post, a
+    #   page, a space, or an attachment. Items that match the patterns are
+    #   included in the index. Items that don't match the pattern are
+    #   excluded from the index. If an item matches both an inclusion
+    #   pattern and an exclusion pattern, the item isn't included in the
+    #   index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns that apply to a URL on the
+    #   Confluence server. An exclusion pattern can apply to a blog post, a
+    #   page, a space, or an attachment. Items that match the pattern are
+    #   excluded from the index. Items that don't match the pattern are
+    #   included in the index. If a item matches both an exclusion pattern
+    #   and an inclusion pattern, the item isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceConfiguration AWS API Documentation
+    #
+    class ConfluenceConfiguration < Struct.new(
+      :server_url,
+      :secret_arn,
+      :version,
+      :space_configuration,
+      :page_configuration,
+      :blog_configuration,
+      :attachment_configuration,
+      :vpc_configuration,
+      :inclusion_patterns,
+      :exclusion_patterns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the page settings for the Confluence data source.
+    #
+    # @note When making an API call, you may pass ConfluencePageConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         page_field_mappings: [
+    #           {
+    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] page_field_mappings
+    #   Defines how page metadata fields should be mapped to index fields.
+    #   Before you can map a field, you must first create an index field
+    #   with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `PageFieldMappings` parameter, you must specify
+    #   at least one field mapping.
+    #   @return [Array<Types::ConfluencePageToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluencePageConfiguration AWS API Documentation
+    #
+    class ConfluencePageConfiguration < Struct.new(
+      :page_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a field in the Confluence data source to a
+    # Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluencePageToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluencePageToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluencePageToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for indexing Confluence spaces.
+    #
+    # @note When making an API call, you may pass ConfluenceSpaceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         crawl_personal_spaces: false,
+    #         crawl_archived_spaces: false,
+    #         include_spaces: ["ConfluenceSpaceIdentifier"],
+    #         exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #         space_field_mappings: [
+    #           {
+    #             data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] crawl_personal_spaces
+    #   Specifies whether Amazon Kendra should index personal spaces. Users
+    #   can add restrictions to items in personal spaces. If personal spaces
+    #   are indexed, queries without user context information may return
+    #   restricted items from a personal space in their results. For more
+    #   information, see [Filtering on user context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_archived_spaces
+    #   Specifies whether Amazon Kendra should index archived spaces.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_spaces
+    #   A list of space keys for Confluence spaces. If you include a key,
+    #   the blogs, documents, and attachments in the space are indexed.
+    #   Spaces that aren't in the list aren't indexed. A space in the list
+    #   must exist. Otherwise, Amazon Kendra logs an error when the data
+    #   source is synchronized. If a space is in both the `IncludeSpaces`
+    #   and the `ExcludeSpaces` list, the space is excluded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_spaces
+    #   A list of space keys of Confluence spaces. If you include a key, the
+    #   blogs, documents, and attachments in the space are not indexed. If a
+    #   space is in both the `ExcludeSpaces` and the `IncludeSpaces` list,
+    #   the space is excluded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] space_field_mappings
+    #   Defines how space metadata fields should be mapped to index fields.
+    #   Before you can map a field, you must first create an index field
+    #   with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `SpaceFieldMappings` parameter, you must specify
+    #   at least one field mapping.
+    #   @return [Array<Types::ConfluenceSpaceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceSpaceConfiguration AWS API Documentation
+    #
+    class ConfluenceSpaceConfiguration < Struct.new(
+      :crawl_personal_spaces,
+      :crawl_archived_spaces,
+      :include_spaces,
+      :exclude_spaces,
+      :space_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a field in the Confluence data source to a
+    # Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluenceSpaceToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceSpaceToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluenceSpaceToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the information necessary to connect to a database.
     #
     # @note When making an API call, you may pass ConnectionConfiguration
@@ -879,7 +1364,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -1070,6 +1555,58 @@ module Aws::Kendra
     #                 },
     #               ],
     #             },
+    #           },
+    #           confluence_configuration: {
+    #             server_url: "Url", # required
+    #             secret_arn: "SecretArn", # required
+    #             version: "SERVER", # required, accepts SERVER
+    #             space_configuration: {
+    #               crawl_personal_spaces: false,
+    #               crawl_archived_spaces: false,
+    #               include_spaces: ["ConfluenceSpaceIdentifier"],
+    #               exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #               space_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             page_configuration: {
+    #               page_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             blog_configuration: {
+    #               blog_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             attachment_configuration: {
+    #               crawl_attachments: false,
+    #               attachment_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           },
     #         },
     #         description: "Description",
@@ -1580,6 +2117,58 @@ module Aws::Kendra
     #             ],
     #           },
     #         },
+    #         confluence_configuration: {
+    #           server_url: "Url", # required
+    #           secret_arn: "SecretArn", # required
+    #           version: "SERVER", # required, accepts SERVER
+    #           space_configuration: {
+    #             crawl_personal_spaces: false,
+    #             crawl_archived_spaces: false,
+    #             include_spaces: ["ConfluenceSpaceIdentifier"],
+    #             exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #             space_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           page_configuration: {
+    #             page_field_mappings: [
+    #               {
+    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           blog_configuration: {
+    #             blog_field_mappings: [
+    #               {
+    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           attachment_configuration: {
+    #             crawl_attachments: false,
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -1612,6 +2201,11 @@ module Aws::Kendra
     #   instances.
     #   @return [Types::ServiceNowConfiguration]
     #
+    # @!attribute [rw] confluence_configuration
+    #   Provides configuration information for connecting to a Confluence
+    #   data source.
+    #   @return [Types::ConfluenceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -1620,7 +2214,8 @@ module Aws::Kendra
       :database_configuration,
       :salesforce_configuration,
       :one_drive_configuration,
-      :service_now_configuration)
+      :service_now_configuration,
+      :confluence_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5197,6 +5792,58 @@ module Aws::Kendra
     #                 },
     #               ],
     #             },
+    #           },
+    #           confluence_configuration: {
+    #             server_url: "Url", # required
+    #             secret_arn: "SecretArn", # required
+    #             version: "SERVER", # required, accepts SERVER
+    #             space_configuration: {
+    #               crawl_personal_spaces: false,
+    #               crawl_archived_spaces: false,
+    #               include_spaces: ["ConfluenceSpaceIdentifier"],
+    #               exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #               space_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             page_configuration: {
+    #               page_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             blog_configuration: {
+    #               blog_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             attachment_configuration: {
+    #               crawl_attachments: false,
+    #               attachment_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           },
     #         },
     #         description: "Description",
