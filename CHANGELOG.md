@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.614 (2020-10-26)
+------------------
+
 * Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
 
 * Feature - Aws::Neptune - Updated the API, and documentation for Amazon Neptune.
