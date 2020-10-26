@@ -60,7 +60,8 @@ module AwsSdkCodeGenerator
         'max' => false,
         'wrapper' => false,
         'xmlOrder' => false,
-        'retryable' => false
+        'retryable' => false,
+        'union' => false
       }
 
       METADATA_KEYS = {
