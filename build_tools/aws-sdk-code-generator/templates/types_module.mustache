@@ -18,6 +18,9 @@ module {{module_name}}
       {{/members}}
       SENSITIVE = {{sensitive_params}}
       include Aws::Structure
+      {{#union?}}
+      include Aws::Structure::Union
+      {{/union?}}
     end
     {{/empty?}}
     {{/structures}}

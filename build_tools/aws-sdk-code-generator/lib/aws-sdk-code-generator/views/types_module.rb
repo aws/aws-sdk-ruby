@@ -13,6 +13,7 @@ module AwsSdkCodeGenerator
         @service = options.fetch(:service)
         @api = @service.api
         @input_shapes = compute_input_shapes(@service.api)
+        @output_shapes = compute_output_shapes(@service.api)
       end
 
       # @return [String|nil]
@@ -56,7 +57,8 @@ module AwsSdkCodeGenerator
               class_name: shape_name,
               members: struct_members,
               sensitive_params: sensitive_params,
-              documentation: struct_class_docs(shape_name)
+              documentation: struct_class_docs(shape_name, shape),
+              union: shape['union']
             )
           else
             list
@@ -71,7 +73,7 @@ module AwsSdkCodeGenerator
             list << EventStreamClass.new(
               class_name: shape_name,
               types: struct_members(shape),
-              documentation: eventstream_class_docs(shape_name)
+              documentation: eventstream_class_docs(shape_name, shape)
             )
           else
             list
@@ -97,19 +99,20 @@ module AwsSdkCodeGenerator
         members
       end
 
-      def struct_class_docs(shape_name)
+      def struct_class_docs(shape_name, shape)
         join_docstrings([
           html_to_markdown(Api.docstring(shape_name, @api)),
-          input_example_docs(shape_name),
+          input_example_docs(shape_name, shape),
+          output_example_docs(shape_name, shape),
           attribute_macros_docs(shape_name),
           see_also_tag(shape_name),
         ])
       end
 
-      def eventstream_class_docs(shape_name)
+      def eventstream_class_docs(shape_name, shape)
         join_docstrings([
           html_to_markdown(Api.docstring(shape_name, @api)),
-          input_example_docs(shape_name),
+          input_example_docs(shape_name, shape),
           eventstream_docs(shape_name),
           see_also_tag(shape_name),
         ])
@@ -120,11 +123,25 @@ module AwsSdkCodeGenerator
         " #event_types #=> Array, returns all modeled event types in the stream"
       end
 
-      def input_example_docs(shape_name)
+      def output_example_docs(shape_name, shape)
+        # TODO: Special docs
+        if @output_shapes.include?(shape_name)
+          if shape['union']
+            "@note #{shape_name} is a union - when returned from an API call"\
+            ' exactly one value will be set.  You may call `#member` to'\
+            ' determine which value is set.'
+          end
+        end
+      end
+
+      def input_example_docs(shape_name, shape)
         if @input_shapes.include?(shape_name)
           return if shape(shape_name)['members'].nil?
           if shape(shape_name)['members'].empty?
-            note = '@api private'
+            '@api private'
+          elsif shape['union']
+            "@note #{shape_name} is a union - when making an API calls you"\
+            ' must set exactly one of the members.'
           else
             note = "@note When making an API call, you may pass #{shape_name}\n"
             note += "  data as a hash:\n\n"
@@ -175,6 +192,14 @@ module AwsSdkCodeGenerator
           visit_inputs(operation['input'], inputs) if operation['input']
         end
         inputs
+      end
+
+      def compute_output_shapes(api)
+        outputs = Set.new
+        (api['operations'] || {}).each do |_, operation|
+          visit_inputs(operation['output'], outputs) if operation['output']
+        end
+        outputs
       end
 
       def idempotency_token?(member_ref)
@@ -245,6 +270,8 @@ module AwsSdkCodeGenerator
           @members = options.fetch(:members)
           @documentation = options.fetch(:documentation)
           @sensitive_params = options.fetch(:sensitive_params)
+          @union = options.fetch(:union)
+          @members << StructMember.new(member_name: :unknown) if @union
           if @members.nil? || @members.empty?
             @empty = true
           else
@@ -264,6 +291,11 @@ module AwsSdkCodeGenerator
 
         # @return [Array<Symbol>]
         attr_accessor :sensitive_params
+
+        # @return [Boolean]
+        def union?
+          @union
+        end
 
         # @return [Boolean]
         def empty?

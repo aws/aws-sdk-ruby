@@ -70,11 +70,24 @@ module Aws
       end
 
     end
+
+    module Union
+      def member
+        self.members.select { |k| self[k] }.first
+      end
+
+      def value
+        self[member] if member
+      end
+
+      def set_unknown_member(name, value)
+        self[:unknown] = {name: name, value: value}
+      end
+    end
   end
 
   # @api private
   class EmptyStructure < Struct.new('AwsEmptyStructure')
     include(Aws::Structure)
   end
-
 end

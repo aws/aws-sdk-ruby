@@ -91,39 +91,14 @@ module Aws::DynamoDB
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
     #
-    # @note When making an API call, you may pass AttributeValue
-    #   data as a hash:
+    # @note AttributeValue is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         s: "StringAttributeValue",
-    #         n: "NumberAttributeValue",
-    #         b: "data",
-    #         ss: ["StringAttributeValue"],
-    #         ns: ["NumberAttributeValue"],
-    #         bs: ["data"],
-    #         m: {
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         l: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         null: false,
-    #         bool: false,
-    #       }
+    # @note AttributeValue is a union - when returned from an API call exactly one value will be set.  You may call `#member` to determine which value is set.
     #
     # @!attribute [rw] s
     #   An attribute of type String. For example:
     #
     #   `"S": "Hello"`
-    #   @return [String]
-    #
-    # @!attribute [rw] n
-    #   An attribute of type Number. For example:
-    #
-    #   `"N": "123.45"`
-    #
-    #   Numbers are sent across the network to DynamoDB as strings, to
-    #   maximize compatibility across languages and libraries. However,
-    #   DynamoDB treats them as number type attributes for mathematical
-    #   operations.
     #   @return [String]
     #
     # @!attribute [rw] b
@@ -183,7 +158,6 @@ module Aws::DynamoDB
     #
     class AttributeValue < Struct.new(
       :s,
-      :n,
       :b,
       :ss,
       :ns,
@@ -191,9 +165,11 @@ module Aws::DynamoDB
       :m,
       :l,
       :null,
-      :bool)
+      :bool,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
     end
 
     # For the `UpdateItem` operation, represents the attributes to be

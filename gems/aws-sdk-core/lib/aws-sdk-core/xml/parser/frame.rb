@@ -95,6 +95,8 @@ module Aws
         def child_frame(xml_name)
           if @member = @members[xml_name]
             Frame.new(xml_name, self, @member[:ref])
+          elsif @ref.shape.union
+            UnknownMemberFrame.new(xml_name, self, nil, @result)
           else
             NullFrame.new(xml_name, self)
           end
@@ -106,6 +108,8 @@ module Aws
             @result[@member[:name]][child.key.result] = child.value.result
           when FlatListFrame
             @result[@member[:name]] << child.result
+          when UnknownMemberFrame
+            @result[:unknown] = { name: child.path.last, value: child.result }
           when NullFrame
           else
             @result[@member[:name]] = child.result
@@ -239,6 +243,12 @@ module Aws
         def set_text(value)
           yield_unhandled_value(path, value)
           super
+        end
+      end
+
+      class UnknownMemberFrame < Frame
+        def result
+          @text.join
         end
       end
 

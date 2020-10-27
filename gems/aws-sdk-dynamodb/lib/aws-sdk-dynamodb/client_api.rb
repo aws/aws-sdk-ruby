@@ -22,7 +22,7 @@ module Aws::DynamoDB
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeNameList = Shapes::ListShape.new(name: 'AttributeNameList')
     AttributeUpdates = Shapes::MapShape.new(name: 'AttributeUpdates')
-    AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
+    AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue', union: true)
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     AttributeValueUpdate = Shapes::StructureShape.new(name: 'AttributeValueUpdate')
     AutoScalingPolicyDescription = Shapes::StructureShape.new(name: 'AutoScalingPolicyDescription')
@@ -391,7 +391,6 @@ module Aws::DynamoDB
     AttributeUpdates.value = Shapes::ShapeRef.new(shape: AttributeValueUpdate)
 
     AttributeValue.add_member(:s, Shapes::ShapeRef.new(shape: StringAttributeValue, location_name: "S"))
-    AttributeValue.add_member(:n, Shapes::ShapeRef.new(shape: NumberAttributeValue, location_name: "N"))
     AttributeValue.add_member(:b, Shapes::ShapeRef.new(shape: BinaryAttributeValue, location_name: "B"))
     AttributeValue.add_member(:ss, Shapes::ShapeRef.new(shape: StringSetAttributeValue, location_name: "SS"))
     AttributeValue.add_member(:ns, Shapes::ShapeRef.new(shape: NumberSetAttributeValue, location_name: "NS"))

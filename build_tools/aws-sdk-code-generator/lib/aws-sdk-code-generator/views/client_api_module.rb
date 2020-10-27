@@ -31,7 +31,8 @@ module AwsSdkCodeGenerator
         'xmlNamespace' => true,
         'streaming' => true, # transfer-encoding
         'requiresLength' => true, # transder-encoding
-        # event stream modeling
+        'union' => true,
+      # event stream modeling
         'event' => false,
         'eventstream' => false,
         'eventheader' => false,
@@ -61,7 +62,6 @@ module AwsSdkCodeGenerator
         'wrapper' => false,
         'xmlOrder' => false,
         'retryable' => false,
-        'union' => false
       }
 
       METADATA_KEYS = {

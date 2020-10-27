@@ -28,6 +28,8 @@ module Aws
           member_name, member_ref = shape.member_by_location_name(key)
           if member_ref
             target[member_name] = parse_ref(member_ref, value)
+          elsif shape.union
+            target[:unknown] = { name: key, value: value }
           end
         end
         target
