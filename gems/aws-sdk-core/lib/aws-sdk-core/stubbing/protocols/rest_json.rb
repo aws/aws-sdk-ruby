@@ -5,7 +5,7 @@ module Aws
     module Protocols
       class RestJson < Rest
 
-        def body_for(_1, _2, rules, data)
+        def body_for(_a, _b, rules, data)
           if eventstream?(rules)
             encode_eventstream_response(rules, data, Aws::Json::Builder)
           else
