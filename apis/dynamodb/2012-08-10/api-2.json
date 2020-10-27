@@ -736,6 +736,7 @@
       "type":"structure",
       "members":{
         "S":{"shape":"StringAttributeValue"},
+        "N":{"shape":"NumberAttributeValue"},
         "B":{"shape":"BinaryAttributeValue"},
         "SS":{"shape":"StringSetAttributeValue"},
         "NS":{"shape":"NumberSetAttributeValue"},

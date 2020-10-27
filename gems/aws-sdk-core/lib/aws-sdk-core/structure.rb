@@ -79,10 +79,6 @@ module Aws
       def value
         self[member] if member
       end
-
-      def set_unknown_member(name, value)
-        self[:unknown] = {name: name, value: value}
-      end
     end
   end
 

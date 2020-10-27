@@ -124,7 +124,6 @@ module AwsSdkCodeGenerator
       end
 
       def output_example_docs(shape_name, shape)
-        # TODO: Special docs
         if @output_shapes.include?(shape_name)
           if shape['union']
             "@note #{shape_name} is a union - when returned from an API call"\
@@ -189,7 +188,7 @@ module AwsSdkCodeGenerator
       def compute_input_shapes(api)
         inputs = Set.new
         (api['operations'] || {}).each do |_, operation|
-          visit_inputs(operation['input'], inputs) if operation['input']
+          visit_shapes(operation['input'], inputs) if operation['input']
         end
         inputs
       end
@@ -197,7 +196,7 @@ module AwsSdkCodeGenerator
       def compute_output_shapes(api)
         outputs = Set.new
         (api['operations'] || {}).each do |_, operation|
-          visit_inputs(operation['output'], outputs) if operation['output']
+          visit_shapes(operation['output'], outputs) if operation['output']
         end
         outputs
       end
@@ -210,22 +209,22 @@ module AwsSdkCodeGenerator
         "<p><b>A suitable default value is auto-generated.</b> You should normally not need to pass this option.</p>"
       end
 
-      def visit_inputs(shape_ref, inputs)
-        return if inputs.include?(shape_ref['shape']) # recursion
-        inputs << shape_ref['shape']
+      def visit_shapes(shape_ref, shapes)
+        return if shapes.include?(shape_ref['shape']) # recursion
+        shapes << shape_ref['shape']
         s = shape(shape_ref)
         raise "cannot locate shape #{shape_ref['shape']}" if s.nil?
         case s['type']
         when 'structure'
           return if s['members'].nil?
           s['members'].each_pair do |_, member_ref|
-            visit_inputs(member_ref, inputs)
+            visit_shapes(member_ref, shapes)
           end
         when 'list'
-          visit_inputs(s['member'], inputs)
+          visit_shapes(s['member'], shapes)
         when 'map'
-          visit_inputs(s['key'], inputs)
-          visit_inputs(s['value'], inputs)
+          visit_shapes(s['key'], shapes)
+          visit_shapes(s['value'], shapes)
         end
       end
 

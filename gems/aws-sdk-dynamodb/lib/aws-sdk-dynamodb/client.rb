@@ -542,28 +542,16 @@ module Aws::DynamoDB
     #       "Music" => {
     #         keys: [
     #           {
-    #             "Artist" => {
-    #               s: "No One You Know", 
-    #             }, 
-    #             "SongTitle" => {
-    #               s: "Call Me Today", 
-    #             }, 
+    #             "Artist" => "No One You Know", 
+    #             "SongTitle" => "Call Me Today", 
     #           }, 
     #           {
-    #             "Artist" => {
-    #               s: "Acme Band", 
-    #             }, 
-    #             "SongTitle" => {
-    #               s: "Happy Day", 
-    #             }, 
+    #             "Artist" => "Acme Band", 
+    #             "SongTitle" => "Happy Day", 
     #           }, 
     #           {
-    #             "Artist" => {
-    #               s: "No One You Know", 
-    #             }, 
-    #             "SongTitle" => {
-    #               s: "Scared of My Shadow", 
-    #             }, 
+    #             "Artist" => "No One You Know", 
+    #             "SongTitle" => "Scared of My Shadow", 
     #           }, 
     #         ], 
     #         projection_expression: "AlbumTitle", 
@@ -576,19 +564,13 @@ module Aws::DynamoDB
     #     responses: {
     #       "Music" => [
     #         {
-    #           "AlbumTitle" => {
-    #             s: "Somewhat Famous", 
-    #           }, 
+    #           "AlbumTitle" => "Somewhat Famous", 
     #         }, 
     #         {
-    #           "AlbumTitle" => {
-    #             s: "Blue Sky Blues", 
-    #           }, 
+    #           "AlbumTitle" => "Blue Sky Blues", 
     #         }, 
     #         {
-    #           "AlbumTitle" => {
-    #             s: "Louder Than Ever", 
-    #           }, 
+    #           "AlbumTitle" => "Louder Than Ever", 
     #         }, 
     #       ], 
     #     }, 
@@ -813,45 +795,27 @@ module Aws::DynamoDB
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => {
-    #                 s: "Somewhat Famous", 
-    #               }, 
-    #               "Artist" => {
-    #                 s: "No One You Know", 
-    #               }, 
-    #               "SongTitle" => {
-    #                 s: "Call Me Today", 
-    #               }, 
+    #               "AlbumTitle" => "Somewhat Famous", 
+    #               "Artist" => "No One You Know", 
+    #               "SongTitle" => "Call Me Today", 
     #             }, 
     #           }, 
     #         }, 
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => {
-    #                 s: "Songs About Life", 
-    #               }, 
-    #               "Artist" => {
-    #                 s: "Acme Band", 
-    #               }, 
-    #               "SongTitle" => {
-    #                 s: "Happy Day", 
-    #               }, 
+    #               "AlbumTitle" => "Songs About Life", 
+    #               "Artist" => "Acme Band", 
+    #               "SongTitle" => "Happy Day", 
     #             }, 
     #           }, 
     #         }, 
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => {
-    #                 s: "Blue Sky Blues", 
-    #               }, 
-    #               "Artist" => {
-    #                 s: "No One You Know", 
-    #               }, 
-    #               "SongTitle" => {
-    #                 s: "Scared of My Shadow", 
-    #               }, 
+    #               "AlbumTitle" => "Blue Sky Blues", 
+    #               "Artist" => "No One You Know", 
+    #               "SongTitle" => "Scared of My Shadow", 
     #             }, 
     #           }, 
     #         }, 
@@ -1819,12 +1783,8 @@ module Aws::DynamoDB
     #
     #   resp = client.delete_item({
     #     key: {
-    #       "Artist" => {
-    #         s: "No One You Know", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Scared of My Shadow", 
-    #       }, 
+    #       "Artist" => "No One You Know", 
+    #       "SongTitle" => "Scared of My Shadow", 
     #     }, 
     #     table_name: "Music", 
     #   })
@@ -2901,12 +2861,8 @@ module Aws::DynamoDB
     #
     #   resp = client.get_item({
     #     key: {
-    #       "Artist" => {
-    #         s: "Acme Band", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Happy Day", 
-    #       }, 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #     table_name: "Music", 
     #   })
@@ -2914,15 +2870,9 @@ module Aws::DynamoDB
     #   resp.to_h outputs the following:
     #   {
     #     item: {
-    #       "AlbumTitle" => {
-    #         s: "Songs About Life", 
-    #       }, 
-    #       "Artist" => {
-    #         s: "Acme Band", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Happy Day", 
-    #       }, 
+    #       "AlbumTitle" => "Songs About Life", 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #   }
     #
@@ -3531,15 +3481,9 @@ module Aws::DynamoDB
     #
     #   resp = client.put_item({
     #     item: {
-    #       "AlbumTitle" => {
-    #         s: "Somewhat Famous", 
-    #       }, 
-    #       "Artist" => {
-    #         s: "No One You Know", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Call Me Today", 
-    #       }, 
+    #       "AlbumTitle" => "Somewhat Famous", 
+    #       "Artist" => "No One You Know", 
+    #       "SongTitle" => "Call Me Today", 
     #     }, 
     #     return_consumed_capacity: "TOTAL", 
     #     table_name: "Music", 
@@ -4056,9 +4000,7 @@ module Aws::DynamoDB
     #
     #   resp = client.query({
     #     expression_attribute_values: {
-    #       ":v1" => {
-    #         s: "No One You Know", 
-    #       }, 
+    #       ":v1" => "No One You Know", 
     #     }, 
     #     key_condition_expression: "Artist = :v1", 
     #     projection_expression: "SongTitle", 
@@ -4072,9 +4014,7 @@ module Aws::DynamoDB
     #     count: 2, 
     #     items: [
     #       {
-    #         "SongTitle" => {
-    #           s: "Call Me Today", 
-    #         }, 
+    #         "SongTitle" => "Call Me Today", 
     #       }, 
     #     ], 
     #     scanned_count: 2, 
@@ -4915,9 +4855,7 @@ module Aws::DynamoDB
     #       "#ST" => "SongTitle", 
     #     }, 
     #     expression_attribute_values: {
-    #       ":a" => {
-    #         s: "No One You Know", 
-    #       }, 
+    #       ":a" => "No One You Know", 
     #     }, 
     #     filter_expression: "Artist = :a", 
     #     projection_expression: "#ST, #AT", 
@@ -4931,20 +4869,12 @@ module Aws::DynamoDB
     #     count: 2, 
     #     items: [
     #       {
-    #         "AlbumTitle" => {
-    #           s: "Somewhat Famous", 
-    #         }, 
-    #         "SongTitle" => {
-    #           s: "Call Me Today", 
-    #         }, 
+    #         "AlbumTitle" => "Somewhat Famous", 
+    #         "SongTitle" => "Call Me Today", 
     #       }, 
     #       {
-    #         "AlbumTitle" => {
-    #           s: "Blue Sky Blues", 
-    #         }, 
-    #         "SongTitle" => {
-    #           s: "Scared of My Shadow", 
-    #         }, 
+    #         "AlbumTitle" => "Blue Sky Blues", 
+    #         "SongTitle" => "Scared of My Shadow", 
     #       }, 
     #     ], 
     #     scanned_count: 3, 
@@ -6058,6 +5988,40 @@ module Aws::DynamoDB
     #   * {Types::UpdateItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::UpdateItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #   * {Types::UpdateItemOutput#item_collection_metrics #item_collection_metrics} => Types::ItemCollectionMetrics
+    #
+    #
+    # @example Example: To update an item in a table
+    #
+    #   # This example updates an item in the Music table. It adds a new attribute (Year) and modifies the AlbumTitle attribute. 
+    #   # All of the attributes in the item, as they appear after the update, are returned in the response.
+    #
+    #   resp = client.update_item({
+    #     expression_attribute_names: {
+    #       "#AT" => "AlbumTitle", 
+    #       "#Y" => "Year", 
+    #     }, 
+    #     expression_attribute_values: {
+    #       ":t" => "Louder Than Ever", 
+    #       ":y" => "2015", 
+    #     }, 
+    #     key: {
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
+    #     }, 
+    #     return_values: "ALL_NEW", 
+    #     table_name: "Music", 
+    #     update_expression: "SET #Y = :y, #AT = :t", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: {
+    #       "AlbumTitle" => "Louder Than Ever", 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
+    #       "Year" => "2015", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #

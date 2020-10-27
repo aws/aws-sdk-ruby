@@ -267,10 +267,6 @@ module Seahorse
 
       end
 
-      class UnionShape < StructureShape
-
-      end
-
       class TimestampShape < Shape; end
 
     end

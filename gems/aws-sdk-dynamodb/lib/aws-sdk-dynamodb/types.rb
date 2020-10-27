@@ -101,6 +101,17 @@ module Aws::DynamoDB
     #   `"S": "Hello"`
     #   @return [String]
     #
+    # @!attribute [rw] n
+    #   An attribute of type Number. For example:
+    #
+    #   `"N": "123.45"`
+    #
+    #   Numbers are sent across the network to DynamoDB as strings, to
+    #   maximize compatibility across languages and libraries. However,
+    #   DynamoDB treats them as number type attributes for mathematical
+    #   operations.
+    #   @return [String]
+    #
     # @!attribute [rw] b
     #   An attribute of type Binary. For example:
     #
@@ -158,6 +169,7 @@ module Aws::DynamoDB
     #
     class AttributeValue < Struct.new(
       :s,
+      :n,
       :b,
       :ss,
       :ns,

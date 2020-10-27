@@ -391,6 +391,7 @@ module Aws::DynamoDB
     AttributeUpdates.value = Shapes::ShapeRef.new(shape: AttributeValueUpdate)
 
     AttributeValue.add_member(:s, Shapes::ShapeRef.new(shape: StringAttributeValue, location_name: "S"))
+    AttributeValue.add_member(:n, Shapes::ShapeRef.new(shape: NumberAttributeValue, location_name: "N"))
     AttributeValue.add_member(:b, Shapes::ShapeRef.new(shape: BinaryAttributeValue, location_name: "B"))
     AttributeValue.add_member(:ss, Shapes::ShapeRef.new(shape: StringSetAttributeValue, location_name: "SS"))
     AttributeValue.add_member(:ns, Shapes::ShapeRef.new(shape: NumberSetAttributeValue, location_name: "NS"))
