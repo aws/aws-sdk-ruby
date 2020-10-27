@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.615 (2020-10-27)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 2.11.614 (2020-10-26)
