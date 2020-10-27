@@ -968,7 +968,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a binary column statistics data.
+    # Defines column statistics supported for bit sequence data values.
     #
     # @note When making an API call, you may pass BinaryColumnStatisticsData
     #   data as a hash:
@@ -980,15 +980,15 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] maximum_length
-    #   Maximum length of the column.
+    #   The size of the longest bit sequence in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] average_length
-    #   Average length of the column.
+    #   The average bit sequence length in the column.
     #   @return [Float]
     #
     # @!attribute [rw] number_of_nulls
-    #   Number of nulls.
+    #   The number of null values in the column.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BinaryColumnStatisticsData AWS API Documentation
@@ -1001,7 +1001,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a boolean column statistics.
+    # Defines column statistics supported for Boolean data columns.
     #
     # @note When making an API call, you may pass BooleanColumnStatisticsData
     #   data as a hash:
@@ -1013,15 +1013,15 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] number_of_trues
-    #   Number of true value.
+    #   The number of true values in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_falses
-    #   Number of false value.
+    #   The number of false values in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_nulls
-    #   Number of nulls.
+    #   The number of null values in the column.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BooleanColumnStatisticsData AWS API Documentation
@@ -1378,14 +1378,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a column containing error.
+    # Encapsulates a column name that failed and the reason for failure.
     #
     # @!attribute [rw] column_name
-    #   The name of the column.
+    #   The name of the column that failed.
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   The error message occurred during operation.
+    #   An error message with the reason for the failure of an operation.
     #   @return [Types::ErrorDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnError AWS API Documentation
@@ -1397,7 +1397,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a column statistics.
+    # Represents the generated column-level statistics for a table or
+    # partition.
     #
     # @note When making an API call, you may pass ColumnStatistics
     #   data as a hash:
@@ -1458,19 +1459,20 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] column_name
-    #   The name of the column.
+    #   Name of column which statistics belong to.
     #   @return [String]
     #
     # @!attribute [rw] column_type
-    #   The type of the column.
+    #   The data type of the column.
     #   @return [String]
     #
     # @!attribute [rw] analyzed_time
-    #   The analyzed time of the column statistics.
+    #   The timestamp of when column statistics were generated.
     #   @return [Time]
     #
     # @!attribute [rw] statistics_data
-    #   The statistics of the column.
+    #   A `ColumnStatisticData` object that contains the statistics data
+    #   values.
     #   @return [Types::ColumnStatisticsData]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatistics AWS API Documentation
@@ -1484,7 +1486,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a column statistics data.
+    # Contains the individual types of column statistics data. Only one data
+    # object should be set and indicated by the `Type` attribute.
     #
     # @note When making an API call, you may pass ColumnStatisticsData
     #   data as a hash:
@@ -1540,35 +1543,35 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] type
-    #   The name of the column.
+    #   The type of column statistics data.
     #   @return [String]
     #
     # @!attribute [rw] boolean_column_statistics_data
-    #   Boolean Column Statistics Data.
+    #   Boolean column statistics data.
     #   @return [Types::BooleanColumnStatisticsData]
     #
     # @!attribute [rw] date_column_statistics_data
-    #   Date Column Statistics Data.
+    #   Date column statistics data.
     #   @return [Types::DateColumnStatisticsData]
     #
     # @!attribute [rw] decimal_column_statistics_data
-    #   Decimal Column Statistics Data.
+    #   Decimal column statistics data.
     #   @return [Types::DecimalColumnStatisticsData]
     #
     # @!attribute [rw] double_column_statistics_data
-    #   Double Column Statistics Data.
+    #   Double column statistics data.
     #   @return [Types::DoubleColumnStatisticsData]
     #
     # @!attribute [rw] long_column_statistics_data
-    #   Long Column Statistics Data.
+    #   Long column statistics data.
     #   @return [Types::LongColumnStatisticsData]
     #
     # @!attribute [rw] string_column_statistics_data
-    #   String Column Statistics Data.
+    #   String column statistics data.
     #   @return [Types::StringColumnStatisticsData]
     #
     # @!attribute [rw] binary_column_statistics_data
-    #   Binary Column Statistics Data.
+    #   Binary column statistics data.
     #   @return [Types::BinaryColumnStatisticsData]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsData AWS API Documentation
@@ -1586,14 +1589,15 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a column containing error.
+    # Encapsulates a `ColumnStatistics` object that failed and the reason
+    # for failure.
     #
     # @!attribute [rw] column_statistics
-    #   The ColumnStatistics of the column.
+    #   The `ColumnStatistics` of the column.
     #   @return [Types::ColumnStatistics]
     #
     # @!attribute [rw] error
-    #   The error message occurred during operation.
+    #   An error message with the reason for the failure of an operation.
     #   @return [Types::ErrorDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsError AWS API Documentation
@@ -3402,6 +3406,13 @@ module Aws::Glue
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         transform_encryption: {
+    #           ml_user_data_encryption: {
+    #             ml_user_data_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #             kms_key_id: "NameString",
+    #           },
+    #           task_run_security_configuration_name: "NameString",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -3545,6 +3556,12 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] transform_encryption
+    #   The encryption-at-rest settings of the transform that apply to
+    #   accessing user data. Machine learning transforms can access user
+    #   data encrypted in Amazon S3 using KMS.
+    #   @return [Types::TransformEncryption]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateMLTransformRequest AWS API Documentation
     #
     class CreateMLTransformRequest < Struct.new(
@@ -3559,7 +3576,8 @@ module Aws::Glue
       :number_of_workers,
       :timeout,
       :max_retries,
-      :tags)
+      :tags,
+      :transform_encryption)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4456,7 +4474,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a date column statistics data.
+    # Defines column statistics supported for timestamp data columns.
     #
     # @note When making an API call, you may pass DateColumnStatisticsData
     #   data as a hash:
@@ -4469,19 +4487,19 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] minimum_value
-    #   Minimum value of the column.
+    #   The lowest value in the column.
     #   @return [Time]
     #
     # @!attribute [rw] maximum_value
-    #   Maximum value of the column.
+    #   The highest value in the column.
     #   @return [Time]
     #
     # @!attribute [rw] number_of_nulls
-    #   Number of nulls.
+    #   The number of null values in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_distinct_values
-    #   Number of distinct values.
+    #   The number of distinct values in a column.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DateColumnStatisticsData AWS API Documentation
@@ -4495,7 +4513,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a decimal column statistics data.
+    # Defines column statistics supported for fixed-point number data
+    # columns.
     #
     # @note When making an API call, you may pass DecimalColumnStatisticsData
     #   data as a hash:
@@ -4514,19 +4533,19 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] minimum_value
-    #   Minimum value of the column.
+    #   The lowest value in the column.
     #   @return [Types::DecimalNumber]
     #
     # @!attribute [rw] maximum_value
-    #   Maximum value of the column.
+    #   The highest value in the column.
     #   @return [Types::DecimalNumber]
     #
     # @!attribute [rw] number_of_nulls
-    #   Number of nulls.
+    #   The number of null values in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_distinct_values
-    #   Number of distinct values.
+    #   The number of distinct values in a column.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DecimalColumnStatisticsData AWS API Documentation
@@ -5396,7 +5415,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a double column statistics data.
+    # Defines column statistics supported for floating-point number data
+    # columns.
     #
     # @note When making an API call, you may pass DoubleColumnStatisticsData
     #   data as a hash:
@@ -5409,19 +5429,19 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] minimum_value
-    #   Minimum value of the column.
+    #   The lowest value in the column.
     #   @return [Float]
     #
     # @!attribute [rw] maximum_value
-    #   Maximum value of the column.
+    #   The highest value in the column.
     #   @return [Float]
     #
     # @!attribute [rw] number_of_nulls
-    #   Number of nulls.
+    #   The number of null values in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_distinct_values
-    #   Number of distinct values.
+    #   The number of distinct values in a column.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DoubleColumnStatisticsData AWS API Documentation
@@ -7065,6 +7085,12 @@ module Aws::Glue
     #   a task run fails.
     #   @return [Integer]
     #
+    # @!attribute [rw] transform_encryption
+    #   The encryption-at-rest settings of the transform that apply to
+    #   accessing user data. Machine learning transforms can access user
+    #   data encrypted in Amazon S3 using KMS.
+    #   @return [Types::TransformEncryption]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransformResponse AWS API Documentation
     #
     class GetMLTransformResponse < Struct.new(
@@ -7085,7 +7111,8 @@ module Aws::Glue
       :worker_type,
       :number_of_workers,
       :timeout,
-      :max_retries)
+      :max_retries,
+      :transform_encryption)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9955,7 +9982,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a long column statistics data.
+    # Defines column statistics supported for integer data columns.
     #
     # @note When making an API call, you may pass LongColumnStatisticsData
     #   data as a hash:
@@ -9968,19 +9995,19 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] minimum_value
-    #   Minimum value of the column.
+    #   The lowest value in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_value
-    #   Maximum value of the column.
+    #   The highest value in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_nulls
-    #   Number of nulls.
+    #   The number of null values in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_distinct_values
-    #   Number of distinct values.
+    #   The number of distinct values in a column.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LongColumnStatisticsData AWS API Documentation
@@ -10160,6 +10187,12 @@ module Aws::Glue
     #   machine learning transform fails.
     #   @return [Integer]
     #
+    # @!attribute [rw] transform_encryption
+    #   The encryption-at-rest settings of the transform that apply to
+    #   accessing user data. Machine learning transforms can access user
+    #   data encrypted in Amazon S3 using KMS.
+    #   @return [Types::TransformEncryption]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MLTransform AWS API Documentation
     #
     class MLTransform < Struct.new(
@@ -10180,7 +10213,8 @@ module Aws::Glue
       :worker_type,
       :number_of_workers,
       :timeout,
-      :max_retries)
+      :max_retries,
+      :transform_encryption)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10195,6 +10229,39 @@ module Aws::Glue
     #
     class MLTransformNotReadyException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption-at-rest settings of the transform that apply to
+    # accessing user data.
+    #
+    # @note When making an API call, you may pass MLUserDataEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         ml_user_data_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         kms_key_id: "NameString",
+    #       }
+    #
+    # @!attribute [rw] ml_user_data_encryption_mode
+    #   The encryption mode applied to user data. Valid values are:
+    #
+    #   * DISABLED: encryption is disabled
+    #
+    #   * SSEKMS: use of server-side encryption with AWS Key Management
+    #     Service (SSE-KMS) for user data stored in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID for the customer-provided KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MLUserDataEncryption AWS API Documentation
+    #
+    class MLUserDataEncryption < Struct.new(
+      :ml_user_data_encryption_mode,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12225,7 +12292,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Defines a string column statistics data.
+    # Defines column statistics supported for character sequence data
+    # values.
     #
     # @note When making an API call, you may pass StringColumnStatisticsData
     #   data as a hash:
@@ -12238,19 +12306,19 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] maximum_length
-    #   Maximum value of the column.
+    #   The size of the longest string in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] average_length
-    #   Average value of the column.
+    #   The average string length in the column.
     #   @return [Float]
     #
     # @!attribute [rw] number_of_nulls
-    #   Number of nulls.
+    #   The number of null values in the column.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_distinct_values
-    #   Number of distinct values.
+    #   The number of distinct values in a column.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StringColumnStatisticsData AWS API Documentation
@@ -12846,6 +12914,42 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The encryption-at-rest settings of the transform that apply to
+    # accessing user data. Machine learning transforms can access user data
+    # encrypted in Amazon S3 using KMS.
+    #
+    # Additionally, imported labels and trained transforms can now be
+    # encrypted using a customer provided KMS key.
+    #
+    # @note When making an API call, you may pass TransformEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         ml_user_data_encryption: {
+    #           ml_user_data_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #           kms_key_id: "NameString",
+    #         },
+    #         task_run_security_configuration_name: "NameString",
+    #       }
+    #
+    # @!attribute [rw] ml_user_data_encryption
+    #   An `MLUserDataEncryption` object containing the encryption mode and
+    #   customer-provided KMS key ID.
+    #   @return [Types::MLUserDataEncryption]
+    #
+    # @!attribute [rw] task_run_security_configuration_name
+    #   The name of the security configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformEncryption AWS API Documentation
+    #
+    class TransformEncryption < Struct.new(
+      :ml_user_data_encryption,
+      :task_run_security_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The criteria used to filter the machine learning transforms.
     #
     # @note When making an API call, you may pass TransformFilterCriteria
@@ -12960,7 +13064,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html
     #   @return [String]
     #
     # @!attribute [rw] find_matches_parameters

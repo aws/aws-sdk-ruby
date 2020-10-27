@@ -2184,6 +2184,11 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
+    # @option params [Types::TransformEncryption] :transform_encryption
+    #   The encryption-at-rest settings of the transform that apply to
+    #   accessing user data. Machine learning transforms can access user data
+    #   encrypted in Amazon S3 using KMS.
+    #
     # @return [Types::CreateMLTransformResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMLTransformResponse#transform_id #transform_id} => String
@@ -2219,6 +2224,13 @@ module Aws::Glue
     #     max_retries: 1,
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     transform_encryption: {
+    #       ml_user_data_encryption: {
+    #         ml_user_data_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         kms_key_id: "NameString",
+    #       },
+    #       task_run_security_configuration_name: "NameString",
     #     },
     #   })
     #
@@ -2772,6 +2784,9 @@ module Aws::Glue
 
     # Delete the partition column statistics of a column.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `DeletePartition`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
     #   none is supplied, the AWS account ID is used by default.
@@ -2810,6 +2825,9 @@ module Aws::Glue
     end
 
     # Retrieves table statistics of columns.
+    #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `DeleteTable`.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
@@ -3433,6 +3451,9 @@ module Aws::Glue
 
     # Retrieves partition statistics of columns.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `GetPartition`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
     #   none is supplied, the AWS account ID is used by default.
@@ -3514,6 +3535,9 @@ module Aws::Glue
     end
 
     # Retrieves table statistics of columns.
+    #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `GetTable`.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
@@ -4688,6 +4712,7 @@ module Aws::Glue
     #   * {Types::GetMLTransformResponse#number_of_workers #number_of_workers} => Integer
     #   * {Types::GetMLTransformResponse#timeout #timeout} => Integer
     #   * {Types::GetMLTransformResponse#max_retries #max_retries} => Integer
+    #   * {Types::GetMLTransformResponse#transform_encryption #transform_encryption} => Types::TransformEncryption
     #
     # @example Request syntax with placeholder values
     #
@@ -4733,6 +4758,9 @@ module Aws::Glue
     #   resp.number_of_workers #=> Integer
     #   resp.timeout #=> Integer
     #   resp.max_retries #=> Integer
+    #   resp.transform_encryption.ml_user_data_encryption.ml_user_data_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.transform_encryption.ml_user_data_encryption.kms_key_id #=> String
+    #   resp.transform_encryption.task_run_security_configuration_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransform AWS API Documentation
     #
@@ -4835,6 +4863,9 @@ module Aws::Glue
     #   resp.transforms[0].number_of_workers #=> Integer
     #   resp.transforms[0].timeout #=> Integer
     #   resp.transforms[0].max_retries #=> Integer
+    #   resp.transforms[0].transform_encryption.ml_user_data_encryption.ml_user_data_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.transforms[0].transform_encryption.ml_user_data_encryption.kms_key_id #=> String
+    #   resp.transforms[0].transform_encryption.task_run_security_configuration_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransforms AWS API Documentation
@@ -7985,6 +8016,9 @@ module Aws::Glue
 
     # Creates or updates partition statistics of columns.
     #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `UpdatePartition`.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
     #   none is supplied, the AWS account ID is used by default.
@@ -8118,6 +8152,9 @@ module Aws::Glue
     end
 
     # Creates or updates table statistics of columns.
+    #
+    # The Identity and Access Management (IAM) permission required for this
+    # operation is `UpdateTable`.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
@@ -9148,7 +9185,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

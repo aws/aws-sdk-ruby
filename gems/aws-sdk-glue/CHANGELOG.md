@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2020-10-27)
+------------------
+
+* Feature - AWS Glue machine learning transforms now support encryption-at-rest for labels and trained models.
+
 1.77.0 (2020-10-21)
 ------------------
 

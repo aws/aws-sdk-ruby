@@ -428,6 +428,8 @@ module Aws::Glue
     LongColumnStatisticsData = Shapes::StructureShape.new(name: 'LongColumnStatisticsData')
     MLTransform = Shapes::StructureShape.new(name: 'MLTransform')
     MLTransformNotReadyException = Shapes::StructureShape.new(name: 'MLTransformNotReadyException')
+    MLUserDataEncryption = Shapes::StructureShape.new(name: 'MLUserDataEncryption')
+    MLUserDataEncryptionModeString = Shapes::StringShape.new(name: 'MLUserDataEncryptionModeString')
     MapValue = Shapes::MapShape.new(name: 'MapValue')
     MappingEntry = Shapes::StructureShape.new(name: 'MappingEntry')
     MappingList = Shapes::ListShape.new(name: 'MappingList')
@@ -603,6 +605,7 @@ module Aws::Glue
     TimestampValue = Shapes::TimestampShape.new(name: 'TimestampValue')
     Token = Shapes::StringShape.new(name: 'Token')
     TotalSegmentsInteger = Shapes::IntegerShape.new(name: 'TotalSegmentsInteger')
+    TransformEncryption = Shapes::StructureShape.new(name: 'TransformEncryption')
     TransformFilterCriteria = Shapes::StructureShape.new(name: 'TransformFilterCriteria')
     TransformIdList = Shapes::ListShape.new(name: 'TransformIdList')
     TransformList = Shapes::ListShape.new(name: 'TransformList')
@@ -1207,6 +1210,7 @@ module Aws::Glue
     CreateMLTransformRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     CreateMLTransformRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
     CreateMLTransformRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateMLTransformRequest.add_member(:transform_encryption, Shapes::ShapeRef.new(shape: TransformEncryption, location_name: "TransformEncryption"))
     CreateMLTransformRequest.struct_class = Types::CreateMLTransformRequest
 
     CreateMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
@@ -1782,6 +1786,7 @@ module Aws::Glue
     GetMLTransformResponse.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
     GetMLTransformResponse.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     GetMLTransformResponse.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
+    GetMLTransformResponse.add_member(:transform_encryption, Shapes::ShapeRef.new(shape: TransformEncryption, location_name: "TransformEncryption"))
     GetMLTransformResponse.struct_class = Types::GetMLTransformResponse
 
     GetMLTransformsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -2252,10 +2257,15 @@ module Aws::Glue
     MLTransform.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
     MLTransform.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     MLTransform.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
+    MLTransform.add_member(:transform_encryption, Shapes::ShapeRef.new(shape: TransformEncryption, location_name: "TransformEncryption"))
     MLTransform.struct_class = Types::MLTransform
 
     MLTransformNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     MLTransformNotReadyException.struct_class = Types::MLTransformNotReadyException
+
+    MLUserDataEncryption.add_member(:ml_user_data_encryption_mode, Shapes::ShapeRef.new(shape: MLUserDataEncryptionModeString, required: true, location_name: "MlUserDataEncryptionMode"))
+    MLUserDataEncryption.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NameString, location_name: "KmsKeyId"))
+    MLUserDataEncryption.struct_class = Types::MLUserDataEncryption
 
     MapValue.key = Shapes::ShapeRef.new(shape: GenericString)
     MapValue.value = Shapes::ShapeRef.new(shape: GenericString)
@@ -2728,6 +2738,10 @@ module Aws::Glue
     TaskRunSortCriteria.add_member(:column, Shapes::ShapeRef.new(shape: TaskRunSortColumnType, required: true, location_name: "Column"))
     TaskRunSortCriteria.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirectionType, required: true, location_name: "SortDirection"))
     TaskRunSortCriteria.struct_class = Types::TaskRunSortCriteria
+
+    TransformEncryption.add_member(:ml_user_data_encryption, Shapes::ShapeRef.new(shape: MLUserDataEncryption, location_name: "MlUserDataEncryption"))
+    TransformEncryption.add_member(:task_run_security_configuration_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TaskRunSecurityConfigurationName"))
+    TransformEncryption.struct_class = Types::TransformEncryption
 
     TransformFilterCriteria.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     TransformFilterCriteria.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, location_name: "TransformType"))
