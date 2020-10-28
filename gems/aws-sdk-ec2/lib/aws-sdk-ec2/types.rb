@@ -1109,6 +1109,67 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateEnclaveCertificateIamRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "ResourceArn",
+    #         role_arn: "ResourceArn",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   The ARN of the ACM certificate with which to associate the IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to associate with the ACM certificate. You
+    #   can associate up to 16 IAM roles with an ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateEnclaveCertificateIamRoleRequest AWS API Documentation
+    #
+    class AssociateEnclaveCertificateIamRoleRequest < Struct.new(
+      :certificate_arn,
+      :role_arn,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_s3_bucket_name
+    #   The name of the Amazon S3 bucket to which the certificate was
+    #   uploaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_s3_object_key
+    #   The Amazon S3 object key where the certificate, certificate chain,
+    #   and encrypted private key bundle are stored. The object key is
+    #   formatted as follows: `certificate_arn`/`role_arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_kms_key_id
+    #   The ID of the AWS Key Management Service (KMS) key used to encrypt
+    #   the private key of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateEnclaveCertificateIamRoleResult AWS API Documentation
+    #
+    class AssociateEnclaveCertificateIamRoleResult < Struct.new(
+      :certificate_s3_bucket_name,
+      :certificate_s3_object_key,
+      :encryption_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateIamInstanceProfileRequest
     #   data as a hash:
     #
@@ -1431,6 +1492,38 @@ module Aws::EC2
       :ipv_6_cidr_block_association,
       :cidr_block_association,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the associated IAM roles.
+    #
+    # @!attribute [rw] associated_role_arn
+    #   The ARN of the associated IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_s3_bucket_name
+    #   The name of the Amazon S3 bucket in which the Amazon S3 object is
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_s3_object_key
+    #   The key of the Amazon S3 object ey where the certificate,
+    #   certificate chain, and encrypted private key bundle is stored. The
+    #   object key is formated as follows: `certificate_arn`/`role_arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_kms_key_id
+    #   The ID of the KMS key used to encrypt the private key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedRole AWS API Documentation
+    #
+    class AssociatedRole < Struct.new(
+      :associated_role_arn,
+      :certificate_s3_bucket_name,
+      :certificate_s3_object_key,
+      :encryption_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6536,6 +6629,9 @@ module Aws::EC2
     #             http_put_response_hop_limit: 1,
     #             http_endpoint: "disabled", # accepts disabled, enabled
     #           },
+    #           enclave_options: {
+    #             enabled: false,
+    #           },
     #         },
     #         tag_specifications: [
     #           {
@@ -6757,6 +6853,9 @@ module Aws::EC2
     #             http_tokens: "optional", # accepts optional, required
     #             http_put_response_hop_limit: 1,
     #             http_endpoint: "disabled", # accepts disabled, enabled
+    #           },
+    #           enclave_options: {
+    #             enabled: false,
     #           },
     #         },
     #       }
@@ -15812,7 +15911,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #         dry_run: false,
     #         instance_id: "InstanceId", # required
     #       }
@@ -23961,6 +24060,54 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateEnclaveCertificateIamRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "ResourceArn",
+    #         role_arn: "ResourceArn",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   The ARN of the ACM certificate from which to disassociate the IAM
+    #   role.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateEnclaveCertificateIamRoleRequest AWS API Documentation
+    #
+    class DisassociateEnclaveCertificateIamRoleRequest < Struct.new(
+      :certificate_arn,
+      :role_arn,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateEnclaveCertificateIamRoleResult AWS API Documentation
+    #
+    class DisassociateEnclaveCertificateIamRoleResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateIamInstanceProfileRequest
     #   data as a hash:
     #
@@ -25311,6 +25458,49 @@ module Aws::EC2
     #
     class EnableVpcClassicLinkResult < Struct.new(
       :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    #
+    # @!attribute [rw] enabled
+    #   If this parameter is set to `true`, the instance is enabled for AWS
+    #   Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnclaveOptions AWS API Documentation
+    #
+    class EnclaveOptions < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether the instance is enabled for AWS Nitro Enclaves. For
+    # more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    #
+    # @note When making an API call, you may pass EnclaveOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   To enable the instance for AWS Nitro Enclaves, set this parameter to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnclaveOptionsRequest AWS API Documentation
+    #
+    class EnclaveOptionsRequest < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26798,6 +26988,47 @@ module Aws::EC2
     class FpgaInfo < Struct.new(
       :fpgas,
       :total_fpga_memory_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAssociatedEnclaveCertificateIamRolesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "ResourceArn",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   The ARN of the ACM certificate for which to view the associated IAM
+    #   roles, encryption keys, and Amazon S3 object information.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAssociatedEnclaveCertificateIamRolesRequest AWS API Documentation
+    #
+    class GetAssociatedEnclaveCertificateIamRolesRequest < Struct.new(
+      :certificate_arn,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_roles
+    #   Information about the associated IAM roles.
+    #   @return [Array<Types::AssociatedRole>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAssociatedEnclaveCertificateIamRolesResult AWS API Documentation
+    #
+    class GetAssociatedEnclaveCertificateIamRolesResult < Struct.new(
+      :associated_roles)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30441,6 +30672,10 @@ module Aws::EC2
     #   The metadata options for the instance.
     #   @return [Types::InstanceMetadataOptionsResponse]
     #
+    # @!attribute [rw] enclave_options
+    #   Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    #   @return [Types::EnclaveOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -30490,7 +30725,8 @@ module Aws::EC2
       :capacity_reservation_specification,
       :hibernation_options,
       :licenses,
-      :metadata_options)
+      :metadata_options,
+      :enclave_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30513,6 +30749,11 @@ module Aws::EC2
     # @!attribute [rw] ena_support
     #   Indicates whether enhanced networking with ENA is enabled.
     #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] enclave_options
+    #   To enable the instance for AWS Nitro Enclaves, set this parameter to
+    #   `true`; otherwise, set it to `false`.
+    #   @return [Types::EnclaveOptions]
     #
     # @!attribute [rw] ebs_optimized
     #   Indicates whether the instance is optimized for Amazon EBS I/O.
@@ -30572,6 +30813,7 @@ module Aws::EC2
       :block_device_mappings,
       :disable_api_termination,
       :ena_support,
+      :enclave_options,
       :ebs_optimized,
       :instance_id,
       :instance_initiated_shutdown_behavior,
@@ -32838,6 +33080,49 @@ module Aws::EC2
     class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
       :type,
       :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    #
+    # @!attribute [rw] enabled
+    #   If this parameter is set to `true`, the instance is enabled for AWS
+    #   Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEnclaveOptions AWS API Documentation
+    #
+    class LaunchTemplateEnclaveOptions < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether the instance is enabled for AWS Nitro Enclaves. For
+    # more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    #
+    # @note When making an API call, you may pass LaunchTemplateEnclaveOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   To enable the instance for AWS Nitro Enclaves, set this parameter to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEnclaveOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplateEnclaveOptionsRequest < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35217,7 +35502,7 @@ module Aws::EC2
     #         source_dest_check: {
     #           value: false,
     #         },
-    #         attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #         attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #         block_device_mappings: [
     #           {
     #             device_name: "String",
@@ -41553,6 +41838,9 @@ module Aws::EC2
     #           http_put_response_hop_limit: 1,
     #           http_endpoint: "disabled", # accepts disabled, enabled
     #         },
+    #         enclave_options: {
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] kernel_id
@@ -41759,6 +42047,22 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #   @return [Types::LaunchTemplateInstanceMetadataOptionsRequest]
     #
+    # @!attribute [rw] enclave_options
+    #   Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    #   For more information, see [ AWS Nitro Enclaves][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #   You can't enable AWS Nitro Enclaves and hibernation on the same
+    #   instance. For more information about AWS Nitro Enclaves
+    #   requirements, see [ AWS Nitro Enclaves][2] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
+    #   @return [Types::LaunchTemplateEnclaveOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -41787,7 +42091,8 @@ module Aws::EC2
       :capacity_reservation_specification,
       :license_specifications,
       :hibernation_options,
-      :metadata_options)
+      :metadata_options,
+      :enclave_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43079,7 +43384,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #         dry_run: false,
     #         instance_id: "InstanceId", # required
     #       }
@@ -43332,6 +43637,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #   @return [Types::LaunchTemplateInstanceMetadataOptions]
     #
+    # @!attribute [rw] enclave_options
+    #   Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    #   @return [Types::LaunchTemplateEnclaveOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -43360,7 +43669,8 @@ module Aws::EC2
       :capacity_reservation_specification,
       :license_specifications,
       :hibernation_options,
-      :metadata_options)
+      :metadata_options,
+      :enclave_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44182,6 +44492,9 @@ module Aws::EC2
     #           http_put_response_hop_limit: 1,
     #           http_endpoint: "disabled", # accepts disabled, enabled
     #         },
+    #         enclave_options: {
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -44526,6 +44839,9 @@ module Aws::EC2
     #   information, see [Hibernate your instance][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
+    #   You can't enable hibernation and AWS Nitro Enclaves on the same
+    #   instance.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
@@ -44543,6 +44859,22 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #   @return [Types::InstanceMetadataOptionsRequest]
+    #
+    # @!attribute [rw] enclave_options
+    #   Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    #   For more information, see [ AWS Nitro Enclaves][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #   You can't enable AWS Nitro Enclaves and hibernation on the same
+    #   instance. For more information about AWS Nitro Enclaves
+    #   requirements, see [ AWS Nitro Enclaves][2] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
+    #   @return [Types::EnclaveOptionsRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
@@ -44582,7 +44914,8 @@ module Aws::EC2
       :capacity_reservation_specification,
       :hibernation_options,
       :license_specifications,
-      :metadata_options)
+      :metadata_options,
+      :enclave_options)
       SENSITIVE = []
       include Aws::Structure
     end

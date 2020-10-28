@@ -628,8 +628,8 @@ module Aws::WorkMail
     #   The identifier of the organization for which the user is created.
     #
     # @option params [required, String] :name
-    #   The name for the new user. Simple AD or AD Connector user names have a
-    #   maximum length of 20. All others have a maximum length of 64.
+    #   The name for the new user. WorkMail directory user names have a
+    #   maximum length of 64. All others have a maximum length of 20.
     #
     # @option params [required, String] :display_name
     #   The display name for the new user.
@@ -2354,7 +2354,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

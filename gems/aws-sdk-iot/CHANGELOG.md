@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2020-10-28)
+------------------
+
+* Feature - This release adds support for GG-Managed Job Namespace
+
 1.59.0 (2020-10-15)
 ------------------
 

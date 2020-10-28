@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-10-28)
+------------------
+
+* Feature - Documentation update for Amazon WorkMail
+
 1.32.0 (2020-10-15)
 ------------------
 

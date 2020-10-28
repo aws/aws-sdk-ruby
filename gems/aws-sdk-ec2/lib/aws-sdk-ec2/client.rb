@@ -1401,6 +1401,74 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Associates an AWS Identity and Access Management (IAM) role with an
+    # AWS Certificate Manager (ACM) certificate. This enables the
+    # certificate to be used by the ACM for Nitro Enclaves application
+    # inside an enclave. For more information, see [AWS Certificate Manager
+    # for Nitro Enclaves][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    # When the IAM role is associated with the ACM certificate, places the
+    # certificate, certificate chain, and encrypted private key in an Amazon
+    # S3 bucket that only the associated IAM role can access. The private
+    # key of the certificate is encrypted with an AWS-managed KMS key that
+    # has an attached attestation-based key policy.
+    #
+    # To enable the IAM role to access the Amazon S3 object, you must grant
+    # it permission to call `s3:GetObject` on the Amazon S3 bucket returned
+    # by the command. To enable the IAM role to access the AWS KMS key, you
+    # must grant it permission to call `kms:Decrypt` on AWS KMS key returned
+    # by the command. For more information, see [ Grant the role permission
+    # to access the certificate and encryption key][2] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html
+    # [2]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy
+    #
+    # @option params [String] :certificate_arn
+    #   The ARN of the ACM certificate with which to associate the IAM role.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the IAM role to associate with the ACM certificate. You can
+    #   associate up to 16 IAM roles with an ACM certificate.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateEnclaveCertificateIamRoleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateEnclaveCertificateIamRoleResult#certificate_s3_bucket_name #certificate_s3_bucket_name} => String
+    #   * {Types::AssociateEnclaveCertificateIamRoleResult#certificate_s3_object_key #certificate_s3_object_key} => String
+    #   * {Types::AssociateEnclaveCertificateIamRoleResult#encryption_kms_key_id #encryption_kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_enclave_certificate_iam_role({
+    #     certificate_arn: "ResourceArn",
+    #     role_arn: "ResourceArn",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_s3_bucket_name #=> String
+    #   resp.certificate_s3_object_key #=> String
+    #   resp.encryption_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateEnclaveCertificateIamRole AWS API Documentation
+    #
+    # @overload associate_enclave_certificate_iam_role(params = {})
+    # @param [Hash] params ({})
+    def associate_enclave_certificate_iam_role(params = {}, options = {})
+      req = build_request(:associate_enclave_certificate_iam_role, params)
+      req.send_request(options)
+    end
+
     # Associates an IAM instance profile with a running or stopped instance.
     # You cannot associate more than one IAM instance profile with an
     # instance.
@@ -5625,6 +5693,9 @@ module Aws::EC2
     #         http_put_response_hop_limit: 1,
     #         http_endpoint: "disabled", # accepts disabled, enabled
     #       },
+    #       enclave_options: {
+    #         enabled: false,
+    #       },
     #     },
     #     tag_specifications: [
     #       {
@@ -5906,6 +5977,9 @@ module Aws::EC2
     #         http_put_response_hop_limit: 1,
     #         http_endpoint: "disabled", # accepts disabled, enabled
     #       },
+    #       enclave_options: {
+    #         enabled: false,
+    #       },
     #     },
     #   })
     #
@@ -6001,6 +6075,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.launch_template_version.launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.launch_template_version.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.launch_template_version.launch_template_data.enclave_options.enabled #=> Boolean
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
     #   resp.warning.errors[0].message #=> String
@@ -16449,6 +16524,7 @@ module Aws::EC2
     #   * {Types::InstanceAttribute#block_device_mappings #block_device_mappings} => Array&lt;Types::InstanceBlockDeviceMapping&gt;
     #   * {Types::InstanceAttribute#disable_api_termination #disable_api_termination} => Types::AttributeBooleanValue
     #   * {Types::InstanceAttribute#ena_support #ena_support} => Types::AttributeBooleanValue
+    #   * {Types::InstanceAttribute#enclave_options #enclave_options} => Types::EnclaveOptions
     #   * {Types::InstanceAttribute#ebs_optimized #ebs_optimized} => Types::AttributeBooleanValue
     #   * {Types::InstanceAttribute#instance_id #instance_id} => String
     #   * {Types::InstanceAttribute#instance_initiated_shutdown_behavior #instance_initiated_shutdown_behavior} => Types::AttributeValue
@@ -16533,7 +16609,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #   })
@@ -16551,6 +16627,7 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.volume_id #=> String
     #   resp.disable_api_termination.value #=> Boolean
     #   resp.ena_support.value #=> Boolean
+    #   resp.enclave_options.enabled #=> Boolean
     #   resp.ebs_optimized.value #=> Boolean
     #   resp.instance_id #=> String
     #   resp.instance_initiated_shutdown_behavior #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -17779,6 +17856,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.reservations[0].instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.reservations[0].instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.reservations[0].instances[0].enclave_options.enabled #=> Boolean
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -18358,6 +18436,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.launch_template_versions[0].launch_template_data.enclave_options.enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -26818,6 +26897,52 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disassociates an IAM role from an AWS Certificate Manager (ACM)
+    # certificate. Disassociating an IAM role from an ACM certificate
+    # removes the Amazon S3 object that contains the certificate,
+    # certificate chain, and encrypted private key from the Amazon S3
+    # bucket. It also revokes the IAM role's permission to use the AWS Key
+    # Management Service (KMS) key used to encrypt the private key. This
+    # effectively revokes the role's permission to use the certificate.
+    #
+    # @option params [String] :certificate_arn
+    #   The ARN of the ACM certificate from which to disassociate the IAM
+    #   role.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the IAM role to disassociate.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateEnclaveCertificateIamRoleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateEnclaveCertificateIamRoleResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_enclave_certificate_iam_role({
+    #     certificate_arn: "ResourceArn",
+    #     role_arn: "ResourceArn",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateEnclaveCertificateIamRole AWS API Documentation
+    #
+    # @overload disassociate_enclave_certificate_iam_role(params = {})
+    # @param [Hash] params ({})
+    def disassociate_enclave_certificate_iam_role(params = {}, options = {})
+      req = build_request(:disassociate_enclave_certificate_iam_role, params)
+      req.send_request(options)
+    end
+
     # Disassociates an IAM instance profile from a running or stopped
     # instance.
     #
@@ -27712,6 +27837,51 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Returns the IAM roles that are associated with the specified AWS
+    # Certificate Manager (ACM) certificate. It also returns the name of the
+    # Amazon S3 bucket and the Amazon S3 object key where the certificate,
+    # certificate chain, and encrypted private key bundle are stored, and
+    # the ARN of the AWS Key Management Service (KMS) key that's used to
+    # encrypt the private key.
+    #
+    # @option params [String] :certificate_arn
+    #   The ARN of the ACM certificate for which to view the associated IAM
+    #   roles, encryption keys, and Amazon S3 object information.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetAssociatedEnclaveCertificateIamRolesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAssociatedEnclaveCertificateIamRolesResult#associated_roles #associated_roles} => Array&lt;Types::AssociatedRole&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_associated_enclave_certificate_iam_roles({
+    #     certificate_arn: "ResourceArn",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associated_roles #=> Array
+    #   resp.associated_roles[0].associated_role_arn #=> String
+    #   resp.associated_roles[0].certificate_s3_bucket_name #=> String
+    #   resp.associated_roles[0].certificate_s3_object_key #=> String
+    #   resp.associated_roles[0].encryption_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAssociatedEnclaveCertificateIamRoles AWS API Documentation
+    #
+    # @overload get_associated_enclave_certificate_iam_roles(params = {})
+    # @param [Hash] params ({})
+    def get_associated_enclave_certificate_iam_roles(params = {}, options = {})
+      req = build_request(:get_associated_enclave_certificate_iam_roles, params)
+      req.send_request(options)
+    end
+
     # Gets information about the IPv6 CIDR block associations for a
     # specified IPv6 address pool.
     #
@@ -28448,6 +28618,7 @@ module Aws::EC2
     #   resp.launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.launch_template_data.enclave_options.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -30895,7 +31066,7 @@ module Aws::EC2
     #     source_dest_check: {
     #       value: false,
     #     },
-    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
@@ -36238,7 +36409,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.reset_instance_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #   })
@@ -37193,6 +37364,9 @@ module Aws::EC2
     #   information, see [Hibernate your instance][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
+    #   You can't enable hibernation and AWS Nitro Enclaves on the same
+    #   instance.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
@@ -37207,6 +37381,21 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
+    # @option params [Types::EnclaveOptionsRequest] :enclave_options
+    #   Indicates whether the instance is enabled for AWS Nitro Enclaves. For
+    #   more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #   You can't enable AWS Nitro Enclaves and hibernation on the same
+    #   instance. For more information about AWS Nitro Enclaves requirements,
+    #   see [ AWS Nitro Enclaves][2] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -37408,6 +37597,9 @@ module Aws::EC2
     #       http_put_response_hop_limit: 1,
     #       http_endpoint: "disabled", # accepts disabled, enabled
     #     },
+    #     enclave_options: {
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -37532,6 +37724,7 @@ module Aws::EC2
     #   resp.instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.instances[0].enclave_options.enabled #=> Boolean
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -38901,7 +39094,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.202.0'
+      context[:gem_version] = '1.203.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

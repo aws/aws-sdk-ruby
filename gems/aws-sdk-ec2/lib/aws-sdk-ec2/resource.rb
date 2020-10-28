@@ -228,6 +228,9 @@ module Aws::EC2
     #       http_put_response_hop_limit: 1,
     #       http_endpoint: "disabled", # accepts disabled, enabled
     #     },
+    #     enclave_options: {
+    #       enabled: false,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -500,6 +503,9 @@ module Aws::EC2
     #   information, see [Hibernate your instance][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
+    #   You can't enable hibernation and AWS Nitro Enclaves on the same
+    #   instance.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
@@ -512,6 +518,20 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    # @option options [Types::EnclaveOptionsRequest] :enclave_options
+    #   Indicates whether the instance is enabled for AWS Nitro Enclaves. For
+    #   more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #   You can't enable AWS Nitro Enclaves and hibernation on the same
+    #   instance. For more information about AWS Nitro Enclaves requirements,
+    #   see [ AWS Nitro Enclaves][2] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []

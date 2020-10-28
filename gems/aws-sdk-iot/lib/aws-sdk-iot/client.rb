@@ -448,6 +448,19 @@ module Aws::IoT
     #   An optional comment string describing why the job was associated with
     #   the targets.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Types::AssociateTargetsWithJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateTargetsWithJobResponse#job_arn #job_arn} => String
@@ -460,6 +473,7 @@ module Aws::IoT
     #     targets: ["TargetArn"], # required
     #     job_id: "JobId", # required
     #     comment: "Comment",
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @example Response structure
@@ -1347,6 +1361,19 @@ module Aws::IoT
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the job.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -1396,6 +1423,7 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @example Response structure
@@ -3086,6 +3114,19 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3093,6 +3134,7 @@ module Aws::IoT
     #   resp = client.delete_job({
     #     job_id: "JobId", # required
     #     force: false,
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @overload delete_job(params = {})
@@ -3132,6 +3174,19 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3141,6 +3196,7 @@ module Aws::IoT
     #     thing_name: "ThingName", # required
     #     execution_number: 1, # required
     #     force: false,
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @overload delete_job_execution(params = {})
@@ -4262,6 +4318,7 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_removed_things #=> Integer
     #   resp.job.job_process_details.number_of_timed_out_things #=> Integer
     #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
+    #   resp.job.namespace_id #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -6539,6 +6596,19 @@ module Aws::IoT
     #   An optional filter that lets you search for jobs that have the
     #   specified status.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request.
     #
@@ -6557,6 +6627,7 @@ module Aws::IoT
     #   resp = client.list_job_executions_for_thing({
     #     thing_name: "ThingName", # required
     #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
+    #     namespace_id: "NamespaceId",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -6607,6 +6678,19 @@ module Aws::IoT
     #   A filter that limits the returned jobs to those for the specified
     #   group.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::JobSummary&gt;
@@ -6623,6 +6707,7 @@ module Aws::IoT
     #     next_token: "NextToken",
     #     thing_group_name: "ThingGroupName",
     #     thing_group_id: "ThingGroupId",
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @example Response structure
@@ -9783,6 +9868,19 @@ module Aws::IoT
     #   terminal state before the time expires, it will be automatically set
     #   to `TIMED_OUT`.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -9818,6 +9916,7 @@ module Aws::IoT
     #     timeout_config: {
     #       in_progress_timeout_in_minutes: 1,
     #     },
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @overload update_job(params = {})
@@ -10485,7 +10584,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

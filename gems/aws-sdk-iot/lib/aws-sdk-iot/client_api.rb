@@ -710,6 +710,7 @@ module Aws::IoT
     MqttContext = Shapes::StructureShape.new(name: 'MqttContext')
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
     MqttUsername = Shapes::StringShape.new(name: 'MqttUsername')
+    NamespaceId = Shapes::StringShape.new(name: 'NamespaceId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonCompliantChecksCount = Shapes::IntegerShape.new(name: 'NonCompliantChecksCount')
     NonCompliantResource = Shapes::StructureShape.new(name: 'NonCompliantResource')
@@ -1222,6 +1223,7 @@ module Aws::IoT
     AssociateTargetsWithJobRequest.add_member(:targets, Shapes::ShapeRef.new(shape: JobTargets, required: true, location_name: "targets"))
     AssociateTargetsWithJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     AssociateTargetsWithJobRequest.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    AssociateTargetsWithJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     AssociateTargetsWithJobRequest.struct_class = Types::AssociateTargetsWithJobRequest
 
     AssociateTargetsWithJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -1670,6 +1672,7 @@ module Aws::IoT
     CreateJobRequest.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     CreateJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -1926,10 +1929,12 @@ module Aws::IoT
     DeleteJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     DeleteJobExecutionRequest.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, required: true, location: "uri", location_name: "executionNumber"))
     DeleteJobExecutionRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobExecutionRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     DeleteJobExecutionRequest.struct_class = Types::DeleteJobExecutionRequest
 
     DeleteJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     DeleteJobRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     DeleteJobRequest.struct_class = Types::DeleteJobRequest
 
     DeleteMitigationActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, required: true, location: "uri", location_name: "actionName"))
@@ -2615,6 +2620,7 @@ module Aws::IoT
     Job.add_member(:completed_at, Shapes::ShapeRef.new(shape: DateType, location_name: "completedAt"))
     Job.add_member(:job_process_details, Shapes::ShapeRef.new(shape: JobProcessDetails, location_name: "jobProcessDetails"))
     Job.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
+    Job.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -2861,6 +2867,7 @@ module Aws::IoT
 
     ListJobExecutionsForThingRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     ListJobExecutionsForThingRequest.add_member(:status, Shapes::ShapeRef.new(shape: JobExecutionStatus, location: "querystring", location_name: "status"))
+    ListJobExecutionsForThingRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     ListJobExecutionsForThingRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LaserMaxResults, location: "querystring", location_name: "maxResults"))
     ListJobExecutionsForThingRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListJobExecutionsForThingRequest.struct_class = Types::ListJobExecutionsForThingRequest
@@ -2875,6 +2882,7 @@ module Aws::IoT
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListJobsRequest.add_member(:thing_group_name, Shapes::ShapeRef.new(shape: ThingGroupName, location: "querystring", location_name: "thingGroupName"))
     ListJobsRequest.add_member(:thing_group_id, Shapes::ShapeRef.new(shape: ThingGroupId, location: "querystring", location_name: "thingGroupId"))
+    ListJobsRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     ListJobsRequest.struct_class = Types::ListJobsRequest
 
     ListJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: JobSummaryList, location_name: "jobs"))
@@ -4043,6 +4051,7 @@ module Aws::IoT
     UpdateJobRequest.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: JobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
     UpdateJobRequest.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     UpdateJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
+    UpdateJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateMitigationActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, required: true, location: "uri", location_name: "actionName"))

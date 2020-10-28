@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.203.0 (2020-10-28)
+------------------
+
+* Feature - AWS Nitro Enclaves general availability. Added support to RunInstances for creating enclave-enabled EC2 instances. New APIs to associate an ACM certificate with an IAM role, for enclave consumption.
+
 1.202.0 (2020-10-21)
 ------------------
 
