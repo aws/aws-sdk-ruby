@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-10-29)
+------------------
+
+* Feature - Add support for tagging of CodeArtifact domain and repository resources.
+
 1.4.0 (2020-09-30)
 ------------------
 

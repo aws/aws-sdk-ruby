@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-10-29)
+------------------
+
+* Feature - Documentation updates for marketplacecommerceanalytics to specify four data sets which are deprecated.
+
 1.29.0 (2020-09-30)
 ------------------
 

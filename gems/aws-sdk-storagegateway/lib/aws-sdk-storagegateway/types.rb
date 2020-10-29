@@ -1043,6 +1043,7 @@ module Aws::StorageGateway
     #         cache_attributes: {
     #           cache_stale_timeout_in_seconds: 1,
     #         },
+    #         notification_policy: "NotificationPolicy",
     #       }
     #
     # @!attribute [rw] client_token
@@ -1173,6 +1174,10 @@ module Aws::StorageGateway
     #   Refresh cache information.
     #   @return [Types::CacheAttributes]
     #
+    # @!attribute [rw] notification_policy
+    #   The notification policy of the file share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
     #
     class CreateNFSFileShareInput < Struct.new(
@@ -1192,7 +1197,8 @@ module Aws::StorageGateway
       :requester_pays,
       :tags,
       :file_share_name,
-      :cache_attributes)
+      :cache_attributes,
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1229,6 +1235,7 @@ module Aws::StorageGateway
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
     #         smbacl_enabled: false,
+    #         access_based_enumeration: false,
     #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
@@ -1245,6 +1252,7 @@ module Aws::StorageGateway
     #         cache_attributes: {
     #           cache_stale_timeout_in_seconds: 1,
     #         },
+    #         notification_policy: "NotificationPolicy",
     #       }
     #
     # @!attribute [rw] client_token
@@ -1345,6 +1353,11 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] access_based_enumeration
+    #   The files and folders on this share will only be visible to users
+    #   with read access.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] admin_user_list
     #   A list of users or groups in the Active Directory that will be
     #   granted administrator privileges on the file share. These users can
@@ -1416,6 +1429,10 @@ module Aws::StorageGateway
     #   Refresh cache information.
     #   @return [Types::CacheAttributes]
     #
+    # @!attribute [rw] notification_policy
+    #   The notification policy of the file share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput AWS API Documentation
     #
     class CreateSMBFileShareInput < Struct.new(
@@ -1431,6 +1448,7 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :smbacl_enabled,
+      :access_based_enumeration,
       :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
@@ -1439,7 +1457,8 @@ module Aws::StorageGateway
       :case_sensitivity,
       :tags,
       :file_share_name,
-      :cache_attributes)
+      :cache_attributes,
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3169,6 +3188,10 @@ module Aws::StorageGateway
     #     Microsoft Windows 8, Windows Server 2012 or newer.
     #   @return [String]
     #
+    # @!attribute [rw] file_shares_visible
+    #   The shares on this gateway appear when listing shares.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput AWS API Documentation
     #
     class DescribeSMBSettingsOutput < Struct.new(
@@ -3176,7 +3199,8 @@ module Aws::StorageGateway
       :domain_name,
       :active_directory_status,
       :smb_guest_password_set,
-      :smb_security_strategy)
+      :smb_security_strategy,
+      :file_shares_visible)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4887,6 +4911,10 @@ module Aws::StorageGateway
     #   Refresh cache information.
     #   @return [Types::CacheAttributes]
     #
+    # @!attribute [rw] notification_policy
+    #   The notification policy of the file share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
     #
     class NFSFileShareInfo < Struct.new(
@@ -4909,7 +4937,8 @@ module Aws::StorageGateway
       :requester_pays,
       :tags,
       :file_share_name,
-      :cache_attributes)
+      :cache_attributes,
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5385,6 +5414,10 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] access_based_enumeration
+    #   Indicates whether `AccessBasedEnumeration` is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] admin_user_list
     #   A list of users or groups in the Active Directory that have
     #   administrator rights to the file share. A group must be prefixed
@@ -5448,6 +5481,10 @@ module Aws::StorageGateway
     #   Refresh cache information.
     #   @return [Types::CacheAttributes]
     #
+    # @!attribute [rw] notification_policy
+    #   The notification policy of the file share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo AWS API Documentation
     #
     class SMBFileShareInfo < Struct.new(
@@ -5466,6 +5503,7 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :smbacl_enabled,
+      :access_based_enumeration,
       :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
@@ -5474,7 +5512,8 @@ module Aws::StorageGateway
       :case_sensitivity,
       :tags,
       :file_share_name,
-      :cache_attributes)
+      :cache_attributes,
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6568,6 +6607,7 @@ module Aws::StorageGateway
     #         cache_attributes: {
     #           cache_stale_timeout_in_seconds: 1,
     #         },
+    #         notification_policy: "NotificationPolicy",
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -6670,6 +6710,10 @@ module Aws::StorageGateway
     #   Refresh cache information.
     #   @return [Types::CacheAttributes]
     #
+    # @!attribute [rw] notification_policy
+    #   The notification policy of the file share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
     #
     class UpdateNFSFileShareInput < Struct.new(
@@ -6685,7 +6729,8 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :file_share_name,
-      :cache_attributes)
+      :cache_attributes,
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6719,6 +6764,7 @@ module Aws::StorageGateway
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
     #         smbacl_enabled: false,
+    #         access_based_enumeration: false,
     #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
@@ -6728,6 +6774,7 @@ module Aws::StorageGateway
     #         cache_attributes: {
     #           cache_stale_timeout_in_seconds: 1,
     #         },
+    #         notification_policy: "NotificationPolicy",
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -6813,6 +6860,11 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] access_based_enumeration
+    #   The files and folders on this share will only be visible to users
+    #   with read access.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] admin_user_list
     #   A list of users or groups in the Active Directory that have
     #   administrator rights to the file share. A group must be prefixed
@@ -6862,6 +6914,10 @@ module Aws::StorageGateway
     #   Refresh cache information.
     #   @return [Types::CacheAttributes]
     #
+    # @!attribute [rw] notification_policy
+    #   The notification policy of the file share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput AWS API Documentation
     #
     class UpdateSMBFileShareInput < Struct.new(
@@ -6874,13 +6930,15 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :smbacl_enabled,
+      :access_based_enumeration,
       :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
       :audit_destination_arn,
       :case_sensitivity,
       :file_share_name,
-      :cache_attributes)
+      :cache_attributes,
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6895,6 +6953,47 @@ module Aws::StorageGateway
     #
     class UpdateSMBFileShareOutput < Struct.new(
       :file_share_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSMBFileShareVisibilityInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #         file_shares_visible: false, # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_shares_visible
+    #   The shares on this gateway appear when listing shares.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareVisibilityInput AWS API Documentation
+    #
+    class UpdateSMBFileShareVisibilityInput < Struct.new(
+      :gateway_arn,
+      :file_shares_visible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareVisibilityOutput AWS API Documentation
+    #
+    class UpdateSMBFileShareVisibilityOutput < Struct.new(
+      :gateway_arn)
       SENSITIVE = []
       include Aws::Structure
     end

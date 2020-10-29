@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2020-10-29)
+------------------
+
+* Feature - Adding support for access based enumeration on SMB file shares, file share visibility on SMB file shares, and file upload notifications for all file shares
+
 1.50.0 (2020-09-30)
 ------------------
 

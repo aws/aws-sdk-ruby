@@ -119,6 +119,7 @@ module Aws::ElasticLoadBalancingV2
     FixedResponseActionMessage = Shapes::StringShape.new(name: 'FixedResponseActionMessage')
     FixedResponseActionStatusCode = Shapes::StringShape.new(name: 'FixedResponseActionStatusCode')
     ForwardActionConfig = Shapes::StructureShape.new(name: 'ForwardActionConfig')
+    GrpcCode = Shapes::StringShape.new(name: 'GrpcCode')
     HealthCheckEnabled = Shapes::BooleanShape.new(name: 'HealthCheckEnabled')
     HealthCheckIntervalSeconds = Shapes::IntegerShape.new(name: 'HealthCheckIntervalSeconds')
     HealthCheckPort = Shapes::StringShape.new(name: 'HealthCheckPort')
@@ -188,6 +189,7 @@ module Aws::ElasticLoadBalancingV2
     PriorityInUseException = Shapes::StructureShape.new(name: 'PriorityInUseException')
     PrivateIPv4Address = Shapes::StringShape.new(name: 'PrivateIPv4Address')
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
+    ProtocolVersion = Shapes::StringShape.new(name: 'ProtocolVersion')
     QueryStringConditionConfig = Shapes::StructureShape.new(name: 'QueryStringConditionConfig')
     QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
     QueryStringKeyValuePairList = Shapes::ListShape.new(name: 'QueryStringKeyValuePairList')
@@ -415,6 +417,7 @@ module Aws::ElasticLoadBalancingV2
 
     CreateTargetGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: TargetGroupName, required: true, location_name: "Name"))
     CreateTargetGroupInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "Protocol"))
+    CreateTargetGroupInput.add_member(:protocol_version, Shapes::ShapeRef.new(shape: ProtocolVersion, location_name: "ProtocolVersion"))
     CreateTargetGroupInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
     CreateTargetGroupInput.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateTargetGroupInput.add_member(:health_check_protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "HealthCheckProtocol"))
@@ -658,7 +661,8 @@ module Aws::ElasticLoadBalancingV2
 
     LoadBalancers.member = Shapes::ShapeRef.new(shape: LoadBalancer)
 
-    Matcher.add_member(:http_code, Shapes::ShapeRef.new(shape: HttpCode, required: true, location_name: "HttpCode"))
+    Matcher.add_member(:http_code, Shapes::ShapeRef.new(shape: HttpCode, location_name: "HttpCode"))
+    Matcher.add_member(:grpc_code, Shapes::ShapeRef.new(shape: GrpcCode, location_name: "GrpcCode"))
     Matcher.struct_class = Types::Matcher
 
     ModifyListenerInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
@@ -881,6 +885,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:matcher, Shapes::ShapeRef.new(shape: Matcher, location_name: "Matcher"))
     TargetGroup.add_member(:load_balancer_arns, Shapes::ShapeRef.new(shape: LoadBalancerArns, location_name: "LoadBalancerArns"))
     TargetGroup.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
+    TargetGroup.add_member(:protocol_version, Shapes::ShapeRef.new(shape: ProtocolVersion, location_name: "ProtocolVersion"))
     TargetGroup.struct_class = Types::TargetGroup
 
     TargetGroupArns.member = Shapes::ShapeRef.new(shape: TargetGroupArn)

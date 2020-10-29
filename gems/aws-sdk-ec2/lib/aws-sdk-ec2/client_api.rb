@@ -50,6 +50,7 @@ module Aws::EC2
     AllowedPrincipal = Shapes::StructureShape.new(name: 'AllowedPrincipal')
     AllowedPrincipalSet = Shapes::ListShape.new(name: 'AllowedPrincipalSet')
     AllowsMultipleInstanceTypes = Shapes::StringShape.new(name: 'AllowsMultipleInstanceTypes')
+    ApplianceModeSupportValue = Shapes::StringShape.new(name: 'ApplianceModeSupportValue')
     ApplySecurityGroupsToClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkRequest')
     ApplySecurityGroupsToClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkResult')
     ArchitectureType = Shapes::StringShape.new(name: 'ArchitectureType')
@@ -1769,6 +1770,7 @@ module Aws::EC2
     SecurityGroupReference = Shapes::StructureShape.new(name: 'SecurityGroupReference')
     SecurityGroupReferences = Shapes::ListShape.new(name: 'SecurityGroupReferences')
     SecurityGroupStringList = Shapes::ListShape.new(name: 'SecurityGroupStringList')
+    SelfServicePortal = Shapes::StringShape.new(name: 'SelfServicePortal')
     SendDiagnosticInterruptRequest = Shapes::StructureShape.new(name: 'SendDiagnosticInterruptRequest')
     SensitiveUserData = Shapes::StringShape.new(name: 'SensitiveUserData')
     ServiceConfiguration = Shapes::StructureShape.new(name: 'ServiceConfiguration')
@@ -2798,6 +2800,7 @@ module Aws::EC2
     ClientVpnEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ClientVpnEndpoint.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "securityGroupIdSet"))
     ClientVpnEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    ClientVpnEndpoint.add_member(:self_service_portal_url, Shapes::ShapeRef.new(shape: String, location_name: "selfServicePortalUrl"))
     ClientVpnEndpoint.struct_class = Types::ClientVpnEndpoint
 
     ClientVpnEndpointIdList.member = Shapes::ShapeRef.new(shape: ClientVpnEndpointId, location_name: "item")
@@ -2976,6 +2979,7 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateClientVpnEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "SecurityGroupId"))
     CreateClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    CreateClientVpnEndpointRequest.add_member(:self_service_portal, Shapes::ShapeRef.new(shape: SelfServicePortal, location_name: "SelfServicePortal"))
     CreateClientVpnEndpointRequest.struct_class = Types::CreateClientVpnEndpointRequest
 
     CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
@@ -3472,6 +3476,7 @@ module Aws::EC2
 
     CreateTransitGatewayVpcAttachmentRequestOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "DnsSupport"))
     CreateTransitGatewayVpcAttachmentRequestOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Ipv6SupportValue, location_name: "Ipv6Support"))
+    CreateTransitGatewayVpcAttachmentRequestOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: ApplianceModeSupportValue, location_name: "ApplianceModeSupport"))
     CreateTransitGatewayVpcAttachmentRequestOptions.struct_class = Types::CreateTransitGatewayVpcAttachmentRequestOptions
 
     CreateTransitGatewayVpcAttachmentResult.add_member(:transit_gateway_vpc_attachment, Shapes::ShapeRef.new(shape: TransitGatewayVpcAttachment, location_name: "transitGatewayVpcAttachment"))
@@ -5751,9 +5756,11 @@ module Aws::EC2
     FailedQueuedPurchaseDeletionSet.member = Shapes::ShapeRef.new(shape: FailedQueuedPurchaseDeletion, location_name: "item")
 
     FederatedAuthentication.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "samlProviderArn"))
+    FederatedAuthentication.add_member(:self_service_saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "selfServiceSamlProviderArn"))
     FederatedAuthentication.struct_class = Types::FederatedAuthentication
 
     FederatedAuthenticationRequest.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "SAMLProviderArn"))
+    FederatedAuthenticationRequest.add_member(:self_service_saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "SelfServiceSAMLProviderArn"))
     FederatedAuthenticationRequest.struct_class = Types::FederatedAuthenticationRequest
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -7336,6 +7343,7 @@ module Aws::EC2
     ModifyClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyClientVpnEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "SecurityGroupId"))
     ModifyClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    ModifyClientVpnEndpointRequest.add_member(:self_service_portal, Shapes::ShapeRef.new(shape: SelfServicePortal, location_name: "SelfServicePortal"))
     ModifyClientVpnEndpointRequest.struct_class = Types::ModifyClientVpnEndpointRequest
 
     ModifyClientVpnEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -7620,6 +7628,7 @@ module Aws::EC2
 
     ModifyTransitGatewayVpcAttachmentRequestOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "DnsSupport"))
     ModifyTransitGatewayVpcAttachmentRequestOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Ipv6SupportValue, location_name: "Ipv6Support"))
+    ModifyTransitGatewayVpcAttachmentRequestOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: ApplianceModeSupportValue, location_name: "ApplianceModeSupport"))
     ModifyTransitGatewayVpcAttachmentRequestOptions.struct_class = Types::ModifyTransitGatewayVpcAttachmentRequestOptions
 
     ModifyTransitGatewayVpcAttachmentResult.add_member(:transit_gateway_vpc_attachment, Shapes::ShapeRef.new(shape: TransitGatewayVpcAttachment, location_name: "transitGatewayVpcAttachment"))
@@ -9840,6 +9849,7 @@ module Aws::EC2
 
     TransitGatewayVpcAttachmentOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "dnsSupport"))
     TransitGatewayVpcAttachmentOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Ipv6SupportValue, location_name: "ipv6Support"))
+    TransitGatewayVpcAttachmentOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: ApplianceModeSupportValue, location_name: "applianceModeSupport"))
     TransitGatewayVpcAttachmentOptions.struct_class = Types::TransitGatewayVpcAttachmentOptions
 
     TunnelOption.add_member(:outside_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "outsideIpAddress"))

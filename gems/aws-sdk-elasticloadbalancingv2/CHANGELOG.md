@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2020-10-29)
+------------------
+
+* Feature - Application Load Balancer (ALB) now supports the gRPC protocol-version. With this release, customers can use ALB to route and load balance gRPC traffic between gRPC enabled clients and microservices.
+
 1.53.0 (2020-10-02)
 ------------------
 

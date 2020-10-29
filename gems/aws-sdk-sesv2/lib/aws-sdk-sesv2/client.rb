@@ -432,7 +432,7 @@ module Aws::SESV2
     #     event_destination_name: "EventDestinationName", # required
     #     event_destination: { # required
     #       enabled: false,
-    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
+    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION
     #       kinesis_firehose_destination: {
     #         iam_role_arn: "AmazonResourceName", # required
     #         delivery_stream_arn: "AmazonResourceName", # required
@@ -461,6 +461,99 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def create_configuration_set_event_destination(params = {}, options = {})
       req = build_request(:create_configuration_set_event_destination, params)
+      req.send_request(options)
+    end
+
+    # Creates a contact, which is an end-user who is receiving the email,
+    # and adds them to a contact list.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list to which the contact should be added.
+    #
+    # @option params [required, String] :email_address
+    #   The contact's email address.
+    #
+    # @option params [Array<Types::TopicPreference>] :topic_preferences
+    #   The contact's preferences for being opted-in to or opted-out of
+    #   topics.
+    #
+    # @option params [Boolean] :unsubscribe_all
+    #   A boolean value status noting if the contact is unsubscribed from all
+    #   contact list topics.
+    #
+    # @option params [String] :attributes_data
+    #   The attribute data attached to a contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contact({
+    #     contact_list_name: "ContactListName", # required
+    #     email_address: "EmailAddress", # required
+    #     topic_preferences: [
+    #       {
+    #         topic_name: "TopicName", # required
+    #         subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #       },
+    #     ],
+    #     unsubscribe_all: false,
+    #     attributes_data: "AttributesData",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateContact AWS API Documentation
+    #
+    # @overload create_contact(params = {})
+    # @param [Hash] params ({})
+    def create_contact(params = {}, options = {})
+      req = build_request(:create_contact, params)
+      req.send_request(options)
+    end
+
+    # Creates a contact list.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list.
+    #
+    # @option params [Array<Types::Topic>] :topics
+    #   An interest group, theme, or label within a list. A contact list can
+    #   have multiple topics.
+    #
+    # @option params [String] :description
+    #   A description of what the contact list is about.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with a contact list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contact_list({
+    #     contact_list_name: "ContactListName", # required
+    #     topics: [
+    #       {
+    #         topic_name: "TopicName", # required
+    #         display_name: "DisplayName", # required
+    #         description: "Description",
+    #         default_subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #       },
+    #     ],
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateContactList AWS API Documentation
+    #
+    # @overload create_contact_list(params = {})
+    # @param [Hash] params ({})
+    def create_contact_list(params = {}, options = {})
+      req = build_request(:create_contact_list, params)
       req.send_request(options)
     end
 
@@ -849,8 +942,12 @@ module Aws::SESV2
     #
     #   resp = client.create_import_job({
     #     import_destination: { # required
-    #       suppression_list_destination: { # required
+    #       suppression_list_destination: {
     #         suppression_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #       },
+    #       contact_list_destination: {
+    #         contact_list_name: "ContactListName", # required
+    #         contact_list_import_action: "DELETE", # required, accepts DELETE, PUT
     #       },
     #     },
     #     import_data_source: { # required
@@ -931,6 +1028,54 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def delete_configuration_set_event_destination(params = {}, options = {})
       req = build_request(:delete_configuration_set_event_destination, params)
+      req.send_request(options)
+    end
+
+    # Removes a contact from a contact list.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list from which the contact should be removed.
+    #
+    # @option params [required, String] :email_address
+    #   The contact's email address.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact({
+    #     contact_list_name: "ContactListName", # required
+    #     email_address: "EmailAddress", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteContact AWS API Documentation
+    #
+    # @overload delete_contact(params = {})
+    # @param [Hash] params ({})
+    def delete_contact(params = {}, options = {})
+      req = build_request(:delete_contact, params)
+      req.send_request(options)
+    end
+
+    # Deletes a contact list and all of the contacts on that list.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_list({
+    #     contact_list_name: "ContactListName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteContactList AWS API Documentation
+    #
+    # @overload delete_contact_list(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_list(params = {}, options = {})
+      req = build_request(:delete_contact_list, params)
       req.send_request(options)
     end
 
@@ -1266,7 +1411,7 @@ module Aws::SESV2
     #   resp.event_destinations[0].name #=> String
     #   resp.event_destinations[0].enabled #=> Boolean
     #   resp.event_destinations[0].matching_event_types #=> Array
-    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "SEND", "REJECT", "BOUNCE", "COMPLAINT", "DELIVERY", "OPEN", "CLICK", "RENDERING_FAILURE", "DELIVERY_DELAY"
+    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "SEND", "REJECT", "BOUNCE", "COMPLAINT", "DELIVERY", "OPEN", "CLICK", "RENDERING_FAILURE", "DELIVERY_DELAY", "SUBSCRIPTION"
     #   resp.event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
     #   resp.event_destinations[0].kinesis_firehose_destination.delivery_stream_arn #=> String
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations #=> Array
@@ -1282,6 +1427,101 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def get_configuration_set_event_destinations(params = {}, options = {})
       req = build_request(:get_configuration_set_event_destinations, params)
+      req.send_request(options)
+    end
+
+    # Returns a contact from a contact list.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list to which the contact belongs.
+    #
+    # @option params [required, String] :email_address
+    #   The contact's email addres.
+    #
+    # @return [Types::GetContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContactResponse#contact_list_name #contact_list_name} => String
+    #   * {Types::GetContactResponse#email_address #email_address} => String
+    #   * {Types::GetContactResponse#topic_preferences #topic_preferences} => Array&lt;Types::TopicPreference&gt;
+    #   * {Types::GetContactResponse#topic_default_preferences #topic_default_preferences} => Array&lt;Types::TopicPreference&gt;
+    #   * {Types::GetContactResponse#unsubscribe_all #unsubscribe_all} => Boolean
+    #   * {Types::GetContactResponse#attributes_data #attributes_data} => String
+    #   * {Types::GetContactResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetContactResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_contact({
+    #     contact_list_name: "ContactListName", # required
+    #     email_address: "EmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_list_name #=> String
+    #   resp.email_address #=> String
+    #   resp.topic_preferences #=> Array
+    #   resp.topic_preferences[0].topic_name #=> String
+    #   resp.topic_preferences[0].subscription_status #=> String, one of "OPT_IN", "OPT_OUT"
+    #   resp.topic_default_preferences #=> Array
+    #   resp.topic_default_preferences[0].topic_name #=> String
+    #   resp.topic_default_preferences[0].subscription_status #=> String, one of "OPT_IN", "OPT_OUT"
+    #   resp.unsubscribe_all #=> Boolean
+    #   resp.attributes_data #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetContact AWS API Documentation
+    #
+    # @overload get_contact(params = {})
+    # @param [Hash] params ({})
+    def get_contact(params = {}, options = {})
+      req = build_request(:get_contact, params)
+      req.send_request(options)
+    end
+
+    # Returns contact list metadata. It does not return any information
+    # about the contacts present in the list.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list.
+    #
+    # @return [Types::GetContactListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContactListResponse#contact_list_name #contact_list_name} => String
+    #   * {Types::GetContactListResponse#topics #topics} => Array&lt;Types::Topic&gt;
+    #   * {Types::GetContactListResponse#description #description} => String
+    #   * {Types::GetContactListResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetContactListResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #   * {Types::GetContactListResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_contact_list({
+    #     contact_list_name: "ContactListName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_list_name #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0].topic_name #=> String
+    #   resp.topics[0].display_name #=> String
+    #   resp.topics[0].description #=> String
+    #   resp.topics[0].default_subscription_status #=> String, one of "OPT_IN", "OPT_OUT"
+    #   resp.description #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_updated_timestamp #=> Time
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetContactList AWS API Documentation
+    #
+    # @overload get_contact_list(params = {})
+    # @param [Hash] params ({})
+    def get_contact_list(params = {}, options = {})
+      req = build_request(:get_contact_list, params)
       req.send_request(options)
     end
 
@@ -1793,6 +2033,8 @@ module Aws::SESV2
     #
     #   resp.job_id #=> String
     #   resp.import_destination.suppression_list_destination.suppression_list_import_action #=> String, one of "DELETE", "PUT"
+    #   resp.import_destination.contact_list_destination.contact_list_name #=> String
+    #   resp.import_destination.contact_list_destination.contact_list_import_action #=> String, one of "DELETE", "PUT"
     #   resp.import_data_source.s3_url #=> String
     #   resp.import_data_source.data_format #=> String, one of "CSV", "JSON"
     #   resp.failure_info.failed_records_s3_url #=> String
@@ -1890,6 +2132,118 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def list_configuration_sets(params = {}, options = {})
       req = build_request(:list_configuration_sets, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the contact lists available.
+    #
+    # @option params [Integer] :page_size
+    #   Maximum number of contact lists to return at once. Use this parameter
+    #   to paginate results. If additional contact lists exist beyond the
+    #   specified limit, the `NextToken` element is sent in the response. Use
+    #   the `NextToken` value in subsequent requests to retrieve additional
+    #   lists.
+    #
+    # @option params [String] :next_token
+    #   A string token indicating that there might be additional contact lists
+    #   available to be listed. Use the token provided in the Response to use
+    #   in the subsequent call to ListContactLists with the same parameters to
+    #   retrieve the next page of contact lists.
+    #
+    # @return [Types::ListContactListsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContactListsResponse#contact_lists #contact_lists} => Array&lt;Types::ContactList&gt;
+    #   * {Types::ListContactListsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contact_lists({
+    #     page_size: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_lists #=> Array
+    #   resp.contact_lists[0].contact_list_name #=> String
+    #   resp.contact_lists[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListContactLists AWS API Documentation
+    #
+    # @overload list_contact_lists(params = {})
+    # @param [Hash] params ({})
+    def list_contact_lists(params = {}, options = {})
+      req = build_request(:list_contact_lists, params)
+      req.send_request(options)
+    end
+
+    # Lists the contacts present in a specific contact list.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list.
+    #
+    # @option params [Types::ListContactsFilter] :filter
+    #   A filter that can be applied to a list of contacts.
+    #
+    # @option params [Integer] :page_size
+    #   The number of contacts that may be returned at once, which is
+    #   dependent on if there are more or less contacts than the value of the
+    #   PageSize. Use this parameter to paginate results. If additional
+    #   contacts exist beyond the specified limit, the `NextToken` element is
+    #   sent in the response. Use the `NextToken` value in subsequent requests
+    #   to retrieve additional contacts.
+    #
+    # @option params [String] :next_token
+    #   A string token indicating that there might be additional contacts
+    #   available to be listed. Use the token provided in the Response to use
+    #   in the subsequent call to ListContacts with the same parameters to
+    #   retrieve the next page of contacts.
+    #
+    # @return [Types::ListContactsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContactsResponse#contacts #contacts} => Array&lt;Types::Contact&gt;
+    #   * {Types::ListContactsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contacts({
+    #     contact_list_name: "ContactListName", # required
+    #     filter: {
+    #       filtered_status: "OPT_IN", # accepts OPT_IN, OPT_OUT
+    #       topic_filter: {
+    #         topic_name: "TopicName",
+    #         use_default_if_preference_unavailable: false,
+    #       },
+    #     },
+    #     page_size: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contacts #=> Array
+    #   resp.contacts[0].email_address #=> String
+    #   resp.contacts[0].topic_preferences #=> Array
+    #   resp.contacts[0].topic_preferences[0].topic_name #=> String
+    #   resp.contacts[0].topic_preferences[0].subscription_status #=> String, one of "OPT_IN", "OPT_OUT"
+    #   resp.contacts[0].topic_default_preferences #=> Array
+    #   resp.contacts[0].topic_default_preferences[0].topic_name #=> String
+    #   resp.contacts[0].topic_default_preferences[0].subscription_status #=> String, one of "OPT_IN", "OPT_OUT"
+    #   resp.contacts[0].unsubscribe_all #=> Boolean
+    #   resp.contacts[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListContacts AWS API Documentation
+    #
+    # @overload list_contacts(params = {})
+    # @param [Hash] params ({})
+    def list_contacts(params = {}, options = {})
+      req = build_request(:list_contacts, params)
       req.send_request(options)
     end
 
@@ -2253,7 +2607,7 @@ module Aws::SESV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_import_jobs({
-    #     import_destination_type: "SUPPRESSION_LIST", # accepts SUPPRESSION_LIST
+    #     import_destination_type: "SUPPRESSION_LIST", # accepts SUPPRESSION_LIST, CONTACT_LIST
     #     next_token: "NextToken",
     #     page_size: 1,
     #   })
@@ -2263,6 +2617,8 @@ module Aws::SESV2
     #   resp.import_jobs #=> Array
     #   resp.import_jobs[0].job_id #=> String
     #   resp.import_jobs[0].import_destination.suppression_list_destination.suppression_list_import_action #=> String, one of "DELETE", "PUT"
+    #   resp.import_jobs[0].import_destination.contact_list_destination.contact_list_name #=> String
+    #   resp.import_jobs[0].import_destination.contact_list_destination.contact_list_import_action #=> String, one of "DELETE", "PUT"
     #   resp.import_jobs[0].job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED"
     #   resp.import_jobs[0].created_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3293,6 +3649,10 @@ module Aws::SESV2
     #   The name of the configuration set that you want to use when sending
     #   the email.
     #
+    # @option params [Types::ListManagementOptions] :list_management_options
+    #   An object used to specify a list or topic to which an email belongs,
+    #   which will be used when a contact chooses to unsubscribe.
+    #
     # @return [Types::SendEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendEmailResponse#message_id #message_id} => String
@@ -3343,6 +3703,10 @@ module Aws::SESV2
     #       },
     #     ],
     #     configuration_set_name: "ConfigurationSetName",
+    #     list_management_options: {
+    #       contact_list_name: "ContactListName", # required
+    #       topic_name: "TopicName",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3502,7 +3866,7 @@ module Aws::SESV2
     #     event_destination_name: "EventDestinationName", # required
     #     event_destination: { # required
     #       enabled: false,
-    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
+    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION
     #       kinesis_firehose_destination: {
     #         iam_role_arn: "AmazonResourceName", # required
     #         delivery_stream_arn: "AmazonResourceName", # required
@@ -3531,6 +3895,92 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def update_configuration_set_event_destination(params = {}, options = {})
       req = build_request(:update_configuration_set_event_destination, params)
+      req.send_request(options)
+    end
+
+    # Updates a contact's preferences for a list. It is not necessary to
+    # specify all existing topic preferences in the TopicPreferences object,
+    # just the ones that need updating.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list.
+    #
+    # @option params [required, String] :email_address
+    #   The contact's email addres.
+    #
+    # @option params [Array<Types::TopicPreference>] :topic_preferences
+    #   The contact's preference for being opted-in to or opted-out of a
+    #   topic.
+    #
+    # @option params [Boolean] :unsubscribe_all
+    #   A boolean value status noting if the contact is unsubscribed from all
+    #   contact list topics.
+    #
+    # @option params [String] :attributes_data
+    #   The attribute data attached to a contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact({
+    #     contact_list_name: "ContactListName", # required
+    #     email_address: "EmailAddress", # required
+    #     topic_preferences: [
+    #       {
+    #         topic_name: "TopicName", # required
+    #         subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #       },
+    #     ],
+    #     unsubscribe_all: false,
+    #     attributes_data: "AttributesData",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateContact AWS API Documentation
+    #
+    # @overload update_contact(params = {})
+    # @param [Hash] params ({})
+    def update_contact(params = {}, options = {})
+      req = build_request(:update_contact, params)
+      req.send_request(options)
+    end
+
+    # Updates contact list metadata. This operation does a complete
+    # replacement.
+    #
+    # @option params [required, String] :contact_list_name
+    #   The name of the contact list.
+    #
+    # @option params [Array<Types::Topic>] :topics
+    #   An interest group, theme, or label within a list. A contact list can
+    #   have multiple topics.
+    #
+    # @option params [String] :description
+    #   A description of what the contact list is about.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_list({
+    #     contact_list_name: "ContactListName", # required
+    #     topics: [
+    #       {
+    #         topic_name: "TopicName", # required
+    #         display_name: "DisplayName", # required
+    #         description: "Description",
+    #         default_subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #       },
+    #     ],
+    #     description: "Description",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateContactList AWS API Documentation
+    #
+    # @overload update_contact_list(params = {})
+    # @param [Hash] params ({})
+    def update_contact_list(params = {}, options = {})
+      req = build_request(:update_contact_list, params)
       req.send_request(options)
     end
 
@@ -3706,7 +4156,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

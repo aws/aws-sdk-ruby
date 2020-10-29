@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-10-29)
+------------------
+
+* Feature - Support disabling the default execute-api endpoint for REST APIs.
+
 1.55.0 (2020-10-01)
 ------------------
 

@@ -560,6 +560,9 @@ module Aws::CodeArtifact
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the domain.
+    #
     # @return [Types::CreateDomainResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResult#domain #domain} => Types::DomainDescription
@@ -569,6 +572,12 @@ module Aws::CodeArtifact
     #   resp = client.create_domain({
     #     domain: "DomainName", # required
     #     encryption_key: "Arn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -581,6 +590,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateDomain AWS API Documentation
     #
@@ -617,6 +627,9 @@ module Aws::CodeArtifact
     #
     #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the repository.
+    #
     # @return [Types::CreateRepositoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryResult#repository #repository} => Types::RepositoryDescription
@@ -631,6 +644,12 @@ module Aws::CodeArtifact
     #     upstreams: [
     #       {
     #         repository_name: "RepositoryName", # required
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -691,6 +710,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeleteDomain AWS API Documentation
     #
@@ -977,6 +997,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribeDomain AWS API Documentation
     #
@@ -1181,11 +1202,18 @@ module Aws::CodeArtifact
     # status to `Disposed`. A disposed package version cannot be restored in
     # your repository because its assets are deleted.
     #
-    # To view all disposed package versions in a repository, use `
-    # ListackageVersions ` and set the ` status ` parameter to `Disposed`.
+    # To view all disposed package versions in a repository, use [
+    # `ListPackageVersions` ][1] and set the [ `status` ][2] parameter to
+    # `Disposed`.
     #
-    # To view information about a disposed package version, use `
-    # ListPackageVersions ` and set the ` status ` parameter to `Disposed`.
+    # To view information about a disposed package version, use [
+    # `DescribePackageVersion` ][3]..
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html
+    # [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax
+    # [3]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the repository you want to
@@ -1282,10 +1310,11 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Generates a temporary authentication token for accessing repositories
+    # Generates a temporary authorization token for accessing repositories
     # in the domain. This API requires the
     # `codeartifact:GetAuthorizationToken` and `sts:GetServiceBearerToken`
-    # permissions.
+    # permissions. For more information about authorization tokens, see [AWS
+    # CodeArtifact authentication and tokens][1].
     #
     # <note markdown="1"> CodeArtifact authorization tokens are valid for a period of 12 hours
     # when created with the `login` command. You can call `login`
@@ -1303,14 +1332,15 @@ module Aws::CodeArtifact
     # token, the token will be valid for the full authorization period even
     # though this is longer than the 15-minute session duration.
     #
-    #  See [Using IAM Roles][1] for more information on controlling session
+    #  See [Using IAM Roles][2] for more information on controlling session
     # duration.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that is in scope for the generated
@@ -1322,6 +1352,10 @@ module Aws::CodeArtifact
     #
     # @option params [Integer] :duration_seconds
     #   The time, in seconds, that the generated authorization token is valid.
+    #   Valid values are `0` and any number between `900` (15 minutes) and
+    #   `43200` (12 hours). A value of `0` will set the expiration of the
+    #   authorization token to the same expiration of the user's role's
+    #   temporary credentials.
     #
     # @return [Types::GetAuthorizationTokenResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2247,8 +2281,44 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Gets information about AWS tags for a specified Amazon Resource Name
+    # (ARN) in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #
+    # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Sets a resource policy on a domain that specifies permissions to
     # access it.
+    #
+    # When you call `PutDomainPermissionsPolicy`, the resource policy on the
+    # domain is ignored when evaluting permissions. This ensures that the
+    # owner of a domain cannot lock themselves out of the domain, which
+    # would prevent them from being able to update the resource policy.
     #
     # @option params [required, String] :domain
     #   The name of the domain on which to set the resource policy.
@@ -2297,6 +2367,12 @@ module Aws::CodeArtifact
     # Sets the resource policy on a repository that specifies permissions to
     # access it.
     #
+    # When you call `PutRepositoryPermissionsPolicy`, the resource policy on
+    # the repository is ignored when evaluting permissions. This ensures
+    # that the owner of a repository cannot lock themselves out of the
+    # repository, which would prevent them from being able to update the
+    # resource policy.
+    #
     # @option params [required, String] :domain
     #   The name of the domain containing the repository to set the resource
     #   policy on.
@@ -2344,6 +2420,65 @@ module Aws::CodeArtifact
     # @param [Hash] params ({})
     def put_repository_permissions_policy(params = {}, options = {})
       req = build_request(:put_repository_permissions_policy, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates tags for a resource in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you want to modify or add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   remove tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2524,7 +2659,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

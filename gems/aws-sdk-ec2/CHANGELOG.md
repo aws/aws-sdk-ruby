@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2020-10-29)
+------------------
+
+* Feature - Support for Appliance mode on Transit Gateway that simplifies deployment of stateful network appliances. Added support for AWS Client VPN Self-Service Portal.
+
 1.203.0 (2020-10-28)
 ------------------
 

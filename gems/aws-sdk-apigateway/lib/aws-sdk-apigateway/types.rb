@@ -1276,6 +1276,7 @@ module Aws::APIGateway
     #         tags: {
     #           "String" => "String",
     #         },
+    #         disable_execute_api_endpoint: false,
     #       }
     #
     # @!attribute [rw] name
@@ -1332,6 +1333,15 @@ module Aws::APIGateway
     #   not start with `aws:`. The tag value can be up to 256 characters.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   `execute-api` endpoint. By default, clients can invoke your API with
+    #   the default
+    #   https://\\\{api\_id\\}.execute-api.\\\{region\\}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
+    #   @return [Boolean]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
@@ -1342,7 +1352,8 @@ module Aws::APIGateway
       :api_key_source,
       :endpoint_configuration,
       :policy,
-      :tags)
+      :tags,
+      :disable_execute_api_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6458,13 +6469,23 @@ module Aws::APIGateway
     #   @return [Types::EndpointConfiguration]
     #
     # @!attribute [rw] policy
-    #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
+    #   A stringified JSON policy document that applies to this RestApi
+    #   regardless of the caller and Method configuration.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The collection of tags. Each tag element is associated with a given
     #   resource.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   `execute-api` endpoint. By default, clients can invoke your API with
+    #   the default
+    #   https://\\\{api\_id\\}.execute-api.\\\{region\\}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
+    #   @return [Boolean]
     #
     class RestApi < Struct.new(
       :id,
@@ -6478,7 +6499,8 @@ module Aws::APIGateway
       :api_key_source,
       :endpoint_configuration,
       :policy,
-      :tags)
+      :tags,
+      :disable_execute_api_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

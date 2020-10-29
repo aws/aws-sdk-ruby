@@ -466,6 +466,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
     #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
     #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
@@ -3964,6 +3965,12 @@ module Aws::EC2
     #   security group IDs are specified in the request, the default security
     #   group for the VPC is applied.
     #
+    # @option params [String] :self_service_portal
+    #   Specify whether to enable the self-service portal for the Client VPN
+    #   endpoint.
+    #
+    #   Default Value: `enabled`
+    #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
@@ -3986,6 +3993,7 @@ module Aws::EC2
     #         },
     #         federated_authentication: {
     #           saml_provider_arn: "String",
+    #           self_service_saml_provider_arn: "String",
     #         },
     #       },
     #     ],
@@ -4014,6 +4022,7 @@ module Aws::EC2
     #     ],
     #     security_group_ids: ["SecurityGroupId"],
     #     vpc_id: "VpcId",
+    #     self_service_portal: "enabled", # accepts enabled, disabled
     #   })
     #
     # @example Response structure
@@ -8977,6 +8986,7 @@ module Aws::EC2
     #     options: {
     #       dns_support: "enable", # accepts enable, disable
     #       ipv_6_support: "enable", # accepts enable, disable
+    #       appliance_mode_support: "enable", # accepts enable, disable
     #     },
     #     tag_specifications: [
     #       {
@@ -9004,6 +9014,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
     #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
     #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
@@ -12109,6 +12120,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
     #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
     #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
@@ -13974,6 +13986,7 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].authentication_options[0].active_directory.directory_id #=> String
     #   resp.client_vpn_endpoints[0].authentication_options[0].mutual_authentication.client_root_certificate_chain #=> String
     #   resp.client_vpn_endpoints[0].authentication_options[0].federated_authentication.saml_provider_arn #=> String
+    #   resp.client_vpn_endpoints[0].authentication_options[0].federated_authentication.self_service_saml_provider_arn #=> String
     #   resp.client_vpn_endpoints[0].connection_log_options.enabled #=> Boolean
     #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_group #=> String
     #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_stream #=> String
@@ -13983,6 +13996,7 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].security_group_ids #=> Array
     #   resp.client_vpn_endpoints[0].security_group_ids[0] #=> String
     #   resp.client_vpn_endpoints[0].vpc_id #=> String
+    #   resp.client_vpn_endpoints[0].self_service_portal_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
@@ -24168,6 +24182,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachments[0].creation_time #=> Time
     #   resp.transit_gateway_vpc_attachments[0].options.dns_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachments[0].options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachments[0].options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachments[0].tags #=> Array
     #   resp.transit_gateway_vpc_attachments[0].tags[0].key #=> String
     #   resp.transit_gateway_vpc_attachments[0].tags[0].value #=> String
@@ -30159,6 +30174,10 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   The ID of the VPC to associate with the Client VPN endpoint.
     #
+    # @option params [String] :self_service_portal
+    #   Specify whether to enable the self-service portal for the Client VPN
+    #   endpoint.
+    #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
@@ -30183,6 +30202,7 @@ module Aws::EC2
     #     dry_run: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     vpc_id: "VpcId",
+    #     self_service_portal: "enabled", # accepts enabled, disabled
     #   })
     #
     # @example Response structure
@@ -32556,6 +32576,7 @@ module Aws::EC2
     #     options: {
     #       dns_support: "enable", # accepts enable, disable
     #       ipv_6_support: "enable", # accepts enable, disable
+    #       appliance_mode_support: "enable", # accepts enable, disable
     #     },
     #     dry_run: false,
     #   })
@@ -32572,6 +32593,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
     #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
     #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
@@ -34733,6 +34755,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
     #   resp.transit_gateway_vpc_attachment.tags[0].key #=> String
     #   resp.transit_gateway_vpc_attachment.tags[0].value #=> String
@@ -39094,7 +39117,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.203.0'
+      context[:gem_version] = '1.204.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

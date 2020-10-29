@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-10-29)
+------------------
+
+* Feature - This release enables customers to manage their own contact lists and end-user subscription preferences.
+
 1.13.0 (2020-09-30)
 ------------------
 

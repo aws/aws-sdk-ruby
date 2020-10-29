@@ -3706,7 +3706,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication
+    # [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html
     #
     # @!attribute [rw] type
     #   The authentication type used.
@@ -3756,6 +3756,7 @@ module Aws::EC2
     #         },
     #         federated_authentication: {
     #           saml_provider_arn: "String",
+    #           self_service_saml_provider_arn: "String",
     #         },
     #       }
     #
@@ -4000,6 +4001,10 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] self_service_portal_url
+    #   The URL of the self-service portal.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -4021,7 +4026,8 @@ module Aws::EC2
       :connection_log_options,
       :tags,
       :security_group_ids,
-      :vpc_id)
+      :vpc_id,
+      :self_service_portal_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5070,6 +5076,7 @@ module Aws::EC2
     #             },
     #             federated_authentication: {
     #               saml_provider_arn: "String",
+    #               self_service_saml_provider_arn: "String",
     #             },
     #           },
     #         ],
@@ -5098,6 +5105,7 @@ module Aws::EC2
     #         ],
     #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
+    #         self_service_portal: "enabled", # accepts enabled, disabled
     #       }
     #
     # @!attribute [rw] client_cidr_block
@@ -5216,6 +5224,13 @@ module Aws::EC2
     #   security group for the VPC is applied.
     #   @return [String]
     #
+    # @!attribute [rw] self_service_portal
+    #   Specify whether to enable the self-service portal for the Client VPN
+    #   endpoint.
+    #
+    #   Default Value: `enabled`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -5232,7 +5247,8 @@ module Aws::EC2
       :client_token,
       :tag_specifications,
       :security_group_ids,
-      :vpc_id)
+      :vpc_id,
+      :self_service_portal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9182,6 +9198,7 @@ module Aws::EC2
     #         options: {
     #           dns_support: "enable", # accepts enable, disable
     #           ipv_6_support: "enable", # accepts enable, disable
+    #           appliance_mode_support: "enable", # accepts enable, disable
     #         },
     #         tag_specifications: [
     #           {
@@ -9248,6 +9265,7 @@ module Aws::EC2
     #       {
     #         dns_support: "enable", # accepts enable, disable
     #         ipv_6_support: "enable", # accepts enable, disable
+    #         appliance_mode_support: "enable", # accepts enable, disable
     #       }
     #
     # @!attribute [rw] dns_support
@@ -9258,11 +9276,19 @@ module Aws::EC2
     #   Enable or disable IPv6 support. The default is `enable`.
     #   @return [String]
     #
+    # @!attribute [rw] appliance_mode_support
+    #   Enable or disable support for appliance mode. If enabled, a traffic
+    #   flow between a source and destination uses the same Availability
+    #   Zone for the VPC attachment for the lifetime of that flow. The
+    #   default is `disable`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayVpcAttachmentRequestOptions AWS API Documentation
     #
     class CreateTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
-      :ipv_6_support)
+      :ipv_6_support,
+      :appliance_mode_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26147,17 +26173,23 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the IAM SAML identity provider used for federated
+    # Describes the IAM SAML identity providers used for federated
     # authentication.
     #
     # @!attribute [rw] saml_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM SAML identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] self_service_saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider for
+    #   the self-service portal.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FederatedAuthentication AWS API Documentation
     #
     class FederatedAuthentication < Struct.new(
-      :saml_provider_arn)
+      :saml_provider_arn,
+      :self_service_saml_provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26169,16 +26201,23 @@ module Aws::EC2
     #
     #       {
     #         saml_provider_arn: "String",
+    #         self_service_saml_provider_arn: "String",
     #       }
     #
     # @!attribute [rw] saml_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM SAML identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] self_service_saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider for
+    #   the self-service portal.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FederatedAuthenticationRequest AWS API Documentation
     #
     class FederatedAuthenticationRequest < Struct.new(
-      :saml_provider_arn)
+      :saml_provider_arn,
+      :self_service_saml_provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34821,6 +34860,7 @@ module Aws::EC2
     #         dry_run: false,
     #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
+    #         self_service_portal: "enabled", # accepts enabled, disabled
     #       }
     #
     # @!attribute [rw] client_vpn_endpoint_id
@@ -34894,6 +34934,11 @@ module Aws::EC2
     #   The ID of the VPC to associate with the Client VPN endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] self_service_portal
+    #   Specify whether to enable the self-service portal for the Client VPN
+    #   endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
     #
     class ModifyClientVpnEndpointRequest < Struct.new(
@@ -34906,7 +34951,8 @@ module Aws::EC2
       :split_tunnel,
       :dry_run,
       :security_group_ids,
-      :vpc_id)
+      :vpc_id,
+      :self_service_portal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36966,6 +37012,7 @@ module Aws::EC2
     #         options: {
     #           dns_support: "enable", # accepts enable, disable
     #           ipv_6_support: "enable", # accepts enable, disable
+    #           appliance_mode_support: "enable", # accepts enable, disable
     #         },
     #         dry_run: false,
     #       }
@@ -37018,6 +37065,7 @@ module Aws::EC2
     #       {
     #         dns_support: "enable", # accepts enable, disable
     #         ipv_6_support: "enable", # accepts enable, disable
+    #         appliance_mode_support: "enable", # accepts enable, disable
     #       }
     #
     # @!attribute [rw] dns_support
@@ -37028,11 +37076,19 @@ module Aws::EC2
     #   Enable or disable IPv6 support. The default is `enable`.
     #   @return [String]
     #
+    # @!attribute [rw] appliance_mode_support
+    #   Enable or disable support for appliance mode. If enabled, a traffic
+    #   flow between a source and destination uses the same Availability
+    #   Zone for the VPC attachment for the lifetime of that flow. The
+    #   default is `disable`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayVpcAttachmentRequestOptions AWS API Documentation
     #
     class ModifyTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
-      :ipv_6_support)
+      :ipv_6_support,
+      :appliance_mode_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50344,11 +50400,16 @@ module Aws::EC2
     #   Indicates whether IPv6 support is disabled.
     #   @return [String]
     #
+    # @!attribute [rw] appliance_mode_support
+    #   Indicates whether appliance mode support is enabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayVpcAttachmentOptions AWS API Documentation
     #
     class TransitGatewayVpcAttachmentOptions < Struct.new(
       :dns_support,
-      :ipv_6_support)
+      :ipv_6_support,
+      :appliance_mode_support)
       SENSITIVE = []
       include Aws::Structure
     end

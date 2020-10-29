@@ -299,6 +299,12 @@ module Aws::CodeArtifact
     #       {
     #         domain: "DomainName", # required
     #         encryption_key: "Arn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] domain
@@ -330,11 +336,16 @@ module Aws::CodeArtifact
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tag key-value pairs for the domain.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
       :domain,
-      :encryption_key)
+      :encryption_key,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -363,6 +374,12 @@ module Aws::CodeArtifact
     #         upstreams: [
     #           {
     #             repository_name: "RepositoryName", # required
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -396,6 +413,10 @@ module Aws::CodeArtifact
     #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html
     #   @return [Array<Types::UpstreamRepository>]
     #
+    # @!attribute [rw] tags
+    #   One or more tag key-value pairs for the repository.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
@@ -403,7 +424,8 @@ module Aws::CodeArtifact
       :domain_owner,
       :repository,
       :description,
-      :upstreams)
+      :upstreams,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1121,6 +1143,11 @@ module Aws::CodeArtifact
     #   The total size of all assets in the domain.
     #   @return [Integer]
     #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket that is used
+    #   to store package assets in the domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DomainDescription AWS API Documentation
     #
     class DomainDescription < Struct.new(
@@ -1131,7 +1158,8 @@ module Aws::CodeArtifact
       :created_time,
       :encryption_key,
       :repository_count,
-      :asset_size_bytes)
+      :asset_size_bytes,
+      :s3_bucket_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1208,7 +1236,10 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] duration_seconds
     #   The time, in seconds, that the generated authorization token is
-    #   valid.
+    #   valid. Valid values are `0` and any number between `900` (15
+    #   minutes) and `43200` (12 hours). A value of `0` will set the
+    #   expiration of the authorization token to the same expiration of the
+    #   user's role's temporary credentials.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/GetAuthorizationTokenRequest AWS API Documentation
@@ -2391,6 +2422,38 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with the specified
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListTagsForResourceResult AWS API Documentation
+    #
+    class ListTagsForResourceResult < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a package dependency.
     #
     # @!attribute [rw] namespace
@@ -3011,6 +3074,69 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
+    # A tag is a key-value pair that can be used to manage, search for, or
+    # filter resources in AWS CodeArtifact.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags you want to modify or add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/TagResourceResult AWS API Documentation
+    #
+    class TagResourceResult < Aws::EmptyStructure; end
+
     # The operation did not succeed because too many requests are sent to
     # the service.
     #
@@ -3029,6 +3155,36 @@ module Aws::CodeArtifact
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UntagResourceResult AWS API Documentation
+    #
+    class UntagResourceResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePackageVersionsStatusRequest
     #   data as a hash:
