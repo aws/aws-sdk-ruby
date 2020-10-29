@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.617 (2020-10-29)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::CodeArtifact - Updated the API, and documentation for CodeArtifact.
