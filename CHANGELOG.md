@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Braket - Updated the API, and documentation for Braket.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::ElastiCache - Updated the documentation for Amazon ElastiCache.
+
+* Feature - Aws::Imagebuilder - Updated the API, and documentation for EC2 Image Builder.
+
+* Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
+
 2.11.617 (2020-10-29)
 ------------------
 
