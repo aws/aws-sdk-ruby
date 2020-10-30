@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.618 (2020-10-30)
+------------------
+
 * Feature - Aws::Braket - Updated the API, and documentation for Braket.
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
