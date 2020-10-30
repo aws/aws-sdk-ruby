@@ -1096,6 +1096,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
@@ -1300,6 +1301,7 @@ module Aws::Macie2
     #
     #       {
     #         eq: ["__string"],
+    #         eq_exact_match: ["__string"],
     #         gt: 1,
     #         gte: 1,
     #         lt: 1,
@@ -1308,6 +1310,9 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] eq
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] eq_exact_match
     #   @return [Array<String>]
     #
     # @!attribute [rw] gt
@@ -1329,6 +1334,7 @@ module Aws::Macie2
     #
     class CriterionAdditionalProperties < Struct.new(
       :eq,
+      :eq_exact_match,
       :gt,
       :gte,
       :lt,
@@ -2146,6 +2152,7 @@ module Aws::Macie2
     #         criterion: {
     #           "__string" => {
     #             eq: ["__string"],
+    #             eq_exact_match: ["__string"],
     #             gt: 1,
     #             gte: 1,
     #             lt: 1,
@@ -2438,6 +2445,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
@@ -3404,6 +3412,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
@@ -4943,6 +4952,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,

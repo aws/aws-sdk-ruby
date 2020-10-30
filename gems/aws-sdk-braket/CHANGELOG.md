@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-10-30)
+------------------
+
+* Feature - This release supports tagging for Amazon Braket quantum-task resources. It also supports tag-based access control for quantum-task APIs.
+
 1.4.0 (2020-09-30)
 ------------------
 

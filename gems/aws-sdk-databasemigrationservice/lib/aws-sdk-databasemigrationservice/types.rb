@@ -547,6 +547,17 @@ module Aws::DatabaseMigrationService
     #           username: "String",
     #         },
     #         resource_identifier: "String",
+    #         doc_db_settings: {
+    #           username: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           nesting_level: "none", # accepts none, one
+    #           extract_doc_id: false,
+    #           docs_to_investigate: 1,
+    #           kms_key_id: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_identifier
@@ -834,6 +845,10 @@ module Aws::DatabaseMigrationService
     #   default identifier value for the end of `EndpointArn`.
     #   @return [String]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
     class CreateEndpointMessage < Struct.new(
@@ -867,7 +882,8 @@ module Aws::DatabaseMigrationService
       :sybase_settings,
       :microsoft_sql_server_settings,
       :ibm_db_2_settings,
-      :resource_identifier)
+      :resource_identifier,
+      :doc_db_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -3070,6 +3086,91 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a DocumentDB endpoint.
+    #
+    # @note When making an API call, you may pass DocDbSettings
+    #   data as a hash:
+    #
+    #       {
+    #         username: "String",
+    #         password: "SecretString",
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         nesting_level: "none", # accepts none, one
+    #         extract_doc_id: false,
+    #         docs_to_investigate: 1,
+    #         kms_key_id: "String",
+    #       }
+    #
+    # @!attribute [rw] username
+    #   The user name you use to access the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the user account you use to access the DocumentDB
+    #   source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server on the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the DocumentDB source endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] nesting_level
+    #   Specifies either document or table mode.
+    #
+    #   Default value is `"none"`. Specify `"none"` to use document mode.
+    #   Specify `"one"` to use table mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] extract_doc_id
+    #   Specifies the document ID. Use this setting when `NestingLevel` is
+    #   set to `"none"`.
+    #
+    #   Default value is `"false"`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] docs_to_investigate
+    #   Indicates the number of documents to preview to determine the
+    #   document organization. Use this setting when `NestingLevel` is set
+    #   to `"one"`.
+    #
+    #   Must be a positive value greater than `0`. Default value is `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier that is used to encrypt the content on
+    #   the replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then AWS DMS uses your default encryption key.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DocDbSettings AWS API Documentation
+    #
+    class DocDbSettings < Struct.new(
+      :username,
+      :password,
+      :server_name,
+      :port,
+      :database_name,
+      :nesting_level,
+      :extract_doc_id,
+      :docs_to_investigate,
+      :kms_key_id)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
     # Provides the Amazon Resource Name (ARN) of the AWS Identity and Access
     # Management (IAM) role used to define an Amazon DynamoDB target
     # endpoint.
@@ -3336,6 +3437,10 @@ module Aws::DatabaseMigrationService
     #   information, see the `IBMDb2Settings` structure.
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -3370,7 +3475,8 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :doc_db_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4369,6 +4475,17 @@ module Aws::DatabaseMigrationService
     #           max_k_bytes_per_read: 1,
     #           username: "String",
     #         },
+    #         doc_db_settings: {
+    #           username: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           nesting_level: "none", # accepts none, one
+    #           extract_doc_id: false,
+    #           docs_to_investigate: 1,
+    #           kms_key_id: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_arn
@@ -4625,6 +4742,18 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Settings in JSON format for the source DocumentDB endpoint. For more
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using DocumentDB as a Target for AWS
+    #   Database Migration Service][1] in the *AWS Database Migration
+    #   Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
     #
     class ModifyEndpointMessage < Struct.new(
@@ -4656,7 +4785,8 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :doc_db_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -7625,11 +7755,11 @@ module Aws::DatabaseMigrationService
     #   When set to `true`, this parameter partitions S3 bucket folders
     #   based on transaction commit dates. The default value is `false`. For
     #   more information about date-based folder partitoning, see [Using
-    #   date-based folder partitioning][1]
+    #   date-based folder partitioning][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning
     #   @return [Boolean]
     #
     # @!attribute [rw] date_partition_sequence

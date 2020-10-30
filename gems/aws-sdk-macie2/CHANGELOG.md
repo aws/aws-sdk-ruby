@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2020-10-30)
+------------------
+
+* Feature - This release of the Amazon Macie API adds an eqExactMatch operator for filtering findings. With this operator you can increase the precision of your finding filters and suppression rules.
+
 1.14.0 (2020-10-23)
 ------------------
 

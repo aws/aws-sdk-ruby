@@ -108,6 +108,7 @@ module Aws::DatabaseMigrationService
     DescribeTableStatisticsResponse = Shapes::StructureShape.new(name: 'DescribeTableStatisticsResponse')
     DmsSslModeValue = Shapes::StringShape.new(name: 'DmsSslModeValue')
     DmsTransferSettings = Shapes::StructureShape.new(name: 'DmsTransferSettings')
+    DocDbSettings = Shapes::StructureShape.new(name: 'DocDbSettings')
     DynamoDbSettings = Shapes::StructureShape.new(name: 'DynamoDbSettings')
     ElasticsearchSettings = Shapes::StructureShape.new(name: 'ElasticsearchSettings')
     EncodingTypeValue = Shapes::StringShape.new(name: 'EncodingTypeValue')
@@ -347,6 +348,7 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
     CreateEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     CreateEndpointMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
+    CreateEndpointMessage.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
     CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -660,6 +662,17 @@ module Aws::DatabaseMigrationService
     DmsTransferSettings.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
     DmsTransferSettings.struct_class = Types::DmsTransferSettings
 
+    DocDbSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    DocDbSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    DocDbSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    DocDbSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    DocDbSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    DocDbSettings.add_member(:nesting_level, Shapes::ShapeRef.new(shape: NestingLevelValue, location_name: "NestingLevel"))
+    DocDbSettings.add_member(:extract_doc_id, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExtractDocId"))
+    DocDbSettings.add_member(:docs_to_investigate, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "DocsToInvestigate"))
+    DocDbSettings.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    DocDbSettings.struct_class = Types::DocDbSettings
+
     DynamoDbSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
     DynamoDbSettings.struct_class = Types::DynamoDbSettings
 
@@ -701,6 +714,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:sybase_settings, Shapes::ShapeRef.new(shape: SybaseSettings, location_name: "SybaseSettings"))
     Endpoint.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
     Endpoint.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
+    Endpoint.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -873,6 +887,7 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:sybase_settings, Shapes::ShapeRef.new(shape: SybaseSettings, location_name: "SybaseSettings"))
     ModifyEndpointMessage.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
     ModifyEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
+    ModifyEndpointMessage.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
     ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))

@@ -779,7 +779,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
     #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
     #
     # @option params [String] :kms_key_id
@@ -995,6 +995,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -1027,6 +1040,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -1454,7 +1480,7 @@ module Aws::ElastiCache
     #   group can be used with.
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0` \|
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
@@ -1901,6 +1927,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -1933,6 +1972,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -2604,7 +2656,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Creates a Redis user. For more
+    # For Redis engine version 6.x onwards: Creates a Redis user. For more
     # information, see [Using Role Based Access Control (RBAC)][1].
     #
     #
@@ -2674,7 +2726,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Creates a Redis user group. For
+    # For Redis engine version 6.x onwards: Creates a Redis user group. For
     # more information, see [Using Role Based Access Control (RBAC)][1]
     #
     #
@@ -3867,7 +3919,7 @@ module Aws::ElastiCache
     #   for.
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0` \|
     #
     #   Constraints:
     #
@@ -4849,7 +4901,7 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family.
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0` \|
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -5987,6 +6039,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -6019,6 +6084,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -6065,7 +6143,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization"|"All Upfront"|"Partial Upfront"| "No Upfront"`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6164,6 +6242,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -6196,6 +6287,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -9454,10 +9558,10 @@ module Aws::ElastiCache
     #   1.  Replication group message: `Test Failover API called for node
     #       group <node-group-id>`
     #
-    #   2.  Cache cluster message: `Failover from master node
+    #   2.  Cache cluster message: `Failover from primary node
     #       <primary-node-id> to replica node <node-id> completed`
     #
-    #   3.  Replication group message: `Failover from master node
+    #   3.  Replication group message: `Failover from primary node
     #       <primary-node-id> to replica node <node-id> completed`
     #
     #   4.  Cache cluster message: `Recovering cache nodes <node-id>`
@@ -9575,7 +9679,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

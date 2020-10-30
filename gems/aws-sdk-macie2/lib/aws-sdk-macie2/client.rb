@@ -615,6 +615,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -1372,6 +1373,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -1634,6 +1636,8 @@ module Aws::Macie2
     #   resp.finding_criteria.criterion #=> Hash
     #   resp.finding_criteria.criterion["__string"].eq #=> Array
     #   resp.finding_criteria.criterion["__string"].eq[0] #=> String
+    #   resp.finding_criteria.criterion["__string"].eq_exact_match #=> Array
+    #   resp.finding_criteria.criterion["__string"].eq_exact_match[0] #=> String
     #   resp.finding_criteria.criterion["__string"].gt #=> Integer
     #   resp.finding_criteria.criterion["__string"].gte #=> Integer
     #   resp.finding_criteria.criterion["__string"].lt #=> Integer
@@ -1994,6 +1998,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -2411,6 +2416,7 @@ module Aws::Macie2
     #       criterion: {
     #         "__string" => {
     #           eq: ["__string"],
+    #           eq_exact_match: ["__string"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
@@ -2529,7 +2535,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

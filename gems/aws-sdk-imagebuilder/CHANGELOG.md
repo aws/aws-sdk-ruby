@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-10-30)
+------------------
+
+* Feature - This feature increases the number of accounts that can be added to the Launch permissions within an Image Builder Distribution configuration.
+
 1.15.0 (2020-09-30)
 ------------------
 

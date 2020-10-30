@@ -352,7 +352,7 @@ module Aws::Braket
     #
     # @example Response structure
     #
-    #   resp.cancellation_status #=> String, one of "CANCELLED", "CANCELLING"
+    #   resp.cancellation_status #=> String, one of "CANCELLING", "CANCELLED"
     #   resp.quantum_task_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CancelQuantumTask AWS API Documentation
@@ -399,6 +399,9 @@ module Aws::Braket
     # @option params [required, Integer] :shots
     #   The number of shots to use for the task.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to be added to the quantum task you're creating.
+    #
     # @return [Types::CreateQuantumTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateQuantumTaskResponse#quantum_task_arn #quantum_task_arn} => String
@@ -409,10 +412,13 @@ module Aws::Braket
     #     action: "JsonValue", # required
     #     client_token: "String64", # required
     #     device_arn: "DeviceArn", # required
-    #     device_parameters: "CreateQuantumTaskRequestdeviceParametersJsonValue",
-    #     output_s3_bucket: "CreateQuantumTaskRequestoutputS3BucketString", # required
-    #     output_s3_key_prefix: "CreateQuantumTaskRequestoutputS3KeyPrefixString", # required
+    #     device_parameters: "CreateQuantumTaskRequestDeviceParametersString",
+    #     output_s3_bucket: "CreateQuantumTaskRequestOutputS3BucketString", # required
+    #     output_s3_key_prefix: "CreateQuantumTaskRequestOutputS3KeyPrefixString", # required
     #     shots: 1, # required
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -453,7 +459,7 @@ module Aws::Braket
     #   resp.device_arn #=> String
     #   resp.device_capabilities #=> String
     #   resp.device_name #=> String
-    #   resp.device_status #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.device_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.device_type #=> String, one of "QPU", "SIMULATOR"
     #   resp.provider_name #=> String
     #
@@ -483,6 +489,7 @@ module Aws::Braket
     #   * {Types::GetQuantumTaskResponse#quantum_task_arn #quantum_task_arn} => String
     #   * {Types::GetQuantumTaskResponse#shots #shots} => Integer
     #   * {Types::GetQuantumTaskResponse#status #status} => String
+    #   * {Types::GetQuantumTaskResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -501,7 +508,9 @@ module Aws::Braket
     #   resp.output_s3_directory #=> String
     #   resp.quantum_task_arn #=> String
     #   resp.shots #=> Integer
-    #   resp.status #=> String, one of "CANCELLED", "CANCELLING", "COMPLETED", "CREATED", "FAILED", "QUEUED", "RUNNING"
+    #   resp.status #=> String, one of "CREATED", "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetQuantumTask AWS API Documentation
     #
@@ -509,6 +518,35 @@ module Aws::Braket
     # @param [Hash] params ({})
     def get_quantum_task(params = {}, options = {})
       req = build_request(:get_quantum_task, params)
+      req.send_request(options)
+    end
+
+    # Shows the tags associated with this resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   Specify the `resourceArn` for the resource whose tags to display.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -537,7 +575,7 @@ module Aws::Braket
     #   resp = client.search_devices({
     #     filters: [ # required
     #       {
-    #         name: "SearchDevicesFilternameString", # required
+    #         name: "SearchDevicesFilterNameString", # required
     #         values: ["String256"], # required
     #       },
     #     ],
@@ -550,7 +588,7 @@ module Aws::Braket
     #   resp.devices #=> Array
     #   resp.devices[0].device_arn #=> String
     #   resp.devices[0].device_name #=> String
-    #   resp.devices[0].device_status #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.devices[0].device_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.devices[0].device_type #=> String, one of "QPU", "SIMULATOR"
     #   resp.devices[0].provider_name #=> String
     #   resp.next_token #=> String
@@ -590,7 +628,7 @@ module Aws::Braket
     #     filters: [ # required
     #       {
     #         name: "String64", # required
-    #         operator: "BETWEEN", # required, accepts BETWEEN, EQUAL, GT, GTE, LT, LTE
+    #         operator: "LT", # required, accepts LT, LTE, EQUAL, GT, GTE, BETWEEN
     #         values: ["String256"], # required
     #       },
     #     ],
@@ -609,7 +647,9 @@ module Aws::Braket
     #   resp.quantum_tasks[0].output_s3_directory #=> String
     #   resp.quantum_tasks[0].quantum_task_arn #=> String
     #   resp.quantum_tasks[0].shots #=> Integer
-    #   resp.quantum_tasks[0].status #=> String, one of "CANCELLED", "CANCELLING", "COMPLETED", "CREATED", "FAILED", "QUEUED", "RUNNING"
+    #   resp.quantum_tasks[0].status #=> String, one of "CREATED", "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.quantum_tasks[0].tags #=> Hash
+    #   resp.quantum_tasks[0].tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchQuantumTasks AWS API Documentation
     #
@@ -617,6 +657,62 @@ module Aws::Braket
     # @param [Hash] params ({})
     def search_quantum_tasks(params = {}, options = {})
       req = build_request(:search_quantum_tasks, params)
+      req.send_request(options)
+    end
+
+    # Add a tag to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   Specify the `resourceArn` of the resource to which a tag will be
+    #   added.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   Specify the tags to add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   Specify the `resourceArn` for the resource from which to remove the
+    #   tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   pecify the keys for the tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["String"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -633,7 +729,7 @@ module Aws::Braket
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-braket'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

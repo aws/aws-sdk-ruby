@@ -755,6 +755,9 @@ module Aws::DatabaseMigrationService
     #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
     #   default identifier value for the end of `EndpointArn`.
     #
+    # @option params [Types::DocDbSettings] :doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -1027,6 +1030,17 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #     },
     #     resource_identifier: "String",
+    #     doc_db_settings: {
+    #       username: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       port: 1,
+    #       database_name: "String",
+    #       nesting_level: "none", # accepts none, one
+    #       extract_doc_id: false,
+    #       docs_to_investigate: 1,
+    #       kms_key_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1221,6 +1235,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.password #=> String
+    #   resp.endpoint.doc_db_settings.server_name #=> String
+    #   resp.endpoint.doc_db_settings.port #=> Integer
+    #   resp.endpoint.doc_db_settings.database_name #=> String
+    #   resp.endpoint.doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -2280,6 +2303,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.password #=> String
+    #   resp.endpoint.doc_db_settings.server_name #=> String
+    #   resp.endpoint.doc_db_settings.port #=> Integer
+    #   resp.endpoint.doc_db_settings.database_name #=> String
+    #   resp.endpoint.doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -3318,6 +3350,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoints[0].ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoints[0].ibm_db_2_settings.username #=> String
+    #   resp.endpoints[0].doc_db_settings.username #=> String
+    #   resp.endpoints[0].doc_db_settings.password #=> String
+    #   resp.endpoints[0].doc_db_settings.server_name #=> String
+    #   resp.endpoints[0].doc_db_settings.port #=> Integer
+    #   resp.endpoints[0].doc_db_settings.database_name #=> String
+    #   resp.endpoints[0].doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoints[0].doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoints[0].doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoints[0].doc_db_settings.kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4867,6 +4908,17 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
     #
+    # @option params [Types::DocDbSettings] :doc_db_settings
+    #   Settings in JSON format for the source DocumentDB endpoint. For more
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using DocumentDB as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
+    #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -5117,6 +5169,17 @@ module Aws::DatabaseMigrationService
     #       max_k_bytes_per_read: 1,
     #       username: "String",
     #     },
+    #     doc_db_settings: {
+    #       username: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       port: 1,
+    #       database_name: "String",
+    #       nesting_level: "none", # accepts none, one
+    #       extract_doc_id: false,
+    #       docs_to_investigate: 1,
+    #       kms_key_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5311,6 +5374,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.password #=> String
+    #   resp.endpoint.doc_db_settings.server_name #=> String
+    #   resp.endpoint.doc_db_settings.port #=> Integer
+    #   resp.endpoint.doc_db_settings.database_name #=> String
+    #   resp.endpoint.doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -6522,7 +6594,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

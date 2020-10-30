@@ -1038,9 +1038,33 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         error_clear_time_msec: 1,
+    #         failover_conditions: [
+    #           {
+    #             failover_condition_settings: {
+    #               input_loss_settings: {
+    #                 input_loss_threshold_msec: 1,
+    #               },
+    #             },
+    #           },
+    #         ],
     #         input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
     #         secondary_input_id: "__string", # required
     #       }
+    #
+    # @!attribute [rw] error_clear_time_msec
+    #   This clear time defines the requirement a recovered input must meet
+    #   to be considered healthy. The input must have no failover conditions
+    #   for this length of time. Enter a time in milliseconds. This value is
+    #   particularly important if the input\_preference for the failover
+    #   pair is set to PRIMARY\_INPUT\_PREFERRED, because after this time,
+    #   MediaLive will switch back to the primary input.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failover_conditions
+    #   A list of failover conditions. If any of these conditions occur,
+    #   MediaLive will perform a failover to the other input.
+    #   @return [Array<Types::FailoverCondition>]
     #
     # @!attribute [rw] input_preference
     #   Input preference when deciding which input to make active when a
@@ -1055,6 +1079,8 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AutomaticInputFailoverSettings AWS API Documentation
     #
     class AutomaticInputFailoverSettings < Struct.new(
+      :error_clear_time_msec,
+      :failover_conditions,
       :input_preference,
       :secondary_input_id)
       SENSITIVE = []
@@ -3159,6 +3185,7 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string",
     #                   },
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #                   discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #                   encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #                   hls_cdn_settings: {
     #                     hls_akamai_settings: {
@@ -3193,6 +3220,7 @@ module Aws::MediaLive
     #                   },
     #                   hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #                   incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -3639,6 +3667,16 @@ module Aws::MediaLive
     #         input_attachments: [
     #           {
     #             automatic_input_failover_settings: {
+    #               error_clear_time_msec: 1,
+    #               failover_conditions: [
+    #                 {
+    #                   failover_condition_settings: {
+    #                     input_loss_settings: {
+    #                       input_loss_threshold_msec: 1,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
     #               secondary_input_id: "__string", # required
     #             },
@@ -6255,6 +6293,7 @@ module Aws::MediaLive
     #                   destination_ref_id: "__string",
     #                 },
     #                 directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #                 discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #                 encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #                 hls_cdn_settings: {
     #                   hls_akamai_settings: {
@@ -6289,6 +6328,7 @@ module Aws::MediaLive
     #                 },
     #                 hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #                 i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #                 incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #                 index_n_segments: 1,
     #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                 iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -6789,6 +6829,56 @@ module Aws::MediaLive
       :output_groups,
       :timecode_config,
       :video_descriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Failover Condition settings. There can be multiple failover conditions
+    # inside AutomaticInputFailoverSettings.
+    #
+    # @note When making an API call, you may pass FailoverCondition
+    #   data as a hash:
+    #
+    #       {
+    #         failover_condition_settings: {
+    #           input_loss_settings: {
+    #             input_loss_threshold_msec: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] failover_condition_settings
+    #   Failover condition type-specific settings.
+    #   @return [Types::FailoverConditionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FailoverCondition AWS API Documentation
+    #
+    class FailoverCondition < Struct.new(
+      :failover_condition_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for one failover condition.
+    #
+    # @note When making an API call, you may pass FailoverConditionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_loss_settings: {
+    #           input_loss_threshold_msec: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_loss_settings
+    #   MediaLive will perform a failover if content is not detected in this
+    #   input for the specified period.
+    #   @return [Types::InputLossFailoverSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FailoverConditionSettings AWS API Documentation
+    #
+    class FailoverConditionSettings < Struct.new(
+      :input_loss_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8100,6 +8190,7 @@ module Aws::MediaLive
     #           destination_ref_id: "__string",
     #         },
     #         directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #         discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #         encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #         hls_cdn_settings: {
     #           hls_akamai_settings: {
@@ -8134,6 +8225,7 @@ module Aws::MediaLive
     #         },
     #         hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #         i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #         incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #         index_n_segments: 1,
     #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #         iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -8246,6 +8338,16 @@ module Aws::MediaLive
     #   Place segments in subdirectories.
     #   @return [String]
     #
+    # @!attribute [rw] discontinuity_tags
+    #   Specifies whether to insert EXT-X-DISCONTINUITY tags in the HLS
+    #   child manifests for this output group. Typically, choose Insert
+    #   because these tags are required in the manifest (according to the
+    #   HLS specification) and serve an important purpose. Choose Never
+    #   Insert only if the downstream system is doing real-time failover
+    #   (without using the MediaLive automatic failover feature) and only if
+    #   that downstream system has advised you to exclude the tags.
+    #   @return [String]
+    #
     # @!attribute [rw] encryption_type
     #   Encrypts the segments with the given encryption scheme. Exclude this
     #   parameter if no encryption is desired.
@@ -8268,6 +8370,16 @@ module Aws::MediaLive
     #   #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or
     #   more #EXT-X-BYTERANGE entries identifying the I-frame position. For
     #   example, #EXT-X-BYTERANGE:160364@1461888"
+    #   @return [String]
+    #
+    # @!attribute [rw] incomplete_segment_behavior
+    #   Specifies whether to include the final (incomplete) segment in the
+    #   media output when the pipeline stops producing output because of a
+    #   channel stop, a channel pause or a loss of input to the pipeline.
+    #   Auto means that MediaLive decides whether to include the final
+    #   segment, depending on the channel class and the types of output
+    #   groups. Suppress means to never include the incomplete segment. We
+    #   recommend you choose Auto and let MediaLive control the behavior.
     #   @return [String]
     #
     # @!attribute [rw] index_n_segments
@@ -8445,10 +8557,12 @@ module Aws::MediaLive
       :constant_iv,
       :destination,
       :directory_structure,
+      :discontinuity_tags,
       :encryption_type,
       :hls_cdn_settings,
       :hls_id_3_segment_tagging,
       :i_frame_only_playlists,
+      :incomplete_segment_behavior,
       :index_n_segments,
       :input_loss_action,
       :iv_in_manifest,
@@ -8921,6 +9035,16 @@ module Aws::MediaLive
     #
     #       {
     #         automatic_input_failover_settings: {
+    #           error_clear_time_msec: 1,
+    #           failover_conditions: [
+    #             {
+    #               failover_condition_settings: {
+    #                 input_loss_settings: {
+    #                   input_loss_threshold_msec: 1,
+    #                 },
+    #               },
+    #             },
+    #           ],
     #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
     #           secondary_input_id: "__string", # required
     #         },
@@ -9580,6 +9704,29 @@ module Aws::MediaLive
       :input_loss_image_slate,
       :input_loss_image_type,
       :repeat_frame_msec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # MediaLive will perform a failover if content is not detected in this
+    # input for the specified period.
+    #
+    # @note When making an API call, you may pass InputLossFailoverSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_loss_threshold_msec: 1,
+    #       }
+    #
+    # @!attribute [rw] input_loss_threshold_msec
+    #   The amount of time (in milliseconds) that no input is detected.
+    #   After that time, an input failover will occur.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputLossFailoverSettings AWS API Documentation
+    #
+    class InputLossFailoverSettings < Struct.new(
+      :input_loss_threshold_msec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12913,6 +13060,7 @@ module Aws::MediaLive
     #               destination_ref_id: "__string",
     #             },
     #             directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #             discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #             encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #             hls_cdn_settings: {
     #               hls_akamai_settings: {
@@ -12947,6 +13095,7 @@ module Aws::MediaLive
     #             },
     #             hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #             i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #             incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #             index_n_segments: 1,
     #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #             iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -13305,6 +13454,7 @@ module Aws::MediaLive
     #             destination_ref_id: "__string",
     #           },
     #           directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #           discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #           encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #           hls_cdn_settings: {
     #             hls_akamai_settings: {
@@ -13339,6 +13489,7 @@ module Aws::MediaLive
     #           },
     #           hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #           i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #           incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #           index_n_segments: 1,
     #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #           iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -16680,6 +16831,7 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string",
     #                   },
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #                   discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #                   encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #                   hls_cdn_settings: {
     #                     hls_akamai_settings: {
@@ -16714,6 +16866,7 @@ module Aws::MediaLive
     #                   },
     #                   hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #                   incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -17160,6 +17313,16 @@ module Aws::MediaLive
     #         input_attachments: [
     #           {
     #             automatic_input_failover_settings: {
+    #               error_clear_time_msec: 1,
+    #               failover_conditions: [
+    #                 {
+    #                   failover_condition_settings: {
+    #                     input_loss_settings: {
+    #                       input_loss_threshold_msec: 1,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
     #               secondary_input_id: "__string", # required
     #             },

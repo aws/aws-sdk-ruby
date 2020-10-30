@@ -527,6 +527,7 @@ module Aws::Macie2
     Criterion.value = Shapes::ShapeRef.new(shape: CriterionAdditionalProperties)
 
     CriterionAdditionalProperties.add_member(:eq, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "eq"))
+    CriterionAdditionalProperties.add_member(:eq_exact_match, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "eqExactMatch"))
     CriterionAdditionalProperties.add_member(:gt, Shapes::ShapeRef.new(shape: __long, location_name: "gt"))
     CriterionAdditionalProperties.add_member(:gte, Shapes::ShapeRef.new(shape: __long, location_name: "gte"))
     CriterionAdditionalProperties.add_member(:lt, Shapes::ShapeRef.new(shape: __long, location_name: "lt"))

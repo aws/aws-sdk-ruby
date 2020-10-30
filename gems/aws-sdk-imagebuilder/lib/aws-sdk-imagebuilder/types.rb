@@ -25,7 +25,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the EC2 AMI.
+    #   The description of the EC2 AMI. Minimum and maximum length are in
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -73,7 +74,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the distribution configuration.
+    #   The description of the distribution configuration. Minimum and
+    #   maximum length are in characters.
     #   @return [String]
     #
     # @!attribute [rw] target_account_ids
@@ -2781,7 +2783,7 @@ module Aws::Imagebuilder
     #       {
     #         component_version_arn: "ComponentVersionArn", # required
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] component_version_arn
@@ -2845,7 +2847,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] owner
@@ -2916,7 +2918,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] filters
@@ -2983,7 +2985,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] image_version_arn
@@ -3052,7 +3054,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] image_pipeline_arn
@@ -3120,7 +3122,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] filters
@@ -3183,7 +3185,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] owner
@@ -3255,7 +3257,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] owner
@@ -3326,7 +3328,7 @@ module Aws::Imagebuilder
     #           },
     #         ],
     #         max_results: 1,
-    #         next_token: "NonEmptyString",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] filters

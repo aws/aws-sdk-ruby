@@ -637,25 +637,33 @@ module Aws::SNS
     #
     #   ^
     #
-    #   The following attribute applies only to FIFO topics:
+    #   The following attributes apply only to [FIFO topics][4]\:
     #
-    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
-    #     Amazon SNS uses a SHA-256 hash to generate the
-    #     `MessageDeduplicationId` using the body of the message (but not the
-    #     attributes of the message).
+    #   * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
     #
-    #   * When `ContentBasedDeduplication` is in effect, messages with
-    #     identical content sent within the deduplication interval are treated
-    #     as duplicates and only one copy of the message is delivered.
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication
+    #     for FIFO topics.
     #
-    #   * If the queue has `ContentBasedDeduplication` set, your
-    #     `MessageDeduplicationId` overrides the generated one.
+    #     * By default, `ContentBasedDeduplication` is set to `false`. If you
+    #       create a FIFO topic and this attribute is `false`, you must
+    #       specify a value for the `MessageDeduplicationId` parameter for the
+    #       [Publish][5] action.
+    #
+    #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+    #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
+    #       the body of the message (but not the attributes of the message).
+    #
+    #       (Optional) To override the generated value, you can specify a
+    #       value for the the `MessageDeduplicationId` parameter for the
+    #       `Publish` action.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
     #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
@@ -1642,8 +1650,8 @@ module Aws::SNS
     #
     # You can override some of these settings for a single message when you
     # use the `Publish` action with the `MessageAttributes.entry.N`
-    # parameter. For more information, see [Sending an SMS Message][1] in
-    # the *Amazon SNS Developer Guide*.
+    # parameter. For more information, see [Publishing to a mobile phone][1]
+    # in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -1834,25 +1842,31 @@ module Aws::SNS
     #
     #   ^
     #
-    #   The following attribute applies only to FIFO topics:
+    #   The following attribute applies only to [FIFO topics][4]\:
     #
-    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
-    #     Amazon SNS uses a SHA-256 hash to generate the
-    #     `MessageDeduplicationId` using the body of the message (but not the
-    #     attributes of the message).
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication
+    #     for FIFO topics.
     #
-    #   * When `ContentBasedDeduplication` is in effect, messages with
-    #     identical content sent within the deduplication interval are treated
-    #     as duplicates and only one copy of the message is delivered.
+    #     * By default, `ContentBasedDeduplication` is set to `false`. If you
+    #       create a FIFO topic and this attribute is `false`, you must
+    #       specify a value for the `MessageDeduplicationId` parameter for the
+    #       [Publish][5] action.
     #
-    #   * If the queue has `ContentBasedDeduplication` set, your
-    #     `MessageDeduplicationId` overrides the generated one.
+    #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+    #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
+    #       the body of the message (but not the attributes of the message).
+    #
+    #       (Optional) To override the generated value, you can specify a
+    #       value for the the `MessageDeduplicationId` parameter for the
+    #       `Publish` action.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
     #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
     #
     # @option params [String] :attribute_value
     #   The new value for the attribute.
@@ -1965,15 +1979,12 @@ module Aws::SNS
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   * If you set this parameter to `true`, the response includes the ARN
-    #     in all cases, even if the subscription is not yet confirmed. In
-    #     addition to the ARN for confirmed subscriptions, the response also
-    #     includes the `pending subscription` ARN value for subscriptions that
-    #     aren't yet confirmed. A subscription becomes confirmed when the
-    #     subscriber calls the `ConfirmSubscription` action with a
-    #     confirmation token.
-    #
-    #   ^
+    #   If you set this parameter to `true`, the response includes the ARN in
+    #   all cases, even if the subscription is not yet confirmed. In addition
+    #   to the ARN for confirmed subscriptions, the response also includes the
+    #   `pending subscription` ARN value for subscriptions that aren't yet
+    #   confirmed. A subscription becomes confirmed when the subscriber calls
+    #   the `ConfirmSubscription` action with a confirmation token.
     #
     #
     #
@@ -2136,7 +2147,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

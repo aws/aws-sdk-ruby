@@ -1086,6 +1086,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string",
     #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #               discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #               encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #               hls_cdn_settings: {
     #                 hls_akamai_settings: {
@@ -1120,6 +1121,7 @@ module Aws::MediaLive
     #               },
     #               hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #               i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #               incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #               index_n_segments: 1,
     #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #               iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -1566,6 +1568,16 @@ module Aws::MediaLive
     #     input_attachments: [
     #       {
     #         automatic_input_failover_settings: {
+    #           error_clear_time_msec: 1,
+    #           failover_conditions: [
+    #             {
+    #               failover_condition_settings: {
+    #                 input_loss_settings: {
+    #                   input_loss_threshold_msec: 1,
+    #                 },
+    #               },
+    #             },
+    #           ],
     #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
     #           secondary_input_id: "__string", # required
     #         },
@@ -1850,6 +1862,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.constant_iv #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.discontinuity_tags #=> String, one of "INSERT", "NEVER_INSERT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.encryption_type #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.filecache_duration #=> Integer
@@ -1874,6 +1887,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.incomplete_segment_behavior #=> String, one of "AUTO", "SUPPRESS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -2188,6 +2202,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
@@ -2791,6 +2808,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.constant_iv #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.discontinuity_tags #=> String, one of "INSERT", "NEVER_INSERT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.encryption_type #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.filecache_duration #=> Integer
@@ -2815,6 +2833,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.incomplete_segment_behavior #=> String, one of "AUTO", "SUPPRESS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -3129,6 +3148,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -3671,6 +3693,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.constant_iv #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.discontinuity_tags #=> String, one of "INSERT", "NEVER_INSERT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.encryption_type #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.filecache_duration #=> Integer
@@ -3695,6 +3718,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.incomplete_segment_behavior #=> String, one of "AUTO", "SUPPRESS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -4009,6 +4033,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -4667,6 +4694,9 @@ module Aws::MediaLive
     #   resp.channels[0].egress_endpoints[0].source_ip #=> String
     #   resp.channels[0].id #=> String
     #   resp.channels[0].input_attachments #=> Array
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channels[0].input_attachments[0].input_attachment_name #=> String
@@ -5510,6 +5540,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.constant_iv #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.discontinuity_tags #=> String, one of "INSERT", "NEVER_INSERT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.encryption_type #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.filecache_duration #=> Integer
@@ -5534,6 +5565,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.incomplete_segment_behavior #=> String, one of "AUTO", "SUPPRESS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -5848,6 +5880,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -6172,6 +6207,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.constant_iv #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.discontinuity_tags #=> String, one of "INSERT", "NEVER_INSERT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.encryption_type #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.filecache_duration #=> Integer
@@ -6196,6 +6232,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.incomplete_segment_behavior #=> String, one of "AUTO", "SUPPRESS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -6510,6 +6547,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -6976,6 +7016,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string",
     #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
+    #               discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
     #               encryption_type: "AES128", # accepts AES128, SAMPLE_AES
     #               hls_cdn_settings: {
     #                 hls_akamai_settings: {
@@ -7010,6 +7051,7 @@ module Aws::MediaLive
     #               },
     #               hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #               i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
+    #               incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
     #               index_n_segments: 1,
     #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #               iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -7456,6 +7498,16 @@ module Aws::MediaLive
     #     input_attachments: [
     #       {
     #         automatic_input_failover_settings: {
+    #           error_clear_time_msec: 1,
+    #           failover_conditions: [
+    #             {
+    #               failover_condition_settings: {
+    #                 input_loss_settings: {
+    #                   input_loss_threshold_msec: 1,
+    #                 },
+    #               },
+    #             },
+    #           ],
     #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
     #           secondary_input_id: "__string", # required
     #         },
@@ -7735,6 +7787,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.constant_iv #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.discontinuity_tags #=> String, one of "INSERT", "NEVER_INSERT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.encryption_type #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.filecache_duration #=> Integer
@@ -7759,6 +7812,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.incomplete_segment_behavior #=> String, one of "AUTO", "SUPPRESS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -8073,6 +8127,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
@@ -8359,6 +8416,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.constant_iv #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.discontinuity_tags #=> String, one of "INSERT", "NEVER_INSERT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.encryption_type #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_akamai_settings.filecache_duration #=> Integer
@@ -8383,6 +8441,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.incomplete_segment_behavior #=> String, one of "AUTO", "SUPPRESS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -8697,6 +8756,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
@@ -9167,7 +9229,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

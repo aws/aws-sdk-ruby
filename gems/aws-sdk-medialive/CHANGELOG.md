@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2020-10-30)
+------------------
+
+* Feature - Support for HLS discontinuity tags in the child manifests. Support for incomplete segment behavior in the media output. Support for automatic input failover condition settings.
+
 1.57.0 (2020-10-16)
 ------------------
 

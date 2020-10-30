@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-10-30)
+------------------
+
+* Feature - Documentation updates for AWS ElastiCache
+
 1.44.0 (2020-10-07)
 ------------------
 

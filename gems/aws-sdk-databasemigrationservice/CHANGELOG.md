@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-10-30)
+------------------
+
+* Feature - Adding DocDbSettings to support DocumentDB as a source.
+
 1.45.0 (2020-10-15)
 ------------------
 

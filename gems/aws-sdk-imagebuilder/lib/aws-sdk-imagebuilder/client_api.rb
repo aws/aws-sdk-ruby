@@ -168,6 +168,7 @@ module Aws::Imagebuilder
     OsVersionList = Shapes::ListShape.new(name: 'OsVersionList')
     OutputResources = Shapes::StructureShape.new(name: 'OutputResources')
     Ownership = Shapes::StringShape.new(name: 'Ownership')
+    PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PipelineExecutionStartCondition = Shapes::StringShape.new(name: 'PipelineExecutionStartCondition')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
     Platform = Shapes::StringShape.new(name: 'Platform')
@@ -728,97 +729,97 @@ module Aws::Imagebuilder
 
     ListComponentBuildVersionsRequest.add_member(:component_version_arn, Shapes::ShapeRef.new(shape: ComponentVersionArn, required: true, location_name: "componentVersionArn"))
     ListComponentBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListComponentBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListComponentBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentBuildVersionsRequest.struct_class = Types::ListComponentBuildVersionsRequest
 
     ListComponentBuildVersionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListComponentBuildVersionsResponse.add_member(:component_summary_list, Shapes::ShapeRef.new(shape: ComponentSummaryList, location_name: "componentSummaryList"))
-    ListComponentBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListComponentBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentBuildVersionsResponse.struct_class = Types::ListComponentBuildVersionsResponse
 
     ListComponentsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListComponentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentsRequest.struct_class = Types::ListComponentsRequest
 
     ListComponentsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListComponentsResponse.add_member(:component_version_list, Shapes::ShapeRef.new(shape: ComponentVersionList, location_name: "componentVersionList"))
-    ListComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentsResponse.struct_class = Types::ListComponentsResponse
 
     ListDistributionConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListDistributionConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListDistributionConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListDistributionConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDistributionConfigurationsRequest.struct_class = Types::ListDistributionConfigurationsRequest
 
     ListDistributionConfigurationsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListDistributionConfigurationsResponse.add_member(:distribution_configuration_summary_list, Shapes::ShapeRef.new(shape: DistributionConfigurationSummaryList, location_name: "distributionConfigurationSummaryList"))
-    ListDistributionConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListDistributionConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDistributionConfigurationsResponse.struct_class = Types::ListDistributionConfigurationsResponse
 
     ListImageBuildVersionsRequest.add_member(:image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, required: true, location_name: "imageVersionArn"))
     ListImageBuildVersionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImageBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListImageBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImageBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageBuildVersionsRequest.struct_class = Types::ListImageBuildVersionsRequest
 
     ListImageBuildVersionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListImageBuildVersionsResponse.add_member(:image_summary_list, Shapes::ShapeRef.new(shape: ImageSummaryList, location_name: "imageSummaryList"))
-    ListImageBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImageBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageBuildVersionsResponse.struct_class = Types::ListImageBuildVersionsResponse
 
     ListImagePipelineImagesRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
     ListImagePipelineImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImagePipelineImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListImagePipelineImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImagePipelineImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagePipelineImagesRequest.struct_class = Types::ListImagePipelineImagesRequest
 
     ListImagePipelineImagesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListImagePipelineImagesResponse.add_member(:image_summary_list, Shapes::ShapeRef.new(shape: ImageSummaryList, location_name: "imageSummaryList"))
-    ListImagePipelineImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImagePipelineImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagePipelineImagesResponse.struct_class = Types::ListImagePipelineImagesResponse
 
     ListImagePipelinesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImagePipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListImagePipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImagePipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagePipelinesRequest.struct_class = Types::ListImagePipelinesRequest
 
     ListImagePipelinesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListImagePipelinesResponse.add_member(:image_pipeline_list, Shapes::ShapeRef.new(shape: ImagePipelineList, location_name: "imagePipelineList"))
-    ListImagePipelinesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImagePipelinesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagePipelinesResponse.struct_class = Types::ListImagePipelinesResponse
 
     ListImageRecipesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListImageRecipesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImageRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListImageRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImageRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageRecipesRequest.struct_class = Types::ListImageRecipesRequest
 
     ListImageRecipesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListImageRecipesResponse.add_member(:image_recipe_summary_list, Shapes::ShapeRef.new(shape: ImageRecipeSummaryList, location_name: "imageRecipeSummaryList"))
-    ListImageRecipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImageRecipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageRecipesResponse.struct_class = Types::ListImageRecipesResponse
 
     ListImagesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagesRequest.struct_class = Types::ListImagesRequest
 
     ListImagesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListImagesResponse.add_member(:image_version_list, Shapes::ShapeRef.new(shape: ImageVersionList, location_name: "imageVersionList"))
-    ListImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagesResponse.struct_class = Types::ListImagesResponse
 
     ListInfrastructureConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListInfrastructureConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
-    ListInfrastructureConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListInfrastructureConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListInfrastructureConfigurationsRequest.struct_class = Types::ListInfrastructureConfigurationsRequest
 
     ListInfrastructureConfigurationsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     ListInfrastructureConfigurationsResponse.add_member(:infrastructure_configuration_summary_list, Shapes::ShapeRef.new(shape: InfrastructureConfigurationSummaryList, location_name: "infrastructureConfigurationSummaryList"))
-    ListInfrastructureConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListInfrastructureConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListInfrastructureConfigurationsResponse.struct_class = Types::ListInfrastructureConfigurationsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, required: true, location: "uri", location_name: "resourceArn"))

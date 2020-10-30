@@ -207,6 +207,8 @@ module Aws::MediaLive
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
     Empty = Shapes::StructureShape.new(name: 'Empty')
     EncoderSettings = Shapes::StructureShape.new(name: 'EncoderSettings')
+    FailoverCondition = Shapes::StructureShape.new(name: 'FailoverCondition')
+    FailoverConditionSettings = Shapes::StructureShape.new(name: 'FailoverConditionSettings')
     FeatureActivations = Shapes::StructureShape.new(name: 'FeatureActivations')
     FeatureActivationsInputPrepareScheduleActions = Shapes::StringShape.new(name: 'FeatureActivationsInputPrepareScheduleActions')
     FecOutputIncludeFec = Shapes::StringShape.new(name: 'FecOutputIncludeFec')
@@ -279,11 +281,13 @@ module Aws::MediaLive
     HlsClientCache = Shapes::StringShape.new(name: 'HlsClientCache')
     HlsCodecSpecification = Shapes::StringShape.new(name: 'HlsCodecSpecification')
     HlsDirectoryStructure = Shapes::StringShape.new(name: 'HlsDirectoryStructure')
+    HlsDiscontinuityTags = Shapes::StringShape.new(name: 'HlsDiscontinuityTags')
     HlsEncryptionType = Shapes::StringShape.new(name: 'HlsEncryptionType')
     HlsGroupSettings = Shapes::StructureShape.new(name: 'HlsGroupSettings')
     HlsH265PackagingType = Shapes::StringShape.new(name: 'HlsH265PackagingType')
     HlsId3SegmentTaggingScheduleActionSettings = Shapes::StructureShape.new(name: 'HlsId3SegmentTaggingScheduleActionSettings')
     HlsId3SegmentTaggingState = Shapes::StringShape.new(name: 'HlsId3SegmentTaggingState')
+    HlsIncompleteSegmentBehavior = Shapes::StringShape.new(name: 'HlsIncompleteSegmentBehavior')
     HlsInputSettings = Shapes::StructureShape.new(name: 'HlsInputSettings')
     HlsIvInManifest = Shapes::StringShape.new(name: 'HlsIvInManifest')
     HlsIvSource = Shapes::StringShape.new(name: 'HlsIvSource')
@@ -341,6 +345,7 @@ module Aws::MediaLive
     InputLossActionForRtmpOut = Shapes::StringShape.new(name: 'InputLossActionForRtmpOut')
     InputLossActionForUdpOut = Shapes::StringShape.new(name: 'InputLossActionForUdpOut')
     InputLossBehavior = Shapes::StructureShape.new(name: 'InputLossBehavior')
+    InputLossFailoverSettings = Shapes::StructureShape.new(name: 'InputLossFailoverSettings')
     InputLossImageType = Shapes::StringShape.new(name: 'InputLossImageType')
     InputMaximumBitrate = Shapes::StringShape.new(name: 'InputMaximumBitrate')
     InputPreference = Shapes::StringShape.new(name: 'InputPreference')
@@ -655,6 +660,7 @@ module Aws::MediaLive
     __integerMin0Max7 = Shapes::IntegerShape.new(name: '__integerMin0Max7')
     __integerMin0Max8191 = Shapes::IntegerShape.new(name: '__integerMin0Max8191')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
+    __integerMin100 = Shapes::IntegerShape.new(name: '__integerMin100')
     __integerMin1000 = Shapes::IntegerShape.new(name: '__integerMin1000')
     __integerMin1000000Max100000000 = Shapes::IntegerShape.new(name: '__integerMin1000000Max100000000')
     __integerMin100000Max100000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max100000000')
@@ -695,6 +701,7 @@ module Aws::MediaLive
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
     __listOfChannelEgressEndpoint = Shapes::ListShape.new(name: '__listOfChannelEgressEndpoint')
     __listOfChannelSummary = Shapes::ListShape.new(name: '__listOfChannelSummary')
+    __listOfFailoverCondition = Shapes::ListShape.new(name: '__listOfFailoverCondition')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfInput = Shapes::ListShape.new(name: '__listOfInput')
     __listOfInputAttachment = Shapes::ListShape.new(name: '__listOfInputAttachment')
@@ -855,6 +862,8 @@ module Aws::MediaLive
     AudioTrackSelection.add_member(:tracks, Shapes::ShapeRef.new(shape: __listOfAudioTrack, required: true, location_name: "tracks"))
     AudioTrackSelection.struct_class = Types::AudioTrackSelection
 
+    AutomaticInputFailoverSettings.add_member(:error_clear_time_msec, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "errorClearTimeMsec"))
+    AutomaticInputFailoverSettings.add_member(:failover_conditions, Shapes::ShapeRef.new(shape: __listOfFailoverCondition, location_name: "failoverConditions"))
     AutomaticInputFailoverSettings.add_member(:input_preference, Shapes::ShapeRef.new(shape: InputPreference, location_name: "inputPreference"))
     AutomaticInputFailoverSettings.add_member(:secondary_input_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secondaryInputId"))
     AutomaticInputFailoverSettings.struct_class = Types::AutomaticInputFailoverSettings
@@ -1533,6 +1542,12 @@ module Aws::MediaLive
     EncoderSettings.add_member(:video_descriptions, Shapes::ShapeRef.new(shape: __listOfVideoDescription, required: true, location_name: "videoDescriptions"))
     EncoderSettings.struct_class = Types::EncoderSettings
 
+    FailoverCondition.add_member(:failover_condition_settings, Shapes::ShapeRef.new(shape: FailoverConditionSettings, location_name: "failoverConditionSettings"))
+    FailoverCondition.struct_class = Types::FailoverCondition
+
+    FailoverConditionSettings.add_member(:input_loss_settings, Shapes::ShapeRef.new(shape: InputLossFailoverSettings, location_name: "inputLossSettings"))
+    FailoverConditionSettings.struct_class = Types::FailoverConditionSettings
+
     FeatureActivations.add_member(:input_prepare_schedule_actions, Shapes::ShapeRef.new(shape: FeatureActivationsInputPrepareScheduleActions, location_name: "inputPrepareScheduleActions"))
     FeatureActivations.struct_class = Types::FeatureActivations
 
@@ -1705,10 +1720,12 @@ module Aws::MediaLive
     HlsGroupSettings.add_member(:constant_iv, Shapes::ShapeRef.new(shape: __stringMin32Max32, location_name: "constantIv"))
     HlsGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     HlsGroupSettings.add_member(:directory_structure, Shapes::ShapeRef.new(shape: HlsDirectoryStructure, location_name: "directoryStructure"))
+    HlsGroupSettings.add_member(:discontinuity_tags, Shapes::ShapeRef.new(shape: HlsDiscontinuityTags, location_name: "discontinuityTags"))
     HlsGroupSettings.add_member(:encryption_type, Shapes::ShapeRef.new(shape: HlsEncryptionType, location_name: "encryptionType"))
     HlsGroupSettings.add_member(:hls_cdn_settings, Shapes::ShapeRef.new(shape: HlsCdnSettings, location_name: "hlsCdnSettings"))
     HlsGroupSettings.add_member(:hls_id_3_segment_tagging, Shapes::ShapeRef.new(shape: HlsId3SegmentTaggingState, location_name: "hlsId3SegmentTagging"))
     HlsGroupSettings.add_member(:i_frame_only_playlists, Shapes::ShapeRef.new(shape: IFrameOnlyPlaylistType, location_name: "iFrameOnlyPlaylists"))
+    HlsGroupSettings.add_member(:incomplete_segment_behavior, Shapes::ShapeRef.new(shape: HlsIncompleteSegmentBehavior, location_name: "incompleteSegmentBehavior"))
     HlsGroupSettings.add_member(:index_n_segments, Shapes::ShapeRef.new(shape: __integerMin3, location_name: "indexNSegments"))
     HlsGroupSettings.add_member(:input_loss_action, Shapes::ShapeRef.new(shape: InputLossActionForHlsOut, location_name: "inputLossAction"))
     HlsGroupSettings.add_member(:iv_in_manifest, Shapes::ShapeRef.new(shape: HlsIvInManifest, location_name: "ivInManifest"))
@@ -1885,6 +1902,9 @@ module Aws::MediaLive
     InputLossBehavior.add_member(:input_loss_image_type, Shapes::ShapeRef.new(shape: InputLossImageType, location_name: "inputLossImageType"))
     InputLossBehavior.add_member(:repeat_frame_msec, Shapes::ShapeRef.new(shape: __integerMin0Max1000000, location_name: "repeatFrameMsec"))
     InputLossBehavior.struct_class = Types::InputLossBehavior
+
+    InputLossFailoverSettings.add_member(:input_loss_threshold_msec, Shapes::ShapeRef.new(shape: __integerMin100, location_name: "inputLossThresholdMsec"))
+    InputLossFailoverSettings.struct_class = Types::InputLossFailoverSettings
 
     InputPrepareScheduleActionSettings.add_member(:input_attachment_name_reference, Shapes::ShapeRef.new(shape: __string, location_name: "inputAttachmentNameReference"))
     InputPrepareScheduleActionSettings.add_member(:input_clipping_settings, Shapes::ShapeRef.new(shape: InputClippingSettings, location_name: "inputClippingSettings"))
@@ -2952,6 +2972,8 @@ module Aws::MediaLive
     __listOfChannelEgressEndpoint.member = Shapes::ShapeRef.new(shape: ChannelEgressEndpoint)
 
     __listOfChannelSummary.member = Shapes::ShapeRef.new(shape: ChannelSummary)
+
+    __listOfFailoverCondition.member = Shapes::ShapeRef.new(shape: FailoverCondition)
 
     __listOfHlsAdMarkers.member = Shapes::ShapeRef.new(shape: HlsAdMarkers)
 

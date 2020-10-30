@@ -1657,7 +1657,7 @@ module Aws::Imagebuilder
     #   resp = client.list_component_build_versions({
     #     component_version_arn: "ComponentVersionArn", # required
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1727,7 +1727,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1789,7 +1789,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1849,7 +1849,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1921,7 +1921,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1988,7 +1988,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2063,7 +2063,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2127,7 +2127,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2182,7 +2182,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2729,7 +2729,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
