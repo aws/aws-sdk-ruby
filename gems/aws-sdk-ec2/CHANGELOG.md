@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.205.0 (2020-11-02)
+------------------
+
+* Feature - This release adds support for the following features: 1. P4d instances based on NVIDIA A100 GPUs.  2. NetworkCardIndex attribute to support multiple network cards.
+
 1.204.0 (2020-10-29)
 ------------------
 
