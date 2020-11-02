@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.619 (2020-11-02)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 2.11.618 (2020-10-30)
