@@ -201,6 +201,8 @@ module Aws::EC2
     ClassicLoadBalancersConfig = Shapes::StructureShape.new(name: 'ClassicLoadBalancersConfig')
     ClientCertificateRevocationListStatus = Shapes::StructureShape.new(name: 'ClientCertificateRevocationListStatus')
     ClientCertificateRevocationListStatusCode = Shapes::StringShape.new(name: 'ClientCertificateRevocationListStatusCode')
+    ClientConnectOptions = Shapes::StructureShape.new(name: 'ClientConnectOptions')
+    ClientConnectResponseOptions = Shapes::StructureShape.new(name: 'ClientConnectResponseOptions')
     ClientData = Shapes::StructureShape.new(name: 'ClientData')
     ClientVpnAssociationId = Shapes::StringShape.new(name: 'ClientVpnAssociationId')
     ClientVpnAuthentication = Shapes::StructureShape.new(name: 'ClientVpnAuthentication')
@@ -215,6 +217,8 @@ module Aws::EC2
     ClientVpnConnectionStatus = Shapes::StructureShape.new(name: 'ClientVpnConnectionStatus')
     ClientVpnConnectionStatusCode = Shapes::StringShape.new(name: 'ClientVpnConnectionStatusCode')
     ClientVpnEndpoint = Shapes::StructureShape.new(name: 'ClientVpnEndpoint')
+    ClientVpnEndpointAttributeStatus = Shapes::StructureShape.new(name: 'ClientVpnEndpointAttributeStatus')
+    ClientVpnEndpointAttributeStatusCode = Shapes::StringShape.new(name: 'ClientVpnEndpointAttributeStatusCode')
     ClientVpnEndpointId = Shapes::StringShape.new(name: 'ClientVpnEndpointId')
     ClientVpnEndpointIdList = Shapes::ListShape.new(name: 'ClientVpnEndpointIdList')
     ClientVpnEndpointStatus = Shapes::StructureShape.new(name: 'ClientVpnEndpointStatus')
@@ -944,7 +948,12 @@ module Aws::EC2
     FleetLaunchTemplateSpecification = Shapes::StructureShape.new(name: 'FleetLaunchTemplateSpecification')
     FleetLaunchTemplateSpecificationRequest = Shapes::StructureShape.new(name: 'FleetLaunchTemplateSpecificationRequest')
     FleetOnDemandAllocationStrategy = Shapes::StringShape.new(name: 'FleetOnDemandAllocationStrategy')
+    FleetReplacementStrategy = Shapes::StringShape.new(name: 'FleetReplacementStrategy')
     FleetSet = Shapes::ListShape.new(name: 'FleetSet')
+    FleetSpotCapacityRebalance = Shapes::StructureShape.new(name: 'FleetSpotCapacityRebalance')
+    FleetSpotCapacityRebalanceRequest = Shapes::StructureShape.new(name: 'FleetSpotCapacityRebalanceRequest')
+    FleetSpotMaintenanceStrategies = Shapes::StructureShape.new(name: 'FleetSpotMaintenanceStrategies')
+    FleetSpotMaintenanceStrategiesRequest = Shapes::StructureShape.new(name: 'FleetSpotMaintenanceStrategiesRequest')
     FleetStateCode = Shapes::StringShape.new(name: 'FleetStateCode')
     FleetType = Shapes::StringShape.new(name: 'FleetType')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -1639,6 +1648,7 @@ module Aws::EC2
     ReplaceRouteTableAssociationResult = Shapes::StructureShape.new(name: 'ReplaceRouteTableAssociationResult')
     ReplaceTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'ReplaceTransitGatewayRouteRequest')
     ReplaceTransitGatewayRouteResult = Shapes::StructureShape.new(name: 'ReplaceTransitGatewayRouteResult')
+    ReplacementStrategy = Shapes::StringShape.new(name: 'ReplacementStrategy')
     ReportInstanceReasonCodes = Shapes::StringShape.new(name: 'ReportInstanceReasonCodes')
     ReportInstanceStatusRequest = Shapes::StructureShape.new(name: 'ReportInstanceStatusRequest')
     ReportStatusType = Shapes::StringShape.new(name: 'ReportStatusType')
@@ -1797,6 +1807,7 @@ module Aws::EC2
     SnapshotState = Shapes::StringShape.new(name: 'SnapshotState')
     SnapshotTaskDetail = Shapes::StructureShape.new(name: 'SnapshotTaskDetail')
     SpotAllocationStrategy = Shapes::StringShape.new(name: 'SpotAllocationStrategy')
+    SpotCapacityRebalance = Shapes::StructureShape.new(name: 'SpotCapacityRebalance')
     SpotDatafeedSubscription = Shapes::StructureShape.new(name: 'SpotDatafeedSubscription')
     SpotFleetLaunchSpecification = Shapes::StructureShape.new(name: 'SpotFleetLaunchSpecification')
     SpotFleetMonitoring = Shapes::StructureShape.new(name: 'SpotFleetMonitoring')
@@ -1816,6 +1827,7 @@ module Aws::EC2
     SpotInstanceStateFault = Shapes::StructureShape.new(name: 'SpotInstanceStateFault')
     SpotInstanceStatus = Shapes::StructureShape.new(name: 'SpotInstanceStatus')
     SpotInstanceType = Shapes::StringShape.new(name: 'SpotInstanceType')
+    SpotMaintenanceStrategies = Shapes::StructureShape.new(name: 'SpotMaintenanceStrategies')
     SpotMarketOptions = Shapes::StructureShape.new(name: 'SpotMarketOptions')
     SpotOptions = Shapes::StructureShape.new(name: 'SpotOptions')
     SpotOptionsRequest = Shapes::StructureShape.new(name: 'SpotOptionsRequest')
@@ -2736,6 +2748,15 @@ module Aws::EC2
     ClientCertificateRevocationListStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ClientCertificateRevocationListStatus.struct_class = Types::ClientCertificateRevocationListStatus
 
+    ClientConnectOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    ClientConnectOptions.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: String, location_name: "LambdaFunctionArn"))
+    ClientConnectOptions.struct_class = Types::ClientConnectOptions
+
+    ClientConnectResponseOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    ClientConnectResponseOptions.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: String, location_name: "lambdaFunctionArn"))
+    ClientConnectResponseOptions.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnEndpointAttributeStatus, location_name: "status"))
+    ClientConnectResponseOptions.struct_class = Types::ClientConnectResponseOptions
+
     ClientData.add_member(:comment, Shapes::ShapeRef.new(shape: String, location_name: "Comment"))
     ClientData.add_member(:upload_end, Shapes::ShapeRef.new(shape: DateTime, location_name: "UploadEnd"))
     ClientData.add_member(:upload_size, Shapes::ShapeRef.new(shape: Double, location_name: "UploadSize"))
@@ -2775,6 +2796,7 @@ module Aws::EC2
     ClientVpnConnection.add_member(:common_name, Shapes::ShapeRef.new(shape: String, location_name: "commonName"))
     ClientVpnConnection.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnConnectionStatus, location_name: "status"))
     ClientVpnConnection.add_member(:connection_end_time, Shapes::ShapeRef.new(shape: String, location_name: "connectionEndTime"))
+    ClientVpnConnection.add_member(:posture_compliance_statuses, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "postureComplianceStatusSet"))
     ClientVpnConnection.struct_class = Types::ClientVpnConnection
 
     ClientVpnConnectionSet.member = Shapes::ShapeRef.new(shape: ClientVpnConnection, location_name: "item")
@@ -2803,7 +2825,12 @@ module Aws::EC2
     ClientVpnEndpoint.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "securityGroupIdSet"))
     ClientVpnEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     ClientVpnEndpoint.add_member(:self_service_portal_url, Shapes::ShapeRef.new(shape: String, location_name: "selfServicePortalUrl"))
+    ClientVpnEndpoint.add_member(:client_connect_options, Shapes::ShapeRef.new(shape: ClientConnectResponseOptions, location_name: "clientConnectOptions"))
     ClientVpnEndpoint.struct_class = Types::ClientVpnEndpoint
+
+    ClientVpnEndpointAttributeStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnEndpointAttributeStatusCode, location_name: "code"))
+    ClientVpnEndpointAttributeStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientVpnEndpointAttributeStatus.struct_class = Types::ClientVpnEndpointAttributeStatus
 
     ClientVpnEndpointIdList.member = Shapes::ShapeRef.new(shape: ClientVpnEndpointId, location_name: "item")
 
@@ -2982,6 +3009,7 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "SecurityGroupId"))
     CreateClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateClientVpnEndpointRequest.add_member(:self_service_portal, Shapes::ShapeRef.new(shape: SelfServicePortal, location_name: "SelfServicePortal"))
+    CreateClientVpnEndpointRequest.add_member(:client_connect_options, Shapes::ShapeRef.new(shape: ClientConnectOptions, location_name: "ClientConnectOptions"))
     CreateClientVpnEndpointRequest.struct_class = Types::CreateClientVpnEndpointRequest
 
     CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
@@ -5841,6 +5869,18 @@ module Aws::EC2
 
     FleetSet.member = Shapes::ShapeRef.new(shape: FleetData, location_name: "item")
 
+    FleetSpotCapacityRebalance.add_member(:replacement_strategy, Shapes::ShapeRef.new(shape: FleetReplacementStrategy, location_name: "replacementStrategy"))
+    FleetSpotCapacityRebalance.struct_class = Types::FleetSpotCapacityRebalance
+
+    FleetSpotCapacityRebalanceRequest.add_member(:replacement_strategy, Shapes::ShapeRef.new(shape: FleetReplacementStrategy, location_name: "ReplacementStrategy"))
+    FleetSpotCapacityRebalanceRequest.struct_class = Types::FleetSpotCapacityRebalanceRequest
+
+    FleetSpotMaintenanceStrategies.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: FleetSpotCapacityRebalance, location_name: "capacityRebalance"))
+    FleetSpotMaintenanceStrategies.struct_class = Types::FleetSpotMaintenanceStrategies
+
+    FleetSpotMaintenanceStrategiesRequest.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: FleetSpotCapacityRebalanceRequest, location_name: "CapacityRebalance"))
+    FleetSpotMaintenanceStrategiesRequest.struct_class = Types::FleetSpotMaintenanceStrategiesRequest
+
     FlowLog.add_member(:creation_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "creationTime"))
     FlowLog.add_member(:deliver_logs_error_message, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsErrorMessage"))
     FlowLog.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsPermissionArn"))
@@ -7350,6 +7390,7 @@ module Aws::EC2
     ModifyClientVpnEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "SecurityGroupId"))
     ModifyClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     ModifyClientVpnEndpointRequest.add_member(:self_service_portal, Shapes::ShapeRef.new(shape: SelfServicePortal, location_name: "SelfServicePortal"))
+    ModifyClientVpnEndpointRequest.add_member(:client_connect_options, Shapes::ShapeRef.new(shape: ClientConnectOptions, location_name: "ClientConnectOptions"))
     ModifyClientVpnEndpointRequest.struct_class = Types::ModifyClientVpnEndpointRequest
 
     ModifyClientVpnEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -7374,7 +7415,7 @@ module Aws::EC2
     ModifyFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))
     ModifyFleetRequest.add_member(:launch_template_configs, Shapes::ShapeRef.new(shape: FleetLaunchTemplateConfigListRequest, location_name: "LaunchTemplateConfig"))
     ModifyFleetRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
-    ModifyFleetRequest.add_member(:target_capacity_specification, Shapes::ShapeRef.new(shape: TargetCapacitySpecificationRequest, required: true, location_name: "TargetCapacitySpecification"))
+    ModifyFleetRequest.add_member(:target_capacity_specification, Shapes::ShapeRef.new(shape: TargetCapacitySpecificationRequest, location_name: "TargetCapacitySpecification"))
     ModifyFleetRequest.struct_class = Types::ModifyFleetRequest
 
     ModifyFleetResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -9218,6 +9259,9 @@ module Aws::EC2
     SnapshotTaskDetail.add_member(:user_bucket, Shapes::ShapeRef.new(shape: UserBucketDetails, location_name: "userBucket"))
     SnapshotTaskDetail.struct_class = Types::SnapshotTaskDetail
 
+    SpotCapacityRebalance.add_member(:replacement_strategy, Shapes::ShapeRef.new(shape: ReplacementStrategy, location_name: "replacementStrategy"))
+    SpotCapacityRebalance.struct_class = Types::SpotCapacityRebalance
+
     SpotDatafeedSubscription.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
     SpotDatafeedSubscription.add_member(:fault, Shapes::ShapeRef.new(shape: SpotInstanceStateFault, location_name: "fault"))
     SpotDatafeedSubscription.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
@@ -9258,6 +9302,7 @@ module Aws::EC2
 
     SpotFleetRequestConfigData.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: AllocationStrategy, location_name: "allocationStrategy"))
     SpotFleetRequestConfigData.add_member(:on_demand_allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandAllocationStrategy, location_name: "onDemandAllocationStrategy"))
+    SpotFleetRequestConfigData.add_member(:spot_maintenance_strategies, Shapes::ShapeRef.new(shape: SpotMaintenanceStrategies, location_name: "spotMaintenanceStrategies"))
     SpotFleetRequestConfigData.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     SpotFleetRequestConfigData.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: ExcessCapacityTerminationPolicy, location_name: "excessCapacityTerminationPolicy"))
     SpotFleetRequestConfigData.add_member(:fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "fulfilledCapacity"))
@@ -9325,6 +9370,9 @@ module Aws::EC2
     SpotInstanceStatus.add_member(:update_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "updateTime"))
     SpotInstanceStatus.struct_class = Types::SpotInstanceStatus
 
+    SpotMaintenanceStrategies.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: SpotCapacityRebalance, location_name: "capacityRebalance"))
+    SpotMaintenanceStrategies.struct_class = Types::SpotMaintenanceStrategies
+
     SpotMarketOptions.add_member(:max_price, Shapes::ShapeRef.new(shape: String, location_name: "MaxPrice"))
     SpotMarketOptions.add_member(:spot_instance_type, Shapes::ShapeRef.new(shape: SpotInstanceType, location_name: "SpotInstanceType"))
     SpotMarketOptions.add_member(:block_duration_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "BlockDurationMinutes"))
@@ -9333,6 +9381,7 @@ module Aws::EC2
     SpotMarketOptions.struct_class = Types::SpotMarketOptions
 
     SpotOptions.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotAllocationStrategy, location_name: "allocationStrategy"))
+    SpotOptions.add_member(:maintenance_strategies, Shapes::ShapeRef.new(shape: FleetSpotMaintenanceStrategies, location_name: "maintenanceStrategies"))
     SpotOptions.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
     SpotOptions.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instancePoolsToUseCount"))
     SpotOptions.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleInstanceType"))
@@ -9342,6 +9391,7 @@ module Aws::EC2
     SpotOptions.struct_class = Types::SpotOptions
 
     SpotOptionsRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotAllocationStrategy, location_name: "AllocationStrategy"))
+    SpotOptionsRequest.add_member(:maintenance_strategies, Shapes::ShapeRef.new(shape: FleetSpotMaintenanceStrategiesRequest, location_name: "MaintenanceStrategies"))
     SpotOptionsRequest.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "InstanceInterruptionBehavior"))
     SpotOptionsRequest.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancePoolsToUseCount"))
     SpotOptionsRequest.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "SingleInstanceType"))

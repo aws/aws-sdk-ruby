@@ -372,6 +372,10 @@ module Aws::AutoScaling
     #   Valid Range: Minimum value of 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] capacity_rebalance
+    #   Indicates whether capacity rebalance is enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -400,7 +404,8 @@ module Aws::AutoScaling
       :termination_policies,
       :new_instances_protected_from_scale_in,
       :service_linked_role_arn,
-      :max_instance_lifetime)
+      :max_instance_lifetime,
+      :capacity_rebalance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -834,6 +839,7 @@ module Aws::AutoScaling
     #         vpc_zone_identifier: "XmlStringMaxLen2047",
     #         termination_policies: ["XmlStringMaxLen1600"],
     #         new_instances_protected_from_scale_in: false,
+    #         capacity_rebalance: false,
     #         lifecycle_hook_specification_list: [
     #           {
     #             lifecycle_hook_name: "AsciiStringMaxLen255", # required
@@ -1101,6 +1107,24 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     #   @return [Boolean]
     #
+    # @!attribute [rw] capacity_rebalance
+    #   Indicates whether capacity rebalance is enabled. Otherwise, capacity
+    #   rebalance is disabled.
+    #
+    #   You can enable capacity rebalancing for your Auto Scaling groups
+    #   when using Spot Instances. When you turn on capacity rebalancing,
+    #   Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever
+    #   Amazon EC2 predicts that a Spot Instance is at an elevated risk of
+    #   interruption. After launching a new instance, it then terminates an
+    #   old instance. For more information, see [Amazon EC2 Auto Scaling
+    #   capacity rebalancing][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] lifecycle_hook_specification_list
     #   One or more lifecycle hooks.
     #   @return [Array<Types::LifecycleHookSpecification>]
@@ -1177,6 +1201,7 @@ module Aws::AutoScaling
       :vpc_zone_identifier,
       :termination_policies,
       :new_instances_protected_from_scale_in,
+      :capacity_rebalance,
       :lifecycle_hook_specification_list,
       :tags,
       :service_linked_role_arn,
@@ -1382,7 +1407,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html
     #   @return [Types::InstanceMonitoring]
     #
     # @!attribute [rw] spot_price
@@ -1485,12 +1510,12 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] metadata_options
     #   The metadata options for the instances. For more information, see
-    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide
-    #   for Linux Instances*.
+    #   [Configuring the Instance Metadata Options][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     #   @return [Types::InstanceMetadataOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfigurationType AWS API Documentation
@@ -3019,12 +3044,12 @@ module Aws::AutoScaling
     end
 
     # The metadata options for the instances. For more information, see
-    # [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
-    # Linux Instances*.
+    # [Configuring the Instance Metadata Options][1] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     #
     # @note When making an API call, you may pass InstanceMetadataOptions
     #   data as a hash:
@@ -3464,7 +3489,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html
     #   @return [Types::InstanceMonitoring]
     #
     # @!attribute [rw] spot_price
@@ -3537,12 +3562,12 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] metadata_options
     #   The metadata options for the instances. For more information, see
-    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide
-    #   for Linux Instances*.
+    #   [Configuring the Instance Metadata Options][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     #   @return [Types::InstanceMetadataOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfiguration AWS API Documentation
@@ -4380,17 +4405,20 @@ module Aws::AutoScaling
     #   `ALBRequestCountPerTarget` and there is a target group attached to
     #   the Auto Scaling group.
     #
-    #   Elastic Load Balancing sends data about your load balancers to
-    #   Amazon CloudWatch. CloudWatch collects the data and specifies the
-    #   format to use to access the data. The format is
-    #   `app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
-    #   `, where
+    #   You create the resource label by appending the final portion of the
+    #   load balancer ARN and the final portion of the target group ARN into
+    #   a single value, separated by a forward slash (/). The format is
+    #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
+    #   where:
     #
-    #   * `app/load-balancer-name/load-balancer-id ` is the final portion of
-    #     the load balancer ARN, and
+    #   * app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the
+    #     final portion of the load balancer ARN
     #
-    #   * `targetgroup/target-group-name/target-group-id ` is the final
-    #     portion of the target group ARN.
+    #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
+    #     the final portion of the target group ARN.
+    #
+    #   This is an example:
+    #   app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
     #
     #   To find the ARN for an Application Load Balancer, use the
     #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
@@ -5892,6 +5920,7 @@ module Aws::AutoScaling
     #         new_instances_protected_from_scale_in: false,
     #         service_linked_role_arn: "ResourceName",
     #         max_instance_lifetime: 1,
+    #         capacity_rebalance: false,
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -6080,6 +6109,23 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     #   @return [Integer]
     #
+    # @!attribute [rw] capacity_rebalance
+    #   Enables or disables capacity rebalance.
+    #
+    #   You can enable capacity rebalancing for your Auto Scaling groups
+    #   when using Spot Instances. When you turn on capacity rebalancing,
+    #   Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever
+    #   Amazon EC2 predicts that a Spot Instance is at an elevated risk of
+    #   interruption. After launching a new instance, it then terminates an
+    #   old instance. For more information, see [Amazon EC2 Auto Scaling
+    #   capacity rebalancing][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -6099,7 +6145,8 @@ module Aws::AutoScaling
       :termination_policies,
       :new_instances_protected_from_scale_in,
       :service_linked_role_arn,
-      :max_instance_lifetime)
+      :max_instance_lifetime,
+      :capacity_rebalance)
       SENSITIVE = []
       include Aws::Structure
     end

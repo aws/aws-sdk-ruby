@@ -3979,6 +3979,10 @@ module Aws::EC2
     #
     #   Default Value: `enabled`
     #
+    # @option params [Types::ClientConnectOptions] :client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
@@ -4031,6 +4035,10 @@ module Aws::EC2
     #     security_group_ids: ["SecurityGroupId"],
     #     vpc_id: "VpcId",
     #     self_service_portal: "enabled", # accepts enabled, disabled
+    #     client_connect_options: {
+    #       enabled: false,
+    #       lambda_function_arn: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4671,15 +4679,23 @@ module Aws::EC2
     #   Fleet expires.
     #
     # @option params [String] :type
-    #   The type of the request. By default, the EC2 Fleet places an
-    #   asynchronous request for your desired capacity, and maintains it by
-    #   replenishing interrupted Spot Instances (`maintain`). A value of
-    #   `instant` places a synchronous one-time request, and returns errors
-    #   for any instances that could not be launched. A value of `request`
-    #   places an asynchronous one-time request without maintaining capacity
-    #   or submitting requests in alternative capacity pools if capacity is
-    #   unavailable. For more information, see [EC2 Fleet Request Types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   The type of request. The default value is `maintain`.
+    #
+    #   * `maintain` - The EC2 Fleet plaees an asynchronous request for your
+    #     desired capacity, and continues to maintain your desired Spot
+    #     capacity by replenishing interrupted Spot Instances.
+    #
+    #   * `request` - The EC2 Fleet places an asynchronous one-time request
+    #     for your desired capacity, but does submit Spot requests in
+    #     alternative capacity pools if Spot capacity is unavailable, and does
+    #     not maintain Spot capacity if Spot Instances are interrupted.
+    #
+    #   * `instant` - The EC2 Fleet places a synchronous one-time request for
+    #     your desired capacity, and returns errors for any instances that
+    #     could not be launched.
+    #
+    #   For more information, see [EC2 Fleet request types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -4704,7 +4720,7 @@ module Aws::EC2
     #   value for `ResourceType` must be `fleet`, otherwise the fleet request
     #   fails. To tag instances at launch, specify the tags in the [launch
     #   template][1]. For information about tagging after launch, see [Tagging
-    #   Your Resources][2].
+    #   your resources][2].
     #
     #
     #
@@ -4724,6 +4740,11 @@ module Aws::EC2
     #     client_token: "String",
     #     spot_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #       maintenance_strategies: {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       },
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       instance_pools_to_use_count: 1,
     #       single_instance_type: false,
@@ -13913,6 +13934,8 @@ module Aws::EC2
     #   resp.connections[0].status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
     #   resp.connections[0].status.message #=> String
     #   resp.connections[0].connection_end_time #=> String
+    #   resp.connections[0].posture_compliance_statuses #=> Array
+    #   resp.connections[0].posture_compliance_statuses[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnections AWS API Documentation
@@ -14009,6 +14032,10 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].security_group_ids[0] #=> String
     #   resp.client_vpn_endpoints[0].vpc_id #=> String
     #   resp.client_vpn_endpoints[0].self_service_portal_url #=> String
+    #   resp.client_vpn_endpoints[0].client_connect_options.enabled #=> Boolean
+    #   resp.client_vpn_endpoints[0].client_connect_options.lambda_function_arn #=> String
+    #   resp.client_vpn_endpoints[0].client_connect_options.status.code #=> String, one of "applying", "applied"
+    #   resp.client_vpn_endpoints[0].client_connect_options.status.message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
@@ -15175,6 +15202,7 @@ module Aws::EC2
     #   resp.fleets[0].valid_until #=> Time
     #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
     #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized"
+    #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.fleets[0].spot_options.instance_pools_to_use_count #=> Integer
     #   resp.fleets[0].spot_options.single_instance_type #=> Boolean
@@ -22541,6 +22569,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_allocation_strategy #=> String, one of "lowestPrice", "prioritized"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.client_token #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.excess_capacity_termination_policy #=> String, one of "noTermination", "default"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.fulfilled_capacity #=> Float
@@ -30197,6 +30226,10 @@ module Aws::EC2
     #   Specify whether to enable the self-service portal for the Client VPN
     #   endpoint.
     #
+    # @option params [Types::ClientConnectOptions] :client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
@@ -30222,6 +30255,10 @@ module Aws::EC2
     #     security_group_ids: ["SecurityGroupId"],
     #     vpc_id: "VpcId",
     #     self_service_portal: "enabled", # accepts enabled, disabled
+    #     client_connect_options: {
+    #       enabled: false,
+    #       lambda_function_arn: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -30424,7 +30461,7 @@ module Aws::EC2
     # @option params [required, String] :fleet_id
     #   The ID of the EC2 Fleet.
     #
-    # @option params [required, Types::TargetCapacitySpecificationRequest] :target_capacity_specification
+    # @option params [Types::TargetCapacitySpecificationRequest] :target_capacity_specification
     #   The size of the EC2 Fleet.
     #
     # @return [Types::ModifyFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -30466,7 +30503,7 @@ module Aws::EC2
     #       },
     #     ],
     #     fleet_id: "FleetId", # required
-    #     target_capacity_specification: { # required
+    #     target_capacity_specification: {
     #       total_target_capacity: 1, # required
     #       on_demand_target_capacity: 1,
     #       spot_target_capacity: 1,
@@ -35741,6 +35778,11 @@ module Aws::EC2
     #     spot_fleet_request_config: { # required
     #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #       on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
+    #       spot_maintenance_strategies: {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       },
     #       client_token: "String",
     #       excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #       fulfilled_capacity: 1.0,
@@ -37429,18 +37471,15 @@ module Aws::EC2
     #
     # @option params [Types::EnclaveOptionsRequest] :enclave_options
     #   Indicates whether the instance is enabled for AWS Nitro Enclaves. For
-    #   more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   more information, see [ What is AWS Nitro Enclaves?][1] in the *AWS
+    #   Nitro Enclaves User Guide*.
     #
     #   You can't enable AWS Nitro Enclaves and hibernation on the same
-    #   instance. For more information about AWS Nitro Enclaves requirements,
-    #   see [ AWS Nitro Enclaves][2] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -39141,7 +39180,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.205.0'
+      context[:gem_version] = '1.206.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

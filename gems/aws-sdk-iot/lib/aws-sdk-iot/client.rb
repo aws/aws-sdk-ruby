@@ -6243,7 +6243,9 @@ module Aws::IoT
     # Lists the billing groups you have created.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
@@ -7041,7 +7043,9 @@ module Aws::IoT
     # Cognito identities or federated identities.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -7375,7 +7379,9 @@ module Aws::IoT
     #   The ARN of the resource.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7487,7 +7493,9 @@ module Aws::IoT
     # List the thing groups in your account.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7540,7 +7548,9 @@ module Aws::IoT
     #   The thing name.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7578,16 +7588,29 @@ module Aws::IoT
     # can be X.509 certificates, IAM users, groups, and roles, Amazon
     # Cognito identities or federated identities.
     #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
     # @option params [required, String] :thing_name
     #   The name of the thing.
     #
     # @return [Types::ListThingPrincipalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListThingPrincipalsResponse#principals #principals} => Array&lt;String&gt;
+    #   * {Types::ListThingPrincipalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_thing_principals({
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #     thing_name: "ThingName", # required
     #   })
     #
@@ -7595,6 +7618,7 @@ module Aws::IoT
     #
     #   resp.principals #=> Array
     #   resp.principals[0] #=> String
+    #   resp.next_token #=> String
     #
     # @overload list_thing_principals(params = {})
     # @param [Hash] params ({})
@@ -7612,7 +7636,9 @@ module Aws::IoT
     #   The type of task report.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
@@ -7651,7 +7677,9 @@ module Aws::IoT
     # List bulk thing provisioning tasks.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7690,7 +7718,9 @@ module Aws::IoT
     # Lists the existing thing types.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -7747,7 +7777,9 @@ module Aws::IoT
     #  </note>
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -7802,7 +7834,9 @@ module Aws::IoT
     #   The name of the billing group.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
@@ -7845,7 +7879,9 @@ module Aws::IoT
     #   well.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7885,7 +7921,9 @@ module Aws::IoT
     #   The maximum number of results to return at one time.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @return [Types::ListTopicRuleDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7926,7 +7964,9 @@ module Aws::IoT
     #   The maximum number of results to return.
     #
     # @option params [String] :next_token
-    #   A token used to retrieve the next value.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Boolean] :rule_disabled
     #   Specifies whether the rule is disabled.
@@ -7971,8 +8011,9 @@ module Aws::IoT
     #   `THING_Group`.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -10584,7 +10625,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

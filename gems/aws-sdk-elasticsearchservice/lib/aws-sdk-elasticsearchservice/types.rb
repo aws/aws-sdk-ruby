@@ -173,9 +173,14 @@ module Aws::ElasticsearchService
     #   True if the internal user database is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] saml_options
+    #   Describes the SAML application configured for a domain.
+    #   @return [Types::SAMLOptionsOutput]
+    #
     class AdvancedSecurityOptions < Struct.new(
       :enabled,
-      :internal_user_database_enabled)
+      :internal_user_database_enabled,
+      :saml_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -196,6 +201,18 @@ module Aws::ElasticsearchService
     #           master_user_name: "Username",
     #           master_user_password: "Password",
     #         },
+    #         saml_options: {
+    #           enabled: false,
+    #           idp: {
+    #             metadata_content: "SAMLMetadata", # required
+    #             entity_id: "SAMLEntityId", # required
+    #           },
+    #           master_user_name: "Username",
+    #           master_backend_role: "BackendRole",
+    #           subject_key: "String",
+    #           roles_key: "String",
+    #           session_timeout_minutes: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] enabled
@@ -211,10 +228,15 @@ module Aws::ElasticsearchService
     #   both.
     #   @return [Types::MasterUserOptions]
     #
+    # @!attribute [rw] saml_options
+    #   Specifies the SAML application configuration for the domain.
+    #   @return [Types::SAMLOptionsInput]
+    #
     class AdvancedSecurityOptionsInput < Struct.new(
       :enabled,
       :internal_user_database_enabled,
-      :master_user_options)
+      :master_user_options,
+      :saml_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -478,6 +500,18 @@ module Aws::ElasticsearchService
     #             master_user_arn: "ARN",
     #             master_user_name: "Username",
     #             master_user_password: "Password",
+    #           },
+    #           saml_options: {
+    #             enabled: false,
+    #             idp: {
+    #               metadata_content: "SAMLMetadata", # required
+    #               entity_id: "SAMLEntityId", # required
+    #             },
+    #             master_user_name: "Username",
+    #             master_backend_role: "BackendRole",
+    #             subject_key: "String",
+    #             roles_key: "String",
+    #             session_timeout_minutes: 1,
     #           },
     #         },
     #       }
@@ -3184,6 +3218,125 @@ module Aws::ElasticsearchService
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
+    # Specifies the SAML Identity Provider's information.
+    #
+    # @note When making an API call, you may pass SAMLIdp
+    #   data as a hash:
+    #
+    #       {
+    #         metadata_content: "SAMLMetadata", # required
+    #         entity_id: "SAMLEntityId", # required
+    #       }
+    #
+    # @!attribute [rw] metadata_content
+    #   The Metadata of the SAML application in xml format.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The unique Entity ID of the application in SAML Identity Provider.
+    #   @return [String]
+    #
+    class SAMLIdp < Struct.new(
+      :metadata_content,
+      :entity_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the SAML application configuration for the domain.
+    #
+    # @note When making an API call, you may pass SAMLOptionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         idp: {
+    #           metadata_content: "SAMLMetadata", # required
+    #           entity_id: "SAMLEntityId", # required
+    #         },
+    #         master_user_name: "Username",
+    #         master_backend_role: "BackendRole",
+    #         subject_key: "String",
+    #         roles_key: "String",
+    #         session_timeout_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   True if SAML is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idp
+    #   Specifies the SAML Identity Provider's information.
+    #   @return [Types::SAMLIdp]
+    #
+    # @!attribute [rw] master_user_name
+    #   The SAML master username, which is stored in the Amazon
+    #   Elasticsearch Service domain's internal database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_backend_role
+    #   The backend role to which the SAML master user is mapped to.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_key
+    #   The key to use for matching the SAML Subject attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   The key to use for matching the SAML Roles attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_timeout_minutes
+    #   The duration, in minutes, after which a user session becomes
+    #   inactive. Acceptable values are between 1 and 1440, and the default
+    #   value is 60.
+    #   @return [Integer]
+    #
+    class SAMLOptionsInput < Struct.new(
+      :enabled,
+      :idp,
+      :master_user_name,
+      :master_backend_role,
+      :subject_key,
+      :roles_key,
+      :session_timeout_minutes)
+      SENSITIVE = [:master_user_name]
+      include Aws::Structure
+    end
+
+    # Describes the SAML application configured for the domain.
+    #
+    # @!attribute [rw] enabled
+    #   True if SAML is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idp
+    #   Describes the SAML Identity Provider's information.
+    #   @return [Types::SAMLIdp]
+    #
+    # @!attribute [rw] subject_key
+    #   The key used for matching the SAML Subject attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   The key used for matching the SAML Roles attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_timeout_minutes
+    #   The duration, in minutes, after which a user session becomes
+    #   inactive.
+    #   @return [Integer]
+    #
+    class SAMLOptionsOutput < Struct.new(
+      :enabled,
+      :idp,
+      :subject_key,
+      :roles_key,
+      :session_timeout_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The current options of an Elasticsearch domain service software
     # options.
     #
@@ -3464,6 +3617,18 @@ module Aws::ElasticsearchService
     #             master_user_arn: "ARN",
     #             master_user_name: "Username",
     #             master_user_password: "Password",
+    #           },
+    #           saml_options: {
+    #             enabled: false,
+    #             idp: {
+    #               metadata_content: "SAMLMetadata", # required
+    #               entity_id: "SAMLEntityId", # required
+    #             },
+    #             master_user_name: "Username",
+    #             master_backend_role: "BackendRole",
+    #             subject_key: "String",
+    #             roles_key: "String",
+    #             session_timeout_minutes: 1,
     #           },
     #         },
     #       }

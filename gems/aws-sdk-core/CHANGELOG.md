@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.109.2 (2020-11-04)
+------------------
+
 * Issue - Check for flattened on ref for lists when serializing.
 
 3.109.1 (2020-10-05)

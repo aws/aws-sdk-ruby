@@ -963,6 +963,22 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     #
+    # @option params [Boolean] :capacity_rebalance
+    #   Indicates whether capacity rebalance is enabled. Otherwise, capacity
+    #   rebalance is disabled.
+    #
+    #   You can enable capacity rebalancing for your Auto Scaling groups when
+    #   using Spot Instances. When you turn on capacity rebalancing, Amazon
+    #   EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon
+    #   EC2 predicts that a Spot Instance is at an elevated risk of
+    #   interruption. After launching a new instance, it then terminates an
+    #   old instance. For more information, see [Amazon EC2 Auto Scaling
+    #   capacity rebalancing][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #
     # @option params [Array<Types::LifecycleHookSpecification>] :lifecycle_hook_specification_list
     #   One or more lifecycle hooks.
     #
@@ -1116,6 +1132,7 @@ module Aws::AutoScaling
     #     vpc_zone_identifier: "XmlStringMaxLen2047",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
+    #     capacity_rebalance: false,
     #     lifecycle_hook_specification_list: [
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
@@ -1303,7 +1320,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html
     #
     # @option params [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
@@ -1398,12 +1415,12 @@ module Aws::AutoScaling
     #
     # @option params [Types::InstanceMetadataOptions] :metadata_options
     #   The metadata options for the instances. For more information, see
-    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
-    #   Linux Instances*.
+    #   [Configuring the Instance Metadata Options][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2101,6 +2118,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].new_instances_protected_from_scale_in #=> Boolean
     #   resp.auto_scaling_groups[0].service_linked_role_arn #=> String
     #   resp.auto_scaling_groups[0].max_instance_lifetime #=> Integer
+    #   resp.auto_scaling_groups[0].capacity_rebalance #=> Boolean
     #   resp.next_token #=> String
     #
     #
@@ -4082,6 +4100,9 @@ module Aws::AutoScaling
     # Auto Scaling Group Scales][1] in the *Amazon EC2 Auto Scaling User
     # Guide*.
     #
+    # If you exceed your maximum limit of SNS topics, which is 10 per Auto
+    # Scaling group, the call fails.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html
@@ -4748,6 +4769,9 @@ module Aws::AutoScaling
     # Auto Scaling group from terminating on scale in, see [Instance
     # Protection][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
+    # If you exceed your maximum limit of instance IDs, which is 50 per Auto
+    # Scaling group, the call fails.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
@@ -5257,6 +5281,21 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     #
+    # @option params [Boolean] :capacity_rebalance
+    #   Enables or disables capacity rebalance.
+    #
+    #   You can enable capacity rebalancing for your Auto Scaling groups when
+    #   using Spot Instances. When you turn on capacity rebalancing, Amazon
+    #   EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon
+    #   EC2 predicts that a Spot Instance is at an elevated risk of
+    #   interruption. After launching a new instance, it then terminates an
+    #   old instance. For more information, see [Amazon EC2 Auto Scaling
+    #   capacity rebalancing][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -5334,6 +5373,7 @@ module Aws::AutoScaling
     #     new_instances_protected_from_scale_in: false,
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
+    #     capacity_rebalance: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -5358,7 +5398,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

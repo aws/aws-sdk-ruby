@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.206.0 (2020-11-04)
+------------------
+
+* Feature - Added support for Client Connect Handler for AWS Client VPN. Fleet supports launching replacement instances in response to Capacity Rebalance recommendation.
+
 1.205.0 (2020-11-02)
 ------------------
 

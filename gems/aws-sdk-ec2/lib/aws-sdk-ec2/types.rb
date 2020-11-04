@@ -3221,7 +3221,7 @@ module Aws::EC2
     # For more information about Capacity Reservations, see [On-Demand
     # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
     # Guide*. For examples of using Capacity Reservations in an EC2 Fleet,
-    # see [EC2 Fleet Example Configurations][2] in the *Amazon Elastic
+    # see [EC2 Fleet example configurations][2] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
     #
@@ -3265,7 +3265,7 @@ module Aws::EC2
     # For more information about Capacity Reservations, see [On-Demand
     # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
     # Guide*. For examples of using Capacity Reservations in an EC2 Fleet,
-    # see [EC2 Fleet Example Configurations][2] in the *Amazon Elastic
+    # see [EC2 Fleet example configurations][2] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
     #
@@ -3674,6 +3674,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The options for managing connection authorization for new client
+    # connections.
+    #
+    # @note When making an API call, you may pass ClientConnectOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         lambda_function_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connect options are enabled. The default is
+    #   `false` (not enabled).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function used for
+    #   connection authorization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientConnectOptions AWS API Documentation
+    #
+    class ClientConnectOptions < Struct.new(
+      :enabled,
+      :lambda_function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for managing connection authorization for new client
+    # connections.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connect options are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function used for
+    #   connection authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of any updates to the client connect options.
+    #   @return [Types::ClientVpnEndpointAttributeStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientConnectResponseOptions AWS API Documentation
+    #
+    class ClientConnectResponseOptions < Struct.new(
+      :enabled,
+      :lambda_function_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the client-specific data.
     #
     # @note When making an API call, you may pass ClientData
@@ -3882,6 +3938,11 @@ module Aws::EC2
     #   The date and time the client connection was terminated.
     #   @return [String]
     #
+    # @!attribute [rw] posture_compliance_statuses
+    #   The statuses returned by the client connect handler for posture
+    #   compliance, if applicable.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnection AWS API Documentation
     #
     class ClientVpnConnection < Struct.new(
@@ -3897,7 +3958,8 @@ module Aws::EC2
       :client_ip,
       :common_name,
       :status,
-      :connection_end_time)
+      :connection_end_time,
+      :posture_compliance_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4018,6 +4080,11 @@ module Aws::EC2
     #   The URL of the self-service portal.
     #   @return [String]
     #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::ClientConnectResponseOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -4040,7 +4107,27 @@ module Aws::EC2
       :tags,
       :security_group_ids,
       :vpc_id,
-      :self_service_portal_url)
+      :self_service_portal_url,
+      :client_connect_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the status of the Client VPN endpoint attribute.
+    #
+    # @!attribute [rw] code
+    #   The status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpointAttributeStatus AWS API Documentation
+    #
+    class ClientVpnEndpointAttributeStatus < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5119,6 +5206,10 @@ module Aws::EC2
     #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #         self_service_portal: "enabled", # accepts enabled, disabled
+    #         client_connect_options: {
+    #           enabled: false,
+    #           lambda_function_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] client_cidr_block
@@ -5244,6 +5335,11 @@ module Aws::EC2
     #   Default Value: `enabled`
     #   @return [String]
     #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::ClientConnectOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -5261,7 +5357,8 @@ module Aws::EC2
       :tag_specifications,
       :security_group_ids,
       :vpc_id,
-      :self_service_portal)
+      :self_service_portal,
+      :client_connect_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5768,6 +5865,11 @@ module Aws::EC2
     #         client_token: "String",
     #         spot_options: {
     #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #           maintenance_strategies: {
+    #             capacity_rebalance: {
+    #               replacement_strategy: "launch", # accepts launch
+    #             },
+    #           },
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           instance_pools_to_use_count: 1,
     #           single_instance_type: false,
@@ -5884,15 +5986,23 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of the request. By default, the EC2 Fleet places an
-    #   asynchronous request for your desired capacity, and maintains it by
-    #   replenishing interrupted Spot Instances (`maintain`). A value of
-    #   `instant` places a synchronous one-time request, and returns errors
-    #   for any instances that could not be launched. A value of `request`
-    #   places an asynchronous one-time request without maintaining capacity
-    #   or submitting requests in alternative capacity pools if capacity is
-    #   unavailable. For more information, see [EC2 Fleet Request Types][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #   The type of request. The default value is `maintain`.
+    #
+    #   * `maintain` - The EC2 Fleet plaees an asynchronous request for your
+    #     desired capacity, and continues to maintain your desired Spot
+    #     capacity by replenishing interrupted Spot Instances.
+    #
+    #   * `request` - The EC2 Fleet places an asynchronous one-time request
+    #     for your desired capacity, but does submit Spot requests in
+    #     alternative capacity pools if Spot capacity is unavailable, and
+    #     does not maintain Spot capacity if Spot Instances are interrupted.
+    #
+    #   * `instant` - The EC2 Fleet places a synchronous one-time request
+    #     for your desired capacity, and returns errors for any instances
+    #     that could not be launched.
+    #
+    #   For more information, see [EC2 Fleet request types][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -5921,7 +6031,7 @@ module Aws::EC2
     #   The value for `ResourceType` must be `fleet`, otherwise the fleet
     #   request fails. To tag instances at launch, specify the tags in the
     #   [launch template][1]. For information about tagging after launch,
-    #   see [Tagging Your Resources][2].
+    #   see [Tagging your resources][2].
     #
     #
     #
@@ -25519,12 +25629,12 @@ module Aws::EC2
     end
 
     # Indicates whether the instance is enabled for AWS Nitro Enclaves. For
-    # more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # more information, see [ What is AWS Nitro Enclaves?][1] in the *AWS
+    # Nitro Enclaves User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    # [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #
     # @note When making an API call, you may pass EnclaveOptionsRequest
     #   data as a hash:
@@ -26729,6 +26839,113 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The strategy to use when Amazon EC2 emits a signal that your Spot
+    # Instance is at an elevated risk of being interrupted.
+    #
+    # @!attribute [rw] replacement_strategy
+    #   To allow EC2 Fleet to launch a replacement Spot Instance when an
+    #   instance rebalance notification is emitted for an existing Spot
+    #   Instance in the fleet, specify `launch`. Only available for fleets
+    #   of type `maintain`.
+    #
+    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
+    #   rebalance is not automatically terminated. You can terminate it, or
+    #   you can wait until Amazon EC2 interrupts it. You are charged for
+    #   both instances while they are running.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalance AWS API Documentation
+    #
+    class FleetSpotCapacityRebalance < Struct.new(
+      :replacement_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Spot Instance replacement strategy to use when Amazon EC2 emits a
+    # signal that your Spot Instance is at an elevated risk of being
+    # interrupted. For more information, see [Capacity rebalancing][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance
+    #
+    # @note When making an API call, you may pass FleetSpotCapacityRebalanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replacement_strategy: "launch", # accepts launch
+    #       }
+    #
+    # @!attribute [rw] replacement_strategy
+    #   The replacement strategy to use. Only available for fleets of type
+    #   `maintain`.
+    #
+    #   To allow EC2 Fleet to launch a replacement Spot Instance when an
+    #   instance rebalance notification is emitted for an existing Spot
+    #   Instance in the fleet, specify `launch`. You must specify a value,
+    #   otherwise you get an error.
+    #
+    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
+    #   rebalance is not automatically terminated. You can terminate it, or
+    #   you can wait until Amazon EC2 interrupts it. You are charged for all
+    #   instances while they are running.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalanceRequest AWS API Documentation
+    #
+    class FleetSpotCapacityRebalanceRequest < Struct.new(
+      :replacement_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The strategies for managing your Spot Instances that are at an
+    # elevated risk of being interrupted.
+    #
+    # @!attribute [rw] capacity_rebalance
+    #   The strategy to use when Amazon EC2 emits a signal that your Spot
+    #   Instance is at an elevated risk of being interrupted.
+    #   @return [Types::FleetSpotCapacityRebalance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotMaintenanceStrategies AWS API Documentation
+    #
+    class FleetSpotMaintenanceStrategies < Struct.new(
+      :capacity_rebalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The strategies for managing your Spot Instances that are at an
+    # elevated risk of being interrupted.
+    #
+    # @note When making an API call, you may pass FleetSpotMaintenanceStrategiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       }
+    #
+    # @!attribute [rw] capacity_rebalance
+    #   The strategy to use when Amazon EC2 emits a signal that your Spot
+    #   Instance is at an elevated risk of being interrupted.
+    #   @return [Types::FleetSpotCapacityRebalanceRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotMaintenanceStrategiesRequest AWS API Documentation
+    #
+    class FleetSpotMaintenanceStrategiesRequest < Struct.new(
+      :capacity_rebalance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34904,6 +35121,10 @@ module Aws::EC2
     #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #         self_service_portal: "enabled", # accepts enabled, disabled
+    #         client_connect_options: {
+    #           enabled: false,
+    #           lambda_function_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] client_vpn_endpoint_id
@@ -34982,6 +35203,11 @@ module Aws::EC2
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::ClientConnectOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
     #
     class ModifyClientVpnEndpointRequest < Struct.new(
@@ -34995,7 +35221,8 @@ module Aws::EC2
       :dry_run,
       :security_group_ids,
       :vpc_id,
-      :self_service_portal)
+      :self_service_portal,
+      :client_connect_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35159,7 +35386,7 @@ module Aws::EC2
     #           },
     #         ],
     #         fleet_id: "FleetId", # required
-    #         target_capacity_specification: { # required
+    #         target_capacity_specification: {
     #           total_target_capacity: 1, # required
     #           on_demand_target_capacity: 1,
     #           spot_target_capacity: 1,
@@ -42209,6 +42436,11 @@ module Aws::EC2
     #         spot_fleet_request_config: { # required
     #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #           on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
+    #           spot_maintenance_strategies: {
+    #             capacity_rebalance: {
+    #               replacement_strategy: "launch", # accepts launch
+    #             },
+    #           },
     #           client_token: "String",
     #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #           fulfilled_capacity: 1.0,
@@ -44968,18 +45200,15 @@ module Aws::EC2
     #
     # @!attribute [rw] enclave_options
     #   Indicates whether the instance is enabled for AWS Nitro Enclaves.
-    #   For more information, see [ AWS Nitro Enclaves][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   For more information, see [ What is AWS Nitro Enclaves?][1] in the
+    #   *AWS Nitro Enclaves User Guide*.
     #
     #   You can't enable AWS Nitro Enclaves and hibernation on the same
-    #   instance. For more information about AWS Nitro Enclaves
-    #   requirements, see [ AWS Nitro Enclaves][2] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #   @return [Types::EnclaveOptionsRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
@@ -46922,6 +47151,46 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The Spot Instance replacement strategy to use when Amazon EC2 emits a
+    # signal that your Spot Instance is at an elevated risk of being
+    # interrupted. For more information, see [Capacity rebalancing][1] in
+    # the *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#spot-fleet-capacity-rebalance
+    #
+    # @note When making an API call, you may pass SpotCapacityRebalance
+    #   data as a hash:
+    #
+    #       {
+    #         replacement_strategy: "launch", # accepts launch
+    #       }
+    #
+    # @!attribute [rw] replacement_strategy
+    #   The replacement strategy to use. Only available for fleets of type
+    #   `maintain`. You must specify a value, otherwise you get an error.
+    #
+    #   To allow Spot Fleet to launch a replacement Spot Instance when an
+    #   instance rebalance notification is emitted for a Spot Instance in
+    #   the fleet, specify `launch`.
+    #
+    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
+    #   rebalance is not automatically terminated. You can terminate it, or
+    #   you can wait until Amazon EC2 interrupts it. You are charged for all
+    #   instances while they are running.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotCapacityRebalance AWS API Documentation
+    #
+    class SpotCapacityRebalance < Struct.new(
+      :replacement_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the data feed for a Spot Instance.
     #
     # @!attribute [rw] bucket
@@ -47270,6 +47539,11 @@ module Aws::EC2
     #       {
     #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #         on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
+    #         spot_maintenance_strategies: {
+    #           capacity_rebalance: {
+    #             replacement_strategy: "launch", # accepts launch
+    #           },
+    #         },
     #         client_token: "String",
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         fulfilled_capacity: 1.0,
@@ -47448,6 +47722,11 @@ module Aws::EC2
     #   highest priority first. If you do not specify a value, Spot Fleet
     #   defaults to `lowestPrice`.
     #   @return [String]
+    #
+    # @!attribute [rw] spot_maintenance_strategies
+    #   The strategies for managing your Spot Instances that are at an
+    #   elevated risk of being interrupted.
+    #   @return [Types::SpotMaintenanceStrategies]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -47631,6 +47910,7 @@ module Aws::EC2
     class SpotFleetRequestConfigData < Struct.new(
       :allocation_strategy,
       :on_demand_allocation_strategy,
+      :spot_maintenance_strategies,
       :client_token,
       :excess_capacity_termination_policy,
       :fulfilled_capacity,
@@ -47875,6 +48155,31 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The strategies for managing your Spot Instances that are at an
+    # elevated risk of being interrupted.
+    #
+    # @note When making an API call, you may pass SpotMaintenanceStrategies
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       }
+    #
+    # @!attribute [rw] capacity_rebalance
+    #   The strategy to use when Amazon EC2 emits a signal that your Spot
+    #   Instance is at an elevated risk of being interrupted.
+    #   @return [Types::SpotCapacityRebalance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotMaintenanceStrategies AWS API Documentation
+    #
+    class SpotMaintenanceStrategies < Struct.new(
+      :capacity_rebalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options for Spot Instances.
     #
     # @note When making an API call, you may pass SpotMarketOptions
@@ -47972,6 +48277,12 @@ module Aws::EC2
     #   for the number of instances that are launching.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance_strategies
+    #   The strategies for managing your workloads on your Spot Instances
+    #   that will be interrupted. Currently only the capacity rebalance
+    #   strategy is available.
+    #   @return [Types::FleetSpotMaintenanceStrategies]
+    #
     # @!attribute [rw] instance_interruption_behavior
     #   The behavior when a Spot Instance is interrupted. The default is
     #   `terminate`.
@@ -48011,6 +48322,7 @@ module Aws::EC2
     #
     class SpotOptions < Struct.new(
       :allocation_strategy,
+      :maintenance_strategies,
       :instance_interruption_behavior,
       :instance_pools_to_use_count,
       :single_instance_type,
@@ -48028,6 +48340,11 @@ module Aws::EC2
     #
     #       {
     #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #         maintenance_strategies: {
+    #           capacity_rebalance: {
+    #             replacement_strategy: "launch", # accepts launch
+    #           },
+    #         },
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         instance_pools_to_use_count: 1,
     #         single_instance_type: false,
@@ -48051,6 +48368,11 @@ module Aws::EC2
     #   launches instances from Spot Instance pools with optimal capacity
     #   for the number of instances that are launching.
     #   @return [String]
+    #
+    # @!attribute [rw] maintenance_strategies
+    #   The strategies for managing your Spot Instances that are at an
+    #   elevated risk of being interrupted.
+    #   @return [Types::FleetSpotMaintenanceStrategiesRequest]
     #
     # @!attribute [rw] instance_interruption_behavior
     #   The behavior when a Spot Instance is interrupted. The default is
@@ -48091,6 +48413,7 @@ module Aws::EC2
     #
     class SpotOptionsRequest < Struct.new(
       :allocation_strategy,
+      :maintenance_strategies,
       :instance_interruption_behavior,
       :instance_pools_to_use_count,
       :single_instance_type,

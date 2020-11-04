@@ -201,7 +201,7 @@ module Aws::CloudWatch
     # metric math expression. Each structure either retrieves a metric or
     # performs a math expression. One item in the Metrics array is the math
     # expression that the alarm watches. This expression by designated by
-    # having `ReturnValue` set to true.
+    # having `ReturnData` set to true.
     # @return [Array<Types::MetricDataQuery>]
     def metrics
       data[:metrics]

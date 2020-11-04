@@ -552,8 +552,8 @@ module Aws::CloudWatch
     #   a math expression.
     #
     #   One item in the `Metrics` array is the expression that the alarm
-    #   watches. You designate this expression by setting `ReturnValue` to
-    #   true for this object in the array. For more information, see
+    #   watches. You designate this expression by setting `ReturnData` to true
+    #   for this object in the array. For more information, see
     #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the

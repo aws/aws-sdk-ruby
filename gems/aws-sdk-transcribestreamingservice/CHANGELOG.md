@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-11-04)
+------------------
+
+* Feature - With this release, Amazon Transcribe now supports real-time transcription from audio sources in Italian (it-IT) and German(de-DE).
+
 1.22.0 (2020-09-30)
 ------------------
 

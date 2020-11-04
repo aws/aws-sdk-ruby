@@ -186,6 +186,12 @@ module Aws::AutoScaling
       data[:max_instance_lifetime]
     end
 
+    # Indicates whether capacity rebalance is enabled.
+    # @return [Boolean]
+    def capacity_rebalance
+      data[:capacity_rebalance]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -915,6 +921,7 @@ module Aws::AutoScaling
     #     new_instances_protected_from_scale_in: false,
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
+    #     capacity_rebalance: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1065,6 +1072,20 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
+    # @option options [Boolean] :capacity_rebalance
+    #   Enables or disables capacity rebalance.
+    #
+    #   You can enable capacity rebalancing for your Auto Scaling groups when
+    #   using Spot Instances. When you turn on capacity rebalancing, Amazon
+    #   EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon
+    #   EC2 predicts that a Spot Instance is at an elevated risk of
+    #   interruption. After launching a new instance, it then terminates an
+    #   old instance. For more information, see [Amazon EC2 Auto Scaling
+    #   capacity rebalancing][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

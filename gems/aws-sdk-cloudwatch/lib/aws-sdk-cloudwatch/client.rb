@@ -739,6 +739,11 @@ module Aws::CloudWatch
     # Retrieves the alarms for the specified metric. To filter the results,
     # specify a statistic, period, or unit.
     #
+    # This operation retrieves only standard alarms that are based on the
+    # specified metric. It does not return alarms based on math expressions
+    # that use the specified metric, or composite alarms that use the
+    # specified metric.
+    #
     # @option params [required, String] :metric_name
     #   The name of the metric.
     #
@@ -921,7 +926,6 @@ module Aws::CloudWatch
     end
 
     # Returns a list of all the Contributor Insights rules in your account.
-    # All rules in your account are returned with a single operation.
     #
     # For more information about Contributor Insights, see [Using
     # Contributor Insights to Analyze High-Cardinality Data][1].
@@ -931,11 +935,12 @@ module Aws::CloudWatch
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html
     #
     # @option params [String] :next_token
-    #   Reserved for future use.
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of rules.
     #
     # @option params [Integer] :max_results
-    #   This parameter is not currently used. Reserved for future use. If it
-    #   is used in the future, the maximum value might be different.
+    #   The maximum number of results to return in one operation. If you omit
+    #   this parameter, the default of 500 is used.
     #
     # @return [Types::DescribeInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1376,8 +1381,8 @@ module Aws::CloudWatch
     #   response from CloudWatch than setting 12:07 or 12:29 as the `EndTime`.
     #
     # @option params [String] :next_token
-    #   Include this value, if it was returned by the previous call, to get
-    #   the next set of data points.
+    #   Include this value, if it was returned by the previous `GetMetricData`
+    #   operation, to get the next set of data points.
     #
     # @option params [String] :scan_by
     #   The order in which data points should be returned.
@@ -1837,13 +1842,16 @@ module Aws::CloudWatch
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html
     #
     # @option params [String] :namespace
-    #   The namespace to filter against.
+    #   The metric namespace to filter against. Only the namespace that
+    #   matches exactly will be returned.
     #
     # @option params [String] :metric_name
-    #   The name of the metric to filter against.
+    #   The name of the metric to filter against. Only the metrics with names
+    #   that match exactly will be returned.
     #
     # @option params [Array<Types::DimensionFilter>] :dimensions
-    #   The dimensions to filter against.
+    #   The dimensions to filter against. Only the dimensions that match
+    #   exactly will be returned.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to indicate that there is more
@@ -1973,8 +1981,6 @@ module Aws::CloudWatch
     #
     #   The configuration can also include the time zone to use for the
     #   metric.
-    #
-    #   You can in
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2594,8 +2600,8 @@ module Aws::CloudWatch
     #   a math expression.
     #
     #   One item in the `Metrics` array is the expression that the alarm
-    #   watches. You designate this expression by setting `ReturnValue` to
-    #   true for this object in the array. For more information, see
+    #   watches. You designate this expression by setting `ReturnData` to true
+    #   for this object in the array. For more information, see
     #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
@@ -2724,6 +2730,10 @@ module Aws::CloudWatch
     # data the metric collects. Each dimension consists of a Name and Value
     # pair. For more information about specifying dimensions, see
     # [Publishing Metrics][2] in the *Amazon CloudWatch User Guide*.
+    #
+    # You specify the time stamp to be associated with each data point. You
+    # can specify time stamps that are as much as two weeks before the
+    # current date, and as much as 2 hours after the current day and time.
     #
     # Data points with time stamps from 24 hours ago or longer can take at
     # least 48 hours to become available for [GetMetricData][3] or
@@ -2977,7 +2987,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

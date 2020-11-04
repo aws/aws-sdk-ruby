@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2020-11-04)
+------------------
+
+* Feature - Updated API documentation and added paginator for AWS Iot Registry ListThingPrincipals API.
+
 1.60.0 (2020-10-28)
 ------------------
 

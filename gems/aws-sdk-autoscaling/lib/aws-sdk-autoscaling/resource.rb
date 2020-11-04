@@ -82,6 +82,7 @@ module Aws::AutoScaling
     #     vpc_zone_identifier: "XmlStringMaxLen2047",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
+    #     capacity_rebalance: false,
     #     lifecycle_hook_specification_list: [
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
@@ -310,6 +311,21 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    # @option options [Boolean] :capacity_rebalance
+    #   Indicates whether capacity rebalance is enabled. Otherwise, capacity
+    #   rebalance is disabled.
+    #
+    #   You can enable capacity rebalancing for your Auto Scaling groups when
+    #   using Spot Instances. When you turn on capacity rebalancing, Amazon
+    #   EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon
+    #   EC2 predicts that a Spot Instance is at an elevated risk of
+    #   interruption. After launching a new instance, it then terminates an
+    #   old instance. For more information, see [Amazon EC2 Auto Scaling
+    #   capacity rebalancing][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
     # @option options [Array<Types::LifecycleHookSpecification>] :lifecycle_hook_specification_list
     #   One or more lifecycle hooks.
     # @option options [Array<Types::Tag>] :tags
@@ -537,7 +553,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html
     # @option options [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
     #   fulfill the request. Spot Instances are launched when the price you
@@ -626,12 +642,12 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
     # @option options [Types::InstanceMetadataOptions] :metadata_options
     #   The metadata options for the instances. For more information, see
-    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
-    #   Linux Instances*.
+    #   [Configuring the Instance Metadata Options][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     # @return [LaunchConfiguration]
     def create_launch_configuration(options = {})
       @client.create_launch_configuration(options)

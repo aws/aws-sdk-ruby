@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-11-04)
+------------------
+
+* Feature - Service Catalog API ListPortfolioAccess can now support a maximum PageSize of 100.
+
 1.52.0 (2020-10-22)
 ------------------
 

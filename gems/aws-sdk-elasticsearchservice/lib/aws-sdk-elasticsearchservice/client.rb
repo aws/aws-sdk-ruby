@@ -629,6 +629,18 @@ module Aws::ElasticsearchService
     #         master_user_name: "Username",
     #         master_user_password: "Password",
     #       },
+    #       saml_options: {
+    #         enabled: false,
+    #         idp: {
+    #           metadata_content: "SAMLMetadata", # required
+    #           entity_id: "SAMLEntityId", # required
+    #         },
+    #         master_user_name: "Username",
+    #         master_backend_role: "BackendRole",
+    #         subject_key: "String",
+    #         roles_key: "String",
+    #         session_timeout_minutes: 1,
+    #       },
     #     },
     #   })
     #
@@ -692,6 +704,12 @@ module Aws::ElasticsearchService
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -883,6 +901,12 @@ module Aws::ElasticsearchService
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1093,6 +1117,12 @@ module Aws::ElasticsearchService
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1220,6 +1250,12 @@ module Aws::ElasticsearchService
     #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.entity_id #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.subject_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.roles_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.session_timeout_minutes #=> Integer
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
@@ -1311,6 +1347,12 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status_list[0].advanced_security_options.enabled #=> Boolean
     #   resp.domain_status_list[0].advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -2307,6 +2349,18 @@ module Aws::ElasticsearchService
     #         master_user_name: "Username",
     #         master_user_password: "Password",
     #       },
+    #       saml_options: {
+    #         enabled: false,
+    #         idp: {
+    #           metadata_content: "SAMLMetadata", # required
+    #           entity_id: "SAMLEntityId", # required
+    #         },
+    #         master_user_name: "Username",
+    #         master_backend_role: "BackendRole",
+    #         subject_key: "String",
+    #         roles_key: "String",
+    #         session_timeout_minutes: 1,
+    #       },
     #     },
     #   })
     #
@@ -2412,6 +2466,12 @@ module Aws::ElasticsearchService
     #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.entity_id #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.subject_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.roles_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.session_timeout_minutes #=> Integer
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
@@ -2482,7 +2542,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

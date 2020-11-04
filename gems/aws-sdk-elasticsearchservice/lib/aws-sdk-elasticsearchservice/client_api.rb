@@ -28,6 +28,7 @@ module Aws::ElasticsearchService
     AdvancedSecurityOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsStatus')
     AssociatePackageRequest = Shapes::StructureShape.new(name: 'AssociatePackageRequest')
     AssociatePackageResponse = Shapes::StructureShape.new(name: 'AssociatePackageResponse')
+    BackendRole = Shapes::StringShape.new(name: 'BackendRole')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelElasticsearchServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateRequest')
@@ -208,6 +209,11 @@ module Aws::ElasticsearchService
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    SAMLEntityId = Shapes::StringShape.new(name: 'SAMLEntityId')
+    SAMLIdp = Shapes::StructureShape.new(name: 'SAMLIdp')
+    SAMLMetadata = Shapes::StringShape.new(name: 'SAMLMetadata')
+    SAMLOptionsInput = Shapes::StructureShape.new(name: 'SAMLOptionsInput')
+    SAMLOptionsOutput = Shapes::StructureShape.new(name: 'SAMLOptionsOutput')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
@@ -282,11 +288,13 @@ module Aws::ElasticsearchService
 
     AdvancedSecurityOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AdvancedSecurityOptions.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
+    AdvancedSecurityOptions.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsOutput, location_name: "SAMLOptions"))
     AdvancedSecurityOptions.struct_class = Types::AdvancedSecurityOptions
 
     AdvancedSecurityOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AdvancedSecurityOptionsInput.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
     AdvancedSecurityOptionsInput.add_member(:master_user_options, Shapes::ShapeRef.new(shape: MasterUserOptions, location_name: "MasterUserOptions"))
+    AdvancedSecurityOptionsInput.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsInput, location_name: "SAMLOptions"))
     AdvancedSecurityOptionsInput.struct_class = Types::AdvancedSecurityOptionsInput
 
     AdvancedSecurityOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, required: true, location_name: "Options"))
@@ -830,6 +838,26 @@ module Aws::ElasticsearchService
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SAMLIdp.add_member(:metadata_content, Shapes::ShapeRef.new(shape: SAMLMetadata, required: true, location_name: "MetadataContent"))
+    SAMLIdp.add_member(:entity_id, Shapes::ShapeRef.new(shape: SAMLEntityId, required: true, location_name: "EntityId"))
+    SAMLIdp.struct_class = Types::SAMLIdp
+
+    SAMLOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    SAMLOptionsInput.add_member(:idp, Shapes::ShapeRef.new(shape: SAMLIdp, location_name: "Idp"))
+    SAMLOptionsInput.add_member(:master_user_name, Shapes::ShapeRef.new(shape: Username, location_name: "MasterUserName"))
+    SAMLOptionsInput.add_member(:master_backend_role, Shapes::ShapeRef.new(shape: BackendRole, location_name: "MasterBackendRole"))
+    SAMLOptionsInput.add_member(:subject_key, Shapes::ShapeRef.new(shape: String, location_name: "SubjectKey"))
+    SAMLOptionsInput.add_member(:roles_key, Shapes::ShapeRef.new(shape: String, location_name: "RolesKey"))
+    SAMLOptionsInput.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "SessionTimeoutMinutes"))
+    SAMLOptionsInput.struct_class = Types::SAMLOptionsInput
+
+    SAMLOptionsOutput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    SAMLOptionsOutput.add_member(:idp, Shapes::ShapeRef.new(shape: SAMLIdp, location_name: "Idp"))
+    SAMLOptionsOutput.add_member(:subject_key, Shapes::ShapeRef.new(shape: String, location_name: "SubjectKey"))
+    SAMLOptionsOutput.add_member(:roles_key, Shapes::ShapeRef.new(shape: String, location_name: "RolesKey"))
+    SAMLOptionsOutput.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "SessionTimeoutMinutes"))
+    SAMLOptionsOutput.struct_class = Types::SAMLOptionsOutput
 
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))

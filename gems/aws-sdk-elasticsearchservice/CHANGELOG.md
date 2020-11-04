@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-11-04)
+------------------
+
+* Feature - Amazon Elasticsearch Service now supports native SAML authentication that seamlessly integrates with the customers' existing SAML 2.0 Identity Provider (IdP).
+
 1.43.0 (2020-09-30)
 ------------------
 
