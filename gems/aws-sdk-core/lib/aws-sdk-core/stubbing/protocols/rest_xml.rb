@@ -5,8 +5,6 @@ module Aws
     module Protocols
       class RestXml < Rest
 
-        include Seahorse::Model::Shapes
-
         def body_for(api, operation, rules, data)
           if eventstream?(rules)
             encode_eventstream_response(rules, data, Xml::Builder)
