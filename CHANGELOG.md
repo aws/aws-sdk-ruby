@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.621 (2020-11-05)
+------------------
+
 * Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
