@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-11-05)
+------------------
+
+* Feature - With this release, customers can now reprocess past events by storing the events published on event bus in an encrypted archive.
+
 1.16.0 (2020-10-08)
 ------------------
 

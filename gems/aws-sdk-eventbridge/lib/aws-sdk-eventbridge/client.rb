@@ -361,6 +361,92 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Cancels the specified replay.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to cancel.
+    #
+    # @return [Types::CancelReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::CancelReplayResponse#state #state} => String
+    #   * {Types::CancelReplayResponse#state_reason #state_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_replay({
+    #     replay_name: "ReplayName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_arn #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CancelReplay AWS API Documentation
+    #
+    # @overload cancel_replay(params = {})
+    # @param [Hash] params ({})
+    def cancel_replay(params = {}, options = {})
+      req = build_request(:cancel_replay, params)
+      req.send_request(options)
+    end
+
+    # Creates an archive of events with the specified settings. When you
+    # create an archive, incoming events might not immediately start being
+    # sent to the archive. Allow a short period of time for changes to take
+    # effect.
+    #
+    # @option params [required, String] :archive_name
+    #   The name for the archive to create.
+    #
+    # @option params [required, String] :event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #
+    # @option params [String] :description
+    #   A description for the archive.
+    #
+    # @option params [String] :event_pattern
+    #   An event pattern to use to filter events sent to the archive.
+    #
+    # @option params [Integer] :retention_days
+    #   The number of days to retain events for. Default value is 0. If set to
+    #   0, events are retained indefinitely
+    #
+    # @return [Types::CreateArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::CreateArchiveResponse#state #state} => String
+    #   * {Types::CreateArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::CreateArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_archive({
+    #     archive_name: "ArchiveName", # required
+    #     event_source_arn: "Arn", # required
+    #     description: "ArchiveDescription",
+    #     event_pattern: "EventPattern",
+    #     retention_days: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateArchive AWS API Documentation
+    #
+    # @overload create_archive(params = {})
+    # @param [Hash] params ({})
+    def create_archive(params = {}, options = {})
+      req = build_request(:create_archive, params)
+      req.send_request(options)
+    end
+
     # Creates a new event bus within your account. This can be a custom
     # event bus which you can use to receive events from your custom
     # applications and services, or it can be a partner event bus which can
@@ -507,6 +593,28 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Deletes the specified archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_archive({
+    #     archive_name: "ArchiveName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteArchive AWS API Documentation
+    #
+    # @overload delete_archive(params = {})
+    # @param [Hash] params ({})
+    def delete_archive(params = {}, options = {})
+      req = build_request(:delete_archive, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified custom event bus or partner event bus. All rules
     # associated with this event bus need to be deleted. You can't delete
     # your account's default event bus.
@@ -606,6 +714,54 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def delete_rule(params = {}, options = {})
       req = build_request(:delete_rule, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about an archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to retrieve.
+    #
+    # @return [Types::DescribeArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::DescribeArchiveResponse#archive_name #archive_name} => String
+    #   * {Types::DescribeArchiveResponse#event_source_arn #event_source_arn} => String
+    #   * {Types::DescribeArchiveResponse#description #description} => String
+    #   * {Types::DescribeArchiveResponse#event_pattern #event_pattern} => String
+    #   * {Types::DescribeArchiveResponse#state #state} => String
+    #   * {Types::DescribeArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeArchiveResponse#retention_days #retention_days} => Integer
+    #   * {Types::DescribeArchiveResponse#size_bytes #size_bytes} => Integer
+    #   * {Types::DescribeArchiveResponse#event_count #event_count} => Integer
+    #   * {Types::DescribeArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_archive({
+    #     archive_name: "ArchiveName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.archive_name #=> String
+    #   resp.event_source_arn #=> String
+    #   resp.description #=> String
+    #   resp.event_pattern #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.retention_days #=> Integer
+    #   resp.size_bytes #=> Integer
+    #   resp.event_count #=> Integer
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeArchive AWS API Documentation
+    #
+    # @overload describe_archive(params = {})
+    # @param [Hash] params ({})
+    def describe_archive(params = {}, options = {})
+      req = build_request(:describe_archive, params)
       req.send_request(options)
     end
 
@@ -723,6 +879,67 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Retrieves details about a replay. Use `DescribeReplay` to determine
+    # the progress of a running replay. A replay processes events to replay
+    # based on the time in the event, and replays them using 1 minute
+    # intervals. If you use `StartReplay` and specify an `EventStartTime`
+    # and an `EventEndTime` that covers a 20 minute time range, the events
+    # are replayed from the first minute of that 20 minute range first. Then
+    # the events from the second minute are replayed. You can use
+    # `DescribeReplay` to determine the progress of a replay. The value
+    # returned for `EventLastReplayedTime` indicates the time within the
+    # specified time range associated with the last event replayed.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to retrieve.
+    #
+    # @return [Types::DescribeReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplayResponse#replay_name #replay_name} => String
+    #   * {Types::DescribeReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::DescribeReplayResponse#description #description} => String
+    #   * {Types::DescribeReplayResponse#state #state} => String
+    #   * {Types::DescribeReplayResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeReplayResponse#event_source_arn #event_source_arn} => String
+    #   * {Types::DescribeReplayResponse#destination #destination} => Types::ReplayDestination
+    #   * {Types::DescribeReplayResponse#event_start_time #event_start_time} => Time
+    #   * {Types::DescribeReplayResponse#event_end_time #event_end_time} => Time
+    #   * {Types::DescribeReplayResponse#event_last_replayed_time #event_last_replayed_time} => Time
+    #   * {Types::DescribeReplayResponse#replay_start_time #replay_start_time} => Time
+    #   * {Types::DescribeReplayResponse#replay_end_time #replay_end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replay({
+    #     replay_name: "ReplayName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_name #=> String
+    #   resp.replay_arn #=> String
+    #   resp.description #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #   resp.event_source_arn #=> String
+    #   resp.destination.arn #=> String
+    #   resp.destination.filter_arns #=> Array
+    #   resp.destination.filter_arns[0] #=> String
+    #   resp.event_start_time #=> Time
+    #   resp.event_end_time #=> Time
+    #   resp.event_last_replayed_time #=> Time
+    #   resp.replay_start_time #=> Time
+    #   resp.replay_end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeReplay AWS API Documentation
+    #
+    # @overload describe_replay(params = {})
+    # @param [Hash] params ({})
+    def describe_replay(params = {}, options = {})
+      req = build_request(:describe_replay, params)
+      req.send_request(options)
+    end
+
     # Describes the specified rule.
     #
     # DescribeRule does not list the targets of a rule. To see the targets
@@ -836,6 +1053,64 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def enable_rule(params = {}, options = {})
       req = build_request(:enable_rule, params)
+      req.send_request(options)
+    end
+
+    # Lists your archives. You can either list all the archives or you can
+    # provide a prefix to match to the archive names. Filter parameters are
+    # exclusive.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter the archives returned. Only archives with name
+    #   that match the prefix are returned.
+    #
+    # @option params [String] :event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #
+    # @option params [String] :state
+    #   The state of the archive.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListArchivesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListArchivesResponse#archives #archives} => Array&lt;Types::Archive&gt;
+    #   * {Types::ListArchivesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_archives({
+    #     name_prefix: "ArchiveName",
+    #     event_source_arn: "Arn",
+    #     state: "ENABLED", # accepts ENABLED, DISABLED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archives #=> Array
+    #   resp.archives[0].archive_name #=> String
+    #   resp.archives[0].event_source_arn #=> String
+    #   resp.archives[0].state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.archives[0].state_reason #=> String
+    #   resp.archives[0].retention_days #=> Integer
+    #   resp.archives[0].size_bytes #=> Integer
+    #   resp.archives[0].event_count #=> Integer
+    #   resp.archives[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListArchives AWS API Documentation
+    #
+    # @overload list_archives(params = {})
+    # @param [Hash] params ({})
+    def list_archives(params = {}, options = {})
+      req = build_request(:list_archives, params)
       req.send_request(options)
     end
 
@@ -1026,6 +1301,65 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def list_partner_event_sources(params = {}, options = {})
       req = build_request(:list_partner_event_sources, params)
+      req.send_request(options)
+    end
+
+    # Lists your replays. You can either list all the replays or you can
+    # provide a prefix to match to the replay names. Filter parameters are
+    # exclusive.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter the archives returned. Only archives with name
+    #   that match the prefix are returned.
+    #
+    # @option params [String] :state
+    #   The state of the replay.
+    #
+    # @option params [String] :event_source_arn
+    #   The ARN of the event source associated with the replay.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of replays to retrieve.
+    #
+    # @return [Types::ListReplaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReplaysResponse#replays #replays} => Array&lt;Types::Replay&gt;
+    #   * {Types::ListReplaysResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_replays({
+    #     name_prefix: "ReplayName",
+    #     state: "STARTING", # accepts STARTING, RUNNING, CANCELLING, COMPLETED, CANCELLED, FAILED
+    #     event_source_arn: "Arn",
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replays #=> Array
+    #   resp.replays[0].replay_name #=> String
+    #   resp.replays[0].event_source_arn #=> String
+    #   resp.replays[0].state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.replays[0].state_reason #=> String
+    #   resp.replays[0].event_start_time #=> Time
+    #   resp.replays[0].event_end_time #=> Time
+    #   resp.replays[0].event_last_replayed_time #=> Time
+    #   resp.replays[0].replay_start_time #=> Time
+    #   resp.replays[0].replay_end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListReplays AWS API Documentation
+    #
+    # @overload list_replays(params = {})
+    # @param [Hash] params ({})
+    def list_replays(params = {}, options = {})
+      req = build_request(:list_replays, params)
       req.send_request(options)
     end
 
@@ -1900,6 +2234,75 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Starts the specified replay. Events are not necessarily replayed in
+    # the exact same order that they were added to the archive. A replay
+    # processes events to replay based on the time in the event, and replays
+    # them using 1 minute intervals. If you specify an `EventStartTime` and
+    # an `EventEndTime` that covers a 20 minute time range, the events are
+    # replayed from the first minute of that 20 minute range first. Then the
+    # events from the second minute are replayed. You can use
+    # `DescribeReplay` to determine the progress of a replay. The value
+    # returned for `EventLastReplayedTime` indicates the time within the
+    # specified time range associated with the last event replayed.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to start.
+    #
+    # @option params [String] :description
+    #   A description for the replay to start.
+    #
+    # @option params [required, String] :event_source_arn
+    #   The ARN of the archive to replay events from.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :event_start_time
+    #   A time stamp for the time to start replaying events. Only events that
+    #   occurred between the `EventStartTime` and `EventEndTime` are replayed.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :event_end_time
+    #   A time stamp for the time to stop replaying events. Only events that
+    #   occurred between the `EventStartTime` and `EventEndTime` are replayed.
+    #
+    # @option params [required, Types::ReplayDestination] :destination
+    #   A `ReplayDestination` object that includes details about the
+    #   destination for the replay.
+    #
+    # @return [Types::StartReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::StartReplayResponse#state #state} => String
+    #   * {Types::StartReplayResponse#state_reason #state_reason} => String
+    #   * {Types::StartReplayResponse#replay_start_time #replay_start_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replay({
+    #     replay_name: "ReplayName", # required
+    #     description: "ReplayDescription",
+    #     event_source_arn: "Arn", # required
+    #     event_start_time: Time.now, # required
+    #     event_end_time: Time.now, # required
+    #     destination: { # required
+    #       arn: "Arn", # required
+    #       filter_arns: ["Arn"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_arn #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #   resp.replay_start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/StartReplay AWS API Documentation
+    #
+    # @overload start_replay(params = {})
+    # @param [Hash] params ({})
+    def start_replay(params = {}, options = {})
+      req = build_request(:start_replay, params)
+      req.send_request(options)
+    end
+
     # Assigns one or more tags (key-value pairs) to the specified
     # EventBridge resource. Tags can help you organize and categorize your
     # resources. You can also use them to scope user permissions by granting
@@ -2017,6 +2420,52 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Updates the specified archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to update.
+    #
+    # @option params [String] :description
+    #   The description for the archive.
+    #
+    # @option params [String] :event_pattern
+    #   The event pattern to use to filter events sent to the archive.
+    #
+    # @option params [Integer] :retention_days
+    #   The number of days to retain events in the archive.
+    #
+    # @return [Types::UpdateArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::UpdateArchiveResponse#state #state} => String
+    #   * {Types::UpdateArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::UpdateArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_archive({
+    #     archive_name: "ArchiveName", # required
+    #     description: "ArchiveDescription",
+    #     event_pattern: "EventPattern",
+    #     retention_days: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateArchive AWS API Documentation
+    #
+    # @overload update_archive(params = {})
+    # @param [Hash] params ({})
+    def update_archive(params = {}, options = {})
+      req = build_request(:update_archive, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2030,7 +2479,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

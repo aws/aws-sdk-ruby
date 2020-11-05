@@ -492,6 +492,9 @@ module Aws::ElasticsearchService
     #         domain_endpoint_options: {
     #           enforce_https: false,
     #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #           custom_endpoint_enabled: false,
+    #           custom_endpoint: "DomainNameFqdn",
+    #           custom_endpoint_certificate_arn: "ARN",
     #         },
     #         advanced_security_options: {
     #           enabled: false,
@@ -1437,6 +1440,9 @@ module Aws::ElasticsearchService
     #       {
     #         enforce_https: false,
     #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         custom_endpoint_enabled: false,
+    #         custom_endpoint: "DomainNameFqdn",
+    #         custom_endpoint_certificate_arn: "ARN",
     #       }
     #
     # @!attribute [rw] enforce_https
@@ -1454,9 +1460,25 @@ module Aws::ElasticsearchService
     #     supports only TLSv1.2
     #   @return [String]
     #
+    # @!attribute [rw] custom_endpoint_enabled
+    #   Specify if custom endpoint should be enabled for the Elasticsearch
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_endpoint
+    #   Specify the fully qualified domain for your custom endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_certificate_arn
+    #   Specify ACM certificate ARN for your custom endpoint.
+    #   @return [String]
+    #
     class DomainEndpointOptions < Struct.new(
       :enforce_https,
-      :tls_security_policy)
+      :tls_security_policy,
+      :custom_endpoint_enabled,
+      :custom_endpoint,
+      :custom_endpoint_certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3609,6 +3631,9 @@ module Aws::ElasticsearchService
     #         domain_endpoint_options: {
     #           enforce_https: false,
     #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #           custom_endpoint_enabled: false,
+    #           custom_endpoint: "DomainNameFqdn",
+    #           custom_endpoint_certificate_arn: "ARN",
     #         },
     #         advanced_security_options: {
     #           enabled: false,

@@ -92,6 +92,7 @@ module Aws::ElasticsearchService
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
     DomainInformation = Shapes::StructureShape.new(name: 'DomainInformation')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainNameFqdn = Shapes::StringShape.new(name: 'DomainNameFqdn')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
     DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
@@ -489,6 +490,9 @@ module Aws::ElasticsearchService
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
     DomainEndpointOptions.add_member(:tls_security_policy, Shapes::ShapeRef.new(shape: TLSSecurityPolicy, location_name: "TLSSecurityPolicy"))
+    DomainEndpointOptions.add_member(:custom_endpoint_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CustomEndpointEnabled"))
+    DomainEndpointOptions.add_member(:custom_endpoint, Shapes::ShapeRef.new(shape: DomainNameFqdn, location_name: "CustomEndpoint"))
+    DomainEndpointOptions.add_member(:custom_endpoint_certificate_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CustomEndpointCertificateArn"))
     DomainEndpointOptions.struct_class = Types::DomainEndpointOptions
 
     DomainEndpointOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, required: true, location_name: "Options"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2020-11-05)
+------------------
+
+* Feature - Supports a new parameter to set the max allocated storage in gigabytes for the CreateDBInstanceReadReplica API.
+
 1.104.0 (2020-10-15)
 ------------------
 

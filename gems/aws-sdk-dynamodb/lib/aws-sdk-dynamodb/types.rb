@@ -6272,6 +6272,16 @@ module Aws::DynamoDB
     #     this region.
     #
     #      </note>
+    #
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS ` - The AWS KMS key used to
+    #     encrypt the table is inaccessible.
+    #
+    #     <note markdown="1"> If the AWS KMS key remains inaccessible for more than 20 hours,
+    #     DynamoDB will remove this replica from the replication group. The
+    #     replica will not be deleted and replication will stop from and to
+    #     this region.
+    #
+    #      </note>
     #   @return [String]
     #
     # @!attribute [rw] replica_status_description

@@ -620,6 +620,9 @@ module Aws::ElasticsearchService
     #     domain_endpoint_options: {
     #       enforce_https: false,
     #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       custom_endpoint_enabled: false,
+    #       custom_endpoint: "DomainNameFqdn",
+    #       custom_endpoint_certificate_arn: "ARN",
     #     },
     #     advanced_security_options: {
     #       enabled: false,
@@ -702,6 +705,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
@@ -899,6 +905,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
@@ -1115,6 +1124,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
@@ -1243,6 +1255,9 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
@@ -1345,6 +1360,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status_list[0].advanced_security_options.enabled #=> Boolean
     #   resp.domain_status_list[0].advanced_security_options.internal_user_database_enabled #=> Boolean
     #   resp.domain_status_list[0].advanced_security_options.saml_options.enabled #=> Boolean
@@ -2340,6 +2358,9 @@ module Aws::ElasticsearchService
     #     domain_endpoint_options: {
     #       enforce_https: false,
     #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       custom_endpoint_enabled: false,
+    #       custom_endpoint: "DomainNameFqdn",
+    #       custom_endpoint_certificate_arn: "ARN",
     #     },
     #     advanced_security_options: {
     #       enabled: false,
@@ -2459,6 +2480,9 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
@@ -2542,7 +2566,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

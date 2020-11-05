@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-11-05)
+------------------
+
+* Feature - Support Amazon MQ as an Event Source.
+
 1.51.0 (2020-09-30)
 ------------------
 

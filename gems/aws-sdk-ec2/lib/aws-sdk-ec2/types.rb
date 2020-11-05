@@ -462,7 +462,7 @@ module Aws::EC2
     #       {
     #         domain: "vpc", # accepts vpc, standard
     #         address: "PublicIpAddress",
-    #         public_ipv_4_pool: "String",
+    #         public_ipv_4_pool: "Ipv4PoolEc2Id",
     #         network_border_group: "String",
     #         customer_owned_ipv_4_pool: "String",
     #         dry_run: false,
@@ -1156,8 +1156,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
-    #   The ID of the AWS Key Management Service (KMS) key used to encrypt
-    #   the private key of the certificate.
+    #   The ID of the AWS KMS CMK used to encrypt the private key of the
+    #   certificate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateEnclaveCertificateIamRoleResult AWS API Documentation
@@ -1514,7 +1514,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
-    #   The ID of the KMS key used to encrypt the private key.
+    #   The ID of the KMS customer master key (CMK) used to encrypt the
+    #   private key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedRole AWS API Documentation
@@ -4623,32 +4624,29 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   An identifier for the symmetric AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK) to use when creating the encrypted volume.
-    #   This parameter is only required if you want to use a non-default
-    #   CMK; if this parameter is not specified, the default CMK for EBS is
-    #   used. If a `KmsKeyId` is specified, the `Encrypted` flag must also
-    #   be set.
+    #   The identifier of the symmetric AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK) to use when creating encrypted volumes. If
+    #   this parameter is not specified, your AWS managed CMK for EBS is
+    #   used. If you specify a CMK, you must also set the encrypted state to
+    #   `true`.
     #
-    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
-    #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". For example:
+    #   You can specify a CMK using any of the following:
     #
-    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Alias name: `alias/ExampleAlias`
+    #   * Key ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
-    #   call may appear to complete even though you provided an invalid
-    #   identifier. This action will eventually report failure.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an identifier that is not valid, the action can appear to complete,
+    #   but eventually fails.
     #
-    #   The specified CMK must exist in the Region that the snapshot is
-    #   being copied to.
+    #   The specified CMK must exist in the destination Region.
     #
     #   Amazon EBS does not support asymmetric CMKs.
     #   @return [String]
@@ -4764,15 +4762,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify
     #   an ID, alias, or ARN that is not valid, the action can appear to
@@ -6467,14 +6465,14 @@ module Aws::EC2
     #
     #       {
     #         description: "String",
-    #         export_to_s3_task: {
+    #         export_to_s3_task: { # required
     #           container_format: "ova", # accepts ova
     #           disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #           s3_bucket: "String",
     #           s3_prefix: "String",
     #         },
     #         instance_id: "InstanceId", # required
-    #         target_environment: "citrix", # accepts citrix, vmware, microsoft
+    #         target_environment: "citrix", # required, accepts citrix, vmware, microsoft
     #         tag_specifications: [
     #           {
     #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -9398,7 +9396,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
-    #   Enable or disable IPv6 support. The default is `enable`.
+    #   Enable or disable IPv6 support.
     #   @return [String]
     #
     # @!attribute [rw] appliance_mode_support
@@ -9571,15 +9569,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify
     #   an ID, alias, or ARN that is not valid, the action can appear to
@@ -15073,7 +15071,7 @@ module Aws::EC2
     #
     #   * `log-destination-type` - The type of destination to which the flow
     #     log publishes data. Possible destination types include
-    #     `cloud-watch-logs` and `S3`.
+    #     `cloud-watch-logs` and `s3`.
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -21581,6 +21579,16 @@ module Aws::EC2
     #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
     #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
     #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #   @return [Array<Types::Filter>]
@@ -35304,15 +35312,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify
     #   an ID, alias, or ARN that is not valid, the action can appear to
@@ -46889,10 +46897,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] owner_alias
-    #   The AWS owner alias, as maintained by Amazon. The possible values
-    #   are: `amazon` \| `self` \| `all` \| `aws-marketplace` \|
-    #   `microsoft`. This AWS owner alias is not to be confused with the
-    #   user-configured AWS account alias, which is set from the IAM
+    #   The AWS owner alias, from an Amazon-maintained list (`amazon`). This
+    #   is not the user-configured AWS account alias set using the IAM
     #   console.
     #   @return [String]
     #
@@ -49127,15 +49133,16 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
-    #   `client-vpn-endpoint` \| `customer-gateway` \| `dedicated-host` \|
-    #   `dhcp-options` \| `export-image-task` \| `export-instance-task` \|
-    #   `fleet` \| `fpga-image` \| `host-reservation` \| `import-image-task`
-    #   \| `import-snapshot-task` \| `instance` \| `internet-gateway` \|
-    #   `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \| `launch-template`
-    #   \| `placement-group` \| `prefix-list` \| `natgateway` \|
-    #   `network-acl` \| `route-table` \| `security-group` \|
-    #   `spot-fleet-request` \| `spot-instances-request` \| `snapshot` \|
-    #   `subnet` \| `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `carrier-gateway` \| `client-vpn-endpoint` \| `customer-gateway` \|
+    #   `dedicated-host` \| `dhcp-options` \| `export-image-task` \|
+    #   `export-instance-task` \| `fleet` \| `fpga-image` \|
+    #   `host-reservation` \| `import-image-task` \| `import-snapshot-task`
+    #   \| `instance` \| `internet-gateway` \| `ipv4pool-ec2` \|
+    #   `ipv6pool-ec2` \| `key-pair` \| `launch-template` \|
+    #   `placement-group` \| `prefix-list` \| `natgateway` \| `network-acl`
+    #   \| `route-table` \| `security-group` \| `spot-fleet-request` \|
+    #   `spot-instances-request` \| `snapshot` \| `subnet` \|
+    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
     #   `volume` \|`vpc` \| ` vpc-peering-connection` \| `vpc-endpoint` (for

@@ -41,10 +41,26 @@ module Aws::FraudDetector
     DeleteDetectorResult = Shapes::StructureShape.new(name: 'DeleteDetectorResult')
     DeleteDetectorVersionRequest = Shapes::StructureShape.new(name: 'DeleteDetectorVersionRequest')
     DeleteDetectorVersionResult = Shapes::StructureShape.new(name: 'DeleteDetectorVersionResult')
+    DeleteEntityTypeRequest = Shapes::StructureShape.new(name: 'DeleteEntityTypeRequest')
+    DeleteEntityTypeResult = Shapes::StructureShape.new(name: 'DeleteEntityTypeResult')
     DeleteEventRequest = Shapes::StructureShape.new(name: 'DeleteEventRequest')
     DeleteEventResult = Shapes::StructureShape.new(name: 'DeleteEventResult')
+    DeleteEventTypeRequest = Shapes::StructureShape.new(name: 'DeleteEventTypeRequest')
+    DeleteEventTypeResult = Shapes::StructureShape.new(name: 'DeleteEventTypeResult')
+    DeleteExternalModelRequest = Shapes::StructureShape.new(name: 'DeleteExternalModelRequest')
+    DeleteExternalModelResult = Shapes::StructureShape.new(name: 'DeleteExternalModelResult')
+    DeleteLabelRequest = Shapes::StructureShape.new(name: 'DeleteLabelRequest')
+    DeleteLabelResult = Shapes::StructureShape.new(name: 'DeleteLabelResult')
+    DeleteModelRequest = Shapes::StructureShape.new(name: 'DeleteModelRequest')
+    DeleteModelResult = Shapes::StructureShape.new(name: 'DeleteModelResult')
+    DeleteModelVersionRequest = Shapes::StructureShape.new(name: 'DeleteModelVersionRequest')
+    DeleteModelVersionResult = Shapes::StructureShape.new(name: 'DeleteModelVersionResult')
+    DeleteOutcomeRequest = Shapes::StructureShape.new(name: 'DeleteOutcomeRequest')
+    DeleteOutcomeResult = Shapes::StructureShape.new(name: 'DeleteOutcomeResult')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DeleteRuleResult = Shapes::StructureShape.new(name: 'DeleteRuleResult')
+    DeleteVariableRequest = Shapes::StructureShape.new(name: 'DeleteVariableRequest')
+    DeleteVariableResult = Shapes::StructureShape.new(name: 'DeleteVariableResult')
     DescribeDetectorRequest = Shapes::StructureShape.new(name: 'DescribeDetectorRequest')
     DescribeDetectorResult = Shapes::StructureShape.new(name: 'DescribeDetectorResult')
     DescribeModelVersionsRequest = Shapes::StructureShape.new(name: 'DescribeModelVersionsRequest')
@@ -333,16 +349,59 @@ module Aws::FraudDetector
 
     DeleteDetectorVersionResult.struct_class = Types::DeleteDetectorVersionResult
 
-    DeleteEventRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventId"))
-    DeleteEventRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventTypeName"))
+    DeleteEntityTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "name"))
+    DeleteEntityTypeRequest.struct_class = Types::DeleteEntityTypeRequest
+
+    DeleteEntityTypeResult.struct_class = Types::DeleteEntityTypeResult
+
+    DeleteEventRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventId"))
+    DeleteEventRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
     DeleteEventRequest.struct_class = Types::DeleteEventRequest
 
     DeleteEventResult.struct_class = Types::DeleteEventResult
+
+    DeleteEventTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "name"))
+    DeleteEventTypeRequest.struct_class = Types::DeleteEventTypeRequest
+
+    DeleteEventTypeResult.struct_class = Types::DeleteEventTypeResult
+
+    DeleteExternalModelRequest.add_member(:model_endpoint, Shapes::ShapeRef.new(shape: sageMakerEndpointIdentifier, required: true, location_name: "modelEndpoint"))
+    DeleteExternalModelRequest.struct_class = Types::DeleteExternalModelRequest
+
+    DeleteExternalModelResult.struct_class = Types::DeleteExternalModelResult
+
+    DeleteLabelRequest.add_member(:name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "name"))
+    DeleteLabelRequest.struct_class = Types::DeleteLabelRequest
+
+    DeleteLabelResult.struct_class = Types::DeleteLabelResult
+
+    DeleteModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
+    DeleteModelRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
+    DeleteModelRequest.struct_class = Types::DeleteModelRequest
+
+    DeleteModelResult.struct_class = Types::DeleteModelResult
+
+    DeleteModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
+    DeleteModelVersionRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
+    DeleteModelVersionRequest.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, required: true, location_name: "modelVersionNumber"))
+    DeleteModelVersionRequest.struct_class = Types::DeleteModelVersionRequest
+
+    DeleteModelVersionResult.struct_class = Types::DeleteModelVersionResult
+
+    DeleteOutcomeRequest.add_member(:name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "name"))
+    DeleteOutcomeRequest.struct_class = Types::DeleteOutcomeRequest
+
+    DeleteOutcomeResult.struct_class = Types::DeleteOutcomeResult
 
     DeleteRuleRequest.add_member(:rule, Shapes::ShapeRef.new(shape: Rule, required: true, location_name: "rule"))
     DeleteRuleRequest.struct_class = Types::DeleteRuleRequest
 
     DeleteRuleResult.struct_class = Types::DeleteRuleResult
+
+    DeleteVariableRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "name"))
+    DeleteVariableRequest.struct_class = Types::DeleteVariableRequest
+
+    DeleteVariableResult.struct_class = Types::DeleteVariableResult
 
     DescribeDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     DescribeDetectorRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
@@ -1051,6 +1110,18 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_entity_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEntityType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEntityTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEntityTypeResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_event, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEvent"
         o.http_method = "POST"
@@ -1059,6 +1130,80 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: DeleteEventResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_event_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEventTypeResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_external_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteExternalModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteExternalModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteExternalModelResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_label, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLabel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLabelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLabelResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteModelResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_model_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteModelVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteModelVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteModelVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_outcome, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOutcome"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOutcomeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOutcomeResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1070,6 +1215,19 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: DeleteRuleResult)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_variable, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVariable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVariableRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVariableResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1167,6 +1325,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_event_types, Seahorse::Model::Operation.new.tap do |o|

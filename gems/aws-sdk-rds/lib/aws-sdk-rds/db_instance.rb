@@ -1441,29 +1441,8 @@ module Aws::RDS
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines:
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. Mapping AWS IAM accounts to database accounts is
-    #   managed by the DB cluster.
-    #
-    #   **MySQL**
-    #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
-    #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
-    #
-    #   * For MySQL 8.0, minor version 8.0.16 or higher
-    #
-    #   **PostgreSQL**
-    #
-    #   * For PostgreSQL 9.5, minor version 9.5.15 or higher
-    #
-    #   * For PostgreSQL 9.6, minor version 9.6.11 or higher
-    #
-    #   * PostgreSQL 10.6, 10.7, and 10.9
+    #   This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts
+    #   to database accounts is managed by the DB cluster.
     #
     #   For more information, see [ IAM Database Authentication for MySQL and
     #   PostgreSQL][1] in the *Amazon RDS User Guide.*
@@ -1603,6 +1582,7 @@ module Aws::RDS
     #     domain: "String",
     #     domain_iam_role_name: "String",
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     max_allocated_storage: 1,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1848,8 +1828,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled. For information about the supported DB engines,
-    #   see CreateDBInstance.
+    #   mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -1939,6 +1918,9 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    # @option options [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2336,7 +2318,7 @@ module Aws::RDS
     #   The version number of the database engine to upgrade to. Changing this
     #   parameter results in an outage and the change is applied during the
     #   next maintenance window unless the `ApplyImmediately` parameter is
-    #   eanbled for this request.
+    #   enabled for this request.
     #
     #   For major version upgrades, if a nondefault DB parameter group is
     #   currently in use, a new DB parameter group in the DB parameter group
@@ -2591,8 +2573,10 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled. For information about the supported DB engines,
-    #   see CreateDBInstance.
+    #   mapping is disabled.
+    #
+    #   This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts
+    #   to database accounts is managed by the DB cluster.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -3024,8 +3008,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled. For information about the supported DB engines,
-    #   see CreateDBInstance.
+    #   mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon

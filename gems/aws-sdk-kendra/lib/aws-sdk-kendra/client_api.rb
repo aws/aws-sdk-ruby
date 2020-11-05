@@ -35,6 +35,7 @@ module Aws::Kendra
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CapacityUnitsConfiguration = Shapes::StructureShape.new(name: 'CapacityUnitsConfiguration')
     ChangeDetectingColumns = Shapes::ListShape.new(name: 'ChangeDetectingColumns')
+    ClaimRegex = Shapes::StringShape.new(name: 'ClaimRegex')
     ClickFeedback = Shapes::StructureShape.new(name: 'ClickFeedback')
     ClickFeedbackList = Shapes::ListShape.new(name: 'ClickFeedbackList')
     ClientTokenName = Shapes::StringShape.new(name: 'ClientTokenName')
@@ -137,6 +138,7 @@ module Aws::Kendra
     FaqStatus = Shapes::StringShape.new(name: 'FaqStatus')
     FaqSummary = Shapes::StructureShape.new(name: 'FaqSummary')
     FaqSummaryItems = Shapes::ListShape.new(name: 'FaqSummaryItems')
+    GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
     Importance = Shapes::IntegerShape.new(name: 'Importance')
@@ -153,6 +155,10 @@ module Aws::Kendra
     IndexedTextDocumentsCount = Shapes::IntegerShape.new(name: 'IndexedTextDocumentsCount')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    Issuer = Shapes::StringShape.new(name: 'Issuer')
+    JsonTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JsonTokenTypeConfiguration')
+    JwtTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JwtTokenTypeConfiguration')
+    KeyLocation = Shapes::StringShape.new(name: 'KeyLocation')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     ListDataSourceSyncJobsRequest = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsRequest')
     ListDataSourceSyncJobsResponse = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsResponse')
@@ -261,11 +267,17 @@ module Aws::Kendra
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Title = Shapes::StringShape.new(name: 'Title')
+    Token = Shapes::StringShape.new(name: 'Token')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
     Url = Shapes::StringShape.new(name: 'Url')
+    UserContext = Shapes::StructureShape.new(name: 'UserContext')
+    UserContextPolicy = Shapes::StringShape.new(name: 'UserContextPolicy')
+    UserNameAttributeField = Shapes::StringShape.new(name: 'UserNameAttributeField')
+    UserTokenConfiguration = Shapes::StructureShape.new(name: 'UserTokenConfiguration')
+    UserTokenConfigurationList = Shapes::ListShape.new(name: 'UserTokenConfigurationList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueImportanceMap = Shapes::MapShape.new(name: 'ValueImportanceMap')
     ValueImportanceMapKey = Shapes::StringShape.new(name: 'ValueImportanceMapKey')
@@ -456,6 +468,8 @@ module Aws::Kendra
     CreateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
+    CreateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     CreateIndexRequest.struct_class = Types::CreateIndexRequest
 
     CreateIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
@@ -586,6 +600,8 @@ module Aws::Kendra
     DescribeIndexResponse.add_member(:index_statistics, Shapes::ShapeRef.new(shape: IndexStatistics, location_name: "IndexStatistics"))
     DescribeIndexResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     DescribeIndexResponse.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
+    DescribeIndexResponse.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
+    DescribeIndexResponse.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     DescribeIndexResponse.struct_class = Types::DescribeIndexResponse
 
     Document.add_member(:id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location_name: "Id"))
@@ -683,6 +699,19 @@ module Aws::Kendra
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    JsonTokenTypeConfiguration.add_member(:user_name_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserNameAttributeField"))
+    JsonTokenTypeConfiguration.add_member(:group_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupAttributeField"))
+    JsonTokenTypeConfiguration.struct_class = Types::JsonTokenTypeConfiguration
+
+    JwtTokenTypeConfiguration.add_member(:key_location, Shapes::ShapeRef.new(shape: KeyLocation, required: true, location_name: "KeyLocation"))
+    JwtTokenTypeConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "URL"))
+    JwtTokenTypeConfiguration.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "SecretManagerArn"))
+    JwtTokenTypeConfiguration.add_member(:user_name_attribute_field, Shapes::ShapeRef.new(shape: UserNameAttributeField, location_name: "UserNameAttributeField"))
+    JwtTokenTypeConfiguration.add_member(:group_attribute_field, Shapes::ShapeRef.new(shape: GroupAttributeField, location_name: "GroupAttributeField"))
+    JwtTokenTypeConfiguration.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, location_name: "Issuer"))
+    JwtTokenTypeConfiguration.add_member(:claim_regex, Shapes::ShapeRef.new(shape: ClaimRegex, location_name: "ClaimRegex"))
+    JwtTokenTypeConfiguration.struct_class = Types::JwtTokenTypeConfiguration
+
     ListDataSourceSyncJobsRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     ListDataSourceSyncJobsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     ListDataSourceSyncJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -733,6 +762,7 @@ module Aws::Kendra
     OneDriveConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
     OneDriveConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
     OneDriveConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    OneDriveConfiguration.add_member(:disable_local_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableLocalGroups"))
     OneDriveConfiguration.struct_class = Types::OneDriveConfiguration
 
     OneDriveUserList.member = Shapes::ShapeRef.new(shape: OneDriveUser)
@@ -757,6 +787,7 @@ module Aws::Kendra
     QueryRequest.add_member(:page_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PageNumber"))
     QueryRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
     QueryRequest.add_member(:sorting_configuration, Shapes::ShapeRef.new(shape: SortingConfiguration, location_name: "SortingConfiguration"))
+    QueryRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "UserContext"))
     QueryRequest.struct_class = Types::QueryRequest
 
     QueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
@@ -916,6 +947,7 @@ module Aws::Kendra
     SharePointConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     SharePointConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
     SharePointConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    SharePointConfiguration.add_member(:disable_local_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableLocalGroups"))
     SharePointConfiguration.struct_class = Types::SharePointConfiguration
 
     SharePointUrlList.member = Shapes::ShapeRef.new(shape: Url)
@@ -996,7 +1028,18 @@ module Aws::Kendra
     UpdateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateIndexRequest.add_member(:document_metadata_configuration_updates, Shapes::ShapeRef.new(shape: DocumentMetadataConfigurationList, location_name: "DocumentMetadataConfigurationUpdates"))
     UpdateIndexRequest.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
+    UpdateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
+    UpdateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     UpdateIndexRequest.struct_class = Types::UpdateIndexRequest
+
+    UserContext.add_member(:token, Shapes::ShapeRef.new(shape: Token, location_name: "Token"))
+    UserContext.struct_class = Types::UserContext
+
+    UserTokenConfiguration.add_member(:jwt_token_type_configuration, Shapes::ShapeRef.new(shape: JwtTokenTypeConfiguration, location_name: "JwtTokenTypeConfiguration"))
+    UserTokenConfiguration.add_member(:json_token_type_configuration, Shapes::ShapeRef.new(shape: JsonTokenTypeConfiguration, location_name: "JsonTokenTypeConfiguration"))
+    UserTokenConfiguration.struct_class = Types::UserTokenConfiguration
+
+    UserTokenConfigurationList.member = Shapes::ShapeRef.new(shape: UserTokenConfiguration)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException

@@ -115,10 +115,9 @@ module Aws::EC2
       data[:volume_size]
     end
 
-    # The AWS owner alias, as maintained by Amazon. The possible values are:
-    # `amazon` \| `self` \| `all` \| `aws-marketplace` \| `microsoft`. This
-    # AWS owner alias is not to be confused with the user-configured AWS
-    # account alias, which is set from the IAM console.
+    # The AWS owner alias, from an Amazon-maintained list (`amazon`). This
+    # is not the user-configured AWS account alias set using the IAM
+    # console.
     # @return [String]
     def owner_alias
       data[:owner_alias]
@@ -336,15 +335,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to

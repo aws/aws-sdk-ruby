@@ -777,7 +777,7 @@ module Aws::EC2
     #   resp = client.allocate_address({
     #     domain: "vpc", # accepts vpc, standard
     #     address: "PublicIpAddress",
-    #     public_ipv_4_pool: "String",
+    #     public_ipv_4_pool: "Ipv4PoolEc2Id",
     #     network_border_group: "String",
     #     customer_owned_ipv_4_pool: "String",
     #     dry_run: false,
@@ -1406,22 +1406,21 @@ module Aws::EC2
     # AWS Certificate Manager (ACM) certificate. This enables the
     # certificate to be used by the ACM for Nitro Enclaves application
     # inside an enclave. For more information, see [AWS Certificate Manager
-    # for Nitro Enclaves][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # for Nitro Enclaves][1] in the *AWS Nitro Enclaves User Guide*.
     #
     # When the IAM role is associated with the ACM certificate, places the
     # certificate, certificate chain, and encrypted private key in an Amazon
     # S3 bucket that only the associated IAM role can access. The private
-    # key of the certificate is encrypted with an AWS-managed KMS key that
-    # has an attached attestation-based key policy.
+    # key of the certificate is encrypted with an AWS-managed KMS customer
+    # master (CMK) that has an attached attestation-based CMK policy.
     #
     # To enable the IAM role to access the Amazon S3 object, you must grant
     # it permission to call `s3:GetObject` on the Amazon S3 bucket returned
-    # by the command. To enable the IAM role to access the AWS KMS key, you
-    # must grant it permission to call `kms:Decrypt` on AWS KMS key returned
+    # by the command. To enable the IAM role to access the AWS KMS CMK, you
+    # must grant it permission to call `kms:Decrypt` on AWS KMS CMK returned
     # by the command. For more information, see [ Grant the role permission
-    # to access the certificate and encryption key][2] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # to access the certificate and encryption key][2] in the *AWS Nitro
+    # Enclaves User Guide*.
     #
     #
     #
@@ -3303,31 +3302,28 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the symmetric AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK) to use when creating the encrypted volume.
-    #   This parameter is only required if you want to use a non-default CMK;
-    #   if this parameter is not specified, the default CMK for EBS is used.
-    #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the symmetric AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK) to use when creating encrypted volumes. If
+    #   this parameter is not specified, your AWS managed CMK for EBS is used.
+    #   If you specify a CMK, you must also set the encrypted state to `true`.
     #
-    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
-    #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". For example:
+    #   You can specify a CMK using any of the following:
     #
-    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Alias name: `alias/ExampleAlias`
+    #   * Key ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   This action will eventually report failure.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   identifier that is not valid, the action can appear to complete, but
+    #   eventually fails.
     #
-    #   The specified CMK must exist in the Region that the snapshot is being
-    #   copied to.
+    #   The specified CMK must exist in the destination Region.
     #
     #   Amazon EBS does not support asymmetric CMKs.
     #
@@ -3452,15 +3448,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to
@@ -5270,13 +5266,13 @@ module Aws::EC2
     #   A description for the conversion task or the resource being exported.
     #   The maximum length is 255 characters.
     #
-    # @option params [Types::ExportToS3TaskSpecification] :export_to_s3_task
+    # @option params [required, Types::ExportToS3TaskSpecification] :export_to_s3_task
     #   The format and location for an instance export task.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
     #
-    # @option params [String] :target_environment
+    # @option params [required, String] :target_environment
     #   The target virtualization environment.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
@@ -5290,14 +5286,14 @@ module Aws::EC2
     #
     #   resp = client.create_instance_export_task({
     #     description: "String",
-    #     export_to_s3_task: {
+    #     export_to_s3_task: { # required
     #       container_format: "ova", # accepts ova
     #       disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #       s3_bucket: "String",
     #       s3_prefix: "String",
     #     },
     #     instance_id: "InstanceId", # required
-    #     target_environment: "citrix", # accepts citrix, vmware, microsoft
+    #     target_environment: "citrix", # required, accepts citrix, vmware, microsoft
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -9135,15 +9131,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to
@@ -15276,7 +15272,7 @@ module Aws::EC2
     #
     #   * `log-destination-type` - The type of destination to which the flow
     #     log publishes data. Possible destination types include
-    #     `cloud-watch-logs` and `S3`.
+    #     `cloud-watch-logs` and `s3`.
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -24009,6 +24005,16 @@ module Aws::EC2
     #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
     #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
+    #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
     # @option params [Integer] :max_results
@@ -25542,6 +25548,14 @@ module Aws::EC2
 
     # Describes available services to which you can create a VPC endpoint.
     #
+    # When the service provider and the consumer have different accounts
+    # multiple Availability Zones, and the consumer views the VPC endpoint
+    # service information, the response only includes the common
+    # Availability Zones. For example, when the service provider account
+    # uses `us-east-1a` and `us-east-1c` and the consumer uses `us-east-1a`
+    # and us-east-1a and us-east-1b, the response includes the VPC endpoint
+    # services in the common Availability Zone, `us-east-1a`.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -26964,8 +26978,9 @@ module Aws::EC2
     # removes the Amazon S3 object that contains the certificate,
     # certificate chain, and encrypted private key from the Amazon S3
     # bucket. It also revokes the IAM role's permission to use the AWS Key
-    # Management Service (KMS) key used to encrypt the private key. This
-    # effectively revokes the role's permission to use the certificate.
+    # Management Service (KMS) customer master key (CMK) used to encrypt the
+    # private key. This effectively revokes the role's permission to use
+    # the certificate.
     #
     # @option params [String] :certificate_arn
     #   The ARN of the ACM certificate from which to disassociate the IAM
@@ -27903,8 +27918,8 @@ module Aws::EC2
     # Certificate Manager (ACM) certificate. It also returns the name of the
     # Amazon S3 bucket and the Amazon S3 object key where the certificate,
     # certificate chain, and encrypted private key bundle are stored, and
-    # the ARN of the AWS Key Management Service (KMS) key that's used to
-    # encrypt the private key.
+    # the ARN of the AWS Key Management Service (KMS) customer master key
+    # (CMK) that's used to encrypt the private key.
     #
     # @option params [String] :certificate_arn
     #   The ARN of the ACM certificate for which to view the associated IAM
@@ -30364,15 +30379,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to
@@ -38438,7 +38453,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html#add-dns-txt-record
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html#add-dns-txt-record
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39180,7 +39195,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.206.0'
+      context[:gem_version] = '1.207.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -687,11 +687,12 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
+    #   specified age. The default value is infinite (-1). When set to
+    #   infinite (-1), failed records are retried until the record expires
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
-    #   infinite, failed records will be retried until the record expires.
+    #   of retries. The default value is infinite (-1). When set to infinite
+    #   (-1), failed records are retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -787,6 +788,22 @@ module Aws::Lambda
     # @option params [Array<String>] :topics
     #   (MSK) The name of the Kafka topic.
     #
+    # @option params [Array<String>] :queues
+    #   (MQ) The name of the Amazon MQ broker destination queue to consume.
+    #
+    # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
+    #   (MQ) The Secrets Manager secret that stores your broker credentials.
+    #   To store your secret, use the following format: ` \{ "username": "your
+    #   username", "password": "your password" \}`
+    #
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret, you
+    #   can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -801,6 +818,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -850,6 +869,13 @@ module Aws::Lambda
     #     bisect_batch_on_function_error: false,
     #     maximum_retry_attempts: 1,
     #     topics: ["Topic"],
+    #     queues: ["Queue"],
+    #     source_access_configurations: [
+    #       {
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
+    #         uri: "Arn",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -868,6 +894,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1299,6 +1330,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1345,6 +1378,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1757,6 +1795,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1810,6 +1850,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -3061,6 +3106,11 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].destination_config.on_failure.destination #=> String
     #   resp.event_source_mappings[0].topics #=> Array
     #   resp.event_source_mappings[0].topics[0] #=> String
+    #   resp.event_source_mappings[0].queues #=> Array
+    #   resp.event_source_mappings[0].queues[0] #=> String
+    #   resp.event_source_mappings[0].source_access_configurations #=> Array
+    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.event_source_mappings[0].source_access_configurations[0].uri #=> String
     #   resp.event_source_mappings[0].maximum_record_age_in_seconds #=> Integer
     #   resp.event_source_mappings[0].bisect_batch_on_function_error #=> Boolean
     #   resp.event_source_mappings[0].maximum_retry_attempts #=> Integer
@@ -4725,11 +4775,12 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
+    #   specified age. The default value is infinite (-1). When set to
+    #   infinite (-1), failed records are retried until the record expires
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
-    #   infinite, failed records will be retried until the record expires.
+    #   of retries. The default value is infinite (-1). When set to infinite
+    #   (-1), failed records are retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -4796,6 +4847,19 @@ module Aws::Lambda
     #   (Streams) The number of batches to process from each shard
     #   concurrently.
     #
+    # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
+    #   (MQ) The Secrets Manager secret that stores your broker credentials.
+    #   To store your secret, use the following format: ` \{ "username": "your
+    #   username", "password": "your password" \}`
+    #
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret, you
+    #   can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -4810,6 +4874,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -4858,6 +4924,12 @@ module Aws::Lambda
     #     bisect_batch_on_function_error: false,
     #     maximum_retry_attempts: 1,
     #     parallelization_factor: 1,
+    #     source_access_configurations: [
+    #       {
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
+    #         uri: "Arn",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4876,6 +4948,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -5464,7 +5541,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
