@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.83.2 (2020-11-06)
+------------------
+
 * Issue - Fix bug with clients not resolving the correct endpoint in `us-east-1` using access point ARNs.
 
 1.83.1 (2020-10-19)

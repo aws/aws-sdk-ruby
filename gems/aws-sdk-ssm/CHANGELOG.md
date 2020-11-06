@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2020-11-06)
+------------------
+
+* Feature - Documentation updates for Systems Manager
+
 1.95.0 (2020-10-19)
 ------------------
 

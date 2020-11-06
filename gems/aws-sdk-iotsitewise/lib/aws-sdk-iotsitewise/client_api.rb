@@ -86,8 +86,6 @@ module Aws::IoTSiteWise
     CreateGatewayResponse = Shapes::StructureShape.new(name: 'CreateGatewayResponse')
     CreatePortalRequest = Shapes::StructureShape.new(name: 'CreatePortalRequest')
     CreatePortalResponse = Shapes::StructureShape.new(name: 'CreatePortalResponse')
-    CreatePresignedPortalUrlRequest = Shapes::StructureShape.new(name: 'CreatePresignedPortalUrlRequest')
-    CreatePresignedPortalUrlResponse = Shapes::StructureShape.new(name: 'CreatePresignedPortalUrlResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
     DashboardDefinition = Shapes::StringShape.new(name: 'DashboardDefinition')
@@ -237,7 +235,6 @@ module Aws::IoTSiteWise
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     SSOApplicationId = Shapes::StringShape.new(name: 'SSOApplicationId')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
-    SessionDurationSeconds = Shapes::IntegerShape.new(name: 'SessionDurationSeconds')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -535,13 +532,6 @@ module Aws::IoTSiteWise
     CreatePortalResponse.add_member(:portal_status, Shapes::ShapeRef.new(shape: PortalStatus, required: true, location_name: "portalStatus"))
     CreatePortalResponse.add_member(:sso_application_id, Shapes::ShapeRef.new(shape: SSOApplicationId, required: true, location_name: "ssoApplicationId"))
     CreatePortalResponse.struct_class = Types::CreatePortalResponse
-
-    CreatePresignedPortalUrlRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "portalId"))
-    CreatePresignedPortalUrlRequest.add_member(:session_duration_seconds, Shapes::ShapeRef.new(shape: SessionDurationSeconds, location: "querystring", location_name: "sessionDurationSeconds"))
-    CreatePresignedPortalUrlRequest.struct_class = Types::CreatePresignedPortalUrlRequest
-
-    CreatePresignedPortalUrlResponse.add_member(:presigned_portal_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "presignedPortalUrl"))
-    CreatePresignedPortalUrlResponse.struct_class = Types::CreatePresignedPortalUrlResponse
 
     CreateProjectRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "portalId"))
     CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "projectName"))
@@ -1334,20 +1324,6 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-      end)
-
-      api.add_operation(:create_presigned_portal_url, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreatePresignedPortalUrl"
-        o.http_method = "GET"
-        o.http_request_uri = "/portals/{portalId}/presigned-url"
-        o.endpoint_pattern = {
-          "hostPrefix" => "monitor.",
-        }
-        o.input = Shapes::ShapeRef.new(shape: CreatePresignedPortalUrlRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreatePresignedPortalUrlResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|

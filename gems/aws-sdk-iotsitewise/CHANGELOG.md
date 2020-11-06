@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-11-06)
+------------------
+
+* Feature - Remove the CreatePresignedPortalUrl API
+
 1.12.0 (2020-09-30)
 ------------------
 

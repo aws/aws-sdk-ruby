@@ -1079,42 +1079,6 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Creates a pre-signed URL to a portal. Use this operation to create
-    # URLs to portals that use AWS Identity and Access Management (IAM) to
-    # authenticate users. An IAM user with access to a portal can call this
-    # API to get a URL to that portal. The URL contains a session token that
-    # lets the IAM user access the portal.
-    #
-    # @option params [required, String] :portal_id
-    #   The ID of the portal to access.
-    #
-    # @option params [Integer] :session_duration_seconds
-    #   The duration (in seconds) for which the session at the URL is valid.
-    #
-    #   Default: 900 seconds (15 minutes)
-    #
-    # @return [Types::CreatePresignedPortalUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreatePresignedPortalUrlResponse#presigned_portal_url #presigned_portal_url} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_presigned_portal_url({
-    #     portal_id: "ID", # required
-    #     session_duration_seconds: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.presigned_portal_url #=> String
-    #
-    # @overload create_presigned_portal_url(params = {})
-    # @param [Hash] params ({})
-    def create_presigned_portal_url(params = {}, options = {})
-      req = build_request(:create_presigned_portal_url, params)
-      req.send_request(options)
-    end
-
     # Creates a project in the specified portal.
     #
     # @option params [required, String] :portal_id
@@ -3417,7 +3381,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

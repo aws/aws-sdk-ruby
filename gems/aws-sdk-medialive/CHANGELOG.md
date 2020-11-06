@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2020-11-06)
+------------------
+
+* Feature - Support for SCTE35 ad markers in OnCuePoint style in RTMP outputs.
+
 1.58.0 (2020-10-30)
 ------------------
 

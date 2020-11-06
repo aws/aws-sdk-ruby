@@ -16374,7 +16374,7 @@ module Aws::EC2
     #     the location type is `region` (default), the location is the
     #     Region code (for example, `us-east-2`.)
     #
-    #   * `instance-type` - The instance type.
+    #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16453,17 +16453,17 @@ module Aws::EC2
     #   One or more filters. Filter names and values are case-sensitive.
     #
     #   * `auto-recovery-supported` - Indicates whether auto recovery is
-    #     supported. (`true` \| `false`)
+    #     supported (`true` \| `false`).
     #
-    #   * `bare-metal` - Indicates whether it is a bare metal instance type.
-    #     (`true` \| `false`)
+    #   * `bare-metal` - Indicates whether it is a bare metal instance type
+    #     (`true` \| `false`).
     #
     #   * `burstable-performance-supported` - Indicates whether it is a
-    #     burstable performance instance type. (`true` \| `false`)
+    #     burstable performance instance type (`true` \| `false`).
     #
     #   * `current-generation` - Indicates whether this instance type is the
-    #     latest generation instance type of an instance family. (`true` \|
-    #     `false`)
+    #     latest generation instance type of an instance family (`true` \|
+    #     `false`).
     #
     #   * `ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps` - The
     #     baseline bandwidth performance for an EBS-optimized instance type,
@@ -16475,7 +16475,7 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
     #     baseline throughput performance for an EBS-optimized instance
-    #     type, in MBps.
+    #     type, in MB/s.
     #
     #   * `ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps` - The
     #     maximum bandwidth performance for an EBS-optimized instance type,
@@ -16487,25 +16487,25 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
     #     maximum throughput performance for an EBS-optimized instance type,
-    #     in MBps.
+    #     in MB/s.
     #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
-    #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
+    #     type is EBS-optimized (`supported` \| `unsupported` \| `default`).
     #
     #   * `ebs-info.encryption-support` - Indicates whether EBS encryption
-    #     is supported. (`supported` \| `unsupported`)
+    #     is supported (`supported` \| `unsupported`).
     #
     #   * `ebs-info.nvme-support` - Indicates whether non-volatile memory
-    #     express (NVMe) is supported for EBS volumes. (`required` \|
-    #     `supported` \| `unsupported`)
+    #     express (NVMe) is supported for EBS volumes (`required` \|
+    #     `supported` \| `unsupported`).
     #
     #   * `free-tier-eligible` - Indicates whether the instance type is
-    #     eligible to use in the free tier. (`true` \| `false`)
+    #     eligible to use in the free tier (`true` \| `false`).
     #
     #   * `hibernation-supported` - Indicates whether On-Demand hibernation
-    #     is supported. (`true` \| `false`)
+    #     is supported (`true` \| `false`).
     #
-    #   * `hypervisor` - The hypervisor. (`nitro` \| `xen`)
+    #   * `hypervisor` - The hypervisor (`nitro` \| `xen`).
     #
     #   * `instance-storage-info.disk.count` - The number of local disks.
     #
@@ -16513,17 +16513,17 @@ module Aws::EC2
     #     instance storage disk, in GB.
     #
     #   * `instance-storage-info.disk.type` - The storage technology for the
-    #     local instance storage disks. (`hdd` \| `ssd`)
+    #     local instance storage disks (`hdd` \| `ssd`).
     #
     #   * `instance-storage-info.nvme-support` - Indicates whether
-    #     non-volatile memory express (NVMe) is supported for instance
-    #     store. (`required` \| `supported`) \| `unsupported`)
+    #     non-volatile memory express (NVMe) is supported for instance store
+    #     (`required` \| `supported`) \| `unsupported`).
     #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
     #
     #   * `instance-storage-supported` - Indicates whether the instance type
-    #     has local instance storage. (`true` \| `false`)
+    #     has local instance storage (`true` \| `false`).
     #
     #   * `instance-type` - The instance type (for example `c5.2xlarge` or
     #     c5*).
@@ -16531,11 +16531,11 @@ module Aws::EC2
     #   * `memory-info.size-in-mib` - The memory size.
     #
     #   * `network-info.efa-supported` - Indicates whether the instance type
-    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
+    #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
     #
     #   * `network-info.ena-support` - Indicates whether Elastic Network
-    #     Adapter (ENA) is supported or required. (`required` \| `supported`
-    #     \| `unsupported`)
+    #     Adapter (ENA) is supported or required (`required` \| `supported`
+    #     \| `unsupported`).
     #
     #   * `network-info.ipv4-addresses-per-interface` - The maximum number
     #     of private IPv4 addresses per network interface.
@@ -16544,7 +16544,7 @@ module Aws::EC2
     #     of private IPv6 addresses per network interface.
     #
     #   * `network-info.ipv6-supported` - Indicates whether the instance
-    #     type supports IPv6. (`true` \| `false`)
+    #     type supports IPv6 (`true` \| `false`).
     #
     #   * `network-info.maximum-network-interfaces` - The maximum number of
     #     network interfaces per instance.
@@ -16552,19 +16552,19 @@ module Aws::EC2
     #   * `network-info.network-performance` - The network performance (for
     #     example, "25 Gigabit").
     #
-    #   * `processor-info.supported-architecture` - The CPU architecture.
-    #     (`arm64` \| `i386` \| `x86_64`)
+    #   * `processor-info.supported-architecture` - The CPU architecture
+    #     (`arm64` \| `i386` \| `x86_64`).
     #
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock
     #     speed, in GHz.
     #
-    #   * `supported-root-device-type` - The root device type. (`ebs` \|
-    #     `instance-store`)
+    #   * `supported-root-device-type` - The root device type (`ebs` \|
+    #     `instance-store`).
     #
-    #   * `supported-usage-class` - The usage class. (`on-demand` \| `spot`)
+    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`).
     #
-    #   * `supported-virtualization-type` - The virtualization type. (`hvm`
-    #     \| `paravirtual`)
+    #   * `supported-virtualization-type` - The virtualization type (`hvm`
+    #     \| `paravirtual`).
     #
     #   * `vcpu-info.default-cores` - The default number of cores for the
     #     instance type.
@@ -24851,9 +24851,9 @@ module Aws::EC2
     # Describes the Amazon EBS features supported by the instance type.
     #
     # @!attribute [rw] ebs_optimized_support
-    #   Indicates that the instance type is Amazon EBS-optimized. For more
-    #   information, see [Amazon EBS-Optimized Instances][1] in *Amazon EC2
-    #   User Guide for Linux Instances*.
+    #   Indicates whether the instance type is Amazon EBS-optimized. For
+    #   more information, see [Amazon EBS-Optimized Instances][1] in *Amazon
+    #   EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -24950,7 +24950,7 @@ module Aws::EC2
     #
     # @!attribute [rw] baseline_throughput_in_m_bps
     #   The baseline throughput performance for an EBS-optimized instance
-    #   type, in MBps.
+    #   type, in MB/s.
     #   @return [Float]
     #
     # @!attribute [rw] baseline_iops
@@ -24965,7 +24965,7 @@ module Aws::EC2
     #
     # @!attribute [rw] maximum_throughput_in_m_bps
     #   The maximum throughput performance for an EBS-optimized instance
-    #   type, in MBps.
+    #   type, in MB/s.
     #   @return [Float]
     #
     # @!attribute [rw] maximum_iops
@@ -27094,7 +27094,7 @@ module Aws::EC2
     # Describes the memory for the FPGA accelerator for the instance type.
     #
     # @!attribute [rw] size_in_mi_b
-    #   The size (in MiB) for the memory available to the FPGA accelerator.
+    #   The size of the memory available to the FPGA accelerator, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaDeviceMemoryInfo AWS API Documentation
@@ -28670,7 +28670,7 @@ module Aws::EC2
     # Describes the memory available to the GPU accelerator.
     #
     # @!attribute [rw] size_in_mi_b
-    #   The size (in MiB) for the memory available to the GPU accelerator.
+    #   The size of the memory available to the GPU accelerator, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GpuDeviceMemoryInfo AWS API Documentation
@@ -28689,7 +28689,7 @@ module Aws::EC2
     #
     # @!attribute [rw] total_gpu_memory_in_mi_b
     #   The total size of the memory for the GPU accelerators for the
-    #   instance type.
+    #   instance type, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GpuInfo AWS API Documentation
@@ -32139,7 +32139,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] disks
-    #   Array describing the disks that are available for the instance type.
+    #   Describes the disks that are available for the instance type.
     #   @return [Array<Types::DiskInfo>]
     #
     # @!attribute [rw] nvme_support
@@ -32190,7 +32190,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] current_generation
-    #   Indicates whether the instance type is a current generation.
+    #   Indicates whether the instance type is current generation.
     #   @return [Boolean]
     #
     # @!attribute [rw] free_tier_eligible
@@ -32203,7 +32203,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_root_device_types
-    #   Indicates the supported root device types.
+    #   The supported root device types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_virtualization_types
@@ -32211,11 +32211,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] bare_metal
-    #   Indicates whether the instance is bare metal.
+    #   Indicates whether the instance is a bare metal instance type.
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
-    #   Indicates the hypervisor used for the instance type.
+    #   The hypervisor for the instance type.
     #   @return [String]
     #
     # @!attribute [rw] processor_info
@@ -32235,7 +32235,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_storage_info
-    #   Describes the disks for the instance type.
+    #   Describes the instance storage for the instance type.
     #   @return [Types::InstanceStorageInfo]
     #
     # @!attribute [rw] ebs_info
@@ -34962,7 +34962,7 @@ module Aws::EC2
     # Describes the memory for the instance type.
     #
     # @!attribute [rw] size_in_mi_b
-    #   Size of the memory, in MiB.
+    #   The size of the memory, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MemoryInfo AWS API Documentation
@@ -38858,15 +38858,52 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the network card support of the instance type.
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_performance
+    #   The network performance of the network card.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_network_interfaces
+    #   The maximum number of network interfaces for the network card.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkCardInfo AWS API Documentation
+    #
+    class NetworkCardInfo < Struct.new(
+      :network_card_index,
+      :network_performance,
+      :maximum_network_interfaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the networking features of the instance type.
     #
     # @!attribute [rw] network_performance
-    #   Describes the network performance.
+    #   The network performance.
     #   @return [String]
     #
     # @!attribute [rw] maximum_network_interfaces
     #   The maximum number of network interfaces for the instance type.
     #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_network_cards
+    #   The maximum number of physical network cards that can be allocated
+    #   to the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_network_card_index
+    #   The index of the default network card, starting at 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_cards
+    #   Describes the network cards for the instance type.
+    #   @return [Array<Types::NetworkCardInfo>]
     #
     # @!attribute [rw] ipv_4_addresses_per_interface
     #   The maximum number of IPv4 addresses per network interface.
@@ -38893,6 +38930,9 @@ module Aws::EC2
     class NetworkInfo < Struct.new(
       :network_performance,
       :maximum_network_interfaces,
+      :maximum_network_cards,
+      :default_network_card_index,
+      :network_cards,
       :ipv_4_addresses_per_interface,
       :ipv_6_addresses_per_interface,
       :ipv_6_supported,
@@ -39912,7 +39952,7 @@ module Aws::EC2
     # Describes the placement group support of the instance type.
     #
     # @!attribute [rw] supported_strategies
-    #   A list of supported placement groups types.
+    #   The supported placement group types.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroupInfo AWS API Documentation
@@ -40259,7 +40299,7 @@ module Aws::EC2
     # Describes the processor used by the instance type.
     #
     # @!attribute [rw] supported_architectures
-    #   A list of architectures supported by the instance type.
+    #   The architectures supported by the instance type.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sustained_clock_speed_in_ghz
@@ -51448,13 +51488,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] valid_cores
-    #   List of the valid number of cores that can be configured for the
-    #   instance type.
+    #   The valid number of cores that can be configured for the instance
+    #   type.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] valid_threads_per_core
-    #   List of the valid number of threads per core that can be configured
-    #   for the instance type.
+    #   The valid number of threads per core that can be configured for the
+    #   instance type.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VCpuInfo AWS API Documentation

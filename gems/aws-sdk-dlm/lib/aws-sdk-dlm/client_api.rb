@@ -49,6 +49,7 @@ module Aws::DLM
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    NoReboot = Shapes::BooleanShape.new(name: 'NoReboot')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
     ParameterList = Shapes::ListShape.new(name: 'ParameterList')
     Parameters = Shapes::StructureShape.new(name: 'Parameters')
@@ -175,6 +176,7 @@ module Aws::DLM
     LifecyclePolicySummary.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
     LifecyclePolicySummary.add_member(:state, Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location_name: "State"))
     LifecyclePolicySummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    LifecyclePolicySummary.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))
     LifecyclePolicySummary.struct_class = Types::LifecyclePolicySummary
 
     LifecyclePolicySummaryList.member = Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
@@ -193,6 +195,7 @@ module Aws::DLM
     ParameterList.member = Shapes::ShapeRef.new(shape: Parameter)
 
     Parameters.add_member(:exclude_boot_volume, Shapes::ShapeRef.new(shape: ExcludeBootVolume, location_name: "ExcludeBootVolume"))
+    Parameters.add_member(:no_reboot, Shapes::ShapeRef.new(shape: NoReboot, location_name: "NoReboot"))
     Parameters.struct_class = Types::Parameters
 
     PolicyDetails.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))

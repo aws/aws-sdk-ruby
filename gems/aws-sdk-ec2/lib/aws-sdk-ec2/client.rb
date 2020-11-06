@@ -17069,7 +17069,7 @@ module Aws::EC2
     #     location type is `region` (default), the location is the Region code
     #     (for example, `us-east-2`.)
     #
-    #   * `instance-type` - The instance type.
+    #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -17140,17 +17140,17 @@ module Aws::EC2
     #   One or more filters. Filter names and values are case-sensitive.
     #
     #   * `auto-recovery-supported` - Indicates whether auto recovery is
-    #     supported. (`true` \| `false`)
+    #     supported (`true` \| `false`).
     #
-    #   * `bare-metal` - Indicates whether it is a bare metal instance type.
-    #     (`true` \| `false`)
+    #   * `bare-metal` - Indicates whether it is a bare metal instance type
+    #     (`true` \| `false`).
     #
     #   * `burstable-performance-supported` - Indicates whether it is a
-    #     burstable performance instance type. (`true` \| `false`)
+    #     burstable performance instance type (`true` \| `false`).
     #
     #   * `current-generation` - Indicates whether this instance type is the
-    #     latest generation instance type of an instance family. (`true` \|
-    #     `false`)
+    #     latest generation instance type of an instance family (`true` \|
+    #     `false`).
     #
     #   * `ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps` - The
     #     baseline bandwidth performance for an EBS-optimized instance type,
@@ -17162,7 +17162,7 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
     #     baseline throughput performance for an EBS-optimized instance type,
-    #     in MBps.
+    #     in MB/s.
     #
     #   * `ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps` - The
     #     maximum bandwidth performance for an EBS-optimized instance type, in
@@ -17174,25 +17174,25 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
     #     maximum throughput performance for an EBS-optimized instance type,
-    #     in MBps.
+    #     in MB/s.
     #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
-    #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
+    #     type is EBS-optimized (`supported` \| `unsupported` \| `default`).
     #
     #   * `ebs-info.encryption-support` - Indicates whether EBS encryption is
-    #     supported. (`supported` \| `unsupported`)
+    #     supported (`supported` \| `unsupported`).
     #
     #   * `ebs-info.nvme-support` - Indicates whether non-volatile memory
-    #     express (NVMe) is supported for EBS volumes. (`required` \|
-    #     `supported` \| `unsupported`)
+    #     express (NVMe) is supported for EBS volumes (`required` \|
+    #     `supported` \| `unsupported`).
     #
     #   * `free-tier-eligible` - Indicates whether the instance type is
-    #     eligible to use in the free tier. (`true` \| `false`)
+    #     eligible to use in the free tier (`true` \| `false`).
     #
     #   * `hibernation-supported` - Indicates whether On-Demand hibernation is
-    #     supported. (`true` \| `false`)
+    #     supported (`true` \| `false`).
     #
-    #   * `hypervisor` - The hypervisor. (`nitro` \| `xen`)
+    #   * `hypervisor` - The hypervisor (`nitro` \| `xen`).
     #
     #   * `instance-storage-info.disk.count` - The number of local disks.
     #
@@ -17200,17 +17200,17 @@ module Aws::EC2
     #     instance storage disk, in GB.
     #
     #   * `instance-storage-info.disk.type` - The storage technology for the
-    #     local instance storage disks. (`hdd` \| `ssd`)
+    #     local instance storage disks (`hdd` \| `ssd`).
     #
     #   * `instance-storage-info.nvme-support` - Indicates whether
-    #     non-volatile memory express (NVMe) is supported for instance store.
-    #     (`required` \| `supported`) \| `unsupported`)
+    #     non-volatile memory express (NVMe) is supported for instance store
+    #     (`required` \| `supported`) \| `unsupported`).
     #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
     #
     #   * `instance-storage-supported` - Indicates whether the instance type
-    #     has local instance storage. (`true` \| `false`)
+    #     has local instance storage (`true` \| `false`).
     #
     #   * `instance-type` - The instance type (for example `c5.2xlarge` or
     #     c5*).
@@ -17218,11 +17218,11 @@ module Aws::EC2
     #   * `memory-info.size-in-mib` - The memory size.
     #
     #   * `network-info.efa-supported` - Indicates whether the instance type
-    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
+    #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
     #
     #   * `network-info.ena-support` - Indicates whether Elastic Network
-    #     Adapter (ENA) is supported or required. (`required` \| `supported`
-    #     \| `unsupported`)
+    #     Adapter (ENA) is supported or required (`required` \| `supported` \|
+    #     `unsupported`).
     #
     #   * `network-info.ipv4-addresses-per-interface` - The maximum number of
     #     private IPv4 addresses per network interface.
@@ -17231,7 +17231,7 @@ module Aws::EC2
     #     private IPv6 addresses per network interface.
     #
     #   * `network-info.ipv6-supported` - Indicates whether the instance type
-    #     supports IPv6. (`true` \| `false`)
+    #     supports IPv6 (`true` \| `false`).
     #
     #   * `network-info.maximum-network-interfaces` - The maximum number of
     #     network interfaces per instance.
@@ -17239,19 +17239,19 @@ module Aws::EC2
     #   * `network-info.network-performance` - The network performance (for
     #     example, "25 Gigabit").
     #
-    #   * `processor-info.supported-architecture` - The CPU architecture.
-    #     (`arm64` \| `i386` \| `x86_64`)
+    #   * `processor-info.supported-architecture` - The CPU architecture
+    #     (`arm64` \| `i386` \| `x86_64`).
     #
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock speed,
     #     in GHz.
     #
-    #   * `supported-root-device-type` - The root device type. (`ebs` \|
-    #     `instance-store`)
+    #   * `supported-root-device-type` - The root device type (`ebs` \|
+    #     `instance-store`).
     #
-    #   * `supported-usage-class` - The usage class. (`on-demand` \| `spot`)
+    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`).
     #
-    #   * `supported-virtualization-type` - The virtualization type. (`hvm` \|
-    #     `paravirtual`)
+    #   * `supported-virtualization-type` - The virtualization type (`hvm` \|
+    #     `paravirtual`).
     #
     #   * `vcpu-info.default-cores` - The default number of cores for the
     #     instance type.
@@ -17342,6 +17342,12 @@ module Aws::EC2
     #   resp.instance_types[0].ebs_info.nvme_support #=> String, one of "unsupported", "supported", "required"
     #   resp.instance_types[0].network_info.network_performance #=> String
     #   resp.instance_types[0].network_info.maximum_network_interfaces #=> Integer
+    #   resp.instance_types[0].network_info.maximum_network_cards #=> Integer
+    #   resp.instance_types[0].network_info.default_network_card_index #=> Integer
+    #   resp.instance_types[0].network_info.network_cards #=> Array
+    #   resp.instance_types[0].network_info.network_cards[0].network_card_index #=> Integer
+    #   resp.instance_types[0].network_info.network_cards[0].network_performance #=> String
+    #   resp.instance_types[0].network_info.network_cards[0].maximum_network_interfaces #=> Integer
     #   resp.instance_types[0].network_info.ipv_4_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_supported #=> Boolean
@@ -39195,7 +39201,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.207.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

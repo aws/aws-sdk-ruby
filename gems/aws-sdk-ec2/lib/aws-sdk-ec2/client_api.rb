@@ -389,6 +389,7 @@ module Aws::EC2
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
     DedicatedHostId = Shapes::StringShape.new(name: 'DedicatedHostId')
+    DefaultNetworkCardIndex = Shapes::IntegerShape.new(name: 'DefaultNetworkCardIndex')
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
     DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
@@ -1351,6 +1352,7 @@ module Aws::EC2
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumBandwidthInMbps = Shapes::IntegerShape.new(name: 'MaximumBandwidthInMbps')
     MaximumIops = Shapes::IntegerShape.new(name: 'MaximumIops')
+    MaximumNetworkCards = Shapes::IntegerShape.new(name: 'MaximumNetworkCards')
     MaximumThroughputInMBps = Shapes::FloatShape.new(name: 'MaximumThroughputInMBps')
     MembershipType = Shapes::StringShape.new(name: 'MembershipType')
     MemoryInfo = Shapes::StructureShape.new(name: 'MemoryInfo')
@@ -1463,6 +1465,9 @@ module Aws::EC2
     NetworkAclId = Shapes::StringShape.new(name: 'NetworkAclId')
     NetworkAclIdStringList = Shapes::ListShape.new(name: 'NetworkAclIdStringList')
     NetworkAclList = Shapes::ListShape.new(name: 'NetworkAclList')
+    NetworkCardIndex = Shapes::IntegerShape.new(name: 'NetworkCardIndex')
+    NetworkCardInfo = Shapes::StructureShape.new(name: 'NetworkCardInfo')
+    NetworkCardInfoList = Shapes::ListShape.new(name: 'NetworkCardInfoList')
     NetworkInfo = Shapes::StructureShape.new(name: 'NetworkInfo')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceAssociation = Shapes::StructureShape.new(name: 'NetworkInterfaceAssociation')
@@ -7904,8 +7909,18 @@ module Aws::EC2
 
     NetworkAclList.member = Shapes::ShapeRef.new(shape: NetworkAcl, location_name: "item")
 
+    NetworkCardInfo.add_member(:network_card_index, Shapes::ShapeRef.new(shape: NetworkCardIndex, location_name: "networkCardIndex"))
+    NetworkCardInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
+    NetworkCardInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))
+    NetworkCardInfo.struct_class = Types::NetworkCardInfo
+
+    NetworkCardInfoList.member = Shapes::ShapeRef.new(shape: NetworkCardInfo, location_name: "item")
+
     NetworkInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
     NetworkInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))
+    NetworkInfo.add_member(:maximum_network_cards, Shapes::ShapeRef.new(shape: MaximumNetworkCards, location_name: "maximumNetworkCards"))
+    NetworkInfo.add_member(:default_network_card_index, Shapes::ShapeRef.new(shape: DefaultNetworkCardIndex, location_name: "defaultNetworkCardIndex"))
+    NetworkInfo.add_member(:network_cards, Shapes::ShapeRef.new(shape: NetworkCardInfoList, location_name: "networkCards"))
     NetworkInfo.add_member(:ipv_4_addresses_per_interface, Shapes::ShapeRef.new(shape: MaxIpv4AddrPerInterface, location_name: "ipv4AddressesPerInterface"))
     NetworkInfo.add_member(:ipv_6_addresses_per_interface, Shapes::ShapeRef.new(shape: MaxIpv6AddrPerInterface, location_name: "ipv6AddressesPerInterface"))
     NetworkInfo.add_member(:ipv_6_supported, Shapes::ShapeRef.new(shape: Ipv6Flag, location_name: "ipv6Supported"))

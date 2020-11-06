@@ -1187,6 +1187,7 @@ module Aws::MediaLive
     #             multiplex_group_settings: {
     #             },
     #             rtmp_group_settings: {
+    #               ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #               authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #               cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #               cache_length: 1,
@@ -1935,6 +1936,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers[0] #=> String, one of "ON_CUE_POINT_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.authentication_scheme #=> String, one of "AKAMAI", "COMMON"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
@@ -2881,6 +2884,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers[0] #=> String, one of "ON_CUE_POINT_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.authentication_scheme #=> String, one of "AKAMAI", "COMMON"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
@@ -3766,6 +3771,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers[0] #=> String, one of "ON_CUE_POINT_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.authentication_scheme #=> String, one of "AKAMAI", "COMMON"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
@@ -5613,6 +5620,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers[0] #=> String, one of "ON_CUE_POINT_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.authentication_scheme #=> String, one of "AKAMAI", "COMMON"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
@@ -6280,6 +6289,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers[0] #=> String, one of "ON_CUE_POINT_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.authentication_scheme #=> String, one of "AKAMAI", "COMMON"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
@@ -7117,6 +7128,7 @@ module Aws::MediaLive
     #             multiplex_group_settings: {
     #             },
     #             rtmp_group_settings: {
+    #               ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #               authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #               cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #               cache_length: 1,
@@ -7860,6 +7872,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers[0] #=> String, one of "ON_CUE_POINT_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.authentication_scheme #=> String, one of "AKAMAI", "COMMON"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
@@ -8489,6 +8503,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.ad_markers[0] #=> String, one of "ON_CUE_POINT_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.authentication_scheme #=> String, one of "AKAMAI", "COMMON"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
@@ -9229,7 +9245,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

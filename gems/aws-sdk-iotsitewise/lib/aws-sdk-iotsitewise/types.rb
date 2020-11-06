@@ -1588,45 +1588,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePresignedPortalUrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #         session_duration_seconds: 1,
-    #       }
-    #
-    # @!attribute [rw] portal_id
-    #   The ID of the portal to access.
-    #   @return [String]
-    #
-    # @!attribute [rw] session_duration_seconds
-    #   The duration (in seconds) for which the session at the URL is valid.
-    #
-    #   Default: 900 seconds (15 minutes)
-    #   @return [Integer]
-    #
-    class CreatePresignedPortalUrlRequest < Struct.new(
-      :portal_id,
-      :session_duration_seconds)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] presigned_portal_url
-    #   The pre-signed URL to the portal. The URL contains the portal ID and
-    #   a session token that lets you access the portal. The URL has the
-    #   following format.
-    #
-    #   `https://<portal-id>.app.iotsitewise.aws/auth?token=<encrypted-token>`
-    #   @return [String]
-    #
-    class CreatePresignedPortalUrlResponse < Struct.new(
-      :presigned_portal_url)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass CreateProjectRequest
     #   data as a hash:
     #

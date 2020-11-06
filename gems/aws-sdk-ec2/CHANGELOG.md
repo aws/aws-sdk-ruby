@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.208.0 (2020-11-06)
+------------------
+
+* Feature - Network card support with four new attributes: NetworkCardIndex, NetworkPerformance, DefaultNetworkCardIndex, and MaximumNetworkInterfaces, added to the DescribeInstanceTypes API.
+
 1.207.0 (2020-11-05)
 ------------------
 

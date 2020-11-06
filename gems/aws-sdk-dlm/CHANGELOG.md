@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-06)
+------------------
+
+* Feature - Amazon Data Lifecycle Manager now supports the creation and retention of EBS-backed Amazon Machine Images
+
 1.35.0 (2020-09-30)
 ------------------
 
