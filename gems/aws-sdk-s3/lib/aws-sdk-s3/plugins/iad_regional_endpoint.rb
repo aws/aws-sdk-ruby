@@ -28,8 +28,11 @@ region. Defaults to `legacy` mode using global endpoint.
           def call(context)
             # keep legacy global endpoint pattern by default
             if context.config.s3_us_east_1_regional_endpoint == 'legacy'
-              context.http_request.endpoint.host = IADRegionalEndpoint.legacy_host(
-                context.http_request.endpoint.host)
+              # if it's an ARN, don't touch the endpoint at all
+              unless context.metadata[:s3_arn]
+                context.http_request.endpoint.host =
+                  IADRegionalEndpoint.legacy_host(context.http_request.endpoint.host)
+              end
             end
             @handler.call(context)
           end
