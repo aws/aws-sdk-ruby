@@ -1569,6 +1569,9 @@ module Aws::ElasticsearchService
     #   ASSOCIATING/ASSOCIATION\_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION\_FAILED.
     #   @return [String]
     #
+    # @!attribute [rw] package_version
+    #   @return [String]
+    #
     # @!attribute [rw] reference_path
     #   The relative path on Amazon ES nodes, which can be used as
     #   synonym\_path when the package is synonym file.
@@ -1586,6 +1589,7 @@ module Aws::ElasticsearchService
       :last_updated,
       :domain_name,
       :domain_package_status,
+      :package_version,
       :reference_path,
       :error_details)
       SENSITIVE = []
@@ -2150,6 +2154,61 @@ module Aws::ElasticsearchService
     #
     class GetCompatibleElasticsearchVersionsResponse < Struct.new(
       :compatible_elasticsearch_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` GetPackageVersionHistory `
+    # operation.
+    #
+    # @note When making an API call, you may pass GetPackageVersionHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Returns an audit history of versions of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of versions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class GetPackageVersionHistoryRequest < Struct.new(
+      :package_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` GetPackageVersionHistory `
+    # operation.
+    #
+    # @!attribute [rw] package_id
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version_history_list
+    #   List of `PackageVersionHistory` objects.
+    #   @return [Array<Types::PackageVersionHistory>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class GetPackageVersionHistoryResponse < Struct.new(
+      :package_id,
+      :package_version_history_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2925,6 +2984,12 @@ module Aws::ElasticsearchService
     #   Timestamp which tells creation date of the package.
     #   @return [Time]
     #
+    # @!attribute [rw] last_updated_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] available_package_version
+    #   @return [String]
+    #
     # @!attribute [rw] error_details
     #   Additional information if the package is in an error state. Null
     #   otherwise.
@@ -2937,6 +3002,8 @@ module Aws::ElasticsearchService
       :package_description,
       :package_status,
       :created_at,
+      :last_updated_at,
+      :available_package_version,
       :error_details)
       SENSITIVE = []
       include Aws::Structure
@@ -2964,6 +3031,28 @@ module Aws::ElasticsearchService
     class PackageSource < Struct.new(
       :s3_bucket_name,
       :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a package version.
+    #
+    # @!attribute [rw] package_version
+    #   Version of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   A message associated with the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp which tells creation time of the package version.
+    #   @return [Time]
+    #
+    class PackageVersionHistory < Struct.new(
+      :package_version,
+      :commit_message,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3750,6 +3839,60 @@ module Aws::ElasticsearchService
     #
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
       :domain_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` UpdatePackage ` operation.
+    #
+    # @note When making an API call, you may pass UpdatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         package_source: { # required
+    #           s3_bucket_name: "S3BucketName",
+    #           s3_key: "S3Key",
+    #         },
+    #         package_description: "PackageDescription",
+    #         commit_message: "CommitMessage",
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Unique identifier for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_source
+    #   The S3 location for importing the package specified as
+    #   `S3BucketName` and `S3Key`
+    #   @return [Types::PackageSource]
+    #
+    # @!attribute [rw] package_description
+    #   New description of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   An info message for the new version which will be shown as part of
+    #   `GetPackageVersionHistoryResponse`.
+    #   @return [String]
+    #
+    class UpdatePackageRequest < Struct.new(
+      :package_id,
+      :package_source,
+      :package_description,
+      :commit_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` UpdatePackage ` operation.
+    #
+    # @!attribute [rw] package_details
+    #   Information about the package `PackageDetails`.
+    #   @return [Types::PackageDetails]
+    #
+    class UpdatePackageResponse < Struct.new(
+      :package_details)
       SENSITIVE = []
       include Aws::Structure
     end

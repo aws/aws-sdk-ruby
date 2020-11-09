@@ -2448,7 +2448,7 @@ module Aws::SSM
     #   resp = client.describe_automation_executions({
     #     filters: [
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup
     #         values: ["AutomationExecutionFilterValue"], # required
     #       },
     #     ],
@@ -6017,13 +6017,6 @@ module Aws::SSM
     # @option params [Array<Types::AssociationFilter>] :association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
-    #
-    #   <note markdown="1"> Filtering associations using the `InstanceID` attribute only returns
-    #   legacy associations created using the `InstanceID` attribute.
-    #   Associations targeting the instance that are part of the Target
-    #   Attributes `ResourceGroup` or `Tags` are not returned.
-    #
-    #    </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -9789,7 +9782,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

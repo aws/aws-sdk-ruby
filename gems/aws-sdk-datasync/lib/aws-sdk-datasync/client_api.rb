@@ -172,6 +172,8 @@ module Aws::DataSync
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentRequest = Shapes::StructureShape.new(name: 'UpdateAgentRequest')
     UpdateAgentResponse = Shapes::StructureShape.new(name: 'UpdateAgentResponse')
+    UpdateTaskExecutionRequest = Shapes::StructureShape.new(name: 'UpdateTaskExecutionRequest')
+    UpdateTaskExecutionResponse = Shapes::StructureShape.new(name: 'UpdateTaskExecutionResponse')
     UpdateTaskRequest = Shapes::StructureShape.new(name: 'UpdateTaskRequest')
     UpdateTaskResponse = Shapes::StructureShape.new(name: 'UpdateTaskResponse')
     VerifyMode = Shapes::StringShape.new(name: 'VerifyMode')
@@ -605,6 +607,12 @@ module Aws::DataSync
 
     UpdateAgentResponse.struct_class = Types::UpdateAgentResponse
 
+    UpdateTaskExecutionRequest.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, required: true, location_name: "TaskExecutionArn"))
+    UpdateTaskExecutionRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, required: true, location_name: "Options"))
+    UpdateTaskExecutionRequest.struct_class = Types::UpdateTaskExecutionRequest
+
+    UpdateTaskExecutionResponse.struct_class = Types::UpdateTaskExecutionResponse
+
     UpdateTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
     UpdateTaskRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
     UpdateTaskRequest.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
@@ -971,6 +979,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_task_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTaskExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTaskExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTaskExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

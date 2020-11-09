@@ -605,6 +605,78 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # Describes a bandwidth rate limit interval for a gateway. A bandwidth
+    # rate limit schedule consists of one or more bandwidth rate limit
+    # intervals. A bandwidth rate limit interval defines a period of time on
+    # one or more days of the week, during which bandwidth rate limits are
+    # specified for uploading, downloading, or both.
+    #
+    # @note When making an API call, you may pass BandwidthRateLimitInterval
+    #   data as a hash:
+    #
+    #       {
+    #         start_hour_of_day: 1, # required
+    #         start_minute_of_hour: 1, # required
+    #         end_hour_of_day: 1, # required
+    #         end_minute_of_hour: 1, # required
+    #         days_of_week: [1], # required
+    #         average_upload_rate_limit_in_bits_per_sec: 1,
+    #         average_download_rate_limit_in_bits_per_sec: 1,
+    #       }
+    #
+    # @!attribute [rw] start_hour_of_day
+    #   The hour of the day to start the bandwidth rate limit interval.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_minute_of_hour
+    #   The minute of the hour to start the bandwidth rate limit interval.
+    #   The interval begins at the start of that minute. To begin an
+    #   interval exactly at the start of the hour, use the value `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_hour_of_day
+    #   The hour of the day to end the bandwidth rate limit interval.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_minute_of_hour
+    #   The minute of the hour to end the bandwidth rate limit interval.
+    #
+    #   The bandwidth rate limit interval ends at the end of the minute. To
+    #   end an interval at the end of an hour, use the value `59`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] days_of_week
+    #   The days of the week component of the bandwidth rate limit interval,
+    #   represented as ordinal numbers from 0 to 6, where 0 represents
+    #   Sunday and 6 Saturday.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] average_upload_rate_limit_in_bits_per_sec
+    #   The average upload rate limit component of the bandwidth rate limit
+    #   interval, in bits per second. This field does not appear in the
+    #   response if the upload rate limit is not set.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] average_download_rate_limit_in_bits_per_sec
+    #   The average download rate limit component of the bandwidth rate
+    #   limit interval, in bits per second. This field does not appear in
+    #   the response if the download rate limit is not set.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/BandwidthRateLimitInterval AWS API Documentation
+    #
+    class BandwidthRateLimitInterval < Struct.new(
+      :start_hour_of_day,
+      :start_minute_of_hour,
+      :end_hour_of_day,
+      :end_minute_of_hour,
+      :days_of_week,
+      :average_upload_rate_limit_in_bits_per_sec,
+      :average_download_rate_limit_in_bits_per_sec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Lists refresh cache information.
     #
     # @note When making an API call, you may pass CacheAttributes
@@ -2634,6 +2706,47 @@ module Aws::StorageGateway
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBandwidthRateLimitScheduleInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitScheduleInput AWS API Documentation
+    #
+    class DescribeBandwidthRateLimitScheduleInput < Struct.new(
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] bandwidth_rate_limit_intervals
+    #   An array that contains the bandwidth rate limit intervals for a tape
+    #   or volume gateway.
+    #   @return [Array<Types::BandwidthRateLimitInterval>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitScheduleOutput AWS API Documentation
+    #
+    class DescribeBandwidthRateLimitScheduleOutput < Struct.new(
+      :gateway_arn,
+      :bandwidth_rate_limit_intervals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6302,6 +6415,59 @@ module Aws::StorageGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitOutput AWS API Documentation
     #
     class UpdateBandwidthRateLimitOutput < Struct.new(
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateBandwidthRateLimitScheduleInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #         bandwidth_rate_limit_intervals: [ # required
+    #           {
+    #             start_hour_of_day: 1, # required
+    #             start_minute_of_hour: 1, # required
+    #             end_hour_of_day: 1, # required
+    #             end_minute_of_hour: 1, # required
+    #             days_of_week: [1], # required
+    #             average_upload_rate_limit_in_bits_per_sec: 1,
+    #             average_download_rate_limit_in_bits_per_sec: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #   @return [Array<Types::BandwidthRateLimitInterval>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitScheduleInput AWS API Documentation
+    #
+    class UpdateBandwidthRateLimitScheduleInput < Struct.new(
+      :gateway_arn,
+      :bandwidth_rate_limit_intervals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitScheduleOutput AWS API Documentation
+    #
+    class UpdateBandwidthRateLimitScheduleOutput < Struct.new(
       :gateway_arn)
       SENSITIVE = []
       include Aws::Structure

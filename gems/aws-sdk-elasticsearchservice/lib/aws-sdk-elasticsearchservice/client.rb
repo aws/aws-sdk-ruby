@@ -426,6 +426,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.package_version #=> String
     #   resp.domain_package_details.reference_path #=> String
     #   resp.domain_package_details.error_details.error_type #=> String
     #   resp.domain_package_details.error_details.error_message #=> String
@@ -820,6 +821,8 @@ module Aws::ElasticsearchService
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
+    #   resp.package_details.last_updated_at #=> Time
+    #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
     #
@@ -1039,6 +1042,8 @@ module Aws::ElasticsearchService
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
+    #   resp.package_details.last_updated_at #=> Time
+    #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
     #
@@ -1598,6 +1603,8 @@ module Aws::ElasticsearchService
     #   resp.package_details_list[0].package_description #=> String
     #   resp.package_details_list[0].package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details_list[0].created_at #=> Time
+    #   resp.package_details_list[0].last_updated_at #=> Time
+    #   resp.package_details_list[0].available_package_version #=> String
     #   resp.package_details_list[0].error_details.error_type #=> String
     #   resp.package_details_list[0].error_details.error_message #=> String
     #   resp.next_token #=> String
@@ -1747,6 +1754,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.package_version #=> String
     #   resp.domain_package_details.reference_path #=> String
     #   resp.domain_package_details.error_details.error_type #=> String
     #   resp.domain_package_details.error_details.error_message #=> String
@@ -1789,6 +1797,52 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def get_compatible_elasticsearch_versions(params = {}, options = {})
       req = build_request(:get_compatible_elasticsearch_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of versions of the package, along with their creation
+    # time and commit message.
+    #
+    # @option params [required, String] :package_id
+    #   Returns an audit history of versions of the package.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of versions.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::GetPackageVersionHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPackageVersionHistoryResponse#package_id #package_id} => String
+    #   * {Types::GetPackageVersionHistoryResponse#package_version_history_list #package_version_history_list} => Array&lt;Types::PackageVersionHistory&gt;
+    #   * {Types::GetPackageVersionHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_package_version_history({
+    #     package_id: "PackageID", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_id #=> String
+    #   resp.package_version_history_list #=> Array
+    #   resp.package_version_history_list[0].package_version #=> String
+    #   resp.package_version_history_list[0].commit_message #=> String
+    #   resp.package_version_history_list[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload get_package_version_history(params = {})
+    # @param [Hash] params ({})
+    def get_package_version_history(params = {}, options = {})
+      req = build_request(:get_package_version_history, params)
       req.send_request(options)
     end
 
@@ -1935,6 +1989,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].package_version #=> String
     #   resp.domain_package_details_list[0].reference_path #=> String
     #   resp.domain_package_details_list[0].error_details.error_type #=> String
     #   resp.domain_package_details_list[0].error_details.error_message #=> String
@@ -2071,6 +2126,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].package_version #=> String
     #   resp.domain_package_details_list[0].reference_path #=> String
     #   resp.domain_package_details_list[0].error_details.error_type #=> String
     #   resp.domain_package_details_list[0].error_details.error_message #=> String
@@ -2509,6 +2565,58 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Updates a package for use with Amazon ES domains.
+    #
+    # @option params [required, String] :package_id
+    #   Unique identifier for the package.
+    #
+    # @option params [required, Types::PackageSource] :package_source
+    #   The S3 location for importing the package specified as `S3BucketName`
+    #   and `S3Key`
+    #
+    # @option params [String] :package_description
+    #   New description of the package.
+    #
+    # @option params [String] :commit_message
+    #   An info message for the new version which will be shown as part of
+    #   `GetPackageVersionHistoryResponse`.
+    #
+    # @return [Types::UpdatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePackageResponse#package_details #package_details} => Types::PackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package({
+    #     package_id: "PackageID", # required
+    #     package_source: { # required
+    #       s3_bucket_name: "S3BucketName",
+    #       s3_key: "S3Key",
+    #     },
+    #     package_description: "PackageDescription",
+    #     commit_message: "CommitMessage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details.package_id #=> String
+    #   resp.package_details.package_name #=> String
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_description #=> String
+    #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details.created_at #=> Time
+    #   resp.package_details.last_updated_at #=> Time
+    #   resp.package_details.available_package_version #=> String
+    #   resp.package_details.error_details.error_type #=> String
+    #   resp.package_details.error_details.error_message #=> String
+    #
+    # @overload update_package(params = {})
+    # @param [Hash] params ({})
+    def update_package(params = {}, options = {})
+      req = build_request(:update_package, params)
+      req.send_request(options)
+    end
+
     # Allows you to either upgrade your domain or perform an Upgrade
     # eligibility check to a compatible Elasticsearch version.
     #
@@ -2566,7 +2674,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

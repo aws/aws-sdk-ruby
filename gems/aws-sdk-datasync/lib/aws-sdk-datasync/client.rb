@@ -634,7 +634,7 @@ module Aws::DataSync
     #   subdirectory of that path. The path should be such that it can be
     #   mounted by other NFS clients in your network.
     #
-    #   To see all the paths exported by your NFS server. run "`showmount -e
+    #   To see all the paths exported by your NFS server, run "`showmount -e
     #   nfs-server-name`" from an NFS client that has access to your server.
     #   You can specify any directory that appears in the results, and any
     #   subdirectory of that directory. Ensure that the NFS export is
@@ -828,8 +828,8 @@ module Aws::DataSync
     #   S3 destination.
     #
     # @option params [required, String] :s3_bucket_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the bucket
-    #   is on an AWS Outpost, this must be an access point ARN.
+    #   The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost,
+    #   this must be an access point ARN.
     #
     # @option params [String] :s3_storage_class
     #   The Amazon S3 storage class that you want to store your files in when
@@ -838,13 +838,12 @@ module Aws::DataSync
     #   Outposts, the storage class defaults to AWS S3 Outposts.
     #
     #   For more information about S3 storage classes, see [Amazon S3 Storage
-    #   Classes][1] in the *Amazon Simple Storage Service Developer Guide*.
-    #   Some storage classes have behaviors that can affect your S3 storage
-    #   cost. For detailed information, see using-storage-classes.
+    #   Classes][1]. Some storage classes have behaviors that can affect your
+    #   S3 storage cost. For detailed information, see using-storage-classes.
     #
     #
     #
-    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   [1]: http://aws.amazon.com/s3/storage-classes/
     #
     # @option params [required, Types::S3Config] :s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -855,9 +854,9 @@ module Aws::DataSync
     #
     # @option params [Array<String>] :agent_arns
     #   If you are using DataSync on an AWS Outpost, specify the Amazon
-    #   Resource Names (ARNs) of the DataSync agents deployed on your AWS
-    #   Outpost. For more information about launching a DataSync agent on an
-    #   Amazon Outpost, see outposts-agent.
+    #   Resource Names (ARNs) of the DataSync agents deployed on your Outpost.
+    #   For more information about launching a DataSync agent on an AWS
+    #   Outpost, see outposts-agent.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -1042,7 +1041,7 @@ module Aws::DataSync
     #   A list of filter rules that determines which files to exclude from a
     #   task. The list should contain a single filter string that consists of
     #   the patterns to exclude. The patterns are delimited by "\|" (that
-    #   is, a pipe), for example, `"/folder1|/folder2"`
+    #   is, a pipe), for example, `"/folder1|/folder2"`.
     #
     # @option params [Types::TaskSchedule] :schedule
     #   Specifies a schedule used to periodically transfer files from a source
@@ -2104,6 +2103,69 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Updates execution of a task.
+    #
+    # You can modify bandwidth throttling for a task execution that is
+    # running or queued. For more information, see [Adjusting Bandwidth
+    # Throttling for a Task Execution][1].
+    #
+    # <note markdown="1"> The only `Option` that can be modified by `UpdateTaskExecution` is `
+    # BytesPerSecond `.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/working-with-task-executions.html#adjust-bandwidth-throttling
+    #
+    # @option params [required, String] :task_execution_arn
+    #   The Amazon Resource Name (ARN) of the specific task execution that is
+    #   being updated.
+    #
+    # @option params [required, Types::Options] :options
+    #   Represents the options that are available to control the behavior of a
+    #   StartTaskExecution operation. Behavior includes preserving metadata
+    #   such as user ID (UID), group ID (GID), and file permissions, and also
+    #   overwriting files in the destination, data integrity verification, and
+    #   so on.
+    #
+    #   A task has a set of default options associated with it. If you don't
+    #   specify an option in StartTaskExecution, the default value is used.
+    #   You can override the defaults options on each task execution by
+    #   specifying an overriding `Options` value to StartTaskExecution.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_task_execution({
+    #     task_execution_arn: "TaskExecutionArn", # required
+    #     options: { # required
+    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #       overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
+    #       atime: "NONE", # accepts NONE, BEST_EFFORT
+    #       mtime: "NONE", # accepts NONE, PRESERVE
+    #       uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #       gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #       preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
+    #       preserve_devices: "NONE", # accepts NONE, PRESERVE
+    #       posix_permissions: "NONE", # accepts NONE, PRESERVE
+    #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecution AWS API Documentation
+    #
+    # @overload update_task_execution(params = {})
+    # @param [Hash] params ({})
+    def update_task_execution(params = {}, options = {})
+      req = build_request(:update_task_execution, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2117,7 +2179,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

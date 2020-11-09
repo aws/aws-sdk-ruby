@@ -2828,6 +2828,65 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Returns information about the bandwidth rate limit schedule of a
+    # gateway. By default, gateways do not have bandwidth rate limit
+    # schedules, which means no bandwidth rate limiting is in effect. This
+    # operation is supported only in the volume and tape gateway types.
+    #
+    # This operation returns information about a gateway's bandwidth rate
+    # limit schedule. A bandwidth rate limit schedule consists of one or
+    # more bandwidth rate limit intervals. A bandwidth rate limit interval
+    # defines a period of time on one or more days of the week, during which
+    # bandwidth rate limits are specified for uploading, downloading, or
+    # both.
+    #
+    # A bandwidth rate limit interval consists of one or more days of the
+    # week, a start hour and minute, an ending hour and minute, and
+    # bandwidth rate limits for uploading and downloading
+    #
+    # If no bandwidth rate limit schedule intervals are set for the gateway,
+    # this operation returns an empty response. To specify which gateway to
+    # describe, use the Amazon Resource Name (ARN) of the gateway in your
+    # request.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @return [Types::DescribeBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
+    #   * {Types::DescribeBandwidthRateLimitScheduleOutput#bandwidth_rate_limit_intervals #bandwidth_rate_limit_intervals} => Array&lt;Types::BandwidthRateLimitInterval&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bandwidth_rate_limit_schedule({
+    #     gateway_arn: "GatewayARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.bandwidth_rate_limit_intervals #=> Array
+    #   resp.bandwidth_rate_limit_intervals[0].start_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].start_minute_of_hour #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_minute_of_hour #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].days_of_week #=> Array
+    #   resp.bandwidth_rate_limit_intervals[0].days_of_week[0] #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].average_upload_rate_limit_in_bits_per_sec #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].average_download_rate_limit_in_bits_per_sec #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitSchedule AWS API Documentation
+    #
+    # @overload describe_bandwidth_rate_limit_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_bandwidth_rate_limit_schedule(params = {}, options = {})
+      req = build_request(:describe_bandwidth_rate_limit_schedule, params)
+      req.send_request(options)
+    end
+
     # Returns information about the cache of a gateway. This operation is
     # only supported in the cached volume, tape, and file gateway types.
     #
@@ -4604,6 +4663,8 @@ module Aws::StorageGateway
     #   * {Types::ListTapePoolsOutput#pool_infos #pool_infos} => Array&lt;Types::PoolInfo&gt;
     #   * {Types::ListTapePoolsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tape_pools({
@@ -5638,6 +5699,56 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Updates the bandwidth rate limit schedule for a specified gateway. By
+    # default, gateways do not have bandwidth rate limit schedules, which
+    # means no bandwidth rate limiting is in effect. Use this to initiate or
+    # update a gateway's bandwidth rate limit schedule. This operation is
+    # supported in the volume and tape gateway types.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @option params [required, Array<Types::BandwidthRateLimitInterval>] :bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #
+    # @return [Types::UpdateBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bandwidth_rate_limit_schedule({
+    #     gateway_arn: "GatewayARN", # required
+    #     bandwidth_rate_limit_intervals: [ # required
+    #       {
+    #         start_hour_of_day: 1, # required
+    #         start_minute_of_hour: 1, # required
+    #         end_hour_of_day: 1, # required
+    #         end_minute_of_hour: 1, # required
+    #         days_of_week: [1], # required
+    #         average_upload_rate_limit_in_bits_per_sec: 1,
+    #         average_download_rate_limit_in_bits_per_sec: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitSchedule AWS API Documentation
+    #
+    # @overload update_bandwidth_rate_limit_schedule(params = {})
+    # @param [Hash] params ({})
+    def update_bandwidth_rate_limit_schedule(params = {}, options = {})
+      req = build_request(:update_bandwidth_rate_limit_schedule, params)
+      req.send_request(options)
+    end
+
     # Updates the Challenge-Handshake Authentication Protocol (CHAP)
     # credentials for a specified iSCSI target. By default, a gateway does
     # not have CHAP enabled; however, for added security, you might use it.
@@ -6518,7 +6629,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

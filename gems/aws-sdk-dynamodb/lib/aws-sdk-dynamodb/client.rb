@@ -2193,6 +2193,52 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Describes an existing table export.
+    #
+    # @option params [required, String] :export_arn
+    #   The Amazon Resource Name (ARN) associated with the export.
+    #
+    # @return [Types::DescribeExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExportOutput#export_description #export_description} => Types::ExportDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_export({
+    #     export_arn: "ExportArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_description.export_arn #=> String
+    #   resp.export_description.export_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.export_description.start_time #=> Time
+    #   resp.export_description.end_time #=> Time
+    #   resp.export_description.export_manifest #=> String
+    #   resp.export_description.table_arn #=> String
+    #   resp.export_description.table_id #=> String
+    #   resp.export_description.export_time #=> Time
+    #   resp.export_description.client_token #=> String
+    #   resp.export_description.s3_bucket #=> String
+    #   resp.export_description.s3_bucket_owner #=> String
+    #   resp.export_description.s3_prefix #=> String
+    #   resp.export_description.s3_sse_algorithm #=> String, one of "AES256", "KMS"
+    #   resp.export_description.s3_sse_kms_key_id #=> String
+    #   resp.export_description.failure_code #=> String
+    #   resp.export_description.failure_message #=> String
+    #   resp.export_description.export_format #=> String, one of "DYNAMODB_JSON", "ION"
+    #   resp.export_description.billed_size_bytes #=> Integer
+    #   resp.export_description.item_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExport AWS API Documentation
+    #
+    # @overload describe_export(params = {})
+    # @param [Hash] params ({})
+    def describe_export(params = {}, options = {})
+      req = build_request(:describe_export, params)
+      req.send_request(options)
+    end
+
     # Returns information about the specified global table.
     #
     # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
@@ -2726,6 +2772,111 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Exports table data to an S3 bucket. The table must have point in time
+    # recovery enabled, and you can export data from any time within the
+    # point in time recovery window.
+    #
+    # @option params [required, String] :table_arn
+    #   The Amazon Resource Name (ARN) associated with the table to export.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :export_time
+    #   Time in the past from which to export table data. The table export
+    #   will be a snapshot of the table's state at this point in time.
+    #
+    # @option params [String] :client_token
+    #   Providing a `ClientToken` makes the call to
+    #   `ExportTableToPointInTimeInput` idempotent, meaning that multiple
+    #   identical calls have the same effect as one single call.
+    #
+    #   A client token is valid for 8 hours after the first request that uses
+    #   it is completed. After 8 hours, any request with the same client token
+    #   is treated as a new request. Do not resubmit the same request with the
+    #   same client token for more than 8 hours, or the result might not be
+    #   idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 8-hour idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :s3_bucket
+    #   The name of the Amazon S3 bucket to export the snapshot to.
+    #
+    # @option params [String] :s3_bucket_owner
+    #   The ID of the AWS account that owns the bucket the export will be
+    #   stored in.
+    #
+    # @option params [String] :s3_prefix
+    #   The Amazon S3 bucket prefix to use as the file name and path of the
+    #   exported snapshot.
+    #
+    # @option params [String] :s3_sse_algorithm
+    #   Type of encryption used on the bucket where export data will be
+    #   stored. Valid values for `S3SseAlgorithm` are:
+    #
+    #   * `AES256` - server-side encryption with Amazon S3 managed keys
+    #
+    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #
+    # @option params [String] :s3_sse_kms_key_id
+    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket where
+    #   export data will be stored (if applicable).
+    #
+    # @option params [String] :export_format
+    #   The format for the exported data. Valid values for `ExportFormat` are
+    #   `DYNAMODB_JSON` or `ION`.
+    #
+    # @return [Types::ExportTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportTableToPointInTimeOutput#export_description #export_description} => Types::ExportDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_table_to_point_in_time({
+    #     table_arn: "TableArn", # required
+    #     export_time: Time.now,
+    #     client_token: "ClientToken",
+    #     s3_bucket: "S3Bucket", # required
+    #     s3_bucket_owner: "S3BucketOwner",
+    #     s3_prefix: "S3Prefix",
+    #     s3_sse_algorithm: "AES256", # accepts AES256, KMS
+    #     s3_sse_kms_key_id: "S3SseKmsKeyId",
+    #     export_format: "DYNAMODB_JSON", # accepts DYNAMODB_JSON, ION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_description.export_arn #=> String
+    #   resp.export_description.export_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.export_description.start_time #=> Time
+    #   resp.export_description.end_time #=> Time
+    #   resp.export_description.export_manifest #=> String
+    #   resp.export_description.table_arn #=> String
+    #   resp.export_description.table_id #=> String
+    #   resp.export_description.export_time #=> Time
+    #   resp.export_description.client_token #=> String
+    #   resp.export_description.s3_bucket #=> String
+    #   resp.export_description.s3_bucket_owner #=> String
+    #   resp.export_description.s3_prefix #=> String
+    #   resp.export_description.s3_sse_algorithm #=> String, one of "AES256", "KMS"
+    #   resp.export_description.s3_sse_kms_key_id #=> String
+    #   resp.export_description.failure_code #=> String
+    #   resp.export_description.failure_message #=> String
+    #   resp.export_description.export_format #=> String, one of "DYNAMODB_JSON", "ION"
+    #   resp.export_description.billed_size_bytes #=> Integer
+    #   resp.export_description.item_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTime AWS API Documentation
+    #
+    # @overload export_table_to_point_in_time(params = {})
+    # @param [Hash] params ({})
+    def export_table_to_point_in_time(params = {}, options = {})
+      req = build_request(:export_table_to_point_in_time, params)
+      req.send_request(options)
+    end
+
     # The `GetItem` operation returns a set of attributes for the item with
     # the given primary key. If there is no matching item, `GetItem` does
     # not return any data and there will be no `Item` element in the
@@ -3045,6 +3196,50 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def list_contributor_insights(params = {}, options = {})
       req = build_request(:list_contributor_insights, params)
+      req.send_request(options)
+    end
+
+    # Lists completed exports within the past 90 days.
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) associated with the exported table.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListExports`. When provided in this manner, the
+    #   API fetches the next page of results.
+    #
+    # @return [Types::ListExportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportsOutput#export_summaries #export_summaries} => Array&lt;Types::ExportSummary&gt;
+    #   * {Types::ListExportsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exports({
+    #     table_arn: "TableArn",
+    #     max_results: 1,
+    #     next_token: "ExportNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_summaries #=> Array
+    #   resp.export_summaries[0].export_arn #=> String
+    #   resp.export_summaries[0].export_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExports AWS API Documentation
+    #
+    # @overload list_exports(params = {})
+    # @param [Hash] params ({})
+    def list_exports(params = {}, options = {})
+      req = build_request(:list_exports, params)
       req.send_request(options)
     end
 
@@ -6684,7 +6879,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

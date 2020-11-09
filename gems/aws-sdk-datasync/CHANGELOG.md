@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-11-09)
+------------------
+
+* Feature - DataSync now enables customers to adjust the network bandwidth used by a running AWS DataSync task.
+
 1.27.0 (2020-09-30)
 ------------------
 

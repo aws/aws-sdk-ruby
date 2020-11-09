@@ -94,6 +94,7 @@ module Aws::IoTAnalytics
     DeleteDatastoreRequest = Shapes::StructureShape.new(name: 'DeleteDatastoreRequest')
     DeletePipelineRequest = Shapes::StructureShape.new(name: 'DeletePipelineRequest')
     DeltaTime = Shapes::StructureShape.new(name: 'DeltaTime')
+    DeltaTimeSessionWindowConfiguration = Shapes::StructureShape.new(name: 'DeltaTimeSessionWindowConfiguration')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DescribeDatasetRequest = Shapes::StructureShape.new(name: 'DescribeDatasetRequest')
@@ -127,6 +128,10 @@ module Aws::IoTAnalytics
     IotEventsInputName = Shapes::StringShape.new(name: 'IotEventsInputName')
     LambdaActivity = Shapes::StructureShape.new(name: 'LambdaActivity')
     LambdaName = Shapes::StringShape.new(name: 'LambdaName')
+    LateDataRule = Shapes::StructureShape.new(name: 'LateDataRule')
+    LateDataRuleConfiguration = Shapes::StructureShape.new(name: 'LateDataRuleConfiguration')
+    LateDataRuleName = Shapes::StringShape.new(name: 'LateDataRuleName')
+    LateDataRules = Shapes::ListShape.new(name: 'LateDataRules')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
@@ -196,6 +201,7 @@ module Aws::IoTAnalytics
     ServiceManagedDatastoreS3Storage = Shapes::StructureShape.new(name: 'ServiceManagedDatastoreS3Storage')
     ServiceManagedDatastoreS3StorageSummary = Shapes::StructureShape.new(name: 'ServiceManagedDatastoreS3StorageSummary')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SessionTimeoutInMinutes = Shapes::IntegerShape.new(name: 'SessionTimeoutInMinutes')
     SizeInBytes = Shapes::FloatShape.new(name: 'SizeInBytes')
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlQueryDatasetAction = Shapes::StructureShape.new(name: 'SqlQueryDatasetAction')
@@ -268,6 +274,7 @@ module Aws::IoTAnalytics
     Channel.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     Channel.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     Channel.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    Channel.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
     Channel.struct_class = Types::Channel
 
     ChannelActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
@@ -293,6 +300,7 @@ module Aws::IoTAnalytics
     ChannelSummary.add_member(:status, Shapes::ShapeRef.new(shape: ChannelStatus, location_name: "status"))
     ChannelSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     ChannelSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    ChannelSummary.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     ContainerDatasetAction.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "image"))
@@ -313,6 +321,7 @@ module Aws::IoTAnalytics
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
     CreateDatasetContentRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location: "uri", location_name: "datasetName"))
+    CreateDatasetContentRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: DatasetContentVersion, location_name: "versionId"))
     CreateDatasetContentRequest.struct_class = Types::CreateDatasetContentRequest
 
     CreateDatasetContentResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: DatasetContentVersion, location_name: "versionId"))
@@ -325,6 +334,7 @@ module Aws::IoTAnalytics
     CreateDatasetRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     CreateDatasetRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, location_name: "versioningConfiguration"))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDatasetRequest.add_member(:late_data_rules, Shapes::ShapeRef.new(shape: LateDataRules, location_name: "lateDataRules"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
     CreateDatasetResponse.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "datasetName"))
@@ -382,6 +392,7 @@ module Aws::IoTAnalytics
     Dataset.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     Dataset.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     Dataset.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, location_name: "versioningConfiguration"))
+    Dataset.add_member(:late_data_rules, Shapes::ShapeRef.new(shape: LateDataRules, location_name: "lateDataRules"))
     Dataset.struct_class = Types::Dataset
 
     DatasetAction.add_member(:action_name, Shapes::ShapeRef.new(shape: DatasetActionName, location_name: "actionName"))
@@ -452,6 +463,7 @@ module Aws::IoTAnalytics
     Datastore.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     Datastore.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     Datastore.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    Datastore.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
     Datastore.struct_class = Types::Datastore
 
     DatastoreActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
@@ -476,6 +488,7 @@ module Aws::IoTAnalytics
     DatastoreSummary.add_member(:status, Shapes::ShapeRef.new(shape: DatastoreStatus, location_name: "status"))
     DatastoreSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     DatastoreSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    DatastoreSummary.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
     DatastoreSummary.struct_class = Types::DatastoreSummary
 
     DeleteChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location: "uri", location_name: "channelName"))
@@ -497,6 +510,9 @@ module Aws::IoTAnalytics
     DeltaTime.add_member(:offset_seconds, Shapes::ShapeRef.new(shape: OffsetSeconds, required: true, location_name: "offsetSeconds"))
     DeltaTime.add_member(:time_expression, Shapes::ShapeRef.new(shape: TimeExpression, required: true, location_name: "timeExpression"))
     DeltaTime.struct_class = Types::DeltaTime
+
+    DeltaTimeSessionWindowConfiguration.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: SessionTimeoutInMinutes, required: true, location_name: "timeoutInMinutes"))
+    DeltaTimeSessionWindowConfiguration.struct_class = Types::DeltaTimeSessionWindowConfiguration
 
     DescribeChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location: "uri", location_name: "channelName"))
     DescribeChannelRequest.add_member(:include_statistics, Shapes::ShapeRef.new(shape: IncludeStatisticsFlag, location: "querystring", location_name: "includeStatistics"))
@@ -582,6 +598,15 @@ module Aws::IoTAnalytics
     LambdaActivity.add_member(:batch_size, Shapes::ShapeRef.new(shape: ActivityBatchSize, required: true, location_name: "batchSize"))
     LambdaActivity.add_member(:next, Shapes::ShapeRef.new(shape: ActivityName, location_name: "next"))
     LambdaActivity.struct_class = Types::LambdaActivity
+
+    LateDataRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: LateDataRuleName, location_name: "ruleName"))
+    LateDataRule.add_member(:rule_configuration, Shapes::ShapeRef.new(shape: LateDataRuleConfiguration, required: true, location_name: "ruleConfiguration"))
+    LateDataRule.struct_class = Types::LateDataRule
+
+    LateDataRuleConfiguration.add_member(:delta_time_session_window_configuration, Shapes::ShapeRef.new(shape: DeltaTimeSessionWindowConfiguration, location_name: "deltaTimeSessionWindowConfiguration"))
+    LateDataRuleConfiguration.struct_class = Types::LateDataRuleConfiguration
+
+    LateDataRules.member = Shapes::ShapeRef.new(shape: LateDataRule)
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -814,6 +839,7 @@ module Aws::IoTAnalytics
     UpdateDatasetRequest.add_member(:content_delivery_rules, Shapes::ShapeRef.new(shape: DatasetContentDeliveryRules, location_name: "contentDeliveryRules"))
     UpdateDatasetRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     UpdateDatasetRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, location_name: "versioningConfiguration"))
+    UpdateDatasetRequest.add_member(:late_data_rules, Shapes::ShapeRef.new(shape: LateDataRules, location_name: "lateDataRules"))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
 
     UpdateDatastoreRequest.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location: "uri", location_name: "datastoreName"))

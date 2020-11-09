@@ -2305,6 +2305,32 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteBucketIntelligentTieringConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         id: "IntelligentTieringId", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketIntelligentTieringConfigurationRequest AWS API Documentation
+    #
+    class DeleteBucketIntelligentTieringConfigurationRequest < Struct.new(
+      :bucket,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteBucketInventoryConfigurationRequest
     #   data as a hash:
     #
@@ -2413,6 +2439,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketOwnershipControlsRequest AWS API Documentation
@@ -2595,25 +2624,28 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies whether Amazon S3 replicates the delete markers. If you
-    # specify a `Filter`, you must specify this element. However, in the
-    # latest version of replication configuration (when `Filter` is
-    # specified), Amazon S3 doesn't replicate delete markers. Therefore,
-    # the `DeleteMarkerReplication` element can contain only
-    # &lt;Status&gt;Disabled&lt;/Status&gt;. For an example configuration,
-    # see [Basic Rule Configuration][1].
+    # Specifies whether Amazon S3 replicates delete markers. If you specify
+    # a `Filter` in your replication configuration, you must also include a
+    # `DeleteMarkerReplication` element. If your `Filter` includes a `Tag`
+    # element, the `DeleteMarkerReplication` `Status` must be set to
+    # Disabled, because Amazon S3 does not support replicating delete
+    # markers for tag-based rules. For an example configuration, see [Basic
+    # Rule Configuration][1].
     #
-    # <note markdown="1"> If you don't specify the `Filter` element, Amazon S3 assumes that the
-    # replication configuration is the earlier version, V1. In the earlier
-    # version, Amazon S3 handled replication of delete markers differently.
-    # For more information, see [Backward Compatibility][2].
+    # For more information about delete marker replication, see [Basic Rule
+    # Configuration][2].
+    #
+    # <note markdown="1"> If you are using an earlier version of the replication configuration,
+    # Amazon S3 handles replication of delete markers differently. For more
+    # information, see [Backward Compatibility][3].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
     #
     # @note When making an API call, you may pass DeleteMarkerReplication
     #   data as a hash:
@@ -2625,8 +2657,7 @@ module Aws::S3
     # @!attribute [rw] status
     #   Indicates whether to replicate delete markers.
     #
-    #   <note markdown="1"> In the current implementation, Amazon S3 doesn't replicate the
-    #   delete markers. The status must be `Disabled`.
+    #   <note markdown="1"> Indicates whether to replicate delete markers.
     #
     #    </note>
     #   @return [String]
@@ -3039,7 +3070,7 @@ module Aws::S3
     #         },
     #         metrics: {
     #           status: "Enabled", # required, accepts Enabled, Disabled
-    #           event_threshold: { # required
+    #           event_threshold: {
     #             minutes: 1,
     #           },
     #         },
@@ -3102,8 +3133,7 @@ module Aws::S3
     #
     # @!attribute [rw] metrics
     #   A container specifying replication metrics-related settings enabling
-    #   metrics and Amazon S3 events for S3 Replication Time Control (S3
-    #   RTC). Must be specified together with a `ReplicationTime` block.
+    #   replication metrics and events.
     #   @return [Types::Metrics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination AWS API Documentation
@@ -4326,6 +4356,44 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] intelligent_tiering_configuration
+    #   Container for S3 Intelligent-Tiering configuration.
+    #   @return [Types::IntelligentTieringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketIntelligentTieringConfigurationOutput AWS API Documentation
+    #
+    class GetBucketIntelligentTieringConfigurationOutput < Struct.new(
+      :intelligent_tiering_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBucketIntelligentTieringConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         id: "IntelligentTieringId", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketIntelligentTieringConfigurationRequest AWS API Documentation
+    #
+    class GetBucketIntelligentTieringConfigurationRequest < Struct.new(
+      :bucket,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] inventory_configuration
     #   Specifies the inventory configuration.
     #   @return [Types::InventoryConfiguration]
@@ -4643,6 +4711,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketOwnershipControlsRequest AWS API Documentation
@@ -5847,7 +5918,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] tier
-    #   S3 Glacier retrieval tier at which the restore will be processed.
+    #   Retrieval tier at which the restore will be processed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GlacierJobParameters AWS API Documentation
@@ -6055,6 +6126,10 @@ module Aws::S3
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
     #   @return [String]
     #
+    # @!attribute [rw] archive_status
+    #   The archive state of the head object.
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified
     #   Last modified date of the object
     #   @return [Time]
@@ -6240,6 +6315,7 @@ module Aws::S3
       :accept_ranges,
       :expiration,
       :restore,
+      :archive_status,
       :last_modified,
       :content_length,
       :etag,
@@ -6516,6 +6592,177 @@ module Aws::S3
       :compression_type,
       :json,
       :parquet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for specifying S3 Intelligent-Tiering filters. The filters
+    # determine the subset of objects to which the rule applies.
+    #
+    # @note When making an API call, you may pass IntelligentTieringAndOperator
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tags: [
+    #           {
+    #             key: "ObjectKey", # required
+    #             value: "Value", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   An object key name prefix that identifies the subset of objects to
+    #   which the configuration applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   All of these tags must exist in the object's tag set in order for
+    #   the configuration to apply.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IntelligentTieringAndOperator AWS API Documentation
+    #
+    class IntelligentTieringAndOperator < Struct.new(
+      :prefix,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the S3 Intelligent-Tiering configuration for an Amazon S3
+    # bucket.
+    #
+    # For information about the S3 Intelligent-Tiering storage class, see
+    # [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    #
+    # @note When making an API call, you may pass IntelligentTieringConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         id: "IntelligentTieringId", # required
+    #         filter: {
+    #           prefix: "Prefix",
+    #           tag: {
+    #             key: "ObjectKey", # required
+    #             value: "Value", # required
+    #           },
+    #           and: {
+    #             prefix: "Prefix",
+    #             tags: [
+    #               {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         status: "Enabled", # required, accepts Enabled, Disabled
+    #         tierings: [ # required
+    #           {
+    #             days: 1, # required
+    #             access_tier: "ARCHIVE_ACCESS", # required, accepts ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Specifies a bucket filter. The configuration only includes objects
+    #   that meet the filter's criteria.
+    #   @return [Types::IntelligentTieringFilter]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tierings
+    #   Specifies the S3 Intelligent-Tiering storage class tier of the
+    #   configuration.
+    #   @return [Array<Types::Tiering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IntelligentTieringConfiguration AWS API Documentation
+    #
+    class IntelligentTieringConfiguration < Struct.new(
+      :id,
+      :filter,
+      :status,
+      :tierings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `Filter` is used to identify objects that the S3
+    # Intelligent-Tiering configuration applies to.
+    #
+    # @note When making an API call, you may pass IntelligentTieringFilter
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix",
+    #         tag: {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #         and: {
+    #           prefix: "Prefix",
+    #           tags: [
+    #             {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   An object key name prefix that identifies the subset of objects to
+    #   which the rule applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A container of a key value name pair.
+    #   @return [Types::Tag]
+    #
+    # @!attribute [rw] and
+    #   A conjunction (logical AND) of predicates, which is used in
+    #   evaluating a metrics filter. The operator must have at least two
+    #   predicates, and an object must match all of the predicates in order
+    #   for the filter to apply.
+    #   @return [Types::IntelligentTieringAndOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IntelligentTieringFilter AWS API Documentation
+    #
+    class IntelligentTieringFilter < Struct.new(
+      :prefix,
+      :tag,
+      :and)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object is archived and inaccessible until restored.
+    #
+    # @!attribute [rw] storage_class
+    #   @return [String]
+    #
+    # @!attribute [rw] access_tier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InvalidObjectState AWS API Documentation
+    #
+    class InvalidObjectState < Struct.new(
+      :storage_class,
+      :access_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7249,6 +7496,67 @@ module Aws::S3
       :bucket,
       :continuation_token,
       :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] is_truncated
+    #   Indicates whether the returned list of analytics configurations is
+    #   complete. A value of true indicates that the list is not complete
+    #   and the NextContinuationToken will be provided for a subsequent
+    #   request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] continuation_token
+    #   The ContinuationToken that represents a placeholder from where this
+    #   request should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_continuation_token
+    #   The marker used to continue this inventory configuration listing.
+    #   Use the `NextContinuationToken` from this response to continue the
+    #   listing in a subsequent request. The continuation token is an opaque
+    #   value that Amazon S3 understands.
+    #   @return [String]
+    #
+    # @!attribute [rw] intelligent_tiering_configuration_list
+    #   The list of S3 Intelligent-Tiering configurations for a bucket.
+    #   @return [Array<Types::IntelligentTieringConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketIntelligentTieringConfigurationsOutput AWS API Documentation
+    #
+    class ListBucketIntelligentTieringConfigurationsOutput < Struct.new(
+      :is_truncated,
+      :continuation_token,
+      :next_continuation_token,
+      :intelligent_tiering_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBucketIntelligentTieringConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         continuation_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] continuation_token
+    #   The ContinuationToken that represents a placeholder from where this
+    #   request should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketIntelligentTieringConfigurationsRequest AWS API Documentation
+    #
+    class ListBucketIntelligentTieringConfigurationsRequest < Struct.new(
+      :bucket,
+      :continuation_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8506,15 +8814,14 @@ module Aws::S3
     end
 
     # A container specifying replication metrics-related settings enabling
-    # metrics and Amazon S3 events for S3 Replication Time Control (S3 RTC).
-    # Must be specified together with a `ReplicationTime` block.
+    # replication metrics and events.
     #
     # @note When making an API call, you may pass Metrics
     #   data as a hash:
     #
     #       {
     #         status: "Enabled", # required, accepts Enabled, Disabled
-    #         event_threshold: { # required
+    #         event_threshold: {
     #           minutes: 1,
     #         },
     #       }
@@ -9560,8 +9867,8 @@ module Aws::S3
     # @!attribute [rw] restrict_public_buckets
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for this bucket. Setting this element to `TRUE` restricts access to
-    #   this bucket to only AWS services and authorized users within this
-    #   account if the bucket has a public policy.
+    #   this bucket to only AWS service principals and authorized users
+    #   within this account if the bucket has a public policy.
     #
     #   Enabling this setting doesn't affect previously stored bucket
     #   policies, except that public and cross-account access within any
@@ -9907,6 +10214,63 @@ module Aws::S3
       :content_md5,
       :server_side_encryption_configuration,
       :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutBucketIntelligentTieringConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         id: "IntelligentTieringId", # required
+    #         intelligent_tiering_configuration: { # required
+    #           id: "IntelligentTieringId", # required
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #           tierings: [ # required
+    #             {
+    #               days: 1, # required
+    #               access_tier: "ARCHIVE_ACCESS", # required, accepts ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] intelligent_tiering_configuration
+    #   Container for S3 Intelligent-Tiering configuration.
+    #   @return [Types::IntelligentTieringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketIntelligentTieringConfigurationRequest AWS API Documentation
+    #
+    class PutBucketIntelligentTieringConfigurationRequest < Struct.new(
+      :bucket,
+      :id,
+      :intelligent_tiering_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10407,6 +10771,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned
+    #   by a different account, the request will fail with an HTTP `403
+    #   (Access Denied)` error.
     #   @return [String]
     #
     # @!attribute [rw] ownership_controls
@@ -10527,7 +10894,7 @@ module Aws::S3
     #                 },
     #                 metrics: {
     #                   status: "Enabled", # required, accepts Enabled, Disabled
-    #                   event_threshold: { # required
+    #                   event_threshold: {
     #                     minutes: 1,
     #                   },
     #                 },
@@ -10563,6 +10930,7 @@ module Aws::S3
     #   @return [Types::ReplicationConfiguration]
     #
     # @!attribute [rw] token
+    #   A token to allow Object Lock to be enabled for an existing bucket.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -12133,7 +12501,7 @@ module Aws::S3
     #               },
     #               metrics: {
     #                 status: "Enabled", # required, accepts Enabled, Disabled
-    #                 event_threshold: { # required
+    #                 event_threshold: {
     #                   minutes: 1,
     #                 },
     #               },
@@ -12224,7 +12592,7 @@ module Aws::S3
     #           },
     #           metrics: {
     #             status: "Enabled", # required, accepts Enabled, Disabled
-    #             event_threshold: { # required
+    #             event_threshold: {
     #               minutes: 1,
     #             },
     #           },
@@ -12252,9 +12620,12 @@ module Aws::S3
     #   * Same object qualify tag-based filter criteria specified in
     #     multiple rules
     #
-    #   For more information, see [Replication](
-    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in
-    #   the *Amazon Simple Storage Service Developer Guide*.
+    #   For more information, see [Replication][1] in the *Amazon Simple
+    #   Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
@@ -12293,25 +12664,28 @@ module Aws::S3
     #   @return [Types::Destination]
     #
     # @!attribute [rw] delete_marker_replication
-    #   Specifies whether Amazon S3 replicates the delete markers. If you
-    #   specify a `Filter`, you must specify this element. However, in the
-    #   latest version of replication configuration (when `Filter` is
-    #   specified), Amazon S3 doesn't replicate delete markers. Therefore,
-    #   the `DeleteMarkerReplication` element can contain only
-    #   &lt;Status&gt;Disabled&lt;/Status&gt;. For an example configuration,
-    #   see [Basic Rule Configuration][1].
+    #   Specifies whether Amazon S3 replicates delete markers. If you
+    #   specify a `Filter` in your replication configuration, you must also
+    #   include a `DeleteMarkerReplication` element. If your `Filter`
+    #   includes a `Tag` element, the `DeleteMarkerReplication` `Status`
+    #   must be set to Disabled, because Amazon S3 does not support
+    #   replicating delete markers for tag-based rules. For an example
+    #   configuration, see [Basic Rule Configuration][1].
     #
-    #   <note markdown="1"> If you don't specify the `Filter` element, Amazon S3 assumes that
-    #   the replication configuration is the earlier version, V1. In the
-    #   earlier version, Amazon S3 handled replication of delete markers
-    #   differently. For more information, see [Backward Compatibility][2].
+    #   For more information about delete marker replication, see [Basic
+    #   Rule Configuration][2].
+    #
+    #   <note markdown="1"> If you are using an earlier version of the replication
+    #   configuration, Amazon S3 handles replication of delete markers
+    #   differently. For more information, see [Backward Compatibility][3].
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
     #   @return [Types::DeleteMarkerReplication]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule AWS API Documentation
@@ -12643,7 +13017,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket name or containing the object to restore.
+    #   The bucket name containing the object to restore.
     #
     #   When using this API with an access point, you must direct requests
     #   to the access point hostname. The access point hostname takes the
@@ -12802,6 +13176,9 @@ module Aws::S3
     # @!attribute [rw] days
     #   Lifetime of the active copy in days. Do not use with restores that
     #   specify `OutputLocation`.
+    #
+    #   The Days element is required for regular restores, and must not be
+    #   provided for select requests.
     #   @return [Integer]
     #
     # @!attribute [rw] glacier_job_parameters
@@ -12814,7 +13191,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   S3 Glacier retrieval tier at which the restore will be processed.
+    #   Retrieval tier at which the restore will be processed.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -13802,6 +14179,45 @@ module Aws::S3
     class TargetGrant < Struct.new(
       :grantee,
       :permission)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead.
+    #
+    # @note When making an API call, you may pass Tiering
+    #   data as a hash:
+    #
+    #       {
+    #         days: 1, # required
+    #         access_tier: "ARCHIVE_ACCESS", # required, accepts ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS
+    #       }
+    #
+    # @!attribute [rw] days
+    #   The number of days that you want your archived data to be
+    #   accessible. The minimum number of days specified in the restore
+    #   request must be at least 90 days. If a smaller value is specifed it
+    #   will be ignored.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] access_tier
+    #   S3 Intelligent-Tiering access tier. See [Storage class for
+    #   automatically optimizing frequently and infrequently accessed
+    #   objects][1] for a list of access tiers in the S3 Intelligent-Tiering
+    #   storage class.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tiering AWS API Documentation
+    #
+    class Tiering < Struct.new(
+      :days,
+      :access_tier)
       SENSITIVE = []
       include Aws::Structure
     end

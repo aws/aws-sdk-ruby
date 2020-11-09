@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-11-09)
+------------------
+
+* Feature - Adding support for package versioning in Amazon Elasticsearch Service
+
 1.45.0 (2020-11-05)
 ------------------
 

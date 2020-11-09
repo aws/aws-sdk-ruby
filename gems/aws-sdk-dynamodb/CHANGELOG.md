@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-11-09)
+------------------
+
+* Feature - This release adds supports for exporting Amazon DynamoDB table data to Amazon S3 to perform analytics at any scale.
+
 1.56.0 (2020-11-05)
 ------------------
 

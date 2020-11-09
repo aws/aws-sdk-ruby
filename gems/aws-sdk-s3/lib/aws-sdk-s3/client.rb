@@ -2169,6 +2169,68 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Deletes the S3 Intelligent-Tiering configuration from the specified
+    # bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `DeleteBucketIntelligentTieringConfiguration`
+    # include:
+    #
+    # * [GetBucketIntelligentTieringConfiguration][2]
+    #
+    # * [PutBucketIntelligentTieringConfiguration][3]
+    #
+    # * [ListBucketIntelligentTieringConfigurations][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [required, String] :id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_intelligent_tiering_configuration({
+    #     bucket: "BucketName", # required
+    #     id: "IntelligentTieringId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketIntelligentTieringConfiguration AWS API Documentation
+    #
+    # @overload delete_bucket_intelligent_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_intelligent_tiering_configuration(params = {}, options = {})
+      req = build_request(:delete_bucket_intelligent_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes an inventory configuration (identified by the inventory ID)
     # from the bucket.
     #
@@ -2382,6 +2444,9 @@ module Aws::S3
     #   The Amazon S3 bucket whose `OwnershipControls` you want to delete.
     #
     # @option params [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2751,15 +2816,6 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -2772,6 +2828,15 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3559,6 +3624,85 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Gets the S3 Intelligent-Tiering configuration from the specified
+    # bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `GetBucketIntelligentTieringConfiguration`
+    # include:
+    #
+    # * [DeleteBucketIntelligentTieringConfiguration][2]
+    #
+    # * [PutBucketIntelligentTieringConfiguration][3]
+    #
+    # * [ListBucketIntelligentTieringConfigurations][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [required, String] :id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #
+    # @return [Types::GetBucketIntelligentTieringConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketIntelligentTieringConfigurationOutput#intelligent_tiering_configuration #intelligent_tiering_configuration} => Types::IntelligentTieringConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_intelligent_tiering_configuration({
+    #     bucket: "BucketName", # required
+    #     id: "IntelligentTieringId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.intelligent_tiering_configuration.id #=> String
+    #   resp.intelligent_tiering_configuration.filter.prefix #=> String
+    #   resp.intelligent_tiering_configuration.filter.tag.key #=> String
+    #   resp.intelligent_tiering_configuration.filter.tag.value #=> String
+    #   resp.intelligent_tiering_configuration.filter.and.prefix #=> String
+    #   resp.intelligent_tiering_configuration.filter.and.tags #=> Array
+    #   resp.intelligent_tiering_configuration.filter.and.tags[0].key #=> String
+    #   resp.intelligent_tiering_configuration.filter.and.tags[0].value #=> String
+    #   resp.intelligent_tiering_configuration.status #=> String, one of "Enabled", "Disabled"
+    #   resp.intelligent_tiering_configuration.tierings #=> Array
+    #   resp.intelligent_tiering_configuration.tierings[0].days #=> Integer
+    #   resp.intelligent_tiering_configuration.tierings[0].access_tier #=> String, one of "ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketIntelligentTieringConfiguration AWS API Documentation
+    #
+    # @overload get_bucket_intelligent_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_intelligent_tiering_configuration(params = {}, options = {})
+      req = build_request(:get_bucket_intelligent_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns an inventory configuration (identified by the inventory
     # configuration ID) from the bucket.
     #
@@ -4299,6 +4443,9 @@ module Aws::S3
     #   retrieve.
     #
     # @option params [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     #
     # @return [Types::GetBucketOwnershipControlsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4909,11 +5056,13 @@ module Aws::S3
     # For more information about returning the ACL of an object, see
     # [GetObjectAcl][3].
     #
-    # If the object you are retrieving is stored in the GLACIER or
-    # DEEP\_ARCHIVE storage classes, before you can retrieve the object you
-    # must first restore a copy using [RestoreObject][4]. Otherwise, this
-    # operation returns an `InvalidObjectStateError` error. For information
-    # about restoring archived objects, see [Restoring Archived Objects][5].
+    # If the object you are retrieving is stored in the S3 Glacier, S3
+    # Glacier Deep Archive, S3 Intelligent-Tiering Archive, or S3
+    # Intelligent-Tiering Deep Archive storage classes, before you can
+    # retrieve the object you must first restore a copy using
+    # [RestoreObject][4]. Otherwise, this operation returns an
+    # `InvalidObjectStateError` error. For information about restoring
+    # archived objects, see [Restoring Archived Objects][5].
     #
     # Encryption request headers, like `x-amz-server-side-encryption`,
     # should not be sent for GET requests if your object uses server-side
@@ -5194,28 +5343,6 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
-    #     version_id: "null", 
-    #   }
-    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -5237,6 +5364,28 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
+    #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -5771,27 +5920,6 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -5814,6 +5942,27 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -6275,6 +6424,7 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#accept_ranges #accept_ranges} => String
     #   * {Types::HeadObjectOutput#expiration #expiration} => String
     #   * {Types::HeadObjectOutput#restore #restore} => String
+    #   * {Types::HeadObjectOutput#archive_status #archive_status} => String
     #   * {Types::HeadObjectOutput#last_modified #last_modified} => Time
     #   * {Types::HeadObjectOutput#content_length #content_length} => Integer
     #   * {Types::HeadObjectOutput#etag #etag} => String
@@ -6348,6 +6498,7 @@ module Aws::S3
     #   resp.accept_ranges #=> String
     #   resp.expiration #=> String
     #   resp.restore #=> String
+    #   resp.archive_status #=> String, one of "ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"
     #   resp.last_modified #=> Time
     #   resp.content_length #=> Integer
     #   resp.etag #=> String
@@ -6485,6 +6636,93 @@ module Aws::S3
     # @param [Hash] params ({})
     def list_bucket_analytics_configurations(params = {}, options = {})
       req = build_request(:list_bucket_analytics_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists the S3 Intelligent-Tiering configuration from the specified
+    # bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `ListBucketIntelligentTieringConfigurations`
+    # include:
+    #
+    # * [DeleteBucketIntelligentTieringConfiguration][2]
+    #
+    # * [PutBucketIntelligentTieringConfiguration][3]
+    #
+    # * [GetBucketIntelligentTieringConfiguration][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [String] :continuation_token
+    #   The ContinuationToken that represents a placeholder from where this
+    #   request should begin.
+    #
+    # @return [Types::ListBucketIntelligentTieringConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#is_truncated #is_truncated} => Boolean
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#continuation_token #continuation_token} => String
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#next_continuation_token #next_continuation_token} => String
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#intelligent_tiering_configuration_list #intelligent_tiering_configuration_list} => Array&lt;Types::IntelligentTieringConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bucket_intelligent_tiering_configurations({
+    #     bucket: "BucketName", # required
+    #     continuation_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.is_truncated #=> Boolean
+    #   resp.continuation_token #=> String
+    #   resp.next_continuation_token #=> String
+    #   resp.intelligent_tiering_configuration_list #=> Array
+    #   resp.intelligent_tiering_configuration_list[0].id #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.prefix #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.tag.key #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.tag.value #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.prefix #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.tags #=> Array
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.tags[0].key #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.tags[0].value #=> String
+    #   resp.intelligent_tiering_configuration_list[0].status #=> String, one of "Enabled", "Disabled"
+    #   resp.intelligent_tiering_configuration_list[0].tierings #=> Array
+    #   resp.intelligent_tiering_configuration_list[0].tierings[0].days #=> Integer
+    #   resp.intelligent_tiering_configuration_list[0].tierings[0].access_tier #=> String, one of "ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketIntelligentTieringConfigurations AWS API Documentation
+    #
+    # @overload list_bucket_intelligent_tiering_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_bucket_intelligent_tiering_configurations(params = {}, options = {})
+      req = build_request(:list_bucket_intelligent_tiering_configurations, params)
       req.send_request(options)
     end
 
@@ -8513,6 +8751,96 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Puts a S3 Intelligent-Tiering configuration to the specified bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `PutBucketIntelligentTieringConfiguration`
+    # include:
+    #
+    # * [DeleteBucketIntelligentTieringConfiguration][2]
+    #
+    # * [GetBucketIntelligentTieringConfiguration][3]
+    #
+    # * [ListBucketIntelligentTieringConfigurations][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [required, String] :id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #
+    # @option params [required, Types::IntelligentTieringConfiguration] :intelligent_tiering_configuration
+    #   Container for S3 Intelligent-Tiering configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_intelligent_tiering_configuration({
+    #     bucket: "BucketName", # required
+    #     id: "IntelligentTieringId", # required
+    #     intelligent_tiering_configuration: { # required
+    #       id: "IntelligentTieringId", # required
+    #       filter: {
+    #         prefix: "Prefix",
+    #         tag: {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #         and: {
+    #           prefix: "Prefix",
+    #           tags: [
+    #             {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       status: "Enabled", # required, accepts Enabled, Disabled
+    #       tierings: [ # required
+    #         {
+    #           days: 1, # required
+    #           access_tier: "ARCHIVE_ACCESS", # required, accepts ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketIntelligentTieringConfiguration AWS API Documentation
+    #
+    # @overload put_bucket_intelligent_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_intelligent_tiering_configuration(params = {}, options = {})
+      req = build_request(:put_bucket_intelligent_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # This implementation of the `PUT` operation adds an inventory
     # configuration (identified by the inventory ID) to the bucket. You can
     # have up to 1,000 inventory configurations per bucket.
@@ -9431,14 +9759,14 @@ module Aws::S3
     end
 
     # Creates or modifies `OwnershipControls` for an Amazon S3 bucket. To
-    # use this operation, you must have the `s3:GetBucketOwnershipControls`
+    # use this operation, you must have the `s3:PutBucketOwnershipControls`
     # permission. For more information about Amazon S3 permissions, see
     # [Specifying Permissions in a Policy][1].
     #
     # For information about Amazon S3 Object Ownership, see [Using Object
     # Ownership][2].
     #
-    # The following operations are related to `GetBucketOwnershipControls`\:
+    # The following operations are related to `PutBucketOwnershipControls`\:
     #
     # * GetBucketOwnershipControls
     #
@@ -9457,6 +9785,9 @@ module Aws::S3
     #   The MD5 hash of the `OwnershipControls` request body.
     #
     # @option params [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
     #
     # @option params [required, Types::OwnershipControls] :ownership_controls
     #   The `OwnershipControls` (BucketOwnerPreferred or ObjectWriter) that
@@ -9664,6 +9995,7 @@ module Aws::S3
     #   maximum size of a replication configuration is 2 MB.
     #
     # @option params [String] :token
+    #   A token to allow Object Lock to be enabled for an existing bucket.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -9749,7 +10081,7 @@ module Aws::S3
     #             },
     #             metrics: {
     #               status: "Enabled", # required, accepts Enabled, Disabled
-    #               event_threshold: { # required
+    #               event_threshold: {
     #                 minutes: 1,
     #               },
     #             },
@@ -10593,23 +10925,6 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
     # @example Example: To upload object and specify user-defined metadata
     #
     #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
@@ -10629,6 +10944,40 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
+    # @example Example: To create an object.
+    #
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -10651,22 +11000,22 @@ module Aws::S3
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To upload an object and specify canned ACL.
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     key: "exampleobject", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
     # @example Example: To upload an object (specify optional headers)
@@ -10689,38 +11038,21 @@ module Aws::S3
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
-    # @example Example: To upload an object and specify canned ACL.
+    # @example Example: To upload an object
     #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
     #
     #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
+    #     key: "HappyFace.jpg", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Streaming a file from disk
@@ -11734,64 +12066,65 @@ module Aws::S3
     #
     # **Restoring Archives**
     #
-    # Objects in the GLACIER and DEEP\_ARCHIVE storage classes are archived.
-    # To access an archived object, you must first initiate a restore
-    # request. This restores a temporary copy of the archived object. In a
-    # restore request, you specify the number of days that you want the
-    # restored copy to exist. After the specified period, Amazon S3 deletes
-    # the temporary copy but the object remains archived in the GLACIER or
-    # DEEP\_ARCHIVE storage class that object was restored from.
+    # Objects that you archive to the S3 Glacier, S3 Glacier Deep Archive,
+    # S3 Intelligent-Tiering Archive, or S3 Intelligent-Tiering Deep Archive
+    # storage classes are not accessible in real time. For objects in
+    # Archive Access tier or Deep Archive Access tier you must first
+    # initiate a restore request, and then wait until the object is moved
+    # into the Frequent Access tier. For objects in S3 Glacier or S3 Glacier
+    # Deep Archive you must first initiate a restore request, and then wait
+    # until a temporary copy of the object is available. To access an
+    # archived object, you must restore the object for the duration (number
+    # of days) that you specify.
     #
     # To restore a specific object version, you can provide a version ID. If
     # you don't provide a version ID, Amazon S3 restores the current
     # version.
-    #
-    # The time it takes restore jobs to finish depends on which storage
-    # class the object is being restored from and which data access tier you
-    # specify.
     #
     # When restoring an archived object (or using a select request), you can
     # specify one of the following data access tier options in the `Tier`
     # element of the request body:
     #
     # * <b> <code>Expedited</code> </b> - Expedited retrievals allow you to
-    #   quickly access your data stored in the GLACIER storage class when
-    #   occasional urgent requests for a subset of archives are required.
-    #   For all but the largest archived objects (250 MB+), data accessed
-    #   using Expedited retrievals are typically made available within 1–5
-    #   minutes. Provisioned capacity ensures that retrieval capacity for
-    #   Expedited retrievals is available when you need it. Expedited
-    #   retrievals and provisioned capacity are not available for the
-    #   DEEP\_ARCHIVE storage class.
+    #   quickly access your data stored in the S3 Glacier or S3
+    #   Intelligent-Tiering Archive storage class when occasional urgent
+    #   requests for a subset of archives are required. For all but the
+    #   largest archived objects (250 MB+), data accessed using Expedited
+    #   retrievals is typically made available within 1–5 minutes.
+    #   Provisioned capacity ensures that retrieval capacity for Expedited
+    #   retrievals is available when you need it. Expedited retrievals and
+    #   provisioned capacity are not available for objects stored in the S3
+    #   Glacier Deep Archive or S3 Intelligent-Tiering Deep Archive storage
+    #   class.
     #
-    # * <b> <code>Standard</code> </b> - S3 Standard retrievals allow you to
+    # * <b> <code>Standard</code> </b> - Standard retrievals allow you to
     #   access any of your archived objects within several hours. This is
-    #   the default option for the GLACIER and DEEP\_ARCHIVE retrieval
-    #   requests that do not specify the retrieval option. S3 Standard
-    #   retrievals typically complete within 3-5 hours from the GLACIER
-    #   storage class and typically complete within 12 hours from the
-    #   DEEP\_ARCHIVE storage class.
+    #   the default option for retrieval requests that do not specify the
+    #   retrieval option. Standard retrievals typically finish within 3–5
+    #   hours for objects stored in the S3 Glacier or S3 Intelligent-Tiering
+    #   Archive storage class. They typically finish within 12 hours for
+    #   objects stored in the S3 Glacier Deep Archive or S3
+    #   Intelligent-Tiering Deep Archive storage class. Standard retrievals
+    #   are free for objects stored in S3 Intelligent-Tiering.
     #
-    # * <b> <code>Bulk</code> </b> - Bulk retrievals are Amazon S3 Glacier’s
-    #   lowest-cost retrieval option, enabling you to retrieve large
-    #   amounts, even petabytes, of data inexpensively in a day. Bulk
-    #   retrievals typically complete within 5-12 hours from the GLACIER
-    #   storage class and typically complete within 48 hours from the
-    #   DEEP\_ARCHIVE storage class.
+    # * <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost
+    #   retrieval option in S3 Glacier, enabling you to retrieve large
+    #   amounts, even petabytes, of data inexpensively. Bulk retrievals
+    #   typically finish within 5–12 hours for objects stored in the S3
+    #   Glacier or S3 Intelligent-Tiering Archive storage class. They
+    #   typically finish within 48 hours for objects stored in the S3
+    #   Glacier Deep Archive or S3 Intelligent-Tiering Deep Archive storage
+    #   class. Bulk retrievals are free for objects stored in S3
+    #   Intelligent-Tiering.
     #
     # For more information about archive retrieval options and provisioned
     # capacity for `Expedited` data access, see [Restoring Archived
     # Objects][8] in the *Amazon Simple Storage Service Developer Guide*.
     #
     # You can use Amazon S3 restore speed upgrade to change the restore
-    # speed to a faster speed while it is in progress. You upgrade the speed
-    # of an in-progress restoration by issuing another restore request to
-    # the same object, setting a new `Tier` request element. When issuing a
-    # request to upgrade the restore tier, you must choose a tier that is
-    # faster than the tier that the in-progress restore is using. You must
-    # not change any other parameters, such as the `Days` request element.
-    # For more information, see [ Upgrading the Speed of an In-Progress
-    # Restore][9] in the *Amazon Simple Storage Service Developer Guide*.
+    # speed to a faster speed while it is in progress. For more information,
+    # see [ Upgrading the speed of an in-progress restore][9] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     # To get the status of object restoration, you can send a `HEAD`
     # request. Operations return the `x-amz-restore` header, which provides
@@ -11822,11 +12155,11 @@ module Aws::S3
     # A successful operation returns either the `200 OK` or `202 Accepted`
     # status code.
     #
-    # * If the object copy is not previously restored, then Amazon S3
-    #   returns `202 Accepted` in the response.
+    # * If the object is not previously restored, then Amazon S3 returns
+    #   `202 Accepted` in the response.
     #
-    # * If the object copy is previously restored, Amazon S3 returns `200
-    #   OK` in the response.
+    # * If the object is previously restored, Amazon S3 returns `200 OK` in
+    #   the response.
     #
     # **Special Errors**
     #
@@ -11841,11 +12174,10 @@ module Aws::S3
     #
     # * * *Code: GlacierExpeditedRetrievalNotAvailable*
     #
-    #   * *Cause: S3 Glacier expedited retrievals are currently not
-    #     available. Try again later. (Returned if there is insufficient
-    #     capacity to process the Expedited request. This error applies only
-    #     to Expedited retrievals and not to S3 Standard or Bulk
-    #     retrievals.)*
+    #   * *Cause: expedited retrievals are currently not available. Try
+    #     again later. (Returned if there is insufficient capacity to
+    #     process the Expedited request. This error applies only to
+    #     Expedited retrievals and not to S3 Standard or Bulk retrievals.)*
     #
     #   * *HTTP Status Code: 503*
     #
@@ -11877,7 +12209,7 @@ module Aws::S3
     # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
-    #   The bucket name or containing the object to restore.
+    #   The bucket name containing the object to restore.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
@@ -13123,7 +13455,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.83.2'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

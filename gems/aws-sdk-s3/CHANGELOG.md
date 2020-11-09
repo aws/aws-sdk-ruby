@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2020-11-09)
+------------------
+
+* Feature - S3 Intelligent-Tiering adds support for Archive and Deep Archive Access tiers; S3 Replication adds replication metrics and failure notifications, brings feature parity for delete marker replication
+
 1.83.2 (2020-11-06)
 ------------------
 

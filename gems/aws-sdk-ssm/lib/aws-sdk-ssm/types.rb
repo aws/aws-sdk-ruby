@@ -620,10 +620,6 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   The name of the filter.
-    #
-    #   <note markdown="1"> `InstanceId` has been deprecated.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1146,7 +1142,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup
     #         values: ["AutomationExecutionFilterValue"], # required
     #       }
     #
@@ -4384,7 +4380,7 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
+    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup
     #             values: ["AutomationExecutionFilterValue"], # required
     #           },
     #         ],
@@ -10611,13 +10607,6 @@ module Aws::SSM
     # @!attribute [rw] association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
-    #
-    #   <note markdown="1"> Filtering associations using the `InstanceID` attribute only returns
-    #   legacy associations created using the `InstanceID` attribute.
-    #   Associations targeting the instance that are part of the Target
-    #   Attributes `ResourceGroup` or `Tags` are not returned.
-    #
-    #    </note>
     #   @return [Array<Types::AssociationFilter>]
     #
     # @!attribute [rw] max_results
