@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.623 (2020-11-09)
+------------------
+
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
