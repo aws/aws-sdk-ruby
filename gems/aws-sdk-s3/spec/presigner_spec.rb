@@ -154,6 +154,20 @@ module Aws
           )
           expect(url).to match(/x-amz-acl=public-read/)
         end
+
+        context 'outpost ARNs' do
+          it 'uses s3-outposts as the service' do
+            arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+            url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+            expect(url).to include('X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2Fus-west-2%2Fs3-outposts%2Faws4_request')
+          end
+
+          it 'uses the resolved-region' do
+            arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+            url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+            expect(url).to include('X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2Fus-east-1%2Fs3-outposts%2Faws4_request')
+          end
+        end
       end
 
       describe '#presigned_request' do

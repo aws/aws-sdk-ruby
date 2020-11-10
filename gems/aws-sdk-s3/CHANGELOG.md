@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix presigned urls for Outpost ARNs.
+
 1.83.1 (2020-10-19)
 ------------------
 
