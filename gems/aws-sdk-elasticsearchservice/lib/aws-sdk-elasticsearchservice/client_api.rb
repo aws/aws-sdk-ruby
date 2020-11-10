@@ -28,6 +28,7 @@ module Aws::ElasticsearchService
     AdvancedSecurityOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsStatus')
     AssociatePackageRequest = Shapes::StructureShape.new(name: 'AssociatePackageRequest')
     AssociatePackageResponse = Shapes::StructureShape.new(name: 'AssociatePackageResponse')
+    BackendRole = Shapes::StringShape.new(name: 'BackendRole')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelElasticsearchServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateRequest')
@@ -35,6 +36,7 @@ module Aws::ElasticsearchService
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     CognitoOptions = Shapes::StructureShape.new(name: 'CognitoOptions')
     CognitoOptionsStatus = Shapes::StructureShape.new(name: 'CognitoOptionsStatus')
+    CommitMessage = Shapes::StringShape.new(name: 'CommitMessage')
     CompatibleElasticsearchVersionsList = Shapes::ListShape.new(name: 'CompatibleElasticsearchVersionsList')
     CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -91,6 +93,7 @@ module Aws::ElasticsearchService
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
     DomainInformation = Shapes::StructureShape.new(name: 'DomainInformation')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainNameFqdn = Shapes::StringShape.new(name: 'DomainNameFqdn')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
     DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
@@ -120,6 +123,8 @@ module Aws::ElasticsearchService
     GUID = Shapes::StringShape.new(name: 'GUID')
     GetCompatibleElasticsearchVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsRequest')
     GetCompatibleElasticsearchVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsResponse')
+    GetPackageVersionHistoryRequest = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryRequest')
+    GetPackageVersionHistoryResponse = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryResponse')
     GetUpgradeHistoryRequest = Shapes::StructureShape.new(name: 'GetUpgradeHistoryRequest')
     GetUpgradeHistoryResponse = Shapes::StructureShape.new(name: 'GetUpgradeHistoryResponse')
     GetUpgradeStatusRequest = Shapes::StructureShape.new(name: 'GetUpgradeStatusRequest')
@@ -186,6 +191,9 @@ module Aws::ElasticsearchService
     PackageSource = Shapes::StructureShape.new(name: 'PackageSource')
     PackageStatus = Shapes::StringShape.new(name: 'PackageStatus')
     PackageType = Shapes::StringShape.new(name: 'PackageType')
+    PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
+    PackageVersionHistory = Shapes::StructureShape.new(name: 'PackageVersionHistory')
+    PackageVersionHistoryList = Shapes::ListShape.new(name: 'PackageVersionHistoryList')
     Password = Shapes::StringShape.new(name: 'Password')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PurchaseReservedElasticsearchInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingRequest')
@@ -208,6 +216,11 @@ module Aws::ElasticsearchService
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    SAMLEntityId = Shapes::StringShape.new(name: 'SAMLEntityId')
+    SAMLIdp = Shapes::StructureShape.new(name: 'SAMLIdp')
+    SAMLMetadata = Shapes::StringShape.new(name: 'SAMLMetadata')
+    SAMLOptionsInput = Shapes::StructureShape.new(name: 'SAMLOptionsInput')
+    SAMLOptionsOutput = Shapes::StructureShape.new(name: 'SAMLOptionsOutput')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
@@ -231,6 +244,8 @@ module Aws::ElasticsearchService
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
     UpdateElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigRequest')
     UpdateElasticsearchDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigResponse')
+    UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
+    UpdatePackageResponse = Shapes::StructureShape.new(name: 'UpdatePackageResponse')
     UpdateTimestamp = Shapes::TimestampShape.new(name: 'UpdateTimestamp')
     UpgradeElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'UpgradeElasticsearchDomainRequest')
     UpgradeElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'UpgradeElasticsearchDomainResponse')
@@ -282,11 +297,13 @@ module Aws::ElasticsearchService
 
     AdvancedSecurityOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AdvancedSecurityOptions.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
+    AdvancedSecurityOptions.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsOutput, location_name: "SAMLOptions"))
     AdvancedSecurityOptions.struct_class = Types::AdvancedSecurityOptions
 
     AdvancedSecurityOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AdvancedSecurityOptionsInput.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
     AdvancedSecurityOptionsInput.add_member(:master_user_options, Shapes::ShapeRef.new(shape: MasterUserOptions, location_name: "MasterUserOptions"))
+    AdvancedSecurityOptionsInput.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsInput, location_name: "SAMLOptions"))
     AdvancedSecurityOptionsInput.struct_class = Types::AdvancedSecurityOptionsInput
 
     AdvancedSecurityOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, required: true, location_name: "Options"))
@@ -481,6 +498,9 @@ module Aws::ElasticsearchService
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
     DomainEndpointOptions.add_member(:tls_security_policy, Shapes::ShapeRef.new(shape: TLSSecurityPolicy, location_name: "TLSSecurityPolicy"))
+    DomainEndpointOptions.add_member(:custom_endpoint_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CustomEndpointEnabled"))
+    DomainEndpointOptions.add_member(:custom_endpoint, Shapes::ShapeRef.new(shape: DomainNameFqdn, location_name: "CustomEndpoint"))
+    DomainEndpointOptions.add_member(:custom_endpoint_certificate_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CustomEndpointCertificateArn"))
     DomainEndpointOptions.struct_class = Types::DomainEndpointOptions
 
     DomainEndpointOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, required: true, location_name: "Options"))
@@ -505,6 +525,7 @@ module Aws::ElasticsearchService
     DomainPackageDetails.add_member(:last_updated, Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdated"))
     DomainPackageDetails.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DomainPackageDetails.add_member(:domain_package_status, Shapes::ShapeRef.new(shape: DomainPackageStatus, location_name: "DomainPackageStatus"))
+    DomainPackageDetails.add_member(:package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "PackageVersion"))
     DomainPackageDetails.add_member(:reference_path, Shapes::ShapeRef.new(shape: ReferencePath, location_name: "ReferencePath"))
     DomainPackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
     DomainPackageDetails.struct_class = Types::DomainPackageDetails
@@ -613,6 +634,16 @@ module Aws::ElasticsearchService
 
     GetCompatibleElasticsearchVersionsResponse.add_member(:compatible_elasticsearch_versions, Shapes::ShapeRef.new(shape: CompatibleElasticsearchVersionsList, location_name: "CompatibleElasticsearchVersions"))
     GetCompatibleElasticsearchVersionsResponse.struct_class = Types::GetCompatibleElasticsearchVersionsResponse
+
+    GetPackageVersionHistoryRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
+    GetPackageVersionHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetPackageVersionHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetPackageVersionHistoryRequest.struct_class = Types::GetPackageVersionHistoryRequest
+
+    GetPackageVersionHistoryResponse.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, location_name: "PackageID"))
+    GetPackageVersionHistoryResponse.add_member(:package_version_history_list, Shapes::ShapeRef.new(shape: PackageVersionHistoryList, location_name: "PackageVersionHistoryList"))
+    GetPackageVersionHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetPackageVersionHistoryResponse.struct_class = Types::GetPackageVersionHistoryResponse
 
     GetUpgradeHistoryRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     GetUpgradeHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -764,6 +795,8 @@ module Aws::ElasticsearchService
     PackageDetails.add_member(:package_description, Shapes::ShapeRef.new(shape: PackageDescription, location_name: "PackageDescription"))
     PackageDetails.add_member(:package_status, Shapes::ShapeRef.new(shape: PackageStatus, location_name: "PackageStatus"))
     PackageDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    PackageDetails.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdatedAt"))
+    PackageDetails.add_member(:available_package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "AvailablePackageVersion"))
     PackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
     PackageDetails.struct_class = Types::PackageDetails
 
@@ -772,6 +805,13 @@ module Aws::ElasticsearchService
     PackageSource.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
     PackageSource.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     PackageSource.struct_class = Types::PackageSource
+
+    PackageVersionHistory.add_member(:package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "PackageVersion"))
+    PackageVersionHistory.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "CommitMessage"))
+    PackageVersionHistory.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    PackageVersionHistory.struct_class = Types::PackageVersionHistory
+
+    PackageVersionHistoryList.member = Shapes::ShapeRef.new(shape: PackageVersionHistory)
 
     PurchaseReservedElasticsearchInstanceOfferingRequest.add_member(:reserved_elasticsearch_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "ReservedElasticsearchInstanceOfferingId"))
     PurchaseReservedElasticsearchInstanceOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, required: true, location_name: "ReservationName"))
@@ -830,6 +870,26 @@ module Aws::ElasticsearchService
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SAMLIdp.add_member(:metadata_content, Shapes::ShapeRef.new(shape: SAMLMetadata, required: true, location_name: "MetadataContent"))
+    SAMLIdp.add_member(:entity_id, Shapes::ShapeRef.new(shape: SAMLEntityId, required: true, location_name: "EntityId"))
+    SAMLIdp.struct_class = Types::SAMLIdp
+
+    SAMLOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    SAMLOptionsInput.add_member(:idp, Shapes::ShapeRef.new(shape: SAMLIdp, location_name: "Idp"))
+    SAMLOptionsInput.add_member(:master_user_name, Shapes::ShapeRef.new(shape: Username, location_name: "MasterUserName"))
+    SAMLOptionsInput.add_member(:master_backend_role, Shapes::ShapeRef.new(shape: BackendRole, location_name: "MasterBackendRole"))
+    SAMLOptionsInput.add_member(:subject_key, Shapes::ShapeRef.new(shape: String, location_name: "SubjectKey"))
+    SAMLOptionsInput.add_member(:roles_key, Shapes::ShapeRef.new(shape: String, location_name: "RolesKey"))
+    SAMLOptionsInput.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "SessionTimeoutMinutes"))
+    SAMLOptionsInput.struct_class = Types::SAMLOptionsInput
+
+    SAMLOptionsOutput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    SAMLOptionsOutput.add_member(:idp, Shapes::ShapeRef.new(shape: SAMLIdp, location_name: "Idp"))
+    SAMLOptionsOutput.add_member(:subject_key, Shapes::ShapeRef.new(shape: String, location_name: "SubjectKey"))
+    SAMLOptionsOutput.add_member(:roles_key, Shapes::ShapeRef.new(shape: String, location_name: "RolesKey"))
+    SAMLOptionsOutput.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "SessionTimeoutMinutes"))
+    SAMLOptionsOutput.struct_class = Types::SAMLOptionsOutput
 
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))
@@ -890,6 +950,15 @@ module Aws::ElasticsearchService
 
     UpdateElasticsearchDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: ElasticsearchDomainConfig, required: true, location_name: "DomainConfig"))
     UpdateElasticsearchDomainConfigResponse.struct_class = Types::UpdateElasticsearchDomainConfigResponse
+
+    UpdatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location_name: "PackageID"))
+    UpdatePackageRequest.add_member(:package_source, Shapes::ShapeRef.new(shape: PackageSource, required: true, location_name: "PackageSource"))
+    UpdatePackageRequest.add_member(:package_description, Shapes::ShapeRef.new(shape: PackageDescription, location_name: "PackageDescription"))
+    UpdatePackageRequest.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "CommitMessage"))
+    UpdatePackageRequest.struct_class = Types::UpdatePackageRequest
+
+    UpdatePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
+    UpdatePackageResponse.struct_class = Types::UpdatePackageResponse
 
     UpgradeElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     UpgradeElasticsearchDomainRequest.add_member(:target_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location_name: "TargetVersion"))
@@ -1265,6 +1334,25 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:get_package_version_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPackageVersionHistory"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/packages/{PackageID}/history"
+        o.input = Shapes::ShapeRef.new(shape: GetPackageVersionHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPackageVersionHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_upgrade_history, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUpgradeHistory"
         o.http_method = "GET"
@@ -1451,6 +1539,20 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePackage"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/packages/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePackageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePackageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

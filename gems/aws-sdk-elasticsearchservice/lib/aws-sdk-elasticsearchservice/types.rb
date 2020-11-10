@@ -173,9 +173,14 @@ module Aws::ElasticsearchService
     #   True if the internal user database is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] saml_options
+    #   Describes the SAML application configured for a domain.
+    #   @return [Types::SAMLOptionsOutput]
+    #
     class AdvancedSecurityOptions < Struct.new(
       :enabled,
-      :internal_user_database_enabled)
+      :internal_user_database_enabled,
+      :saml_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -196,6 +201,18 @@ module Aws::ElasticsearchService
     #           master_user_name: "Username",
     #           master_user_password: "Password",
     #         },
+    #         saml_options: {
+    #           enabled: false,
+    #           idp: {
+    #             metadata_content: "SAMLMetadata", # required
+    #             entity_id: "SAMLEntityId", # required
+    #           },
+    #           master_user_name: "Username",
+    #           master_backend_role: "BackendRole",
+    #           subject_key: "String",
+    #           roles_key: "String",
+    #           session_timeout_minutes: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] enabled
@@ -211,10 +228,15 @@ module Aws::ElasticsearchService
     #   both.
     #   @return [Types::MasterUserOptions]
     #
+    # @!attribute [rw] saml_options
+    #   Specifies the SAML application configuration for the domain.
+    #   @return [Types::SAMLOptionsInput]
+    #
     class AdvancedSecurityOptionsInput < Struct.new(
       :enabled,
       :internal_user_database_enabled,
-      :master_user_options)
+      :master_user_options,
+      :saml_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -470,6 +492,9 @@ module Aws::ElasticsearchService
     #         domain_endpoint_options: {
     #           enforce_https: false,
     #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #           custom_endpoint_enabled: false,
+    #           custom_endpoint: "DomainNameFqdn",
+    #           custom_endpoint_certificate_arn: "ARN",
     #         },
     #         advanced_security_options: {
     #           enabled: false,
@@ -478,6 +503,18 @@ module Aws::ElasticsearchService
     #             master_user_arn: "ARN",
     #             master_user_name: "Username",
     #             master_user_password: "Password",
+    #           },
+    #           saml_options: {
+    #             enabled: false,
+    #             idp: {
+    #               metadata_content: "SAMLMetadata", # required
+    #               entity_id: "SAMLEntityId", # required
+    #             },
+    #             master_user_name: "Username",
+    #             master_backend_role: "BackendRole",
+    #             subject_key: "String",
+    #             roles_key: "String",
+    #             session_timeout_minutes: 1,
     #           },
     #         },
     #       }
@@ -1403,6 +1440,9 @@ module Aws::ElasticsearchService
     #       {
     #         enforce_https: false,
     #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         custom_endpoint_enabled: false,
+    #         custom_endpoint: "DomainNameFqdn",
+    #         custom_endpoint_certificate_arn: "ARN",
     #       }
     #
     # @!attribute [rw] enforce_https
@@ -1420,9 +1460,25 @@ module Aws::ElasticsearchService
     #     supports only TLSv1.2
     #   @return [String]
     #
+    # @!attribute [rw] custom_endpoint_enabled
+    #   Specify if custom endpoint should be enabled for the Elasticsearch
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_endpoint
+    #   Specify the fully qualified domain for your custom endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_certificate_arn
+    #   Specify ACM certificate ARN for your custom endpoint.
+    #   @return [String]
+    #
     class DomainEndpointOptions < Struct.new(
       :enforce_https,
-      :tls_security_policy)
+      :tls_security_policy,
+      :custom_endpoint_enabled,
+      :custom_endpoint,
+      :custom_endpoint_certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1513,6 +1569,9 @@ module Aws::ElasticsearchService
     #   ASSOCIATING/ASSOCIATION\_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION\_FAILED.
     #   @return [String]
     #
+    # @!attribute [rw] package_version
+    #   @return [String]
+    #
     # @!attribute [rw] reference_path
     #   The relative path on Amazon ES nodes, which can be used as
     #   synonym\_path when the package is synonym file.
@@ -1530,6 +1589,7 @@ module Aws::ElasticsearchService
       :last_updated,
       :domain_name,
       :domain_package_status,
+      :package_version,
       :reference_path,
       :error_details)
       SENSITIVE = []
@@ -2094,6 +2154,61 @@ module Aws::ElasticsearchService
     #
     class GetCompatibleElasticsearchVersionsResponse < Struct.new(
       :compatible_elasticsearch_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` GetPackageVersionHistory `
+    # operation.
+    #
+    # @note When making an API call, you may pass GetPackageVersionHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Returns an audit history of versions of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of versions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class GetPackageVersionHistoryRequest < Struct.new(
+      :package_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` GetPackageVersionHistory `
+    # operation.
+    #
+    # @!attribute [rw] package_id
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version_history_list
+    #   List of `PackageVersionHistory` objects.
+    #   @return [Array<Types::PackageVersionHistory>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class GetPackageVersionHistoryResponse < Struct.new(
+      :package_id,
+      :package_version_history_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2869,6 +2984,12 @@ module Aws::ElasticsearchService
     #   Timestamp which tells creation date of the package.
     #   @return [Time]
     #
+    # @!attribute [rw] last_updated_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] available_package_version
+    #   @return [String]
+    #
     # @!attribute [rw] error_details
     #   Additional information if the package is in an error state. Null
     #   otherwise.
@@ -2881,6 +3002,8 @@ module Aws::ElasticsearchService
       :package_description,
       :package_status,
       :created_at,
+      :last_updated_at,
+      :available_package_version,
       :error_details)
       SENSITIVE = []
       include Aws::Structure
@@ -2908,6 +3031,28 @@ module Aws::ElasticsearchService
     class PackageSource < Struct.new(
       :s3_bucket_name,
       :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a package version.
+    #
+    # @!attribute [rw] package_version
+    #   Version of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   A message associated with the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp which tells creation time of the package version.
+    #   @return [Time]
+    #
+    class PackageVersionHistory < Struct.new(
+      :package_version,
+      :commit_message,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3184,6 +3329,125 @@ module Aws::ElasticsearchService
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
+    # Specifies the SAML Identity Provider's information.
+    #
+    # @note When making an API call, you may pass SAMLIdp
+    #   data as a hash:
+    #
+    #       {
+    #         metadata_content: "SAMLMetadata", # required
+    #         entity_id: "SAMLEntityId", # required
+    #       }
+    #
+    # @!attribute [rw] metadata_content
+    #   The Metadata of the SAML application in xml format.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The unique Entity ID of the application in SAML Identity Provider.
+    #   @return [String]
+    #
+    class SAMLIdp < Struct.new(
+      :metadata_content,
+      :entity_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the SAML application configuration for the domain.
+    #
+    # @note When making an API call, you may pass SAMLOptionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         idp: {
+    #           metadata_content: "SAMLMetadata", # required
+    #           entity_id: "SAMLEntityId", # required
+    #         },
+    #         master_user_name: "Username",
+    #         master_backend_role: "BackendRole",
+    #         subject_key: "String",
+    #         roles_key: "String",
+    #         session_timeout_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   True if SAML is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idp
+    #   Specifies the SAML Identity Provider's information.
+    #   @return [Types::SAMLIdp]
+    #
+    # @!attribute [rw] master_user_name
+    #   The SAML master username, which is stored in the Amazon
+    #   Elasticsearch Service domain's internal database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_backend_role
+    #   The backend role to which the SAML master user is mapped to.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_key
+    #   The key to use for matching the SAML Subject attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   The key to use for matching the SAML Roles attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_timeout_minutes
+    #   The duration, in minutes, after which a user session becomes
+    #   inactive. Acceptable values are between 1 and 1440, and the default
+    #   value is 60.
+    #   @return [Integer]
+    #
+    class SAMLOptionsInput < Struct.new(
+      :enabled,
+      :idp,
+      :master_user_name,
+      :master_backend_role,
+      :subject_key,
+      :roles_key,
+      :session_timeout_minutes)
+      SENSITIVE = [:master_user_name]
+      include Aws::Structure
+    end
+
+    # Describes the SAML application configured for the domain.
+    #
+    # @!attribute [rw] enabled
+    #   True if SAML is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idp
+    #   Describes the SAML Identity Provider's information.
+    #   @return [Types::SAMLIdp]
+    #
+    # @!attribute [rw] subject_key
+    #   The key used for matching the SAML Subject attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   The key used for matching the SAML Roles attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_timeout_minutes
+    #   The duration, in minutes, after which a user session becomes
+    #   inactive.
+    #   @return [Integer]
+    #
+    class SAMLOptionsOutput < Struct.new(
+      :enabled,
+      :idp,
+      :subject_key,
+      :roles_key,
+      :session_timeout_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The current options of an Elasticsearch domain service software
     # options.
     #
@@ -3456,6 +3720,9 @@ module Aws::ElasticsearchService
     #         domain_endpoint_options: {
     #           enforce_https: false,
     #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #           custom_endpoint_enabled: false,
+    #           custom_endpoint: "DomainNameFqdn",
+    #           custom_endpoint_certificate_arn: "ARN",
     #         },
     #         advanced_security_options: {
     #           enabled: false,
@@ -3464,6 +3731,18 @@ module Aws::ElasticsearchService
     #             master_user_arn: "ARN",
     #             master_user_name: "Username",
     #             master_user_password: "Password",
+    #           },
+    #           saml_options: {
+    #             enabled: false,
+    #             idp: {
+    #               metadata_content: "SAMLMetadata", # required
+    #               entity_id: "SAMLEntityId", # required
+    #             },
+    #             master_user_name: "Username",
+    #             master_backend_role: "BackendRole",
+    #             subject_key: "String",
+    #             roles_key: "String",
+    #             session_timeout_minutes: 1,
     #           },
     #         },
     #       }
@@ -3560,6 +3839,60 @@ module Aws::ElasticsearchService
     #
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
       :domain_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` UpdatePackage ` operation.
+    #
+    # @note When making an API call, you may pass UpdatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         package_source: { # required
+    #           s3_bucket_name: "S3BucketName",
+    #           s3_key: "S3Key",
+    #         },
+    #         package_description: "PackageDescription",
+    #         commit_message: "CommitMessage",
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Unique identifier for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_source
+    #   The S3 location for importing the package specified as
+    #   `S3BucketName` and `S3Key`
+    #   @return [Types::PackageSource]
+    #
+    # @!attribute [rw] package_description
+    #   New description of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   An info message for the new version which will be shown as part of
+    #   `GetPackageVersionHistoryResponse`.
+    #   @return [String]
+    #
+    class UpdatePackageRequest < Struct.new(
+      :package_id,
+      :package_source,
+      :package_description,
+      :commit_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` UpdatePackage ` operation.
+    #
+    # @!attribute [rw] package_details
+    #   Information about the package `PackageDetails`.
+    #   @return [Types::PackageDetails]
+    #
+    class UpdatePackageResponse < Struct.new(
+      :package_details)
       SENSITIVE = []
       include Aws::Structure
     end

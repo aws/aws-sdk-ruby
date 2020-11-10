@@ -1462,6 +1462,7 @@ module Aws::Macie2
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.pages[0].page_number #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records #=> Array
+    #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records[0].json_path #=> String
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].occurrences.records[0].record_index #=> Integer
     #   resp.findings[0].classification_details.result.custom_data_identifiers.total_count #=> Integer
     #   resp.findings[0].classification_details.result.mime_type #=> String
@@ -1491,6 +1492,7 @@ module Aws::Macie2
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.pages[0].page_number #=> Integer
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records #=> Array
+    #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records[0].json_path #=> String
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].occurrences.records[0].record_index #=> Integer
     #   resp.findings[0].classification_details.result.sensitive_data[0].detections[0].type #=> String
     #   resp.findings[0].classification_details.result.sensitive_data[0].total_count #=> Integer
@@ -2535,7 +2537,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

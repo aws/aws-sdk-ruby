@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-11-05)
+------------------
+
+* Feature - Added support for deleting resources like Variables, ExternalModels, Outcomes, Models, ModelVersions, Labels, EventTypes and EntityTypes. Updated DeleteEvent operation to catch missing exceptions.
+
 1.13.0 (2020-09-30)
 ------------------
 

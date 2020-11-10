@@ -1750,8 +1750,8 @@ module Aws::Macie2
     #
     # @!attribute [rw] user_paused_details
     #   Provides information about when a classification job was paused and
-    #   when it will expire and be cancelled if it isn’t resumed. This
-    #   object is present only if a job’s current status (jobStatus) is
+    #   when it will expire and be cancelled if it isn't resumed. This
+    #   object is present only if a job's current status (jobStatus) is
     #   USER\_PAUSED.
     #   @return [Types::UserPausedDetails]
     #
@@ -3203,8 +3203,8 @@ module Aws::Macie2
     #
     # @!attribute [rw] user_paused_details
     #   Provides information about when a classification job was paused and
-    #   when it will expire and be cancelled if it isn’t resumed. This
-    #   object is present only if a job’s current status (jobStatus) is
+    #   when it will expire and be cancelled if it isn't resumed. This
+    #   object is present only if a job's current status (jobStatus) is
     #   USER\_PAUSED.
     #   @return [Types::UserPausedDetails]
     #
@@ -3869,14 +3869,14 @@ module Aws::Macie2
     #
     # @!attribute [rw] line_ranges
     #   Provides details about the location of occurrences of sensitive data
-    #   in an Adobe Portable Document Format file, Apache Avro object
-    #   container, Microsoft Word document, or non-binary text file.
+    #   in an Adobe Portable Document Format file, Microsoft Word document,
+    #   or non-binary text file.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] offset_ranges
     #   Provides details about the location of occurrences of sensitive data
-    #   in an Adobe Portable Document Format file, Apache Avro object
-    #   container, Microsoft Word document, or non-binary text file.
+    #   in an Adobe Portable Document Format file, Microsoft Word document,
+    #   or non-binary text file.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] pages
@@ -3906,14 +3906,14 @@ module Aws::Macie2
     #
     # @!attribute [rw] line_range
     #   Provides details about the location of an occurrence of sensitive
-    #   data in an Adobe Portable Document Format file, Apache Avro object
-    #   container, Microsoft Word document, or non-binary text file.
+    #   data in an Adobe Portable Document Format file, Microsoft Word
+    #   document, or non-binary text file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] offset_range
     #   Provides details about the location of an occurrence of sensitive
-    #   data in an Adobe Portable Document Format file, Apache Avro object
-    #   container, Microsoft Word document, or non-binary text file.
+    #   data in an Adobe Portable Document Format file, Microsoft Word
+    #   document, or non-binary text file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] page_number
@@ -4001,8 +4001,8 @@ module Aws::Macie2
     end
 
     # Provides details about the location of an occurrence of sensitive data
-    # in an Adobe Portable Document Format file, Apache Avro object
-    # container, Microsoft Word document, or non-binary text file.
+    # in an Adobe Portable Document Format file, Microsoft Word document, or
+    # non-binary text file.
     #
     # @!attribute [rw] end
     #   @return [Integer]
@@ -4024,7 +4024,10 @@ module Aws::Macie2
     end
 
     # Specifies the location of an occurrence of sensitive data in an Apache
-    # Parquet file.
+    # Avro object container or Apache Parquet file.
+    #
+    # @!attribute [rw] json_path
+    #   @return [String]
     #
     # @!attribute [rw] record_index
     #   @return [Integer]
@@ -4032,6 +4035,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Record AWS API Documentation
     #
     class Record < Struct.new(
+      :json_path,
       :record_index)
       SENSITIVE = []
       include Aws::Structure
@@ -5332,8 +5336,9 @@ module Aws::Macie2
     end
 
     # Provides information about when a classification job was paused and
-    # when it will expire and be cancelled if it isn’t resumed. This object
-    # is present only if a job’s current status (jobStatus) is USER\_PAUSED.
+    # when it will expire and be cancelled if it isn't resumed. This object
+    # is present only if a job's current status (jobStatus) is
+    # USER\_PAUSED.
     #
     # @!attribute [rw] job_expires_at
     #   @return [Time]

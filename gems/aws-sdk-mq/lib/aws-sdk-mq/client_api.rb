@@ -177,6 +177,7 @@ module Aws::MQ
     BrokerSummary.add_member(:broker_state, Shapes::ShapeRef.new(shape: BrokerState, location_name: "brokerState"))
     BrokerSummary.add_member(:created, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "created"))
     BrokerSummary.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "deploymentMode"))
+    BrokerSummary.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     BrokerSummary.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
     BrokerSummary.struct_class = Types::BrokerSummary
 

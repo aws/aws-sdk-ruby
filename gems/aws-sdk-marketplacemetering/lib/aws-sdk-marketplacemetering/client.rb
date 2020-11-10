@@ -349,6 +349,12 @@ module Aws::MarketplaceMetering
     #
     # BatchMeterUsage can process up to 25 UsageRecords at a time.
     #
+    # A UsageRecord can optionally include multiple usage allocations, to
+    # provide customers with usagedata split into buckets by tags that you
+    # define (or allow the customer to define).
+    #
+    # BatchMeterUsage requests must be less than 1MB in size.
+    #
     # @option params [required, Array<Types::UsageRecord>] :usage_records
     #   The set of UsageRecords to submit. BatchMeterUsage accepts up to 25
     #   UsageRecords at a time.
@@ -372,6 +378,17 @@ module Aws::MarketplaceMetering
     #         customer_identifier: "CustomerIdentifier", # required
     #         dimension: "UsageDimension", # required
     #         quantity: 1,
+    #         usage_allocations: [
+    #           {
+    #             allocated_usage_quantity: 1, # required
+    #             tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       },
     #     ],
     #     product_code: "ProductCode", # required
@@ -384,6 +401,11 @@ module Aws::MarketplaceMetering
     #   resp.results[0].usage_record.customer_identifier #=> String
     #   resp.results[0].usage_record.dimension #=> String
     #   resp.results[0].usage_record.quantity #=> Integer
+    #   resp.results[0].usage_record.usage_allocations #=> Array
+    #   resp.results[0].usage_record.usage_allocations[0].allocated_usage_quantity #=> Integer
+    #   resp.results[0].usage_record.usage_allocations[0].tags #=> Array
+    #   resp.results[0].usage_record.usage_allocations[0].tags[0].key #=> String
+    #   resp.results[0].usage_record.usage_allocations[0].tags[0].value #=> String
     #   resp.results[0].metering_record_id #=> String
     #   resp.results[0].status #=> String, one of "Success", "CustomerNotSubscribed", "DuplicateRecord"
     #   resp.unprocessed_records #=> Array
@@ -391,6 +413,11 @@ module Aws::MarketplaceMetering
     #   resp.unprocessed_records[0].customer_identifier #=> String
     #   resp.unprocessed_records[0].dimension #=> String
     #   resp.unprocessed_records[0].quantity #=> Integer
+    #   resp.unprocessed_records[0].usage_allocations #=> Array
+    #   resp.unprocessed_records[0].usage_allocations[0].allocated_usage_quantity #=> Integer
+    #   resp.unprocessed_records[0].usage_allocations[0].tags #=> Array
+    #   resp.unprocessed_records[0].usage_allocations[0].tags[0].key #=> String
+    #   resp.unprocessed_records[0].usage_allocations[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage AWS API Documentation
     #
@@ -406,6 +433,10 @@ module Aws::MarketplaceMetering
     #
     # MeterUsage is authenticated on the buyer's AWS account using
     # credentials from the EC2 instance, ECS task, or EKS pod.
+    #
+    # MeterUsage can optionally include multiple usage allocations, to
+    # provide customers with usage data split into buckets by tags that you
+    # define (or allow the customer to define).
     #
     # @option params [required, String] :product_code
     #   Product code is used to uniquely identify a product in AWS
@@ -430,6 +461,13 @@ module Aws::MarketplaceMetering
     #   returns DryRunOperation; otherwise, it returns UnauthorizedException.
     #   Defaults to `false` if not specified.
     #
+    # @option params [Array<Types::UsageAllocation>] :usage_allocations
+    #   The set of UsageAllocations to submit.
+    #
+    #   The sum of all UsageAllocation quantities must equal the UsageQuantity
+    #   of the MeterUsage request, and each UsageAllocation must have a unique
+    #   set of tags (include no tags).
+    #
     # @return [Types::MeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::MeterUsageResult#metering_record_id #metering_record_id} => String
@@ -442,6 +480,17 @@ module Aws::MarketplaceMetering
     #     usage_dimension: "UsageDimension", # required
     #     usage_quantity: 1,
     #     dry_run: false,
+    #     usage_allocations: [
+    #       {
+    #         allocated_usage_quantity: 1, # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -583,7 +632,7 @@ module Aws::MarketplaceMetering
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

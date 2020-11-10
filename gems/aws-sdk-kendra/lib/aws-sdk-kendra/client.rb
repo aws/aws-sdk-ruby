@@ -600,6 +600,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
+    #         disable_local_groups: false,
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -724,6 +725,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         disable_local_groups: false,
     #       },
     #       service_now_configuration: {
     #         host_url: "ServiceNowHostUrl", # required
@@ -761,7 +763,7 @@ module Aws::Kendra
     #       confluence_configuration: {
     #         server_url: "Url", # required
     #         secret_arn: "SecretArn", # required
-    #         version: "SERVER", # required, accepts SERVER
+    #         version: "CLOUD", # required, accepts CLOUD, SERVER
     #         space_configuration: {
     #           crawl_personal_spaces: false,
     #           crawl_archived_spaces: false,
@@ -973,6 +975,24 @@ module Aws::Kendra
     #   tags to identify and organize your resources and to control access to
     #   resources.
     #
+    # @option params [Array<Types::UserTokenConfiguration>] :user_token_configurations
+    #   The user token configuration.
+    #
+    # @option params [String] :user_context_policy
+    #   The user context policy.
+    #
+    #   ATTRIBUTE\_FILTER
+    #
+    #   : All indexed content is searchable and displayable for all users. If
+    #     there is an access control list, it is ignored. You can filter on
+    #     user and group attributes.
+    #
+    #   USER\_TOKEN
+    #
+    #   : Enables SSO and token-based user access control. All documents with
+    #     no access control and all documents accessible to the user will be
+    #     searchable and displayable.
+    #
     # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIndexResponse#id #id} => String
@@ -994,6 +1014,24 @@ module Aws::Kendra
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     user_token_configurations: [
+    #       {
+    #         jwt_token_type_configuration: {
+    #           key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #           url: "Url",
+    #           secret_manager_arn: "RoleArn",
+    #           user_name_attribute_field: "UserNameAttributeField",
+    #           group_attribute_field: "GroupAttributeField",
+    #           issuer: "Issuer",
+    #           claim_regex: "ClaimRegex",
+    #         },
+    #         json_token_type_configuration: {
+    #           user_name_attribute_field: "String", # required
+    #           group_attribute_field: "String", # required
+    #         },
+    #       },
+    #     ],
+    #     user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #   })
     #
     # @example Response structure
@@ -1158,6 +1196,7 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.share_point_configuration.field_mappings[0].index_field_name #=> String
     #   resp.configuration.share_point_configuration.document_title_field_name #=> String
+    #   resp.configuration.share_point_configuration.disable_local_groups #=> Boolean
     #   resp.configuration.database_configuration.database_engine_type #=> String, one of "RDS_AURORA_MYSQL", "RDS_AURORA_POSTGRESQL", "RDS_MYSQL", "RDS_POSTGRESQL"
     #   resp.configuration.database_configuration.connection_configuration.database_host #=> String
     #   resp.configuration.database_configuration.connection_configuration.database_port #=> Integer
@@ -1237,6 +1276,7 @@ module Aws::Kendra
     #   resp.configuration.one_drive_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.one_drive_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.one_drive_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.one_drive_configuration.disable_local_groups #=> Boolean
     #   resp.configuration.service_now_configuration.host_url #=> String
     #   resp.configuration.service_now_configuration.secret_arn #=> String
     #   resp.configuration.service_now_configuration.service_now_build_version #=> String, one of "LONDON", "OTHERS"
@@ -1264,7 +1304,7 @@ module Aws::Kendra
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].index_field_name #=> String
     #   resp.configuration.confluence_configuration.server_url #=> String
     #   resp.configuration.confluence_configuration.secret_arn #=> String
-    #   resp.configuration.confluence_configuration.version #=> String, one of "SERVER"
+    #   resp.configuration.confluence_configuration.version #=> String, one of "CLOUD", "SERVER"
     #   resp.configuration.confluence_configuration.space_configuration.crawl_personal_spaces #=> Boolean
     #   resp.configuration.confluence_configuration.space_configuration.crawl_archived_spaces #=> Boolean
     #   resp.configuration.confluence_configuration.space_configuration.include_spaces #=> Array
@@ -1386,6 +1426,8 @@ module Aws::Kendra
     #   * {Types::DescribeIndexResponse#index_statistics #index_statistics} => Types::IndexStatistics
     #   * {Types::DescribeIndexResponse#error_message #error_message} => String
     #   * {Types::DescribeIndexResponse#capacity_units #capacity_units} => Types::CapacityUnitsConfiguration
+    #   * {Types::DescribeIndexResponse#user_token_configurations #user_token_configurations} => Array&lt;Types::UserTokenConfiguration&gt;
+    #   * {Types::DescribeIndexResponse#user_context_policy #user_context_policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1423,6 +1465,17 @@ module Aws::Kendra
     #   resp.error_message #=> String
     #   resp.capacity_units.storage_capacity_units #=> Integer
     #   resp.capacity_units.query_capacity_units #=> Integer
+    #   resp.user_token_configurations #=> Array
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.key_location #=> String, one of "URL", "SECRET_MANAGER"
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.url #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.secret_manager_arn #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.user_name_attribute_field #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.group_attribute_field #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.issuer #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.claim_regex #=> String
+    #   resp.user_token_configurations[0].json_token_type_configuration.user_name_attribute_field #=> String
+    #   resp.user_token_configurations[0].json_token_type_configuration.group_attribute_field #=> String
+    #   resp.user_context_policy #=> String, one of "ATTRIBUTE_FILTER", "USER_TOKEN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndex AWS API Documentation
     #
@@ -1751,6 +1804,9 @@ module Aws::Kendra
     #   If you don't provide sorting configuration, the results are sorted by
     #   the relevance that Amazon Kendra determines for the result.
     #
+    # @option params [Types::UserContext] :user_context
+    #   The user context token.
+    #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::QueryResult#query_id #query_id} => String
@@ -1853,6 +1909,9 @@ module Aws::Kendra
     #     sorting_configuration: {
     #       document_attribute_key: "DocumentAttributeKey", # required
     #       sort_order: "DESC", # required, accepts DESC, ASC
+    #     },
+    #     user_context: {
+    #       token: "Token",
     #     },
     #   })
     #
@@ -2151,6 +2210,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
+    #         disable_local_groups: false,
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2275,6 +2335,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         disable_local_groups: false,
     #       },
     #       service_now_configuration: {
     #         host_url: "ServiceNowHostUrl", # required
@@ -2312,7 +2373,7 @@ module Aws::Kendra
     #       confluence_configuration: {
     #         server_url: "Url", # required
     #         secret_arn: "SecretArn", # required
-    #         version: "SERVER", # required, accepts SERVER
+    #         version: "CLOUD", # required, accepts CLOUD, SERVER
     #         space_configuration: {
     #           crawl_personal_spaces: false,
     #           crawl_archived_spaces: false,
@@ -2402,6 +2463,12 @@ module Aws::Kendra
     #   If you are using extra storage units, you can't reduce the storage
     #   capacity below that required to meet the storage needs for your index.
     #
+    # @option params [Array<Types::UserTokenConfiguration>] :user_token_configurations
+    #   The user token configuration.
+    #
+    # @option params [String] :user_context_policy
+    #   The user user token context policy.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2436,6 +2503,24 @@ module Aws::Kendra
     #       storage_capacity_units: 1, # required
     #       query_capacity_units: 1, # required
     #     },
+    #     user_token_configurations: [
+    #       {
+    #         jwt_token_type_configuration: {
+    #           key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #           url: "Url",
+    #           secret_manager_arn: "RoleArn",
+    #           user_name_attribute_field: "UserNameAttributeField",
+    #           group_attribute_field: "GroupAttributeField",
+    #           issuer: "Issuer",
+    #           claim_regex: "ClaimRegex",
+    #         },
+    #         json_token_type_configuration: {
+    #           user_name_attribute_field: "String", # required
+    #           group_attribute_field: "String", # required
+    #         },
+    #       },
+    #     ],
+    #     user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndex AWS API Documentation
@@ -2460,7 +2545,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

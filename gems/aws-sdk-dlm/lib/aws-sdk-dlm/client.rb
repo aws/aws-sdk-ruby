@@ -358,7 +358,7 @@ module Aws::DLM
     #     description: "PolicyDescription", # required
     #     state: "ENABLED", # required, accepts ENABLED, DISABLED
     #     policy_details: { # required
-    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT
     #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #       target_tags: [
     #         {
@@ -415,6 +415,7 @@ module Aws::DLM
     #       ],
     #       parameters: {
     #         exclude_boot_volume: false,
+    #         no_reboot: false,
     #       },
     #     },
     #     tags: {
@@ -507,6 +508,7 @@ module Aws::DLM
     #   resp.policies[0].state #=> String, one of "ENABLED", "DISABLED", "ERROR"
     #   resp.policies[0].tags #=> Hash
     #   resp.policies[0].tags["TagKey"] #=> String
+    #   resp.policies[0].policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT", "IMAGE_MANAGEMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePolicies AWS API Documentation
     #
@@ -541,7 +543,7 @@ module Aws::DLM
     #   resp.policy.execution_role_arn #=> String
     #   resp.policy.date_created #=> Time
     #   resp.policy.date_modified #=> Time
-    #   resp.policy.policy_details.policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT"
+    #   resp.policy.policy_details.policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT", "IMAGE_MANAGEMENT"
     #   resp.policy.policy_details.resource_types #=> Array
     #   resp.policy.policy_details.resource_types[0] #=> String, one of "VOLUME", "INSTANCE"
     #   resp.policy.policy_details.target_tags #=> Array
@@ -577,6 +579,7 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
+    #   resp.policy.policy_details.parameters.no_reboot #=> Boolean
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
     #   resp.policy.policy_arn #=> String
@@ -702,7 +705,7 @@ module Aws::DLM
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     description: "PolicyDescription",
     #     policy_details: {
-    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT
     #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #       target_tags: [
     #         {
@@ -759,6 +762,7 @@ module Aws::DLM
     #       ],
     #       parameters: {
     #         exclude_boot_volume: false,
+    #         no_reboot: false,
     #       },
     #     },
     #   })
@@ -785,7 +789,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

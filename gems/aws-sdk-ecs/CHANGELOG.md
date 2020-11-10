@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2020-11-09)
+------------------
+
+* Feature - This release provides native support for specifying Amazon FSx for Windows File Server file systems as volumes in your Amazon ECS task definitions.
+
 1.70.0 (2020-09-30)
 ------------------
 

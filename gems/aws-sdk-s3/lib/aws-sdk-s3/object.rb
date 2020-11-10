@@ -91,6 +91,12 @@ module Aws::S3
       data[:restore]
     end
 
+    # The archive state of the head object.
+    # @return [String]
+    def archive_status
+      data[:archive_status]
+    end
+
     # Last modified date of the object
     # @return [Time]
     def last_modified

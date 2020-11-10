@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.208.0 (2020-11-06)
+------------------
+
+* Feature - Network card support with four new attributes: NetworkCardIndex, NetworkPerformance, DefaultNetworkCardIndex, and MaximumNetworkInterfaces, added to the DescribeInstanceTypes API.
+
+1.207.0 (2020-11-05)
+------------------
+
+* Feature - Documentation updates for EC2.
+
+1.206.0 (2020-11-04)
+------------------
+
+* Feature - Added support for Client Connect Handler for AWS Client VPN. Fleet supports launching replacement instances in response to Capacity Rebalance recommendation.
+
 1.205.0 (2020-11-02)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-11-05)
+------------------
+
+* Feature - Amazon Kendra now supports providing user context in your query requests, Tokens can be JSON or JWT format. This release also introduces support for Confluence cloud datasources.
+
 1.17.0 (2020-10-26)
 ------------------
 

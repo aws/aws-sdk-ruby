@@ -660,12 +660,35 @@ module Aws::FraudDetector
     #
     class DeleteDetectorVersionResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteEntityTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the entity type to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEntityTypeRequest AWS API Documentation
+    #
+    class DeleteEntityTypeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEntityTypeResult AWS API Documentation
+    #
+    class DeleteEntityTypeResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteEventRequest
     #   data as a hash:
     #
     #       {
-    #         event_id: "string", # required
-    #         event_type_name: "string", # required
+    #         event_id: "identifier", # required
+    #         event_type_name: "identifier", # required
     #       }
     #
     # @!attribute [rw] event_id
@@ -688,6 +711,162 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventResult AWS API Documentation
     #
     class DeleteEventResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteEventTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the event type to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventTypeRequest AWS API Documentation
+    #
+    class DeleteEventTypeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventTypeResult AWS API Documentation
+    #
+    class DeleteEventTypeResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteExternalModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_endpoint: "sageMakerEndpointIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] model_endpoint
+    #   The endpoint of the Amazon Sagemaker model to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteExternalModelRequest AWS API Documentation
+    #
+    class DeleteExternalModelRequest < Struct.new(
+      :model_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteExternalModelResult AWS API Documentation
+    #
+    class DeleteExternalModelResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the label to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteLabelRequest AWS API Documentation
+    #
+    class DeleteLabelRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteLabelResult AWS API Documentation
+    #
+    class DeleteLabelResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_id: "modelIdentifier", # required
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #       }
+    #
+    # @!attribute [rw] model_id
+    #   The model ID of the model to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_type
+    #   The model type of the model to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelRequest AWS API Documentation
+    #
+    class DeleteModelRequest < Struct.new(
+      :model_id,
+      :model_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelResult AWS API Documentation
+    #
+    class DeleteModelResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteModelVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_id: "modelIdentifier", # required
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_version_number: "floatVersionString", # required
+    #       }
+    #
+    # @!attribute [rw] model_id
+    #   The model ID of the model version to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_type
+    #   The model type of the model version to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version_number
+    #   The model version number of the model version to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelVersionRequest AWS API Documentation
+    #
+    class DeleteModelVersionRequest < Struct.new(
+      :model_id,
+      :model_type,
+      :model_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModelVersionResult AWS API Documentation
+    #
+    class DeleteModelVersionResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteOutcomeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the outcome to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteOutcomeRequest AWS API Documentation
+    #
+    class DeleteOutcomeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteOutcomeResult AWS API Documentation
+    #
+    class DeleteOutcomeResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteRuleRequest
     #   data as a hash:
@@ -715,6 +894,29 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteRuleResult AWS API Documentation
     #
     class DeleteRuleResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteVariableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the variable to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteVariableRequest AWS API Documentation
+    #
+    class DeleteVariableRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteVariableResult AWS API Documentation
+    #
+    class DeleteVariableResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeDetectorRequest
     #   data as a hash:
@@ -1660,6 +1862,26 @@ module Aws::FraudDetector
     #
     # @!attribute [rw] status
     #   The model version status.
+    #
+    #   Possible values are:
+    #
+    #   * `TRAINING_IN_PROGRESS`
+    #
+    #   * `TRAINING_COMPLETE`
+    #
+    #   * `ACTIVATE_REQUESTED`
+    #
+    #   * `ACTIVATE_IN_PROGRESS`
+    #
+    #   * `ACTIVE`
+    #
+    #   * `INACTIVATE_REQUESTED`
+    #
+    #   * `INACTIVATE_IN_PROGRESS`
+    #
+    #   * `INACTIVE`
+    #
+    #   * `ERROR`
     #   @return [String]
     #
     # @!attribute [rw] arn

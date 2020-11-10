@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-11-04)
+------------------
+
+* Feature - Capacity Rebalance helps you manage and maintain workload availability during Spot interruptions by proactively augmenting your Auto Scaling group with a new instance before interrupting an old one.
+
 1.47.0 (2020-09-30)
 ------------------
 

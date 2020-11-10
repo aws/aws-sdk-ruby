@@ -462,7 +462,7 @@ module Aws::EC2
     #       {
     #         domain: "vpc", # accepts vpc, standard
     #         address: "PublicIpAddress",
-    #         public_ipv_4_pool: "String",
+    #         public_ipv_4_pool: "Ipv4PoolEc2Id",
     #         network_border_group: "String",
     #         customer_owned_ipv_4_pool: "String",
     #         dry_run: false,
@@ -1156,8 +1156,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
-    #   The ID of the AWS Key Management Service (KMS) key used to encrypt
-    #   the private key of the certificate.
+    #   The ID of the AWS KMS CMK used to encrypt the private key of the
+    #   certificate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateEnclaveCertificateIamRoleResult AWS API Documentation
@@ -1514,7 +1514,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
-    #   The ID of the KMS key used to encrypt the private key.
+    #   The ID of the KMS customer master key (CMK) used to encrypt the
+    #   private key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedRole AWS API Documentation
@@ -3221,7 +3222,7 @@ module Aws::EC2
     # For more information about Capacity Reservations, see [On-Demand
     # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
     # Guide*. For examples of using Capacity Reservations in an EC2 Fleet,
-    # see [EC2 Fleet Example Configurations][2] in the *Amazon Elastic
+    # see [EC2 Fleet example configurations][2] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
     #
@@ -3265,7 +3266,7 @@ module Aws::EC2
     # For more information about Capacity Reservations, see [On-Demand
     # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
     # Guide*. For examples of using Capacity Reservations in an EC2 Fleet,
-    # see [EC2 Fleet Example Configurations][2] in the *Amazon Elastic
+    # see [EC2 Fleet example configurations][2] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
     #
@@ -3674,6 +3675,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The options for managing connection authorization for new client
+    # connections.
+    #
+    # @note When making an API call, you may pass ClientConnectOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         lambda_function_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connect options are enabled. The default is
+    #   `false` (not enabled).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function used for
+    #   connection authorization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientConnectOptions AWS API Documentation
+    #
+    class ClientConnectOptions < Struct.new(
+      :enabled,
+      :lambda_function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for managing connection authorization for new client
+    # connections.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connect options are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function used for
+    #   connection authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of any updates to the client connect options.
+    #   @return [Types::ClientVpnEndpointAttributeStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientConnectResponseOptions AWS API Documentation
+    #
+    class ClientConnectResponseOptions < Struct.new(
+      :enabled,
+      :lambda_function_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the client-specific data.
     #
     # @note When making an API call, you may pass ClientData
@@ -3882,6 +3939,11 @@ module Aws::EC2
     #   The date and time the client connection was terminated.
     #   @return [String]
     #
+    # @!attribute [rw] posture_compliance_statuses
+    #   The statuses returned by the client connect handler for posture
+    #   compliance, if applicable.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnection AWS API Documentation
     #
     class ClientVpnConnection < Struct.new(
@@ -3897,7 +3959,8 @@ module Aws::EC2
       :client_ip,
       :common_name,
       :status,
-      :connection_end_time)
+      :connection_end_time,
+      :posture_compliance_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4018,6 +4081,11 @@ module Aws::EC2
     #   The URL of the self-service portal.
     #   @return [String]
     #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::ClientConnectResponseOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -4040,7 +4108,27 @@ module Aws::EC2
       :tags,
       :security_group_ids,
       :vpc_id,
-      :self_service_portal_url)
+      :self_service_portal_url,
+      :client_connect_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the status of the Client VPN endpoint attribute.
+    #
+    # @!attribute [rw] code
+    #   The status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpointAttributeStatus AWS API Documentation
+    #
+    class ClientVpnEndpointAttributeStatus < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4536,32 +4624,29 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   An identifier for the symmetric AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK) to use when creating the encrypted volume.
-    #   This parameter is only required if you want to use a non-default
-    #   CMK; if this parameter is not specified, the default CMK for EBS is
-    #   used. If a `KmsKeyId` is specified, the `Encrypted` flag must also
-    #   be set.
+    #   The identifier of the symmetric AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK) to use when creating encrypted volumes. If
+    #   this parameter is not specified, your AWS managed CMK for EBS is
+    #   used. If you specify a CMK, you must also set the encrypted state to
+    #   `true`.
     #
-    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
-    #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". For example:
+    #   You can specify a CMK using any of the following:
     #
-    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Alias name: `alias/ExampleAlias`
+    #   * Key ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
-    #   call may appear to complete even though you provided an invalid
-    #   identifier. This action will eventually report failure.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an identifier that is not valid, the action can appear to complete,
+    #   but eventually fails.
     #
-    #   The specified CMK must exist in the Region that the snapshot is
-    #   being copied to.
+    #   The specified CMK must exist in the destination Region.
     #
     #   Amazon EBS does not support asymmetric CMKs.
     #   @return [String]
@@ -4677,15 +4762,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify
     #   an ID, alias, or ARN that is not valid, the action can appear to
@@ -5119,6 +5204,10 @@ module Aws::EC2
     #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #         self_service_portal: "enabled", # accepts enabled, disabled
+    #         client_connect_options: {
+    #           enabled: false,
+    #           lambda_function_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] client_cidr_block
@@ -5244,6 +5333,11 @@ module Aws::EC2
     #   Default Value: `enabled`
     #   @return [String]
     #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::ClientConnectOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -5261,7 +5355,8 @@ module Aws::EC2
       :tag_specifications,
       :security_group_ids,
       :vpc_id,
-      :self_service_portal)
+      :self_service_portal,
+      :client_connect_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5768,6 +5863,11 @@ module Aws::EC2
     #         client_token: "String",
     #         spot_options: {
     #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #           maintenance_strategies: {
+    #             capacity_rebalance: {
+    #               replacement_strategy: "launch", # accepts launch
+    #             },
+    #           },
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           instance_pools_to_use_count: 1,
     #           single_instance_type: false,
@@ -5884,15 +5984,23 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of the request. By default, the EC2 Fleet places an
-    #   asynchronous request for your desired capacity, and maintains it by
-    #   replenishing interrupted Spot Instances (`maintain`). A value of
-    #   `instant` places a synchronous one-time request, and returns errors
-    #   for any instances that could not be launched. A value of `request`
-    #   places an asynchronous one-time request without maintaining capacity
-    #   or submitting requests in alternative capacity pools if capacity is
-    #   unavailable. For more information, see [EC2 Fleet Request Types][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #   The type of request. The default value is `maintain`.
+    #
+    #   * `maintain` - The EC2 Fleet plaees an asynchronous request for your
+    #     desired capacity, and continues to maintain your desired Spot
+    #     capacity by replenishing interrupted Spot Instances.
+    #
+    #   * `request` - The EC2 Fleet places an asynchronous one-time request
+    #     for your desired capacity, but does submit Spot requests in
+    #     alternative capacity pools if Spot capacity is unavailable, and
+    #     does not maintain Spot capacity if Spot Instances are interrupted.
+    #
+    #   * `instant` - The EC2 Fleet places a synchronous one-time request
+    #     for your desired capacity, and returns errors for any instances
+    #     that could not be launched.
+    #
+    #   For more information, see [EC2 Fleet request types][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -5921,7 +6029,7 @@ module Aws::EC2
     #   The value for `ResourceType` must be `fleet`, otherwise the fleet
     #   request fails. To tag instances at launch, specify the tags in the
     #   [launch template][1]. For information about tagging after launch,
-    #   see [Tagging Your Resources][2].
+    #   see [Tagging your resources][2].
     #
     #
     #
@@ -6357,14 +6465,14 @@ module Aws::EC2
     #
     #       {
     #         description: "String",
-    #         export_to_s3_task: {
+    #         export_to_s3_task: { # required
     #           container_format: "ova", # accepts ova
     #           disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #           s3_bucket: "String",
     #           s3_prefix: "String",
     #         },
     #         instance_id: "InstanceId", # required
-    #         target_environment: "citrix", # accepts citrix, vmware, microsoft
+    #         target_environment: "citrix", # required, accepts citrix, vmware, microsoft
     #         tag_specifications: [
     #           {
     #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -9288,7 +9396,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
-    #   Enable or disable IPv6 support. The default is `enable`.
+    #   Enable or disable IPv6 support.
     #   @return [String]
     #
     # @!attribute [rw] appliance_mode_support
@@ -9461,15 +9569,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify
     #   an ID, alias, or ARN that is not valid, the action can appear to
@@ -14963,7 +15071,7 @@ module Aws::EC2
     #
     #   * `log-destination-type` - The type of destination to which the flow
     #     log publishes data. Possible destination types include
-    #     `cloud-watch-logs` and `S3`.
+    #     `cloud-watch-logs` and `s3`.
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -16266,7 +16374,7 @@ module Aws::EC2
     #     the location type is `region` (default), the location is the
     #     Region code (for example, `us-east-2`.)
     #
-    #   * `instance-type` - The instance type.
+    #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16345,17 +16453,17 @@ module Aws::EC2
     #   One or more filters. Filter names and values are case-sensitive.
     #
     #   * `auto-recovery-supported` - Indicates whether auto recovery is
-    #     supported. (`true` \| `false`)
+    #     supported (`true` \| `false`).
     #
-    #   * `bare-metal` - Indicates whether it is a bare metal instance type.
-    #     (`true` \| `false`)
+    #   * `bare-metal` - Indicates whether it is a bare metal instance type
+    #     (`true` \| `false`).
     #
     #   * `burstable-performance-supported` - Indicates whether it is a
-    #     burstable performance instance type. (`true` \| `false`)
+    #     burstable performance instance type (`true` \| `false`).
     #
     #   * `current-generation` - Indicates whether this instance type is the
-    #     latest generation instance type of an instance family. (`true` \|
-    #     `false`)
+    #     latest generation instance type of an instance family (`true` \|
+    #     `false`).
     #
     #   * `ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps` - The
     #     baseline bandwidth performance for an EBS-optimized instance type,
@@ -16367,7 +16475,7 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
     #     baseline throughput performance for an EBS-optimized instance
-    #     type, in MBps.
+    #     type, in MB/s.
     #
     #   * `ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps` - The
     #     maximum bandwidth performance for an EBS-optimized instance type,
@@ -16379,25 +16487,25 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
     #     maximum throughput performance for an EBS-optimized instance type,
-    #     in MBps.
+    #     in MB/s.
     #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
-    #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
+    #     type is EBS-optimized (`supported` \| `unsupported` \| `default`).
     #
     #   * `ebs-info.encryption-support` - Indicates whether EBS encryption
-    #     is supported. (`supported` \| `unsupported`)
+    #     is supported (`supported` \| `unsupported`).
     #
     #   * `ebs-info.nvme-support` - Indicates whether non-volatile memory
-    #     express (NVMe) is supported for EBS volumes. (`required` \|
-    #     `supported` \| `unsupported`)
+    #     express (NVMe) is supported for EBS volumes (`required` \|
+    #     `supported` \| `unsupported`).
     #
     #   * `free-tier-eligible` - Indicates whether the instance type is
-    #     eligible to use in the free tier. (`true` \| `false`)
+    #     eligible to use in the free tier (`true` \| `false`).
     #
     #   * `hibernation-supported` - Indicates whether On-Demand hibernation
-    #     is supported. (`true` \| `false`)
+    #     is supported (`true` \| `false`).
     #
-    #   * `hypervisor` - The hypervisor. (`nitro` \| `xen`)
+    #   * `hypervisor` - The hypervisor (`nitro` \| `xen`).
     #
     #   * `instance-storage-info.disk.count` - The number of local disks.
     #
@@ -16405,17 +16513,17 @@ module Aws::EC2
     #     instance storage disk, in GB.
     #
     #   * `instance-storage-info.disk.type` - The storage technology for the
-    #     local instance storage disks. (`hdd` \| `ssd`)
+    #     local instance storage disks (`hdd` \| `ssd`).
     #
     #   * `instance-storage-info.nvme-support` - Indicates whether
-    #     non-volatile memory express (NVMe) is supported for instance
-    #     store. (`required` \| `supported`) \| `unsupported`)
+    #     non-volatile memory express (NVMe) is supported for instance store
+    #     (`required` \| `supported`) \| `unsupported`).
     #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
     #
     #   * `instance-storage-supported` - Indicates whether the instance type
-    #     has local instance storage. (`true` \| `false`)
+    #     has local instance storage (`true` \| `false`).
     #
     #   * `instance-type` - The instance type (for example `c5.2xlarge` or
     #     c5*).
@@ -16423,11 +16531,11 @@ module Aws::EC2
     #   * `memory-info.size-in-mib` - The memory size.
     #
     #   * `network-info.efa-supported` - Indicates whether the instance type
-    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
+    #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
     #
     #   * `network-info.ena-support` - Indicates whether Elastic Network
-    #     Adapter (ENA) is supported or required. (`required` \| `supported`
-    #     \| `unsupported`)
+    #     Adapter (ENA) is supported or required (`required` \| `supported`
+    #     \| `unsupported`).
     #
     #   * `network-info.ipv4-addresses-per-interface` - The maximum number
     #     of private IPv4 addresses per network interface.
@@ -16436,7 +16544,7 @@ module Aws::EC2
     #     of private IPv6 addresses per network interface.
     #
     #   * `network-info.ipv6-supported` - Indicates whether the instance
-    #     type supports IPv6. (`true` \| `false`)
+    #     type supports IPv6 (`true` \| `false`).
     #
     #   * `network-info.maximum-network-interfaces` - The maximum number of
     #     network interfaces per instance.
@@ -16444,19 +16552,19 @@ module Aws::EC2
     #   * `network-info.network-performance` - The network performance (for
     #     example, "25 Gigabit").
     #
-    #   * `processor-info.supported-architecture` - The CPU architecture.
-    #     (`arm64` \| `i386` \| `x86_64`)
+    #   * `processor-info.supported-architecture` - The CPU architecture
+    #     (`arm64` \| `i386` \| `x86_64`).
     #
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock
     #     speed, in GHz.
     #
-    #   * `supported-root-device-type` - The root device type. (`ebs` \|
-    #     `instance-store`)
+    #   * `supported-root-device-type` - The root device type (`ebs` \|
+    #     `instance-store`).
     #
-    #   * `supported-usage-class` - The usage class. (`on-demand` \| `spot`)
+    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`).
     #
-    #   * `supported-virtualization-type` - The virtualization type. (`hvm`
-    #     \| `paravirtual`)
+    #   * `supported-virtualization-type` - The virtualization type (`hvm`
+    #     \| `paravirtual`).
     #
     #   * `vcpu-info.default-cores` - The default number of cores for the
     #     instance type.
@@ -21472,6 +21580,16 @@ module Aws::EC2
     #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
     #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
+    #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #   @return [Array<Types::Filter>]
     #
@@ -24733,9 +24851,9 @@ module Aws::EC2
     # Describes the Amazon EBS features supported by the instance type.
     #
     # @!attribute [rw] ebs_optimized_support
-    #   Indicates that the instance type is Amazon EBS-optimized. For more
-    #   information, see [Amazon EBS-Optimized Instances][1] in *Amazon EC2
-    #   User Guide for Linux Instances*.
+    #   Indicates whether the instance type is Amazon EBS-optimized. For
+    #   more information, see [Amazon EBS-Optimized Instances][1] in *Amazon
+    #   EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -24832,7 +24950,7 @@ module Aws::EC2
     #
     # @!attribute [rw] baseline_throughput_in_m_bps
     #   The baseline throughput performance for an EBS-optimized instance
-    #   type, in MBps.
+    #   type, in MB/s.
     #   @return [Float]
     #
     # @!attribute [rw] baseline_iops
@@ -24847,7 +24965,7 @@ module Aws::EC2
     #
     # @!attribute [rw] maximum_throughput_in_m_bps
     #   The maximum throughput performance for an EBS-optimized instance
-    #   type, in MBps.
+    #   type, in MB/s.
     #   @return [Float]
     #
     # @!attribute [rw] maximum_iops
@@ -25519,12 +25637,12 @@ module Aws::EC2
     end
 
     # Indicates whether the instance is enabled for AWS Nitro Enclaves. For
-    # more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # more information, see [ What is AWS Nitro Enclaves?][1] in the *AWS
+    # Nitro Enclaves User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
+    # [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #
     # @note When making an API call, you may pass EnclaveOptionsRequest
     #   data as a hash:
@@ -26733,6 +26851,113 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The strategy to use when Amazon EC2 emits a signal that your Spot
+    # Instance is at an elevated risk of being interrupted.
+    #
+    # @!attribute [rw] replacement_strategy
+    #   To allow EC2 Fleet to launch a replacement Spot Instance when an
+    #   instance rebalance notification is emitted for an existing Spot
+    #   Instance in the fleet, specify `launch`. Only available for fleets
+    #   of type `maintain`.
+    #
+    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
+    #   rebalance is not automatically terminated. You can terminate it, or
+    #   you can wait until Amazon EC2 interrupts it. You are charged for
+    #   both instances while they are running.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalance AWS API Documentation
+    #
+    class FleetSpotCapacityRebalance < Struct.new(
+      :replacement_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Spot Instance replacement strategy to use when Amazon EC2 emits a
+    # signal that your Spot Instance is at an elevated risk of being
+    # interrupted. For more information, see [Capacity rebalancing][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance
+    #
+    # @note When making an API call, you may pass FleetSpotCapacityRebalanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replacement_strategy: "launch", # accepts launch
+    #       }
+    #
+    # @!attribute [rw] replacement_strategy
+    #   The replacement strategy to use. Only available for fleets of type
+    #   `maintain`.
+    #
+    #   To allow EC2 Fleet to launch a replacement Spot Instance when an
+    #   instance rebalance notification is emitted for an existing Spot
+    #   Instance in the fleet, specify `launch`. You must specify a value,
+    #   otherwise you get an error.
+    #
+    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
+    #   rebalance is not automatically terminated. You can terminate it, or
+    #   you can wait until Amazon EC2 interrupts it. You are charged for all
+    #   instances while they are running.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalanceRequest AWS API Documentation
+    #
+    class FleetSpotCapacityRebalanceRequest < Struct.new(
+      :replacement_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The strategies for managing your Spot Instances that are at an
+    # elevated risk of being interrupted.
+    #
+    # @!attribute [rw] capacity_rebalance
+    #   The strategy to use when Amazon EC2 emits a signal that your Spot
+    #   Instance is at an elevated risk of being interrupted.
+    #   @return [Types::FleetSpotCapacityRebalance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotMaintenanceStrategies AWS API Documentation
+    #
+    class FleetSpotMaintenanceStrategies < Struct.new(
+      :capacity_rebalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The strategies for managing your Spot Instances that are at an
+    # elevated risk of being interrupted.
+    #
+    # @note When making an API call, you may pass FleetSpotMaintenanceStrategiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       }
+    #
+    # @!attribute [rw] capacity_rebalance
+    #   The strategy to use when Amazon EC2 emits a signal that your Spot
+    #   Instance is at an elevated risk of being interrupted.
+    #   @return [Types::FleetSpotCapacityRebalanceRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotMaintenanceStrategiesRequest AWS API Documentation
+    #
+    class FleetSpotMaintenanceStrategiesRequest < Struct.new(
+      :capacity_rebalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a flow log.
     #
     # @!attribute [rw] creation_time
@@ -26869,7 +27094,7 @@ module Aws::EC2
     # Describes the memory for the FPGA accelerator for the instance type.
     #
     # @!attribute [rw] size_in_mi_b
-    #   The size (in MiB) for the memory available to the FPGA accelerator.
+    #   The size of the memory available to the FPGA accelerator, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaDeviceMemoryInfo AWS API Documentation
@@ -28445,7 +28670,7 @@ module Aws::EC2
     # Describes the memory available to the GPU accelerator.
     #
     # @!attribute [rw] size_in_mi_b
-    #   The size (in MiB) for the memory available to the GPU accelerator.
+    #   The size of the memory available to the GPU accelerator, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GpuDeviceMemoryInfo AWS API Documentation
@@ -28464,7 +28689,7 @@ module Aws::EC2
     #
     # @!attribute [rw] total_gpu_memory_in_mi_b
     #   The total size of the memory for the GPU accelerators for the
-    #   instance type.
+    #   instance type, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GpuInfo AWS API Documentation
@@ -31914,7 +32139,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] disks
-    #   Array describing the disks that are available for the instance type.
+    #   Describes the disks that are available for the instance type.
     #   @return [Array<Types::DiskInfo>]
     #
     # @!attribute [rw] nvme_support
@@ -31965,7 +32190,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] current_generation
-    #   Indicates whether the instance type is a current generation.
+    #   Indicates whether the instance type is current generation.
     #   @return [Boolean]
     #
     # @!attribute [rw] free_tier_eligible
@@ -31978,7 +32203,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_root_device_types
-    #   Indicates the supported root device types.
+    #   The supported root device types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_virtualization_types
@@ -31986,11 +32211,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] bare_metal
-    #   Indicates whether the instance is bare metal.
+    #   Indicates whether the instance is a bare metal instance type.
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
-    #   Indicates the hypervisor used for the instance type.
+    #   The hypervisor for the instance type.
     #   @return [String]
     #
     # @!attribute [rw] processor_info
@@ -32010,7 +32235,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_storage_info
-    #   Describes the disks for the instance type.
+    #   Describes the instance storage for the instance type.
     #   @return [Types::InstanceStorageInfo]
     #
     # @!attribute [rw] ebs_info
@@ -34737,7 +34962,7 @@ module Aws::EC2
     # Describes the memory for the instance type.
     #
     # @!attribute [rw] size_in_mi_b
-    #   Size of the memory, in MiB.
+    #   The size of the memory, in MiB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MemoryInfo AWS API Documentation
@@ -34904,6 +35129,10 @@ module Aws::EC2
     #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #         self_service_portal: "enabled", # accepts enabled, disabled
+    #         client_connect_options: {
+    #           enabled: false,
+    #           lambda_function_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] client_vpn_endpoint_id
@@ -34982,6 +35211,11 @@ module Aws::EC2
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::ClientConnectOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
     #
     class ModifyClientVpnEndpointRequest < Struct.new(
@@ -34995,7 +35229,8 @@ module Aws::EC2
       :dry_run,
       :security_group_ids,
       :vpc_id,
-      :self_service_portal)
+      :self_service_portal,
+      :client_connect_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35077,15 +35312,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify
     #   an ID, alias, or ARN that is not valid, the action can appear to
@@ -35159,7 +35394,7 @@ module Aws::EC2
     #           },
     #         ],
     #         fleet_id: "FleetId", # required
-    #         target_capacity_specification: { # required
+    #         target_capacity_specification: {
     #           total_target_capacity: 1, # required
     #           on_demand_target_capacity: 1,
     #           spot_target_capacity: 1,
@@ -38623,15 +38858,52 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the network card support of the instance type.
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_performance
+    #   The network performance of the network card.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_network_interfaces
+    #   The maximum number of network interfaces for the network card.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkCardInfo AWS API Documentation
+    #
+    class NetworkCardInfo < Struct.new(
+      :network_card_index,
+      :network_performance,
+      :maximum_network_interfaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the networking features of the instance type.
     #
     # @!attribute [rw] network_performance
-    #   Describes the network performance.
+    #   The network performance.
     #   @return [String]
     #
     # @!attribute [rw] maximum_network_interfaces
     #   The maximum number of network interfaces for the instance type.
     #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_network_cards
+    #   The maximum number of physical network cards that can be allocated
+    #   to the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_network_card_index
+    #   The index of the default network card, starting at 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_cards
+    #   Describes the network cards for the instance type.
+    #   @return [Array<Types::NetworkCardInfo>]
     #
     # @!attribute [rw] ipv_4_addresses_per_interface
     #   The maximum number of IPv4 addresses per network interface.
@@ -38658,6 +38930,9 @@ module Aws::EC2
     class NetworkInfo < Struct.new(
       :network_performance,
       :maximum_network_interfaces,
+      :maximum_network_cards,
+      :default_network_card_index,
+      :network_cards,
       :ipv_4_addresses_per_interface,
       :ipv_6_addresses_per_interface,
       :ipv_6_supported,
@@ -39677,7 +39952,7 @@ module Aws::EC2
     # Describes the placement group support of the instance type.
     #
     # @!attribute [rw] supported_strategies
-    #   A list of supported placement groups types.
+    #   The supported placement group types.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroupInfo AWS API Documentation
@@ -40024,7 +40299,7 @@ module Aws::EC2
     # Describes the processor used by the instance type.
     #
     # @!attribute [rw] supported_architectures
-    #   A list of architectures supported by the instance type.
+    #   The architectures supported by the instance type.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sustained_clock_speed_in_ghz
@@ -42209,6 +42484,11 @@ module Aws::EC2
     #         spot_fleet_request_config: { # required
     #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #           on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
+    #           spot_maintenance_strategies: {
+    #             capacity_rebalance: {
+    #               replacement_strategy: "launch", # accepts launch
+    #             },
+    #           },
     #           client_token: "String",
     #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #           fulfilled_capacity: 1.0,
@@ -44968,18 +45248,15 @@ module Aws::EC2
     #
     # @!attribute [rw] enclave_options
     #   Indicates whether the instance is enabled for AWS Nitro Enclaves.
-    #   For more information, see [ AWS Nitro Enclaves][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   For more information, see [ What is AWS Nitro Enclaves?][1] in the
+    #   *AWS Nitro Enclaves User Guide*.
     #
     #   You can't enable AWS Nitro Enclaves and hibernation on the same
-    #   instance. For more information about AWS Nitro Enclaves
-    #   requirements, see [ AWS Nitro Enclaves][2] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #   @return [Types::EnclaveOptionsRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
@@ -46660,10 +46937,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] owner_alias
-    #   The AWS owner alias, as maintained by Amazon. The possible values
-    #   are: `amazon` \| `self` \| `all` \| `aws-marketplace` \|
-    #   `microsoft`. This AWS owner alias is not to be confused with the
-    #   user-configured AWS account alias, which is set from the IAM
+    #   The AWS owner alias, from an Amazon-maintained list (`amazon`). This
+    #   is not the user-configured AWS account alias set using the IAM
     #   console.
     #   @return [String]
     #
@@ -46918,6 +47193,46 @@ module Aws::EC2
       :status_message,
       :url,
       :user_bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Spot Instance replacement strategy to use when Amazon EC2 emits a
+    # signal that your Spot Instance is at an elevated risk of being
+    # interrupted. For more information, see [Capacity rebalancing][1] in
+    # the *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#spot-fleet-capacity-rebalance
+    #
+    # @note When making an API call, you may pass SpotCapacityRebalance
+    #   data as a hash:
+    #
+    #       {
+    #         replacement_strategy: "launch", # accepts launch
+    #       }
+    #
+    # @!attribute [rw] replacement_strategy
+    #   The replacement strategy to use. Only available for fleets of type
+    #   `maintain`. You must specify a value, otherwise you get an error.
+    #
+    #   To allow Spot Fleet to launch a replacement Spot Instance when an
+    #   instance rebalance notification is emitted for a Spot Instance in
+    #   the fleet, specify `launch`.
+    #
+    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
+    #   rebalance is not automatically terminated. You can terminate it, or
+    #   you can wait until Amazon EC2 interrupts it. You are charged for all
+    #   instances while they are running.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotCapacityRebalance AWS API Documentation
+    #
+    class SpotCapacityRebalance < Struct.new(
+      :replacement_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47270,6 +47585,11 @@ module Aws::EC2
     #       {
     #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #         on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
+    #         spot_maintenance_strategies: {
+    #           capacity_rebalance: {
+    #             replacement_strategy: "launch", # accepts launch
+    #           },
+    #         },
     #         client_token: "String",
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         fulfilled_capacity: 1.0,
@@ -47448,6 +47768,11 @@ module Aws::EC2
     #   highest priority first. If you do not specify a value, Spot Fleet
     #   defaults to `lowestPrice`.
     #   @return [String]
+    #
+    # @!attribute [rw] spot_maintenance_strategies
+    #   The strategies for managing your Spot Instances that are at an
+    #   elevated risk of being interrupted.
+    #   @return [Types::SpotMaintenanceStrategies]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -47631,6 +47956,7 @@ module Aws::EC2
     class SpotFleetRequestConfigData < Struct.new(
       :allocation_strategy,
       :on_demand_allocation_strategy,
+      :spot_maintenance_strategies,
       :client_token,
       :excess_capacity_termination_policy,
       :fulfilled_capacity,
@@ -47875,6 +48201,31 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The strategies for managing your Spot Instances that are at an
+    # elevated risk of being interrupted.
+    #
+    # @note When making an API call, you may pass SpotMaintenanceStrategies
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       }
+    #
+    # @!attribute [rw] capacity_rebalance
+    #   The strategy to use when Amazon EC2 emits a signal that your Spot
+    #   Instance is at an elevated risk of being interrupted.
+    #   @return [Types::SpotCapacityRebalance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotMaintenanceStrategies AWS API Documentation
+    #
+    class SpotMaintenanceStrategies < Struct.new(
+      :capacity_rebalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options for Spot Instances.
     #
     # @note When making an API call, you may pass SpotMarketOptions
@@ -47972,6 +48323,12 @@ module Aws::EC2
     #   for the number of instances that are launching.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance_strategies
+    #   The strategies for managing your workloads on your Spot Instances
+    #   that will be interrupted. Currently only the capacity rebalance
+    #   strategy is available.
+    #   @return [Types::FleetSpotMaintenanceStrategies]
+    #
     # @!attribute [rw] instance_interruption_behavior
     #   The behavior when a Spot Instance is interrupted. The default is
     #   `terminate`.
@@ -48011,6 +48368,7 @@ module Aws::EC2
     #
     class SpotOptions < Struct.new(
       :allocation_strategy,
+      :maintenance_strategies,
       :instance_interruption_behavior,
       :instance_pools_to_use_count,
       :single_instance_type,
@@ -48028,6 +48386,11 @@ module Aws::EC2
     #
     #       {
     #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #         maintenance_strategies: {
+    #           capacity_rebalance: {
+    #             replacement_strategy: "launch", # accepts launch
+    #           },
+    #         },
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         instance_pools_to_use_count: 1,
     #         single_instance_type: false,
@@ -48051,6 +48414,11 @@ module Aws::EC2
     #   launches instances from Spot Instance pools with optimal capacity
     #   for the number of instances that are launching.
     #   @return [String]
+    #
+    # @!attribute [rw] maintenance_strategies
+    #   The strategies for managing your Spot Instances that are at an
+    #   elevated risk of being interrupted.
+    #   @return [Types::FleetSpotMaintenanceStrategiesRequest]
     #
     # @!attribute [rw] instance_interruption_behavior
     #   The behavior when a Spot Instance is interrupted. The default is
@@ -48091,6 +48459,7 @@ module Aws::EC2
     #
     class SpotOptionsRequest < Struct.new(
       :allocation_strategy,
+      :maintenance_strategies,
       :instance_interruption_behavior,
       :instance_pools_to_use_count,
       :single_instance_type,
@@ -48804,15 +49173,16 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
-    #   `client-vpn-endpoint` \| `customer-gateway` \| `dedicated-host` \|
-    #   `dhcp-options` \| `export-image-task` \| `export-instance-task` \|
-    #   `fleet` \| `fpga-image` \| `host-reservation` \| `import-image-task`
-    #   \| `import-snapshot-task` \| `instance` \| `internet-gateway` \|
-    #   `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \| `launch-template`
-    #   \| `placement-group` \| `prefix-list` \| `natgateway` \|
-    #   `network-acl` \| `route-table` \| `security-group` \|
-    #   `spot-fleet-request` \| `spot-instances-request` \| `snapshot` \|
-    #   `subnet` \| `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `carrier-gateway` \| `client-vpn-endpoint` \| `customer-gateway` \|
+    #   `dedicated-host` \| `dhcp-options` \| `export-image-task` \|
+    #   `export-instance-task` \| `fleet` \| `fpga-image` \|
+    #   `host-reservation` \| `import-image-task` \| `import-snapshot-task`
+    #   \| `instance` \| `internet-gateway` \| `ipv4pool-ec2` \|
+    #   `ipv6pool-ec2` \| `key-pair` \| `launch-template` \|
+    #   `placement-group` \| `prefix-list` \| `natgateway` \| `network-acl`
+    #   \| `route-table` \| `security-group` \| `spot-fleet-request` \|
+    #   `spot-instances-request` \| `snapshot` \| `subnet` \|
+    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
     #   `volume` \|`vpc` \| ` vpc-peering-connection` \| `vpc-endpoint` (for
@@ -51118,13 +51488,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] valid_cores
-    #   List of the valid number of cores that can be configured for the
-    #   instance type.
+    #   The valid number of cores that can be configured for the instance
+    #   type.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] valid_threads_per_core
-    #   List of the valid number of threads per core that can be configured
-    #   for the instance type.
+    #   The valid number of threads per core that can be configured for the
+    #   instance type.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VCpuInfo AWS API Documentation

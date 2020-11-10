@@ -986,7 +986,7 @@ module Aws::Kendra
     #       {
     #         server_url: "Url", # required
     #         secret_arn: "SecretArn", # required
-    #         version: "SERVER", # required, accepts SERVER
+    #         version: "CLOUD", # required, accepts CLOUD, SERVER
     #         space_configuration: {
     #           crawl_personal_spaces: false,
     #           crawl_archived_spaces: false,
@@ -1048,8 +1048,8 @@ module Aws::Kendra
     #   server. The secret must contain a JSON structure with the following
     #   keys:
     #
-    #   * username - The user name of a user with administrative privileges
-    #     for the Confluence server.
+    #   * username - The user name or email address of a user with
+    #     administrative privileges for the Confluence server.
     #
     #   * password - The password associated with the user logging in to the
     #     Confluence server.
@@ -1398,6 +1398,7 @@ module Aws::Kendra
     #               },
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
+    #             disable_local_groups: false,
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1522,6 +1523,7 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #             disable_local_groups: false,
     #           },
     #           service_now_configuration: {
     #             host_url: "ServiceNowHostUrl", # required
@@ -1559,7 +1561,7 @@ module Aws::Kendra
     #           confluence_configuration: {
     #             server_url: "Url", # required
     #             secret_arn: "SecretArn", # required
-    #             version: "SERVER", # required, accepts SERVER
+    #             version: "CLOUD", # required, accepts CLOUD, SERVER
     #             space_configuration: {
     #               crawl_personal_spaces: false,
     #               crawl_archived_spaces: false,
@@ -1844,6 +1846,24 @@ module Aws::Kendra
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         user_token_configurations: [
+    #           {
+    #             jwt_token_type_configuration: {
+    #               key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #               url: "Url",
+    #               secret_manager_arn: "RoleArn",
+    #               user_name_attribute_field: "UserNameAttributeField",
+    #               group_attribute_field: "GroupAttributeField",
+    #               issuer: "Issuer",
+    #               claim_regex: "ClaimRegex",
+    #             },
+    #             json_token_type_configuration: {
+    #               user_name_attribute_field: "String", # required
+    #               group_attribute_field: "String", # required
+    #             },
+    #           },
+    #         ],
+    #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #       }
     #
     # @!attribute [rw] name
@@ -1894,6 +1914,26 @@ module Aws::Kendra
     #   to resources.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] user_token_configurations
+    #   The user token configuration.
+    #   @return [Array<Types::UserTokenConfiguration>]
+    #
+    # @!attribute [rw] user_context_policy
+    #   The user context policy.
+    #
+    #   ATTRIBUTE\_FILTER
+    #
+    #   : All indexed content is searchable and displayable for all users.
+    #     If there is an access control list, it is ignored. You can filter
+    #     on user and group attributes.
+    #
+    #   USER\_TOKEN
+    #
+    #   : Enables SSO and token-based user access control. All documents
+    #     with no access control and all documents accessible to the user
+    #     will be searchable and displayable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateIndexRequest AWS API Documentation
     #
     class CreateIndexRequest < Struct.new(
@@ -1903,7 +1943,9 @@ module Aws::Kendra
       :server_side_encryption_configuration,
       :description,
       :client_token,
-      :tags)
+      :tags,
+      :user_token_configurations,
+      :user_context_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1959,6 +2001,7 @@ module Aws::Kendra
     #             },
     #           ],
     #           document_title_field_name: "DataSourceFieldName",
+    #           disable_local_groups: false,
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2083,6 +2126,7 @@ module Aws::Kendra
     #               index_field_name: "IndexFieldName", # required
     #             },
     #           ],
+    #           disable_local_groups: false,
     #         },
     #         service_now_configuration: {
     #           host_url: "ServiceNowHostUrl", # required
@@ -2120,7 +2164,7 @@ module Aws::Kendra
     #         confluence_configuration: {
     #           server_url: "Url", # required
     #           secret_arn: "SecretArn", # required
-    #           version: "SERVER", # required, accepts SERVER
+    #           version: "CLOUD", # required, accepts CLOUD, SERVER
     #           space_configuration: {
     #             crawl_personal_spaces: false,
     #             crawl_archived_spaces: false,
@@ -2875,6 +2919,14 @@ module Aws::Kendra
     #   capacity for the index.
     #   @return [Types::CapacityUnitsConfiguration]
     #
+    # @!attribute [rw] user_token_configurations
+    #   The user token configuration for the Amazon Kendra index.
+    #   @return [Array<Types::UserTokenConfiguration>]
+    #
+    # @!attribute [rw] user_context_policy
+    #   The user context policy for the Amazon Kendra index.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
     #
     class DescribeIndexResponse < Struct.new(
@@ -2890,7 +2942,9 @@ module Aws::Kendra
       :document_metadata_configurations,
       :index_statistics,
       :error_message,
-      :capacity_units)
+      :capacity_units,
+      :user_token_configurations,
+      :user_context_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3362,6 +3416,90 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Configuration information for the JSON token type.
+    #
+    # @note When making an API call, you may pass JsonTokenTypeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         user_name_attribute_field: "String", # required
+    #         group_attribute_field: "String", # required
+    #       }
+    #
+    # @!attribute [rw] user_name_attribute_field
+    #   The user name attribute field.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_attribute_field
+    #   The group attribute field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/JsonTokenTypeConfiguration AWS API Documentation
+    #
+    class JsonTokenTypeConfiguration < Struct.new(
+      :user_name_attribute_field,
+      :group_attribute_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for the JWT token type.
+    #
+    # @note When making an API call, you may pass JwtTokenTypeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #         url: "Url",
+    #         secret_manager_arn: "RoleArn",
+    #         user_name_attribute_field: "UserNameAttributeField",
+    #         group_attribute_field: "GroupAttributeField",
+    #         issuer: "Issuer",
+    #         claim_regex: "ClaimRegex",
+    #       }
+    #
+    # @!attribute [rw] key_location
+    #   The location of the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The signing key URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_manager_arn
+    #   The Amazon Resource Name (arn) of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name_attribute_field
+    #   The user name attribute field.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_attribute_field
+    #   The group attribute field.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer
+    #   The issuer of the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] claim_regex
+    #   The regular expression that identifies the claim.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/JwtTokenTypeConfiguration AWS API Documentation
+    #
+    class JwtTokenTypeConfiguration < Struct.new(
+      :key_location,
+      :url,
+      :secret_manager_arn,
+      :user_name_attribute_field,
+      :group_attribute_field,
+      :issuer,
+      :claim_regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDataSourceSyncJobsRequest
     #   data as a hash:
     #
@@ -3654,6 +3792,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         disable_local_groups: false,
     #       }
     #
     # @!attribute [rw] tenant_domain
@@ -3696,6 +3835,11 @@ module Aws::Kendra
     #   must first create the index fields before you map OneDrive fields.
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
+    # @!attribute [rw] disable_local_groups
+    #   A Boolean value that specifies whether local groups are disabled
+    #   (`True`) or enabled (`False`).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OneDriveConfiguration AWS API Documentation
     #
     class OneDriveConfiguration < Struct.new(
@@ -3704,7 +3848,8 @@ module Aws::Kendra
       :one_drive_users,
       :inclusion_patterns,
       :exclusion_patterns,
-      :field_mappings)
+      :field_mappings,
+      :disable_local_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3874,6 +4019,9 @@ module Aws::Kendra
     #           document_attribute_key: "DocumentAttributeKey", # required
     #           sort_order: "DESC", # required, accepts DESC, ASC
     #         },
+    #         user_context: {
+    #           token: "Token",
+    #         },
     #       }
     #
     # @!attribute [rw] index_id
@@ -3937,6 +4085,10 @@ module Aws::Kendra
     #   by the relevance that Amazon Kendra determines for the result.
     #   @return [Types::SortingConfiguration]
     #
+    # @!attribute [rw] user_context
+    #   The user context token.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -3948,7 +4100,8 @@ module Aws::Kendra
       :query_result_type_filter,
       :page_number,
       :page_size,
-      :sorting_configuration)
+      :sorting_configuration,
+      :user_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5116,6 +5269,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
+    #         disable_local_groups: false,
     #       }
     #
     # @!attribute [rw] share_point_version
@@ -5196,6 +5350,11 @@ module Aws::Kendra
     #   the document.
     #   @return [String]
     #
+    # @!attribute [rw] disable_local_groups
+    #   A Boolean value that specifies whether local groups are disabled
+    #   (`True`) or enabled (`False`).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
     class SharePointConfiguration < Struct.new(
@@ -5208,7 +5367,8 @@ module Aws::Kendra
       :exclusion_patterns,
       :vpc_configuration,
       :field_mappings,
-      :document_title_field_name)
+      :document_title_field_name,
+      :disable_local_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5635,6 +5795,7 @@ module Aws::Kendra
     #               },
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
+    #             disable_local_groups: false,
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -5759,6 +5920,7 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #             disable_local_groups: false,
     #           },
     #           service_now_configuration: {
     #             host_url: "ServiceNowHostUrl", # required
@@ -5796,7 +5958,7 @@ module Aws::Kendra
     #           confluence_configuration: {
     #             server_url: "Url", # required
     #             secret_arn: "SecretArn", # required
-    #             version: "SERVER", # required, accepts SERVER
+    #             version: "CLOUD", # required, accepts CLOUD, SERVER
     #             space_configuration: {
     #               crawl_personal_spaces: false,
     #               crawl_archived_spaces: false,
@@ -5929,6 +6091,24 @@ module Aws::Kendra
     #           storage_capacity_units: 1, # required
     #           query_capacity_units: 1, # required
     #         },
+    #         user_token_configurations: [
+    #           {
+    #             jwt_token_type_configuration: {
+    #               key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #               url: "Url",
+    #               secret_manager_arn: "RoleArn",
+    #               user_name_attribute_field: "UserNameAttributeField",
+    #               group_attribute_field: "GroupAttributeField",
+    #               issuer: "Issuer",
+    #               claim_regex: "ClaimRegex",
+    #             },
+    #             json_token_type_configuration: {
+    #               user_name_attribute_field: "String", # required
+    #               group_attribute_field: "String", # required
+    #             },
+    #           },
+    #         ],
+    #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #       }
     #
     # @!attribute [rw] id
@@ -5962,6 +6142,14 @@ module Aws::Kendra
     #   index.
     #   @return [Types::CapacityUnitsConfiguration]
     #
+    # @!attribute [rw] user_token_configurations
+    #   The user token configuration.
+    #   @return [Array<Types::UserTokenConfiguration>]
+    #
+    # @!attribute [rw] user_context_policy
+    #   The user user token context policy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndexRequest AWS API Documentation
     #
     class UpdateIndexRequest < Struct.new(
@@ -5970,7 +6158,68 @@ module Aws::Kendra
       :role_arn,
       :description,
       :document_metadata_configuration_updates,
-      :capacity_units)
+      :capacity_units,
+      :user_token_configurations,
+      :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the user context for a Amazon Kendra index.
+    #
+    # @note When making an API call, you may pass UserContext
+    #   data as a hash:
+    #
+    #       {
+    #         token: "Token",
+    #       }
+    #
+    # @!attribute [rw] token
+    #   The user context token. It must be a JWT or a JSON token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserContext AWS API Documentation
+    #
+    class UserContext < Struct.new(
+      :token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration information for a token configuration.
+    #
+    # @note When making an API call, you may pass UserTokenConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         jwt_token_type_configuration: {
+    #           key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #           url: "Url",
+    #           secret_manager_arn: "RoleArn",
+    #           user_name_attribute_field: "UserNameAttributeField",
+    #           group_attribute_field: "GroupAttributeField",
+    #           issuer: "Issuer",
+    #           claim_regex: "ClaimRegex",
+    #         },
+    #         json_token_type_configuration: {
+    #           user_name_attribute_field: "String", # required
+    #           group_attribute_field: "String", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] jwt_token_type_configuration
+    #   Information about the JWT token type configuration.
+    #   @return [Types::JwtTokenTypeConfiguration]
+    #
+    # @!attribute [rw] json_token_type_configuration
+    #   Information about the JSON token type configuration.
+    #   @return [Types::JsonTokenTypeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserTokenConfiguration AWS API Documentation
+    #
+    class UserTokenConfiguration < Struct.new(
+      :jwt_token_type_configuration,
+      :json_token_type_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

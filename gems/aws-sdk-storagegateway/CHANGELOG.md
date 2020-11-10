@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-11-09)
+------------------
+
+* Feature - Added bandwidth rate limit schedule for Tape and Volume Gateways
+
 1.51.0 (2020-10-29)
 ------------------
 

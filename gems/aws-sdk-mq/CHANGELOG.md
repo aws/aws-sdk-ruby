@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-11-04)
+------------------
+
+* Feature - Amazon MQ introduces support for RabbitMQ, a popular message-broker with native support for AMQP 0.9.1. You can now create fully-managed RabbitMQ brokers in the cloud.
+
 1.33.0 (2020-09-30)
 ------------------
 

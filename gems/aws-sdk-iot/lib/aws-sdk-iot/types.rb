@@ -9648,7 +9648,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9673,8 +9675,8 @@ module Aws::IoT
     #   @return [Array<Types::GroupNameAndArn>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListBillingGroupsResponse < Struct.new(
@@ -10519,7 +10521,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -10545,8 +10549,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListPrincipalThingsResponse < Struct.new(
@@ -10877,7 +10881,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     class ListTagsForResourceRequest < Struct.new(
@@ -10892,8 +10898,8 @@ module Aws::IoT
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListTagsForResourceResponse < Struct.new(
@@ -11006,7 +11012,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11026,8 +11034,8 @@ module Aws::IoT
     #   @return [Array<Types::GroupNameAndArn>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingGroupsForThingResponse < Struct.new(
@@ -11049,7 +11057,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11085,8 +11095,8 @@ module Aws::IoT
     #   @return [Array<Types::GroupNameAndArn>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results. Will not be returned
-    #   if operation has returned all results.
+    #   The token to use to get the next set of results. Will not be
+    #   returned if operation has returned all results.
     #   @return [String]
     #
     class ListThingGroupsResponse < Struct.new(
@@ -11102,14 +11112,28 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
     #         thing_name: "ThingName", # required
     #       }
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
     #
     # @!attribute [rw] thing_name
     #   The name of the thing.
     #   @return [String]
     #
     class ListThingPrincipalsRequest < Struct.new(
+      :next_token,
+      :max_results,
       :thing_name)
       SENSITIVE = []
       include Aws::Structure
@@ -11121,8 +11145,14 @@ module Aws::IoT
     #   The principals associated with the thing.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
+    #   @return [String]
+    #
     class ListThingPrincipalsResponse < Struct.new(
-      :principals)
+      :principals,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11146,7 +11176,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11171,8 +11203,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingRegistrationTaskReportsResponse < Struct.new(
@@ -11193,7 +11225,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11217,8 +11251,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingRegistrationTasksResponse < Struct.new(
@@ -11240,7 +11274,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11291,7 +11327,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11311,8 +11349,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results. Will not be returned
-    #   if operation has returned all results.
+    #   The token to use to get the next set of results. Will not be
+    #   returned if operation has returned all results.
     #   @return [String]
     #
     class ListThingsInBillingGroupResponse < Struct.new(
@@ -11342,7 +11380,9 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11363,8 +11403,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingsInThingGroupResponse < Struct.new(
@@ -11388,7 +11428,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11424,8 +11466,8 @@ module Aws::IoT
     #   @return [Array<Types::ThingAttribute>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results. Will not be returned
-    #   if operation has returned all results.
+    #   The token to use to get the next set of results. Will not be
+    #   returned if operation has returned all results.
     #   @return [String]
     #
     class ListThingsResponse < Struct.new(
@@ -11448,7 +11490,9 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     class ListTopicRuleDestinationsRequest < Struct.new(
@@ -11463,7 +11507,8 @@ module Aws::IoT
     #   @return [Array<Types::TopicRuleDestinationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListTopicRuleDestinationsResponse < Struct.new(
@@ -11494,7 +11539,9 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token used to retrieve the next value.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] rule_disabled
@@ -11517,7 +11564,8 @@ module Aws::IoT
     #   @return [Array<Types::TopicRuleListItem>]
     #
     # @!attribute [rw] next_token
-    #   A token used to retrieve the next value.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListTopicRulesResponse < Struct.new(
@@ -11542,8 +11590,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11563,8 +11612,8 @@ module Aws::IoT
     #   @return [Array<Types::LogTargetConfiguration>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListV2LoggingLevelsResponse < Struct.new(

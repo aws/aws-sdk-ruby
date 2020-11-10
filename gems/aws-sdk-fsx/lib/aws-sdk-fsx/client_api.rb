@@ -22,7 +22,14 @@ module Aws::FSx
     AdministrativeActionFailureDetails = Shapes::StructureShape.new(name: 'AdministrativeActionFailureDetails')
     AdministrativeActionType = Shapes::StringShape.new(name: 'AdministrativeActionType')
     AdministrativeActions = Shapes::ListShape.new(name: 'AdministrativeActions')
+    Alias = Shapes::StructureShape.new(name: 'Alias')
+    AliasLifecycle = Shapes::StringShape.new(name: 'AliasLifecycle')
+    Aliases = Shapes::ListShape.new(name: 'Aliases')
+    AlternateDNSName = Shapes::StringShape.new(name: 'AlternateDNSName')
+    AlternateDNSNames = Shapes::ListShape.new(name: 'AlternateDNSNames')
     ArchivePath = Shapes::StringShape.new(name: 'ArchivePath')
+    AssociateFileSystemAliasesRequest = Shapes::StructureShape.new(name: 'AssociateFileSystemAliasesRequest')
+    AssociateFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'AssociateFileSystemAliasesResponse')
     AutoImportPolicyType = Shapes::StringShape.new(name: 'AutoImportPolicyType')
     AutomaticBackupRetentionDays = Shapes::IntegerShape.new(name: 'AutomaticBackupRetentionDays')
     Backup = Shapes::StructureShape.new(name: 'Backup')
@@ -84,11 +91,15 @@ module Aws::FSx
     DescribeBackupsResponse = Shapes::StructureShape.new(name: 'DescribeBackupsResponse')
     DescribeDataRepositoryTasksRequest = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksRequest')
     DescribeDataRepositoryTasksResponse = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksResponse')
+    DescribeFileSystemAliasesRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesRequest')
+    DescribeFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesResponse')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
     DescribeFileSystemsResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemsResponse')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryPassword = Shapes::StringShape.new(name: 'DirectoryPassword')
     DirectoryUserName = Shapes::StringShape.new(name: 'DirectoryUserName')
+    DisassociateFileSystemAliasesRequest = Shapes::StructureShape.new(name: 'DisassociateFileSystemAliasesRequest')
+    DisassociateFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'DisassociateFileSystemAliasesResponse')
     DnsIps = Shapes::ListShape.new(name: 'DnsIps')
     DriveCacheType = Shapes::StringShape.new(name: 'DriveCacheType')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
@@ -200,6 +211,22 @@ module Aws::FSx
     AdministrativeActionFailureDetails.struct_class = Types::AdministrativeActionFailureDetails
 
     AdministrativeActions.member = Shapes::ShapeRef.new(shape: AdministrativeAction)
+
+    Alias.add_member(:name, Shapes::ShapeRef.new(shape: AlternateDNSName, location_name: "Name"))
+    Alias.add_member(:lifecycle, Shapes::ShapeRef.new(shape: AliasLifecycle, location_name: "Lifecycle"))
+    Alias.struct_class = Types::Alias
+
+    Aliases.member = Shapes::ShapeRef.new(shape: Alias)
+
+    AlternateDNSNames.member = Shapes::ShapeRef.new(shape: AlternateDNSName)
+
+    AssociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    AssociateFileSystemAliasesRequest.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, required: true, location_name: "Aliases"))
+    AssociateFileSystemAliasesRequest.struct_class = Types::AssociateFileSystemAliasesRequest
+
+    AssociateFileSystemAliasesResponse.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
+    AssociateFileSystemAliasesResponse.struct_class = Types::AssociateFileSystemAliasesResponse
 
     Backup.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     Backup.add_member(:lifecycle, Shapes::ShapeRef.new(shape: BackupLifecycle, required: true, location_name: "Lifecycle"))
@@ -316,6 +343,7 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     CreateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     CreateFileSystemWindowsConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
+    CreateFileSystemWindowsConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
 
     DataRepositoryConfiguration.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
@@ -430,6 +458,16 @@ module Aws::FSx
     DescribeDataRepositoryTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeDataRepositoryTasksResponse.struct_class = Types::DescribeDataRepositoryTasksResponse
 
+    DescribeFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DescribeFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    DescribeFileSystemAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeFileSystemAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileSystemAliasesRequest.struct_class = Types::DescribeFileSystemAliasesRequest
+
+    DescribeFileSystemAliasesResponse.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
+    DescribeFileSystemAliasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileSystemAliasesResponse.struct_class = Types::DescribeFileSystemAliasesResponse
+
     DescribeFileSystemsRequest.add_member(:file_system_ids, Shapes::ShapeRef.new(shape: FileSystemIds, location_name: "FileSystemIds"))
     DescribeFileSystemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     DescribeFileSystemsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -438,6 +476,14 @@ module Aws::FSx
     DescribeFileSystemsResponse.add_member(:file_systems, Shapes::ShapeRef.new(shape: FileSystems, location_name: "FileSystems"))
     DescribeFileSystemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeFileSystemsResponse.struct_class = Types::DescribeFileSystemsResponse
+
+    DisassociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    DisassociateFileSystemAliasesRequest.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, required: true, location_name: "Aliases"))
+    DisassociateFileSystemAliasesRequest.struct_class = Types::DisassociateFileSystemAliasesRequest
+
+    DisassociateFileSystemAliasesResponse.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
+    DisassociateFileSystemAliasesResponse.struct_class = Types::DisassociateFileSystemAliasesResponse
 
     DnsIps.member = Shapes::ShapeRef.new(shape: IpAddress)
 
@@ -627,6 +673,7 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     WindowsFileSystemConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     WindowsFileSystemConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
+    WindowsFileSystemConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     WindowsFileSystemConfiguration.struct_class = Types::WindowsFileSystemConfiguration
 
 
@@ -647,6 +694,17 @@ module Aws::FSx
         "targetPrefix" => "AWSSimbaAPIService_v20180301",
         "uid" => "fsx-2018-03-01",
       }
+
+      api.add_operation(:associate_file_system_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateFileSystemAliases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateFileSystemAliasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateFileSystemAliasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
 
       api.add_operation(:cancel_data_repository_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelDataRepositoryTask"
@@ -789,6 +847,23 @@ module Aws::FSx
         )
       end)
 
+      api.add_operation(:describe_file_system_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFileSystemAliases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFileSystemAliasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFileSystemAliasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_file_systems, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeFileSystems"
         o.http_method = "POST"
@@ -804,6 +879,17 @@ module Aws::FSx
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:disassociate_file_system_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFileSystemAliases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFileSystemAliasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFileSystemAliasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

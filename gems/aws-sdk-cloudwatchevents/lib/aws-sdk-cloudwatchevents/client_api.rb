@@ -16,6 +16,13 @@ module Aws::CloudWatchEvents
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Action = Shapes::StringShape.new(name: 'Action')
     ActivateEventSourceRequest = Shapes::StructureShape.new(name: 'ActivateEventSourceRequest')
+    Archive = Shapes::StructureShape.new(name: 'Archive')
+    ArchiveArn = Shapes::StringShape.new(name: 'ArchiveArn')
+    ArchiveDescription = Shapes::StringShape.new(name: 'ArchiveDescription')
+    ArchiveName = Shapes::StringShape.new(name: 'ArchiveName')
+    ArchiveResponseList = Shapes::ListShape.new(name: 'ArchiveResponseList')
+    ArchiveState = Shapes::StringShape.new(name: 'ArchiveState')
+    ArchiveStateReason = Shapes::StringShape.new(name: 'ArchiveStateReason')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
     AwsVpcConfiguration = Shapes::StructureShape.new(name: 'AwsVpcConfiguration')
@@ -23,8 +30,12 @@ module Aws::CloudWatchEvents
     BatchParameters = Shapes::StructureShape.new(name: 'BatchParameters')
     BatchRetryStrategy = Shapes::StructureShape.new(name: 'BatchRetryStrategy')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelReplayRequest = Shapes::StructureShape.new(name: 'CancelReplayRequest')
+    CancelReplayResponse = Shapes::StructureShape.new(name: 'CancelReplayResponse')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
+    CreateArchiveRequest = Shapes::StructureShape.new(name: 'CreateArchiveRequest')
+    CreateArchiveResponse = Shapes::StructureShape.new(name: 'CreateArchiveResponse')
     CreateEventBusRequest = Shapes::StructureShape.new(name: 'CreateEventBusRequest')
     CreateEventBusResponse = Shapes::StructureShape.new(name: 'CreateEventBusResponse')
     CreatePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'CreatePartnerEventSourceRequest')
@@ -33,15 +44,21 @@ module Aws::CloudWatchEvents
     DbUser = Shapes::StringShape.new(name: 'DbUser')
     DeactivateEventSourceRequest = Shapes::StructureShape.new(name: 'DeactivateEventSourceRequest')
     DeadLetterConfig = Shapes::StructureShape.new(name: 'DeadLetterConfig')
+    DeleteArchiveRequest = Shapes::StructureShape.new(name: 'DeleteArchiveRequest')
+    DeleteArchiveResponse = Shapes::StructureShape.new(name: 'DeleteArchiveResponse')
     DeleteEventBusRequest = Shapes::StructureShape.new(name: 'DeleteEventBusRequest')
     DeletePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'DeletePartnerEventSourceRequest')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
+    DescribeArchiveRequest = Shapes::StructureShape.new(name: 'DescribeArchiveRequest')
+    DescribeArchiveResponse = Shapes::StructureShape.new(name: 'DescribeArchiveResponse')
     DescribeEventBusRequest = Shapes::StructureShape.new(name: 'DescribeEventBusRequest')
     DescribeEventBusResponse = Shapes::StructureShape.new(name: 'DescribeEventBusResponse')
     DescribeEventSourceRequest = Shapes::StructureShape.new(name: 'DescribeEventSourceRequest')
     DescribeEventSourceResponse = Shapes::StructureShape.new(name: 'DescribeEventSourceResponse')
     DescribePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'DescribePartnerEventSourceRequest')
     DescribePartnerEventSourceResponse = Shapes::StructureShape.new(name: 'DescribePartnerEventSourceResponse')
+    DescribeReplayRequest = Shapes::StructureShape.new(name: 'DescribeReplayRequest')
+    DescribeReplayResponse = Shapes::StructureShape.new(name: 'DescribeReplayResponse')
     DescribeRuleRequest = Shapes::StructureShape.new(name: 'DescribeRuleRequest')
     DescribeRuleResponse = Shapes::StructureShape.new(name: 'DescribeRuleResponse')
     DisableRuleRequest = Shapes::StructureShape.new(name: 'DisableRuleRequest')
@@ -66,6 +83,7 @@ module Aws::CloudWatchEvents
     HeaderParametersMap = Shapes::MapShape.new(name: 'HeaderParametersMap')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
     HttpParameters = Shapes::StructureShape.new(name: 'HttpParameters')
+    IllegalStatusException = Shapes::StructureShape.new(name: 'IllegalStatusException')
     InputTransformer = Shapes::StructureShape.new(name: 'InputTransformer')
     InputTransformerPathKey = Shapes::StringShape.new(name: 'InputTransformerPathKey')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -77,6 +95,8 @@ module Aws::CloudWatchEvents
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitMax100 = Shapes::IntegerShape.new(name: 'LimitMax100')
     LimitMin1 = Shapes::IntegerShape.new(name: 'LimitMin1')
+    ListArchivesRequest = Shapes::StructureShape.new(name: 'ListArchivesRequest')
+    ListArchivesResponse = Shapes::StructureShape.new(name: 'ListArchivesResponse')
     ListEventBusesRequest = Shapes::StructureShape.new(name: 'ListEventBusesRequest')
     ListEventBusesResponse = Shapes::StructureShape.new(name: 'ListEventBusesResponse')
     ListEventSourcesRequest = Shapes::StructureShape.new(name: 'ListEventSourcesRequest')
@@ -85,6 +105,8 @@ module Aws::CloudWatchEvents
     ListPartnerEventSourceAccountsResponse = Shapes::StructureShape.new(name: 'ListPartnerEventSourceAccountsResponse')
     ListPartnerEventSourcesRequest = Shapes::StructureShape.new(name: 'ListPartnerEventSourcesRequest')
     ListPartnerEventSourcesResponse = Shapes::StructureShape.new(name: 'ListPartnerEventSourcesResponse')
+    ListReplaysRequest = Shapes::StructureShape.new(name: 'ListReplaysRequest')
+    ListReplaysResponse = Shapes::StructureShape.new(name: 'ListReplaysResponse')
     ListRuleNamesByTargetRequest = Shapes::StructureShape.new(name: 'ListRuleNamesByTargetRequest')
     ListRuleNamesByTargetResponse = Shapes::StructureShape.new(name: 'ListRuleNamesByTargetResponse')
     ListRulesRequest = Shapes::StructureShape.new(name: 'ListRulesRequest')
@@ -93,6 +115,7 @@ module Aws::CloudWatchEvents
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTargetsByRuleRequest = Shapes::StructureShape.new(name: 'ListTargetsByRuleRequest')
     ListTargetsByRuleResponse = Shapes::StructureShape.new(name: 'ListTargetsByRuleResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedBy = Shapes::StringShape.new(name: 'ManagedBy')
     ManagedRuleException = Shapes::StructureShape.new(name: 'ManagedRuleException')
     MaximumEventAgeInSeconds = Shapes::IntegerShape.new(name: 'MaximumEventAgeInSeconds')
@@ -140,9 +163,19 @@ module Aws::CloudWatchEvents
     RemoveTargetsResponse = Shapes::StructureShape.new(name: 'RemoveTargetsResponse')
     RemoveTargetsResultEntry = Shapes::StructureShape.new(name: 'RemoveTargetsResultEntry')
     RemoveTargetsResultEntryList = Shapes::ListShape.new(name: 'RemoveTargetsResultEntryList')
+    Replay = Shapes::StructureShape.new(name: 'Replay')
+    ReplayArn = Shapes::StringShape.new(name: 'ReplayArn')
+    ReplayDescription = Shapes::StringShape.new(name: 'ReplayDescription')
+    ReplayDestination = Shapes::StructureShape.new(name: 'ReplayDestination')
+    ReplayDestinationFilters = Shapes::ListShape.new(name: 'ReplayDestinationFilters')
+    ReplayList = Shapes::ListShape.new(name: 'ReplayList')
+    ReplayName = Shapes::StringShape.new(name: 'ReplayName')
+    ReplayState = Shapes::StringShape.new(name: 'ReplayState')
+    ReplayStateReason = Shapes::StringShape.new(name: 'ReplayStateReason')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetentionDays = Shapes::IntegerShape.new(name: 'RetentionDays')
     RetryPolicy = Shapes::StructureShape.new(name: 'RetryPolicy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Rule = Shapes::StructureShape.new(name: 'Rule')
@@ -161,6 +194,8 @@ module Aws::CloudWatchEvents
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     Sql = Shapes::StringShape.new(name: 'Sql')
     SqsParameters = Shapes::StructureShape.new(name: 'SqsParameters')
+    StartReplayRequest = Shapes::StructureShape.new(name: 'StartReplayRequest')
+    StartReplayResponse = Shapes::StructureShape.new(name: 'StartReplayResponse')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
     StatementName = Shapes::StringShape.new(name: 'StatementName')
     String = Shapes::StringShape.new(name: 'String')
@@ -187,9 +222,23 @@ module Aws::CloudWatchEvents
     TransformerPaths = Shapes::MapShape.new(name: 'TransformerPaths')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateArchiveRequest = Shapes::StructureShape.new(name: 'UpdateArchiveRequest')
+    UpdateArchiveResponse = Shapes::StructureShape.new(name: 'UpdateArchiveResponse')
 
     ActivateEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
     ActivateEventSourceRequest.struct_class = Types::ActivateEventSourceRequest
+
+    Archive.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveName, location_name: "ArchiveName"))
+    Archive.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
+    Archive.add_member(:state, Shapes::ShapeRef.new(shape: ArchiveState, location_name: "State"))
+    Archive.add_member(:state_reason, Shapes::ShapeRef.new(shape: ArchiveStateReason, location_name: "StateReason"))
+    Archive.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    Archive.add_member(:size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "SizeBytes"))
+    Archive.add_member(:event_count, Shapes::ShapeRef.new(shape: Long, location_name: "EventCount"))
+    Archive.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Archive.struct_class = Types::Archive
+
+    ArchiveResponseList.member = Shapes::ShapeRef.new(shape: Archive)
 
     AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Subnets"))
     AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
@@ -208,12 +257,33 @@ module Aws::CloudWatchEvents
     BatchRetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "Attempts"))
     BatchRetryStrategy.struct_class = Types::BatchRetryStrategy
 
+    CancelReplayRequest.add_member(:replay_name, Shapes::ShapeRef.new(shape: ReplayName, required: true, location_name: "ReplayName"))
+    CancelReplayRequest.struct_class = Types::CancelReplayRequest
+
+    CancelReplayResponse.add_member(:replay_arn, Shapes::ShapeRef.new(shape: ReplayArn, location_name: "ReplayArn"))
+    CancelReplayResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReplayState, location_name: "State"))
+    CancelReplayResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: ReplayStateReason, location_name: "StateReason"))
+    CancelReplayResponse.struct_class = Types::CancelReplayResponse
+
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     Condition.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
     Condition.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
     Condition.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     Condition.struct_class = Types::Condition
+
+    CreateArchiveRequest.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveName, required: true, location_name: "ArchiveName"))
+    CreateArchiveRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventSourceArn"))
+    CreateArchiveRequest.add_member(:description, Shapes::ShapeRef.new(shape: ArchiveDescription, location_name: "Description"))
+    CreateArchiveRequest.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
+    CreateArchiveRequest.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    CreateArchiveRequest.struct_class = Types::CreateArchiveRequest
+
+    CreateArchiveResponse.add_member(:archive_arn, Shapes::ShapeRef.new(shape: ArchiveArn, location_name: "ArchiveArn"))
+    CreateArchiveResponse.add_member(:state, Shapes::ShapeRef.new(shape: ArchiveState, location_name: "State"))
+    CreateArchiveResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: ArchiveStateReason, location_name: "StateReason"))
+    CreateArchiveResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    CreateArchiveResponse.struct_class = Types::CreateArchiveResponse
 
     CreateEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, required: true, location_name: "Name"))
     CreateEventBusRequest.add_member(:event_source_name, Shapes::ShapeRef.new(shape: EventSourceName, location_name: "EventSourceName"))
@@ -236,6 +306,11 @@ module Aws::CloudWatchEvents
     DeadLetterConfig.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
     DeadLetterConfig.struct_class = Types::DeadLetterConfig
 
+    DeleteArchiveRequest.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveName, required: true, location_name: "ArchiveName"))
+    DeleteArchiveRequest.struct_class = Types::DeleteArchiveRequest
+
+    DeleteArchiveResponse.struct_class = Types::DeleteArchiveResponse
+
     DeleteEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, required: true, location_name: "Name"))
     DeleteEventBusRequest.struct_class = Types::DeleteEventBusRequest
 
@@ -247,6 +322,22 @@ module Aws::CloudWatchEvents
     DeleteRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
     DeleteRuleRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     DeleteRuleRequest.struct_class = Types::DeleteRuleRequest
+
+    DescribeArchiveRequest.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveName, required: true, location_name: "ArchiveName"))
+    DescribeArchiveRequest.struct_class = Types::DescribeArchiveRequest
+
+    DescribeArchiveResponse.add_member(:archive_arn, Shapes::ShapeRef.new(shape: ArchiveArn, location_name: "ArchiveArn"))
+    DescribeArchiveResponse.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveName, location_name: "ArchiveName"))
+    DescribeArchiveResponse.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
+    DescribeArchiveResponse.add_member(:description, Shapes::ShapeRef.new(shape: ArchiveDescription, location_name: "Description"))
+    DescribeArchiveResponse.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
+    DescribeArchiveResponse.add_member(:state, Shapes::ShapeRef.new(shape: ArchiveState, location_name: "State"))
+    DescribeArchiveResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: ArchiveStateReason, location_name: "StateReason"))
+    DescribeArchiveResponse.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    DescribeArchiveResponse.add_member(:size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "SizeBytes"))
+    DescribeArchiveResponse.add_member(:event_count, Shapes::ShapeRef.new(shape: Long, location_name: "EventCount"))
+    DescribeArchiveResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeArchiveResponse.struct_class = Types::DescribeArchiveResponse
 
     DescribeEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "Name"))
     DescribeEventBusRequest.struct_class = Types::DescribeEventBusRequest
@@ -273,6 +364,23 @@ module Aws::CloudWatchEvents
     DescribePartnerEventSourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
     DescribePartnerEventSourceResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     DescribePartnerEventSourceResponse.struct_class = Types::DescribePartnerEventSourceResponse
+
+    DescribeReplayRequest.add_member(:replay_name, Shapes::ShapeRef.new(shape: ReplayName, required: true, location_name: "ReplayName"))
+    DescribeReplayRequest.struct_class = Types::DescribeReplayRequest
+
+    DescribeReplayResponse.add_member(:replay_name, Shapes::ShapeRef.new(shape: ReplayName, location_name: "ReplayName"))
+    DescribeReplayResponse.add_member(:replay_arn, Shapes::ShapeRef.new(shape: ReplayArn, location_name: "ReplayArn"))
+    DescribeReplayResponse.add_member(:description, Shapes::ShapeRef.new(shape: ReplayDescription, location_name: "Description"))
+    DescribeReplayResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReplayState, location_name: "State"))
+    DescribeReplayResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: ReplayStateReason, location_name: "StateReason"))
+    DescribeReplayResponse.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
+    DescribeReplayResponse.add_member(:destination, Shapes::ShapeRef.new(shape: ReplayDestination, location_name: "Destination"))
+    DescribeReplayResponse.add_member(:event_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventStartTime"))
+    DescribeReplayResponse.add_member(:event_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventEndTime"))
+    DescribeReplayResponse.add_member(:event_last_replayed_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventLastReplayedTime"))
+    DescribeReplayResponse.add_member(:replay_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReplayStartTime"))
+    DescribeReplayResponse.add_member(:replay_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReplayEndTime"))
+    DescribeReplayResponse.struct_class = Types::DescribeReplayResponse
 
     DescribeRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     DescribeRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
@@ -332,6 +440,8 @@ module Aws::CloudWatchEvents
     HttpParameters.add_member(:query_string_parameters, Shapes::ShapeRef.new(shape: QueryStringParametersMap, location_name: "QueryStringParameters"))
     HttpParameters.struct_class = Types::HttpParameters
 
+    IllegalStatusException.struct_class = Types::IllegalStatusException
+
     InputTransformer.add_member(:input_paths_map, Shapes::ShapeRef.new(shape: TransformerPaths, location_name: "InputPathsMap"))
     InputTransformer.add_member(:input_template, Shapes::ShapeRef.new(shape: TransformerInput, required: true, location_name: "InputTemplate"))
     InputTransformer.struct_class = Types::InputTransformer
@@ -346,6 +456,17 @@ module Aws::CloudWatchEvents
     KinesisParameters.struct_class = Types::KinesisParameters
 
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListArchivesRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: ArchiveName, location_name: "NamePrefix"))
+    ListArchivesRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
+    ListArchivesRequest.add_member(:state, Shapes::ShapeRef.new(shape: ArchiveState, location_name: "State"))
+    ListArchivesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListArchivesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitMax100, location_name: "Limit"))
+    ListArchivesRequest.struct_class = Types::ListArchivesRequest
+
+    ListArchivesResponse.add_member(:archives, Shapes::ShapeRef.new(shape: ArchiveResponseList, location_name: "Archives"))
+    ListArchivesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListArchivesResponse.struct_class = Types::ListArchivesResponse
 
     ListEventBusesRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: EventBusName, location_name: "NamePrefix"))
     ListEventBusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -382,6 +503,17 @@ module Aws::CloudWatchEvents
     ListPartnerEventSourcesResponse.add_member(:partner_event_sources, Shapes::ShapeRef.new(shape: PartnerEventSourceList, location_name: "PartnerEventSources"))
     ListPartnerEventSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPartnerEventSourcesResponse.struct_class = Types::ListPartnerEventSourcesResponse
+
+    ListReplaysRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: ReplayName, location_name: "NamePrefix"))
+    ListReplaysRequest.add_member(:state, Shapes::ShapeRef.new(shape: ReplayState, location_name: "State"))
+    ListReplaysRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
+    ListReplaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListReplaysRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitMax100, location_name: "Limit"))
+    ListReplaysRequest.struct_class = Types::ListReplaysRequest
+
+    ListReplaysResponse.add_member(:replays, Shapes::ShapeRef.new(shape: ReplayList, location_name: "Replays"))
+    ListReplaysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListReplaysResponse.struct_class = Types::ListReplaysResponse
 
     ListRuleNamesByTargetRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "TargetArn"))
     ListRuleNamesByTargetRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
@@ -559,6 +691,25 @@ module Aws::CloudWatchEvents
 
     RemoveTargetsResultEntryList.member = Shapes::ShapeRef.new(shape: RemoveTargetsResultEntry)
 
+    Replay.add_member(:replay_name, Shapes::ShapeRef.new(shape: ReplayName, location_name: "ReplayName"))
+    Replay.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
+    Replay.add_member(:state, Shapes::ShapeRef.new(shape: ReplayState, location_name: "State"))
+    Replay.add_member(:state_reason, Shapes::ShapeRef.new(shape: ReplayStateReason, location_name: "StateReason"))
+    Replay.add_member(:event_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventStartTime"))
+    Replay.add_member(:event_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventEndTime"))
+    Replay.add_member(:event_last_replayed_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventLastReplayedTime"))
+    Replay.add_member(:replay_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReplayStartTime"))
+    Replay.add_member(:replay_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReplayEndTime"))
+    Replay.struct_class = Types::Replay
+
+    ReplayDestination.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    ReplayDestination.add_member(:filter_arns, Shapes::ShapeRef.new(shape: ReplayDestinationFilters, location_name: "FilterArns"))
+    ReplayDestination.struct_class = Types::ReplayDestination
+
+    ReplayDestinationFilters.member = Shapes::ShapeRef.new(shape: Arn)
+
+    ReplayList.member = Shapes::ShapeRef.new(shape: Replay)
+
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -595,6 +746,20 @@ module Aws::CloudWatchEvents
 
     SqsParameters.add_member(:message_group_id, Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
     SqsParameters.struct_class = Types::SqsParameters
+
+    StartReplayRequest.add_member(:replay_name, Shapes::ShapeRef.new(shape: ReplayName, required: true, location_name: "ReplayName"))
+    StartReplayRequest.add_member(:description, Shapes::ShapeRef.new(shape: ReplayDescription, location_name: "Description"))
+    StartReplayRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventSourceArn"))
+    StartReplayRequest.add_member(:event_start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EventStartTime"))
+    StartReplayRequest.add_member(:event_end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EventEndTime"))
+    StartReplayRequest.add_member(:destination, Shapes::ShapeRef.new(shape: ReplayDestination, required: true, location_name: "Destination"))
+    StartReplayRequest.struct_class = Types::StartReplayRequest
+
+    StartReplayResponse.add_member(:replay_arn, Shapes::ShapeRef.new(shape: ReplayArn, location_name: "ReplayArn"))
+    StartReplayResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReplayState, location_name: "State"))
+    StartReplayResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: ReplayStateReason, location_name: "StateReason"))
+    StartReplayResponse.add_member(:replay_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReplayStartTime"))
+    StartReplayResponse.struct_class = Types::StartReplayResponse
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -649,6 +814,18 @@ module Aws::CloudWatchEvents
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateArchiveRequest.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveName, required: true, location_name: "ArchiveName"))
+    UpdateArchiveRequest.add_member(:description, Shapes::ShapeRef.new(shape: ArchiveDescription, location_name: "Description"))
+    UpdateArchiveRequest.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
+    UpdateArchiveRequest.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    UpdateArchiveRequest.struct_class = Types::UpdateArchiveRequest
+
+    UpdateArchiveResponse.add_member(:archive_arn, Shapes::ShapeRef.new(shape: ArchiveArn, location_name: "ArchiveArn"))
+    UpdateArchiveResponse.add_member(:state, Shapes::ShapeRef.new(shape: ArchiveState, location_name: "State"))
+    UpdateArchiveResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: ArchiveStateReason, location_name: "StateReason"))
+    UpdateArchiveResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    UpdateArchiveResponse.struct_class = Types::UpdateArchiveResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -678,6 +855,32 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
+      end)
+
+      api.add_operation(:cancel_replay, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelReplay"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelReplayRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelReplayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:create_archive, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateArchive"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateArchiveRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateArchiveResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventPatternException)
       end)
 
       api.add_operation(:create_event_bus, Seahorse::Model::Operation.new.tap do |o|
@@ -721,6 +924,17 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
+      api.add_operation(:delete_archive, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteArchive"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteArchiveRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteArchiveResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:delete_event_bus, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEventBus"
         o.http_method = "POST"
@@ -752,6 +966,17 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_archive, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeArchive"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeArchiveRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeArchiveResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:describe_event_bus, Seahorse::Model::Operation.new.tap do |o|
@@ -786,6 +1011,16 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
+      api.add_operation(:describe_replay, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReplay"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReplayRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReplayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:describe_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRule"
         o.http_method = "POST"
@@ -817,6 +1052,16 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:list_archives, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListArchives"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListArchivesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListArchivesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -858,6 +1103,15 @@ module Aws::CloudWatchEvents
         o.output = Shapes::ShapeRef.new(shape: ListPartnerEventSourcesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
+      end)
+
+      api.add_operation(:list_replays, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReplays"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReplaysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReplaysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:list_rule_names_by_target, Seahorse::Model::Operation.new.tap do |o|
@@ -981,6 +1235,19 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:start_replay, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartReplay"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartReplayRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartReplayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventPatternException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1013,6 +1280,19 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
+      end)
+
+      api.add_operation(:update_archive, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateArchive"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateArchiveRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateArchiveResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventPatternException)
       end)
     end
 

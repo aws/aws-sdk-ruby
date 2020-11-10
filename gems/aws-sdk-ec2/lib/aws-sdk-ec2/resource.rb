@@ -521,18 +521,15 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @option options [Types::EnclaveOptionsRequest] :enclave_options
     #   Indicates whether the instance is enabled for AWS Nitro Enclaves. For
-    #   more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   more information, see [ What is AWS Nitro Enclaves?][1] in the *AWS
+    #   Nitro Enclaves User Guide*.
     #
     #   You can't enable AWS Nitro Enclaves and hibernation on the same
-    #   instance. For more information about AWS Nitro Enclaves requirements,
-    #   see [ AWS Nitro Enclaves][2] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -1202,15 +1199,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to

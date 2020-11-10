@@ -871,12 +871,13 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] next_token
-    #   Reserved for future use.
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of rules.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   This parameter is not currently used. Reserved for future use. If it
-    #   is used in the future, the maximum value might be different.
+    #   The maximum number of results to return in one operation. If you
+    #   omit this parameter, the default of 500 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeInsightRulesInput AWS API Documentation
@@ -889,7 +890,8 @@ module Aws::CloudWatch
     end
 
     # @!attribute [rw] next_token
-    #   Reserved for future use.
+    #   If this parameter is present, it is a token that marks the start of
+    #   the next batch of returned results.
     #   @return [String]
     #
     # @!attribute [rw] insight_rules
@@ -925,7 +927,8 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the dimension.
+    #   The value of the dimension. Dimension values cannot contain blank
+    #   spaces or non-ASCII characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Dimension AWS API Documentation
@@ -1354,8 +1357,8 @@ module Aws::CloudWatch
     #   @return [Time]
     #
     # @!attribute [rw] next_token
-    #   Include this value, if it was returned by the previous call, to get
-    #   the next set of data points.
+    #   Include this value, if it was returned by the previous
+    #   `GetMetricData` operation, to get the next set of data points.
     #   @return [String]
     #
     # @!attribute [rw] scan_by
@@ -2006,15 +2009,18 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] namespace
-    #   The namespace to filter against.
+    #   The metric namespace to filter against. Only the namespace that
+    #   matches exactly will be returned.
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric to filter against.
+    #   The name of the metric to filter against. Only the metrics with
+    #   names that match exactly will be returned.
     #   @return [String]
     #
     # @!attribute [rw] dimensions
-    #   The dimensions to filter against.
+    #   The dimensions to filter against. Only the dimensions that match
+    #   exactly will be returned.
     #   @return [Array<Types::DimensionFilter>]
     #
     # @!attribute [rw] next_token
@@ -2294,7 +2300,7 @@ module Aws::CloudWatch
     #   metric math expression. Each structure either retrieves a metric or
     #   performs a math expression. One item in the Metrics array is the
     #   math expression that the alarm watches. This expression by
-    #   designated by having `ReturnValue` set to true.
+    #   designated by having `ReturnData` set to true.
     #   @return [Array<Types::MetricDataQuery>]
     #
     # @!attribute [rw] threshold_metric_id
@@ -2823,8 +2829,6 @@ module Aws::CloudWatch
     #
     #   The configuration can also include the time zone to use for the
     #   metric.
-    #
-    #   You can in
     #   @return [Types::AnomalyDetectorConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAnomalyDetectorInput AWS API Documentation
@@ -3414,7 +3418,7 @@ module Aws::CloudWatch
     #   performs a math expression.
     #
     #   One item in the `Metrics` array is the expression that the alarm
-    #   watches. You designate this expression by setting `ReturnValue` to
+    #   watches. You designate this expression by setting `ReturnData` to
     #   true for this object in the array. For more information, see
     #   [MetricDataQuery][1].
     #

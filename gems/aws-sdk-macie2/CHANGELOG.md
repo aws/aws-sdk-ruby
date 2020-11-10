@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-11-09)
+------------------
+
+* Feature - Sensitive data findings in Amazon Macie now include enhanced location data for Apache Avro object containers and Apache Parquet files.
+
 1.15.0 (2020-10-30)
 ------------------
 

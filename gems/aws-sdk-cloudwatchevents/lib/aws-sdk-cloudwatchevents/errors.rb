@@ -28,6 +28,7 @@ module Aws::CloudWatchEvents
   #
   # ## Error Classes
   # * {ConcurrentModificationException}
+  # * {IllegalStatusException}
   # * {InternalException}
   # * {InvalidEventPatternException}
   # * {InvalidStateException}
@@ -49,6 +50,16 @@ module Aws::CloudWatchEvents
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudWatchEvents::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class IllegalStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchEvents::Types::IllegalStatusException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

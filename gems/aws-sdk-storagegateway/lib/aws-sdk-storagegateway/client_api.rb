@@ -37,6 +37,8 @@ module Aws::StorageGateway
     AutomaticTapeCreationRules = Shapes::ListShape.new(name: 'AutomaticTapeCreationRules')
     AvailabilityMonitorTestStatus = Shapes::StringShape.new(name: 'AvailabilityMonitorTestStatus')
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
+    BandwidthRateLimitInterval = Shapes::StructureShape.new(name: 'BandwidthRateLimitInterval')
+    BandwidthRateLimitIntervals = Shapes::ListShape.new(name: 'BandwidthRateLimitIntervals')
     BandwidthType = Shapes::StringShape.new(name: 'BandwidthType')
     BandwidthUploadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthUploadRateLimit')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -75,6 +77,7 @@ module Aws::StorageGateway
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     DayOfMonth = Shapes::IntegerShape.new(name: 'DayOfMonth')
     DayOfWeek = Shapes::IntegerShape.new(name: 'DayOfWeek')
+    DaysOfWeek = Shapes::ListShape.new(name: 'DaysOfWeek')
     DeleteAutomaticTapeCreationPolicyInput = Shapes::StructureShape.new(name: 'DeleteAutomaticTapeCreationPolicyInput')
     DeleteAutomaticTapeCreationPolicyOutput = Shapes::StructureShape.new(name: 'DeleteAutomaticTapeCreationPolicyOutput')
     DeleteBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitInput')
@@ -100,6 +103,8 @@ module Aws::StorageGateway
     DescribeAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestOutput')
     DescribeBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitInput')
     DescribeBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitOutput')
+    DescribeBandwidthRateLimitScheduleInput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitScheduleInput')
+    DescribeBandwidthRateLimitScheduleOutput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitScheduleOutput')
     DescribeCacheInput = Shapes::StructureShape.new(name: 'DescribeCacheInput')
     DescribeCacheOutput = Shapes::StructureShape.new(name: 'DescribeCacheOutput')
     DescribeCachediSCSIVolumesInput = Shapes::StructureShape.new(name: 'DescribeCachediSCSIVolumesInput')
@@ -312,6 +317,8 @@ module Aws::StorageGateway
     UpdateAutomaticTapeCreationPolicyOutput = Shapes::StructureShape.new(name: 'UpdateAutomaticTapeCreationPolicyOutput')
     UpdateBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitInput')
     UpdateBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitOutput')
+    UpdateBandwidthRateLimitScheduleInput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitScheduleInput')
+    UpdateBandwidthRateLimitScheduleOutput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitScheduleOutput')
     UpdateChapCredentialsInput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsInput')
     UpdateChapCredentialsOutput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsOutput')
     UpdateGatewayInformationInput = Shapes::StructureShape.new(name: 'UpdateGatewayInformationInput')
@@ -432,6 +439,17 @@ module Aws::StorageGateway
     AutomaticTapeCreationRule.struct_class = Types::AutomaticTapeCreationRule
 
     AutomaticTapeCreationRules.member = Shapes::ShapeRef.new(shape: AutomaticTapeCreationRule)
+
+    BandwidthRateLimitInterval.add_member(:start_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartHourOfDay"))
+    BandwidthRateLimitInterval.add_member(:start_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "StartMinuteOfHour"))
+    BandwidthRateLimitInterval.add_member(:end_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "EndHourOfDay"))
+    BandwidthRateLimitInterval.add_member(:end_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "EndMinuteOfHour"))
+    BandwidthRateLimitInterval.add_member(:days_of_week, Shapes::ShapeRef.new(shape: DaysOfWeek, required: true, location_name: "DaysOfWeek"))
+    BandwidthRateLimitInterval.add_member(:average_upload_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
+    BandwidthRateLimitInterval.add_member(:average_download_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
+    BandwidthRateLimitInterval.struct_class = Types::BandwidthRateLimitInterval
+
+    BandwidthRateLimitIntervals.member = Shapes::ShapeRef.new(shape: BandwidthRateLimitInterval)
 
     CacheAttributes.add_member(:cache_stale_timeout_in_seconds, Shapes::ShapeRef.new(shape: CacheStaleTimeoutInSeconds, location_name: "CacheStaleTimeoutInSeconds"))
     CacheAttributes.struct_class = Types::CacheAttributes
@@ -615,6 +633,8 @@ module Aws::StorageGateway
     CreateTapesOutput.add_member(:tape_arns, Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
     CreateTapesOutput.struct_class = Types::CreateTapesOutput
 
+    DaysOfWeek.member = Shapes::ShapeRef.new(shape: DayOfWeek)
+
     DeleteAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DeleteAutomaticTapeCreationPolicyInput.struct_class = Types::DeleteAutomaticTapeCreationPolicyInput
 
@@ -697,6 +717,13 @@ module Aws::StorageGateway
     DescribeBandwidthRateLimitOutput.add_member(:average_upload_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
     DescribeBandwidthRateLimitOutput.add_member(:average_download_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
     DescribeBandwidthRateLimitOutput.struct_class = Types::DescribeBandwidthRateLimitOutput
+
+    DescribeBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    DescribeBandwidthRateLimitScheduleInput.struct_class = Types::DescribeBandwidthRateLimitScheduleInput
+
+    DescribeBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DescribeBandwidthRateLimitScheduleOutput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals"))
+    DescribeBandwidthRateLimitScheduleOutput.struct_class = Types::DescribeBandwidthRateLimitScheduleOutput
 
     DescribeCacheInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DescribeCacheInput.struct_class = Types::DescribeCacheInput
@@ -1285,6 +1312,13 @@ module Aws::StorageGateway
     UpdateBandwidthRateLimitOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     UpdateBandwidthRateLimitOutput.struct_class = Types::UpdateBandwidthRateLimitOutput
 
+    UpdateBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    UpdateBandwidthRateLimitScheduleInput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, required: true, location_name: "BandwidthRateLimitIntervals"))
+    UpdateBandwidthRateLimitScheduleInput.struct_class = Types::UpdateBandwidthRateLimitScheduleInput
+
+    UpdateBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateBandwidthRateLimitScheduleOutput.struct_class = Types::UpdateBandwidthRateLimitScheduleOutput
+
     UpdateChapCredentialsInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, required: true, location_name: "TargetARN"))
     UpdateChapCredentialsInput.add_member(:secret_to_authenticate_initiator, Shapes::ShapeRef.new(shape: ChapSecret, required: true, location_name: "SecretToAuthenticateInitiator"))
     UpdateChapCredentialsInput.add_member(:initiator_name, Shapes::ShapeRef.new(shape: IqnName, required: true, location_name: "InitiatorName"))
@@ -1756,6 +1790,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_bandwidth_rate_limit_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBandwidthRateLimitSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitScheduleInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_cache, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCache"
         o.http_method = "POST"
@@ -2046,6 +2090,12 @@ module Aws::StorageGateway
         o.output = Shapes::ShapeRef.new(shape: ListTapePoolsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_tapes, Seahorse::Model::Operation.new.tap do |o|
@@ -2226,6 +2276,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_bandwidth_rate_limit_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBandwidthRateLimitSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitScheduleInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitScheduleOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

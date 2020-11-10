@@ -511,6 +511,7 @@ module Aws::MediaLive
     ReservationVideoQuality = Shapes::StringShape.new(name: 'ReservationVideoQuality')
     ResourceConflict = Shapes::StructureShape.new(name: 'ResourceConflict')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    RtmpAdMarkers = Shapes::StringShape.new(name: 'RtmpAdMarkers')
     RtmpCacheFullBehavior = Shapes::StringShape.new(name: 'RtmpCacheFullBehavior')
     RtmpCaptionData = Shapes::StringShape.new(name: 'RtmpCaptionData')
     RtmpCaptionInfoDestinationSettings = Shapes::StructureShape.new(name: 'RtmpCaptionInfoDestinationSettings')
@@ -731,6 +732,7 @@ module Aws::MediaLive
     __listOfPipelineDetail = Shapes::ListShape.new(name: '__listOfPipelineDetail')
     __listOfPipelinePauseStateSettings = Shapes::ListShape.new(name: '__listOfPipelinePauseStateSettings')
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
+    __listOfRtmpAdMarkers = Shapes::ListShape.new(name: '__listOfRtmpAdMarkers')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
     __listOfTransferringInputDeviceSummary = Shapes::ListShape.new(name: '__listOfTransferringInputDeviceSummary')
@@ -2506,6 +2508,7 @@ module Aws::MediaLive
 
     RtmpCaptionInfoDestinationSettings.struct_class = Types::RtmpCaptionInfoDestinationSettings
 
+    RtmpGroupSettings.add_member(:ad_markers, Shapes::ShapeRef.new(shape: __listOfRtmpAdMarkers, location_name: "adMarkers"))
     RtmpGroupSettings.add_member(:authentication_scheme, Shapes::ShapeRef.new(shape: AuthenticationScheme, location_name: "authenticationScheme"))
     RtmpGroupSettings.add_member(:cache_full_behavior, Shapes::ShapeRef.new(shape: RtmpCacheFullBehavior, location_name: "cacheFullBehavior"))
     RtmpGroupSettings.add_member(:cache_length, Shapes::ShapeRef.new(shape: __integerMin30, location_name: "cacheLength"))
@@ -3032,6 +3035,8 @@ module Aws::MediaLive
     __listOfPipelinePauseStateSettings.member = Shapes::ShapeRef.new(shape: PipelinePauseStateSettings)
 
     __listOfReservation.member = Shapes::ShapeRef.new(shape: Reservation)
+
+    __listOfRtmpAdMarkers.member = Shapes::ShapeRef.new(shape: RtmpAdMarkers)
 
     __listOfScheduleAction.member = Shapes::ShapeRef.new(shape: ScheduleAction)
 

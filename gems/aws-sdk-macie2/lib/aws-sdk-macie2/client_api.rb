@@ -1033,6 +1033,7 @@ module Aws::Macie2
 
     Ranges.member = Shapes::ShapeRef.new(shape: Range)
 
+    Record.add_member(:json_path, Shapes::ShapeRef.new(shape: __string, location_name: "jsonPath"))
     Record.add_member(:record_index, Shapes::ShapeRef.new(shape: __long, location_name: "recordIndex"))
     Record.struct_class = Types::Record
 

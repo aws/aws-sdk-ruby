@@ -44,7 +44,7 @@ module Aws::RDS
     end
     alias :db_snapshot_identifier :snapshot_id
 
-    # Specifies when the snapshot was taken in Coodinated Universal Time
+    # Specifies when the snapshot was taken in Coordinated Universal Time
     # (UTC).
     # @return [Time]
     def snapshot_create_time
@@ -789,8 +789,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled. For information about the supported DB engines,
-    #   see CreateDBInstance.
+    #   mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon

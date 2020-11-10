@@ -454,6 +454,13 @@ module Aws::Lambda
     #         bisect_batch_on_function_error: false,
     #         maximum_retry_attempts: 1,
     #         topics: ["Topic"],
+    #         queues: ["Queue"],
+    #         source_access_configurations: [
+    #           {
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH
+    #             uri: "Arn",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] event_source_arn
@@ -553,6 +560,24 @@ module Aws::Lambda
     #   (MSK) The name of the Kafka topic.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] queues
+    #   (MQ) The name of the Amazon MQ broker destination queue to consume.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_access_configurations
+    #   (MQ) The Secrets Manager secret that stores your broker credentials.
+    #   To store your secret, use the following format: ` \{ "username":
+    #   "your username", "password": "your password" \}`
+    #
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
+    #   you can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #   @return [Array<Types::SourceAccessConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
     class CreateEventSourceMappingRequest < Struct.new(
@@ -568,7 +593,9 @@ module Aws::Lambda
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts,
-      :topics)
+      :topics,
+      :queues,
+      :source_access_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1277,12 +1304,12 @@ module Aws::Lambda
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   (Streams) The maximum amount of time to gather records before
-    #   invoking the function, in seconds.
+    #   invoking the function, in seconds. The default value is zero.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
     #   (Streams) The number of batches to process from each shard
-    #   concurrently.
+    #   concurrently. The default value is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] event_source_arn
@@ -1320,22 +1347,42 @@ module Aws::Lambda
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] topics
-    #   (MSK) The name of the Kafka topic.
+    #   (MSK) The name of the Kafka topic to consume.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] queues
+    #   (MQ) The name of the Amazon MQ broker destination queue to consume.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_access_configurations
+    #   (MQ) The Secrets Manager secret that stores your broker credentials.
+    #   To store your secret, use the following format: ` \{ "username":
+    #   "your username", "password": "your password" \}`
+    #
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
+    #   you can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #   @return [Array<Types::SourceAccessConfiguration>]
+    #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams) The maximum age of a record that Lambda sends to a
-    #   function for processing.
+    #   (Streams) Discard records older than the specified age. The default
+    #   value is infinite (-1). When set to infinite (-1), failed records
+    #   are retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
     #   (Streams) If the function returns an error, split the batch in two
-    #   and retry.
+    #   and retry. The default value is false.
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams) The maximum number of times to retry when the function
-    #   returns an error.
+    #   (Streams) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records are retried until the record expires.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
@@ -1353,6 +1400,8 @@ module Aws::Lambda
       :state_transition_reason,
       :destination_config,
       :topics,
+      :queues,
+      :source_access_configurations,
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts)
@@ -3991,6 +4040,47 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # (MQ) The Secrets Manager secret that stores your broker credentials.
+    # To store your secret, use the following format: ` \{ "username": "your
+    # username", "password": "your password" \}`
+    #
+    # @note When making an API call, you may pass SourceAccessConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
+    #         uri: "Arn",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
+    #   you can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
+    #   you can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SourceAccessConfiguration AWS API Documentation
+    #
+    class SourceAccessConfiguration < Struct.new(
+      :type,
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # AWS Lambda was not able to set up VPC access for the Lambda function
     # because one or more configured subnets has no available IP addresses.
     #
@@ -4232,6 +4322,12 @@ module Aws::Lambda
     #         bisect_batch_on_function_error: false,
     #         maximum_retry_attempts: 1,
     #         parallelization_factor: 1,
+    #         source_access_configurations: [
+    #           {
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH
+    #             uri: "Arn",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] uuid
@@ -4306,6 +4402,20 @@ module Aws::Lambda
     #   concurrently.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_access_configurations
+    #   (MQ) The Secrets Manager secret that stores your broker credentials.
+    #   To store your secret, use the following format: ` \{ "username":
+    #   "your username", "password": "your password" \}`
+    #
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
+    #   you can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #   @return [Array<Types::SourceAccessConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
     #
     class UpdateEventSourceMappingRequest < Struct.new(
@@ -4318,7 +4428,8 @@ module Aws::Lambda
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts,
-      :parallelization_factor)
+      :parallelization_factor,
+      :source_access_configurations)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-11-09)
+------------------
+
+* Feature - This release adds supports for exporting Amazon DynamoDB table data to Amazon S3 to perform analytics at any scale.
+
+1.56.0 (2020-11-05)
+------------------
+
+* Feature - This release adds a new ReplicaStatus INACCESSIBLE_ENCRYPTION_CREDENTIALS for the Table description, indicating when a key used to encrypt a regional replica table is not accessible.
+
 1.55.0 (2020-10-05)
 ------------------
 

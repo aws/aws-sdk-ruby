@@ -132,6 +132,8 @@ module Aws::ECS
     EnvironmentFileType = Shapes::StringShape.new(name: 'EnvironmentFileType')
     EnvironmentFiles = Shapes::ListShape.new(name: 'EnvironmentFiles')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    FSxWindowsFileServerAuthorizationConfig = Shapes::StructureShape.new(name: 'FSxWindowsFileServerAuthorizationConfig')
+    FSxWindowsFileServerVolumeConfiguration = Shapes::StructureShape.new(name: 'FSxWindowsFileServerVolumeConfiguration')
     Failure = Shapes::StructureShape.new(name: 'Failure')
     Failures = Shapes::ListShape.new(name: 'Failures')
     FirelensConfiguration = Shapes::StructureShape.new(name: 'FirelensConfiguration')
@@ -795,6 +797,15 @@ module Aws::ECS
     EnvironmentFiles.member = Shapes::ShapeRef.new(shape: EnvironmentFile)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
+    FSxWindowsFileServerAuthorizationConfig.add_member(:credentials_parameter, Shapes::ShapeRef.new(shape: String, required: true, location_name: "credentialsParameter"))
+    FSxWindowsFileServerAuthorizationConfig.add_member(:domain, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domain"))
+    FSxWindowsFileServerAuthorizationConfig.struct_class = Types::FSxWindowsFileServerAuthorizationConfig
+
+    FSxWindowsFileServerVolumeConfiguration.add_member(:file_system_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fileSystemId"))
+    FSxWindowsFileServerVolumeConfiguration.add_member(:root_directory, Shapes::ShapeRef.new(shape: String, required: true, location_name: "rootDirectory"))
+    FSxWindowsFileServerVolumeConfiguration.add_member(:authorization_config, Shapes::ShapeRef.new(shape: FSxWindowsFileServerAuthorizationConfig, required: true, location_name: "authorizationConfig"))
+    FSxWindowsFileServerVolumeConfiguration.struct_class = Types::FSxWindowsFileServerVolumeConfiguration
 
     Failure.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     Failure.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
@@ -1515,6 +1526,7 @@ module Aws::ECS
     Volume.add_member(:host, Shapes::ShapeRef.new(shape: HostVolumeProperties, location_name: "host"))
     Volume.add_member(:docker_volume_configuration, Shapes::ShapeRef.new(shape: DockerVolumeConfiguration, location_name: "dockerVolumeConfiguration"))
     Volume.add_member(:efs_volume_configuration, Shapes::ShapeRef.new(shape: EFSVolumeConfiguration, location_name: "efsVolumeConfiguration"))
+    Volume.add_member(:fsx_windows_file_server_volume_configuration, Shapes::ShapeRef.new(shape: FSxWindowsFileServerVolumeConfiguration, location_name: "fsxWindowsFileServerVolumeConfiguration"))
     Volume.struct_class = Types::Volume
 
     VolumeFrom.add_member(:source_container, Shapes::ShapeRef.new(shape: String, location_name: "sourceContainer"))

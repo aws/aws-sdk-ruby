@@ -3286,6 +3286,7 @@ module Aws::MediaLive
     #                 multiplex_group_settings: {
     #                 },
     #                 rtmp_group_settings: {
+    #                   ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                   cache_length: 1,
@@ -6394,6 +6395,7 @@ module Aws::MediaLive
     #               multiplex_group_settings: {
     #               },
     #               rtmp_group_settings: {
+    #                 ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #                 authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #                 cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                 cache_length: 1,
@@ -13161,6 +13163,7 @@ module Aws::MediaLive
     #           multiplex_group_settings: {
     #           },
     #           rtmp_group_settings: {
+    #             ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #             authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #             cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #             cache_length: 1,
@@ -13555,6 +13558,7 @@ module Aws::MediaLive
     #         multiplex_group_settings: {
     #         },
     #         rtmp_group_settings: {
+    #           ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #           authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #           cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #           cache_length: 1,
@@ -14369,6 +14373,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #         authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #         cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #         cache_length: 1,
@@ -14376,6 +14381,12 @@ module Aws::MediaLive
     #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #         restart_delay: 1,
     #       }
+    #
+    # @!attribute [rw] ad_markers
+    #   Choose the ad marker type for this output group. MediaLive will
+    #   create a message based on the content of each SCTE-35 message,
+    #   format it for that marker type, and insert it in the datastream.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] authentication_scheme
     #   Authentication scheme to use when connecting with CDN
@@ -14421,6 +14432,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpGroupSettings AWS API Documentation
     #
     class RtmpGroupSettings < Struct.new(
+      :ad_markers,
       :authentication_scheme,
       :cache_full_behavior,
       :cache_length,
@@ -16932,6 +16944,7 @@ module Aws::MediaLive
     #                 multiplex_group_settings: {
     #                 },
     #                 rtmp_group_settings: {
+    #                   ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
     #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                   cache_length: 1,

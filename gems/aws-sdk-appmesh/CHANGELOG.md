@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-11-05)
+------------------
+
+* Feature - This release adds circuit breaking capabilities to your mesh with connection pooling and outlier detection support.
+
 1.31.0 (2020-09-30)
 ------------------
 

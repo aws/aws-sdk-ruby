@@ -775,8 +775,8 @@ module Aws::ECS
     #   task definition to run in your service. If a `revision` is not
     #   specified, the latest `ACTIVE` revision is used.
     #
-    #   A task definition must be specified if the service is using the `ECS`
-    #   deployment controller.
+    #   A task definition must be specified if the service is using either the
+    #   `ECS` or `CODE_DEPLOY` deployment controllers.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancers to use with
@@ -785,11 +785,11 @@ module Aws::ECS
     #
     #   If the service is using the rolling update (`ECS`) deployment
     #   controller and using either an Application Load Balancer or Network
-    #   Load Balancer, you can specify multiple target groups to attach to the
-    #   service. The service-linked role is required for services that make
-    #   use of multiple target groups. For more information, see [Using
-    #   Service-Linked Roles for Amazon ECS][2] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   Load Balancer, you must specify one or more target group ARNs to
+    #   attach to the service. The service-linked role is required for
+    #   services that make use of multiple target groups. For more
+    #   information, see [Using Service-Linked Roles for Amazon ECS][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -812,15 +812,17 @@ module Aws::ECS
     #   For Application Load Balancers and Network Load Balancers, this object
     #   must contain the load balancer target group ARN, the container name
     #   (as it appears in a container definition), and the container port to
-    #   access from the load balancer. When a task from this service is placed
-    #   on a container instance, the container instance and port combination
-    #   is registered as a target in the target group specified here.
+    #   access from the load balancer. The load balancer name parameter must
+    #   be omitted. When a task from this service is placed on a container
+    #   instance, the container instance and port combination is registered as
+    #   a target in the target group specified here.
     #
     #   For Classic Load Balancers, this object must contain the load balancer
     #   name, the container name (as it appears in a container definition),
-    #   and the container port to access from the load balancer. When a task
-    #   from this service is placed on a container instance, the container
-    #   instance is registered with the load balancer specified here.
+    #   and the container port to access from the load balancer. The target
+    #   group ARN parameter must be omitted. When a task from this service is
+    #   placed on a container instance, the container instance is registered
+    #   with the load balancer specified here.
     #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
@@ -2477,6 +2479,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3345,6 +3351,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -5305,8 +5315,10 @@ module Aws::ECS
     #   constraints in the task definition and those specified at runtime).
     #
     # @option params [Array<String>] :requires_compatibilities
-    #   The launch type required by the task. If no value is specified, it
-    #   defaults to `EC2`.
+    #   The task launch type that Amazon ECS should validate the task
+    #   definition against. This ensures that the task definition parameters
+    #   are compatible with the specified launch type. If no value is
+    #   specified, it defaults to `EC2`.
     #
     # @option params [String] :cpu
     #   The number of CPU units used by the task. It can be expressed as an
@@ -5741,6 +5753,14 @@ module Aws::ECS
     #             iam: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
+    #         fsx_windows_file_server_volume_configuration: {
+    #           file_system_id: "String", # required
+    #           root_directory: "String", # required
+    #           authorization_config: { # required
+    #             credentials_parameter: "String", # required
+    #             domain: "String", # required
+    #           },
+    #         },
     #       },
     #     ],
     #     placement_constraints: [
@@ -5903,6 +5923,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
+    #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -8088,7 +8112,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

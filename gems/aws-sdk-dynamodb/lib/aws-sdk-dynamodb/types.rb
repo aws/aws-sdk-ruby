@@ -1616,7 +1616,7 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents a Contributor Insights summary entry..
+    # Represents a Contributor Insights summary entry.
     #
     # @!attribute [rw] table_name
     #   Name of the table associated with the summary.
@@ -2843,6 +2843,37 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeExportInput
+    #   data as a hash:
+    #
+    #       {
+    #         export_arn: "ExportArn", # required
+    #       }
+    #
+    # @!attribute [rw] export_arn
+    #   The Amazon Resource Name (ARN) associated with the export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExportInput AWS API Documentation
+    #
+    class DescribeExportInput < Struct.new(
+      :export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_description
+    #   Represents the properties of the export.
+    #   @return [Types::ExportDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExportOutput AWS API Documentation
+    #
+    class DescribeExportOutput < Struct.new(
+      :export_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGlobalTableInput
     #   data as a hash:
     #
@@ -3344,6 +3375,273 @@ module Aws::DynamoDB
       :exists,
       :comparison_operator,
       :attribute_value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There was a conflict when writing to the specified S3 bucket.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportConflictException AWS API Documentation
+    #
+    class ExportConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the properties of the exported table.
+    #
+    # @!attribute [rw] export_arn
+    #   The Amazon Resource Name (ARN) of the table export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   Export can be in one of the following states: IN\_PROGRESS,
+    #   COMPLETED, or FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time at which the export task began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the export task completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] export_manifest
+    #   The name of the manifest file for the export task.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the table that was exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   Unique ID of the table that was exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_time
+    #   Point in time from which table data was exported.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   The client token that was provided for the export task. A client
+    #   token makes calls to `ExportTableToPointInTimeInput` idempotent,
+    #   meaning that multiple identical calls have the same effect as one
+    #   single call.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the Amazon S3 bucket containing the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The ID of the AWS account that owns the bucket containing the
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The Amazon S3 bucket prefix used as the file name and path of the
+    #   exported snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_algorithm
+    #   Type of encryption used on the bucket where export data is stored.
+    #   Valid values for `S3SseAlgorithm` are:
+    #
+    #   * `AES256` - server-side encryption with Amazon S3 managed keys
+    #
+    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_kms_key_id
+    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket
+    #   where export data is stored (if applicable).
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   Status code for the result of the failed export.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   Export failure reason description.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_format
+    #   The format of the exported data. Valid values for `ExportFormat` are
+    #   `DYNAMODB_JSON` or `ION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] billed_size_bytes
+    #   The billable size of the table export.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] item_count
+    #   The number of items exported.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportDescription AWS API Documentation
+    #
+    class ExportDescription < Struct.new(
+      :export_arn,
+      :export_status,
+      :start_time,
+      :end_time,
+      :export_manifest,
+      :table_arn,
+      :table_id,
+      :export_time,
+      :client_token,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_prefix,
+      :s3_sse_algorithm,
+      :s3_sse_kms_key_id,
+      :failure_code,
+      :failure_message,
+      :export_format,
+      :billed_size_bytes,
+      :item_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified export was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportNotFoundException AWS API Documentation
+    #
+    class ExportNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an export task.
+    #
+    # @!attribute [rw] export_arn
+    #   The Amazon Resource Name (ARN) of the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   Export can be in one of the following states: IN\_PROGRESS,
+    #   COMPLETED, or FAILED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportSummary AWS API Documentation
+    #
+    class ExportSummary < Struct.new(
+      :export_arn,
+      :export_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportTableToPointInTimeInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_arn: "TableArn", # required
+    #         export_time: Time.now,
+    #         client_token: "ClientToken",
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_bucket_owner: "S3BucketOwner",
+    #         s3_prefix: "S3Prefix",
+    #         s3_sse_algorithm: "AES256", # accepts AES256, KMS
+    #         s3_sse_kms_key_id: "S3SseKmsKeyId",
+    #         export_format: "DYNAMODB_JSON", # accepts DYNAMODB_JSON, ION
+    #       }
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) associated with the table to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_time
+    #   Time in the past from which to export table data. The table export
+    #   will be a snapshot of the table's state at this point in time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   Providing a `ClientToken` makes the call to
+    #   `ExportTableToPointInTimeInput` idempotent, meaning that multiple
+    #   identical calls have the same effect as one single call.
+    #
+    #   A client token is valid for 8 hours after the first request that
+    #   uses it is completed. After 8 hours, any request with the same
+    #   client token is treated as a new request. Do not resubmit the same
+    #   request with the same client token for more than 8 hours, or the
+    #   result might not be idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 8-hour idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the Amazon S3 bucket to export the snapshot to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The ID of the AWS account that owns the bucket the export will be
+    #   stored in.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The Amazon S3 bucket prefix to use as the file name and path of the
+    #   exported snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_algorithm
+    #   Type of encryption used on the bucket where export data will be
+    #   stored. Valid values for `S3SseAlgorithm` are:
+    #
+    #   * `AES256` - server-side encryption with Amazon S3 managed keys
+    #
+    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_kms_key_id
+    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket
+    #   where export data will be stored (if applicable).
+    #   @return [String]
+    #
+    # @!attribute [rw] export_format
+    #   The format for the exported data. Valid values for `ExportFormat`
+    #   are `DYNAMODB_JSON` or `ION`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTimeInput AWS API Documentation
+    #
+    class ExportTableToPointInTimeInput < Struct.new(
+      :table_arn,
+      :export_time,
+      :client_token,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_prefix,
+      :s3_sse_algorithm,
+      :s3_sse_kms_key_id,
+      :export_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_description
+    #   Contains a description of the table export.
+    #   @return [Types::ExportDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTimeOutput AWS API Documentation
+    #
+    class ExportTableToPointInTimeOutput < Struct.new(
+      :export_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4146,6 +4444,20 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The specified `ExportTime` is outside of the point in time recovery
+    # window.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/InvalidExportTimeException AWS API Documentation
+    #
+    class InvalidExportTimeException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An invalid restore time was specified. RestoreDateTime must be between
     # EarliestRestorableDateTime and LatestRestorableDateTime.
     #
@@ -4567,6 +4879,58 @@ module Aws::DynamoDB
     #
     class ListContributorInsightsOutput < Struct.new(
       :contributor_insights_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExportsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_arn: "TableArn",
+    #         max_results: 1,
+    #         next_token: "ExportNextToken",
+    #       }
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) associated with the exported table.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListExports`. When provided in this manner,
+    #   the API fetches the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExportsInput AWS API Documentation
+    #
+    class ListExportsInput < Struct.new(
+      :table_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_summaries
+    #   A list of `ExportSummary` objects.
+    #   @return [Array<Types::ExportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If this value is returned, there are additional results to be
+    #   displayed. To retrieve them, call `ListExports` again, with
+    #   `NextToken` set to this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExportsOutput AWS API Documentation
+    #
+    class ListExportsOutput < Struct.new(
+      :export_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6267,6 +6631,16 @@ module Aws::DynamoDB
     #     Region has been disabled.
     #
     #     <note markdown="1"> If the AWS Region remains inaccessible for more than 20 hours,
+    #     DynamoDB will remove this replica from the replication group. The
+    #     replica will not be deleted and replication will stop from and to
+    #     this region.
+    #
+    #      </note>
+    #
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS ` - The AWS KMS key used to
+    #     encrypt the table is inaccessible.
+    #
+    #     <note markdown="1"> If the AWS KMS key remains inaccessible for more than 20 hours,
     #     DynamoDB will remove this replica from the replication group. The
     #     replica will not be deleted and replication will stop from and to
     #     this region.

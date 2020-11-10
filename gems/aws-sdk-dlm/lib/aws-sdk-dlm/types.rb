@@ -18,7 +18,7 @@ module Aws::DLM
     #         description: "PolicyDescription", # required
     #         state: "ENABLED", # required, accepts ENABLED, DISABLED
     #         policy_details: { # required
-    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT
     #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #           target_tags: [
     #             {
@@ -75,6 +75,7 @@ module Aws::DLM
     #           ],
     #           parameters: {
     #             exclude_boot_volume: false,
+    #             no_reboot: false,
     #           },
     #         },
     #         tags: {
@@ -545,13 +546,21 @@ module Aws::DLM
     #   The tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] policy_type
+    #   The type of policy. `EBS_SNAPSHOT_MANAGEMENT` indicates that the
+    #   policy manages the lifecycle of Amazon EBS snapshots.
+    #   `IMAGE_MANAGEMENT` indicates that the policy manages the lifecycle
+    #   of EBS-backed AMIs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicySummary AWS API Documentation
     #
     class LifecyclePolicySummary < Struct.new(
       :policy_id,
       :description,
       :state,
-      :tags)
+      :tags,
+      :policy_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -618,6 +627,7 @@ module Aws::DLM
     #
     #       {
     #         exclude_boot_volume: false,
+    #         no_reboot: false,
     #       }
     #
     # @!attribute [rw] exclude_boot_volume
@@ -630,10 +640,19 @@ module Aws::DLM
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] no_reboot
+    #   Applies to AMI lifecycle policies only. Indicates whether targeted
+    #   instances are rebooted when the lifecycle policy runs. `true`
+    #   indicates that targeted instances are not rebooted when the policy
+    #   runs. `false` indicates that target instances are rebooted when the
+    #   policy runs. The default is `true` (instance are not rebooted).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters AWS API Documentation
     #
     class Parameters < Struct.new(
-      :exclude_boot_volume)
+      :exclude_boot_volume,
+      :no_reboot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -644,7 +663,7 @@ module Aws::DLM
     #   data as a hash:
     #
     #       {
-    #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT
     #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #         target_tags: [
     #           {
@@ -701,12 +720,17 @@ module Aws::DLM
     #         ],
     #         parameters: {
     #           exclude_boot_volume: false,
+    #           no_reboot: false,
     #         },
     #       }
     #
     # @!attribute [rw] policy_type
-    #   The valid target resource types and actions a policy can manage. The
-    #   default is EBS\_SNAPSHOT\_MANAGEMENT.
+    #   The valid target resource types and actions a policy can manage.
+    #   Specify `EBS_SNAPSHOT_MANAGEMENT` to create a lifecycle policy that
+    #   manages the lifecycle of Amazon EBS snapshots. Specify
+    #   `IMAGE_MANAGEMENT` to create a lifecycle policy that manages the
+    #   lifecycle of EBS-backed AMIs. The default is
+    #   `EBS_SNAPSHOT_MANAGEMENT`.
     #   @return [String]
     #
     # @!attribute [rw] resource_types
@@ -1004,7 +1028,7 @@ module Aws::DLM
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         description: "PolicyDescription",
     #         policy_details: {
-    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT
     #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #           target_tags: [
     #             {
@@ -1061,6 +1085,7 @@ module Aws::DLM
     #           ],
     #           parameters: {
     #             exclude_boot_volume: false,
+    #             no_reboot: false,
     #           },
     #         },
     #       }

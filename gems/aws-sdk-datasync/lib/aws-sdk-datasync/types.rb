@@ -379,7 +379,7 @@ module Aws::DataSync
     #   a subdirectory of that path. The path should be such that it can be
     #   mounted by other NFS clients in your network.
     #
-    #   To see all the paths exported by your NFS server. run "`showmount
+    #   To see all the paths exported by your NFS server, run "`showmount
     #   -e nfs-server-name`" from an NFS client that has access to your
     #   server. You can specify any directory that appears in the results,
     #   and any subdirectory of that directory. Ensure that the NFS export
@@ -610,8 +610,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the
-    #   bucket is on an AWS Outpost, this must be an access point ARN.
+    #   The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost,
+    #   this must be an access point ARN.
     #   @return [String]
     #
     # @!attribute [rw] s3_storage_class
@@ -621,13 +621,13 @@ module Aws::DataSync
     #   Outposts, the storage class defaults to AWS S3 Outposts.
     #
     #   For more information about S3 storage classes, see [Amazon S3
-    #   Storage Classes][1] in the *Amazon Simple Storage Service Developer
-    #   Guide*. Some storage classes have behaviors that can affect your S3
-    #   storage cost. For detailed information, see using-storage-classes.
+    #   Storage Classes][1]. Some storage classes have behaviors that can
+    #   affect your S3 storage cost. For detailed information, see
+    #   using-storage-classes.
     #
     #
     #
-    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   [1]: http://aws.amazon.com/s3/storage-classes/
     #   @return [String]
     #
     # @!attribute [rw] s3_config
@@ -640,9 +640,9 @@ module Aws::DataSync
     #
     # @!attribute [rw] agent_arns
     #   If you are using DataSync on an AWS Outpost, specify the Amazon
-    #   Resource Names (ARNs) of the DataSync agents deployed on your AWS
+    #   Resource Names (ARNs) of the DataSync agents deployed on your
     #   Outpost. For more information about launching a DataSync agent on an
-    #   Amazon Outpost, see outposts-agent.
+    #   AWS Outpost, see outposts-agent.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -873,7 +873,7 @@ module Aws::DataSync
     #   A list of filter rules that determines which files to exclude from a
     #   task. The list should contain a single filter string that consists
     #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example, `"/folder1|/folder2"`
+    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
@@ -1354,13 +1354,13 @@ module Aws::DataSync
     #   The Amazon S3 storage class that you chose to store your files in
     #   when this location is used as a task destination. For more
     #   information about S3 storage classes, see [Amazon S3 Storage
-    #   Classes][1] in the *Amazon Simple Storage Service Developer Guide*.
-    #   Some storage classes have behaviors that can affect your S3 storage
-    #   cost. For detailed information, see using-storage-classes.
+    #   Classes][1]. Some storage classes have behaviors that can affect
+    #   your S3 storage cost. For detailed information, see
+    #   using-storage-classes.
     #
     #
     #
-    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   [1]: http://aws.amazon.com/s3/storage-classes/
     #   @return [String]
     #
     # @!attribute [rw] s3_config
@@ -1372,10 +1372,10 @@ module Aws::DataSync
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] agent_arns
-    #   If you are using DataSync on an Amazon Outpost, the Amazon Resource
-    #   Name (ARNs) of the EC2 agents deployed on your AWS Outpost. For more
-    #   information about launching a DataSync agent on an Amazon Outpost,
-    #   see outposts-agent.
+    #   If you are using DataSync on an AWS Outpost, the Amazon Resource
+    #   Name (ARNs) of the EC2 agents deployed on your Outpost. For more
+    #   information about launching a DataSync agent on an AWS Outpost, see
+    #   outposts-agent.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
@@ -1627,7 +1627,7 @@ module Aws::DataSync
     #   The status of the task that was described.
     #
     #   For detailed information about task execution statuses, see
-    #   Understanding Task Statuses in the *AWS DataSync User Guide.*
+    #   Understanding Task Statuses in the *AWS DataSync User Guide*.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2782,7 +2782,7 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] transfer_status
-    #   The status of the TRANSFERRING Phase.
+    #   The status of the TRANSFERRING phase.
     #   @return [String]
     #
     # @!attribute [rw] verify_duration
@@ -2791,7 +2791,7 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] verify_status
-    #   The status of the VERIFYING Phase.
+    #   The status of the VERIFYING phase.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -2979,6 +2979,59 @@ module Aws::DataSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateAgentResponse AWS API Documentation
     #
     class UpdateAgentResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateTaskExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_execution_arn: "TaskExecutionArn", # required
+    #         options: { # required
+    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
+    #           atime: "NONE", # accepts NONE, BEST_EFFORT
+    #           mtime: "NONE", # accepts NONE, PRESERVE
+    #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
+    #           preserve_devices: "NONE", # accepts NONE, PRESERVE
+    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
+    #           bytes_per_second: 1,
+    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #         },
+    #       }
+    #
+    # @!attribute [rw] task_execution_arn
+    #   The Amazon Resource Name (ARN) of the specific task execution that
+    #   is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Represents the options that are available to control the behavior of
+    #   a StartTaskExecution operation. Behavior includes preserving
+    #   metadata such as user ID (UID), group ID (GID), and file
+    #   permissions, and also overwriting files in the destination, data
+    #   integrity verification, and so on.
+    #
+    #   A task has a set of default options associated with it. If you
+    #   don't specify an option in StartTaskExecution, the default value is
+    #   used. You can override the defaults options on each task execution
+    #   by specifying an overriding `Options` value to StartTaskExecution.
+    #   @return [Types::Options]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecutionRequest AWS API Documentation
+    #
+    class UpdateTaskExecutionRequest < Struct.new(
+      :task_execution_arn,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecutionResponse AWS API Documentation
+    #
+    class UpdateTaskExecutionResponse < Aws::EmptyStructure; end
 
     # UpdateTaskResponse
     #

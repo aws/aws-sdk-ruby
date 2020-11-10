@@ -175,7 +175,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics
+    # [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html
     # @return [Types::InstanceMonitoring]
     def instance_monitoring
       data[:instance_monitoring]
@@ -261,12 +261,12 @@ module Aws::AutoScaling
     end
 
     # The metadata options for the instances. For more information, see
-    # [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
-    # Linux Instances*.
+    # [Configuring the Instance Metadata Options][1] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     # @return [Types::InstanceMetadataOptions]
     def metadata_options
       data[:metadata_options]

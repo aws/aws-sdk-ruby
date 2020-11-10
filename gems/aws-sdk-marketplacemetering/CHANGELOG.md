@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-11-04)
+------------------
+
+* Feature - Adding Vendor Tagging Support in MeterUsage and BatchMeterUsage API.
+
 1.31.0 (2020-09-30)
 ------------------
 

@@ -59,6 +59,20 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The service within the service graph that has anomalously high fault
+    # rates.
+    #
+    # @!attribute [rw] service_id
+    #   @return [Types::ServiceId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AnomalousService AWS API Documentation
+    #
+    class AnomalousService < Struct.new(
+      :service_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of Availability Zones corresponding to the segments in a trace.
     #
     # @!attribute [rw] name
@@ -728,6 +742,26 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The predicted high and low fault count. This is used to determine if a
+    # service has become anomalous and if an insight should be created.
+    #
+    # @!attribute [rw] fault_count_high
+    #   The upper limit of fault counts for a service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fault_count_low
+    #   The lower limit of fault counts for a service.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ForecastStatistics AWS API Documentation
+    #
+    class ForecastStatistics < Struct.new(
+      :fault_count_high,
+      :fault_count_low)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigRequest AWS API Documentation
@@ -816,6 +850,253 @@ module Aws::XRay
     #
     class GetGroupsResult < Struct.new(
       :groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInsightEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         insight_id: "InsightId", # required
+    #         max_results: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] insight_id
+    #   The insight's unique identifier. Use the GetInsightSummaries action
+    #   to retrieve an InsightId.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Used to retrieve at most the specified value of events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token returned by a previous request to
+    #   retrieve the next page of events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightEventsRequest AWS API Documentation
+    #
+    class GetInsightEventsRequest < Struct.new(
+      :insight_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight_events
+    #   A detailed description of the event. This includes the time of the
+    #   event, client and root cause impact statistics, and the top
+    #   anomalous service at the time of the event.
+    #   @return [Array<Types::InsightEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   Use this token to retrieve the next page of insight events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightEventsResult AWS API Documentation
+    #
+    class GetInsightEventsResult < Struct.new(
+      :insight_events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInsightImpactGraphRequest
+    #   data as a hash:
+    #
+    #       {
+    #         insight_id: "InsightId", # required
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] insight_id
+    #   The insight's unique identifier. Use the GetInsightSummaries action
+    #   to retrieve an InsightId.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The estimated start time of the insight, in Unix time seconds. The
+    #   StartTime is inclusive of the value provided and can't be more than
+    #   30 days old.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The estimated end time of the insight, in Unix time seconds. The
+    #   EndTime is exclusive of the value provided. The time range between
+    #   the start time and end time can't be more than six hours.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token returned by a previous request to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightImpactGraphRequest AWS API Documentation
+    #
+    class GetInsightImpactGraphRequest < Struct.new(
+      :insight_id,
+      :start_time,
+      :end_time,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight_id
+    #   The insight's unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The provided start time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The provided end time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_graph_start_time
+    #   The time, in Unix seconds, at which the service graph started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_graph_end_time
+    #   The time, in Unix seconds, at which the service graph ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] services
+    #   The AWS instrumented services related to the insight.
+    #   @return [Array<Types::InsightImpactGraphService>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightImpactGraphResult AWS API Documentation
+    #
+    class GetInsightImpactGraphResult < Struct.new(
+      :insight_id,
+      :start_time,
+      :end_time,
+      :service_graph_start_time,
+      :service_graph_end_time,
+      :services,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInsightRequest
+    #   data as a hash:
+    #
+    #       {
+    #         insight_id: "InsightId", # required
+    #       }
+    #
+    # @!attribute [rw] insight_id
+    #   The insight's unique identifier. Use the GetInsightSummaries action
+    #   to retrieve an InsightId.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightRequest AWS API Documentation
+    #
+    class GetInsightRequest < Struct.new(
+      :insight_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight
+    #   The summary information of an insight.
+    #   @return [Types::Insight]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightResult AWS API Documentation
+    #
+    class GetInsightResult < Struct.new(
+      :insight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInsightSummariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         states: ["ACTIVE"], # accepts ACTIVE, CLOSED
+    #         group_arn: "GroupARN",
+    #         group_name: "GroupName",
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         max_results: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] states
+    #   The list of insight states.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_arn
+    #   The Amazon Resource Name (ARN) of the group. Required if the
+    #   GroupName isn't provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group. Required if the GroupARN isn't provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The beginning of the time frame in which the insights started. The
+    #   start time can't be more than 30 days old.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time frame in which the insights ended. The end time
+    #   can't be more than 30 days old.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to display.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightSummariesRequest AWS API Documentation
+    #
+    class GetInsightSummariesRequest < Struct.new(
+      :states,
+      :group_arn,
+      :group_name,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight_summaries
+    #   The summary of each insight within the group matching the provided
+    #   filters. The summary contains the InsightID, start and end time, the
+    #   root cause service, the root cause and client impact statistics, the
+    #   top anomalous services, and the status of the insight.
+    #   @return [Array<Types::InsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightSummariesResult AWS API Documentation
+    #
+    class GetInsightSummariesResult < Struct.new(
+      :insight_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1038,6 +1319,7 @@ module Aws::XRay
     #         group_arn: "GroupARN",
     #         entity_selector_expression: "EntitySelectorExpression",
     #         period: 1,
+    #         forecast_statistics: false,
     #         next_token: "String",
     #       }
     #
@@ -1069,6 +1351,11 @@ module Aws::XRay
     #   Aggregation period in seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] forecast_statistics
+    #   The forecasted high and low fault count values. Forecast enabled
+    #   requests require the EntitySelectorExpression ID be provided.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   Pagination token.
     #   @return [String]
@@ -1082,6 +1369,7 @@ module Aws::XRay
       :group_arn,
       :entity_selector_expression,
       :period,
+      :forecast_statistics,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1375,6 +1663,272 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # When fault rates go outside of the expected range, X-Ray creates an
+    # insight. Insights tracks emergent issues within your applications.
+    #
+    # @!attribute [rw] insight_id
+    #   The insights unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The Amazon Resource Name (ARN) of the group that the insight belongs
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group that the insight belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_cause_service_id
+    #   @return [Types::ServiceId]
+    #
+    # @!attribute [rw] categories
+    #   The categories that label and describe the type of insight.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time, in Unix seconds, at which the insight began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time, in Unix seconds, at which the insight ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] summary
+    #   A brief description of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_impact_statistics
+    #   The impact statistics of the client side service. This includes the
+    #   number of requests to the client service and whether the requests
+    #   were faults or okay.
+    #   @return [Types::RequestImpactStatistics]
+    #
+    # @!attribute [rw] root_cause_service_request_impact_statistics
+    #   The impact statistics of the root cause service. This includes the
+    #   number of requests to the client service and whether the requests
+    #   were faults or okay.
+    #   @return [Types::RequestImpactStatistics]
+    #
+    # @!attribute [rw] top_anomalous_services
+    #   The service within the insight that is most impacted by the
+    #   incident.
+    #   @return [Array<Types::AnomalousService>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Insight AWS API Documentation
+    #
+    class Insight < Struct.new(
+      :insight_id,
+      :group_arn,
+      :group_name,
+      :root_cause_service_id,
+      :categories,
+      :state,
+      :start_time,
+      :end_time,
+      :summary,
+      :client_request_impact_statistics,
+      :root_cause_service_request_impact_statistics,
+      :top_anomalous_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # X-Ray reevaluates insights periodically until they are resolved, and
+    # records each intermediate state in an event. You can review incident
+    # events in the Impact Timeline on the Inspect page in the X-Ray
+    # console.
+    #
+    # @!attribute [rw] summary
+    #   A brief description of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_time
+    #   The time, in Unix seconds, at which the event was recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_request_impact_statistics
+    #   The impact statistics of the client side service. This includes the
+    #   number of requests to the client service and whether the requests
+    #   were faults or okay.
+    #   @return [Types::RequestImpactStatistics]
+    #
+    # @!attribute [rw] root_cause_service_request_impact_statistics
+    #   The impact statistics of the root cause service. This includes the
+    #   number of requests to the client service and whether the requests
+    #   were faults or okay.
+    #   @return [Types::RequestImpactStatistics]
+    #
+    # @!attribute [rw] top_anomalous_services
+    #   The service during the event that is most impacted by the incident.
+    #   @return [Array<Types::AnomalousService>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InsightEvent AWS API Documentation
+    #
+    class InsightEvent < Struct.new(
+      :summary,
+      :event_time,
+      :client_request_impact_statistics,
+      :root_cause_service_request_impact_statistics,
+      :top_anomalous_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection between two service in an insight impact graph.
+    #
+    # @!attribute [rw] reference_id
+    #   Identifier of the edge. Unique within a service map.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InsightImpactGraphEdge AWS API Documentation
+    #
+    class InsightImpactGraphEdge < Struct.new(
+      :reference_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an application that processed requests, users that
+    # made requests, or downstream services, resources, and applications
+    # that an application used.
+    #
+    # @!attribute [rw] reference_id
+    #   Identifier for the service. Unique within the service map.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   Identifier for the service. Unique within the service map.
+    #
+    #   * AWS Resource - The type of an AWS resource. For example,
+    #     AWS::EC2::Instance for an application running on Amazon EC2 or
+    #     AWS::DynamoDB::Table for an Amazon DynamoDB table that the
+    #     application used.
+    #
+    #   * AWS Service - The type of an AWS service. For example,
+    #     AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't
+    #     target a specific table.
+    #
+    #   * AWS Service - The type of an AWS service. For example,
+    #     AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't
+    #     target a specific table.
+    #
+    #   * remote - A downstream service of indeterminate type.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The canonical name of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] names
+    #   A list of names for the service, including the canonical name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] account_id
+    #   Identifier of the AWS account in which the service runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] edges
+    #   Connections to downstream services.
+    #   @return [Array<Types::InsightImpactGraphEdge>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InsightImpactGraphService AWS API Documentation
+    #
+    class InsightImpactGraphService < Struct.new(
+      :reference_id,
+      :type,
+      :name,
+      :names,
+      :account_id,
+      :edges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information that describes an insight.
+    #
+    # @!attribute [rw] insight_id
+    #   The insights unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The Amazon Resource Name (ARN) of the group that the insight belongs
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group that the insight belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_cause_service_id
+    #   @return [Types::ServiceId]
+    #
+    # @!attribute [rw] categories
+    #   Categories The categories that label and describe the type of
+    #   insight.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time, in Unix seconds, at which the insight began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time, in Unix seconds, at which the insight ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] summary
+    #   A brief description of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_impact_statistics
+    #   The impact statistics of the client side service. This includes the
+    #   number of requests to the client service and whether the requests
+    #   were faults or okay.
+    #   @return [Types::RequestImpactStatistics]
+    #
+    # @!attribute [rw] root_cause_service_request_impact_statistics
+    #   The impact statistics of the root cause service. This includes the
+    #   number of requests to the client service and whether the requests
+    #   were faults or okay.
+    #   @return [Types::RequestImpactStatistics]
+    #
+    # @!attribute [rw] top_anomalous_services
+    #   The service within the insight that is most impacted by the
+    #   incident.
+    #   @return [Array<Types::AnomalousService>]
+    #
+    # @!attribute [rw] last_update_time
+    #   The time, in Unix seconds, that the insight was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InsightSummary AWS API Documentation
+    #
+    class InsightSummary < Struct.new(
+      :insight_id,
+      :group_arn,
+      :group_name,
+      :root_cause_service_id,
+      :categories,
+      :state,
+      :start_time,
+      :end_time,
+      :summary,
+      :client_request_impact_statistics,
+      :root_cause_service_request_impact_statistics,
+      :top_anomalous_services,
+      :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structure containing configurations related to insights.
     #
     # @note When making an API call, you may pass InsightsConfiguration
@@ -1612,6 +2166,30 @@ module Aws::XRay
     #
     class PutTraceSegmentsResult < Struct.new(
       :unprocessed_trace_segments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics that describe how the incident has impacted a service.
+    #
+    # @!attribute [rw] fault_count
+    #   The number of requests that have resulted in a fault,
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ok_count
+    #   The number of successful requests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of requests to the service.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/RequestImpactStatistics AWS API Documentation
+    #
+    class RequestImpactStatistics < Struct.new(
+      :fault_count,
+      :ok_count,
+      :total_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2508,6 +3086,10 @@ module Aws::XRay
     #   Response statistics for a service.
     #   @return [Types::ServiceStatistics]
     #
+    # @!attribute [rw] service_forecast_statistics
+    #   The forecasted high and low fault count values.
+    #   @return [Types::ForecastStatistics]
+    #
     # @!attribute [rw] response_time_histogram
     #   The response time histogram for the selected entities.
     #   @return [Array<Types::HistogramEntry>]
@@ -2518,6 +3100,7 @@ module Aws::XRay
       :timestamp,
       :edge_summary_statistics,
       :service_summary_statistics,
+      :service_forecast_statistics,
       :response_time_histogram)
       SENSITIVE = []
       include Aws::Structure

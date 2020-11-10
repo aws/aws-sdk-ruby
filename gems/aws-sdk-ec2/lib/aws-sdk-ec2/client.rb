@@ -777,7 +777,7 @@ module Aws::EC2
     #   resp = client.allocate_address({
     #     domain: "vpc", # accepts vpc, standard
     #     address: "PublicIpAddress",
-    #     public_ipv_4_pool: "String",
+    #     public_ipv_4_pool: "Ipv4PoolEc2Id",
     #     network_border_group: "String",
     #     customer_owned_ipv_4_pool: "String",
     #     dry_run: false,
@@ -1406,22 +1406,21 @@ module Aws::EC2
     # AWS Certificate Manager (ACM) certificate. This enables the
     # certificate to be used by the ACM for Nitro Enclaves application
     # inside an enclave. For more information, see [AWS Certificate Manager
-    # for Nitro Enclaves][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # for Nitro Enclaves][1] in the *AWS Nitro Enclaves User Guide*.
     #
     # When the IAM role is associated with the ACM certificate, places the
     # certificate, certificate chain, and encrypted private key in an Amazon
     # S3 bucket that only the associated IAM role can access. The private
-    # key of the certificate is encrypted with an AWS-managed KMS key that
-    # has an attached attestation-based key policy.
+    # key of the certificate is encrypted with an AWS-managed KMS customer
+    # master (CMK) that has an attached attestation-based CMK policy.
     #
     # To enable the IAM role to access the Amazon S3 object, you must grant
     # it permission to call `s3:GetObject` on the Amazon S3 bucket returned
-    # by the command. To enable the IAM role to access the AWS KMS key, you
-    # must grant it permission to call `kms:Decrypt` on AWS KMS key returned
+    # by the command. To enable the IAM role to access the AWS KMS CMK, you
+    # must grant it permission to call `kms:Decrypt` on AWS KMS CMK returned
     # by the command. For more information, see [ Grant the role permission
-    # to access the certificate and encryption key][2] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # to access the certificate and encryption key][2] in the *AWS Nitro
+    # Enclaves User Guide*.
     #
     #
     #
@@ -3303,31 +3302,28 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the symmetric AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK) to use when creating the encrypted volume.
-    #   This parameter is only required if you want to use a non-default CMK;
-    #   if this parameter is not specified, the default CMK for EBS is used.
-    #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the symmetric AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK) to use when creating encrypted volumes. If
+    #   this parameter is not specified, your AWS managed CMK for EBS is used.
+    #   If you specify a CMK, you must also set the encrypted state to `true`.
     #
-    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
-    #   name, or alias ARN. When using an alias name, prefix it with
-    #   "alias/". For example:
+    #   You can specify a CMK using any of the following:
     #
-    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Alias name: `alias/ExampleAlias`
+    #   * Key ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN. For example,
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   This action will eventually report failure.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   identifier that is not valid, the action can appear to complete, but
+    #   eventually fails.
     #
-    #   The specified CMK must exist in the Region that the snapshot is being
-    #   copied to.
+    #   The specified CMK must exist in the destination Region.
     #
     #   Amazon EBS does not support asymmetric CMKs.
     #
@@ -3452,15 +3448,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to
@@ -3979,6 +3975,10 @@ module Aws::EC2
     #
     #   Default Value: `enabled`
     #
+    # @option params [Types::ClientConnectOptions] :client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
@@ -4031,6 +4031,10 @@ module Aws::EC2
     #     security_group_ids: ["SecurityGroupId"],
     #     vpc_id: "VpcId",
     #     self_service_portal: "enabled", # accepts enabled, disabled
+    #     client_connect_options: {
+    #       enabled: false,
+    #       lambda_function_arn: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4671,15 +4675,23 @@ module Aws::EC2
     #   Fleet expires.
     #
     # @option params [String] :type
-    #   The type of the request. By default, the EC2 Fleet places an
-    #   asynchronous request for your desired capacity, and maintains it by
-    #   replenishing interrupted Spot Instances (`maintain`). A value of
-    #   `instant` places a synchronous one-time request, and returns errors
-    #   for any instances that could not be launched. A value of `request`
-    #   places an asynchronous one-time request without maintaining capacity
-    #   or submitting requests in alternative capacity pools if capacity is
-    #   unavailable. For more information, see [EC2 Fleet Request Types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   The type of request. The default value is `maintain`.
+    #
+    #   * `maintain` - The EC2 Fleet plaees an asynchronous request for your
+    #     desired capacity, and continues to maintain your desired Spot
+    #     capacity by replenishing interrupted Spot Instances.
+    #
+    #   * `request` - The EC2 Fleet places an asynchronous one-time request
+    #     for your desired capacity, but does submit Spot requests in
+    #     alternative capacity pools if Spot capacity is unavailable, and does
+    #     not maintain Spot capacity if Spot Instances are interrupted.
+    #
+    #   * `instant` - The EC2 Fleet places a synchronous one-time request for
+    #     your desired capacity, and returns errors for any instances that
+    #     could not be launched.
+    #
+    #   For more information, see [EC2 Fleet request types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -4704,7 +4716,7 @@ module Aws::EC2
     #   value for `ResourceType` must be `fleet`, otherwise the fleet request
     #   fails. To tag instances at launch, specify the tags in the [launch
     #   template][1]. For information about tagging after launch, see [Tagging
-    #   Your Resources][2].
+    #   your resources][2].
     #
     #
     #
@@ -4724,6 +4736,11 @@ module Aws::EC2
     #     client_token: "String",
     #     spot_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #       maintenance_strategies: {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       },
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       instance_pools_to_use_count: 1,
     #       single_instance_type: false,
@@ -5249,13 +5266,13 @@ module Aws::EC2
     #   A description for the conversion task or the resource being exported.
     #   The maximum length is 255 characters.
     #
-    # @option params [Types::ExportToS3TaskSpecification] :export_to_s3_task
+    # @option params [required, Types::ExportToS3TaskSpecification] :export_to_s3_task
     #   The format and location for an instance export task.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
     #
-    # @option params [String] :target_environment
+    # @option params [required, String] :target_environment
     #   The target virtualization environment.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
@@ -5269,14 +5286,14 @@ module Aws::EC2
     #
     #   resp = client.create_instance_export_task({
     #     description: "String",
-    #     export_to_s3_task: {
+    #     export_to_s3_task: { # required
     #       container_format: "ova", # accepts ova
     #       disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #       s3_bucket: "String",
     #       s3_prefix: "String",
     #     },
     #     instance_id: "InstanceId", # required
-    #     target_environment: "citrix", # accepts citrix, vmware, microsoft
+    #     target_environment: "citrix", # required, accepts citrix, vmware, microsoft
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -9114,15 +9131,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to
@@ -13913,6 +13930,8 @@ module Aws::EC2
     #   resp.connections[0].status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
     #   resp.connections[0].status.message #=> String
     #   resp.connections[0].connection_end_time #=> String
+    #   resp.connections[0].posture_compliance_statuses #=> Array
+    #   resp.connections[0].posture_compliance_statuses[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnections AWS API Documentation
@@ -14009,6 +14028,10 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].security_group_ids[0] #=> String
     #   resp.client_vpn_endpoints[0].vpc_id #=> String
     #   resp.client_vpn_endpoints[0].self_service_portal_url #=> String
+    #   resp.client_vpn_endpoints[0].client_connect_options.enabled #=> Boolean
+    #   resp.client_vpn_endpoints[0].client_connect_options.lambda_function_arn #=> String
+    #   resp.client_vpn_endpoints[0].client_connect_options.status.code #=> String, one of "applying", "applied"
+    #   resp.client_vpn_endpoints[0].client_connect_options.status.message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
@@ -15175,6 +15198,7 @@ module Aws::EC2
     #   resp.fleets[0].valid_until #=> Time
     #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
     #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized"
+    #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.fleets[0].spot_options.instance_pools_to_use_count #=> Integer
     #   resp.fleets[0].spot_options.single_instance_type #=> Boolean
@@ -15248,7 +15272,7 @@ module Aws::EC2
     #
     #   * `log-destination-type` - The type of destination to which the flow
     #     log publishes data. Possible destination types include
-    #     `cloud-watch-logs` and `S3`.
+    #     `cloud-watch-logs` and `s3`.
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -17045,7 +17069,7 @@ module Aws::EC2
     #     location type is `region` (default), the location is the Region code
     #     (for example, `us-east-2`.)
     #
-    #   * `instance-type` - The instance type.
+    #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -17116,17 +17140,17 @@ module Aws::EC2
     #   One or more filters. Filter names and values are case-sensitive.
     #
     #   * `auto-recovery-supported` - Indicates whether auto recovery is
-    #     supported. (`true` \| `false`)
+    #     supported (`true` \| `false`).
     #
-    #   * `bare-metal` - Indicates whether it is a bare metal instance type.
-    #     (`true` \| `false`)
+    #   * `bare-metal` - Indicates whether it is a bare metal instance type
+    #     (`true` \| `false`).
     #
     #   * `burstable-performance-supported` - Indicates whether it is a
-    #     burstable performance instance type. (`true` \| `false`)
+    #     burstable performance instance type (`true` \| `false`).
     #
     #   * `current-generation` - Indicates whether this instance type is the
-    #     latest generation instance type of an instance family. (`true` \|
-    #     `false`)
+    #     latest generation instance type of an instance family (`true` \|
+    #     `false`).
     #
     #   * `ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps` - The
     #     baseline bandwidth performance for an EBS-optimized instance type,
@@ -17138,7 +17162,7 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
     #     baseline throughput performance for an EBS-optimized instance type,
-    #     in MBps.
+    #     in MB/s.
     #
     #   * `ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps` - The
     #     maximum bandwidth performance for an EBS-optimized instance type, in
@@ -17150,25 +17174,25 @@ module Aws::EC2
     #
     #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
     #     maximum throughput performance for an EBS-optimized instance type,
-    #     in MBps.
+    #     in MB/s.
     #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
-    #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
+    #     type is EBS-optimized (`supported` \| `unsupported` \| `default`).
     #
     #   * `ebs-info.encryption-support` - Indicates whether EBS encryption is
-    #     supported. (`supported` \| `unsupported`)
+    #     supported (`supported` \| `unsupported`).
     #
     #   * `ebs-info.nvme-support` - Indicates whether non-volatile memory
-    #     express (NVMe) is supported for EBS volumes. (`required` \|
-    #     `supported` \| `unsupported`)
+    #     express (NVMe) is supported for EBS volumes (`required` \|
+    #     `supported` \| `unsupported`).
     #
     #   * `free-tier-eligible` - Indicates whether the instance type is
-    #     eligible to use in the free tier. (`true` \| `false`)
+    #     eligible to use in the free tier (`true` \| `false`).
     #
     #   * `hibernation-supported` - Indicates whether On-Demand hibernation is
-    #     supported. (`true` \| `false`)
+    #     supported (`true` \| `false`).
     #
-    #   * `hypervisor` - The hypervisor. (`nitro` \| `xen`)
+    #   * `hypervisor` - The hypervisor (`nitro` \| `xen`).
     #
     #   * `instance-storage-info.disk.count` - The number of local disks.
     #
@@ -17176,17 +17200,17 @@ module Aws::EC2
     #     instance storage disk, in GB.
     #
     #   * `instance-storage-info.disk.type` - The storage technology for the
-    #     local instance storage disks. (`hdd` \| `ssd`)
+    #     local instance storage disks (`hdd` \| `ssd`).
     #
     #   * `instance-storage-info.nvme-support` - Indicates whether
-    #     non-volatile memory express (NVMe) is supported for instance store.
-    #     (`required` \| `supported`) \| `unsupported`)
+    #     non-volatile memory express (NVMe) is supported for instance store
+    #     (`required` \| `supported`) \| `unsupported`).
     #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
     #
     #   * `instance-storage-supported` - Indicates whether the instance type
-    #     has local instance storage. (`true` \| `false`)
+    #     has local instance storage (`true` \| `false`).
     #
     #   * `instance-type` - The instance type (for example `c5.2xlarge` or
     #     c5*).
@@ -17194,11 +17218,11 @@ module Aws::EC2
     #   * `memory-info.size-in-mib` - The memory size.
     #
     #   * `network-info.efa-supported` - Indicates whether the instance type
-    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
+    #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
     #
     #   * `network-info.ena-support` - Indicates whether Elastic Network
-    #     Adapter (ENA) is supported or required. (`required` \| `supported`
-    #     \| `unsupported`)
+    #     Adapter (ENA) is supported or required (`required` \| `supported` \|
+    #     `unsupported`).
     #
     #   * `network-info.ipv4-addresses-per-interface` - The maximum number of
     #     private IPv4 addresses per network interface.
@@ -17207,7 +17231,7 @@ module Aws::EC2
     #     private IPv6 addresses per network interface.
     #
     #   * `network-info.ipv6-supported` - Indicates whether the instance type
-    #     supports IPv6. (`true` \| `false`)
+    #     supports IPv6 (`true` \| `false`).
     #
     #   * `network-info.maximum-network-interfaces` - The maximum number of
     #     network interfaces per instance.
@@ -17215,19 +17239,19 @@ module Aws::EC2
     #   * `network-info.network-performance` - The network performance (for
     #     example, "25 Gigabit").
     #
-    #   * `processor-info.supported-architecture` - The CPU architecture.
-    #     (`arm64` \| `i386` \| `x86_64`)
+    #   * `processor-info.supported-architecture` - The CPU architecture
+    #     (`arm64` \| `i386` \| `x86_64`).
     #
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock speed,
     #     in GHz.
     #
-    #   * `supported-root-device-type` - The root device type. (`ebs` \|
-    #     `instance-store`)
+    #   * `supported-root-device-type` - The root device type (`ebs` \|
+    #     `instance-store`).
     #
-    #   * `supported-usage-class` - The usage class. (`on-demand` \| `spot`)
+    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`).
     #
-    #   * `supported-virtualization-type` - The virtualization type. (`hvm` \|
-    #     `paravirtual`)
+    #   * `supported-virtualization-type` - The virtualization type (`hvm` \|
+    #     `paravirtual`).
     #
     #   * `vcpu-info.default-cores` - The default number of cores for the
     #     instance type.
@@ -17318,6 +17342,12 @@ module Aws::EC2
     #   resp.instance_types[0].ebs_info.nvme_support #=> String, one of "unsupported", "supported", "required"
     #   resp.instance_types[0].network_info.network_performance #=> String
     #   resp.instance_types[0].network_info.maximum_network_interfaces #=> Integer
+    #   resp.instance_types[0].network_info.maximum_network_cards #=> Integer
+    #   resp.instance_types[0].network_info.default_network_card_index #=> Integer
+    #   resp.instance_types[0].network_info.network_cards #=> Array
+    #   resp.instance_types[0].network_info.network_cards[0].network_card_index #=> Integer
+    #   resp.instance_types[0].network_info.network_cards[0].network_performance #=> String
+    #   resp.instance_types[0].network_info.network_cards[0].maximum_network_interfaces #=> Integer
     #   resp.instance_types[0].network_info.ipv_4_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_supported #=> Boolean
@@ -22541,6 +22571,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_allocation_strategy #=> String, one of "lowestPrice", "prioritized"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.client_token #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.excess_capacity_termination_policy #=> String, one of "noTermination", "default"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.fulfilled_capacity #=> Float
@@ -23979,6 +24010,16 @@ module Aws::EC2
     #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
     #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
     #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -25513,6 +25554,14 @@ module Aws::EC2
 
     # Describes available services to which you can create a VPC endpoint.
     #
+    # When the service provider and the consumer have different accounts
+    # multiple Availability Zones, and the consumer views the VPC endpoint
+    # service information, the response only includes the common
+    # Availability Zones. For example, when the service provider account
+    # uses `us-east-1a` and `us-east-1c` and the consumer uses `us-east-1a`
+    # and us-east-1a and us-east-1b, the response includes the VPC endpoint
+    # services in the common Availability Zone, `us-east-1a`.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -26935,8 +26984,9 @@ module Aws::EC2
     # removes the Amazon S3 object that contains the certificate,
     # certificate chain, and encrypted private key from the Amazon S3
     # bucket. It also revokes the IAM role's permission to use the AWS Key
-    # Management Service (KMS) key used to encrypt the private key. This
-    # effectively revokes the role's permission to use the certificate.
+    # Management Service (KMS) customer master key (CMK) used to encrypt the
+    # private key. This effectively revokes the role's permission to use
+    # the certificate.
     #
     # @option params [String] :certificate_arn
     #   The ARN of the ACM certificate from which to disassociate the IAM
@@ -27874,8 +27924,8 @@ module Aws::EC2
     # Certificate Manager (ACM) certificate. It also returns the name of the
     # Amazon S3 bucket and the Amazon S3 object key where the certificate,
     # certificate chain, and encrypted private key bundle are stored, and
-    # the ARN of the AWS Key Management Service (KMS) key that's used to
-    # encrypt the private key.
+    # the ARN of the AWS Key Management Service (KMS) customer master key
+    # (CMK) that's used to encrypt the private key.
     #
     # @option params [String] :certificate_arn
     #   The ARN of the ACM certificate for which to view the associated IAM
@@ -30197,6 +30247,10 @@ module Aws::EC2
     #   Specify whether to enable the self-service portal for the Client VPN
     #   endpoint.
     #
+    # @option params [Types::ClientConnectOptions] :client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
@@ -30222,6 +30276,10 @@ module Aws::EC2
     #     security_group_ids: ["SecurityGroupId"],
     #     vpc_id: "VpcId",
     #     self_service_portal: "enabled", # accepts enabled, disabled
+    #     client_connect_options: {
+    #       enabled: false,
+    #       lambda_function_arn: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -30327,15 +30385,15 @@ module Aws::EC2
     #
     #   You can specify the CMK using any of the following:
     #
-    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Key alias. For example, alias/ExampleAlias.
     #
     #   * Key ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
     #   * Alias ARN. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
     #
     #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
     #   ID, alias, or ARN that is not valid, the action can appear to
@@ -30424,7 +30482,7 @@ module Aws::EC2
     # @option params [required, String] :fleet_id
     #   The ID of the EC2 Fleet.
     #
-    # @option params [required, Types::TargetCapacitySpecificationRequest] :target_capacity_specification
+    # @option params [Types::TargetCapacitySpecificationRequest] :target_capacity_specification
     #   The size of the EC2 Fleet.
     #
     # @return [Types::ModifyFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -30466,7 +30524,7 @@ module Aws::EC2
     #       },
     #     ],
     #     fleet_id: "FleetId", # required
-    #     target_capacity_specification: { # required
+    #     target_capacity_specification: {
     #       total_target_capacity: 1, # required
     #       on_demand_target_capacity: 1,
     #       spot_target_capacity: 1,
@@ -35741,6 +35799,11 @@ module Aws::EC2
     #     spot_fleet_request_config: { # required
     #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #       on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
+    #       spot_maintenance_strategies: {
+    #         capacity_rebalance: {
+    #           replacement_strategy: "launch", # accepts launch
+    #         },
+    #       },
     #       client_token: "String",
     #       excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #       fulfilled_capacity: 1.0,
@@ -37429,18 +37492,15 @@ module Aws::EC2
     #
     # @option params [Types::EnclaveOptionsRequest] :enclave_options
     #   Indicates whether the instance is enabled for AWS Nitro Enclaves. For
-    #   more information, see [ AWS Nitro Enclaves][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   more information, see [ What is AWS Nitro Enclaves?][1] in the *AWS
+    #   Nitro Enclaves User Guide*.
     #
     #   You can't enable AWS Nitro Enclaves and hibernation on the same
-    #   instance. For more information about AWS Nitro Enclaves requirements,
-    #   see [ AWS Nitro Enclaves][2] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -38399,7 +38459,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html#add-dns-txt-record
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html#add-dns-txt-record
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39141,7 +39201,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.205.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

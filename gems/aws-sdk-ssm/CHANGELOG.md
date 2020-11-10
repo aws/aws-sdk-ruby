@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2020-11-09)
+------------------
+
+* Feature - add a new filter to allow customer to filter automation executions by using resource-group which used for execute automation
+
+1.96.0 (2020-11-06)
+------------------
+
+* Feature - Documentation updates for Systems Manager
+
 1.95.0 (2020-10-19)
 ------------------
 

@@ -5273,8 +5273,11 @@ module Aws::ServiceCatalog
     #   update the launch role that is associated with a provisioned product.
     #   This role is used when an end-user calls a provisioning operation such
     #   as `UpdateProvisionedProduct`, `TerminateProvisionedProduct`, or
-    #   `ExecuteProvisionedProductServiceAction`. Only an ARN role is valid. A
-    #   user ARN is invalid.
+    #   `ExecuteProvisionedProductServiceAction`. Only an ARN role or `null`
+    #   is valid. A user ARN is invalid. For example, if an admin user passes
+    #   `null` as the value for the key `LAUNCH_ROLE`, the admin removes the
+    #   launch role that is associated with the provisioned product. As a
+    #   result, the end user operations use the credentials of the end user.
     #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the user
     #   that has permission to see, update, terminate, and execute service
@@ -5533,7 +5536,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -232,6 +232,7 @@ module Aws::ServiceCatalog
     OutputKeys = Shapes::ListShape.new(name: 'OutputKeys')
     OutputValue = Shapes::StringShape.new(name: 'OutputValue')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
+    PageSizeMax100 = Shapes::IntegerShape.new(name: 'PageSizeMax100')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
     ParameterConstraints = Shapes::StructureShape.new(name: 'ParameterConstraints')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
@@ -1046,7 +1047,7 @@ module Aws::ServiceCatalog
     ListPortfolioAccessInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
     ListPortfolioAccessInput.add_member(:organization_parent_id, Shapes::ShapeRef.new(shape: Id, location_name: "OrganizationParentId"))
     ListPortfolioAccessInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
-    ListPortfolioAccessInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListPortfolioAccessInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSizeMax100, location_name: "PageSize"))
     ListPortfolioAccessInput.struct_class = Types::ListPortfolioAccessInput
 
     ListPortfolioAccessOutput.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "AccountIds"))

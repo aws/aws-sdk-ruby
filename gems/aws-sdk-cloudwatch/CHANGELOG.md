@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-11-04)
+------------------
+
+* Feature - Documentation updates for monitoring
+
 1.45.0 (2020-09-30)
 ------------------
 
