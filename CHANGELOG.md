@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.624 (2020-11-10)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
