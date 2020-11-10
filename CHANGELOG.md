@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.623 (2020-11-09)
 ------------------
 
