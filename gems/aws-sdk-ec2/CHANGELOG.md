@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.209.0 (2020-11-10)
+------------------
+
+* Feature - This release adds support for Gateway Load Balancer VPC endpoints and VPC endpoint services
+
 1.208.0 (2020-11-06)
 ------------------
 

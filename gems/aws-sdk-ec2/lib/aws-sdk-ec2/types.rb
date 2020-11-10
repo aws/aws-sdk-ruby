@@ -7898,6 +7898,7 @@ module Aws::EC2
     #         destination_ipv_6_cidr_block: "String",
     #         destination_prefix_list_id: "PrefixListResourceId",
     #         dry_run: false,
+    #         vpc_endpoint_id: "VpcEndpointId",
     #         egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #         gateway_id: "RouteGatewayId",
     #         instance_id: "InstanceId",
@@ -7932,6 +7933,11 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
+    #   endpoints only.
+    #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
     #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
@@ -7986,6 +7992,7 @@ module Aws::EC2
       :destination_ipv_6_cidr_block,
       :destination_prefix_list_id,
       :dry_run,
+      :vpc_endpoint_id,
       :egress_only_internet_gateway_id,
       :gateway_id,
       :instance_id,
@@ -9740,7 +9747,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         vpc_endpoint_type: "Interface", # accepts Interface, Gateway
+    #         vpc_endpoint_type: "Interface", # accepts Interface, Gateway, GatewayLoadBalancer
     #         vpc_id: "VpcId", # required
     #         service_name: "String", # required
     #         policy_document: "String",
@@ -9786,10 +9793,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] policy_document
-    #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format. If this parameter
-    #   is not specified, we attach a default policy that allows full access
-    #   to the service.
+    #   (Interface and gateway endpoints) A policy to attach to the endpoint
+    #   that controls access to the service. The policy must be in valid
+    #   JSON format. If this parameter is not specified, we attach a default
+    #   policy that allows full access to the service.
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
@@ -9797,8 +9804,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   (Interface endpoint) The ID of one or more subnets in which to
-    #   create an endpoint network interface.
+    #   (Interface and Gateway Load Balancer endpoints) The ID of one or
+    #   more subnets in which to create an endpoint network interface. For a
+    #   Gateway Load Balancer endpoint, you can specify one subnet only.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
@@ -9882,7 +9890,8 @@ module Aws::EC2
     #         dry_run: false,
     #         acceptance_required: false,
     #         private_dns_name: "String",
-    #         network_load_balancer_arns: ["String"], # required
+    #         network_load_balancer_arns: ["String"],
+    #         gateway_load_balancer_arns: ["String"],
     #         client_token: "String",
     #         tag_specifications: [
     #           {
@@ -9911,12 +9920,18 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] private_dns_name
-    #   The private DNS name to assign to the VPC endpoint service.
+    #   (Interface endpoint configuration) The private DNS name to assign to
+    #   the VPC endpoint service.
     #   @return [String]
     #
     # @!attribute [rw] network_load_balancer_arns
     #   The Amazon Resource Names (ARNs) of one or more Network Load
     #   Balancers for your service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of one or more Gateway Load
+    #   Balancers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
@@ -9940,6 +9955,7 @@ module Aws::EC2
       :acceptance_required,
       :private_dns_name,
       :network_load_balancer_arns,
+      :gateway_load_balancer_arns,
       :client_token,
       :tag_specifications)
       SENSITIVE = []
@@ -22968,6 +22984,9 @@ module Aws::EC2
     #   * `vpc-endpoint-state` - The state of the endpoint
     #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
     #     `deleted` \| `rejected` \| `failed`).
+    #
+    #   * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` \|
+    #     `Gateway` \| `GatewayLoadBalancer`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -37640,8 +37659,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format.
+    #   (Interface and gateway endpoints) A policy to attach to the endpoint
+    #   that controls access to the service. The policy must be in valid
+    #   JSON format.
     #   @return [String]
     #
     # @!attribute [rw] add_route_table_ids
@@ -37655,8 +37675,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] add_subnet_ids
-    #   (Interface endpoint) One or more subnet IDs in which to serve the
-    #   endpoint.
+    #   (Interface and Gateway Load Balancer endpoints) One or more subnet
+    #   IDs in which to serve the endpoint. For a Gateway Load Balancer
+    #   endpoint, you can specify only one subnet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_subnet_ids
@@ -37721,6 +37742,8 @@ module Aws::EC2
     #         acceptance_required: false,
     #         add_network_load_balancer_arns: ["String"],
     #         remove_network_load_balancer_arns: ["String"],
+    #         add_gateway_load_balancer_arns: ["String"],
+    #         remove_gateway_load_balancer_arns: ["String"],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -37735,11 +37758,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
-    #   The private DNS name to assign to the endpoint service.
+    #   (Interface endpoint configuration) The private DNS name to assign to
+    #   the endpoint service.
     #   @return [String]
     #
     # @!attribute [rw] remove_private_dns_name
-    #   Removes the private DNS name of the endpoint service.
+    #   (Interface endpoint configuration) Removes the private DNS name of
+    #   the endpoint service.
     #   @return [Boolean]
     #
     # @!attribute [rw] acceptance_required
@@ -37757,6 +37782,16 @@ module Aws::EC2
     #   from your service configuration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] add_gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Gateway Load Balancers to add to
+    #   your service configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove
+    #   from your service configuration.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfigurationRequest AWS API Documentation
     #
     class ModifyVpcEndpointServiceConfigurationRequest < Struct.new(
@@ -37766,7 +37801,9 @@ module Aws::EC2
       :remove_private_dns_name,
       :acceptance_required,
       :add_network_load_balancer_arns,
-      :remove_network_load_balancer_arns)
+      :remove_network_load_balancer_arns,
+      :add_gateway_load_balancer_arns,
+      :remove_gateway_load_balancer_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41785,6 +41822,7 @@ module Aws::EC2
     #         destination_ipv_6_cidr_block: "String",
     #         destination_prefix_list_id: "PrefixListResourceId",
     #         dry_run: false,
+    #         vpc_endpoint_id: "VpcEndpointId",
     #         egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #         gateway_id: "RouteGatewayId",
     #         instance_id: "InstanceId",
@@ -41820,6 +41858,11 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
+    #   endpoints only.
+    #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
     #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
@@ -41873,6 +41916,7 @@ module Aws::EC2
       :destination_ipv_6_cidr_block,
       :destination_prefix_list_id,
       :dry_run,
+      :vpc_endpoint_id,
       :egress_only_internet_gateway_id,
       :gateway_id,
       :instance_id,
@@ -46683,6 +46727,11 @@ module Aws::EC2
     #   the service.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of the Gateway Load Balancers for
+    #   the service.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] base_endpoint_dns_names
     #   The DNS names for the service.
     #   @return [Array<String>]
@@ -46711,6 +46760,7 @@ module Aws::EC2
       :acceptance_required,
       :manages_vpc_endpoints,
       :network_load_balancer_arns,
+      :gateway_load_balancer_arns,
       :base_endpoint_dns_names,
       :private_dns_name,
       :private_dns_name_configuration,
@@ -52286,6 +52336,11 @@ module Aws::EC2
     #   the service.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of the Gateway Load Balancers for
+    #   the service.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection AWS API Documentation
     #
     class VpcEndpointConnection < Struct.new(
@@ -52295,7 +52350,8 @@ module Aws::EC2
       :vpc_endpoint_state,
       :creation_timestamp,
       :dns_entries,
-      :network_load_balancer_arns)
+      :network_load_balancer_arns,
+      :gateway_load_balancer_arns)
       SENSITIVE = []
       include Aws::Structure
     end

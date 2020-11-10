@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2020-11-10)
+------------------
+
+* Feature - Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
+
 1.48.0 (2020-11-04)
 ------------------
 

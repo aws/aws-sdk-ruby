@@ -7239,6 +7239,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :vpc_endpoint_id
+    #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
+    #   endpoints only.
+    #
     # @option params [String] :egress_only_internet_gateway_id
     #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #
@@ -7298,6 +7302,7 @@ module Aws::EC2
     #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteGatewayId",
     #     instance_id: "InstanceId",
@@ -9499,6 +9504,10 @@ module Aws::EC2
     # You can specify the subnets in which to create an endpoint, and the
     # security groups to associate with the endpoint network interface.
     #
+    # A `GatewayLoadBalancer` endpoint is a network interface in your subnet
+    # that serves an endpoint for communicating with a Gateway Load Balancer
+    # that you've configured as a VPC endpoint service.
+    #
     # Use DescribeVpcEndpointServices to get a list of supported services.
     #
     #
@@ -9525,17 +9534,18 @@ module Aws::EC2
     #   provider.
     #
     # @option params [String] :policy_document
-    #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format. If this parameter is
-    #   not specified, we attach a default policy that allows full access to
-    #   the service.
+    #   (Interface and gateway endpoints) A policy to attach to the endpoint
+    #   that controls access to the service. The policy must be in valid JSON
+    #   format. If this parameter is not specified, we attach a default policy
+    #   that allows full access to the service.
     #
     # @option params [Array<String>] :route_table_ids
     #   (Gateway endpoint) One or more route table IDs.
     #
     # @option params [Array<String>] :subnet_ids
-    #   (Interface endpoint) The ID of one or more subnets in which to create
-    #   an endpoint network interface.
+    #   (Interface and Gateway Load Balancer endpoints) The ID of one or more
+    #   subnets in which to create an endpoint network interface. For a
+    #   Gateway Load Balancer endpoint, you can specify one subnet only.
     #
     # @option params [Array<String>] :security_group_ids
     #   (Interface endpoint) The ID of one or more security groups to
@@ -9578,7 +9588,7 @@ module Aws::EC2
     #
     #   resp = client.create_vpc_endpoint({
     #     dry_run: false,
-    #     vpc_endpoint_type: "Interface", # accepts Interface, Gateway
+    #     vpc_endpoint_type: "Interface", # accepts Interface, Gateway, GatewayLoadBalancer
     #     vpc_id: "VpcId", # required
     #     service_name: "String", # required
     #     policy_document: "String",
@@ -9603,7 +9613,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.vpc_endpoint.vpc_endpoint_id #=> String
-    #   resp.vpc_endpoint.vpc_endpoint_type #=> String, one of "Interface", "Gateway"
+    #   resp.vpc_endpoint.vpc_endpoint_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer"
     #   resp.vpc_endpoint.vpc_id #=> String
     #   resp.vpc_endpoint.service_name #=> String
     #   resp.vpc_endpoint.state #=> String, one of "PendingAcceptance", "Pending", "Available", "Deleting", "Deleted", "Rejected", "Failed", "Expired"
@@ -9719,23 +9729,30 @@ module Aws::EC2
 
     # Creates a VPC endpoint service configuration to which service
     # consumers (AWS accounts, IAM users, and IAM roles) can connect.
-    # Service consumers can create an interface VPC endpoint to connect to
-    # your service.
     #
-    # To create an endpoint service configuration, you must first create a
-    # Network Load Balancer for your service. For more information, see [VPC
-    # Endpoint Services][1] in the *Amazon Virtual Private Cloud User
-    # Guide*.
+    # To create an endpoint service configuration, you must first create one
+    # of the following for your service:
+    #
+    # * A [Network Load Balancer][1]. Service consumers connect to your
+    #   service using an interface endpoint.
+    #
+    # * A [Gateway Load Balancer][2]. Service consumers connect to your
+    #   service using a Gateway Load Balancer endpoint.
+    #
+    # For more information, see [VPC Endpoint Services][3] in the *Amazon
+    # Virtual Private Cloud User Guide*.
     #
     # If you set the private DNS name, you must prove that you own the
     # private DNS domain name. For more information, see [VPC Endpoint
-    # Service Private DNS Name Verification][2] in the *Amazon Virtual
+    # Service Private DNS Name Verification][4] in the *Amazon Virtual
     # Private Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
+    # [4]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9749,11 +9766,16 @@ module Aws::EC2
     #   AcceptVpcEndpointConnections.
     #
     # @option params [String] :private_dns_name
-    #   The private DNS name to assign to the VPC endpoint service.
+    #   (Interface endpoint configuration) The private DNS name to assign to
+    #   the VPC endpoint service.
     #
-    # @option params [required, Array<String>] :network_load_balancer_arns
+    # @option params [Array<String>] :network_load_balancer_arns
     #   The Amazon Resource Names (ARNs) of one or more Network Load Balancers
     #   for your service.
+    #
+    # @option params [Array<String>] :gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of one or more Gateway Load
+    #   Balancers.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -9778,7 +9800,8 @@ module Aws::EC2
     #     dry_run: false,
     #     acceptance_required: false,
     #     private_dns_name: "String",
-    #     network_load_balancer_arns: ["String"], # required
+    #     network_load_balancer_arns: ["String"],
+    #     gateway_load_balancer_arns: ["String"],
     #     client_token: "String",
     #     tag_specifications: [
     #       {
@@ -9796,7 +9819,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.service_configuration.service_type #=> Array
-    #   resp.service_configuration.service_type[0].service_type #=> String, one of "Interface", "Gateway"
+    #   resp.service_configuration.service_type[0].service_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer"
     #   resp.service_configuration.service_id #=> String
     #   resp.service_configuration.service_name #=> String
     #   resp.service_configuration.service_state #=> String, one of "Pending", "Available", "Deleting", "Deleted", "Failed"
@@ -9806,6 +9829,8 @@ module Aws::EC2
     #   resp.service_configuration.manages_vpc_endpoints #=> Boolean
     #   resp.service_configuration.network_load_balancer_arns #=> Array
     #   resp.service_configuration.network_load_balancer_arns[0] #=> String
+    #   resp.service_configuration.gateway_load_balancer_arns #=> Array
+    #   resp.service_configuration.gateway_load_balancer_arns[0] #=> String
     #   resp.service_configuration.base_endpoint_dns_names #=> Array
     #   resp.service_configuration.base_endpoint_dns_names[0] #=> String
     #   resp.service_configuration.private_dns_name #=> String
@@ -12340,8 +12365,10 @@ module Aws::EC2
 
     # Deletes one or more specified VPC endpoints. Deleting a gateway
     # endpoint also deletes the endpoint routes in the route tables that
-    # were associated with the endpoint. Deleting an interface endpoint
-    # deletes the endpoint network interfaces.
+    # were associated with the endpoint. Deleting an interface endpoint or a
+    # Gateway Load Balancer endpoint deletes the endpoint network
+    # interfaces. Gateway Load Balancer endpoints can only be deleted if the
+    # routes that are associated with the endpoint are deleted.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -25374,6 +25401,8 @@ module Aws::EC2
     #   resp.vpc_endpoint_connections[0].dns_entries[0].hosted_zone_id #=> String
     #   resp.vpc_endpoint_connections[0].network_load_balancer_arns #=> Array
     #   resp.vpc_endpoint_connections[0].network_load_balancer_arns[0] #=> String
+    #   resp.vpc_endpoint_connections[0].gateway_load_balancer_arns #=> Array
+    #   resp.vpc_endpoint_connections[0].gateway_load_balancer_arns[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections AWS API Documentation
@@ -25453,7 +25482,7 @@ module Aws::EC2
     #
     #   resp.service_configurations #=> Array
     #   resp.service_configurations[0].service_type #=> Array
-    #   resp.service_configurations[0].service_type[0].service_type #=> String, one of "Interface", "Gateway"
+    #   resp.service_configurations[0].service_type[0].service_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer"
     #   resp.service_configurations[0].service_id #=> String
     #   resp.service_configurations[0].service_name #=> String
     #   resp.service_configurations[0].service_state #=> String, one of "Pending", "Available", "Deleting", "Deleted", "Failed"
@@ -25463,6 +25492,8 @@ module Aws::EC2
     #   resp.service_configurations[0].manages_vpc_endpoints #=> Boolean
     #   resp.service_configurations[0].network_load_balancer_arns #=> Array
     #   resp.service_configurations[0].network_load_balancer_arns[0] #=> String
+    #   resp.service_configurations[0].gateway_load_balancer_arns #=> Array
+    #   resp.service_configurations[0].gateway_load_balancer_arns[0] #=> String
     #   resp.service_configurations[0].base_endpoint_dns_names #=> Array
     #   resp.service_configurations[0].base_endpoint_dns_names[0] #=> String
     #   resp.service_configurations[0].private_dns_name #=> String
@@ -25627,7 +25658,7 @@ module Aws::EC2
     #   resp.service_details[0].service_name #=> String
     #   resp.service_details[0].service_id #=> String
     #   resp.service_details[0].service_type #=> Array
-    #   resp.service_details[0].service_type[0].service_type #=> String, one of "Interface", "Gateway"
+    #   resp.service_details[0].service_type[0].service_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer"
     #   resp.service_details[0].availability_zones #=> Array
     #   resp.service_details[0].availability_zones[0] #=> String
     #   resp.service_details[0].owner #=> String
@@ -25675,6 +25706,9 @@ module Aws::EC2
     #   * `vpc-endpoint-state` - The state of the endpoint
     #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
     #     `deleted` \| `rejected` \| `failed`).
+    #
+    #   * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` \|
+    #     `Gateway` \| `GatewayLoadBalancer`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -25724,7 +25758,7 @@ module Aws::EC2
     #
     #   resp.vpc_endpoints #=> Array
     #   resp.vpc_endpoints[0].vpc_endpoint_id #=> String
-    #   resp.vpc_endpoints[0].vpc_endpoint_type #=> String, one of "Interface", "Gateway"
+    #   resp.vpc_endpoints[0].vpc_endpoint_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer"
     #   resp.vpc_endpoints[0].vpc_id #=> String
     #   resp.vpc_endpoints[0].service_name #=> String
     #   resp.vpc_endpoints[0].state #=> String, one of "PendingAcceptance", "Pending", "Available", "Deleting", "Deleted", "Rejected", "Failed", "Expired"
@@ -32944,9 +32978,9 @@ module Aws::EC2
     end
 
     # Modifies attributes of a specified VPC endpoint. The attributes that
-    # you can modify depend on the type of VPC endpoint (interface or
-    # gateway). For more information, see [VPC Endpoints][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # you can modify depend on the type of VPC endpoint (interface, gateway,
+    # or Gateway Load Balancer). For more information, see [VPC
+    # Endpoints][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -32966,8 +33000,9 @@ module Aws::EC2
     #   default policy. The default policy allows full access to the service.
     #
     # @option params [String] :policy_document
-    #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format.
+    #   (Interface and gateway endpoints) A policy to attach to the endpoint
+    #   that controls access to the service. The policy must be in valid JSON
+    #   format.
     #
     # @option params [Array<String>] :add_route_table_ids
     #   (Gateway endpoint) One or more route tables IDs to associate with the
@@ -32978,8 +33013,9 @@ module Aws::EC2
     #   the endpoint.
     #
     # @option params [Array<String>] :add_subnet_ids
-    #   (Interface endpoint) One or more subnet IDs in which to serve the
-    #   endpoint.
+    #   (Interface and Gateway Load Balancer endpoints) One or more subnet IDs
+    #   in which to serve the endpoint. For a Gateway Load Balancer endpoint,
+    #   you can specify only one subnet.
     #
     # @option params [Array<String>] :remove_subnet_ids
     #   (Interface endpoint) One or more subnets IDs in which to remove the
@@ -33077,9 +33113,10 @@ module Aws::EC2
     end
 
     # Modifies the attributes of your VPC endpoint service configuration.
-    # You can change the Network Load Balancers for your service, and you
-    # can specify whether acceptance is required for requests to connect to
-    # your endpoint service through an interface VPC endpoint.
+    # You can change the Network Load Balancers or Gateway Load Balancers
+    # for your service, and you can specify whether acceptance is required
+    # for requests to connect to your endpoint service through an interface
+    # VPC endpoint.
     #
     # If you set or modify the private DNS name, you must prove that you own
     # the private DNS domain name. For more information, see [VPC Endpoint
@@ -33100,10 +33137,12 @@ module Aws::EC2
     #   The ID of the service.
     #
     # @option params [String] :private_dns_name
-    #   The private DNS name to assign to the endpoint service.
+    #   (Interface endpoint configuration) The private DNS name to assign to
+    #   the endpoint service.
     #
     # @option params [Boolean] :remove_private_dns_name
-    #   Removes the private DNS name of the endpoint service.
+    #   (Interface endpoint configuration) Removes the private DNS name of the
+    #   endpoint service.
     #
     # @option params [Boolean] :acceptance_required
     #   Indicates whether requests to create an endpoint to your service must
@@ -33115,6 +33154,14 @@ module Aws::EC2
     #
     # @option params [Array<String>] :remove_network_load_balancer_arns
     #   The Amazon Resource Names (ARNs) of Network Load Balancers to remove
+    #   from your service configuration.
+    #
+    # @option params [Array<String>] :add_gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Gateway Load Balancers to add to
+    #   your service configuration.
+    #
+    # @option params [Array<String>] :remove_gateway_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove
     #   from your service configuration.
     #
     # @return [Types::ModifyVpcEndpointServiceConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -33131,6 +33178,8 @@ module Aws::EC2
     #     acceptance_required: false,
     #     add_network_load_balancer_arns: ["String"],
     #     remove_network_load_balancer_arns: ["String"],
+    #     add_gateway_load_balancer_arns: ["String"],
+    #     remove_gateway_load_balancer_arns: ["String"],
     #   })
     #
     # @example Response structure
@@ -35310,6 +35359,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :vpc_endpoint_id
+    #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
+    #   endpoints only.
+    #
     # @option params [String] :egress_only_internet_gateway_id
     #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     #
@@ -35365,6 +35418,7 @@ module Aws::EC2
     #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteGatewayId",
     #     instance_id: "InstanceId",
@@ -39201,7 +39255,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.208.0'
+      context[:gem_version] = '1.209.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

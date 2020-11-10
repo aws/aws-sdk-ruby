@@ -379,8 +379,8 @@ module Aws::ElasticLoadBalancingV2
     Ciphers.member = Shapes::ShapeRef.new(shape: Cipher)
 
     CreateListenerInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
-    CreateListenerInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, required: true, location_name: "Protocol"))
-    CreateListenerInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    CreateListenerInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "Protocol"))
+    CreateListenerInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
     CreateListenerInput.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     CreateListenerInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     CreateListenerInput.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "DefaultActions"))

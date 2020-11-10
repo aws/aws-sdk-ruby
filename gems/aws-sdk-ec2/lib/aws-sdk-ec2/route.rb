@@ -300,6 +300,7 @@ module Aws::EC2
     #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteGatewayId",
     #     instance_id: "InstanceId",
@@ -323,6 +324,9 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :vpc_endpoint_id
+    #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
+    #   endpoints only.
     # @option options [String] :egress_only_internet_gateway_id
     #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     # @option options [String] :gateway_id

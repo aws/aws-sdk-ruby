@@ -42,10 +42,8 @@ module Aws::AutoScaling
     end
 
     # The ID of the Amazon Machine Image (AMI) to use to launch your EC2
-    # instances.
-    #
-    # For more information, see [Finding an AMI][1] in the *Amazon EC2 User
-    # Guide for Linux Instances*.
+    # instances. For more information, see [Finding an AMI][1] in the
+    # *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -69,10 +67,8 @@ module Aws::AutoScaling
     end
 
     # A list that contains the security groups to assign to the instances in
-    # the Auto Scaling group.
-    #
-    # For more information, see [Security Groups for Your VPC][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # the Auto Scaling group. For more information, see [Security Groups for
+    # Your VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -83,10 +79,8 @@ module Aws::AutoScaling
     end
 
     # The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
-    # to.
-    #
-    # For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    # Guide for Linux Instances* and [Linking EC2-Classic Instances to a
+    # to. For more information, see [ClassicLink][1] in the *Amazon EC2 User
+    # Guide for Linux Instances* and [Linking EC2-Classic instances to a
     # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
@@ -102,7 +96,7 @@ module Aws::AutoScaling
     # `ClassicLinkVPCId`.
     #
     # For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    # Guide for Linux Instances* and [Linking EC2-Classic Instances to a
+    # Guide for Linux Instances* and [Linking EC2-Classic instances to a
     # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
@@ -115,10 +109,8 @@ module Aws::AutoScaling
     end
 
     # The Base64-encoded user data to make available to the launched EC2
-    # instances.
-    #
-    # For more information, see [Instance Metadata and User Data][1] in the
-    # *Amazon EC2 User Guide for Linux Instances*.
+    # instances. For more information, see [Instance metadata and user
+    # data][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -154,10 +146,8 @@ module Aws::AutoScaling
     end
 
     # A block device mapping, which specifies the block devices for the
-    # instance.
-    #
-    # For more information, see [Block Device Mapping][1] in the *Amazon EC2
-    # User Guide for Linux Instances*.
+    # instance. For more information, see [Block Device Mapping][1] in the
+    # *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -183,10 +173,9 @@ module Aws::AutoScaling
 
     # The maximum hourly price to be paid for any Spot Instance launched to
     # fulfill the request. Spot Instances are launched when the price you
-    # specify exceeds the current Spot price.
-    #
-    # For more information, see [Launching Spot Instances in Your Auto
-    # Scaling Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # specify exceeds the current Spot price. For more information, see
+    # [Requesting Spot Instances][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*.
     #
     #
     #
@@ -198,10 +187,9 @@ module Aws::AutoScaling
 
     # The name or the Amazon Resource Name (ARN) of the instance profile
     # associated with the IAM role for the instance. The instance profile
-    # contains the IAM role.
-    #
-    # For more information, see [IAM Role for Applications That Run on
-    # Amazon EC2 Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # contains the IAM role. For more information, see [IAM role for
+    # applications that run on Amazon EC2 instances][1] in the *Amazon EC2
+    # Auto Scaling User Guide*.
     #
     #
     #
@@ -218,10 +206,9 @@ module Aws::AutoScaling
     end
 
     # Specifies whether the launch configuration is optimized for EBS I/O
-    # (`true`) or not (`false`).
-    #
-    # For more information, see [Amazon EBS-Optimized Instances][1] in the
-    # *Amazon EC2 User Guide for Linux Instances*.
+    # (`true`) or not (`false`). For more information, see [Amazon
+    # EBS-Optimized Instances][1] in the *Amazon EC2 User Guide for Linux
+    # Instances*.
     #
     #
     #
@@ -232,10 +219,9 @@ module Aws::AutoScaling
     end
 
     # For Auto Scaling groups that are running in a VPC, specifies whether
-    # to assign a public IP address to the group's instances.
-    #
-    # For more information, see [Launching Auto Scaling Instances in a
-    # VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # to assign a public IP address to the group's instances. For more
+    # information, see [Launching Auto Scaling instances in a VPC][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -249,12 +235,12 @@ module Aws::AutoScaling
     # instance with `dedicated` tenancy runs on isolated, single-tenant
     # hardware and can only be launched into a VPC.
     #
-    # For more information, see [Instance Placement Tenancy][1] in the
-    # *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Configuring instance tenancy with Amazon
+    # EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
     # @return [String]
     def placement_tenancy
       data[:placement_tenancy]

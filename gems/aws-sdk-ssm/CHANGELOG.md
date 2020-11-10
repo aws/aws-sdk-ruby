@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2020-11-10)
+------------------
+
+* Feature - Add SessionId as a filter for DescribeSessions API
+
 1.97.0 (2020-11-09)
 ------------------
 

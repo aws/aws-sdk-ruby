@@ -55,8 +55,8 @@ module Aws::AutoScaling
     #
     # * `SimpleScaling` (default)
     #
-    # For more information, see [Target Tracking Scaling Policies][1] and
-    # [Step and Simple Scaling Policies][2] in the *Amazon EC2 Auto Scaling
+    # For more information, see [Target tracking scaling policies][1] and
+    # [Step and simple scaling policies][2] in the *Amazon EC2 Auto Scaling
     # User Guide*.
     #
     #
@@ -309,7 +309,7 @@ module Aws::AutoScaling
     #   period to complete before executing the policy.
     #
     #   Valid only if the policy type is `SimpleScaling`. For more
-    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1] in
+    #   information, see [Scaling cooldowns for Amazon EC2 Auto Scaling][1] in
     #   the *Amazon EC2 Auto Scaling User Guide*.
     #
     #

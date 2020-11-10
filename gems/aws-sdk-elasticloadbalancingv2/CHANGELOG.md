@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-11-10)
+------------------
+
+* Feature - Added support for Gateway Load Balancers, which make it easy to deploy, scale, and run third-party virtual networking appliances.
+
 1.54.0 (2020-10-29)
 ------------------
 
