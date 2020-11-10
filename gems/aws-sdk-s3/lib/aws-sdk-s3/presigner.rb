@@ -257,7 +257,7 @@ module Aws
 
         if arn
           signer_opts[:region] = resolved_region
-          signer_opts[:service] = 's3-outposts' if arn.respond_to?(:outpost_id)
+          signer_opts[:service] = arn.service
         end
 
         Aws::Sigv4::Signer.new(signer_opts)
