@@ -82,7 +82,7 @@ module Aws
 
               if arn
                 S3Signer.build_v4_signer(
-                  service: arn.respond_to?(:outpost_id) ? 's3-outposts' : 's3',
+                  service: arn.service,
                   region: resolved_region,
                   credentials: context.config.credentials
                 )

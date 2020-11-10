@@ -196,7 +196,7 @@ module Aws
         req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
-        signer = build_signer(req.context.config, unsigned_headers)
+        signer = build_signer(req.context, unsigned_headers)
 
         req.handle(step: :send) do |context|
           if scheme != http_req.endpoint.scheme
@@ -240,14 +240,27 @@ module Aws
         x_amz_headers
       end
 
-      def build_signer(cfg, unsigned_headers)
-        Aws::Sigv4::Signer.new(
+      def build_signer(context, unsigned_headers)
+        signer_opts = {
           service: 's3',
-          region: cfg.region,
-          credentials_provider: cfg.credentials,
+          region: context.config.region,
+          credentials_provider: context.config.credentials,
           unsigned_headers: unsigned_headers,
           uri_escape_path: false
+        }
+
+        resolved_region, arn = Aws::S3::Plugins::ARN.resolve_arn!(
+          context.params[:bucket],
+          context.config.sigv4_signer.region,
+          context.config.s3_use_arn_region
         )
+
+        if arn
+          signer_opts[:region] = resolved_region
+          signer_opts[:service] = arn.service
+        end
+
+        Aws::Sigv4::Signer.new(signer_opts)
       end
     end
   end
