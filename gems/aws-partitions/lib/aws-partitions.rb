@@ -319,6 +319,7 @@ module Aws
             'Glacier' => 'glacier',
             'GlobalAccelerator' => 'globalaccelerator',
             'Glue' => 'glue',
+            'GlueDataBrew' => 'databrew',
             'Greengrass' => 'greengrass',
             'GroundStation' => 'groundstation',
             'GuardDuty' => 'guardduty',

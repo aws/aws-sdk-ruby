@@ -330,7 +330,7 @@ module Aws::Amplify
     # Creates a new Amplify app.
     #
     # @option params [required, String] :name
-    #   The name for the Amplify app.
+    #   The name for an Amplify app.
     #
     # @option params [String] :description
     #   The description for an Amplify app.
@@ -381,14 +381,17 @@ module Aws::Amplify
     # @option params [String] :build_spec
     #   The build specification (build spec) for an Amplify app.
     #
+    # @option params [String] :custom_headers
+    #   The custom HTTP headers for an Amplify app.
+    #
     # @option params [Boolean] :enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify app.
+    #   Enables automated branch creation for an Amplify app.
     #
     # @option params [Array<String>] :auto_branch_creation_patterns
-    #   The automated branch creation glob patterns for the Amplify app.
+    #   The automated branch creation glob patterns for an Amplify app.
     #
     # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
-    #   The automated branch creation configuration for the Amplify app.
+    #   The automated branch creation configuration for an Amplify app.
     #
     # @return [Types::CreateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -423,6 +426,7 @@ module Aws::Amplify
     #       "TagKey" => "TagValue",
     #     },
     #     build_spec: "BuildSpec",
+    #     custom_headers: "CustomHeaders",
     #     enable_auto_branch_creation: false,
     #     auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #     auto_branch_creation_config: {
@@ -471,6 +475,7 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.custom_headers #=> String
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
@@ -573,10 +578,12 @@ module Aws::Amplify
     #   Enables basic authorization for the branch.
     #
     # @option params [Boolean] :enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
     #   Performance mode optimizes for faster hosting performance by keeping
-    #   content cached at the edge for a longer interval. Enabling performance
-    #   mode will mean that hosting configuration or code changes can take up
-    #   to 10 minutes to roll out.
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up to
+    #   10 minutes to roll out.
     #
     # @option params [Hash<String,String>] :tags
     #   The tag for the branch.
@@ -592,7 +599,7 @@ module Aws::Amplify
     #   prefix.
     #
     # @option params [Boolean] :enable_pull_request_preview
-    #   Enables pull request preview for this branch.
+    #   Enables pull request previews for this branch.
     #
     # @option params [String] :pull_request_environment_name
     #   The Amplify environment name for the pull request.
@@ -877,6 +884,7 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.custom_headers #=> String
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
@@ -1211,6 +1219,7 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.custom_headers #=> String
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
@@ -1553,6 +1562,7 @@ module Aws::Amplify
     #   resp.apps[0].production_branch.thumbnail_url #=> String
     #   resp.apps[0].production_branch.branch_name #=> String
     #   resp.apps[0].build_spec #=> String
+    #   resp.apps[0].custom_headers #=> String
     #   resp.apps[0].enable_auto_branch_creation #=> Boolean
     #   resp.apps[0].auto_branch_creation_patterns #=> Array
     #   resp.apps[0].auto_branch_creation_patterns[0] #=> String
@@ -2191,15 +2201,18 @@ module Aws::Amplify
     # @option params [String] :build_spec
     #   The build specification (build spec) for an Amplify app.
     #
+    # @option params [String] :custom_headers
+    #   The custom HTTP headers for an Amplify app.
+    #
     # @option params [Boolean] :enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify app.
+    #   Enables automated branch creation for an Amplify app.
     #
     # @option params [Array<String>] :auto_branch_creation_patterns
-    #   Describes the automated branch creation glob patterns for the Amplify
+    #   Describes the automated branch creation glob patterns for an Amplify
     #   app.
     #
     # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
-    #   The automated branch creation configuration for the Amplify app.
+    #   The automated branch creation configuration for an Amplify app.
     #
     # @option params [String] :repository
     #   The name of the repository for an Amplify app
@@ -2242,6 +2255,7 @@ module Aws::Amplify
     #       },
     #     ],
     #     build_spec: "BuildSpec",
+    #     custom_headers: "CustomHeaders",
     #     enable_auto_branch_creation: false,
     #     auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #     auto_branch_creation_config: {
@@ -2293,6 +2307,7 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.custom_headers #=> String
     #   resp.app.enable_auto_branch_creation #=> Boolean
     #   resp.app.auto_branch_creation_patterns #=> Array
     #   resp.app.auto_branch_creation_patterns[0] #=> String
@@ -2350,10 +2365,12 @@ module Aws::Amplify
     #   Enables basic authorization for the branch.
     #
     # @option params [Boolean] :enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
     #   Performance mode optimizes for faster hosting performance by keeping
-    #   content cached at the edge for a longer interval. Enabling performance
-    #   mode will mean that hosting configuration or code changes can take up
-    #   to 10 minutes to roll out.
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up to
+    #   10 minutes to roll out.
     #
     # @option params [String] :build_spec
     #   The build specification (build spec) for the branch.
@@ -2366,7 +2383,7 @@ module Aws::Amplify
     #   prefix.
     #
     # @option params [Boolean] :enable_pull_request_preview
-    #   Enables pull request preview for this branch.
+    #   Enables pull request previews for this branch.
     #
     # @option params [String] :pull_request_environment_name
     #   The Amplify environment name for the pull request.
@@ -2568,7 +2585,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -499,9 +499,9 @@ module Aws::ForecastService
     # To get a list of all your datasets groups, use the ListDatasetGroups
     # operation.
     #
-    # <note markdown="1"> The `Status` of a dataset group must be `ACTIVE` before you can create
-    # use the dataset group to create a predictor. To get the status, use
-    # the DescribeDatasetGroup operation.
+    # <note markdown="1"> The `Status` of a dataset group must be `ACTIVE` before you can use
+    # the dataset group to create a predictor. To get the status, use the
+    # DescribeDatasetGroup operation.
     #
     #  </note>
     #
@@ -940,24 +940,20 @@ module Aws::ForecastService
 
     # Creates an Amazon Forecast predictor.
     #
-    # In the request, you provide a dataset group and either specify an
-    # algorithm or let Amazon Forecast choose the algorithm for you using
+    # In the request, provide a dataset group and either specify an
+    # algorithm or let Amazon Forecast choose an algorithm for you using
     # AutoML. If you specify an algorithm, you also can override
     # algorithm-specific hyperparameters.
     #
-    # Amazon Forecast uses the chosen algorithm to train a model using the
-    # latest version of the datasets in the specified dataset group. The
-    # result is called a predictor. You then generate a forecast using the
-    # CreateForecast operation.
+    # Amazon Forecast uses the algorithm to train a predictor using the
+    # latest version of the datasets in the specified dataset group. You can
+    # then generate a forecast using the CreateForecast operation.
     #
-    # After training a model, the `CreatePredictor` operation also evaluates
-    # it. To see the evaluation metrics, use the GetAccuracyMetrics
-    # operation. Always review the evaluation metrics before deciding to use
-    # the predictor to generate a forecast.
+    # To see the evaluation metrics, use the GetAccuracyMetrics operation.
     #
-    # Optionally, you can specify a featurization configuration to fill and
-    # aggregate the data fields in the `TARGET_TIME_SERIES` dataset to
-    # improve model training. For more information, see FeaturizationConfig.
+    # You can specify a featurization configuration to fill and aggregate
+    # the data fields in the `TARGET_TIME_SERIES` dataset to improve model
+    # training. For more information, see FeaturizationConfig.
     #
     # For RELATED\_TIME\_SERIES datasets, `CreatePredictor` verifies that
     # the `DataFrequency` specified when the dataset was created matches the
@@ -965,12 +961,17 @@ module Aws::ForecastService
     # restriction. Amazon Forecast also verifies the delimiter and timestamp
     # format. For more information, see howitworks-datasets-groups.
     #
+    # By default, predictors are trained and evaluated at the 0.1 (P10), 0.5
+    # (P50), and 0.9 (P90) quantiles. You can choose custom forecast types
+    # to train and evaluate your predictor by setting the `ForecastTypes`.
+    #
     # **AutoML**
     #
     # If you want Amazon Forecast to evaluate each algorithm and choose the
     # one that minimizes the `objective function`, set `PerformAutoML` to
     # `true`. The `objective function` is defined as the mean of the
-    # weighted p10, p50, and p90 quantile losses. For more information, see
+    # weighted losses over the forecast types. By default, these are the
+    # p10, p50, and p90 quantile losses. For more information, see
     # EvaluationResult.
     #
     # When AutoML is enabled, the following properties are disallowed:
@@ -1003,9 +1004,9 @@ module Aws::ForecastService
     #
     #   * `arn:aws:forecast:::algorithm/ARIMA`
     #
-    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
+    #   * `arn:aws:forecast:::algorithm/CNN-QR`
     #
-    #     Supports hyperparameter optimization (HPO)
+    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
     #
     #   * `arn:aws:forecast:::algorithm/ETS`
     #
@@ -1024,6 +1025,14 @@ module Aws::ForecastService
     #
     #   The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of
     #   the TARGET\_TIME\_SERIES dataset length.
+    #
+    # @option params [Array<String>] :forecast_types
+    #   Specifies the forecast types used to train a predictor. You can
+    #   specify up to five forecast types. Forecast types can be quantiles
+    #   from 0.01 to 0.99, by increments of 0.01 or higher. You can also
+    #   specify the mean forecast with `mean`.
+    #
+    #   The default value is `["0.10", "0.50", "0.9"]`.
     #
     # @option params [Boolean] :perform_auto_ml
     #   Whether to perform AutoML. When Amazon Forecast performs AutoML, it
@@ -1052,11 +1061,11 @@ module Aws::ForecastService
     #   hyperparameter. In this case, you are required to specify an algorithm
     #   and `PerformAutoML` must be false.
     #
-    #   The following algorithm supports HPO:
+    #   The following algorithms support HPO:
     #
     #   * DeepAR+
     #
-    #   ^
+    #   * CNN-QR
     #
     # @option params [Hash<String,String>] :training_parameters
     #   The hyperparameters to override for model training. The
@@ -1134,6 +1143,7 @@ module Aws::ForecastService
     #     predictor_name: "Name", # required
     #     algorithm_arn: "Arn",
     #     forecast_horizon: 1, # required
+    #     forecast_types: ["ForecastType"],
     #     perform_auto_ml: false,
     #     perform_hpo: false,
     #     training_parameters: {
@@ -1716,6 +1726,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#predictor_name #predictor_name} => String
     #   * {Types::DescribePredictorResponse#algorithm_arn #algorithm_arn} => String
     #   * {Types::DescribePredictorResponse#forecast_horizon #forecast_horizon} => Integer
+    #   * {Types::DescribePredictorResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#perform_auto_ml #perform_auto_ml} => Boolean
     #   * {Types::DescribePredictorResponse#perform_hpo #perform_hpo} => Boolean
     #   * {Types::DescribePredictorResponse#training_parameters #training_parameters} => Hash&lt;String,String&gt;
@@ -1744,6 +1755,8 @@ module Aws::ForecastService
     #   resp.predictor_name #=> String
     #   resp.algorithm_arn #=> String
     #   resp.forecast_horizon #=> Integer
+    #   resp.forecast_types #=> Array
+    #   resp.forecast_types[0] #=> String
     #   resp.perform_auto_ml #=> Boolean
     #   resp.perform_hpo #=> Boolean
     #   resp.training_parameters #=> Hash
@@ -1807,7 +1820,7 @@ module Aws::ForecastService
     # Provides metrics on the accuracy of the models that were trained by
     # the CreatePredictor operation. Use metrics to see how well the model
     # performed and to decide whether to use the predictor to generate a
-    # forecast. For more information, see metrics.
+    # forecast. For more information, see [Predictor Metrics][1].
     #
     # This operation generates metrics for each backtest window that was
     # evaluated. The number of backtest windows (`NumberOfBacktestWindows`)
@@ -1827,6 +1840,10 @@ module Aws::ForecastService
     # status, use the DescribePredictor operation.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/metrics.html
     #
     # @option params [required, String] :predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to get metrics for.
@@ -1854,6 +1871,10 @@ module Aws::ForecastService
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.weighted_quantile_losses #=> Array
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.weighted_quantile_losses[0].quantile #=> Float
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.weighted_quantile_losses[0].loss_value #=> Float
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics #=> Array
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].forecast_type #=> String
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].wape #=> Float
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].rmse #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetrics AWS API Documentation
     #
@@ -2459,7 +2480,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

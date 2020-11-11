@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.85.0 (2020-11-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-gluedatabrew` gem.
+
 3.84.0 (2020-09-30)
 ------------------
 

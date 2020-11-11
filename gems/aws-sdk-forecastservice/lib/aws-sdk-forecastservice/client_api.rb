@@ -64,6 +64,8 @@ module Aws::ForecastService
     Double = Shapes::FloatShape.new(name: 'Double')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorMetric = Shapes::StructureShape.new(name: 'ErrorMetric')
+    ErrorMetrics = Shapes::ListShape.new(name: 'ErrorMetrics')
     EvaluationParameters = Shapes::StructureShape.new(name: 'EvaluationParameters')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationType = Shapes::StringShape.new(name: 'EvaluationType')
@@ -230,6 +232,7 @@ module Aws::ForecastService
     CreatePredictorRequest.add_member(:predictor_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "PredictorName"))
     CreatePredictorRequest.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlgorithmArn"))
     CreatePredictorRequest.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ForecastHorizon"))
+    CreatePredictorRequest.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     CreatePredictorRequest.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformAutoML"))
     CreatePredictorRequest.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformHPO"))
     CreatePredictorRequest.add_member(:training_parameters, Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
@@ -374,6 +377,7 @@ module Aws::ForecastService
     DescribePredictorResponse.add_member(:predictor_name, Shapes::ShapeRef.new(shape: Name, location_name: "PredictorName"))
     DescribePredictorResponse.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlgorithmArn"))
     DescribePredictorResponse.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: Integer, location_name: "ForecastHorizon"))
+    DescribePredictorResponse.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     DescribePredictorResponse.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformAutoML"))
     DescribePredictorResponse.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformHPO"))
     DescribePredictorResponse.add_member(:training_parameters, Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
@@ -394,6 +398,13 @@ module Aws::ForecastService
     EncryptionConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
     EncryptionConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, required: true, location_name: "KMSKeyArn"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
+
+    ErrorMetric.add_member(:forecast_type, Shapes::ShapeRef.new(shape: ForecastType, location_name: "ForecastType"))
+    ErrorMetric.add_member(:wape, Shapes::ShapeRef.new(shape: Double, location_name: "WAPE"))
+    ErrorMetric.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, location_name: "RMSE"))
+    ErrorMetric.struct_class = Types::ErrorMetric
+
+    ErrorMetrics.member = Shapes::ShapeRef.new(shape: ErrorMetric)
 
     EvaluationParameters.add_member(:number_of_backtest_windows, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfBacktestWindows"))
     EvaluationParameters.add_member(:back_test_window_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BackTestWindowOffset"))
@@ -548,8 +559,9 @@ module Aws::ForecastService
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    Metrics.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, location_name: "RMSE"))
+    Metrics.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, deprecated: true, location_name: "RMSE", metadata: {"deprecatedMessage"=>"This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"}))
     Metrics.add_member(:weighted_quantile_losses, Shapes::ShapeRef.new(shape: WeightedQuantileLosses, location_name: "WeightedQuantileLosses"))
+    Metrics.add_member(:error_metrics, Shapes::ShapeRef.new(shape: ErrorMetrics, location_name: "ErrorMetrics"))
     Metrics.struct_class = Types::Metrics
 
     ParameterRanges.add_member(:categorical_parameter_ranges, Shapes::ShapeRef.new(shape: CategoricalParameterRanges, location_name: "CategoricalParameterRanges"))

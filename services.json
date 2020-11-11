@@ -321,6 +321,9 @@
   "Glue": {
     "models": "glue/2017-03-31"
   },
+  "GlueDataBrew": {
+    "models": "databrew/2017-07-25"
+  },
   "Greengrass": {
     "models": "greengrass/2017-06-07"
   },

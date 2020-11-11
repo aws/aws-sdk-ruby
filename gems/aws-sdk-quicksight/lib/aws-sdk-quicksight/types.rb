@@ -706,6 +706,38 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A rule defined to grant access on one or more restricted columns. Each
+    # dataset can have multiple rules. To create a restricted column, you
+    # add it to one or more rules. Each rule must contain at least one
+    # column and at least one user or group. To be able to see a restricted
+    # column, a user or group needs to be added to a rule for that column.
+    #
+    # @note When making an API call, you may pass ColumnLevelPermissionRule
+    #   data as a hash:
+    #
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       }
+    #
+    # @!attribute [rw] principals
+    #   An array of Amazon Resource Names (ARNs) for QuickSight users or
+    #   groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_names
+    #   An array of column names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnLevelPermissionRule AWS API Documentation
+    #
+    class ColumnLevelPermissionRule < Struct.new(
+      :principals,
+      :column_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The column schema.
     #
     # @!attribute [rw] name
@@ -1400,6 +1432,12 @@ module Aws::QuickSight
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #         },
+    #         column_level_permission_rules: [
+    #           {
+    #             principals: ["String"],
+    #             column_names: ["String"],
+    #           },
+    #         ],
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1449,6 +1487,10 @@ module Aws::QuickSight
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
+    #
     # @!attribute [rw] tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the dataset.
@@ -1466,6 +1508,7 @@ module Aws::QuickSight
       :column_groups,
       :permissions,
       :row_level_permission_data_set,
+      :column_level_permission_rules,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1518,7 +1561,7 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         data_source_id: "ResourceId", # required
     #         name: "ResourceName", # required
-    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
+    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
     #         data_source_parameters: {
     #           amazon_elasticsearch_parameters: {
     #             domain: "Domain", # required
@@ -1548,6 +1591,11 @@ module Aws::QuickSight
     #             database: "Database", # required
     #           },
     #           my_sql_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             database: "Database", # required
+    #           },
+    #           oracle_parameters: {
     #             host: "Host", # required
     #             port: 1, # required
     #             database: "Database", # required
@@ -1639,6 +1687,11 @@ module Aws::QuickSight
     #                   database: "Database", # required
     #                 },
     #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 oracle_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
     #                   database: "Database", # required
@@ -1967,7 +2020,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment, also called a rule. It must be unique
+    #   within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
@@ -2680,6 +2734,11 @@ module Aws::QuickSight
     #               port: 1, # required
     #               database: "Database", # required
     #             },
+    #             oracle_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
     #             postgre_sql_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
@@ -3248,6 +3307,10 @@ module Aws::QuickSight
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
     #
     class DataSet < Struct.new(
@@ -3262,7 +3325,8 @@ module Aws::QuickSight
       :import_mode,
       :consumed_spice_capacity_in_bytes,
       :column_groups,
-      :row_level_permission_data_set)
+      :row_level_permission_data_set,
+      :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3362,6 +3426,10 @@ module Aws::QuickSight
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules_applied
+    #   Indicates if the dataset has column level permission configured.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSummary AWS API Documentation
     #
     class DataSetSummary < Struct.new(
@@ -3371,7 +3439,8 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :import_mode,
-      :row_level_permission_data_set)
+      :row_level_permission_data_set,
+      :column_level_permission_rules_applied)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3503,6 +3572,11 @@ module Aws::QuickSight
     #                 database: "Database", # required
     #               },
     #               my_sql_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               oracle_parameters: {
     #                 host: "Host", # required
     #                 port: 1, # required
     #                 database: "Database", # required
@@ -3644,6 +3718,11 @@ module Aws::QuickSight
     #           port: 1, # required
     #           database: "Database", # required
     #         },
+    #         oracle_parameters: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           database: "Database", # required
+    #         },
     #         postgre_sql_parameters: {
     #           host: "Host", # required
     #           port: 1, # required
@@ -3730,6 +3809,10 @@ module Aws::QuickSight
     #   MySQL parameters.
     #   @return [Types::MySqlParameters]
     #
+    # @!attribute [rw] oracle_parameters
+    #   Oracle parameters.
+    #   @return [Types::OracleParameters]
+    #
     # @!attribute [rw] postgre_sql_parameters
     #   PostgreSQL parameters.
     #   @return [Types::PostgreSqlParameters]
@@ -3785,6 +3868,7 @@ module Aws::QuickSight
       :jira_parameters,
       :maria_db_parameters,
       :my_sql_parameters,
+      :oracle_parameters,
       :postgre_sql_parameters,
       :presto_parameters,
       :rds_parameters,
@@ -5340,7 +5424,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment, also called a rule.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -8209,6 +8293,37 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass OracleParameters
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       }
+    #
+    # @!attribute [rw] host
+    #   An Oracle host.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database
+    #   Database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OracleParameters AWS API Documentation
+    #
+    class OracleParameters < Struct.new(
+      :host,
+      :port,
+      :database)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output column.
     #
     # @!attribute [rw] name
@@ -8885,8 +9000,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The IAM action to grant or revoke permissions on, for example
-    #   `"quicksight:DescribeDashboard"`.
+    #   The IAM action to grant or revoke permissions on.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourcePermission AWS API Documentation
@@ -11489,6 +11603,12 @@ module Aws::QuickSight
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #         },
+    #         column_level_permission_rules: [
+    #           {
+    #             principals: ["String"],
+    #             column_names: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -11528,6 +11648,10 @@ module Aws::QuickSight
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDataSetRequest AWS API Documentation
     #
     class UpdateDataSetRequest < Struct.new(
@@ -11538,7 +11662,8 @@ module Aws::QuickSight
       :logical_table_map,
       :import_mode,
       :column_groups,
-      :row_level_permission_data_set)
+      :row_level_permission_data_set,
+      :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11701,6 +11826,11 @@ module Aws::QuickSight
     #             port: 1, # required
     #             database: "Database", # required
     #           },
+    #           oracle_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             database: "Database", # required
+    #           },
     #           postgre_sql_parameters: {
     #             host: "Host", # required
     #             port: 1, # required
@@ -11788,6 +11918,11 @@ module Aws::QuickSight
     #                   database: "Database", # required
     #                 },
     #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 oracle_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
     #                   database: "Database", # required
@@ -12018,8 +12153,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. This name must be unique within an AWS
-    #   account.
+    #   The name of the assignment, also called a rule. This name must be
+    #   unique within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -12063,7 +12198,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment or rule.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id

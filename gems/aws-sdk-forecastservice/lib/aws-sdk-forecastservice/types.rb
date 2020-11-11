@@ -652,6 +652,7 @@ module Aws::ForecastService
     #         predictor_name: "Name", # required
     #         algorithm_arn: "Arn",
     #         forecast_horizon: 1, # required
+    #         forecast_types: ["ForecastType"],
     #         perform_auto_ml: false,
     #         perform_hpo: false,
     #         training_parameters: {
@@ -737,9 +738,9 @@ module Aws::ForecastService
     #
     #   * `arn:aws:forecast:::algorithm/ARIMA`
     #
-    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
+    #   * `arn:aws:forecast:::algorithm/CNN-QR`
     #
-    #     Supports hyperparameter optimization (HPO)
+    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
     #
     #   * `arn:aws:forecast:::algorithm/ETS`
     #
@@ -760,6 +761,15 @@ module Aws::ForecastService
     #   The maximum forecast horizon is the lesser of 500 time-steps or 1/3
     #   of the TARGET\_TIME\_SERIES dataset length.
     #   @return [Integer]
+    #
+    # @!attribute [rw] forecast_types
+    #   Specifies the forecast types used to train a predictor. You can
+    #   specify up to five forecast types. Forecast types can be quantiles
+    #   from 0.01 to 0.99, by increments of 0.01 or higher. You can also
+    #   specify the mean forecast with `mean`.
+    #
+    #   The default value is `["0.10", "0.50", "0.9"]`.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] perform_auto_ml
     #   Whether to perform AutoML. When Amazon Forecast performs AutoML, it
@@ -790,11 +800,11 @@ module Aws::ForecastService
     #   hyperparameter. In this case, you are required to specify an
     #   algorithm and `PerformAutoML` must be false.
     #
-    #   The following algorithm supports HPO:
+    #   The following algorithms support HPO:
     #
     #   * DeepAR+
     #
-    #   ^
+    #   * CNN-QR
     #   @return [Boolean]
     #
     # @!attribute [rw] training_parameters
@@ -877,6 +887,7 @@ module Aws::ForecastService
       :predictor_name,
       :algorithm_arn,
       :forecast_horizon,
+      :forecast_types,
       :perform_auto_ml,
       :perform_hpo,
       :training_parameters,
@@ -1731,6 +1742,11 @@ module Aws::ForecastService
     #   also called the prediction length.
     #   @return [Integer]
     #
+    # @!attribute [rw] forecast_types
+    #   The forecast types used during predictor training. Default value is
+    #   `["0.1","0.5","0.9"]`
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] perform_auto_ml
     #   Whether the predictor is set to perform AutoML.
     #   @return [Boolean]
@@ -1742,10 +1758,9 @@ module Aws::ForecastService
     #
     # @!attribute [rw] training_parameters
     #   The default training parameters or overrides selected during model
-    #   training. If using the AutoML algorithm or if HPO is turned on while
-    #   using the DeepAR+ algorithms, the optimized values for the chosen
-    #   hyperparameters are returned. For more information, see
-    #   aws-forecast-choosing-recipes.
+    #   training. When running AutoML or choosing HPO with CNN-QR or
+    #   DeepAR+, the optimized values for the chosen hyperparameters are
+    #   returned. For more information, see aws-forecast-choosing-recipes.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] evaluation_parameters
@@ -1830,6 +1845,7 @@ module Aws::ForecastService
       :predictor_name,
       :algorithm_arn,
       :forecast_horizon,
+      :forecast_types,
       :perform_auto_ml,
       :perform_hpo,
       :training_parameters,
@@ -1880,6 +1896,32 @@ module Aws::ForecastService
     class EncryptionConfig < Struct.new(
       :role_arn,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides detailed error metrics to evaluate the performance of a
+    # predictor. This object is part of the Metrics object.
+    #
+    # @!attribute [rw] forecast_type
+    #   Forecast types can be quantiles from 0.01 to 0.99 (by increments of
+    #   0.01), and the mean.
+    #   @return [String]
+    #
+    # @!attribute [rw] wape
+    #   The weighted absolute percentage error (WAPE).
+    #   @return [Float]
+    #
+    # @!attribute [rw] rmse
+    #   The root-mean-square error (RMSE).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ErrorMetric AWS API Documentation
+    #
+    class ErrorMetric < Struct.new(
+      :forecast_type,
+      :wape,
+      :rmse)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2146,6 +2188,11 @@ module Aws::ForecastService
     #   * `backfill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
     #   * `futurefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   To set a filling method to a specific value, set the fill parameter
+    #   to `value` and define the value in a corresponding `_value`
+    #   parameter. For example, to set backfilling to a value of 2, include
+    #   the following: `"backfill": "value"` and `"backfill_value":"2"`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/FeaturizationMethod AWS API Documentation
@@ -3002,7 +3049,7 @@ module Aws::ForecastService
     # predictor. This object is part of the WindowSummary object.
     #
     # @!attribute [rw] rmse
-    #   The root mean square error (RMSE).
+    #   The root-mean-square error (RMSE).
     #   @return [Float]
     #
     # @!attribute [rw] weighted_quantile_losses
@@ -3011,11 +3058,17 @@ module Aws::ForecastService
     #   this case is the loss function.
     #   @return [Array<Types::WeightedQuantileLoss>]
     #
+    # @!attribute [rw] error_metrics
+    #   Provides detailed error metrics on forecast type, root-mean
+    #   square-error (RMSE), and weighted average percentage error (WAPE).
+    #   @return [Array<Types::ErrorMetric>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Metrics AWS API Documentation
     #
     class Metrics < Struct.new(
       :rmse,
-      :weighted_quantile_losses)
+      :weighted_quantile_losses,
+      :error_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3381,39 +3434,10 @@ module Aws::ForecastService
     # Describes a supplementary feature of a dataset group. This object is
     # part of the InputDataConfig object.
     #
-    # The only supported feature is a holiday calendar. If you use the
-    # calendar, all data in the datasets should belong to the same country
-    # as the calendar. For the holiday calendar data, see the [Jollyday][1]
-    # web site.
-    #
-    # India and Korea's holidays are not included in the Jollyday library,
-    # but both are supported by Amazon Forecast. Their holidays are:
-    #
-    # **"IN" - INDIA**
-    #
-    # * `JANUARY 26 - REPUBLIC DAY`
-    #
-    # * `AUGUST 15 - INDEPENDENCE DAY`
-    #
-    # * `OCTOBER 2 GANDHI'S BIRTHDAY`
-    #
-    # **"KR" - KOREA**
-    #
-    # * `JANUARY 1 - NEW YEAR`
-    #
-    # * `MARCH 1 - INDEPENDENCE MOVEMENT DAY`
-    #
-    # * `MAY 5 - CHILDREN'S DAY`
-    #
-    # * `JUNE 6 - MEMORIAL DAY`
-    #
-    # * `AUGUST 15 - LIBERATION DAY`
-    #
-    # * `OCTOBER 3 - NATIONAL FOUNDATION DAY`
-    #
-    # * `OCTOBER 9 - HANGEUL DAY`
-    #
-    # * `DECEMBER 25 - CHRISTMAS DAY`
+    # The only supported feature is Holidays. If you use the calendar, all
+    # data in the datasets should belong to the same country as the
+    # calendar. For the holiday calendar data, see the [Jollyday][1]
+    # website.
     #
     #
     #
@@ -3434,19 +3458,35 @@ module Aws::ForecastService
     # @!attribute [rw] value
     #   One of the following 2 letter country codes:
     #
+    #   * "AL" - ALBANIA
+    #
     #   * "AR" - ARGENTINA
     #
     #   * "AT" - AUSTRIA
     #
     #   * "AU" - AUSTRALIA
     #
+    #   * "BA" - BOSNIA HERZEGOVINA
+    #
     #   * "BE" - BELGIUM
+    #
+    #   * "BG" - BULGARIA
+    #
+    #   * "BO" - BOLIVIA
     #
     #   * "BR" - BRAZIL
     #
+    #   * "BY" - BELARUS
+    #
     #   * "CA" - CANADA
     #
-    #   * "CN" - CHINA
+    #   * "CL" - CHILE
+    #
+    #   * "CO" - COLOMBIA
+    #
+    #   * "CR" - COSTA RICA
+    #
+    #   * "HR" - CROATIA
     #
     #   * "CZ" - CZECH REPUBLIC
     #
@@ -3454,37 +3494,81 @@ module Aws::ForecastService
     #
     #   * "EC" - ECUADOR
     #
+    #   * "EE" - ESTONIA
+    #
+    #   * "ET" - ETHIOPIA
+    #
     #   * "FI" - FINLAND
     #
     #   * "FR" - FRANCE
     #
     #   * "DE" - GERMANY
     #
+    #   * "GR" - GREECE
+    #
     #   * "HU" - HUNGARY
     #
-    #   * "IE" - IRELAND
+    #   * "IS" - ICELAND
     #
     #   * "IN" - INDIA
+    #
+    #   * "IE" - IRELAND
     #
     #   * "IT" - ITALY
     #
     #   * "JP" - JAPAN
     #
+    #   * "KZ" - KAZAKHSTAN
+    #
     #   * "KR" - KOREA
+    #
+    #   * "LV" - LATVIA
+    #
+    #   * "LI" - LIECHTENSTEIN
+    #
+    #   * "LT" - LITHUANIA
     #
     #   * "LU" - LUXEMBOURG
     #
+    #   * "MK" - MACEDONIA
+    #
+    #   * "MT" - MALTA
+    #
     #   * "MX" - MEXICO
+    #
+    #   * "MD" - MOLDOVA
+    #
+    #   * "ME" - MONTENEGRO
     #
     #   * "NL" - NETHERLANDS
     #
+    #   * "NZ" - NEW ZEALAND
+    #
+    #   * "NI" - NICARAGUA
+    #
+    #   * "NG" - NIGERIA
+    #
     #   * "NO" - NORWAY
+    #
+    #   * "PA" - PANAMA
+    #
+    #   * "PY" - PARAGUAY
+    #
+    #   * "PE" - PERU
     #
     #   * "PL" - POLAND
     #
     #   * "PT" - PORTUGAL
     #
+    #   * "RO" - ROMANIA
+    #
     #   * "RU" - RUSSIA
+    #
+    #   * "RS" - SERBIA
+    #
+    #   * "SK" - SLOVAKIA
+    #
+    #   * "SI" - SLOVENIA
     #
     #   * "ZA" - SOUTH AFRICA
     #
@@ -3494,9 +3578,17 @@ module Aws::ForecastService
     #
     #   * "CH" - SWITZERLAND
     #
+    #   * "UA" - UKRAINE
+    #
+    #   * "AE" - UNITED ARAB EMIRATES
+    #
     #   * "US" - UNITED STATES
     #
     #   * "UK" - UNITED KINGDOM
+    #
+    #   * "UY" - URUGUAY
+    #
+    #   * "VE" - VENEZUELA
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/SupplementaryFeature AWS API Documentation

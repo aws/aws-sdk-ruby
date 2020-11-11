@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-11-11)
+------------------
+
+* Feature - Providing support of custom quantiles in CreatePredictor API.
+
 1.11.0 (2020-09-30)
 ------------------
 

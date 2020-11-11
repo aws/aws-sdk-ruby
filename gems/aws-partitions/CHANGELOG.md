@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.391.0 (2020-11-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::GlueDataBrew`.
+
 1.390.0 (2020-11-05)
 ------------------
 

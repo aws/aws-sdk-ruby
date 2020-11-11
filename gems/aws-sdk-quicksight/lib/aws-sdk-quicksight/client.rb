@@ -791,6 +791,9 @@ module Aws::QuickSight
     #   The row-level security configuration for the data that you want to
     #   create.
     #
+    # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the dataset.
@@ -926,6 +929,12 @@ module Aws::QuickSight
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #     },
+    #     column_level_permission_rules: [
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1008,7 +1017,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     data_source_id: "ResourceId", # required
     #     name: "ResourceName", # required
-    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
+    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
     #     data_source_parameters: {
     #       amazon_elasticsearch_parameters: {
     #         domain: "Domain", # required
@@ -1038,6 +1047,11 @@ module Aws::QuickSight
     #         database: "Database", # required
     #       },
     #       my_sql_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       },
+    #       oracle_parameters: {
     #         host: "Host", # required
     #         port: 1, # required
     #         database: "Database", # required
@@ -1129,6 +1143,11 @@ module Aws::QuickSight
     #               database: "Database", # required
     #             },
     #             my_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             oracle_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
@@ -1330,16 +1349,18 @@ module Aws::QuickSight
     end
 
     # Creates an assignment with one specified IAM policy, identified by its
-    # Amazon Resource Name (ARN). This policy will be assigned to specified
-    # groups or users of Amazon QuickSight. The users and groups need to be
-    # in the same namespace.
+    # Amazon Resource Name (ARN). This policy assignment is attached to the
+    # specified groups or users of Amazon QuickSight. Assignment names are
+    # unique per AWS account. To avoid overwriting rules in other
+    # namespaces, use assignment names that are unique.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the AWS account where you want to assign an IAM policy to
     #   QuickSight users or groups.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment, also called a rule. It must be unique
+    #   within an AWS account.
     #
     # @option params [required, String] :assignment_status
     #   The status of the assignment. Possible values are as follows:
@@ -2974,6 +2995,11 @@ module Aws::QuickSight
     #   resp.data_set.row_level_permission_data_set.namespace #=> String
     #   resp.data_set.row_level_permission_data_set.arn #=> String
     #   resp.data_set.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set.column_level_permission_rules #=> Array
+    #   resp.data_set.column_level_permission_rules[0].principals #=> Array
+    #   resp.data_set.column_level_permission_rules[0].principals[0] #=> String
+    #   resp.data_set.column_level_permission_rules[0].column_names #=> Array
+    #   resp.data_set.column_level_permission_rules[0].column_names[0] #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -3060,7 +3086,7 @@ module Aws::QuickSight
     #   resp.data_source.arn #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.name #=> String
-    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
+    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
     #   resp.data_source.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_source.created_time #=> Time
     #   resp.data_source.last_updated_time #=> Time
@@ -3080,6 +3106,9 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.my_sql_parameters.host #=> String
     #   resp.data_source.data_source_parameters.my_sql_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.my_sql_parameters.database #=> String
+    #   resp.data_source.data_source_parameters.oracle_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.oracle_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.oracle_parameters.database #=> String
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.database #=> String
@@ -3125,6 +3154,9 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.database #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -3267,7 +3299,7 @@ module Aws::QuickSight
     #   to describe.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment, also called a rule.
     #
     # @option params [required, String] :namespace
     #   The namespace that contains the assignment.
@@ -4192,6 +4224,7 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.namespace #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.arn #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -4241,7 +4274,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].arn #=> String
     #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].name #=> String
-    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
+    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
     #   resp.data_sources[0].status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_sources[0].created_time #=> Time
     #   resp.data_sources[0].last_updated_time #=> Time
@@ -4261,6 +4294,9 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.database #=> String
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.database #=> String
@@ -4306,6 +4342,9 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.database #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -6101,6 +6140,9 @@ module Aws::QuickSight
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   The row-level security configuration for the data you want to create.
     #
+    # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #
     # @return [Types::UpdateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSetResponse#arn #arn} => String
@@ -6226,6 +6268,12 @@ module Aws::QuickSight
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #     },
+    #     column_level_permission_rules: [
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6382,6 +6430,11 @@ module Aws::QuickSight
     #         port: 1, # required
     #         database: "Database", # required
     #       },
+    #       oracle_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       },
     #       postgre_sql_parameters: {
     #         host: "Host", # required
     #         port: 1, # required
@@ -6469,6 +6522,11 @@ module Aws::QuickSight
     #               database: "Database", # required
     #             },
     #             my_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             oracle_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
@@ -6665,14 +6723,14 @@ module Aws::QuickSight
 
     # Updates an existing IAM policy assignment. This operation updates only
     # the optional parameter or parameters that are specified in the
-    # request.
+    # request. This overwrites all of the users included in `Identities`.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the AWS account that contains the IAM policy assignment.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment. This name must be unique within an AWS
-    #   account.
+    #   The name of the assignment, also called a rule. This name must be
+    #   unique within an AWS account.
     #
     # @option params [required, String] :namespace
     #   The namespace of the assignment.
@@ -7309,7 +7367,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2020-11-11)
+------------------
+
+* Feature - Adding support to remove a Provisioned Product launch role via UpdateProvisionedProductProperties
+
 1.53.0 (2020-11-04)
 ------------------
 

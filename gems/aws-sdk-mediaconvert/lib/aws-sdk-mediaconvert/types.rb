@@ -998,6 +998,84 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Use automated ABR to have MediaConvert set up the renditions in your
+    # ABR package for you automatically, based on characteristics of your
+    # input video. This feature optimizes video quality while minimizing the
+    # overall size of your ABR package.
+    #
+    # @note When making an API call, you may pass AutomatedAbrSettings
+    #   data as a hash:
+    #
+    #       {
+    #         max_abr_bitrate: 1,
+    #         max_renditions: 1,
+    #         min_abr_bitrate: 1,
+    #       }
+    #
+    # @!attribute [rw] max_abr_bitrate
+    #   Optional. The maximum target bit rate used in your automated ABR
+    #   stack. Use this value to set an upper limit on the bandwidth
+    #   consumed by the highest-quality rendition. This is the rendition
+    #   that is delivered to viewers with the fastest internet connections.
+    #   If you don't specify a value, MediaConvert uses 8,000,000 (8 mb/s)
+    #   by default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_renditions
+    #   Optional. The maximum number of renditions that MediaConvert will
+    #   create in your automated ABR stack. The number of renditions is
+    #   determined automatically, based on analysis of each job, but will
+    #   never exceed this limit. When you set this to Auto in the console,
+    #   which is equivalent to excluding it from your JSON job
+    #   specification, MediaConvert defaults to a limit of 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_abr_bitrate
+    #   Optional. The minimum target bitrate used in your automated ABR
+    #   stack. Use this value to set a lower limit on the bitrate of video
+    #   delivered to viewers with slow internet connections. If you don't
+    #   specify a value, MediaConvert uses 600,000 (600 kb/s) by default.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AutomatedAbrSettings AWS API Documentation
+    #
+    class AutomatedAbrSettings < Struct.new(
+      :max_abr_bitrate,
+      :max_renditions,
+      :min_abr_bitrate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use automated encoding to have MediaConvert choose your encoding
+    # settings for you, based on characteristics of your input video.
+    #
+    # @note When making an API call, you may pass AutomatedEncodingSettings
+    #   data as a hash:
+    #
+    #       {
+    #         abr_settings: {
+    #           max_abr_bitrate: 1,
+    #           max_renditions: 1,
+    #           min_abr_bitrate: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] abr_settings
+    #   Use automated ABR to have MediaConvert set up the renditions in your
+    #   ABR package for you automatically, based on characteristics of your
+    #   input video. This feature optimizes video quality while minimizing
+    #   the overall size of your ABR package.
+    #   @return [Types::AutomatedAbrSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AutomatedEncodingSettings AWS API Documentation
+    #
+    class AutomatedEncodingSettings < Struct.new(
+      :abr_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings for quality-defined variable bitrate encoding with the AV1
     # codec. Required when you set Rate control mode to QVBR. Not valid when
     # you set Rate control mode to a value other than QVBR, or when you
@@ -3025,6 +3103,13 @@ module Aws::MediaConvert
     #           },
     #           output_groups: [
     #             {
+    #               automated_encoding_settings: {
+    #                 abr_settings: {
+    #                   max_abr_bitrate: 1,
+    #                   max_renditions: 1,
+    #                   min_abr_bitrate: 1,
+    #                 },
+    #               },
     #               custom_name: "__string",
     #               name: "__string",
     #               output_group_settings: {
@@ -3587,7 +3672,7 @@ module Aws::MediaConvert
     #                         quality: 1,
     #                       },
     #                       h264_settings: {
-    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -4226,6 +4311,13 @@ module Aws::MediaConvert
     #           },
     #           output_groups: [
     #             {
+    #               automated_encoding_settings: {
+    #                 abr_settings: {
+    #                   max_abr_bitrate: 1,
+    #                   max_renditions: 1,
+    #                   min_abr_bitrate: 1,
+    #                 },
+    #               },
     #               custom_name: "__string",
     #               name: "__string",
     #               output_group_settings: {
@@ -4788,7 +4880,7 @@ module Aws::MediaConvert
     #                         quality: 1,
     #                       },
     #                       h264_settings: {
-    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -5533,7 +5625,7 @@ module Aws::MediaConvert
     #                 quality: 1,
     #               },
     #               h264_settings: {
-    #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -7788,7 +7880,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #         bitrate: 1,
     #         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -7834,12 +7926,18 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] adaptive_quantization
-    #   Specify the strength of any adaptive quantization filters that you
-    #   enable. The value that you choose here applies to the following
-    #   settings: Flicker adaptive quantization
-    #   (flickerAdaptiveQuantization), Spatial adaptive quantization
-    #   (spatialAdaptiveQuantization), and Temporal adaptive quantization
-    #   (temporalAdaptiveQuantization).
+    #   Keep the default value, Auto (AUTO), for this setting to have
+    #   MediaConvert automatically apply the best types of quantization for
+    #   your video content. When you want to apply your quantization
+    #   settings manually, you must set H264AdaptiveQuantization to a value
+    #   other than Auto (AUTO). Use this setting to specify the strength of
+    #   any adaptive quantization filters that you enable. If you don't
+    #   want MediaConvert to do any adaptive quantization in this transcode,
+    #   set Adaptive quantization (H264AdaptiveQuantization) to Off (OFF).
+    #   Related settings: The value that you choose here applies to the
+    #   following settings: H264FlickerAdaptiveQuantization,
+    #   H264SpatialAdaptiveQuantization, and
+    #   H264TemporalAdaptiveQuantization.
     #   @return [String]
     #
     # @!attribute [rw] bitrate
@@ -7881,14 +7979,21 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] flicker_adaptive_quantization
-    #   Enable this setting to have the encoder reduce I-frame pop. I-frame
-    #   pop appears as a visual flicker that can arise when the encoder
-    #   saves bits by copying some macroblocks many times from frame to
-    #   frame, and then refreshes them at the I-frame. When you enable this
-    #   setting, the encoder updates these macroblocks slightly more often
-    #   to smooth out the flicker. This setting is disabled by default.
-    #   Related setting: In addition to enabling this setting, you must also
-    #   set adaptiveQuantization to a value other than Off (OFF).
+    #   Only use this setting when you change the default value, AUTO, for
+    #   the setting H264AdaptiveQuantization. When you keep all defaults,
+    #   excluding H264AdaptiveQuantization and all other adaptive
+    #   quantization from your JSON job specification, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. When you set H264AdaptiveQuantization to a value other than
+    #   AUTO, the default value for H264FlickerAdaptiveQuantization is
+    #   Disabled (DISABLED). Change this value to Enabled (ENABLED) to
+    #   reduce I-frame pop. I-frame pop appears as a visual flicker that can
+    #   arise when the encoder saves bits by copying some macroblocks many
+    #   times from frame to frame, and then refreshes them at the I-frame.
+    #   When you enable this setting, the encoder updates these macroblocks
+    #   slightly more often to smooth out the flicker. To manually enable or
+    #   disable H264FlickerAdaptiveQuantization, you must set Adaptive
+    #   quantization (H264AdaptiveQuantization) to a value other than AUTO.
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -8112,7 +8217,14 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_adaptive_quantization
-    #   Keep the default value, Enabled (ENABLED), to adjust quantization
+    #   Only use this setting when you change the default value, Auto
+    #   (AUTO), for the setting H264AdaptiveQuantization. When you keep all
+    #   defaults, excluding H264AdaptiveQuantization and all other adaptive
+    #   quantization from your JSON job specification, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. When you set H264AdaptiveQuantization to a value other than
+    #   AUTO, the default value for H264SpatialAdaptiveQuantization is
+    #   Enabled (ENABLED). Keep this default value to adjust quantization
     #   within each frame based on spatial variation of content complexity.
     #   When you enable this feature, the encoder uses fewer bits on areas
     #   that can sustain more distortion with no noticeable visual
@@ -8123,12 +8235,15 @@ module Aws::MediaConvert
     #   quality. Note, though, that this feature doesn't take into account
     #   where the viewer's attention is likely to be. If viewers are likely
     #   to be focusing their attention on a part of the screen with a lot of
-    #   complex texture, you might choose to disable this feature. Related
+    #   complex texture, you might choose to set
+    #   H264SpatialAdaptiveQuantization to Disabled (DISABLED). Related
     #   setting: When you enable spatial adaptive quantization, set the
-    #   value for Adaptive quantization (adaptiveQuantization) depending on
-    #   your content. For homogeneous content, such as cartoons and video
+    #   value for Adaptive quantization (H264AdaptiveQuantization) depending
+    #   on your content. For homogeneous content, such as cartoons and video
     #   games, set it to Low. For content with a wider variety of textures,
-    #   set it to High or Higher.
+    #   set it to High or Higher. To manually enable or disable
+    #   H264SpatialAdaptiveQuantization, you must set Adaptive quantization
+    #   (H264AdaptiveQuantization) to a value other than AUTO.
     #   @return [String]
     #
     # @!attribute [rw] syntax
@@ -8148,7 +8263,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] temporal_adaptive_quantization
-    #   Keep the default value, Enabled (ENABLED), to adjust quantization
+    #   Only use this setting when you change the default value, AUTO, for
+    #   the setting H264AdaptiveQuantization. When you keep all defaults,
+    #   excluding H264AdaptiveQuantization and all other adaptive
+    #   quantization from your JSON job specification, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. When you set H264AdaptiveQuantization to a value other than
+    #   AUTO, the default value for H264TemporalAdaptiveQuantization is
+    #   Enabled (ENABLED). Keep this default value to adjust quantization
     #   within each frame based on temporal variation of content complexity.
     #   When you enable this feature, the encoder uses fewer bits on areas
     #   of the frame that aren't moving and uses more bits on complex
@@ -8159,10 +8281,13 @@ module Aws::MediaConvert
     #   doesn't take into account where the viewer's attention is likely
     #   to be. If viewers are likely to be focusing their attention on a
     #   part of the screen that doesn't have moving objects with sharp
-    #   edges, such as sports athletes' faces, you might choose to disable
-    #   this feature. Related setting: When you enable temporal
-    #   quantization, adjust the strength of the filter with the setting
-    #   Adaptive quantization (adaptiveQuantization).
+    #   edges, such as sports athletes' faces, you might choose to set
+    #   H264TemporalAdaptiveQuantization to Disabled (DISABLED). Related
+    #   setting: When you enable temporal quantization, adjust the strength
+    #   of the filter with the setting Adaptive quantization
+    #   (adaptiveQuantization). To manually enable or disable
+    #   H264TemporalAdaptiveQuantization, you must set Adaptive quantization
+    #   (H264AdaptiveQuantization) to a value other than AUTO.
     #   @return [String]
     #
     # @!attribute [rw] unregistered_sei_timecode
@@ -10739,6 +10864,13 @@ module Aws::MediaConvert
     #         },
     #         output_groups: [
     #           {
+    #             automated_encoding_settings: {
+    #               abr_settings: {
+    #                 max_abr_bitrate: 1,
+    #                 max_renditions: 1,
+    #                 min_abr_bitrate: 1,
+    #               },
+    #             },
     #             custom_name: "__string",
     #             name: "__string",
     #             output_group_settings: {
@@ -11301,7 +11433,7 @@ module Aws::MediaConvert
     #                       quality: 1,
     #                     },
     #                     h264_settings: {
-    #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -11970,6 +12102,13 @@ module Aws::MediaConvert
     #         },
     #         output_groups: [
     #           {
+    #             automated_encoding_settings: {
+    #               abr_settings: {
+    #                 max_abr_bitrate: 1,
+    #                 max_renditions: 1,
+    #                 min_abr_bitrate: 1,
+    #               },
+    #             },
     #             custom_name: "__string",
     #             name: "__string",
     #             output_group_settings: {
@@ -12532,7 +12671,7 @@ module Aws::MediaConvert
     #                       quality: 1,
     #                     },
     #                     h264_settings: {
-    #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -15552,7 +15691,7 @@ module Aws::MediaConvert
     #               quality: 1,
     #             },
     #             h264_settings: {
-    #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -15952,6 +16091,13 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         automated_encoding_settings: {
+    #           abr_settings: {
+    #             max_abr_bitrate: 1,
+    #             max_renditions: 1,
+    #             min_abr_bitrate: 1,
+    #           },
+    #         },
     #         custom_name: "__string",
     #         name: "__string",
     #         output_group_settings: {
@@ -16514,7 +16660,7 @@ module Aws::MediaConvert
     #                   quality: 1,
     #                 },
     #                 h264_settings: {
-    #                   adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                   adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                   bitrate: 1,
     #                   codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                   codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -16799,6 +16945,11 @@ module Aws::MediaConvert
     #         ],
     #       }
     #
+    # @!attribute [rw] automated_encoding_settings
+    #   Use automated encoding to have MediaConvert choose your encoding
+    #   settings for you, based on characteristics of your input video.
+    #   @return [Types::AutomatedEncodingSettings]
+    #
     # @!attribute [rw] custom_name
     #   Use Custom Group Name (CustomName) to specify a name for the output
     #   group. This value is displayed on the console and can make your job
@@ -16823,6 +16974,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputGroup AWS API Documentation
     #
     class OutputGroup < Struct.new(
+      :automated_encoding_settings,
       :custom_name,
       :name,
       :output_group_settings,
@@ -17558,7 +17710,7 @@ module Aws::MediaConvert
     #               quality: 1,
     #             },
     #             h264_settings: {
-    #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -19220,6 +19372,13 @@ module Aws::MediaConvert
     #           },
     #           output_groups: [
     #             {
+    #               automated_encoding_settings: {
+    #                 abr_settings: {
+    #                   max_abr_bitrate: 1,
+    #                   max_renditions: 1,
+    #                   min_abr_bitrate: 1,
+    #                 },
+    #               },
     #               custom_name: "__string",
     #               name: "__string",
     #               output_group_settings: {
@@ -19782,7 +19941,7 @@ module Aws::MediaConvert
     #                         quality: 1,
     #                       },
     #                       h264_settings: {
-    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -20514,7 +20673,7 @@ module Aws::MediaConvert
     #                 quality: 1,
     #               },
     #               h264_settings: {
-    #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -21081,7 +21240,7 @@ module Aws::MediaConvert
     #           quality: 1,
     #         },
     #         h264_settings: {
-    #           adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #           adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #           bitrate: 1,
     #           codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #           codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -21376,7 +21535,7 @@ module Aws::MediaConvert
     #             quality: 1,
     #           },
     #           h264_settings: {
-    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN

@@ -665,6 +665,13 @@ module Aws::MediaConvert
     #       },
     #       output_groups: [
     #         {
+    #           automated_encoding_settings: {
+    #             abr_settings: {
+    #               max_abr_bitrate: 1,
+    #               max_renditions: 1,
+    #               min_abr_bitrate: 1,
+    #             },
+    #           },
     #           custom_name: "__string",
     #           name: "__string",
     #           output_group_settings: {
@@ -1227,7 +1234,7 @@ module Aws::MediaConvert
     #                     quality: 1,
     #                   },
     #                   h264_settings: {
-    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -1695,6 +1702,9 @@ module Aws::MediaConvert
     #   resp.job.settings.nielsen_non_linear_watermark.tic_server_url #=> String
     #   resp.job.settings.nielsen_non_linear_watermark.unique_tic_per_audio_track #=> String, one of "RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"
     #   resp.job.settings.output_groups #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -2088,7 +2098,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -2598,6 +2608,13 @@ module Aws::MediaConvert
     #       },
     #       output_groups: [
     #         {
+    #           automated_encoding_settings: {
+    #             abr_settings: {
+    #               max_abr_bitrate: 1,
+    #               max_renditions: 1,
+    #               min_abr_bitrate: 1,
+    #             },
+    #           },
     #           custom_name: "__string",
     #           name: "__string",
     #           output_group_settings: {
@@ -3160,7 +3177,7 @@ module Aws::MediaConvert
     #                     quality: 1,
     #                   },
     #                   h264_settings: {
-    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -3598,6 +3615,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.nielsen_non_linear_watermark.tic_server_url #=> String
     #   resp.job_template.settings.nielsen_non_linear_watermark.unique_tic_per_audio_track #=> String, one of "RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"
     #   resp.job_template.settings.output_groups #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -3991,7 +4011,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -4605,7 +4625,7 @@ module Aws::MediaConvert
     #             quality: 1,
     #           },
     #           h264_settings: {
-    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -5150,7 +5170,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -5779,6 +5799,9 @@ module Aws::MediaConvert
     #   resp.job.settings.nielsen_non_linear_watermark.tic_server_url #=> String
     #   resp.job.settings.nielsen_non_linear_watermark.unique_tic_per_audio_track #=> String, one of "RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"
     #   resp.job.settings.output_groups #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -6172,7 +6195,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -6571,6 +6594,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.nielsen_non_linear_watermark.tic_server_url #=> String
     #   resp.job_template.settings.nielsen_non_linear_watermark.unique_tic_per_audio_track #=> String, one of "RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"
     #   resp.job_template.settings.output_groups #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -6964,7 +6990,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -7483,7 +7509,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -7941,6 +7967,9 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.nielsen_non_linear_watermark.tic_server_url #=> String
     #   resp.job_templates[0].settings.nielsen_non_linear_watermark.unique_tic_per_audio_track #=> String, one of "RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"
     #   resp.job_templates[0].settings.output_groups #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].custom_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].name #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -8334,7 +8363,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -8783,6 +8812,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.nielsen_non_linear_watermark.tic_server_url #=> String
     #   resp.jobs[0].settings.nielsen_non_linear_watermark.unique_tic_per_audio_track #=> String, one of "RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"
     #   resp.jobs[0].settings.output_groups #=> Array
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].custom_name #=> String
     #   resp.jobs[0].settings.output_groups[0].name #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -9176,7 +9208,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -9733,7 +9765,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -10378,6 +10410,13 @@ module Aws::MediaConvert
     #       },
     #       output_groups: [
     #         {
+    #           automated_encoding_settings: {
+    #             abr_settings: {
+    #               max_abr_bitrate: 1,
+    #               max_renditions: 1,
+    #               min_abr_bitrate: 1,
+    #             },
+    #           },
     #           custom_name: "__string",
     #           name: "__string",
     #           output_group_settings: {
@@ -10940,7 +10979,7 @@ module Aws::MediaConvert
     #                     quality: 1,
     #                   },
     #                   h264_settings: {
-    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                     bitrate: 1,
     #                     codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -11375,6 +11414,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.nielsen_non_linear_watermark.tic_server_url #=> String
     #   resp.job_template.settings.nielsen_non_linear_watermark.unique_tic_per_audio_track #=> String, one of "RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"
     #   resp.job_template.settings.output_groups #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -11768,7 +11810,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -12376,7 +12418,7 @@ module Aws::MediaConvert
     #             quality: 1,
     #           },
     #           h264_settings: {
-    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -12918,7 +12960,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -13236,7 +13278,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-11-11)
+------------------
+
+* Feature - QuickSight now supports Column-level security and connecting to Oracle data source.
+
 1.34.0 (2020-10-23)
 ------------------
 

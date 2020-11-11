@@ -102,6 +102,7 @@ module Aws
   autoload :Glacier, 'aws-sdk-glacier'
   autoload :GlobalAccelerator, 'aws-sdk-globalaccelerator'
   autoload :Glue, 'aws-sdk-glue'
+  autoload :GlueDataBrew, 'aws-sdk-gluedatabrew'
   autoload :Greengrass, 'aws-sdk-greengrass'
   autoload :GroundStation, 'aws-sdk-groundstation'
   autoload :GuardDuty, 'aws-sdk-guardduty'
