@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.625 (2020-11-11)
+------------------
+
 * Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
 
 * Feature - Aws::ForecastService - Updated the API, and documentation for Amazon Forecast Service.
