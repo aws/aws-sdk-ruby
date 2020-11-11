@@ -386,6 +386,10 @@
     "models": "glue/2017-03-31",
     "endpoint": "glue"
   },
+  "GlueDataBrew": {
+    "models": "databrew/2017-07-25",
+    "endpoint": "databrew"
+  },
   "Greengrass": {
     "models": "greengrass/2017-06-07",
     "endpoint": "greengrass"

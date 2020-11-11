@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
+
+* Feature - Aws::ForecastService - Updated the API, and documentation for Amazon Forecast Service.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::GlueDataBrew - Added support for a new service, AWS Glue DataBrew.
+
+* Feature - Aws::GlueDataBrew - Added support for the new 2017-07-25 API version of AWS Glue DataBrew.
+
 2.11.624 (2020-11-10)
 ------------------
 

@@ -300,6 +300,7 @@ to be backwards compatible.
 | AWS Elemental MediaStore Data Plane                   | MediaStoreData                  | 2017-09-01  |
 | AWS Global Accelerator                                | GlobalAccelerator               | 2018-08-08  |
 | AWS Glue                                              | Glue                            | 2017-03-31  |
+| AWS Glue DataBrew                                     | GlueDataBrew                    | 2017-07-25  |
 | AWS Greengrass                                        | Greengrass                      | 2017-06-07  |
 | AWS Ground Station                                    | GroundStation                   | 2019-05-23  |
 | AWS Health APIs and Notifications                     | Health                          | 2016-08-04  |

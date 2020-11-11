@@ -120,6 +120,7 @@ module Aws
     Glacier
     GlobalAccelerator
     Glue
+    GlueDataBrew
     Greengrass
     GroundStation
     GuardDuty
