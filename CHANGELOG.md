@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.626 (2020-11-12)
+------------------
+
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
 
 * Feature - Aws::LexModelBuildingService - Updated the API for Amazon Lex Model Building Service.
