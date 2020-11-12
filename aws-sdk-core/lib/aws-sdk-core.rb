@@ -33,6 +33,7 @@ module Aws
     ApiGatewayV2
     AppConfig
     AppMesh
+    AppRegistry
     AppStream
     AppSync
     Appflow

@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::LexModelBuildingService - Updated the API for Amazon Lex Model Building Service.
+
+* Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
+
+* Feature - Aws::PersonalizeRuntime - Updated the API, and documentation for Amazon Personalize Runtime.
+
+* Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
+
+* Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
+
+* Feature - Aws::AppRegistry - Added support for a new service, AWS Service Catalog App Registry.
+
+* Feature - Aws::AppRegistry - Added support for the new 2020-06-24 API version of AWS Service Catalog App Registry.
+
 2.11.625 (2020-11-11)
 ------------------
 

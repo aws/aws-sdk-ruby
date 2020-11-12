@@ -351,6 +351,7 @@ to be backwards compatible.
 | AWS SecurityHub                                       | SecurityHub                     | 2018-10-26  |
 | AWS Server Migration Service                          | SMS                             | 2016-10-24  |
 | AWS Service Catalog                                   | ServiceCatalog                  | 2015-12-10  |
+| AWS Service Catalog App Registry                      | AppRegistry                     | 2020-06-24  |
 | AWS Shield                                            | Shield                          | 2016-06-02  |
 | AWS Signer                                            | Signer                          | 2017-08-25  |
 | AWS Single Sign-On                                    | SSO                             | 2019-06-10  |

@@ -39,6 +39,10 @@
     "models": "appmesh/2019-01-25",
     "endpoint": "appmesh"
   },
+  "AppRegistry": {
+    "models": "servicecatalog-appregistry/2020-06-24",
+    "endpoint": "servicecatalog-appregistry"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01",
     "endpoint": "appstream2"
