@@ -141,6 +141,7 @@ module Aws::IoT
     AwsJobRolloutRatePerMinute = Shapes::IntegerShape.new(name: 'AwsJobRolloutRatePerMinute')
     AwsJobTimeoutConfig = Shapes::StructureShape.new(name: 'AwsJobTimeoutConfig')
     AwsJobTimeoutInProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'AwsJobTimeoutInProgressTimeoutInMinutes')
+    BatchMode = Shapes::BooleanShape.new(name: 'BatchMode')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
     BehaviorCriteria = Shapes::StructureShape.new(name: 'BehaviorCriteria')
     BehaviorMetric = Shapes::StringShape.new(name: 'BehaviorMetric')
@@ -2412,6 +2413,7 @@ module Aws::IoT
     FirehoseAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     FirehoseAction.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "deliveryStreamName"))
     FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
+    FirehoseAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     FirehoseAction.struct_class = Types::FirehoseAction
 
     GetCardinalityRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
@@ -2591,11 +2593,13 @@ module Aws::IoT
 
     IotAnalyticsAction.add_member(:channel_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "channelArn"))
     IotAnalyticsAction.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName"))
+    IotAnalyticsAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     IotAnalyticsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
     IotAnalyticsAction.struct_class = Types::IotAnalyticsAction
 
     IotEventsAction.add_member(:input_name, Shapes::ShapeRef.new(shape: InputName, required: true, location_name: "inputName"))
     IotEventsAction.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId"))
+    IotEventsAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     IotEventsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     IotEventsAction.struct_class = Types::IotEventsAction
 

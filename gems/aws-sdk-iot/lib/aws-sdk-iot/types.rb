@@ -161,6 +161,7 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           delivery_stream_name: "DeliveryStreamName", # required
     #           separator: "FirehoseSeparator",
+    #           batch_mode: false,
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
@@ -194,11 +195,13 @@ module Aws::IoT
     #         iot_analytics: {
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
+    #           batch_mode: false,
     #           role_arn: "AwsArn",
     #         },
     #         iot_events: {
     #           input_name: "InputName", # required
     #           message_id: "MessageId",
+    #           batch_mode: false,
     #           role_arn: "AwsArn", # required
     #         },
     #         iot_site_wise: {
@@ -4515,6 +4518,7 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #                 delivery_stream_name: "DeliveryStreamName", # required
     #                 separator: "FirehoseSeparator",
+    #                 batch_mode: false,
     #               },
     #               cloudwatch_metric: {
     #                 role_arn: "AwsArn", # required
@@ -4548,11 +4552,13 @@ module Aws::IoT
     #               iot_analytics: {
     #                 channel_arn: "AwsArn",
     #                 channel_name: "ChannelName",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn",
     #               },
     #               iot_events: {
     #                 input_name: "InputName", # required
     #                 message_id: "MessageId",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn", # required
     #               },
     #               iot_site_wise: {
@@ -4674,6 +4680,7 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               delivery_stream_name: "DeliveryStreamName", # required
     #               separator: "FirehoseSeparator",
+    #               batch_mode: false,
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
@@ -4707,11 +4714,13 @@ module Aws::IoT
     #             iot_analytics: {
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
+    #               batch_mode: false,
     #               role_arn: "AwsArn",
     #             },
     #             iot_events: {
     #               input_name: "InputName", # required
     #               message_id: "MessageId",
+    #               batch_mode: false,
     #               role_arn: "AwsArn", # required
     #             },
     #             iot_site_wise: {
@@ -7617,6 +7626,7 @@ module Aws::IoT
     #         role_arn: "AwsArn", # required
     #         delivery_stream_name: "DeliveryStreamName", # required
     #         separator: "FirehoseSeparator",
+    #         batch_mode: false,
     #       }
     #
     # @!attribute [rw] role_arn
@@ -7634,10 +7644,25 @@ module Aws::IoT
     #   (tab), '\\r\\n' (Windows newline), ',' (comma).
     #   @return [String]
     #
+    # @!attribute [rw] batch_mode
+    #   Whether to deliver the Kinesis Data Firehose stream as a batch by
+    #   using [ `PutRecordBatch` ][1]. The default value is `false`.
+    #
+    #   When `batchMode` is `true` and the rule's SQL statement evaluates
+    #   to an Array, each Array element forms one record in the [
+    #   `PutRecordBatch` ][1] request. The resulting array can't have more
+    #   than 500 records.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html
+    #   @return [Boolean]
+    #
     class FirehoseAction < Struct.new(
       :role_arn,
       :delivery_stream_name,
-      :separator)
+      :separator,
+      :batch_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8482,6 +8507,7 @@ module Aws::IoT
     #       {
     #         channel_arn: "AwsArn",
     #         channel_name: "ChannelName",
+    #         batch_mode: false,
     #         role_arn: "AwsArn",
     #       }
     #
@@ -8495,6 +8521,20 @@ module Aws::IoT
     #   sent.
     #   @return [String]
     #
+    # @!attribute [rw] batch_mode
+    #   Whether to process the action as a batch. The default value is
+    #   `false`.
+    #
+    #   When `batchMode` is `true` and the rule SQL statement evaluates to
+    #   an Array, each Array element is delivered as a separate message when
+    #   passed by [ `BatchPutMessage` ][1] to the AWS IoT Analytics channel.
+    #   The resulting array can't have more than 100 messages.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_BatchPutMessage.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] role_arn
     #   The ARN of the role which has a policy that grants IoT Analytics
     #   permission to send message data via IoT Analytics
@@ -8504,6 +8544,7 @@ module Aws::IoT
     class IotAnalyticsAction < Struct.new(
       :channel_arn,
       :channel_name,
+      :batch_mode,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -8517,6 +8558,7 @@ module Aws::IoT
     #       {
     #         input_name: "InputName", # required
     #         message_id: "MessageId",
+    #         batch_mode: false,
     #         role_arn: "AwsArn", # required
     #       }
     #
@@ -8525,9 +8567,31 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] message_id
-    #   \[Optional\] Use this to ensure that only one input (message) with a
-    #   given messageId will be processed by an AWS IoT Events detector.
+    #   The ID of the message. The default `messageId` is a new UUID value.
+    #
+    #   When `batchMode` is `true`, you can't specify a `messageId`--a new
+    #   UUID value will be assigned.
+    #
+    #   Assign a value to this property to ensure that only one input
+    #   (message) with a given `messageId` will be processed by an AWS IoT
+    #   Events detector.
     #   @return [String]
+    #
+    # @!attribute [rw] batch_mode
+    #   Whether to process the event actions as a batch. The default value
+    #   is `false`.
+    #
+    #   When `batchMode` is `true`, you can't specify a `messageId`.
+    #
+    #   When `batchMode` is `true` and the rule SQL statement evaluates to
+    #   an Array, each Array element is treated as a separate message when
+    #   it's sent to AWS IoT Events by calling [ `BatchPutMessage` ][1].
+    #   The resulting array can't have more than 10 messages.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html
+    #   @return [Boolean]
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that grants AWS IoT permission to send an input
@@ -8538,6 +8602,7 @@ module Aws::IoT
     class IotEventsAction < Struct.new(
       :input_name,
       :message_id,
+      :batch_mode,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -13100,6 +13165,7 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #                 delivery_stream_name: "DeliveryStreamName", # required
     #                 separator: "FirehoseSeparator",
+    #                 batch_mode: false,
     #               },
     #               cloudwatch_metric: {
     #                 role_arn: "AwsArn", # required
@@ -13133,11 +13199,13 @@ module Aws::IoT
     #               iot_analytics: {
     #                 channel_arn: "AwsArn",
     #                 channel_name: "ChannelName",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn",
     #               },
     #               iot_events: {
     #                 input_name: "InputName", # required
     #                 message_id: "MessageId",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn", # required
     #               },
     #               iot_site_wise: {
@@ -13259,6 +13327,7 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               delivery_stream_name: "DeliveryStreamName", # required
     #               separator: "FirehoseSeparator",
+    #               batch_mode: false,
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
@@ -13292,11 +13361,13 @@ module Aws::IoT
     #             iot_analytics: {
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
+    #               batch_mode: false,
     #               role_arn: "AwsArn",
     #             },
     #             iot_events: {
     #               input_name: "InputName", # required
     #               message_id: "MessageId",
+    #               batch_mode: false,
     #               role_arn: "AwsArn", # required
     #             },
     #             iot_site_wise: {
@@ -13586,7 +13657,12 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The object key.
+    #   The object key. For more information, see [Actions, resources, and
+    #   condition keys for Amazon S3][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html
     #   @return [String]
     #
     # @!attribute [rw] canned_acl
@@ -14010,7 +14086,11 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Use Sig V4 authorization.
+    # For more information, see [Signature Version 4 signing process][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @note When making an API call, you may pass SigV4Authorization
     #   data as a hash:
@@ -15748,6 +15828,7 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               delivery_stream_name: "DeliveryStreamName", # required
     #               separator: "FirehoseSeparator",
+    #               batch_mode: false,
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
@@ -15781,11 +15862,13 @@ module Aws::IoT
     #             iot_analytics: {
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
+    #               batch_mode: false,
     #               role_arn: "AwsArn",
     #             },
     #             iot_events: {
     #               input_name: "InputName", # required
     #               message_id: "MessageId",
+    #               batch_mode: false,
     #               role_arn: "AwsArn", # required
     #             },
     #             iot_site_wise: {
@@ -15907,6 +15990,7 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             delivery_stream_name: "DeliveryStreamName", # required
     #             separator: "FirehoseSeparator",
+    #             batch_mode: false,
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
@@ -15940,11 +16024,13 @@ module Aws::IoT
     #           iot_analytics: {
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
+    #             batch_mode: false,
     #             role_arn: "AwsArn",
     #           },
     #           iot_events: {
     #             input_name: "InputName", # required
     #             message_id: "MessageId",
+    #             batch_mode: false,
     #             role_arn: "AwsArn", # required
     #           },
     #           iot_site_wise: {

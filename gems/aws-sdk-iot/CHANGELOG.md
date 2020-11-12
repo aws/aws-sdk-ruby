@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2020-11-12)
+------------------
+
+* Feature - This release adds a batchMode parameter to the IotEvents, IotAnalytics, and Firehose actions which allows customers to send an array of messages to the corresponding services
+
 1.61.0 (2020-11-04)
 ------------------
 

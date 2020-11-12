@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-apigatewayv2', '~> 1')
   spec.add_dependency('aws-sdk-appconfig', '~> 1')
   spec.add_dependency('aws-sdk-appmesh', '~> 1')
+  spec.add_dependency('aws-sdk-appregistry', '~> 1')
   spec.add_dependency('aws-sdk-appstream', '~> 1')
   spec.add_dependency('aws-sdk-appsync', '~> 1')
   spec.add_dependency('aws-sdk-appflow', '~> 1')

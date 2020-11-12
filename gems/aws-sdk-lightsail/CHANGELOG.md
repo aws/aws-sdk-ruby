@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-11-12)
+------------------
+
+* Feature - This release adds support for Amazon Lightsail container services. You can now create a Lightsail container service, and deploy Docker images to it.
+
 1.39.0 (2020-09-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-11-12)
+------------------
+
+* Feature - Lex now supports es-ES, it-IT, fr-FR and fr-CA locales
+
 1.39.0 (2020-09-30)
 ------------------
 

@@ -2544,6 +2544,7 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             delivery_stream_name: "DeliveryStreamName", # required
     #             separator: "FirehoseSeparator",
+    #             batch_mode: false,
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
@@ -2577,11 +2578,13 @@ module Aws::IoT
     #           iot_analytics: {
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
+    #             batch_mode: false,
     #             role_arn: "AwsArn",
     #           },
     #           iot_events: {
     #             input_name: "InputName", # required
     #             message_id: "MessageId",
+    #             batch_mode: false,
     #             role_arn: "AwsArn", # required
     #           },
     #           iot_site_wise: {
@@ -2703,6 +2706,7 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           delivery_stream_name: "DeliveryStreamName", # required
     #           separator: "FirehoseSeparator",
+    #           batch_mode: false,
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
@@ -2736,11 +2740,13 @@ module Aws::IoT
     #         iot_analytics: {
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
+    #           batch_mode: false,
     #           role_arn: "AwsArn",
     #         },
     #         iot_events: {
     #           input_name: "InputName", # required
     #           message_id: "MessageId",
+    #           batch_mode: false,
     #           role_arn: "AwsArn", # required
     #         },
     #         iot_site_wise: {
@@ -5496,6 +5502,7 @@ module Aws::IoT
     #   resp.rule.actions[0].firehose.role_arn #=> String
     #   resp.rule.actions[0].firehose.delivery_stream_name #=> String
     #   resp.rule.actions[0].firehose.separator #=> String
+    #   resp.rule.actions[0].firehose.batch_mode #=> Boolean
     #   resp.rule.actions[0].cloudwatch_metric.role_arn #=> String
     #   resp.rule.actions[0].cloudwatch_metric.metric_namespace #=> String
     #   resp.rule.actions[0].cloudwatch_metric.metric_name #=> String
@@ -5517,9 +5524,11 @@ module Aws::IoT
     #   resp.rule.actions[0].salesforce.url #=> String
     #   resp.rule.actions[0].iot_analytics.channel_arn #=> String
     #   resp.rule.actions[0].iot_analytics.channel_name #=> String
+    #   resp.rule.actions[0].iot_analytics.batch_mode #=> Boolean
     #   resp.rule.actions[0].iot_analytics.role_arn #=> String
     #   resp.rule.actions[0].iot_events.input_name #=> String
     #   resp.rule.actions[0].iot_events.message_id #=> String
+    #   resp.rule.actions[0].iot_events.batch_mode #=> Boolean
     #   resp.rule.actions[0].iot_events.role_arn #=> String
     #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries #=> Array
     #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].entry_id #=> String
@@ -5588,6 +5597,7 @@ module Aws::IoT
     #   resp.rule.error_action.firehose.role_arn #=> String
     #   resp.rule.error_action.firehose.delivery_stream_name #=> String
     #   resp.rule.error_action.firehose.separator #=> String
+    #   resp.rule.error_action.firehose.batch_mode #=> Boolean
     #   resp.rule.error_action.cloudwatch_metric.role_arn #=> String
     #   resp.rule.error_action.cloudwatch_metric.metric_namespace #=> String
     #   resp.rule.error_action.cloudwatch_metric.metric_name #=> String
@@ -5609,9 +5619,11 @@ module Aws::IoT
     #   resp.rule.error_action.salesforce.url #=> String
     #   resp.rule.error_action.iot_analytics.channel_arn #=> String
     #   resp.rule.error_action.iot_analytics.channel_name #=> String
+    #   resp.rule.error_action.iot_analytics.batch_mode #=> Boolean
     #   resp.rule.error_action.iot_analytics.role_arn #=> String
     #   resp.rule.error_action.iot_events.input_name #=> String
     #   resp.rule.error_action.iot_events.message_id #=> String
+    #   resp.rule.error_action.iot_events.batch_mode #=> Boolean
     #   resp.rule.error_action.iot_events.role_arn #=> String
     #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries #=> Array
     #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].entry_id #=> String
@@ -8508,6 +8520,7 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             delivery_stream_name: "DeliveryStreamName", # required
     #             separator: "FirehoseSeparator",
+    #             batch_mode: false,
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
@@ -8541,11 +8554,13 @@ module Aws::IoT
     #           iot_analytics: {
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
+    #             batch_mode: false,
     #             role_arn: "AwsArn",
     #           },
     #           iot_events: {
     #             input_name: "InputName", # required
     #             message_id: "MessageId",
+    #             batch_mode: false,
     #             role_arn: "AwsArn", # required
     #           },
     #           iot_site_wise: {
@@ -8667,6 +8682,7 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           delivery_stream_name: "DeliveryStreamName", # required
     #           separator: "FirehoseSeparator",
+    #           batch_mode: false,
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
@@ -8700,11 +8716,13 @@ module Aws::IoT
     #         iot_analytics: {
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
+    #           batch_mode: false,
     #           role_arn: "AwsArn",
     #         },
     #         iot_events: {
     #           input_name: "InputName", # required
     #           message_id: "MessageId",
+    #           batch_mode: false,
     #           role_arn: "AwsArn", # required
     #         },
     #         iot_site_wise: {
@@ -10625,7 +10643,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

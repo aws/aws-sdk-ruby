@@ -233,6 +233,7 @@ module Aws
             'ApiGatewayV2' => 'apigateway',
             'AppConfig' => 'appconfig',
             'AppMesh' => 'appmesh',
+            'AppRegistry' => 'servicecatalog-appregistry',
             'AppStream' => 'appstream2',
             'AppSync' => 'appsync',
             'Appflow' => 'appflow',

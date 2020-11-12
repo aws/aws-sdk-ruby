@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.392.0 (2020-11-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AppRegistry`.
+
 1.391.0 (2020-11-11)
 ------------------
 

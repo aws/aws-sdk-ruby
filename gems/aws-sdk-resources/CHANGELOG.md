@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.86.0 (2020-11-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-appregistry` gem.
+
 3.85.0 (2020-11-11)
 ------------------
 

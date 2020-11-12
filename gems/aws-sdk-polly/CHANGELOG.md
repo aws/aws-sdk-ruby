@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-11-12)
+------------------
+
+* Feature - Amazon Polly adds new Australian English female voice - Olivia. Olivia is available as Neural voice only.
+
 1.37.0 (2020-09-30)
 ------------------
 

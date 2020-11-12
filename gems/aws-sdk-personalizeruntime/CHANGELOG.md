@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-11-12)
+------------------
+
+* Feature - Adds support to use dynamic filters with Personalize.
+
 1.18.0 (2020-09-30)
 ------------------
 
