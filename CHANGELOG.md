@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
+
+* Feature - Aws::Textract - Updated the API, and documentation for Amazon Textract.
+
 2.11.626 (2020-11-12)
 ------------------
 
