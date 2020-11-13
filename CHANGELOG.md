@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.627 (2020-11-13)
+------------------
+
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
 
 * Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
