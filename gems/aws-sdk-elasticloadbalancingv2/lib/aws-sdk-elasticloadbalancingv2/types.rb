@@ -613,8 +613,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, and TCP\_UDP. You cannot specify a protocol for a Gateway
-    #   Load Balancer.
+    #   TLS, UDP, and TCP\_UDP. You can’t specify the UDP or TCP\_UDP
+    #   protocol if dual-stack mode is enabled. You cannot specify a
+    #   protocol for a Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -711,6 +712,7 @@ module Aws::ElasticLoadBalancingV2
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
     #             private_i_pv_4_address: "PrivateIPv4Address",
+    #             i_pv_6_address: "IPv6Address",
     #           },
     #         ],
     #         security_groups: ["SecurityGroupId"],
@@ -775,7 +777,9 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zones. You can specify one Elastic IP address per
     #   subnet if you need static IP addresses for your internet-facing load
     #   balancer. For internal load balancers, you can specify one private
-    #   IP address per subnet from the IPv4 range of the subnet.
+    #   IP address per subnet from the IPv4 range of the subnet. For
+    #   internet-facing load balancer, you can specify one IPv6 address per
+    #   subnet.
     #
     #   \[Gateway Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You cannot specify Elastic IP addresses for your
@@ -814,10 +818,10 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   \[Application Load Balancers\] The type of IP addresses used by the
-    #   subnets for your load balancer. The possible values are `ipv4` (for
-    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
-    #   Internal load balancers must use `ipv4`.
+    #   The type of IP addresses used by the subnets for your load balancer.
+    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
+    #   (for IPv4 and IPv6 addresses). Internal load balancers must use
+    #   `ipv4`.
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
@@ -2316,12 +2320,17 @@ module Aws::ElasticLoadBalancingV2
     #   load balancer.
     #   @return [String]
     #
+    # @!attribute [rw] i_pv_6_address
+    #   \[Network Load Balancers\] The IPv6 address.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerAddress AWS API Documentation
     #
     class LoadBalancerAddress < Struct.new(
       :ip_address,
       :allocation_id,
-      :private_i_pv_4_address)
+      :private_i_pv_4_address,
+      :i_pv_6_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2383,6 +2392,11 @@ module Aws::ElasticLoadBalancingV2
     #     value is `true` or `false`. The default is `true`. Elastic Load
     #     Balancing requires that message header names contain only
     #     alphanumeric characters and hyphens.
+    #
+    #   * `waf.fail_open.enabled` - Indicates whether to allow a WAF-enabled
+    #     load balancer to route requests to targets if it is unable to
+    #     forward the request to AWS WAF. The value is `true` or `false`.
+    #     The default is `false`.
     #
     #   The following attribute is supported by Network Load Balancers and
     #   Gateway Load Balancers:
@@ -2562,8 +2576,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer.
     #   Application Load Balancers support the HTTP and HTTPS protocols.
     #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
-    #   protocols. You cannot specify a protocol for a Gateway Load
-    #   Balancer.
+    #   protocols. You can’t change the protocol to UDP or TCP\_UDP if
+    #   dual-stack mode is enabled. You cannot specify a protocol for a
+    #   Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
@@ -3497,7 +3512,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] ip_address_type
     #   The IP address type. The possible values are `ipv4` (for IPv4
     #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
-    #   load balancers must use `ipv4`.
+    #   load balancers must use `ipv4`. You can’t specify `dualstack` for a
+    #   load balancer with a UDP or TCP\_UDP listener.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressTypeInput AWS API Documentation
@@ -3605,8 +3621,10 @@ module Aws::ElasticLoadBalancingV2
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
     #             private_i_pv_4_address: "PrivateIPv4Address",
+    #             i_pv_6_address: "IPv6Address",
     #           },
     #         ],
+    #         ip_address_type: "ipv4", # accepts ipv4, dualstack
     #       }
     #
     # @!attribute [rw] load_balancer_arn
@@ -3614,10 +3632,21 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of the public subnets. You must specify subnets from at
-    #   least two Availability Zones. You can specify only one subnet per
+    #   The IDs of the public subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet
     #   mappings.
+    #
+    #   \[Application Load Balancers\] You must specify subnets from at
+    #   least two Availability Zones.
+    #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify
+    #   subnets from one or more Local Zones.
+    #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
@@ -3629,19 +3658,36 @@ module Aws::ElasticLoadBalancingV2
     #   least two Availability Zones. You cannot specify Elastic IP
     #   addresses for your subnets.
     #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify
+    #   subnets from one or more Local Zones.
+    #
     #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones. If you need static IP addresses for your
-    #   internet-facing load balancer, you can specify one Elastic IP
-    #   address per subnet. For internal load balancers, you can specify one
-    #   private IP address per subnet from the IPv4 range of the subnet.
+    #   Availability Zones. You can specify one Elastic IP address per
+    #   subnet if you need static IP addresses for your internet-facing load
+    #   balancer. For internal load balancers, you can specify one private
+    #   IP address per subnet from the IPv4 range of the subnet. For
+    #   internet-facing load balancer, you can specify one IPv6 address per
+    #   subnet.
     #   @return [Array<Types::SubnetMapping>]
+    #
+    # @!attribute [rw] ip_address_type
+    #   \[Network Load Balancers\] The type of IP addresses used by the
+    #   subnets for your load balancer. The possible values are `ipv4` (for
+    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
+    #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
+    #   listener. Internal load balancers must use `ipv4`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
     #
     class SetSubnetsInput < Struct.new(
       :load_balancer_arn,
       :subnets,
-      :subnet_mappings)
+      :subnet_mappings,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3650,10 +3696,15 @@ module Aws::ElasticLoadBalancingV2
     #   Information about the subnets.
     #   @return [Array<Types::AvailabilityZone>]
     #
+    # @!attribute [rw] ip_address_type
+    #   \[Network Load Balancers\] The IP address type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsOutput AWS API Documentation
     #
     class SetSubnetsOutput < Struct.new(
-      :availability_zones)
+      :availability_zones,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3724,6 +3775,7 @@ module Aws::ElasticLoadBalancingV2
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
     #         private_i_pv_4_address: "PrivateIPv4Address",
+    #         i_pv_6_address: "IPv6Address",
     #       }
     #
     # @!attribute [rw] subnet_id
@@ -3740,12 +3792,17 @@ module Aws::ElasticLoadBalancingV2
     #   load balancer.
     #   @return [String]
     #
+    # @!attribute [rw] i_pv_6_address
+    #   \[Network Load Balancers\] The IPv6 address.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetMapping AWS API Documentation
     #
     class SubnetMapping < Struct.new(
       :subnet_id,
       :allocation_id,
-      :private_i_pv_4_address)
+      :private_i_pv_4_address,
+      :i_pv_6_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4039,13 +4096,17 @@ module Aws::ElasticLoadBalancingV2
     #
     #   ^
     #
-    #   The following attribute is supported only by Network Load Balancers:
+    #   The following attributes are supported only by Network Load
+    #   Balancers:
+    #
+    #   * `deregistration_delay.connection_termination.enabled` - Indicates
+    #     whether the load balancer terminates connections at the end of the
+    #     deregistration timeout. The value is `true` or `false`. The
+    #     default is `false`.
     #
     #   * `proxy_protocol_v2.enabled` - Indicates whether Proxy Protocol
     #     version 2 is enabled. The value is `true` or `false`. The default
     #     is `false`.
-    #
-    #   ^
     #   @return [String]
     #
     # @!attribute [rw] value

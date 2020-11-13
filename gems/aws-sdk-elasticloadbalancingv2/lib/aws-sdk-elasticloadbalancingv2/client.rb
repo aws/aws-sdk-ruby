@@ -466,8 +466,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, and TCP\_UDP. You cannot specify a protocol for a Gateway
-    #   Load Balancer.
+    #   TLS, UDP, and TCP\_UDP. You can’t specify the UDP or TCP\_UDP protocol
+    #   if dual-stack mode is enabled. You cannot specify a protocol for a
+    #   Gateway Load Balancer.
     #
     # @option params [Integer] :port
     #   The port on which the load balancer is listening. You cannot specify a
@@ -819,7 +820,9 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zones. You can specify one Elastic IP address per subnet
     #   if you need static IP addresses for your internet-facing load
     #   balancer. For internal load balancers, you can specify one private IP
-    #   address per subnet from the IPv4 range of the subnet.
+    #   address per subnet from the IPv4 range of the subnet. For
+    #   internet-facing load balancer, you can specify one IPv6 address per
+    #   subnet.
     #
     #   \[Gateway Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You cannot specify Elastic IP addresses for your
@@ -853,10 +856,10 @@ module Aws::ElasticLoadBalancingV2
     #   The type of load balancer. The default is `application`.
     #
     # @option params [String] :ip_address_type
-    #   \[Application Load Balancers\] The type of IP addresses used by the
-    #   subnets for your load balancer. The possible values are `ipv4` (for
-    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
-    #   Internal load balancers must use `ipv4`.
+    #   The type of IP addresses used by the subnets for your load balancer.
+    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
+    #   (for IPv4 and IPv6 addresses). Internal load balancers must use
+    #   `ipv4`.
     #
     # @option params [String] :customer_owned_ipv_4_pool
     #   \[Application Load Balancers on Outposts\] The ID of the
@@ -968,6 +971,7 @@ module Aws::ElasticLoadBalancingV2
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
     #         private_i_pv_4_address: "PrivateIPv4Address",
+    #         i_pv_6_address: "IPv6Address",
     #       },
     #     ],
     #     security_groups: ["SecurityGroupId"],
@@ -1004,6 +1008,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].private_i_pv_4_address #=> String
+    #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].i_pv_6_address #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -2125,6 +2130,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].private_i_pv_4_address #=> String
+    #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].i_pv_6_address #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -2839,7 +2845,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer.
     #   Application Load Balancers support the HTTP and HTTPS protocols.
     #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
-    #   protocols. You cannot specify a protocol for a Gateway Load Balancer.
+    #   protocols. You can’t change the protocol to UDP or TCP\_UDP if
+    #   dual-stack mode is enabled. You cannot specify a protocol for a
+    #   Gateway Load Balancer.
     #
     # @option params [String] :ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
@@ -3901,7 +3909,8 @@ module Aws::ElasticLoadBalancingV2
     # @option params [required, String] :ip_address_type
     #   The IP address type. The possible values are `ipv4` (for IPv4
     #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
-    #   load balancers must use `ipv4`.
+    #   load balancers must use `ipv4`. You can’t specify `dualstack` for a
+    #   load balancer with a UDP or TCP\_UDP listener.
     #
     # @return [Types::SetIpAddressTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4133,9 +4142,20 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the load balancer.
     #
     # @option params [Array<String>] :subnets
-    #   The IDs of the public subnets. You must specify subnets from at least
-    #   two Availability Zones. You can specify only one subnet per
+    #   The IDs of the public subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet mappings.
+    #
+    #   \[Application Load Balancers\] You must specify subnets from at least
+    #   two Availability Zones.
+    #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify subnets
+    #   from one or more Local Zones.
+    #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
     #   The IDs of the public subnets. You can specify only one subnet per
@@ -4145,15 +4165,31 @@ module Aws::ElasticLoadBalancingV2
     #   two Availability Zones. You cannot specify Elastic IP addresses for
     #   your subnets.
     #
+    #   \[Application Load Balancers on Outposts\] You must specify one
+    #   Outpost subnet.
+    #
+    #   \[Application Load Balancers on Local Zones\] You can specify subnets
+    #   from one or more Local Zones.
+    #
     #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones. If you need static IP addresses for your
-    #   internet-facing load balancer, you can specify one Elastic IP address
-    #   per subnet. For internal load balancers, you can specify one private
-    #   IP address per subnet from the IPv4 range of the subnet.
+    #   Availability Zones. You can specify one Elastic IP address per subnet
+    #   if you need static IP addresses for your internet-facing load
+    #   balancer. For internal load balancers, you can specify one private IP
+    #   address per subnet from the IPv4 range of the subnet. For
+    #   internet-facing load balancer, you can specify one IPv6 address per
+    #   subnet.
+    #
+    # @option params [String] :ip_address_type
+    #   \[Network Load Balancers\] The type of IP addresses used by the
+    #   subnets for your load balancer. The possible values are `ipv4` (for
+    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
+    #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
+    #   listener. Internal load balancers must use `ipv4`.
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SetSubnetsOutput#availability_zones #availability_zones} => Array&lt;Types::AvailabilityZone&gt;
+    #   * {Types::SetSubnetsOutput#ip_address_type #ip_address_type} => String
     #
     #
     # @example Example: To enable Availability Zones for a load balancer
@@ -4192,8 +4228,10 @@ module Aws::ElasticLoadBalancingV2
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
     #         private_i_pv_4_address: "PrivateIPv4Address",
+    #         i_pv_6_address: "IPv6Address",
     #       },
     #     ],
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #   })
     #
     # @example Response structure
@@ -4206,6 +4244,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].private_i_pv_4_address #=> String
+    #   resp.availability_zones[0].load_balancer_addresses[0].i_pv_6_address #=> String
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnets AWS API Documentation
     #
@@ -4229,7 +4269,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

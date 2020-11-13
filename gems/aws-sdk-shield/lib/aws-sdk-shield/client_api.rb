@@ -29,28 +29,40 @@ module Aws::Shield
     AttackProperties = Shapes::ListShape.new(name: 'AttackProperties')
     AttackProperty = Shapes::StructureShape.new(name: 'AttackProperty')
     AttackPropertyIdentifier = Shapes::StringShape.new(name: 'AttackPropertyIdentifier')
+    AttackStatisticsDataItem = Shapes::StructureShape.new(name: 'AttackStatisticsDataItem')
+    AttackStatisticsDataList = Shapes::ListShape.new(name: 'AttackStatisticsDataList')
     AttackSummaries = Shapes::ListShape.new(name: 'AttackSummaries')
     AttackSummary = Shapes::StructureShape.new(name: 'AttackSummary')
     AttackTimestamp = Shapes::TimestampShape.new(name: 'AttackTimestamp')
     AttackVectorDescription = Shapes::StructureShape.new(name: 'AttackVectorDescription')
     AttackVectorDescriptionList = Shapes::ListShape.new(name: 'AttackVectorDescriptionList')
+    AttackVolume = Shapes::StructureShape.new(name: 'AttackVolume')
+    AttackVolumeStatistics = Shapes::StructureShape.new(name: 'AttackVolumeStatistics')
     AutoRenew = Shapes::StringShape.new(name: 'AutoRenew')
     ContactNotes = Shapes::StringShape.new(name: 'ContactNotes')
     Contributor = Shapes::StructureShape.new(name: 'Contributor')
+    CreateProtectionGroupRequest = Shapes::StructureShape.new(name: 'CreateProtectionGroupRequest')
+    CreateProtectionGroupResponse = Shapes::StructureShape.new(name: 'CreateProtectionGroupResponse')
     CreateProtectionRequest = Shapes::StructureShape.new(name: 'CreateProtectionRequest')
     CreateProtectionResponse = Shapes::StructureShape.new(name: 'CreateProtectionResponse')
     CreateSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateSubscriptionRequest')
     CreateSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateSubscriptionResponse')
+    DeleteProtectionGroupRequest = Shapes::StructureShape.new(name: 'DeleteProtectionGroupRequest')
+    DeleteProtectionGroupResponse = Shapes::StructureShape.new(name: 'DeleteProtectionGroupResponse')
     DeleteProtectionRequest = Shapes::StructureShape.new(name: 'DeleteProtectionRequest')
     DeleteProtectionResponse = Shapes::StructureShape.new(name: 'DeleteProtectionResponse')
     DeleteSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionRequest')
     DeleteSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteSubscriptionResponse')
     DescribeAttackRequest = Shapes::StructureShape.new(name: 'DescribeAttackRequest')
     DescribeAttackResponse = Shapes::StructureShape.new(name: 'DescribeAttackResponse')
+    DescribeAttackStatisticsRequest = Shapes::StructureShape.new(name: 'DescribeAttackStatisticsRequest')
+    DescribeAttackStatisticsResponse = Shapes::StructureShape.new(name: 'DescribeAttackStatisticsResponse')
     DescribeDRTAccessRequest = Shapes::StructureShape.new(name: 'DescribeDRTAccessRequest')
     DescribeDRTAccessResponse = Shapes::StructureShape.new(name: 'DescribeDRTAccessResponse')
     DescribeEmergencyContactSettingsRequest = Shapes::StructureShape.new(name: 'DescribeEmergencyContactSettingsRequest')
     DescribeEmergencyContactSettingsResponse = Shapes::StructureShape.new(name: 'DescribeEmergencyContactSettingsResponse')
+    DescribeProtectionGroupRequest = Shapes::StructureShape.new(name: 'DescribeProtectionGroupRequest')
+    DescribeProtectionGroupResponse = Shapes::StructureShape.new(name: 'DescribeProtectionGroupResponse')
     DescribeProtectionRequest = Shapes::StructureShape.new(name: 'DescribeProtectionRequest')
     DescribeProtectionResponse = Shapes::StructureShape.new(name: 'DescribeProtectionResponse')
     DescribeSubscriptionRequest = Shapes::StructureShape.new(name: 'DescribeSubscriptionRequest')
@@ -88,8 +100,12 @@ module Aws::Shield
     LimitsExceededException = Shapes::StructureShape.new(name: 'LimitsExceededException')
     ListAttacksRequest = Shapes::StructureShape.new(name: 'ListAttacksRequest')
     ListAttacksResponse = Shapes::StructureShape.new(name: 'ListAttacksResponse')
+    ListProtectionGroupsRequest = Shapes::StructureShape.new(name: 'ListProtectionGroupsRequest')
+    ListProtectionGroupsResponse = Shapes::StructureShape.new(name: 'ListProtectionGroupsResponse')
     ListProtectionsRequest = Shapes::StructureShape.new(name: 'ListProtectionsRequest')
     ListProtectionsResponse = Shapes::StructureShape.new(name: 'ListProtectionsResponse')
+    ListResourcesInProtectionGroupRequest = Shapes::StructureShape.new(name: 'ListResourcesInProtectionGroupRequest')
+    ListResourcesInProtectionGroupResponse = Shapes::StructureShape.new(name: 'ListResourcesInProtectionGroupResponse')
     LockedSubscriptionException = Shapes::StructureShape.new(name: 'LockedSubscriptionException')
     LogBucket = Shapes::StringShape.new(name: 'LogBucket')
     LogBucketList = Shapes::ListShape.new(name: 'LogBucketList')
@@ -101,13 +117,25 @@ module Aws::Shield
     OptimisticLockException = Shapes::StructureShape.new(name: 'OptimisticLockException')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     ProactiveEngagementStatus = Shapes::StringShape.new(name: 'ProactiveEngagementStatus')
+    ProtectedResourceType = Shapes::StringShape.new(name: 'ProtectedResourceType')
     Protection = Shapes::StructureShape.new(name: 'Protection')
+    ProtectionGroup = Shapes::StructureShape.new(name: 'ProtectionGroup')
+    ProtectionGroupAggregation = Shapes::StringShape.new(name: 'ProtectionGroupAggregation')
+    ProtectionGroupArbitraryPatternLimits = Shapes::StructureShape.new(name: 'ProtectionGroupArbitraryPatternLimits')
+    ProtectionGroupId = Shapes::StringShape.new(name: 'ProtectionGroupId')
+    ProtectionGroupLimits = Shapes::StructureShape.new(name: 'ProtectionGroupLimits')
+    ProtectionGroupMembers = Shapes::ListShape.new(name: 'ProtectionGroupMembers')
+    ProtectionGroupPattern = Shapes::StringShape.new(name: 'ProtectionGroupPattern')
+    ProtectionGroupPatternTypeLimits = Shapes::StructureShape.new(name: 'ProtectionGroupPatternTypeLimits')
+    ProtectionGroups = Shapes::ListShape.new(name: 'ProtectionGroups')
     ProtectionId = Shapes::StringShape.new(name: 'ProtectionId')
+    ProtectionLimits = Shapes::StructureShape.new(name: 'ProtectionLimits')
     ProtectionName = Shapes::StringShape.new(name: 'ProtectionName')
     Protections = Shapes::ListShape.new(name: 'Protections')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnFilterList = Shapes::ListShape.new(name: 'ResourceArnFilterList')
+    ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     String = Shapes::StringShape.new(name: 'String')
@@ -115,6 +143,7 @@ module Aws::Shield
     SubResourceSummaryList = Shapes::ListShape.new(name: 'SubResourceSummaryList')
     SubResourceType = Shapes::StringShape.new(name: 'SubResourceType')
     Subscription = Shapes::StructureShape.new(name: 'Subscription')
+    SubscriptionLimits = Shapes::StructureShape.new(name: 'SubscriptionLimits')
     SubscriptionState = Shapes::StringShape.new(name: 'SubscriptionState')
     SummarizedAttackVector = Shapes::StructureShape.new(name: 'SummarizedAttackVector')
     SummarizedAttackVectorList = Shapes::ListShape.new(name: 'SummarizedAttackVectorList')
@@ -127,8 +156,13 @@ module Aws::Shield
     Unit = Shapes::StringShape.new(name: 'Unit')
     UpdateEmergencyContactSettingsRequest = Shapes::StructureShape.new(name: 'UpdateEmergencyContactSettingsRequest')
     UpdateEmergencyContactSettingsResponse = Shapes::StructureShape.new(name: 'UpdateEmergencyContactSettingsResponse')
+    UpdateProtectionGroupRequest = Shapes::StructureShape.new(name: 'UpdateProtectionGroupRequest')
+    UpdateProtectionGroupResponse = Shapes::StructureShape.new(name: 'UpdateProtectionGroupResponse')
     UpdateSubscriptionRequest = Shapes::StructureShape.new(name: 'UpdateSubscriptionRequest')
     UpdateSubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateSubscriptionResponse')
+    ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
+    ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
+    ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -177,6 +211,12 @@ module Aws::Shield
     AttackProperty.add_member(:total, Shapes::ShapeRef.new(shape: Long, location_name: "Total"))
     AttackProperty.struct_class = Types::AttackProperty
 
+    AttackStatisticsDataItem.add_member(:attack_volume, Shapes::ShapeRef.new(shape: AttackVolume, location_name: "AttackVolume"))
+    AttackStatisticsDataItem.add_member(:attack_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "AttackCount"))
+    AttackStatisticsDataItem.struct_class = Types::AttackStatisticsDataItem
+
+    AttackStatisticsDataList.member = Shapes::ShapeRef.new(shape: AttackStatisticsDataItem)
+
     AttackSummaries.member = Shapes::ShapeRef.new(shape: AttackSummary)
 
     AttackSummary.add_member(:attack_id, Shapes::ShapeRef.new(shape: String, location_name: "AttackId"))
@@ -191,9 +231,26 @@ module Aws::Shield
 
     AttackVectorDescriptionList.member = Shapes::ShapeRef.new(shape: AttackVectorDescription)
 
+    AttackVolume.add_member(:bits_per_second, Shapes::ShapeRef.new(shape: AttackVolumeStatistics, location_name: "BitsPerSecond"))
+    AttackVolume.add_member(:packets_per_second, Shapes::ShapeRef.new(shape: AttackVolumeStatistics, location_name: "PacketsPerSecond"))
+    AttackVolume.add_member(:requests_per_second, Shapes::ShapeRef.new(shape: AttackVolumeStatistics, location_name: "RequestsPerSecond"))
+    AttackVolume.struct_class = Types::AttackVolume
+
+    AttackVolumeStatistics.add_member(:max, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Max"))
+    AttackVolumeStatistics.struct_class = Types::AttackVolumeStatistics
+
     Contributor.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Contributor.add_member(:value, Shapes::ShapeRef.new(shape: Long, location_name: "Value"))
     Contributor.struct_class = Types::Contributor
+
+    CreateProtectionGroupRequest.add_member(:protection_group_id, Shapes::ShapeRef.new(shape: ProtectionGroupId, required: true, location_name: "ProtectionGroupId"))
+    CreateProtectionGroupRequest.add_member(:aggregation, Shapes::ShapeRef.new(shape: ProtectionGroupAggregation, required: true, location_name: "Aggregation"))
+    CreateProtectionGroupRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: ProtectionGroupPattern, required: true, location_name: "Pattern"))
+    CreateProtectionGroupRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ProtectedResourceType, location_name: "ResourceType"))
+    CreateProtectionGroupRequest.add_member(:members, Shapes::ShapeRef.new(shape: ProtectionGroupMembers, location_name: "Members"))
+    CreateProtectionGroupRequest.struct_class = Types::CreateProtectionGroupRequest
+
+    CreateProtectionGroupResponse.struct_class = Types::CreateProtectionGroupResponse
 
     CreateProtectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProtectionName, required: true, location_name: "Name"))
     CreateProtectionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -205,6 +262,11 @@ module Aws::Shield
     CreateSubscriptionRequest.struct_class = Types::CreateSubscriptionRequest
 
     CreateSubscriptionResponse.struct_class = Types::CreateSubscriptionResponse
+
+    DeleteProtectionGroupRequest.add_member(:protection_group_id, Shapes::ShapeRef.new(shape: ProtectionGroupId, required: true, location_name: "ProtectionGroupId"))
+    DeleteProtectionGroupRequest.struct_class = Types::DeleteProtectionGroupRequest
+
+    DeleteProtectionGroupResponse.struct_class = Types::DeleteProtectionGroupResponse
 
     DeleteProtectionRequest.add_member(:protection_id, Shapes::ShapeRef.new(shape: ProtectionId, required: true, location_name: "ProtectionId"))
     DeleteProtectionRequest.struct_class = Types::DeleteProtectionRequest
@@ -221,6 +283,12 @@ module Aws::Shield
     DescribeAttackResponse.add_member(:attack, Shapes::ShapeRef.new(shape: AttackDetail, location_name: "Attack"))
     DescribeAttackResponse.struct_class = Types::DescribeAttackResponse
 
+    DescribeAttackStatisticsRequest.struct_class = Types::DescribeAttackStatisticsRequest
+
+    DescribeAttackStatisticsResponse.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, required: true, location_name: "TimeRange"))
+    DescribeAttackStatisticsResponse.add_member(:data_items, Shapes::ShapeRef.new(shape: AttackStatisticsDataList, required: true, location_name: "DataItems"))
+    DescribeAttackStatisticsResponse.struct_class = Types::DescribeAttackStatisticsResponse
+
     DescribeDRTAccessRequest.struct_class = Types::DescribeDRTAccessRequest
 
     DescribeDRTAccessResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
@@ -231,6 +299,12 @@ module Aws::Shield
 
     DescribeEmergencyContactSettingsResponse.add_member(:emergency_contact_list, Shapes::ShapeRef.new(shape: EmergencyContactList, location_name: "EmergencyContactList"))
     DescribeEmergencyContactSettingsResponse.struct_class = Types::DescribeEmergencyContactSettingsResponse
+
+    DescribeProtectionGroupRequest.add_member(:protection_group_id, Shapes::ShapeRef.new(shape: ProtectionGroupId, required: true, location_name: "ProtectionGroupId"))
+    DescribeProtectionGroupRequest.struct_class = Types::DescribeProtectionGroupRequest
+
+    DescribeProtectionGroupResponse.add_member(:protection_group, Shapes::ShapeRef.new(shape: ProtectionGroup, required: true, location_name: "ProtectionGroup"))
+    DescribeProtectionGroupResponse.struct_class = Types::DescribeProtectionGroupResponse
 
     DescribeProtectionRequest.add_member(:protection_id, Shapes::ShapeRef.new(shape: ProtectionId, location_name: "ProtectionId"))
     DescribeProtectionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
@@ -291,6 +365,8 @@ module Aws::Shield
     InvalidPaginationTokenException.struct_class = Types::InvalidPaginationTokenException
 
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidParameterException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
+    InvalidParameterException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fields"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidResourceException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -318,6 +394,14 @@ module Aws::Shield
     ListAttacksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListAttacksResponse.struct_class = Types::ListAttacksResponse
 
+    ListProtectionGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListProtectionGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListProtectionGroupsRequest.struct_class = Types::ListProtectionGroupsRequest
+
+    ListProtectionGroupsResponse.add_member(:protection_groups, Shapes::ShapeRef.new(shape: ProtectionGroups, required: true, location_name: "ProtectionGroups"))
+    ListProtectionGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListProtectionGroupsResponse.struct_class = Types::ListProtectionGroupsResponse
+
     ListProtectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListProtectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListProtectionsRequest.struct_class = Types::ListProtectionsRequest
@@ -325,6 +409,15 @@ module Aws::Shield
     ListProtectionsResponse.add_member(:protections, Shapes::ShapeRef.new(shape: Protections, location_name: "Protections"))
     ListProtectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListProtectionsResponse.struct_class = Types::ListProtectionsResponse
+
+    ListResourcesInProtectionGroupRequest.add_member(:protection_group_id, Shapes::ShapeRef.new(shape: ProtectionGroupId, required: true, location_name: "ProtectionGroupId"))
+    ListResourcesInProtectionGroupRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListResourcesInProtectionGroupRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListResourcesInProtectionGroupRequest.struct_class = Types::ListResourcesInProtectionGroupRequest
+
+    ListResourcesInProtectionGroupResponse.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, required: true, location_name: "ResourceArns"))
+    ListResourcesInProtectionGroupResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListResourcesInProtectionGroupResponse.struct_class = Types::ListResourcesInProtectionGroupResponse
 
     LockedSubscriptionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     LockedSubscriptionException.struct_class = Types::LockedSubscriptionException
@@ -348,14 +441,42 @@ module Aws::Shield
     Protection.add_member(:health_check_ids, Shapes::ShapeRef.new(shape: HealthCheckIds, location_name: "HealthCheckIds"))
     Protection.struct_class = Types::Protection
 
+    ProtectionGroup.add_member(:protection_group_id, Shapes::ShapeRef.new(shape: ProtectionGroupId, required: true, location_name: "ProtectionGroupId"))
+    ProtectionGroup.add_member(:aggregation, Shapes::ShapeRef.new(shape: ProtectionGroupAggregation, required: true, location_name: "Aggregation"))
+    ProtectionGroup.add_member(:pattern, Shapes::ShapeRef.new(shape: ProtectionGroupPattern, required: true, location_name: "Pattern"))
+    ProtectionGroup.add_member(:resource_type, Shapes::ShapeRef.new(shape: ProtectedResourceType, location_name: "ResourceType"))
+    ProtectionGroup.add_member(:members, Shapes::ShapeRef.new(shape: ProtectionGroupMembers, required: true, location_name: "Members"))
+    ProtectionGroup.struct_class = Types::ProtectionGroup
+
+    ProtectionGroupArbitraryPatternLimits.add_member(:max_members, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxMembers"))
+    ProtectionGroupArbitraryPatternLimits.struct_class = Types::ProtectionGroupArbitraryPatternLimits
+
+    ProtectionGroupLimits.add_member(:max_protection_groups, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxProtectionGroups"))
+    ProtectionGroupLimits.add_member(:pattern_type_limits, Shapes::ShapeRef.new(shape: ProtectionGroupPatternTypeLimits, required: true, location_name: "PatternTypeLimits"))
+    ProtectionGroupLimits.struct_class = Types::ProtectionGroupLimits
+
+    ProtectionGroupMembers.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
+    ProtectionGroupPatternTypeLimits.add_member(:arbitrary_pattern_limits, Shapes::ShapeRef.new(shape: ProtectionGroupArbitraryPatternLimits, required: true, location_name: "ArbitraryPatternLimits"))
+    ProtectionGroupPatternTypeLimits.struct_class = Types::ProtectionGroupPatternTypeLimits
+
+    ProtectionGroups.member = Shapes::ShapeRef.new(shape: ProtectionGroup)
+
+    ProtectionLimits.add_member(:protected_resource_type_limits, Shapes::ShapeRef.new(shape: Limits, required: true, location_name: "ProtectedResourceTypeLimits"))
+    ProtectionLimits.struct_class = Types::ProtectionLimits
+
     Protections.member = Shapes::ShapeRef.new(shape: Protection)
 
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceAlreadyExistsException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
     ResourceArnFilterList.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
+    ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SubResourceSummary.add_member(:type, Shapes::ShapeRef.new(shape: SubResourceType, location_name: "Type"))
@@ -372,7 +493,12 @@ module Aws::Shield
     Subscription.add_member(:auto_renew, Shapes::ShapeRef.new(shape: AutoRenew, location_name: "AutoRenew"))
     Subscription.add_member(:limits, Shapes::ShapeRef.new(shape: Limits, location_name: "Limits"))
     Subscription.add_member(:proactive_engagement_status, Shapes::ShapeRef.new(shape: ProactiveEngagementStatus, location_name: "ProactiveEngagementStatus"))
+    Subscription.add_member(:subscription_limits, Shapes::ShapeRef.new(shape: SubscriptionLimits, required: true, location_name: "SubscriptionLimits"))
     Subscription.struct_class = Types::Subscription
+
+    SubscriptionLimits.add_member(:protection_limits, Shapes::ShapeRef.new(shape: ProtectionLimits, required: true, location_name: "ProtectionLimits"))
+    SubscriptionLimits.add_member(:protection_group_limits, Shapes::ShapeRef.new(shape: ProtectionGroupLimits, required: true, location_name: "ProtectionGroupLimits"))
+    SubscriptionLimits.struct_class = Types::SubscriptionLimits
 
     SummarizedAttackVector.add_member(:vector_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VectorType"))
     SummarizedAttackVector.add_member(:vector_counters, Shapes::ShapeRef.new(shape: SummarizedCounterList, location_name: "VectorCounters"))
@@ -401,10 +527,25 @@ module Aws::Shield
 
     UpdateEmergencyContactSettingsResponse.struct_class = Types::UpdateEmergencyContactSettingsResponse
 
+    UpdateProtectionGroupRequest.add_member(:protection_group_id, Shapes::ShapeRef.new(shape: ProtectionGroupId, required: true, location_name: "ProtectionGroupId"))
+    UpdateProtectionGroupRequest.add_member(:aggregation, Shapes::ShapeRef.new(shape: ProtectionGroupAggregation, required: true, location_name: "Aggregation"))
+    UpdateProtectionGroupRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: ProtectionGroupPattern, required: true, location_name: "Pattern"))
+    UpdateProtectionGroupRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ProtectedResourceType, location_name: "ResourceType"))
+    UpdateProtectionGroupRequest.add_member(:members, Shapes::ShapeRef.new(shape: ProtectionGroupMembers, location_name: "Members"))
+    UpdateProtectionGroupRequest.struct_class = Types::UpdateProtectionGroupRequest
+
+    UpdateProtectionGroupResponse.struct_class = Types::UpdateProtectionGroupResponse
+
     UpdateSubscriptionRequest.add_member(:auto_renew, Shapes::ShapeRef.new(shape: AutoRenew, location_name: "AutoRenew"))
     UpdateSubscriptionRequest.struct_class = Types::UpdateSubscriptionRequest
 
     UpdateSubscriptionResponse.struct_class = Types::UpdateSubscriptionResponse
+
+    ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ValidationExceptionField.struct_class = Types::ValidationExceptionField
+
+    ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
 
     # @api private
@@ -496,6 +637,20 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_protection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProtectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProtectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProtectionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitsExceededException)
+      end)
+
       api.add_operation(:create_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSubscription"
         o.http_method = "POST"
@@ -515,6 +670,17 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
+      end)
+
+      api.add_operation(:delete_protection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProtectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProtectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProtectionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -537,6 +703,15 @@ module Aws::Shield
         o.output = Shapes::ShapeRef.new(shape: DescribeAttackResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_attack_statistics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAttackStatistics"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAttackStatisticsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAttackStatisticsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:describe_drt_access, Seahorse::Model::Operation.new.tap do |o|
@@ -567,6 +742,16 @@ module Aws::Shield
         o.output = Shapes::ShapeRef.new(shape: DescribeProtectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_protection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProtectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProtectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProtectionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -670,12 +855,46 @@ module Aws::Shield
         )
       end)
 
+      api.add_operation(:list_protection_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProtectionGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProtectionGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProtectionGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_protections, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListProtections"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListProtectionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProtectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resources_in_protection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourcesInProtectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourcesInProtectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourcesInProtectionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
@@ -697,6 +916,18 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_protection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProtectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProtectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProtectionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_subscription, Seahorse::Model::Operation.new.tap do |o|

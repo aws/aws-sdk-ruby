@@ -607,6 +607,71 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Creates a grouping of protected resources so they can be handled as a
+    # collective. This resource grouping improves the accuracy of detection
+    # and reduces false positives.
+    #
+    # @option params [required, String] :protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #
+    # @option params [required, String] :aggregation
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
+    #
+    #   * Sum - Use the total traffic across the group. This is a good choice
+    #     for most cases. Examples include Elastic IP addresses for EC2
+    #     instances that scale manually or automatically.
+    #
+    #   * Mean - Use the average of the traffic across the group. This is a
+    #     good choice for resources that share traffic uniformly. Examples
+    #     include accelerators and load balancers.
+    #
+    #   * Max - Use the highest traffic from each resource. This is useful for
+    #     resources that don't share traffic and for resources that share
+    #     that traffic in a non-uniform way. Examples include CloudFront
+    #     distributions and origin resources for CloudFront distributions.
+    #
+    # @option params [required, String] :pattern
+    #   The criteria to use to choose the protected resources for inclusion in
+    #   the group. You can include all resources that have protections,
+    #   provide a list of resource Amazon Resource Names (ARNs), or include
+    #   all resources of a specified resource type.
+    #
+    # @option params [String] :resource_type
+    #   The resource type to include in the protection group. All protected
+    #   resources of this type are included in the protection group. Newly
+    #   protected resources of this type are automatically added to the group.
+    #   You must set this when you set `Pattern` to `BY_RESOURCE_TYPE` and you
+    #   must not set it for any other `Pattern` setting.
+    #
+    # @option params [Array<String>] :members
+    #   The Amazon Resource Names (ARNs) of the resources to include in the
+    #   protection group. You must set this when you set `Pattern` to
+    #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_protection_group({
+    #     protection_group_id: "ProtectionGroupId", # required
+    #     aggregation: "SUM", # required, accepts SUM, MEAN, MAX
+    #     pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
+    #     resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
+    #     members: ["ResourceArn"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionGroup AWS API Documentation
+    #
+    # @overload create_protection_group(params = {})
+    # @param [Hash] params ({})
+    def create_protection_group(params = {}, options = {})
+      req = build_request(:create_protection_group, params)
+      req.send_request(options)
+    end
+
     # Activates AWS Shield Advanced for an account.
     #
     # When you initally create a subscription, your subscription is set to
@@ -644,6 +709,30 @@ module Aws::Shield
     # @param [Hash] params ({})
     def delete_protection(params = {}, options = {})
       req = build_request(:delete_protection, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified protection group.
+    #
+    # @option params [required, String] :protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_protection_group({
+    #     protection_group_id: "ProtectionGroupId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionGroup AWS API Documentation
+    #
+    # @overload delete_protection_group(params = {})
+    # @param [Hash] params ({})
+    def delete_protection_group(params = {}, options = {})
+      req = build_request(:delete_protection_group, params)
       req.send_request(options)
     end
 
@@ -726,6 +815,45 @@ module Aws::Shield
     # @param [Hash] params ({})
     def describe_attack(params = {}, options = {})
       req = build_request(:describe_attack, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the number and type of attacks AWS Shield
+    # has detected in the last year for all resources that belong to your
+    # account, regardless of whether you've defined Shield protections for
+    # them. This operation is available to Shield customers as well as to
+    # Shield Advanced customers.
+    #
+    # The operation returns data for the time range of midnight UTC, one
+    # year ago, to midnight UTC, today. For example, if the current time is
+    # `2020-10-26 15:39:32 PDT`, equal to `2020-10-26 22:39:32 UTC`, then
+    # the time range for the attack data returned is from `2019-10-26
+    # 00:00:00 UTC` to `2020-10-26 00:00:00 UTC`.
+    #
+    # The time range indicates the period covered by the attack statistics
+    # data items.
+    #
+    # @return [Types::DescribeAttackStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAttackStatisticsResponse#time_range #time_range} => Types::TimeRange
+    #   * {Types::DescribeAttackStatisticsResponse#data_items #data_items} => Array&lt;Types::AttackStatisticsDataItem&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.time_range.from_inclusive #=> Time
+    #   resp.time_range.to_exclusive #=> Time
+    #   resp.data_items #=> Array
+    #   resp.data_items[0].attack_volume.bits_per_second.max #=> Float
+    #   resp.data_items[0].attack_volume.packets_per_second.max #=> Float
+    #   resp.data_items[0].attack_volume.requests_per_second.max #=> Float
+    #   resp.data_items[0].attack_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackStatistics AWS API Documentation
+    #
+    # @overload describe_attack_statistics(params = {})
+    # @param [Hash] params ({})
+    def describe_attack_statistics(params = {}, options = {})
+      req = build_request(:describe_attack_statistics, params)
       req.send_request(options)
     end
 
@@ -819,6 +947,41 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Returns the specification for the specified protection group.
+    #
+    # @option params [required, String] :protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #
+    # @return [Types::DescribeProtectionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProtectionGroupResponse#protection_group #protection_group} => Types::ProtectionGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_protection_group({
+    #     protection_group_id: "ProtectionGroupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protection_group.protection_group_id #=> String
+    #   resp.protection_group.aggregation #=> String, one of "SUM", "MEAN", "MAX"
+    #   resp.protection_group.pattern #=> String, one of "ALL", "ARBITRARY", "BY_RESOURCE_TYPE"
+    #   resp.protection_group.resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "ROUTE_53_HOSTED_ZONE", "ELASTIC_IP_ALLOCATION", "CLASSIC_LOAD_BALANCER", "APPLICATION_LOAD_BALANCER", "GLOBAL_ACCELERATOR"
+    #   resp.protection_group.members #=> Array
+    #   resp.protection_group.members[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionGroup AWS API Documentation
+    #
+    # @overload describe_protection_group(params = {})
+    # @param [Hash] params ({})
+    def describe_protection_group(params = {}, options = {})
+      req = build_request(:describe_protection_group, params)
+      req.send_request(options)
+    end
+
     # Provides details about the AWS Shield Advanced subscription for an
     # account.
     #
@@ -836,6 +999,11 @@ module Aws::Shield
     #   resp.subscription.limits[0].type #=> String
     #   resp.subscription.limits[0].max #=> Integer
     #   resp.subscription.proactive_engagement_status #=> String, one of "ENABLED", "DISABLED", "PENDING"
+    #   resp.subscription.subscription_limits.protection_limits.protected_resource_type_limits #=> Array
+    #   resp.subscription.subscription_limits.protection_limits.protected_resource_type_limits[0].type #=> String
+    #   resp.subscription.subscription_limits.protection_limits.protected_resource_type_limits[0].max #=> Integer
+    #   resp.subscription.subscription_limits.protection_group_limits.max_protection_groups #=> Integer
+    #   resp.subscription.subscription_limits.protection_group_limits.pattern_type_limits.arbitrary_pattern_limits.max_members #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription AWS API Documentation
     #
@@ -1028,15 +1196,15 @@ module Aws::Shield
     #   `ListAttacksRequest`. Pass null if this is the first call.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of AttackSummary objects to be returned. If this is
-    #   left blank, the first 20 results will be returned.
+    #   The maximum number of AttackSummary objects to return. If you leave
+    #   this blank, Shield Advanced returns the first 20 results.
     #
-    #   This is a maximum value; it is possible that AWS WAF will return the
-    #   results in smaller batches. That is, the number of AttackSummary
-    #   objects returned could be less than `MaxResults`, even if there are
-    #   still more AttackSummary objects yet to return. If there are more
-    #   AttackSummary objects to return, AWS WAF will always also return a
-    #   `NextToken`.
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be less
+    #   than `MaxResults`, even if there are still more objects yet to return.
+    #   If there are more objects to return, Shield Advanced returns a value
+    #   in `NextToken` that you can use in your next request, to get the next
+    #   batch of objects.
     #
     # @return [Types::ListAttacksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1081,6 +1249,57 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Retrieves the ProtectionGroup objects for the account.
+    #
+    # @option params [String] :next_token
+    #   The next token value from a previous call to `ListProtectionGroups`.
+    #   Pass null if this is the first call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of ProtectionGroup objects to return. If you leave
+    #   this blank, Shield Advanced returns the first 20 results.
+    #
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be less
+    #   than `MaxResults`, even if there are still more objects yet to return.
+    #   If there are more objects to return, Shield Advanced returns a value
+    #   in `NextToken` that you can use in your next request, to get the next
+    #   batch of objects.
+    #
+    # @return [Types::ListProtectionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProtectionGroupsResponse#protection_groups #protection_groups} => Array&lt;Types::ProtectionGroup&gt;
+    #   * {Types::ListProtectionGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_protection_groups({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protection_groups #=> Array
+    #   resp.protection_groups[0].protection_group_id #=> String
+    #   resp.protection_groups[0].aggregation #=> String, one of "SUM", "MEAN", "MAX"
+    #   resp.protection_groups[0].pattern #=> String, one of "ALL", "ARBITRARY", "BY_RESOURCE_TYPE"
+    #   resp.protection_groups[0].resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "ROUTE_53_HOSTED_ZONE", "ELASTIC_IP_ALLOCATION", "CLASSIC_LOAD_BALANCER", "APPLICATION_LOAD_BALANCER", "GLOBAL_ACCELERATOR"
+    #   resp.protection_groups[0].members #=> Array
+    #   resp.protection_groups[0].members[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroups AWS API Documentation
+    #
+    # @overload list_protection_groups(params = {})
+    # @param [Hash] params ({})
+    def list_protection_groups(params = {}, options = {})
+      req = build_request(:list_protection_groups, params)
+      req.send_request(options)
+    end
+
     # Lists all Protection objects for the account.
     #
     # @option params [String] :next_token
@@ -1088,14 +1307,15 @@ module Aws::Shield
     #   `ListProtections`. Pass null if this is the first call.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Protection objects to be returned. If this is
-    #   left blank the first 20 results will be returned.
+    #   The maximum number of Protection objects to return. If you leave this
+    #   blank, Shield Advanced returns the first 20 results.
     #
-    #   This is a maximum value; it is possible that AWS WAF will return the
-    #   results in smaller batches. That is, the number of Protection objects
-    #   returned could be less than `MaxResults`, even if there are still more
-    #   Protection objects yet to return. If there are more Protection objects
-    #   to return, AWS WAF will always also return a `NextToken`.
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be less
+    #   than `MaxResults`, even if there are still more objects yet to return.
+    #   If there are more objects to return, Shield Advanced returns a value
+    #   in `NextToken` that you can use in your next request, to get the next
+    #   batch of objects.
     #
     # @return [Types::ListProtectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1127,6 +1347,58 @@ module Aws::Shield
     # @param [Hash] params ({})
     def list_protections(params = {}, options = {})
       req = build_request(:list_protections, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the resources that are included in the protection group.
+    #
+    # @option params [required, String] :protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #
+    # @option params [String] :next_token
+    #   The next token value from a previous call to
+    #   `ListResourcesInProtectionGroup`. Pass null if this is the first call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resource ARN objects to return. If you leave
+    #   this blank, Shield Advanced returns the first 20 results.
+    #
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be less
+    #   than `MaxResults`, even if there are still more objects yet to return.
+    #   If there are more objects to return, Shield Advanced returns a value
+    #   in `NextToken` that you can use in your next request, to get the next
+    #   batch of objects.
+    #
+    # @return [Types::ListResourcesInProtectionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourcesInProtectionGroupResponse#resource_arns #resource_arns} => Array&lt;String&gt;
+    #   * {Types::ListResourcesInProtectionGroupResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resources_in_protection_group({
+    #     protection_group_id: "ProtectionGroupId", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arns #=> Array
+    #   resp.resource_arns[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListResourcesInProtectionGroup AWS API Documentation
+    #
+    # @overload list_resources_in_protection_group(params = {})
+    # @param [Hash] params ({})
+    def list_resources_in_protection_group(params = {}, options = {})
+      req = build_request(:list_resources_in_protection_group, params)
       req.send_request(options)
     end
 
@@ -1164,6 +1436,71 @@ module Aws::Shield
     # @param [Hash] params ({})
     def update_emergency_contact_settings(params = {}, options = {})
       req = build_request(:update_emergency_contact_settings, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing protection group. A protection group is a grouping
+    # of protected resources so they can be handled as a collective. This
+    # resource grouping improves the accuracy of detection and reduces false
+    # positives.
+    #
+    # @option params [required, String] :protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #
+    # @option params [required, String] :aggregation
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
+    #
+    #   * Sum - Use the total traffic across the group. This is a good choice
+    #     for most cases. Examples include Elastic IP addresses for EC2
+    #     instances that scale manually or automatically.
+    #
+    #   * Mean - Use the average of the traffic across the group. This is a
+    #     good choice for resources that share traffic uniformly. Examples
+    #     include accelerators and load balancers.
+    #
+    #   * Max - Use the highest traffic from each resource. This is useful for
+    #     resources that don't share traffic and for resources that share
+    #     that traffic in a non-uniform way. Examples include CloudFront
+    #     distributions and origin resources for CloudFront distributions.
+    #
+    # @option params [required, String] :pattern
+    #   The criteria to use to choose the protected resources for inclusion in
+    #   the group. You can include all resources that have protections,
+    #   provide a list of resource Amazon Resource Names (ARNs), or include
+    #   all resources of a specified resource type.
+    #
+    # @option params [String] :resource_type
+    #   The resource type to include in the protection group. All protected
+    #   resources of this type are included in the protection group. You must
+    #   set this when you set `Pattern` to `BY_RESOURCE_TYPE` and you must not
+    #   set it for any other `Pattern` setting.
+    #
+    # @option params [Array<String>] :members
+    #   The Amazon Resource Names (ARNs) of the resources to include in the
+    #   protection group. You must set this when you set `Pattern` to
+    #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_protection_group({
+    #     protection_group_id: "ProtectionGroupId", # required
+    #     aggregation: "SUM", # required, accepts SUM, MEAN, MAX
+    #     pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
+    #     resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
+    #     members: ["ResourceArn"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateProtectionGroup AWS API Documentation
+    #
+    # @overload update_protection_group(params = {})
+    # @param [Hash] params ({})
+    def update_protection_group(params = {}, options = {})
+      req = build_request(:update_protection_group, params)
       req.send_request(options)
     end
 
@@ -1208,7 +1545,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

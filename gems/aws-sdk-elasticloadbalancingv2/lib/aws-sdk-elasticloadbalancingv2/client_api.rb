@@ -131,6 +131,7 @@ module Aws::ElasticLoadBalancingV2
     HttpHeaderConditionConfig = Shapes::StructureShape.new(name: 'HttpHeaderConditionConfig')
     HttpHeaderConditionName = Shapes::StringShape.new(name: 'HttpHeaderConditionName')
     HttpRequestMethodConditionConfig = Shapes::StructureShape.new(name: 'HttpRequestMethodConditionConfig')
+    IPv6Address = Shapes::StringShape.new(name: 'IPv6Address')
     IncompatibleProtocolsException = Shapes::StructureShape.new(name: 'IncompatibleProtocolsException')
     InvalidConfigurationRequestException = Shapes::StructureShape.new(name: 'InvalidConfigurationRequestException')
     InvalidLoadBalancerActionException = Shapes::StructureShape.new(name: 'InvalidLoadBalancerActionException')
@@ -639,6 +640,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancerAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
     LoadBalancerAddress.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     LoadBalancerAddress.add_member(:private_i_pv_4_address, Shapes::ShapeRef.new(shape: PrivateIPv4Address, location_name: "PrivateIPv4Address"))
+    LoadBalancerAddress.add_member(:i_pv_6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "IPv6Address"))
     LoadBalancerAddress.struct_class = Types::LoadBalancerAddress
 
     LoadBalancerAddresses.member = Shapes::ShapeRef.new(shape: LoadBalancerAddress)
@@ -818,9 +820,11 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
     SetSubnetsInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets"))
     SetSubnetsInput.add_member(:subnet_mappings, Shapes::ShapeRef.new(shape: SubnetMappings, location_name: "SubnetMappings"))
+    SetSubnetsInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     SetSubnetsInput.struct_class = Types::SetSubnetsInput
 
     SetSubnetsOutput.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
+    SetSubnetsOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     SetSubnetsOutput.struct_class = Types::SetSubnetsOutput
 
     SourceIpConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
@@ -840,6 +844,7 @@ module Aws::ElasticLoadBalancingV2
     SubnetMapping.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     SubnetMapping.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     SubnetMapping.add_member(:private_i_pv_4_address, Shapes::ShapeRef.new(shape: PrivateIPv4Address, location_name: "PrivateIPv4Address"))
+    SubnetMapping.add_member(:i_pv_6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "IPv6Address"))
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)

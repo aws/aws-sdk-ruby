@@ -184,6 +184,11 @@ module Aws::Textract
     #   The word or line of text that's recognized by Amazon Textract.
     #   @return [String]
     #
+    # @!attribute [rw] text_type
+    #   The kind of text that Amazon Textract has detected. Can check for
+    #   handwritten text and printed text.
+    #   @return [String]
+    #
     # @!attribute [rw] row_index
     #   The row in which a table cell is located. The first row position is
     #   1. `RowIndex` isn't returned by `DetectDocumentText` and
@@ -265,6 +270,7 @@ module Aws::Textract
       :block_type,
       :confidence,
       :text,
+      :text_type,
       :row_index,
       :column_index,
       :row_span,
@@ -486,7 +492,7 @@ module Aws::Textract
     end
 
     # The document can't be processed because it's too large. The maximum
-    # document size for synchronous operations 5 MB. The maximum document
+    # document size for synchronous operations 10 MB. The maximum document
     # size for asynchronous operations is 500 MB for PDF files.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DocumentTooLargeException AWS API Documentation
@@ -822,6 +828,13 @@ module Aws::Textract
     #
     class InvalidJobIdException < Aws::EmptyStructure; end
 
+    # Indicates you do not have decrypt permissions with the KMS key
+    # entered, or the KMS key was entered incorrectly.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InvalidKMSKeyException AWS API Documentation
+    #
+    class InvalidKMSKeyException < Aws::EmptyStructure; end
+
     # An input parameter violated a constraint. For example, in synchronous
     # operations, an `InvalidParameterException` exception occurs when
     # neither of the `S3Object` or `Bytes` values are supplied in the
@@ -1046,6 +1059,7 @@ module Aws::Textract
     #           s3_bucket: "S3Bucket", # required
     #           s3_prefix: "S3ObjectName",
     #         },
+    #         kms_key_id: "KMSKeyId",
     #       }
     #
     # @!attribute [rw] document_location
@@ -1093,6 +1107,14 @@ module Aws::Textract
     #   the GetDocumentAnalysis operation.
     #   @return [Types::OutputConfig]
     #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the
+    #   KMS key will be used for server-side encryption of the objects in
+    #   the customer bucket. When this parameter is not enabled, the result
+    #   will be encrypted server side,using SSE-S3.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentAnalysisRequest AWS API Documentation
     #
     class StartDocumentAnalysisRequest < Struct.new(
@@ -1101,7 +1123,8 @@ module Aws::Textract
       :client_request_token,
       :job_tag,
       :notification_channel,
-      :output_config)
+      :output_config,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1141,6 +1164,7 @@ module Aws::Textract
     #           s3_bucket: "S3Bucket", # required
     #           s3_prefix: "S3ObjectName",
     #         },
+    #         kms_key_id: "KMSKeyId",
     #       }
     #
     # @!attribute [rw] document_location
@@ -1178,6 +1202,14 @@ module Aws::Textract
     #   the GetDocumentTextDetection operation.
     #   @return [Types::OutputConfig]
     #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the
+    #   KMS key will be used for server-side encryption of the objects in
+    #   the customer bucket. When this parameter is not enabled, the result
+    #   will be encrypted server side,using SSE-S3.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentTextDetectionRequest AWS API Documentation
     #
     class StartDocumentTextDetectionRequest < Struct.new(
@@ -1185,7 +1217,8 @@ module Aws::Textract
       :client_request_token,
       :job_tag,
       :notification_channel,
-      :output_config)
+      :output_config,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -251,7 +251,7 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] top_contributors
-    #   The array of Contributor objects that includes the top five
+    #   The array of contributor objects that includes the top five
     #   contributors to an attack.
     #   @return [Array<Types::Contributor>]
     #
@@ -272,6 +272,29 @@ module Aws::Shield
       :top_contributors,
       :unit,
       :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single attack statistics data record. This is returned by
+    # DescribeAttackStatistics along with a time range indicating the time
+    # period that the attack statistics apply to.
+    #
+    # @!attribute [rw] attack_volume
+    #   Information about the volume of attacks during the time period. If
+    #   the accompanying `AttackCount` is zero, this setting might be empty.
+    #   @return [Types::AttackVolume]
+    #
+    # @!attribute [rw] attack_count
+    #   The number of attacks detected during the time period. This is
+    #   always present, but might be zero.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackStatisticsDataItem AWS API Documentation
+    #
+    class AttackStatisticsDataItem < Struct.new(
+      :attack_volume,
+      :attack_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -370,6 +393,51 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # Information about the volume of attacks during the time period,
+    # included in an AttackStatisticsDataItem. If the accompanying
+    # `AttackCount` in the statistics object is zero, this setting might be
+    # empty.
+    #
+    # @!attribute [rw] bits_per_second
+    #   A statistics object that uses bits per second as the unit. This is
+    #   included for network level attacks.
+    #   @return [Types::AttackVolumeStatistics]
+    #
+    # @!attribute [rw] packets_per_second
+    #   A statistics object that uses packets per second as the unit. This
+    #   is included for network level attacks.
+    #   @return [Types::AttackVolumeStatistics]
+    #
+    # @!attribute [rw] requests_per_second
+    #   A statistics object that uses requests per second as the unit. This
+    #   is included for application level attacks, and is only available for
+    #   accounts that are subscribed to Shield Advanced.
+    #   @return [Types::AttackVolumeStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVolume AWS API Documentation
+    #
+    class AttackVolume < Struct.new(
+      :bits_per_second,
+      :packets_per_second,
+      :requests_per_second)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics objects for the various data types in AttackVolume.
+    #
+    # @!attribute [rw] max
+    #   The maximum attack volume observed for the given unit.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVolumeStatistics AWS API Documentation
+    #
+    class AttackVolumeStatistics < Struct.new(
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A contributor to the attack and their contribution.
     #
     # @!attribute [rw] name
@@ -392,6 +460,80 @@ module Aws::Shield
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateProtectionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_group_id: "ProtectionGroupId", # required
+    #         aggregation: "SUM", # required, accepts SUM, MEAN, MAX
+    #         pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
+    #         resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
+    #         members: ["ResourceArn"],
+    #       }
+    #
+    # @!attribute [rw] protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
+    #
+    #   * Sum - Use the total traffic across the group. This is a good
+    #     choice for most cases. Examples include Elastic IP addresses for
+    #     EC2 instances that scale manually or automatically.
+    #
+    #   * Mean - Use the average of the traffic across the group. This is a
+    #     good choice for resources that share traffic uniformly. Examples
+    #     include accelerators and load balancers.
+    #
+    #   * Max - Use the highest traffic from each resource. This is useful
+    #     for resources that don't share traffic and for resources that
+    #     share that traffic in a non-uniform way. Examples include
+    #     CloudFront distributions and origin resources for CloudFront
+    #     distributions.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The criteria to use to choose the protected resources for inclusion
+    #   in the group. You can include all resources that have protections,
+    #   provide a list of resource Amazon Resource Names (ARNs), or include
+    #   all resources of a specified resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type to include in the protection group. All protected
+    #   resources of this type are included in the protection group. Newly
+    #   protected resources of this type are automatically added to the
+    #   group. You must set this when you set `Pattern` to
+    #   `BY_RESOURCE_TYPE` and you must not set it for any other `Pattern`
+    #   setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] members
+    #   The Amazon Resource Names (ARNs) of the resources to include in the
+    #   protection group. You must set this when you set `Pattern` to
+    #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionGroupRequest AWS API Documentation
+    #
+    class CreateProtectionGroupRequest < Struct.new(
+      :protection_group_id,
+      :aggregation,
+      :pattern,
+      :resource_type,
+      :members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionGroupResponse AWS API Documentation
+    #
+    class CreateProtectionGroupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateProtectionRequest
     #   data as a hash:
@@ -464,6 +606,31 @@ module Aws::Shield
     #
     class CreateSubscriptionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteProtectionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_group_id: "ProtectionGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionGroupRequest AWS API Documentation
+    #
+    class DeleteProtectionGroupRequest < Struct.new(
+      :protection_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionGroupResponse AWS API Documentation
+    #
+    class DeleteProtectionGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteProtectionRequest
     #   data as a hash:
     #
@@ -530,6 +697,29 @@ module Aws::Shield
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackStatisticsRequest AWS API Documentation
+    #
+    class DescribeAttackStatisticsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] time_range
+    #   The time range.
+    #   @return [Types::TimeRange]
+    #
+    # @!attribute [rw] data_items
+    #   The data that describes the attacks detected during the time period.
+    #   @return [Array<Types::AttackStatisticsDataItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackStatisticsResponse AWS API Documentation
+    #
+    class DescribeAttackStatisticsResponse < Struct.new(
+      :time_range,
+      :data_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessRequest AWS API Documentation
     #
     class DescribeDRTAccessRequest < Aws::EmptyStructure; end
@@ -569,6 +759,41 @@ module Aws::Shield
     #
     class DescribeEmergencyContactSettingsResponse < Struct.new(
       :emergency_contact_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProtectionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_group_id: "ProtectionGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionGroupRequest AWS API Documentation
+    #
+    class DescribeProtectionGroupRequest < Struct.new(
+      :protection_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protection_group
+    #   A grouping of protected resources that you and AWS Shield Advanced
+    #   can monitor as a collective. This resource grouping improves the
+    #   accuracy of detection and reduces false positives.
+    #   @return [Types::ProtectionGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionGroupResponse AWS API Documentation
+    #
+    class DescribeProtectionGroupResponse < Struct.new(
+      :protection_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -815,15 +1040,26 @@ module Aws::Shield
     end
 
     # Exception that indicates that the parameters passed to the API are
-    # invalid.
+    # invalid. If available, this exception includes details in additional
+    # properties.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   Additional information about the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   Fields that caused the exception.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidParameterException AWS API Documentation
     #
     class InvalidParameterException < Struct.new(
-      :message)
+      :message,
+      :reason,
+      :fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -938,15 +1174,15 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of AttackSummary objects to be returned. If this
-    #   is left blank, the first 20 results will be returned.
+    #   The maximum number of AttackSummary objects to return. If you leave
+    #   this blank, Shield Advanced returns the first 20 results.
     #
-    #   This is a maximum value; it is possible that AWS WAF will return the
-    #   results in smaller batches. That is, the number of AttackSummary
-    #   objects returned could be less than `MaxResults`, even if there are
-    #   still more AttackSummary objects yet to return. If there are more
-    #   AttackSummary objects to return, AWS WAF will always also return a
-    #   `NextToken`.
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be
+    #   less than `MaxResults`, even if there are still more objects yet to
+    #   return. If there are more objects to return, Shield Advanced returns
+    #   a value in `NextToken` that you can use in your next request, to get
+    #   the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksRequest AWS API Documentation
@@ -971,16 +1207,69 @@ module Aws::Shield
     #   value for the `NextMarker` parameter in a subsequent call to
     #   `ListAttacks` to retrieve the next set of items.
     #
-    #   AWS WAF might return the list of AttackSummary objects in batches
-    #   smaller than the number specified by MaxResults. If there are more
-    #   AttackSummary objects to return, AWS WAF will always also return a
-    #   `NextToken`.
+    #   Shield Advanced might return the list of AttackSummary objects in
+    #   batches smaller than the number specified by MaxResults. If there
+    #   are more attack summary objects to return, Shield Advanced will
+    #   always also return a `NextToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksResponse AWS API Documentation
     #
     class ListAttacksResponse < Struct.new(
       :attack_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListProtectionGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The next token value from a previous call to `ListProtectionGroups`.
+    #   Pass null if this is the first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of ProtectionGroup objects to return. If you
+    #   leave this blank, Shield Advanced returns the first 20 results.
+    #
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be
+    #   less than `MaxResults`, even if there are still more objects yet to
+    #   return. If there are more objects to return, Shield Advanced returns
+    #   a value in `NextToken` that you can use in your next request, to get
+    #   the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroupsRequest AWS API Documentation
+    #
+    class ListProtectionGroupsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protection_groups
+    #   @return [Array<Types::ProtectionGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   If you specify a value for `MaxResults` and you have more protection
+    #   groups than the value of MaxResults, AWS Shield Advanced returns
+    #   this token that you can use in your next request, to get the next
+    #   batch of objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroupsResponse AWS API Documentation
+    #
+    class ListProtectionGroupsResponse < Struct.new(
+      :protection_groups,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1000,15 +1289,15 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Protection objects to be returned. If this is
-    #   left blank the first 20 results will be returned.
+    #   The maximum number of Protection objects to return. If you leave
+    #   this blank, Shield Advanced returns the first 20 results.
     #
-    #   This is a maximum value; it is possible that AWS WAF will return the
-    #   results in smaller batches. That is, the number of Protection
-    #   objects returned could be less than `MaxResults`, even if there are
-    #   still more Protection objects yet to return. If there are more
-    #   Protection objects to return, AWS WAF will always also return a
-    #   `NextToken`.
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be
+    #   less than `MaxResults`, even if there are still more objects yet to
+    #   return. If there are more objects to return, Shield Advanced returns
+    #   a value in `NextToken` that you can use in your next request, to get
+    #   the next batch of objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsRequest AWS API Documentation
@@ -1033,16 +1322,80 @@ module Aws::Shield
     #   previous response to get information about another batch of
     #   Protections.
     #
-    #   AWS WAF might return the list of Protection objects in batches
-    #   smaller than the number specified by MaxResults. If there are more
-    #   Protection objects to return, AWS WAF will always also return a
-    #   `NextToken`.
+    #   Shield Advanced might return the list of Protection objects in
+    #   batches smaller than the number specified by MaxResults. If there
+    #   are more Protection objects to return, Shield Advanced will always
+    #   also return a `NextToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsResponse AWS API Documentation
     #
     class ListProtectionsResponse < Struct.new(
       :protections,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourcesInProtectionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_group_id: "ProtectionGroupId", # required
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next token value from a previous call to
+    #   `ListResourcesInProtectionGroup`. Pass null if this is the first
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resource ARN objects to return. If you leave
+    #   this blank, Shield Advanced returns the first 20 results.
+    #
+    #   This is a maximum value. Shield Advanced might return the results in
+    #   smaller batches. That is, the number of objects returned could be
+    #   less than `MaxResults`, even if there are still more objects yet to
+    #   return. If there are more objects to return, Shield Advanced returns
+    #   a value in `NextToken` that you can use in your next request, to get
+    #   the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListResourcesInProtectionGroupRequest AWS API Documentation
+    #
+    class ListResourcesInProtectionGroupRequest < Struct.new(
+      :protection_group_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arns
+    #   The Amazon Resource Names (ARNs) of the resources that are included
+    #   in the protection group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If you specify a value for `MaxResults` and you have more resources
+    #   in the protection group than the value of MaxResults, AWS Shield
+    #   Advanced returns this token that you can use in your next request,
+    #   to get the next batch of objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListResourcesInProtectionGroupResponse AWS API Documentation
+    #
+    class ListResourcesInProtectionGroupResponse < Struct.new(
+      :resource_arns,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1112,7 +1465,7 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the protection. For example, `My CloudFront
+    #   The name of the protection. For example, `My CloudFront
     #   distributions`.
     #   @return [String]
     #
@@ -1137,28 +1490,167 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # Exception indicating the specified resource already exists.
+    # A grouping of protected resources that you and AWS Shield Advanced can
+    # monitor as a collective. This resource grouping improves the accuracy
+    # of detection and reduces false positives.
+    #
+    # @!attribute [rw] protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
+    #
+    #   * Sum - Use the total traffic across the group. This is a good
+    #     choice for most cases. Examples include Elastic IP addresses for
+    #     EC2 instances that scale manually or automatically.
+    #
+    #   * Mean - Use the average of the traffic across the group. This is a
+    #     good choice for resources that share traffic uniformly. Examples
+    #     include accelerators and load balancers.
+    #
+    #   * Max - Use the highest traffic from each resource. This is useful
+    #     for resources that don't share traffic and for resources that
+    #     share that traffic in a non-uniform way. Examples include
+    #     CloudFront distributions and origin resources for CloudFront
+    #     distributions.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The criteria to use to choose the protected resources for inclusion
+    #   in the group. You can include all resources that have protections,
+    #   provide a list of resource Amazon Resource Names (ARNs), or include
+    #   all resources of a specified resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type to include in the protection group. All protected
+    #   resources of this type are included in the protection group. You
+    #   must set this when you set `Pattern` to `BY_RESOURCE_TYPE` and you
+    #   must not set it for any other `Pattern` setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] members
+    #   The Amazon Resource Names (ARNs) of the resources to include in the
+    #   protection group. You must set this when you set `Pattern` to
+    #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ProtectionGroup AWS API Documentation
+    #
+    class ProtectionGroup < Struct.new(
+      :protection_group_id,
+      :aggregation,
+      :pattern,
+      :resource_type,
+      :members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Limits settings on protection groups with arbitrary pattern type.
+    #
+    # @!attribute [rw] max_members
+    #   The maximum number of resources you can specify for a single
+    #   arbitrary pattern in a protection group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ProtectionGroupArbitraryPatternLimits AWS API Documentation
+    #
+    class ProtectionGroupArbitraryPatternLimits < Struct.new(
+      :max_members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Limits settings on protection groups for your subscription.
+    #
+    # @!attribute [rw] max_protection_groups
+    #   The maximum number of protection groups that you can have at one
+    #   time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pattern_type_limits
+    #   Limits settings by pattern type in the protection groups for your
+    #   subscription.
+    #   @return [Types::ProtectionGroupPatternTypeLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ProtectionGroupLimits AWS API Documentation
+    #
+    class ProtectionGroupLimits < Struct.new(
+      :max_protection_groups,
+      :pattern_type_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Limits settings by pattern type in the protection groups for your
+    # subscription.
+    #
+    # @!attribute [rw] arbitrary_pattern_limits
+    #   Limits settings on protection groups with arbitrary pattern type.
+    #   @return [Types::ProtectionGroupArbitraryPatternLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ProtectionGroupPatternTypeLimits AWS API Documentation
+    #
+    class ProtectionGroupPatternTypeLimits < Struct.new(
+      :arbitrary_pattern_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Limits settings on protections for your subscription.
+    #
+    # @!attribute [rw] protected_resource_type_limits
+    #   The maximum number of resource types that you can specify in a
+    #   protection.
+    #   @return [Array<Types::Limit>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ProtectionLimits AWS API Documentation
+    #
+    class ProtectionLimits < Struct.new(
+      :protected_resource_type_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exception indicating the specified resource already exists. If
+    # available, this exception includes details in additional properties.
     #
     # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that already exists.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceAlreadyExistsException AWS API Documentation
     #
     class ResourceAlreadyExistsException < Struct.new(
-      :message)
+      :message,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Exception indicating the specified resource does not exist.
+    # Exception indicating the specified resource does not exist. If
+    # available, this exception includes details in additional properties.
     #
     # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Type of resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1240,6 +1732,10 @@ module Aws::Shield
     #   escalations or to initiate proactive customer support.
     #   @return [String]
     #
+    # @!attribute [rw] subscription_limits
+    #   Limits settings for your subscription.
+    #   @return [Types::SubscriptionLimits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription AWS API Documentation
     #
     class Subscription < Struct.new(
@@ -1248,7 +1744,27 @@ module Aws::Shield
       :time_commitment_in_seconds,
       :auto_renew,
       :limits,
-      :proactive_engagement_status)
+      :proactive_engagement_status,
+      :subscription_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Limits settings for your subscription.
+    #
+    # @!attribute [rw] protection_limits
+    #   Limits settings on protections for your subscription.
+    #   @return [Types::ProtectionLimits]
+    #
+    # @!attribute [rw] protection_group_limits
+    #   Limits settings on protection groups for your subscription.
+    #   @return [Types::ProtectionGroupLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/SubscriptionLimits AWS API Documentation
+    #
+    class SubscriptionLimits < Struct.new(
+      :protection_limits,
+      :protection_group_limits)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1383,6 +1899,78 @@ module Aws::Shield
     #
     class UpdateEmergencyContactSettingsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateProtectionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_group_id: "ProtectionGroupId", # required
+    #         aggregation: "SUM", # required, accepts SUM, MEAN, MAX
+    #         pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
+    #         resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
+    #         members: ["ResourceArn"],
+    #       }
+    #
+    # @!attribute [rw] protection_group_id
+    #   The name of the protection group. You use this to identify the
+    #   protection group in lists and to manage the protection group, for
+    #   example to update, delete, or describe it.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation
+    #   Defines how AWS Shield combines resource data for the group in order
+    #   to detect, mitigate, and report events.
+    #
+    #   * Sum - Use the total traffic across the group. This is a good
+    #     choice for most cases. Examples include Elastic IP addresses for
+    #     EC2 instances that scale manually or automatically.
+    #
+    #   * Mean - Use the average of the traffic across the group. This is a
+    #     good choice for resources that share traffic uniformly. Examples
+    #     include accelerators and load balancers.
+    #
+    #   * Max - Use the highest traffic from each resource. This is useful
+    #     for resources that don't share traffic and for resources that
+    #     share that traffic in a non-uniform way. Examples include
+    #     CloudFront distributions and origin resources for CloudFront
+    #     distributions.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The criteria to use to choose the protected resources for inclusion
+    #   in the group. You can include all resources that have protections,
+    #   provide a list of resource Amazon Resource Names (ARNs), or include
+    #   all resources of a specified resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type to include in the protection group. All protected
+    #   resources of this type are included in the protection group. You
+    #   must set this when you set `Pattern` to `BY_RESOURCE_TYPE` and you
+    #   must not set it for any other `Pattern` setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] members
+    #   The Amazon Resource Names (ARNs) of the resources to include in the
+    #   protection group. You must set this when you set `Pattern` to
+    #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateProtectionGroupRequest AWS API Documentation
+    #
+    class UpdateProtectionGroupRequest < Struct.new(
+      :protection_group_id,
+      :aggregation,
+      :pattern,
+      :resource_type,
+      :members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateProtectionGroupResponse AWS API Documentation
+    #
+    class UpdateProtectionGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateSubscriptionRequest
     #   data as a hash:
     #
@@ -1410,6 +1998,26 @@ module Aws::Shield
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscriptionResponse AWS API Documentation
     #
     class UpdateSubscriptionResponse < Aws::EmptyStructure; end
+
+    # Provides information about a particular parameter passed inside a
+    # request that resulted in an exception.
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter that failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message describing why the parameter failed validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ValidationExceptionField AWS API Documentation
+    #
+    class ValidationExceptionField < Struct.new(
+      :name,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end
