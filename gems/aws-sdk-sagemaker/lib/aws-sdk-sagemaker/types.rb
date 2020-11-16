@@ -1210,15 +1210,15 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The configuration for running an Amazon SageMaker image as a
-    # KernelGateway app.
+    # The configuration for running a SageMaker image as a KernelGateway
+    # app.
     #
     # @!attribute [rw] app_image_config_arn
     #   The Amazon Resource Name (ARN) of the AppImageConfig.
     #   @return [String]
     #
     # @!attribute [rw] app_image_config_name
-    #   The name of the AppImageConfig.
+    #   The name of the AppImageConfig. Must be unique to your account.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -1230,7 +1230,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] kernel_gateway_image_config
-    #   The KernelGateway app.
+    #   The configuration for the file system and kernels in the SageMaker
+    #   image.
     #   @return [Types::KernelGatewayImageConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppImageConfigDetails AWS API Documentation
@@ -3298,6 +3299,7 @@ module Aws::SageMaker
     #         ],
     #         app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
     #         home_efs_file_system_kms_key_id: "KmsKeyId",
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] domain_name
@@ -3339,8 +3341,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_kms_key_id
-    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
-    #   with a customer master key (CMK) is not supported.
+    #   This member is deprecated and replaced with `KmsKeyId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   SageMaker uses AWS KMS to encrypt the EFS volume attached to the
+    #   domain with an AWS managed customer master key (CMK) by default. For
+    #   more control, specify a customer managed CMK.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -3353,7 +3360,8 @@ module Aws::SageMaker
       :vpc_id,
       :tags,
       :app_network_access_type,
-      :home_efs_file_system_kms_key_id)
+      :home_efs_file_system_kms_key_id,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4153,8 +4161,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name of the image. When the image is added to a domain,
-    #   `DisplayName` must be unique to the domain.
+    #   The display name of the image. If not provided, `ImageName` is
+    #   displayed.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -6379,7 +6387,12 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A custom image.
+    # A custom SageMaker image. For more information, see [Bring your own
+    # SageMaker image][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html
     #
     # @note When making an API call, you may pass CustomImage
     #   data as a hash:
@@ -7473,7 +7486,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] kernel_gateway_image_config
-    #   The KernelGateway app.
+    #   The configuration of a KernelGateway app.
     #   @return [Types::KernelGatewayImageConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfigResponse AWS API Documentation
@@ -7936,7 +7949,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_user_settings
-    #   Settings which are applied to all UserProfile in this domain, if
+    #   Settings which are applied to all UserProfiles in this domain, if
     #   settings are not explicitly specified in a given UserProfile.
     #   @return [Types::UserSettings]
     #
@@ -7952,7 +7965,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_kms_key_id
-    #   The AWS Key Management Service encryption key ID.
+    #   This member is deprecated and replaced with `KmsKeyId`.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -7966,6 +7979,11 @@ module Aws::SageMaker
     # @!attribute [rw] vpc_id
     #   The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses
     #   for communication.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS customer managed CMK used to encrypt the EFS volume
+    #   attached to the domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
@@ -7986,7 +8004,8 @@ module Aws::SageMaker
       :home_efs_file_system_kms_key_id,
       :subnet_ids,
       :url,
-      :vpc_id)
+      :vpc_id,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10713,8 +10732,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The Amazon Elastic File System (EFS) storage configuration for an
-    # image.
+    # The Amazon Elastic File System (EFS) storage configuration for a
+    # SageMaker image.
     #
     # @note When making an API call, you may pass FileSystemConfig
     #   data as a hash:
@@ -10732,11 +10751,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_uid
-    #   The default POSIX user ID. If not specified, defaults to `1000`.
+    #   The default POSIX user ID (UID). If not specified, defaults to
+    #   `1000`.
     #   @return [Integer]
     #
     # @!attribute [rw] default_gid
-    #   The default POSIX group ID. If not specified, defaults to `100`.
+    #   The default POSIX group ID (GID). If not specified, defaults to
+    #   `100`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FileSystemConfig AWS API Documentation
@@ -13355,10 +13376,10 @@ module Aws::SageMaker
     #       * If using the CLI, `\{"input_1": [1,3,224,224],
     #         "input_2":[1,3,224,224]\}`
     #
-    #   * `MXNET/ONNX`\: You must specify the name and shape (NCHW format)
-    #     of the expected data inputs in order using a dictionary format for
-    #     your trained model. The dictionary formats required for the
-    #     console and CLI are different.
+    #   * `MXNET/ONNX/DARKNET`\: You must specify the name and shape (NCHW
+    #     format) of the expected data inputs in order using a dictionary
+    #     format for your trained model. The dictionary formats required for
+    #     the console and CLI are different.
     #
     #     * Examples for one input:
     #
@@ -13580,7 +13601,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Jupyter server's app settings.
+    # The JupyterServer app settings.
     #
     # @note When making an API call, you may pass JupyterServerAppSettings
     #   data as a hash:
@@ -13595,7 +13616,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
-    #   SageMaker image created on the instance.
+    #   default SageMaker image used by the JupyterServer app.
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterServerAppSettings AWS API Documentation
@@ -13632,7 +13653,7 @@ module Aws::SageMaker
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] custom_images
-    #   A list of custom images that are configured to run as a
+    #   A list of custom SageMaker images that are configured to run as a
     #   KernelGateway app.
     #   @return [Array<Types::CustomImage>]
     #
@@ -13645,7 +13666,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The configuration for an Amazon SageMaker KernelGateway app.
+    # The configuration for the file system and kernels in a SageMaker image
+    # running as a KernelGateway app.
     #
     # @note When making an API call, you may pass KernelGatewayImageConfig
     #   data as a hash:
@@ -13665,12 +13687,12 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] kernel_specs
-    #   Defines how a kernel is started and the arguments, environment
-    #   variables, and metadata that are available to the kernel.
+    #   The specification of the Jupyter kernels in the image.
     #   @return [Array<Types::KernelSpec>]
     #
     # @!attribute [rw] file_system_config
-    #   The file system configuration.
+    #   The Amazon Elastic File System (EFS) storage configuration for a
+    #   SageMaker image.
     #   @return [Types::FileSystemConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayImageConfig AWS API Documentation
@@ -13682,8 +13704,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines how a kernel is started and the arguments, environment
-    # variables, and metadata that are available to the kernel.
+    # The specification of a Jupyter kernel.
     #
     # @note When making an API call, you may pass KernelSpec
     #   data as a hash:
@@ -13694,7 +13715,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the kernel. Must be unique to your account.
+    #   The name of the kernel.
     #   @return [String]
     #
     # @!attribute [rw] display_name

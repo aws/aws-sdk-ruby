@@ -87,7 +87,7 @@ module Aws::IoTSecureTunneling
     #   data as a hash:
     #
     #       {
-    #         thing_name: "ThingName", # required
+    #         thing_name: "ThingName",
     #         services: ["Service"], # required
     #       }
     #
@@ -96,12 +96,11 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     #
     # @!attribute [rw] services
-    #   A list of service names that identity the target application.
-    #   Currently, you can only specify a single name. The AWS IoT client
-    #   running on the destination device reads this value and uses it to
-    #   look up a port or an IP address and a port. The AWS IoT client
-    #   instantiates the local proxy which uses this information to connect
-    #   to the destination application.
+    #   A list of service names that identity the target application. The
+    #   AWS IoT client running on the destination device reads this value
+    #   and uses it to look up a port or an IP address and a port. The AWS
+    #   IoT client instantiates the local proxy which uses this information
+    #   to connect to the destination application.
     #   @return [Array<String>]
     #
     class DestinationConfig < Struct.new(
@@ -205,7 +204,7 @@ module Aws::IoTSecureTunneling
     #           },
     #         ],
     #         destination_config: {
-    #           thing_name: "ThingName", # required
+    #           thing_name: "ThingName",
     #           services: ["Service"], # required
     #         },
     #         timeout_config: {

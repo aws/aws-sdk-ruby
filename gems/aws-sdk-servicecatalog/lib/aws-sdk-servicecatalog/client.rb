@@ -1080,7 +1080,8 @@ module Aws::ServiceCatalog
     #   One or more tags.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
-    #   The configuration of the provisioning artifact.
+    #   The configuration of the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #
     # @option params [required, String] :idempotency_token
     #   A unique identifier that you provide to ensure idempotency. If
@@ -1300,7 +1301,8 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :parameters
-    #   The configuration for the provisioning artifact.
+    #   The configuration for the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #
     # @option params [required, String] :idempotency_token
     #   A unique identifier that you provide to ensure idempotency. If
@@ -3149,6 +3151,99 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Requests the import of a resource as a Service Catalog provisioned
+    # product that is associated to a Service Catalog product and
+    # provisioning artifact. Once imported all supported Service Catalog
+    # governance actions are supported on the provisioned product.
+    #
+    # Resource import only supports CloudFormation stack ARNs.
+    # CloudFormation StackSets and non-root nested stacks are not supported.
+    #
+    # The CloudFormation stack must have one of the following statuses to be
+    # imported: CREATE\_COMPLETE, UPDATE\_COMPLETE,
+    # UPDATE\_ROLLBACK\_COMPLETE, IMPORT\_COMPLETE,
+    # IMPORT\_ROLLBACK\_COMPLETE.
+    #
+    # Import of the resource requires that the CloudFormation stack template
+    # matches the associated Service Catalog product provisioning artifact.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :product_id
+    #   The product identifier.
+    #
+    # @option params [required, String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #
+    # @option params [required, String] :provisioned_product_name
+    #   The user-friendly name of the provisioned product. The value must be
+    #   unique for the AWS account. The name cannot be updated after the
+    #   product is provisioned.
+    #
+    # @option params [required, String] :physical_id
+    #   The unique identifier of the resource to be imported. It only
+    #   currently supports CloudFormation stack IDs.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ImportAsProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportAsProvisionedProductOutput#record_detail #record_detail} => Types::RecordDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_as_provisioned_product({
+    #     accept_language: "AcceptLanguage",
+    #     product_id: "Id", # required
+    #     provisioning_artifact_id: "Id", # required
+    #     provisioned_product_name: "ProvisionedProductName", # required
+    #     physical_id: "PhysicalId", # required
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.record_detail.record_id #=> String
+    #   resp.record_detail.provisioned_product_name #=> String
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
+    #   resp.record_detail.created_time #=> Time
+    #   resp.record_detail.updated_time #=> Time
+    #   resp.record_detail.provisioned_product_type #=> String
+    #   resp.record_detail.record_type #=> String
+    #   resp.record_detail.provisioned_product_id #=> String
+    #   resp.record_detail.product_id #=> String
+    #   resp.record_detail.provisioning_artifact_id #=> String
+    #   resp.record_detail.path_id #=> String
+    #   resp.record_detail.record_errors #=> Array
+    #   resp.record_detail.record_errors[0].code #=> String
+    #   resp.record_detail.record_errors[0].description #=> String
+    #   resp.record_detail.record_tags #=> Array
+    #   resp.record_detail.record_tags[0].key #=> String
+    #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProduct AWS API Documentation
+    #
+    # @overload import_as_provisioned_product(params = {})
+    # @param [Hash] params ({})
+    def import_as_provisioned_product(params = {}, options = {})
+      req = build_request(:import_as_provisioned_product, params)
+      req.send_request(options)
+    end
+
     # Lists all portfolios for which sharing was accepted by this account.
     #
     # @option params [String] :accept_language
@@ -4769,6 +4864,13 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [Boolean] :retain_physical_resources
+    #   When this boolean parameter is set to true, the
+    #   TerminateProvisionedProduct API deletes the Service Catalog
+    #   provisioned product. However, it does not remove the CloudFormation
+    #   stack, stack set, or the underlying resources of the deleted
+    #   provisioned product. The default value is false.
+    #
     # @return [Types::TerminateProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TerminateProvisionedProductOutput#record_detail #record_detail} => Types::RecordDetail
@@ -4781,6 +4883,7 @@ module Aws::ServiceCatalog
     #     terminate_token: "IdempotencyToken", # required
     #     ignore_errors: false,
     #     accept_language: "AcceptLanguage",
+    #     retain_physical_resources: false,
     #   })
     #
     # @example Response structure
@@ -5273,12 +5376,8 @@ module Aws::ServiceCatalog
     #   the launch role that is associated with a provisioned product. This
     #   role is used when an end user calls a provisioning operation such as
     #   `UpdateProvisionedProduct`, `TerminateProvisionedProduct`, or
-    #   `ExecuteProvisionedProductServiceAction`. Only a role ARN or an empty
-    #   string `""` is valid. A user ARN is invalid. if an admin user passes
-    #   an empty string `""` as the value for the key `LAUNCH_ROLE`, the admin
-    #   removes the launch role that is associated with the provisioned
-    #   product. As a result, the end user operations use the credentials of
-    #   the end user.
+    #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid. A
+    #   user ARN is invalid.
     #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the user
     #   that has permission to see, update, terminate, and execute service
@@ -5537,7 +5636,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

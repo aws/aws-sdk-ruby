@@ -729,8 +729,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a configuration for running an Amazon SageMaker image as a
-    # KernelGateway app.
+    # Creates a configuration for running a SageMaker image as a
+    # KernelGateway app. The configuration specifies the Amazon Elastic File
+    # System (EFS) storage volume on the image, and a list of the kernels in
+    # the image.
     #
     # @option params [required, String] :app_image_config_name
     #   The name of the AppImageConfig. Must be unique to your account.
@@ -1156,8 +1158,12 @@ module Aws::SageMaker
     #     subnets
     #
     # @option params [String] :home_efs_file_system_kms_key_id
-    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
-    #   with a customer master key (CMK) is not supported.
+    #   This member is deprecated and replaced with `KmsKeyId`.
+    #
+    # @option params [String] :kms_key_id
+    #   SageMaker uses AWS KMS to encrypt the EFS volume attached to the
+    #   domain with an AWS managed customer master key (CMK) by default. For
+    #   more control, specify a customer managed CMK.
     #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1216,6 +1222,7 @@ module Aws::SageMaker
     #     ],
     #     app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
     #     home_efs_file_system_kms_key_id: "KmsKeyId",
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1286,11 +1293,42 @@ module Aws::SageMaker
     # AWS STS in an AWS Region][3] in the *AWS Identity and Access
     # Management User Guide*.
     #
+    # <note markdown="1"> To add the IAM role policies for using this API operation, go to the
+    # [IAM console][4], and choose Roles in the left navigation pane. Search
+    # the IAM role that you want to grant access to use the CreateEndpoint
+    # and CreateEndpointConfig API operations, add the following policies to
+    # the role.
+    #
+    #  * Option 1: For a full Amazon SageMaker access, search and attach the
+    #   `AmazonSageMakerFullAccess` policy.
+    #
+    # * Option 2: For granting a limited access to an IAM role, paste the
+    #   following Action elements manually into the JSON file of the IAM
+    #   role:
+    #
+    #   `"Action": ["sagemaker:CreateEndpoint",
+    #   "sagemaker:CreateEndpointConfig"]`
+    #
+    #   `"Resource": [`
+    #
+    #   `"arn:aws:sagemaker:region:account-id:endpoint/endpointName"`
+    #
+    #   `"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"`
+    #
+    #   `]`
+    #
+    #   For more information, see [Amazon SageMaker API Permissions:
+    #   Actions, Permissions, and Resources Reference][5].
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [4]: https://console.aws.amazon.com/iam/
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint.The name must be unique within an AWS Region
@@ -2058,16 +2096,21 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a SageMaker `Image`. A SageMaker image represents a set of
-    # container images. Each of these container images is represented by a
-    # SageMaker `ImageVersion`.
+    # Creates a custom SageMaker image. A SageMaker image is a set of image
+    # versions. Each image version represents a container image stored in
+    # Amazon Container Registry (ECR). For more information, see [Bring your
+    # own SageMaker image][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html
     #
     # @option params [String] :description
     #   The description of the image.
     #
     # @option params [String] :display_name
-    #   The display name of the image. When the image is added to a domain,
-    #   `DisplayName` must be unique to the domain.
+    #   The display name of the image. If not provided, `ImageName` is
+    #   displayed.
     #
     # @option params [required, String] :image_name
     #   The name of the image. Must be unique to your account.
@@ -5470,6 +5513,7 @@ module Aws::SageMaker
     #   * {Types::DescribeDomainResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::DescribeDomainResponse#url #url} => String
     #   * {Types::DescribeDomainResponse#vpc_id #vpc_id} => String
+    #   * {Types::DescribeDomainResponse#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5514,6 +5558,7 @@ module Aws::SageMaker
     #   resp.subnet_ids[0] #=> String
     #   resp.url #=> String
     #   resp.vpc_id #=> String
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomain AWS API Documentation
     #
@@ -11803,7 +11848,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

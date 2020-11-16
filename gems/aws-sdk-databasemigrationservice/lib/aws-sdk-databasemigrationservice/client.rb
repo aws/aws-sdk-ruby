@@ -1949,6 +1949,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask AWS API Documentation
     #
@@ -2599,6 +2600,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask AWS API Documentation
     #
@@ -4360,6 +4362,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_tasks[0].replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_tasks[0].task_data #=> String
+    #   resp.replication_tasks[0].target_replication_instance_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5895,6 +5898,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask AWS API Documentation
     #
@@ -5902,6 +5906,70 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def modify_replication_task(params = {}, options = {})
       req = build_request(:modify_replication_task, params)
+      req.send_request(options)
+    end
+
+    # Moves a replication task from its current replication instance to a
+    # different target replication instance using the specified parameters.
+    # The target replication instance must be created with the same or later
+    # AWS DMS version as the current replication instance.
+    #
+    # @option params [required, String] :replication_task_arn
+    #   The Amazon Resource Name (ARN) of the task that you want to move.
+    #
+    # @option params [required, String] :target_replication_instance_arn
+    #   The ARN of the replication instance where you want to move the task
+    #   to.
+    #
+    # @return [Types::MoveReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MoveReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.move_replication_task({
+    #     replication_task_arn: "String", # required
+    #     target_replication_instance_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task.replication_task_identifier #=> String
+    #   resp.replication_task.source_endpoint_arn #=> String
+    #   resp.replication_task.target_endpoint_arn #=> String
+    #   resp.replication_task.replication_instance_arn #=> String
+    #   resp.replication_task.migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_task.table_mappings #=> String
+    #   resp.replication_task.replication_task_settings #=> String
+    #   resp.replication_task.status #=> String
+    #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
+    #   resp.replication_task.replication_task_creation_date #=> Time
+    #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
+    #   resp.replication_task.replication_task_arn #=> String
+    #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
+    #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loaded #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTask AWS API Documentation
+    #
+    # @overload move_replication_task(params = {})
+    # @param [Hash] params ({})
+    def move_replication_task(params = {}, options = {})
+      req = build_request(:move_replication_task, params)
       req.send_request(options)
     end
 
@@ -6260,6 +6328,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask AWS API Documentation
     #
@@ -6316,6 +6385,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessment AWS API Documentation
     #
@@ -6516,6 +6586,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask AWS API Documentation
     #
@@ -6594,7 +6665,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

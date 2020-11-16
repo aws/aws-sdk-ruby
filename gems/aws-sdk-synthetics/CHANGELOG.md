@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-11-16)
+------------------
+
+* Feature - AWS Synthetics now supports Environment Variables  to assign runtime parameters in the canary scripts.
+
 1.9.0 (2020-09-30)
 ------------------
 

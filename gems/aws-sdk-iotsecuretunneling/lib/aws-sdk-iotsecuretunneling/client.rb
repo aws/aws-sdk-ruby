@@ -481,7 +481,7 @@ module Aws::IoTSecureTunneling
     end
 
     # Creates a new tunnel, and returns two client access tokens for clients
-    # to use to connect to the AWS IoT Secure Tunneling proxy server. .
+    # to use to connect to the AWS IoT Secure Tunneling proxy server.
     #
     # @option params [String] :description
     #   A short text description of the tunnel.
@@ -513,7 +513,7 @@ module Aws::IoTSecureTunneling
     #       },
     #     ],
     #     destination_config: {
-    #       thing_name: "ThingName", # required
+    #       thing_name: "ThingName",
     #       services: ["Service"], # required
     #     },
     #     timeout_config: {
@@ -601,7 +601,7 @@ module Aws::IoTSecureTunneling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsecuretunneling'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

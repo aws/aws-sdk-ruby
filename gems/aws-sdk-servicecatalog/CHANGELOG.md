@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-11-16)
+------------------
+
+* Feature - Support import of CloudFormation stacks into Service Catalog provisioned products.
+
 1.54.0 (2020-11-11)
 ------------------
 

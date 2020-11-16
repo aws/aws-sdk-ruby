@@ -5306,6 +5306,44 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass MoveReplicationTaskMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String", # required
+    #         target_replication_instance_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   The Amazon Resource Name (ARN) of the task that you want to move.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_replication_instance_arn
+    #   The ARN of the replication instance where you want to move the task
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTaskMessage AWS API Documentation
+    #
+    class MoveReplicationTaskMessage < Struct.new(
+      :replication_task_arn,
+      :target_replication_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task
+    #   The replication task that was moved.
+    #   @return [Types::ReplicationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTaskResponse AWS API Documentation
+    #
+    class MoveReplicationTaskResponse < Struct.new(
+      :replication_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that defines a MySQL endpoint.
     #
     # @note When making an API call, you may pass MySQLSettings
@@ -6866,17 +6904,16 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] source_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   The Amazon Resource Name (ARN) that uniquely identifies the
     #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] target_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   endpoint.
+    #   The ARN that uniquely identifies the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_arn
-    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   The ARN of the replication instance.
     #   @return [String]
     #
     # @!attribute [rw] migration_type
@@ -6892,7 +6929,73 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the replication task.
+    #   The status of the replication task. This response parameter can
+    #   return one of the following values:
+    #
+    #   * `"moving"` – The task is being moved in response to running the [
+    #     `MoveReplicationTask` ][1] operation.
+    #
+    #   * `"creating"` – The task is being created in response to running
+    #     the [ `CreateReplicationTask` ][2] operation.
+    #
+    #   * `"deleting"` – The task is being deleted in response to running
+    #     the [ `DeleteReplicationTask` ][3] operation.
+    #
+    #   * `"failed"` – The task failed to successfully complete the database
+    #     migration in response to running the [ `StartReplicationTask` ][4]
+    #     operation.
+    #
+    #   * `"failed-move"` – The task failed to move in response to running
+    #     the [ `MoveReplicationTask` ][1] operation.
+    #
+    #   * `"modifying"` – The task definition is being modified in response
+    #     to running the [ `ModifyReplicationTask` ][5] operation.
+    #
+    #   * `"ready"` – The task is in a `ready` state where it can respond to
+    #     other task operations, such as [ `StartReplicationTask` ][4] or [
+    #     `DeleteReplicationTask` ][3].
+    #
+    #   * `"running"` – The task is performing a database migration in
+    #     response to running the [ `StartReplicationTask` ][4] operation.
+    #
+    #   * `"starting"` – The task is preparing to perform a database
+    #     migration in response to running the [ `StartReplicationTask` ][4]
+    #     operation.
+    #
+    #   * `"stopped"` – The task has stopped in response to running the [
+    #     `StopReplicationTask` ][6] operation.
+    #
+    #   * `"stopping"` – The task is preparing to stop in response to
+    #     running the [ `StopReplicationTask` ][6] operation.
+    #
+    #   * `"testing"` – The database migration specified for this task is
+    #     being tested in response to running either the [
+    #     `StartReplicationTaskAssessmentRun` ][7] or the [
+    #     `StartReplicationTaskAssessment` ][8] operation.
+    #
+    #     <note markdown="1"> [ `StartReplicationTaskAssessmentRun` ][7] is an improved
+    #     premigration task assessment operation. The [
+    #     `StartReplicationTaskAssessment` ][8] operation assesses data type
+    #     compatibility only between the source and target database of a
+    #     given migration task. In contrast, [
+    #     `StartReplicationTaskAssessmentRun` ][7] enables you to specify a
+    #     variety of premigration task assessments in addition to data type
+    #     compatibility. These assessments include ones for the validity of
+    #     primary key definitions and likely issues with database migration
+    #     performance, among others.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html
+    #   [3]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html
+    #   [4]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html
+    #   [5]: https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html
+    #   [6]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html
+    #   [7]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html
+    #   [8]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html
     #   @return [String]
     #
     # @!attribute [rw] last_failure_message
@@ -6910,7 +7013,7 @@ module Aws::DatabaseMigrationService
     #     load completed.
     #
     #   * `"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"` – In a full-load and
-    #     CDC migration, the full-load stopped as specified before starting
+    #     CDC migration, the full load stopped as specified before starting
     #     the CDC migration.
     #
     #   * `"STOP_REASON_SERVER_TIME"` – The migration stopped at the
@@ -6979,6 +7082,17 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #   @return [String]
     #
+    # @!attribute [rw] target_replication_instance_arn
+    #   The ARN of the replication instance to which this task is moved in
+    #   response to running the [ `MoveReplicationTask` ][1] operation.
+    #   Otherwise, this response parameter isn't a member of the
+    #   `ReplicationTask` object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTask AWS API Documentation
     #
     class ReplicationTask < Struct.new(
@@ -6999,7 +7113,8 @@ module Aws::DatabaseMigrationService
       :recovery_checkpoint,
       :replication_task_arn,
       :replication_task_stats,
-      :task_data)
+      :task_data,
+      :target_replication_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end

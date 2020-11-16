@@ -989,7 +989,8 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] provisioning_artifact_parameters
-    #   The configuration of the provisioning artifact.
+    #   The configuration of the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
@@ -1219,7 +1220,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The configuration for the provisioning artifact.
+    #   The configuration for the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
@@ -3127,6 +3129,81 @@ module Aws::ServiceCatalog
     class GetProvisionedProductOutputsOutput < Struct.new(
       :outputs,
       :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportAsProvisionedProductInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         provisioned_product_name: "ProvisionedProductName", # required
+    #         physical_id: "PhysicalId", # required
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_name
+    #   The user-friendly name of the provisioned product. The value must be
+    #   unique for the AWS account. The name cannot be updated after the
+    #   product is provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_id
+    #   The unique identifier of the resource to be imported. It only
+    #   currently supports CloudFormation stack IDs.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProductInput AWS API Documentation
+    #
+    class ImportAsProvisionedProductInput < Struct.new(
+      :accept_language,
+      :product_id,
+      :provisioning_artifact_id,
+      :provisioned_product_name,
+      :physical_id,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_detail
+    #   Information about a request operation.
+    #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProductOutput AWS API Documentation
+    #
+    class ImportAsProvisionedProductOutput < Struct.new(
+      :record_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6631,6 +6708,7 @@ module Aws::ServiceCatalog
     #         terminate_token: "IdempotencyToken", # required
     #         ignore_errors: false,
     #         accept_language: "AcceptLanguage",
+    #         retain_physical_resources: false,
     #       }
     #
     # @!attribute [rw] provisioned_product_name
@@ -6670,6 +6748,14 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] retain_physical_resources
+    #   When this boolean parameter is set to true, the
+    #   TerminateProvisionedProduct API deletes the Service Catalog
+    #   provisioned product. However, it does not remove the CloudFormation
+    #   stack, stack set, or the underlying resources of the deleted
+    #   provisioned product. The default value is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductInput AWS API Documentation
     #
     class TerminateProvisionedProductInput < Struct.new(
@@ -6677,7 +6763,8 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :terminate_token,
       :ignore_errors,
-      :accept_language)
+      :accept_language,
+      :retain_physical_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7198,12 +7285,8 @@ module Aws::ServiceCatalog
     #   the launch role that is associated with a provisioned product. This
     #   role is used when an end user calls a provisioning operation such as
     #   `UpdateProvisionedProduct`, `TerminateProvisionedProduct`, or
-    #   `ExecuteProvisionedProductServiceAction`. Only a role ARN or an
-    #   empty string `""` is valid. A user ARN is invalid. if an admin user
-    #   passes an empty string `""` as the value for the key `LAUNCH_ROLE`,
-    #   the admin removes the launch role that is associated with the
-    #   provisioned product. As a result, the end user operations use the
-    #   credentials of the end user.
+    #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid.
+    #   A user ARN is invalid.
     #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the
     #   user that has permission to see, update, terminate, and execute

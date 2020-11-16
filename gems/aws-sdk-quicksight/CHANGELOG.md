@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-16)
+------------------
+
+* Feature - Adding new parameters for dashboard persistence
+
 1.35.0 (2020-11-11)
 ------------------
 

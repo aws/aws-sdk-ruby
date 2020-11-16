@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2020-11-16)
+------------------
+
+* Feature - This feature enables customers to encrypt their Amazon SageMaker Studio storage volumes with customer master keys (CMKs) managed by them in AWS Key Management Service (KMS).
+
 1.71.0 (2020-10-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-11-16)
+------------------
+
+* Feature - Support using multiple data streams per tunnel using the Secure Tunneling multiplexing feature.
+
 1.8.0 (2020-09-30)
 ------------------
 

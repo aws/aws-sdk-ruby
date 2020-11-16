@@ -165,6 +165,8 @@ module Aws::DatabaseMigrationService
     ModifyReplicationTaskMessage = Shapes::StructureShape.new(name: 'ModifyReplicationTaskMessage')
     ModifyReplicationTaskResponse = Shapes::StructureShape.new(name: 'ModifyReplicationTaskResponse')
     MongoDbSettings = Shapes::StructureShape.new(name: 'MongoDbSettings')
+    MoveReplicationTaskMessage = Shapes::StructureShape.new(name: 'MoveReplicationTaskMessage')
+    MoveReplicationTaskResponse = Shapes::StructureShape.new(name: 'MoveReplicationTaskResponse')
     MySQLSettings = Shapes::StructureShape.new(name: 'MySQLSettings')
     NeptuneSettings = Shapes::StructureShape.new(name: 'NeptuneSettings')
     NestingLevelValue = Shapes::StringShape.new(name: 'NestingLevelValue')
@@ -955,6 +957,13 @@ module Aws::DatabaseMigrationService
     MongoDbSettings.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     MongoDbSettings.struct_class = Types::MongoDbSettings
 
+    MoveReplicationTaskMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
+    MoveReplicationTaskMessage.add_member(:target_replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetReplicationInstanceArn"))
+    MoveReplicationTaskMessage.struct_class = Types::MoveReplicationTaskMessage
+
+    MoveReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
+    MoveReplicationTaskResponse.struct_class = Types::MoveReplicationTaskResponse
+
     MySQLSettings.add_member(:after_connect_script, Shapes::ShapeRef.new(shape: String, location_name: "AfterConnectScript"))
     MySQLSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     MySQLSettings.add_member(:events_poll_interval, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "EventsPollInterval"))
@@ -1187,6 +1196,7 @@ module Aws::DatabaseMigrationService
     ReplicationTask.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
     ReplicationTask.add_member(:replication_task_stats, Shapes::ShapeRef.new(shape: ReplicationTaskStats, location_name: "ReplicationTaskStats"))
     ReplicationTask.add_member(:task_data, Shapes::ShapeRef.new(shape: String, location_name: "TaskData"))
+    ReplicationTask.add_member(:target_replication_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetReplicationInstanceArn"))
     ReplicationTask.struct_class = Types::ReplicationTask
 
     ReplicationTaskAssessmentResult.add_member(:replication_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIdentifier"))
@@ -1479,6 +1489,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
       end)
 
       api.add_operation(:create_event_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -2014,6 +2025,17 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
+      api.add_operation(:move_replication_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "MoveReplicationTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: MoveReplicationTaskMessage)
+        o.output = Shapes::ShapeRef.new(shape: MoveReplicationTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
       end)
 
       api.add_operation(:reboot_replication_instance, Seahorse::Model::Operation.new.tap do |o|

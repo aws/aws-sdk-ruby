@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-16)
+------------------
+
+* Feature - Documentation updates for Amazon SNS.
+
 1.35.0 (2020-10-30)
 ------------------
 

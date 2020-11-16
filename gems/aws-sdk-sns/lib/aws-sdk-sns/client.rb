@@ -1770,7 +1770,7 @@ module Aws::SNS
     #   A map of attributes with their corresponding values.
     #
     #   The following lists the names, descriptions, and values of the special
-    #   request parameters that the `SetTopicAttributes` action uses:
+    #   request parameters that this action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
@@ -1892,8 +1892,8 @@ module Aws::SNS
 
     # Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is
     # HTTP/S or email, or if the endpoint and the topic are not in the same
-    # AWS account, the endpoint owner must the `ConfirmSubscription` action
-    # to confirm the subscription.
+    # AWS account, the endpoint owner must run the `ConfirmSubscription`
+    # action to confirm the subscription.
     #
     # You call the `ConfirmSubscription` action with the token from the
     # subscription response. Confirmation tokens are valid for three days.
@@ -2147,7 +2147,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

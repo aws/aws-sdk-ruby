@@ -168,6 +168,8 @@ module Aws::ServiceCatalog
     Id = Shapes::StringShape.new(name: 'Id')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IgnoreErrors = Shapes::BooleanShape.new(name: 'IgnoreErrors')
+    ImportAsProvisionedProductInput = Shapes::StructureShape.new(name: 'ImportAsProvisionedProductInput')
+    ImportAsProvisionedProductOutput = Shapes::StructureShape.new(name: 'ImportAsProvisionedProductOutput')
     InstructionType = Shapes::StringShape.new(name: 'InstructionType')
     InstructionValue = Shapes::StringShape.new(name: 'InstructionValue')
     InvalidParametersException = Shapes::StructureShape.new(name: 'InvalidParametersException')
@@ -362,6 +364,7 @@ module Aws::ServiceCatalog
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTargetDefinition = Shapes::StructureShape.new(name: 'ResourceTargetDefinition')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RetainPhysicalResources = Shapes::BooleanShape.new(name: 'RetainPhysicalResources')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ScanProvisionedProductsInput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsInput')
     ScanProvisionedProductsOutput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsOutput')
@@ -970,6 +973,17 @@ module Aws::ServiceCatalog
     GetProvisionedProductOutputsOutput.add_member(:outputs, Shapes::ShapeRef.new(shape: RecordOutputs, location_name: "Outputs"))
     GetProvisionedProductOutputsOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     GetProvisionedProductOutputsOutput.struct_class = Types::GetProvisionedProductOutputsOutput
+
+    ImportAsProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ImportAsProvisionedProductInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
+    ImportAsProvisionedProductInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
+    ImportAsProvisionedProductInput.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductName, required: true, location_name: "ProvisionedProductName"))
+    ImportAsProvisionedProductInput.add_member(:physical_id, Shapes::ShapeRef.new(shape: PhysicalId, required: true, location_name: "PhysicalId"))
+    ImportAsProvisionedProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    ImportAsProvisionedProductInput.struct_class = Types::ImportAsProvisionedProductInput
+
+    ImportAsProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
+    ImportAsProvisionedProductOutput.struct_class = Types::ImportAsProvisionedProductOutput
 
     InvalidParametersException.struct_class = Types::InvalidParametersException
 
@@ -1639,6 +1653,7 @@ module Aws::ServiceCatalog
     TerminateProvisionedProductInput.add_member(:terminate_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "TerminateToken", metadata: {"idempotencyToken"=>true}))
     TerminateProvisionedProductInput.add_member(:ignore_errors, Shapes::ShapeRef.new(shape: IgnoreErrors, location_name: "IgnoreErrors"))
     TerminateProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    TerminateProvisionedProductInput.add_member(:retain_physical_resources, Shapes::ShapeRef.new(shape: RetainPhysicalResources, location_name: "RetainPhysicalResources"))
     TerminateProvisionedProductInput.struct_class = Types::TerminateProvisionedProductInput
 
     TerminateProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
@@ -2326,6 +2341,18 @@ module Aws::ServiceCatalog
             "next_page_token" => "page_token"
           }
         )
+      end)
+
+      api.add_operation(:import_as_provisioned_product, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportAsProvisionedProduct"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportAsProvisionedProductInput)
+        o.output = Shapes::ShapeRef.new(shape: ImportAsProvisionedProductOutput)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:list_accepted_portfolio_shares, Seahorse::Model::Operation.new.tap do |o|

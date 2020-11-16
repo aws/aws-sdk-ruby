@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-11-16)
+------------------
+
+* Feature - Adding MoveReplicationTask feature to move replication tasks between instances
+
 1.46.0 (2020-10-30)
 ------------------
 

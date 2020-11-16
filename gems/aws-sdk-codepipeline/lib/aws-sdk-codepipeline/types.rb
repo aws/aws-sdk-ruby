@@ -352,6 +352,17 @@ module Aws::CodePipeline
 
     # Represents information about the run of an action.
     #
+    # @!attribute [rw] action_execution_id
+    #   ID of the workflow action execution in the current stage. Use the
+    #   GetPipelineState action to retrieve the current action execution
+    #   details of the current stage.
+    #
+    #   <note markdown="1"> For older executions, this field might be empty. The action
+    #   execution ID is available for executions run on or after March 2020.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the action, or for a completed action, the last status
     #   of the action.
@@ -396,6 +407,7 @@ module Aws::CodePipeline
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecution AWS API Documentation
     #
     class ActionExecution < Struct.new(
+      :action_execution_id,
       :status,
       :summary,
       :last_status_change,
@@ -725,10 +737,30 @@ module Aws::CodePipeline
     #   A category defines what kind of action can be taken in the stage,
     #   and constrains the provider type for the action. Valid categories
     #   are limited to one of the following values.
+    #
+    #   * Source
+    #
+    #   * Build
+    #
+    #   * Test
+    #
+    #   * Deploy
+    #
+    #   * Invoke
+    #
+    #   * Approval
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The creator of the action being called.
+    #   The creator of the action being called. There are three valid values
+    #   for the `Owner` field in the action category section within your
+    #   pipeline structure: `AWS`, `ThirdParty`, and `Custom`. For more
+    #   information, see [Valid Action Types and Providers in
+    #   CodePipeline][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
     #   @return [String]
     #
     # @!attribute [rw] provider
@@ -1077,6 +1109,20 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Your request cannot be handled because the pipeline is busy handling
+    # ongoing activities. Try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a CreateCustomActionType operation.
     #
     # @note When making an API call, you may pass CreateCustomActionTypeInput
@@ -1122,12 +1168,6 @@ module Aws::CodePipeline
     # @!attribute [rw] category
     #   The category of the custom action, such as a build action or a test
     #   action.
-    #
-    #   <note markdown="1"> Although `Source` and `Approval` are listed as valid values, they
-    #   are not currently functional. These values are reserved for future
-    #   use.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] provider
@@ -2753,7 +2793,7 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the action to be performed.
+    #   The name of the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -3815,6 +3855,10 @@ module Aws::CodePipeline
     #   The name of the stage.
     #   @return [String]
     #
+    # @!attribute [rw] inbound_execution
+    #   Represents information about the run of a stage.
+    #   @return [Types::StageExecution]
+    #
     # @!attribute [rw] inbound_transition_state
     #   The state of the inbound transition, which is either enabled or
     #   disabled.
@@ -3833,6 +3877,7 @@ module Aws::CodePipeline
     #
     class StageState < Struct.new(
       :stage_name,
+      :inbound_execution,
       :inbound_transition_state,
       :action_states,
       :latest_execution)

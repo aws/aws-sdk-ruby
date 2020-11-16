@@ -75,10 +75,9 @@ module Aws::Synthetics
     #   @return [String]
     #
     # @!attribute [rw] runtime_version
-    #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
-    #   `syn-1.0`. For more information about runtime versions, see [ Canary
-    #   Runtime Versions][1].
+    #   Specifies the runtime version to use for the canary. For more
+    #   information about runtime versions, see [ Canary Runtime
+    #   Versions][1].
     #
     #
     #
@@ -267,6 +266,9 @@ module Aws::Synthetics
     #         timeout_in_seconds: 1,
     #         memory_in_mb: 1,
     #         active_tracing: false,
+    #         environment_variables: {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue",
+    #         },
     #       }
     #
     # @!attribute [rw] timeout_in_seconds
@@ -299,12 +301,30 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] environment_variables
+    #   Specifies the keys and values to use for any environment variables
+    #   used in the canary script. Use the following format:
+    #
+    #   \\\{ "key1" : "value1", "key2" : "value2", ...\\}
+    #
+    #   Keys must start with a letter and be at least two characters. The
+    #   total size of your environment variables cannot exceed 4 KB. You
+    #   can't specify any Lambda reserved environment variables as the keys
+    #   for your environment variables. For more information about reserved
+    #   keys, see [ Runtime environment variables][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigInput AWS API Documentation
     #
     class CanaryRunConfigInput < Struct.new(
       :timeout_in_seconds,
       :memory_in_mb,
-      :active_tracing)
+      :active_tracing,
+      :environment_variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -544,6 +564,9 @@ module Aws::Synthetics
     #           timeout_in_seconds: 1,
     #           memory_in_mb: 1,
     #           active_tracing: false,
+    #           environment_variables: {
+    #             "EnvironmentVariableName" => "EnvironmentVariableValue",
+    #           },
     #         },
     #         success_retention_period_in_days: 1,
     #         failure_retention_period_in_days: 1,
@@ -628,10 +651,9 @@ module Aws::Synthetics
     #   @return [Integer]
     #
     # @!attribute [rw] runtime_version
-    #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
-    #   `syn-1.0`. For more information about runtime versions, see [ Canary
-    #   Runtime Versions][1].
+    #   Specifies the runtime version to use for the canary. For a list of
+    #   valid runtime versions and more information about runtime versions,
+    #   see [ Canary Runtime Versions][1].
     #
     #
     #
@@ -1019,8 +1041,12 @@ module Aws::Synthetics
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
     #
     # @!attribute [rw] version_name
-    #   The name of the runtime version. Currently, the only valid values
-    #   are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and `syn-1.0`.
+    #   The name of the runtime version. For a list of valid runtime
+    #   versions, see [ Canary Runtime Versions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1191,6 +1217,9 @@ module Aws::Synthetics
     #           timeout_in_seconds: 1,
     #           memory_in_mb: 1,
     #           active_tracing: false,
+    #           environment_variables: {
+    #             "EnvironmentVariableName" => "EnvironmentVariableValue",
+    #           },
     #         },
     #         success_retention_period_in_days: 1,
     #         failure_retention_period_in_days: 1,
@@ -1240,10 +1269,9 @@ module Aws::Synthetics
     #   @return [String]
     #
     # @!attribute [rw] runtime_version
-    #   Specifies the runtime version to use for the canary. Currently, the
-    #   only valid values are `syn-nodejs-2.0`, `syn-nodejs-2.0-beta`, and
-    #   `syn-1.0`. For more information about runtime versions, see [ Canary
-    #   Runtime Versions][1].
+    #   Specifies the runtime version to use for the canary. For a list of
+    #   valid runtime versions and for more information about runtime
+    #   versions, see [ Canary Runtime Versions][1].
     #
     #
     #
