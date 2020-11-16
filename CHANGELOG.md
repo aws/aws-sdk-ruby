@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::IoTSecureTunneling - Updated the API, and documentation for AWS IoT Secure Tunneling.
+
+* Feature - Aws::IoTSiteWise - Updated the API, and documentation for AWS IoT SiteWise.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
+
+* Feature - Aws::Synthetics - Updated the API, and documentation for Synthetics.
+
 2.11.627 (2020-11-13)
 ------------------
 
