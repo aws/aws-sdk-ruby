@@ -4,11 +4,11 @@ module Aws
   # An auto-refreshing credential provider that works by assuming a
   # role via {Aws::SSO::Client#get_role_credentials} using a cached access
   # token.  This class does NOT implement the SSO login token flow - tokens
-  # must generated and refreshed separately by running `aws login` with the
-  # correct profile.
+  # must generated and refreshed separately by running `aws login` from the
+  # AWS CLI with the correct profile.
   #
   # For more background on AWS SSO see the official
-  # [what is SSO](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html]
+  # {what is SSO}[https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html]
   # page.
   #
   # ## Refreshing Credentials from SSO
@@ -20,13 +20,29 @@ module Aws
   # and another token will be needed. The SDK does not manage refreshing of
   # the token value, but this can be done by running `aws login` with the
   # correct profile.
+  #
+  #
+  #     # You must first run aws sso login --profile your-sso-profile
+  #     sso_credentials = Aws::SSOCredentials.new(
+  #       sso_account_id: '123456789',
+  #       sso_role_name: "role_name",
+  #       sso_region: "us-east-1",
+  #       sso_start_url: 'https://your-start-url.awsapps.com/start'
+  #     )
+  #
+  #     ec2 = Aws::EC2::Client.new(credentials: sso_credentials)
+  #
+  # If you omit `:client` option, a new {SSO::Client} object will be
+  # constructed.
   class SSOCredentials
 
     include CredentialProvider
     include RefreshingCredentials
 
+    # @api private
     SSO_REQUIRED_OPTS = [:sso_account_id, :sso_region, :sso_role_name, :sso_start_url].freeze
 
+    # @api private
     SSO_LOGIN_GUIDANCE = 'The SSO session associated with this profile has '\
     'expired or is otherwise invalid. To refresh this SSO session run '\
     'aws sso login with the corresponding profile.'.freeze
@@ -45,7 +61,7 @@ module Aws
     #   provided by the SSO service via the console and is the URL used to
     #   login to the SSO directory. This is also sometimes referred to as
     #   the "User Portal URL"
-
+    #
     # @option options [SSO::Client] :client Optional `SSO::Client`.  If not
     #   provided, a client will be constructed.
     def initialize(options = {})
@@ -69,7 +85,7 @@ module Aws
       super
     end
 
-    # @return [STS::Client]
+    # @return [SSO::Client]
     attr_reader :client
 
     private
