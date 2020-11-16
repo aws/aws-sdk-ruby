@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.628 (2020-11-16)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
