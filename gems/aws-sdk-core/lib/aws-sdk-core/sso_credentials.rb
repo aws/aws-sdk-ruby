@@ -81,7 +81,7 @@ module Aws
 
       options[:region] = @sso_region
       options[:credentials] = nil
-      @client = options[:client] || SSO::Client.new(options)
+      @client = options[:client] || Aws::SSO::Client.new(options)
       super
     end
 

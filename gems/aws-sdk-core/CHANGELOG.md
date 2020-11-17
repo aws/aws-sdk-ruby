@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Use full namespace for SSO Client when creating `SSOCredentials`
+
 3.109.2 (2020-11-04)
 ------------------
 
