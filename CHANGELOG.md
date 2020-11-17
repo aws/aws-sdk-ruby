@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.629 (2020-11-17)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
