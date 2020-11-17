@@ -159,6 +159,8 @@ module Aws::Macie2
     JobType = Shapes::StringShape.new(name: 'JobType')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     KeyValuePairList = Shapes::ListShape.new(name: 'KeyValuePairList')
+    LastRunErrorStatus = Shapes::StructureShape.new(name: 'LastRunErrorStatus')
+    LastRunErrorStatusCode = Shapes::StringShape.new(name: 'LastRunErrorStatusCode')
     ListClassificationJobsRequest = Shapes::StructureShape.new(name: 'ListClassificationJobsRequest')
     ListClassificationJobsResponse = Shapes::StructureShape.new(name: 'ListClassificationJobsResponse')
     ListCustomDataIdentifiersRequest = Shapes::StructureShape.new(name: 'ListCustomDataIdentifiersRequest')
@@ -612,6 +614,7 @@ module Aws::Macie2
     DescribeClassificationJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
     DescribeClassificationJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     DescribeClassificationJobResponse.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
+    DescribeClassificationJobResponse.add_member(:last_run_error_status, Shapes::ShapeRef.new(shape: LastRunErrorStatus, location_name: "lastRunErrorStatus"))
     DescribeClassificationJobResponse.add_member(:last_run_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastRunTime"))
     DescribeClassificationJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DescribeClassificationJobResponse.add_member(:s3_job_definition, Shapes::ShapeRef.new(shape: S3JobDefinition, location_name: "s3JobDefinition"))
@@ -888,6 +891,7 @@ module Aws::Macie2
     JobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
     JobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     JobSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
+    JobSummary.add_member(:last_run_error_status, Shapes::ShapeRef.new(shape: LastRunErrorStatus, location_name: "lastRunErrorStatus"))
     JobSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     JobSummary.add_member(:user_paused_details, Shapes::ShapeRef.new(shape: UserPausedDetails, location_name: "userPausedDetails"))
     JobSummary.struct_class = Types::JobSummary
@@ -897,6 +901,9 @@ module Aws::Macie2
     KeyValuePair.struct_class = Types::KeyValuePair
 
     KeyValuePairList.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
+    LastRunErrorStatus.add_member(:code, Shapes::ShapeRef.new(shape: LastRunErrorStatusCode, location_name: "code"))
+    LastRunErrorStatus.struct_class = Types::LastRunErrorStatus
 
     ListClassificationJobsRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: ListJobsFilterCriteria, location_name: "filterCriteria"))
     ListClassificationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))

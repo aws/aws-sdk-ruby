@@ -381,6 +381,7 @@ module Aws
             'MigrationHubConfig' => 'migrationhub-config',
             'Mobile' => 'mobile',
             'Neptune' => 'rds',
+            'NetworkFirewall' => 'network-firewall',
             'NetworkManager' => 'networkmanager',
             'OpsWorks' => 'opsworks',
             'OpsWorksCM' => 'opsworks-cm',

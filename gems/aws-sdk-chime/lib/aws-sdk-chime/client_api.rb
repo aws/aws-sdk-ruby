@@ -77,6 +77,8 @@ module Aws::Chime
     CreateAttendeeResponse = Shapes::StructureShape.new(name: 'CreateAttendeeResponse')
     CreateBotRequest = Shapes::StructureShape.new(name: 'CreateBotRequest')
     CreateBotResponse = Shapes::StructureShape.new(name: 'CreateBotResponse')
+    CreateMeetingDialOutRequest = Shapes::StructureShape.new(name: 'CreateMeetingDialOutRequest')
+    CreateMeetingDialOutResponse = Shapes::StructureShape.new(name: 'CreateMeetingDialOutResponse')
     CreateMeetingRequest = Shapes::StructureShape.new(name: 'CreateMeetingRequest')
     CreateMeetingResponse = Shapes::StructureShape.new(name: 'CreateMeetingResponse')
     CreateMeetingWithAttendeesRequest = Shapes::StructureShape.new(name: 'CreateMeetingWithAttendeesRequest')
@@ -90,6 +92,12 @@ module Aws::Chime
     CreateRoomMembershipResponse = Shapes::StructureShape.new(name: 'CreateRoomMembershipResponse')
     CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
     CreateRoomResponse = Shapes::StructureShape.new(name: 'CreateRoomResponse')
+    CreateSipMediaApplicationCallRequest = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationCallRequest')
+    CreateSipMediaApplicationCallResponse = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationCallResponse')
+    CreateSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationRequest')
+    CreateSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'CreateSipMediaApplicationResponse')
+    CreateSipRuleRequest = Shapes::StructureShape.new(name: 'CreateSipRuleRequest')
+    CreateSipRuleResponse = Shapes::StructureShape.new(name: 'CreateSipRuleResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     CreateVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorGroupRequest')
@@ -110,6 +118,8 @@ module Aws::Chime
     DeleteProxySessionRequest = Shapes::StructureShape.new(name: 'DeleteProxySessionRequest')
     DeleteRoomMembershipRequest = Shapes::StructureShape.new(name: 'DeleteRoomMembershipRequest')
     DeleteRoomRequest = Shapes::StructureShape.new(name: 'DeleteRoomRequest')
+    DeleteSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'DeleteSipMediaApplicationRequest')
+    DeleteSipRuleRequest = Shapes::StructureShape.new(name: 'DeleteSipRuleRequest')
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorEmergencyCallingConfigurationRequest')
     DeleteVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorGroupRequest')
     DeleteVoiceConnectorOriginationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorOriginationRequest')
@@ -136,6 +146,7 @@ module Aws::Chime
     ExternalMeetingIdType = Shapes::StringShape.new(name: 'ExternalMeetingIdType')
     ExternalUserIdType = Shapes::StringShape.new(name: 'ExternalUserIdType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GeoMatchLevel = Shapes::StringShape.new(name: 'GeoMatchLevel')
     GeoMatchParams = Shapes::StructureShape.new(name: 'GeoMatchParams')
     GetAccountRequest = Shapes::StructureShape.new(name: 'GetAccountRequest')
@@ -162,6 +173,12 @@ module Aws::Chime
     GetRetentionSettingsResponse = Shapes::StructureShape.new(name: 'GetRetentionSettingsResponse')
     GetRoomRequest = Shapes::StructureShape.new(name: 'GetRoomRequest')
     GetRoomResponse = Shapes::StructureShape.new(name: 'GetRoomResponse')
+    GetSipMediaApplicationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetSipMediaApplicationLoggingConfigurationRequest')
+    GetSipMediaApplicationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetSipMediaApplicationLoggingConfigurationResponse')
+    GetSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'GetSipMediaApplicationRequest')
+    GetSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'GetSipMediaApplicationResponse')
+    GetSipRuleRequest = Shapes::StructureShape.new(name: 'GetSipRuleRequest')
+    GetSipRuleResponse = Shapes::StructureShape.new(name: 'GetSipRuleResponse')
     GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
     GetUserResponse = Shapes::StructureShape.new(name: 'GetUserResponse')
     GetUserSettingsRequest = Shapes::StructureShape.new(name: 'GetUserSettingsRequest')
@@ -217,6 +234,10 @@ module Aws::Chime
     ListRoomMembershipsResponse = Shapes::StructureShape.new(name: 'ListRoomMembershipsResponse')
     ListRoomsRequest = Shapes::StructureShape.new(name: 'ListRoomsRequest')
     ListRoomsResponse = Shapes::StructureShape.new(name: 'ListRoomsResponse')
+    ListSipMediaApplicationsRequest = Shapes::StructureShape.new(name: 'ListSipMediaApplicationsRequest')
+    ListSipMediaApplicationsResponse = Shapes::StructureShape.new(name: 'ListSipMediaApplicationsResponse')
+    ListSipRulesRequest = Shapes::StructureShape.new(name: 'ListSipRulesRequest')
+    ListSipRulesResponse = Shapes::StructureShape.new(name: 'ListSipRulesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
@@ -289,6 +310,8 @@ module Aws::Chime
     PutEventsConfigurationResponse = Shapes::StructureShape.new(name: 'PutEventsConfigurationResponse')
     PutRetentionSettingsRequest = Shapes::StructureShape.new(name: 'PutRetentionSettingsRequest')
     PutRetentionSettingsResponse = Shapes::StructureShape.new(name: 'PutRetentionSettingsResponse')
+    PutSipMediaApplicationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutSipMediaApplicationLoggingConfigurationRequest')
+    PutSipMediaApplicationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutSipMediaApplicationLoggingConfigurationResponse')
     PutVoiceConnectorEmergencyCallingConfigurationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorEmergencyCallingConfigurationRequest')
     PutVoiceConnectorEmergencyCallingConfigurationResponse = Shapes::StructureShape.new(name: 'PutVoiceConnectorEmergencyCallingConfigurationResponse')
     PutVoiceConnectorLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorLoggingConfigurationRequest')
@@ -331,6 +354,20 @@ module Aws::Chime
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SigninDelegateGroup = Shapes::StructureShape.new(name: 'SigninDelegateGroup')
     SigninDelegateGroupList = Shapes::ListShape.new(name: 'SigninDelegateGroupList')
+    SipApplicationPriority = Shapes::IntegerShape.new(name: 'SipApplicationPriority')
+    SipMediaApplication = Shapes::StructureShape.new(name: 'SipMediaApplication')
+    SipMediaApplicationCall = Shapes::StructureShape.new(name: 'SipMediaApplicationCall')
+    SipMediaApplicationEndpoint = Shapes::StructureShape.new(name: 'SipMediaApplicationEndpoint')
+    SipMediaApplicationEndpointList = Shapes::ListShape.new(name: 'SipMediaApplicationEndpointList')
+    SipMediaApplicationList = Shapes::ListShape.new(name: 'SipMediaApplicationList')
+    SipMediaApplicationLoggingConfiguration = Shapes::StructureShape.new(name: 'SipMediaApplicationLoggingConfiguration')
+    SipMediaApplicationName = Shapes::StringShape.new(name: 'SipMediaApplicationName')
+    SipRule = Shapes::StructureShape.new(name: 'SipRule')
+    SipRuleList = Shapes::ListShape.new(name: 'SipRuleList')
+    SipRuleName = Shapes::StringShape.new(name: 'SipRuleName')
+    SipRuleTargetApplication = Shapes::StructureShape.new(name: 'SipRuleTargetApplication')
+    SipRuleTargetApplicationList = Shapes::ListShape.new(name: 'SipRuleTargetApplicationList')
+    SipRuleTriggerType = Shapes::StringShape.new(name: 'SipRuleTriggerType')
     StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
     StreamingNotificationTarget = Shapes::StructureShape.new(name: 'StreamingNotificationTarget')
     StreamingNotificationTargetList = Shapes::ListShape.new(name: 'StreamingNotificationTargetList')
@@ -373,6 +410,10 @@ module Aws::Chime
     UpdateRoomMembershipResponse = Shapes::StructureShape.new(name: 'UpdateRoomMembershipResponse')
     UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
     UpdateRoomResponse = Shapes::StructureShape.new(name: 'UpdateRoomResponse')
+    UpdateSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationRequest')
+    UpdateSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationResponse')
+    UpdateSipRuleRequest = Shapes::StructureShape.new(name: 'UpdateSipRuleRequest')
+    UpdateSipRuleResponse = Shapes::StructureShape.new(name: 'UpdateSipRuleResponse')
     UpdateUserRequest = Shapes::StructureShape.new(name: 'UpdateUserRequest')
     UpdateUserRequestItem = Shapes::StructureShape.new(name: 'UpdateUserRequestItem')
     UpdateUserRequestItemList = Shapes::ListShape.new(name: 'UpdateUserRequestItemList')
@@ -584,6 +625,15 @@ module Aws::Chime
     CreateBotResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
     CreateBotResponse.struct_class = Types::CreateBotResponse
 
+    CreateMeetingDialOutRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    CreateMeetingDialOutRequest.add_member(:from_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "FromPhoneNumber"))
+    CreateMeetingDialOutRequest.add_member(:to_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "ToPhoneNumber"))
+    CreateMeetingDialOutRequest.add_member(:join_token, Shapes::ShapeRef.new(shape: JoinTokenString, required: true, location_name: "JoinToken"))
+    CreateMeetingDialOutRequest.struct_class = Types::CreateMeetingDialOutRequest
+
+    CreateMeetingDialOutResponse.add_member(:transaction_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "TransactionId"))
+    CreateMeetingDialOutResponse.struct_class = Types::CreateMeetingDialOutResponse
+
     CreateMeetingRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateMeetingRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingIdType, location_name: "ExternalMeetingId"))
     CreateMeetingRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserIdType, location_name: "MeetingHostId"))
@@ -647,6 +697,32 @@ module Aws::Chime
 
     CreateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     CreateRoomResponse.struct_class = Types::CreateRoomResponse
+
+    CreateSipMediaApplicationCallRequest.add_member(:from_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "FromPhoneNumber"))
+    CreateSipMediaApplicationCallRequest.add_member(:to_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "ToPhoneNumber"))
+    CreateSipMediaApplicationCallRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    CreateSipMediaApplicationCallRequest.struct_class = Types::CreateSipMediaApplicationCallRequest
+
+    CreateSipMediaApplicationCallResponse.add_member(:sip_media_application_call, Shapes::ShapeRef.new(shape: SipMediaApplicationCall, location_name: "SipMediaApplicationCall"))
+    CreateSipMediaApplicationCallResponse.struct_class = Types::CreateSipMediaApplicationCallResponse
+
+    CreateSipMediaApplicationRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AwsRegion"))
+    CreateSipMediaApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
+    CreateSipMediaApplicationRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, required: true, location_name: "Endpoints"))
+    CreateSipMediaApplicationRequest.struct_class = Types::CreateSipMediaApplicationRequest
+
+    CreateSipMediaApplicationResponse.add_member(:sip_media_application, Shapes::ShapeRef.new(shape: SipMediaApplication, location_name: "SipMediaApplication"))
+    CreateSipMediaApplicationResponse.struct_class = Types::CreateSipMediaApplicationResponse
+
+    CreateSipRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipRuleName, required: true, location_name: "Name"))
+    CreateSipRuleRequest.add_member(:trigger_type, Shapes::ShapeRef.new(shape: SipRuleTriggerType, required: true, location_name: "TriggerType"))
+    CreateSipRuleRequest.add_member(:trigger_value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TriggerValue"))
+    CreateSipRuleRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
+    CreateSipRuleRequest.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, required: true, location_name: "TargetApplications"))
+    CreateSipRuleRequest.struct_class = Types::CreateSipRuleRequest
+
+    CreateSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
+    CreateSipRuleResponse.struct_class = Types::CreateSipRuleResponse
 
     CreateUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     CreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
@@ -716,6 +792,12 @@ module Aws::Chime
     DeleteRoomRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     DeleteRoomRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
     DeleteRoomRequest.struct_class = Types::DeleteRoomRequest
+
+    DeleteSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    DeleteSipMediaApplicationRequest.struct_class = Types::DeleteSipMediaApplicationRequest
+
+    DeleteSipRuleRequest.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipRuleId"))
+    DeleteSipRuleRequest.struct_class = Types::DeleteSipRuleRequest
 
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest.struct_class = Types::DeleteVoiceConnectorEmergencyCallingConfigurationRequest
@@ -865,6 +947,24 @@ module Aws::Chime
 
     GetRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     GetRoomResponse.struct_class = Types::GetRoomResponse
+
+    GetSipMediaApplicationLoggingConfigurationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    GetSipMediaApplicationLoggingConfigurationRequest.struct_class = Types::GetSipMediaApplicationLoggingConfigurationRequest
+
+    GetSipMediaApplicationLoggingConfigurationResponse.add_member(:sip_media_application_logging_configuration, Shapes::ShapeRef.new(shape: SipMediaApplicationLoggingConfiguration, location_name: "SipMediaApplicationLoggingConfiguration"))
+    GetSipMediaApplicationLoggingConfigurationResponse.struct_class = Types::GetSipMediaApplicationLoggingConfigurationResponse
+
+    GetSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    GetSipMediaApplicationRequest.struct_class = Types::GetSipMediaApplicationRequest
+
+    GetSipMediaApplicationResponse.add_member(:sip_media_application, Shapes::ShapeRef.new(shape: SipMediaApplication, location_name: "SipMediaApplication"))
+    GetSipMediaApplicationResponse.struct_class = Types::GetSipMediaApplicationResponse
+
+    GetSipRuleRequest.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipRuleId"))
+    GetSipRuleRequest.struct_class = Types::GetSipRuleRequest
+
+    GetSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
+    GetSipRuleResponse.struct_class = Types::GetSipRuleResponse
 
     GetUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     GetUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
@@ -1050,6 +1150,23 @@ module Aws::Chime
     ListRoomsResponse.add_member(:rooms, Shapes::ShapeRef.new(shape: RoomList, location_name: "Rooms"))
     ListRoomsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListRoomsResponse.struct_class = Types::ListRoomsResponse
+
+    ListSipMediaApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListSipMediaApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "next-token"))
+    ListSipMediaApplicationsRequest.struct_class = Types::ListSipMediaApplicationsRequest
+
+    ListSipMediaApplicationsResponse.add_member(:sip_media_applications, Shapes::ShapeRef.new(shape: SipMediaApplicationList, location_name: "SipMediaApplications"))
+    ListSipMediaApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListSipMediaApplicationsResponse.struct_class = Types::ListSipMediaApplicationsResponse
+
+    ListSipRulesRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "sip-media-application"))
+    ListSipRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListSipRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "next-token"))
+    ListSipRulesRequest.struct_class = Types::ListSipRulesRequest
+
+    ListSipRulesResponse.add_member(:sip_rules, Shapes::ShapeRef.new(shape: SipRuleList, location_name: "SipRules"))
+    ListSipRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListSipRulesResponse.struct_class = Types::ListSipRulesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "arn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1265,6 +1382,13 @@ module Aws::Chime
     PutRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "InitiateDeletionTimestamp"))
     PutRetentionSettingsResponse.struct_class = Types::PutRetentionSettingsResponse
 
+    PutSipMediaApplicationLoggingConfigurationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    PutSipMediaApplicationLoggingConfigurationRequest.add_member(:sip_media_application_logging_configuration, Shapes::ShapeRef.new(shape: SipMediaApplicationLoggingConfiguration, location_name: "SipMediaApplicationLoggingConfiguration"))
+    PutSipMediaApplicationLoggingConfigurationRequest.struct_class = Types::PutSipMediaApplicationLoggingConfigurationRequest
+
+    PutSipMediaApplicationLoggingConfigurationResponse.add_member(:sip_media_application_logging_configuration, Shapes::ShapeRef.new(shape: SipMediaApplicationLoggingConfiguration, location_name: "SipMediaApplicationLoggingConfiguration"))
+    PutSipMediaApplicationLoggingConfigurationResponse.struct_class = Types::PutSipMediaApplicationLoggingConfigurationResponse
+
     PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:emergency_calling_configuration, Shapes::ShapeRef.new(shape: EmergencyCallingConfiguration, required: true, location_name: "EmergencyCallingConfiguration"))
     PutVoiceConnectorEmergencyCallingConfigurationRequest.struct_class = Types::PutVoiceConnectorEmergencyCallingConfigurationRequest
@@ -1404,6 +1528,46 @@ module Aws::Chime
     SigninDelegateGroup.struct_class = Types::SigninDelegateGroup
 
     SigninDelegateGroupList.member = Shapes::ShapeRef.new(shape: SigninDelegateGroup)
+
+    SipMediaApplication.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipMediaApplicationId"))
+    SipMediaApplication.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
+    SipMediaApplication.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
+    SipMediaApplication.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, location_name: "Endpoints"))
+    SipMediaApplication.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    SipMediaApplication.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    SipMediaApplication.struct_class = Types::SipMediaApplication
+
+    SipMediaApplicationCall.add_member(:transaction_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "TransactionId"))
+    SipMediaApplicationCall.struct_class = Types::SipMediaApplicationCall
+
+    SipMediaApplicationEndpoint.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "LambdaArn"))
+    SipMediaApplicationEndpoint.struct_class = Types::SipMediaApplicationEndpoint
+
+    SipMediaApplicationEndpointList.member = Shapes::ShapeRef.new(shape: SipMediaApplicationEndpoint)
+
+    SipMediaApplicationList.member = Shapes::ShapeRef.new(shape: SipMediaApplication)
+
+    SipMediaApplicationLoggingConfiguration.add_member(:enable_sip_media_application_message_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableSipMediaApplicationMessageLogs"))
+    SipMediaApplicationLoggingConfiguration.struct_class = Types::SipMediaApplicationLoggingConfiguration
+
+    SipRule.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipRuleId"))
+    SipRule.add_member(:name, Shapes::ShapeRef.new(shape: SipRuleName, location_name: "Name"))
+    SipRule.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
+    SipRule.add_member(:trigger_type, Shapes::ShapeRef.new(shape: SipRuleTriggerType, location_name: "TriggerType"))
+    SipRule.add_member(:trigger_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TriggerValue"))
+    SipRule.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, location_name: "TargetApplications"))
+    SipRule.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    SipRule.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    SipRule.struct_class = Types::SipRule
+
+    SipRuleList.member = Shapes::ShapeRef.new(shape: SipRule)
+
+    SipRuleTargetApplication.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipMediaApplicationId"))
+    SipRuleTargetApplication.add_member(:priority, Shapes::ShapeRef.new(shape: SipApplicationPriority, location_name: "Priority"))
+    SipRuleTargetApplication.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
+    SipRuleTargetApplication.struct_class = Types::SipRuleTargetApplication
+
+    SipRuleTargetApplicationList.member = Shapes::ShapeRef.new(shape: SipRuleTargetApplication)
 
     StreamingConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, required: true, location_name: "DataRetentionInHours"))
     StreamingConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
@@ -1547,6 +1711,23 @@ module Aws::Chime
 
     UpdateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     UpdateRoomResponse.struct_class = Types::UpdateRoomResponse
+
+    UpdateSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    UpdateSipMediaApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
+    UpdateSipMediaApplicationRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, location_name: "Endpoints"))
+    UpdateSipMediaApplicationRequest.struct_class = Types::UpdateSipMediaApplicationRequest
+
+    UpdateSipMediaApplicationResponse.add_member(:sip_media_application, Shapes::ShapeRef.new(shape: SipMediaApplication, location_name: "SipMediaApplication"))
+    UpdateSipMediaApplicationResponse.struct_class = Types::UpdateSipMediaApplicationResponse
+
+    UpdateSipRuleRequest.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipRuleId"))
+    UpdateSipRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipRuleName, required: true, location_name: "Name"))
+    UpdateSipRuleRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
+    UpdateSipRuleRequest.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, location_name: "TargetApplications"))
+    UpdateSipRuleRequest.struct_class = Types::UpdateSipRuleRequest
+
+    UpdateSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
+    UpdateSipRuleResponse.struct_class = Types::UpdateSipRuleResponse
 
     UpdateUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
@@ -1894,6 +2075,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_meeting_dial_out, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMeetingDialOut"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/dial-outs"
+        o.input = Shapes::ShapeRef.new(shape: CreateMeetingDialOutRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMeetingDialOutResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:create_meeting_with_attendees, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMeetingWithAttendees"
         o.http_method = "POST"
@@ -1969,6 +2165,55 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSipMediaApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-media-applications"
+        o.input = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_sip_media_application_call, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSipMediaApplicationCall"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/calls"
+        o.input = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationCallRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationCallResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSipRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-rules"
+        o.input = Shapes::ShapeRef.new(shape: CreateSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSipRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -2136,6 +2381,38 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSipMediaApplication"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSipRule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2511,6 +2788,51 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSipMediaApplication"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSipMediaApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_sip_media_application_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSipMediaApplicationLoggingConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/logging-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetSipMediaApplicationLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSipMediaApplicationLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSipRule"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSipRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2912,6 +3234,34 @@ module Aws::Chime
         )
       end)
 
+      api.add_operation(:list_sip_media_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSipMediaApplications"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-media-applications"
+        o.input = Shapes::ShapeRef.new(shape: ListSipMediaApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSipMediaApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:list_sip_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSipRules"
+        o.http_method = "GET"
+        o.http_request_uri = "/sip-rules"
+        o.input = Shapes::ShapeRef.new(shape: ListSipRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSipRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -3043,6 +3393,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:put_sip_media_application_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSipMediaApplicationLoggingConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/logging-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutSipMediaApplicationLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutSipMediaApplicationLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -3466,6 +3831,39 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_sip_media_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSipMediaApplication"
+        o.http_method = "PUT"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_sip_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSipRule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSipRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSipRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

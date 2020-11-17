@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-11-17)
+------------------
+
+* Feature - Added Firewall Manager policy support for AWS Network Firewall resources.
+
 1.32.0 (2020-09-30)
 ------------------
 

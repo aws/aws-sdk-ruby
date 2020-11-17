@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-11-17)
+------------------
+
+* Feature - The Amazon Macie API now has a lastRunErrorStatus property to indicate if account- or bucket-level errors occurred during the run of a one-time classification job or the latest run of a recurring job.
+
 1.16.0 (2020-11-09)
 ------------------
 

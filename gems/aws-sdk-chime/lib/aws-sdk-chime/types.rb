@@ -328,8 +328,10 @@ module Aws::Chime
     # token except for the one authorized to represent the attendee.
     #
     # @!attribute [rw] external_user_id
-    #   The Amazon Chime SDK external user ID. Links the attendee to an
-    #   identity managed by a builder application.
+    #   The Amazon Chime SDK external user ID. An idempotency token. Links
+    #   the attendee to an identity managed by a builder application. If you
+    #   create an attendee with the same external user id, the service
+    #   returns the existing record.
     #   @return [String]
     #
     # @!attribute [rw] attendee_id
@@ -810,7 +812,8 @@ module Aws::Chime
     end
 
     # @!attribute [rw] account
-    #   The Amazon Chime account details.
+    #   The Amazon Chime account details. An AWS account can have multiple
+    #   Amazon Chime accounts.
     #   @return [Types::Account]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAccountResponse AWS API Documentation
@@ -826,8 +829,10 @@ module Aws::Chime
     # user IDs, error codes, and error messages.
     #
     # @!attribute [rw] external_user_id
-    #   The Amazon Chime SDK external user ID. Links the attendee to an
-    #   identity managed by a builder application.
+    #   The Amazon Chime SDK external user ID. An idempotency token. Links
+    #   the attendee to an identity managed by a builder application. If you
+    #   create an attendee with the same external user id, the service
+    #   returns the existing record.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -867,8 +872,10 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] external_user_id
-    #   The Amazon Chime SDK external user ID. Links the attendee to an
-    #   identity managed by a builder application.
+    #   The Amazon Chime SDK external user ID. An idempotency token. Links
+    #   the attendee to an identity managed by a builder application. If you
+    #   create an attendee with the same external user id, the service
+    #   returns the existing record.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -902,8 +909,10 @@ module Aws::Chime
     #       }
     #
     # @!attribute [rw] external_user_id
-    #   The Amazon Chime SDK external user ID. Links the attendee to an
-    #   identity managed by a builder application.
+    #   The Amazon Chime SDK external user ID. An idempotency token. Links
+    #   the attendee to an identity managed by a builder application. If you
+    #   create an attendee with the same external user id, the service
+    #   returns the existing record.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -970,6 +979,68 @@ module Aws::Chime
     #
     class CreateBotResponse < Struct.new(
       :bot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMeetingDialOutRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         from_phone_number: "E164PhoneNumber", # required
+    #         to_phone_number: "E164PhoneNumber", # required
+    #         join_token: "JoinTokenString", # required
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    #   Type: String
+    #
+    #   Pattern:
+    #   \[a-fA-F0-9\]\\\{8\\}(?:-\[a-fA-F0-9\]\\\{4\\})\\\{3\\}-\[a-fA-F0-9\]\\\{12\\}
+    #
+    #   Required: No
+    #   @return [String]
+    #
+    # @!attribute [rw] from_phone_number
+    #   Phone number used as the caller ID when the remote party receives a
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_phone_number
+    #   Phone number called when inviting someone to a meeting.
+    #   @return [String]
+    #
+    # @!attribute [rw] join_token
+    #   Token used by the Amazon Chime SDK attendee. Call the [
+    #   CreateAttendee API][1] to get a join token.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingDialOutRequest AWS API Documentation
+    #
+    class CreateMeetingDialOutRequest < Struct.new(
+      :meeting_id,
+      :from_phone_number,
+      :to_phone_number,
+      :join_token)
+      SENSITIVE = [:from_phone_number, :to_phone_number, :join_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transaction_id
+    #   Unique ID that tracks API calls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingDialOutResponse AWS API Documentation
+    #
+    class CreateMeetingDialOutResponse < Struct.new(
+      :transaction_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1375,6 +1446,174 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSipMediaApplicationCallRequest
+    #   data as a hash:
+    #
+    #       {
+    #         from_phone_number: "E164PhoneNumber",
+    #         to_phone_number: "E164PhoneNumber",
+    #         sip_media_application_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] from_phone_number
+    #   The phone number that a user calls from.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_phone_number
+    #   The phone number that the user dials in order to connect to a
+    #   meeting
+    #   @return [String]
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The ID of the SIP media application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplicationCallRequest AWS API Documentation
+    #
+    class CreateSipMediaApplicationCallRequest < Struct.new(
+      :from_phone_number,
+      :to_phone_number,
+      :sip_media_application_id)
+      SENSITIVE = [:from_phone_number, :to_phone_number]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application_call
+    #   The actual call.
+    #   @return [Types::SipMediaApplicationCall]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplicationCallResponse AWS API Documentation
+    #
+    class CreateSipMediaApplicationCallResponse < Struct.new(
+      :sip_media_application_call)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateSipMediaApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_region: "String", # required
+    #         name: "SipMediaApplicationName",
+    #         endpoints: [ # required
+    #           {
+    #             lambda_arn: "FunctionArn",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_region
+    #   AWS Region assigned to the SIP media application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The SIP media application name.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   List of endpoints (Lambda Amazon Resource Names) specified for the
+    #   SIP media application. Currently, only one endpoint is supported.
+    #   @return [Array<Types::SipMediaApplicationEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplicationRequest AWS API Documentation
+    #
+    class CreateSipMediaApplicationRequest < Struct.new(
+      :aws_region,
+      :name,
+      :endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application
+    #   The Sip media application details.
+    #   @return [Types::SipMediaApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplicationResponse AWS API Documentation
+    #
+    class CreateSipMediaApplicationResponse < Struct.new(
+      :sip_media_application)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateSipRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "SipRuleName", # required
+    #         trigger_type: "ToPhoneNumber", # required, accepts ToPhoneNumber, RequestUriHostname
+    #         trigger_value: "NonEmptyString", # required
+    #         disabled: false,
+    #         target_applications: [ # required
+    #           {
+    #             sip_media_application_id: "NonEmptyString",
+    #             priority: 1,
+    #             aws_region: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the SIP rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_type
+    #   The type of trigger whose value is assigned to the SIP rule in
+    #   `TriggerValue`. Allowed trigger values are `RequestUriHostname` and
+    #   `ToPhoneNumber`.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_value
+    #   If `TriggerType` is `RequestUriHostname` then the value can be the
+    #   outbound host name of an Amazon Chime Voice Connector. If
+    #   `TriggerType` is `ToPhoneNumber` then the value can be a
+    #   customer-owned phone number in E164 format. `SipRule` is triggered
+    #   if the SIP application requests a host name, or a If `TriggerType`
+    #   is `RequestUriHostname`, then the value can be the outbound hostname
+    #   of an Amazon Chime Voice Connector. If `TriggerType` is
+    #   `ToPhoneNumber`, then the value can be a customer-owned phone number
+    #   in E164 format. `SipRule` is triggered if the SIP application
+    #   requests a host name, or a `ToPhoneNumber` value matches the
+    #   incoming SIP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled
+    #   Enables or disables a rule. You must disable rules before you can
+    #   delete them.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_applications
+    #   List of SIP media applications with priority and AWS Region. Only
+    #   one SIP application per AWS Region can be used.
+    #   @return [Array<Types::SipRuleTargetApplication>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipRuleRequest AWS API Documentation
+    #
+    class CreateSipRuleRequest < Struct.new(
+      :name,
+      :trigger_type,
+      :trigger_value,
+      :disabled,
+      :target_applications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_rule
+    #   Returns the SIP rule information, including the rule ID, triggers,
+    #   and target applications.
+    #   @return [Types::SipRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipRuleResponse AWS API Documentation
+    #
+    class CreateSipRuleResponse < Struct.new(
+      :sip_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUserRequest
     #   data as a hash:
     #
@@ -1766,6 +2005,44 @@ module Aws::Chime
     class DeleteRoomRequest < Struct.new(
       :account_id,
       :room_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSipMediaApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The SIP media application ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteSipMediaApplicationRequest AWS API Documentation
+    #
+    class DeleteSipMediaApplicationRequest < Struct.new(
+      :sip_media_application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSipRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_rule_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] sip_rule_id
+    #   The SIP rule ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteSipRuleRequest AWS API Documentation
+    #
+    class DeleteSipRuleRequest < Struct.new(
+      :sip_rule_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2186,7 +2463,8 @@ module Aws::Chime
     end
 
     # @!attribute [rw] account
-    #   The Amazon Chime account details.
+    #   The Amazon Chime account details. An AWS account can have multiple
+    #   Amazon Chime accounts.
     #   @return [Types::Account]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAccountResponse AWS API Documentation
@@ -2573,6 +2851,99 @@ module Aws::Chime
     #
     class GetRoomResponse < Struct.new(
       :room)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSipMediaApplicationLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The ID of the SIP media application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipMediaApplicationLoggingConfigurationRequest AWS API Documentation
+    #
+    class GetSipMediaApplicationLoggingConfigurationRequest < Struct.new(
+      :sip_media_application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application_logging_configuration
+    #   The actual logging configuration.
+    #   @return [Types::SipMediaApplicationLoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipMediaApplicationLoggingConfigurationResponse AWS API Documentation
+    #
+    class GetSipMediaApplicationLoggingConfigurationResponse < Struct.new(
+      :sip_media_application_logging_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSipMediaApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The SIP media application ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipMediaApplicationRequest AWS API Documentation
+    #
+    class GetSipMediaApplicationRequest < Struct.new(
+      :sip_media_application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application
+    #   The SIP media application details.
+    #   @return [Types::SipMediaApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipMediaApplicationResponse AWS API Documentation
+    #
+    class GetSipMediaApplicationResponse < Struct.new(
+      :sip_media_application)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSipRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_rule_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] sip_rule_id
+    #   The SIP rule ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipRuleRequest AWS API Documentation
+    #
+    class GetSipRuleRequest < Struct.new(
+      :sip_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_rule
+    #   The SIP rule details.
+    #   @return [Types::SipRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipRuleResponse AWS API Documentation
+    #
+    class GetSipRuleResponse < Struct.new(
+      :sip_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3042,11 +3413,11 @@ module Aws::Chime
     end
 
     # @!attribute [rw] accounts
-    #   List of Amazon Chime accounts and account details.
+    #   The list of accounts.
     #   @return [Array<Types::Account>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results.
+    #   The account's user token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAccountsResponse AWS API Documentation
@@ -3313,7 +3684,7 @@ module Aws::Chime
     #       {
     #         status: "AcquireInProgress", # accepts AcquireInProgress, AcquireFailed, Unassigned, Assigned, ReleaseInProgress, DeleteInProgress, ReleaseFailed, DeleteFailed
     #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
-    #         filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId
+    #         filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId, SipRuleId
     #         filter_value: "String",
     #         max_results: 1,
     #         next_token: "String",
@@ -3530,6 +3901,98 @@ module Aws::Chime
     #
     class ListRoomsResponse < Struct.new(
       :rooms,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSipMediaApplicationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Defaults
+    #   to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSipMediaApplicationsRequest AWS API Documentation
+    #
+    class ListSipMediaApplicationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_applications
+    #   List of SIP media applications and application details.
+    #   @return [Array<Types::SipMediaApplication>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSipMediaApplicationsResponse AWS API Documentation
+    #
+    class ListSipMediaApplicationsResponse < Struct.new(
+      :sip_media_applications,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSipRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString",
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The SIP media application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Defaults
+    #   to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSipRulesRequest AWS API Documentation
+    #
+    class ListSipRulesRequest < Struct.new(
+      :sip_media_application_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_rules
+    #   List of SIP rules and rule details.
+    #   @return [Array<Types::SipRule>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSipRulesResponse AWS API Documentation
+    #
+    class ListSipRulesResponse < Struct.new(
+      :sip_rules,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4550,6 +5013,45 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutSipMediaApplicationLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString", # required
+    #         sip_media_application_logging_configuration: {
+    #           enable_sip_media_application_message_logs: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The ID of the specified SIP media application
+    #   @return [String]
+    #
+    # @!attribute [rw] sip_media_application_logging_configuration
+    #   The actual logging configuration.
+    #   @return [Types::SipMediaApplicationLoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutSipMediaApplicationLoggingConfigurationRequest AWS API Documentation
+    #
+    class PutSipMediaApplicationLoggingConfigurationRequest < Struct.new(
+      :sip_media_application_id,
+      :sip_media_application_logging_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application_logging_configuration
+    #   The actual logging configuration.
+    #   @return [Types::SipMediaApplicationLoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutSipMediaApplicationLoggingConfigurationResponse AWS API Documentation
+    #
+    class PutSipMediaApplicationLoggingConfigurationResponse < Struct.new(
+      :sip_media_application_logging_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutVoiceConnectorEmergencyCallingConfigurationRequest
     #   data as a hash:
     #
@@ -5301,6 +5803,198 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The SIP media application details, including name and endpoints. An
+    # AWS account can have multiple SIP media applications.
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The SIP media application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The AWS Region in which the SIP media application is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the SIP media application.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   List of endpoints for SIP media application. Currently, only one
+    #   endpoint per SIP media application is permitted.
+    #   @return [Array<Types::SipMediaApplicationEndpoint>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The SIP media application creation timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The SIP media application updated timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SipMediaApplication AWS API Documentation
+    #
+    class SipMediaApplication < Struct.new(
+      :sip_media_application_id,
+      :aws_region,
+      :name,
+      :endpoints,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `Call` instance for a SIP media application.
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID of a call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SipMediaApplicationCall AWS API Documentation
+    #
+    class SipMediaApplicationCall < Struct.new(
+      :transaction_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Endpoints to specify as part of a SIP media application.
+    #
+    # @note When making an API call, you may pass SipMediaApplicationEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_arn: "FunctionArn",
+    #       }
+    #
+    # @!attribute [rw] lambda_arn
+    #   Valid Amazon Resource Name (ARN) of the Lambda function of the same
+    #   AWS Region where the SIP media application is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SipMediaApplicationEndpoint AWS API Documentation
+    #
+    class SipMediaApplicationEndpoint < Struct.new(
+      :lambda_arn)
+      SENSITIVE = [:lambda_arn]
+      include Aws::Structure
+    end
+
+    # Logging configuration of the SIP media application.
+    #
+    # @note When making an API call, you may pass SipMediaApplicationLoggingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enable_sip_media_application_message_logs: false,
+    #       }
+    #
+    # @!attribute [rw] enable_sip_media_application_message_logs
+    #   Enables application message logs for the SIP media application.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SipMediaApplicationLoggingConfiguration AWS API Documentation
+    #
+    class SipMediaApplicationLoggingConfiguration < Struct.new(
+      :enable_sip_media_application_message_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The SIP rule details, including name, triggers, and target
+    # applications. An AWS account can have multiple SIP rules.
+    #
+    # @!attribute [rw] sip_rule_id
+    #   The SIP rule ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the SIP rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled
+    #   Indicates if the SIP rule is enabled or disabled. You must disable a
+    #   rule before you can delete it.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] trigger_type
+    #   The type of trigger whose value is assigned to the SIP rule in
+    #   `TriggerValue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_value
+    #   If `TriggerType` is `RequestUriHostname`, then the value can be the
+    #   outbound host name of the Amazon Chime Voice Connector. If
+    #   `TriggerType` is `ToPhoneNumber`, then the value can be a
+    #   customer-owned phone number in E164 format. `SipRule` is triggered
+    #   when a SIP rule requests host name or `ToPhoneNumber` matches in the
+    #   incoming SIP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_applications
+    #   List of SIP media applications with priority and AWS Region. You can
+    #   only use one SIP application per AWS Region and priority
+    #   combination.
+    #   @return [Array<Types::SipRuleTargetApplication>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The SIP rule created timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The SIP rule updated timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SipRule AWS API Documentation
+    #
+    class SipRule < Struct.new(
+      :sip_rule_id,
+      :name,
+      :disabled,
+      :trigger_type,
+      :trigger_value,
+      :target_applications,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Target SIP media application along with other details like priority
+    # and AWS Region to be specified in the SIP rule. Only one SIP rule per
+    # AWS Region can be provided.
+    #
+    # @note When making an API call, you may pass SipRuleTargetApplication
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString",
+    #         priority: 1,
+    #         aws_region: "String",
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The SIP media application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Priority of the SIP media application in the target list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aws_region
+    #   AWS Region of target application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SipRuleTargetApplication AWS API Documentation
+    #
+    class SipRuleTargetApplication < Struct.new(
+      :sip_media_application_id,
+      :priority,
+      :aws_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The streaming configuration associated with an Amazon Chime Voice
     # Connector. Specifies whether media streaming is enabled for sending to
     # Amazon Kinesis, and shows the retention period for the Amazon Kinesis
@@ -5748,7 +6442,8 @@ module Aws::Chime
     end
 
     # @!attribute [rw] account
-    #   The updated Amazon Chime account details.
+    #   The Amazon Chime account details. An AWS account can have multiple
+    #   Amazon Chime accounts.
     #   @return [Types::Account]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccountResponse AWS API Documentation
@@ -6096,6 +6791,108 @@ module Aws::Chime
     #
     class UpdateRoomResponse < Struct.new(
       :room)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSipMediaApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString", # required
+    #         name: "SipMediaApplicationName",
+    #         endpoints: [
+    #           {
+    #             lambda_arn: "FunctionArn",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The SIP media application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new name for the specified SIP media application.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   The new set of endpoints for the specified SIP media application.
+    #   @return [Array<Types::SipMediaApplicationEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationRequest AWS API Documentation
+    #
+    class UpdateSipMediaApplicationRequest < Struct.new(
+      :sip_media_application_id,
+      :name,
+      :endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application
+    #   The updated SIP media application details.
+    #   @return [Types::SipMediaApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationResponse AWS API Documentation
+    #
+    class UpdateSipMediaApplicationResponse < Struct.new(
+      :sip_media_application)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSipRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_rule_id: "NonEmptyString", # required
+    #         name: "SipRuleName", # required
+    #         disabled: false,
+    #         target_applications: [
+    #           {
+    #             sip_media_application_id: "NonEmptyString",
+    #             priority: 1,
+    #             aws_region: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] sip_rule_id
+    #   The SIP rule ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new name for the specified SIP rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled
+    #   The new value specified to indicate whether the rule is disabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_applications
+    #   The new value of the list of target applications.
+    #   @return [Array<Types::SipRuleTargetApplication>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipRuleRequest AWS API Documentation
+    #
+    class UpdateSipRuleRequest < Struct.new(
+      :sip_rule_id,
+      :name,
+      :disabled,
+      :target_applications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_rule
+    #   Updated SIP rule details.
+    #   @return [Types::SipRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipRuleResponse AWS API Documentation
+    #
+    class UpdateSipRuleResponse < Struct.new(
+      :sip_rule)
       SENSITIVE = []
       include Aws::Structure
     end

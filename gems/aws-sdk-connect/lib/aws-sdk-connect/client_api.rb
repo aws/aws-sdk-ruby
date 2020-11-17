@@ -47,6 +47,8 @@ module Aws::Connect
     CreateContactFlowResponse = Shapes::StructureShape.new(name: 'CreateContactFlowResponse')
     CreateRoutingProfileRequest = Shapes::StructureShape.new(name: 'CreateRoutingProfileRequest')
     CreateRoutingProfileResponse = Shapes::StructureShape.new(name: 'CreateRoutingProfileResponse')
+    CreateUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'CreateUserHierarchyGroupRequest')
+    CreateUserHierarchyGroupResponse = Shapes::StructureShape.new(name: 'CreateUserHierarchyGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
@@ -58,6 +60,7 @@ module Aws::Connect
     CurrentMetricResults = Shapes::ListShape.new(name: 'CurrentMetricResults')
     CurrentMetrics = Shapes::ListShape.new(name: 'CurrentMetrics')
     Delay = Shapes::IntegerShape.new(name: 'Delay')
+    DeleteUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DeleteUserHierarchyGroupRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DescribeContactFlowRequest = Shapes::StructureShape.new(name: 'DescribeContactFlowRequest')
     DescribeContactFlowResponse = Shapes::StructureShape.new(name: 'DescribeContactFlowResponse')
@@ -95,8 +98,10 @@ module Aws::Connect
     HierarchyLevel = Shapes::StructureShape.new(name: 'HierarchyLevel')
     HierarchyLevelId = Shapes::StringShape.new(name: 'HierarchyLevelId')
     HierarchyLevelName = Shapes::StringShape.new(name: 'HierarchyLevelName')
+    HierarchyLevelUpdate = Shapes::StructureShape.new(name: 'HierarchyLevelUpdate')
     HierarchyPath = Shapes::StructureShape.new(name: 'HierarchyPath')
     HierarchyStructure = Shapes::StructureShape.new(name: 'HierarchyStructure')
+    HierarchyStructureUpdate = Shapes::StructureShape.new(name: 'HierarchyStructureUpdate')
     HistoricalMetric = Shapes::StructureShape.new(name: 'HistoricalMetric')
     HistoricalMetricData = Shapes::StructureShape.new(name: 'HistoricalMetricData')
     HistoricalMetricDataCollections = Shapes::ListShape.new(name: 'HistoricalMetricDataCollections')
@@ -172,7 +177,9 @@ module Aws::Connect
     QueueType = Shapes::StringShape.new(name: 'QueueType')
     QueueTypes = Shapes::ListShape.new(name: 'QueueTypes')
     Queues = Shapes::ListShape.new(name: 'Queues')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResumeContactRecordingRequest = Shapes::StructureShape.new(name: 'ResumeContactRecordingRequest')
     ResumeContactRecordingResponse = Shapes::StructureShape.new(name: 'ResumeContactRecordingResponse')
     RoutingProfile = Shapes::StructureShape.new(name: 'RoutingProfile')
@@ -224,7 +231,9 @@ module Aws::Connect
     UpdateRoutingProfileDefaultOutboundQueueRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileDefaultOutboundQueueRequest')
     UpdateRoutingProfileNameRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileNameRequest')
     UpdateRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileQueuesRequest')
+    UpdateUserHierarchyGroupNameRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyGroupNameRequest')
     UpdateUserHierarchyRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyRequest')
+    UpdateUserHierarchyStructureRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyStructureRequest')
     UpdateUserIdentityInfoRequest = Shapes::StructureShape.new(name: 'UpdateUserIdentityInfoRequest')
     UpdateUserPhoneConfigRequest = Shapes::StructureShape.new(name: 'UpdateUserPhoneConfigRequest')
     UpdateUserRoutingProfileRequest = Shapes::StructureShape.new(name: 'UpdateUserRoutingProfileRequest')
@@ -305,6 +314,15 @@ module Aws::Connect
     CreateRoutingProfileResponse.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "RoutingProfileId"))
     CreateRoutingProfileResponse.struct_class = Types::CreateRoutingProfileResponse
 
+    CreateUserHierarchyGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, required: true, location_name: "Name"))
+    CreateUserHierarchyGroupRequest.add_member(:parent_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "ParentGroupId"))
+    CreateUserHierarchyGroupRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateUserHierarchyGroupRequest.struct_class = Types::CreateUserHierarchyGroupRequest
+
+    CreateUserHierarchyGroupResponse.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "HierarchyGroupId"))
+    CreateUserHierarchyGroupResponse.add_member(:hierarchy_group_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "HierarchyGroupArn"))
+    CreateUserHierarchyGroupResponse.struct_class = Types::CreateUserHierarchyGroupResponse
+
     CreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: AgentUsername, required: true, location_name: "Username"))
     CreateUserRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     CreateUserRequest.add_member(:identity_info, Shapes::ShapeRef.new(shape: UserIdentityInfo, location_name: "IdentityInfo"))
@@ -344,6 +362,10 @@ module Aws::Connect
     CurrentMetricResults.member = Shapes::ShapeRef.new(shape: CurrentMetricResult)
 
     CurrentMetrics.member = Shapes::ShapeRef.new(shape: CurrentMetric)
+
+    DeleteUserHierarchyGroupRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, required: true, location: "uri", location_name: "HierarchyGroupId"))
+    DeleteUserHierarchyGroupRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteUserHierarchyGroupRequest.struct_class = Types::DeleteUserHierarchyGroupRequest
 
     DeleteUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
@@ -463,6 +485,9 @@ module Aws::Connect
     HierarchyLevel.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyLevelName, location_name: "Name"))
     HierarchyLevel.struct_class = Types::HierarchyLevel
 
+    HierarchyLevelUpdate.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyLevelName, required: true, location_name: "Name"))
+    HierarchyLevelUpdate.struct_class = Types::HierarchyLevelUpdate
+
     HierarchyPath.add_member(:level_one, Shapes::ShapeRef.new(shape: HierarchyGroupSummary, location_name: "LevelOne"))
     HierarchyPath.add_member(:level_two, Shapes::ShapeRef.new(shape: HierarchyGroupSummary, location_name: "LevelTwo"))
     HierarchyPath.add_member(:level_three, Shapes::ShapeRef.new(shape: HierarchyGroupSummary, location_name: "LevelThree"))
@@ -476,6 +501,13 @@ module Aws::Connect
     HierarchyStructure.add_member(:level_four, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelFour"))
     HierarchyStructure.add_member(:level_five, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelFive"))
     HierarchyStructure.struct_class = Types::HierarchyStructure
+
+    HierarchyStructureUpdate.add_member(:level_one, Shapes::ShapeRef.new(shape: HierarchyLevelUpdate, location_name: "LevelOne"))
+    HierarchyStructureUpdate.add_member(:level_two, Shapes::ShapeRef.new(shape: HierarchyLevelUpdate, location_name: "LevelTwo"))
+    HierarchyStructureUpdate.add_member(:level_three, Shapes::ShapeRef.new(shape: HierarchyLevelUpdate, location_name: "LevelThree"))
+    HierarchyStructureUpdate.add_member(:level_four, Shapes::ShapeRef.new(shape: HierarchyLevelUpdate, location_name: "LevelFour"))
+    HierarchyStructureUpdate.add_member(:level_five, Shapes::ShapeRef.new(shape: HierarchyLevelUpdate, location_name: "LevelFive"))
+    HierarchyStructureUpdate.struct_class = Types::HierarchyStructureUpdate
 
     HistoricalMetric.add_member(:name, Shapes::ShapeRef.new(shape: HistoricalMetricName, location_name: "Name"))
     HistoricalMetric.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, location_name: "Threshold", metadata: {"box"=>true}))
@@ -673,6 +705,11 @@ module Aws::Connect
 
     Queues.member = Shapes::ShapeRef.new(shape: QueueId)
 
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ResourceInUseException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ResourceInUseException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceId"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -844,10 +881,19 @@ module Aws::Connect
     UpdateRoutingProfileQueuesRequest.add_member(:queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, required: true, location_name: "QueueConfigs"))
     UpdateRoutingProfileQueuesRequest.struct_class = Types::UpdateRoutingProfileQueuesRequest
 
+    UpdateUserHierarchyGroupNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, required: true, location_name: "Name"))
+    UpdateUserHierarchyGroupNameRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, required: true, location: "uri", location_name: "HierarchyGroupId"))
+    UpdateUserHierarchyGroupNameRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateUserHierarchyGroupNameRequest.struct_class = Types::UpdateUserHierarchyGroupNameRequest
+
     UpdateUserHierarchyRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "HierarchyGroupId"))
     UpdateUserHierarchyRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     UpdateUserHierarchyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateUserHierarchyRequest.struct_class = Types::UpdateUserHierarchyRequest
+
+    UpdateUserHierarchyStructureRequest.add_member(:hierarchy_structure, Shapes::ShapeRef.new(shape: HierarchyStructureUpdate, required: true, location_name: "HierarchyStructure"))
+    UpdateUserHierarchyStructureRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateUserHierarchyStructureRequest.struct_class = Types::UpdateUserHierarchyStructureRequest
 
     UpdateUserIdentityInfoRequest.add_member(:identity_info, Shapes::ShapeRef.new(shape: UserIdentityInfo, required: true, location_name: "IdentityInfo"))
     UpdateUserIdentityInfoRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
@@ -983,6 +1029,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_user_hierarchy_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUserHierarchyGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/user-hierarchy-groups/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateUserHierarchyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUserHierarchyGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:delete_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteUser"
         o.http_method = "DELETE"
@@ -992,6 +1053,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_user_hierarchy_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUserHierarchyGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUserHierarchyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
@@ -1555,6 +1630,34 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_user_hierarchy_group_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserHierarchyGroupName"
+        o.http_method = "POST"
+        o.http_request_uri = "/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}/name"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserHierarchyGroupNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_user_hierarchy_structure, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserHierarchyStructure"
+        o.http_method = "POST"
+        o.http_request_uri = "/user-hierarchy-structure/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserHierarchyStructureRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)

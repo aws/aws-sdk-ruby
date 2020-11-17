@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2020-11-17)
+------------------
+
+* Feature - Support copy-db-snapshot in the one region on cross clusters and local cluster for RDSonVmware. Add target-custom-availability-zone parameter to specify where a snapshot should be copied.
+
 1.105.0 (2020-11-05)
 ------------------
 

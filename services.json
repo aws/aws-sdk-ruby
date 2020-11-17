@@ -514,6 +514,9 @@
   "Neptune": {
     "models": "neptune/2014-10-31"
   },
+  "NetworkFirewall": {
+    "models": "network-firewall/2020-11-12"
+  },
   "NetworkManager": {
     "models": "networkmanager/2019-07-05"
   },

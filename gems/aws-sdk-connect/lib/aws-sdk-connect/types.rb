@@ -356,6 +356,56 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateUserHierarchyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "HierarchyGroupName", # required
+    #         parent_group_id: "HierarchyGroupId",
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the user hierarchy group. Must not be more than 100
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_group_id
+    #   The identifier for the parent hierarchy group. The user hierarchy is
+    #   created at level one if the parent group ID is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupRequest AWS API Documentation
+    #
+    class CreateUserHierarchyGroupRequest < Struct.new(
+      :name,
+      :parent_group_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_group_arn
+    #   The Amazon Resource Name (ARN) of the hierarchy group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupResponse AWS API Documentation
+    #
+    class CreateUserHierarchyGroupResponse < Struct.new(
+      :hierarchy_group_id,
+      :hierarchy_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUserRequest
     #   data as a hash:
     #
@@ -572,6 +622,31 @@ module Aws::Connect
     class CurrentMetricResult < Struct.new(
       :dimensions,
       :collections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUserHierarchyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hierarchy_group_id: "HierarchyGroupId", # required
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserHierarchyGroupRequest AWS API Documentation
+    #
+    class DeleteUserHierarchyGroupRequest < Struct.new(
+      :hierarchy_group_id,
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1534,6 +1609,28 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about the hierarchy level to update.
+    #
+    # @note When making an API call, you may pass HierarchyLevelUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         name: "HierarchyLevelName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the user hierarchy level. Must not be more than 50
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyLevelUpdate AWS API Documentation
+    #
+    class HierarchyLevelUpdate < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the levels of a hierarchy group.
     #
     # @!attribute [rw] level_one
@@ -1593,6 +1690,61 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyStructure AWS API Documentation
     #
     class HierarchyStructure < Struct.new(
+      :level_one,
+      :level_two,
+      :level_three,
+      :level_four,
+      :level_five)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the level hierarchy to update.
+    #
+    # @note When making an API call, you may pass HierarchyStructureUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         level_one: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_two: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_three: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_four: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_five: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] level_one
+    #   The update for level one.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_two
+    #   The update for level two.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_three
+    #   The update for level three.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_four
+    #   The update for level four.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_five
+    #   The update for level five.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyStructureUpdate AWS API Documentation
+    #
+    class HierarchyStructureUpdate < Struct.new(
       :level_one,
       :level_two,
       :level_three,
@@ -2537,6 +2689,29 @@ module Aws::Connect
       :arn,
       :name,
       :queue_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # That resource is already in use. Please try another.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier for the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :resource_type,
+      :resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3515,6 +3690,38 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateUserHierarchyGroupNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "HierarchyGroupName", # required
+    #         hierarchy_group_id: "HierarchyGroupId", # required
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the hierarchy group. Must not be more than 100
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyGroupNameRequest AWS API Documentation
+    #
+    class UpdateUserHierarchyGroupNameRequest < Struct.new(
+      :name,
+      :hierarchy_group_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateUserHierarchyRequest
     #   data as a hash:
     #
@@ -3541,6 +3748,47 @@ module Aws::Connect
     class UpdateUserHierarchyRequest < Struct.new(
       :hierarchy_group_id,
       :user_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateUserHierarchyStructureRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hierarchy_structure: { # required
+    #           level_one: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_two: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_three: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_four: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_five: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #         },
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] hierarchy_structure
+    #   The hierarchy levels to update.
+    #   @return [Types::HierarchyStructureUpdate]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyStructureRequest AWS API Documentation
+    #
+    class UpdateUserHierarchyStructureRequest < Struct.new(
+      :hierarchy_structure,
       :instance_id)
       SENSITIVE = []
       include Aws::Structure

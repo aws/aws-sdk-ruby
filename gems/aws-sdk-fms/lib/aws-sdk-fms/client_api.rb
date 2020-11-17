@@ -82,6 +82,14 @@ module Aws::FMS
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManagedServiceData = Shapes::StringShape.new(name: 'ManagedServiceData')
     MemberAccounts = Shapes::ListShape.new(name: 'MemberAccounts')
+    NetworkFirewallAction = Shapes::StringShape.new(name: 'NetworkFirewallAction')
+    NetworkFirewallActionList = Shapes::ListShape.new(name: 'NetworkFirewallActionList')
+    NetworkFirewallMissingExpectedRTViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingExpectedRTViolation')
+    NetworkFirewallMissingFirewallViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingFirewallViolation')
+    NetworkFirewallMissingSubnetViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingSubnetViolation')
+    NetworkFirewallPolicyDescription = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyDescription')
+    NetworkFirewallPolicyModifiedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyModifiedViolation')
+    NetworkFirewallResourceName = Shapes::StringShape.new(name: 'NetworkFirewallResourceName')
     PaginationMaxResults = Shapes::IntegerShape.new(name: 'PaginationMaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartialMatch = Shapes::StructureShape.new(name: 'PartialMatch')
@@ -133,6 +141,11 @@ module Aws::FMS
     SecurityGroupRuleDescription = Shapes::StructureShape.new(name: 'SecurityGroupRuleDescription')
     SecurityServicePolicyData = Shapes::StructureShape.new(name: 'SecurityServicePolicyData')
     SecurityServiceType = Shapes::StringShape.new(name: 'SecurityServiceType')
+    StatefulRuleGroup = Shapes::StructureShape.new(name: 'StatefulRuleGroup')
+    StatefulRuleGroupList = Shapes::ListShape.new(name: 'StatefulRuleGroupList')
+    StatelessRuleGroup = Shapes::StructureShape.new(name: 'StatelessRuleGroup')
+    StatelessRuleGroupList = Shapes::ListShape.new(name: 'StatelessRuleGroupList')
+    StatelessRuleGroupPriority = Shapes::IntegerShape.new(name: 'StatelessRuleGroupPriority')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -360,6 +373,39 @@ module Aws::FMS
 
     MemberAccounts.member = Shapes::ShapeRef.new(shape: AWSAccountId)
 
+    NetworkFirewallActionList.member = Shapes::ShapeRef.new(shape: NetworkFirewallAction)
+
+    NetworkFirewallMissingExpectedRTViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    NetworkFirewallMissingExpectedRTViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
+    NetworkFirewallMissingExpectedRTViolation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "AvailabilityZone"))
+    NetworkFirewallMissingExpectedRTViolation.add_member(:current_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentRouteTable"))
+    NetworkFirewallMissingExpectedRTViolation.add_member(:expected_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ExpectedRouteTable"))
+    NetworkFirewallMissingExpectedRTViolation.struct_class = Types::NetworkFirewallMissingExpectedRTViolation
+
+    NetworkFirewallMissingFirewallViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    NetworkFirewallMissingFirewallViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
+    NetworkFirewallMissingFirewallViolation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "AvailabilityZone"))
+    NetworkFirewallMissingFirewallViolation.add_member(:target_violation_reason, Shapes::ShapeRef.new(shape: TargetViolationReason, location_name: "TargetViolationReason"))
+    NetworkFirewallMissingFirewallViolation.struct_class = Types::NetworkFirewallMissingFirewallViolation
+
+    NetworkFirewallMissingSubnetViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    NetworkFirewallMissingSubnetViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
+    NetworkFirewallMissingSubnetViolation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "AvailabilityZone"))
+    NetworkFirewallMissingSubnetViolation.add_member(:target_violation_reason, Shapes::ShapeRef.new(shape: TargetViolationReason, location_name: "TargetViolationReason"))
+    NetworkFirewallMissingSubnetViolation.struct_class = Types::NetworkFirewallMissingSubnetViolation
+
+    NetworkFirewallPolicyDescription.add_member(:stateless_rule_groups, Shapes::ShapeRef.new(shape: StatelessRuleGroupList, location_name: "StatelessRuleGroups"))
+    NetworkFirewallPolicyDescription.add_member(:stateless_default_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatelessDefaultActions"))
+    NetworkFirewallPolicyDescription.add_member(:stateless_fragment_default_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatelessFragmentDefaultActions"))
+    NetworkFirewallPolicyDescription.add_member(:stateless_custom_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatelessCustomActions"))
+    NetworkFirewallPolicyDescription.add_member(:stateful_rule_groups, Shapes::ShapeRef.new(shape: StatefulRuleGroupList, location_name: "StatefulRuleGroups"))
+    NetworkFirewallPolicyDescription.struct_class = Types::NetworkFirewallPolicyDescription
+
+    NetworkFirewallPolicyModifiedViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    NetworkFirewallPolicyModifiedViolation.add_member(:current_policy_description, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyDescription, location_name: "CurrentPolicyDescription"))
+    NetworkFirewallPolicyModifiedViolation.add_member(:expected_policy_description, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyDescription, location_name: "ExpectedPolicyDescription"))
+    NetworkFirewallPolicyModifiedViolation.struct_class = Types::NetworkFirewallPolicyModifiedViolation
+
     PartialMatch.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceRule, location_name: "Reference"))
     PartialMatch.add_member(:target_violation_reasons, Shapes::ShapeRef.new(shape: TargetViolationReasons, location_name: "TargetViolationReasons"))
     PartialMatch.struct_class = Types::PartialMatch
@@ -478,6 +524,10 @@ module Aws::FMS
     ResourceViolation.add_member(:aws_vpc_security_group_violation, Shapes::ShapeRef.new(shape: AwsVPCSecurityGroupViolation, location_name: "AwsVPCSecurityGroupViolation"))
     ResourceViolation.add_member(:aws_ec2_network_interface_violation, Shapes::ShapeRef.new(shape: AwsEc2NetworkInterfaceViolation, location_name: "AwsEc2NetworkInterfaceViolation"))
     ResourceViolation.add_member(:aws_ec2_instance_violation, Shapes::ShapeRef.new(shape: AwsEc2InstanceViolation, location_name: "AwsEc2InstanceViolation"))
+    ResourceViolation.add_member(:network_firewall_missing_firewall_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingFirewallViolation, location_name: "NetworkFirewallMissingFirewallViolation"))
+    ResourceViolation.add_member(:network_firewall_missing_subnet_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingSubnetViolation, location_name: "NetworkFirewallMissingSubnetViolation"))
+    ResourceViolation.add_member(:network_firewall_missing_expected_rt_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingExpectedRTViolation, location_name: "NetworkFirewallMissingExpectedRTViolation"))
+    ResourceViolation.add_member(:network_firewall_policy_modified_violation, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyModifiedViolation, location_name: "NetworkFirewallPolicyModifiedViolation"))
     ResourceViolation.struct_class = Types::ResourceViolation
 
     ResourceViolations.member = Shapes::ShapeRef.new(shape: ResourceViolation)
@@ -501,6 +551,19 @@ module Aws::FMS
     SecurityServicePolicyData.add_member(:type, Shapes::ShapeRef.new(shape: SecurityServiceType, required: true, location_name: "Type"))
     SecurityServicePolicyData.add_member(:managed_service_data, Shapes::ShapeRef.new(shape: ManagedServiceData, location_name: "ManagedServiceData"))
     SecurityServicePolicyData.struct_class = Types::SecurityServicePolicyData
+
+    StatefulRuleGroup.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NetworkFirewallResourceName, location_name: "RuleGroupName"))
+    StatefulRuleGroup.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    StatefulRuleGroup.struct_class = Types::StatefulRuleGroup
+
+    StatefulRuleGroupList.member = Shapes::ShapeRef.new(shape: StatefulRuleGroup)
+
+    StatelessRuleGroup.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NetworkFirewallResourceName, location_name: "RuleGroupName"))
+    StatelessRuleGroup.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    StatelessRuleGroup.add_member(:priority, Shapes::ShapeRef.new(shape: StatelessRuleGroupPriority, location_name: "Priority"))
+    StatelessRuleGroup.struct_class = Types::StatelessRuleGroup
+
+    StatelessRuleGroupList.member = Shapes::ShapeRef.new(shape: StatelessRuleGroup)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -595,6 +658,8 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:delete_protocols_list, Seahorse::Model::Operation.new.tap do |o|

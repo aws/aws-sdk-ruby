@@ -357,6 +357,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Migration Hub                                     | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
 | AWS Migration Hub Config                              | Aws::MigrationHubConfig              | aws-sdk-migrationhubconfig              | 2019-06-30  |
 | AWS Mobile                                            | Aws::Mobile                          | aws-sdk-mobile                          | 2017-07-01  |
+| AWS Network Firewall                                  | Aws::NetworkFirewall                 | aws-sdk-networkfirewall                 | 2020-11-12  |
 | AWS Network Manager                                   | Aws::NetworkManager                  | aws-sdk-networkmanager                  | 2019-07-05  |
 | AWS OpsWorks                                          | Aws::OpsWorks                        | aws-sdk-opsworks                        | 2013-02-18  |
 | AWS OpsWorks CM                                       | Aws::OpsWorksCM                      | aws-sdk-opsworkscm                      | 2016-11-01  |

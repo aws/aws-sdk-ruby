@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.87.0 (2020-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-networkfirewall` gem.
+
 3.86.0 (2020-11-12)
 ------------------
 

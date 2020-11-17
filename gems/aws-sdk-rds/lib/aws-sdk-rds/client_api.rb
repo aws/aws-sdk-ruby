@@ -729,6 +729,7 @@ module Aws::RDS
     CopyDBSnapshotMessage.add_member(:copy_tags, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTags"))
     CopyDBSnapshotMessage.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: String, location_name: "PreSignedUrl"))
     CopyDBSnapshotMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, location_name: "OptionGroupName"))
+    CopyDBSnapshotMessage.add_member(:target_custom_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "TargetCustomAvailabilityZone"))
     CopyDBSnapshotMessage.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "DestinationRegion", metadata: {"documented"=>false}))
     CopyDBSnapshotMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CopyDBSnapshotMessage.struct_class = Types::CopyDBSnapshotMessage
@@ -3372,6 +3373,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneNotFoundFault)
       end)
 
       api.add_operation(:copy_option_group, Seahorse::Model::Operation.new.tap do |o|

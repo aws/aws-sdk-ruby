@@ -1280,6 +1280,7 @@ module Aws::RDS
     #         copy_tags: false,
     #         pre_signed_url: "String",
     #         option_group_name: "String",
+    #         target_custom_availability_zone: "String",
     #         source_region: "String",
     #       }
     #
@@ -1443,6 +1444,13 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options
     #   @return [String]
     #
+    # @!attribute [rw] target_custom_availability_zone
+    #   The external custom Availability Zone (CAZ) identifier for the
+    #   target CAZ.
+    #
+    #   Example: `rds-caz-aiqhTgQv`.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -1461,6 +1469,7 @@ module Aws::RDS
       :copy_tags,
       :pre_signed_url,
       :option_group_name,
+      :target_custom_availability_zone,
       :destination_region,
       :source_region)
       SENSITIVE = []

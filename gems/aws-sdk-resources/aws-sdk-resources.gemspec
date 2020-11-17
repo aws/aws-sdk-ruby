@@ -175,6 +175,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-migrationhubconfig', '~> 1')
   spec.add_dependency('aws-sdk-mobile', '~> 1')
   spec.add_dependency('aws-sdk-neptune', '~> 1')
+  spec.add_dependency('aws-sdk-networkfirewall', '~> 1')
   spec.add_dependency('aws-sdk-networkmanager', '~> 1')
   spec.add_dependency('aws-sdk-opsworks', '~> 1')
   spec.add_dependency('aws-sdk-opsworkscm', '~> 1')

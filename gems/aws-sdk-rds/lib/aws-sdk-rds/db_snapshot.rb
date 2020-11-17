@@ -407,6 +407,7 @@ module Aws::RDS
     #     copy_tags: false,
     #     pre_signed_url: "String",
     #     option_group_name: "String",
+    #     target_custom_availability_zone: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -525,6 +526,11 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options
+    # @option options [String] :target_custom_availability_zone
+    #   The external custom Availability Zone (CAZ) identifier for the target
+    #   CAZ.
+    #
+    #   Example: `rds-caz-aiqhTgQv`.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the

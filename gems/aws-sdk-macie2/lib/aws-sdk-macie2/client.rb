@@ -984,6 +984,7 @@ module Aws::Macie2
     #   * {Types::DescribeClassificationJobResponse#job_id #job_id} => String
     #   * {Types::DescribeClassificationJobResponse#job_status #job_status} => String
     #   * {Types::DescribeClassificationJobResponse#job_type #job_type} => String
+    #   * {Types::DescribeClassificationJobResponse#last_run_error_status #last_run_error_status} => Types::LastRunErrorStatus
     #   * {Types::DescribeClassificationJobResponse#last_run_time #last_run_time} => Time
     #   * {Types::DescribeClassificationJobResponse#name #name} => String
     #   * {Types::DescribeClassificationJobResponse#s3_job_definition #s3_job_definition} => Types::S3JobDefinition
@@ -1011,6 +1012,7 @@ module Aws::Macie2
     #   resp.job_id #=> String
     #   resp.job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
     #   resp.job_type #=> String, one of "ONE_TIME", "SCHEDULED"
+    #   resp.last_run_error_status.code #=> String, one of "NONE", "ERROR"
     #   resp.last_run_time #=> Time
     #   resp.name #=> String
     #   resp.s3_job_definition.bucket_definitions #=> Array
@@ -1918,6 +1920,7 @@ module Aws::Macie2
     #   resp.items[0].job_id #=> String
     #   resp.items[0].job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
     #   resp.items[0].job_type #=> String, one of "ONE_TIME", "SCHEDULED"
+    #   resp.items[0].last_run_error_status.code #=> String, one of "NONE", "ERROR"
     #   resp.items[0].name #=> String
     #   resp.items[0].user_paused_details.job_expires_at #=> Time
     #   resp.items[0].user_paused_details.job_imminent_expiration_health_event_arn #=> String
@@ -2537,7 +2540,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

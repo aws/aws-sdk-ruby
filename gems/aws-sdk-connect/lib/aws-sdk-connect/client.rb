@@ -604,6 +604,46 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a new user hierarchy group.
+    #
+    # @option params [required, String] :name
+    #   The name of the user hierarchy group. Must not be more than 100
+    #   characters.
+    #
+    # @option params [String] :parent_group_id
+    #   The identifier for the parent hierarchy group. The user hierarchy is
+    #   created at level one if the parent group ID is null.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @return [Types::CreateUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserHierarchyGroupResponse#hierarchy_group_id #hierarchy_group_id} => String
+    #   * {Types::CreateUserHierarchyGroupResponse#hierarchy_group_arn #hierarchy_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user_hierarchy_group({
+    #     name: "HierarchyGroupName", # required
+    #     parent_group_id: "HierarchyGroupId",
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hierarchy_group_id #=> String
+    #   resp.hierarchy_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroup AWS API Documentation
+    #
+    # @overload create_user_hierarchy_group(params = {})
+    # @param [Hash] params ({})
+    def create_user_hierarchy_group(params = {}, options = {})
+      req = build_request(:create_user_hierarchy_group, params)
+      req.send_request(options)
+    end
+
     # Deletes a user account from the specified Amazon Connect instance.
     #
     # For information about what happens to a user's data when their
@@ -635,6 +675,33 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_user(params = {}, options = {})
       req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing user hierarchy group. It must not be associated
+    # with any agents or have any active child groups.
+    #
+    # @option params [required, String] :hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_hierarchy_group({
+    #     hierarchy_group_id: "HierarchyGroupId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserHierarchyGroup AWS API Documentation
+    #
+    # @overload delete_user_hierarchy_group(params = {})
+    # @param [Hash] params ({})
+    def delete_user_hierarchy_group(params = {}, options = {})
+      req = build_request(:delete_user_hierarchy_group, params)
       req.send_request(options)
     end
 
@@ -2496,9 +2563,6 @@ module Aws::Connect
     # Contact attributes are available in Amazon Connect for 24 months, and
     # are then deleted.
     #
-    # This operation is also available in the Amazon Connect Flow language.
-    # See [UpdateContactAttributes][1].
-    #
     # **Important:** You cannot use the operation to update attributes for
     # contacts that occurred prior to the release of the API, September 12,
     # 2018. You can update attributes only for contacts that started after
@@ -2506,10 +2570,6 @@ module Aws::Connect
     # contact that occurred prior to the release of the API, a 400 error is
     # returned. This applies also to queued callbacks that were initiated
     # prior to the release of the API but are still active in your instance.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-actions-updatecontactattributes.html
     #
     # @option params [required, String] :initial_contact_id
     #   The identifier of the contact. This is the identifier of the contact
@@ -2591,6 +2651,13 @@ module Aws::Connect
     end
 
     # The name of the contact flow.
+    #
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -2797,6 +2864,79 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the name of the user hierarchy group.
+    #
+    # @option params [required, String] :name
+    #   The name of the hierarchy group. Must not be more than 100 characters.
+    #
+    # @option params [required, String] :hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_hierarchy_group_name({
+    #     name: "HierarchyGroupName", # required
+    #     hierarchy_group_id: "HierarchyGroupId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyGroupName AWS API Documentation
+    #
+    # @overload update_user_hierarchy_group_name(params = {})
+    # @param [Hash] params ({})
+    def update_user_hierarchy_group_name(params = {}, options = {})
+      req = build_request(:update_user_hierarchy_group_name, params)
+      req.send_request(options)
+    end
+
+    # Updates the user hierarchy structure: add, remove, and rename user
+    # hierarchy levels.
+    #
+    # @option params [required, Types::HierarchyStructureUpdate] :hierarchy_structure
+    #   The hierarchy levels to update.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_hierarchy_structure({
+    #     hierarchy_structure: { # required
+    #       level_one: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_two: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_three: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_four: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #       level_five: {
+    #         name: "HierarchyLevelName", # required
+    #       },
+    #     },
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyStructure AWS API Documentation
+    #
+    # @overload update_user_hierarchy_structure(params = {})
+    # @param [Hash] params ({})
+    def update_user_hierarchy_structure(params = {}, options = {})
+      req = build_request(:update_user_hierarchy_structure, params)
+      req.send_request(options)
+    end
+
     # Updates the identity information for the specified user.
     #
     # Someone with the ability to invoke `UpdateUserIndentityInfo` can
@@ -2952,7 +3092,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

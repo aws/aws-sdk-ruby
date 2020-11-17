@@ -1720,6 +1720,14 @@ module Aws::Macie2
     #   The schedule for running a classification job. Valid values are:
     #   @return [String]
     #
+    # @!attribute [rw] last_run_error_status
+    #   Specifies whether any account- or bucket-level access errors
+    #   occurred when a classification job ran. For example, the job is
+    #   configured to analyze data for a member account that was suspended,
+    #   or the job is configured to analyze an S3 bucket that Amazon Macie
+    #   isn't allowed to access.
+    #   @return [Types::LastRunErrorStatus]
+    #
     # @!attribute [rw] last_run_time
     #   @return [Time]
     #
@@ -1767,6 +1775,7 @@ module Aws::Macie2
       :job_id,
       :job_status,
       :job_type,
+      :last_run_error_status,
       :last_run_time,
       :name,
       :s3_job_definition,
@@ -3198,6 +3207,14 @@ module Aws::Macie2
     #   The schedule for running a classification job. Valid values are:
     #   @return [String]
     #
+    # @!attribute [rw] last_run_error_status
+    #   Specifies whether any account- or bucket-level access errors
+    #   occurred when a classification job ran. For example, the job is
+    #   configured to analyze data for a member account that was suspended,
+    #   or the job is configured to analyze an S3 bucket that Amazon Macie
+    #   isn't allowed to access.
+    #   @return [Types::LastRunErrorStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -3216,6 +3233,7 @@ module Aws::Macie2
       :job_id,
       :job_status,
       :job_type,
+      :last_run_error_status,
       :name,
       :user_paused_details)
       SENSITIVE = []
@@ -3237,6 +3255,26 @@ module Aws::Macie2
     class KeyValuePair < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether any account- or bucket-level access errors occurred
+    # when a classification job ran. For example, the job is configured to
+    # analyze data for a member account that was suspended, or the job is
+    # configured to analyze an S3 bucket that Amazon Macie isn't allowed to
+    # access.
+    #
+    # @!attribute [rw] code
+    #   Specifies whether any account- or bucket-level access errors
+    #   occurred during the run of a one-time classification job or the most
+    #   recent run of a recurring classification job. Possible values are:
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/LastRunErrorStatus AWS API Documentation
+    #
+    class LastRunErrorStatus < Struct.new(
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end

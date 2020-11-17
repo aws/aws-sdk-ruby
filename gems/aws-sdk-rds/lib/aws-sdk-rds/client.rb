@@ -1553,6 +1553,12 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options
     #
+    # @option params [String] :target_custom_availability_zone
+    #   The external custom Availability Zone (CAZ) identifier for the target
+    #   CAZ.
+    #
+    #   Example: `rds-caz-aiqhTgQv`.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1592,6 +1598,7 @@ module Aws::RDS
     #     copy_tags: false,
     #     pre_signed_url: "String",
     #     option_group_name: "String",
+    #     target_custom_availability_zone: "String",
     #     source_region: "String",
     #   })
     #
@@ -18775,7 +18782,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

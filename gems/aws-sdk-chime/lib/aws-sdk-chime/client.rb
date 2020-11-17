@@ -867,8 +867,10 @@ module Aws::Chime
     #   The Amazon Chime SDK meeting ID.
     #
     # @option params [required, String] :external_user_id
-    #   The Amazon Chime SDK external user ID. Links the attendee to an
-    #   identity managed by a builder application.
+    #   The Amazon Chime SDK external user ID. An idempotency token. Links the
+    #   attendee to an identity managed by a builder application. If you
+    #   create an attendee with the same external user id, the service returns
+    #   the existing record.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag key-value pairs.
@@ -1031,6 +1033,66 @@ module Aws::Chime
     # @param [Hash] params ({})
     def create_meeting(params = {}, options = {})
       req = build_request(:create_meeting, params)
+      req.send_request(options)
+    end
+
+    # Uses the join token and call metadata in a meeting request (From
+    # number, To number, and so forth) to initiate an outbound call to a
+    # public switched telephone network (PSTN) and joins them into Chime
+    # meeting. Also ensures that the From number belongs to the customer.
+    #
+    # To play welcome audio or implement an interactive voice response
+    # (IVR), use the `CreateSipMediaApplicationCall` API with the
+    # corresponding SIP media application ID.
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    #   Type: String
+    #
+    #   Pattern:
+    #   \[a-fA-F0-9\]\\\{8\\}(?:-\[a-fA-F0-9\]\\\{4\\})\\\{3\\}-\[a-fA-F0-9\]\\\{12\\}
+    #
+    #   Required: No
+    #
+    # @option params [required, String] :from_phone_number
+    #   Phone number used as the caller ID when the remote party receives a
+    #   call.
+    #
+    # @option params [required, String] :to_phone_number
+    #   Phone number called when inviting someone to a meeting.
+    #
+    # @option params [required, String] :join_token
+    #   Token used by the Amazon Chime SDK attendee. Call the [ CreateAttendee
+    #   API][1] to get a join token.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.html
+    #
+    # @return [Types::CreateMeetingDialOutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMeetingDialOutResponse#transaction_id #transaction_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_meeting_dial_out({
+    #     meeting_id: "GuidString", # required
+    #     from_phone_number: "E164PhoneNumber", # required
+    #     to_phone_number: "E164PhoneNumber", # required
+    #     join_token: "JoinTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transaction_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingDialOut AWS API Documentation
+    #
+    # @overload create_meeting_dial_out(params = {})
+    # @param [Hash] params ({})
+    def create_meeting_dial_out(params = {}, options = {})
+      req = build_request(:create_meeting_dial_out, params)
       req.send_request(options)
     end
 
@@ -1357,6 +1419,165 @@ module Aws::Chime
     # @param [Hash] params ({})
     def create_room_membership(params = {}, options = {})
       req = build_request(:create_room_membership, params)
+      req.send_request(options)
+    end
+
+    # Creates a SIP media application.
+    #
+    # @option params [required, String] :aws_region
+    #   AWS Region assigned to the SIP media application.
+    #
+    # @option params [String] :name
+    #   The SIP media application name.
+    #
+    # @option params [required, Array<Types::SipMediaApplicationEndpoint>] :endpoints
+    #   List of endpoints (Lambda Amazon Resource Names) specified for the SIP
+    #   media application. Currently, only one endpoint is supported.
+    #
+    # @return [Types::CreateSipMediaApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSipMediaApplicationResponse#sip_media_application #sip_media_application} => Types::SipMediaApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sip_media_application({
+    #     aws_region: "String", # required
+    #     name: "SipMediaApplicationName",
+    #     endpoints: [ # required
+    #       {
+    #         lambda_arn: "FunctionArn",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application.sip_media_application_id #=> String
+    #   resp.sip_media_application.aws_region #=> String
+    #   resp.sip_media_application.name #=> String
+    #   resp.sip_media_application.endpoints #=> Array
+    #   resp.sip_media_application.endpoints[0].lambda_arn #=> String
+    #   resp.sip_media_application.created_timestamp #=> Time
+    #   resp.sip_media_application.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplication AWS API Documentation
+    #
+    # @overload create_sip_media_application(params = {})
+    # @param [Hash] params ({})
+    def create_sip_media_application(params = {}, options = {})
+      req = build_request(:create_sip_media_application, params)
+      req.send_request(options)
+    end
+
+    # Creates an outbound call to a phone number from the phone number
+    # specified in the request, and it invokes the endpoint of the specified
+    # `sipMediaApplicationId`.
+    #
+    # @option params [String] :from_phone_number
+    #   The phone number that a user calls from.
+    #
+    # @option params [String] :to_phone_number
+    #   The phone number that the user dials in order to connect to a meeting
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The ID of the SIP media application.
+    #
+    # @return [Types::CreateSipMediaApplicationCallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSipMediaApplicationCallResponse#sip_media_application_call #sip_media_application_call} => Types::SipMediaApplicationCall
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sip_media_application_call({
+    #     from_phone_number: "E164PhoneNumber",
+    #     to_phone_number: "E164PhoneNumber",
+    #     sip_media_application_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application_call.transaction_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplicationCall AWS API Documentation
+    #
+    # @overload create_sip_media_application_call(params = {})
+    # @param [Hash] params ({})
+    def create_sip_media_application_call(params = {}, options = {})
+      req = build_request(:create_sip_media_application_call, params)
+      req.send_request(options)
+    end
+
+    # Creates a SIP rule which can be used to run a SIP media application as
+    # a target for a specific trigger type.
+    #
+    # @option params [required, String] :name
+    #   The name of the SIP rule.
+    #
+    # @option params [required, String] :trigger_type
+    #   The type of trigger whose value is assigned to the SIP rule in
+    #   `TriggerValue`. Allowed trigger values are `RequestUriHostname` and
+    #   `ToPhoneNumber`.
+    #
+    # @option params [required, String] :trigger_value
+    #   If `TriggerType` is `RequestUriHostname` then the value can be the
+    #   outbound host name of an Amazon Chime Voice Connector. If
+    #   `TriggerType` is `ToPhoneNumber` then the value can be a
+    #   customer-owned phone number in E164 format. `SipRule` is triggered if
+    #   the SIP application requests a host name, or a If `TriggerType` is
+    #   `RequestUriHostname`, then the value can be the outbound hostname of
+    #   an Amazon Chime Voice Connector. If `TriggerType` is `ToPhoneNumber`,
+    #   then the value can be a customer-owned phone number in E164 format.
+    #   `SipRule` is triggered if the SIP application requests a host name, or
+    #   a `ToPhoneNumber` value matches the incoming SIP request.
+    #
+    # @option params [Boolean] :disabled
+    #   Enables or disables a rule. You must disable rules before you can
+    #   delete them.
+    #
+    # @option params [required, Array<Types::SipRuleTargetApplication>] :target_applications
+    #   List of SIP media applications with priority and AWS Region. Only one
+    #   SIP application per AWS Region can be used.
+    #
+    # @return [Types::CreateSipRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSipRuleResponse#sip_rule #sip_rule} => Types::SipRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sip_rule({
+    #     name: "SipRuleName", # required
+    #     trigger_type: "ToPhoneNumber", # required, accepts ToPhoneNumber, RequestUriHostname
+    #     trigger_value: "NonEmptyString", # required
+    #     disabled: false,
+    #     target_applications: [ # required
+    #       {
+    #         sip_media_application_id: "NonEmptyString",
+    #         priority: 1,
+    #         aws_region: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_rule.sip_rule_id #=> String
+    #   resp.sip_rule.name #=> String
+    #   resp.sip_rule.disabled #=> Boolean
+    #   resp.sip_rule.trigger_type #=> String, one of "ToPhoneNumber", "RequestUriHostname"
+    #   resp.sip_rule.trigger_value #=> String
+    #   resp.sip_rule.target_applications #=> Array
+    #   resp.sip_rule.target_applications[0].sip_media_application_id #=> String
+    #   resp.sip_rule.target_applications[0].priority #=> Integer
+    #   resp.sip_rule.target_applications[0].aws_region #=> String
+    #   resp.sip_rule.created_timestamp #=> Time
+    #   resp.sip_rule.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipRule AWS API Documentation
+    #
+    # @overload create_sip_rule(params = {})
+    # @param [Hash] params ({})
+    def create_sip_rule(params = {}, options = {})
+      req = build_request(:create_sip_rule, params)
       req.send_request(options)
     end
 
@@ -1747,6 +1968,51 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_room_membership(params = {}, options = {})
       req = build_request(:delete_room_membership, params)
+      req.send_request(options)
+    end
+
+    # Deletes a SIP media application.
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The SIP media application ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sip_media_application({
+    #     sip_media_application_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteSipMediaApplication AWS API Documentation
+    #
+    # @overload delete_sip_media_application(params = {})
+    # @param [Hash] params ({})
+    def delete_sip_media_application(params = {}, options = {})
+      req = build_request(:delete_sip_media_application, params)
+      req.send_request(options)
+    end
+
+    # Deletes a SIP rule. You must disable a SIP rule before you can delete
+    # it.
+    #
+    # @option params [required, String] :sip_rule_id
+    #   The SIP rule ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sip_rule({
+    #     sip_rule_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteSipRule AWS API Documentation
+    #
+    # @overload delete_sip_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_sip_rule(params = {}, options = {})
+      req = build_request(:delete_sip_rule, params)
       req.send_request(options)
     end
 
@@ -2366,7 +2632,7 @@ module Aws::Chime
     #   resp.phone_number.capabilities.outbound_mms #=> Boolean
     #   resp.phone_number.associations #=> Array
     #   resp.phone_number.associations[0].value #=> String
-    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
+    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId", "SipRuleId"
     #   resp.phone_number.associations[0].associated_timestamp #=> Time
     #   resp.phone_number.calling_name #=> String
     #   resp.phone_number.calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
@@ -2564,6 +2830,109 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_room(params = {}, options = {})
       req = build_request(:get_room, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the information for a SIP media application, including name,
+    # AWS Region, and endpoints.
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The SIP media application ID.
+    #
+    # @return [Types::GetSipMediaApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSipMediaApplicationResponse#sip_media_application #sip_media_application} => Types::SipMediaApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sip_media_application({
+    #     sip_media_application_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application.sip_media_application_id #=> String
+    #   resp.sip_media_application.aws_region #=> String
+    #   resp.sip_media_application.name #=> String
+    #   resp.sip_media_application.endpoints #=> Array
+    #   resp.sip_media_application.endpoints[0].lambda_arn #=> String
+    #   resp.sip_media_application.created_timestamp #=> Time
+    #   resp.sip_media_application.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipMediaApplication AWS API Documentation
+    #
+    # @overload get_sip_media_application(params = {})
+    # @param [Hash] params ({})
+    def get_sip_media_application(params = {}, options = {})
+      req = build_request(:get_sip_media_application, params)
+      req.send_request(options)
+    end
+
+    # Returns the logging configuration for the specified SIP media
+    # application.
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The ID of the SIP media application.
+    #
+    # @return [Types::GetSipMediaApplicationLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSipMediaApplicationLoggingConfigurationResponse#sip_media_application_logging_configuration #sip_media_application_logging_configuration} => Types::SipMediaApplicationLoggingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sip_media_application_logging_configuration({
+    #     sip_media_application_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application_logging_configuration.enable_sip_media_application_message_logs #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipMediaApplicationLoggingConfiguration AWS API Documentation
+    #
+    # @overload get_sip_media_application_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_sip_media_application_logging_configuration(params = {}, options = {})
+      req = build_request(:get_sip_media_application_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a SIP rule, such as the rule ID, name,
+    # triggers, and target endpoints.
+    #
+    # @option params [required, String] :sip_rule_id
+    #   The SIP rule ID.
+    #
+    # @return [Types::GetSipRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSipRuleResponse#sip_rule #sip_rule} => Types::SipRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sip_rule({
+    #     sip_rule_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_rule.sip_rule_id #=> String
+    #   resp.sip_rule.name #=> String
+    #   resp.sip_rule.disabled #=> Boolean
+    #   resp.sip_rule.trigger_type #=> String, one of "ToPhoneNumber", "RequestUriHostname"
+    #   resp.sip_rule.trigger_value #=> String
+    #   resp.sip_rule.target_applications #=> Array
+    #   resp.sip_rule.target_applications[0].sip_media_application_id #=> String
+    #   resp.sip_rule.target_applications[0].priority #=> Integer
+    #   resp.sip_rule.target_applications[0].aws_region #=> String
+    #   resp.sip_rule.created_timestamp #=> Time
+    #   resp.sip_rule.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetSipRule AWS API Documentation
+    #
+    # @overload get_sip_rule(params = {})
+    # @param [Hash] params ({})
+    def get_sip_rule(params = {}, options = {})
+      req = build_request(:get_sip_rule, params)
       req.send_request(options)
     end
 
@@ -3346,7 +3715,7 @@ module Aws::Chime
     #   resp = client.list_phone_numbers({
     #     status: "AcquireInProgress", # accepts AcquireInProgress, AcquireFailed, Unassigned, Assigned, ReleaseInProgress, DeleteInProgress, ReleaseFailed, DeleteFailed
     #     product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
-    #     filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId
+    #     filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId, SipRuleId
     #     filter_value: "String",
     #     max_results: 1,
     #     next_token: "String",
@@ -3368,7 +3737,7 @@ module Aws::Chime
     #   resp.phone_numbers[0].capabilities.outbound_mms #=> Boolean
     #   resp.phone_numbers[0].associations #=> Array
     #   resp.phone_numbers[0].associations[0].value #=> String
-    #   resp.phone_numbers[0].associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
+    #   resp.phone_numbers[0].associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId", "SipRuleId"
     #   resp.phone_numbers[0].associations[0].associated_timestamp #=> Time
     #   resp.phone_numbers[0].calling_name #=> String
     #   resp.phone_numbers[0].calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
@@ -3552,6 +3921,99 @@ module Aws::Chime
     # @param [Hash] params ({})
     def list_rooms(params = {}, options = {})
       req = build_request(:list_rooms, params)
+      req.send_request(options)
+    end
+
+    # Lists the SIP media applications under the administrator's AWS
+    # account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Defaults to
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::ListSipMediaApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSipMediaApplicationsResponse#sip_media_applications #sip_media_applications} => Array&lt;Types::SipMediaApplication&gt;
+    #   * {Types::ListSipMediaApplicationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sip_media_applications({
+    #     max_results: 1,
+    #     next_token: "NextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_applications #=> Array
+    #   resp.sip_media_applications[0].sip_media_application_id #=> String
+    #   resp.sip_media_applications[0].aws_region #=> String
+    #   resp.sip_media_applications[0].name #=> String
+    #   resp.sip_media_applications[0].endpoints #=> Array
+    #   resp.sip_media_applications[0].endpoints[0].lambda_arn #=> String
+    #   resp.sip_media_applications[0].created_timestamp #=> Time
+    #   resp.sip_media_applications[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSipMediaApplications AWS API Documentation
+    #
+    # @overload list_sip_media_applications(params = {})
+    # @param [Hash] params ({})
+    def list_sip_media_applications(params = {}, options = {})
+      req = build_request(:list_sip_media_applications, params)
+      req.send_request(options)
+    end
+
+    # Lists the SIP rules under the administrator's AWS account.
+    #
+    # @option params [String] :sip_media_application_id
+    #   The SIP media application ID.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Defaults to
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::ListSipRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSipRulesResponse#sip_rules #sip_rules} => Array&lt;Types::SipRule&gt;
+    #   * {Types::ListSipRulesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sip_rules({
+    #     sip_media_application_id: "NonEmptyString",
+    #     max_results: 1,
+    #     next_token: "NextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_rules #=> Array
+    #   resp.sip_rules[0].sip_rule_id #=> String
+    #   resp.sip_rules[0].name #=> String
+    #   resp.sip_rules[0].disabled #=> Boolean
+    #   resp.sip_rules[0].trigger_type #=> String, one of "ToPhoneNumber", "RequestUriHostname"
+    #   resp.sip_rules[0].trigger_value #=> String
+    #   resp.sip_rules[0].target_applications #=> Array
+    #   resp.sip_rules[0].target_applications[0].sip_media_application_id #=> String
+    #   resp.sip_rules[0].target_applications[0].priority #=> Integer
+    #   resp.sip_rules[0].target_applications[0].aws_region #=> String
+    #   resp.sip_rules[0].created_timestamp #=> Time
+    #   resp.sip_rules[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSipRules AWS API Documentation
+    #
+    # @overload list_sip_rules(params = {})
+    # @param [Hash] params ({})
+    def list_sip_rules(params = {}, options = {})
+      req = build_request(:list_sip_rules, params)
       req.send_request(options)
     end
 
@@ -3893,6 +4355,41 @@ module Aws::Chime
     # @param [Hash] params ({})
     def put_retention_settings(params = {}, options = {})
       req = build_request(:put_retention_settings, params)
+      req.send_request(options)
+    end
+
+    # Updates the logging configuration for the specified SIP media
+    # application.
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The ID of the specified SIP media application
+    #
+    # @option params [Types::SipMediaApplicationLoggingConfiguration] :sip_media_application_logging_configuration
+    #   The actual logging configuration.
+    #
+    # @return [Types::PutSipMediaApplicationLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutSipMediaApplicationLoggingConfigurationResponse#sip_media_application_logging_configuration #sip_media_application_logging_configuration} => Types::SipMediaApplicationLoggingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_sip_media_application_logging_configuration({
+    #     sip_media_application_id: "NonEmptyString", # required
+    #     sip_media_application_logging_configuration: {
+    #       enable_sip_media_application_message_logs: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application_logging_configuration.enable_sip_media_application_message_logs #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutSipMediaApplicationLoggingConfiguration AWS API Documentation
+    #
+    # @overload put_sip_media_application_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_sip_media_application_logging_configuration(params = {}, options = {})
+      req = build_request(:put_sip_media_application_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -4394,7 +4891,7 @@ module Aws::Chime
     #   resp.phone_number.capabilities.outbound_mms #=> Boolean
     #   resp.phone_number.associations #=> Array
     #   resp.phone_number.associations[0].value #=> String
-    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
+    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId", "SipRuleId"
     #   resp.phone_number.associations[0].associated_timestamp #=> Time
     #   resp.phone_number.calling_name #=> String
     #   resp.phone_number.calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
@@ -4849,7 +5346,7 @@ module Aws::Chime
     #   resp.phone_number.capabilities.outbound_mms #=> Boolean
     #   resp.phone_number.associations #=> Array
     #   resp.phone_number.associations[0].value #=> String
-    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId"
+    #   resp.phone_number.associations[0].name #=> String, one of "AccountId", "UserId", "VoiceConnectorId", "VoiceConnectorGroupId", "SipRuleId"
     #   resp.phone_number.associations[0].associated_timestamp #=> Time
     #   resp.phone_number.calling_name #=> String
     #   resp.phone_number.calling_name_status #=> String, one of "Unassigned", "UpdateInProgress", "UpdateSucceeded", "UpdateFailed"
@@ -5038,6 +5535,108 @@ module Aws::Chime
     # @param [Hash] params ({})
     def update_room_membership(params = {}, options = {})
       req = build_request(:update_room_membership, params)
+      req.send_request(options)
+    end
+
+    # Updates the details for the specified SIP media application.
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The SIP media application ID.
+    #
+    # @option params [String] :name
+    #   The new name for the specified SIP media application.
+    #
+    # @option params [Array<Types::SipMediaApplicationEndpoint>] :endpoints
+    #   The new set of endpoints for the specified SIP media application.
+    #
+    # @return [Types::UpdateSipMediaApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSipMediaApplicationResponse#sip_media_application #sip_media_application} => Types::SipMediaApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sip_media_application({
+    #     sip_media_application_id: "NonEmptyString", # required
+    #     name: "SipMediaApplicationName",
+    #     endpoints: [
+    #       {
+    #         lambda_arn: "FunctionArn",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application.sip_media_application_id #=> String
+    #   resp.sip_media_application.aws_region #=> String
+    #   resp.sip_media_application.name #=> String
+    #   resp.sip_media_application.endpoints #=> Array
+    #   resp.sip_media_application.endpoints[0].lambda_arn #=> String
+    #   resp.sip_media_application.created_timestamp #=> Time
+    #   resp.sip_media_application.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplication AWS API Documentation
+    #
+    # @overload update_sip_media_application(params = {})
+    # @param [Hash] params ({})
+    def update_sip_media_application(params = {}, options = {})
+      req = build_request(:update_sip_media_application, params)
+      req.send_request(options)
+    end
+
+    # Updates the details for the specified SIP rule.
+    #
+    # @option params [required, String] :sip_rule_id
+    #   The SIP rule ID.
+    #
+    # @option params [required, String] :name
+    #   The new name for the specified SIP rule.
+    #
+    # @option params [Boolean] :disabled
+    #   The new value specified to indicate whether the rule is disabled.
+    #
+    # @option params [Array<Types::SipRuleTargetApplication>] :target_applications
+    #   The new value of the list of target applications.
+    #
+    # @return [Types::UpdateSipRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSipRuleResponse#sip_rule #sip_rule} => Types::SipRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sip_rule({
+    #     sip_rule_id: "NonEmptyString", # required
+    #     name: "SipRuleName", # required
+    #     disabled: false,
+    #     target_applications: [
+    #       {
+    #         sip_media_application_id: "NonEmptyString",
+    #         priority: 1,
+    #         aws_region: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_rule.sip_rule_id #=> String
+    #   resp.sip_rule.name #=> String
+    #   resp.sip_rule.disabled #=> Boolean
+    #   resp.sip_rule.trigger_type #=> String, one of "ToPhoneNumber", "RequestUriHostname"
+    #   resp.sip_rule.trigger_value #=> String
+    #   resp.sip_rule.target_applications #=> Array
+    #   resp.sip_rule.target_applications[0].sip_media_application_id #=> String
+    #   resp.sip_rule.target_applications[0].priority #=> Integer
+    #   resp.sip_rule.target_applications[0].aws_region #=> String
+    #   resp.sip_rule.created_timestamp #=> Time
+    #   resp.sip_rule.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipRule AWS API Documentation
+    #
+    # @overload update_sip_rule(params = {})
+    # @param [Hash] params ({})
+    def update_sip_rule(params = {}, options = {})
+      req = build_request(:update_sip_rule, params)
       req.send_request(options)
     end
 
@@ -5244,7 +5843,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

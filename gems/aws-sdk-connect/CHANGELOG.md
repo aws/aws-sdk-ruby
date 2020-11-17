@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-11-17)
+------------------
+
+* Feature - This release adds support for user hierarchy group and user hierarchy structure. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
 1.34.0 (2020-09-30)
 ------------------
 

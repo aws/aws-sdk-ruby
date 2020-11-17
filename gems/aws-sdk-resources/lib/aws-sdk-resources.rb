@@ -165,6 +165,7 @@ module Aws
   autoload :MigrationHubConfig, 'aws-sdk-migrationhubconfig'
   autoload :Mobile, 'aws-sdk-mobile'
   autoload :Neptune, 'aws-sdk-neptune'
+  autoload :NetworkFirewall, 'aws-sdk-networkfirewall'
   autoload :NetworkManager, 'aws-sdk-networkmanager'
   autoload :OpsWorks, 'aws-sdk-opsworks'
   autoload :OpsWorksCM, 'aws-sdk-opsworkscm'

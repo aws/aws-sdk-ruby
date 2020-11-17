@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.394.0 (2020-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NetworkFirewall`.
+
 1.393.0 (2020-11-13)
 ------------------
 
