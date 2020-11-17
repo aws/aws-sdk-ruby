@@ -183,6 +183,7 @@ module Aws
     MigrationHubConfig
     Mobile
     Neptune
+    NetworkFirewall
     NetworkManager
     OpsWorks
     OpsWorksCM

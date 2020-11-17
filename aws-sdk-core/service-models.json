@@ -638,6 +638,10 @@
     "models": "neptune/2014-10-31",
     "endpoint": "rds"
   },
+  "NetworkFirewall": {
+    "models": "network-firewall/2020-11-12",
+    "endpoint": "network-firewall"
+  },
   "NetworkManager": {
     "models": "networkmanager/2019-07-05",
     "endpoint": "networkmanager"

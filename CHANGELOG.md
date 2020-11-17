@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
+* Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::NetworkFirewall - Added support for a new service, AWS Network Firewall.
+
+* Feature - Aws::NetworkFirewall - Added support for the new 2020-11-12 API version of AWS Network Firewall.
+
 2.11.628 (2020-11-16)
 ------------------
 

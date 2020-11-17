@@ -330,6 +330,7 @@ to be backwards compatible.
 | AWS Migration Hub                                     | MigrationHub                    | 2017-05-31  |
 | AWS Migration Hub Config                              | MigrationHubConfig              | 2019-06-30  |
 | AWS Mobile                                            | Mobile                          | 2017-07-01  |
+| AWS Network Firewall                                  | NetworkFirewall                 | 2020-11-12  |
 | AWS Network Manager                                   | NetworkManager                  | 2019-07-05  |
 | AWS OpsWorks                                          | OpsWorks                        | 2013-02-18  |
 | AWS OpsWorks CM                                       | OpsWorksCM                      | 2016-11-01  |
