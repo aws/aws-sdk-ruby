@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.630 (2020-11-18)
+------------------
+
 * Feature - Aws::Backup - Updated the API, and documentation for AWS Backup.
 
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
