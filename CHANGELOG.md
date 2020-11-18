@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Backup - Updated the API, and documentation for AWS Backup.
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElastiCache - Updated the documentation for Amazon ElastiCache.
+
+* Feature - Aws::Outposts - Updated the API for AWS Outposts.
+
+* Feature - Aws::S3Control - Updated the API, and documentation for AWS S3 Control.
+
 2.11.629 (2020-11-17)
 ------------------
 
