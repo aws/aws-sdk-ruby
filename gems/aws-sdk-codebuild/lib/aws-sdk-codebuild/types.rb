@@ -3911,21 +3911,28 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] modes
-    #   If you use a `LOCAL` cache, the local cache mode. You can use one or
-    #   more local cache modes at the same time.
+    #   An array of strings that specify the local cache modes. You can use
+    #   one or more local cache modes at the same time. This is only used
+    #   for `LOCAL` cache types.
     #
-    #   * `LOCAL_SOURCE_CACHE` mode caches Git metadata for primary and
-    #     secondary sources. After the cache is created, subsequent builds
-    #     pull only the change between commits. This mode is a good choice
-    #     for projects with a clean working directory and a source that is a
-    #     large Git repository. If you choose this option and your project
-    #     does not use a Git repository (GitHub, GitHub Enterprise, or
-    #     Bitbucket), the option is ignored.
+    #   Possible values are:
     #
-    #   * `LOCAL_DOCKER_LAYER_CACHE` mode caches existing Docker layers.
-    #     This mode is a good choice for projects that build or pull large
-    #     Docker images. It can prevent the performance issues caused by
-    #     pulling large Docker images down from the network.
+    #   LOCAL\_SOURCE\_CACHE
+    #
+    #   : Caches Git metadata for primary and secondary sources. After the
+    #     cache is created, subsequent builds pull only the change between
+    #     commits. This mode is a good choice for projects with a clean
+    #     working directory and a source that is a large Git repository. If
+    #     you choose this option and your project does not use a Git
+    #     repository (GitHub, GitHub Enterprise, or Bitbucket), the option
+    #     is ignored.
+    #
+    #   LOCAL\_DOCKER\_LAYER\_CACHE
+    #
+    #   : Caches existing Docker layers. This mode is a good choice for
+    #     projects that build or pull large Docker images. It can prevent
+    #     the performance issues caused by pulling large Docker images down
+    #     from the network.
     #
     #     <note markdown="1"> * You can use a Docker layer cache in the Linux environment only.
     #
@@ -3936,12 +3943,12 @@ module Aws::CodeBuild
     #       Docker layer cache.
     #
     #      </note>
-    #   ^
     #
-    #   * `LOCAL_CUSTOM_CACHE` mode caches directories you specify in the
-    #     buildspec file. This mode is a good choice if your build scenario
-    #     is not suited to one of the other three local cache modes. If you
-    #     use a custom cache:
+    #   LOCAL\_CUSTOM\_CACHE
+    #
+    #   : Caches directories you specify in the buildspec file. This mode is
+    #     a good choice if your build scenario is not suited to one of the
+    #     other three local cache modes. If you use a custom cache:
     #
     #     * Only directories can be specified for caching. You cannot
     #       specify individual files.
@@ -4017,9 +4024,7 @@ module Aws::CodeBuild
     #
     #   * For an image tag: `<registry>/<repository>:<tag>`. For example, in
     #     the Docker repository that CodeBuild uses to manage its Docker
-    #     images, this would be `aws/codebuild/standard:4.0`. To specify the
-    #     latest version of this image, this would be
-    #     `aws/codebuild/standard:latest`.
+    #     images, this would be `aws/codebuild/standard:4.0`.
     #
     #   * For an image digest: `<registry>/<repository>@<digest>`. For
     #     example, to specify an image with the digest
@@ -4097,7 +4102,14 @@ module Aws::CodeBuild
     #   @return [Boolean]
     #
     # @!attribute [rw] certificate
-    #   The certificate to use with this build project.
+    #   The ARN of the Amazon Simple Storage Service (Amazon S3) bucket,
+    #   path prefix, and object key that contains the PEM-encoded
+    #   certificate for the build project. For more information, see
+    #   [certificate][1] in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate
     #   @return [String]
     #
     # @!attribute [rw] registry_credential
@@ -4181,8 +4193,8 @@ module Aws::CodeBuild
     #   The name used to access a file system created by Amazon EFS.
     #   CodeBuild creates an environment variable by appending the
     #   `identifier` in all capital letters to `CODEBUILD_`. For example, if
-    #   you specify `my-efs` for `identifier`, a new environment variable is
-    #   create named `CODEBUILD_MY-EFS`.
+    #   you specify `my_efs` for `identifier`, a new environment variable is
+    #   create named `CODEBUILD_MY_EFS`.
     #
     #   The `identifier` is used to mount your file system.
     #   @return [String]
@@ -4724,6 +4736,9 @@ module Aws::CodeBuild
     #   CodeBuild report group tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportGroup AWS API Documentation
     #
     class ReportGroup < Struct.new(
@@ -4733,7 +4748,8 @@ module Aws::CodeBuild
       :export_config,
       :created,
       :last_modified,
-      :tags)
+      :tags,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

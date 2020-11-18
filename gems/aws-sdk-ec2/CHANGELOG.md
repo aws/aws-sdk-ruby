@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.210.0 (2020-11-18)
+------------------
+
+* Feature - EC2 Fleet adds support of DeleteFleets API for instant type fleets. Now you can delete an instant type fleet and terminate all associated instances with a single API call.
+
 1.209.0 (2020-11-10)
 ------------------
 

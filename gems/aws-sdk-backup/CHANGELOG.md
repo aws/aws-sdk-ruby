@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-11-18)
+------------------
+
+* Feature - AWS Backup now supports cross-account backup, enabling AWS customers to securely copy their backups across their AWS accounts within their AWS organizations.
+
 1.24.0 (2020-10-19)
 ------------------
 

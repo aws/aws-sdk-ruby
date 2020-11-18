@@ -10827,8 +10827,15 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
-    #   Indicates whether to terminate instances for an EC2 Fleet if it is
-    #   deleted successfully.
+    #   Indicates whether to terminate the instances when the EC2 Fleet is
+    #   deleted. The default is to terminate the instances.
+    #
+    #   To let the instances continue to run after the EC2 Fleet is deleted,
+    #   specify `NoTerminateInstances`. Supported only for fleets of type
+    #   `maintain` and `request`.
+    #
+    #   For `instant` fleets, you cannot specify `NoTerminateInstances`. A
+    #   deleted `instant` fleet with running instances is not supported.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetsRequest AWS API Documentation
@@ -26881,8 +26888,8 @@ module Aws::EC2
     #
     #   <note markdown="1"> When a replacement instance is launched, the instance marked for
     #   rebalance is not automatically terminated. You can terminate it, or
-    #   you can wait until Amazon EC2 interrupts it. You are charged for
-    #   both instances while they are running.
+    #   you can leave it running. You are charged for both instances while
+    #   they are running.
     #
     #    </note>
     #   @return [String]
@@ -26922,8 +26929,8 @@ module Aws::EC2
     #
     #   <note markdown="1"> When a replacement instance is launched, the instance marked for
     #   rebalance is not automatically terminated. You can terminate it, or
-    #   you can wait until Amazon EC2 interrupts it. You are charged for all
-    #   instances while they are running.
+    #   you can leave it running. You are charged for all instances while
+    #   they are running.
     #
     #    </note>
     #   @return [String]
@@ -47273,8 +47280,8 @@ module Aws::EC2
     #
     #   <note markdown="1"> When a replacement instance is launched, the instance marked for
     #   rebalance is not automatically terminated. You can terminate it, or
-    #   you can wait until Amazon EC2 interrupts it. You are charged for all
-    #   instances while they are running.
+    #   you can leave it running. You are charged for all instances while
+    #   they are running.
     #
     #    </note>
     #   @return [String]

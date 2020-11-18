@@ -78,6 +78,8 @@ module Aws::Backup
     DescribeBackupVaultOutput = Shapes::StructureShape.new(name: 'DescribeBackupVaultOutput')
     DescribeCopyJobInput = Shapes::StructureShape.new(name: 'DescribeCopyJobInput')
     DescribeCopyJobOutput = Shapes::StructureShape.new(name: 'DescribeCopyJobOutput')
+    DescribeGlobalSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalSettingsInput')
+    DescribeGlobalSettingsOutput = Shapes::StructureShape.new(name: 'DescribeGlobalSettingsOutput')
     DescribeProtectedResourceInput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceInput')
     DescribeProtectedResourceOutput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceOutput')
     DescribeRecoveryPointInput = Shapes::StructureShape.new(name: 'DescribeRecoveryPointInput')
@@ -103,6 +105,9 @@ module Aws::Backup
     GetRecoveryPointRestoreMetadataInput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataInput')
     GetRecoveryPointRestoreMetadataOutput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataOutput')
     GetSupportedResourceTypesOutput = Shapes::StructureShape.new(name: 'GetSupportedResourceTypesOutput')
+    GlobalSettings = Shapes::MapShape.new(name: 'GlobalSettings')
+    GlobalSettingsName = Shapes::StringShape.new(name: 'GlobalSettingsName')
+    GlobalSettingsValue = Shapes::StringShape.new(name: 'GlobalSettingsValue')
     IAMPolicy = Shapes::StringShape.new(name: 'IAMPolicy')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
@@ -177,6 +182,7 @@ module Aws::Backup
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateBackupPlanInput = Shapes::StructureShape.new(name: 'UpdateBackupPlanInput')
     UpdateBackupPlanOutput = Shapes::StructureShape.new(name: 'UpdateBackupPlanOutput')
+    UpdateGlobalSettingsInput = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsInput')
     UpdateRecoveryPointLifecycleInput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleInput')
     UpdateRecoveryPointLifecycleOutput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleOutput')
     UpdateRegionSettingsInput = Shapes::StructureShape.new(name: 'UpdateRegionSettingsInput')
@@ -452,6 +458,12 @@ module Aws::Backup
     DescribeCopyJobOutput.add_member(:copy_job, Shapes::ShapeRef.new(shape: CopyJob, location_name: "CopyJob"))
     DescribeCopyJobOutput.struct_class = Types::DescribeCopyJobOutput
 
+    DescribeGlobalSettingsInput.struct_class = Types::DescribeGlobalSettingsInput
+
+    DescribeGlobalSettingsOutput.add_member(:global_settings, Shapes::ShapeRef.new(shape: GlobalSettings, location_name: "GlobalSettings"))
+    DescribeGlobalSettingsOutput.add_member(:last_update_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdateTime"))
+    DescribeGlobalSettingsOutput.struct_class = Types::DescribeGlobalSettingsOutput
+
     DescribeProtectedResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     DescribeProtectedResourceInput.struct_class = Types::DescribeProtectedResourceInput
 
@@ -467,6 +479,7 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     DescribeRecoveryPointOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     DescribeRecoveryPointOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    DescribeRecoveryPointOutput.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
     DescribeRecoveryPointOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     DescribeRecoveryPointOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     DescribeRecoveryPointOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
@@ -578,6 +591,9 @@ module Aws::Backup
 
     GetSupportedResourceTypesOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     GetSupportedResourceTypesOutput.struct_class = Types::GetSupportedResourceTypesOutput
+
+    GlobalSettings.key = Shapes::ShapeRef.new(shape: GlobalSettingsName)
+    GlobalSettings.value = Shapes::ShapeRef.new(shape: GlobalSettingsValue)
 
     InvalidParameterValueException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
@@ -756,6 +772,7 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     RecoveryPointByBackupVault.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     RecoveryPointByBackupVault.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    RecoveryPointByBackupVault.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
     RecoveryPointByBackupVault.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     RecoveryPointByBackupVault.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     RecoveryPointByBackupVault.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
@@ -889,6 +906,9 @@ module Aws::Backup
     UpdateBackupPlanOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location_name: "VersionId"))
     UpdateBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     UpdateBackupPlanOutput.struct_class = Types::UpdateBackupPlanOutput
+
+    UpdateGlobalSettingsInput.add_member(:global_settings, Shapes::ShapeRef.new(shape: GlobalSettings, location_name: "GlobalSettings"))
+    UpdateGlobalSettingsInput.struct_class = Types::UpdateGlobalSettingsInput
 
     UpdateRecoveryPointLifecycleInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     UpdateRecoveryPointLifecycleInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
@@ -1069,6 +1089,15 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_global_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGlobalSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-settings"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGlobalSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGlobalSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1467,6 +1496,7 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
@@ -1544,6 +1574,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGlobalSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/global-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGlobalSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:update_recovery_point_lifecycle, Seahorse::Model::Operation.new.tap do |o|

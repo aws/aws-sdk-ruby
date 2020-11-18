@@ -273,6 +273,19 @@ module Aws::CloudFormation
     #   Descriptive information about the change set.
     #   @return [String]
     #
+    # @!attribute [rw] include_nested_stacks
+    #   Specifies the current setting of `IncludeNestedStacks` for the
+    #   change set.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_change_set_id
+    #   The parent change set ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_change_set_id
+    #   The root change set ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetSummary AWS API Documentation
     #
     class ChangeSetSummary < Struct.new(
@@ -284,7 +297,10 @@ module Aws::CloudFormation
       :status,
       :status_reason,
       :creation_time,
-      :description)
+      :description,
+      :include_nested_stacks,
+      :parent_change_set_id,
+      :root_change_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -451,6 +467,7 @@ module Aws::CloudFormation
     #             },
     #           },
     #         ],
+    #         include_nested_stacks: false,
     #       }
     #
     # @!attribute [rw] stack_name
@@ -551,11 +568,10 @@ module Aws::CloudFormation
     #     <note markdown="1"> This capacity does not apply to creating change sets, and
     #     specifying it when creating change sets has no effect.
     #
-    #      Also, change sets do not currently support nested stacks. If you
-    #     want to create a stack from a stack template that contains macros
-    #     *and* nested stacks, you must create or update the stack directly
-    #     from the template using the CreateStack or UpdateStack action, and
-    #     specifying this capability.
+    #      If you want to create a stack from a stack template that contains
+    #     macros *and* nested stacks, you must create or update the stack
+    #     directly from the template using the CreateStack or UpdateStack
+    #     action, and specifying this capability.
     #
     #      </note>
     #
@@ -675,6 +691,12 @@ module Aws::CloudFormation
     #   The resources to import into your stack.
     #   @return [Array<Types::ResourceToImport>]
     #
+    # @!attribute [rw] include_nested_stacks
+    #   Creates a change set for the all nested stacks specified in the
+    #   template. The default behavior of this action is set to `False`. To
+    #   include nested sets in a change set, specify `True`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -693,7 +715,8 @@ module Aws::CloudFormation
       :client_token,
       :description,
       :change_set_type,
-      :resources_to_import)
+      :resources_to_import,
+      :include_nested_stacks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -895,10 +918,9 @@ module Aws::CloudFormation
     #     and [AWS::Serverless][10] transforms, which are macros hosted by
     #     AWS CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     create a stack from a stack template that contains macros *and*
-    #     nested stacks, you must create the stack directly from the
-    #     template using this capability.
+    #     If you want to create a stack from a stack template that contains
+    #     macros *and* nested stacks, you must create the stack directly
+    #     from the template using this capability.
     #
     #     You should only create stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.
@@ -1988,6 +2010,20 @@ module Aws::CloudFormation
     #   of changes. If there is no additional page, this value is null.
     #   @return [String]
     #
+    # @!attribute [rw] include_nested_stacks
+    #   Verifies if `IncludeNestedStacks` is set to `True`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_change_set_id
+    #   Specifies the change set ID of the parent change set in the current
+    #   nested change set hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_change_set_id
+    #   Specifies the change set ID of the root change set in the current
+    #   nested change set hierarchy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2006,7 +2042,10 @@ module Aws::CloudFormation
       :capabilities,
       :tags,
       :changes,
-      :next_token)
+      :next_token,
+      :include_nested_stacks,
+      :parent_change_set_id,
+      :root_change_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4668,18 +4707,20 @@ module Aws::CloudFormation
     #   you want to register, see [submit][1] in the *CloudFormation CLI
     #   User Guide*.
     #
-    #   <note markdown="1"> As part of registering a resource provider type, CloudFormation must
-    #   be able to access the S3 bucket which contains the schema handler
-    #   package for that resource provider. For more information, see [IAM
-    #   Permissions for Registering a Resource Provider][2] in the *AWS
-    #   CloudFormation User Guide*.
+    #   <note markdown="1"> The user registering the resource provider type must be able to
+    #   access the the schema handler package in the S3 bucket. That is, the
+    #   user needs to have [GetObject][2] permissions for the schema handler
+    #   package. For more information, see [Actions, Resources, and
+    #   Condition Keys for Amazon S3][3] in the *AWS Identity and Access
+    #   Management User Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html
     #   @return [String]
     #
     # @!attribute [rw] logging_config
@@ -4743,8 +4784,9 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] action
     #   The action that AWS CloudFormation takes on the resource, such as
-    #   `Add` (adds a new resource), `Modify` (changes a resource), or
-    #   `Remove` (deletes a resource).
+    #   `Add` (adds a new resource), `Modify` (changes a resource), `Remove`
+    #   (deletes a resource), `Import` (imports a resource), or `Dynamic`
+    #   (exact action for the resource cannot be determined).
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
@@ -4789,6 +4831,10 @@ module Aws::CloudFormation
     #   resource.
     #   @return [Array<Types::ResourceChangeDetail>]
     #
+    # @!attribute [rw] change_set_id
+    #   The change set ID of the nested change set.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
@@ -4798,7 +4844,8 @@ module Aws::CloudFormation
       :resource_type,
       :replacement,
       :scope,
-      :details)
+      :details,
+      :change_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7515,10 +7562,9 @@ module Aws::CloudFormation
     #     and [AWS::Serverless][10] transforms, which are macros hosted by
     #     AWS CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     update a stack from a stack template that contains macros *and*
-    #     nested stacks, you must update the stack directly from the
-    #     template using this capability.
+    #     If you want to update a stack from a stack template that contains
+    #     macros *and* nested stacks, you must update the stack directly
+    #     from the template using this capability.
     #
     #     You should only update stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.

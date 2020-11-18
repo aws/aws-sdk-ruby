@@ -329,7 +329,7 @@ module Aws::Outposts
 
     # Creates an Outpost.
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #   The name of the Outpost.
     #
     # @option params [String] :description
@@ -355,7 +355,7 @@ module Aws::Outposts
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_outpost({
-    #     name: "OutpostName",
+    #     name: "OutpostName", # required
     #     description: "OutpostDescription",
     #     site_id: "SiteId", # required
     #     availability_zone: "AvailabilityZone",
@@ -604,7 +604,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

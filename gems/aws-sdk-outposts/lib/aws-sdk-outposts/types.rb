@@ -27,7 +27,7 @@ module Aws::Outposts
     #   data as a hash:
     #
     #       {
-    #         name: "OutpostName",
+    #         name: "OutpostName", # required
     #         description: "OutpostDescription",
     #         site_id: "SiteId", # required
     #         availability_zone: "AvailabilityZone",

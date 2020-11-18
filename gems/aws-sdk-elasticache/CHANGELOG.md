@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-11-18)
+------------------
+
+* Feature - Adding Memcached 1.6 to parameter family
+
 1.45.0 (2020-10-30)
 ------------------
 

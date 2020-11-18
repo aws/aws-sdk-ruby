@@ -505,6 +505,9 @@ module Aws::CloudFormation
     # execute the change set by using the ExecuteChangeSet action. AWS
     # CloudFormation doesn't make changes until you execute the change set.
     #
+    # To create a change set for the entire stack hierachy, set
+    # `IncludeNestedStacks` to `True`.
+    #
     # @option params [required, String] :stack_name
     #   The name or the unique ID of the stack for which you are creating a
     #   change set. AWS CloudFormation generates the change set by comparing
@@ -598,11 +601,10 @@ module Aws::CloudFormation
     #     <note markdown="1"> This capacity does not apply to creating change sets, and specifying
     #     it when creating change sets has no effect.
     #
-    #      Also, change sets do not currently support nested stacks. If you
-    #     want to create a stack from a stack template that contains macros
-    #     *and* nested stacks, you must create or update the stack directly
-    #     from the template using the CreateStack or UpdateStack action, and
-    #     specifying this capability.
+    #      If you want to create a stack from a stack template that contains
+    #     macros *and* nested stacks, you must create or update the stack
+    #     directly from the template using the CreateStack or UpdateStack
+    #     action, and specifying this capability.
     #
     #      </note>
     #
@@ -710,6 +712,11 @@ module Aws::CloudFormation
     # @option params [Array<Types::ResourceToImport>] :resources_to_import
     #   The resources to import into your stack.
     #
+    # @option params [Boolean] :include_nested_stacks
+    #   Creates a change set for the all nested stacks specified in the
+    #   template. The default behavior of this action is set to `False`. To
+    #   include nested sets in a change set, specify `True`.
+    #
     # @return [Types::CreateChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChangeSetOutput#id #id} => String
@@ -762,6 +769,7 @@ module Aws::CloudFormation
     #         },
     #       },
     #     ],
+    #     include_nested_stacks: false,
     #   })
     #
     # @example Response structure
@@ -907,10 +915,9 @@ module Aws::CloudFormation
     #     [AWS::Serverless][10] transforms, which are macros hosted by AWS
     #     CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     create a stack from a stack template that contains macros *and*
-    #     nested stacks, you must create the stack directly from the template
-    #     using this capability.
+    #     If you want to create a stack from a stack template that contains
+    #     macros *and* nested stacks, you must create the stack directly from
+    #     the template using this capability.
     #
     #     You should only create stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.
@@ -1476,6 +1483,11 @@ module Aws::CloudFormation
     # If the call successfully completes, AWS CloudFormation successfully
     # deleted the change set.
     #
+    # If `IncludeNestedStacks` specifies `True` during the creation of the
+    # nested change set, then `DeleteChangeSet` will delete all change sets
+    # that belong to the stacks hierarchy and will also delete all change
+    # sets for nested stacks with the status of `REVIEW_IN_PROGRESS`.
+    #
     # @option params [required, String] :change_set_name
     #   The name or Amazon Resource Name (ARN) of the change set that you want
     #   to delete.
@@ -1824,6 +1836,9 @@ module Aws::CloudFormation
     #   * {Types::DescribeChangeSetOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeChangeSetOutput#changes #changes} => Array&lt;Types::Change&gt;
     #   * {Types::DescribeChangeSetOutput#next_token #next_token} => String
+    #   * {Types::DescribeChangeSetOutput#include_nested_stacks #include_nested_stacks} => Boolean
+    #   * {Types::DescribeChangeSetOutput#parent_change_set_id #parent_change_set_id} => String
+    #   * {Types::DescribeChangeSetOutput#root_change_set_id #root_change_set_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1847,7 +1862,7 @@ module Aws::CloudFormation
     #   resp.parameters[0].resolved_value #=> String
     #   resp.creation_time #=> Time
     #   resp.execution_status #=> String, one of "UNAVAILABLE", "AVAILABLE", "EXECUTE_IN_PROGRESS", "EXECUTE_COMPLETE", "EXECUTE_FAILED", "OBSOLETE"
-    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_COMPLETE", "FAILED"
+    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "FAILED"
     #   resp.status_reason #=> String
     #   resp.notification_arns #=> Array
     #   resp.notification_arns[0] #=> String
@@ -1862,7 +1877,7 @@ module Aws::CloudFormation
     #   resp.tags[0].value #=> String
     #   resp.changes #=> Array
     #   resp.changes[0].type #=> String, one of "Resource"
-    #   resp.changes[0].resource_change.action #=> String, one of "Add", "Modify", "Remove", "Import"
+    #   resp.changes[0].resource_change.action #=> String, one of "Add", "Modify", "Remove", "Import", "Dynamic"
     #   resp.changes[0].resource_change.logical_resource_id #=> String
     #   resp.changes[0].resource_change.physical_resource_id #=> String
     #   resp.changes[0].resource_change.resource_type #=> String
@@ -1876,7 +1891,11 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.details[0].evaluation #=> String, one of "Static", "Dynamic"
     #   resp.changes[0].resource_change.details[0].change_source #=> String, one of "ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic"
     #   resp.changes[0].resource_change.details[0].causing_entity #=> String
+    #   resp.changes[0].resource_change.change_set_id #=> String
     #   resp.next_token #=> String
+    #   resp.include_nested_stacks #=> Boolean
+    #   resp.parent_change_set_id #=> String
+    #   resp.root_change_set_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2986,6 +3005,9 @@ module Aws::CloudFormation
     # enforces the policy during the update. You can't specify a temporary
     # stack policy that overrides the current policy.
     #
+    # To create a change set for the entire stack hierachy,
+    # `IncludeNestedStacks` must have been set to `True`.
+    #
     # @option params [required, String] :change_set_name
     #   The name or ARN of the change set that you want use to update the
     #   specified stack.
@@ -3260,10 +3282,13 @@ module Aws::CloudFormation
     #   resp.summaries[0].change_set_id #=> String
     #   resp.summaries[0].change_set_name #=> String
     #   resp.summaries[0].execution_status #=> String, one of "UNAVAILABLE", "AVAILABLE", "EXECUTE_IN_PROGRESS", "EXECUTE_COMPLETE", "EXECUTE_FAILED", "OBSOLETE"
-    #   resp.summaries[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_COMPLETE", "FAILED"
+    #   resp.summaries[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "FAILED"
     #   resp.summaries[0].status_reason #=> String
     #   resp.summaries[0].creation_time #=> Time
     #   resp.summaries[0].description #=> String
+    #   resp.summaries[0].include_nested_stacks #=> Boolean
+    #   resp.summaries[0].parent_change_set_id #=> String
+    #   resp.summaries[0].root_change_set_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSets AWS API Documentation
@@ -4142,18 +4167,20 @@ module Aws::CloudFormation
     #   you want to register, see [submit][1] in the *CloudFormation CLI User
     #   Guide*.
     #
-    #   <note markdown="1"> As part of registering a resource provider type, CloudFormation must
-    #   be able to access the S3 bucket which contains the schema handler
-    #   package for that resource provider. For more information, see [IAM
-    #   Permissions for Registering a Resource Provider][2] in the *AWS
-    #   CloudFormation User Guide*.
+    #   <note markdown="1"> The user registering the resource provider type must be able to access
+    #   the the schema handler package in the S3 bucket. That is, the user
+    #   needs to have [GetObject][2] permissions for the schema handler
+    #   package. For more information, see [Actions, Resources, and Condition
+    #   Keys for Amazon S3][3] in the *AWS Identity and Access Management User
+    #   Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html
     #
     # @option params [Types::LoggingConfig] :logging_config
     #   Specifies logging configuration information for a type.
@@ -4511,10 +4538,9 @@ module Aws::CloudFormation
     #     [AWS::Serverless][10] transforms, which are macros hosted by AWS
     #     CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     update a stack from a stack template that contains macros *and*
-    #     nested stacks, you must update the stack directly from the template
-    #     using this capability.
+    #     If you want to update a stack from a stack template that contains
+    #     macros *and* nested stacks, you must update the stack directly from
+    #     the template using this capability.
     #
     #     You should only update stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.
@@ -5332,7 +5358,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -58,7 +58,7 @@ module Aws::Outposts
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    CreateOutpostInput.add_member(:name, Shapes::ShapeRef.new(shape: OutpostName, location_name: "Name"))
+    CreateOutpostInput.add_member(:name, Shapes::ShapeRef.new(shape: OutpostName, required: true, location_name: "Name"))
     CreateOutpostInput.add_member(:description, Shapes::ShapeRef.new(shape: OutpostDescription, location_name: "Description"))
     CreateOutpostInput.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, required: true, location_name: "SiteId"))
     CreateOutpostInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))

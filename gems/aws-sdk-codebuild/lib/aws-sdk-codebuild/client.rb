@@ -1110,6 +1110,7 @@ module Aws::CodeBuild
     #   resp.report_groups[0].tags #=> Array
     #   resp.report_groups[0].tags[0].key #=> String
     #   resp.report_groups[0].tags[0].value #=> String
+    #   resp.report_groups[0].status #=> String, one of "ACTIVE", "DELETING"
     #   resp.report_groups_not_found #=> Array
     #   resp.report_groups_not_found[0] #=> String
     #
@@ -1638,6 +1639,7 @@ module Aws::CodeBuild
     #   resp.report_group.tags #=> Array
     #   resp.report_group.tags[0].key #=> String
     #   resp.report_group.tags[0].value #=> String
+    #   resp.report_group.status #=> String, one of "ACTIVE", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroup AWS API Documentation
     #
@@ -3009,7 +3011,8 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Restarts a batch build.
+    # Restarts a failed batch build. Only batch builds that have failed can
+    # be retried.
     #
     # @option params [String] :id
     #   Specifies the identifier of the batch build to restart.
@@ -4884,6 +4887,7 @@ module Aws::CodeBuild
     #   resp.report_group.tags #=> Array
     #   resp.report_group.tags[0].key #=> String
     #   resp.report_group.tags[0].value #=> String
+    #   resp.report_group.status #=> String, one of "ACTIVE", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroup AWS API Documentation
     #
@@ -4985,7 +4989,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

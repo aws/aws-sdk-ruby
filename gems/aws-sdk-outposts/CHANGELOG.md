@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-11-18)
+------------------
+
+* Feature - Mark the Name parameter in CreateOutpost as required.
+
 1.10.0 (2020-09-30)
 ------------------
 

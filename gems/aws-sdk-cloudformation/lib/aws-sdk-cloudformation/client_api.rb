@@ -137,6 +137,7 @@ module Aws::CloudFormation
     Imports = Shapes::ListShape.new(name: 'Imports')
     InProgressStackInstancesCount = Shapes::IntegerShape.new(name: 'InProgressStackInstancesCount')
     InSyncStackInstancesCount = Shapes::IntegerShape.new(name: 'InSyncStackInstancesCount')
+    IncludeNestedStacks = Shapes::BooleanShape.new(name: 'IncludeNestedStacks')
     InsufficientCapabilitiesException = Shapes::StructureShape.new(name: 'InsufficientCapabilitiesException')
     InvalidChangeSetStatusException = Shapes::StructureShape.new(name: 'InvalidChangeSetStatusException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -430,6 +431,9 @@ module Aws::CloudFormation
     ChangeSetSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: ChangeSetStatusReason, location_name: "StatusReason"))
     ChangeSetSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     ChangeSetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ChangeSetSummary.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
+    ChangeSetSummary.add_member(:parent_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ParentChangeSetId"))
+    ChangeSetSummary.add_member(:root_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "RootChangeSetId"))
     ChangeSetSummary.struct_class = Types::ChangeSetSummary
 
     Changes.member = Shapes::ShapeRef.new(shape: Change)
@@ -458,6 +462,7 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateChangeSetInput.add_member(:change_set_type, Shapes::ShapeRef.new(shape: ChangeSetType, location_name: "ChangeSetType"))
     CreateChangeSetInput.add_member(:resources_to_import, Shapes::ShapeRef.new(shape: ResourcesToImport, location_name: "ResourcesToImport"))
+    CreateChangeSetInput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
     CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
     CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
@@ -586,6 +591,9 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeChangeSetOutput.add_member(:changes, Shapes::ShapeRef.new(shape: Changes, location_name: "Changes"))
     DescribeChangeSetOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeChangeSetOutput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
+    DescribeChangeSetOutput.add_member(:parent_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ParentChangeSetId"))
+    DescribeChangeSetOutput.add_member(:root_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "RootChangeSetId"))
     DescribeChangeSetOutput.struct_class = Types::DescribeChangeSetOutput
 
     DescribeStackDriftDetectionStatusInput.add_member(:stack_drift_detection_id, Shapes::ShapeRef.new(shape: StackDriftDetectionId, required: true, location_name: "StackDriftDetectionId"))
@@ -993,6 +1001,7 @@ module Aws::CloudFormation
     ResourceChange.add_member(:replacement, Shapes::ShapeRef.new(shape: Replacement, location_name: "Replacement"))
     ResourceChange.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
     ResourceChange.add_member(:details, Shapes::ShapeRef.new(shape: ResourceChangeDetails, location_name: "Details"))
+    ResourceChange.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ChangeSetId"))
     ResourceChange.struct_class = Types::ResourceChange
 
     ResourceChangeDetail.add_member(:target, Shapes::ShapeRef.new(shape: ResourceTargetDefinition, location_name: "Target"))

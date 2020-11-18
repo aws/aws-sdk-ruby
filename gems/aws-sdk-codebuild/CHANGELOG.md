@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2020-11-18)
+------------------
+
+* Feature - AWS CodeBuild - Adding Status field for Report Group
+
 1.63.0 (2020-09-30)
 ------------------
 

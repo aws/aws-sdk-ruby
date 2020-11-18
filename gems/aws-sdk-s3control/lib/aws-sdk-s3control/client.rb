@@ -367,11 +367,12 @@ module Aws::S3Control
     # Simple Storage Service Developer Guide </i>.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][2] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][2] section.
     #
     #
     #
@@ -386,10 +387,10 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteAccessPoint.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_ListAccessPoints.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
     # @option params [required, String] :account_id
     #   The AWS account ID for the owner of the bucket for which you want to
@@ -402,8 +403,11 @@ module Aws::S3Control
     #   The name of the bucket that you want to associate this access point
     #   with.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -422,7 +426,7 @@ module Aws::S3Control
     #
     # @option params [Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   Amazon S3 account. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
     #   *Amazon Simple Storage Service Developer Guide*.
@@ -493,8 +497,8 @@ module Aws::S3Control
     # * Bucket Location constraint
     #
     # For an example of the request syntax for Amazon S3 on Outposts that
-    # uses the S3 on Outposts endpoint hostname prefix and outpost-id in
-    # your API request, see the [ Example][4] section below.
+    # uses the S3 on Outposts endpoint hostname prefix and
+    # `x-amz-outpost-id` in your API request, see the [Examples][4] section.
     #
     # The following actions are related to `CreateBucket` for Amazon S3 on
     # Outposts:
@@ -514,12 +518,12 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateBucket.html#API_control_CreateBucket_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucket.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucket.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateAccessPoint.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutAccessPointPolicy.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -632,7 +636,7 @@ module Aws::S3Control
     # [S3 Batch Operations][1] in the *Amazon Simple Storage Service
     # Developer Guide*.
     #
-    # This operation creates a S3 Batch Operations job.
+    # This operation creates an S3 Batch Operations job.
     #
     #
     #
@@ -854,12 +858,12 @@ module Aws::S3Control
     # Deletes the specified access point.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the ARN, see the [ Example][1] section
-    # below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
     #
     # The following actions are related to `DeleteAccessPoint`\:
     #
@@ -871,7 +875,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
@@ -882,8 +886,11 @@ module Aws::S3Control
     # @option params [required, String] :name
     #   The name of the access point you want to delete.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point accessed
-    #   in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -914,11 +921,12 @@ module Aws::S3Control
     #
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][1] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
     #
     # The following actions are related to `DeleteAccessPointPolicy`\:
     #
@@ -928,7 +936,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteAccessPointPolicy.html#API_control_DeleteAccessPointPolicy_Examples
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html#API_control_DeleteAccessPointPolicy_Examples
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html
     #
@@ -938,8 +946,11 @@ module Aws::S3Control
     # @option params [required, String] :name
     #   The name of the access point whose policy you want to delete.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point accessed
-    #   in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -978,11 +989,12 @@ module Aws::S3Control
     # Developer Guide*.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][3] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
     #
     # **Related Resources**
     #
@@ -996,9 +1008,9 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucket.html#API_control_DeleteBucket_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html#API_control_DeleteBucket_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucket.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [required, String] :account_id
@@ -1007,8 +1019,11 @@ module Aws::S3Control
     # @option params [required, String] :bucket
     #   Specifies the bucket being deleted.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1050,16 +1065,17 @@ module Aws::S3Control
     # Guide*.
     #
     # To use this operation, you must have permission to perform the
-    # `s3outposts:DeleteLifecycleConfiguration` action. By default, the
+    # `s3-outposts:DeleteLifecycleConfiguration` action. By default, the
     # bucket owner has this permission and the Outposts bucket owner can
     # grant this permission to others.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][3] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
     #
     # For more information about object expiration, see [ Elements to
     # Describe Lifecycle Actions][4].
@@ -1074,7 +1090,7 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
@@ -1083,10 +1099,13 @@ module Aws::S3Control
     #   The account ID of the lifecycle configuration to delete.
     #
     # @option params [required, String] :bucket
-    #   The bucket ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1122,7 +1141,7 @@ module Aws::S3Control
     # subresource to delete the policy of a specified Amazon S3 on Outposts
     # bucket. If you are using an identity other than the root user of the
     # AWS account that owns the bucket, the calling identity must have the
-    # `s3outposts:DeleteBucketPolicy` permissions on the specified Outposts
+    # `s3-outposts:DeleteBucketPolicy` permissions on the specified Outposts
     # bucket and belong to the bucket owner's account to use this
     # operation. For more information, see [Using Amazon S3 on Outposts][2]
     # in *Amazon Simple Storage Service Developer Guide*.
@@ -1141,11 +1160,12 @@ module Aws::S3Control
     # https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][3] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
     #
     # The following actions are related to `DeleteBucketPolicy`\:
     #
@@ -1157,18 +1177,21 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketPolicy.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
     #
     # @option params [required, String] :account_id
     #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1194,7 +1217,7 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API operation deletes an Amazon S3 on Outposts bucket's tags. To
+    # <note markdown="1"> This operation deletes an Amazon S3 on Outposts bucket's tags. To
     # delete an S3 bucket tags, see [DeleteBucketTagging][1] in the *Amazon
     # Simple Storage Service API*.
     #
@@ -1209,11 +1232,12 @@ module Aws::S3Control
     # permission and can grant this permission to others.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][3] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
     #
     # The following actions are related to `DeleteBucketTagging`\:
     #
@@ -1225,7 +1249,7 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
     #
@@ -1235,8 +1259,11 @@ module Aws::S3Control
     # @option params [required, String] :bucket
     #   The bucket ARN that has the tag set to be removed.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1342,6 +1369,86 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def delete_public_access_block(params = {}, options = {})
       req = build_request(:delete_public_access_block, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Amazon S3 Storage Lens configuration. For more information
+    # about S3 Storage Lens, see [Working with Amazon S3 Storage Lens][1] in
+    # the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:DeleteStorageLensConfiguration` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_lens_configuration({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfiguration AWS API Documentation
+    #
+    # @overload delete_storage_lens_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_lens_configuration(params = {}, options = {})
+      req = build_request(:delete_storage_lens_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Amazon S3 Storage Lens configuration tags. For more
+    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
+    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:DeleteStorageLensConfigurationTagging` action. For more
+    # information, see [Setting permissions to use Amazon S3 Storage
+    # Lens][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_lens_configuration_tagging({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTagging AWS API Documentation
+    #
+    # @overload delete_storage_lens_configuration_tagging(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_lens_configuration_tagging(params = {}, options = {})
+      req = build_request(:delete_storage_lens_configuration_tagging, params)
       req.send_request(options)
     end
 
@@ -1482,11 +1589,12 @@ module Aws::S3Control
     #
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][1] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
     #
     # The following actions are related to `GetAccessPoint`\:
     #
@@ -1498,7 +1606,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetAccessPoint.html#API_control_GetAccessPoint_Examples
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
@@ -1510,8 +1618,11 @@ module Aws::S3Control
     #   The name of the access point whose configuration information you want
     #   to retrieve.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point accessed
-    #   in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1576,8 +1687,11 @@ module Aws::S3Control
     # @option params [required, String] :name
     #   The name of the access point whose policy you want to retrieve.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point accessed
-    #   in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1652,30 +1766,53 @@ module Aws::S3Control
     # Using Amazon S3 on Outposts][1] in the *Amazon Simple Storage Service
     # Developer Guide*.
     #
+    # If you are using an identity other than the root user of the AWS
+    # account that owns the bucket, the calling identity must have the
+    # `s3-outposts:GetBucket` permissions on the specified bucket and belong
+    # to the bucket owner's account in order to use this operation. Only
+    # users from Outposts bucket owner account with the right permissions
+    # can perform actions on an Outposts bucket.
+    #
+    # If you don't have `s3-outposts:GetBucket` permissions or you're not
+    # using an identity that belongs to the bucket owner's account, Amazon
+    # S3 returns a `403 Access Denied` error.
+    #
     # The following actions are related to `GetBucket` for Amazon S3 on
     # Outposts:
     #
-    # * [PutObject][2]
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][2] section.
     #
-    # * [CreateBucket][3]
+    # * [PutObject][3]
     #
-    # * [DeleteBucket][4]
+    # * [CreateBucket][4]
+    #
+    # * [DeleteBucket][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateBucket.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
     #
     # @option params [required, String] :account_id
     #   The AWS account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1711,7 +1848,7 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API operation gets an Amazon S3 on Outposts bucket's lifecycle
+    # <note markdown="1"> This operation gets an Amazon S3 on Outposts bucket's lifecycle
     # configuration. To get an S3 bucket's lifecycle configuration, see
     # [GetBucketLifecycleConfiguration][1] in the *Amazon Simple Storage
     # Service API*.
@@ -1724,18 +1861,19 @@ module Aws::S3Control
     # Management][3] in *Amazon Simple Storage Service Developer Guide*.
     #
     # To use this operation, you must have permission to perform the
-    # `s3outposts:GetLifecycleConfiguration` action. The Outposts bucket
+    # `s3-outposts:GetLifecycleConfiguration` action. The Outposts bucket
     # owner has this permission, by default. The bucket owner can grant this
     # permission to others. For more information about permissions, see
     # [Permissions Related to Bucket Subresource Operations][4] and
     # [Managing Access Permissions to Your Amazon S3 Resources][5].
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][6] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][6] section.
     #
     # `GetBucketLifecycleConfiguration` has the following special error:
     #
@@ -1761,7 +1899,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
@@ -1771,8 +1909,11 @@ module Aws::S3Control
     # @option params [required, String] :bucket
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1825,9 +1966,9 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API action gets a bucket policy for an Amazon S3 on Outposts
-    # bucket. To get a policy for an S3 bucket, see [GetBucketPolicy][1] in
-    # the *Amazon Simple Storage Service API*.
+    # <note markdown="1"> This action gets a bucket policy for an Amazon S3 on Outposts bucket.
+    # To get a policy for an S3 bucket, see [GetBucketPolicy][1] in the
+    # *Amazon Simple Storage Service API*.
     #
     #  </note>
     #
@@ -1840,11 +1981,11 @@ module Aws::S3Control
     # `GetBucketPolicy` permissions on the specified bucket and belong to
     # the bucket owner's account in order to use this operation.
     #
-    # If you don't have `s3outposts:GetBucketPolicy` permissions, Amazon S3
-    # returns a `403 Access Denied` error. If you have the correct
-    # permissions, but you're not using an identity that belongs to the
-    # bucket owner's account, Amazon S3 returns a `405 Method Not Allowed`
-    # error.
+    # Only users from Outposts bucket owner account with the right
+    # permissions can perform actions on an Outposts bucket. If you don't
+    # have `s3-outposts:GetBucketPolicy` permissions or you're not using an
+    # identity that belongs to the bucket owner's account, Amazon S3
+    # returns a `403 Access Denied` error.
     #
     # As a security precaution, the root user of the AWS account that owns a
     # bucket can always use this operation, even if the policy explicitly
@@ -1854,11 +1995,12 @@ module Aws::S3Control
     # and User Policies][3].
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][4] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][4] section.
     #
     # The following actions are related to `GetBucketPolicy`\:
     #
@@ -1873,7 +2015,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
@@ -1882,10 +2024,13 @@ module Aws::S3Control
     #   The AWS account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1917,8 +2062,8 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API operation gets an Amazon S3 on Outposts bucket's tags. To
-    # get an S3 bucket tags, see [GetBucketTagging][1] in the *Amazon Simple
+    # <note markdown="1"> This operation gets an Amazon S3 on Outposts bucket's tags. To get an
+    # S3 bucket tags, see [GetBucketTagging][1] in the *Amazon Simple
     # Storage Service API*.
     #
     #  </note>
@@ -1940,11 +2085,12 @@ module Aws::S3Control
     #   ^
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][3] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
     #
     # The following actions are related to `GetBucketTagging`\:
     #
@@ -1956,7 +2102,7 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucketTagging.html#API_control_GetBucketTagging_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
@@ -1964,10 +2110,13 @@ module Aws::S3Control
     #   The AWS account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2101,6 +2250,123 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Gets the Amazon S3 Storage Lens configuration. For more information,
+    # see [Working with Amazon S3 Storage Lens][1] in the *Amazon Simple
+    # Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:GetStorageLensConfiguration` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Types::GetStorageLensConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageLensConfigurationResult#storage_lens_configuration #storage_lens_configuration} => Types::StorageLensConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_storage_lens_configuration({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_lens_configuration.id #=> String
+    #   resp.storage_lens_configuration.account_level.activity_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.activity_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.delimiter #=> String
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.max_depth #=> Integer
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.min_storage_bytes_percentage #=> Float
+    #   resp.storage_lens_configuration.include.buckets #=> Array
+    #   resp.storage_lens_configuration.include.buckets[0] #=> String
+    #   resp.storage_lens_configuration.include.regions #=> Array
+    #   resp.storage_lens_configuration.include.regions[0] #=> String
+    #   resp.storage_lens_configuration.exclude.buckets #=> Array
+    #   resp.storage_lens_configuration.exclude.buckets[0] #=> String
+    #   resp.storage_lens_configuration.exclude.regions #=> Array
+    #   resp.storage_lens_configuration.exclude.regions[0] #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.format #=> String, one of "CSV", "Parquet"
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.output_schema_version #=> String, one of "V_1"
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.account_id #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.arn #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.prefix #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.encryption.ssekms.key_id #=> String
+    #   resp.storage_lens_configuration.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.aws_org.arn #=> String
+    #   resp.storage_lens_configuration.storage_lens_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfiguration AWS API Documentation
+    #
+    # @overload get_storage_lens_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_storage_lens_configuration(params = {}, options = {})
+      req = build_request(:get_storage_lens_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets the tags of Amazon S3 Storage Lens configuration. For more
+    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
+    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:GetStorageLensConfigurationTagging` action. For more information,
+    # see [Setting permissions to use Amazon S3 Storage Lens][2] in the
+    # *Amazon Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Types::GetStorageLensConfigurationTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageLensConfigurationTaggingResult#tags #tags} => Array&lt;Types::StorageLensTag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_storage_lens_configuration_tagging({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationTagging AWS API Documentation
+    #
+    # @overload get_storage_lens_configuration_tagging(params = {})
+    # @param [Hash] params ({})
+    def get_storage_lens_configuration_tagging(params = {}, options = {})
+      req = build_request(:get_storage_lens_configuration_tagging, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the access points currently associated with the
     # specified bucket. You can retrieve up to 1000 access points per call.
     # If the specified bucket has more than 1,000 access points (or the
@@ -2111,11 +2377,12 @@ module Aws::S3Control
     #
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][1] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
     #
     # The following actions are related to `ListAccessPoints`\:
     #
@@ -2127,7 +2394,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetAccessPoint.html#API_control_GetAccessPoint_Examples
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
@@ -2140,8 +2407,11 @@ module Aws::S3Control
     #   The name of the bucket whose associated access points you want to
     #   list.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2278,19 +2548,19 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Returns a list of all Outposts buckets in an Outposts that are owned
-    # by the authenticated sender of the request. For more information, see
+    # Returns a list of all Outposts buckets in an Outpost that are owned by
+    # the authenticated sender of the request. For more information, see
     # [Using Amazon S3 on Outposts][1] in the *Amazon Simple Storage Service
     # Developer Guide*.
     #
     # For an example of the request syntax for Amazon S3 on Outposts that
-    # uses the S3 on Outposts endpoint hostname prefix and outpost-id in
-    # your API request, see the [ Example][2] section below.
+    # uses the S3 on Outposts endpoint hostname prefix and
+    # `x-amz-outpost-id` in your request, see the [Examples][2] section.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
     #
     # @option params [required, String] :account_id
     #   The AWS account ID of the Outposts bucket.
@@ -2341,6 +2611,58 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Gets a list of Amazon S3 Storage Lens configurations. For more
+    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
+    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:ListStorageLensConfigurations` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results.
+    #
+    # @return [Types::ListStorageLensConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStorageLensConfigurationsResult#next_token #next_token} => String
+    #   * {Types::ListStorageLensConfigurationsResult#storage_lens_configuration_list #storage_lens_configuration_list} => Array&lt;Types::ListStorageLensConfigurationEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_storage_lens_configurations({
+    #     account_id: "AccountId", # required
+    #     next_token: "ContinuationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.storage_lens_configuration_list #=> Array
+    #   resp.storage_lens_configuration_list[0].id #=> String
+    #   resp.storage_lens_configuration_list[0].storage_lens_arn #=> String
+    #   resp.storage_lens_configuration_list[0].home_region #=> String
+    #   resp.storage_lens_configuration_list[0].is_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurations AWS API Documentation
+    #
+    # @overload list_storage_lens_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_storage_lens_configurations(params = {}, options = {})
+      req = build_request(:list_storage_lens_configurations, params)
+      req.send_request(options)
+    end
+
     # Associates an access policy with the specified access point. Each
     # access point can have only one policy, so a request made to this API
     # replaces any existing policy associated with the specified access
@@ -2349,11 +2671,12 @@ module Aws::S3Control
     #
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][1] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
     #
     # The following actions are related to `PutAccessPointPolicy`\:
     #
@@ -2363,7 +2686,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
     #
@@ -2375,8 +2698,11 @@ module Aws::S3Control
     #   The name of the access point that you want to associate with the
     #   specified policy.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point accessed
-    #   in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2386,8 +2712,8 @@ module Aws::S3Control
     #
     # @option params [required, String] :policy
     #   The policy that you want to apply to the specified access point. For
-    #   more information about access point policies, see [Managing Data
-    #   Access with Amazon S3 Access Points][1] in the *Amazon Simple Storage
+    #   more information about access point policies, see [Managing data
+    #   access with Amazon S3 Access Points][1] in the *Amazon Simple Storage
     #   Service Developer Guide*.
     #
     #
@@ -2413,27 +2739,29 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API action puts a lifecycle configuration to an Amazon S3 on
-    # Outposts bucket. To put a lifecycle configuration to an S3 bucket, see
+    # <note markdown="1"> This action puts a lifecycle configuration to an Amazon S3 on Outposts
+    # bucket. To put a lifecycle configuration to an S3 bucket, see
     # [PutBucketLifecycleConfiguration][1] in the *Amazon Simple Storage
     # Service API*.
     #
     #  </note>
     #
     # Creates a new lifecycle configuration for the Outposts bucket or
-    # replaces an existing lifecycle configuration. Outposts buckets can
-    # only support a lifecycle that deletes objects after a certain period
-    # of time. For more information, see [Managing Lifecycle Permissions for
-    # Amazon S3 on Outposts][2].
+    # replaces an existing lifecycle configuration. Outposts buckets only
+    # support lifecycle configurations that delete/expire objects after a
+    # certain period of time and abort incomplete multipart uploads. For
+    # more information, see [Managing Lifecycle Permissions for Amazon S3 on
+    # Outposts][2].
     #
     #
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][3] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
     #
     # The following actions are related to
     # `PutBucketLifecycleConfiguration`\:
@@ -2446,7 +2774,7 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketLifecycleConfiguration.html#API_control_PutBucketLifecycleConfiguration_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html#API_control_PutBucketLifecycleConfiguration_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
@@ -2525,9 +2853,9 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API action puts a bucket policy to an Amazon S3 on Outposts
-    # bucket. To put a policy on an S3 bucket, see [PutBucketPolicy][1] in
-    # the *Amazon Simple Storage Service API*.
+    # <note markdown="1"> This action puts a bucket policy to an Amazon S3 on Outposts bucket.
+    # To put a policy on an S3 bucket, see [PutBucketPolicy][1] in the
+    # *Amazon Simple Storage Service API*.
     #
     #  </note>
     #
@@ -2553,11 +2881,12 @@ module Aws::S3Control
     # and User Policies][3].
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][4] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][4] section.
     #
     # The following actions are related to `PutBucketPolicy`\:
     #
@@ -2570,7 +2899,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
     #
@@ -2578,10 +2907,13 @@ module Aws::S3Control
     #   The AWS account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2620,8 +2952,8 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API action puts tags on an Amazon S3 on Outposts bucket. To put
-    # tags on an S3 bucket, see [PutBucketTagging][1] in the *Amazon Simple
+    # <note markdown="1"> This action puts tags on an Amazon S3 on Outposts bucket. To put tags
+    # on an S3 bucket, see [PutBucketTagging][1] in the *Amazon Simple
     # Storage Service API*.
     #
     #  </note>
@@ -2646,7 +2978,7 @@ module Aws::S3Control
     #  </note>
     #
     # To use this operation, you must have permissions to perform the
-    # `s3outposts:PutBucketTagging` action. The Outposts bucket owner has
+    # `s3-outposts:PutBucketTagging` action. The Outposts bucket owner has
     # this permission by default and can grant this permission to others.
     # For more information about permissions, see [ Permissions Related to
     # Bucket Subresource Operations][5] and [Managing Access Permissions to
@@ -2684,11 +3016,12 @@ module Aws::S3Control
     #   ^
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
-    # additional parameter of outpost-id to be passed with the request and
-    # an S3 on Outposts endpoint hostname prefix instead of s3-control. For
-    # an example of the request syntax for Amazon S3 on Outposts that uses
-    # the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-    # using the access point ARN, see the [ Example][9] section below.
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][9] section.
     #
     # The following actions are related to `PutBucketTagging`\:
     #
@@ -2706,7 +3039,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     # [8]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketTagging.html#API_control_PutBucketTagging_Examples
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
@@ -2716,8 +3049,11 @@ module Aws::S3Control
     # @option params [required, String] :bucket
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2760,7 +3096,7 @@ module Aws::S3Control
     # that is associated with the job. To modify the existing tag set, you
     # can either replace the existing tag set entirely, or make changes
     # within the existing tag set by retrieving the existing tag set using
-    # [GetJobTagging][1], modify that tag set, and use this API action to
+    # [GetJobTagging][1], modify that tag set, and use this action to
     # replace the tag set with the one you modified. For more information,
     # see [Controlling access and labeling jobs using tags][2] in the
     # *Amazon Simple Storage Service Developer Guide*.
@@ -2893,6 +3229,168 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def put_public_access_block(params = {}, options = {})
       req = build_request(:put_public_access_block, params)
+      req.send_request(options)
+    end
+
+    # Puts an Amazon S3 Storage Lens configuration. For more information
+    # about S3 Storage Lens, see [Working with Amazon S3 Storage Lens][1] in
+    # the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:PutStorageLensConfiguration` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @option params [required, Types::StorageLensConfiguration] :storage_lens_configuration
+    #   The S3 Storage Lens configuration.
+    #
+    # @option params [Array<Types::StorageLensTag>] :tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_storage_lens_configuration({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #     storage_lens_configuration: { # required
+    #       id: "ConfigId", # required
+    #       account_level: { # required
+    #         activity_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         bucket_level: { # required
+    #           activity_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           prefix_level: {
+    #             storage_metrics: { # required
+    #               is_enabled: false,
+    #               selection_criteria: {
+    #                 delimiter: "StorageLensPrefixLevelDelimiter",
+    #                 max_depth: 1,
+    #                 min_storage_bytes_percentage: 1.0,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #       include: {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       },
+    #       exclude: {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       },
+    #       data_export: {
+    #         s3_bucket_destination: { # required
+    #           format: "CSV", # required, accepts CSV, Parquet
+    #           output_schema_version: "V_1", # required, accepts V_1
+    #           account_id: "AccountId", # required
+    #           arn: "S3BucketArnString", # required
+    #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #       is_enabled: false, # required
+    #       aws_org: {
+    #         arn: "AwsOrgArn", # required
+    #       },
+    #       storage_lens_arn: "StorageLensArn",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfiguration AWS API Documentation
+    #
+    # @overload put_storage_lens_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_storage_lens_configuration(params = {}, options = {})
+      req = build_request(:put_storage_lens_configuration, params)
+      req.send_request(options)
+    end
+
+    # Put or replace tags on an existing Amazon S3 Storage Lens
+    # configuration. For more information about S3 Storage Lens, see
+    # [Working with Amazon S3 Storage Lens][1] in the *Amazon Simple Storage
+    # Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:PutStorageLensConfigurationTagging` action. For more information,
+    # see [Setting permissions to use Amazon S3 Storage Lens][2] in the
+    # *Amazon Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @option params [required, Array<Types::StorageLensTag>] :tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_storage_lens_configuration_tagging({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationTagging AWS API Documentation
+    #
+    # @overload put_storage_lens_configuration_tagging(params = {})
+    # @param [Hash] params ({})
+    def put_storage_lens_configuration_tagging(params = {}, options = {})
+      req = build_request(:put_storage_lens_configuration_tagging, params)
       req.send_request(options)
     end
 
@@ -3035,7 +3533,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

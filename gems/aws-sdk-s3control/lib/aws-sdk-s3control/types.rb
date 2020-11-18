@@ -72,6 +72,71 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for the account level Amazon S3 Storage Lens
+    # configuration.
+    #
+    # @note When making an API call, you may pass AccountLevel
+    #   data as a hash:
+    #
+    #       {
+    #         activity_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         bucket_level: { # required
+    #           activity_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           prefix_level: {
+    #             storage_metrics: { # required
+    #               is_enabled: false,
+    #               selection_criteria: {
+    #                 delimiter: "StorageLensPrefixLevelDelimiter",
+    #                 max_depth: 1,
+    #                 min_storage_bytes_percentage: 1.0,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] activity_metrics
+    #   A container for the S3 Storage Lens activity metrics.
+    #   @return [Types::ActivityMetrics]
+    #
+    # @!attribute [rw] bucket_level
+    #   A container for the S3 Storage Lens bucket-level configuration.
+    #   @return [Types::BucketLevel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccountLevel AWS API Documentation
+    #
+    class AccountLevel < Struct.new(
+      :activity_metrics,
+      :bucket_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the activity metrics.
+    #
+    # @note When making an API call, you may pass ActivityMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether the activity metrics are enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ActivityMetrics AWS API Documentation
+    #
+    class ActivityMetrics < Struct.new(
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -97,6 +162,46 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketAlreadyOwnedByYou AWS API Documentation
     #
     class BucketAlreadyOwnedByYou < Aws::EmptyStructure; end
+
+    # A container for the bucket-level configuration.
+    #
+    # @note When making an API call, you may pass BucketLevel
+    #   data as a hash:
+    #
+    #       {
+    #         activity_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         prefix_level: {
+    #           storage_metrics: { # required
+    #             is_enabled: false,
+    #             selection_criteria: {
+    #               delimiter: "StorageLensPrefixLevelDelimiter",
+    #               max_depth: 1,
+    #               min_storage_bytes_percentage: 1.0,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] activity_metrics
+    #   A container for the bucket-level activity metrics for Amazon S3
+    #   Storage Lens
+    #   @return [Types::ActivityMetrics]
+    #
+    # @!attribute [rw] prefix_level
+    #   A container for the bucket-level prefix-level metrics for S3 Storage
+    #   Lens
+    #   @return [Types::PrefixLevel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketLevel AWS API Documentation
+    #
+    class BucketLevel < Struct.new(
+      :activity_metrics,
+      :prefix_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateAccessPointRequest
     #   data as a hash:
@@ -129,8 +234,11 @@ module Aws::S3Control
     #   The name of the bucket that you want to associate this access point
     #   with.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -151,7 +259,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   Amazon S3 account. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
     #   *Amazon Simple Storage Service Developer Guide*.
@@ -177,6 +285,10 @@ module Aws::S3Control
 
     # @!attribute [rw] access_point_arn
     #   The ARN of the access point.
+    #
+    #   <note markdown="1"> This is only supported by Amazon S3 on Outposts.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointResult AWS API Documentation
@@ -339,8 +451,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -595,8 +710,12 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point whose policy you want to delete.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -629,8 +748,12 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point you want to delete.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -661,10 +784,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The bucket ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -695,10 +821,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -731,8 +860,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   Specifies the bucket being deleted.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -765,8 +897,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The bucket ARN that has the tag set to be removed.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -834,6 +969,60 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteStorageLensConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationRequest AWS API Documentation
+    #
+    class DeleteStorageLensConfigurationRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteStorageLensConfigurationTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTaggingRequest AWS API Documentation
+    #
+    class DeleteStorageLensConfigurationTaggingRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTaggingResult AWS API Documentation
+    #
+    class DeleteStorageLensConfigurationTaggingResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeJobRequest
     #   data as a hash:
     #
@@ -871,6 +1060,33 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for what Amazon S3 Storage Lens will exclude.
+    #
+    # @note When making an API call, you may pass Exclude
+    #   data as a hash:
+    #
+    #       {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       }
+    #
+    # @!attribute [rw] buckets
+    #   A container for the S3 Storage Lens bucket excludes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   A container for the S3 Storage Lens Region excludes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Exclude AWS API Documentation
+    #
+    class Exclude < Struct.new(
+      :buckets,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAccessPointPolicyRequest
     #   data as a hash:
     #
@@ -886,8 +1102,12 @@ module Aws::S3Control
     # @!attribute [rw] name
     #   The name of the access point whose policy you want to retrieve.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -971,8 +1191,12 @@ module Aws::S3Control
     #   The name of the access point whose configuration information you
     #   want to retrieve.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1016,7 +1240,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   Amazon S3 account. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
     #   *Amazon Simple Storage Service Developer Guide*.
@@ -1060,8 +1284,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1104,10 +1331,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1150,10 +1380,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1205,10 +1438,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1309,6 +1545,80 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetStorageLensConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationRequest AWS API Documentation
+    #
+    class GetStorageLensConfigurationRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_lens_configuration
+    #   The S3 Storage Lens configuration requested.
+    #   @return [Types::StorageLensConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationResult AWS API Documentation
+    #
+    class GetStorageLensConfigurationResult < Struct.new(
+      :storage_lens_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetStorageLensConfigurationTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationTaggingRequest AWS API Documentation
+    #
+    class GetStorageLensConfigurationTaggingRequest < Struct.new(
+      :config_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags of S3 Storage Lens configuration requested.
+    #   @return [Array<Types::StorageLensTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationTaggingResult AWS API Documentation
+    #
+    class GetStorageLensConfigurationTaggingResult < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1316,6 +1626,33 @@ module Aws::S3Control
     #
     class IdempotencyException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for what Amazon S3 Storage Lens configuration includes.
+    #
+    # @note When making an API call, you may pass Include
+    #   data as a hash:
+    #
+    #       {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       }
+    #
+    # @!attribute [rw] buckets
+    #   A container for the S3 Storage Lens bucket includes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   A container for the S3 Storage Lens Region includes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Include AWS API Documentation
+    #
+    class Include < Struct.new(
+      :buckets,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2245,8 +2582,11 @@ module Aws::S3Control
     #   The name of the bucket whose associated access points you want to
     #   list.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2422,6 +2762,85 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Part of `ListStorageLensConfigurationResult`. Each entry includes the
+    # description of the S3 Storage Lens configuration, its home Region,
+    # whether it is enabled, its Amazon Resource Name (ARN), and config ID.
+    #
+    # @!attribute [rw] id
+    #   A container for the S3 Storage Lens configuration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_arn
+    #   The ARN of the S3 Storage Lens configuration. This property is
+    #   read-only.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_region
+    #   A container for the S3 Storage Lens home Region. Your metrics data
+    #   is stored and retained in your designated S3 Storage Lens home
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether the S3 Storage Lens configuration is
+    #   enabled. This property is required.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurationEntry AWS API Documentation
+    #
+    class ListStorageLensConfigurationEntry < Struct.new(
+      :id,
+      :storage_lens_arn,
+      :home_region,
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStorageLensConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         next_token: "ContinuationToken",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurationsRequest AWS API Documentation
+    #
+    class ListStorageLensConfigurationsRequest < Struct.new(
+      :account_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the request produced more than the maximum number of S3 Storage
+    #   Lens configuration results, you can pass this value into a
+    #   subsequent request to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_configuration_list
+    #   A list of S3 Storage Lens configurations.
+    #   @return [Array<Types::ListStorageLensConfigurationEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurationsResult AWS API Documentation
+    #
+    class ListStorageLensConfigurationsResult < Struct.new(
+      :next_token,
+      :storage_lens_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon S3 throws this exception if you make a `GetPublicAccessBlock`
     # request against an account that doesn't have a
     # `PublicAccessBlockConfiguration` set.
@@ -2532,8 +2951,67 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for the prefix-level configuration.
+    #
+    # @note When making an API call, you may pass PrefixLevel
+    #   data as a hash:
+    #
+    #       {
+    #         storage_metrics: { # required
+    #           is_enabled: false,
+    #           selection_criteria: {
+    #             delimiter: "StorageLensPrefixLevelDelimiter",
+    #             max_depth: 1,
+    #             min_storage_bytes_percentage: 1.0,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] storage_metrics
+    #   A container for the prefix-level storage metrics for S3 Storage
+    #   Lens.
+    #   @return [Types::PrefixLevelStorageMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PrefixLevel AWS API Documentation
+    #
+    class PrefixLevel < Struct.new(
+      :storage_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the prefix-level storage metrics for S3 Storage Lens.
+    #
+    # @note When making an API call, you may pass PrefixLevelStorageMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false,
+    #         selection_criteria: {
+    #           delimiter: "StorageLensPrefixLevelDelimiter",
+    #           max_depth: 1,
+    #           min_storage_bytes_percentage: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether prefix-level storage metrics are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] selection_criteria
+    #   @return [Types::SelectionCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PrefixLevelStorageMetrics AWS API Documentation
+    #
+    class PrefixLevelStorageMetrics < Struct.new(
+      :is_enabled,
+      :selection_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `PublicAccessBlock` configuration that you want to apply to this
-    # Amazon S3 bucket. You can enable the configuration options in any
+    # Amazon S3 account. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
     # bucket or object public, see [The Meaning of "Public"][1] in the
     # *Amazon Simple Storage Service Developer Guide*.
@@ -2597,8 +3075,8 @@ module Aws::S3Control
     # @!attribute [rw] restrict_public_buckets
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for buckets in this account. Setting this element to `TRUE`
-    #   restricts access to buckets with public policies to only AWS
-    #   services and authorized users within this account.
+    #   restricts access to buckets with public policies to only AWS service
+    #   principals and authorized users within this account.
     #
     #   Enabling this setting doesn't affect previously stored bucket
     #   policies, except that public and cross-account access within any
@@ -2637,8 +3115,12 @@ module Aws::S3Control
     #   The name of the access point that you want to associate with the
     #   specified policy.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the access point
-    #   accessed in the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the access point accessed in the
+    #   format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2649,8 +3131,8 @@ module Aws::S3Control
     #
     # @!attribute [rw] policy
     #   The policy that you want to apply to the specified access point. For
-    #   more information about access point policies, see [Managing Data
-    #   Access with Amazon S3 Access Points][1] in the *Amazon Simple
+    #   more information about access point policies, see [Managing data
+    #   access with Amazon S3 Access Points][1] in the *Amazon Simple
     #   Storage Service Developer Guide*.
     #
     #
@@ -2761,10 +3243,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The ARN of the bucket.
+    #   Specifies the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2820,8 +3305,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The Amazon Resource Name (ARN) of the bucket.
     #
-    #   For Amazon S3 on Outposts specify the ARN of the bucket accessed in
-    #   the format
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and
+    #   CLI, you must specify the ARN of the bucket accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2915,6 +3403,147 @@ module Aws::S3Control
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutStorageLensConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #         storage_lens_configuration: { # required
+    #           id: "ConfigId", # required
+    #           account_level: { # required
+    #             activity_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             bucket_level: { # required
+    #               activity_metrics: {
+    #                 is_enabled: false,
+    #               },
+    #               prefix_level: {
+    #                 storage_metrics: { # required
+    #                   is_enabled: false,
+    #                   selection_criteria: {
+    #                     delimiter: "StorageLensPrefixLevelDelimiter",
+    #                     max_depth: 1,
+    #                     min_storage_bytes_percentage: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           include: {
+    #             buckets: ["S3BucketArnString"],
+    #             regions: ["S3AWSRegion"],
+    #           },
+    #           exclude: {
+    #             buckets: ["S3BucketArnString"],
+    #             regions: ["S3AWSRegion"],
+    #           },
+    #           data_export: {
+    #             s3_bucket_destination: { # required
+    #               format: "CSV", # required, accepts CSV, Parquet
+    #               output_schema_version: "V_1", # required, accepts V_1
+    #               account_id: "AccountId", # required
+    #               arn: "S3BucketArnString", # required
+    #               prefix: "Prefix",
+    #               encryption: {
+    #                 sses3: {
+    #                 },
+    #                 ssekms: {
+    #                   key_id: "SSEKMSKeyId", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           is_enabled: false, # required
+    #           aws_org: {
+    #             arn: "AwsOrgArn", # required
+    #           },
+    #           storage_lens_arn: "StorageLensArn",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_configuration
+    #   The S3 Storage Lens configuration.
+    #   @return [Types::StorageLensConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #   @return [Array<Types::StorageLensTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationRequest AWS API Documentation
+    #
+    class PutStorageLensConfigurationRequest < Struct.new(
+      :config_id,
+      :account_id,
+      :storage_lens_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutStorageLensConfigurationTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_id: "ConfigId", # required
+    #         account_id: "AccountId", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the requester.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #   @return [Array<Types::StorageLensTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationTaggingRequest AWS API Documentation
+    #
+    class PutStorageLensConfigurationTaggingRequest < Struct.new(
+      :config_id,
+      :account_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationTaggingResult AWS API Documentation
+    #
+    class PutStorageLensConfigurationTaggingResult < Aws::EmptyStructure; end
 
     # The container for the regional bucket.
     #
@@ -3021,6 +3650,69 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for the bucket where the Amazon S3 Storage Lens metrics
+    # export files are located.
+    #
+    # @note When making an API call, you may pass S3BucketDestination
+    #   data as a hash:
+    #
+    #       {
+    #         format: "CSV", # required, accepts CSV, Parquet
+    #         output_schema_version: "V_1", # required, accepts V_1
+    #         account_id: "AccountId", # required
+    #         arn: "S3BucketArnString", # required
+    #         prefix: "Prefix",
+    #         encryption: {
+    #           sses3: {
+    #           },
+    #           ssekms: {
+    #             key_id: "SSEKMSKeyId", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] format
+    #   @return [String]
+    #
+    # @!attribute [rw] output_schema_version
+    #   The schema version of the export file.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the owner of the S3 Storage Lens metrics export
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the bucket. This property is
+    #   read-only and follows the following format: `
+    #   arn:aws:s3:us-east-1:example-account-id:bucket/your-destination-bucket-name
+    #   `
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix of the destination bucket where the metrics export will
+    #   be delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   The container for the type encryption of the metrics exports in this
+    #   bucket.
+    #   @return [Types::StorageLensDataExportEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3BucketDestination AWS API Documentation
+    #
+    class S3BucketDestination < Struct.new(
+      :format,
+      :output_schema_version,
+      :account_id,
+      :arn,
+      :prefix,
+      :encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration parameters for a PUT Copy object operation.
     # S3 Batch Operations passes each value through to the underlying PUT
     # Copy object API. For more information about the parameters for this
@@ -3081,6 +3773,10 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] target_resource
+    #   Specifies the destination bucket ARN for the batch copy operation.
+    #   For example, to copy objects to a bucket named
+    #   "destinationBucket", set the TargetResource to
+    #   "arn:aws:s3:::destinationBucket".
     #   @return [String]
     #
     # @!attribute [rw] canned_access_control_list
@@ -3102,6 +3798,9 @@ module Aws::S3Control
     #   @return [Array<Types::S3Tag>]
     #
     # @!attribute [rw] redirect_location
+    #   Specifies an optional metadata property for website redirects,
+    #   `x-amz-website-redirect-location`. Allows webpage redirects if the
+    #   object is accessed through a website endpoint.
     #   @return [String]
     #
     # @!attribute [rw] requester_pays
@@ -3117,6 +3816,10 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] target_key_prefix
+    #   Specifies the folder prefix into which you would like the objects to
+    #   be copied. For example, to copy objects into a folder named
+    #   "Folder1" in the destination bucket, set the TargetKeyPrefix to
+    #   "Folder1/".
     #   @return [String]
     #
     # @!attribute [rw] object_lock_legal_hold_status
@@ -3577,6 +4280,298 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SSEKMS
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "SSEKMSKeyId", # required
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   A container for the ARN of the SSE-KMS encryption. This property is
+    #   read-only and follows the following format: `
+    #   arn:aws:kms:us-east-1:example-account-id:key/example-9a73-4afc-8d29-8f5900cef44e
+    #   `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSEKMS AWS API Documentation
+    #
+    class SSEKMS < Struct.new(
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3 AWS API Documentation
+    #
+    class SSES3 < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass SelectionCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         delimiter: "StorageLensPrefixLevelDelimiter",
+    #         max_depth: 1,
+    #         min_storage_bytes_percentage: 1.0,
+    #       }
+    #
+    # @!attribute [rw] delimiter
+    #   A container for the delimiter of the selection criteria being used.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_depth
+    #   The max depth of the selection criteria
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_storage_bytes_percentage
+    #   The minimum number of storage bytes percentage whose metrics will be
+    #   selected.
+    #
+    #   <note markdown="1"> You must choose a value greater than or equal to `1.0`.
+    #
+    #    </note>
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SelectionCriteria AWS API Documentation
+    #
+    class SelectionCriteria < Struct.new(
+      :delimiter,
+      :max_depth,
+      :min_storage_bytes_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS organization for your S3 Storage Lens.
+    #
+    # @note When making an API call, you may pass StorageLensAwsOrg
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AwsOrgArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   A container for the Amazon Resource Name (ARN) of the AWS
+    #   organization. This property is read-only and follows the following
+    #   format: `
+    #   arn:aws:organizations:us-east-1:example-account-id:organization/o-ex2l495dck
+    #   `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensAwsOrg AWS API Documentation
+    #
+    class StorageLensAwsOrg < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the Amazon S3 Storage Lens configuration.
+    #
+    # @note When making an API call, you may pass StorageLensConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ConfigId", # required
+    #         account_level: { # required
+    #           activity_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           bucket_level: { # required
+    #             activity_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             prefix_level: {
+    #               storage_metrics: { # required
+    #                 is_enabled: false,
+    #                 selection_criteria: {
+    #                   delimiter: "StorageLensPrefixLevelDelimiter",
+    #                   max_depth: 1,
+    #                   min_storage_bytes_percentage: 1.0,
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #         include: {
+    #           buckets: ["S3BucketArnString"],
+    #           regions: ["S3AWSRegion"],
+    #         },
+    #         exclude: {
+    #           buckets: ["S3BucketArnString"],
+    #           regions: ["S3AWSRegion"],
+    #         },
+    #         data_export: {
+    #           s3_bucket_destination: { # required
+    #             format: "CSV", # required, accepts CSV, Parquet
+    #             output_schema_version: "V_1", # required, accepts V_1
+    #             account_id: "AccountId", # required
+    #             arn: "S3BucketArnString", # required
+    #             prefix: "Prefix",
+    #             encryption: {
+    #               sses3: {
+    #               },
+    #               ssekms: {
+    #                 key_id: "SSEKMSKeyId", # required
+    #               },
+    #             },
+    #           },
+    #         },
+    #         is_enabled: false, # required
+    #         aws_org: {
+    #           arn: "AwsOrgArn", # required
+    #         },
+    #         storage_lens_arn: "StorageLensArn",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   A container for the Amazon S3 Storage Lens configuration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_level
+    #   A container for all the account-level configurations of your S3
+    #   Storage Lens configuration.
+    #   @return [Types::AccountLevel]
+    #
+    # @!attribute [rw] include
+    #   A container for what is included in this configuration. This
+    #   container can only be valid if there is no `Exclude` container
+    #   submitted, and it's not empty.
+    #   @return [Types::Include]
+    #
+    # @!attribute [rw] exclude
+    #   A container for what is excluded in this configuration. This
+    #   container can only be valid if there is no `Include` container
+    #   submitted, and it's not empty.
+    #   @return [Types::Exclude]
+    #
+    # @!attribute [rw] data_export
+    #   A container to specify the properties of your S3 Storage Lens
+    #   metrics export including, the destination, schema and format.
+    #   @return [Types::StorageLensDataExport]
+    #
+    # @!attribute [rw] is_enabled
+    #   A container for whether the S3 Storage Lens configuration is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] aws_org
+    #   A container for the AWS organization for this S3 Storage Lens
+    #   configuration.
+    #   @return [Types::StorageLensAwsOrg]
+    #
+    # @!attribute [rw] storage_lens_arn
+    #   The Amazon Resource Name (ARN) of the S3 Storage Lens configuration.
+    #   This property is read-only and follows the following format: `
+    #   arn:aws:s3:us-east-1:example-account-id:storage-lens/your-dashboard-name
+    #   `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensConfiguration AWS API Documentation
+    #
+    class StorageLensConfiguration < Struct.new(
+      :id,
+      :account_level,
+      :include,
+      :exclude,
+      :data_export,
+      :is_enabled,
+      :aws_org,
+      :storage_lens_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container to specify the properties of your S3 Storage Lens metrics
+    # export, including the destination, schema, and format.
+    #
+    # @note When making an API call, you may pass StorageLensDataExport
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_destination: { # required
+    #           format: "CSV", # required, accepts CSV, Parquet
+    #           output_schema_version: "V_1", # required, accepts V_1
+    #           account_id: "AccountId", # required
+    #           arn: "S3BucketArnString", # required
+    #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_destination
+    #   A container for the bucket where the S3 Storage Lens metrics export
+    #   will be located.
+    #   @return [Types::S3BucketDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensDataExport AWS API Documentation
+    #
+    class StorageLensDataExport < Struct.new(
+      :s3_bucket_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the encryption of the S3 Storage Lens metrics exports.
+    #
+    # @note When making an API call, you may pass StorageLensDataExportEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         sses3: {
+    #         },
+    #         ssekms: {
+    #           key_id: "SSEKMSKeyId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sses3
+    #   @return [Types::SSES3]
+    #
+    # @!attribute [rw] ssekms
+    #   @return [Types::SSEKMS]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensDataExportEncryption AWS API Documentation
+    #
+    class StorageLensDataExportEncryption < Struct.new(
+      :sses3,
+      :ssekms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StorageLensTag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensTag AWS API Documentation
+    #
+    class StorageLensTag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Tagging
     #   data as a hash:
     #
@@ -3628,7 +4623,7 @@ module Aws::S3Control
 
     # Specifies when an object transitions to a specified storage class. For
     # more information about Amazon S3 Lifecycle configuration rules, see [
-    # Transitioning Objects Using Amazon S3 Lifecycle][1] in the *Amazon
+    # Transitioning objects using Amazon S3 Lifecycle][1] in the *Amazon
     # Simple Storage Service Developer Guide*.
     #
     #

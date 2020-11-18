@@ -894,6 +894,28 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # The current feature settings for the AWS Account.
+    #
+    # @return [Types::DescribeGlobalSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalSettingsOutput#global_settings #global_settings} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeGlobalSettingsOutput#last_update_time #last_update_time} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.global_settings #=> Hash
+    #   resp.global_settings["GlobalSettingsName"] #=> String
+    #   resp.last_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettings AWS API Documentation
+    #
+    # @overload describe_global_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_global_settings(params = {}, options = {})
+      req = build_request(:describe_global_settings, params)
+      req.send_request(options)
+    end
+
     # Returns information about a saved resource, including the last time it
     # was backed up, its Amazon Resource Name (ARN), and the AWS service
     # type of the saved resource.
@@ -948,6 +970,7 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#recovery_point_arn #recovery_point_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#backup_vault_name #backup_vault_name} => String
     #   * {Types::DescribeRecoveryPointOutput#backup_vault_arn #backup_vault_arn} => String
+    #   * {Types::DescribeRecoveryPointOutput#source_backup_vault_arn #source_backup_vault_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#resource_arn #resource_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#resource_type #resource_type} => String
     #   * {Types::DescribeRecoveryPointOutput#created_by #created_by} => Types::RecoveryPointCreator
@@ -975,6 +998,7 @@ module Aws::Backup
     #   resp.recovery_point_arn #=> String
     #   resp.backup_vault_name #=> String
     #   resp.backup_vault_arn #=> String
+    #   resp.source_backup_vault_arn #=> String
     #   resp.resource_arn #=> String
     #   resp.resource_type #=> String
     #   resp.created_by.backup_plan_id #=> String
@@ -1004,11 +1028,12 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns the current service opt-in settings for the Region. If the
-    # service has a value set to `true`, AWS Backup tries to protect that
-    # service's resources in this Region, when included in an on-demand
-    # backup or scheduled backup plan. If the value is set to `false` for a
-    # service, AWS Backup does not try to protect that service's resources
+    # Returns the current service opt-in settings for the Region. If
+    # service-opt-in is enabled for a service, AWS Backup tries to protect
+    # that service's resources in this Region, when the resource is
+    # included in an on-demand backup or scheduled backup plan. Otherwise,
+    # AWS Backup does not try to protect that service's resources in this
+    # Region, AWS Backup does not try to protect that service's resources
     # in this Region.
     #
     # @return [Types::DescribeRegionSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2035,6 +2060,7 @@ module Aws::Backup
     #   resp.recovery_points[0].recovery_point_arn #=> String
     #   resp.recovery_points[0].backup_vault_name #=> String
     #   resp.recovery_points[0].backup_vault_arn #=> String
+    #   resp.recovery_points[0].source_backup_vault_arn #=> String
     #   resp.recovery_points[0].resource_arn #=> String
     #   resp.recovery_points[0].resource_type #=> String
     #   resp.recovery_points[0].created_by.backup_plan_id #=> String
@@ -2733,6 +2759,31 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Updates the current global settings for the AWS Account. Use the
+    # `DescribeGlobalSettings` API to determine the current settings.
+    #
+    # @option params [Hash<String,String>] :global_settings
+    #   A list of resources along with the opt-in preferences for the account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_settings({
+    #     global_settings: {
+    #       "GlobalSettingsName" => "GlobalSettingsValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettings AWS API Documentation
+    #
+    # @overload update_global_settings(params = {})
+    # @param [Hash] params ({})
+    def update_global_settings(params = {}, options = {})
+      req = build_request(:update_global_settings, params)
+      req.send_request(options)
+    end
+
     # Sets the transition lifecycle of a recovery point.
     #
     # The lifecycle defines when a protected resource is transitioned to
@@ -2803,12 +2854,13 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates the current service opt-in settings for the Region. If the
-    # service has a value set to `true`, AWS Backup tries to protect that
-    # service's resources in this Region, when included in an on-demand
-    # backup or scheduled backup plan. If the value is set to `false` for a
-    # service, AWS Backup does not try to protect that service's resources
-    # in this Region.
+    # Updates the current service opt-in settings for the Region. If
+    # service-opt-in is enabled for a service, AWS Backup tries to protect
+    # that service's resources in this Region, when the resource is
+    # included in an on-demand backup or scheduled backup plan. Otherwise,
+    # AWS Backup does not try to protect that service's resources in this
+    # Region. Use the `DescribeRegionSettings` API to determine the resource
+    # types that are supported.
     #
     # @option params [Hash<String,Boolean>] :resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for the
@@ -2846,7 +2898,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

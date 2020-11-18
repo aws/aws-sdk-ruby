@@ -1479,8 +1479,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that the cache parameter
     #   group can be used with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
@@ -3548,10 +3549,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Deletes a user. The user will
-    # be removed from all user groups and in turn removed from all
-    # replication groups. For more information, see [Using Role Based Access
-    # Control (RBAC)][1].
+    # For Redis engine version 6.x onwards: Deletes a user. The user will be
+    # removed from all user groups and in turn removed from all replication
+    # groups. For more information, see [Using Role Based Access Control
+    # (RBAC)][1].
     #
     #
     #
@@ -3599,7 +3600,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.04 onwards: Deletes a ser group. The user
+    # For Redis engine version 6.x onwards: Deletes a ser group. The user
     # group must first be disassociated from the replcation group before it
     # can be deleted. For more information, see [Using Role Based Access
     # Control (RBAC)][1].
@@ -3918,8 +3919,9 @@ module Aws::ElastiCache
     #   The name of a specific cache parameter group family to return details
     #   for.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     #   Constraints:
     #
@@ -4900,8 +4902,9 @@ module Aws::ElastiCache
     # @option params [required, String] :cache_parameter_group_family
     #   The name of the cache parameter group family.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -9679,7 +9682,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

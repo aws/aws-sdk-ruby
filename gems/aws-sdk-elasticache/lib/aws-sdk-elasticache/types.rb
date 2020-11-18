@@ -621,9 +621,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family associated with this
     #   cache engine.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0`
-    #   \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] cache_engine_description
@@ -966,9 +966,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that this cache
     #   parameter group is compatible with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0`
-    #   \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1980,9 +1980,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that the cache
     #   parameter group can be used with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0`
-    #   \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3458,9 +3458,9 @@ module Aws::ElastiCache
     #   The name of a specific cache parameter group family to return
     #   details for.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0`
-    #   \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #
     #   Constraints:
     #
@@ -3701,9 +3701,9 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_parameter_group_family
     #   The name of the cache parameter group family.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0`
-    #   \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4759,9 +4759,9 @@ module Aws::ElastiCache
     #   Specifies the name of the cache parameter group family to which the
     #   engine default parameters apply.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.0`
-    #   \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] marker

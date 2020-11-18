@@ -187,6 +187,7 @@ module Aws::CodeBuild
     ReportGroupArns = Shapes::ListShape.new(name: 'ReportGroupArns')
     ReportGroupName = Shapes::StringShape.new(name: 'ReportGroupName')
     ReportGroupSortByType = Shapes::StringShape.new(name: 'ReportGroupSortByType')
+    ReportGroupStatusType = Shapes::StringShape.new(name: 'ReportGroupStatusType')
     ReportGroups = Shapes::ListShape.new(name: 'ReportGroups')
     ReportPackagingType = Shapes::StringShape.new(name: 'ReportPackagingType')
     ReportStatusCounts = Shapes::MapShape.new(name: 'ReportStatusCounts')
@@ -914,6 +915,7 @@ module Aws::CodeBuild
     ReportGroup.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     ReportGroup.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModified"))
     ReportGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ReportGroup.add_member(:status, Shapes::ShapeRef.new(shape: ReportGroupStatusType, location_name: "status"))
     ReportGroup.struct_class = Types::ReportGroup
 
     ReportGroupArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)

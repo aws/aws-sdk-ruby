@@ -33,10 +33,13 @@ module Aws::Backup
     #   Specifies the backup option for a selected resource. This option is
     #   only available for Windows VSS backup jobs.
     #
-    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
-    #   backup option and create a VSS Windows backup. Set to
-    #   “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS
-    #   option is not enabled by default.
+    #   Valid values:
+    #
+    #   Set to `"WindowsVSS":"enabled"` to enable the WindowsVSS backup
+    #   option and create a VSS Windows backup.
+    #
+    #   Set to `"WindowsVSS":"disabled"` to create a regular backup. The
+    #   WindowsVSS option is not enabled by default.
     #
     #   If you specify an invalid option, you get an
     #   `InvalidParameterValueException` exception.
@@ -1556,8 +1559,8 @@ module Aws::Backup
     # @!attribute [rw] backup_type
     #   Represents the actual backup type selected for a backup job. For
     #   example, if a successful WindowsVSS backup was taken, `BackupType`
-    #   returns “WindowsVSS”. If `BackupType` is empty, then it is a regular
-    #   backup.
+    #   returns "WindowsVSS". If `BackupType` is empty, then the backup
+    #   type that was is a regular backup.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJobOutput AWS API Documentation
@@ -1689,6 +1692,34 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettingsInput AWS API Documentation
+    #
+    class DescribeGlobalSettingsInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] global_settings
+    #   A list of resources along with the opt-in preferences for the
+    #   account.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] last_update_time
+    #   The date and time that the global settings was last updated. This
+    #   update is in Unix format and Coordinated Universal Time (UTC). The
+    #   value of `LastUpdateTime` is accurate to milliseconds. For example,
+    #   the value 1516925490.087 represents Friday, January 26, 2018
+    #   12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettingsOutput AWS API Documentation
+    #
+    class DescribeGlobalSettingsOutput < Struct.new(
+      :global_settings,
+      :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProtectedResourceInput
     #   data as a hash:
     #
@@ -1781,6 +1812,14 @@ module Aws::Backup
     # @!attribute [rw] backup_vault_arn
     #   An ARN that uniquely identifies a backup vault; for example,
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the source
+    #   vault where the resource was originally backed up in; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:vault:BackupVault`. If the
+    #   recovery is restored to the same AWS account or Region, this value
+    #   will be `null`.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1882,6 +1921,7 @@ module Aws::Backup
       :recovery_point_arn,
       :backup_vault_name,
       :backup_vault_arn,
+      :source_backup_vault_arn,
       :resource_arn,
       :resource_type,
       :created_by,
@@ -3541,6 +3581,12 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
+    # @!attribute [rw] source_backup_vault_arn
+    #   The backup vault where the recovery point was originally copied
+    #   from. If the recovery point is restored to the same account this
+    #   value will be `null`.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the resource type.
@@ -3629,6 +3675,7 @@ module Aws::Backup
       :recovery_point_arn,
       :backup_vault_name,
       :backup_vault_arn,
+      :source_backup_vault_arn,
       :resource_arn,
       :resource_type,
       :created_by,
@@ -4366,6 +4413,28 @@ module Aws::Backup
       :creation_date,
       :version_id,
       :advanced_backup_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGlobalSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_settings: {
+    #           "GlobalSettingsName" => "GlobalSettingsValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] global_settings
+    #   A list of resources along with the opt-in preferences for the
+    #   account.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettingsInput AWS API Documentation
+    #
+    class UpdateGlobalSettingsInput < Struct.new(
+      :global_settings)
       SENSITIVE = []
       include Aws::Structure
     end
