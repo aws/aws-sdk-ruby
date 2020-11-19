@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.631 (2020-11-19)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
