@@ -2848,8 +2848,8 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the master account and
-    #   member accounts if the value is set to `PAYER`. If the value is
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to `PAYER`. If the value is
     #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #   @return [String]
@@ -3438,8 +3438,8 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the master account and
-    #   member accounts if the value is set to `PAYER`. If the value is
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to `PAYER`. If the value is
     #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #   @return [String]
@@ -5001,8 +5001,8 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the master account and
-    #   member accounts if the value is set to `PAYER`. If the value is
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to `PAYER`. If the value is
     #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #   @return [String]
@@ -5161,11 +5161,16 @@ module Aws::CostExplorer
     #   The timestamp showing when the recommendations were generated.
     #   @return [String]
     #
+    # @!attribute [rw] additional_metadata
+    #   Additional metadata that may be applicable to the recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendationMetadata AWS API Documentation
     #
     class SavingsPlansPurchaseRecommendationMetadata < Struct.new(
       :recommendation_id,
-      :generation_timestamp)
+      :generation_timestamp,
+      :additional_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5367,8 +5372,8 @@ module Aws::CostExplorer
     end
 
     # A single daily or monthly Savings Plans utilization rate, and details
-    # for your account. A master account in an organization have access to
-    # member accounts. You can use `GetDimensionValues` to determine the
+    # for your account. A management account in an organization have access
+    # to member accounts. You can use `GetDimensionValues` to determine the
     # possible dimension values.
     #
     # @!attribute [rw] savings_plan_arn

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2020-11-19)
+------------------
+
+* Feature - The AWS Elemental MediaLive APIs and SDKs now support the ability to see the software update status on Link devices
+
 1.59.0 (2020-11-06)
 ------------------
 

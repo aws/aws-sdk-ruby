@@ -599,7 +599,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         force: false,
     #       }
     #
@@ -608,8 +608,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -715,12 +715,12 @@ module Aws::CloudWatchEvents
     #   data as a hash:
     #
     #       {
-    #         name: "EventBusName",
+    #         name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the event bus to show details for. If you omit this, the
-    #   default event bus is displayed.
+    #   The name or ARN of the event bus to show details for. If you omit
+    #   this, the default event bus is displayed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusRequest AWS API Documentation
@@ -946,7 +946,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -954,8 +954,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleRequest AWS API Documentation
@@ -1009,7 +1009,16 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule.
+    #   The name of the event bus associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The account ID of the user that created the rule. If you use
+    #   `PutRule` to put a rule on an event bus in another account, the
+    #   other account is the owner of the rule, and the rule ARN includes
+    #   the account ID for that account. However, the value for `CreatedBy`
+    #   is the account ID as the account that created the rule in the other
+    #   account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleResponse AWS API Documentation
@@ -1023,7 +1032,8 @@ module Aws::CloudWatchEvents
       :description,
       :role_arn,
       :managed_by,
-      :event_bus_name)
+      :event_bus_name,
+      :created_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1033,7 +1043,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -1041,8 +1051,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleRequest AWS API Documentation
@@ -1146,7 +1156,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -1154,8 +1164,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleRequest AWS API Documentation
@@ -1714,8 +1724,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] name_prefix
-    #   A name prefix to filter the archives returned. Only archives with
-    #   name that match the prefix are returned.
+    #   A name prefix to filter the replays returned. Only replays with name
+    #   that match the prefix are returned.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1771,7 +1781,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         target_arn: "TargetArn", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
@@ -1781,8 +1791,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list rules for. If you omit
+    #   this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1828,7 +1838,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name_prefix: "RuleName",
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
@@ -1838,8 +1848,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list the rules for. If you omit
+    #   this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1917,7 +1927,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
@@ -1927,8 +1937,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2090,7 +2100,7 @@ module Aws::CloudWatchEvents
     #             resources: ["EventResource"],
     #             detail_type: "String",
     #             detail: "String",
-    #             event_bus_name: "NonPartnerEventBusName",
+    #             event_bus_name: "NonPartnerEventBusNameOrArn",
     #           },
     #         ],
     #       }
@@ -2120,7 +2130,7 @@ module Aws::CloudWatchEvents
     #         resources: ["EventResource"],
     #         detail_type: "String",
     #         detail: "String",
-    #         event_bus_name: "NonPartnerEventBusName",
+    #         event_bus_name: "NonPartnerEventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] time
@@ -2153,8 +2163,9 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus that will receive the event. Only the rules that are
-    #   associated with this event bus will be able to match the event.
+    #   The name or ARN of the event bus to receive the event. Only the
+    #   rules that are associated with this event bus are used to match the
+    #   event. If you omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry AWS API Documentation
@@ -2338,19 +2349,20 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         event_bus_name: "NonPartnerEventBusName",
-    #         action: "Action", # required
-    #         principal: "Principal", # required
-    #         statement_id: "StatementId", # required
+    #         action: "Action",
+    #         principal: "Principal",
+    #         statement_id: "StatementId",
     #         condition: {
     #           type: "String", # required
     #           key: "String", # required
     #           value: "String", # required
     #         },
+    #         policy: "String",
     #       }
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -2397,6 +2409,12 @@ module Aws::CloudWatchEvents
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #   @return [Types::Condition]
     #
+    # @!attribute [rw] policy
+    #   A JSON string that describes the permission policy statement. You
+    #   can include a `Policy` parameter in the request instead of using the
+    #   `StatementId`, `Action`, `Principal`, or `Condition` parameters.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest AWS API Documentation
     #
     class PutPermissionRequest < Struct.new(
@@ -2404,7 +2422,8 @@ module Aws::CloudWatchEvents
       :action,
       :principal,
       :statement_id,
-      :condition)
+      :condition,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2425,7 +2444,7 @@ module Aws::CloudWatchEvents
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -2464,8 +2483,8 @@ module Aws::CloudWatchEvents
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus to associate with this rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus to associate with this rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleRequest AWS API Documentation
@@ -2500,7 +2519,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         targets: [ # required
     #           {
     #             id: "TargetId", # required
@@ -2585,8 +2604,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The name of the event bus associated with the rule. If you omit
-    #   this, the default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -2708,7 +2727,8 @@ module Aws::CloudWatchEvents
     #   data as a hash:
     #
     #       {
-    #         statement_id: "StatementId", # required
+    #         statement_id: "StatementId",
+    #         remove_all_permissions: false,
     #         event_bus_name: "NonPartnerEventBusName",
     #       }
     #
@@ -2716,6 +2736,10 @@ module Aws::CloudWatchEvents
     #   The statement ID corresponding to the account that is no longer
     #   allowed to put events to the default event bus.
     #   @return [String]
+    #
+    # @!attribute [rw] remove_all_permissions
+    #   Specifies whether to remove all permissions.
+    #   @return [Boolean]
     #
     # @!attribute [rw] event_bus_name
     #   The name of the event bus to revoke permissions for. If you omit
@@ -2726,6 +2750,7 @@ module Aws::CloudWatchEvents
     #
     class RemovePermissionRequest < Struct.new(
       :statement_id,
+      :remove_all_permissions,
       :event_bus_name)
       SENSITIVE = []
       include Aws::Structure
@@ -2736,7 +2761,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         ids: ["TargetId"], # required
     #         force: false,
     #       }
@@ -2746,7 +2771,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The name of the event bus associated with the rule.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] ids
@@ -2991,7 +3017,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Rule AWS API Documentation

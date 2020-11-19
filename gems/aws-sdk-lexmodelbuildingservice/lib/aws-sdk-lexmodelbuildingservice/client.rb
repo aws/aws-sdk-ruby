@@ -471,6 +471,8 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateIntentVersionResponse#version #version} => String
     #   * {Types::CreateIntentVersionResponse#checksum #checksum} => String
     #   * {Types::CreateIntentVersionResponse#kendra_configuration #kendra_configuration} => Types::KendraConfiguration
+    #   * {Types::CreateIntentVersionResponse#input_contexts #input_contexts} => Array&lt;Types::InputContext&gt;
+    #   * {Types::CreateIntentVersionResponse#output_contexts #output_contexts} => Array&lt;Types::OutputContext&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -500,6 +502,8 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
     #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
+    #   resp.slots[0].default_value_spec.default_value_list #=> Array
+    #   resp.slots[0].default_value_spec.default_value_list[0].default_value #=> String
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -542,6 +546,12 @@ module Aws::LexModelBuildingService
     #   resp.kendra_configuration.kendra_index #=> String
     #   resp.kendra_configuration.query_filter_string #=> String
     #   resp.kendra_configuration.role #=> String
+    #   resp.input_contexts #=> Array
+    #   resp.input_contexts[0].name #=> String
+    #   resp.output_contexts #=> Array
+    #   resp.output_contexts[0].name #=> String
+    #   resp.output_contexts[0].time_to_live_in_seconds #=> Integer
+    #   resp.output_contexts[0].turns_to_live #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersion AWS API Documentation
     #
@@ -1786,6 +1796,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetIntentResponse#version #version} => String
     #   * {Types::GetIntentResponse#checksum #checksum} => String
     #   * {Types::GetIntentResponse#kendra_configuration #kendra_configuration} => Types::KendraConfiguration
+    #   * {Types::GetIntentResponse#input_contexts #input_contexts} => Array&lt;Types::InputContext&gt;
+    #   * {Types::GetIntentResponse#output_contexts #output_contexts} => Array&lt;Types::OutputContext&gt;
     #
     #
     # @example Example: To get a information about an intent
@@ -1960,6 +1972,8 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
     #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
+    #   resp.slots[0].default_value_spec.default_value_list #=> Array
+    #   resp.slots[0].default_value_spec.default_value_list[0].default_value #=> String
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -2002,6 +2016,12 @@ module Aws::LexModelBuildingService
     #   resp.kendra_configuration.kendra_index #=> String
     #   resp.kendra_configuration.query_filter_string #=> String
     #   resp.kendra_configuration.role #=> String
+    #   resp.input_contexts #=> Array
+    #   resp.input_contexts[0].name #=> String
+    #   resp.output_contexts #=> Array
+    #   resp.output_contexts[0].name #=> String
+    #   resp.output_contexts[0].time_to_live_in_seconds #=> Integer
+    #   resp.output_contexts[0].turns_to_live #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntent AWS API Documentation
     #
@@ -2561,14 +2581,6 @@ module Aws::LexModelBuildingService
     #   `true` by default. In these Regions setting the parameter to `false`
     #   throws a `ValidationException` exception.
     #
-    #   * Asia Pacific (Singapore) (ap-southeast-1)
-    #
-    #   * Asia Pacific (Tokyo) (ap-northeast-1)
-    #
-    #   * EU (Frankfurt) (eu-central-1)
-    #
-    #   * EU (London) (eu-west-2)
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html
@@ -2581,7 +2593,7 @@ module Aws::LexModelBuildingService
     #   only inserted if they are configured for the bot.
     #
     #   You must set the `enableModelImprovements` parameter to `true` to use
-    #   confidence scores.
+    #   confidence scores in the following regions.
     #
     #   * US East (N. Virginia) (us-east-1)
     #
@@ -3296,6 +3308,15 @@ module Aws::LexModelBuildingService
     #
     #   [1]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
     #
+    # @option params [Array<Types::InputContext>] :input_contexts
+    #   An array of `InputContext` objects that lists the contexts that must
+    #   be active for Amazon Lex to choose the intent in a conversation with
+    #   the user.
+    #
+    # @option params [Array<Types::OutputContext>] :output_contexts
+    #   An array of `OutputContext` objects that lists the contexts that the
+    #   intent activates when the intent is fulfilled.
+    #
     # @return [Types::PutIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutIntentResponse#name #name} => String
@@ -3315,6 +3336,8 @@ module Aws::LexModelBuildingService
     #   * {Types::PutIntentResponse#checksum #checksum} => String
     #   * {Types::PutIntentResponse#create_version #create_version} => Boolean
     #   * {Types::PutIntentResponse#kendra_configuration #kendra_configuration} => Types::KendraConfiguration
+    #   * {Types::PutIntentResponse#input_contexts #input_contexts} => Array&lt;Types::InputContext&gt;
+    #   * {Types::PutIntentResponse#output_contexts #output_contexts} => Array&lt;Types::OutputContext&gt;
     #
     #
     # @example Example: To create an intent
@@ -3613,6 +3636,13 @@ module Aws::LexModelBuildingService
     #         sample_utterances: ["Utterance"],
     #         response_card: "ResponseCard",
     #         obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
+    #         default_value_spec: {
+    #           default_value_list: [ # required
+    #             {
+    #               default_value: "SlotDefaultValueString", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     sample_utterances: ["Utterance"],
@@ -3689,6 +3719,18 @@ module Aws::LexModelBuildingService
     #       query_filter_string: "QueryFilterString",
     #       role: "roleArn", # required
     #     },
+    #     input_contexts: [
+    #       {
+    #         name: "InputContextName", # required
+    #       },
+    #     ],
+    #     output_contexts: [
+    #       {
+    #         name: "OutputContextName", # required
+    #         time_to_live_in_seconds: 1, # required
+    #         turns_to_live: 1, # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3712,6 +3754,8 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
     #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
+    #   resp.slots[0].default_value_spec.default_value_list #=> Array
+    #   resp.slots[0].default_value_spec.default_value_list[0].default_value #=> String
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -3755,6 +3799,12 @@ module Aws::LexModelBuildingService
     #   resp.kendra_configuration.kendra_index #=> String
     #   resp.kendra_configuration.query_filter_string #=> String
     #   resp.kendra_configuration.role #=> String
+    #   resp.input_contexts #=> Array
+    #   resp.input_contexts[0].name #=> String
+    #   resp.output_contexts #=> Array
+    #   resp.output_contexts[0].name #=> String
+    #   resp.output_contexts[0].time_to_live_in_seconds #=> Integer
+    #   resp.output_contexts[0].turns_to_live #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent AWS API Documentation
     #
@@ -4111,7 +4161,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

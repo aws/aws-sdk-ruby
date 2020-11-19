@@ -675,7 +675,9 @@ module Aws::Lambda
     #
     # * [Using AWS Lambda with Amazon SQS][3]
     #
-    # * [Using AWS Lambda with Amazon MSK][4]
+    # * [Using AWS Lambda with Amazon MQ][4]
+    #
+    # * [Using AWS Lambda with Amazon MSK][5]
     #
     # The following error handling options are only available for stream
     # sources (DynamoDB and Kinesis):
@@ -702,7 +704,8 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
-    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html
+    # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     #
     # @option params [required, String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -807,6 +810,8 @@ module Aws::Lambda
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -881,6 +886,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -1319,6 +1326,8 @@ module Aws::Lambda
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -1365,6 +1374,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -1784,6 +1795,8 @@ module Aws::Lambda
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -1837,6 +1850,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -3093,6 +3108,8 @@ module Aws::Lambda
     #   resp.next_marker #=> String
     #   resp.event_source_mappings #=> Array
     #   resp.event_source_mappings[0].uuid #=> String
+    #   resp.event_source_mappings[0].starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.event_source_mappings[0].starting_position_timestamp #=> Time
     #   resp.event_source_mappings[0].batch_size #=> Integer
     #   resp.event_source_mappings[0].maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_mappings[0].parallelization_factor #=> Integer
@@ -4863,6 +4880,8 @@ module Aws::Lambda
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -4935,6 +4954,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -5541,7 +5562,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

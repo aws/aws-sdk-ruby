@@ -396,7 +396,9 @@ module Aws::CloudWatchEvents
     # Creates an archive of events with the specified settings. When you
     # create an archive, incoming events might not immediately start being
     # sent to the archive. Allow a short period of time for changes to take
-    # effect.
+    # effect. If you do not specify a pattern to filter events sent to the
+    # archive, all events are sent to the archive except replayed events.
+    # Replayed events are not sent to an archive.
     #
     # @option params [required, String] :archive_name
     #   The name for the archive to create.
@@ -688,8 +690,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [Boolean] :force
     #   If this is a managed rule, created by an AWS service on your behalf,
@@ -704,7 +706,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.delete_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     force: false,
     #   })
     #
@@ -777,8 +779,8 @@ module Aws::CloudWatchEvents
     # For more information about partner event buses, see CreateEventBus.
     #
     # @option params [String] :name
-    #   The name of the event bus to show details for. If you omit this, the
-    #   default event bus is displayed.
+    #   The name or ARN of the event bus to show details for. If you omit
+    #   this, the default event bus is displayed.
     #
     # @return [Types::DescribeEventBusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -789,7 +791,7 @@ module Aws::CloudWatchEvents
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_bus({
-    #     name: "EventBusName",
+    #     name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -949,8 +951,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Types::DescribeRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -963,12 +965,13 @@ module Aws::CloudWatchEvents
     #   * {Types::DescribeRuleResponse#role_arn #role_arn} => String
     #   * {Types::DescribeRuleResponse#managed_by #managed_by} => String
     #   * {Types::DescribeRuleResponse#event_bus_name #event_bus_name} => String
+    #   * {Types::DescribeRuleResponse#created_by #created_by} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -982,6 +985,7 @@ module Aws::CloudWatchEvents
     #   resp.role_arn #=> String
     #   resp.managed_by #=> String
     #   resp.event_bus_name #=> String
+    #   resp.created_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule AWS API Documentation
     #
@@ -1003,8 +1007,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1012,7 +1016,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.disable_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRule AWS API Documentation
@@ -1035,8 +1039,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1044,7 +1048,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.enable_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule AWS API Documentation
@@ -1309,7 +1313,7 @@ module Aws::CloudWatchEvents
     # exclusive.
     #
     # @option params [String] :name_prefix
-    #   A name prefix to filter the archives returned. Only archives with name
+    #   A name prefix to filter the replays returned. Only replays with name
     #   that match the prefix are returned.
     #
     # @option params [String] :state
@@ -1371,8 +1375,8 @@ module Aws::CloudWatchEvents
     #   The Amazon Resource Name (ARN) of the target resource.
     #
     # @option params [String] :event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list rules for. If you omit this,
+    #   the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1390,7 +1394,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.list_rule_names_by_target({
     #     target_arn: "TargetArn", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1420,8 +1424,8 @@ module Aws::CloudWatchEvents
     #   The prefix matching the rule name.
     #
     # @option params [String] :event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list the rules for. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1439,7 +1443,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.list_rules({
     #     name_prefix: "RuleName",
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1504,8 +1508,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1523,7 +1527,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.list_targets_by_rule({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1608,7 +1612,7 @@ module Aws::CloudWatchEvents
     #         resources: ["EventResource"],
     #         detail_type: "String",
     #         detail: "String",
-    #         event_bus_name: "NonPartnerEventBusName",
+    #         event_bus_name: "NonPartnerEventBusNameOrArn",
     #       },
     #     ],
     #   })
@@ -1702,14 +1706,14 @@ module Aws::CloudWatchEvents
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name of the event bus associated with the rule. If you omit this,
+    #   the default event bus is used.
     #
-    # @option params [required, String] :action
+    # @option params [String] :action
     #   The action that you are enabling the other account to perform.
     #   Currently, this must be `events:PutEvents`.
     #
-    # @option params [required, String] :principal
+    # @option params [String] :principal
     #   The 12-digit AWS account ID that you are permitting to put events to
     #   your default event bus. Specify "*" to permit any account to put
     #   events to your default event bus.
@@ -1721,7 +1725,7 @@ module Aws::CloudWatchEvents
     #   with an account field do not match any events sent from other
     #   accounts.
     #
-    # @option params [required, String] :statement_id
+    # @option params [String] :statement_id
     #   An identifier string for the external account that you are granting
     #   permissions to. If you later want to revoke the permission for this
     #   external account, specify this `StatementId` when you run
@@ -1744,20 +1748,26 @@ module Aws::CloudWatchEvents
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #
+    # @option params [String] :policy
+    #   A JSON string that describes the permission policy statement. You can
+    #   include a `Policy` parameter in the request instead of using the
+    #   `StatementId`, `Action`, `Principal`, or `Condition` parameters.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_permission({
     #     event_bus_name: "NonPartnerEventBusName",
-    #     action: "Action", # required
-    #     principal: "Principal", # required
-    #     statement_id: "StatementId", # required
+    #     action: "Action",
+    #     principal: "Principal",
+    #     statement_id: "StatementId",
     #     condition: {
     #       type: "String", # required
     #       key: "String", # required
     #       value: "String", # required
     #     },
+    #     policy: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission AWS API Documentation
@@ -1863,8 +1873,8 @@ module Aws::CloudWatchEvents
     #   The list of key-value pairs to associate with the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus to associate with this rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus to associate with this rule. If you
+    #   omit this, the default event bus is used.
     #
     # @return [Types::PutRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1885,7 +1895,7 @@ module Aws::CloudWatchEvents
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -2031,8 +2041,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The name of the event bus associated with the rule. If you omit this,
-    #   the default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [required, Array<Types::Target>] :targets
     #   The targets to update or add to the rule.
@@ -2046,7 +2056,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.put_targets({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     targets: [ # required
     #       {
     #         id: "TargetId", # required
@@ -2149,9 +2159,12 @@ module Aws::CloudWatchEvents
     # granted it permission with `PutPermission`. You can find the
     # `StatementId` by using DescribeEventBus.
     #
-    # @option params [required, String] :statement_id
+    # @option params [String] :statement_id
     #   The statement ID corresponding to the account that is no longer
     #   allowed to put events to the default event bus.
+    #
+    # @option params [Boolean] :remove_all_permissions
+    #   Specifies whether to remove all permissions.
     #
     # @option params [String] :event_bus_name
     #   The name of the event bus to revoke permissions for. If you omit this,
@@ -2162,7 +2175,8 @@ module Aws::CloudWatchEvents
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_permission({
-    #     statement_id: "StatementId", # required
+    #     statement_id: "StatementId",
+    #     remove_all_permissions: false,
     #     event_bus_name: "NonPartnerEventBusName",
     #   })
     #
@@ -2191,7 +2205,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The name of the event bus associated with the rule.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [required, Array<String>] :ids
     #   The IDs of the targets to remove from the rule.
@@ -2212,7 +2227,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.remove_targets({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     ids: ["TargetId"], # required
     #     force: false,
     #   })
@@ -2479,7 +2494,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

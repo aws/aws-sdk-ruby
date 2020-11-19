@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-11-19)
+------------------
+
+* Feature - Adding multi-region replication feature for AWS Managed Microsoft AD
+
 1.34.0 (2020-09-30)
 ------------------
 

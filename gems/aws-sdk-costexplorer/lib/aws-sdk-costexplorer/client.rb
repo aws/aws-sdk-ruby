@@ -884,13 +884,17 @@ module Aws::CostExplorer
     # `UsageQuantity`, that you want the request to return. You can also
     # filter and group your data by various dimensions, such as `SERVICE` or
     # `AZ`, in a specific time range. For a complete list of valid
-    # dimensions, see the [GetDimensionValues][1] operation. Master account
-    # in an organization in AWS Organizations have access to all member
-    # accounts.
+    # dimensions, see the [GetDimensionValues][1] operation. Management
+    # account in an organization in AWS Organizations have access to all
+    # member accounts.
+    #
+    # For information about filter limitations, see [Quotas and
+    # restrictions][2] in the *Billing and Cost Management User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html
     #
     # @option params [required, Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving AWS costs. The start date
@@ -1045,8 +1049,8 @@ module Aws::CostExplorer
     # return. You can also filter and group your data by various dimensions,
     # such as `SERVICE` or `AZ`, in a specific time range. For a complete
     # list of valid dimensions, see the [GetDimensionValues][1] operation.
-    # Master account in an organization in AWS Organizations have access to
-    # all member accounts. This API is currently available for the Amazon
+    # Management account in an organization in AWS Organizations have access
+    # to all member accounts. This API is currently available for the Amazon
     # Elastic Compute Cloud – Compute service only.
     #
     # <note markdown="1"> This is an opt-in only feature. You can enable this feature from the
@@ -1498,11 +1502,11 @@ module Aws::CostExplorer
     # Retrieves the reservation coverage for your account. This enables you
     # to see how much of your Amazon Elastic Compute Cloud, Amazon
     # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
-    # usage is covered by a reservation. An organization's master account
-    # can see the coverage of the associated member accounts. This supports
-    # dimensions, Cost Categories, and nested expressions. For any time
-    # period, you can filter data about reservation usage by the following
-    # dimensions:
+    # usage is covered by a reservation. An organization's management
+    # account can see the coverage of the associated member accounts. This
+    # supports dimensions, Cost Categories, and nested expressions. For any
+    # time period, you can filter data about reservation usage by the
+    # following dimensions:
     #
     # * AZ
     #
@@ -1756,8 +1760,8 @@ module Aws::CostExplorer
     #
     # @option params [String] :account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the master account and
-    #   member accounts if the value is set to `PAYER`. If the value is
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to `PAYER`. If the value is
     #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #
@@ -1884,11 +1888,11 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves the reservation utilization for your account. Master account
-    # in an organization have access to member accounts. You can filter data
-    # by dimensions in a time period. You can use `GetDimensionValues` to
-    # determine the possible dimension values. Currently, you can group only
-    # by `SUBSCRIPTION_ID`.
+    # Retrieves the reservation utilization for your account. Management
+    # account in an organization have access to member accounts. You can
+    # filter data by dimensions in a time period. You can use
+    # `GetDimensionValues` to determine the possible dimension values.
+    # Currently, you can group only by `SUBSCRIPTION_ID`.
     #
     # @option params [required, Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving RI utilization. The start
@@ -2276,10 +2280,10 @@ module Aws::CostExplorer
 
     # Retrieves the Savings Plans covered for your account. This enables you
     # to see how much of your cost is covered by a Savings Plan. An
-    # organization’s master account can see the coverage of the associated
-    # member accounts. This supports dimensions, Cost Categories, and nested
-    # expressions. For any time period, you can filter data for Savings
-    # Plans usage with the following dimensions:
+    # organization’s management account can see the coverage of the
+    # associated member accounts. This supports dimensions, Cost Categories,
+    # and nested expressions. For any time period, you can filter data for
+    # Savings Plans usage with the following dimensions:
     #
     # * `LINKED_ACCOUNT`
     #
@@ -2437,8 +2441,8 @@ module Aws::CostExplorer
     #
     # @option params [String] :account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the master account and
-    #   member accounts if the value is set to `PAYER`. If the value is
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to `PAYER`. If the value is
     #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #
@@ -2520,6 +2524,7 @@ module Aws::CostExplorer
     #
     #   resp.metadata.recommendation_id #=> String
     #   resp.metadata.generation_timestamp #=> String
+    #   resp.metadata.additional_metadata #=> String
     #   resp.savings_plans_purchase_recommendation.account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.savings_plans_purchase_recommendation.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP"
     #   resp.savings_plans_purchase_recommendation.term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
@@ -2567,7 +2572,7 @@ module Aws::CostExplorer
     end
 
     # Retrieves the Savings Plans utilization for your account across date
-    # ranges with daily or monthly granularity. Master account in an
+    # ranges with daily or monthly granularity. Management account in an
     # organization have access to member accounts. You can use
     # `GetDimensionValues` in `SAVINGS_PLANS` to determine the possible
     # dimension values.
@@ -3268,7 +3273,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

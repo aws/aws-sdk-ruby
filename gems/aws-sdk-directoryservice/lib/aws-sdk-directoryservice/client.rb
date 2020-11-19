@@ -478,6 +478,43 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Adds two domain controllers in the specified Region for the specified
+    # directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory to which you want to add Region
+    #   replication.
+    #
+    # @option params [required, String] :region_name
+    #   The name of the Region where you want to add domain controllers for
+    #   replication. For example, `us-east-1`.
+    #
+    # @option params [required, Types::DirectoryVpcSettings] :vpc_settings
+    #   Contains VPC information for the CreateDirectory or CreateMicrosoftAD
+    #   operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_region({
+    #     directory_id: "DirectoryId", # required
+    #     region_name: "RegionName", # required
+    #     vpc_settings: { # required
+    #       vpc_id: "VpcId", # required
+    #       subnet_ids: ["SubnetId"], # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddRegion AWS API Documentation
+    #
+    # @overload add_region(params = {})
+    # @param [Hash] params ({})
+    def add_region(params = {}, options = {})
+      req = build_request(:add_region, params)
+      req.send_request(options)
+    end
+
     # Adds or overwrites one or more tags for the specified directory. Each
     # directory can have a maximum of 50 tags. Each tag consists of a key
     # and optional value. Tag keys must be unique to each resource.
@@ -659,8 +696,8 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Creates a computer account in the specified directory, and joins the
-    # computer to the directory.
+    # Creates an Active Directory computer object in the specified
+    # directory.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory in which to create the computer
@@ -782,6 +819,36 @@ module Aws::DirectoryService
     #
     #   If you need to change the password for the administrator account, you
     #   can use the ResetUserPassword API call.
+    #
+    #   The regex pattern for this string is made up of the following
+    #   conditions:
+    #
+    #   * Length (?=^.\\\{8,64\\}$) – Must be between 8 and 64 characters
+    #
+    #   ^
+    #
+    #   AND any 3 of the following password complexity rules required by
+    #   Active Directory:
+    #
+    #   * Numbers and upper case and lowercase
+    #     (?=.*\\d)(?=.*\[A-Z\])(?=.*\[a-z\])
+    #
+    #   * Numbers and special characters and lower case
+    #     (?=.*\\d)(?=.*\[^A-Za-z0-9\\s\])(?=.*\[a-z\])
+    #
+    #   * Special characters and upper case and lower case
+    #     (?=.*\[^A-Za-z0-9\\s\])(?=.*\[A-Z\])(?=.*\[a-z\])
+    #
+    #   * Numbers and upper case and special characters
+    #     (?=.*\\d)(?=.*\[A-Z\])(?=.*\[^A-Za-z0-9\\s\])
+    #
+    #   For additional information about how Active Directory passwords are
+    #   enforced, see [Password must meet complexity requirements][1] on the
+    #   Microsoft website.
+    #
+    #
+    #
+    #   [1]: https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements
     #
     # @option params [String] :description
     #   A description for the directory.
@@ -1448,6 +1515,9 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.display_label #=> String
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.use_same_username #=> Boolean
     #   resp.directory_descriptions[0].owner_directory_description.radius_status #=> String, one of "Creating", "Completed", "Failed"
+    #   resp.directory_descriptions[0].regions_info.primary_region #=> String
+    #   resp.directory_descriptions[0].regions_info.additional_regions #=> Array
+    #   resp.directory_descriptions[0].regions_info.additional_regions[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories AWS API Documentation
@@ -1606,6 +1676,57 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def describe_ldaps_settings(params = {}, options = {})
       req = build_request(:describe_ldaps_settings, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the Regions that are configured for
+    # multi-Region replication.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [String] :region_name
+    #   The name of the Region. For example, `us-east-1`.
+    #
+    # @option params [String] :next_token
+    #   The *DescribeRegionsResult.NextToken* value from a previous call to
+    #   DescribeRegions. Pass null if this is the first call.
+    #
+    # @return [Types::DescribeRegionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegionsResult#regions_description #regions_description} => Array&lt;Types::RegionDescription&gt;
+    #   * {Types::DescribeRegionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_regions({
+    #     directory_id: "DirectoryId", # required
+    #     region_name: "RegionName",
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.regions_description #=> Array
+    #   resp.regions_description[0].directory_id #=> String
+    #   resp.regions_description[0].region_name #=> String
+    #   resp.regions_description[0].region_type #=> String, one of "Primary", "Additional"
+    #   resp.regions_description[0].status #=> String, one of "Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed"
+    #   resp.regions_description[0].vpc_settings.vpc_id #=> String
+    #   resp.regions_description[0].vpc_settings.subnet_ids #=> Array
+    #   resp.regions_description[0].vpc_settings.subnet_ids[0] #=> String
+    #   resp.regions_description[0].desired_number_of_domain_controllers #=> Integer
+    #   resp.regions_description[0].launch_time #=> Time
+    #   resp.regions_description[0].status_last_updated_date_time #=> Time
+    #   resp.regions_description[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeRegions AWS API Documentation
+    #
+    # @overload describe_regions(params = {})
+    # @param [Hash] params ({})
+    def describe_regions(params = {}, options = {})
+      req = build_request(:describe_regions, params)
       req.send_request(options)
     end
 
@@ -2390,6 +2511,31 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Stops all replication and removes the domain controllers from the
+    # specified Region. You cannot remove the primary Region with this
+    # operation. Instead, use the `DeleteDirectory` API.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory for which you want to remove Region
+    #   replication.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_region({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveRegion AWS API Documentation
+    #
+    # @overload remove_region(params = {})
+    # @param [Hash] params ({})
+    def remove_region(params = {}, options = {})
+      req = build_request(:remove_region, params)
+      req.send_request(options)
+    end
+
     # Removes tags from a directory.
     #
     # @option params [required, String] :resource_id
@@ -2834,7 +2980,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

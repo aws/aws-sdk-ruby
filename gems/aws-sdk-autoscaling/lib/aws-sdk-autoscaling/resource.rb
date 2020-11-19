@@ -56,6 +56,11 @@ module Aws::AutoScaling
     #           {
     #             instance_type: "XmlStringMaxLen255",
     #             weighted_capacity: "XmlStringMaxLen32",
+    #             launch_template_specification: {
+    #               launch_template_id: "XmlStringMaxLen255",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "XmlStringMaxLen255",
+    #             },
     #           },
     #         ],
     #       },
@@ -146,7 +151,8 @@ module Aws::AutoScaling
     #   types to fulfill On-Demand and Spot capacities, but also the
     #   parameters that specify the instance configuration information—the
     #   launch template and instance types. The policy can also include a
-    #   weight for each instance type. For more information, see [Auto Scaling
+    #   weight for each instance type and different launch templates for
+    #   individual instance types. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #

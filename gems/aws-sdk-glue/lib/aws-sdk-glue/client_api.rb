@@ -75,6 +75,8 @@ module Aws::Glue
     CatalogTablesList = Shapes::ListShape.new(name: 'CatalogTablesList')
     CatalogTarget = Shapes::StructureShape.new(name: 'CatalogTarget')
     CatalogTargetList = Shapes::ListShape.new(name: 'CatalogTargetList')
+    CheckSchemaVersionValidityInput = Shapes::StructureShape.new(name: 'CheckSchemaVersionValidityInput')
+    CheckSchemaVersionValidityResponse = Shapes::StructureShape.new(name: 'CheckSchemaVersionValidityResponse')
     Classification = Shapes::StringShape.new(name: 'Classification')
     Classifier = Shapes::StructureShape.new(name: 'Classifier')
     ClassifierList = Shapes::ListShape.new(name: 'ClassifierList')
@@ -105,6 +107,7 @@ module Aws::Glue
     ColumnValuesString = Shapes::StringShape.new(name: 'ColumnValuesString')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
     Comparator = Shapes::StringShape.new(name: 'Comparator')
+    Compatibility = Shapes::StringShape.new(name: 'Compatibility')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConcurrentRunsExceededException = Shapes::StructureShape.new(name: 'ConcurrentRunsExceededException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
@@ -156,6 +159,10 @@ module Aws::Glue
     CreateMLTransformResponse = Shapes::StructureShape.new(name: 'CreateMLTransformResponse')
     CreatePartitionRequest = Shapes::StructureShape.new(name: 'CreatePartitionRequest')
     CreatePartitionResponse = Shapes::StructureShape.new(name: 'CreatePartitionResponse')
+    CreateRegistryInput = Shapes::StructureShape.new(name: 'CreateRegistryInput')
+    CreateRegistryResponse = Shapes::StructureShape.new(name: 'CreateRegistryResponse')
+    CreateSchemaInput = Shapes::StructureShape.new(name: 'CreateSchemaInput')
+    CreateSchemaResponse = Shapes::StructureShape.new(name: 'CreateSchemaResponse')
     CreateScriptRequest = Shapes::StructureShape.new(name: 'CreateScriptRequest')
     CreateScriptResponse = Shapes::StructureShape.new(name: 'CreateScriptResponse')
     CreateSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationRequest')
@@ -169,6 +176,7 @@ module Aws::Glue
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
     CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
     CreateXMLClassifierRequest = Shapes::StructureShape.new(name: 'CreateXMLClassifierRequest')
+    CreatedTimestamp = Shapes::StringShape.new(name: 'CreatedTimestamp')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     CsvClassifier = Shapes::StructureShape.new(name: 'CsvClassifier')
     CsvColumnDelimiter = Shapes::StringShape.new(name: 'CsvColumnDelimiter')
@@ -179,6 +187,7 @@ module Aws::Glue
     DagEdges = Shapes::ListShape.new(name: 'DagEdges')
     DagNodes = Shapes::ListShape.new(name: 'DagNodes')
     DataCatalogEncryptionSettings = Shapes::StructureShape.new(name: 'DataCatalogEncryptionSettings')
+    DataFormat = Shapes::StringShape.new(name: 'DataFormat')
     DataLakePrincipal = Shapes::StructureShape.new(name: 'DataLakePrincipal')
     DataLakePrincipalString = Shapes::StringShape.new(name: 'DataLakePrincipalString')
     Database = Shapes::StructureShape.new(name: 'Database')
@@ -211,8 +220,14 @@ module Aws::Glue
     DeleteMLTransformResponse = Shapes::StructureShape.new(name: 'DeleteMLTransformResponse')
     DeletePartitionRequest = Shapes::StructureShape.new(name: 'DeletePartitionRequest')
     DeletePartitionResponse = Shapes::StructureShape.new(name: 'DeletePartitionResponse')
+    DeleteRegistryInput = Shapes::StructureShape.new(name: 'DeleteRegistryInput')
+    DeleteRegistryResponse = Shapes::StructureShape.new(name: 'DeleteRegistryResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DeleteSchemaInput = Shapes::StructureShape.new(name: 'DeleteSchemaInput')
+    DeleteSchemaResponse = Shapes::StructureShape.new(name: 'DeleteSchemaResponse')
+    DeleteSchemaVersionsInput = Shapes::StructureShape.new(name: 'DeleteSchemaVersionsInput')
+    DeleteSchemaVersionsResponse = Shapes::StructureShape.new(name: 'DeleteSchemaVersionsResponse')
     DeleteSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationRequest')
     DeleteSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationResponse')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
@@ -243,7 +258,10 @@ module Aws::Glue
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     ErrorByName = Shapes::MapShape.new(name: 'ErrorByName')
+    ErrorCodeString = Shapes::StringShape.new(name: 'ErrorCodeString')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
+    ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
+    ErrorMessageString = Shapes::StringShape.new(name: 'ErrorMessageString')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     EvaluationMetrics = Shapes::StructureShape.new(name: 'EvaluationMetrics')
     ExecutionProperty = Shapes::StructureShape.new(name: 'ExecutionProperty')
@@ -321,11 +339,21 @@ module Aws::Glue
     GetPartitionsResponse = Shapes::StructureShape.new(name: 'GetPartitionsResponse')
     GetPlanRequest = Shapes::StructureShape.new(name: 'GetPlanRequest')
     GetPlanResponse = Shapes::StructureShape.new(name: 'GetPlanResponse')
+    GetRegistryInput = Shapes::StructureShape.new(name: 'GetRegistryInput')
+    GetRegistryResponse = Shapes::StructureShape.new(name: 'GetRegistryResponse')
     GetResourcePoliciesRequest = Shapes::StructureShape.new(name: 'GetResourcePoliciesRequest')
     GetResourcePoliciesResponse = Shapes::StructureShape.new(name: 'GetResourcePoliciesResponse')
     GetResourcePoliciesResponseList = Shapes::ListShape.new(name: 'GetResourcePoliciesResponseList')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    GetSchemaByDefinitionInput = Shapes::StructureShape.new(name: 'GetSchemaByDefinitionInput')
+    GetSchemaByDefinitionResponse = Shapes::StructureShape.new(name: 'GetSchemaByDefinitionResponse')
+    GetSchemaInput = Shapes::StructureShape.new(name: 'GetSchemaInput')
+    GetSchemaResponse = Shapes::StructureShape.new(name: 'GetSchemaResponse')
+    GetSchemaVersionInput = Shapes::StructureShape.new(name: 'GetSchemaVersionInput')
+    GetSchemaVersionResponse = Shapes::StructureShape.new(name: 'GetSchemaVersionResponse')
+    GetSchemaVersionsDiffInput = Shapes::StructureShape.new(name: 'GetSchemaVersionsDiffInput')
+    GetSchemaVersionsDiffResponse = Shapes::StructureShape.new(name: 'GetSchemaVersionsDiffResponse')
     GetSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationRequest')
     GetSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'GetSecurityConfigurationResponse')
     GetSecurityConfigurationsRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationsRequest')
@@ -377,6 +405,7 @@ module Aws::Glue
     IntegerValue = Shapes::IntegerShape.new(name: 'IntegerValue')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
+    IsVersionValid = Shapes::BooleanShape.new(name: 'IsVersionValid')
     JdbcTarget = Shapes::StructureShape.new(name: 'JdbcTarget')
     JdbcTargetList = Shapes::ListShape.new(name: 'JdbcTargetList')
     Job = Shapes::StructureShape.new(name: 'Job')
@@ -405,6 +434,7 @@ module Aws::Glue
     Language = Shapes::StringShape.new(name: 'Language')
     LastCrawlInfo = Shapes::StructureShape.new(name: 'LastCrawlInfo')
     LastCrawlStatus = Shapes::StringShape.new(name: 'LastCrawlStatus')
+    LatestSchemaVersionBoolean = Shapes::BooleanShape.new(name: 'LatestSchemaVersionBoolean')
     ListCrawlersRequest = Shapes::StructureShape.new(name: 'ListCrawlersRequest')
     ListCrawlersResponse = Shapes::StructureShape.new(name: 'ListCrawlersResponse')
     ListDevEndpointsRequest = Shapes::StructureShape.new(name: 'ListDevEndpointsRequest')
@@ -413,6 +443,12 @@ module Aws::Glue
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListMLTransformsRequest = Shapes::StructureShape.new(name: 'ListMLTransformsRequest')
     ListMLTransformsResponse = Shapes::StructureShape.new(name: 'ListMLTransformsResponse')
+    ListRegistriesInput = Shapes::StructureShape.new(name: 'ListRegistriesInput')
+    ListRegistriesResponse = Shapes::StructureShape.new(name: 'ListRegistriesResponse')
+    ListSchemaVersionsInput = Shapes::StructureShape.new(name: 'ListSchemaVersionsInput')
+    ListSchemaVersionsResponse = Shapes::StructureShape.new(name: 'ListSchemaVersionsResponse')
+    ListSchemasInput = Shapes::StructureShape.new(name: 'ListSchemasInput')
+    ListSchemasResponse = Shapes::StructureShape.new(name: 'ListSchemasResponse')
     ListTriggersRequest = Shapes::StructureShape.new(name: 'ListTriggersRequest')
     ListTriggersResponse = Shapes::StructureShape.new(name: 'ListTriggersResponse')
     ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
@@ -435,9 +471,16 @@ module Aws::Glue
     MappingList = Shapes::ListShape.new(name: 'MappingList')
     MatchCriteria = Shapes::ListShape.new(name: 'MatchCriteria')
     MaxConcurrentRuns = Shapes::IntegerShape.new(name: 'MaxConcurrentRuns')
+    MaxResultsNumber = Shapes::IntegerShape.new(name: 'MaxResultsNumber')
     MaxRetries = Shapes::IntegerShape.new(name: 'MaxRetries')
     MessagePrefix = Shapes::StringShape.new(name: 'MessagePrefix')
     MessageString = Shapes::StringShape.new(name: 'MessageString')
+    MetadataInfo = Shapes::StructureShape.new(name: 'MetadataInfo')
+    MetadataInfoMap = Shapes::MapShape.new(name: 'MetadataInfoMap')
+    MetadataKeyString = Shapes::StringShape.new(name: 'MetadataKeyString')
+    MetadataKeyValuePair = Shapes::StructureShape.new(name: 'MetadataKeyValuePair')
+    MetadataList = Shapes::ListShape.new(name: 'MetadataList')
+    MetadataValueString = Shapes::StringShape.new(name: 'MetadataValueString')
     MillisecondsCount = Shapes::IntegerShape.new(name: 'MillisecondsCount')
     MongoDBTarget = Shapes::StructureShape.new(name: 'MongoDBTarget')
     MongoDBTargetList = Shapes::ListShape.new(name: 'MongoDBTargetList')
@@ -495,13 +538,26 @@ module Aws::Glue
     PutDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsResponse')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
+    PutSchemaVersionMetadataInput = Shapes::StructureShape.new(name: 'PutSchemaVersionMetadataInput')
+    PutSchemaVersionMetadataResponse = Shapes::StructureShape.new(name: 'PutSchemaVersionMetadataResponse')
     PutWorkflowRunPropertiesRequest = Shapes::StructureShape.new(name: 'PutWorkflowRunPropertiesRequest')
     PutWorkflowRunPropertiesResponse = Shapes::StructureShape.new(name: 'PutWorkflowRunPropertiesResponse')
     PythonScript = Shapes::StringShape.new(name: 'PythonScript')
     PythonVersionString = Shapes::StringShape.new(name: 'PythonVersionString')
+    QuerySchemaVersionMetadataInput = Shapes::StructureShape.new(name: 'QuerySchemaVersionMetadataInput')
+    QuerySchemaVersionMetadataMaxResults = Shapes::IntegerShape.new(name: 'QuerySchemaVersionMetadataMaxResults')
+    QuerySchemaVersionMetadataResponse = Shapes::StructureShape.new(name: 'QuerySchemaVersionMetadataResponse')
     RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
     RecrawlBehavior = Shapes::StringShape.new(name: 'RecrawlBehavior')
     RecrawlPolicy = Shapes::StructureShape.new(name: 'RecrawlPolicy')
+    RegisterSchemaVersionInput = Shapes::StructureShape.new(name: 'RegisterSchemaVersionInput')
+    RegisterSchemaVersionResponse = Shapes::StructureShape.new(name: 'RegisterSchemaVersionResponse')
+    RegistryId = Shapes::StructureShape.new(name: 'RegistryId')
+    RegistryListDefinition = Shapes::ListShape.new(name: 'RegistryListDefinition')
+    RegistryListItem = Shapes::StructureShape.new(name: 'RegistryListItem')
+    RegistryStatus = Shapes::StringShape.new(name: 'RegistryStatus')
+    RemoveSchemaVersionMetadataInput = Shapes::StructureShape.new(name: 'RemoveSchemaVersionMetadataInput')
+    RemoveSchemaVersionMetadataResponse = Shapes::StructureShape.new(name: 'RemoveSchemaVersionMetadataResponse')
     ReplaceBoolean = Shapes::BooleanShape.new(name: 'ReplaceBoolean')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
@@ -529,8 +585,27 @@ module Aws::Glue
     SchedulerRunningException = Shapes::StructureShape.new(name: 'SchedulerRunningException')
     SchedulerTransitioningException = Shapes::StructureShape.new(name: 'SchedulerTransitioningException')
     SchemaChangePolicy = Shapes::StructureShape.new(name: 'SchemaChangePolicy')
+    SchemaCheckpointNumber = Shapes::IntegerShape.new(name: 'SchemaCheckpointNumber')
     SchemaColumn = Shapes::StructureShape.new(name: 'SchemaColumn')
+    SchemaDefinitionDiff = Shapes::StringShape.new(name: 'SchemaDefinitionDiff')
+    SchemaDefinitionString = Shapes::StringShape.new(name: 'SchemaDefinitionString')
+    SchemaDiffType = Shapes::StringShape.new(name: 'SchemaDiffType')
+    SchemaId = Shapes::StructureShape.new(name: 'SchemaId')
+    SchemaListDefinition = Shapes::ListShape.new(name: 'SchemaListDefinition')
+    SchemaListItem = Shapes::StructureShape.new(name: 'SchemaListItem')
     SchemaPathString = Shapes::StringShape.new(name: 'SchemaPathString')
+    SchemaReference = Shapes::StructureShape.new(name: 'SchemaReference')
+    SchemaRegistryNameString = Shapes::StringShape.new(name: 'SchemaRegistryNameString')
+    SchemaRegistryTokenString = Shapes::StringShape.new(name: 'SchemaRegistryTokenString')
+    SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
+    SchemaValidationError = Shapes::StringShape.new(name: 'SchemaValidationError')
+    SchemaVersionErrorItem = Shapes::StructureShape.new(name: 'SchemaVersionErrorItem')
+    SchemaVersionErrorList = Shapes::ListShape.new(name: 'SchemaVersionErrorList')
+    SchemaVersionIdString = Shapes::StringShape.new(name: 'SchemaVersionIdString')
+    SchemaVersionList = Shapes::ListShape.new(name: 'SchemaVersionList')
+    SchemaVersionListItem = Shapes::StructureShape.new(name: 'SchemaVersionListItem')
+    SchemaVersionNumber = Shapes::StructureShape.new(name: 'SchemaVersionNumber')
+    SchemaVersionStatus = Shapes::StringShape.new(name: 'SchemaVersionStatus')
     ScriptLocationString = Shapes::StringShape.new(name: 'ScriptLocationString')
     SearchPropertyPredicates = Shapes::ListShape.new(name: 'SearchPropertyPredicates')
     SearchTablesRequest = Shapes::StructureShape.new(name: 'SearchTablesRequest')
@@ -653,6 +728,10 @@ module Aws::Glue
     UpdateMLTransformResponse = Shapes::StructureShape.new(name: 'UpdateMLTransformResponse')
     UpdatePartitionRequest = Shapes::StructureShape.new(name: 'UpdatePartitionRequest')
     UpdatePartitionResponse = Shapes::StructureShape.new(name: 'UpdatePartitionResponse')
+    UpdateRegistryInput = Shapes::StructureShape.new(name: 'UpdateRegistryInput')
+    UpdateRegistryResponse = Shapes::StructureShape.new(name: 'UpdateRegistryResponse')
+    UpdateSchemaInput = Shapes::StructureShape.new(name: 'UpdateSchemaInput')
+    UpdateSchemaResponse = Shapes::StructureShape.new(name: 'UpdateSchemaResponse')
     UpdateTableRequest = Shapes::StructureShape.new(name: 'UpdateTableRequest')
     UpdateTableResponse = Shapes::StructureShape.new(name: 'UpdateTableResponse')
     UpdateTriggerRequest = Shapes::StructureShape.new(name: 'UpdateTriggerRequest')
@@ -662,6 +741,7 @@ module Aws::Glue
     UpdateWorkflowRequest = Shapes::StructureShape.new(name: 'UpdateWorkflowRequest')
     UpdateWorkflowResponse = Shapes::StructureShape.new(name: 'UpdateWorkflowResponse')
     UpdateXMLClassifierRequest = Shapes::StructureShape.new(name: 'UpdateXMLClassifierRequest')
+    UpdatedTimestamp = Shapes::StringShape.new(name: 'UpdatedTimestamp')
     UriString = Shapes::StringShape.new(name: 'UriString')
     UserDefinedFunction = Shapes::StructureShape.new(name: 'UserDefinedFunction')
     UserDefinedFunctionInput = Shapes::StructureShape.new(name: 'UserDefinedFunctionInput')
@@ -670,8 +750,10 @@ module Aws::Glue
     ValueString = Shapes::StringShape.new(name: 'ValueString')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VersionId = Shapes::IntegerShape.new(name: 'VersionId')
+    VersionLongNumber = Shapes::IntegerShape.new(name: 'VersionLongNumber')
     VersionMismatchException = Shapes::StructureShape.new(name: 'VersionMismatchException')
     VersionString = Shapes::StringShape.new(name: 'VersionString')
+    VersionsString = Shapes::StringShape.new(name: 'VersionsString')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
     WorkerType = Shapes::StringShape.new(name: 'WorkerType')
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
@@ -884,6 +966,14 @@ module Aws::Glue
     CatalogTarget.struct_class = Types::CatalogTarget
 
     CatalogTargetList.member = Shapes::ShapeRef.new(shape: CatalogTarget)
+
+    CheckSchemaVersionValidityInput.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, required: true, location_name: "DataFormat"))
+    CheckSchemaVersionValidityInput.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaDefinitionString, required: true, location_name: "SchemaDefinition"))
+    CheckSchemaVersionValidityInput.struct_class = Types::CheckSchemaVersionValidityInput
+
+    CheckSchemaVersionValidityResponse.add_member(:valid, Shapes::ShapeRef.new(shape: IsVersionValid, location_name: "Valid"))
+    CheckSchemaVersionValidityResponse.add_member(:error, Shapes::ShapeRef.new(shape: SchemaValidationError, location_name: "Error"))
+    CheckSchemaVersionValidityResponse.struct_class = Types::CheckSchemaVersionValidityResponse
 
     Classifier.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: GrokClassifier, location_name: "GrokClassifier"))
     Classifier.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: XMLClassifier, location_name: "XMLClassifier"))
@@ -1224,6 +1314,42 @@ module Aws::Glue
 
     CreatePartitionResponse.struct_class = Types::CreatePartitionResponse
 
+    CreateRegistryInput.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, required: true, location_name: "RegistryName"))
+    CreateRegistryInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateRegistryInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateRegistryInput.struct_class = Types::CreateRegistryInput
+
+    CreateRegistryResponse.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    CreateRegistryResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    CreateRegistryResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateRegistryResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateRegistryResponse.struct_class = Types::CreateRegistryResponse
+
+    CreateSchemaInput.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "RegistryId"))
+    CreateSchemaInput.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, required: true, location_name: "SchemaName"))
+    CreateSchemaInput.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, required: true, location_name: "DataFormat"))
+    CreateSchemaInput.add_member(:compatibility, Shapes::ShapeRef.new(shape: Compatibility, location_name: "Compatibility"))
+    CreateSchemaInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateSchemaInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateSchemaInput.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaDefinitionString, location_name: "SchemaDefinition"))
+    CreateSchemaInput.struct_class = Types::CreateSchemaInput
+
+    CreateSchemaResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    CreateSchemaResponse.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    CreateSchemaResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    CreateSchemaResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    CreateSchemaResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateSchemaResponse.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, location_name: "DataFormat"))
+    CreateSchemaResponse.add_member(:compatibility, Shapes::ShapeRef.new(shape: Compatibility, location_name: "Compatibility"))
+    CreateSchemaResponse.add_member(:schema_checkpoint, Shapes::ShapeRef.new(shape: SchemaCheckpointNumber, location_name: "SchemaCheckpoint"))
+    CreateSchemaResponse.add_member(:latest_schema_version, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "LatestSchemaVersion"))
+    CreateSchemaResponse.add_member(:next_schema_version, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "NextSchemaVersion"))
+    CreateSchemaResponse.add_member(:schema_status, Shapes::ShapeRef.new(shape: SchemaStatus, location_name: "SchemaStatus"))
+    CreateSchemaResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateSchemaResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    CreateSchemaResponse.add_member(:schema_version_status, Shapes::ShapeRef.new(shape: SchemaVersionStatus, location_name: "SchemaVersionStatus"))
+    CreateSchemaResponse.struct_class = Types::CreateSchemaResponse
+
     CreateScriptRequest.add_member(:dag_nodes, Shapes::ShapeRef.new(shape: DagNodes, location_name: "DagNodes"))
     CreateScriptRequest.add_member(:dag_edges, Shapes::ShapeRef.new(shape: DagEdges, location_name: "DagEdges"))
     CreateScriptRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "Language"))
@@ -1416,11 +1542,34 @@ module Aws::Glue
 
     DeletePartitionResponse.struct_class = Types::DeletePartitionResponse
 
+    DeleteRegistryInput.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, required: true, location_name: "RegistryId"))
+    DeleteRegistryInput.struct_class = Types::DeleteRegistryInput
+
+    DeleteRegistryResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    DeleteRegistryResponse.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    DeleteRegistryResponse.add_member(:status, Shapes::ShapeRef.new(shape: RegistryStatus, location_name: "Status"))
+    DeleteRegistryResponse.struct_class = Types::DeleteRegistryResponse
+
     DeleteResourcePolicyRequest.add_member(:policy_hash_condition, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHashCondition"))
     DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "ResourceArn"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeleteSchemaInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    DeleteSchemaInput.struct_class = Types::DeleteSchemaInput
+
+    DeleteSchemaResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    DeleteSchemaResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    DeleteSchemaResponse.add_member(:status, Shapes::ShapeRef.new(shape: SchemaStatus, location_name: "Status"))
+    DeleteSchemaResponse.struct_class = Types::DeleteSchemaResponse
+
+    DeleteSchemaVersionsInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    DeleteSchemaVersionsInput.add_member(:versions, Shapes::ShapeRef.new(shape: VersionsString, required: true, location_name: "Versions"))
+    DeleteSchemaVersionsInput.struct_class = Types::DeleteSchemaVersionsInput
+
+    DeleteSchemaVersionsResponse.add_member(:schema_version_errors, Shapes::ShapeRef.new(shape: SchemaVersionErrorList, location_name: "SchemaVersionErrors"))
+    DeleteSchemaVersionsResponse.struct_class = Types::DeleteSchemaVersionsResponse
 
     DeleteSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DeleteSecurityConfigurationRequest.struct_class = Types::DeleteSecurityConfigurationRequest
@@ -1535,6 +1684,10 @@ module Aws::Glue
     ErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: NameString, location_name: "ErrorCode"))
     ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
     ErrorDetail.struct_class = Types::ErrorDetail
+
+    ErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCodeString, location_name: "ErrorCode"))
+    ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessageString, location_name: "ErrorMessage"))
+    ErrorDetails.struct_class = Types::ErrorDetails
 
     EvaluationMetrics.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, required: true, location_name: "TransformType"))
     EvaluationMetrics.add_member(:find_matches_metrics, Shapes::ShapeRef.new(shape: FindMatchesMetrics, location_name: "FindMatchesMetrics"))
@@ -1851,6 +2004,17 @@ module Aws::Glue
     GetPlanResponse.add_member(:scala_code, Shapes::ShapeRef.new(shape: ScalaCode, location_name: "ScalaCode"))
     GetPlanResponse.struct_class = Types::GetPlanResponse
 
+    GetRegistryInput.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, required: true, location_name: "RegistryId"))
+    GetRegistryInput.struct_class = Types::GetRegistryInput
+
+    GetRegistryResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    GetRegistryResponse.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    GetRegistryResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetRegistryResponse.add_member(:status, Shapes::ShapeRef.new(shape: RegistryStatus, location_name: "Status"))
+    GetRegistryResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    GetRegistryResponse.add_member(:updated_time, Shapes::ShapeRef.new(shape: UpdatedTimestamp, location_name: "UpdatedTime"))
+    GetRegistryResponse.struct_class = Types::GetRegistryResponse
+
     GetResourcePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetResourcePoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     GetResourcePoliciesRequest.struct_class = Types::GetResourcePoliciesRequest
@@ -1869,6 +2033,58 @@ module Aws::Glue
     GetResourcePolicyResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
     GetResourcePolicyResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
+
+    GetSchemaByDefinitionInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    GetSchemaByDefinitionInput.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaDefinitionString, required: true, location_name: "SchemaDefinition"))
+    GetSchemaByDefinitionInput.struct_class = Types::GetSchemaByDefinitionInput
+
+    GetSchemaByDefinitionResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    GetSchemaByDefinitionResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    GetSchemaByDefinitionResponse.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, location_name: "DataFormat"))
+    GetSchemaByDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: SchemaVersionStatus, location_name: "Status"))
+    GetSchemaByDefinitionResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    GetSchemaByDefinitionResponse.struct_class = Types::GetSchemaByDefinitionResponse
+
+    GetSchemaInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    GetSchemaInput.struct_class = Types::GetSchemaInput
+
+    GetSchemaResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    GetSchemaResponse.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    GetSchemaResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    GetSchemaResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    GetSchemaResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetSchemaResponse.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, location_name: "DataFormat"))
+    GetSchemaResponse.add_member(:compatibility, Shapes::ShapeRef.new(shape: Compatibility, location_name: "Compatibility"))
+    GetSchemaResponse.add_member(:schema_checkpoint, Shapes::ShapeRef.new(shape: SchemaCheckpointNumber, location_name: "SchemaCheckpoint"))
+    GetSchemaResponse.add_member(:latest_schema_version, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "LatestSchemaVersion"))
+    GetSchemaResponse.add_member(:next_schema_version, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "NextSchemaVersion"))
+    GetSchemaResponse.add_member(:schema_status, Shapes::ShapeRef.new(shape: SchemaStatus, location_name: "SchemaStatus"))
+    GetSchemaResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    GetSchemaResponse.add_member(:updated_time, Shapes::ShapeRef.new(shape: UpdatedTimestamp, location_name: "UpdatedTime"))
+    GetSchemaResponse.struct_class = Types::GetSchemaResponse
+
+    GetSchemaVersionInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, location_name: "SchemaId"))
+    GetSchemaVersionInput.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    GetSchemaVersionInput.add_member(:schema_version_number, Shapes::ShapeRef.new(shape: SchemaVersionNumber, location_name: "SchemaVersionNumber"))
+    GetSchemaVersionInput.struct_class = Types::GetSchemaVersionInput
+
+    GetSchemaVersionResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    GetSchemaVersionResponse.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaDefinitionString, location_name: "SchemaDefinition"))
+    GetSchemaVersionResponse.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, location_name: "DataFormat"))
+    GetSchemaVersionResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    GetSchemaVersionResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "VersionNumber"))
+    GetSchemaVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: SchemaVersionStatus, location_name: "Status"))
+    GetSchemaVersionResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    GetSchemaVersionResponse.struct_class = Types::GetSchemaVersionResponse
+
+    GetSchemaVersionsDiffInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    GetSchemaVersionsDiffInput.add_member(:first_schema_version_number, Shapes::ShapeRef.new(shape: SchemaVersionNumber, required: true, location_name: "FirstSchemaVersionNumber"))
+    GetSchemaVersionsDiffInput.add_member(:second_schema_version_number, Shapes::ShapeRef.new(shape: SchemaVersionNumber, required: true, location_name: "SecondSchemaVersionNumber"))
+    GetSchemaVersionsDiffInput.add_member(:schema_diff_type, Shapes::ShapeRef.new(shape: SchemaDiffType, required: true, location_name: "SchemaDiffType"))
+    GetSchemaVersionsDiffInput.struct_class = Types::GetSchemaVersionsDiffInput
+
+    GetSchemaVersionsDiffResponse.add_member(:diff, Shapes::ShapeRef.new(shape: SchemaDefinitionDiff, location_name: "Diff"))
+    GetSchemaVersionsDiffResponse.struct_class = Types::GetSchemaVersionsDiffResponse
 
     GetSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetSecurityConfigurationRequest.struct_class = Types::GetSecurityConfigurationRequest
@@ -2207,6 +2423,32 @@ module Aws::Glue
     ListMLTransformsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListMLTransformsResponse.struct_class = Types::ListMLTransformsResponse
 
+    ListRegistriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsNumber, location_name: "MaxResults"))
+    ListRegistriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    ListRegistriesInput.struct_class = Types::ListRegistriesInput
+
+    ListRegistriesResponse.add_member(:registries, Shapes::ShapeRef.new(shape: RegistryListDefinition, location_name: "Registries"))
+    ListRegistriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    ListRegistriesResponse.struct_class = Types::ListRegistriesResponse
+
+    ListSchemaVersionsInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    ListSchemaVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsNumber, location_name: "MaxResults"))
+    ListSchemaVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    ListSchemaVersionsInput.struct_class = Types::ListSchemaVersionsInput
+
+    ListSchemaVersionsResponse.add_member(:schemas, Shapes::ShapeRef.new(shape: SchemaVersionList, location_name: "Schemas"))
+    ListSchemaVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    ListSchemaVersionsResponse.struct_class = Types::ListSchemaVersionsResponse
+
+    ListSchemasInput.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "RegistryId"))
+    ListSchemasInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsNumber, location_name: "MaxResults"))
+    ListSchemasInput.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    ListSchemasInput.struct_class = Types::ListSchemasInput
+
+    ListSchemasResponse.add_member(:schemas, Shapes::ShapeRef.new(shape: SchemaListDefinition, location_name: "Schemas"))
+    ListSchemasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    ListSchemasResponse.struct_class = Types::ListSchemasResponse
+
     ListTriggersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListTriggersRequest.add_member(:dependent_job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DependentJobName"))
     ListTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -2281,6 +2523,19 @@ module Aws::Glue
     MappingList.member = Shapes::ShapeRef.new(shape: MappingEntry)
 
     MatchCriteria.member = Shapes::ShapeRef.new(shape: NameString)
+
+    MetadataInfo.add_member(:metadata_value, Shapes::ShapeRef.new(shape: MetadataValueString, location_name: "MetadataValue"))
+    MetadataInfo.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    MetadataInfo.struct_class = Types::MetadataInfo
+
+    MetadataInfoMap.key = Shapes::ShapeRef.new(shape: MetadataKeyString)
+    MetadataInfoMap.value = Shapes::ShapeRef.new(shape: MetadataInfo)
+
+    MetadataKeyValuePair.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKeyString, location_name: "MetadataKey"))
+    MetadataKeyValuePair.add_member(:metadata_value, Shapes::ShapeRef.new(shape: MetadataValueString, location_name: "MetadataValue"))
+    MetadataKeyValuePair.struct_class = Types::MetadataKeyValuePair
+
+    MetadataList.member = Shapes::ShapeRef.new(shape: MetadataKeyValuePair)
 
     MongoDBTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     MongoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
@@ -2415,6 +2670,22 @@ module Aws::Glue
     PutResourcePolicyResponse.add_member(:policy_hash, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHash"))
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
+    PutSchemaVersionMetadataInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, location_name: "SchemaId"))
+    PutSchemaVersionMetadataInput.add_member(:schema_version_number, Shapes::ShapeRef.new(shape: SchemaVersionNumber, location_name: "SchemaVersionNumber"))
+    PutSchemaVersionMetadataInput.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    PutSchemaVersionMetadataInput.add_member(:metadata_key_value, Shapes::ShapeRef.new(shape: MetadataKeyValuePair, required: true, location_name: "MetadataKeyValue"))
+    PutSchemaVersionMetadataInput.struct_class = Types::PutSchemaVersionMetadataInput
+
+    PutSchemaVersionMetadataResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    PutSchemaVersionMetadataResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    PutSchemaVersionMetadataResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    PutSchemaVersionMetadataResponse.add_member(:latest_version, Shapes::ShapeRef.new(shape: LatestSchemaVersionBoolean, location_name: "LatestVersion"))
+    PutSchemaVersionMetadataResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "VersionNumber"))
+    PutSchemaVersionMetadataResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    PutSchemaVersionMetadataResponse.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKeyString, location_name: "MetadataKey"))
+    PutSchemaVersionMetadataResponse.add_member(:metadata_value, Shapes::ShapeRef.new(shape: MetadataValueString, location_name: "MetadataValue"))
+    PutSchemaVersionMetadataResponse.struct_class = Types::PutSchemaVersionMetadataResponse
+
     PutWorkflowRunPropertiesRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     PutWorkflowRunPropertiesRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, required: true, location_name: "RunId"))
     PutWorkflowRunPropertiesRequest.add_member(:run_properties, Shapes::ShapeRef.new(shape: WorkflowRunProperties, required: true, location_name: "RunProperties"))
@@ -2422,8 +2693,60 @@ module Aws::Glue
 
     PutWorkflowRunPropertiesResponse.struct_class = Types::PutWorkflowRunPropertiesResponse
 
+    QuerySchemaVersionMetadataInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, location_name: "SchemaId"))
+    QuerySchemaVersionMetadataInput.add_member(:schema_version_number, Shapes::ShapeRef.new(shape: SchemaVersionNumber, location_name: "SchemaVersionNumber"))
+    QuerySchemaVersionMetadataInput.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    QuerySchemaVersionMetadataInput.add_member(:metadata_list, Shapes::ShapeRef.new(shape: MetadataList, location_name: "MetadataList"))
+    QuerySchemaVersionMetadataInput.add_member(:max_results, Shapes::ShapeRef.new(shape: QuerySchemaVersionMetadataMaxResults, location_name: "MaxResults"))
+    QuerySchemaVersionMetadataInput.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    QuerySchemaVersionMetadataInput.struct_class = Types::QuerySchemaVersionMetadataInput
+
+    QuerySchemaVersionMetadataResponse.add_member(:metadata_info_map, Shapes::ShapeRef.new(shape: MetadataInfoMap, location_name: "MetadataInfoMap"))
+    QuerySchemaVersionMetadataResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    QuerySchemaVersionMetadataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
+    QuerySchemaVersionMetadataResponse.struct_class = Types::QuerySchemaVersionMetadataResponse
+
     RecrawlPolicy.add_member(:recrawl_behavior, Shapes::ShapeRef.new(shape: RecrawlBehavior, location_name: "RecrawlBehavior"))
     RecrawlPolicy.struct_class = Types::RecrawlPolicy
+
+    RegisterSchemaVersionInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    RegisterSchemaVersionInput.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaDefinitionString, required: true, location_name: "SchemaDefinition"))
+    RegisterSchemaVersionInput.struct_class = Types::RegisterSchemaVersionInput
+
+    RegisterSchemaVersionResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    RegisterSchemaVersionResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "VersionNumber"))
+    RegisterSchemaVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: SchemaVersionStatus, location_name: "Status"))
+    RegisterSchemaVersionResponse.struct_class = Types::RegisterSchemaVersionResponse
+
+    RegistryId.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    RegistryId.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    RegistryId.struct_class = Types::RegistryId
+
+    RegistryListDefinition.member = Shapes::ShapeRef.new(shape: RegistryListItem)
+
+    RegistryListItem.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    RegistryListItem.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    RegistryListItem.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    RegistryListItem.add_member(:status, Shapes::ShapeRef.new(shape: RegistryStatus, location_name: "Status"))
+    RegistryListItem.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    RegistryListItem.add_member(:updated_time, Shapes::ShapeRef.new(shape: UpdatedTimestamp, location_name: "UpdatedTime"))
+    RegistryListItem.struct_class = Types::RegistryListItem
+
+    RemoveSchemaVersionMetadataInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, location_name: "SchemaId"))
+    RemoveSchemaVersionMetadataInput.add_member(:schema_version_number, Shapes::ShapeRef.new(shape: SchemaVersionNumber, location_name: "SchemaVersionNumber"))
+    RemoveSchemaVersionMetadataInput.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    RemoveSchemaVersionMetadataInput.add_member(:metadata_key_value, Shapes::ShapeRef.new(shape: MetadataKeyValuePair, required: true, location_name: "MetadataKeyValue"))
+    RemoveSchemaVersionMetadataInput.struct_class = Types::RemoveSchemaVersionMetadataInput
+
+    RemoveSchemaVersionMetadataResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    RemoveSchemaVersionMetadataResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    RemoveSchemaVersionMetadataResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    RemoveSchemaVersionMetadataResponse.add_member(:latest_version, Shapes::ShapeRef.new(shape: LatestSchemaVersionBoolean, location_name: "LatestVersion"))
+    RemoveSchemaVersionMetadataResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "VersionNumber"))
+    RemoveSchemaVersionMetadataResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    RemoveSchemaVersionMetadataResponse.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKeyString, location_name: "MetadataKey"))
+    RemoveSchemaVersionMetadataResponse.add_member(:metadata_value, Shapes::ShapeRef.new(shape: MetadataValueString, location_name: "MetadataValue"))
+    RemoveSchemaVersionMetadataResponse.struct_class = Types::RemoveSchemaVersionMetadataResponse
 
     ResetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     ResetJobBookmarkRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
@@ -2483,6 +2806,46 @@ module Aws::Glue
     SchemaColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnNameString, location_name: "Name"))
     SchemaColumn.add_member(:data_type, Shapes::ShapeRef.new(shape: ColumnTypeString, location_name: "DataType"))
     SchemaColumn.struct_class = Types::SchemaColumn
+
+    SchemaId.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    SchemaId.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    SchemaId.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    SchemaId.struct_class = Types::SchemaId
+
+    SchemaListDefinition.member = Shapes::ShapeRef.new(shape: SchemaListItem)
+
+    SchemaListItem.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    SchemaListItem.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    SchemaListItem.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    SchemaListItem.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    SchemaListItem.add_member(:schema_status, Shapes::ShapeRef.new(shape: SchemaStatus, location_name: "SchemaStatus"))
+    SchemaListItem.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    SchemaListItem.add_member(:updated_time, Shapes::ShapeRef.new(shape: UpdatedTimestamp, location_name: "UpdatedTime"))
+    SchemaListItem.struct_class = Types::SchemaListItem
+
+    SchemaReference.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, location_name: "SchemaId"))
+    SchemaReference.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    SchemaReference.add_member(:schema_version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "SchemaVersionNumber", metadata: {"box"=>true}))
+    SchemaReference.struct_class = Types::SchemaReference
+
+    SchemaVersionErrorItem.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "VersionNumber"))
+    SchemaVersionErrorItem.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    SchemaVersionErrorItem.struct_class = Types::SchemaVersionErrorItem
+
+    SchemaVersionErrorList.member = Shapes::ShapeRef.new(shape: SchemaVersionErrorItem)
+
+    SchemaVersionList.member = Shapes::ShapeRef.new(shape: SchemaVersionListItem)
+
+    SchemaVersionListItem.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    SchemaVersionListItem.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
+    SchemaVersionListItem.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "VersionNumber"))
+    SchemaVersionListItem.add_member(:status, Shapes::ShapeRef.new(shape: SchemaVersionStatus, location_name: "Status"))
+    SchemaVersionListItem.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    SchemaVersionListItem.struct_class = Types::SchemaVersionListItem
+
+    SchemaVersionNumber.add_member(:latest_version, Shapes::ShapeRef.new(shape: LatestSchemaVersionBoolean, location_name: "LatestVersion"))
+    SchemaVersionNumber.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionLongNumber, location_name: "VersionNumber"))
+    SchemaVersionNumber.struct_class = Types::SchemaVersionNumber
 
     SearchPropertyPredicates.member = Shapes::ShapeRef.new(shape: PropertyPredicate)
 
@@ -2627,6 +2990,7 @@ module Aws::Glue
     StorageDescriptor.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     StorageDescriptor.add_member(:skewed_info, Shapes::ShapeRef.new(shape: SkewedInfo, location_name: "SkewedInfo"))
     StorageDescriptor.add_member(:stored_as_sub_directories, Shapes::ShapeRef.new(shape: Boolean, location_name: "StoredAsSubDirectories"))
+    StorageDescriptor.add_member(:schema_reference, Shapes::ShapeRef.new(shape: SchemaReference, location_name: "SchemaReference"))
     StorageDescriptor.struct_class = Types::StorageDescriptor
 
     StringColumnStatisticsData.add_member(:maximum_length, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "MaximumLength"))
@@ -2927,6 +3291,25 @@ module Aws::Glue
 
     UpdatePartitionResponse.struct_class = Types::UpdatePartitionResponse
 
+    UpdateRegistryInput.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, required: true, location_name: "RegistryId"))
+    UpdateRegistryInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, required: true, location_name: "Description"))
+    UpdateRegistryInput.struct_class = Types::UpdateRegistryInput
+
+    UpdateRegistryResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    UpdateRegistryResponse.add_member(:registry_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "RegistryArn"))
+    UpdateRegistryResponse.struct_class = Types::UpdateRegistryResponse
+
+    UpdateSchemaInput.add_member(:schema_id, Shapes::ShapeRef.new(shape: SchemaId, required: true, location_name: "SchemaId"))
+    UpdateSchemaInput.add_member(:schema_version_number, Shapes::ShapeRef.new(shape: SchemaVersionNumber, location_name: "SchemaVersionNumber"))
+    UpdateSchemaInput.add_member(:compatibility, Shapes::ShapeRef.new(shape: Compatibility, location_name: "Compatibility"))
+    UpdateSchemaInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdateSchemaInput.struct_class = Types::UpdateSchemaInput
+
+    UpdateSchemaResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "SchemaArn"))
+    UpdateSchemaResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
+    UpdateSchemaResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
+    UpdateSchemaResponse.struct_class = Types::UpdateSchemaResponse
+
     UpdateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     UpdateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
@@ -3225,6 +3608,17 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:check_schema_version_validity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CheckSchemaVersionValidity"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CheckSchemaVersionValidityInput)
+        o.output = Shapes::ShapeRef.new(shape: CheckSchemaVersionValidityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:create_classifier, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateClassifier"
         o.http_method = "POST"
@@ -3334,6 +3728,33 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:create_registry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRegistry"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRegistryInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateRegistryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:create_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSchema"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSchemaInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:create_script, Seahorse::Model::Operation.new.tap do |o|
@@ -3537,6 +3958,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:delete_registry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRegistry"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRegistryInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRegistryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteResourcePolicy"
         o.http_method = "POST"
@@ -3548,6 +3981,30 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ConditionCheckFailureException)
+      end)
+
+      api.add_operation(:delete_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSchema"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSchemaInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_schema_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSchemaVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSchemaVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSchemaVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_security_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -4042,6 +4499,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:get_registry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRegistry"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRegistryInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRegistryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:get_resource_policies, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetResourcePolicies"
         o.http_method = "POST"
@@ -4052,6 +4521,12 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4064,6 +4539,54 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:get_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSchema"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSchemaInput)
+        o.output = Shapes::ShapeRef.new(shape: GetSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_schema_by_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSchemaByDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSchemaByDefinitionInput)
+        o.output = Shapes::ShapeRef.new(shape: GetSchemaByDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_schema_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSchemaVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSchemaVersionInput)
+        o.output = Shapes::ShapeRef.new(shape: GetSchemaVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_schema_versions_diff, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSchemaVersionsDiff"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSchemaVersionsDiffInput)
+        o.output = Shapes::ShapeRef.new(shape: GetSchemaVersionsDiffResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:get_security_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -4367,6 +4890,59 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:list_registries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRegistries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRegistriesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRegistriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_schema_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSchemaVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSchemaVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSchemaVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_schemas, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSchemas"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSchemasInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSchemasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_triggers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTriggers"
         o.http_method = "POST"
@@ -4426,6 +5002,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ConditionCheckFailureException)
       end)
 
+      api.add_operation(:put_schema_version_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSchemaVersionMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutSchemaVersionMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: PutSchemaVersionMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+      end)
+
       api.add_operation(:put_workflow_run_properties, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutWorkflowRunProperties"
         o.http_method = "POST"
@@ -4439,6 +5028,42 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:query_schema_version_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "QuerySchemaVersionMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: QuerySchemaVersionMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: QuerySchemaVersionMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
+      api.add_operation(:register_schema_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterSchemaVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterSchemaVersionInput)
+        o.output = Shapes::ShapeRef.new(shape: RegisterSchemaVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:remove_schema_version_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveSchemaVersionMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveSchemaVersionMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: RemoveSchemaVersionMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
       api.add_operation(:reset_job_bookmark, Seahorse::Model::Operation.new.tap do |o|
@@ -4816,6 +5441,32 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:update_registry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRegistry"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRegistryInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRegistryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSchema"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSchemaInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_table, Seahorse::Model::Operation.new.tap do |o|

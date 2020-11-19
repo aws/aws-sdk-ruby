@@ -410,6 +410,15 @@ module Aws::Glue
     #             },
     #           },
     #           stored_as_sub_directories: false,
+    #           schema_reference: {
+    #             schema_id: {
+    #               schema_arn: "GlueResourceArn",
+    #               schema_name: "SchemaRegistryNameString",
+    #               registry_name: "SchemaRegistryNameString",
+    #             },
+    #             schema_version_id: "SchemaVersionIdString",
+    #             schema_version_number: 1,
+    #           },
     #         },
     #         parameters: {
     #           "KeyString" => "ParametersMapValue",
@@ -906,6 +915,11 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.partitions[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.partitions[0].parameters #=> Hash
     #   resp.partitions[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].last_analyzed_time #=> Time
@@ -1284,6 +1298,15 @@ module Aws::Glue
     #               },
     #             },
     #             stored_as_sub_directories: false,
+    #             schema_reference: {
+    #               schema_id: {
+    #                 schema_arn: "GlueResourceArn",
+    #                 schema_name: "SchemaRegistryNameString",
+    #                 registry_name: "SchemaRegistryNameString",
+    #               },
+    #               schema_version_id: "SchemaVersionIdString",
+    #               schema_version_number: 1,
+    #             },
     #           },
     #           parameters: {
     #             "KeyString" => "ParametersMapValue",
@@ -1348,6 +1371,44 @@ module Aws::Glue
     # @param [Hash] params ({})
     def cancel_ml_task_run(params = {}, options = {})
       req = build_request(:cancel_ml_task_run, params)
+      req.send_request(options)
+    end
+
+    # Validates the supplied schema. This call has no side effects, it
+    # simply validates using the supplied schema using `DataFormat` as the
+    # format. Since it does not take a schema set name, no compatibility
+    # checks are performed.
+    #
+    # @option params [required, String] :data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #
+    # @option params [required, String] :schema_definition
+    #   The definition of the schema that has to be validated.
+    #
+    # @return [Types::CheckSchemaVersionValidityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CheckSchemaVersionValidityResponse#valid #valid} => Boolean
+    #   * {Types::CheckSchemaVersionValidityResponse#error #error} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.check_schema_version_validity({
+    #     data_format: "AVRO", # required, accepts AVRO
+    #     schema_definition: "SchemaDefinitionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.valid #=> Boolean
+    #   resp.error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CheckSchemaVersionValidity AWS API Documentation
+    #
+    # @overload check_schema_version_validity(params = {})
+    # @param [Hash] params ({})
+    def check_schema_version_validity(params = {}, options = {})
+      req = build_request(:check_schema_version_validity, params)
       req.send_request(options)
     end
 
@@ -2316,6 +2377,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
@@ -2330,6 +2400,205 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_partition(params = {}, options = {})
       req = build_request(:create_partition, params)
+      req.send_request(options)
+    end
+
+    # Creates a new registry which may be used to hold a collection of
+    # schemas.
+    #
+    # @option params [required, String] :registry_name
+    #   Name of the registry to be created of max length of 255, and may only
+    #   contain letters, numbers, hyphen, underscore, dollar sign, or hash
+    #   mark. No whitespace.
+    #
+    # @option params [String] :description
+    #   A description of the registry. If description is not provided, there
+    #   will not be any default value for this.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   AWS tags that contain a key value pair and may be searched by console,
+    #   command line, or API.
+    #
+    # @return [Types::CreateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::CreateRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::CreateRegistryResponse#description #description} => String
+    #   * {Types::CreateRegistryResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registry({
+    #     registry_name: "SchemaRegistryNameString", # required
+    #     description: "DescriptionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_arn #=> String
+    #   resp.registry_name #=> String
+    #   resp.description #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateRegistry AWS API Documentation
+    #
+    # @overload create_registry(params = {})
+    # @param [Hash] params ({})
+    def create_registry(params = {}, options = {})
+      req = build_request(:create_registry, params)
+      req.send_request(options)
+    end
+
+    # Creates a new schema set and registers the schema definition. Returns
+    # an error if the schema set already exists without actually registering
+    # the version.
+    #
+    # When the schema set is created, a version checkpoint will be set to
+    # the first version. Compatibility mode "DISABLED" restricts any
+    # additional schema versions from being added after the first schema
+    # version. For all other compatibility modes, validation of
+    # compatibility settings will be applied only from the second version
+    # onwards when the `RegisterSchemaVersion` API is used.
+    #
+    # When this API is called without a `RegistryId`, this will create an
+    # entry for a "default-registry" in the registry database tables, if
+    # it is not already present.
+    #
+    # @option params [Types::RegistryId] :registry_id
+    #   This is a wrapper shape to contain the registry identity fields. If
+    #   this is not provided, the default registry will be used. The ARN
+    #   format for the same will be: `arn:aws:glue:us-east-2:<customer
+    #   id>:registry/default-registry:random-5-letter-id`.
+    #
+    # @option params [required, String] :schema_name
+    #   Name of the schema to be created of max length of 255, and may only
+    #   contain letters, numbers, hyphen, underscore, dollar sign, or hash
+    #   mark. No whitespace.
+    #
+    # @option params [required, String] :data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #
+    # @option params [String] :compatibility
+    #   The compatibility mode of the schema. The possible values are:
+    #
+    #   * *NONE*\: No compatibility mode applies. You can use this choice in
+    #     development scenarios or if you do not know the compatibility mode
+    #     that you want to apply to schemas. Any new version added will be
+    #     accepted without undergoing a compatibility check.
+    #
+    #   * *DISABLED*\: This compatibility choice prevents versioning for a
+    #     particular schema. You can use this choice to prevent future
+    #     versioning of a schema.
+    #
+    #   * *BACKWARD*\: This compatibility choice is recommended as it allows
+    #     data receivers to read both the current and one previous schema
+    #     version. This means that for instance, a new schema version cannot
+    #     drop data fields or change the type of these fields, so they can't
+    #     be read by readers using the previous version.
+    #
+    #   * *BACKWARD\_ALL*\: This compatibility choice allows data receivers to
+    #     read both the current and all previous schema versions. You can use
+    #     this choice when you need to delete fields or add optional fields,
+    #     and check compatibility against all previous schema versions.
+    #
+    #   * *FORWARD*\: This compatibility choice allows data receivers to read
+    #     both the current and one next schema version, but not necessarily
+    #     later versions. You can use this choice when you need to add fields
+    #     or delete optional fields, but only check compatibility against the
+    #     last schema version.
+    #
+    #   * *FORWARD\_ALL*\: This compatibility choice allows data receivers to
+    #     read written by producers of any new registered schema. You can use
+    #     this choice when you need to add fields or delete optional fields,
+    #     and check compatibility against all previous schema versions.
+    #
+    #   * *FULL*\: This compatibility choice allows data receivers to read
+    #     data written by producers using the previous or next version of the
+    #     schema, but not necessarily earlier or later versions. You can use
+    #     this choice when you need to add or remove optional fields, but only
+    #     check compatibility against the last schema version.
+    #
+    #   * *FULL\_ALL*\: This compatibility choice allows data receivers to
+    #     read data written by producers using all previous schema versions.
+    #     You can use this choice when you need to add or remove optional
+    #     fields, and check compatibility against all previous schema
+    #     versions.
+    #
+    # @option params [String] :description
+    #   An optional description of the schema. If description is not provided,
+    #   there will not be any automatic default value for this.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   AWS tags that contain a key value pair and may be searched by console,
+    #   command line, or API. If specified, follows the AWS tags-on-create
+    #   pattern.
+    #
+    # @option params [String] :schema_definition
+    #   The schema definition using the `DataFormat` setting for `SchemaName`.
+    #
+    # @return [Types::CreateSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSchemaResponse#registry_name #registry_name} => String
+    #   * {Types::CreateSchemaResponse#registry_arn #registry_arn} => String
+    #   * {Types::CreateSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::CreateSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::CreateSchemaResponse#description #description} => String
+    #   * {Types::CreateSchemaResponse#data_format #data_format} => String
+    #   * {Types::CreateSchemaResponse#compatibility #compatibility} => String
+    #   * {Types::CreateSchemaResponse#schema_checkpoint #schema_checkpoint} => Integer
+    #   * {Types::CreateSchemaResponse#latest_schema_version #latest_schema_version} => Integer
+    #   * {Types::CreateSchemaResponse#next_schema_version #next_schema_version} => Integer
+    #   * {Types::CreateSchemaResponse#schema_status #schema_status} => String
+    #   * {Types::CreateSchemaResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateSchemaResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::CreateSchemaResponse#schema_version_status #schema_version_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_schema({
+    #     registry_id: {
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #     schema_name: "SchemaRegistryNameString", # required
+    #     data_format: "AVRO", # required, accepts AVRO
+    #     compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
+    #     description: "DescriptionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     schema_definition: "SchemaDefinitionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.schema_arn #=> String
+    #   resp.description #=> String
+    #   resp.data_format #=> String, one of "AVRO"
+    #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
+    #   resp.schema_checkpoint #=> Integer
+    #   resp.latest_schema_version #=> Integer
+    #   resp.next_schema_version #=> Integer
+    #   resp.schema_status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.schema_version_id #=> String
+    #   resp.schema_version_status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSchema AWS API Documentation
+    #
+    # @overload create_schema(params = {})
+    # @param [Hash] params ({})
+    def create_schema(params = {}, options = {})
+      req = build_request(:create_schema, params)
       req.send_request(options)
     end
 
@@ -2520,6 +2789,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       partition_keys: [
     #         {
@@ -3076,6 +3354,47 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Delete the entire registry including schema and all of its versions.
+    # To get the status of the delete operation, you can call the
+    # `GetRegistry` API after the asynchronous call. Deleting a registry
+    # will disable all online operations for the registry such as the
+    # `UpdateRegistry`, `CreateSchema`, `UpdateSchema`, and
+    # `RegisterSchemaVersion` APIs.
+    #
+    # @option params [required, Types::RegistryId] :registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @return [Types::DeleteRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::DeleteRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::DeleteRegistryResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_registry({
+    #     registry_id: { # required
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteRegistry AWS API Documentation
+    #
+    # @overload delete_registry(params = {})
+    # @param [Hash] params ({})
+    def delete_registry(params = {}, options = {})
+      req = build_request(:delete_registry, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified policy.
     #
     # @option params [String] :policy_hash_condition
@@ -3100,6 +3419,109 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_resource_policy(params = {}, options = {})
       req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes the entire schema set, including the schema set and all of its
+    # versions. To get the status of the delete operation, you can call
+    # `GetSchema` API after the asynchronous call. Deleting a registry will
+    # disable all online operations for the schema, such as the
+    # `GetSchemaByDefinition`, and `RegisterSchemaVersion` APIs.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure that may contain the schema name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @return [Types::DeleteSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::DeleteSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::DeleteSchemaResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_schema({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchema AWS API Documentation
+    #
+    # @overload delete_schema(params = {})
+    # @param [Hash] params ({})
+    def delete_schema(params = {}, options = {})
+      req = build_request(:delete_schema, params)
+      req.send_request(options)
+    end
+
+    # Remove versions from the specified schema. A version number or range
+    # may be supplied. If the compatibility mode forbids deleting of a
+    # version that is necessary, such as BACKWARDS\_FULL, an error is
+    # returned. Calling the `GetSchemaVersions` API after this call will
+    # list the status of the deleted versions.
+    #
+    # When the range of version numbers contain check pointed version, the
+    # API will return a 409 conflict and will not proceed with the deletion.
+    # You have to remove the checkpoint first using the
+    # `DeleteSchemaCheckpoint` API before using this API.
+    #
+    # You cannot use the `DeleteSchemaVersions` API to delete the first
+    # schema version in the schema set. The first schema version can only be
+    # deleted by the `DeleteSchema` API. This operation will also delete the
+    # attached `SchemaVersionMetadata` under the schema versions. Hard
+    # deletes will be enforced on the database.
+    #
+    # If the compatibility mode forbids deleting of a version that is
+    # necessary, such as BACKWARDS\_FULL, an error is returned.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure that may contain the schema name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :versions
+    #   A version range may be supplied which may be of the format:
+    #
+    #   * a single version number, 5
+    #
+    #   * a range, 5-8 : deletes versions 5, 6, 7, 8
+    #
+    # @return [Types::DeleteSchemaVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSchemaVersionsResponse#schema_version_errors #schema_version_errors} => Array&lt;Types::SchemaVersionErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_schema_versions({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     versions: "VersionsString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_errors #=> Array
+    #   resp.schema_version_errors[0].version_number #=> Integer
+    #   resp.schema_version_errors[0].error_details.error_code #=> String
+    #   resp.schema_version_errors[0].error_details.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchemaVersions AWS API Documentation
+    #
+    # @overload delete_schema_versions(params = {})
+    # @param [Hash] params ({})
+    def delete_schema_versions(params = {}, options = {})
+      req = build_request(:delete_schema_versions, params)
       req.send_request(options)
     end
 
@@ -5014,6 +5436,11 @@ module Aws::Glue
     #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.partition.parameters #=> Hash
     #   resp.partition.parameters["KeyString"] #=> String
     #   resp.partition.last_analyzed_time #=> Time
@@ -5254,6 +5681,11 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.partitions[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.partitions[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.partitions[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.partitions[0].parameters #=> Hash
     #   resp.partitions[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].last_analyzed_time #=> Time
@@ -5369,6 +5801,48 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Describes the specified registry in detail.
+    #
+    # @option params [required, Types::RegistryId] :registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::GetRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::GetRegistryResponse#description #description} => String
+    #   * {Types::GetRegistryResponse#status #status} => String
+    #   * {Types::GetRegistryResponse#created_time #created_time} => String
+    #   * {Types::GetRegistryResponse#updated_time #updated_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_registry({
+    #     registry_id: { # required
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.created_time #=> String
+    #   resp.updated_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetRegistry AWS API Documentation
+    #
+    # @overload get_registry(params = {})
+    # @param [Hash] params ({})
+    def get_registry(params = {}, options = {})
+      req = build_request(:get_registry, params)
+      req.send_request(options)
+    end
+
     # Retrieves the security configurations for the resource policies set on
     # individual resources, and also the account-level policy.
     #
@@ -5387,6 +5861,8 @@ module Aws::Glue
     #
     #   * {Types::GetResourcePoliciesResponse#get_resource_policies_response_list #get_resource_policies_response_list} => Array&lt;Types::GluePolicy&gt;
     #   * {Types::GetResourcePoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5450,6 +5926,254 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified schema in detail.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @return [Types::GetSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaResponse#registry_name #registry_name} => String
+    #   * {Types::GetSchemaResponse#registry_arn #registry_arn} => String
+    #   * {Types::GetSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::GetSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::GetSchemaResponse#description #description} => String
+    #   * {Types::GetSchemaResponse#data_format #data_format} => String
+    #   * {Types::GetSchemaResponse#compatibility #compatibility} => String
+    #   * {Types::GetSchemaResponse#schema_checkpoint #schema_checkpoint} => Integer
+    #   * {Types::GetSchemaResponse#latest_schema_version #latest_schema_version} => Integer
+    #   * {Types::GetSchemaResponse#next_schema_version #next_schema_version} => Integer
+    #   * {Types::GetSchemaResponse#schema_status #schema_status} => String
+    #   * {Types::GetSchemaResponse#created_time #created_time} => String
+    #   * {Types::GetSchemaResponse#updated_time #updated_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.schema_arn #=> String
+    #   resp.description #=> String
+    #   resp.data_format #=> String, one of "AVRO"
+    #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
+    #   resp.schema_checkpoint #=> Integer
+    #   resp.latest_schema_version #=> Integer
+    #   resp.next_schema_version #=> Integer
+    #   resp.schema_status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #   resp.created_time #=> String
+    #   resp.updated_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchema AWS API Documentation
+    #
+    # @overload get_schema(params = {})
+    # @param [Hash] params ({})
+    def get_schema(params = {}, options = {})
+      req = build_request(:get_schema, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a schema by the `SchemaDefinition`. The schema definition is
+    # sent to the Schema Registry, canonicalized, and hashed. If the hash is
+    # matched within the scope of the `SchemaName` or ARN (or the default
+    # registry, if none is supplied), that schema’s metadata is returned.
+    # Otherwise, a 404 or NotFound error is returned. Schema versions in
+    # `Deleted` statuses will not be included in the results.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #
+    # @option params [required, String] :schema_definition
+    #   The definition of the schema for which schema details are required.
+    #
+    # @return [Types::GetSchemaByDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaByDefinitionResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::GetSchemaByDefinitionResponse#schema_arn #schema_arn} => String
+    #   * {Types::GetSchemaByDefinitionResponse#data_format #data_format} => String
+    #   * {Types::GetSchemaByDefinitionResponse#status #status} => String
+    #   * {Types::GetSchemaByDefinitionResponse#created_time #created_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema_by_definition({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_definition: "SchemaDefinitionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_id #=> String
+    #   resp.schema_arn #=> String
+    #   resp.data_format #=> String, one of "AVRO"
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #   resp.created_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaByDefinition AWS API Documentation
+    #
+    # @overload get_schema_by_definition(params = {})
+    # @param [Hash] params ({})
+    def get_schema_by_definition(params = {}, options = {})
+      req = build_request(:get_schema_by_definition, params)
+      req.send_request(options)
+    end
+
+    # Get the specified schema by its unique ID assigned when a version of
+    # the schema is created or registered. Schema versions in Deleted status
+    # will not be included in the results.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @option params [String] :schema_version_id
+    #   The `SchemaVersionId` of the schema version. This field is required
+    #   for fetching by schema ID. Either this or the `SchemaId` wrapper has
+    #   to be provided.
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @return [Types::GetSchemaVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaVersionResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::GetSchemaVersionResponse#schema_definition #schema_definition} => String
+    #   * {Types::GetSchemaVersionResponse#data_format #data_format} => String
+    #   * {Types::GetSchemaVersionResponse#schema_arn #schema_arn} => String
+    #   * {Types::GetSchemaVersionResponse#version_number #version_number} => Integer
+    #   * {Types::GetSchemaVersionResponse#status #status} => String
+    #   * {Types::GetSchemaVersionResponse#created_time #created_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema_version({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_id #=> String
+    #   resp.schema_definition #=> String
+    #   resp.data_format #=> String, one of "AVRO"
+    #   resp.schema_arn #=> String
+    #   resp.version_number #=> Integer
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #   resp.created_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersion AWS API Documentation
+    #
+    # @overload get_schema_version(params = {})
+    # @param [Hash] params ({})
+    def get_schema_version(params = {}, options = {})
+      req = build_request(:get_schema_version, params)
+      req.send_request(options)
+    end
+
+    # Fetches the schema version difference in the specified difference type
+    # between two stored schema versions in the Schema Registry.
+    #
+    # This API allows you to compare two schema versions between two schema
+    # definitions under the same schema.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #
+    # @option params [required, Types::SchemaVersionNumber] :first_schema_version_number
+    #   The first of the two schema versions to be compared.
+    #
+    # @option params [required, Types::SchemaVersionNumber] :second_schema_version_number
+    #   The second of the two schema versions to be compared.
+    #
+    # @option params [required, String] :schema_diff_type
+    #   Refers to `SYNTAX_DIFF`, which is the currently supported diff type.
+    #
+    # @return [Types::GetSchemaVersionsDiffResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSchemaVersionsDiffResponse#diff #diff} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_schema_versions_diff({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     first_schema_version_number: { # required
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     second_schema_version_number: { # required
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_diff_type: "SYNTAX_DIFF", # required, accepts SYNTAX_DIFF
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.diff #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersionsDiff AWS API Documentation
+    #
+    # @overload get_schema_versions_diff(params = {})
+    # @param [Hash] params ({})
+    def get_schema_versions_diff(params = {}, options = {})
+      req = build_request(:get_schema_versions_diff, params)
       req.send_request(options)
     end
 
@@ -5601,6 +6325,11 @@ module Aws::Glue
     #   resp.table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table.partition_keys #=> Array
     #   resp.table.partition_keys[0].name #=> String
     #   resp.table.partition_keys[0].type #=> String
@@ -5699,6 +6428,11 @@ module Aws::Glue
     #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_version.table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_version.table.storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_version.table.partition_keys #=> Array
     #   resp.table_version.table.partition_keys[0].name #=> String
     #   resp.table_version.table.partition_keys[0].type #=> String
@@ -5806,6 +6540,11 @@ module Aws::Glue
     #   resp.table_versions[0].table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_versions[0].table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_versions[0].table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_versions[0].table.storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_versions[0].table.partition_keys #=> Array
     #   resp.table_versions[0].table.partition_keys[0].name #=> String
     #   resp.table_versions[0].table.partition_keys[0].type #=> String
@@ -5914,6 +6653,11 @@ module Aws::Glue
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_list[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_list[0].partition_keys #=> Array
     #   resp.table_list[0].partition_keys[0].name #=> String
     #   resp.table_list[0].partition_keys[0].type #=> String
@@ -6887,6 +7631,170 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns a list of registries that you have created, with minimal
+    # registry information. Registries in the `Deleting` status will not be
+    # included in the results. Empty results will be returned if there are
+    # no registries available.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListRegistriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegistriesResponse#registries #registries} => Array&lt;Types::RegistryListItem&gt;
+    #   * {Types::ListRegistriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_registries({
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registries #=> Array
+    #   resp.registries[0].registry_name #=> String
+    #   resp.registries[0].registry_arn #=> String
+    #   resp.registries[0].description #=> String
+    #   resp.registries[0].status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.registries[0].created_time #=> String
+    #   resp.registries[0].updated_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListRegistries AWS API Documentation
+    #
+    # @overload list_registries(params = {})
+    # @param [Hash] params ({})
+    def list_registries(params = {}, options = {})
+      req = build_request(:list_registries, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of schema versions that you have created, with minimal
+    # information. Schema versions in Deleted status will not be included in
+    # the results. Empty results will be returned if there are no schema
+    # versions available.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListSchemaVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSchemaVersionsResponse#schemas #schemas} => Array&lt;Types::SchemaVersionListItem&gt;
+    #   * {Types::ListSchemaVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_schema_versions({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schemas #=> Array
+    #   resp.schemas[0].schema_arn #=> String
+    #   resp.schemas[0].schema_version_id #=> String
+    #   resp.schemas[0].version_number #=> Integer
+    #   resp.schemas[0].status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #   resp.schemas[0].created_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemaVersions AWS API Documentation
+    #
+    # @overload list_schema_versions(params = {})
+    # @param [Hash] params ({})
+    def list_schema_versions(params = {}, options = {})
+      req = build_request(:list_schema_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of schemas with minimal details. Schemas in Deleting
+    # status will not be included in the results. Empty results will be
+    # returned if there are no schemas available.
+    #
+    # When the `RegistryId` is not provided, all the schemas across
+    # registries will be part of the API response.
+    #
+    # @option params [Types::RegistryId] :registry_id
+    #   A wrapper structure that may contain the registry name and Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListSchemasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSchemasResponse#schemas #schemas} => Array&lt;Types::SchemaListItem&gt;
+    #   * {Types::ListSchemasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_schemas({
+    #     registry_id: {
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schemas #=> Array
+    #   resp.schemas[0].registry_name #=> String
+    #   resp.schemas[0].schema_name #=> String
+    #   resp.schemas[0].schema_arn #=> String
+    #   resp.schemas[0].description #=> String
+    #   resp.schemas[0].schema_status #=> String, one of "AVAILABLE", "PENDING", "DELETING"
+    #   resp.schemas[0].created_time #=> String
+    #   resp.schemas[0].updated_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemas AWS API Documentation
+    #
+    # @overload list_schemas(params = {})
+    # @param [Hash] params ({})
+    def list_schemas(params = {}, options = {})
+      req = build_request(:list_schemas, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all trigger resources in this AWS account, or
     # the resources with the specified tag. This operation allows you to see
     # which resources are available in your account, and their names.
@@ -7082,6 +7990,72 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Puts the metadata key value pair for a specified schema version ID. A
+    # maximum of 10 key value pairs will be allowed per schema version. They
+    # can be added over one or more calls.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   The unique ID for the schema.
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @option params [String] :schema_version_id
+    #   The unique version ID of the schema version.
+    #
+    # @option params [required, Types::MetadataKeyValuePair] :metadata_key_value
+    #   The metadata key's corresponding value.
+    #
+    # @return [Types::PutSchemaVersionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutSchemaVersionMetadataResponse#schema_arn #schema_arn} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#schema_name #schema_name} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#registry_name #registry_name} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#latest_version #latest_version} => Boolean
+    #   * {Types::PutSchemaVersionMetadataResponse#version_number #version_number} => Integer
+    #   * {Types::PutSchemaVersionMetadataResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#metadata_key #metadata_key} => String
+    #   * {Types::PutSchemaVersionMetadataResponse#metadata_value #metadata_value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_schema_version_metadata({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     metadata_key_value: { # required
+    #       metadata_key: "MetadataKeyString",
+    #       metadata_value: "MetadataValueString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.registry_name #=> String
+    #   resp.latest_version #=> Boolean
+    #   resp.version_number #=> Integer
+    #   resp.schema_version_id #=> String
+    #   resp.metadata_key #=> String
+    #   resp.metadata_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutSchemaVersionMetadata AWS API Documentation
+    #
+    # @overload put_schema_version_metadata(params = {})
+    # @param [Hash] params ({})
+    def put_schema_version_metadata(params = {}, options = {})
+      req = build_request(:put_schema_version_metadata, params)
+      req.send_request(options)
+    end
+
     # Puts the specified workflow run properties for the given workflow run.
     # If a property already exists for the specified run, then it overrides
     # the value otherwise adds the property to existing properties.
@@ -7114,6 +8088,205 @@ module Aws::Glue
     # @param [Hash] params ({})
     def put_workflow_run_properties(params = {}, options = {})
       req = build_request(:put_workflow_run_properties, params)
+      req.send_request(options)
+    end
+
+    # Queries for the schema version metadata information.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   A wrapper structure that may contain the schema name and Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @option params [String] :schema_version_id
+    #   The unique version ID of the schema version.
+    #
+    # @option params [Array<Types::MetadataKeyValuePair>] :metadata_list
+    #   Search key-value pairs for metadata, if they are not provided all the
+    #   metadata information will be fetched.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::QuerySchemaVersionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::QuerySchemaVersionMetadataResponse#metadata_info_map #metadata_info_map} => Hash&lt;String,Types::MetadataInfo&gt;
+    #   * {Types::QuerySchemaVersionMetadataResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::QuerySchemaVersionMetadataResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.query_schema_version_metadata({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     metadata_list: [
+    #       {
+    #         metadata_key: "MetadataKeyString",
+    #         metadata_value: "MetadataValueString",
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "SchemaRegistryTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metadata_info_map #=> Hash
+    #   resp.metadata_info_map["MetadataKeyString"].metadata_value #=> String
+    #   resp.metadata_info_map["MetadataKeyString"].created_time #=> String
+    #   resp.schema_version_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/QuerySchemaVersionMetadata AWS API Documentation
+    #
+    # @overload query_schema_version_metadata(params = {})
+    # @param [Hash] params ({})
+    def query_schema_version_metadata(params = {}, options = {})
+      req = build_request(:query_schema_version_metadata, params)
+      req.send_request(options)
+    end
+
+    # Adds a new version to the existing schema. Returns an error if new
+    # version of schema does not meet the compatibility requirements of the
+    # schema set. This API will not create a new schema set and will return
+    # a 404 error if the schema set is not already present in the Schema
+    # Registry.
+    #
+    # If this is the first schema definition to be registered in the Schema
+    # Registry, this API will store the schema version and return
+    # immediately. Otherwise, this call has the potential to run longer than
+    # other operations due to compatibility modes. You can call the
+    # `GetSchemaVersion` API with the `SchemaVersionId` to check
+    # compatibility modes.
+    #
+    # If the same schema definition is already stored in Schema Registry as
+    # a version, the schema ID of the existing schema is returned to the
+    # caller.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #
+    # @option params [required, String] :schema_definition
+    #   The schema definition using the `DataFormat` setting for the
+    #   `SchemaName`.
+    #
+    # @return [Types::RegisterSchemaVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterSchemaVersionResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::RegisterSchemaVersionResponse#version_number #version_number} => Integer
+    #   * {Types::RegisterSchemaVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_schema_version({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_definition: "SchemaDefinitionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_version_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegisterSchemaVersion AWS API Documentation
+    #
+    # @overload register_schema_version(params = {})
+    # @param [Hash] params ({})
+    def register_schema_version(params = {}, options = {})
+      req = build_request(:register_schema_version, params)
+      req.send_request(options)
+    end
+
+    # Removes a key value pair from the schema version metadata for the
+    # specified schema version ID.
+    #
+    # @option params [Types::SchemaId] :schema_id
+    #   A wrapper structure that may contain the schema name and Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   The version number of the schema.
+    #
+    # @option params [String] :schema_version_id
+    #   The unique version ID of the schema version.
+    #
+    # @option params [required, Types::MetadataKeyValuePair] :metadata_key_value
+    #   The value of the metadata key.
+    #
+    # @return [Types::RemoveSchemaVersionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveSchemaVersionMetadataResponse#schema_arn #schema_arn} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#schema_name #schema_name} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#registry_name #registry_name} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#latest_version #latest_version} => Boolean
+    #   * {Types::RemoveSchemaVersionMetadataResponse#version_number #version_number} => Integer
+    #   * {Types::RemoveSchemaVersionMetadataResponse#schema_version_id #schema_version_id} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#metadata_key #metadata_key} => String
+    #   * {Types::RemoveSchemaVersionMetadataResponse#metadata_value #metadata_value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_schema_version_metadata({
+    #     schema_id: {
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     schema_version_id: "SchemaVersionIdString",
+    #     metadata_key_value: { # required
+    #       metadata_key: "MetadataKeyString",
+    #       metadata_value: "MetadataValueString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.registry_name #=> String
+    #   resp.latest_version #=> Boolean
+    #   resp.version_number #=> Integer
+    #   resp.schema_version_id #=> String
+    #   resp.metadata_key #=> String
+    #   resp.metadata_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RemoveSchemaVersionMetadata AWS API Documentation
+    #
+    # @overload remove_schema_version_metadata(params = {})
+    # @param [Hash] params ({})
+    def remove_schema_version_metadata(params = {}, options = {})
+      req = build_request(:remove_schema_version_metadata, params)
       req.send_request(options)
     end
 
@@ -7325,6 +8498,11 @@ module Aws::Glue
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
     #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
     #   resp.table_list[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table_list[0].storage_descriptor.schema_reference.schema_version_number #=> Integer
     #   resp.table_list[0].partition_keys #=> Array
     #   resp.table_list[0].partition_keys[0].name #=> String
     #   resp.table_list[0].partition_keys[0].type #=> String
@@ -8868,6 +10046,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
@@ -8882,6 +10069,119 @@ module Aws::Glue
     # @param [Hash] params ({})
     def update_partition(params = {}, options = {})
       req = build_request(:update_partition, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing registry which is used to hold a collection of
+    # schemas. The updated properties relate to the registry, and do not
+    # modify any of the schemas within the registry.
+    #
+    # @option params [required, Types::RegistryId] :registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :description
+    #   A description of the registry. If description is not provided, this
+    #   field will not be updated.
+    #
+    # @return [Types::UpdateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRegistryResponse#registry_name #registry_name} => String
+    #   * {Types::UpdateRegistryResponse#registry_arn #registry_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_registry({
+    #     registry_id: { # required
+    #       registry_name: "SchemaRegistryNameString",
+    #       registry_arn: "GlueResourceArn",
+    #     },
+    #     description: "DescriptionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_name #=> String
+    #   resp.registry_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateRegistry AWS API Documentation
+    #
+    # @overload update_registry(params = {})
+    # @param [Hash] params ({})
+    def update_registry(params = {}, options = {})
+      req = build_request(:update_registry, params)
+      req.send_request(options)
+    end
+
+    # Updates the description, compatibility setting, or version checkpoint
+    # for a schema set.
+    #
+    # For updating the compatibility setting, the call will not validate
+    # compatibility for the entire set of schema versions with the new
+    # compatibility setting. If the value for `Compatibility` is provided,
+    # the `VersionNumber` (a checkpoint) is also required. The API will
+    # validate the checkpoint version number for consistency.
+    #
+    # If the value for the `VersionNumber` (checkpoint) is provided,
+    # `Compatibility` is optional and this can be used to set/reset a
+    # checkpoint for the schema.
+    #
+    # This update will happen only if the schema is in the AVAILABLE state.
+    #
+    # @option params [required, Types::SchemaId] :schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #
+    # @option params [Types::SchemaVersionNumber] :schema_version_number
+    #   Version number required for check pointing. One of `VersionNumber` or
+    #   `Compatibility` has to be provided.
+    #
+    # @option params [String] :compatibility
+    #   The new compatibility setting for the schema.
+    #
+    # @option params [String] :description
+    #   The new description for the schema.
+    #
+    # @return [Types::UpdateSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSchemaResponse#schema_arn #schema_arn} => String
+    #   * {Types::UpdateSchemaResponse#schema_name #schema_name} => String
+    #   * {Types::UpdateSchemaResponse#registry_name #registry_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_schema({
+    #     schema_id: { # required
+    #       schema_arn: "GlueResourceArn",
+    #       schema_name: "SchemaRegistryNameString",
+    #       registry_name: "SchemaRegistryNameString",
+    #     },
+    #     schema_version_number: {
+    #       latest_version: false,
+    #       version_number: 1,
+    #     },
+    #     compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
+    #     description: "DescriptionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #   resp.registry_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateSchema AWS API Documentation
+    #
+    # @overload update_schema(params = {})
+    # @param [Hash] params ({})
+    def update_schema(params = {}, options = {})
+      req = build_request(:update_schema, params)
       req.send_request(options)
     end
 
@@ -8959,6 +10259,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       },
     #       partition_keys: [
     #         {
@@ -9185,7 +10494,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

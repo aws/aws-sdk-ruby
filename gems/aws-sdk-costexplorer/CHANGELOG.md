@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-11-19)
+------------------
+
+* Feature - Additional metadata that may be applicable to the recommendation.
+
 1.52.0 (2020-10-15)
 ------------------
 

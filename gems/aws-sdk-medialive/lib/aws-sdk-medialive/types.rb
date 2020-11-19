@@ -4869,6 +4869,10 @@ module Aws::MediaLive
     #   its configuration.
     #   @return [String]
     #
+    # @!attribute [rw] device_update_status
+    #   The status of software on the input device.
+    #   @return [String]
+    #
     # @!attribute [rw] hd_device_settings
     #   Settings that describe the active source from the input device, and
     #   the video characteristics of that source.
@@ -4901,6 +4905,7 @@ module Aws::MediaLive
       :arn,
       :connection_state,
       :device_settings_sync_state,
+      :device_update_status,
       :hd_device_settings,
       :id,
       :mac_address,
@@ -9322,6 +9327,10 @@ module Aws::MediaLive
     #   its configuration.
     #   @return [String]
     #
+    # @!attribute [rw] device_update_status
+    #   The status of software on the input device.
+    #   @return [String]
+    #
     # @!attribute [rw] hd_device_settings
     #   Settings that describe an input device that is type HD.
     #   @return [Types::InputDeviceHdSettings]
@@ -9356,6 +9365,7 @@ module Aws::MediaLive
       :arn,
       :connection_state,
       :device_settings_sync_state,
+      :device_update_status,
       :hd_device_settings,
       :id,
       :mac_address,
@@ -9566,6 +9576,10 @@ module Aws::MediaLive
     #   its configuration.
     #   @return [String]
     #
+    # @!attribute [rw] device_update_status
+    #   The status of software on the input device.
+    #   @return [String]
+    #
     # @!attribute [rw] hd_device_settings
     #   Settings that describe an input device that is type HD.
     #   @return [Types::InputDeviceHdSettings]
@@ -9600,6 +9614,7 @@ module Aws::MediaLive
       :arn,
       :connection_state,
       :device_settings_sync_state,
+      :device_update_status,
       :hd_device_settings,
       :id,
       :mac_address,
@@ -17620,6 +17635,10 @@ module Aws::MediaLive
     #   its configuration.
     #   @return [String]
     #
+    # @!attribute [rw] device_update_status
+    #   The status of software on the input device.
+    #   @return [String]
+    #
     # @!attribute [rw] hd_device_settings
     #   Settings that describe the active source from the input device, and
     #   the video characteristics of that source.
@@ -17652,6 +17671,7 @@ module Aws::MediaLive
       :arn,
       :connection_state,
       :device_settings_sync_state,
+      :device_update_status,
       :hd_device_settings,
       :id,
       :mac_address,

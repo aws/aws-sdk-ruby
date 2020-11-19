@@ -166,6 +166,15 @@ module Aws::Glue
     #                 },
     #               },
     #               stored_as_sub_directories: false,
+    #               schema_reference: {
+    #                 schema_id: {
+    #                   schema_arn: "GlueResourceArn",
+    #                   schema_name: "SchemaRegistryNameString",
+    #                   registry_name: "SchemaRegistryNameString",
+    #                 },
+    #                 schema_version_id: "SchemaVersionIdString",
+    #                 schema_version_number: 1,
+    #               },
     #             },
     #             parameters: {
     #               "KeyString" => "ParametersMapValue",
@@ -837,6 +846,15 @@ module Aws::Glue
     #                   },
     #                 },
     #                 stored_as_sub_directories: false,
+    #                 schema_reference: {
+    #                   schema_id: {
+    #                     schema_arn: "GlueResourceArn",
+    #                     schema_name: "SchemaRegistryNameString",
+    #                     registry_name: "SchemaRegistryNameString",
+    #                   },
+    #                   schema_version_id: "SchemaVersionIdString",
+    #                   schema_version_number: 1,
+    #                 },
     #               },
     #               parameters: {
     #                 "KeyString" => "ParametersMapValue",
@@ -930,6 +948,15 @@ module Aws::Glue
     #               },
     #             },
     #             stored_as_sub_directories: false,
+    #             schema_reference: {
+    #               schema_id: {
+    #                 schema_arn: "GlueResourceArn",
+    #                 schema_name: "SchemaRegistryNameString",
+    #                 registry_name: "SchemaRegistryNameString",
+    #               },
+    #               schema_version_id: "SchemaVersionIdString",
+    #               schema_version_number: 1,
+    #             },
     #           },
     #           parameters: {
     #             "KeyString" => "ParametersMapValue",
@@ -1155,6 +1182,49 @@ module Aws::Glue
     class CatalogTarget < Struct.new(
       :database_name,
       :tables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CheckSchemaVersionValidityInput
+    #   data as a hash:
+    #
+    #       {
+    #         data_format: "AVRO", # required, accepts AVRO
+    #         schema_definition: "SchemaDefinitionString", # required
+    #       }
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_definition
+    #   The definition of the schema that has to be validated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CheckSchemaVersionValidityInput AWS API Documentation
+    #
+    class CheckSchemaVersionValidityInput < Struct.new(
+      :data_format,
+      :schema_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] valid
+    #   Return true, if the schema is valid and false otherwise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] error
+    #   A validation failure error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CheckSchemaVersionValidityResponse AWS API Documentation
+    #
+    class CheckSchemaVersionValidityResponse < Struct.new(
+      :valid,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3645,6 +3715,15 @@ module Aws::Glue
     #               },
     #             },
     #             stored_as_sub_directories: false,
+    #             schema_reference: {
+    #               schema_id: {
+    #                 schema_arn: "GlueResourceArn",
+    #                 schema_name: "SchemaRegistryNameString",
+    #                 registry_name: "SchemaRegistryNameString",
+    #               },
+    #               schema_version_id: "SchemaVersionIdString",
+    #               schema_version_number: 1,
+    #             },
     #           },
     #           parameters: {
     #             "KeyString" => "ParametersMapValue",
@@ -3686,6 +3765,266 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartitionResponse AWS API Documentation
     #
     class CreatePartitionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CreateRegistryInput
+    #   data as a hash:
+    #
+    #       {
+    #         registry_name: "SchemaRegistryNameString", # required
+    #         description: "DescriptionString",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_name
+    #   Name of the registry to be created of max length of 255, and may
+    #   only contain letters, numbers, hyphen, underscore, dollar sign, or
+    #   hash mark. No whitespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the registry. If description is not provided, there
+    #   will not be any default value for this.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   AWS tags that contain a key value pair and may be searched by
+    #   console, command line, or API.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateRegistryInput AWS API Documentation
+    #
+    class CreateRegistryInput < Struct.new(
+      :registry_name,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the newly created registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   The name of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the registry.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateRegistryResponse AWS API Documentation
+    #
+    class CreateRegistryResponse < Struct.new(
+      :registry_arn,
+      :registry_name,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateSchemaInput
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: {
+    #           registry_name: "SchemaRegistryNameString",
+    #           registry_arn: "GlueResourceArn",
+    #         },
+    #         schema_name: "SchemaRegistryNameString", # required
+    #         data_format: "AVRO", # required, accepts AVRO
+    #         compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
+    #         description: "DescriptionString",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         schema_definition: "SchemaDefinitionString",
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   This is a wrapper shape to contain the registry identity fields. If
+    #   this is not provided, the default registry will be used. The ARN
+    #   format for the same will be: `arn:aws:glue:us-east-2:<customer
+    #   id>:registry/default-registry:random-5-letter-id`.
+    #   @return [Types::RegistryId]
+    #
+    # @!attribute [rw] schema_name
+    #   Name of the schema to be created of max length of 255, and may only
+    #   contain letters, numbers, hyphen, underscore, dollar sign, or hash
+    #   mark. No whitespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] compatibility
+    #   The compatibility mode of the schema. The possible values are:
+    #
+    #   * *NONE*\: No compatibility mode applies. You can use this choice in
+    #     development scenarios or if you do not know the compatibility mode
+    #     that you want to apply to schemas. Any new version added will be
+    #     accepted without undergoing a compatibility check.
+    #
+    #   * *DISABLED*\: This compatibility choice prevents versioning for a
+    #     particular schema. You can use this choice to prevent future
+    #     versioning of a schema.
+    #
+    #   * *BACKWARD*\: This compatibility choice is recommended as it allows
+    #     data receivers to read both the current and one previous schema
+    #     version. This means that for instance, a new schema version cannot
+    #     drop data fields or change the type of these fields, so they
+    #     can't be read by readers using the previous version.
+    #
+    #   * *BACKWARD\_ALL*\: This compatibility choice allows data receivers
+    #     to read both the current and all previous schema versions. You can
+    #     use this choice when you need to delete fields or add optional
+    #     fields, and check compatibility against all previous schema
+    #     versions.
+    #
+    #   * *FORWARD*\: This compatibility choice allows data receivers to
+    #     read both the current and one next schema version, but not
+    #     necessarily later versions. You can use this choice when you need
+    #     to add fields or delete optional fields, but only check
+    #     compatibility against the last schema version.
+    #
+    #   * *FORWARD\_ALL*\: This compatibility choice allows data receivers
+    #     to read written by producers of any new registered schema. You can
+    #     use this choice when you need to add fields or delete optional
+    #     fields, and check compatibility against all previous schema
+    #     versions.
+    #
+    #   * *FULL*\: This compatibility choice allows data receivers to read
+    #     data written by producers using the previous or next version of
+    #     the schema, but not necessarily earlier or later versions. You can
+    #     use this choice when you need to add or remove optional fields,
+    #     but only check compatibility against the last schema version.
+    #
+    #   * *FULL\_ALL*\: This compatibility choice allows data receivers to
+    #     read data written by producers using all previous schema versions.
+    #     You can use this choice when you need to add or remove optional
+    #     fields, and check compatibility against all previous schema
+    #     versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the schema. If description is not
+    #   provided, there will not be any automatic default value for this.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   AWS tags that contain a key value pair and may be searched by
+    #   console, command line, or API. If specified, follows the AWS
+    #   tags-on-create pattern.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_definition
+    #   The schema definition using the `DataFormat` setting for
+    #   `SchemaName`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSchemaInput AWS API Documentation
+    #
+    class CreateSchemaInput < Struct.new(
+      :registry_id,
+      :schema_name,
+      :data_format,
+      :compatibility,
+      :description,
+      :tags,
+      :schema_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_name
+    #   The name of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the schema if specified when created.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] compatibility
+    #   The schema compatibility mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_checkpoint
+    #   The version number of the checkpoint (the last time the
+    #   compatibility mode was changed).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_schema_version
+    #   The latest version of the schema associated with the returned schema
+    #   definition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_schema_version
+    #   The next version of the schema associated with the returned schema
+    #   definition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schema_status
+    #   The status of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the schema.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique identifier of the first schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version_status
+    #   The status of the first schema version created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSchemaResponse AWS API Documentation
+    #
+    class CreateSchemaResponse < Struct.new(
+      :registry_name,
+      :registry_arn,
+      :schema_name,
+      :schema_arn,
+      :description,
+      :data_format,
+      :compatibility,
+      :schema_checkpoint,
+      :latest_schema_version,
+      :next_schema_version,
+      :schema_status,
+      :tags,
+      :schema_version_id,
+      :schema_version_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateScriptRequest
     #   data as a hash:
@@ -3865,6 +4204,15 @@ module Aws::Glue
     #               },
     #             },
     #             stored_as_sub_directories: false,
+    #             schema_reference: {
+    #               schema_id: {
+    #                 schema_arn: "GlueResourceArn",
+    #                 schema_name: "SchemaRegistryNameString",
+    #                 registry_name: "SchemaRegistryNameString",
+    #               },
+    #               schema_version_id: "SchemaVersionIdString",
+    #               schema_version_number: 1,
+    #             },
     #           },
     #           partition_keys: [
     #             {
@@ -4912,6 +5260,52 @@ module Aws::Glue
     #
     class DeletePartitionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteRegistryInput
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: { # required
+    #           registry_name: "SchemaRegistryNameString",
+    #           registry_arn: "GlueResourceArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::RegistryId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteRegistryInput AWS API Documentation
+    #
+    class DeleteRegistryInput < Struct.new(
+      :registry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_name
+    #   The name of the registry being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the registry. A successful operation will return the
+    #   `Deleting` status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteRegistryResponse AWS API Documentation
+    #
+    class DeleteRegistryResponse < Struct.new(
+      :registry_name,
+      :registry_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteResourcePolicyRequest
     #   data as a hash:
     #
@@ -4941,6 +5335,99 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicyResponse AWS API Documentation
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteSchemaInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure that may contain the schema name and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::SchemaId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchemaInput AWS API Documentation
+    #
+    class DeleteSchemaInput < Struct.new(
+      :schema_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchemaResponse AWS API Documentation
+    #
+    class DeleteSchemaResponse < Struct.new(
+      :schema_arn,
+      :schema_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSchemaVersionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         versions: "VersionsString", # required
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure that may contain the schema name and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] versions
+    #   A version range may be supplied which may be of the format:
+    #
+    #   * a single version number, 5
+    #
+    #   * a range, 5-8 : deletes versions 5, 6, 7, 8
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchemaVersionsInput AWS API Documentation
+    #
+    class DeleteSchemaVersionsInput < Struct.new(
+      :schema_id,
+      :versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_version_errors
+    #   A list of `SchemaVersionErrorItem` objects, each containing an error
+    #   and schema version.
+    #   @return [Array<Types::SchemaVersionErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSchemaVersionsResponse AWS API Documentation
+    #
+    class DeleteSchemaVersionsResponse < Struct.new(
+      :schema_version_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteSecurityConfigurationRequest
     #   data as a hash:
@@ -5622,6 +6109,25 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ErrorDetail AWS API Documentation
     #
     class ErrorDetail < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing error details.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ErrorDetails AWS API Documentation
+    #
+    class ErrorDetails < Struct.new(
       :error_code,
       :error_message)
       SENSITIVE = []
@@ -7656,6 +8162,66 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetRegistryInput
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: { # required
+    #           registry_name: "SchemaRegistryNameString",
+    #           registry_arn: "GlueResourceArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::RegistryId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetRegistryInput AWS API Documentation
+    #
+    class GetRegistryInput < Struct.new(
+      :registry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_name
+    #   The name of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the registry was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_time
+    #   The date and time the registry was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetRegistryResponse AWS API Documentation
+    #
+    class GetRegistryResponse < Struct.new(
+      :registry_name,
+      :registry_arn,
+      :description,
+      :status,
+      :created_time,
+      :updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetResourcePoliciesRequest
     #   data as a hash:
     #
@@ -7748,6 +8314,339 @@ module Aws::Glue
       :policy_hash,
       :create_time,
       :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSchemaByDefinitionInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_definition: "SchemaDefinitionString", # required
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_definition
+    #   The definition of the schema for which schema details are required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaByDefinitionInput AWS API Documentation
+    #
+    class GetSchemaByDefinitionInput < Struct.new(
+      :schema_id,
+      :schema_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_version_id
+    #   The schema ID of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the schema was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaByDefinitionResponse AWS API Documentation
+    #
+    class GetSchemaByDefinitionResponse < Struct.new(
+      :schema_version_id,
+      :schema_arn,
+      :data_format,
+      :status,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSchemaInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaInput AWS API Documentation
+    #
+    class GetSchemaInput < Struct.new(
+      :schema_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_name
+    #   The name of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of schema if specified when created
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] compatibility
+    #   The compatibility mode of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_checkpoint
+    #   The version number of the checkpoint (the last time the
+    #   compatibility mode was changed).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_schema_version
+    #   The latest version of the schema associated with the returned schema
+    #   definition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_schema_version
+    #   The next version of the schema associated with the returned schema
+    #   definition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schema_status
+    #   The status of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the schema was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_time
+    #   The date and time the schema was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaResponse AWS API Documentation
+    #
+    class GetSchemaResponse < Struct.new(
+      :registry_name,
+      :registry_arn,
+      :schema_name,
+      :schema_arn,
+      :description,
+      :data_format,
+      :compatibility,
+      :schema_checkpoint,
+      :latest_schema_version,
+      :next_schema_version,
+      :schema_status,
+      :created_time,
+      :updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSchemaVersionInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: {
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_version_id: "SchemaVersionIdString",
+    #         schema_version_number: {
+    #           latest_version: false,
+    #           version_number: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The `SchemaVersionId` of the schema version. This field is required
+    #   for fetching by schema ID. Either this or the `SchemaId` wrapper has
+    #   to be provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version_number
+    #   The version number of the schema.
+    #   @return [Types::SchemaVersionNumber]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersionInput AWS API Documentation
+    #
+    class GetSchemaVersionInput < Struct.new(
+      :schema_id,
+      :schema_version_id,
+      :schema_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_version_id
+    #   The `SchemaVersionId` of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_definition
+    #   The schema definition for the schema ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the schema.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the schema version was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersionResponse AWS API Documentation
+    #
+    class GetSchemaVersionResponse < Struct.new(
+      :schema_version_id,
+      :schema_definition,
+      :data_format,
+      :schema_arn,
+      :version_number,
+      :status,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSchemaVersionsDiffInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         first_schema_version_number: { # required
+    #           latest_version: false,
+    #           version_number: 1,
+    #         },
+    #         second_schema_version_number: { # required
+    #           latest_version: false,
+    #           version_number: 1,
+    #         },
+    #         schema_diff_type: "SYNTAX_DIFF", # required, accepts SYNTAX_DIFF
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] first_schema_version_number
+    #   The first of the two schema versions to be compared.
+    #   @return [Types::SchemaVersionNumber]
+    #
+    # @!attribute [rw] second_schema_version_number
+    #   The second of the two schema versions to be compared.
+    #   @return [Types::SchemaVersionNumber]
+    #
+    # @!attribute [rw] schema_diff_type
+    #   Refers to `SYNTAX_DIFF`, which is the currently supported diff type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersionsDiffInput AWS API Documentation
+    #
+    class GetSchemaVersionsDiffInput < Struct.new(
+      :schema_id,
+      :first_schema_version_number,
+      :second_schema_version_number,
+      :schema_diff_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] diff
+    #   The difference between schemas as a string in JsonPatch format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSchemaVersionsDiffResponse AWS API Documentation
+    #
+    class GetSchemaVersionsDiffResponse < Struct.new(
+      :diff)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9829,6 +10728,169 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRegistriesInput
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "SchemaRegistryTokenString",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListRegistriesInput AWS API Documentation
+    #
+    class ListRegistriesInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registries
+    #   An array of `RegistryDetailedListItem` objects containing minimal
+    #   details of each registry.
+    #   @return [Array<Types::RegistryListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of tokens,
+    #   returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListRegistriesResponse AWS API Documentation
+    #
+    class ListRegistriesResponse < Struct.new(
+      :registries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSchemaVersionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         max_results: 1,
+    #         next_token: "SchemaRegistryTokenString",
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemaVersionsInput AWS API Documentation
+    #
+    class ListSchemaVersionsInput < Struct.new(
+      :schema_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schemas
+    #   An array of `SchemaVersionList` objects containing details of each
+    #   schema version.
+    #   @return [Array<Types::SchemaVersionListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of tokens,
+    #   returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemaVersionsResponse AWS API Documentation
+    #
+    class ListSchemaVersionsResponse < Struct.new(
+      :schemas,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSchemasInput
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: {
+    #           registry_name: "SchemaRegistryNameString",
+    #           registry_arn: "GlueResourceArn",
+    #         },
+    #         max_results: 1,
+    #         next_token: "SchemaRegistryTokenString",
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   A wrapper structure that may contain the registry name and Amazon
+    #   Resource Name (ARN).
+    #   @return [Types::RegistryId]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemasInput AWS API Documentation
+    #
+    class ListSchemasInput < Struct.new(
+      :registry_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schemas
+    #   An array of `SchemaListItem` objects containing details of each
+    #   schema.
+    #   @return [Array<Types::SchemaListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of tokens,
+    #   returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSchemasResponse AWS API Documentation
+    #
+    class ListSchemasResponse < Struct.new(
+      :schemas,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTriggersRequest
     #   data as a hash:
     #
@@ -10317,6 +11379,52 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing metadata information for a schema version.
+    #
+    # @!attribute [rw] metadata_value
+    #   The metadata key’s corresponding value.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time at which the entry was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MetadataInfo AWS API Documentation
+    #
+    class MetadataInfo < Struct.new(
+      :metadata_value,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing a key value pair for metadata.
+    #
+    # @note When making an API call, you may pass MetadataKeyValuePair
+    #   data as a hash:
+    #
+    #       {
+    #         metadata_key: "MetadataKeyString",
+    #         metadata_value: "MetadataValueString",
+    #       }
+    #
+    # @!attribute [rw] metadata_key
+    #   A metadata key.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_value
+    #   A metadata key’s corresponding value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MetadataKeyValuePair AWS API Documentation
+    #
+    class MetadataKeyValuePair < Struct.new(
+      :metadata_key,
+      :metadata_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Amazon DocumentDB or MongoDB data store to crawl.
     #
     # @note When making an API call, you may pass MongoDBTarget
@@ -10652,6 +11760,15 @@ module Aws::Glue
     #             },
     #           },
     #           stored_as_sub_directories: false,
+    #           schema_reference: {
+    #             schema_id: {
+    #               schema_arn: "GlueResourceArn",
+    #               schema_name: "SchemaRegistryNameString",
+    #               registry_name: "SchemaRegistryNameString",
+    #             },
+    #             schema_version_id: "SchemaVersionIdString",
+    #             schema_version_number: 1,
+    #           },
     #         },
     #         parameters: {
     #           "KeyString" => "ParametersMapValue",
@@ -10989,6 +12106,100 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutSchemaVersionMetadataInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: {
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_version_number: {
+    #           latest_version: false,
+    #           version_number: 1,
+    #         },
+    #         schema_version_id: "SchemaVersionIdString",
+    #         metadata_key_value: { # required
+    #           metadata_key: "MetadataKeyString",
+    #           metadata_value: "MetadataValueString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   The unique ID for the schema.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_version_number
+    #   The version number of the schema.
+    #   @return [Types::SchemaVersionNumber]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique version ID of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_key_value
+    #   The metadata key's corresponding value.
+    #   @return [Types::MetadataKeyValuePair]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutSchemaVersionMetadataInput AWS API Documentation
+    #
+    class PutSchemaVersionMetadataInput < Struct.new(
+      :schema_id,
+      :schema_version_number,
+      :schema_version_id,
+      :metadata_key_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) for the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name for the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   The name for the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The latest version of the schema.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the schema.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique version ID of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_key
+    #   The metadata key.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_value
+    #   The value of the metadata key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutSchemaVersionMetadataResponse AWS API Documentation
+    #
+    class PutSchemaVersionMetadataResponse < Struct.new(
+      :schema_arn,
+      :schema_name,
+      :registry_name,
+      :latest_version,
+      :version_number,
+      :schema_version_id,
+      :metadata_key,
+      :metadata_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutWorkflowRunPropertiesRequest
     #   data as a hash:
     #
@@ -11027,6 +12238,93 @@ module Aws::Glue
     #
     class PutWorkflowRunPropertiesResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass QuerySchemaVersionMetadataInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: {
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_version_number: {
+    #           latest_version: false,
+    #           version_number: 1,
+    #         },
+    #         schema_version_id: "SchemaVersionIdString",
+    #         metadata_list: [
+    #           {
+    #             metadata_key: "MetadataKeyString",
+    #             metadata_value: "MetadataValueString",
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "SchemaRegistryTokenString",
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   A wrapper structure that may contain the schema name and Amazon
+    #   Resource Name (ARN).
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_version_number
+    #   The version number of the schema.
+    #   @return [Types::SchemaVersionNumber]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique version ID of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_list
+    #   Search key-value pairs for metadata, if they are not provided all
+    #   the metadata information will be fetched.
+    #   @return [Array<Types::MetadataKeyValuePair>]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results required per page. If the value is not
+    #   supplied, this will be defaulted to 25 per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/QuerySchemaVersionMetadataInput AWS API Documentation
+    #
+    class QuerySchemaVersionMetadataInput < Struct.new(
+      :schema_id,
+      :schema_version_number,
+      :schema_version_id,
+      :metadata_list,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata_info_map
+    #   A map of a metadata key and associated values.
+    #   @return [Hash<String,Types::MetadataInfo>]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique version ID of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of tokens,
+    #   returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/QuerySchemaVersionMetadataResponse AWS API Documentation
+    #
+    class QuerySchemaVersionMetadataResponse < Struct.new(
+      :metadata_info_map,
+      :schema_version_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # When crawling an Amazon S3 data source after the first crawl is
     # complete, specifies whether to crawl the entire dataset again or to
     # crawl only folders that were added since the last crawler run. For
@@ -11059,6 +12357,231 @@ module Aws::Glue
     #
     class RecrawlPolicy < Struct.new(
       :recrawl_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterSchemaVersionInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_definition: "SchemaDefinitionString", # required
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     Either `SchemaArn` or `SchemaName` and `RegistryName` has to be
+    #     provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. Either `SchemaArn` or
+    #     `SchemaName` and `RegistryName` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_definition
+    #   The schema definition using the `DataFormat` setting for the
+    #   `SchemaName`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegisterSchemaVersionInput AWS API Documentation
+    #
+    class RegisterSchemaVersionInput < Struct.new(
+      :schema_id,
+      :schema_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_version_id
+    #   The unique ID that represents the version of this schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version of this schema (for sync flow only, in case this is the
+    #   first version).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the schema version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegisterSchemaVersionResponse AWS API Documentation
+    #
+    class RegisterSchemaVersionResponse < Struct.new(
+      :schema_version_id,
+      :version_number,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A wrapper structure that may contain the registry name and Amazon
+    # Resource Name (ARN).
+    #
+    # @note When making an API call, you may pass RegistryId
+    #   data as a hash:
+    #
+    #       {
+    #         registry_name: "SchemaRegistryNameString",
+    #         registry_arn: "GlueResourceArn",
+    #       }
+    #
+    # @!attribute [rw] registry_name
+    #   Name of the registry. Used only for lookup. One of `RegistryArn` or
+    #   `RegistryName` has to be provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   Arn of the registry to be updated. One of `RegistryArn` or
+    #   `RegistryName` has to be provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegistryId AWS API Documentation
+    #
+    class RegistryId < Struct.new(
+      :registry_name,
+      :registry_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing the details for a registry.
+    #
+    # @!attribute [rw] registry_name
+    #   The name of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The data the registry was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_time
+    #   The date the registry was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegistryListItem AWS API Documentation
+    #
+    class RegistryListItem < Struct.new(
+      :registry_name,
+      :registry_arn,
+      :description,
+      :status,
+      :created_time,
+      :updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveSchemaVersionMetadataInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: {
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_version_number: {
+    #           latest_version: false,
+    #           version_number: 1,
+    #         },
+    #         schema_version_id: "SchemaVersionIdString",
+    #         metadata_key_value: { # required
+    #           metadata_key: "MetadataKeyString",
+    #           metadata_value: "MetadataValueString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   A wrapper structure that may contain the schema name and Amazon
+    #   Resource Name (ARN).
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_version_number
+    #   The version number of the schema.
+    #   @return [Types::SchemaVersionNumber]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique version ID of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_key_value
+    #   The value of the metadata key.
+    #   @return [Types::MetadataKeyValuePair]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RemoveSchemaVersionMetadataInput AWS API Documentation
+    #
+    class RemoveSchemaVersionMetadataInput < Struct.new(
+      :schema_id,
+      :schema_version_number,
+      :schema_version_id,
+      :metadata_key_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   The name of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The latest version of the schema.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the schema.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The version ID for the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_key
+    #   The metadata key.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_value
+    #   The value of the metadata key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RemoveSchemaVersionMetadataResponse AWS API Documentation
+    #
+    class RemoveSchemaVersionMetadataResponse < Struct.new(
+      :schema_arn,
+      :schema_name,
+      :registry_name,
+      :latest_version,
+      :version_number,
+      :schema_version_id,
+      :metadata_key,
+      :metadata_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11380,6 +12903,195 @@ module Aws::Glue
     class SchemaColumn < Struct.new(
       :name,
       :data_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SchemaId
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "GlueResourceArn",
+    #         schema_name: "SchemaRegistryNameString",
+    #         registry_name: "SchemaRegistryNameString",
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaId AWS API Documentation
+    #
+    class SchemaId < Struct.new(
+      :schema_arn,
+      :schema_name,
+      :registry_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains minimal details for a schema.
+    #
+    # @!attribute [rw] registry_name
+    #   the name of the registry where the schema resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) for the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_status
+    #   The status of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that a schema was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_time
+    #   The date and time that a schema was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaListItem AWS API Documentation
+    #
+    class SchemaListItem < Struct.new(
+      :registry_name,
+      :schema_name,
+      :schema_arn,
+      :description,
+      :schema_status,
+      :created_time,
+      :updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that references a schema stored in the AWS Glue Schema
+    # Registry.
+    #
+    # @note When making an API call, you may pass SchemaReference
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: {
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_version_id: "SchemaVersionIdString",
+    #         schema_version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   A structure that contains schema identity fields. Either this or the
+    #   `SchemaVersionId` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique ID assigned to a version of the schema. Either this or
+    #   the `SchemaId` has to be provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version_number
+    #   The version number of the schema.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaReference AWS API Documentation
+    #
+    class SchemaReference < Struct.new(
+      :schema_id,
+      :schema_version_id,
+      :schema_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the error details for an operation on a schema
+    # version.
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the schema.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_details
+    #   The details of the error for the schema version.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaVersionErrorItem AWS API Documentation
+    #
+    class SchemaVersionErrorItem < Struct.new(
+      :version_number,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the details about a schema version.
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version_id
+    #   The unique identifier of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the schema.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the schema version was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaVersionListItem AWS API Documentation
+    #
+    class SchemaVersionListItem < Struct.new(
+      :schema_arn,
+      :schema_version_id,
+      :version_number,
+      :status,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SchemaVersionNumber
+    #   data as a hash:
+    #
+    #       {
+    #         latest_version: false,
+    #         version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] latest_version
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] version_number
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaVersionNumber AWS API Documentation
+    #
+    class SchemaVersionNumber < Struct.new(
+      :latest_version,
+      :version_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12216,6 +13928,15 @@ module Aws::Glue
     #           },
     #         },
     #         stored_as_sub_directories: false,
+    #         schema_reference: {
+    #           schema_id: {
+    #             schema_arn: "GlueResourceArn",
+    #             schema_name: "SchemaRegistryNameString",
+    #             registry_name: "SchemaRegistryNameString",
+    #           },
+    #           schema_version_id: "SchemaVersionIdString",
+    #           schema_version_number: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] columns
@@ -12273,6 +13994,14 @@ module Aws::Glue
     #   not.
     #   @return [Boolean]
     #
+    # @!attribute [rw] schema_reference
+    #   An object that references a schema stored in the AWS Glue Schema
+    #   Registry.
+    #
+    #   When creating a table, you can pass an empty list of columns for the
+    #   schema, and instead use a schema reference.
+    #   @return [Types::SchemaReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StorageDescriptor AWS API Documentation
     #
     class StorageDescriptor < Struct.new(
@@ -12287,7 +14016,8 @@ module Aws::Glue
       :sort_columns,
       :parameters,
       :skewed_info,
-      :stored_as_sub_directories)
+      :stored_as_sub_directories,
+      :schema_reference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12557,6 +14287,15 @@ module Aws::Glue
     #             },
     #           },
     #           stored_as_sub_directories: false,
+    #           schema_reference: {
+    #             schema_id: {
+    #               schema_arn: "GlueResourceArn",
+    #               schema_name: "SchemaRegistryNameString",
+    #               registry_name: "SchemaRegistryNameString",
+    #             },
+    #             schema_version_id: "SchemaVersionIdString",
+    #             schema_version_number: 1,
+    #           },
     #         },
     #         partition_keys: [
     #           {
@@ -14337,6 +16076,15 @@ module Aws::Glue
     #               },
     #             },
     #             stored_as_sub_directories: false,
+    #             schema_reference: {
+    #               schema_id: {
+    #                 schema_arn: "GlueResourceArn",
+    #                 schema_name: "SchemaRegistryNameString",
+    #                 registry_name: "SchemaRegistryNameString",
+    #               },
+    #               schema_version_id: "SchemaVersionIdString",
+    #               schema_version_number: 1,
+    #             },
     #           },
     #           parameters: {
     #             "KeyString" => "ParametersMapValue",
@@ -14387,6 +16135,127 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartitionResponse AWS API Documentation
     #
     class UpdatePartitionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateRegistryInput
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: { # required
+    #           registry_name: "SchemaRegistryNameString",
+    #           registry_arn: "GlueResourceArn",
+    #         },
+    #         description: "DescriptionString", # required
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   This is a wrapper structure that may contain the registry name and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::RegistryId]
+    #
+    # @!attribute [rw] description
+    #   A description of the registry. If description is not provided, this
+    #   field will not be updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateRegistryInput AWS API Documentation
+    #
+    class UpdateRegistryInput < Struct.new(
+      :registry_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_name
+    #   The name of the updated registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource name (ARN) of the updated registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateRegistryResponse AWS API Documentation
+    #
+    class UpdateRegistryResponse < Struct.new(
+      :registry_name,
+      :registry_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSchemaInput
+    #   data as a hash:
+    #
+    #       {
+    #         schema_id: { # required
+    #           schema_arn: "GlueResourceArn",
+    #           schema_name: "SchemaRegistryNameString",
+    #           registry_name: "SchemaRegistryNameString",
+    #         },
+    #         schema_version_number: {
+    #           latest_version: false,
+    #           version_number: 1,
+    #         },
+    #         compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
+    #         description: "DescriptionString",
+    #       }
+    #
+    # @!attribute [rw] schema_id
+    #   This is a wrapper structure to contain schema identity fields. The
+    #   structure contains:
+    #
+    #   * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+    #     One of `SchemaArn` or `SchemaName` has to be provided.
+    #
+    #   * SchemaId$SchemaName: The name of the schema. One of `SchemaArn` or
+    #     `SchemaName` has to be provided.
+    #   @return [Types::SchemaId]
+    #
+    # @!attribute [rw] schema_version_number
+    #   Version number required for check pointing. One of `VersionNumber`
+    #   or `Compatibility` has to be provided.
+    #   @return [Types::SchemaVersionNumber]
+    #
+    # @!attribute [rw] compatibility
+    #   The new compatibility setting for the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description for the schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateSchemaInput AWS API Documentation
+    #
+    class UpdateSchemaInput < Struct.new(
+      :schema_id,
+      :schema_version_number,
+      :compatibility,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   The name of the registry that contains the schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateSchemaResponse AWS API Documentation
+    #
+    class UpdateSchemaResponse < Struct.new(
+      :schema_arn,
+      :schema_name,
+      :registry_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateTableRequest
     #   data as a hash:
@@ -14442,6 +16311,15 @@ module Aws::Glue
     #               },
     #             },
     #             stored_as_sub_directories: false,
+    #             schema_reference: {
+    #               schema_id: {
+    #                 schema_arn: "GlueResourceArn",
+    #                 schema_name: "SchemaRegistryNameString",
+    #                 registry_name: "SchemaRegistryNameString",
+    #               },
+    #               schema_version_id: "SchemaVersionIdString",
+    #               schema_version_number: 1,
+    #             },
     #           },
     #           partition_keys: [
     #             {

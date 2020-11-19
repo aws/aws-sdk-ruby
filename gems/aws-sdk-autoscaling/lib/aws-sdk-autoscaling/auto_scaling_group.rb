@@ -896,6 +896,11 @@ module Aws::AutoScaling
     #           {
     #             instance_type: "XmlStringMaxLen255",
     #             weighted_capacity: "XmlStringMaxLen32",
+    #             launch_template_specification: {
+    #               launch_template_id: "XmlStringMaxLen255",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "XmlStringMaxLen255",
+    #             },
     #           },
     #         ],
     #       },
@@ -936,7 +941,7 @@ module Aws::AutoScaling
     #   An embedded object that specifies a mixed instances policy. When you
     #   make changes to an existing policy, all optional parameters are left
     #   unchanged if not specified. For more information, see [Auto Scaling
-    #   Groups with Multiple Instance Types and Purchase Options][1] in the
+    #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #

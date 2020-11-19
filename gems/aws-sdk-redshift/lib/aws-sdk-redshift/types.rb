@@ -705,6 +705,10 @@ module Aws::Redshift
     #   * ResizeType: Returns ClassicResize
     #   @return [Types::ResizeInfo]
     #
+    # @!attribute [rw] cluster_namespace_arn
+    #   The namespace Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -753,7 +757,8 @@ module Aws::Redshift
       :expected_next_snapshot_schedule_time,
       :expected_next_snapshot_schedule_time_status,
       :next_maintenance_window_start_time,
-      :resize_info)
+      :resize_info,
+      :cluster_namespace_arn)
       SENSITIVE = []
       include Aws::Structure
     end

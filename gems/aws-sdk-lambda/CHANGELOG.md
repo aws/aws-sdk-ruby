@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-11-19)
+------------------
+
+* Feature - Added the starting position and starting position timestamp to ESM Configuration. Now customers will be able to view these fields for their ESM.
+
 1.52.0 (2020-11-05)
 ------------------
 

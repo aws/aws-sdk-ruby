@@ -858,7 +858,7 @@ module Aws::KinesisAnalyticsV2
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     application_description: "ApplicationDescription",
-    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8
+    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11
     #     service_execution_role: "RoleARN", # required
     #     application_configuration: {
     #       sql_application_configuration: {
@@ -1021,7 +1021,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1120,6 +1120,58 @@ module Aws::KinesisAnalyticsV2
     # @param [Hash] params ({})
     def create_application(params = {}, options = {})
       req = build_request(:create_application, params)
+      req.send_request(options)
+    end
+
+    # Creates and returns a URL that you can use to connect to an
+    # application's extension. Currently, the only available extension is
+    # the Apache Flink dashboard.
+    #
+    # The IAM role or user used to call this API defines the permissions to
+    # access the extension. Once the presigned URL is created, no additional
+    # permission is required to access this URL. IAM authorization policies
+    # for this API are also enforced for every HTTP request that attempts to
+    # connect to the extension.
+    #
+    # <note markdown="1"> The URL that you get from a call to CreateApplicationPresignedUrl must
+    # be used within 3 minutes to be valid. If you first try to use the URL
+    # after the 3-minute limit expires, the service returns an HTTP 403
+    # Forbidden error.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :application_name
+    #   The name of the application.
+    #
+    # @option params [required, String] :url_type
+    #   The type of the extension for which to create and return a URL.
+    #   Currently, the only valid extension URL type is `FLINK_DASHBOARD_URL`.
+    #
+    # @option params [Integer] :session_expiration_duration_in_seconds
+    #   The duration in seconds for which the returned URL will be valid.
+    #
+    # @return [Types::CreateApplicationPresignedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApplicationPresignedUrlResponse#authorized_url #authorized_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_application_presigned_url({
+    #     application_name: "ApplicationName", # required
+    #     url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL
+    #     session_expiration_duration_in_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationPresignedUrl AWS API Documentation
+    #
+    # @overload create_application_presigned_url(params = {})
+    # @param [Hash] params ({})
+    def create_application_presigned_url(params = {}, options = {})
+      req = build_request(:create_application_presigned_url, params)
       req.send_request(options)
     end
 
@@ -1464,7 +1516,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1769,7 +1821,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries[0].application_arn #=> String
     #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_summaries[0].application_version_id #=> Integer
-    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
+    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplications AWS API Documentation
@@ -1862,8 +1914,14 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Stops the application from processing data. You can stop an
-    # application only if it is in the running state. You can use the
-    # DescribeApplication operation to find the application state.
+    # application only if it is in the running status, unless you set the
+    # `Force` parameter to `true`.
+    #
+    # You can use the DescribeApplication operation to find the application
+    # status.
+    #
+    # Kinesis Data Analytics takes a snapshot when the application is
+    # stopped, unless `Force` is set to `true`.
     #
     # @option params [required, String] :application_name
     #   The name of the running application to stop.
@@ -1873,12 +1931,19 @@ module Aws::KinesisAnalyticsV2
     #   `true`, Kinesis Data Analytics stops the application without taking a
     #   snapshot.
     #
+    #   <note markdown="1"> Force-stopping your application may lead to data loss or duplication.
+    #   To prevent data loss or duplicate processing of data during
+    #   application restarts, we recommend you to take frequent snapshots of
+    #   your application.
+    #
+    #    </note>
+    #
     #   You can only force stop a Flink-based Kinesis Data Analytics
     #   application. You can't force stop a SQL-based Kinesis Data Analytics
     #   application.
     #
     #   The application must be in the `STARTING`, `UPDATING`, `STOPPING`,
-    #   `AUTOSCALING`, or `RUNNING` state.
+    #   `AUTOSCALING`, or `RUNNING` status.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2182,7 +2247,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
     #   resp.application_detail.application_version_id #=> Integer
@@ -2297,7 +2362,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

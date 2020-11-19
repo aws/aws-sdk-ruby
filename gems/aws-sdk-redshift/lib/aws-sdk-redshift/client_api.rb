@@ -579,6 +579,7 @@ module Aws::Redshift
     Cluster.add_member(:expected_next_snapshot_schedule_time_status, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedNextSnapshotScheduleTimeStatus"))
     Cluster.add_member(:next_maintenance_window_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "NextMaintenanceWindowStartTime"))
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
+    Cluster.add_member(:cluster_namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "ClusterNamespaceArn"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -2520,6 +2521,12 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: ClusterDbRevisionsMessage)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_cluster_parameter_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -2610,6 +2617,12 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: TrackListMessage)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_cluster_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -2834,6 +2847,12 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: SnapshotCopyGrantMessage)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotCopyGrantNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_snapshot_schedules, Seahorse::Model::Operation.new.tap do |o|
@@ -2842,6 +2861,12 @@ module Aws::Redshift
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSnapshotSchedulesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotSchedulesOutputMessage)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_storage, Seahorse::Model::Operation.new.tap do |o|
@@ -2860,6 +2885,12 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: TableRestoreStatusMessage)
         o.errors << Shapes::ShapeRef.new(shape: TableRestoreNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -2870,6 +2901,12 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: TaggedResourceListMessage)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_usage_limits, Seahorse::Model::Operation.new.tap do |o|
@@ -2964,6 +3001,12 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeOfferingNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:modify_cluster, Seahorse::Model::Operation.new.tap do |o|

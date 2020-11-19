@@ -166,6 +166,47 @@ module Aws::DirectoryService
     #
     class AddIpRoutesResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AddRegionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         region_name: "RegionName", # required
+    #         vpc_settings: { # required
+    #           vpc_id: "VpcId", # required
+    #           subnet_ids: ["SubnetId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory to which you want to add Region
+    #   replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Region where you want to add domain controllers for
+    #   replication. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_settings
+    #   Contains VPC information for the CreateDirectory or
+    #   CreateMicrosoftAD operation.
+    #   @return [Types::DirectoryVpcSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddRegionRequest AWS API Documentation
+    #
+    class AddRegionRequest < Struct.new(
+      :directory_id,
+      :region_name,
+      :vpc_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddRegionResult AWS API Documentation
+    #
+    class AddRegionResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AddTagsToResourceRequest
     #   data as a hash:
     #
@@ -784,6 +825,36 @@ module Aws::DirectoryService
     #
     #   If you need to change the password for the administrator account,
     #   you can use the ResetUserPassword API call.
+    #
+    #   The regex pattern for this string is made up of the following
+    #   conditions:
+    #
+    #   * Length (?=^.\\\{8,64\\}$) – Must be between 8 and 64 characters
+    #
+    #   ^
+    #
+    #   AND any 3 of the following password complexity rules required by
+    #   Active Directory:
+    #
+    #   * Numbers and upper case and lowercase
+    #     (?=.*\\d)(?=.*\[A-Z\])(?=.*\[a-z\])
+    #
+    #   * Numbers and special characters and lower case
+    #     (?=.*\\d)(?=.*\[^A-Za-z0-9\\s\])(?=.*\[a-z\])
+    #
+    #   * Special characters and upper case and lower case
+    #     (?=.*\[^A-Za-z0-9\\s\])(?=.*\[A-Z\])(?=.*\[a-z\])
+    #
+    #   * Numbers and upper case and special characters
+    #     (?=.*\\d)(?=.*\[A-Z\])(?=.*\[^A-Za-z0-9\\s\])
+    #
+    #   For additional information about how Active Directory passwords are
+    #   enforced, see [Password must meet complexity requirements][1] on the
+    #   Microsoft website.
+    #
+    #
+    #
+    #   [1]: https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1629,6 +1700,58 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeRegionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         region_name: "RegionName",
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Region. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The *DescribeRegionsResult.NextToken* value from a previous call to
+    #   DescribeRegions. Pass null if this is the first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeRegionsRequest AWS API Documentation
+    #
+    class DescribeRegionsRequest < Struct.new(
+      :directory_id,
+      :region_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regions_description
+    #   List of regional information related to the directory per replicated
+    #   Region.
+    #   @return [Array<Types::RegionDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, more results are available. Pass this value for the
+    #   *NextToken* parameter in a subsequent call to DescribeRegions to
+    #   retrieve the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeRegionsResult AWS API Documentation
+    #
+    class DescribeRegionsResult < Struct.new(
+      :regions_description,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeSharedDirectoriesRequest
     #   data as a hash:
     #
@@ -1827,6 +1950,27 @@ module Aws::DirectoryService
     class DescribeTrustsResult < Struct.new(
       :trusts,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Region you specified is the same Region where the AWS Managed
+    # Microsoft AD directory was created. Specify a different Region and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryAlreadyInRegionException AWS API Documentation
+    #
+    class DirectoryAlreadyInRegionException < Struct.new(
+      :message,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2062,6 +2206,10 @@ module Aws::DirectoryService
     #   owner account.
     #   @return [Types::OwnerDirectoryDescription]
     #
+    # @!attribute [rw] regions_info
+    #   Lists the Regions where the directory has replicated.
+    #   @return [Types::RegionsInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
     #
     class DirectoryDescription < Struct.new(
@@ -2088,7 +2236,8 @@ module Aws::DirectoryService
       :stage_reason,
       :sso_enabled,
       :desired_number_of_domain_controllers,
-      :owner_directory_description)
+      :owner_directory_description,
+      :regions_info)
       SENSITIVE = [:share_notes]
       include Aws::Structure
     end
@@ -3370,9 +3519,9 @@ module Aws::DirectoryService
     #       }
     #
     # @!attribute [rw] radius_servers
-    #   An array of strings that contains the IP addresses of the RADIUS
-    #   server endpoints, or the IP addresses of your RADIUS server load
-    #   balancer.
+    #   An array of strings that contains the fully qualified domain name
+    #   (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN
+    #   or IP addresses of your RADIUS server load balancer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] radius_port
@@ -3419,6 +3568,105 @@ module Aws::DirectoryService
       :display_label,
       :use_same_username)
       SENSITIVE = [:shared_secret]
+      include Aws::Structure
+    end
+
+    # The replicated regional information for a directory.
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Region. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_type
+    #   Specifies if the Region is the primary Region or an additional
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the replication process for the specified Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_settings
+    #   Contains VPC information for the CreateDirectory or
+    #   CreateMicrosoftAD operation.
+    #   @return [Types::DirectoryVpcSettings]
+    #
+    # @!attribute [rw] desired_number_of_domain_controllers
+    #   The desired number of domain controllers in the specified Region for
+    #   the specified directory.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] launch_time
+    #   Specifies when the Region replication began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_last_updated_date_time
+    #   The date and time that the Region status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the Region description was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegionDescription AWS API Documentation
+    #
+    class RegionDescription < Struct.new(
+      :directory_id,
+      :region_name,
+      :region_type,
+      :status,
+      :vpc_settings,
+      :desired_number_of_domain_controllers,
+      :launch_time,
+      :status_last_updated_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have reached the limit for maximum number of simultaneous region
+    # replications per directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegionLimitExceededException AWS API Documentation
+    #
+    class RegionLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the Regions that are configured for
+    # multi-Region replication.
+    #
+    # @!attribute [rw] primary_region
+    #   The Region from where the AWS Managed Microsoft AD directory was
+    #   originally created.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_regions
+    #   Lists the Regions where the directory has been replicated, excluding
+    #   the primary Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegionsInfo AWS API Documentation
+    #
+    class RegionsInfo < Struct.new(
+      :primary_region,
+      :additional_regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3805,30 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutesResult AWS API Documentation
     #
     class RemoveIpRoutesResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RemoveRegionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which you want to remove Region
+    #   replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveRegionRequest AWS API Documentation
+    #
+    class RemoveRegionRequest < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveRegionResult AWS API Documentation
+    #
+    class RemoveRegionResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveTagsFromResourceRequest
     #   data as a hash:

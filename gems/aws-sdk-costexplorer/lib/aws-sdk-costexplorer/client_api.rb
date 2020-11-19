@@ -995,6 +995,7 @@ module Aws::CostExplorer
 
     SavingsPlansPurchaseRecommendationMetadata.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendationId"))
     SavingsPlansPurchaseRecommendationMetadata.add_member(:generation_timestamp, Shapes::ShapeRef.new(shape: GenericString, location_name: "GenerationTimestamp"))
+    SavingsPlansPurchaseRecommendationMetadata.add_member(:additional_metadata, Shapes::ShapeRef.new(shape: GenericString, location_name: "AdditionalMetadata"))
     SavingsPlansPurchaseRecommendationMetadata.struct_class = Types::SavingsPlansPurchaseRecommendationMetadata
 
     SavingsPlansPurchaseRecommendationSummary.add_member(:estimated_roi, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedROI"))

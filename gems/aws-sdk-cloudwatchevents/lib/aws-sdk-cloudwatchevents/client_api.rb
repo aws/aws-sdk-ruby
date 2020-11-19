@@ -40,6 +40,7 @@ module Aws::CloudWatchEvents
     CreateEventBusResponse = Shapes::StructureShape.new(name: 'CreateEventBusResponse')
     CreatePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'CreatePartnerEventSourceRequest')
     CreatePartnerEventSourceResponse = Shapes::StructureShape.new(name: 'CreatePartnerEventSourceResponse')
+    CreatedBy = Shapes::StringShape.new(name: 'CreatedBy')
     Database = Shapes::StringShape.new(name: 'Database')
     DbUser = Shapes::StringShape.new(name: 'DbUser')
     DeactivateEventSourceRequest = Shapes::StructureShape.new(name: 'DeactivateEventSourceRequest')
@@ -69,6 +70,7 @@ module Aws::CloudWatchEvents
     EventBus = Shapes::StructureShape.new(name: 'EventBus')
     EventBusList = Shapes::ListShape.new(name: 'EventBusList')
     EventBusName = Shapes::StringShape.new(name: 'EventBusName')
+    EventBusNameOrArn = Shapes::StringShape.new(name: 'EventBusNameOrArn')
     EventId = Shapes::StringShape.new(name: 'EventId')
     EventPattern = Shapes::StringShape.new(name: 'EventPattern')
     EventResource = Shapes::StringShape.new(name: 'EventResource')
@@ -124,6 +126,7 @@ module Aws::CloudWatchEvents
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonPartnerEventBusName = Shapes::StringShape.new(name: 'NonPartnerEventBusName')
+    NonPartnerEventBusNameOrArn = Shapes::StringShape.new(name: 'NonPartnerEventBusNameOrArn')
     OperationDisabledException = Shapes::StructureShape.new(name: 'OperationDisabledException')
     PartnerEventSource = Shapes::StructureShape.new(name: 'PartnerEventSource')
     PartnerEventSourceAccount = Shapes::StructureShape.new(name: 'PartnerEventSourceAccount')
@@ -319,7 +322,7 @@ module Aws::CloudWatchEvents
     DeletePartnerEventSourceRequest.struct_class = Types::DeletePartnerEventSourceRequest
 
     DeleteRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
-    DeleteRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    DeleteRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     DeleteRuleRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     DeleteRuleRequest.struct_class = Types::DeleteRuleRequest
 
@@ -339,7 +342,7 @@ module Aws::CloudWatchEvents
     DescribeArchiveResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeArchiveResponse.struct_class = Types::DescribeArchiveResponse
 
-    DescribeEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "Name"))
+    DescribeEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "Name"))
     DescribeEventBusRequest.struct_class = Types::DescribeEventBusRequest
 
     DescribeEventBusResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -383,7 +386,7 @@ module Aws::CloudWatchEvents
     DescribeReplayResponse.struct_class = Types::DescribeReplayResponse
 
     DescribeRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
-    DescribeRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    DescribeRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     DescribeRuleRequest.struct_class = Types::DescribeRuleRequest
 
     DescribeRuleResponse.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, location_name: "Name"))
@@ -395,10 +398,11 @@ module Aws::CloudWatchEvents
     DescribeRuleResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeRuleResponse.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "ManagedBy"))
     DescribeRuleResponse.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    DescribeRuleResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "CreatedBy"))
     DescribeRuleResponse.struct_class = Types::DescribeRuleResponse
 
     DisableRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
-    DisableRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    DisableRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     DisableRuleRequest.struct_class = Types::DisableRuleRequest
 
     EcsParameters.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TaskDefinitionArn"))
@@ -410,7 +414,7 @@ module Aws::CloudWatchEvents
     EcsParameters.struct_class = Types::EcsParameters
 
     EnableRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
-    EnableRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    EnableRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     EnableRuleRequest.struct_class = Types::EnableRuleRequest
 
     EventBus.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -516,7 +520,7 @@ module Aws::CloudWatchEvents
     ListReplaysResponse.struct_class = Types::ListReplaysResponse
 
     ListRuleNamesByTargetRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "TargetArn"))
-    ListRuleNamesByTargetRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    ListRuleNamesByTargetRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     ListRuleNamesByTargetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListRuleNamesByTargetRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitMax100, location_name: "Limit"))
     ListRuleNamesByTargetRequest.struct_class = Types::ListRuleNamesByTargetRequest
@@ -526,7 +530,7 @@ module Aws::CloudWatchEvents
     ListRuleNamesByTargetResponse.struct_class = Types::ListRuleNamesByTargetResponse
 
     ListRulesRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: RuleName, location_name: "NamePrefix"))
-    ListRulesRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    ListRulesRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     ListRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitMax100, location_name: "Limit"))
     ListRulesRequest.struct_class = Types::ListRulesRequest
@@ -542,7 +546,7 @@ module Aws::CloudWatchEvents
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListTargetsByRuleRequest.add_member(:rule, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Rule"))
-    ListTargetsByRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    ListTargetsByRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     ListTargetsByRuleRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTargetsByRuleRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitMax100, location_name: "Limit"))
     ListTargetsByRuleRequest.struct_class = Types::ListTargetsByRuleRequest
@@ -584,7 +588,7 @@ module Aws::CloudWatchEvents
     PutEventsRequestEntry.add_member(:resources, Shapes::ShapeRef.new(shape: EventResourceList, location_name: "Resources"))
     PutEventsRequestEntry.add_member(:detail_type, Shapes::ShapeRef.new(shape: String, location_name: "DetailType"))
     PutEventsRequestEntry.add_member(:detail, Shapes::ShapeRef.new(shape: String, location_name: "Detail"))
-    PutEventsRequestEntry.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: NonPartnerEventBusName, location_name: "EventBusName"))
+    PutEventsRequestEntry.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: NonPartnerEventBusNameOrArn, location_name: "EventBusName"))
     PutEventsRequestEntry.struct_class = Types::PutEventsRequestEntry
 
     PutEventsRequestEntryList.member = Shapes::ShapeRef.new(shape: PutEventsRequestEntry)
@@ -624,10 +628,11 @@ module Aws::CloudWatchEvents
     PutPartnerEventsResultEntryList.member = Shapes::ShapeRef.new(shape: PutPartnerEventsResultEntry)
 
     PutPermissionRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: NonPartnerEventBusName, location_name: "EventBusName"))
-    PutPermissionRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
-    PutPermissionRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, required: true, location_name: "Principal"))
-    PutPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
+    PutPermissionRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    PutPermissionRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, location_name: "Principal"))
+    PutPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, location_name: "StatementId"))
     PutPermissionRequest.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
+    PutPermissionRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     PutPermissionRequest.struct_class = Types::PutPermissionRequest
 
     PutRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
@@ -637,14 +642,14 @@ module Aws::CloudWatchEvents
     PutRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: RuleDescription, location_name: "Description"))
     PutRuleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     PutRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    PutRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    PutRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     PutRuleRequest.struct_class = Types::PutRuleRequest
 
     PutRuleResponse.add_member(:rule_arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
     PutRuleResponse.struct_class = Types::PutRuleResponse
 
     PutTargetsRequest.add_member(:rule, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Rule"))
-    PutTargetsRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    PutTargetsRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     PutTargetsRequest.add_member(:targets, Shapes::ShapeRef.new(shape: TargetList, required: true, location_name: "Targets"))
     PutTargetsRequest.struct_class = Types::PutTargetsRequest
 
@@ -670,12 +675,13 @@ module Aws::CloudWatchEvents
     RedshiftDataParameters.add_member(:with_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithEvent"))
     RedshiftDataParameters.struct_class = Types::RedshiftDataParameters
 
-    RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
+    RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, location_name: "StatementId"))
+    RemovePermissionRequest.add_member(:remove_all_permissions, Shapes::ShapeRef.new(shape: Boolean, location_name: "RemoveAllPermissions"))
     RemovePermissionRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: NonPartnerEventBusName, location_name: "EventBusName"))
     RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
 
     RemoveTargetsRequest.add_member(:rule, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Rule"))
-    RemoveTargetsRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "EventBusName"))
+    RemoveTargetsRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     RemoveTargetsRequest.add_member(:ids, Shapes::ShapeRef.new(shape: TargetIdList, required: true, location_name: "Ids"))
     RemoveTargetsRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     RemoveTargetsRequest.struct_class = Types::RemoveTargetsRequest
@@ -1183,6 +1189,7 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:put_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1221,6 +1228,7 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:remove_targets, Seahorse::Model::Operation.new.tap do |o|

@@ -1298,6 +1298,17 @@ module Aws::Lambda
     #   The identifier of the event source mapping.
     #   @return [String]
     #
+    # @!attribute [rw] starting_position
+    #   The position in a stream from which to start reading. Required for
+    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
+    #   `AT_TIMESTAMP` is only supported for Amazon Kinesis streams.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_position_timestamp
+    #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which
+    #   to start reading.
+    #   @return [Time]
+    #
     # @!attribute [rw] batch_size
     #   The maximum number of items to retrieve in a single batch.
     #   @return [Integer]
@@ -1389,6 +1400,8 @@ module Aws::Lambda
     #
     class EventSourceMappingConfiguration < Struct.new(
       :uuid,
+      :starting_position,
+      :starting_position_timestamp,
       :batch_size,
       :maximum_batching_window_in_seconds,
       :parallelization_factor,

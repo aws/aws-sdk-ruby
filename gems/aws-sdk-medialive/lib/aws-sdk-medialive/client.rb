@@ -4198,6 +4198,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputDeviceResponse#arn #arn} => String
     #   * {Types::DescribeInputDeviceResponse#connection_state #connection_state} => String
     #   * {Types::DescribeInputDeviceResponse#device_settings_sync_state #device_settings_sync_state} => String
+    #   * {Types::DescribeInputDeviceResponse#device_update_status #device_update_status} => String
     #   * {Types::DescribeInputDeviceResponse#hd_device_settings #hd_device_settings} => Types::InputDeviceHdSettings
     #   * {Types::DescribeInputDeviceResponse#id #id} => String
     #   * {Types::DescribeInputDeviceResponse#mac_address #mac_address} => String
@@ -4217,6 +4218,7 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
     #   resp.device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
+    #   resp.device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE"
     #   resp.hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -4833,6 +4835,7 @@ module Aws::MediaLive
     #   resp.input_devices[0].arn #=> String
     #   resp.input_devices[0].connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
     #   resp.input_devices[0].device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
+    #   resp.input_devices[0].device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE"
     #   resp.input_devices[0].hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.input_devices[0].hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.input_devices[0].hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -8945,6 +8948,7 @@ module Aws::MediaLive
     #   * {Types::UpdateInputDeviceResponse#arn #arn} => String
     #   * {Types::UpdateInputDeviceResponse#connection_state #connection_state} => String
     #   * {Types::UpdateInputDeviceResponse#device_settings_sync_state #device_settings_sync_state} => String
+    #   * {Types::UpdateInputDeviceResponse#device_update_status #device_update_status} => String
     #   * {Types::UpdateInputDeviceResponse#hd_device_settings #hd_device_settings} => Types::InputDeviceHdSettings
     #   * {Types::UpdateInputDeviceResponse#id #id} => String
     #   * {Types::UpdateInputDeviceResponse#mac_address #mac_address} => String
@@ -8969,6 +8973,7 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
     #   resp.device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
+    #   resp.device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE"
     #   resp.hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -9245,7 +9250,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

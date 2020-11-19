@@ -34,6 +34,7 @@ module Aws::DirectoryService
   # * {CertificateInUseException}
   # * {CertificateLimitExceededException}
   # * {ClientException}
+  # * {DirectoryAlreadyInRegionException}
   # * {DirectoryAlreadySharedException}
   # * {DirectoryDoesNotExistException}
   # * {DirectoryLimitExceededException}
@@ -52,6 +53,7 @@ module Aws::DirectoryService
   # * {IpRouteLimitExceededException}
   # * {NoAvailableCertificateException}
   # * {OrganizationsException}
+  # * {RegionLimitExceededException}
   # * {ServiceException}
   # * {ShareLimitExceededException}
   # * {SnapshotLimitExceededException}
@@ -190,6 +192,26 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::ClientException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class DirectoryAlreadyInRegionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::DirectoryAlreadyInRegionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -550,6 +572,26 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::OrganizationsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class RegionLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::RegionLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

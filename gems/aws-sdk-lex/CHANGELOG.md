@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-11-19)
+------------------
+
+* Feature - Amazon Lex now supports the ability to view and manage active contexts associated with a user session.
+
 1.32.0 (2020-09-30)
 ------------------
 

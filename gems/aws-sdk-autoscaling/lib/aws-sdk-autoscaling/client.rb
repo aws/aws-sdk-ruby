@@ -783,7 +783,8 @@ module Aws::AutoScaling
     #   types to fulfill On-Demand and Spot capacities, but also the
     #   parameters that specify the instance configuration information—the
     #   launch template and instance types. The policy can also include a
-    #   weight for each instance type. For more information, see [Auto Scaling
+    #   weight for each instance type and different launch templates for
+    #   individual instance types. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -1069,6 +1070,11 @@ module Aws::AutoScaling
     #           {
     #             instance_type: "XmlStringMaxLen255",
     #             weighted_capacity: "XmlStringMaxLen32",
+    #             launch_template_specification: {
+    #               launch_template_id: "XmlStringMaxLen255",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "XmlStringMaxLen255",
+    #             },
     #           },
     #         ],
     #       },
@@ -2030,6 +2036,9 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides #=> Array
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_type #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].weighted_capacity #=> String
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].launch_template_specification.launch_template_id #=> String
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].launch_template_specification.launch_template_name #=> String
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].launch_template_specification.version #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_allocation_strategy #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_base_capacity #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_percentage_above_base_capacity #=> Integer
@@ -5094,7 +5103,7 @@ module Aws::AutoScaling
     #   An embedded object that specifies a mixed instances policy. When you
     #   make changes to an existing policy, all optional parameters are left
     #   unchanged if not specified. For more information, see [Auto Scaling
-    #   Groups with Multiple Instance Types and Purchase Options][1] in the
+    #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
@@ -5280,6 +5289,11 @@ module Aws::AutoScaling
     #           {
     #             instance_type: "XmlStringMaxLen255",
     #             weighted_capacity: "XmlStringMaxLen32",
+    #             launch_template_specification: {
+    #               launch_template_id: "XmlStringMaxLen255",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "XmlStringMaxLen255",
+    #             },
     #           },
     #         ],
     #       },
@@ -5330,7 +5344,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

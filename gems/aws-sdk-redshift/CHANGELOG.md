@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2020-11-19)
+------------------
+
+* Feature - Amazon Redshift support for returning ClusterNamespaceArn in describeClusters
+
 1.50.0 (2020-09-30)
 ------------------
 

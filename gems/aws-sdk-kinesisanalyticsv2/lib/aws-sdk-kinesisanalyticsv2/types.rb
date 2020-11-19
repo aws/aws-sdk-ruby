@@ -1705,13 +1705,58 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateApplicationPresignedUrlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL
+    #         session_expiration_duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_type
+    #   The type of the extension for which to create and return a URL.
+    #   Currently, the only valid extension URL type is
+    #   `FLINK_DASHBOARD_URL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_expiration_duration_in_seconds
+    #   The duration in seconds for which the returned URL will be valid.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationPresignedUrlRequest AWS API Documentation
+    #
+    class CreateApplicationPresignedUrlRequest < Struct.new(
+      :application_name,
+      :url_type,
+      :session_expiration_duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_url
+    #   The URL of the extension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationPresignedUrlResponse AWS API Documentation
+    #
+    class CreateApplicationPresignedUrlResponse < Struct.new(
+      :authorized_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateApplicationRequest
     #   data as a hash:
     #
     #       {
     #         application_name: "ApplicationName", # required
     #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8
+    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11
     #         service_execution_role: "RoleARN", # required
     #         application_configuration: {
     #           sql_application_configuration: {
@@ -5584,12 +5629,19 @@ module Aws::KinesisAnalyticsV2
     #   to `true`, Kinesis Data Analytics stops the application without
     #   taking a snapshot.
     #
+    #   <note markdown="1"> Force-stopping your application may lead to data loss or
+    #   duplication. To prevent data loss or duplicate processing of data
+    #   during application restarts, we recommend you to take frequent
+    #   snapshots of your application.
+    #
+    #    </note>
+    #
     #   You can only force stop a Flink-based Kinesis Data Analytics
     #   application. You can't force stop a SQL-based Kinesis Data
     #   Analytics application.
     #
     #   The application must be in the `STARTING`, `UPDATING`, `STOPPING`,
-    #   `AUTOSCALING`, or `RUNNING` state.
+    #   `AUTOSCALING`, or `RUNNING` status.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplicationRequest AWS API Documentation

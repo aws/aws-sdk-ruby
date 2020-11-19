@@ -812,6 +812,11 @@ module Aws::AutoScaling
     #               {
     #                 instance_type: "XmlStringMaxLen255",
     #                 weighted_capacity: "XmlStringMaxLen32",
+    #                 launch_template_specification: {
+    #                   launch_template_id: "XmlStringMaxLen255",
+    #                   launch_template_name: "LaunchTemplateName",
+    #                   version: "XmlStringMaxLen255",
+    #                 },
     #               },
     #             ],
     #           },
@@ -908,8 +913,9 @@ module Aws::AutoScaling
     #   instance types to fulfill On-Demand and Spot capacities, but also
     #   the parameters that specify the instance configuration
     #   information—the launch template and instance types. The policy can
-    #   also include a weight for each instance type. For more information,
-    #   see [Auto Scaling groups with multiple instance types and purchase
+    #   also include a weight for each instance type and different launch
+    #   templates for individual instance types. For more information, see
+    #   [Auto Scaling groups with multiple instance types and purchase
     #   options][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: You must specify either a launch template
@@ -3590,9 +3596,7 @@ module Aws::AutoScaling
 
     # Describes a launch template and overrides.
     #
-    # The overrides are used to override the instance type specified by the
-    # launch template with multiple instance types that can be used to
-    # launch On-Demand Instances and Spot Instances.
+    # You specify these parameters as part of a mixed instances policy.
     #
     # When you update the launch template or overrides, existing Amazon EC2
     # instances continue to run. When scale out occurs, Amazon EC2 Auto
@@ -3613,6 +3617,11 @@ module Aws::AutoScaling
     #           {
     #             instance_type: "XmlStringMaxLen255",
     #             weighted_capacity: "XmlStringMaxLen32",
+    #             launch_template_specification: {
+    #               launch_template_id: "XmlStringMaxLen255",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "XmlStringMaxLen255",
+    #             },
     #           },
     #         ],
     #       }
@@ -3623,10 +3632,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] overrides
     #   Any parameters that you specify override the same parameters in the
-    #   launch template. Currently, the only supported override is instance
-    #   type. You can specify between 1 and 20 instance types. If not
-    #   provided, Amazon EC2 Auto Scaling will use the instance type
-    #   specified in the launch template when it launches an instance.
+    #   launch template. If not provided, Amazon EC2 Auto Scaling uses the
+    #   instance type specified in the launch template when it launches an
+    #   instance.
     #   @return [Array<Types::LaunchTemplateOverrides>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplate AWS API Documentation
@@ -3638,11 +3646,14 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an override for a launch template. Currently, the only
-    # supported override is instance type.
+    # Describes an override for a launch template. The maximum number of
+    # instance types that can be associated with an Auto Scaling group is
+    # 20. For more information, see [Configuring overrides][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
-    # The maximum number of instance type overrides that can be associated
-    # with an Auto Scaling group is 20.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html
     #
     # @note When making an API call, you may pass LaunchTemplateOverrides
     #   data as a hash:
@@ -3650,18 +3661,22 @@ module Aws::AutoScaling
     #       {
     #         instance_type: "XmlStringMaxLen255",
     #         weighted_capacity: "XmlStringMaxLen32",
+    #         launch_template_specification: {
+    #           launch_template_id: "XmlStringMaxLen255",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "XmlStringMaxLen255",
+    #         },
     #       }
     #
     # @!attribute [rw] instance_type
     #   The instance type, such as `m3.xlarge`. You must use an instance
     #   type that is supported in your requested Region and Availability
-    #   Zones. For information about available instance types, see
-    #   [Available instance types][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide.*
+    #   Zones. For more information, see [Instance types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
@@ -3685,11 +3700,26 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
     #   @return [String]
     #
+    # @!attribute [rw] launch_template_specification
+    #   Provides the launch template to be used when launching the instance
+    #   type. For example, some instance types might require a launch
+    #   template with a different AMI. If not provided, Amazon EC2 Auto
+    #   Scaling uses the launch template that's defined for your mixed
+    #   instances policy. For more information, see [Specifying a different
+    #   launch template for an instance type][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html
+    #   @return [Types::LaunchTemplateSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateOverrides AWS API Documentation
     #
     class LaunchTemplateOverrides < Struct.new(
       :instance_type,
-      :weighted_capacity)
+      :weighted_capacity,
+      :launch_template_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4148,8 +4178,8 @@ module Aws::AutoScaling
     # Describes a mixed instances policy for an Auto Scaling group. With
     # mixed instances, your Auto Scaling group can provision a combination
     # of On-Demand Instances and Spot Instances across multiple instance
-    # types. For more information, see [Auto Scaling Groups with Multiple
-    # Instance Types and Purchase Options][1] in the *Amazon EC2 Auto
+    # types. For more information, see [Auto Scaling groups with multiple
+    # instance types and purchase options][1] in the *Amazon EC2 Auto
     # Scaling User Guide*.
     #
     # You can create a mixed instances policy for a new Auto Scaling group,
@@ -4175,6 +4205,11 @@ module Aws::AutoScaling
     #             {
     #               instance_type: "XmlStringMaxLen255",
     #               weighted_capacity: "XmlStringMaxLen32",
+    #               launch_template_specification: {
+    #                 launch_template_id: "XmlStringMaxLen255",
+    #                 launch_template_name: "LaunchTemplateName",
+    #                 version: "XmlStringMaxLen255",
+    #               },
     #             },
     #           ],
     #         },
@@ -5808,6 +5843,11 @@ module Aws::AutoScaling
     #               {
     #                 instance_type: "XmlStringMaxLen255",
     #                 weighted_capacity: "XmlStringMaxLen32",
+    #                 launch_template_specification: {
+    #                   launch_template_id: "XmlStringMaxLen255",
+    #                   launch_template_name: "LaunchTemplateName",
+    #                   version: "XmlStringMaxLen255",
+    #                 },
     #               },
     #             ],
     #           },
@@ -5856,7 +5896,7 @@ module Aws::AutoScaling
     #   An embedded object that specifies a mixed instances policy. When you
     #   make changes to an existing policy, all optional parameters are left
     #   unchanged if not specified. For more information, see [Auto Scaling
-    #   Groups with Multiple Instance Types and Purchase Options][1] in the
+    #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-11-19)
+------------------
+
+* Feature - Amazon Lex supports managing input and output contexts as well as default values for slots.
+
 1.40.0 (2020-11-12)
 ------------------
 

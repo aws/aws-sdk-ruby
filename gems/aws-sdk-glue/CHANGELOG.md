@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2020-11-19)
+------------------
+
+* Feature - Adding support for Glue Schema Registry. The AWS Glue Schema Registry is a new feature that allows you to centrally discover, control, and evolve data stream schemas.
+
 1.78.0 (2020-10-27)
 ------------------
 

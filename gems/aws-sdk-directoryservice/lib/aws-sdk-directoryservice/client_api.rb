@@ -19,9 +19,12 @@ module Aws::DirectoryService
     AccessUrl = Shapes::StringShape.new(name: 'AccessUrl')
     AddIpRoutesRequest = Shapes::StructureShape.new(name: 'AddIpRoutesRequest')
     AddIpRoutesResult = Shapes::StructureShape.new(name: 'AddIpRoutesResult')
+    AddRegionRequest = Shapes::StructureShape.new(name: 'AddRegionRequest')
+    AddRegionResult = Shapes::StructureShape.new(name: 'AddRegionResult')
     AddTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddTagsToResourceRequest')
     AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
     AddedDateTime = Shapes::TimestampShape.new(name: 'AddedDateTime')
+    AdditionalRegions = Shapes::ListShape.new(name: 'AdditionalRegions')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
@@ -106,6 +109,8 @@ module Aws::DirectoryService
     DescribeEventTopicsResult = Shapes::StructureShape.new(name: 'DescribeEventTopicsResult')
     DescribeLDAPSSettingsRequest = Shapes::StructureShape.new(name: 'DescribeLDAPSSettingsRequest')
     DescribeLDAPSSettingsResult = Shapes::StructureShape.new(name: 'DescribeLDAPSSettingsResult')
+    DescribeRegionsRequest = Shapes::StructureShape.new(name: 'DescribeRegionsRequest')
+    DescribeRegionsResult = Shapes::StructureShape.new(name: 'DescribeRegionsResult')
     DescribeSharedDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeSharedDirectoriesRequest')
     DescribeSharedDirectoriesResult = Shapes::StructureShape.new(name: 'DescribeSharedDirectoriesResult')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
@@ -114,6 +119,7 @@ module Aws::DirectoryService
     DescribeTrustsResult = Shapes::StructureShape.new(name: 'DescribeTrustsResult')
     Description = Shapes::StringShape.new(name: 'Description')
     DesiredNumberOfDomainControllers = Shapes::IntegerShape.new(name: 'DesiredNumberOfDomainControllers')
+    DirectoryAlreadyInRegionException = Shapes::StructureShape.new(name: 'DirectoryAlreadyInRegionException')
     DirectoryAlreadySharedException = Shapes::StructureShape.new(name: 'DirectoryAlreadySharedException')
     DirectoryConnectSettings = Shapes::StructureShape.new(name: 'DirectoryConnectSettings')
     DirectoryConnectSettingsDescription = Shapes::StructureShape.new(name: 'DirectoryConnectSettingsDescription')
@@ -219,6 +225,12 @@ module Aws::DirectoryService
     RadiusSharedSecret = Shapes::StringShape.new(name: 'RadiusSharedSecret')
     RadiusStatus = Shapes::StringShape.new(name: 'RadiusStatus')
     RadiusTimeout = Shapes::IntegerShape.new(name: 'RadiusTimeout')
+    RegionDescription = Shapes::StructureShape.new(name: 'RegionDescription')
+    RegionLimitExceededException = Shapes::StructureShape.new(name: 'RegionLimitExceededException')
+    RegionName = Shapes::StringShape.new(name: 'RegionName')
+    RegionType = Shapes::StringShape.new(name: 'RegionType')
+    RegionsDescription = Shapes::ListShape.new(name: 'RegionsDescription')
+    RegionsInfo = Shapes::StructureShape.new(name: 'RegionsInfo')
     RegisterCertificateRequest = Shapes::StructureShape.new(name: 'RegisterCertificateRequest')
     RegisterCertificateResult = Shapes::StructureShape.new(name: 'RegisterCertificateResult')
     RegisterEventTopicRequest = Shapes::StructureShape.new(name: 'RegisterEventTopicRequest')
@@ -229,6 +241,8 @@ module Aws::DirectoryService
     RemoteDomainNames = Shapes::ListShape.new(name: 'RemoteDomainNames')
     RemoveIpRoutesRequest = Shapes::StructureShape.new(name: 'RemoveIpRoutesRequest')
     RemoveIpRoutesResult = Shapes::StructureShape.new(name: 'RemoveIpRoutesResult')
+    RemoveRegionRequest = Shapes::StructureShape.new(name: 'RemoveRegionRequest')
+    RemoveRegionResult = Shapes::StructureShape.new(name: 'RemoveRegionResult')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
     ReplicationScope = Shapes::StringShape.new(name: 'ReplicationScope')
@@ -335,11 +349,20 @@ module Aws::DirectoryService
 
     AddIpRoutesResult.struct_class = Types::AddIpRoutesResult
 
+    AddRegionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    AddRegionRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
+    AddRegionRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, required: true, location_name: "VPCSettings"))
+    AddRegionRequest.struct_class = Types::AddRegionRequest
+
+    AddRegionResult.struct_class = Types::AddRegionResult
+
     AddTagsToResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     AddTagsToResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     AddTagsToResourceRequest.struct_class = Types::AddTagsToResourceRequest
 
     AddTagsToResourceResult.struct_class = Types::AddTagsToResourceResult
+
+    AdditionalRegions.member = Shapes::ShapeRef.new(shape: RegionName)
 
     Attribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Value"))
@@ -587,6 +610,15 @@ module Aws::DirectoryService
     DescribeLDAPSSettingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeLDAPSSettingsResult.struct_class = Types::DescribeLDAPSSettingsResult
 
+    DescribeRegionsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DescribeRegionsRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
+    DescribeRegionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegionsRequest.struct_class = Types::DescribeRegionsRequest
+
+    DescribeRegionsResult.add_member(:regions_description, Shapes::ShapeRef.new(shape: RegionsDescription, location_name: "RegionsDescription"))
+    DescribeRegionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegionsResult.struct_class = Types::DescribeRegionsResult
+
     DescribeSharedDirectoriesRequest.add_member(:owner_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "OwnerDirectoryId"))
     DescribeSharedDirectoriesRequest.add_member(:shared_directory_ids, Shapes::ShapeRef.new(shape: DirectoryIds, location_name: "SharedDirectoryIds"))
     DescribeSharedDirectoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -616,6 +648,10 @@ module Aws::DirectoryService
     DescribeTrustsResult.add_member(:trusts, Shapes::ShapeRef.new(shape: Trusts, location_name: "Trusts"))
     DescribeTrustsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeTrustsResult.struct_class = Types::DescribeTrustsResult
+
+    DirectoryAlreadyInRegionException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryAlreadyInRegionException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryAlreadyInRegionException.struct_class = Types::DirectoryAlreadyInRegionException
 
     DirectoryAlreadySharedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     DirectoryAlreadySharedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
@@ -659,6 +695,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:sso_enabled, Shapes::ShapeRef.new(shape: SsoEnabled, location_name: "SsoEnabled"))
     DirectoryDescription.add_member(:desired_number_of_domain_controllers, Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
     DirectoryDescription.add_member(:owner_directory_description, Shapes::ShapeRef.new(shape: OwnerDirectoryDescription, location_name: "OwnerDirectoryDescription"))
+    DirectoryDescription.add_member(:regions_info, Shapes::ShapeRef.new(shape: RegionsInfo, location_name: "RegionsInfo"))
     DirectoryDescription.struct_class = Types::DirectoryDescription
 
     DirectoryDescriptions.member = Shapes::ShapeRef.new(shape: DirectoryDescription)
@@ -924,6 +961,27 @@ module Aws::DirectoryService
     RadiusSettings.add_member(:use_same_username, Shapes::ShapeRef.new(shape: UseSameUsername, location_name: "UseSameUsername"))
     RadiusSettings.struct_class = Types::RadiusSettings
 
+    RegionDescription.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    RegionDescription.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
+    RegionDescription.add_member(:region_type, Shapes::ShapeRef.new(shape: RegionType, location_name: "RegionType"))
+    RegionDescription.add_member(:status, Shapes::ShapeRef.new(shape: DirectoryStage, location_name: "Status"))
+    RegionDescription.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings"))
+    RegionDescription.add_member(:desired_number_of_domain_controllers, Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
+    RegionDescription.add_member(:launch_time, Shapes::ShapeRef.new(shape: LaunchTime, location_name: "LaunchTime"))
+    RegionDescription.add_member(:status_last_updated_date_time, Shapes::ShapeRef.new(shape: StateLastUpdatedDateTime, location_name: "StatusLastUpdatedDateTime"))
+    RegionDescription.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    RegionDescription.struct_class = Types::RegionDescription
+
+    RegionLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    RegionLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    RegionLimitExceededException.struct_class = Types::RegionLimitExceededException
+
+    RegionsDescription.member = Shapes::ShapeRef.new(shape: RegionDescription)
+
+    RegionsInfo.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "PrimaryRegion"))
+    RegionsInfo.add_member(:additional_regions, Shapes::ShapeRef.new(shape: AdditionalRegions, location_name: "AdditionalRegions"))
+    RegionsInfo.struct_class = Types::RegionsInfo
+
     RegisterCertificateRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     RegisterCertificateRequest.add_member(:certificate_data, Shapes::ShapeRef.new(shape: CertificateData, required: true, location_name: "CertificateData"))
     RegisterCertificateRequest.struct_class = Types::RegisterCertificateRequest
@@ -950,6 +1008,11 @@ module Aws::DirectoryService
     RemoveIpRoutesRequest.struct_class = Types::RemoveIpRoutesRequest
 
     RemoveIpRoutesResult.struct_class = Types::RemoveIpRoutesResult
+
+    RemoveRegionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    RemoveRegionRequest.struct_class = Types::RemoveRegionRequest
+
+    RemoveRegionResult.struct_class = Types::RemoveRegionResult
 
     RemoveTagsFromResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     RemoveTagsFromResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
@@ -1174,6 +1237,24 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: IpRouteLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:add_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddRegionResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryAlreadyInRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
@@ -1501,6 +1582,21 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:describe_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:describe_shared_directories, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSharedDirectories"
         o.http_method = "POST"
@@ -1760,6 +1856,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:remove_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveRegionResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
