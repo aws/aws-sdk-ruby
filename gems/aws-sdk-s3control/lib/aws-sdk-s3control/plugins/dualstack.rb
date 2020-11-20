@@ -16,16 +16,22 @@ for all operations.
 
         def add_handlers(handlers, config)
           handlers.add(OptionHandler, step: :initialize)
-          handlers.add(DualstackHandler, step: :build, priority: 2)
+          handlers.add(DualstackHandler, step: :build, priority: 11)
         end
 
         # @api private
         class OptionHandler < Seahorse::Client::Handler
           def call(context)
+            # Support client configuration and per-operation configuration
             if context.params.is_a?(Hash)
               dualstack = context.params.delete(:use_dualstack_endpoint)
             end
             dualstack = context.config.use_dualstack_endpoint if dualstack.nil?
+            # Raise if :endpoint and dualstack are both provided
+            if dualstack && !context.config.regional_endpoint
+              raise ArgumentError,
+                    'Cannot use both :use_dualstack_endpoint and :endpoint'
+            end
             context[:use_dualstack_endpoint] = dualstack
             @handler.call(context)
           end
@@ -34,27 +40,22 @@ for all operations.
         # @api private
         class DualstackHandler < Seahorse::Client::Handler
           def call(context)
-            apply_dualstack_endpoint(context) if use_dualstack_endpoint?(context)
+            if context.config.regional_endpoint && context[:use_dualstack_endpoint]
+              apply_dualstack_endpoint(context)
+            end
             @handler.call(context)
           end
 
           private
           def apply_dualstack_endpoint(context)
-            bucket_name = context.params[:bucket]
             region = context.config.region
-            dns_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
-              region
-            )
+            dns_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
             host = "s3-control.dualstack.#{region}.#{dns_suffix}"
             endpoint = URI.parse(context.http_request.endpoint.to_s)
             endpoint.scheme = context.http_request.endpoint.scheme
             endpoint.port = context.http_request.endpoint.port
             endpoint.host = host
             context.http_request.endpoint = endpoint.to_s
-          end
-
-          def use_dualstack_endpoint?(context)
-            context[:use_dualstack_endpoint]
           end
         end
 

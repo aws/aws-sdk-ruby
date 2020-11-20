@@ -64,8 +64,12 @@ module Aws
       end
 
       # Outpost Bucket ARNs currently do not support dualstack
-      def host_url(region, _dualstack = false)
-        "s3-outposts.#{region}.amazonaws.com"
+      def host_url(region, _dualstack = false, custom_endpoint = nil)
+        if custom_endpoint
+          custom_endpoint
+        else
+          "s3-outposts.#{region}.amazonaws.com"
+        end
       end
     end
   end

@@ -61,12 +61,6 @@ module Aws
 
       let(:creds) { Aws::Credentials.new('akid', 'secret') }
 
-      it 'does nothing when custom endpoint is provided' do
-        c = EndpointPatternClient.new(credentials: creds, endpoint: 'https://abc.com', region: 'us-west-2', stub_responses: true)
-        resp = c.foo
-        expect(resp.context.http_request.endpoint.host).to eq('abc.com')
-      end
-
       it 'does nothing when :disable_host_prefix_injection is true' do
         c = EndpointPatternClient.new(credentials: creds, region: 'us-west-2', stub_responses: true, disable_host_prefix_injection: true)
         resp = c.foo
@@ -94,4 +88,3 @@ module Aws
     end
   end
 end
-

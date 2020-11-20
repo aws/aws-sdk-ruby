@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support PrivateLink using the client `:endpoint` option. This patch has a minor behavioral change: a client constructed using `:use_dualstack_endpoint` or `:use_accelerate_endpoint` and `:endpoint` will now raise an `ArgumentError`.
+
+* Issue - Fix a bug where bucket region detection did not work correctly with ARNs.
+
 1.87.0 (2020-12-21)
 ------------------
 

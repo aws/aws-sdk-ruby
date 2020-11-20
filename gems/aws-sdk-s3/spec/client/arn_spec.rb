@@ -3,6 +3,13 @@ require_relative '../spec_helper'
 module Aws
   module S3
     describe Client do
+      # check service signing
+      def expect_sigv4_service(service)
+        allow(Aws::Plugins::SignatureV4).to receive(:apply_signature) do |args|
+          expect(args[:signer].service).to eq(service)
+        end
+      end
+
       it 'is configured to use the arn region by default' do
         client = Aws::S3::Client.new(
           stub_responses: true,
@@ -73,18 +80,6 @@ module Aws
         expect(resp.context.http_request.endpoint.path).to eq('/obj')
       end
 
-      it 'raises with :endpoint and an accesspoint arn' do
-        client = Aws::S3::Client.new(
-          stub_responses: true,
-          endpoint: 'https://example.com',
-          region: 'us-west-2'
-        )
-        arn = 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
-        expect do
-          client.get_object(bucket: arn, key: 'obj')
-        end.to raise_error(ArgumentError)
-      end
-
       it 'raises with :force_path_style' do
         client = Aws::S3::Client.new(
           stub_responses: true,
@@ -105,6 +100,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -117,6 +113,7 @@ module Aws
             region: 'us-west-2'
           )
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -129,6 +126,7 @@ module Aws
             region: 's3-external-1'
           )
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -142,6 +140,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.s3-external-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -154,6 +153,7 @@ module Aws
             region: 'aws-global'
           )
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -167,6 +167,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.aws-global.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -192,6 +193,7 @@ module Aws
             use_dualstack_endpoint: true
           )
           arn = 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.dualstack.us-west-2.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -215,6 +217,7 @@ module Aws
             region: 'cn-north-1'
           )
           arn = 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.cn-north-1.amazonaws.com.cn'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -228,6 +231,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.cn-north-1.amazonaws.com.cn'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -240,6 +244,7 @@ module Aws
             region: 'cn-north-1'
           )
           arn = 'arn:aws-cn:s3:cn-northwest-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.cn-northwest-1.amazonaws.com.cn'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -252,6 +257,7 @@ module Aws
             region: 'us-gov-east-1'
           )
           arn = 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.us-gov-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -265,6 +271,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.fips-us-gov-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -277,6 +284,7 @@ module Aws
             region: 'fips-us-gov-east-1'
           )
           arn = 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.us-gov-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -290,6 +298,7 @@ module Aws
             use_dualstack_endpoint: true
           )
           arn = 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myendpoint-123456789012.s3-accesspoint.dualstack.us-gov-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -392,6 +401,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect_sigv4_service('s3-outposts')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -404,6 +414,7 @@ module Aws
             region: 'us-west-2'
           )
           arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect_sigv4_service('s3-outposts')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -417,6 +428,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myaccesspoint'
+          expect_sigv4_service('s3-outposts')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -429,6 +441,7 @@ module Aws
             region: 'us-west-2'
           )
           arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/myaccesspoint'
+          expect_sigv4_service('s3-outposts')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -464,6 +477,7 @@ module Aws
             region: 'us-gov-east-1'
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect_sigv4_service('s3-outposts')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-gov-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -499,6 +513,7 @@ module Aws
             region: 'fips-us-gov-east-1'
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect_sigv4_service('s3-outposts')
           resp = client.get_object(bucket: arn, key: 'obj')
           host = 'myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-gov-east-1.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)

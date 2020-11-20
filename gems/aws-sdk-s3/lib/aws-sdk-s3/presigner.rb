@@ -196,8 +196,6 @@ module Aws
         req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
-        signer = build_signer(req.context, unsigned_headers)
-
         req.handle(step: :send) do |context|
           if scheme != http_req.endpoint.scheme
             endpoint = http_req.endpoint.dup
@@ -222,6 +220,20 @@ module Aws
           end
           http_req.endpoint.query = query.join('&') unless query.empty?
 
+          # If it's an ARN, get the resolved region and service
+          if (arn = context.metadata[:s3_arn])
+            region = arn[:resolved_region]
+            service = arn[:arn].service
+          end
+
+          signer = Aws::Sigv4::Signer.new(
+            service: service || 's3',
+            region: region || context.config.region,
+            credentials_provider: context.config.credentials,
+            unsigned_headers: unsigned_headers,
+            uri_escape_path: false
+          )
+
           url = signer.presign_url(
             http_method: http_req.http_method,
             url: http_req.endpoint,
@@ -238,29 +250,6 @@ module Aws
         end
         # Return the headers
         x_amz_headers
-      end
-
-      def build_signer(context, unsigned_headers)
-        signer_opts = {
-          service: 's3',
-          region: context.config.region,
-          credentials_provider: context.config.credentials,
-          unsigned_headers: unsigned_headers,
-          uri_escape_path: false
-        }
-
-        resolved_region, arn = Aws::S3::Plugins::ARN.resolve_arn!(
-          context.params[:bucket],
-          context.config.sigv4_signer.region,
-          context.config.s3_use_arn_region
-        )
-
-        if arn
-          signer_opts[:region] = resolved_region
-          signer_opts[:service] = arn.service
-        end
-
-        Aws::Sigv4::Signer.new(signer_opts)
       end
     end
   end

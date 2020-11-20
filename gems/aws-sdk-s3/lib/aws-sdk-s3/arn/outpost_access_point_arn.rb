@@ -62,9 +62,13 @@ module Aws
       end
 
       # Outpost ARNs currently do not support dualstack
-      def host_url(region, _dualstack = false)
-        "#{@access_point_name}-#{@account_id}.#{@outpost_id}"\
-        ".s3-outposts.#{region}.amazonaws.com"
+      def host_url(region, _dualstack = false, custom_endpoint = nil)
+        pfx = "#{@access_point_name}-#{@account_id}.#{@outpost_id}"
+        if custom_endpoint
+          "#{pfx}.#{custom_endpoint}"
+        else
+          "#{pfx}.s3-outposts.#{region}.amazonaws.com"
+        end
       end
     end
   end

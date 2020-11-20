@@ -29,7 +29,7 @@ each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/
             OptionHandler, step: :initialize, operations: operations
           )
           handlers.add(
-            AccelerateHandler, step: :build, priority: 0, operations: operations
+            AccelerateHandler, step: :build, priority: 11, operations: operations
           )
         end
 
@@ -40,8 +40,11 @@ each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/
             if context.params.is_a?(Hash)
               accelerate = context.params.delete(:use_accelerate_endpoint)
             end
-            if accelerate.nil?
-              accelerate = context.config.use_accelerate_endpoint
+            accelerate = context.config.use_accelerate_endpoint if accelerate.nil?
+            # Raise if :endpoint and dualstack are both provided
+            if accelerate && !context.config.regional_endpoint
+              raise ArgumentError,
+                    'Cannot use both :use_accelerate_endpoint and :endpoint'
             end
             context[:use_accelerate_endpoint] = accelerate
             @handler.call(context)
@@ -51,7 +54,7 @@ each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/
         # @api private
         class AccelerateHandler < Seahorse::Client::Handler
           def call(context)
-            if context[:use_accelerate_endpoint]
+            if context.config.regional_endpoint && context[:use_accelerate_endpoint]
               dualstack = !!context[:use_dualstack_endpoint]
               use_accelerate_endpoint(context, dualstack)
             end

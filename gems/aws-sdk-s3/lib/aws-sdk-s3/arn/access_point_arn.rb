@@ -52,10 +52,14 @@ module Aws
         end
       end
 
-      def host_url(region, dualstack = false)
-        sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
-        "#{@access_point_name}-#{@account_id}"\
-        ".s3-accesspoint#{'.dualstack' if dualstack}.#{region}.#{sfx}"
+      def host_url(region, dualstack = false, custom_endpoint = nil)
+        pfx = "#{@access_point_name}-#{@account_id}"
+        if custom_endpoint
+          "#{pfx}.#{custom_endpoint}"
+        else
+          sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
+          "#{pfx}.s3-accesspoint#{'.dualstack' if dualstack}.#{region}.#{sfx}"
+        end
       end
     end
   end
