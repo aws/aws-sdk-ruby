@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppMesh - Updated the API for AWS App Mesh.
+
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::CloudHSMV2 - Updated the API, and documentation for AWS CloudHSM V2.
+
+* Feature - Aws::CodeGuruReviewer - Updated the API, and documentation for Amazon CodeGuru Reviewer.
+
+* Feature - Aws::CognitoIdentity - Updated the API, and integration test for Amazon Cognito Identity.
+
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::AppRegistry - Updated the API, and documentation for AWS Service Catalog App Registry.
+
 2.11.631 (2020-11-19)
 ------------------
 
