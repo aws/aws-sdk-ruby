@@ -182,27 +182,5 @@ module BuildTools
         api['operations'][operation]['authtype'] = 'none'
       end
     end
-
-    api('CognitoIdentity') do |api|
-      operations = %w(
-        GetCredentialsForIdentity
-        GetId
-        GetOpenIdToken
-        UnlinkIdentity
-      )
-      operations.each do |operation|
-        api['operations'][operation]['authtype'] = 'none'
-      end
-    end
-
-    api('CognitoIdentityProvider') do |api|
-      operations = %w(
-        InitiateAuth
-        RespondToAuthChallenge
-      )
-      operations.each do |operation|
-        api['operations'][operation]['authtype'] = 'none'
-      end
-    end
   end
 end
