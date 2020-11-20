@@ -37,8 +37,10 @@ module Aws::Connect
   # * {InvalidRequestException}
   # * {LimitExceededException}
   # * {OutboundContactNotPermittedException}
+  # * {ResourceConflictException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {UserNotFoundException}
   #
@@ -198,6 +200,21 @@ module Aws::Connect
       end
     end
 
+    class ResourceConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::ResourceConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceInUseException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -228,6 +245,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

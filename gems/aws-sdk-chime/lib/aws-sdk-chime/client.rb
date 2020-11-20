@@ -855,6 +855,139 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates an Amazon Chime Messaging SDK `AppInstance` under an AWS
+    # Account. Only Messaging SDK customers use this API.
+    # `CreateAppInstance` supports `idempotency` behavior as described in
+    # the AWS API Standard.
+    #
+    # @option params [required, String] :name
+    #   The name of the app instance.
+    #
+    # @option params [String] :metadata
+    #   The metadata of the app instance. Limited to a 1KB string in UTF-8.
+    #
+    # @option params [required, String] :client_request_token
+    #   The `ClientRequestToken` of the app instance.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateAppInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppInstanceResponse#app_instance_arn #app_instance_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_instance({
+    #     name: "NonEmptyResourceName", # required
+    #     metadata: "Metadata",
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstance AWS API Documentation
+    #
+    # @overload create_app_instance(params = {})
+    # @param [Hash] params ({})
+    def create_app_instance(params = {}, options = {})
+      req = build_request(:create_app_instance, params)
+      req.send_request(options)
+    end
+
+    # Promotes an `AppInstanceUser` to an `AppInstanceAdmin`. The promoted
+    # user can perform the following actions.
+    #
+    # * `ChannelModerator` actions across all channels in the app instance.
+    #
+    # * `DeleteChannelMessage` actions.
+    #
+    # Only an `AppInstanceUser` can be promoted to an `AppInstanceAdmin`
+    # role.
+    #
+    # @option params [required, String] :app_instance_admin_arn
+    #   The ARN of the administrator of the current app instance.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @return [Types::CreateAppInstanceAdminResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppInstanceAdminResponse#app_instance_admin #app_instance_admin} => Types::Identity
+    #   * {Types::CreateAppInstanceAdminResponse#app_instance_arn #app_instance_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_instance_admin({
+    #     app_instance_admin_arn: "ChimeArn", # required
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_admin.arn #=> String
+    #   resp.app_instance_admin.name #=> String
+    #   resp.app_instance_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceAdmin AWS API Documentation
+    #
+    # @overload create_app_instance_admin(params = {})
+    # @param [Hash] params ({})
+    def create_app_instance_admin(params = {}, options = {})
+      req = build_request(:create_app_instance_admin, params)
+      req.send_request(options)
+    end
+
+    # Creates a user under an Amazon Chime `AppInstance`. The request
+    # consists of a unique `appInstanceUserId` and `Name` for that user.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance request.
+    #
+    # @option params [required, String] :app_instance_user_id
+    #   The user ID of the app instance.
+    #
+    # @option params [required, String] :name
+    #   The user's name.
+    #
+    # @option params [String] :metadata
+    #   The request's metadata. Limited to a 1KB string in UTF-8.
+    #
+    # @option params [required, String] :client_request_token
+    #   The token assigned to the user requesting an app instance.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppInstanceUserResponse#app_instance_user_arn #app_instance_user_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_instance_user({
+    #     app_instance_arn: "ChimeArn", # required
+    #     app_instance_user_id: "UserId", # required
+    #     name: "UserName", # required
+    #     metadata: "Metadata",
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceUser AWS API Documentation
+    #
+    # @overload create_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def create_app_instance_user(params = {}, options = {})
+      req = build_request(:create_app_instance_user, params)
+      req.send_request(options)
+    end
+
     # Creates a new attendee for an active Amazon Chime SDK meeting. For
     # more information about the Amazon Chime SDK, see [Using the Amazon
     # Chime SDK][1] in the *Amazon Chime Developer Guide*.
@@ -948,6 +1081,219 @@ module Aws::Chime
     # @param [Hash] params ({})
     def create_bot(params = {}, options = {})
       req = build_request(:create_bot, params)
+      req.send_request(options)
+    end
+
+    # Creates a channel to which you can add users and send messages.
+    #
+    # **Restriction**\: You can't change a channel's privacy.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the channel request.
+    #
+    # @option params [required, String] :name
+    #   The name of the channel.
+    #
+    # @option params [String] :mode
+    #   The channel mode: `UNRESTRICTED` or `RESTRICTED`. Administrators,
+    #   moderators, and channel members can add themselves and other members
+    #   to unrestricted channels. Only administrators and moderators can add
+    #   members to restricted channels.
+    #
+    # @option params [String] :privacy
+    #   The channel's privacy level: `PUBLIC` or `PRIVATE`. Private channels
+    #   aren't discoverable by users outside the channel. Public channels are
+    #   discoverable by anyone in the app instance.
+    #
+    # @option params [String] :metadata
+    #   The metadata of the creation request. Limited to 1KB and UTF-8.
+    #
+    # @option params [required, String] :client_request_token
+    #   The client token for the request. An `Idempotency` token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #
+    # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelResponse#channel_arn #channel_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel({
+    #     app_instance_arn: "ChimeArn", # required
+    #     name: "NonEmptyResourceName", # required
+    #     mode: "UNRESTRICTED", # accepts UNRESTRICTED, RESTRICTED
+    #     privacy: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #     metadata: "Metadata",
+    #     client_request_token: "ClientRequestToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannel AWS API Documentation
+    #
+    # @overload create_channel(params = {})
+    # @param [Hash] params ({})
+    def create_channel(params = {}, options = {})
+      req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
+    # Permanently bans a member from a channel. Moderators can't add banned
+    # members to a channel. To undo a ban, you first have to
+    # `DeleteChannelBan`, and then `CreateChannelMembership`. Bans are
+    # cleaned up when you delete users or channels.
+    #
+    # If you ban a user who is already part of a channel, that user is
+    # automatically kicked from the channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the ban request.
+    #
+    # @option params [required, String] :member_arn
+    #   The ARN of the member being banned.
+    #
+    # @return [Types::CreateChannelBanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelBanResponse#channel_arn #channel_arn} => String
+    #   * {Types::CreateChannelBanResponse#member #member} => Types::Identity
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel_ban({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.member.arn #=> String
+    #   resp.member.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelBan AWS API Documentation
+    #
+    # @overload create_channel_ban(params = {})
+    # @param [Hash] params ({})
+    def create_channel_ban(params = {}, options = {})
+      req = build_request(:create_channel_ban, params)
+      req.send_request(options)
+    end
+
+    # Adds a user to a channel. The `InvitedBy` response field is derived
+    # from the request header. A channel member can:
+    #
+    # * List messages
+    #
+    # * Send messages
+    #
+    # * Receive messages
+    #
+    # * Edit their own messages
+    #
+    # * Leave the channel
+    #
+    # Privacy settings impact this action as follows:
+    #
+    # * Public Channels: You do not need to be a member to list messages,
+    #   but you must be a member to send messages.
+    #
+    # * Private Channels: You must be a member to list or send messages.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel to which you're adding users.
+    #
+    # @option params [required, String] :member_arn
+    #   The ARN of the member you want to add to the channel.
+    #
+    # @option params [required, String] :type
+    #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default members
+    #   are always returned as part of `ListChannelMemberships`. Hidden
+    #   members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members are
+    #   not returned. This is only supported by moderators.
+    #
+    # @return [Types::CreateChannelMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelMembershipResponse#channel_arn #channel_arn} => String
+    #   * {Types::CreateChannelMembershipResponse#member #member} => Types::Identity
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel_membership({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #     type: "DEFAULT", # required, accepts DEFAULT, HIDDEN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.member.arn #=> String
+    #   resp.member.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelMembership AWS API Documentation
+    #
+    # @overload create_channel_membership(params = {})
+    # @param [Hash] params ({})
+    def create_channel_membership(params = {}, options = {})
+      req = build_request(:create_channel_membership, params)
+      req.send_request(options)
+    end
+
+    # Creates a new `ChannelModerator`. A channel moderator can:
+    #
+    # * Add and remove other members of the channel.
+    #
+    # * Add and remove other moderators of the channel.
+    #
+    # * Add and remove user bans for the channel.
+    #
+    # * Redact messages in the channel.
+    #
+    # * List messages in the channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :channel_moderator_arn
+    #   The ARN of the moderator.
+    #
+    # @return [Types::CreateChannelModeratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelModeratorResponse#channel_arn #channel_arn} => String
+    #   * {Types::CreateChannelModeratorResponse#channel_moderator #channel_moderator} => Types::Identity
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel_moderator({
+    #     channel_arn: "ChimeArn", # required
+    #     channel_moderator_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.channel_moderator.arn #=> String
+    #   resp.channel_moderator.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelModerator AWS API Documentation
+    #
+    # @overload create_channel_moderator(params = {})
+    # @param [Hash] params ({})
+    def create_channel_moderator(params = {}, options = {})
+      req = build_request(:create_channel_moderator, params)
       req.send_request(options)
     end
 
@@ -1770,6 +2116,99 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Deletes an `AppInstance` and all associated data asynchronously.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_instance({
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstance AWS API Documentation
+    #
+    # @overload delete_app_instance(params = {})
+    # @param [Hash] params ({})
+    def delete_app_instance(params = {}, options = {})
+      req = build_request(:delete_app_instance, params)
+      req.send_request(options)
+    end
+
+    # Demotes an `AppInstanceAdmin` to an `AppInstanceUser`. This action
+    # does not delete the user.
+    #
+    # @option params [required, String] :app_instance_admin_arn
+    #   The ARN of the app instance's administrator.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_instance_admin({
+    #     app_instance_admin_arn: "ChimeArn", # required
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstanceAdmin AWS API Documentation
+    #
+    # @overload delete_app_instance_admin(params = {})
+    # @param [Hash] params ({})
+    def delete_app_instance_admin(params = {}, options = {})
+      req = build_request(:delete_app_instance_admin, params)
+      req.send_request(options)
+    end
+
+    # Deletes the streaming configurations of an app instance.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the streaming configurations being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_instance_streaming_configurations({
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstanceStreamingConfigurations AWS API Documentation
+    #
+    # @overload delete_app_instance_streaming_configurations(params = {})
+    # @param [Hash] params ({})
+    def delete_app_instance_streaming_configurations(params = {}, options = {})
+      req = build_request(:delete_app_instance_streaming_configurations, params)
+      req.send_request(options)
+    end
+
+    # Deletes an `AppInstanceUser`.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the user request being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_instance_user({
+    #     app_instance_user_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstanceUser AWS API Documentation
+    #
+    # @overload delete_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def delete_app_instance_user(params = {}, options = {})
+      req = build_request(:delete_app_instance_user, params)
+      req.send_request(options)
+    end
+
     # Deletes an attendee from the specified Amazon Chime SDK meeting and
     # deletes their `JoinToken`. Attendees are automatically deleted when a
     # Amazon Chime SDK meeting is deleted. For more information about the
@@ -1801,6 +2240,135 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_attendee(params = {}, options = {})
       req = build_request(:delete_attendee, params)
+      req.send_request(options)
+    end
+
+    # Immediately makes a channel and its memberships inaccessible and marks
+    # them for deletion. This is an irreversible process.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel({
+    #     channel_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannel AWS API Documentation
+    #
+    # @overload delete_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_channel(params = {}, options = {})
+      req = build_request(:delete_channel, params)
+      req.send_request(options)
+    end
+
+    # Removes a user from a channel's ban list.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel from which the app instance user was banned.
+    #
+    # @option params [required, String] :member_arn
+    #   The ARN of the app instance user that you want to reinstate.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel_ban({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelBan AWS API Documentation
+    #
+    # @overload delete_channel_ban(params = {})
+    # @param [Hash] params ({})
+    def delete_channel_ban(params = {}, options = {})
+      req = build_request(:delete_channel_ban, params)
+      req.send_request(options)
+    end
+
+    # Removes a member from a channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel from which you want to remove the user.
+    #
+    # @option params [required, String] :member_arn
+    #   The ARN of the member that you're removing from the channel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel_membership({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelMembership AWS API Documentation
+    #
+    # @overload delete_channel_membership(params = {})
+    # @param [Hash] params ({})
+    def delete_channel_membership(params = {}, options = {})
+      req = build_request(:delete_channel_membership, params)
+      req.send_request(options)
+    end
+
+    # Deletes a channel message. Only admins can perform this action.
+    # Deletion makes messages inaccessible immediately. A background process
+    # deletes any revisions created by `UpdateChannelMessage`.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :message_id
+    #   The ID of the message being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel_message({
+    #     channel_arn: "ChimeArn", # required
+    #     message_id: "MessageId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelMessage AWS API Documentation
+    #
+    # @overload delete_channel_message(params = {})
+    # @param [Hash] params ({})
+    def delete_channel_message(params = {}, options = {})
+      req = build_request(:delete_channel_message, params)
+      req.send_request(options)
+    end
+
+    # Deletes a channel moderator.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :channel_moderator_arn
+    #   The ARN of the moderator being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel_moderator({
+    #     channel_arn: "ChimeArn", # required
+    #     channel_moderator_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelModerator AWS API Documentation
+    #
+    # @overload delete_channel_moderator(params = {})
+    # @param [Hash] params ({})
+    def delete_channel_moderator(params = {}, options = {})
+      req = build_request(:delete_channel_moderator, params)
       req.send_request(options)
     end
 
@@ -2219,6 +2787,333 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Returns the full details of an `AppInstance`.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @return [Types::DescribeAppInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppInstanceResponse#app_instance #app_instance} => Types::AppInstance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_instance({
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance.app_instance_arn #=> String
+    #   resp.app_instance.name #=> String
+    #   resp.app_instance.metadata #=> String
+    #   resp.app_instance.created_timestamp #=> Time
+    #   resp.app_instance.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstance AWS API Documentation
+    #
+    # @overload describe_app_instance(params = {})
+    # @param [Hash] params ({})
+    def describe_app_instance(params = {}, options = {})
+      req = build_request(:describe_app_instance, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of an `AppInstanceAdmin`.
+    #
+    # @option params [required, String] :app_instance_admin_arn
+    #   The ARN of the app instance administrator.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @return [Types::DescribeAppInstanceAdminResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppInstanceAdminResponse#app_instance_admin #app_instance_admin} => Types::AppInstanceAdmin
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_instance_admin({
+    #     app_instance_admin_arn: "ChimeArn", # required
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_admin.admin.arn #=> String
+    #   resp.app_instance_admin.admin.name #=> String
+    #   resp.app_instance_admin.app_instance_arn #=> String
+    #   resp.app_instance_admin.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceAdmin AWS API Documentation
+    #
+    # @overload describe_app_instance_admin(params = {})
+    # @param [Hash] params ({})
+    def describe_app_instance_admin(params = {}, options = {})
+      req = build_request(:describe_app_instance_admin, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of an `AppInstanceUser`.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the app instance user.
+    #
+    # @return [Types::DescribeAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppInstanceUserResponse#app_instance_user #app_instance_user} => Types::AppInstanceUser
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_instance_user({
+    #     app_instance_user_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user.app_instance_user_arn #=> String
+    #   resp.app_instance_user.name #=> String
+    #   resp.app_instance_user.created_timestamp #=> Time
+    #   resp.app_instance_user.metadata #=> String
+    #   resp.app_instance_user.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceUser AWS API Documentation
+    #
+    # @overload describe_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def describe_app_instance_user(params = {}, options = {})
+      req = build_request(:describe_app_instance_user, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of a channel in an Amazon Chime app instance.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelResponse#channel #channel} => Types::Channel
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel({
+    #     channel_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel.name #=> String
+    #   resp.channel.channel_arn #=> String
+    #   resp.channel.mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channel.privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channel.metadata #=> String
+    #   resp.channel.created_by.arn #=> String
+    #   resp.channel.created_by.name #=> String
+    #   resp.channel.created_timestamp #=> Time
+    #   resp.channel.last_message_timestamp #=> Time
+    #   resp.channel.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannel AWS API Documentation
+    #
+    # @overload describe_channel(params = {})
+    # @param [Hash] params ({})
+    def describe_channel(params = {}, options = {})
+      req = build_request(:describe_channel, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of a channel ban.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel from which the user is banned.
+    #
+    # @option params [required, String] :member_arn
+    #   The ARN of the member being banned.
+    #
+    # @return [Types::DescribeChannelBanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelBanResponse#channel_ban #channel_ban} => Types::ChannelBan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel_ban({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_ban.member.arn #=> String
+    #   resp.channel_ban.member.name #=> String
+    #   resp.channel_ban.channel_arn #=> String
+    #   resp.channel_ban.created_timestamp #=> Time
+    #   resp.channel_ban.created_by.arn #=> String
+    #   resp.channel_ban.created_by.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelBan AWS API Documentation
+    #
+    # @overload describe_channel_ban(params = {})
+    # @param [Hash] params ({})
+    def describe_channel_ban(params = {}, options = {})
+      req = build_request(:describe_channel_ban, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of a user's channel membership.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :member_arn
+    #   The ARN of the member.
+    #
+    # @return [Types::DescribeChannelMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelMembershipResponse#channel_membership #channel_membership} => Types::ChannelMembership
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel_membership({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_membership.invited_by.arn #=> String
+    #   resp.channel_membership.invited_by.name #=> String
+    #   resp.channel_membership.type #=> String, one of "DEFAULT", "HIDDEN"
+    #   resp.channel_membership.member.arn #=> String
+    #   resp.channel_membership.member.name #=> String
+    #   resp.channel_membership.channel_arn #=> String
+    #   resp.channel_membership.created_timestamp #=> Time
+    #   resp.channel_membership.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelMembership AWS API Documentation
+    #
+    # @overload describe_channel_membership(params = {})
+    # @param [Hash] params ({})
+    def describe_channel_membership(params = {}, options = {})
+      req = build_request(:describe_channel_membership, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of a channel based on the membership of the
+    # `AppInstanceUser` specified.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel to which the user belongs.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the user in a channel.
+    #
+    # @return [Types::DescribeChannelMembershipForAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelMembershipForAppInstanceUserResponse#channel_membership #channel_membership} => Types::ChannelMembershipForAppInstanceUserSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel_membership_for_app_instance_user({
+    #     channel_arn: "ChimeArn", # required
+    #     app_instance_user_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_membership.channel_summary.name #=> String
+    #   resp.channel_membership.channel_summary.channel_arn #=> String
+    #   resp.channel_membership.channel_summary.mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channel_membership.channel_summary.privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channel_membership.channel_summary.metadata #=> String
+    #   resp.channel_membership.channel_summary.last_message_timestamp #=> Time
+    #   resp.channel_membership.app_instance_user_membership_summary.type #=> String, one of "DEFAULT", "HIDDEN"
+    #   resp.channel_membership.app_instance_user_membership_summary.read_marker_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelMembershipForAppInstanceUser AWS API Documentation
+    #
+    # @overload describe_channel_membership_for_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def describe_channel_membership_for_app_instance_user(params = {}, options = {})
+      req = build_request(:describe_channel_membership_for_app_instance_user, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of a channel moderated by the specified
+    # `AppInstanceUser`.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the moderated channel.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the app instance user in the moderated channel.
+    #
+    # @return [Types::DescribeChannelModeratedByAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelModeratedByAppInstanceUserResponse#channel #channel} => Types::ChannelModeratedByAppInstanceUserSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel_moderated_by_app_instance_user({
+    #     channel_arn: "ChimeArn", # required
+    #     app_instance_user_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel.channel_summary.name #=> String
+    #   resp.channel.channel_summary.channel_arn #=> String
+    #   resp.channel.channel_summary.mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channel.channel_summary.privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channel.channel_summary.metadata #=> String
+    #   resp.channel.channel_summary.last_message_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelModeratedByAppInstanceUser AWS API Documentation
+    #
+    # @overload describe_channel_moderated_by_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def describe_channel_moderated_by_app_instance_user(params = {}, options = {})
+      req = build_request(:describe_channel_moderated_by_app_instance_user, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of a single ChannelModerator.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :channel_moderator_arn
+    #   The ARN of the channel moderator.
+    #
+    # @return [Types::DescribeChannelModeratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelModeratorResponse#channel_moderator #channel_moderator} => Types::ChannelModerator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel_moderator({
+    #     channel_arn: "ChimeArn", # required
+    #     channel_moderator_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_moderator.moderator.arn #=> String
+    #   resp.channel_moderator.moderator.name #=> String
+    #   resp.channel_moderator.channel_arn #=> String
+    #   resp.channel_moderator.created_timestamp #=> Time
+    #   resp.channel_moderator.created_by.arn #=> String
+    #   resp.channel_moderator.created_by.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelModerator AWS API Documentation
+    #
+    # @overload describe_channel_moderator(params = {})
+    # @param [Hash] params ({})
+    def describe_channel_moderator(params = {}, options = {})
+      req = build_request(:describe_channel_moderator, params)
+      req.send_request(options)
+    end
+
     # Disassociates the primary provisioned phone number from the specified
     # Amazon Chime user.
     #
@@ -2419,6 +3314,66 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Gets the retention settings for an app instance.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @return [Types::GetAppInstanceRetentionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAppInstanceRetentionSettingsResponse#app_instance_retention_settings #app_instance_retention_settings} => Types::AppInstanceRetentionSettings
+    #   * {Types::GetAppInstanceRetentionSettingsResponse#initiate_deletion_timestamp #initiate_deletion_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_app_instance_retention_settings({
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_retention_settings.channel_retention_settings.retention_days #=> Integer
+    #   resp.initiate_deletion_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAppInstanceRetentionSettings AWS API Documentation
+    #
+    # @overload get_app_instance_retention_settings(params = {})
+    # @param [Hash] params ({})
+    def get_app_instance_retention_settings(params = {}, options = {})
+      req = build_request(:get_app_instance_retention_settings, params)
+      req.send_request(options)
+    end
+
+    # Gets the streaming settings for an app instance.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @return [Types::GetAppInstanceStreamingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAppInstanceStreamingConfigurationsResponse#app_instance_streaming_configurations #app_instance_streaming_configurations} => Array&lt;Types::AppInstanceStreamingConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_app_instance_streaming_configurations({
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_streaming_configurations #=> Array
+    #   resp.app_instance_streaming_configurations[0].app_instance_data_type #=> String, one of "Channel", "ChannelMessage"
+    #   resp.app_instance_streaming_configurations[0].resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAppInstanceStreamingConfigurations AWS API Documentation
+    #
+    # @overload get_app_instance_streaming_configurations(params = {})
+    # @param [Hash] params ({})
+    def get_app_instance_streaming_configurations(params = {}, options = {})
+      req = build_request(:get_app_instance_streaming_configurations, params)
+      req.send_request(options)
+    end
+
     # Gets the Amazon Chime SDK attendee details for a specified meeting ID
     # and attendee ID. For more information about the Amazon Chime SDK, see
     # [Using the Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*.
@@ -2497,6 +3452,49 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_bot(params = {}, options = {})
       req = build_request(:get_bot, params)
+      req.send_request(options)
+    end
+
+    # Gets the full details of a channel message.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :message_id
+    #   The ID of the message.
+    #
+    # @return [Types::GetChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelMessageResponse#channel_message #channel_message} => Types::ChannelMessage
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel_message({
+    #     channel_arn: "ChimeArn", # required
+    #     message_id: "MessageId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_message.channel_arn #=> String
+    #   resp.channel_message.message_id #=> String
+    #   resp.channel_message.content #=> String
+    #   resp.channel_message.metadata #=> String
+    #   resp.channel_message.type #=> String, one of "STANDARD", "CONTROL"
+    #   resp.channel_message.created_timestamp #=> Time
+    #   resp.channel_message.last_edited_timestamp #=> Time
+    #   resp.channel_message.last_updated_timestamp #=> Time
+    #   resp.channel_message.sender.arn #=> String
+    #   resp.channel_message.sender.name #=> String
+    #   resp.channel_message.redacted #=> Boolean
+    #   resp.channel_message.persistence #=> String, one of "PERSISTENT", "NON_PERSISTENT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetChannelMessage AWS API Documentation
+    #
+    # @overload get_channel_message(params = {})
+    # @param [Hash] params ({})
+    def get_channel_message(params = {}, options = {})
+      req = build_request(:get_channel_message, params)
       req.send_request(options)
     end
 
@@ -2598,6 +3596,25 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_meeting(params = {}, options = {})
       req = build_request(:get_meeting, params)
+      req.send_request(options)
+    end
+
+    # The endpoint for the messaging session.
+    #
+    # @return [Types::GetMessagingSessionEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMessagingSessionEndpointResponse#endpoint #endpoint} => Types::MessagingSessionEndpoint
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint.url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMessagingSessionEndpoint AWS API Documentation
+    #
+    # @overload get_messaging_session_endpoint(params = {})
+    # @param [Hash] params ({})
+    def get_messaging_session_endpoint(params = {}, options = {})
+      req = build_request(:get_messaging_session_endpoint, params)
       req.send_request(options)
     end
 
@@ -3124,7 +4141,7 @@ module Aws::Chime
 
     # Retrieves the logging configuration details for the specified Amazon
     # Chime Voice Connector. Shows whether SIP message logs are enabled for
-    # sending to Amazon CloudWatch Logs.
+    # sending to Amazon CloudWatch.
     #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
@@ -3420,6 +4437,138 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Returns a list of the administrators in the app instance.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of administrators that you want to return.
+    #
+    # @option params [String] :next_token
+    #   The token returned from previous API requests until the number of
+    #   administrators is reached.
+    #
+    # @return [Types::ListAppInstanceAdminsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppInstanceAdminsResponse#app_instance_arn #app_instance_arn} => String
+    #   * {Types::ListAppInstanceAdminsResponse#app_instance_admins #app_instance_admins} => Array&lt;Types::AppInstanceAdminSummary&gt;
+    #   * {Types::ListAppInstanceAdminsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_instance_admins({
+    #     app_instance_arn: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_arn #=> String
+    #   resp.app_instance_admins #=> Array
+    #   resp.app_instance_admins[0].admin.arn #=> String
+    #   resp.app_instance_admins[0].admin.name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstanceAdmins AWS API Documentation
+    #
+    # @overload list_app_instance_admins(params = {})
+    # @param [Hash] params ({})
+    def list_app_instance_admins(params = {}, options = {})
+      req = build_request(:list_app_instance_admins, params)
+      req.send_request(options)
+    end
+
+    # List all `AppInstanceUsers` created under a single app instance.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of requests that you want returned.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested users are
+    #   returned.
+    #
+    # @return [Types::ListAppInstanceUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppInstanceUsersResponse#app_instance_arn #app_instance_arn} => String
+    #   * {Types::ListAppInstanceUsersResponse#app_instance_users #app_instance_users} => Array&lt;Types::AppInstanceUserSummary&gt;
+    #   * {Types::ListAppInstanceUsersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_instance_users({
+    #     app_instance_arn: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_arn #=> String
+    #   resp.app_instance_users #=> Array
+    #   resp.app_instance_users[0].app_instance_user_arn #=> String
+    #   resp.app_instance_users[0].name #=> String
+    #   resp.app_instance_users[0].metadata #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstanceUsers AWS API Documentation
+    #
+    # @overload list_app_instance_users(params = {})
+    # @param [Hash] params ({})
+    def list_app_instance_users(params = {}, options = {})
+      req = build_request(:list_app_instance_users, params)
+      req.send_request(options)
+    end
+
+    # Lists all Amazon Chime app instances created under a single AWS
+    # account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of app instances that you want to return.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API requests until you reach the maximum
+    #   number of app instances.
+    #
+    # @return [Types::ListAppInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppInstancesResponse#app_instances #app_instances} => Array&lt;Types::AppInstanceSummary&gt;
+    #   * {Types::ListAppInstancesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_instances({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instances #=> Array
+    #   resp.app_instances[0].app_instance_arn #=> String
+    #   resp.app_instances[0].name #=> String
+    #   resp.app_instances[0].metadata #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstances AWS API Documentation
+    #
+    # @overload list_app_instances(params = {})
+    # @param [Hash] params ({})
+    def list_app_instances(params = {}, options = {})
+      req = build_request(:list_app_instances, params)
+      req.send_request(options)
+    end
+
     # Lists the tags applied to an Amazon Chime SDK attendee resource.
     #
     # @option params [required, String] :meeting_id
@@ -3551,6 +4700,383 @@ module Aws::Chime
     # @param [Hash] params ({})
     def list_bots(params = {}, options = {})
       req = build_request(:list_bots, params)
+      req.send_request(options)
+    end
+
+    # Lists all the users banned from a particular channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of bans that you want returned.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested bans are
+    #   returned.
+    #
+    # @return [Types::ListChannelBansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelBansResponse#channel_arn #channel_arn} => String
+    #   * {Types::ListChannelBansResponse#next_token #next_token} => String
+    #   * {Types::ListChannelBansResponse#channel_bans #channel_bans} => Array&lt;Types::ChannelBanSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_bans({
+    #     channel_arn: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.channel_bans #=> Array
+    #   resp.channel_bans[0].member.arn #=> String
+    #   resp.channel_bans[0].member.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelBans AWS API Documentation
+    #
+    # @overload list_channel_bans(params = {})
+    # @param [Hash] params ({})
+    def list_channel_bans(params = {}, options = {})
+      req = build_request(:list_channel_bans, params)
+      req.send_request(options)
+    end
+
+    # Lists all channel memberships in a channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The maximum number of channel memberships that you want returned.
+    #
+    # @option params [String] :type
+    #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default members
+    #   are always returned as part of `ListChannelMemberships`. Hidden
+    #   members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members are
+    #   not returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channel memberships that you want returned.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested channel
+    #   memberships are returned..
+    #
+    # @return [Types::ListChannelMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelMembershipsResponse#channel_arn #channel_arn} => String
+    #   * {Types::ListChannelMembershipsResponse#channel_memberships #channel_memberships} => Array&lt;Types::ChannelMembershipSummary&gt;
+    #   * {Types::ListChannelMembershipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_memberships({
+    #     channel_arn: "ChimeArn", # required
+    #     type: "DEFAULT", # accepts DEFAULT, HIDDEN
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.channel_memberships #=> Array
+    #   resp.channel_memberships[0].member.arn #=> String
+    #   resp.channel_memberships[0].member.name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMemberships AWS API Documentation
+    #
+    # @overload list_channel_memberships(params = {})
+    # @param [Hash] params ({})
+    def list_channel_memberships(params = {}, options = {})
+      req = build_request(:list_channel_memberships, params)
+      req.send_request(options)
+    end
+
+    # Lists all channels that a particular `AppInstanceUser` is a part of.
+    # Only an `AppInstanceAdmin` can call the API with a user ARN that is
+    # not their own.
+    #
+    # @option params [String] :app_instance_user_arn
+    #   The ARN of the app instance users
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of users that you want returned.
+    #
+    # @option params [String] :next_token
+    #   The token returned from previous API requests until the number of
+    #   channel memberships is reached.
+    #
+    # @return [Types::ListChannelMembershipsForAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelMembershipsForAppInstanceUserResponse#channel_memberships #channel_memberships} => Array&lt;Types::ChannelMembershipForAppInstanceUserSummary&gt;
+    #   * {Types::ListChannelMembershipsForAppInstanceUserResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_memberships_for_app_instance_user({
+    #     app_instance_user_arn: "ChimeArn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_memberships #=> Array
+    #   resp.channel_memberships[0].channel_summary.name #=> String
+    #   resp.channel_memberships[0].channel_summary.channel_arn #=> String
+    #   resp.channel_memberships[0].channel_summary.mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channel_memberships[0].channel_summary.privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channel_memberships[0].channel_summary.metadata #=> String
+    #   resp.channel_memberships[0].channel_summary.last_message_timestamp #=> Time
+    #   resp.channel_memberships[0].app_instance_user_membership_summary.type #=> String, one of "DEFAULT", "HIDDEN"
+    #   resp.channel_memberships[0].app_instance_user_membership_summary.read_marker_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMembershipsForAppInstanceUser AWS API Documentation
+    #
+    # @overload list_channel_memberships_for_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def list_channel_memberships_for_app_instance_user(params = {}, options = {})
+      req = build_request(:list_channel_memberships_for_app_instance_user, params)
+      req.send_request(options)
+    end
+
+    # List all the messages in a channel. Returns a paginated list of
+    # `ChannelMessages`. Sorted in descending order by default, based on the
+    # creation timestamp.
+    #
+    # <note markdown="1"> Redacted messages appear in the results as empty, since they are only
+    # redacted, not deleted. Deleted messages do not appear in the results.
+    # This action always returns the latest version of an edited message.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [String] :sort_order
+    #   The order in which you want messages sorted. Default is Descending,
+    #   based on time created.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :not_before
+    #   The initial or starting time stamp for your requested messages.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :not_after
+    #   The final or ending time stamp for your requested messages.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of messages that you want returned.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested messages
+    #   are returned.
+    #
+    # @return [Types::ListChannelMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelMessagesResponse#channel_arn #channel_arn} => String
+    #   * {Types::ListChannelMessagesResponse#next_token #next_token} => String
+    #   * {Types::ListChannelMessagesResponse#channel_messages #channel_messages} => Array&lt;Types::ChannelMessageSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_messages({
+    #     channel_arn: "ChimeArn", # required
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     not_before: Time.now,
+    #     not_after: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.channel_messages #=> Array
+    #   resp.channel_messages[0].message_id #=> String
+    #   resp.channel_messages[0].content #=> String
+    #   resp.channel_messages[0].metadata #=> String
+    #   resp.channel_messages[0].type #=> String, one of "STANDARD", "CONTROL"
+    #   resp.channel_messages[0].created_timestamp #=> Time
+    #   resp.channel_messages[0].last_updated_timestamp #=> Time
+    #   resp.channel_messages[0].last_edited_timestamp #=> Time
+    #   resp.channel_messages[0].sender.arn #=> String
+    #   resp.channel_messages[0].sender.name #=> String
+    #   resp.channel_messages[0].redacted #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMessages AWS API Documentation
+    #
+    # @overload list_channel_messages(params = {})
+    # @param [Hash] params ({})
+    def list_channel_messages(params = {}, options = {})
+      req = build_request(:list_channel_messages, params)
+      req.send_request(options)
+    end
+
+    # Lists all the moderators for a channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of moderators that you want returned.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested moderators
+    #   are returned.
+    #
+    # @return [Types::ListChannelModeratorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelModeratorsResponse#channel_arn #channel_arn} => String
+    #   * {Types::ListChannelModeratorsResponse#next_token #next_token} => String
+    #   * {Types::ListChannelModeratorsResponse#channel_moderators #channel_moderators} => Array&lt;Types::ChannelModeratorSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_moderators({
+    #     channel_arn: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.channel_moderators #=> Array
+    #   resp.channel_moderators[0].moderator.arn #=> String
+    #   resp.channel_moderators[0].moderator.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelModerators AWS API Documentation
+    #
+    # @overload list_channel_moderators(params = {})
+    # @param [Hash] params ({})
+    def list_channel_moderators(params = {}, options = {})
+      req = build_request(:list_channel_moderators, params)
+      req.send_request(options)
+    end
+
+    # Lists all Channels created under a single Chime App as a paginated
+    # list. You can specify filters to narrow results.
+    #
+    # **Functionality &amp; restrictions**
+    #
+    # * Use privacy = `PUBLIC` to retrieve all public channels in the
+    #   account
+    #
+    # * Only an `AppInstanceAdmin` can set privacy = `PRIVATE` to list the
+    #   private channels in an account.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @option params [String] :privacy
+    #   The privacy setting. `PUBLIC` retrieves all the public channels.
+    #   `PRIVATE` retrieves private channels. Only an app instance
+    #   administrator can retrieve private channels.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channels that you want to return.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested channels
+    #   are returned.
+    #
+    # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelsResponse#channels #channels} => Array&lt;Types::ChannelSummary&gt;
+    #   * {Types::ListChannelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channels({
+    #     app_instance_arn: "ChimeArn", # required
+    #     privacy: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channels #=> Array
+    #   resp.channels[0].name #=> String
+    #   resp.channels[0].channel_arn #=> String
+    #   resp.channels[0].mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channels[0].privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channels[0].metadata #=> String
+    #   resp.channels[0].last_message_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannels AWS API Documentation
+    #
+    # @overload list_channels(params = {})
+    # @param [Hash] params ({})
+    def list_channels(params = {}, options = {})
+      req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # A list of the channels moderated by an app instance user.
+    #
+    # @option params [String] :app_instance_user_arn
+    #   The ARN of the user in the moderated channel.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channels in the request.
+    #
+    # @option params [String] :next_token
+    #   The token returned from previous API requests until the number of
+    #   channels moderated by the user is reached.
+    #
+    # @return [Types::ListChannelsModeratedByAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelsModeratedByAppInstanceUserResponse#channels #channels} => Array&lt;Types::ChannelModeratedByAppInstanceUserSummary&gt;
+    #   * {Types::ListChannelsModeratedByAppInstanceUserResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channels_moderated_by_app_instance_user({
+    #     app_instance_user_arn: "ChimeArn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channels #=> Array
+    #   resp.channels[0].channel_summary.name #=> String
+    #   resp.channels[0].channel_summary.channel_arn #=> String
+    #   resp.channels[0].channel_summary.mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channels[0].channel_summary.privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channels[0].channel_summary.metadata #=> String
+    #   resp.channels[0].channel_summary.last_message_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelsModeratedByAppInstanceUser AWS API Documentation
+    #
+    # @overload list_channels_moderated_by_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def list_channels_moderated_by_app_instance_user(params = {}, options = {})
+      req = build_request(:list_channels_moderated_by_app_instance_user, params)
       req.send_request(options)
     end
 
@@ -3939,6 +5465,8 @@ module Aws::Chime
     #   * {Types::ListSipMediaApplicationsResponse#sip_media_applications #sip_media_applications} => Array&lt;Types::SipMediaApplication&gt;
     #   * {Types::ListSipMediaApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_sip_media_applications({
@@ -3983,6 +5511,8 @@ module Aws::Chime
     #
     #   * {Types::ListSipRulesResponse#sip_rules #sip_rules} => Array&lt;Types::SipRule&gt;
     #   * {Types::ListSipRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4254,6 +5784,84 @@ module Aws::Chime
     # @param [Hash] params ({})
     def logout_user(params = {}, options = {})
       req = build_request(:logout_user, params)
+      req.send_request(options)
+    end
+
+    # Sets the amount of time in days that a given app instance retains
+    # data.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @option params [required, Types::AppInstanceRetentionSettings] :app_instance_retention_settings
+    #   The time in days to retain data. Data type: number.
+    #
+    # @return [Types::PutAppInstanceRetentionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAppInstanceRetentionSettingsResponse#app_instance_retention_settings #app_instance_retention_settings} => Types::AppInstanceRetentionSettings
+    #   * {Types::PutAppInstanceRetentionSettingsResponse#initiate_deletion_timestamp #initiate_deletion_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_app_instance_retention_settings({
+    #     app_instance_arn: "ChimeArn", # required
+    #     app_instance_retention_settings: { # required
+    #       channel_retention_settings: {
+    #         retention_days: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_retention_settings.channel_retention_settings.retention_days #=> Integer
+    #   resp.initiate_deletion_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutAppInstanceRetentionSettings AWS API Documentation
+    #
+    # @overload put_app_instance_retention_settings(params = {})
+    # @param [Hash] params ({})
+    def put_app_instance_retention_settings(params = {}, options = {})
+      req = build_request(:put_app_instance_retention_settings, params)
+      req.send_request(options)
+    end
+
+    # The data streaming configurations of an app instance.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @option params [required, Array<Types::AppInstanceStreamingConfiguration>] :app_instance_streaming_configurations
+    #   The streaming configurations set for an app instance.
+    #
+    # @return [Types::PutAppInstanceStreamingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAppInstanceStreamingConfigurationsResponse#app_instance_streaming_configurations #app_instance_streaming_configurations} => Array&lt;Types::AppInstanceStreamingConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_app_instance_streaming_configurations({
+    #     app_instance_arn: "ChimeArn", # required
+    #     app_instance_streaming_configurations: [ # required
+    #       {
+    #         app_instance_data_type: "Channel", # required, accepts Channel, ChannelMessage
+    #         resource_arn: "Arn", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_streaming_configurations #=> Array
+    #   resp.app_instance_streaming_configurations[0].app_instance_data_type #=> String, one of "Channel", "ChannelMessage"
+    #   resp.app_instance_streaming_configurations[0].resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutAppInstanceStreamingConfigurations AWS API Documentation
+    #
+    # @overload put_app_instance_streaming_configurations(params = {})
+    # @param [Hash] params ({})
+    def put_app_instance_streaming_configurations(params = {}, options = {})
+      req = build_request(:put_app_instance_streaming_configurations, params)
       req.send_request(options)
     end
 
@@ -4711,6 +6319,43 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Redacts message content, but not metadata. The message exists in the
+    # back end, but the action returns null content, and the state shows as
+    # redacted.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel containing the messages that you want to
+    #   redact.
+    #
+    # @option params [required, String] :message_id
+    #   The ID of the message being redacted.
+    #
+    # @return [Types::RedactChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RedactChannelMessageResponse#channel_arn #channel_arn} => String
+    #   * {Types::RedactChannelMessageResponse#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.redact_channel_message({
+    #     channel_arn: "ChimeArn", # required
+    #     message_id: "MessageId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactChannelMessage AWS API Documentation
+    #
+    # @overload redact_channel_message(params = {})
+    # @param [Hash] params ({})
+    def redact_channel_message(params = {}, options = {})
+      req = build_request(:redact_channel_message, params)
+      req.send_request(options)
+    end
+
     # Redacts the specified message from the specified Amazon Chime
     # conversation.
     #
@@ -4742,8 +6387,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Redacts the specified message from the specified Amazon Chime chat
-    # room.
+    # Redacts the specified message from the specified Amazon Chime channel.
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
@@ -4958,6 +6602,65 @@ module Aws::Chime
     # @param [Hash] params ({})
     def search_available_phone_numbers(params = {}, options = {})
       req = build_request(:search_available_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # Sends a message to a particular channel that the member is a part of.
+    #
+    # <note markdown="1"> `STANDARD` messages can contain 4KB of data and the 1KB of metadata.
+    # `CONTROL` messages can contain 30 bytes of data and no metadata.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :content
+    #   The content of the message.
+    #
+    # @option params [required, String] :type
+    #   The type of message, `STANDARD` or `CONTROL`.
+    #
+    # @option params [required, String] :persistence
+    #   Boolean that controls whether the message is persisted on the back
+    #   end. Required.
+    #
+    # @option params [String] :metadata
+    #   The optional metadata for each message.
+    #
+    # @option params [required, String] :client_request_token
+    #   The `Idempotency` token for each client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendChannelMessageResponse#channel_arn #channel_arn} => String
+    #   * {Types::SendChannelMessageResponse#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_channel_message({
+    #     channel_arn: "ChimeArn", # required
+    #     content: "NonEmptyContent", # required
+    #     type: "STANDARD", # required, accepts STANDARD, CONTROL
+    #     persistence: "PERSISTENT", # required, accepts PERSISTENT, NON_PERSISTENT
+    #     metadata: "Metadata",
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SendChannelMessage AWS API Documentation
+    #
+    # @overload send_channel_message(params = {})
+    # @param [Hash] params ({})
+    def send_channel_message(params = {}, options = {})
+      req = build_request(:send_channel_message, params)
       req.send_request(options)
     end
 
@@ -5221,6 +6924,79 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Updates `AppInstance` metadata.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @option params [required, String] :name
+    #   The name that you want to change.
+    #
+    # @option params [String] :metadata
+    #   The metadata that you want to change.
+    #
+    # @return [Types::UpdateAppInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppInstanceResponse#app_instance_arn #app_instance_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_instance({
+    #     app_instance_arn: "ChimeArn", # required
+    #     name: "NonEmptyResourceName", # required
+    #     metadata: "Metadata",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAppInstance AWS API Documentation
+    #
+    # @overload update_app_instance(params = {})
+    # @param [Hash] params ({})
+    def update_app_instance(params = {}, options = {})
+      req = build_request(:update_app_instance, params)
+      req.send_request(options)
+    end
+
+    # Updates the details for an `AppInstanceUser`. You can update names and
+    # metadata.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the app instance user.
+    #
+    # @option params [required, String] :name
+    #   The name of the app instance user.
+    #
+    # @option params [String] :metadata
+    #   The metadata of the app instance user.
+    #
+    # @return [Types::UpdateAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppInstanceUserResponse#app_instance_user_arn #app_instance_user_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_instance_user({
+    #     app_instance_user_arn: "ChimeArn", # required
+    #     name: "UserName", # required
+    #     metadata: "Metadata",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAppInstanceUser AWS API Documentation
+    #
+    # @overload update_app_instance_user(params = {})
+    # @param [Hash] params ({})
+    def update_app_instance_user(params = {}, options = {})
+      req = build_request(:update_app_instance_user, params)
+      req.send_request(options)
+    end
+
     # Updates the status of the specified bot, such as starting or stopping
     # the bot from running in your Amazon Chime Enterprise account.
     #
@@ -5263,6 +7039,119 @@ module Aws::Chime
     # @param [Hash] params ({})
     def update_bot(params = {}, options = {})
       req = build_request(:update_bot, params)
+      req.send_request(options)
+    end
+
+    # Update a channel's attributes.
+    #
+    # **Restriction**\: You can't change a channel's privacy.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :name
+    #   The name of the channel.
+    #
+    # @option params [required, String] :mode
+    #   The mode of the update request.
+    #
+    # @option params [String] :metadata
+    #   The metadata of the channel.
+    #
+    # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelResponse#channel_arn #channel_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel({
+    #     channel_arn: "ChimeArn", # required
+    #     name: "NonEmptyResourceName", # required
+    #     mode: "UNRESTRICTED", # required, accepts UNRESTRICTED, RESTRICTED
+    #     metadata: "Metadata",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannel AWS API Documentation
+    #
+    # @overload update_channel(params = {})
+    # @param [Hash] params ({})
+    def update_channel(params = {}, options = {})
+      req = build_request(:update_channel, params)
+      req.send_request(options)
+    end
+
+    # Updates the content of a message.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :message_id
+    #   The ID string of the message being updated.
+    #
+    # @option params [String] :content
+    #   The content of the message being updated.
+    #
+    # @option params [String] :metadata
+    #   The metadata of the message being updated.
+    #
+    # @return [Types::UpdateChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelMessageResponse#channel_arn #channel_arn} => String
+    #   * {Types::UpdateChannelMessageResponse#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel_message({
+    #     channel_arn: "ChimeArn", # required
+    #     message_id: "MessageId", # required
+    #     content: "Content",
+    #     metadata: "Metadata",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelMessage AWS API Documentation
+    #
+    # @overload update_channel_message(params = {})
+    # @param [Hash] params ({})
+    def update_channel_message(params = {}, options = {})
+      req = build_request(:update_channel_message, params)
+      req.send_request(options)
+    end
+
+    # Sets the timestamp to the point when a user last read messages in a
+    # channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @return [Types::UpdateChannelReadMarkerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelReadMarkerResponse#channel_arn #channel_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel_read_marker({
+    #     channel_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelReadMarker AWS API Documentation
+    #
+    # @overload update_channel_read_marker(params = {})
+    # @param [Hash] params ({})
+    def update_channel_read_marker(params = {}, options = {})
+      req = build_request(:update_channel_read_marker, params)
       req.send_request(options)
     end
 
@@ -5843,7 +7732,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

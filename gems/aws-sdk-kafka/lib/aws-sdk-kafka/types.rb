@@ -383,9 +383,10 @@ module Aws::Kafka
     #
     # @!attribute [rw] enhanced_monitoring
     #   Specifies which metrics are gathered for the MSK cluster. This
-    #   property has three possible values: DEFAULT, PER\_BROKER, and
-    #   PER\_TOPIC\_PER\_BROKER. For a list of the metrics associated with
-    #   each of these three levels of monitoring, see [Monitoring][1].
+    #   property has the following possible values: DEFAULT, PER\_BROKER,
+    #   PER\_TOPIC\_PER\_BROKER, and PER\_TOPIC\_PER\_PARTITION. For a list
+    #   of the metrics associated with each of these levels of monitoring,
+    #   see [Monitoring][1].
     #
     #
     #
@@ -713,7 +714,7 @@ module Aws::Kafka
     #             in_cluster: false,
     #           },
     #         },
-    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         kafka_version: "__stringMin1Max128", # required
     #         logging_info: {
     #           broker_logs: { # required
@@ -771,7 +772,8 @@ module Aws::Kafka
     #
     # @!attribute [rw] enhanced_monitoring
     #   Specifies the level of monitoring for the MSK cluster. The possible
-    #   values are DEFAULT, PER\_BROKER, and PER\_TOPIC\_PER\_BROKER.
+    #   values are DEFAULT, PER\_BROKER, PER\_TOPIC\_PER\_BROKER, and
+    #   PER\_TOPIC\_PER\_PARTITION.
     #   @return [String]
     #
     # @!attribute [rw] kafka_version
@@ -2569,7 +2571,7 @@ module Aws::Kafka
     #       {
     #         cluster_arn: "__string", # required
     #         current_version: "__string", # required
-    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         open_monitoring: {
     #           prometheus: { # required
     #             jmx_exporter: {

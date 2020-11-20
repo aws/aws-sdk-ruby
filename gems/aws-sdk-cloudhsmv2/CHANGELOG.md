@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-11-20)
+------------------
+
+* Feature - Added managed backup retention, a feature that enables customers to retain backups for a configurable period after which CloudHSM service will automatically delete them.
+
 1.30.0 (2020-09-30)
 ------------------
 

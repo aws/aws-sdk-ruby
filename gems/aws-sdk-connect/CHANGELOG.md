@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-20)
+------------------
+
+* Feature - This release adds a set of Amazon Connect APIs to programmatically control instance creation, modification, description and deletion.
+
 1.35.0 (2020-11-17)
 ------------------
 

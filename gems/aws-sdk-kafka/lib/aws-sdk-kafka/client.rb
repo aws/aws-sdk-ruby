@@ -382,7 +382,8 @@ module Aws::Kafka
     #
     # @option params [String] :enhanced_monitoring
     #   Specifies the level of monitoring for the MSK cluster. The possible
-    #   values are DEFAULT, PER\_BROKER, and PER\_TOPIC\_PER\_BROKER.
+    #   values are DEFAULT, PER\_BROKER, PER\_TOPIC\_PER\_BROKER, and
+    #   PER\_TOPIC\_PER\_PARTITION.
     #
     # @option params [required, String] :kafka_version
     #   The version of Apache Kafka.
@@ -443,7 +444,7 @@ module Aws::Kafka
     #         in_cluster: false,
     #       },
     #     },
-    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #     kafka_version: "__stringMin1Max128", # required
     #     logging_info: {
     #       broker_logs: { # required
@@ -653,7 +654,7 @@ module Aws::Kafka
     #   resp.cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
-    #   resp.cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
@@ -708,7 +709,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info.source_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -725,7 +726,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info.target_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -969,7 +970,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info_list[0].source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info_list[0].source_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -986,7 +987,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info_list[0].target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info_list[0].target_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -1060,7 +1061,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_info_list[0].encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_info_list[0].encryption_info.encryption_in_transit.in_cluster #=> Boolean
-    #   resp.cluster_info_list[0].enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_info_list[0].enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_info_list[0].number_of_broker_nodes #=> Integer
     #   resp.cluster_info_list[0].open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info_list[0].open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
@@ -1654,7 +1655,7 @@ module Aws::Kafka
     #   resp = client.update_monitoring({
     #     cluster_arn: "__string", # required
     #     current_version: "__string", # required
-    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #     open_monitoring: {
     #       prometheus: { # required
     #         jmx_exporter: {
@@ -1711,7 +1712,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

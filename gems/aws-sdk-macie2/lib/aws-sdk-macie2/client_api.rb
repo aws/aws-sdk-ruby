@@ -150,7 +150,10 @@ module Aws::Macie2
     IpCountry = Shapes::StructureShape.new(name: 'IpCountry')
     IpGeoLocation = Shapes::StructureShape.new(name: 'IpGeoLocation')
     IpOwner = Shapes::StructureShape.new(name: 'IpOwner')
+    IsDefinedInJob = Shapes::StringShape.new(name: 'IsDefinedInJob')
+    IsMonitoredByJob = Shapes::StringShape.new(name: 'IsMonitoredByJob')
     JobComparator = Shapes::StringShape.new(name: 'JobComparator')
+    JobDetails = Shapes::StructureShape.new(name: 'JobDetails')
     JobScheduleFrequency = Shapes::StructureShape.new(name: 'JobScheduleFrequency')
     JobScopeTerm = Shapes::StructureShape.new(name: 'JobScopeTerm')
     JobScopingBlock = Shapes::StructureShape.new(name: 'JobScopingBlock')
@@ -400,6 +403,7 @@ module Aws::Macie2
     BucketMetadata.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
     BucketMetadata.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
     BucketMetadata.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
+    BucketMetadata.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetails, location_name: "jobDetails"))
     BucketMetadata.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
     BucketMetadata.add_member(:object_count, Shapes::ShapeRef.new(shape: __long, location_name: "objectCount"))
     BucketMetadata.add_member(:object_count_by_encryption_type, Shapes::ShapeRef.new(shape: ObjectCountByEncryptionType, location_name: "objectCountByEncryptionType"))
@@ -873,6 +877,12 @@ module Aws::Macie2
     IpOwner.add_member(:isp, Shapes::ShapeRef.new(shape: __string, location_name: "isp"))
     IpOwner.add_member(:org, Shapes::ShapeRef.new(shape: __string, location_name: "org"))
     IpOwner.struct_class = Types::IpOwner
+
+    JobDetails.add_member(:is_defined_in_job, Shapes::ShapeRef.new(shape: IsDefinedInJob, location_name: "isDefinedInJob"))
+    JobDetails.add_member(:is_monitored_by_job, Shapes::ShapeRef.new(shape: IsMonitoredByJob, location_name: "isMonitoredByJob"))
+    JobDetails.add_member(:last_job_id, Shapes::ShapeRef.new(shape: __string, location_name: "lastJobId"))
+    JobDetails.add_member(:last_job_run_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastJobRunTime"))
+    JobDetails.struct_class = Types::JobDetails
 
     JobScheduleFrequency.add_member(:daily_schedule, Shapes::ShapeRef.new(shape: DailySchedule, location_name: "dailySchedule"))
     JobScheduleFrequency.add_member(:monthly_schedule, Shapes::ShapeRef.new(shape: MonthlySchedule, location_name: "monthlySchedule"))

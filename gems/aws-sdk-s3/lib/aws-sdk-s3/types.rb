@@ -9975,6 +9975,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, go to [RFC
     #   1864.][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -10137,6 +10140,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, go to [RFC
     #   1864.][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -10193,8 +10199,10 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
-    #   configuration. This parameter is auto-populated when using the
-    #   command from the CLI.
+    #   configuration.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -10464,6 +10472,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] content_md5
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_configuration
@@ -10523,6 +10533,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `PutBucketLogging` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -10722,6 +10735,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] notification_configuration
@@ -10768,6 +10784,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `OwnershipControls` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -10809,6 +10828,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash of the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] confirm_remove_self_bucket_access
@@ -10919,6 +10941,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -10973,6 +10998,9 @@ module Aws::S3
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -11026,6 +11054,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -11075,6 +11106,9 @@ module Aws::S3
     #   this header as a message integrity check to verify that the request
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -11154,6 +11188,9 @@ module Aws::S3
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -11267,6 +11304,9 @@ module Aws::S3
     #   be used as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, go to [RFC
     #   1864.&gt;][1]
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -11445,6 +11485,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -11529,6 +11572,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -12065,6 +12111,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -12156,6 +12205,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] tagging
@@ -12203,6 +12255,9 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -14196,10 +14251,11 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] days
-    #   The number of days that you want your archived data to be
-    #   accessible. The minimum number of days specified in the restore
-    #   request must be at least 90 days. If a smaller value is specifed it
-    #   will be ignored.
+    #   The number of consecutive days of no access after which an object
+    #   will be eligible to be transitioned to the corresponding tier. The
+    #   minimum number of days specified for Archive Access tier must be at
+    #   least 90 days and Deep Archive Access tier must be at least 180
+    #   days. The maximum can be up to 2 years (730 days).
     #   @return [Integer]
     #
     # @!attribute [rw] access_tier

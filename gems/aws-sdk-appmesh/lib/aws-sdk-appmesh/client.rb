@@ -431,7 +431,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_gateway_name: "ResourceName", # required
@@ -518,7 +518,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -779,7 +779,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_router_name: "ResourceName", # required
@@ -1025,7 +1025,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_gateway_name: "ResourceName", # required
@@ -1326,7 +1326,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_node_name: "ResourceName", # required
@@ -1487,7 +1487,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_router_name: "ResourceName", # required
@@ -1592,7 +1592,7 @@ module Aws::AppMesh
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     virtual_service_name: "ServiceName", # required
@@ -3284,7 +3284,7 @@ module Aws::AppMesh
     #     tags: [ # required
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -4429,7 +4429,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -17,6 +17,7 @@ module Aws::CodeGuruReviewer
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateRepositoryRequest = Shapes::StructureShape.new(name: 'AssociateRepositoryRequest')
     AssociateRepositoryResponse = Shapes::StructureShape.new(name: 'AssociateRepositoryResponse')
+    AssociationArn = Shapes::StringShape.new(name: 'AssociationArn')
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
     BranchName = Shapes::StringShape.new(name: 'BranchName')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
@@ -56,6 +57,8 @@ module Aws::CodeGuruReviewer
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
     ListRepositoryAssociationsRequest = Shapes::StructureShape.new(name: 'ListRepositoryAssociationsRequest')
     ListRepositoryAssociationsResponse = Shapes::StructureShape.new(name: 'ListRepositoryAssociationsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MeteredLinesOfCodeCount = Shapes::IntegerShape.new(name: 'MeteredLinesOfCodeCount')
     Metrics = Shapes::StructureShape.new(name: 'Metrics')
@@ -92,11 +95,19 @@ module Aws::CodeGuruReviewer
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SourceCodeType = Shapes::StructureShape.new(name: 'SourceCodeType')
     StateReason = Shapes::StringShape.new(name: 'StateReason')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Text = Shapes::StringShape.new(name: 'Text')
     ThirdPartySourceRepository = Shapes::StructureShape.new(name: 'ThirdPartySourceRepository')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     Type = Shapes::StringShape.new(name: 'Type')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UserId = Shapes::StringShape.new(name: 'UserId')
     UserIds = Shapes::ListShape.new(name: 'UserIds')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -106,9 +117,11 @@ module Aws::CodeGuruReviewer
 
     AssociateRepositoryRequest.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, required: true, location_name: "Repository"))
     AssociateRepositoryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     AssociateRepositoryRequest.struct_class = Types::AssociateRepositoryRequest
 
     AssociateRepositoryResponse.add_member(:repository_association, Shapes::ShapeRef.new(shape: RepositoryAssociation, location_name: "RepositoryAssociation"))
+    AssociateRepositoryResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     AssociateRepositoryResponse.struct_class = Types::AssociateRepositoryResponse
 
     CodeCommitRepository.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
@@ -126,6 +139,7 @@ module Aws::CodeGuruReviewer
     CodeReview.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
     CodeReview.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, location_name: "PullRequestId"))
     CodeReview.add_member(:source_code_type, Shapes::ShapeRef.new(shape: SourceCodeType, location_name: "SourceCodeType"))
+    CodeReview.add_member(:association_arn, Shapes::ShapeRef.new(shape: AssociationArn, location_name: "AssociationArn"))
     CodeReview.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     CodeReview.struct_class = Types::CodeReview
 
@@ -155,7 +169,7 @@ module Aws::CodeGuruReviewer
     ConflictException.struct_class = Types::ConflictException
 
     CreateCodeReviewRequest.add_member(:name, Shapes::ShapeRef.new(shape: CodeReviewName, required: true, location_name: "Name"))
-    CreateCodeReviewRequest.add_member(:repository_association_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RepositoryAssociationArn"))
+    CreateCodeReviewRequest.add_member(:repository_association_arn, Shapes::ShapeRef.new(shape: AssociationArn, required: true, location_name: "RepositoryAssociationArn"))
     CreateCodeReviewRequest.add_member(:type, Shapes::ShapeRef.new(shape: CodeReviewType, required: true, location_name: "Type"))
     CreateCodeReviewRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateCodeReviewRequest.struct_class = Types::CreateCodeReviewRequest
@@ -177,16 +191,18 @@ module Aws::CodeGuruReviewer
     DescribeRecommendationFeedbackResponse.add_member(:recommendation_feedback, Shapes::ShapeRef.new(shape: RecommendationFeedback, location_name: "RecommendationFeedback"))
     DescribeRecommendationFeedbackResponse.struct_class = Types::DescribeRecommendationFeedbackResponse
 
-    DescribeRepositoryAssociationRequest.add_member(:association_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "AssociationArn"))
+    DescribeRepositoryAssociationRequest.add_member(:association_arn, Shapes::ShapeRef.new(shape: AssociationArn, required: true, location: "uri", location_name: "AssociationArn"))
     DescribeRepositoryAssociationRequest.struct_class = Types::DescribeRepositoryAssociationRequest
 
     DescribeRepositoryAssociationResponse.add_member(:repository_association, Shapes::ShapeRef.new(shape: RepositoryAssociation, location_name: "RepositoryAssociation"))
+    DescribeRepositoryAssociationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeRepositoryAssociationResponse.struct_class = Types::DescribeRepositoryAssociationResponse
 
-    DisassociateRepositoryRequest.add_member(:association_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "AssociationArn"))
+    DisassociateRepositoryRequest.add_member(:association_arn, Shapes::ShapeRef.new(shape: AssociationArn, required: true, location: "uri", location_name: "AssociationArn"))
     DisassociateRepositoryRequest.struct_class = Types::DisassociateRepositoryRequest
 
     DisassociateRepositoryResponse.add_member(:repository_association, Shapes::ShapeRef.new(shape: RepositoryAssociation, location_name: "RepositoryAssociation"))
+    DisassociateRepositoryResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DisassociateRepositoryResponse.struct_class = Types::DisassociateRepositoryResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -237,6 +253,12 @@ module Aws::CodeGuruReviewer
     ListRepositoryAssociationsResponse.add_member(:repository_association_summaries, Shapes::ShapeRef.new(shape: RepositoryAssociationSummaries, location_name: "RepositoryAssociationSummaries"))
     ListRepositoryAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListRepositoryAssociationsResponse.struct_class = Types::ListRepositoryAssociationsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AssociationArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     Metrics.add_member(:metered_lines_of_code_count, Shapes::ShapeRef.new(shape: MeteredLinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
     Metrics.add_member(:findings_count, Shapes::ShapeRef.new(shape: FindingsCount, location_name: "FindingsCount"))
@@ -336,6 +358,17 @@ module Aws::CodeGuruReviewer
     SourceCodeType.add_member(:repository_head, Shapes::ShapeRef.new(shape: RepositoryHeadSourceCodeType, location_name: "RepositoryHead"))
     SourceCodeType.struct_class = Types::SourceCodeType
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AssociationArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThirdPartySourceRepository.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     ThirdPartySourceRepository.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, required: true, location_name: "ConnectionArn"))
     ThirdPartySourceRepository.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, required: true, location_name: "Owner"))
@@ -343,6 +376,12 @@ module Aws::CodeGuruReviewer
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AssociationArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UserIds.member = Shapes::ShapeRef.new(shape: UserId)
 
@@ -521,6 +560,17 @@ module Aws::CodeGuruReviewer
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:put_recommendation_feedback, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutRecommendationFeedback"
         o.http_method = "PUT"
@@ -532,6 +582,28 @@ module Aws::CodeGuruReviewer
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

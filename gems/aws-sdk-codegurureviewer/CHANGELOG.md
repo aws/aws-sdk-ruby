@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-11-20)
+------------------
+
+* Feature - This release supports tagging repository association resources in Amazon CodeGuru Reviewer.
+
 1.13.0 (2020-09-30)
 ------------------
 

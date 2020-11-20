@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-11-20)
+------------------
+
+* Feature - This release adds support for PER TOPIC PER PARTITION monitoring on AWS MSK clusters.
+
 1.29.0 (2020-10-01)
 ------------------
 

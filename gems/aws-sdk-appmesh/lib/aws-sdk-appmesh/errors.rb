@@ -185,6 +185,14 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
+      end
     end
 
     class TooManyTagsException < ServiceError

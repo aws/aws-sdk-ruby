@@ -1405,6 +1405,19 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
+    #   }
+    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -1419,19 +1432,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
-    #   }
-    #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2929,21 +2929,6 @@ module Aws::S3
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
     #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
-    #   }
-    #
     # @example Example: To remove tag set from an object version
     #
     #   # The following example removes tag set associated with the specified object version. The request specifies both the
@@ -2958,6 +2943,21 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3097,42 +3097,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple objects from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
-    #   # object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "objectkey1", 
-    #         }, 
-    #         {
-    #           key: "objectkey2", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         delete_marker: true, 
-    #         delete_marker_version_id: "A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F", 
-    #         key: "objectkey1", 
-    #       }, 
-    #       {
-    #         delete_marker: true, 
-    #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
-    #         key: "objectkey2", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple object versions from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
@@ -3165,6 +3129,42 @@ module Aws::S3
     #       {
     #         key: "HappyFace.jpg", 
     #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple objects from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
+    #   # object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "objectkey1", 
+    #         }, 
+    #         {
+    #           key: "objectkey2", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F", 
+    #         key: "objectkey1", 
+    #       }, 
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
+    #         key: "objectkey2", 
     #       }, 
     #     ], 
     #   }
@@ -5056,13 +5056,13 @@ module Aws::S3
     # For more information about returning the ACL of an object, see
     # [GetObjectAcl][3].
     #
-    # If the object you are retrieving is stored in the S3 Glacier, S3
-    # Glacier Deep Archive, S3 Intelligent-Tiering Archive, or S3
-    # Intelligent-Tiering Deep Archive storage classes, before you can
-    # retrieve the object you must first restore a copy using
-    # [RestoreObject][4]. Otherwise, this operation returns an
-    # `InvalidObjectStateError` error. For information about restoring
-    # archived objects, see [Restoring Archived Objects][5].
+    # If the object you are retrieving is stored in the S3 Glacier or S3
+    # Glacier Deep Archive storage class, or S3 Intelligent-Tiering Archive
+    # or S3 Intelligent-Tiering Deep Archive tiers, before you can retrieve
+    # the object you must first restore a copy using [RestoreObject][4].
+    # Otherwise, this operation returns an `InvalidObjectStateError` error.
+    # For information about restoring archived objects, see [Restoring
+    # Archived Objects][5].
     #
     # Encryption request headers, like `x-amz-server-side-encryption`,
     # should not be sent for GET requests if your object uses server-side
@@ -8294,6 +8294,9 @@ module Aws::S3
     #   used as a message integrity check to verify that the request body was
     #   not corrupted in transit. For more information, go to [RFC 1864.][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -8580,6 +8583,9 @@ module Aws::S3
     #   used as a message integrity check to verify that the request body was
     #   not corrupted in transit. For more information, go to [RFC 1864.][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -8711,8 +8717,10 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
-    #   configuration. This parameter is auto-populated when using the command
-    #   from the CLI.
+    #   configuration.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   Specifies the default server-side-encryption configuration.
@@ -9044,6 +9052,8 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @option params [String] :content_md5
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #
@@ -9364,6 +9374,9 @@ module Aws::S3
     # @option params [String] :content_md5
     #   The MD5 hash of the `PutBucketLogging` request body.
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -9539,6 +9552,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [required, Types::NotificationConfigurationDeprecated] :notification_configuration
     #   The container for the configuration.
@@ -9784,6 +9800,9 @@ module Aws::S3
     # @option params [String] :content_md5
     #   The MD5 hash of the `OwnershipControls` request body.
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -9854,6 +9873,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash of the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [Boolean] :confirm_remove_self_bucket_access
     #   Set this parameter to true to confirm that you want to remove your
@@ -9926,26 +9948,21 @@ module Aws::S3
     # configuration, you must also add the following elements:
     # `DeleteMarkerReplication`, `Status`, and `Priority`.
     #
-    # <note markdown="1"> The latest version of the replication configuration XML is V2. XML V2
-    # replication configurations are those that contain the `Filter` element
-    # for rules, and rules that specify S3 Replication Time Control (S3
-    # RTC). In XML V2 replication configurations, Amazon S3 doesn't
-    # replicate delete markers. Therefore, you must set the
-    # `DeleteMarkerReplication` element to `Disabled`. For backward
-    # compatibility, Amazon S3 continues to support the XML V1 replication
-    # configuration.
+    # <note markdown="1"> If you are using an earlier version of the replication configuration,
+    # Amazon S3 handles replication of delete markers differently. For more
+    # information, see [Backward Compatibility][3].
     #
     #  </note>
     #
     # For information about enabling versioning on a bucket, see [Using
-    # Versioning][3].
+    # Versioning][4].
     #
     # By default, a resource owner, in this case the AWS account that
     # created the bucket, can perform this operation. The resource owner can
     # also grant others permissions to perform the operation. For more
     # information about permissions, see [Specifying Permissions in a
-    # Policy][4] and [Managing Access Permissions to Your Amazon S3
-    # Resources][5].
+    # Policy][5] and [Managing Access Permissions to Your Amazon S3
+    # Resources][6].
     #
     # **Handling Replication of Encrypted Objects**
     #
@@ -9955,28 +9972,29 @@ module Aws::S3
     # `SourceSelectionCriteria`, `SseKmsEncryptedObjects`, `Status`,
     # `EncryptionConfiguration`, and `ReplicaKmsKeyID`. For information
     # about replication configuration, see [Replicating Objects Created with
-    # SSE Using CMKs stored in AWS KMS][6].
+    # SSE Using CMKs stored in AWS KMS][7].
     #
     # For information on `PutBucketReplication` errors, see [List of
-    # replication-related error codes][7]
+    # replication-related error codes][8]
     #
     # The following operations are related to `PutBucketReplication`\:
     #
-    # * [GetBucketReplication][8]
+    # * [GetBucketReplication][9]
     #
-    # * [DeleteBucketReplication][9]
+    # * [DeleteBucketReplication][10]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket
@@ -9985,6 +10003,9 @@ module Aws::S3
     #   The base64-encoded 128-bit MD5 digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -10132,6 +10153,9 @@ module Aws::S3
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -10258,6 +10282,9 @@ module Aws::S3
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -10370,6 +10397,9 @@ module Aws::S3
     #   this header as a message integrity check to verify that the request
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -10504,6 +10534,9 @@ module Aws::S3
     #   The base64-encoded 128-bit MD5 digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -10925,41 +10958,22 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload object and specify user-defined metadata
+    # @example Example: To upload an object and specify canned ACL.
     #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
+    #     acl: "authenticated-read", 
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
     #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
-    #   }
-    #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
     # @example Example: To upload an object and specify optional tags
@@ -11000,22 +11014,58 @@ module Aws::S3
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
-    # @example Example: To upload an object and specify canned ACL.
+    # @example Example: To create an object.
     #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     acl: "authenticated-read", 
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Example: To upload an object (specify optional headers)
@@ -11036,23 +11086,6 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Streaming a file from disk
@@ -11306,6 +11339,9 @@ module Aws::S3
     #   not corrupted in transit. For more information, go to [RFC
     #   1864.&gt;][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -11504,6 +11540,9 @@ module Aws::S3
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -11583,6 +11622,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -11684,6 +11726,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -11813,6 +11858,9 @@ module Aws::S3
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     # @option params [required, Types::Tagging] :tagging
     #   Container for the `TagSet` and `Tag` elements
     #
@@ -11924,6 +11972,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
@@ -12064,18 +12115,18 @@ module Aws::S3
     # * Amazon S3 accepts a select request even if the object has already
     #   been restored. A select request doesn’t return error response `409`.
     #
-    # **Restoring Archives**
+    # **Restoring objects**
     #
-    # Objects that you archive to the S3 Glacier, S3 Glacier Deep Archive,
-    # S3 Intelligent-Tiering Archive, or S3 Intelligent-Tiering Deep Archive
-    # storage classes are not accessible in real time. For objects in
-    # Archive Access tier or Deep Archive Access tier you must first
-    # initiate a restore request, and then wait until the object is moved
-    # into the Frequent Access tier. For objects in S3 Glacier or S3 Glacier
-    # Deep Archive you must first initiate a restore request, and then wait
-    # until a temporary copy of the object is available. To access an
-    # archived object, you must restore the object for the duration (number
-    # of days) that you specify.
+    # Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive
+    # storage class, and S3 Intelligent-Tiering Archive or S3
+    # Intelligent-Tiering Deep Archive tiers are not accessible in real
+    # time. For objects in Archive Access or Deep Archive Access tiers you
+    # must first initiate a restore request, and then wait until the object
+    # is moved into the Frequent Access tier. For objects in S3 Glacier or
+    # S3 Glacier Deep Archive storage classes you must first initiate a
+    # restore request, and then wait until a temporary copy of the object is
+    # available. To access an archived object, you must restore the object
+    # for the duration (number of days) that you specify.
     #
     # To restore a specific object version, you can provide a version ID. If
     # you don't provide a version ID, Amazon S3 restores the current
@@ -12086,35 +12137,34 @@ module Aws::S3
     # element of the request body:
     #
     # * <b> <code>Expedited</code> </b> - Expedited retrievals allow you to
-    #   quickly access your data stored in the S3 Glacier or S3
-    #   Intelligent-Tiering Archive storage class when occasional urgent
-    #   requests for a subset of archives are required. For all but the
-    #   largest archived objects (250 MB+), data accessed using Expedited
-    #   retrievals is typically made available within 1–5 minutes.
-    #   Provisioned capacity ensures that retrieval capacity for Expedited
-    #   retrievals is available when you need it. Expedited retrievals and
-    #   provisioned capacity are not available for objects stored in the S3
-    #   Glacier Deep Archive or S3 Intelligent-Tiering Deep Archive storage
-    #   class.
+    #   quickly access your data stored in the S3 Glacier storage class or
+    #   S3 Intelligent-Tiering Archive tier when occasional urgent requests
+    #   for a subset of archives are required. For all but the largest
+    #   archived objects (250 MB+), data accessed using Expedited retrievals
+    #   is typically made available within 1–5 minutes. Provisioned capacity
+    #   ensures that retrieval capacity for Expedited retrievals is
+    #   available when you need it. Expedited retrievals and provisioned
+    #   capacity are not available for objects stored in the S3 Glacier Deep
+    #   Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
     #
     # * <b> <code>Standard</code> </b> - Standard retrievals allow you to
     #   access any of your archived objects within several hours. This is
     #   the default option for retrieval requests that do not specify the
     #   retrieval option. Standard retrievals typically finish within 3–5
-    #   hours for objects stored in the S3 Glacier or S3 Intelligent-Tiering
-    #   Archive storage class. They typically finish within 12 hours for
-    #   objects stored in the S3 Glacier Deep Archive or S3
-    #   Intelligent-Tiering Deep Archive storage class. Standard retrievals
-    #   are free for objects stored in S3 Intelligent-Tiering.
+    #   hours for objects stored in the S3 Glacier storage class or S3
+    #   Intelligent-Tiering Archive tier. They typically finish within 12
+    #   hours for objects stored in the S3 Glacier Deep Archive storage
+    #   class or S3 Intelligent-Tiering Deep Archive tier. Standard
+    #   retrievals are free for objects stored in S3 Intelligent-Tiering.
     #
     # * <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost
     #   retrieval option in S3 Glacier, enabling you to retrieve large
     #   amounts, even petabytes, of data inexpensively. Bulk retrievals
     #   typically finish within 5–12 hours for objects stored in the S3
-    #   Glacier or S3 Intelligent-Tiering Archive storage class. They
+    #   Glacier storage class or S3 Intelligent-Tiering Archive tier. They
     #   typically finish within 48 hours for objects stored in the S3
-    #   Glacier Deep Archive or S3 Intelligent-Tiering Deep Archive storage
-    #   class. Bulk retrievals are free for objects stored in S3
+    #   Glacier Deep Archive storage class or S3 Intelligent-Tiering Deep
+    #   Archive tier. Bulk retrievals are free for objects stored in S3
     #   Intelligent-Tiering.
     #
     # For more information about archive retrieval options and provisioned
@@ -13356,26 +13406,6 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
-    #     }, 
-    #   }
-    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -13395,6 +13425,26 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -13455,7 +13505,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.84.1'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

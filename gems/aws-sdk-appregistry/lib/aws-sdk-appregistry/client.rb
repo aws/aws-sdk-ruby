@@ -328,9 +328,9 @@ module Aws::AppRegistry
     # @!group API Operations
 
     # Associates an attribute group with an application to augment the
-    # application's metadata with the group's attributes. This way
-    # applications can be described with user-defined details which are
-    # machine-readable (e.g. for third-party integrations).
+    # application's metadata with the group's attributes. This feature
+    # enables applications to be described with user-defined details that
+    # are machine-readable, such as third-party integrations.
     #
     # @option params [required, String] :application
     #   The name or ID of the application.
@@ -356,7 +356,7 @@ module Aws::AppRegistry
     #   resp.application_arn #=> String
     #   resp.attribute_group_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/AssociateAttributeGroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AssociateAttributeGroup AWS API Documentation
     #
     # @overload associate_attribute_group(params = {})
     # @param [Hash] params ({})
@@ -372,6 +372,7 @@ module Aws::AppRegistry
     #   The name or ID of the application.
     #
     # @option params [required, String] :resource_type
+    #   The type of resource of which the application will be associated.
     #
     # @option params [required, String] :resource
     #   The name or ID of the resource of which the application will be
@@ -395,7 +396,7 @@ module Aws::AppRegistry
     #   resp.application_arn #=> String
     #   resp.resource_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/AssociateResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AssociateResource AWS API Documentation
     #
     # @overload associate_resource(params = {})
     # @param [Hash] params ({})
@@ -418,9 +419,12 @@ module Aws::AppRegistry
     #   Key-value pairs you can use to associate with the application.
     #
     # @option params [required, String] :client_token
-    #   A unique identifier that you provide to ensure idempotency. If
-    #   multiple requests differ only by the clientToken, the same response is
-    #   returned for each repeated request.
+    #   A unique identifier that you provide to ensure idempotency. If you
+    #   retry a request that completed successfully using the same client
+    #   token and the same parameters, the retry succeeds without performing
+    #   any further actions. If you retry a successful request using the same
+    #   client token, but one or more of the parameters are different, the
+    #   retry fails.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -451,7 +455,7 @@ module Aws::AppRegistry
     #   resp.application.tags #=> Hash
     #   resp.application.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/CreateApplication AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/CreateApplication AWS API Documentation
     #
     # @overload create_application(params = {})
     # @param [Hash] params ({})
@@ -461,10 +465,9 @@ module Aws::AppRegistry
     end
 
     # Creates a new attribute group as a container for user-defined
-    # attributes. This approach enables users to have full control over
-    # their cloud application's metadata in a rich machine-readable format
-    # to facilitate integration with automated workflows and third-party
-    # tools.
+    # attributes. This feature enables users to have full control over their
+    # cloud application's metadata in a rich machine-readable format to
+    # facilitate integration with automated workflows and third-party tools.
     #
     # @option params [required, String] :name
     #   The name of the attribute group.
@@ -481,9 +484,12 @@ module Aws::AppRegistry
     #   Key-value pairs you can use to associate with the attribute group.
     #
     # @option params [required, String] :client_token
-    #   A unique identifier that you provide to ensure idempotency. If
-    #   multiple requests differ only by the clientToken, the same response is
-    #   returned for each repeated request.
+    #   A unique identifier that you provide to ensure idempotency. If you
+    #   retry a request that completed successfully using the same client
+    #   token and the same parameters, the retry succeeds without performing
+    #   any further actions. If you retry a successful request using the same
+    #   client token, but one or more of the parameters are different, the
+    #   retry fails.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -515,7 +521,7 @@ module Aws::AppRegistry
     #   resp.attribute_group.tags #=> Hash
     #   resp.attribute_group.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/CreateAttributeGroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/CreateAttributeGroup AWS API Documentation
     #
     # @overload create_attribute_group(params = {})
     # @param [Hash] params ({})
@@ -524,7 +530,9 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Delete an application, specified either by its application ID or name.
+    # Deletes an application that is specified either by its application ID
+    # or name. All associated attribute groups and resources must be
+    # disassociated from it before deleting an application.
     #
     # @option params [required, String] :application
     #   The name or ID of the application.
@@ -548,7 +556,7 @@ module Aws::AppRegistry
     #   resp.application.creation_time #=> Time
     #   resp.application.last_update_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/DeleteApplication AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DeleteApplication AWS API Documentation
     #
     # @overload delete_application(params = {})
     # @param [Hash] params ({})
@@ -583,7 +591,7 @@ module Aws::AppRegistry
     #   resp.attribute_group.creation_time #=> Time
     #   resp.attribute_group.last_update_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/DeleteAttributeGroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DeleteAttributeGroup AWS API Documentation
     #
     # @overload delete_attribute_group(params = {})
     # @param [Hash] params ({})
@@ -595,7 +603,7 @@ module Aws::AppRegistry
     # Disassociates an attribute group from an application to remove the
     # extra attributes contained in the attribute group from the
     # application's metadata. This operation reverts
-    # AssociateAttributeGroup.
+    # `AssociateAttributeGroup`.
     #
     # @option params [required, String] :application
     #   The name or ID of the application.
@@ -621,7 +629,7 @@ module Aws::AppRegistry
     #   resp.application_arn #=> String
     #   resp.attribute_group_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/DisassociateAttributeGroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DisassociateAttributeGroup AWS API Documentation
     #
     # @overload disassociate_attribute_group(params = {})
     # @param [Hash] params ({})
@@ -637,11 +645,10 @@ module Aws::AppRegistry
     #   The name or ID of the application.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource that's being disassociated.
+    #   The type of the resource that is being disassociated.
     #
     # @option params [required, String] :resource
-    #   The name or ID of the resource of which the application will be
-    #   associated.
+    #   The name or ID of the resource.
     #
     # @return [Types::DisassociateResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -661,7 +668,7 @@ module Aws::AppRegistry
     #   resp.application_arn #=> String
     #   resp.resource_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/DisassociateResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DisassociateResource AWS API Documentation
     #
     # @overload disassociate_resource(params = {})
     # @param [Hash] params ({})
@@ -675,7 +682,7 @@ module Aws::AppRegistry
     # (which is unique within one account in one region at a given point in
     # time). Specify by ID in automated workflows if you want to make sure
     # that the exact same application is returned or a
-    # ResourceNotFoundException is thrown, avoiding the ABA addressing
+    # `ResourceNotFoundException` is thrown, avoiding the ABA addressing
     # problem.
     #
     # @option params [required, String] :application
@@ -710,7 +717,7 @@ module Aws::AppRegistry
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/GetApplication AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetApplication AWS API Documentation
     #
     # @overload get_application(params = {})
     # @param [Hash] params ({})
@@ -719,7 +726,9 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Retrieves an attribute group, either by its name or its ID.
+    # Retrieves an attribute group, either by its name or its ID. The
+    # attribute group can be specified either by its unique ID or by its
+    # name.
     #
     # @option params [required, String] :attribute_group
     #   The name or ID of the attribute group that holds the attributes to
@@ -754,7 +763,7 @@ module Aws::AppRegistry
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/GetAttributeGroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAttributeGroup AWS API Documentation
     #
     # @overload get_attribute_group(params = {})
     # @param [Hash] params ({})
@@ -799,7 +808,7 @@ module Aws::AppRegistry
     #   resp.applications[0].last_update_time #=> Time
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/ListApplications AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListApplications AWS API Documentation
     #
     # @overload list_applications(params = {})
     # @param [Hash] params ({})
@@ -844,7 +853,7 @@ module Aws::AppRegistry
     #   resp.attribute_groups[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/ListAssociatedAttributeGroups AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAssociatedAttributeGroups AWS API Documentation
     #
     # @overload list_associated_attribute_groups(params = {})
     # @param [Hash] params ({})
@@ -890,7 +899,7 @@ module Aws::AppRegistry
     #   resp.resources[0].arn #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/ListAssociatedResources AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAssociatedResources AWS API Documentation
     #
     # @overload list_associated_resources(params = {})
     # @param [Hash] params ({})
@@ -936,7 +945,7 @@ module Aws::AppRegistry
     #   resp.attribute_groups[0].last_update_time #=> Time
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/ListAttributeGroups AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAttributeGroups AWS API Documentation
     #
     # @overload list_attribute_groups(params = {})
     # @param [Hash] params ({})
@@ -948,15 +957,14 @@ module Aws::AppRegistry
     # Updates an existing application with new attributes.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application. The name must be unique in the
-    #   region in which you are updating the attribute group.
+    #   The name or ID of the application that will be updated.
     #
     # @option params [String] :name
-    #   The anme of the application. The name must be unique in the region in
-    #   which you are creating the application.
+    #   The new name of the application. The name must be unique in the region
+    #   in which you are updating the application.
     #
     # @option params [String] :description
-    #   The description of the application.
+    #   The new description of the application.
     #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -981,7 +989,7 @@ module Aws::AppRegistry
     #   resp.application.tags #=> Hash
     #   resp.application.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/UpdateApplication AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/UpdateApplication AWS API Documentation
     #
     # @overload update_application(params = {})
     # @param [Hash] params ({})
@@ -1032,7 +1040,7 @@ module Aws::AppRegistry
     #   resp.attribute_group.tags #=> Hash
     #   resp.attribute_group.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry/UpdateAttributeGroup AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/UpdateAttributeGroup AWS API Documentation
     #
     # @overload update_attribute_group(params = {})
     # @param [Hash] params ({})
@@ -1054,7 +1062,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

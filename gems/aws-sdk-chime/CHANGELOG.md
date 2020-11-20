@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-11-20)
+------------------
+
+* Feature - The Amazon Chime SDK for messaging provides the building blocks needed to build chat and other real-time collaboration features.
+
 1.38.0 (2020-11-17)
 ------------------
 

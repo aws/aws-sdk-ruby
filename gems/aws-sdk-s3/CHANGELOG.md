@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2020-11-20)
+------------------
+
+* Feature - Add new documentation regarding automatically generated Content-MD5 headers when using the SDK or CLI.
+
 1.84.1 (2020-11-10)
 ------------------
 

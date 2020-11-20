@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-11-20)
+------------------
+
+* Feature - This release makes tag value a required attribute of the tag's key-value pair.
+
 1.32.0 (2020-11-05)
 ------------------
 

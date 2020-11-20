@@ -153,6 +153,231 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # An instance of a Chime messaging application.
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the messaging instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of an app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of an app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which an app instance was created. In epoch
+    #   milliseconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time an app instance was last updated. In epoch milliseconds.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstance AWS API Documentation
+    #
+    class AppInstance < Struct.new(
+      :app_instance_arn,
+      :name,
+      :metadata,
+      :created_timestamp,
+      :last_updated_timestamp)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # Promotes a user to the administrator role for the duration of an app
+    # instance.
+    #
+    # @!attribute [rw] admin
+    #   The name and metadata of the app instance administrator.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance administrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which an administrator was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceAdmin AWS API Documentation
+    #
+    class AppInstanceAdmin < Struct.new(
+      :admin,
+      :app_instance_arn,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The identity and metadata of an administrator.
+    #
+    # @!attribute [rw] admin
+    #   The name and metadata of the app instance administrator.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceAdminSummary AWS API Documentation
+    #
+    class AppInstanceAdminSummary < Struct.new(
+      :admin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The length of time in days to retain messages.
+    #
+    # @note When making an API call, you may pass AppInstanceRetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         channel_retention_settings: {
+    #           retention_days: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] channel_retention_settings
+    #   The length of time in days to retain a channel.
+    #   @return [Types::ChannelRetentionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceRetentionSettings AWS API Documentation
+    #
+    class AppInstanceRetentionSettings < Struct.new(
+      :channel_retention_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The streaming configuration of an app instance.
+    #
+    # @note When making an API call, you may pass AppInstanceStreamingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_data_type: "Channel", # required, accepts Channel, ChannelMessage
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_data_type
+    #   The data type of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceStreamingConfiguration AWS API Documentation
+    #
+    class AppInstanceStreamingConfiguration < Struct.new(
+      :app_instance_data_type,
+      :resource_arn)
+      SENSITIVE = [:resource_arn]
+      include Aws::Structure
+    end
+
+    # The summary data for an app instance.
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The app instance ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the app instance summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the app instance summary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceSummary AWS API Documentation
+    #
+    class AppInstanceSummary < Struct.new(
+      :app_instance_arn,
+      :name,
+      :metadata)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # The app instance user.
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the app instance user.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the app instance user.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the app instance user was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the app instance user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time at which the app instance user was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceUser AWS API Documentation
+    #
+    class AppInstanceUser < Struct.new(
+      :app_instance_user_arn,
+      :name,
+      :created_timestamp,
+      :metadata,
+      :last_updated_timestamp)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # Lists the channels to which app instance users belong.
+    #
+    # @!attribute [rw] type
+    #   The type of channel summary,
+    #   @return [String]
+    #
+    # @!attribute [rw] read_marker_timestamp
+    #   The time at which a summary was last read.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceUserMembershipSummary AWS API Documentation
+    #
+    class AppInstanceUserMembershipSummary < Struct.new(
+      :type,
+      :read_marker_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The app instance user summary data .
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the app instance user.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name in an app instance user summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata in an app instance user summary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AppInstanceUserSummary AWS API Documentation
+    #
+    class AppInstanceUserSummary < Struct.new(
+      :app_instance_user_arn,
+      :name,
+      :metadata)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociatePhoneNumberWithUserRequest
     #   data as a hash:
     #
@@ -752,6 +977,410 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # Creates a channel.
+    #
+    # @!attribute [rw] name
+    #   The name of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy
+    #   The channel's privacy setting, `PUBLIC` or `HIDDEN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The administrator who created the channel.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the administrator created the channel.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_message_timestamp
+    #   The time at which a member sent the last message in a session.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time at which a channel was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Channel AWS API Documentation
+    #
+    class Channel < Struct.new(
+      :name,
+      :channel_arn,
+      :mode,
+      :privacy,
+      :metadata,
+      :created_by,
+      :created_timestamp,
+      :last_message_timestamp,
+      :last_updated_timestamp)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # Bans a user from a channel.
+    #
+    # @!attribute [rw] member
+    #   The member being banned from the channel.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel from which a member is being banned.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the ban was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The parameter of the action.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelBan AWS API Documentation
+    #
+    class ChannelBan < Struct.new(
+      :member,
+      :channel_arn,
+      :created_timestamp,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary data for the channel ban.
+    #
+    # @!attribute [rw] member
+    #   The member being banned from a channel.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelBanSummary AWS API Documentation
+    #
+    class ChannelBanSummary < Struct.new(
+      :member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a channel member.
+    #
+    # @!attribute [rw] invited_by
+    #   The identifier of the member who invited another member. Taken from
+    #   the message header.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] type
+    #   The membership type set for the channel member.
+    #   @return [String]
+    #
+    # @!attribute [rw] member
+    #   The data of the channel member.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the member's channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the channel membership was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time at which a channel membership was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelMembership AWS API Documentation
+    #
+    class ChannelMembership < Struct.new(
+      :invited_by,
+      :type,
+      :member,
+      :channel_arn,
+      :created_timestamp,
+      :last_updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the channel membership summary data for an app instance.
+    #
+    # @!attribute [rw] channel_summary
+    #   The summary data for a channel.
+    #   @return [Types::ChannelSummary]
+    #
+    # @!attribute [rw] app_instance_user_membership_summary
+    #   Returns the channel membership data for an app instance.
+    #   @return [Types::AppInstanceUserMembershipSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelMembershipForAppInstanceUserSummary AWS API Documentation
+    #
+    class ChannelMembershipForAppInstanceUserSummary < Struct.new(
+      :channel_summary,
+      :app_instance_user_membership_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary data of a channel membership.
+    #
+    # @!attribute [rw] member
+    #   A member's summary data.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelMembershipSummary AWS API Documentation
+    #
+    class ChannelMembershipSummary < Struct.new(
+      :member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a message in a channel.
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID of a message.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The message content.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The message metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The message type.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the message was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_edited_timestamp
+    #   The time at which a message was edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time at which a message was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sender
+    #   The message sender.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] redacted
+    #   Hides the content of a message. The message still exists on the back
+    #   end, but this action only returns metadata.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] persistence
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelMessage AWS API Documentation
+    #
+    class ChannelMessage < Struct.new(
+      :channel_arn,
+      :message_id,
+      :content,
+      :metadata,
+      :type,
+      :created_timestamp,
+      :last_edited_timestamp,
+      :last_updated_timestamp,
+      :sender,
+      :redacted,
+      :persistence)
+      SENSITIVE = [:content, :metadata]
+      include Aws::Structure
+    end
+
+    # A summary of the messages in a channel.
+    #
+    # @!attribute [rw] message_id
+    #   The ID of the message summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the message summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the message summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of message summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the message summary was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_edited_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] sender
+    #   The sender of the message summary.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] redacted
+    #   Redacts the content of a message summary.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelMessageSummary AWS API Documentation
+    #
+    class ChannelMessageSummary < Struct.new(
+      :message_id,
+      :content,
+      :metadata,
+      :type,
+      :created_timestamp,
+      :last_updated_timestamp,
+      :last_edited_timestamp,
+      :sender,
+      :redacted)
+      SENSITIVE = [:content, :metadata]
+      include Aws::Structure
+    end
+
+    # Returns the summary data for a moderated channel.
+    #
+    # @!attribute [rw] channel_summary
+    #   The summary data for a channel.
+    #   @return [Types::ChannelSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelModeratedByAppInstanceUserSummary AWS API Documentation
+    #
+    class ChannelModeratedByAppInstanceUserSummary < Struct.new(
+      :channel_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a moderator on a channel.
+    #
+    # @!attribute [rw] moderator
+    #   The moderator's data.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the moderator's channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the moderator was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The member who created the moderator.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelModerator AWS API Documentation
+    #
+    class ChannelModerator < Struct.new(
+      :moderator,
+      :channel_arn,
+      :created_timestamp,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary data of the moderators in a channel.
+    #
+    # @!attribute [rw] moderator
+    #   The data for a moderator.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelModeratorSummary AWS API Documentation
+    #
+    class ChannelModeratorSummary < Struct.new(
+      :moderator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The retention settings for a channel.
+    #
+    # @note When making an API call, you may pass ChannelRetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         retention_days: 1,
+    #       }
+    #
+    # @!attribute [rw] retention_days
+    #   The time in days to retain a channel.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelRetentionSettings AWS API Documentation
+    #
+    class ChannelRetentionSettings < Struct.new(
+      :retention_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary data for a channel.
+    #
+    # @!attribute [rw] name
+    #   The parameter of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The summary mode of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy
+    #   The privacy setting of the channel being summarized, `PUBLIC` or
+    #   `HIDDEN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the channel summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_message_timestamp
+    #   The time at which the last message in a channel was sent.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelSummary AWS API Documentation
+    #
+    class ChannelSummary < Struct.new(
+      :name,
+      :channel_arn,
+      :mode,
+      :privacy,
+      :metadata,
+      :last_message_timestamp)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
     # The request could not be processed because of conflict in the current
     # state of the resource.
     #
@@ -820,6 +1449,152 @@ module Aws::Chime
     #
     class CreateAccountResponse < Struct.new(
       :account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAppInstanceAdminRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_admin_arn: "ChimeArn", # required
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_admin_arn
+    #   The ARN of the administrator of the current app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceAdminRequest AWS API Documentation
+    #
+    class CreateAppInstanceAdminRequest < Struct.new(
+      :app_instance_admin_arn,
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_admin
+    #   The name and ARN of the admin for the app instance.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the of the admin for the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceAdminResponse AWS API Documentation
+    #
+    class CreateAppInstanceAdminResponse < Struct.new(
+      :app_instance_admin,
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAppInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyResourceName", # required
+    #         metadata: "Metadata",
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the app instance. Limited to a 1KB string in UTF-8.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The `ClientRequestToken` of the app instance.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceRequest AWS API Documentation
+    #
+    class CreateAppInstanceRequest < Struct.new(
+      :name,
+      :metadata,
+      :client_request_token)
+      SENSITIVE = [:name, :metadata, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_arn
+    #   The Amazon Resource Number (ARN) of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceResponse AWS API Documentation
+    #
+    class CreateAppInstanceResponse < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         app_instance_user_id: "UserId", # required
+    #         name: "UserName", # required
+    #         metadata: "Metadata",
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance request.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_user_id
+    #   The user ID of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The request's metadata. Limited to a 1KB string in UTF-8.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The token assigned to the user requesting an app instance.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceUserRequest AWS API Documentation
+    #
+    class CreateAppInstanceUserRequest < Struct.new(
+      :app_instance_arn,
+      :app_instance_user_id,
+      :name,
+      :metadata,
+      :client_request_token)
+      SENSITIVE = [:app_instance_user_id, :name, :metadata, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_user_arn
+    #   The user's ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceUserResponse AWS API Documentation
+    #
+    class CreateAppInstanceUserResponse < Struct.new(
+      :app_instance_user_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -913,6 +1688,9 @@ module Aws::Chime
     #   the attendee to an identity managed by a builder application. If you
     #   create an attendee with the same external user id, the service
     #   returns the existing record.
+    #
+    #   The Amazon Chime SDK external user ID. Links the attendee to an
+    #   identity managed by a builder application.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -979,6 +1757,222 @@ module Aws::Chime
     #
     class CreateBotResponse < Struct.new(
       :bot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateChannelBanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the ban request.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the member being banned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelBanRequest AWS API Documentation
+    #
+    class CreateChannelBanRequest < Struct.new(
+      :channel_arn,
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the response to the ban request.
+    #   @return [String]
+    #
+    # @!attribute [rw] member
+    #   The `ChannelArn` and `BannedIdentity` of the member in the ban
+    #   response.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelBanResponse AWS API Documentation
+    #
+    class CreateChannelBanResponse < Struct.new(
+      :channel_arn,
+      :member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateChannelMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #         type: "DEFAULT", # required, accepts DEFAULT, HIDDEN
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel to which you're adding users.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the member you want to add to the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default
+    #   members are always returned as part of `ListChannelMemberships`.
+    #   Hidden members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members
+    #   are not returned. This is only supported by moderators.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelMembershipRequest AWS API Documentation
+    #
+    class CreateChannelMembershipRequest < Struct.new(
+      :channel_arn,
+      :member_arn,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] member
+    #   The ARN and metadata of the member being added.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelMembershipResponse AWS API Documentation
+    #
+    class CreateChannelMembershipResponse < Struct.new(
+      :channel_arn,
+      :member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateChannelModeratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         channel_moderator_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_moderator_arn
+    #   The ARN of the moderator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelModeratorRequest AWS API Documentation
+    #
+    class CreateChannelModeratorRequest < Struct.new(
+      :channel_arn,
+      :channel_moderator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_moderator
+    #   The ARNs of the channel and the moderator.
+    #   @return [Types::Identity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelModeratorResponse AWS API Documentation
+    #
+    class CreateChannelModeratorResponse < Struct.new(
+      :channel_arn,
+      :channel_moderator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         name: "NonEmptyResourceName", # required
+    #         mode: "UNRESTRICTED", # accepts UNRESTRICTED, RESTRICTED
+    #         privacy: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #         metadata: "Metadata",
+    #         client_request_token: "ClientRequestToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the channel request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The channel mode: `UNRESTRICTED` or `RESTRICTED`. Administrators,
+    #   moderators, and channel members can add themselves and other members
+    #   to unrestricted channels. Only administrators and moderators can add
+    #   members to restricted channels.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy
+    #   The channel's privacy level: `PUBLIC` or `PRIVATE`. Private
+    #   channels aren't discoverable by users outside the channel. Public
+    #   channels are discoverable by anyone in the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the creation request. Limited to 1KB and UTF-8.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The client token for the request. An `Idempotency` token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelRequest AWS API Documentation
+    #
+    class CreateChannelRequest < Struct.new(
+      :app_instance_arn,
+      :name,
+      :mode,
+      :privacy,
+      :metadata,
+      :client_request_token,
+      :tags)
+      SENSITIVE = [:name, :metadata, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateChannelResponse AWS API Documentation
+    #
+    class CreateChannelResponse < Struct.new(
+      :channel_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1840,6 +2834,88 @@ module Aws::Chime
     #
     class DeleteAccountResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteAppInstanceAdminRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_admin_arn: "ChimeArn", # required
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_admin_arn
+    #   The ARN of the app instance's administrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstanceAdminRequest AWS API Documentation
+    #
+    class DeleteAppInstanceAdminRequest < Struct.new(
+      :app_instance_admin_arn,
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAppInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstanceRequest AWS API Documentation
+    #
+    class DeleteAppInstanceRequest < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAppInstanceStreamingConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the streaming configurations being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstanceStreamingConfigurationsRequest AWS API Documentation
+    #
+    class DeleteAppInstanceStreamingConfigurationsRequest < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the user request being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAppInstanceUserRequest AWS API Documentation
+    #
+    class DeleteAppInstanceUserRequest < Struct.new(
+      :app_instance_user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAttendeeRequest
     #   data as a hash:
     #
@@ -1861,6 +2937,125 @@ module Aws::Chime
     class DeleteAttendeeRequest < Struct.new(
       :meeting_id,
       :attendee_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteChannelBanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel from which the app instance user was banned.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the app instance user that you want to reinstate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelBanRequest AWS API Documentation
+    #
+    class DeleteChannelBanRequest < Struct.new(
+      :channel_arn,
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteChannelMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel from which you want to remove the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the member that you're removing from the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelMembershipRequest AWS API Documentation
+    #
+    class DeleteChannelMembershipRequest < Struct.new(
+      :channel_arn,
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteChannelMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         message_id: "MessageId", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID of the message being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelMessageRequest AWS API Documentation
+    #
+    class DeleteChannelMessageRequest < Struct.new(
+      :channel_arn,
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteChannelModeratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         channel_moderator_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_moderator_arn
+    #   The ARN of the moderator being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelModeratorRequest AWS API Documentation
+    #
+    class DeleteChannelModeratorRequest < Struct.new(
+      :channel_arn,
+      :channel_moderator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteChannelRequest AWS API Documentation
+    #
+    class DeleteChannelRequest < Struct.new(
+      :channel_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2206,6 +3401,324 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAppInstanceAdminRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_admin_arn: "ChimeArn", # required
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_admin_arn
+    #   The ARN of the app instance administrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceAdminRequest AWS API Documentation
+    #
+    class DescribeAppInstanceAdminRequest < Struct.new(
+      :app_instance_admin_arn,
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_admin
+    #   The ARN and name of the app instance user, the ARN of the app
+    #   instance, and the created and last-updated timestamps. All
+    #   timestamps use epoch milliseconds.
+    #   @return [Types::AppInstanceAdmin]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceAdminResponse AWS API Documentation
+    #
+    class DescribeAppInstanceAdminResponse < Struct.new(
+      :app_instance_admin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAppInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceRequest AWS API Documentation
+    #
+    class DescribeAppInstanceRequest < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance
+    #   The ARN, metadata, created and last-updated timestamps, and the name
+    #   of the app instance. All timestamps use epoch milliseconds.
+    #   @return [Types::AppInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceResponse AWS API Documentation
+    #
+    class DescribeAppInstanceResponse < Struct.new(
+      :app_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the app instance user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceUserRequest AWS API Documentation
+    #
+    class DescribeAppInstanceUserRequest < Struct.new(
+      :app_instance_user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_user
+    #   The name of the app instance user.
+    #   @return [Types::AppInstanceUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeAppInstanceUserResponse AWS API Documentation
+    #
+    class DescribeAppInstanceUserResponse < Struct.new(
+      :app_instance_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeChannelBanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel from which the user is banned.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the member being banned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelBanRequest AWS API Documentation
+    #
+    class DescribeChannelBanRequest < Struct.new(
+      :channel_arn,
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_ban
+    #   The the details of the ban.
+    #   @return [Types::ChannelBan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelBanResponse AWS API Documentation
+    #
+    class DescribeChannelBanResponse < Struct.new(
+      :channel_ban)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeChannelMembershipForAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         app_instance_user_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel to which the user belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the user in a channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelMembershipForAppInstanceUserRequest AWS API Documentation
+    #
+    class DescribeChannelMembershipForAppInstanceUserRequest < Struct.new(
+      :channel_arn,
+      :app_instance_user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_membership
+    #   The channel to which a user belongs.
+    #   @return [Types::ChannelMembershipForAppInstanceUserSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelMembershipForAppInstanceUserResponse AWS API Documentation
+    #
+    class DescribeChannelMembershipForAppInstanceUserResponse < Struct.new(
+      :channel_membership)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeChannelMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelMembershipRequest AWS API Documentation
+    #
+    class DescribeChannelMembershipRequest < Struct.new(
+      :channel_arn,
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_membership
+    #   The details of the membership.
+    #   @return [Types::ChannelMembership]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelMembershipResponse AWS API Documentation
+    #
+    class DescribeChannelMembershipResponse < Struct.new(
+      :channel_membership)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeChannelModeratedByAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         app_instance_user_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the moderated channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the app instance user in the moderated channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelModeratedByAppInstanceUserRequest AWS API Documentation
+    #
+    class DescribeChannelModeratedByAppInstanceUserRequest < Struct.new(
+      :channel_arn,
+      :app_instance_user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel
+    #   The moderated channel.
+    #   @return [Types::ChannelModeratedByAppInstanceUserSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelModeratedByAppInstanceUserResponse AWS API Documentation
+    #
+    class DescribeChannelModeratedByAppInstanceUserResponse < Struct.new(
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeChannelModeratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         channel_moderator_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_moderator_arn
+    #   The ARN of the channel moderator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelModeratorRequest AWS API Documentation
+    #
+    class DescribeChannelModeratorRequest < Struct.new(
+      :channel_arn,
+      :channel_moderator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_moderator
+    #   The details of the channel moderator.
+    #   @return [Types::ChannelModerator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelModeratorResponse AWS API Documentation
+    #
+    class DescribeChannelModeratorResponse < Struct.new(
+      :channel_moderator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelRequest AWS API Documentation
+    #
+    class DescribeChannelRequest < Struct.new(
+      :channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel
+    #   The channel details.
+    #   @return [Types::Channel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelResponse AWS API Documentation
+    #
+    class DescribeChannelResponse < Struct.new(
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociatePhoneNumberFromUserRequest
     #   data as a hash:
     #
@@ -2396,9 +3909,7 @@ module Aws::Chime
       include Aws::Structure
     end
 
-    # The client is permanently forbidden from making the request. For
-    # example, when a user tries to create an account from an unsupported
-    # Region.
+    # The client is permanently forbidden from making the request.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -2506,6 +4017,74 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAppInstanceRetentionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAppInstanceRetentionSettingsRequest AWS API Documentation
+    #
+    class GetAppInstanceRetentionSettingsRequest < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_retention_settings
+    #   The retention settings for the app instance.
+    #   @return [Types::AppInstanceRetentionSettings]
+    #
+    # @!attribute [rw] initiate_deletion_timestamp
+    #   The timestamp representing the time at which the specified items are
+    #   retained, in Epoch Seconds.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAppInstanceRetentionSettingsResponse AWS API Documentation
+    #
+    class GetAppInstanceRetentionSettingsResponse < Struct.new(
+      :app_instance_retention_settings,
+      :initiate_deletion_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAppInstanceStreamingConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAppInstanceStreamingConfigurationsRequest AWS API Documentation
+    #
+    class GetAppInstanceStreamingConfigurationsRequest < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_streaming_configurations
+    #   The streaming settings.
+    #   @return [Array<Types::AppInstanceStreamingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAppInstanceStreamingConfigurationsResponse AWS API Documentation
+    #
+    class GetAppInstanceStreamingConfigurationsResponse < Struct.new(
+      :app_instance_streaming_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAttendeeRequest
     #   data as a hash:
     #
@@ -2576,6 +4155,43 @@ module Aws::Chime
     #
     class GetBotResponse < Struct.new(
       :bot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetChannelMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         message_id: "MessageId", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID of the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetChannelMessageRequest AWS API Documentation
+    #
+    class GetChannelMessageRequest < Struct.new(
+      :channel_arn,
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_message
+    #   The details of and content in the message.
+    #   @return [Types::ChannelMessage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetChannelMessageResponse AWS API Documentation
+    #
+    class GetChannelMessageResponse < Struct.new(
+      :channel_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2661,6 +4277,24 @@ module Aws::Chime
     #
     class GetMeetingResponse < Struct.new(
       :meeting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMessagingSessionEndpointRequest AWS API Documentation
+    #
+    class GetMessagingSessionEndpointRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] endpoint
+    #   The endpoint returned in the response.
+    #   @return [Types::MessagingSessionEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMessagingSessionEndpointResponse AWS API Documentation
+    #
+    class GetMessagingSessionEndpointResponse < Struct.new(
+      :endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3301,6 +4935,25 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The ARN and name of a user.
+    #
+    # @!attribute [rw] arn
+    #   The ARN in an Identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name in an Identity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Identity AWS API Documentation
+    #
+    class Identity < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
     # Invitation object returned after emailing users to invite them to join
     # the Amazon Chime `Team` account.
     #
@@ -3426,6 +5079,160 @@ module Aws::Chime
       :accounts,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAppInstanceAdminsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of administrators that you want to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API requests until the number of
+    #   administrators is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstanceAdminsRequest AWS API Documentation
+    #
+    class ListAppInstanceAdminsRequest < Struct.new(
+      :app_instance_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_admins
+    #   The information for each administrator.
+    #   @return [Array<Types::AppInstanceAdminSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API requests until the number of
+    #   administrators is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstanceAdminsResponse AWS API Documentation
+    #
+    class ListAppInstanceAdminsResponse < Struct.new(
+      :app_instance_arn,
+      :app_instance_admins,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAppInstanceUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of requests that you want returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested users are
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstanceUsersRequest AWS API Documentation
+    #
+    class ListAppInstanceUsersRequest < Struct.new(
+      :app_instance_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_users
+    #   The information for each of the requested app instance users.
+    #   @return [Array<Types::AppInstanceUserSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested users are
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstanceUsersResponse AWS API Documentation
+    #
+    class ListAppInstanceUsersResponse < Struct.new(
+      :app_instance_arn,
+      :app_instance_users,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAppInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of app instances that you want to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API requests until you reach the
+    #   maximum number of app instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstancesRequest AWS API Documentation
+    #
+    class ListAppInstancesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instances
+    #   The information for each app instance.
+    #   @return [Array<Types::AppInstanceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API requests until the maximum number
+    #   of app instances is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAppInstancesResponse AWS API Documentation
+    #
+    class ListAppInstancesResponse < Struct.new(
+      :app_instances,
+      :next_token)
+      SENSITIVE = [:next_token]
       include Aws::Structure
     end
 
@@ -3560,6 +5367,414 @@ module Aws::Chime
       :bots,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelBansRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of bans that you want returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested bans are
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelBansRequest AWS API Documentation
+    #
+    class ListChannelBansRequest < Struct.new(
+      :channel_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested bans are
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_bans
+    #   The information for each requested ban.
+    #   @return [Array<Types::ChannelBanSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelBansResponse AWS API Documentation
+    #
+    class ListChannelBansResponse < Struct.new(
+      :channel_arn,
+      :next_token,
+      :channel_bans)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelMembershipsForAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "ChimeArn",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the app instance users
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of users that you want returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API requests until the number of
+    #   channel memberships is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMembershipsForAppInstanceUserRequest AWS API Documentation
+    #
+    class ListChannelMembershipsForAppInstanceUserRequest < Struct.new(
+      :app_instance_user_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_memberships
+    #   The token passed by previous API calls until all requested users are
+    #   returned.
+    #   @return [Array<Types::ChannelMembershipForAppInstanceUserSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested users are
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMembershipsForAppInstanceUserResponse AWS API Documentation
+    #
+    class ListChannelMembershipsForAppInstanceUserResponse < Struct.new(
+      :channel_memberships,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelMembershipsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         type: "DEFAULT", # accepts DEFAULT, HIDDEN
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The maximum number of channel memberships that you want returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default
+    #   members are always returned as part of `ListChannelMemberships`.
+    #   Hidden members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members
+    #   are not returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of channel memberships that you want returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested channel
+    #   memberships are returned..
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMembershipsRequest AWS API Documentation
+    #
+    class ListChannelMembershipsRequest < Struct.new(
+      :channel_arn,
+      :type,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_memberships
+    #   The information for the requested channel memberships.
+    #   @return [Array<Types::ChannelMembershipSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested channel
+    #   memberships are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMembershipsResponse AWS API Documentation
+    #
+    class ListChannelMembershipsResponse < Struct.new(
+      :channel_arn,
+      :channel_memberships,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelMessagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         not_before: Time.now,
+    #         not_after: Time.now,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which you want messages sorted. Default is Descending,
+    #   based on time created.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_before
+    #   The initial or starting time stamp for your requested messages.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_after
+    #   The final or ending time stamp for your requested messages.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of messages that you want returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested messages
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMessagesRequest AWS API Documentation
+    #
+    class ListChannelMessagesRequest < Struct.new(
+      :channel_arn,
+      :sort_order,
+      :not_before,
+      :not_after,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel containing the requested messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested messages
+    #   are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_messages
+    #   The information about and content of each requested message.
+    #   @return [Array<Types::ChannelMessageSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelMessagesResponse AWS API Documentation
+    #
+    class ListChannelMessagesResponse < Struct.new(
+      :channel_arn,
+      :next_token,
+      :channel_messages)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelModeratorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of moderators that you want returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested
+    #   moderators are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelModeratorsRequest AWS API Documentation
+    #
+    class ListChannelModeratorsRequest < Struct.new(
+      :channel_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested
+    #   moderators are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_moderators
+    #   The information about and names of each moderator.
+    #   @return [Array<Types::ChannelModeratorSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelModeratorsResponse AWS API Documentation
+    #
+    class ListChannelModeratorsResponse < Struct.new(
+      :channel_arn,
+      :next_token,
+      :channel_moderators)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelsModeratedByAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "ChimeArn",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the user in the moderated channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of channels in the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API requests until the number of
+    #   channels moderated by the user is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelsModeratedByAppInstanceUserRequest AWS API Documentation
+    #
+    class ListChannelsModeratedByAppInstanceUserRequest < Struct.new(
+      :app_instance_user_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channels
+    #   The moderated channels in the request.
+    #   @return [Array<Types::ChannelModeratedByAppInstanceUserSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API requests until the number of
+    #   channels moderated by the user is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelsModeratedByAppInstanceUserResponse AWS API Documentation
+    #
+    class ListChannelsModeratedByAppInstanceUserResponse < Struct.new(
+      :channels,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         privacy: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy
+    #   The privacy setting. `PUBLIC` retrieves all the public channels.
+    #   `PRIVATE` retrieves private channels. Only an app instance
+    #   administrator can retrieve private channels.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of channels that you want to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested channels
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelsRequest AWS API Documentation
+    #
+    class ListChannelsRequest < Struct.new(
+      :app_instance_arn,
+      :privacy,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channels
+    #   The information about each channel.
+    #   @return [Array<Types::ChannelSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from previous API requests until the number of
+    #   channels is reached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListChannelsResponse AWS API Documentation
+    #
+    class ListChannelsResponse < Struct.new(
+      :channels,
+      :next_token)
+      SENSITIVE = [:next_token]
       include Aws::Structure
     end
 
@@ -4452,6 +6667,20 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The endpoint of a meeting session.
+    #
+    # @!attribute [rw] url
+    #   The URL of a meeting session endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MessagingSessionEndpoint AWS API Documentation
+    #
+    class MessagingSessionEndpoint < Struct.new(
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more of the resources in the request does not exist in the
     # system.
     #
@@ -4913,6 +7142,94 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutAppInstanceRetentionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         app_instance_retention_settings: { # required
+    #           channel_retention_settings: {
+    #             retention_days: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_retention_settings
+    #   The time in days to retain data. Data type: number.
+    #   @return [Types::AppInstanceRetentionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutAppInstanceRetentionSettingsRequest AWS API Documentation
+    #
+    class PutAppInstanceRetentionSettingsRequest < Struct.new(
+      :app_instance_arn,
+      :app_instance_retention_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_retention_settings
+    #   The time in days to retain data. Data type: number.
+    #   @return [Types::AppInstanceRetentionSettings]
+    #
+    # @!attribute [rw] initiate_deletion_timestamp
+    #   The time at which the API deletes data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutAppInstanceRetentionSettingsResponse AWS API Documentation
+    #
+    class PutAppInstanceRetentionSettingsResponse < Struct.new(
+      :app_instance_retention_settings,
+      :initiate_deletion_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAppInstanceStreamingConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         app_instance_streaming_configurations: [ # required
+    #           {
+    #             app_instance_data_type: "Channel", # required, accepts Channel, ChannelMessage
+    #             resource_arn: "Arn", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_instance_streaming_configurations
+    #   The streaming configurations set for an app instance.
+    #   @return [Array<Types::AppInstanceStreamingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutAppInstanceStreamingConfigurationsRequest AWS API Documentation
+    #
+    class PutAppInstanceStreamingConfigurationsRequest < Struct.new(
+      :app_instance_arn,
+      :app_instance_streaming_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_streaming_configurations
+    #   The streaming configurations of an app instance.
+    #   @return [Array<Types::AppInstanceStreamingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutAppInstanceStreamingConfigurationsResponse AWS API Documentation
+    #
+    class PutAppInstanceStreamingConfigurationsResponse < Struct.new(
+      :app_instance_streaming_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEventsConfigurationRequest
     #   data as a hash:
     #
@@ -5358,6 +7675,50 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RedactChannelMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         message_id: "MessageId", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel containing the messages that you want to
+    #   redact.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID of the message being redacted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactChannelMessageRequest AWS API Documentation
+    #
+    class RedactChannelMessageRequest < Struct.new(
+      :channel_arn,
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel containing the messages that you want to
+    #   redact.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID of the message being redacted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactChannelMessageResponse AWS API Documentation
+    #
+    class RedactChannelMessageResponse < Struct.new(
+      :channel_arn,
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RedactConversationMessageRequest
     #   data as a hash:
     #
@@ -5743,6 +8104,76 @@ module Aws::Chime
     #
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :e164_phone_numbers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SendChannelMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         content: "NonEmptyContent", # required
+    #         type: "STANDARD", # required, accepts STANDARD, CONTROL
+    #         persistence: "PERSISTENT", # required, accepts PERSISTENT, NON_PERSISTENT
+    #         metadata: "Metadata",
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of message, `STANDARD` or `CONTROL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] persistence
+    #   Boolean that controls whether the message is persisted on the back
+    #   end. Required.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The optional metadata for each message.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The `Idempotency` token for each client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SendChannelMessageRequest AWS API Documentation
+    #
+    class SendChannelMessageRequest < Struct.new(
+      :channel_arn,
+      :content,
+      :type,
+      :persistence,
+      :metadata,
+      :client_request_token)
+      SENSITIVE = [:content, :metadata, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID string assigned to each message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SendChannelMessageResponse AWS API Documentation
+    #
+    class SendChannelMessageResponse < Struct.new(
+      :channel_arn,
+      :message_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6486,6 +8917,92 @@ module Aws::Chime
     #
     class UpdateAccountSettingsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateAppInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         name: "NonEmptyResourceName", # required
+    #         metadata: "Metadata",
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you want to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata that you want to change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAppInstanceRequest AWS API Documentation
+    #
+    class UpdateAppInstanceRequest < Struct.new(
+      :app_instance_arn,
+      :name,
+      :metadata)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAppInstanceResponse AWS API Documentation
+    #
+    class UpdateAppInstanceResponse < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAppInstanceUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "ChimeArn", # required
+    #         name: "UserName", # required
+    #         metadata: "Metadata",
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the app instance user.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the app instance user.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the app instance user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAppInstanceUserRequest AWS API Documentation
+    #
+    class UpdateAppInstanceUserRequest < Struct.new(
+      :app_instance_user_arn,
+      :name,
+      :metadata)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the app instance user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAppInstanceUserResponse AWS API Documentation
+    #
+    class UpdateAppInstanceUserResponse < Struct.new(
+      :app_instance_user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateBotRequest
     #   data as a hash:
     #
@@ -6525,6 +9042,140 @@ module Aws::Chime
     #
     class UpdateBotResponse < Struct.new(
       :bot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateChannelMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         message_id: "MessageId", # required
+    #         content: "Content",
+    #         metadata: "Metadata",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID string of the message being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the message being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the message being updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelMessageRequest AWS API Documentation
+    #
+    class UpdateChannelMessageRequest < Struct.new(
+      :channel_arn,
+      :message_id,
+      :content,
+      :metadata)
+      SENSITIVE = [:content, :metadata]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID string of the message being updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelMessageResponse AWS API Documentation
+    #
+    class UpdateChannelMessageResponse < Struct.new(
+      :channel_arn,
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateChannelReadMarkerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelReadMarkerRequest AWS API Documentation
+    #
+    class UpdateChannelReadMarkerRequest < Struct.new(
+      :channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelReadMarkerResponse AWS API Documentation
+    #
+    class UpdateChannelReadMarkerResponse < Struct.new(
+      :channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         name: "NonEmptyResourceName", # required
+    #         mode: "UNRESTRICTED", # required, accepts UNRESTRICTED, RESTRICTED
+    #         metadata: "Metadata",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelRequest AWS API Documentation
+    #
+    class UpdateChannelRequest < Struct.new(
+      :channel_arn,
+      :name,
+      :mode,
+      :metadata)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateChannelResponse AWS API Documentation
+    #
+    class UpdateChannelResponse < Struct.new(
+      :channel_arn)
       SENSITIVE = []
       include Aws::Structure
     end

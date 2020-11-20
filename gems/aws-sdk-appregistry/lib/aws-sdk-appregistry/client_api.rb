@@ -304,7 +304,7 @@ module Aws::AppRegistry
         "serviceId" => "Service Catalog AppRegistry",
         "signatureVersion" => "v4",
         "signingName" => "servicecatalog",
-        "uid" => "AWS242AppRegistry",
+        "uid" => "AWS242AppRegistry-2020-06-24",
       }
 
       api.add_operation(:associate_attribute_group, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-11-20)
+------------------
+
+* Feature - The Amazon Macie API now provides S3 bucket metadata that indicates whether any one-time or recurring classification jobs are configured to analyze data in a bucket.
+
 1.17.0 (2020-11-17)
 ------------------
 

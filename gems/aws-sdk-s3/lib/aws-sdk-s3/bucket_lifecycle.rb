@@ -228,6 +228,8 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     # @option options [Types::LifecycleConfiguration] :lifecycle_configuration
     # @option options [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by

@@ -43,6 +43,9 @@ module Aws::CodeGuruReviewer
     #           },
     #         },
     #         client_request_token: "ClientRequestToken",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] repository
@@ -58,11 +61,25 @@ module Aws::CodeGuruReviewer
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/AssociateRepositoryRequest AWS API Documentation
     #
     class AssociateRepositoryRequest < Struct.new(
       :repository,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -71,10 +88,24 @@ module Aws::CodeGuruReviewer
     #   Information about the repository association.
     #   @return [Types::RepositoryAssociation]
     #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/AssociateRepositoryResponse AWS API Documentation
     #
     class AssociateRepositoryResponse < Struct.new(
-      :repository_association)
+      :repository_association,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -107,7 +138,8 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about a code review.
+    # Information about a code review. A code review belongs to the
+    # associated repository that contains the reviewed code.
     #
     # @!attribute [rw] name
     #   The name of the code review.
@@ -176,6 +208,17 @@ module Aws::CodeGuruReviewer
     #   The type of the source code for the code review.
     #   @return [Types::SourceCodeType]
     #
+    # @!attribute [rw] association_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   that contains the reviewed source code. You can retrieve associated
+    #   repository ARNs by calling [ `ListRepositoryAssociations` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+    #   @return [String]
+    #
     # @!attribute [rw] metrics
     #   The statistics from the code review.
     #   @return [Types::Metrics]
@@ -195,6 +238,7 @@ module Aws::CodeGuruReviewer
       :type,
       :pull_request_id,
       :source_code_type,
+      :association_arn,
       :metrics)
       SENSITIVE = []
       include Aws::Structure
@@ -313,7 +357,7 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] repository_analysis
     #   A code review that analyzes all code under a specified branch in an
     #   associated respository. The assocated repository is specified using
-    #   its ARN in [ `CreateCodeReview` ][1]
+    #   its ARN in [ `CreateCodeReview` ][1].
     #
     #
     #
@@ -372,7 +416,7 @@ module Aws::CodeGuruReviewer
     #
     #       {
     #         name: "CodeReviewName", # required
-    #         repository_association_arn: "Arn", # required
+    #         repository_association_arn: "AssociationArn", # required
     #         type: { # required
     #           repository_analysis: { # required
     #             repository_head: { # required
@@ -384,13 +428,14 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the code review. Each code review of the same code
-    #   review type must have a unique name in your AWS account.
+    #   The name of the code review. The name of each code review in your
+    #   AWS account must be unique.
     #   @return [String]
     #
     # @!attribute [rw] repository_association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
     #
     #   A code review can only be created on an associated repository. This
     #   is the ARN of the associated repository.
@@ -398,11 +443,13 @@ module Aws::CodeGuruReviewer
     #
     #
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of code review to create. This is specified using a [
-    #   `CodeReviewType` ][1] object.
+    #   `CodeReviewType` ][1] object. You can create a code review only of
+    #   type `RepositoryAnalysis`.
     #
     #
     #
@@ -430,7 +477,8 @@ module Aws::CodeGuruReviewer
     end
 
     # @!attribute [rw] code_review
-    #   Information about a code review.
+    #   Information about a code review. A code review belongs to the
+    #   associated repository that contains the reviewed code.
     #   @return [Types::CodeReview]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CreateCodeReviewResponse AWS API Documentation
@@ -538,16 +586,18 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         association_arn: "Arn", # required
+    #         association_arn: "AssociationArn", # required
     #       }
     #
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DescribeRepositoryAssociationRequest AWS API Documentation
@@ -562,10 +612,24 @@ module Aws::CodeGuruReviewer
     #   Information about the repository association.
     #   @return [Types::RepositoryAssociation]
     #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DescribeRepositoryAssociationResponse AWS API Documentation
     #
     class DescribeRepositoryAssociationResponse < Struct.new(
-      :repository_association)
+      :repository_association,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -574,16 +638,18 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         association_arn: "Arn", # required
+    #         association_arn: "AssociationArn", # required
     #       }
     #
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DisassociateRepositoryRequest AWS API Documentation
@@ -598,10 +664,24 @@ module Aws::CodeGuruReviewer
     #   Information about the disassociated repository.
     #   @return [Types::RepositoryAssociation]
     #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DisassociateRepositoryResponse AWS API Documentation
     #
     class DisassociateRepositoryResponse < Struct.new(
-      :repository_association)
+      :repository_association,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -848,7 +928,7 @@ module Aws::CodeGuruReviewer
     #
     #       {
     #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
-    #         states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating
+    #         states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating, Disassociated
     #         names: ["Name"],
     #         owners: ["Owner"],
     #         max_results: 1,
@@ -886,6 +966,18 @@ module Aws::CodeGuruReviewer
     #
     #   * **Disassociating**\: CodeGuru Reviewer is removing the
     #     repository's pull request notifications and source code access.
+    #
+    #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated
+    #     the repository. You can create a new association with this
+    #     repository if you want to review source code in it later. You can
+    #     control access to code reviews created in an associated repository
+    #     with tags after it has been disassociated. For more information,
+    #     see [Using tags to control access to associated repositories][1]
+    #     in the *Amazon CodeGuru Reviewer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] names
@@ -957,6 +1049,53 @@ module Aws::CodeGuruReviewer
     class ListRepositoryAssociationsResponse < Struct.new(
       :repository_association_summaries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AssociationArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1354,6 +1493,18 @@ module Aws::CodeGuruReviewer
     #
     #   * **Disassociating**\: CodeGuru Reviewer is removing the
     #     repository's pull request notifications and source code access.
+    #
+    #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated
+    #     the repository. You can create a new association with this
+    #     repository if you want to review source code in it later. You can
+    #     control access to code reviews created in an associated repository
+    #     with tags after it has been disassociated. For more information,
+    #     see [Using tags to control access to associated repositories][1]
+    #     in the *Amazon CodeGuru Reviewer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html
     #   @return [String]
     #
     # @!attribute [rw] state_reason
@@ -1398,11 +1549,13 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #   @return [String]
     #
     # @!attribute [rw] connection_arn
@@ -1468,6 +1621,18 @@ module Aws::CodeGuruReviewer
     #
     #   * **Disassociating**\: CodeGuru Reviewer is removing the
     #     repository's pull request notifications and source code access.
+    #
+    #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated
+    #     the repository. You can create a new association with this
+    #     repository if you want to review source code in it later. You can
+    #     control access to code reviews created in an associated repository
+    #     with tags after it has been disassociated. For more information,
+    #     see [Using tags to control access to associated repositories][1]
+    #     in the *Amazon CodeGuru Reviewer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RepositoryAssociationSummary AWS API Documentation
@@ -1556,6 +1721,53 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AssociationArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs used to tag an associated repository. A
+    #   tag is a custom attribute label with two parts:
+    #
+    #   * A *tag key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag keys are case sensitive.
+    #
+    #   * An optional field known as a *tag value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     value is the same as using an empty string. Like tag keys, tag
+    #     values are case sensitive.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Information about a third-party source repository connected to
     # CodeGuru Reviewer.
     #
@@ -1612,6 +1824,43 @@ module Aws::CodeGuruReviewer
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AssociationArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling [
+    #   `ListRepositoryAssociations` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
+    #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of the keys for each tag you want to remove from an
+    #   associated repository.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # The input fails to satisfy the specified constraints.
     #

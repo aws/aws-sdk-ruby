@@ -349,7 +349,7 @@ module Aws::AppMesh
     #         tags: [
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         virtual_gateway_name: "ResourceName", # required
@@ -447,7 +447,7 @@ module Aws::AppMesh
     #         tags: [
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -688,7 +688,7 @@ module Aws::AppMesh
     #         tags: [
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         virtual_router_name: "ResourceName", # required
@@ -849,7 +849,7 @@ module Aws::AppMesh
     #         tags: [
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         virtual_gateway_name: "ResourceName", # required
@@ -1095,7 +1095,7 @@ module Aws::AppMesh
     #         tags: [
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         virtual_node_name: "ResourceName", # required
@@ -1195,7 +1195,7 @@ module Aws::AppMesh
     #         tags: [
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         virtual_router_name: "ResourceName", # required
@@ -1296,7 +1296,7 @@ module Aws::AppMesh
     #         tags: [
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         virtual_service_name: "ServiceName", # required
@@ -5238,7 +5238,7 @@ module Aws::AppMesh
     #
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       }
     #
     # @!attribute [rw] key
@@ -5273,7 +5273,7 @@ module Aws::AppMesh
     #         tags: [ # required
     #           {
     #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }

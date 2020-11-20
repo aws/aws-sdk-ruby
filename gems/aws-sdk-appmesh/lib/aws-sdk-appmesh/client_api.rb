@@ -945,7 +945,7 @@ module Aws::AppMesh
     TagList.member = Shapes::ShapeRef.new(shape: TagRef)
 
     TagRef.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
-    TagRef.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    TagRef.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
     TagRef.struct_class = Types::TagRef
 
     TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))

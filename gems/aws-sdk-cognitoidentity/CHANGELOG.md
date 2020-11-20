@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-11-20)
+------------------
+
+* Feature - Added SDK pagination support for ListIdentityPools
+
 1.27.0 (2020-09-30)
 ------------------
 

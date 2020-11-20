@@ -519,6 +519,12 @@ module Aws::Macie2
     # @!attribute [rw] classifiable_size_in_bytes
     #   @return [Integer]
     #
+    # @!attribute [rw] job_details
+    #   Specifies whether any one-time or recurring classification jobs are
+    #   configured to analyze data in an S3 bucket, and, if so, the details
+    #   of the job that ran most recently.
+    #   @return [Types::JobDetails]
+    #
     # @!attribute [rw] last_updated
     #   @return [Time]
     #
@@ -585,6 +591,7 @@ module Aws::Macie2
       :bucket_name,
       :classifiable_object_count,
       :classifiable_size_in_bytes,
+      :job_details,
       :last_updated,
       :object_count,
       :object_count_by_encryption_type,
@@ -1760,7 +1767,8 @@ module Aws::Macie2
     #   Provides information about when a classification job was paused and
     #   when it will expire and be cancelled if it isn't resumed. This
     #   object is present only if a job's current status (jobStatus) is
-    #   USER\_PAUSED.
+    #   USER\_PAUSED. The information in this object applies only to a job
+    #   that was paused while it had a status of RUNNING.
     #   @return [Types::UserPausedDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJobResponse AWS API Documentation
@@ -3060,6 +3068,33 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies whether any one-time or recurring classification jobs are
+    # configured to analyze data in an S3 bucket, and, if so, the details of
+    # the job that ran most recently.
+    #
+    # @!attribute [rw] is_defined_in_job
+    #   @return [String]
+    #
+    # @!attribute [rw] is_monitored_by_job
+    #   @return [String]
+    #
+    # @!attribute [rw] last_job_id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_job_run_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobDetails AWS API Documentation
+    #
+    class JobDetails < Struct.new(
+      :is_defined_in_job,
+      :is_monitored_by_job,
+      :last_job_id,
+      :last_job_run_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the recurrence pattern for running a classification job.
     #
     # @note When making an API call, you may pass JobScheduleFrequency
@@ -3222,7 +3257,8 @@ module Aws::Macie2
     #   Provides information about when a classification job was paused and
     #   when it will expire and be cancelled if it isn't resumed. This
     #   object is present only if a job's current status (jobStatus) is
-    #   USER\_PAUSED.
+    #   USER\_PAUSED. The information in this object applies only to a job
+    #   that was paused while it had a status of RUNNING.
     #   @return [Types::UserPausedDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobSummary AWS API Documentation
@@ -4180,8 +4216,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies which S3 buckets contain the objects that a classification
-    # job analyzes.
+    # Specifies which AWS account owns the S3 buckets that a classification
+    # job analyzes, and the buckets to analyze for the account.
     #
     # @note When making an API call, you may pass S3BucketDefinitionForJob
     #   data as a hash:
@@ -5376,7 +5412,8 @@ module Aws::Macie2
     # Provides information about when a classification job was paused and
     # when it will expire and be cancelled if it isn't resumed. This object
     # is present only if a job's current status (jobStatus) is
-    # USER\_PAUSED.
+    # USER\_PAUSED. The information in this object applies only to a job
+    # that was paused while it had a status of RUNNING.
     #
     # @!attribute [rw] job_expires_at
     #   @return [Time]

@@ -921,6 +921,10 @@ module Aws::Macie2
     #   resp.buckets[0].bucket_name #=> String
     #   resp.buckets[0].classifiable_object_count #=> Integer
     #   resp.buckets[0].classifiable_size_in_bytes #=> Integer
+    #   resp.buckets[0].job_details.is_defined_in_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.buckets[0].job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.buckets[0].job_details.last_job_id #=> String
+    #   resp.buckets[0].job_details.last_job_run_time #=> Time
     #   resp.buckets[0].last_updated #=> Time
     #   resp.buckets[0].object_count #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.customer_managed #=> Integer
@@ -2540,7 +2544,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
