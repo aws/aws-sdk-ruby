@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2020-11-23)
+------------------
+
+* Feature - This release enables users to identify different file types in the over-the-air update (OTA) functionality using fileType parameter for CreateOTAUpdate API
+
 1.62.0 (2020-11-12)
 ------------------
 

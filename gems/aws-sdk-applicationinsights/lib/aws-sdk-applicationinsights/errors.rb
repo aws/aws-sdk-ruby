@@ -27,6 +27,7 @@ module Aws::ApplicationInsights
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {BadRequestException}
   # * {InternalServerException}
   # * {ResourceInUseException}
@@ -40,6 +41,21 @@ module Aws::ApplicationInsights
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ApplicationInsights::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class BadRequestException < ServiceError
 

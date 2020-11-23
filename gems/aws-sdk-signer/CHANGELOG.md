@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-11-23)
+------------------
+
+* Feature - AWS Signer is launching code-signing for AWS Lambda. Now customers can cryptographically sign Lambda code to ensure trust, integrity, and functionality.
+
 1.26.0 (2020-09-30)
 ------------------
 

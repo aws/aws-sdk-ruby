@@ -664,6 +664,60 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Creates a code signing configuration. A [code signing
+    # configuration][1] defines a list of allowed signing profiles and
+    # defines the code-signing validation policy (action to be taken if
+    # deployment validation checks fail).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html
+    #
+    # @option params [String] :description
+    #   Descriptive name for this code signing configuration.
+    #
+    # @option params [required, Types::AllowedPublishers] :allowed_publishers
+    #   Signing profiles for this code signing configuration.
+    #
+    # @option params [Types::CodeSigningPolicies] :code_signing_policies
+    #   The code signing policies define the actions to take if the validation
+    #   checks fail.
+    #
+    # @return [Types::CreateCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCodeSigningConfigResponse#code_signing_config #code_signing_config} => Types::CodeSigningConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_code_signing_config({
+    #     description: "Description",
+    #     allowed_publishers: { # required
+    #       signing_profile_version_arns: ["Arn"], # required
+    #     },
+    #     code_signing_policies: {
+    #       untrusted_artifact_on_deployment: "Warn", # accepts Warn, Enforce
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config.code_signing_config_id #=> String
+    #   resp.code_signing_config.code_signing_config_arn #=> String
+    #   resp.code_signing_config.description #=> String
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_config.code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_config.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateCodeSigningConfig AWS API Documentation
+    #
+    # @overload create_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def create_code_signing_config(params = {}, options = {})
+      req = build_request(:create_code_signing_config, params)
+      req.send_request(options)
+    end
+
     # Creates a mapping between an event source and an AWS Lambda function.
     # Lambda reads items from the event source and triggers the function.
     #
@@ -948,6 +1002,13 @@ module Aws::Lambda
     # include tags (TagResource) and per-function concurrency limits
     # (PutFunctionConcurrency).
     #
+    # To enable code signing for this function, specify the ARN of a
+    # code-signing configuration. When a user attempts to deploy a code
+    # package with UpdateFunctionCode, Lambda checks that the code package
+    # has a valid signature from a trusted publisher. The code-signing
+    # configuration includes set set of signing profiles, which define the
+    # trusted publishers for this function.
+    #
     # If another account or an AWS service invokes your function, use
     # AddPermission to grant permission by creating a resource-based IAM
     # policy. You can grant permissions at the function level, on a version,
@@ -1070,6 +1131,12 @@ module Aws::Lambda
     # @option params [Array<Types::FileSystemConfig>] :file_system_configs
     #   Connection settings for an Amazon EFS file system.
     #
+    # @option params [String] :code_signing_config_arn
+    #   To enable code signing for this function, specify the ARN of a
+    #   code-signing configuration. A code-signing configuration includes set
+    #   set of signing profiles, which define the trusted publishers for this
+    #   function.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -1099,6 +1166,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To create a function
@@ -1206,6 +1275,7 @@ module Aws::Lambda
     #         local_mount_path: "LocalMountPath", # required
     #       },
     #     ],
+    #     code_signing_config_arn: "CodeSigningConfigArn",
     #   })
     #
     # @example Response structure
@@ -1239,6 +1309,8 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
     #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -1248,6 +1320,8 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1307,6 +1381,29 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_alias(params = {}, options = {})
       req = build_request(:delete_alias, params)
+      req.send_request(options)
+    end
+
+    # Deletes the code signing configuration. You can delete the code
+    # signing configuration only if no function is using it.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteCodeSigningConfig AWS API Documentation
+    #
+    # @overload delete_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def delete_code_signing_config(params = {}, options = {})
+      req = build_request(:delete_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -1462,6 +1559,40 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_function(params = {}, options = {})
       req = build_request(:delete_function, params)
+      req.send_request(options)
+    end
+
+    # Removes the code signing configuration from the function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function_code_signing_config({
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionCodeSigningConfig AWS API Documentation
+    #
+    # @overload delete_function_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def delete_function_code_signing_config(params = {}, options = {})
+      req = build_request(:delete_function_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -1786,6 +1917,40 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns information about the specified code signing configuration.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @return [Types::GetCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCodeSigningConfigResponse#code_signing_config #code_signing_config} => Types::CodeSigningConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config.code_signing_config_id #=> String
+    #   resp.code_signing_config.code_signing_config_arn #=> String
+    #   resp.code_signing_config.description #=> String
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_config.code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_config.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetCodeSigningConfig AWS API Documentation
+    #
+    # @overload get_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def get_code_signing_config(params = {}, options = {})
+      req = build_request(:get_code_signing_config, params)
+      req.send_request(options)
+    end
+
     # Returns details about an event source mapping. You can get the
     # identifier of a mapping from the output of ListEventSourceMappings.
     #
@@ -2002,6 +2167,8 @@ module Aws::Lambda
     #   resp.configuration.layers #=> Array
     #   resp.configuration.layers[0].arn #=> String
     #   resp.configuration.layers[0].code_size #=> Integer
+    #   resp.configuration.layers[0].signing_profile_version_arn #=> String
+    #   resp.configuration.layers[0].signing_job_arn #=> String
     #   resp.configuration.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.configuration.state_reason #=> String
     #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -2011,6 +2178,8 @@ module Aws::Lambda
     #   resp.configuration.file_system_configs #=> Array
     #   resp.configuration.file_system_configs[0].arn #=> String
     #   resp.configuration.file_system_configs[0].local_mount_path #=> String
+    #   resp.configuration.signing_profile_version_arn #=> String
+    #   resp.configuration.signing_job_arn #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.tags #=> Hash
@@ -2028,6 +2197,48 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_function(params = {}, options = {})
       req = build_request(:get_function, params)
+      req.send_request(options)
+    end
+
+    # Returns the code signing configuration for the specified function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @return [Types::GetFunctionCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionCodeSigningConfigResponse#code_signing_config_arn #code_signing_config_arn} => String
+    #   * {Types::GetFunctionCodeSigningConfigResponse#function_name #function_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_code_signing_config({
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config_arn #=> String
+    #   resp.function_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionCodeSigningConfig AWS API Documentation
+    #
+    # @overload get_function_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def get_function_code_signing_config(params = {}, options = {})
+      req = build_request(:get_function_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -2144,6 +2355,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To get a Lambda function's event source mapping
@@ -2222,6 +2435,8 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
     #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -2231,6 +2446,8 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2397,6 +2614,8 @@ module Aws::Lambda
     #   resp.content.location #=> String
     #   resp.content.code_sha_256 #=> String
     #   resp.content.code_size #=> Integer
+    #   resp.content.signing_profile_version_arn #=> String
+    #   resp.content.signing_job_arn #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -2473,6 +2692,8 @@ module Aws::Lambda
     #   resp.content.location #=> String
     #   resp.content.code_sha_256 #=> String
     #   resp.content.code_size #=> Integer
+    #   resp.content.signing_profile_version_arn #=> String
+    #   resp.content.signing_job_arn #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -3023,6 +3244,57 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns a list of [code signing configurations][1] for the specified
+    # function. A request returns up to 10,000 configurations per call. You
+    # can use the `MaxItems` parameter to return fewer configurations per
+    # call.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   Maximum number of items to return.
+    #
+    # @return [Types::ListCodeSigningConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeSigningConfigsResponse#next_marker #next_marker} => String
+    #   * {Types::ListCodeSigningConfigsResponse#code_signing_configs #code_signing_configs} => Array&lt;Types::CodeSigningConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_signing_configs({
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.code_signing_configs #=> Array
+    #   resp.code_signing_configs[0].code_signing_config_id #=> String
+    #   resp.code_signing_configs[0].code_signing_config_arn #=> String
+    #   resp.code_signing_configs[0].description #=> String
+    #   resp.code_signing_configs[0].allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_configs[0].allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_configs[0].code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_configs[0].last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListCodeSigningConfigs AWS API Documentation
+    #
+    # @overload list_code_signing_configs(params = {})
+    # @param [Hash] params ({})
+    def list_code_signing_configs(params = {}, options = {})
+      req = build_request(:list_code_signing_configs, params)
+      req.send_request(options)
+    end
+
     # Lists event source mappings. Specify an `EventSourceArn` to only show
     # event source mappings for a single event source.
     #
@@ -3362,6 +3634,8 @@ module Aws::Lambda
     #   resp.functions[0].layers #=> Array
     #   resp.functions[0].layers[0].arn #=> String
     #   resp.functions[0].layers[0].code_size #=> Integer
+    #   resp.functions[0].layers[0].signing_profile_version_arn #=> String
+    #   resp.functions[0].layers[0].signing_job_arn #=> String
     #   resp.functions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.functions[0].state_reason #=> String
     #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -3371,6 +3645,8 @@ module Aws::Lambda
     #   resp.functions[0].file_system_configs #=> Array
     #   resp.functions[0].file_system_configs[0].arn #=> String
     #   resp.functions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.functions[0].signing_profile_version_arn #=> String
+    #   resp.functions[0].signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3378,6 +3654,50 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def list_functions(params = {}, options = {})
       req = build_request(:list_functions, params)
+      req.send_request(options)
+    end
+
+    # List the functions that use the specified code signing configuration.
+    # You can use this method prior to deleting a code signing
+    # configuration, to verify that no functions are using it.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   Maximum number of items to return.
+    #
+    # @return [Types::ListFunctionsByCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionsByCodeSigningConfigResponse#next_marker #next_marker} => String
+    #   * {Types::ListFunctionsByCodeSigningConfigResponse#function_arns #function_arns} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_functions_by_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.function_arns #=> Array
+    #   resp.function_arns[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsByCodeSigningConfig AWS API Documentation
+    #
+    # @overload list_functions_by_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def list_functions_by_code_signing_config(params = {}, options = {})
+      req = build_request(:list_functions_by_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -3843,6 +4163,8 @@ module Aws::Lambda
     #   resp.versions[0].layers #=> Array
     #   resp.versions[0].layers[0].arn #=> String
     #   resp.versions[0].layers[0].code_size #=> Integer
+    #   resp.versions[0].layers[0].signing_profile_version_arn #=> String
+    #   resp.versions[0].layers[0].signing_job_arn #=> String
     #   resp.versions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.versions[0].state_reason #=> String
     #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -3852,6 +4174,8 @@ module Aws::Lambda
     #   resp.versions[0].file_system_configs #=> Array
     #   resp.versions[0].file_system_configs[0].arn #=> String
     #   resp.versions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.versions[0].signing_profile_version_arn #=> String
+    #   resp.versions[0].signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -3974,6 +4298,8 @@ module Aws::Lambda
     #   resp.content.location #=> String
     #   resp.content.code_sha_256 #=> String
     #   resp.content.code_size #=> Integer
+    #   resp.content.signing_profile_version_arn #=> String
+    #   resp.content.signing_job_arn #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -4068,6 +4394,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To publish a version of a Lambda function
@@ -4149,6 +4477,8 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
     #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -4158,6 +4488,8 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4165,6 +4497,54 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def publish_version(params = {}, options = {})
       req = build_request(:publish_version, params)
+      req.send_request(options)
+    end
+
+    # Update the code signing configuration for the function. Changes to the
+    # code signing configuration take effect the next time a user tries to
+    # deploy a code package to the function.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @return [Types::PutFunctionCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFunctionCodeSigningConfigResponse#code_signing_config_arn #code_signing_config_arn} => String
+    #   * {Types::PutFunctionCodeSigningConfigResponse#function_name #function_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_function_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config_arn #=> String
+    #   resp.function_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionCodeSigningConfig AWS API Documentation
+    #
+    # @overload put_function_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def put_function_code_signing_config(params = {}, options = {})
+      req = build_request(:put_function_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -4778,6 +5158,58 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Update the code signing configuration. Changes to the code signing
+    # configuration take effect the next time a user tries to deploy a code
+    # package to the function.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @option params [String] :description
+    #   Descriptive name for this code signing configuration.
+    #
+    # @option params [Types::AllowedPublishers] :allowed_publishers
+    #   Signing profiles for this code signing configuration.
+    #
+    # @option params [Types::CodeSigningPolicies] :code_signing_policies
+    #   The code signing policy.
+    #
+    # @return [Types::UpdateCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCodeSigningConfigResponse#code_signing_config #code_signing_config} => Types::CodeSigningConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #     description: "Description",
+    #     allowed_publishers: {
+    #       signing_profile_version_arns: ["Arn"], # required
+    #     },
+    #     code_signing_policies: {
+    #       untrusted_artifact_on_deployment: "Warn", # accepts Warn, Enforce
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config.code_signing_config_id #=> String
+    #   resp.code_signing_config.code_signing_config_arn #=> String
+    #   resp.code_signing_config.description #=> String
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_config.code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_config.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateCodeSigningConfig AWS API Documentation
+    #
+    # @overload update_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def update_code_signing_config(params = {}, options = {})
+      req = build_request(:update_code_signing_config, params)
+      req.send_request(options)
+    end
+
     # Updates an event source mapping. You can change the function that AWS
     # Lambda invokes, or pause invocation and resume later from the same
     # location.
@@ -4987,10 +5419,16 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Updates a Lambda function's code.
+    # Updates a Lambda function's code. If code signing is enabled for the
+    # function, the code package must be signed by a trusted publisher. For
+    # more information, see [Configuring code signing][1].
     #
     # The function's code is locked when you publish a version. You can't
     # modify the code of a published version, only the unpublished version.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -5065,6 +5503,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To update a Lambda function's code
@@ -5142,6 +5582,8 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
     #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -5151,6 +5593,8 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -5310,6 +5754,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To update a Lambda function's configuration
@@ -5409,6 +5855,8 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
     #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
@@ -5418,6 +5866,8 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5562,7 +6012,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

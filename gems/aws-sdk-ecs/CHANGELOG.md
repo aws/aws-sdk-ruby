@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2020-11-23)
+------------------
+
+* Feature - This release adds support for updating capacity providers, specifying custom instance warmup periods for capacity providers, and using deployment circuit breaker for your ECS Services.
+
 1.71.0 (2020-11-09)
 ------------------
 

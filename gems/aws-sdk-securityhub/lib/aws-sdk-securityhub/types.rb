@@ -64,7 +64,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId",
+    #         account_id: "AccountId", # required
     #         email: "NonEmptyString",
     #       }
     #
@@ -105,6 +105,29 @@ module Aws::SecurityHub
       :action_target_arn,
       :name,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a Security Hub administrator account designated by an
+    # organization management account.
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account identifier of the Security Hub administrator
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Security Hub administrator account.
+    #   Indicates whether the account is currently enabled as a Security Hub
+    #   administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AdminAccount AWS API Documentation
+    #
+    class AdminAccount < Struct.new(
+      :account_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15207,9 +15230,9 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_details: [
+    #         account_details: [ # required
     #           {
-    #             account_id: "AccountId",
+    #             account_id: "AccountId", # required
     #             email: "NonEmptyString",
     #           },
     #         ],
@@ -15217,8 +15240,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] account_details
     #   The list of accounts to associate with the Security Hub master
-    #   account. For each account, the list includes the account ID and the
-    #   email address.
+    #   account. For each account, the list includes the account ID and
+    #   optionally the email address.
     #   @return [Array<Types::AccountDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateMembersRequest AWS API Documentation
@@ -15470,7 +15493,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -15601,6 +15624,34 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   If set to `true`, then Security Hub is enabled for new accounts. If
+    #   set to false, then new accounts are not added automatically.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] member_account_limit_reached
+    #   Whether the maximum number of allowed member accounts are already
+    #   associated with the Security Hub administrator account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationResponse < Struct.new(
+      :auto_enable,
+      :member_account_limit_reached)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProductsRequest
     #   data as a hash:
     #
@@ -15660,7 +15711,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a
-    #   supported standard.
+    #   supported standard. To get the subscription ARNs of the standards
+    #   you have enabled, use the ` GetEnabledStandards ` operation.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -15775,6 +15827,30 @@ module Aws::SecurityHub
     #
     class DisableImportFindingsForProductResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS account identifier of the Security Hub administrator
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubRequest AWS API Documentation
@@ -15799,7 +15875,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -15850,6 +15926,30 @@ module Aws::SecurityHub
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS account identifier of the account to designate as the
+    #   Security Hub administrator account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass EnableSecurityHubRequest
     #   data as a hash:
@@ -16858,8 +16958,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # AWS Security Hub isn't enabled for the account used to make this
-    # request.
+    # There is an issue with the account used to make the request. Either
+    # Security Hub is not enabled for the account, or the account does not
+    # have permission to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -16929,7 +17030,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -17034,8 +17135,8 @@ module Aws::SecurityHub
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS account limits. The error code describes the
-    # limit exceeded.
+    # beyond the current AWS account or throttling limits. The error code
+    # describes the limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -17165,7 +17266,7 @@ module Aws::SecurityHub
     #
     #   If `OnlyAssociated` is set to `TRUE`, the response includes member
     #   accounts whose relationship status with the master is set to
-    #   `ENABLED` or `DISABLED`.
+    #   `ENABLED`.
     #
     #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
@@ -17206,6 +17307,52 @@ module Aws::SecurityHub
     #
     class ListMembersResponse < Struct.new(
       :members,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOrganizationAdminAccountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `ListOrganizationAdminAccounts` operation, set the value of this
+    #   parameter to `NULL`. For subsequent calls to the operation, to
+    #   continue listing data, set the value of this parameter to the value
+    #   returned from the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsRequest AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_accounts
+    #   The list of Security Hub administrator accounts.
+    #   @return [Array<Types::AdminAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsResponse AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsResponse < Struct.new(
+      :admin_accounts,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -17401,8 +17548,9 @@ module Aws::SecurityHub
     #     account. The member account has not yet responded to the
     #     invitation.
     #
-    #   * `ASSOCIATED` - Indicates that the member account accepted the
-    #     invitation.
+    #   * `ENABLED` - Indicates that the member account is currently active.
+    #     For manually invited member accounts, indicates that the member
+    #     account accepted the invitation.
     #
     #   * `REMOVED` - Indicates that the master account disassociated the
     #     member account.
@@ -22983,6 +23131,36 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateInsightResponse AWS API Documentation
     #
     class UpdateInsightResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   By default, this is `false`, and new accounts are not added
+    #   automatically.
+    #
+    #   To automatically enable Security Hub for new accounts, set this to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationRequest AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationRequest < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationResponse AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateSecurityHubConfigurationRequest
     #   data as a hash:

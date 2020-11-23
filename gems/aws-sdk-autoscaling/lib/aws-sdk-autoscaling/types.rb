@@ -211,7 +211,13 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] target_group_arns
     #   The Amazon Resource Names (ARN) of the target groups. You can
-    #   specify up to 10 target groups.
+    #   specify up to 10 target groups. To get the ARN of a target group,
+    #   use the Elastic Load Balancing [DescribeTargetGroups][1] API
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsType AWS API Documentation
@@ -918,10 +924,6 @@ module Aws::AutoScaling
     #   [Auto Scaling groups with multiple instance types and purchase
     #   options][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: You must specify either a launch template
-    #   (`LaunchTemplate` or `MixedInstancesPolicy`) or a launch
-    #   configuration (`LaunchConfigurationName` or `InstanceId`).
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
@@ -993,8 +995,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
-    #   group. For Application Load Balancers and Network Load Balancers,
-    #   specify `TargetGroupARNs` instead.
+    #   group. For Application Load Balancers, Network Load Balancers, and
+    #   Gateway Load Balancers, specify the `TargetGroupARNs` property
+    #   instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_group_arns
@@ -1475,7 +1478,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
     #   @return [String]
     #
     # @!attribute [rw] metadata_options
@@ -3248,30 +3251,29 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] spot_allocation_strategy
     #   Indicates how to allocate instances across Spot Instance pools. If
-    #   the allocation strategy is `lowest-price`, the Auto Scaling group
+    #   the allocation strategy is `capacity-optimized` (recommended), the
+    #   Auto Scaling group launches instances using Spot pools that are
+    #   optimally chosen based on the available Spot capacity. If the
+    #   allocation strategy is `lowest-price`, the Auto Scaling group
     #   launches instances using the Spot pools with the lowest price, and
     #   evenly allocates your instances across the number of Spot pools that
-    #   you specify. If the allocation strategy is `capacity-optimized`, the
-    #   Auto Scaling group launches instances using Spot pools that are
-    #   optimally chosen based on the available Spot capacity. Defaults to
-    #   `lowest-price` if not specified.
+    #   you specify. Defaults to `lowest-price` if not specified.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_pools
     #   The number of Spot Instance pools across which to allocate your Spot
     #   Instances. The Spot pools are determined from the different instance
-    #   types in the overrides. Defaults to 2 if not specified. Valid only
-    #   when the Spot allocation strategy is `lowest-price`.
-    #
-    #   Valid Range: Minimum value of 1. Maximum value of 20.
+    #   types in the overrides. Valid only when the Spot allocation strategy
+    #   is `lowest-price`. Value must be in the range of 1 to 20. Defaults
+    #   to 2 if not specified.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_max_price
     #   The maximum price per unit hour that you are willing to pay for a
-    #   Spot Instance. If you leave the value of this parameter blank (which
-    #   is the default), the maximum Spot price is set at the On-Demand
-    #   price. To remove a value that you previously set, include the
-    #   parameter but leave the value blank.
+    #   Spot Instance. If you leave the value at its default (empty), Amazon
+    #   EC2 Auto Scaling uses the On-Demand price as the maximum Spot price.
+    #   To remove a value that you previously set, include the property but
+    #   specify an empty string ("") for the value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstancesDistribution AWS API Documentation
@@ -3691,9 +3693,8 @@ module Aws::AutoScaling
     #   with a `WeightedCapacity` of 5 units, the instance is provisioned,
     #   and the desired capacity is exceeded by 3 units. For more
     #   information, see [Instance weighting for Amazon EC2 Auto Scaling][1]
-    #   in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #   Valid Range: Minimum value of 1. Maximum value of 999.
+    #   in the *Amazon EC2 Auto Scaling User Guide*. Value must be in the
+    #   range of 1 to 999.
     #
     #
     #
@@ -3750,8 +3751,10 @@ module Aws::AutoScaling
     #   The ID of the launch template. To get the template ID, use the
     #   Amazon EC2 [DescribeLaunchTemplates][1] API operation. New launch
     #   templates can be created using the Amazon EC2
-    #   [CreateLaunchTemplate][2] API. You must specify either a
-    #   `LaunchTemplateId` or a `LaunchTemplateName`.
+    #   [CreateLaunchTemplate][2] API.
+    #
+    #   Conditional: You must specify either a `LaunchTemplateId` or a
+    #   `LaunchTemplateName`.
     #
     #
     #
@@ -3763,8 +3766,10 @@ module Aws::AutoScaling
     #   The name of the launch template. To get the template name, use the
     #   Amazon EC2 [DescribeLaunchTemplates][1] API operation. New launch
     #   templates can be created using the Amazon EC2
-    #   [CreateLaunchTemplate][2] API. You must specify either a
-    #   `LaunchTemplateId` or a `LaunchTemplateName`.
+    #   [CreateLaunchTemplate][2] API.
+    #
+    #   Conditional: You must specify either a `LaunchTemplateId` or a
+    #   `LaunchTemplateName`.
     #
     #
     #

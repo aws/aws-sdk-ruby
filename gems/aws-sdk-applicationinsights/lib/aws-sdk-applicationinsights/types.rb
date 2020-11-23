@@ -10,6 +10,19 @@
 module Aws::ApplicationInsights
   module Types
 
+    # User does not have permissions to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a standalone resource or similarly grouped resources that
     # the application is made up of.
     #
@@ -17,9 +30,18 @@ module Aws::ApplicationInsights
     #   The name of the component.
     #   @return [String]
     #
+    # @!attribute [rw] component_remarks
+    #   If logging is supported for the resource type, indicates whether the
+    #   component has configured logs to be monitored.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The resource type. Supported resource types include EC2 instances,
     #   Auto Scaling group, Classic ELB, Application ELB, and SQS Queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_type
+    #   The operating system of the component.
     #   @return [String]
     #
     # @!attribute [rw] tier
@@ -30,13 +52,20 @@ module Aws::ApplicationInsights
     #   Indicates whether the application component is monitored.
     #   @return [Boolean]
     #
+    # @!attribute [rw] detected_workload
+    #   Workloads detected in the application component.
+    #   @return [Hash<String,Hash<String,String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationComponent AWS API Documentation
     #
     class ApplicationComponent < Struct.new(
       :component_name,
+      :component_remarks,
       :resource_type,
+      :os_type,
       :tier,
-      :monitor)
+      :monitor,
+      :detected_workload)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -217,7 +246,7 @@ module Aws::ApplicationInsights
     #
     #       {
     #         resource_group_name: "ResourceGroupName", # required
-    #         component_name: "ComponentName", # required
+    #         component_name: "CustomComponentName", # required
     #         resource_list: ["ResourceARN"], # required
     #       }
     #
@@ -271,11 +300,22 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] pattern
-    #   The log pattern.
+    #   The log pattern. The pattern must be DFA compatible. Patterns that
+    #   utilize forward lookahead or backreference constructions are not
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] rank
-    #   Rank of the log pattern.
+    #   Rank of the log pattern. Must be a value between `1` and
+    #   `1,000,000`. The patterns are sorted by rank, so we recommend that
+    #   you set your highest priority patterns with the lowest rank. A
+    #   pattern of rank `1` will be the first to get matched to a log line.
+    #   A pattern of rank `1,000,000` will be last to get matched. When you
+    #   configure custom log patterns from the console, a `Low` severity
+    #   pattern translates to a `750,000` rank. A `Medium` severity pattern
+    #   translates to a `500,000` rank. And a `High` severity pattern
+    #   translates to a `250,000` rank. Rank values less than `1` or greater
+    #   than `1,000,000` are reserved for AWS-provided patterns.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateLogPatternRequest AWS API Documentation
@@ -335,7 +375,7 @@ module Aws::ApplicationInsights
     #
     #       {
     #         resource_group_name: "ResourceGroupName", # required
-    #         component_name: "ComponentName", # required
+    #         component_name: "CustomComponentName", # required
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -431,7 +471,7 @@ module Aws::ApplicationInsights
     #       {
     #         resource_group_name: "ResourceGroupName", # required
     #         component_name: "ComponentName", # required
-    #         tier: "DEFAULT", # required, accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
+    #         tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -1119,26 +1159,37 @@ module Aws::ApplicationInsights
     # `LogPatternSet`.
     #
     # @!attribute [rw] pattern_set_name
-    #   The name of the log pattern. A log pattern name can contains at many
+    #   The name of the log pattern. A log pattern name can contain as many
     #   as 30 characters, and it cannot be empty. The characters can be
-    #   Unicode letters, digits or one of the following symbols: period,
+    #   Unicode letters, digits, or one of the following symbols: period,
     #   dash, underscore.
     #   @return [String]
     #
     # @!attribute [rw] pattern_name
-    #   The name of the log pattern. A log pattern name can contains at many
+    #   The name of the log pattern. A log pattern name can contain as many
     #   as 50 characters, and it cannot be empty. The characters can be
-    #   Unicode letters, digits or one of the following symbols: period,
+    #   Unicode letters, digits, or one of the following symbols: period,
     #   dash, underscore.
     #   @return [String]
     #
     # @!attribute [rw] pattern
     #   A regular expression that defines the log pattern. A log pattern can
-    #   contains at many as 50 characters, and it cannot be empty.
+    #   contain as many as 50 characters, and it cannot be empty. The
+    #   pattern must be DFA compatible. Patterns that utilize forward
+    #   lookahead or backreference constructions are not supported.
     #   @return [String]
     #
     # @!attribute [rw] rank
-    #   Rank of the log pattern.
+    #   Rank of the log pattern. Must be a value between `1` and
+    #   `1,000,000`. The patterns are sorted by rank, so we recommend that
+    #   you set your highest priority patterns with the lowest rank. A
+    #   pattern of rank `1` will be the first to get matched to a log line.
+    #   A pattern of rank `1,000,000` will be last to get matched. When you
+    #   configure custom log patterns from the console, a `Low` severity
+    #   pattern translates to a `750,000` rank. A `Medium` severity pattern
+    #   translates to a `500,000` rank. And a `High` severity pattern
+    #   translates to a `250,000` rank. Rank values less than `1` or greater
+    #   than `1,000,000` are reserved for AWS-provided patterns.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/LogPattern AWS API Documentation
@@ -1270,6 +1321,54 @@ module Aws::ApplicationInsights
     #   The state of the instance, such as `STOPPING` or `TERMINATING`.
     #   @return [String]
     #
+    # @!attribute [rw] rds_event_categories
+    #   The category of an RDS event.
+    #   @return [String]
+    #
+    # @!attribute [rw] rds_event_message
+    #   The message of an RDS event.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_event_name
+    #   The name of the S3 CloudWatch Event-based observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] states_execution_arn
+    #   The Amazon Resource Name (ARN) of the step function execution-based
+    #   observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] states_arn
+    #   The Amazon Resource Name (ARN) of the step function-based
+    #   observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] states_status
+    #   The status of the step function-related observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] states_input
+    #   The input to the step function-based observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_event
+    #   The type of EBS CloudWatch event, such as `createVolume`,
+    #   `deleteVolume` or `attachVolume`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_result
+    #   The result of an EBS CloudWatch event, such as `failed` or
+    #   `succeeded`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_cause
+    #   The cause of an EBS CloudWatch event.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_request_id
+    #   The request ID of an EBS CloudWatch event.
+    #   @return [String]
+    #
     # @!attribute [rw] x_ray_fault_percent
     #   The X-Ray request fault percentage for this node.
     #   @return [Integer]
@@ -1328,6 +1427,17 @@ module Aws::ApplicationInsights
       :code_deploy_application,
       :code_deploy_instance_group_id,
       :ec2_state,
+      :rds_event_categories,
+      :rds_event_message,
+      :s3_event_name,
+      :states_execution_arn,
+      :states_arn,
+      :states_status,
+      :states_input,
+      :ebs_event,
+      :ebs_result,
+      :ebs_cause,
+      :ebs_request_id,
       :x_ray_fault_percent,
       :x_ray_throttle_percent,
       :x_ray_error_percent,
@@ -1666,7 +1776,7 @@ module Aws::ApplicationInsights
     #         resource_group_name: "ResourceGroupName", # required
     #         component_name: "ComponentName", # required
     #         monitor: false,
-    #         tier: "DEFAULT", # accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
+    #         tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE
     #         component_configuration: "ComponentConfiguration",
     #       }
     #
@@ -1724,8 +1834,8 @@ module Aws::ApplicationInsights
     #
     #       {
     #         resource_group_name: "ResourceGroupName", # required
-    #         component_name: "ComponentName", # required
-    #         new_component_name: "NewComponentName",
+    #         component_name: "CustomComponentName", # required
+    #         new_component_name: "CustomComponentName",
     #         resource_list: ["ResourceARN"],
     #       }
     #
@@ -1784,11 +1894,22 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] pattern
-    #   The log pattern.
+    #   The log pattern. The pattern must be DFA compatible. Patterns that
+    #   utilize forward lookahead or backreference constructions are not
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] rank
-    #   Rank of the log pattern.
+    #   Rank of the log pattern. Must be a value between `1` and
+    #   `1,000,000`. The patterns are sorted by rank, so we recommend that
+    #   you set your highest priority patterns with the lowest rank. A
+    #   pattern of rank `1` will be the first to get matched to a log line.
+    #   A pattern of rank `1,000,000` will be last to get matched. When you
+    #   configure custom log patterns from the console, a `Low` severity
+    #   pattern translates to a `750,000` rank. A `Medium` severity pattern
+    #   translates to a `500,000` rank. And a `High` severity pattern
+    #   translates to a `250,000` rank. Rank values less than `1` or greater
+    #   than `1,000,000` are reserved for AWS-provided patterns.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateLogPatternRequest AWS API Documentation

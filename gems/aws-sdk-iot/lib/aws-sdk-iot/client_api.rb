@@ -460,6 +460,7 @@ module Aws::IoT
     FileId = Shapes::IntegerShape.new(name: 'FileId')
     FileLocation = Shapes::StructureShape.new(name: 'FileLocation')
     FileName = Shapes::StringShape.new(name: 'FileName')
+    FileType = Shapes::IntegerShape.new(name: 'FileType')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
     FindingIds = Shapes::ListShape.new(name: 'FindingIds')
     FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
@@ -3250,6 +3251,7 @@ module Aws::IoT
     NotConfiguredException.struct_class = Types::NotConfiguredException
 
     OTAUpdateFile.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
+    OTAUpdateFile.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
     OTAUpdateFile.add_member(:file_version, Shapes::ShapeRef.new(shape: OTAUpdateFileVersion, location_name: "fileVersion"))
     OTAUpdateFile.add_member(:file_location, Shapes::ShapeRef.new(shape: FileLocation, location_name: "fileLocation"))
     OTAUpdateFile.add_member(:code_signing, Shapes::ShapeRef.new(shape: CodeSigning, location_name: "codeSigning"))

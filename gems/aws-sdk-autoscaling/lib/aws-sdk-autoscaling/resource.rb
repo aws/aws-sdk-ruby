@@ -156,10 +156,6 @@ module Aws::AutoScaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: You must specify either a launch template
-    #   (`LaunchTemplate` or `MixedInstancesPolicy`) or a launch configuration
-    #   (`LaunchConfigurationName` or `InstanceId`).
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
@@ -216,8 +212,9 @@ module Aws::AutoScaling
     #   parameter is required to launch instances into EC2-Classic.
     # @option options [Array<String>] :load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
-    #   group. For Application Load Balancers and Network Load Balancers,
-    #   specify `TargetGroupARNs` instead.
+    #   group. For Application Load Balancers, Network Load Balancers, and
+    #   Gateway Load Balancers, specify the `TargetGroupARNs` property
+    #   instead.
     # @option options [Array<String>] :target_group_arns
     #   The Amazon Resource Names (ARN) of the target groups to associate with
     #   the Auto Scaling group. Instances are registered as targets in a
@@ -608,7 +605,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
     # @option options [Types::InstanceMetadataOptions] :metadata_options
     #   The metadata options for the instances. For more information, see
     #   [Configuring the Instance Metadata Options][1] in the *Amazon EC2 Auto

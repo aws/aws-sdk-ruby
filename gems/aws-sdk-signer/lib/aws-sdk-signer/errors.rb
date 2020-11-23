@@ -29,10 +29,13 @@ module Aws::Signer
   # ## Error Classes
   # * {AccessDeniedException}
   # * {BadRequestException}
+  # * {ConflictException}
   # * {InternalServiceErrorException}
   # * {NotFoundException}
   # * {ResourceNotFoundException}
+  # * {ServiceLimitExceededException}
   # * {ThrottlingException}
+  # * {TooManyRequestsException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -54,6 +57,11 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
     end
 
     class BadRequestException < ServiceError
@@ -68,6 +76,31 @@ module Aws::Signer
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Signer::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
       end
     end
 
@@ -84,6 +117,11 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
     end
 
     class NotFoundException < ServiceError
@@ -98,6 +136,11 @@ module Aws::Signer
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
       end
     end
 
@@ -114,6 +157,31 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+    end
+
+    class ServiceLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Signer::Types::ServiceLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
     end
 
     class ThrottlingException < ServiceError
@@ -129,6 +197,31 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+    end
+
+    class TooManyRequestsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Signer::Types::TooManyRequestsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
     end
 
     class ValidationException < ServiceError
@@ -143,6 +236,11 @@ module Aws::Signer
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
       end
     end
 

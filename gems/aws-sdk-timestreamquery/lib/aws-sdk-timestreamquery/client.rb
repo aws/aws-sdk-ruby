@@ -455,6 +455,7 @@ module Aws::TimestreamQuery
     #   * {Types::QueryResponse#next_token #next_token} => String
     #   * {Types::QueryResponse#rows #rows} => Array&lt;Types::Row&gt;
     #   * {Types::QueryResponse#column_info #column_info} => Array&lt;Types::ColumnInfo&gt;
+    #   * {Types::QueryResponse#query_status #query_status} => Types::QueryStatus
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -486,6 +487,9 @@ module Aws::TimestreamQuery
     #   resp.column_info[0].type.array_column_info #=> Types::ColumnInfo
     #   resp.column_info[0].type.time_series_measure_value_column_info #=> Types::ColumnInfo
     #   resp.column_info[0].type.row_column_info #=> Types::ColumnInfoList
+    #   resp.query_status.progress_percentage #=> Float
+    #   resp.query_status.cumulative_bytes_scanned #=> Integer
+    #   resp.query_status.cumulative_bytes_metered #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/Query AWS API Documentation
     #
@@ -509,7 +513,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

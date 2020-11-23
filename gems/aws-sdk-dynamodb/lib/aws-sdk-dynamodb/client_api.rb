@@ -49,10 +49,16 @@ module Aws::DynamoDB
     BackupType = Shapes::StringShape.new(name: 'BackupType')
     BackupTypeFilter = Shapes::StringShape.new(name: 'BackupTypeFilter')
     BackupsInputLimit = Shapes::IntegerShape.new(name: 'BackupsInputLimit')
+    BatchExecuteStatementInput = Shapes::StructureShape.new(name: 'BatchExecuteStatementInput')
+    BatchExecuteStatementOutput = Shapes::StructureShape.new(name: 'BatchExecuteStatementOutput')
     BatchGetItemInput = Shapes::StructureShape.new(name: 'BatchGetItemInput')
     BatchGetItemOutput = Shapes::StructureShape.new(name: 'BatchGetItemOutput')
     BatchGetRequestMap = Shapes::MapShape.new(name: 'BatchGetRequestMap')
     BatchGetResponseMap = Shapes::MapShape.new(name: 'BatchGetResponseMap')
+    BatchStatementError = Shapes::StructureShape.new(name: 'BatchStatementError')
+    BatchStatementErrorCodeEnum = Shapes::StringShape.new(name: 'BatchStatementErrorCodeEnum')
+    BatchStatementRequest = Shapes::StructureShape.new(name: 'BatchStatementRequest')
+    BatchStatementResponse = Shapes::StructureShape.new(name: 'BatchStatementResponse')
     BatchWriteItemInput = Shapes::StructureShape.new(name: 'BatchWriteItemInput')
     BatchWriteItemOutput = Shapes::StructureShape.new(name: 'BatchWriteItemOutput')
     BatchWriteItemRequestMap = Shapes::MapShape.new(name: 'BatchWriteItemRequestMap')
@@ -123,6 +129,8 @@ module Aws::DynamoDB
     DescribeGlobalTableOutput = Shapes::StructureShape.new(name: 'DescribeGlobalTableOutput')
     DescribeGlobalTableSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableSettingsInput')
     DescribeGlobalTableSettingsOutput = Shapes::StructureShape.new(name: 'DescribeGlobalTableSettingsOutput')
+    DescribeKinesisStreamingDestinationInput = Shapes::StructureShape.new(name: 'DescribeKinesisStreamingDestinationInput')
+    DescribeKinesisStreamingDestinationOutput = Shapes::StructureShape.new(name: 'DescribeKinesisStreamingDestinationOutput')
     DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
     DescribeLimitsOutput = Shapes::StructureShape.new(name: 'DescribeLimitsOutput')
     DescribeTableInput = Shapes::StructureShape.new(name: 'DescribeTableInput')
@@ -131,12 +139,18 @@ module Aws::DynamoDB
     DescribeTableReplicaAutoScalingOutput = Shapes::StructureShape.new(name: 'DescribeTableReplicaAutoScalingOutput')
     DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
     DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
+    DestinationStatus = Shapes::StringShape.new(name: 'DestinationStatus')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DuplicateItemException = Shapes::StructureShape.new(name: 'DuplicateItemException')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExceptionDescription = Shapes::StringShape.new(name: 'ExceptionDescription')
     ExceptionName = Shapes::StringShape.new(name: 'ExceptionName')
+    ExecuteStatementInput = Shapes::StructureShape.new(name: 'ExecuteStatementInput')
+    ExecuteStatementOutput = Shapes::StructureShape.new(name: 'ExecuteStatementOutput')
+    ExecuteTransactionInput = Shapes::StructureShape.new(name: 'ExecuteTransactionInput')
+    ExecuteTransactionOutput = Shapes::StructureShape.new(name: 'ExecuteTransactionOutput')
     ExpectedAttributeMap = Shapes::MapShape.new(name: 'ExpectedAttributeMap')
     ExpectedAttributeValue = Shapes::StructureShape.new(name: 'ExpectedAttributeValue')
     ExportArn = Shapes::StringShape.new(name: 'ExportArn')
@@ -215,6 +229,10 @@ module Aws::DynamoDB
     KeySchemaElement = Shapes::StructureShape.new(name: 'KeySchemaElement')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KeysAndAttributes = Shapes::StructureShape.new(name: 'KeysAndAttributes')
+    KinesisDataStreamDestination = Shapes::StructureShape.new(name: 'KinesisDataStreamDestination')
+    KinesisDataStreamDestinations = Shapes::ListShape.new(name: 'KinesisDataStreamDestinations')
+    KinesisStreamingDestinationInput = Shapes::StructureShape.new(name: 'KinesisStreamingDestinationInput')
+    KinesisStreamingDestinationOutput = Shapes::StructureShape.new(name: 'KinesisStreamingDestinationOutput')
     LastUpdateDateTime = Shapes::TimestampShape.new(name: 'LastUpdateDateTime')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAttributeValue = Shapes::ListShape.new(name: 'ListAttributeValue')
@@ -248,12 +266,19 @@ module Aws::DynamoDB
     NullAttributeValue = Shapes::BooleanShape.new(name: 'NullAttributeValue')
     NumberAttributeValue = Shapes::StringShape.new(name: 'NumberAttributeValue')
     NumberSetAttributeValue = Shapes::ListShape.new(name: 'NumberSetAttributeValue')
+    ParameterizedStatement = Shapes::StructureShape.new(name: 'ParameterizedStatement')
+    ParameterizedStatements = Shapes::ListShape.new(name: 'ParameterizedStatements')
+    PartiQLBatchRequest = Shapes::ListShape.new(name: 'PartiQLBatchRequest')
+    PartiQLBatchResponse = Shapes::ListShape.new(name: 'PartiQLBatchResponse')
+    PartiQLNextToken = Shapes::StringShape.new(name: 'PartiQLNextToken')
+    PartiQLStatement = Shapes::StringShape.new(name: 'PartiQLStatement')
     PointInTimeRecoveryDescription = Shapes::StructureShape.new(name: 'PointInTimeRecoveryDescription')
     PointInTimeRecoverySpecification = Shapes::StructureShape.new(name: 'PointInTimeRecoverySpecification')
     PointInTimeRecoveryStatus = Shapes::StringShape.new(name: 'PointInTimeRecoveryStatus')
     PointInTimeRecoveryUnavailableException = Shapes::StructureShape.new(name: 'PointInTimeRecoveryUnavailableException')
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     PositiveLongObject = Shapes::IntegerShape.new(name: 'PositiveLongObject')
+    PreparedStatementParameters = Shapes::ListShape.new(name: 'PreparedStatementParameters')
     Projection = Shapes::StructureShape.new(name: 'Projection')
     ProjectionExpression = Shapes::StringShape.new(name: 'ProjectionExpression')
     ProjectionType = Shapes::StringShape.new(name: 'ProjectionType')
@@ -508,6 +533,12 @@ module Aws::DynamoDB
     BackupSummary.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: BackupSizeBytes, location_name: "BackupSizeBytes"))
     BackupSummary.struct_class = Types::BackupSummary
 
+    BatchExecuteStatementInput.add_member(:statements, Shapes::ShapeRef.new(shape: PartiQLBatchRequest, required: true, location_name: "Statements"))
+    BatchExecuteStatementInput.struct_class = Types::BatchExecuteStatementInput
+
+    BatchExecuteStatementOutput.add_member(:responses, Shapes::ShapeRef.new(shape: PartiQLBatchResponse, location_name: "Responses"))
+    BatchExecuteStatementOutput.struct_class = Types::BatchExecuteStatementOutput
+
     BatchGetItemInput.add_member(:request_items, Shapes::ShapeRef.new(shape: BatchGetRequestMap, required: true, location_name: "RequestItems"))
     BatchGetItemInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     BatchGetItemInput.struct_class = Types::BatchGetItemInput
@@ -522,6 +553,20 @@ module Aws::DynamoDB
 
     BatchGetResponseMap.key = Shapes::ShapeRef.new(shape: TableName)
     BatchGetResponseMap.value = Shapes::ShapeRef.new(shape: ItemList)
+
+    BatchStatementError.add_member(:code, Shapes::ShapeRef.new(shape: BatchStatementErrorCodeEnum, location_name: "Code"))
+    BatchStatementError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BatchStatementError.struct_class = Types::BatchStatementError
+
+    BatchStatementRequest.add_member(:statement, Shapes::ShapeRef.new(shape: PartiQLStatement, required: true, location_name: "Statement"))
+    BatchStatementRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
+    BatchStatementRequest.add_member(:consistent_read, Shapes::ShapeRef.new(shape: ConsistentRead, location_name: "ConsistentRead"))
+    BatchStatementRequest.struct_class = Types::BatchStatementRequest
+
+    BatchStatementResponse.add_member(:error, Shapes::ShapeRef.new(shape: BatchStatementError, location_name: "Error"))
+    BatchStatementResponse.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    BatchStatementResponse.add_member(:item, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Item"))
+    BatchStatementResponse.struct_class = Types::BatchStatementResponse
 
     BatchWriteItemInput.add_member(:request_items, Shapes::ShapeRef.new(shape: BatchWriteItemRequestMap, required: true, location_name: "RequestItems"))
     BatchWriteItemInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
@@ -737,6 +782,13 @@ module Aws::DynamoDB
     DescribeGlobalTableSettingsOutput.add_member(:replica_settings, Shapes::ShapeRef.new(shape: ReplicaSettingsDescriptionList, location_name: "ReplicaSettings"))
     DescribeGlobalTableSettingsOutput.struct_class = Types::DescribeGlobalTableSettingsOutput
 
+    DescribeKinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    DescribeKinesisStreamingDestinationInput.struct_class = Types::DescribeKinesisStreamingDestinationInput
+
+    DescribeKinesisStreamingDestinationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    DescribeKinesisStreamingDestinationOutput.add_member(:kinesis_data_stream_destinations, Shapes::ShapeRef.new(shape: KinesisDataStreamDestinations, location_name: "KinesisDataStreamDestinations"))
+    DescribeKinesisStreamingDestinationOutput.struct_class = Types::DescribeKinesisStreamingDestinationOutput
+
     DescribeLimitsInput.struct_class = Types::DescribeLimitsInput
 
     DescribeLimitsOutput.add_member(:account_max_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "AccountMaxReadCapacityUnits"))
@@ -763,11 +815,31 @@ module Aws::DynamoDB
     DescribeTimeToLiveOutput.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
     DescribeTimeToLiveOutput.struct_class = Types::DescribeTimeToLiveOutput
 
+    DuplicateItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DuplicateItemException.struct_class = Types::DuplicateItemException
+
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Address"))
     Endpoint.add_member(:cache_period_in_minutes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "CachePeriodInMinutes"))
     Endpoint.struct_class = Types::Endpoint
 
     Endpoints.member = Shapes::ShapeRef.new(shape: Endpoint)
+
+    ExecuteStatementInput.add_member(:statement, Shapes::ShapeRef.new(shape: PartiQLStatement, required: true, location_name: "Statement"))
+    ExecuteStatementInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
+    ExecuteStatementInput.add_member(:consistent_read, Shapes::ShapeRef.new(shape: ConsistentRead, location_name: "ConsistentRead"))
+    ExecuteStatementInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PartiQLNextToken, location_name: "NextToken"))
+    ExecuteStatementInput.struct_class = Types::ExecuteStatementInput
+
+    ExecuteStatementOutput.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
+    ExecuteStatementOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PartiQLNextToken, location_name: "NextToken"))
+    ExecuteStatementOutput.struct_class = Types::ExecuteStatementOutput
+
+    ExecuteTransactionInput.add_member(:transact_statements, Shapes::ShapeRef.new(shape: ParameterizedStatements, required: true, location_name: "TransactStatements"))
+    ExecuteTransactionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteTransactionInput.struct_class = Types::ExecuteTransactionInput
+
+    ExecuteTransactionOutput.add_member(:responses, Shapes::ShapeRef.new(shape: ItemResponseList, location_name: "Responses"))
+    ExecuteTransactionOutput.struct_class = Types::ExecuteTransactionOutput
 
     ExpectedAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     ExpectedAttributeMap.value = Shapes::ShapeRef.new(shape: ExpectedAttributeValue)
@@ -985,6 +1057,22 @@ module Aws::DynamoDB
     KeysAndAttributes.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
     KeysAndAttributes.struct_class = Types::KeysAndAttributes
 
+    KinesisDataStreamDestination.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, location_name: "StreamArn"))
+    KinesisDataStreamDestination.add_member(:destination_status, Shapes::ShapeRef.new(shape: DestinationStatus, location_name: "DestinationStatus"))
+    KinesisDataStreamDestination.add_member(:destination_status_description, Shapes::ShapeRef.new(shape: String, location_name: "DestinationStatusDescription"))
+    KinesisDataStreamDestination.struct_class = Types::KinesisDataStreamDestination
+
+    KinesisDataStreamDestinations.member = Shapes::ShapeRef.new(shape: KinesisDataStreamDestination)
+
+    KinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    KinesisStreamingDestinationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
+    KinesisStreamingDestinationInput.struct_class = Types::KinesisStreamingDestinationInput
+
+    KinesisStreamingDestinationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    KinesisStreamingDestinationOutput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, location_name: "StreamArn"))
+    KinesisStreamingDestinationOutput.add_member(:destination_status, Shapes::ShapeRef.new(shape: DestinationStatus, location_name: "DestinationStatus"))
+    KinesisStreamingDestinationOutput.struct_class = Types::KinesisStreamingDestinationOutput
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -1076,6 +1164,16 @@ module Aws::DynamoDB
 
     NumberSetAttributeValue.member = Shapes::ShapeRef.new(shape: NumberAttributeValue)
 
+    ParameterizedStatement.add_member(:statement, Shapes::ShapeRef.new(shape: PartiQLStatement, required: true, location_name: "Statement"))
+    ParameterizedStatement.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
+    ParameterizedStatement.struct_class = Types::ParameterizedStatement
+
+    ParameterizedStatements.member = Shapes::ShapeRef.new(shape: ParameterizedStatement)
+
+    PartiQLBatchRequest.member = Shapes::ShapeRef.new(shape: BatchStatementRequest)
+
+    PartiQLBatchResponse.member = Shapes::ShapeRef.new(shape: BatchStatementResponse)
+
     PointInTimeRecoveryDescription.add_member(:point_in_time_recovery_status, Shapes::ShapeRef.new(shape: PointInTimeRecoveryStatus, location_name: "PointInTimeRecoveryStatus"))
     PointInTimeRecoveryDescription.add_member(:earliest_restorable_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EarliestRestorableDateTime"))
     PointInTimeRecoveryDescription.add_member(:latest_restorable_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "LatestRestorableDateTime"))
@@ -1086,6 +1184,8 @@ module Aws::DynamoDB
 
     PointInTimeRecoveryUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     PointInTimeRecoveryUnavailableException.struct_class = Types::PointInTimeRecoveryUnavailableException
+
+    PreparedStatementParameters.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
     Projection.add_member(:projection_type, Shapes::ShapeRef.new(shape: ProjectionType, location_name: "ProjectionType"))
     Projection.add_member(:non_key_attributes, Shapes::ShapeRef.new(shape: NonKeyAttributeNameList, location_name: "NonKeyAttributes"))
@@ -1618,6 +1718,16 @@ module Aws::DynamoDB
       }
       api.endpoint_operation = :describe_endpoints
 
+      api.add_operation(:batch_execute_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchExecuteStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchExecuteStatementInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchExecuteStatementOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:batch_get_item, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetItem"
         o.http_method = "POST"
@@ -1818,6 +1928,18 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_kinesis_streaming_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeKinesisStreamingDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeKinesisStreamingDestinationInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeKinesisStreamingDestinationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_limits, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeLimits"
         o.http_method = "POST"
@@ -1860,6 +1982,65 @@ module Aws::DynamoDB
         o.input = Shapes::ShapeRef.new(shape: DescribeTimeToLiveInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeTimeToLiveOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:disable_kinesis_streaming_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableKinesisStreamingDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: KinesisStreamingDestinationInput)
+        o.output = Shapes::ShapeRef.new(shape: KinesisStreamingDestinationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:enable_kinesis_streaming_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableKinesisStreamingDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: KinesisStreamingDestinationInput)
+        o.output = Shapes::ShapeRef.new(shape: KinesisStreamingDestinationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:execute_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExecuteStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExecuteStatementInput)
+        o.output = Shapes::ShapeRef.new(shape: ExecuteStatementOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConditionalCheckFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ItemCollectionSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateItemException)
+      end)
+
+      api.add_operation(:execute_transaction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExecuteTransaction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExecuteTransactionInput)
+        o.output = Shapes::ShapeRef.new(shape: ExecuteTransactionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionCanceledException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

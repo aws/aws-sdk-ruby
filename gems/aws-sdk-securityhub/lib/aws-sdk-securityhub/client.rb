@@ -330,6 +330,9 @@ module Aws::SecurityHub
     # Accepts the invitation to be a member account and be monitored by the
     # Security Hub master account that the invitation was sent from.
     #
+    # This operation is only used by member accounts that are not added
+    # through Organizations.
+    #
     # When the member account accepts the invitation, permission is granted
     # to the master account to view findings generated in the member
     # account.
@@ -2854,29 +2857,48 @@ module Aws::SecurityHub
 
     # Creates a member association in Security Hub between the specified
     # accounts and the account used to make the request, which is the master
-    # account. To successfully create a member, you must use this action
-    # from an account that already has Security Hub enabled. To enable
-    # Security Hub, you can use the ` EnableSecurityHub ` operation.
+    # account. If you are integrated with Organizations, then the master
+    # account is the Security Hub administrator account that is designated
+    # by the organization management account.
     #
-    # After you use `CreateMembers` to create member account associations in
-    # Security Hub, you must use the ` InviteMembers ` operation to invite
-    # the accounts to enable Security Hub and become member accounts in
-    # Security Hub.
+    # `CreateMembers` is always used to add accounts that are not
+    # organization members.
     #
-    # If the account owner accepts the invitation, the account becomes a
-    # member account in Security Hub. A permissions policy is added that
-    # permits the master account to view the findings generated in the
-    # member account. When Security Hub is enabled in the invited account,
-    # findings start to be sent to both the member and master accounts.
+    # For accounts that are part of an organization, `CreateMembers` is only
+    # used in the following cases:
+    #
+    # * Security Hub is not configured to automatically add new accounts in
+    #   an organization.
+    #
+    # * The account was disassociated or deleted in Security Hub.
+    #
+    # This action can only be used by an account that has Security Hub
+    # enabled. To enable Security Hub, you can use the ` EnableSecurityHub `
+    # operation.
+    #
+    # For accounts that are not organization members, you create the account
+    # association and then send an invitation to the member account. To send
+    # the invitation, you use the ` InviteMembers ` operation. If the
+    # account owner accepts the invitation, the account becomes a member
+    # account in Security Hub.
+    #
+    # Accounts that are part of an organization do not receive an
+    # invitation. They automatically become a member account in Security
+    # Hub.
+    #
+    # A permissions policy is added that permits the master account to view
+    # the findings generated in the member account. When Security Hub is
+    # enabled in a member account, findings are sent to both the member and
+    # master accounts.
     #
     # To remove the association between the master and member accounts, use
     # the ` DisassociateFromMasterAccount ` or ` DisassociateMembers `
     # operation.
     #
-    # @option params [Array<Types::AccountDetails>] :account_details
+    # @option params [required, Array<Types::AccountDetails>] :account_details
     #   The list of accounts to associate with the Security Hub master
-    #   account. For each account, the list includes the account ID and the
-    #   email address.
+    #   account. For each account, the list includes the account ID and
+    #   optionally the email address.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2885,9 +2907,9 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_members({
-    #     account_details: [
+    #     account_details: [ # required
     #       {
-    #         account_id: "AccountId",
+    #         account_id: "AccountId", # required
     #         email: "NonEmptyString",
     #       },
     #     ],
@@ -2909,6 +2931,9 @@ module Aws::SecurityHub
     end
 
     # Declines invitations to become a member account.
+    #
+    # This operation is only used by accounts that are not part of an
+    # organization. Organization accounts do not receive invitations.
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the accounts from which to decline the
@@ -3002,6 +3027,9 @@ module Aws::SecurityHub
     # Deletes invitations received by the AWS account to become a member
     # account.
     #
+    # This operation is only used by accounts that are not part of an
+    # organization. Organization accounts do not receive invitations.
+    #
     # @option params [required, Array<String>] :account_ids
     #   The list of the account IDs that sent the invitations to delete.
     #
@@ -3032,7 +3060,10 @@ module Aws::SecurityHub
 
     # Deletes the specified member accounts from Security Hub.
     #
-    # @option params [Array<String>] :account_ids
+    # Can be used to delete member accounts that belong to an organization
+    # as well as member accounts that were invited manually.
+    #
+    # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the member accounts to delete.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3042,7 +3073,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -3141,6 +3172,28 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def describe_hub(params = {}, options = {})
       req = build_request(:describe_hub, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the Organizations configuration for Security
+    # Hub. Can only be called from a Security Hub administrator account.
+    #
+    # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
+    #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
+    #
+    # @example Response structure
+    #
+    #   resp.auto_enable #=> Boolean
+    #   resp.member_account_limit_reached #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
+    #
+    # @overload describe_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_configuration(params = {}, options = {})
+      req = build_request(:describe_organization_configuration, params)
       req.send_request(options)
     end
 
@@ -3256,7 +3309,8 @@ module Aws::SecurityHub
     #
     # @option params [required, String] :standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a supported
-    #   standard.
+    #   standard. To get the subscription ARNs of the standards you have
+    #   enabled, use the ` GetEnabledStandards ` operation.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -3334,6 +3388,29 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Disables a Security Hub administrator account. Can only be called by
+    # the organization management account.
+    #
+    # @option params [required, String] :admin_account_id
+    #   The AWS account identifier of the Security Hub administrator account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_organization_admin_account({
+    #     admin_account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload disable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def disable_organization_admin_account(params = {}, options = {})
+      req = build_request(:disable_organization_admin_account, params)
+      req.send_request(options)
+    end
+
     # Disables Security Hub in your account only in the current Region. To
     # disable Security Hub in all Regions, you must submit one request per
     # Region where you have enabled Security Hub.
@@ -3363,6 +3440,11 @@ module Aws::SecurityHub
     # Disassociates the current Security Hub member account from the
     # associated master account.
     #
+    # This operation is only used by accounts that are not part of an
+    # organization. For organization accounts, only the master account (the
+    # designated Security Hub administrator) can disassociate a member
+    # account.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromMasterAccount AWS API Documentation
@@ -3377,7 +3459,10 @@ module Aws::SecurityHub
     # Disassociates the specified member accounts from the associated master
     # account.
     #
-    # @option params [Array<String>] :account_ids
+    # Can be used to disassociate both accounts that are in an organization
+    # and accounts that were invited manually.
+    #
+    # @option params [required, Array<String>] :account_ids
     #   The account IDs of the member accounts to disassociate from the master
     #   account.
     #
@@ -3386,7 +3471,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembers AWS API Documentation
@@ -3428,6 +3513,30 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def enable_import_findings_for_product(params = {}, options = {})
       req = build_request(:enable_import_findings_for_product, params)
+      req.send_request(options)
+    end
+
+    # Designates the Security Hub administrator account for an organization.
+    # Can only be called by the organization management account.
+    #
+    # @option params [required, String] :admin_account_id
+    #   The AWS account identifier of the account to designate as the Security
+    #   Hub administrator account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_organization_admin_account({
+    #     admin_account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload enable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def enable_organization_admin_account(params = {}, options = {})
+      req = build_request(:enable_organization_admin_account, params)
       req.send_request(options)
     end
 
@@ -5586,6 +5695,9 @@ module Aws::SecurityHub
     # Provides the details for the Security Hub master account for the
     # current member account.
     #
+    # Can be used by both member accounts that are in an organization and
+    # accounts that were invited manually.
+    #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMasterAccountResponse#master #master} => Types::Invitation
@@ -5608,6 +5720,13 @@ module Aws::SecurityHub
 
     # Returns the details for the Security Hub member accounts for the
     # specified account IDs.
+    #
+    # A master account can be either a delegated Security Hub administrator
+    # account for an organization or a master account that enabled Security
+    # Hub manually.
+    #
+    # The results include both member accounts that are in an organization
+    # and accounts that were invited manually.
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the Security Hub member accounts to return
@@ -5649,15 +5768,18 @@ module Aws::SecurityHub
     # Invites other AWS accounts to become member accounts for the Security
     # Hub master account that the invitation is sent from.
     #
+    # This operation is only used to invite accounts that do not belong to
+    # an organization. Organization accounts do not receive invitations.
+    #
     # Before you can use this action to invite a member, you must first use
     # the ` CreateMembers ` action to create the member account in Security
     # Hub.
     #
-    # When the account owner accepts the invitation to become a member
-    # account and enables Security Hub, the master account can view the
-    # findings generated from the member account.
+    # When the account owner enables Security Hub and accepts the invitation
+    # to become a member account, the master account can view the findings
+    # generated from the member account.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   The list of account IDs of the AWS accounts to invite to Security Hub
     #   as members.
     #
@@ -5668,7 +5790,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.invite_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -5733,6 +5855,9 @@ module Aws::SecurityHub
     # Lists all Security Hub membership invitations that were sent to the
     # current AWS account.
     #
+    # This operation is only used by accounts that do not belong to an
+    # organization. Organization accounts do not receive invitations.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
     #
@@ -5780,14 +5905,17 @@ module Aws::SecurityHub
     # Lists details about all member accounts for the current Security Hub
     # master account.
     #
+    # The results include both member accounts that belong to an
+    # organization and member accounts that were invited manually.
+    #
     # @option params [Boolean] :only_associated
     #   Specifies which member accounts to include in the response based on
     #   their relationship status with the master account. The default value
     #   is `TRUE`.
     #
     #   If `OnlyAssociated` is set to `TRUE`, the response includes member
-    #   accounts whose relationship status with the master is set to `ENABLED`
-    #   or `DISABLED`.
+    #   accounts whose relationship status with the master is set to
+    #   `ENABLED`.
     #
     #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
@@ -5835,6 +5963,49 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def list_members(params = {}, options = {})
       req = build_request(:list_members, params)
+      req.send_request(options)
+    end
+
+    # Lists the Security Hub administrator accounts. Can only be called by
+    # the organization management account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `ListOrganizationAdminAccounts` operation, set the value of this
+    #   parameter to `NULL`. For subsequent calls to the operation, to
+    #   continue listing data, set the value of this parameter to the value
+    #   returned from the previous response.
+    #
+    # @return [Types::ListOrganizationAdminAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationAdminAccountsResponse#admin_accounts #admin_accounts} => Array&lt;Types::AdminAccount&gt;
+    #   * {Types::ListOrganizationAdminAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organization_admin_accounts({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_accounts #=> Array
+    #   resp.admin_accounts[0].account_id #=> String
+    #   resp.admin_accounts[0].status #=> String, one of "ENABLED", "DISABLE_IN_PROGRESS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccounts AWS API Documentation
+    #
+    # @overload list_organization_admin_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_organization_admin_accounts(params = {}, options = {})
+      req = build_request(:list_organization_admin_accounts, params)
       req.send_request(options)
     end
 
@@ -7134,6 +7305,36 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Used to update the configuration related to Organizations. Can only be
+    # called from a Security Hub administrator account.
+    #
+    # @option params [required, Boolean] :auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   By default, this is `false`, and new accounts are not added
+    #   automatically.
+    #
+    #   To automatically enable Security Hub for new accounts, set this to
+    #   `true`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_organization_configuration({
+    #     auto_enable: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfiguration AWS API Documentation
+    #
+    # @overload update_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_organization_configuration(params = {}, options = {})
+      req = build_request(:update_organization_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates configuration options for Security Hub.
     #
     # @option params [Boolean] :auto_enable_controls
@@ -7206,7 +7407,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2020-11-23)
+------------------
+
+* Feature - This release includes support for new feature: Code Signing for AWS Lambda. This adds new resources and APIs to configure Lambda functions to accept and verify signed code artifacts at deployment.
+
 1.53.0 (2020-11-19)
 ------------------
 

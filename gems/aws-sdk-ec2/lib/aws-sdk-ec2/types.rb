@@ -40271,6 +40271,20 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the Private DNS name for interface endpoints.
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name assigned to the VPC endpoint service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateDnsDetails AWS API Documentation
+    #
+    class PrivateDnsDetails < Struct.new(
+      :private_dns_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the private DNS name for the service endpoint. For
     # more information about these parameters, see [VPC Endpoint Service
     # Private DNS Name Verification][1] in the *Amazon Virtual Private Cloud
@@ -46806,6 +46820,10 @@ module Aws::EC2
     #   The private DNS name for the service.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_names
+    #   The private DNS names assigned to the VPC endpoint service.
+    #   @return [Array<Types::PrivateDnsDetails>]
+    #
     # @!attribute [rw] vpc_endpoint_policy_supported
     #   Indicates whether the service supports endpoint policies.
     #   @return [Boolean]
@@ -46842,6 +46860,7 @@ module Aws::EC2
       :owner,
       :base_endpoint_dns_names,
       :private_dns_name,
+      :private_dns_names,
       :vpc_endpoint_policy_supported,
       :acceptance_required,
       :manages_vpc_endpoints,

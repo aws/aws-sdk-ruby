@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-11-23)
+------------------
+
+* Feature - AWS Single Sign-On now enables attribute-based access control for workforce identities to simplify permissions in AWS
+
 1.3.0 (2020-09-30)
 ------------------
 

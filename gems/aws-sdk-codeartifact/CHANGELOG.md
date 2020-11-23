@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2020-11-23)
+------------------
+
+* Feature - Add support for the NuGet package format.
+
 1.5.0 (2020-10-29)
 ------------------
 

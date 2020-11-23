@@ -596,6 +596,7 @@ module Aws::LicenseManager
     #   resp.license_configuration_associations[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.license_configuration_associations[0].resource_owner_id #=> String
     #   resp.license_configuration_associations[0].association_time #=> Time
+    #   resp.license_configuration_associations[0].ami_association_scope #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListAssociationsForLicenseConfiguration AWS API Documentation
@@ -770,6 +771,7 @@ module Aws::LicenseManager
     #
     #   resp.license_specifications #=> Array
     #   resp.license_specifications[0].license_configuration_arn #=> String
+    #   resp.license_specifications[0].ami_association_scope #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseSpecificationsForResource AWS API Documentation
@@ -1091,11 +1093,13 @@ module Aws::LicenseManager
     #     add_license_specifications: [
     #       {
     #         license_configuration_arn: "String", # required
+    #         ami_association_scope: "String",
     #       },
     #     ],
     #     remove_license_specifications: [
     #       {
     #         license_configuration_arn: "String", # required
+    #         ami_association_scope: "String",
     #       },
     #     ],
     #   })
@@ -1161,7 +1165,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -356,6 +356,46 @@ module Aws::DynamoDB
 
     # @!group API Operations
 
+    # This operation allows you to perform batch reads and writes on data
+    # stored in DynamoDB, using PartiQL.
+    #
+    # @option params [required, Array<Types::BatchStatementRequest>] :statements
+    #   The list of PartiQL statements representing the batch to run.
+    #
+    # @return [Types::BatchExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchExecuteStatementOutput#responses #responses} => Array&lt;Types::BatchStatementResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_execute_statement({
+    #     statements: [ # required
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         consistent_read: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responses #=> Array
+    #   resp.responses[0].error.code #=> String, one of "ConditionalCheckFailed", "ItemCollectionSizeLimitExceeded", "RequestLimitExceeded", "ValidationError", "ProvisionedThroughputExceeded", "TransactionConflict", "ThrottlingError", "InternalServerError", "ResourceNotFound", "AccessDenied", "DuplicateItem"
+    #   resp.responses[0].error.message #=> String
+    #   resp.responses[0].table_name #=> String
+    #   resp.responses[0].item #=> Hash
+    #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatement AWS API Documentation
+    #
+    # @overload batch_execute_statement(params = {})
+    # @param [Hash] params ({})
+    def batch_execute_statement(params = {}, options = {})
+      req = build_request(:batch_execute_statement, params)
+      req.send_request(options)
+    end
+
     # The `BatchGetItem` operation returns the attributes of one or more
     # items from one or more tables. You identify requested items by primary
     # key.
@@ -2383,6 +2423,39 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Returns information about the status of Kinesis streaming.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table being described.
+    #
+    # @return [Types::DescribeKinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::DescribeKinesisStreamingDestinationOutput#kinesis_data_stream_destinations #kinesis_data_stream_destinations} => Array&lt;Types::KinesisDataStreamDestination&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_kinesis_streaming_destination({
+    #     table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.kinesis_data_stream_destinations #=> Array
+    #   resp.kinesis_data_stream_destinations[0].stream_arn #=> String
+    #   resp.kinesis_data_stream_destinations[0].destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.kinesis_data_stream_destinations[0].destination_status_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload describe_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def describe_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:describe_kinesis_streaming_destination, params)
+      req.send_request(options)
+    end
+
     # Returns the current provisioned-capacity quotas for your AWS account
     # in a Region, both for the Region as a whole and for any one DynamoDB
     # table that you create there.
@@ -2769,6 +2842,175 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_time_to_live(params = {}, options = {})
       req = build_request(:describe_time_to_live, params)
+      req.send_request(options)
+    end
+
+    # Stops replication from the DynamoDB table to the Kinesis data stream.
+    # This is done without deleting either of the resources.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the DynamoDB table.
+    #
+    # @option params [required, String] :stream_arn
+    #   The ARN for a Kinesis data stream.
+    #
+    # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
+    #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_kinesis_streaming_destination({
+    #     table_name: "TableName", # required
+    #     stream_arn: "StreamArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DisableKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload disable_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def disable_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:disable_kinesis_streaming_destination, params)
+      req.send_request(options)
+    end
+
+    # Starts table data replication to the specified Kinesis data stream at
+    # a timestamp chosen during the enable workflow. If this operation
+    # doesn't return results immediately, use
+    # DescribeKinesisStreamingDestination to check if streaming to the
+    # Kinesis data stream is ACTIVE.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the DynamoDB table.
+    #
+    # @option params [required, String] :stream_arn
+    #   The ARN for a Kinesis data stream.
+    #
+    # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
+    #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_kinesis_streaming_destination({
+    #     table_name: "TableName", # required
+    #     stream_arn: "StreamArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/EnableKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload enable_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def enable_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:enable_kinesis_streaming_destination, params)
+      req.send_request(options)
+    end
+
+    # This operation allows you to perform reads and singleton writes on
+    # data stored in DynamoDB, using PartiQL.
+    #
+    # @option params [required, String] :statement
+    #   The PartiQL statement representing the operation to run.
+    #
+    # @option params [Array<Types::AttributeValue>] :parameters
+    #   The parameters for the PartiQL statement, if any.
+    #
+    # @option params [Boolean] :consistent_read
+    #   The consistency of a read operation. If set to `true`, then a strongly
+    #   consistent read is used; otherwise, an eventually consistent read is
+    #   used.
+    #
+    # @option params [String] :next_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #
+    # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteStatementOutput#items #items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
+    #   * {Types::ExecuteStatementOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_statement({
+    #     statement: "PartiQLStatement", # required
+    #     parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     consistent_read: false,
+    #     next_token: "PartiQLNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0] #=> Hash
+    #   resp.items[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatement AWS API Documentation
+    #
+    # @overload execute_statement(params = {})
+    # @param [Hash] params ({})
+    def execute_statement(params = {}, options = {})
+      req = build_request(:execute_statement, params)
+      req.send_request(options)
+    end
+
+    # This operation allows you to perform transactional reads or writes on
+    # data stored in DynamoDB, using PartiQL.
+    #
+    # @option params [required, Array<Types::ParameterizedStatement>] :transact_statements
+    #   The list of PartiQL statements representing the transaction to run.
+    #
+    # @option params [String] :client_request_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ExecuteTransactionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteTransactionOutput#responses #responses} => Array&lt;Types::ItemResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_transaction({
+    #     transact_statements: [ # required
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responses #=> Array
+    #   resp.responses[0].item #=> Hash
+    #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransaction AWS API Documentation
+    #
+    # @overload execute_transaction(params = {})
+    # @param [Hash] params ({})
+    def execute_transaction(params = {}, options = {})
+      req = build_request(:execute_transaction, params)
       req.send_request(options)
     end
 
@@ -6879,7 +7121,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2020-11-23)
+------------------
+
+* Feature - Feature1 - Glue crawler adds data lineage configuration option. Feature2 - AWS Glue Data Catalog adds APIs for PartitionIndex creation and deletion as part of Enhancement Partition Management feature.
+
 1.79.0 (2020-11-19)
 ------------------
 

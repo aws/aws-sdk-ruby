@@ -88,6 +88,8 @@ module Aws::CodeArtifact
     #
     #   * `public:maven-commonsware` - for the CommonsWare Android
     #     repository.
+    #
+    #   * `public:nuget-org` - for the NuGet Gallery.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/AssociateExternalConnectionRequest AWS API Documentation
@@ -145,7 +147,7 @@ module Aws::CodeArtifact
     #         domain_owner: "AccountId",
     #         source_repository: "RepositoryName", # required
     #         destination_repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         versions: ["PackageVersion"],
@@ -185,6 +187,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -197,6 +201,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -537,7 +544,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         versions: ["PackageVersion"], # required
@@ -566,6 +573,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -578,6 +587,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -796,7 +808,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         package_version: "PackageVersion", # required
@@ -825,6 +837,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -837,6 +851,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -979,7 +996,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         versions: ["PackageVersion"], # required
@@ -1013,6 +1030,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1025,6 +1044,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1315,7 +1337,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         package_version: "PackageVersion", # required
@@ -1347,6 +1369,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1359,6 +1383,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1429,7 +1456,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         package_version: "PackageVersion", # required
@@ -1459,6 +1486,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1471,6 +1500,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1505,6 +1537,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1517,6 +1551,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1555,7 +1592,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #       }
     #
     # @!attribute [rw] domain
@@ -1580,6 +1617,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/GetRepositoryEndpointRequest AWS API Documentation
@@ -1737,7 +1776,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         package_version: "PackageVersion", # required
@@ -1770,6 +1809,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1782,6 +1823,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1834,6 +1878,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1883,7 +1930,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         package_version: "PackageVersion", # required
@@ -1915,6 +1962,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1927,6 +1976,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1967,6 +2019,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1979,6 +2033,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2029,7 +2086,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
@@ -2061,6 +2118,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2073,6 +2132,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2146,6 +2208,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2158,6 +2222,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2197,7 +2264,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # accepts npm, pypi, maven
+    #         format: "npm", # accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package_prefix: "PackageName",
     #         max_results: 1,
@@ -2227,6 +2294,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2239,11 +2308,14 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package_prefix
-    #   A prefix used to filter returned repositories. Only repositories
-    #   with names that start with `repositoryPrefix` are returned.
+    #   A prefix used to filter returned packages. Only packages with names
+    #   that start with `packagePrefix` are returned.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2466,6 +2538,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2512,6 +2587,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2524,6 +2601,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2551,6 +2631,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2563,6 +2645,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package_name
@@ -2909,6 +2994,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3086,11 +3173,11 @@ module Aws::CodeArtifact
     #       }
     #
     # @!attribute [rw] key
-    #   The tag's key.
+    #   The tag key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The tag's value.
+    #   The tag value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/Tag AWS API Documentation
@@ -3116,8 +3203,8 @@ module Aws::CodeArtifact
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which you want to
-    #   add or update tags.
+    #   The Amazon Resource Name (ARN) of the resource that you want to add
+    #   or update tags for.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3165,8 +3252,8 @@ module Aws::CodeArtifact
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which you want to
-    #   remove tags.
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   remove tags from.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -3193,7 +3280,7 @@ module Aws::CodeArtifact
     #         domain: "DomainName", # required
     #         domain_owner: "AccountId",
     #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven
+    #         format: "npm", # required, accepts npm, pypi, maven, nuget
     #         namespace: "PackageNamespace",
     #         package: "PackageName", # required
     #         versions: ["PackageVersion"], # required
@@ -3228,6 +3315,8 @@ module Aws::CodeArtifact
     #   * `pypi`
     #
     #   * `maven`
+    #
+    #   * `nuget`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -3240,6 +3329,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so
+    #     NuGet packages do not have a namespace.
     #   @return [String]
     #
     # @!attribute [rw] package

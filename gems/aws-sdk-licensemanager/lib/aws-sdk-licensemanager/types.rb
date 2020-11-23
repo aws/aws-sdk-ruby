@@ -578,13 +578,18 @@ module Aws::LicenseManager
     #   resource.
     #   @return [Time]
     #
+    # @!attribute [rw] ami_association_scope
+    #   Scope of AMI associations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseConfigurationAssociation AWS API Documentation
     #
     class LicenseConfigurationAssociation < Struct.new(
       :resource_arn,
       :resource_type,
       :resource_owner_id,
-      :association_time)
+      :association_time,
+      :ami_association_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -686,16 +691,22 @@ module Aws::LicenseManager
     #
     #       {
     #         license_configuration_arn: "String", # required
+    #         ami_association_scope: "String",
     #       }
     #
     # @!attribute [rw] license_configuration_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
+    # @!attribute [rw] ami_association_scope
+    #   Scope of AMI associations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseSpecification AWS API Documentation
     #
     class LicenseSpecification < Struct.new(
-      :license_configuration_arn)
+      :license_configuration_arn,
+      :ami_association_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1515,11 +1526,13 @@ module Aws::LicenseManager
     #         add_license_specifications: [
     #           {
     #             license_configuration_arn: "String", # required
+    #             ami_association_scope: "String",
     #           },
     #         ],
     #         remove_license_specifications: [
     #           {
     #             license_configuration_arn: "String", # required
+    #             ami_association_scope: "String",
     #           },
     #         ],
     #       }

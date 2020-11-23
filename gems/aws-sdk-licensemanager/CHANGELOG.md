@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-11-23)
+------------------
+
+* Feature - AWS License Manager now provides the ability for license administrators to be able to associate license configurations to AMIs shared with their AWS account
+
 1.20.0 (2020-09-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-11-23)
+------------------
+
+* Feature - Added support for the UpdateHost API.
+
 1.11.0 (2020-09-30)
 ------------------
 

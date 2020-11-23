@@ -28,7 +28,7 @@ require_relative 'aws-sdk-translate/customizations'
 # structure.
 #
 #     translate = Aws::Translate::Client.new
-#     resp = translate.delete_terminology(params)
+#     resp = translate.create_parallel_data(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-translate/customizations'
 # @!group service
 module Aws::Translate
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

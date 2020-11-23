@@ -1657,6 +1657,7 @@ module Aws::IoT
     #     files: [ # required
     #       {
     #         file_name: "FileName",
+    #         file_type: 1,
     #         file_version: "OTAUpdateFileVersion",
     #         file_location: {
     #           stream: {
@@ -5207,6 +5208,7 @@ module Aws::IoT
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
     #   resp.ota_update_info.ota_update_files[0].file_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_type #=> Integer
     #   resp.ota_update_info.ota_update_files[0].file_version #=> String
     #   resp.ota_update_info.ota_update_files[0].file_location.stream.stream_id #=> String
     #   resp.ota_update_info.ota_update_files[0].file_location.stream.file_id #=> Integer
@@ -10643,7 +10645,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

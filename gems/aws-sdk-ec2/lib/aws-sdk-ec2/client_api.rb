@@ -1576,6 +1576,8 @@ module Aws::EC2
     PrincipalIdFormat = Shapes::StructureShape.new(name: 'PrincipalIdFormat')
     PrincipalIdFormatList = Shapes::ListShape.new(name: 'PrincipalIdFormatList')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    PrivateDnsDetails = Shapes::StructureShape.new(name: 'PrivateDnsDetails')
+    PrivateDnsDetailsSet = Shapes::ListShape.new(name: 'PrivateDnsDetailsSet')
     PrivateDnsNameConfiguration = Shapes::StructureShape.new(name: 'PrivateDnsNameConfiguration')
     PrivateIpAddressConfigSet = Shapes::ListShape.new(name: 'PrivateIpAddressConfigSet')
     PrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'PrivateIpAddressSpecification')
@@ -8221,6 +8223,11 @@ module Aws::EC2
 
     PrincipalIdFormatList.member = Shapes::ShapeRef.new(shape: PrincipalIdFormat, location_name: "item")
 
+    PrivateDnsDetails.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
+    PrivateDnsDetails.struct_class = Types::PrivateDnsDetails
+
+    PrivateDnsDetailsSet.member = Shapes::ShapeRef.new(shape: PrivateDnsDetails, location_name: "item")
+
     PrivateDnsNameConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: DnsNameState, location_name: "state"))
     PrivateDnsNameConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     PrivateDnsNameConfiguration.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -9191,6 +9198,7 @@ module Aws::EC2
     ServiceDetail.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
     ServiceDetail.add_member(:base_endpoint_dns_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "baseEndpointDnsNameSet"))
     ServiceDetail.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
+    ServiceDetail.add_member(:private_dns_names, Shapes::ShapeRef.new(shape: PrivateDnsDetailsSet, location_name: "privateDnsNameSet"))
     ServiceDetail.add_member(:vpc_endpoint_policy_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "vpcEndpointPolicySupported"))
     ServiceDetail.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptanceRequired"))
     ServiceDetail.add_member(:manages_vpc_endpoints, Shapes::ShapeRef.new(shape: Boolean, location_name: "managesVpcEndpoints"))

@@ -402,8 +402,8 @@ module Aws::Kafka
     #   @return [Types::OpenMonitoring]
     #
     # @!attribute [rw] state
-    #   The state of the cluster. The possible states are CREATING, ACTIVE,
-    #   and FAILED.
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, MAINTENANCE, REBOOTING\_BROKER, and UPDATING.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -825,8 +825,8 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the cluster. The possible states are CREATING, ACTIVE,
-    #   and FAILED.
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, MAINTENANCE, REBOOTING\_BROKER, and UPDATING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterResponse AWS API Documentation
@@ -945,8 +945,8 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the cluster. The possible states are CREATING, ACTIVE,
-    #   and FAILED.
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, MAINTENANCE, REBOOTING\_BROKER, and UPDATING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterResponse AWS API Documentation

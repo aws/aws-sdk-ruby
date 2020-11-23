@@ -691,6 +691,7 @@ module Aws::Glue
     #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
+    #   resp.crawlers[0].lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
     #   resp.crawlers[0].state #=> String, one of "READY", "RUNNING", "STOPPING"
     #   resp.crawlers[0].table_prefix #=> String
     #   resp.crawlers[0].schedule.schedule_expression #=> String
@@ -1555,6 +1556,9 @@ module Aws::Glue
     #   A policy that specifies whether to crawl the entire dataset again, or
     #   to crawl only folders that were added since the last crawler run.
     #
+    # @option params [Types::LineageConfiguration] :lineage_configuration
+    #   Specifies data lineage configuration settings for the crawler.
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -1631,6 +1635,9 @@ module Aws::Glue
     #     },
     #     recrawl_policy: {
     #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #     },
+    #     lineage_configuration: {
+    #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -2400,6 +2407,46 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_partition(params = {}, options = {})
       req = build_request(:create_partition, params)
+      req.send_request(options)
+    end
+
+    # Creates a specified partition index in an existing table.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog ID where the table resides.
+    #
+    # @option params [required, String] :database_name
+    #   Specifies the name of a database in which you want to create a
+    #   partition index.
+    #
+    # @option params [required, String] :table_name
+    #   Specifies the name of a table in which you want to create a partition
+    #   index.
+    #
+    # @option params [required, Types::PartitionIndex] :partition_index
+    #   Specifies a `PartitionIndex` structure to create a partition index in
+    #   an existing table.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_partition_index({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     partition_index: { # required
+    #       keys: ["NameString"], # required
+    #       index_name: "NameString", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartitionIndex AWS API Documentation
+    #
+    # @overload create_partition_index(params = {})
+    # @param [Hash] params ({})
+    def create_partition_index(params = {}, options = {})
+      req = build_request(:create_partition_index, params)
       req.send_request(options)
     end
 
@@ -3354,6 +3401,42 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a specified partition index from an existing table.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog ID where the table resides.
+    #
+    # @option params [required, String] :database_name
+    #   Specifies the name of a database from which you want to delete a
+    #   partition index.
+    #
+    # @option params [required, String] :table_name
+    #   Specifies the name of a table from which you want to delete a
+    #   partition index.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the partition index to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_partition_index({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     index_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartitionIndex AWS API Documentation
+    #
+    # @overload delete_partition_index(params = {})
+    # @param [Hash] params ({})
+    def delete_partition_index(params = {}, options = {})
+      req = build_request(:delete_partition_index, params)
+      req.send_request(options)
+    end
+
     # Delete the entire registry including schema and all of its versions.
     # To get the status of the delete operation, you can call the
     # `GetRegistry` API after the asynchronous call. Deleting a registry
@@ -4211,6 +4294,7 @@ module Aws::Glue
     #   resp.crawler.recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawler.schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawler.schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
+    #   resp.crawler.lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
     #   resp.crawler.state #=> String, one of "READY", "RUNNING", "STOPPING"
     #   resp.crawler.table_prefix #=> String
     #   resp.crawler.schedule.schedule_expression #=> String
@@ -4341,6 +4425,7 @@ module Aws::Glue
     #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
+    #   resp.crawlers[0].lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
     #   resp.crawlers[0].state #=> String, one of "READY", "RUNNING", "STOPPING"
     #   resp.crawlers[0].table_prefix #=> String
     #   resp.crawlers[0].schedule.schedule_expression #=> String
@@ -5494,7 +5579,12 @@ module Aws::Glue
     #   resp.partition_index_descriptor_list[0].keys #=> Array
     #   resp.partition_index_descriptor_list[0].keys[0].name #=> String
     #   resp.partition_index_descriptor_list[0].keys[0].type #=> String
-    #   resp.partition_index_descriptor_list[0].index_status #=> String, one of "ACTIVE"
+    #   resp.partition_index_descriptor_list[0].index_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.partition_index_descriptor_list[0].backfill_errors #=> Array
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].code #=> String, one of "ENCRYPTED_PARTITION_ERROR", "INTERNAL_ERROR", "INVALID_PARTITION_TYPE_DATA_ERROR", "MISSING_PARTITION_VALUE_ERROR", "UNSUPPORTED_PARTITION_CHARACTER_ERROR"
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].partitions #=> Array
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].partitions[0].values #=> Array
+    #   resp.partition_index_descriptor_list[0].backfill_errors[0].partitions[0].values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionIndexes AWS API Documentation
@@ -9551,6 +9641,9 @@ module Aws::Glue
     #   A policy that specifies whether to crawl the entire dataset again, or
     #   to crawl only folders that were added since the last crawler run.
     #
+    # @option params [Types::LineageConfiguration] :lineage_configuration
+    #   Specifies data lineage configuration settings for the crawler.
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -9618,6 +9711,9 @@ module Aws::Glue
     #     },
     #     recrawl_policy: {
     #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #     },
+    #     lineage_configuration: {
+    #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -10494,7 +10590,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

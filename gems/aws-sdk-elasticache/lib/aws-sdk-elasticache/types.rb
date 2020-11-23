@@ -4262,7 +4262,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid Values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"`
     #   @return [String]
     #
     # @!attribute [rw] max_records

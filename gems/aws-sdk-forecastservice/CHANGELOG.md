@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-11-23)
+------------------
+
+* Feature - Releasing the set of PredictorBacktestExportJob APIs which allow customers to export backtest values and item-level metrics data from Predictor training.
+
 1.12.0 (2020-11-11)
 ------------------
 

@@ -756,6 +756,43 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchExecuteStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statements: [ # required
+    #           {
+    #             statement: "PartiQLStatement", # required
+    #             parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #             consistent_read: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] statements
+    #   The list of PartiQL statements representing the batch to run.
+    #   @return [Array<Types::BatchStatementRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatementInput AWS API Documentation
+    #
+    class BatchExecuteStatementInput < Struct.new(
+      :statements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responses
+    #   The response to each PartiQL statement in the batch.
+    #   @return [Array<Types::BatchStatementResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatementOutput AWS API Documentation
+    #
+    class BatchExecuteStatementOutput < Struct.new(
+      :responses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `BatchGetItem` operation.
     #
     # @note When making an API call, you may pass BatchGetItemInput
@@ -949,6 +986,83 @@ module Aws::DynamoDB
       :responses,
       :unprocessed_keys,
       :consumed_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error associated with a statement in a PartiQL batch that was run.
+    #
+    # @!attribute [rw] code
+    #   The error code associated with the failed PartiQL batch statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the PartiQL batch resposne.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementError AWS API Documentation
+    #
+    class BatchStatementError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A PartiQL batch statement request.
+    #
+    # @note When making an API call, you may pass BatchStatementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         consistent_read: false,
+    #       }
+    #
+    # @!attribute [rw] statement
+    #   A valid PartiQL statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters associated with a PartiQL statement in the batch
+    #   request.
+    #   @return [Array<Types::AttributeValue>]
+    #
+    # @!attribute [rw] consistent_read
+    #   The read consistency of the PartiQL batch request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementRequest AWS API Documentation
+    #
+    class BatchStatementRequest < Struct.new(
+      :statement,
+      :parameters,
+      :consistent_read)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A PartiQL batch statement response..
+    #
+    # @!attribute [rw] error
+    #   The error associated with a failed PartiQL batch statement.
+    #   @return [Types::BatchStatementError]
+    #
+    # @!attribute [rw] table_name
+    #   The table name associated with a failed PartiQL batch statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] item
+    #   A DynamoDB item associated with a BatchStatementResponse
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementResponse AWS API Documentation
+    #
+    class BatchStatementResponse < Struct.new(
+      :error,
+      :table_name,
+      :item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2941,6 +3055,42 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeKinesisStreamingDestinationInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table being described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestinationInput AWS API Documentation
+    #
+    class DescribeKinesisStreamingDestinationInput < Struct.new(
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The name of the table being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_data_stream_destinations
+    #   The list of replica structures for the table being described.
+    #   @return [Array<Types::KinesisDataStreamDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestinationOutput AWS API Documentation
+    #
+    class DescribeKinesisStreamingDestinationOutput < Struct.new(
+      :table_name,
+      :kinesis_data_stream_destinations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `DescribeLimits` operation. Has no content.
     #
     # @api private
@@ -3082,6 +3232,20 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # There was an attempt to insert an item with the same primary key as an
+    # item that already exists in the DynamoDB table.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DuplicateItemException AWS API Documentation
+    #
+    class DuplicateItemException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An endpoint information details.
     #
     # @!attribute [rw] address
@@ -3097,6 +3261,114 @@ module Aws::DynamoDB
     class Endpoint < Struct.new(
       :address,
       :cache_period_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExecuteStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         consistent_read: false,
+    #         next_token: "PartiQLNextToken",
+    #       }
+    #
+    # @!attribute [rw] statement
+    #   The PartiQL statement representing the operation to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters for the PartiQL statement, if any.
+    #   @return [Array<Types::AttributeValue>]
+    #
+    # @!attribute [rw] consistent_read
+    #   The consistency of a read operation. If set to `true`, then a
+    #   strongly consistent read is used; otherwise, an eventually
+    #   consistent read is used.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementInput AWS API Documentation
+    #
+    class ExecuteStatementInput < Struct.new(
+      :statement,
+      :parameters,
+      :consistent_read,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   If a read operation was used, this property will contain the result
+    #   of the reade operation; a map of attribute names and their values.
+    #   For the write operations this value will be empty.
+    #   @return [Array<Hash<String,Types::AttributeValue>>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response of a read request exceeds the response payload limit
+    #   DynamoDB will set this value in the response. If set, you can use
+    #   that this value in the subsequent request to get the remaining
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementOutput AWS API Documentation
+    #
+    class ExecuteStatementOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExecuteTransactionInput
+    #   data as a hash:
+    #
+    #       {
+    #         transact_statements: [ # required
+    #           {
+    #             statement: "PartiQLStatement", # required
+    #             parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] transact_statements
+    #   The list of PartiQL statements representing the transaction to run.
+    #   @return [Array<Types::ParameterizedStatement>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransactionInput AWS API Documentation
+    #
+    class ExecuteTransactionInput < Struct.new(
+      :transact_statements,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responses
+    #   The response to a PartiQL transaction.
+    #   @return [Array<Types::ItemResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransactionOutput AWS API Documentation
+    #
+    class ExecuteTransactionOutput < Struct.new(
+      :responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4718,6 +4990,77 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Describes a Kinesis data stream destination.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for a specific Kinesis data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_status
+    #   The current status of replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_status_description
+    #   The human-readable string that corresponds to the replica status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisDataStreamDestination AWS API Documentation
+    #
+    class KinesisDataStreamDestination < Struct.new(
+      :stream_arn,
+      :destination_status,
+      :destination_status_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass KinesisStreamingDestinationInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         stream_arn: "StreamArn", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the DynamoDB table.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for a Kinesis data stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisStreamingDestinationInput AWS API Documentation
+    #
+    class KinesisStreamingDestinationInput < Struct.new(
+      :table_name,
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The name of the table being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for the specific Kinesis data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_status
+    #   The current status of the replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisStreamingDestinationOutput AWS API Documentation
+    #
+    class KinesisStreamingDestinationOutput < Struct.new(
+      :table_name,
+      :stream_arn,
+      :destination_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There is no limit to the number of daily on-demand backups that can be
     # taken.
     #
@@ -5264,6 +5607,33 @@ module Aws::DynamoDB
       :index_name,
       :key_schema,
       :projection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a PartiQL statment that uses parameters.
+    #
+    # @note When making an API call, you may pass ParameterizedStatement
+    #   data as a hash:
+    #
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       }
+    #
+    # @!attribute [rw] statement
+    #   A PartiQL statment that uses parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter values.
+    #   @return [Array<Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ParameterizedStatement AWS API Documentation
+    #
+    class ParameterizedStatement < Struct.new(
+      :statement,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end

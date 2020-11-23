@@ -114,6 +114,45 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A list of errors that can occur when registering partition indexes for
+    # an existing table.
+    #
+    # These errors give the details about why an index registration failed
+    # and provide a limited number of partitions in the response, so that
+    # you can fix the partitions at fault and try registering the index
+    # again. The most common set of errors that can occur are categorized as
+    # follows:
+    #
+    # * EncryptedPartitionError: The partitions are encrypted.
+    #
+    # * InvalidPartitionTypeDataError: The partition value doesn't match
+    #   the data type for that partition column.
+    #
+    # * MissingPartitionValueError: The partitions are encrypted.
+    #
+    # * UnsupportedPartitionCharacterError: Characters inside the partition
+    #   value are not supported. For example: U+0000 , U+0001, U+0002.
+    #
+    # * InternalError: Any error which does not belong to other error codes.
+    #
+    # @!attribute [rw] code
+    #   The error code for an error that occurred when registering partition
+    #   indexes for an existing table.
+    #   @return [String]
+    #
+    # @!attribute [rw] partitions
+    #   A list of a limited number of partitions in the response.
+    #   @return [Array<Types::PartitionValueList>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BackfillError AWS API Documentation
+    #
+    class BackfillError < Struct.new(
+      :code,
+      :partitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchCreatePartitionRequest
     #   data as a hash:
     #
@@ -2187,6 +2226,11 @@ module Aws::Glue
     #   crawler.
     #   @return [Types::SchemaChangePolicy]
     #
+    # @!attribute [rw] lineage_configuration
+    #   A configuration that specifies whether data lineage is enabled for
+    #   the crawler.
+    #   @return [Types::LineageConfiguration]
+    #
     # @!attribute [rw] state
     #   Indicates whether the crawler is running, or whether a run is
     #   pending.
@@ -2248,6 +2292,7 @@ module Aws::Glue
       :classifiers,
       :recrawl_policy,
       :schema_change_policy,
+      :lineage_configuration,
       :state,
       :table_prefix,
       :schedule,
@@ -2601,6 +2646,9 @@ module Aws::Glue
     #         recrawl_policy: {
     #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
     #         },
+    #         lineage_configuration: {
+    #           crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #         },
     #         configuration: "CrawlerConfiguration",
     #         crawler_security_configuration: "CrawlerSecurityConfiguration",
     #         tags: {
@@ -2660,6 +2708,10 @@ module Aws::Glue
     #   or to crawl only folders that were added since the last crawler run.
     #   @return [Types::RecrawlPolicy]
     #
+    # @!attribute [rw] lineage_configuration
+    #   Specifies data lineage configuration settings for the crawler.
+    #   @return [Types::LineageConfiguration]
+    #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -2698,6 +2750,7 @@ module Aws::Glue
       :table_prefix,
       :schema_change_policy,
       :recrawl_policy,
+      :lineage_configuration,
       :configuration,
       :crawler_security_configuration,
       :tags)
@@ -3663,6 +3716,53 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreatePartitionIndexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         partition_index: { # required
+    #           keys: ["NameString"], # required
+    #           index_name: "NameString", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The catalog ID where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Specifies the name of a database in which you want to create a
+    #   partition index.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Specifies the name of a table in which you want to create a
+    #   partition index.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_index
+    #   Specifies a `PartitionIndex` structure to create a partition index
+    #   in an existing table.
+    #   @return [Types::PartitionIndex]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartitionIndexRequest AWS API Documentation
+    #
+    class CreatePartitionIndexRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :partition_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartitionIndexResponse AWS API Documentation
+    #
+    class CreatePartitionIndexResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreatePartitionRequest
     #   data as a hash:
@@ -5216,6 +5316,49 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeletePartitionIndexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         index_name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The catalog ID where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Specifies the name of a database from which you want to delete a
+    #   partition index.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Specifies the name of a table from which you want to delete a
+    #   partition index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the partition index to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartitionIndexRequest AWS API Documentation
+    #
+    class DeletePartitionIndexRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartitionIndexResponse AWS API Documentation
+    #
+    class DeletePartitionIndexResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeletePartitionRequest
     #   data as a hash:
@@ -10488,6 +10631,32 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies data lineage configuration settings for the crawler.
+    #
+    # @note When making an API call, you may pass LineageConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #       }
+    #
+    # @!attribute [rw] crawler_lineage_settings
+    #   Specifies whether data lineage is enabled for the crawler. Valid
+    #   values are:
+    #
+    #   * ENABLE: enables data lineage for the crawler
+    #
+    #   * DISABLE: disables data lineage for the crawler
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LineageConfiguration AWS API Documentation
+    #
+    class LineageConfiguration < Struct.new(
+      :crawler_lineage_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListCrawlersRequest
     #   data as a hash:
     #
@@ -11699,14 +11868,31 @@ module Aws::Glue
     #
     # @!attribute [rw] index_status
     #   The status of the partition index.
+    #
+    #   The possible statuses are:
+    #
+    #   * CREATING: The index is being created. When an index is in a
+    #     CREATING state, the index or its table cannot be deleted.
+    #
+    #   * ACTIVE: The index creation succeeds.
+    #
+    #   * FAILED: The index creation fails.
+    #
+    #   * DELETING: The index is deleted from the list of indexes.
     #   @return [String]
+    #
+    # @!attribute [rw] backfill_errors
+    #   A list of errors that can occur when registering partition indexes
+    #   for an existing table.
+    #   @return [Array<Types::BackfillError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionIndexDescriptor AWS API Documentation
     #
     class PartitionIndexDescriptor < Struct.new(
       :index_name,
       :keys,
-      :index_status)
+      :index_status,
+      :backfill_errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15411,6 +15597,9 @@ module Aws::Glue
     #         recrawl_policy: {
     #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
     #         },
+    #         lineage_configuration: {
+    #           crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #         },
     #         configuration: "CrawlerConfiguration",
     #         crawler_security_configuration: "CrawlerSecurityConfiguration",
     #       }
@@ -15467,6 +15656,10 @@ module Aws::Glue
     #   or to crawl only folders that were added since the last crawler run.
     #   @return [Types::RecrawlPolicy]
     #
+    # @!attribute [rw] lineage_configuration
+    #   Specifies data lineage configuration settings for the crawler.
+    #   @return [Types::LineageConfiguration]
+    #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -15495,6 +15688,7 @@ module Aws::Glue
       :table_prefix,
       :schema_change_policy,
       :recrawl_policy,
+      :lineage_configuration,
       :configuration,
       :crawler_security_configuration)
       SENSITIVE = []

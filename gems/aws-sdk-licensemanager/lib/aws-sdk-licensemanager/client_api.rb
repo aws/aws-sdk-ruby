@@ -213,6 +213,7 @@ module Aws::LicenseManager
     LicenseConfigurationAssociation.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     LicenseConfigurationAssociation.add_member(:resource_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwnerId"))
     LicenseConfigurationAssociation.add_member(:association_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "AssociationTime"))
+    LicenseConfigurationAssociation.add_member(:ami_association_scope, Shapes::ShapeRef.new(shape: String, location_name: "AmiAssociationScope"))
     LicenseConfigurationAssociation.struct_class = Types::LicenseConfigurationAssociation
 
     LicenseConfigurationAssociations.member = Shapes::ShapeRef.new(shape: LicenseConfigurationAssociation)
@@ -242,6 +243,7 @@ module Aws::LicenseManager
     LicenseOperationFailureList.member = Shapes::ShapeRef.new(shape: LicenseOperationFailure)
 
     LicenseSpecification.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseConfigurationArn"))
+    LicenseSpecification.add_member(:ami_association_scope, Shapes::ShapeRef.new(shape: String, location_name: "AmiAssociationScope"))
     LicenseSpecification.struct_class = Types::LicenseSpecification
 
     LicenseSpecifications.member = Shapes::ShapeRef.new(shape: LicenseSpecification)

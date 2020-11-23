@@ -416,7 +416,7 @@ module Aws::ApplicationInsights
     #
     #   resp = client.create_component({
     #     resource_group_name: "ResourceGroupName", # required
-    #     component_name: "ComponentName", # required
+    #     component_name: "CustomComponentName", # required
     #     resource_list: ["ResourceARN"], # required
     #   })
     #
@@ -441,10 +441,21 @@ module Aws::ApplicationInsights
     #   The name of the log pattern.
     #
     # @option params [required, String] :pattern
-    #   The log pattern.
+    #   The log pattern. The pattern must be DFA compatible. Patterns that
+    #   utilize forward lookahead or backreference constructions are not
+    #   supported.
     #
     # @option params [required, Integer] :rank
-    #   Rank of the log pattern.
+    #   Rank of the log pattern. Must be a value between `1` and `1,000,000`.
+    #   The patterns are sorted by rank, so we recommend that you set your
+    #   highest priority patterns with the lowest rank. A pattern of rank `1`
+    #   will be the first to get matched to a log line. A pattern of rank
+    #   `1,000,000` will be last to get matched. When you configure custom log
+    #   patterns from the console, a `Low` severity pattern translates to a
+    #   `750,000` rank. A `Medium` severity pattern translates to a `500,000`
+    #   rank. And a `High` severity pattern translates to a `250,000` rank.
+    #   Rank values less than `1` or greater than `1,000,000` are reserved for
+    #   AWS-provided patterns.
     #
     # @return [Types::CreateLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -517,7 +528,7 @@ module Aws::ApplicationInsights
     #
     #   resp = client.delete_component({
     #     resource_group_name: "ResourceGroupName", # required
-    #     component_name: "ComponentName", # required
+    #     component_name: "CustomComponentName", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DeleteComponent AWS API Documentation
@@ -616,9 +627,14 @@ module Aws::ApplicationInsights
     # @example Response structure
     #
     #   resp.application_component.component_name #=> String
+    #   resp.application_component.component_remarks #=> String
     #   resp.application_component.resource_type #=> String
-    #   resp.application_component.tier #=> String, one of "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB", "SQL_SERVER"
+    #   resp.application_component.os_type #=> String, one of "WINDOWS", "LINUX"
+    #   resp.application_component.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE"
     #   resp.application_component.monitor #=> Boolean
+    #   resp.application_component.detected_workload #=> Hash
+    #   resp.application_component.detected_workload["Tier"] #=> Hash
+    #   resp.application_component.detected_workload["Tier"]["MetaDataKey"] #=> String
     #   resp.resource_list #=> Array
     #   resp.resource_list[0] #=> String
     #
@@ -655,7 +671,7 @@ module Aws::ApplicationInsights
     # @example Response structure
     #
     #   resp.monitor #=> Boolean
-    #   resp.tier #=> String, one of "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB", "SQL_SERVER"
+    #   resp.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE"
     #   resp.component_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfiguration AWS API Documentation
@@ -689,7 +705,7 @@ module Aws::ApplicationInsights
     #   resp = client.describe_component_configuration_recommendation({
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
-    #     tier: "DEFAULT", # required, accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
+    #     tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE
     #   })
     #
     # @example Response structure
@@ -777,7 +793,7 @@ module Aws::ApplicationInsights
     #   resp.observation.unit #=> String
     #   resp.observation.value #=> Float
     #   resp.observation.cloud_watch_event_id #=> String
-    #   resp.observation.cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH"
+    #   resp.observation.cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH", "RDS"
     #   resp.observation.cloud_watch_event_detail_type #=> String
     #   resp.observation.health_event_arn #=> String
     #   resp.observation.health_service #=> String
@@ -790,6 +806,17 @@ module Aws::ApplicationInsights
     #   resp.observation.code_deploy_application #=> String
     #   resp.observation.code_deploy_instance_group_id #=> String
     #   resp.observation.ec2_state #=> String
+    #   resp.observation.rds_event_categories #=> String
+    #   resp.observation.rds_event_message #=> String
+    #   resp.observation.s3_event_name #=> String
+    #   resp.observation.states_execution_arn #=> String
+    #   resp.observation.states_arn #=> String
+    #   resp.observation.states_status #=> String
+    #   resp.observation.states_input #=> String
+    #   resp.observation.ebs_event #=> String
+    #   resp.observation.ebs_result #=> String
+    #   resp.observation.ebs_cause #=> String
+    #   resp.observation.ebs_request_id #=> String
     #   resp.observation.x_ray_fault_percent #=> Integer
     #   resp.observation.x_ray_throttle_percent #=> Integer
     #   resp.observation.x_ray_error_percent #=> Integer
@@ -877,7 +904,7 @@ module Aws::ApplicationInsights
     #   resp.related_observations.observation_list[0].unit #=> String
     #   resp.related_observations.observation_list[0].value #=> Float
     #   resp.related_observations.observation_list[0].cloud_watch_event_id #=> String
-    #   resp.related_observations.observation_list[0].cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH"
+    #   resp.related_observations.observation_list[0].cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH", "RDS"
     #   resp.related_observations.observation_list[0].cloud_watch_event_detail_type #=> String
     #   resp.related_observations.observation_list[0].health_event_arn #=> String
     #   resp.related_observations.observation_list[0].health_service #=> String
@@ -890,6 +917,17 @@ module Aws::ApplicationInsights
     #   resp.related_observations.observation_list[0].code_deploy_application #=> String
     #   resp.related_observations.observation_list[0].code_deploy_instance_group_id #=> String
     #   resp.related_observations.observation_list[0].ec2_state #=> String
+    #   resp.related_observations.observation_list[0].rds_event_categories #=> String
+    #   resp.related_observations.observation_list[0].rds_event_message #=> String
+    #   resp.related_observations.observation_list[0].s3_event_name #=> String
+    #   resp.related_observations.observation_list[0].states_execution_arn #=> String
+    #   resp.related_observations.observation_list[0].states_arn #=> String
+    #   resp.related_observations.observation_list[0].states_status #=> String
+    #   resp.related_observations.observation_list[0].states_input #=> String
+    #   resp.related_observations.observation_list[0].ebs_event #=> String
+    #   resp.related_observations.observation_list[0].ebs_result #=> String
+    #   resp.related_observations.observation_list[0].ebs_cause #=> String
+    #   resp.related_observations.observation_list[0].ebs_request_id #=> String
     #   resp.related_observations.observation_list[0].x_ray_fault_percent #=> Integer
     #   resp.related_observations.observation_list[0].x_ray_throttle_percent #=> Integer
     #   resp.related_observations.observation_list[0].x_ray_error_percent #=> Integer
@@ -984,9 +1022,14 @@ module Aws::ApplicationInsights
     #
     #   resp.application_component_list #=> Array
     #   resp.application_component_list[0].component_name #=> String
+    #   resp.application_component_list[0].component_remarks #=> String
     #   resp.application_component_list[0].resource_type #=> String
-    #   resp.application_component_list[0].tier #=> String, one of "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB", "SQL_SERVER"
+    #   resp.application_component_list[0].os_type #=> String, one of "WINDOWS", "LINUX"
+    #   resp.application_component_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE"
     #   resp.application_component_list[0].monitor #=> Boolean
+    #   resp.application_component_list[0].detected_workload #=> Hash
+    #   resp.application_component_list[0].detected_workload["Tier"] #=> Hash
+    #   resp.application_component_list[0].detected_workload["Tier"]["MetaDataKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListComponents AWS API Documentation
@@ -1063,7 +1106,7 @@ module Aws::ApplicationInsights
     #   resp.event_list #=> Array
     #   resp.event_list[0].monitored_resource_arn #=> String
     #   resp.event_list[0].event_status #=> String, one of "INFO", "WARN", "ERROR"
-    #   resp.event_list[0].event_resource_type #=> String, one of "CLOUDWATCH_ALARM", "CLOUDFORMATION", "SSM_ASSOCIATION"
+    #   resp.event_list[0].event_resource_type #=> String, one of "CLOUDWATCH_ALARM", "CLOUDWATCH_LOG", "CLOUDFORMATION", "SSM_ASSOCIATION"
     #   resp.event_list[0].event_time #=> Time
     #   resp.event_list[0].event_detail #=> String
     #   resp.event_list[0].event_resource_name #=> String
@@ -1429,8 +1472,8 @@ module Aws::ApplicationInsights
     #
     #   resp = client.update_component({
     #     resource_group_name: "ResourceGroupName", # required
-    #     component_name: "ComponentName", # required
-    #     new_component_name: "NewComponentName",
+    #     component_name: "CustomComponentName", # required
+    #     new_component_name: "CustomComponentName",
     #     resource_list: ["ResourceARN"],
     #   })
     #
@@ -1483,7 +1526,7 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
     #     monitor: false,
-    #     tier: "DEFAULT", # accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
+    #     tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE
     #     component_configuration: "ComponentConfiguration",
     #   })
     #
@@ -1508,10 +1551,21 @@ module Aws::ApplicationInsights
     #   The name of the log pattern.
     #
     # @option params [String] :pattern
-    #   The log pattern.
+    #   The log pattern. The pattern must be DFA compatible. Patterns that
+    #   utilize forward lookahead or backreference constructions are not
+    #   supported.
     #
     # @option params [Integer] :rank
-    #   Rank of the log pattern.
+    #   Rank of the log pattern. Must be a value between `1` and `1,000,000`.
+    #   The patterns are sorted by rank, so we recommend that you set your
+    #   highest priority patterns with the lowest rank. A pattern of rank `1`
+    #   will be the first to get matched to a log line. A pattern of rank
+    #   `1,000,000` will be last to get matched. When you configure custom log
+    #   patterns from the console, a `Low` severity pattern translates to a
+    #   `750,000` rank. A `Medium` severity pattern translates to a `500,000`
+    #   rank. And a `High` severity pattern translates to a `250,000` rank.
+    #   Rank values less than `1` or greater than `1,000,000` are reserved for
+    #   AWS-provided patterns.
     #
     # @return [Types::UpdateLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1558,7 +1612,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

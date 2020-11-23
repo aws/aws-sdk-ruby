@@ -327,6 +327,55 @@ module Aws::Signer
 
     # @!group API Operations
 
+    # Adds cross-account permissions to a signing profile.
+    #
+    # @option params [required, String] :profile_name
+    #   The human-readable name of the signing profile.
+    #
+    # @option params [String] :profile_version
+    #   The version of the signing profile.
+    #
+    # @option params [required, String] :action
+    #   The AWS Signer action permitted as part of cross-account permissions.
+    #
+    # @option params [required, String] :principal
+    #   The AWS principal receiving cross-account permissions. This may be an
+    #   IAM role or another AWS account ID.
+    #
+    # @option params [String] :revision_id
+    #   A unique identifier for the current profile revision.
+    #
+    # @option params [required, String] :statement_id
+    #   A unique identifier for the cross-account permission statement.
+    #
+    # @return [Types::AddProfilePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddProfilePermissionResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_profile_permission({
+    #     profile_name: "ProfileName", # required
+    #     profile_version: "ProfileVersion",
+    #     action: "String", # required
+    #     principal: "String", # required
+    #     revision_id: "String",
+    #     statement_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/AddProfilePermission AWS API Documentation
+    #
+    # @overload add_profile_permission(params = {})
+    # @param [Hash] params ({})
+    def add_profile_permission(params = {}, options = {})
+      req = build_request(:add_profile_permission, params)
+      req.send_request(options)
+    end
+
     # Changes the state of an `ACTIVE` signing profile to `CANCELED`. A
     # canceled profile is still viewable with the `ListSigningProfiles`
     # operation, but it cannot perform new signing jobs, and is deleted two
@@ -365,15 +414,21 @@ module Aws::Signer
     #   * {Types::DescribeSigningJobResponse#source #source} => Types::Source
     #   * {Types::DescribeSigningJobResponse#signing_material #signing_material} => Types::SigningMaterial
     #   * {Types::DescribeSigningJobResponse#platform_id #platform_id} => String
+    #   * {Types::DescribeSigningJobResponse#platform_display_name #platform_display_name} => String
     #   * {Types::DescribeSigningJobResponse#profile_name #profile_name} => String
+    #   * {Types::DescribeSigningJobResponse#profile_version #profile_version} => String
     #   * {Types::DescribeSigningJobResponse#overrides #overrides} => Types::SigningPlatformOverrides
     #   * {Types::DescribeSigningJobResponse#signing_parameters #signing_parameters} => Hash&lt;String,String&gt;
     #   * {Types::DescribeSigningJobResponse#created_at #created_at} => Time
     #   * {Types::DescribeSigningJobResponse#completed_at #completed_at} => Time
+    #   * {Types::DescribeSigningJobResponse#signature_expires_at #signature_expires_at} => Time
     #   * {Types::DescribeSigningJobResponse#requested_by #requested_by} => String
     #   * {Types::DescribeSigningJobResponse#status #status} => String
     #   * {Types::DescribeSigningJobResponse#status_reason #status_reason} => String
+    #   * {Types::DescribeSigningJobResponse#revocation_record #revocation_record} => Types::SigningJobRevocationRecord
     #   * {Types::DescribeSigningJobResponse#signed_object #signed_object} => Types::SignedObject
+    #   * {Types::DescribeSigningJobResponse#job_owner #job_owner} => String
+    #   * {Types::DescribeSigningJobResponse#job_invoker #job_invoker} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -389,7 +444,9 @@ module Aws::Signer
     #   resp.source.s3.version #=> String
     #   resp.signing_material.certificate_arn #=> String
     #   resp.platform_id #=> String
+    #   resp.platform_display_name #=> String
     #   resp.profile_name #=> String
+    #   resp.profile_version #=> String
     #   resp.overrides.signing_configuration.encryption_algorithm #=> String, one of "RSA", "ECDSA"
     #   resp.overrides.signing_configuration.hash_algorithm #=> String, one of "SHA1", "SHA256"
     #   resp.overrides.signing_image_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
@@ -397,11 +454,17 @@ module Aws::Signer
     #   resp.signing_parameters["SigningParameterKey"] #=> String
     #   resp.created_at #=> Time
     #   resp.completed_at #=> Time
+    #   resp.signature_expires_at #=> Time
     #   resp.requested_by #=> String
     #   resp.status #=> String, one of "InProgress", "Failed", "Succeeded"
     #   resp.status_reason #=> String
+    #   resp.revocation_record.reason #=> String
+    #   resp.revocation_record.revoked_at #=> Time
+    #   resp.revocation_record.revoked_by #=> String
     #   resp.signed_object.s3.bucket_name #=> String
     #   resp.signed_object.s3.key #=> String
+    #   resp.job_owner #=> String
+    #   resp.job_invoker #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -432,6 +495,7 @@ module Aws::Signer
     #   * {Types::GetSigningPlatformResponse#signing_configuration #signing_configuration} => Types::SigningConfiguration
     #   * {Types::GetSigningPlatformResponse#signing_image_format #signing_image_format} => Types::SigningImageFormat
     #   * {Types::GetSigningPlatformResponse#max_size_in_mb #max_size_in_mb} => Integer
+    #   * {Types::GetSigningPlatformResponse#revocation_supported #revocation_supported} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -456,6 +520,7 @@ module Aws::Signer
     #   resp.signing_image_format.supported_formats[0] #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.signing_image_format.default_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.max_size_in_mb #=> Integer
+    #   resp.revocation_supported #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningPlatform AWS API Documentation
     #
@@ -471,14 +536,23 @@ module Aws::Signer
     # @option params [required, String] :profile_name
     #   The name of the target signing profile.
     #
+    # @option params [String] :profile_owner
+    #   The AWS account ID of the profile owner.
+    #
     # @return [Types::GetSigningProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSigningProfileResponse#profile_name #profile_name} => String
+    #   * {Types::GetSigningProfileResponse#profile_version #profile_version} => String
+    #   * {Types::GetSigningProfileResponse#profile_version_arn #profile_version_arn} => String
+    #   * {Types::GetSigningProfileResponse#revocation_record #revocation_record} => Types::SigningProfileRevocationRecord
     #   * {Types::GetSigningProfileResponse#signing_material #signing_material} => Types::SigningMaterial
     #   * {Types::GetSigningProfileResponse#platform_id #platform_id} => String
+    #   * {Types::GetSigningProfileResponse#platform_display_name #platform_display_name} => String
+    #   * {Types::GetSigningProfileResponse#signature_validity_period #signature_validity_period} => Types::SignatureValidityPeriod
     #   * {Types::GetSigningProfileResponse#overrides #overrides} => Types::SigningPlatformOverrides
     #   * {Types::GetSigningProfileResponse#signing_parameters #signing_parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetSigningProfileResponse#status #status} => String
+    #   * {Types::GetSigningProfileResponse#status_reason #status_reason} => String
     #   * {Types::GetSigningProfileResponse#arn #arn} => String
     #   * {Types::GetSigningProfileResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -486,19 +560,29 @@ module Aws::Signer
     #
     #   resp = client.get_signing_profile({
     #     profile_name: "ProfileName", # required
+    #     profile_owner: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.profile_name #=> String
+    #   resp.profile_version #=> String
+    #   resp.profile_version_arn #=> String
+    #   resp.revocation_record.revocation_effective_from #=> Time
+    #   resp.revocation_record.revoked_at #=> Time
+    #   resp.revocation_record.revoked_by #=> String
     #   resp.signing_material.certificate_arn #=> String
     #   resp.platform_id #=> String
+    #   resp.platform_display_name #=> String
+    #   resp.signature_validity_period.value #=> Integer
+    #   resp.signature_validity_period.type #=> String, one of "DAYS", "MONTHS", "YEARS"
     #   resp.overrides.signing_configuration.encryption_algorithm #=> String, one of "RSA", "ECDSA"
     #   resp.overrides.signing_configuration.hash_algorithm #=> String, one of "SHA1", "SHA256"
     #   resp.overrides.signing_image_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.signing_parameters #=> Hash
     #   resp.signing_parameters["SigningParameterKey"] #=> String
-    #   resp.status #=> String, one of "Active", "Canceled"
+    #   resp.status #=> String, one of "Active", "Canceled", "Revoked"
+    #   resp.status_reason #=> String
     #   resp.arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -509,6 +593,48 @@ module Aws::Signer
     # @param [Hash] params ({})
     def get_signing_profile(params = {}, options = {})
       req = build_request(:get_signing_profile, params)
+      req.send_request(options)
+    end
+
+    # Lists the cross-account permissions associated with a signing profile.
+    #
+    # @option params [required, String] :profile_name
+    #   Name of the signing profile containing the cross-account permissions.
+    #
+    # @option params [String] :next_token
+    #   String for specifying the next set of paginated results.
+    #
+    # @return [Types::ListProfilePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfilePermissionsResponse#revision_id #revision_id} => String
+    #   * {Types::ListProfilePermissionsResponse#policy_size_bytes #policy_size_bytes} => Integer
+    #   * {Types::ListProfilePermissionsResponse#permissions #permissions} => Array&lt;Types::Permission&gt;
+    #   * {Types::ListProfilePermissionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_permissions({
+    #     profile_name: "ProfileName", # required
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_id #=> String
+    #   resp.policy_size_bytes #=> Integer
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].action #=> String
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].statement_id #=> String
+    #   resp.permissions[0].profile_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListProfilePermissions AWS API Documentation
+    #
+    # @overload list_profile_permissions(params = {})
+    # @param [Hash] params ({})
+    def list_profile_permissions(params = {}, options = {})
+      req = build_request(:list_profile_permissions, params)
       req.send_request(options)
     end
 
@@ -544,6 +670,21 @@ module Aws::Signer
     #   parameter in a subsequent request. Set it to the value of `nextToken`
     #   from the response that you just received.
     #
+    # @option params [Boolean] :is_revoked
+    #   Filters results to return only signing jobs with revoked signatures.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :signature_expires_before
+    #   Filters results to return only signing jobs with signatures expiring
+    #   before a specified timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :signature_expires_after
+    #   Filters results to return only signing jobs with signatures expiring
+    #   after a specified timestamp.
+    #
+    # @option params [String] :job_invoker
+    #   Filters results to return only signing jobs initiated by a specified
+    #   IAM entity.
+    #
     # @return [Types::ListSigningJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSigningJobsResponse#jobs #jobs} => Array&lt;Types::SigningJob&gt;
@@ -559,6 +700,10 @@ module Aws::Signer
     #     requested_by: "RequestedBy",
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     is_revoked: false,
+    #     signature_expires_before: Time.now,
+    #     signature_expires_after: Time.now,
+    #     job_invoker: "AccountId",
     #   })
     #
     # @example Response structure
@@ -573,6 +718,14 @@ module Aws::Signer
     #   resp.jobs[0].signing_material.certificate_arn #=> String
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].status #=> String, one of "InProgress", "Failed", "Succeeded"
+    #   resp.jobs[0].is_revoked #=> Boolean
+    #   resp.jobs[0].profile_name #=> String
+    #   resp.jobs[0].profile_version #=> String
+    #   resp.jobs[0].platform_id #=> String
+    #   resp.jobs[0].platform_display_name #=> String
+    #   resp.jobs[0].signature_expires_at #=> Time
+    #   resp.jobs[0].job_owner #=> String
+    #   resp.jobs[0].job_invoker #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningJobs AWS API Documentation
@@ -645,6 +798,7 @@ module Aws::Signer
     #   resp.platforms[0].signing_image_format.supported_formats[0] #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.platforms[0].signing_image_format.default_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.platforms[0].max_size_in_mb #=> Integer
+    #   resp.platforms[0].revocation_supported #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningPlatforms AWS API Documentation
@@ -677,6 +831,14 @@ module Aws::Signer
     #   parameter in a subsequent request. Set it to the value of `nextToken`
     #   from the response that you just received.
     #
+    # @option params [String] :platform_id
+    #   Filters results to return only signing jobs initiated for a specified
+    #   signing platform.
+    #
+    # @option params [Array<String>] :statuses
+    #   Filters results to return only signing jobs with statuses in the
+    #   specified list.
+    #
     # @return [Types::ListSigningProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSigningProfilesResponse#profiles #profiles} => Array&lt;Types::SigningProfile&gt;
@@ -690,17 +852,24 @@ module Aws::Signer
     #     include_canceled: false,
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     platform_id: "PlatformId",
+    #     statuses: ["Active"], # accepts Active, Canceled, Revoked
     #   })
     #
     # @example Response structure
     #
     #   resp.profiles #=> Array
     #   resp.profiles[0].profile_name #=> String
+    #   resp.profiles[0].profile_version #=> String
+    #   resp.profiles[0].profile_version_arn #=> String
     #   resp.profiles[0].signing_material.certificate_arn #=> String
+    #   resp.profiles[0].signature_validity_period.value #=> Integer
+    #   resp.profiles[0].signature_validity_period.type #=> String, one of "DAYS", "MONTHS", "YEARS"
     #   resp.profiles[0].platform_id #=> String
+    #   resp.profiles[0].platform_display_name #=> String
     #   resp.profiles[0].signing_parameters #=> Hash
     #   resp.profiles[0].signing_parameters["SigningParameterKey"] #=> String
-    #   resp.profiles[0].status #=> String, one of "Active", "Canceled"
+    #   resp.profiles[0].status #=> String, one of "Active", "Canceled", "Revoked"
     #   resp.profiles[0].arn #=> String
     #   resp.profiles[0].tags #=> Hash
     #   resp.profiles[0].tags["TagKey"] #=> String
@@ -756,9 +925,13 @@ module Aws::Signer
     # @option params [required, String] :profile_name
     #   The name of the signing profile to be created.
     #
-    # @option params [required, Types::SigningMaterial] :signing_material
+    # @option params [Types::SigningMaterial] :signing_material
     #   The AWS Certificate Manager certificate that will be used to sign code
     #   with the new signing profile.
+    #
+    # @option params [Types::SignatureValidityPeriod] :signature_validity_period
+    #   The default validity period override for any signature generated using
+    #   this signing profile. If unspecified, the default is 135 months.
     #
     # @option params [required, String] :platform_id
     #   The ID of the signing platform to be created.
@@ -778,13 +951,19 @@ module Aws::Signer
     # @return [Types::PutSigningProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutSigningProfileResponse#arn #arn} => String
+    #   * {Types::PutSigningProfileResponse#profile_version #profile_version} => String
+    #   * {Types::PutSigningProfileResponse#profile_version_arn #profile_version_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_signing_profile({
     #     profile_name: "ProfileName", # required
-    #     signing_material: { # required
+    #     signing_material: {
     #       certificate_arn: "CertificateArn", # required
+    #     },
+    #     signature_validity_period: {
+    #       value: 1,
+    #       type: "DAYS", # accepts DAYS, MONTHS, YEARS
     #     },
     #     platform_id: "PlatformId", # required
     #     overrides: {
@@ -805,6 +984,8 @@ module Aws::Signer
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.profile_version #=> String
+    #   resp.profile_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/PutSigningProfile AWS API Documentation
     #
@@ -812,6 +993,113 @@ module Aws::Signer
     # @param [Hash] params ({})
     def put_signing_profile(params = {}, options = {})
       req = build_request(:put_signing_profile, params)
+      req.send_request(options)
+    end
+
+    # Removes cross-account permissions from a signing profile.
+    #
+    # @option params [required, String] :profile_name
+    #   A human-readable name for the signing profile with permissions to be
+    #   removed.
+    #
+    # @option params [required, String] :revision_id
+    #   An identifier for the current revision of the signing profile
+    #   permissions.
+    #
+    # @option params [required, String] :statement_id
+    #   A unique identifier for the cross-account permissions statement.
+    #
+    # @return [Types::RemoveProfilePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveProfilePermissionResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_profile_permission({
+    #     profile_name: "ProfileName", # required
+    #     revision_id: "String", # required
+    #     statement_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/RemoveProfilePermission AWS API Documentation
+    #
+    # @overload remove_profile_permission(params = {})
+    # @param [Hash] params ({})
+    def remove_profile_permission(params = {}, options = {})
+      req = build_request(:remove_profile_permission, params)
+      req.send_request(options)
+    end
+
+    # Changes the state of a signing job to REVOKED. This indicates that the
+    # signature is no longer valid.
+    #
+    # @option params [required, String] :job_id
+    #   ID of the signing job to be revoked.
+    #
+    # @option params [String] :job_owner
+    #   AWS account ID of the job owner.
+    #
+    # @option params [required, String] :reason
+    #   The reason for revoking the signing job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_signature({
+    #     job_id: "JobId", # required
+    #     job_owner: "AccountId",
+    #     reason: "RevocationReasonString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/RevokeSignature AWS API Documentation
+    #
+    # @overload revoke_signature(params = {})
+    # @param [Hash] params ({})
+    def revoke_signature(params = {}, options = {})
+      req = build_request(:revoke_signature, params)
+      req.send_request(options)
+    end
+
+    # Changes the state of a signing profile to REVOKED. This indicates that
+    # signatures generated using the signing profile after an effective
+    # start date are no longer valid.
+    #
+    # @option params [required, String] :profile_name
+    #   The name of the signing profile to be revoked.
+    #
+    # @option params [required, String] :profile_version
+    #   The version of the signing profile to be revoked.
+    #
+    # @option params [required, String] :reason
+    #   The reason for revoking a signing profile.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :effective_time
+    #   A timestamp for when revocation of a Signing Profile should become
+    #   effective. Signatures generated using the signing profile after this
+    #   timestamp are not trusted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_signing_profile({
+    #     profile_name: "ProfileName", # required
+    #     profile_version: "ProfileVersion", # required
+    #     reason: "RevocationReasonString", # required
+    #     effective_time: Time.now, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/RevokeSigningProfile AWS API Documentation
+    #
+    # @overload revoke_signing_profile(params = {})
+    # @param [Hash] params ({})
+    def revoke_signing_profile(params = {}, options = {})
+      req = build_request(:revoke_signing_profile, params)
       req.send_request(options)
     end
 
@@ -852,7 +1140,7 @@ module Aws::Signer
     #   The S3 bucket in which to save your signed object. The destination
     #   contains the name of your bucket and an optional prefix.
     #
-    # @option params [String] :profile_name
+    # @option params [required, String] :profile_name
     #   The name of the signing profile.
     #
     # @option params [required, String] :client_request_token
@@ -862,9 +1150,13 @@ module Aws::Signer
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :profile_owner
+    #   The AWS account ID of the signing profile owner.
+    #
     # @return [Types::StartSigningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSigningJobResponse#job_id #job_id} => String
+    #   * {Types::StartSigningJobResponse#job_owner #job_owner} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -882,13 +1174,15 @@ module Aws::Signer
     #         prefix: "Prefix",
     #       },
     #     },
-    #     profile_name: "ProfileName",
+    #     profile_name: "ProfileName", # required
     #     client_request_token: "ClientRequestToken", # required
+    #     profile_owner: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/StartSigningJob AWS API Documentation
     #
@@ -971,7 +1265,7 @@ module Aws::Signer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-signer'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-23)
+------------------
+
+* Feature - Updated the account management API to support the integration with AWS Organizations. Added new methods to allow users to view and manage the delegated administrator account for Security Hub.
+
 1.35.0 (2020-09-30)
 ------------------
 

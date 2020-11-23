@@ -19,6 +19,10 @@ module Aws::Glue
     AdditionalPlanOptionsMap = Shapes::MapShape.new(name: 'AdditionalPlanOptionsMap')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     AttemptCount = Shapes::IntegerShape.new(name: 'AttemptCount')
+    BackfillError = Shapes::StructureShape.new(name: 'BackfillError')
+    BackfillErrorCode = Shapes::StringShape.new(name: 'BackfillErrorCode')
+    BackfillErroredPartitionsList = Shapes::ListShape.new(name: 'BackfillErroredPartitionsList')
+    BackfillErrors = Shapes::ListShape.new(name: 'BackfillErrors')
     BatchCreatePartitionRequest = Shapes::StructureShape.new(name: 'BatchCreatePartitionRequest')
     BatchCreatePartitionResponse = Shapes::StructureShape.new(name: 'BatchCreatePartitionResponse')
     BatchDeleteConnectionRequest = Shapes::StructureShape.new(name: 'BatchDeleteConnectionRequest')
@@ -129,6 +133,7 @@ module Aws::Glue
     CrawlState = Shapes::StringShape.new(name: 'CrawlState')
     Crawler = Shapes::StructureShape.new(name: 'Crawler')
     CrawlerConfiguration = Shapes::StringShape.new(name: 'CrawlerConfiguration')
+    CrawlerLineageSettings = Shapes::StringShape.new(name: 'CrawlerLineageSettings')
     CrawlerList = Shapes::ListShape.new(name: 'CrawlerList')
     CrawlerMetrics = Shapes::StructureShape.new(name: 'CrawlerMetrics')
     CrawlerMetricsList = Shapes::ListShape.new(name: 'CrawlerMetricsList')
@@ -157,6 +162,8 @@ module Aws::Glue
     CreateJsonClassifierRequest = Shapes::StructureShape.new(name: 'CreateJsonClassifierRequest')
     CreateMLTransformRequest = Shapes::StructureShape.new(name: 'CreateMLTransformRequest')
     CreateMLTransformResponse = Shapes::StructureShape.new(name: 'CreateMLTransformResponse')
+    CreatePartitionIndexRequest = Shapes::StructureShape.new(name: 'CreatePartitionIndexRequest')
+    CreatePartitionIndexResponse = Shapes::StructureShape.new(name: 'CreatePartitionIndexResponse')
     CreatePartitionRequest = Shapes::StructureShape.new(name: 'CreatePartitionRequest')
     CreatePartitionResponse = Shapes::StructureShape.new(name: 'CreatePartitionResponse')
     CreateRegistryInput = Shapes::StructureShape.new(name: 'CreateRegistryInput')
@@ -218,6 +225,8 @@ module Aws::Glue
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
     DeleteMLTransformRequest = Shapes::StructureShape.new(name: 'DeleteMLTransformRequest')
     DeleteMLTransformResponse = Shapes::StructureShape.new(name: 'DeleteMLTransformResponse')
+    DeletePartitionIndexRequest = Shapes::StructureShape.new(name: 'DeletePartitionIndexRequest')
+    DeletePartitionIndexResponse = Shapes::StructureShape.new(name: 'DeletePartitionIndexResponse')
     DeletePartitionRequest = Shapes::StructureShape.new(name: 'DeletePartitionRequest')
     DeletePartitionResponse = Shapes::StructureShape.new(name: 'DeletePartitionResponse')
     DeleteRegistryInput = Shapes::StructureShape.new(name: 'DeleteRegistryInput')
@@ -435,6 +444,7 @@ module Aws::Glue
     LastCrawlInfo = Shapes::StructureShape.new(name: 'LastCrawlInfo')
     LastCrawlStatus = Shapes::StringShape.new(name: 'LastCrawlStatus')
     LatestSchemaVersionBoolean = Shapes::BooleanShape.new(name: 'LatestSchemaVersionBoolean')
+    LineageConfiguration = Shapes::StructureShape.new(name: 'LineageConfiguration')
     ListCrawlersRequest = Shapes::StructureShape.new(name: 'ListCrawlersRequest')
     ListCrawlersResponse = Shapes::StructureShape.new(name: 'ListCrawlersResponse')
     ListDevEndpointsRequest = Shapes::StructureShape.new(name: 'ListDevEndpointsRequest')
@@ -786,6 +796,14 @@ module Aws::Glue
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
+    BackfillError.add_member(:code, Shapes::ShapeRef.new(shape: BackfillErrorCode, location_name: "Code"))
+    BackfillError.add_member(:partitions, Shapes::ShapeRef.new(shape: BackfillErroredPartitionsList, location_name: "Partitions"))
+    BackfillError.struct_class = Types::BackfillError
+
+    BackfillErroredPartitionsList.member = Shapes::ShapeRef.new(shape: PartitionValueList)
+
+    BackfillErrors.member = Shapes::ShapeRef.new(shape: BackfillError)
+
     BatchCreatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     BatchCreatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     BatchCreatePartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -1123,6 +1141,7 @@ module Aws::Glue
     Crawler.add_member(:classifiers, Shapes::ShapeRef.new(shape: ClassifierNameList, location_name: "Classifiers"))
     Crawler.add_member(:recrawl_policy, Shapes::ShapeRef.new(shape: RecrawlPolicy, location_name: "RecrawlPolicy"))
     Crawler.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    Crawler.add_member(:lineage_configuration, Shapes::ShapeRef.new(shape: LineageConfiguration, location_name: "LineageConfiguration"))
     Crawler.add_member(:state, Shapes::ShapeRef.new(shape: CrawlerState, location_name: "State"))
     Crawler.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     Crawler.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
@@ -1194,6 +1213,7 @@ module Aws::Glue
     CreateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     CreateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
     CreateCrawlerRequest.add_member(:recrawl_policy, Shapes::ShapeRef.new(shape: RecrawlPolicy, location_name: "RecrawlPolicy"))
+    CreateCrawlerRequest.add_member(:lineage_configuration, Shapes::ShapeRef.new(shape: LineageConfiguration, location_name: "LineageConfiguration"))
     CreateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     CreateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     CreateCrawlerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
@@ -1305,6 +1325,14 @@ module Aws::Glue
 
     CreateMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
     CreateMLTransformResponse.struct_class = Types::CreateMLTransformResponse
+
+    CreatePartitionIndexRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    CreatePartitionIndexRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    CreatePartitionIndexRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    CreatePartitionIndexRequest.add_member(:partition_index, Shapes::ShapeRef.new(shape: PartitionIndex, required: true, location_name: "PartitionIndex"))
+    CreatePartitionIndexRequest.struct_class = Types::CreatePartitionIndexRequest
+
+    CreatePartitionIndexResponse.struct_class = Types::CreatePartitionIndexResponse
 
     CreatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -1533,6 +1561,14 @@ module Aws::Glue
 
     DeleteMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
     DeleteMLTransformResponse.struct_class = Types::DeleteMLTransformResponse
+
+    DeletePartitionIndexRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    DeletePartitionIndexRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    DeletePartitionIndexRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    DeletePartitionIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "IndexName"))
+    DeletePartitionIndexRequest.struct_class = Types::DeletePartitionIndexRequest
+
+    DeletePartitionIndexResponse.struct_class = Types::DeletePartitionIndexResponse
 
     DeletePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeletePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -2385,6 +2421,9 @@ module Aws::Glue
     LastCrawlInfo.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     LastCrawlInfo.struct_class = Types::LastCrawlInfo
 
+    LineageConfiguration.add_member(:crawler_lineage_settings, Shapes::ShapeRef.new(shape: CrawlerLineageSettings, location_name: "CrawlerLineageSettings"))
+    LineageConfiguration.struct_class = Types::LineageConfiguration
+
     ListCrawlersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListCrawlersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListCrawlersRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
@@ -2602,6 +2641,7 @@ module Aws::Glue
     PartitionIndexDescriptor.add_member(:index_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "IndexName"))
     PartitionIndexDescriptor.add_member(:keys, Shapes::ShapeRef.new(shape: KeySchemaElementList, required: true, location_name: "Keys"))
     PartitionIndexDescriptor.add_member(:index_status, Shapes::ShapeRef.new(shape: PartitionIndexStatus, required: true, location_name: "IndexStatus"))
+    PartitionIndexDescriptor.add_member(:backfill_errors, Shapes::ShapeRef.new(shape: BackfillErrors, location_name: "BackfillErrors"))
     PartitionIndexDescriptor.struct_class = Types::PartitionIndexDescriptor
 
     PartitionIndexDescriptorList.member = Shapes::ShapeRef.new(shape: PartitionIndexDescriptor)
@@ -3209,6 +3249,7 @@ module Aws::Glue
     UpdateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     UpdateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
     UpdateCrawlerRequest.add_member(:recrawl_policy, Shapes::ShapeRef.new(shape: RecrawlPolicy, location_name: "RecrawlPolicy"))
+    UpdateCrawlerRequest.add_member(:lineage_configuration, Shapes::ShapeRef.new(shape: LineageConfiguration, location_name: "LineageConfiguration"))
     UpdateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     UpdateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     UpdateCrawlerRequest.struct_class = Types::UpdateCrawlerRequest
@@ -3730,6 +3771,21 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
+      api.add_operation(:create_partition_index, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePartitionIndex"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePartitionIndexRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePartitionIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
       api.add_operation(:create_registry, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRegistry"
         o.http_method = "POST"
@@ -3956,6 +4012,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:delete_partition_index, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePartitionIndex"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePartitionIndexRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePartitionIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:delete_registry, Seahorse::Model::Operation.new.tap do |o|

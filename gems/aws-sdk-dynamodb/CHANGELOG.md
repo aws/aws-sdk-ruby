@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2020-11-23)
+------------------
+
+* Feature - With this release, you can capture data changes in any Amazon DynamoDB table as an Amazon Kinesis data stream. You also can use PartiQL (SQL-compatible language) to manipulate data in DynamoDB tables.
+
 1.57.0 (2020-11-09)
 ------------------
 

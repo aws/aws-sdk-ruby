@@ -282,13 +282,50 @@ module Aws::TimestreamQuery
     #   The column data types of the returned result set.
     #   @return [Array<Types::ColumnInfo>]
     #
+    # @!attribute [rw] query_status
+    #   Information about the status of the query, including progress and
+    #   bytes scannned.
+    #   @return [Types::QueryStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryResponse AWS API Documentation
     #
     class QueryResponse < Struct.new(
       :query_id,
       :next_token,
       :rows,
-      :column_info)
+      :column_info,
+      :query_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the status of the query, including progress and
+    # bytes scannned.
+    #
+    # @!attribute [rw] progress_percentage
+    #   The progress of the query, expressed as a percentage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] cumulative_bytes_scanned
+    #   The amount of data scanned by the query in bytes. This is a
+    #   cumulative sum and represents the total amount of bytes scanned
+    #   since the query was started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cumulative_bytes_metered
+    #   The amount of data scanned by the query in bytes that you will be
+    #   charged for. This is a cumulative sum and represents the total
+    #   amount of data that you will be charged for since the query was
+    #   started. The charge is applied only once and is either applied when
+    #   the query completes execution or when the query is cancelled.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryStatus AWS API Documentation
+    #
+    class QueryStatus < Struct.new(
+      :progress_percentage,
+      :cumulative_bytes_scanned,
+      :cumulative_bytes_metered)
       SENSITIVE = []
       include Aws::Structure
     end

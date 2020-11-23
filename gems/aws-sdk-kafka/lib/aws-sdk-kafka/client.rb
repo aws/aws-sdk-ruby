@@ -483,7 +483,7 @@ module Aws::Kafka
     #
     #   resp.cluster_arn #=> String
     #   resp.cluster_name #=> String
-    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateCluster AWS API Documentation
     #
@@ -567,7 +567,7 @@ module Aws::Kafka
     # @example Response structure
     #
     #   resp.cluster_arn #=> String
-    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteCluster AWS API Documentation
     #
@@ -658,7 +658,7 @@ module Aws::Kafka
     #   resp.cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_info.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.cluster_info.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #   resp.cluster_info.tags #=> Hash
     #   resp.cluster_info.tags["__string"] #=> String
     #   resp.cluster_info.zookeeper_connect_string #=> String
@@ -1065,7 +1065,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].number_of_broker_nodes #=> Integer
     #   resp.cluster_info_list[0].open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info_list[0].open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_info_list[0].state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.cluster_info_list[0].state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #   resp.cluster_info_list[0].tags #=> Hash
     #   resp.cluster_info_list[0].tags["__string"] #=> String
     #   resp.cluster_info_list[0].zookeeper_connect_string #=> String
@@ -1712,7 +1712,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

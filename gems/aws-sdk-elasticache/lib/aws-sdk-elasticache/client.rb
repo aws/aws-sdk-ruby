@@ -6349,7 +6349,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid Values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -9682,7 +9682,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-11-23)
+------------------
+
+* Feature - This update adds new operations to create and manage parallel data in Amazon Translate. Parallel data is a resource that you can use to run Active Custom Translation jobs.
+
 1.28.0 (2020-09-30)
 ------------------
 

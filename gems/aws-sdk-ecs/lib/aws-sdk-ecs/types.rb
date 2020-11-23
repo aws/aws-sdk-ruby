@@ -153,6 +153,7 @@ module Aws::ECS
     #           target_capacity: 1,
     #           minimum_scaling_step_size: 1,
     #           maximum_scaling_step_size: 1,
+    #           instance_warmup_period: 1,
     #         },
     #         managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
     #       }
@@ -196,6 +197,76 @@ module Aws::ECS
     #
     class AutoScalingGroupProvider < Struct.new(
       :auto_scaling_group_arn,
+      :managed_scaling,
+      :managed_termination_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the Auto Scaling group capacity provider to update.
+    #
+    # @note When making an API call, you may pass AutoScalingGroupProviderUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         managed_scaling: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           target_capacity: 1,
+    #           minimum_scaling_step_size: 1,
+    #           maximum_scaling_step_size: 1,
+    #           instance_warmup_period: 1,
+    #         },
+    #         managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] managed_scaling
+    #   The managed scaling settings for the Auto Scaling group capacity
+    #   provider.
+    #
+    #   When managed scaling is enabled, Amazon ECS manages the scale-in and
+    #   scale-out actions of the Auto Scaling group. Amazon ECS manages a
+    #   target tracking scaling policy using an Amazon ECS-managed
+    #   CloudWatch metric with the specified `targetCapacity` value as the
+    #   target value for the metric. For more information, see [Using
+    #   Managed Scaling][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #   If managed scaling is disabled, the user must manage the scaling of
+    #   the Auto Scaling group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling
+    #   @return [Types::ManagedScaling]
+    #
+    # @!attribute [rw] managed_termination_protection
+    #   The managed termination protection setting to use for the Auto
+    #   Scaling group capacity provider. This determines whether the Auto
+    #   Scaling group has managed termination protection.
+    #
+    #   When using managed termination protection, managed scaling must also
+    #   be used otherwise managed termination protection will not work.
+    #
+    #   When managed termination protection is enabled, Amazon ECS prevents
+    #   the Amazon EC2 instances in an Auto Scaling group that contain tasks
+    #   from being terminated during a scale-in action. The Auto Scaling
+    #   group and each instance in the Auto Scaling group must have instance
+    #   protection from scale-in actions enabled as well. For more
+    #   information, see [Instance Protection][1] in the *AWS Auto Scaling
+    #   User Guide*.
+    #
+    #   When managed termination protection is disabled, your Amazon EC2
+    #   instances are not protected from termination when the Auto Scaling
+    #   group scales in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AutoScalingGroupProviderUpdate AWS API Documentation
+    #
+    class AutoScalingGroupProviderUpdate < Struct.new(
       :managed_scaling,
       :managed_termination_protection)
       SENSITIVE = []
@@ -1442,12 +1513,16 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   The user name to use inside the container. This parameter maps to
-    #   `User` in the [Create a container][1] section of the [Docker Remote
-    #   API][2] and the `--user` option to [docker run][3].
+    #   The user to use inside the container. This parameter maps to `User`
+    #   in the [Create a container][1] section of the [Docker Remote API][2]
+    #   and the `--user` option to [docker run][3].
     #
-    #   You can use the following formats. If specifying a UID or GID, you
-    #   must specify it as a positive integer.
+    #   When running tasks using the `host` network mode, you should not run
+    #   containers using the root user (UID 0). It is considered best
+    #   practice to use a non-root user.
+    #
+    #   You can specify the `user` using the following formats. If
+    #   specifying a UID or GID, you must specify it as a positive integer.
     #
     #   * `user`
     #
@@ -2276,6 +2351,7 @@ module Aws::ECS
     #             target_capacity: 1,
     #             minimum_scaling_step_size: 1,
     #             maximum_scaling_step_size: 1,
+    #             instance_warmup_period: 1,
     #           },
     #           managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
     #         },
@@ -2530,6 +2606,10 @@ module Aws::ECS
     #         platform_version: "String",
     #         role: "String",
     #         deployment_configuration: {
+    #           deployment_circuit_breaker: {
+    #             enable: false, # required
+    #             rollback: false, # required
+    #           },
     #           maximum_percent: 1,
     #           minimum_healthy_percent: 1,
     #         },
@@ -3487,6 +3567,19 @@ module Aws::ECS
     #   status.
     #   @return [Integer]
     #
+    # @!attribute [rw] failed_tasks
+    #   The number of consecutively failed tasks in the deployment. A task
+    #   is considered a failure if the service scheduler can't launch the
+    #   task, the task doesn't transition to a `RUNNING` state, or if it
+    #   fails any of its defined health checks and is stopped.
+    #
+    #   <note markdown="1"> Once a service deployment has one or more successfully running
+    #   tasks, the failed task count resets to zero and stops being
+    #   evaluated.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] created_at
     #   The Unix timestamp for when the service deployment was created.
     #   @return [Time]
@@ -3528,6 +3621,26 @@ module Aws::ECS
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] rollout_state
+    #   <note markdown="1"> The `rolloutState` of a service is only returned for services that
+    #   use the rolling update (`ECS`) deployment type that are not behind a
+    #   Classic Load Balancer.
+    #
+    #    </note>
+    #
+    #   The rollout state of the deployment. When a service deployment is
+    #   started, it begins in an `IN_PROGRESS` state. When the service
+    #   reaches a steady state, the deployment will transition to a
+    #   `COMPLETED` state. If the service fails to reach a steady state and
+    #   circuit breaker is enabled, the deployment will transition to a
+    #   `FAILED` state. A deployment in `FAILED` state will launch no new
+    #   tasks. For more information, see DeploymentCircuitBreaker.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollout_state_reason
+    #   A description of the rollout state of a deployment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -3537,12 +3650,62 @@ module Aws::ECS
       :desired_count,
       :pending_count,
       :running_count,
+      :failed_tasks,
       :created_at,
       :updated_at,
       :capacity_provider_strategy,
       :launch_type,
       :platform_version,
-      :network_configuration)
+      :network_configuration,
+      :rollout_state,
+      :rollout_state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> The deployment circuit breaker can only be used for services using the
+    # rolling update (`ECS`) deployment type that are not behind a Classic
+    # Load Balancer.
+    #
+    #  </note>
+    #
+    # The **deployment circuit breaker** determines whether a service
+    # deployment will fail if the service can't reach a steady state. If
+    # enabled, a service deployment will transition to a failed state and
+    # stop launching new tasks. You can also enable Amazon ECS to roll back
+    # your service to the last completed deployment after a failure. For
+    # more information, see [Rolling update][1] in the *Amazon Elastic
+    # Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
+    #
+    # @note When making an API call, you may pass DeploymentCircuitBreaker
+    #   data as a hash:
+    #
+    #       {
+    #         enable: false, # required
+    #         rollback: false, # required
+    #       }
+    #
+    # @!attribute [rw] enable
+    #   Whether to enable the deployment circuit breaker logic for the
+    #   service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rollback
+    #   Whether to enable Amazon ECS to roll back the service if a service
+    #   deployment fails. If rollback is enabled, when a service deployment
+    #   fails, the service is rolled back to the last deployment that
+    #   completed successfully.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentCircuitBreaker AWS API Documentation
+    #
+    class DeploymentCircuitBreaker < Struct.new(
+      :enable,
+      :rollback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3554,9 +3717,27 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
+    #         deployment_circuit_breaker: {
+    #           enable: false, # required
+    #           rollback: false, # required
+    #         },
     #         maximum_percent: 1,
     #         minimum_healthy_percent: 1,
     #       }
+    #
+    # @!attribute [rw] deployment_circuit_breaker
+    #   <note markdown="1"> The deployment circuit breaker can only be used for services using
+    #   the rolling update (`ECS`) deployment type.
+    #
+    #    </note>
+    #
+    #   The **deployment circuit breaker** determines whether a service
+    #   deployment will fail if the service can't reach a steady state. If
+    #   deployment circuit breaker is enabled, a service deployment will
+    #   transition to a failed state and stop launching new tasks. If
+    #   rollback is enabled, when a service deployment fails, the service is
+    #   rolled back to the last deployment that completed successfully.
+    #   @return [Types::DeploymentCircuitBreaker]
     #
     # @!attribute [rw] maximum_percent
     #   If a service is using the rolling update (`ECS`) deployment type,
@@ -3613,6 +3794,7 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
     #
     class DeploymentConfiguration < Struct.new(
+      :deployment_circuit_breaker,
       :maximum_percent,
       :minimum_healthy_percent)
       SENSITIVE = []
@@ -4602,29 +4784,16 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] credentials_parameter
-    #   The authorization credential option to use.
-    #
-    #   The authorization credential options can be provided using either
-    #   the AWS Secrets Manager ARN or the AWS Systems Manager ARN. The ARNs
-    #   refer to the stored credentials.
-    #
-    #   **options:**
-    #
-    #   * [ARN][1] of an [AWS Secrets Manager][2] secret.
-    #
-    #   * [ARN][1] of an [AWS Systems Manager][3] parameter.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [2]: https://docs.aws.amazon.com/secretsmanager
-    #   [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/integration-ps-secretsmanager.html
+    #   The authorization credential option to use. The authorization
+    #   credential options can be provided using either the Amazon Resource
+    #   Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager
+    #   Parameter Store parameter. The ARNs refer to the stored credentials.
     #   @return [String]
     #
     # @!attribute [rw] domain
     #   A fully qualified domain name hosted by an [AWS Directory
     #   Service][1] Managed Microsoft AD (Active Directory) or self-hosted
-    #   EC2 AD.
+    #   AD on Amazon EC2.
     #
     #
     #
@@ -6306,6 +6475,7 @@ module Aws::ECS
     #         target_capacity: 1,
     #         minimum_scaling_step_size: 1,
     #         maximum_scaling_step_size: 1,
+    #         instance_warmup_period: 1,
     #       }
     #
     # @!attribute [rw] status
@@ -6320,27 +6490,22 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] minimum_scaling_step_size
-    #   The minimum number of Amazon EC2 instances that Amazon ECS will
-    #   scale out at one time. The scale in process is not affected by this
-    #   parameter If this parameter is omitted, the default value of `1` is
-    #   used.
-    #
-    #   When additional capacity is required, Amazon ECS will scale up the
-    #   minimum scaling step size even if the actual demand is less than the
-    #   minimum scaling step size.
-    #
-    #   If you use a capacity provider with an Auto Scaling group configured
-    #   with more than one Amazon EC2 instance type or Availability Zone,
-    #   Amazon ECS will scale up by the exact minimum scaling step size
-    #   value and will ignore both the maximum scaling step size as well as
-    #   the capacity demand.
+    #   The minimum number of container instances that Amazon ECS will scale
+    #   in or scale out at one time. If this parameter is omitted, the
+    #   default value of `1` is used.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_scaling_step_size
-    #   The maximum number of Amazon EC2 instances that Amazon ECS will
-    #   scale out at one time. The scale in process is not affected by this
-    #   parameter. If this parameter is omitted, the default value of
-    #   `10000` is used.
+    #   The maximum number of container instances that Amazon ECS will scale
+    #   in or scale out at one time. If this parameter is omitted, the
+    #   default value of `10000` is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_warmup_period
+    #   The period of time, in seconds, after a newly launched Amazon EC2
+    #   instance can contribute to CloudWatch metrics for Auto Scaling
+    #   group. If this parameter is omitted, the default value of `300`
+    #   seconds is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedScaling AWS API Documentation
@@ -6349,7 +6514,8 @@ module Aws::ECS
       :status,
       :target_capacity,
       :minimum_scaling_step_size,
-      :maximum_scaling_step_size)
+      :maximum_scaling_step_size,
+      :instance_warmup_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6749,11 +6915,7 @@ module Aws::ECS
     # your container instances are launched from the Amazon ECS-optimized
     # AMI version `20190301` or later, then they contain the required
     # versions of the container agent and `ecs-init`. For more information,
-    # see [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic
-    # Container Service Developer Guide*.
-    #
-    # For tasks using the Fargate launch type, the task or service requires
-    # platform version 1.3.0 or later.
+    # see [Amazon ECS-optimized Linux AMI][1]
     #
     #
     #
@@ -7475,22 +7637,27 @@ module Aws::ECS
     #
     # @!attribute [rw] network_mode
     #   The Docker networking mode to use for the containers in the task.
-    #   The valid values are `none`, `bridge`, `awsvpc`, and `host`. The
-    #   default Docker network mode is `bridge`. If you are using the
-    #   Fargate launch type, the `awsvpc` network mode is required. If you
-    #   are using the EC2 launch type, any network mode can be used. If the
-    #   network mode is set to `none`, you cannot specify port mappings in
-    #   your container definitions, and the tasks containers do not have
-    #   external connectivity. The `host` and `awsvpc` network modes offer
-    #   the highest networking performance for containers because they use
-    #   the EC2 network stack instead of the virtualized network stack
-    #   provided by the `bridge` mode.
+    #   The valid values are `none`, `bridge`, `awsvpc`, and `host`. If no
+    #   network mode is specified, the default is `bridge`.
+    #
+    #   For Amazon ECS tasks on Fargate, the `awsvpc` network mode is
+    #   required. For Amazon ECS tasks on Amazon EC2 instances, any network
+    #   mode can be used. If the network mode is set to `none`, you cannot
+    #   specify port mappings in your container definitions, and the tasks
+    #   containers do not have external connectivity. The `host` and
+    #   `awsvpc` network modes offer the highest networking performance for
+    #   containers because they use the EC2 network stack instead of the
+    #   virtualized network stack provided by the `bridge` mode.
     #
     #   With the `host` and `awsvpc` network modes, exposed container ports
     #   are mapped directly to the corresponding host port (for the `host`
     #   network mode) or the attached elastic network interface port (for
     #   the `awsvpc` network mode), so you cannot take advantage of dynamic
     #   host port mappings.
+    #
+    #   When using the `host` network mode, you should not run containers
+    #   using the root user (UID 0). It is considered best practice to use a
+    #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
     #   network interface, and you must specify a NetworkConfiguration value
@@ -7727,11 +7894,7 @@ module Aws::ECS
     #   If your container instances are launched from the Amazon
     #   ECS-optimized AMI version `20190301` or later, then they contain the
     #   required versions of the container agent and `ecs-init`. For more
-    #   information, see [Amazon ECS-optimized Linux AMI][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
-    #
-    #   For tasks using the Fargate launch type, the task or service
-    #   requires platform version 1.3.0 or later.
+    #   information, see [Amazon ECS-optimized Linux AMI][1]
     #
     #
     #
@@ -9777,22 +9940,27 @@ module Aws::ECS
     #
     # @!attribute [rw] network_mode
     #   The Docker networking mode to use for the containers in the task.
-    #   The valid values are `none`, `bridge`, `awsvpc`, and `host`. The
-    #   default Docker network mode is `bridge`. If you are using the
-    #   Fargate launch type, the `awsvpc` network mode is required. If you
-    #   are using the EC2 launch type, any network mode can be used. If the
-    #   network mode is set to `none`, you cannot specify port mappings in
-    #   your container definitions, and the tasks containers do not have
-    #   external connectivity. The `host` and `awsvpc` network modes offer
-    #   the highest networking performance for containers because they use
-    #   the EC2 network stack instead of the virtualized network stack
-    #   provided by the `bridge` mode.
+    #   The valid values are `none`, `bridge`, `awsvpc`, and `host`. If no
+    #   network mode is specified, the default is `bridge`.
+    #
+    #   For Amazon ECS tasks on Fargate, the `awsvpc` network mode is
+    #   required. For Amazon ECS tasks on Amazon EC2 instances, any network
+    #   mode can be used. If the network mode is set to `none`, you cannot
+    #   specify port mappings in your container definitions, and the tasks
+    #   containers do not have external connectivity. The `host` and
+    #   `awsvpc` network modes offer the highest networking performance for
+    #   containers because they use the EC2 network stack instead of the
+    #   virtualized network stack provided by the `bridge` mode.
     #
     #   With the `host` and `awsvpc` network modes, exposed container ports
     #   are mapped directly to the corresponding host port (for the `host`
     #   network mode) or the attached elastic network interface port (for
     #   the `awsvpc` network mode), so you cannot take advantage of dynamic
     #   host port mappings.
+    #
+    #   When using the `host` network mode, you should not run containers
+    #   using the root user (UID 0). It is considered best practice to use a
+    #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
     #   network interface, and you must specify a NetworkConfiguration value
@@ -10528,6 +10696,53 @@ module Aws::ECS
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateCapacityProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         auto_scaling_group_provider: { # required
+    #           managed_scaling: {
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             target_capacity: 1,
+    #             minimum_scaling_step_size: 1,
+    #             maximum_scaling_step_size: 1,
+    #             instance_warmup_period: 1,
+    #           },
+    #           managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   An object representing the parameters to update for the Auto Scaling
+    #   group capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_group_provider
+    #   The name of the capacity provider to update.
+    #   @return [Types::AutoScalingGroupProviderUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProviderRequest AWS API Documentation
+    #
+    class UpdateCapacityProviderRequest < Struct.new(
+      :name,
+      :auto_scaling_group_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider
+    #   The details of a capacity provider.
+    #   @return [Types::CapacityProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProviderResponse AWS API Documentation
+    #
+    class UpdateCapacityProviderResponse < Struct.new(
+      :capacity_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateClusterSettingsRequest
     #   data as a hash:
     #
@@ -10750,6 +10965,10 @@ module Aws::ECS
     #           },
     #         ],
     #         deployment_configuration: {
+    #           deployment_circuit_breaker: {
+    #             enable: false, # required
+    #             rollback: false, # required
+    #           },
     #           maximum_percent: 1,
     #           minimum_healthy_percent: 1,
     #         },

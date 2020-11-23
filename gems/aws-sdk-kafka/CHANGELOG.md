@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-11-23)
+------------------
+
+* Feature - Adding MAINTENANCE and REBOOTING_BROKER to Cluster states.
+
 1.30.0 (2020-11-20)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-11-23)
+------------------
+
+* Feature - Add Detected Workload to ApplicationComponent which shows the workloads that installed in the component
+
 1.15.0 (2020-09-30)
 ------------------
 

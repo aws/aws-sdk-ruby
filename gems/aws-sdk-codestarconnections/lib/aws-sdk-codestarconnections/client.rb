@@ -344,7 +344,7 @@ module Aws::CodeStarconnections
     #
     # @option params [String] :provider_type
     #   The name of the external provider where your third-party code
-    #   repository is configured. The valid provider type is Bitbucket.
+    #   repository is configured.
     #
     # @option params [required, String] :connection_name
     #   The name of the connection to be created. The name must be unique in
@@ -781,6 +781,43 @@ module Aws::CodeStarconnections
       req.send_request(options)
     end
 
+    # Updates a specified host with the provided configurations.
+    #
+    # @option params [required, String] :host_arn
+    #   The Amazon Resource Name (ARN) of the host to be updated.
+    #
+    # @option params [String] :provider_endpoint
+    #   The URL or endpoint of the host to be updated.
+    #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   The VPC configuration of the host to be updated. A VPC must be
+    #   configured and the infrastructure to be represented by the host must
+    #   already be connected to the VPC.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_host({
+    #     host_arn: "HostArn", # required
+    #     provider_endpoint: "Url",
+    #     vpc_configuration: {
+    #       vpc_id: "VpcId", # required
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       tls_certificate: "TlsCertificate",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateHost AWS API Documentation
+    #
+    # @overload update_host(params = {})
+    # @param [Hash] params ({})
+    def update_host(params = {}, options = {})
+      req = build_request(:update_host, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -794,7 +831,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

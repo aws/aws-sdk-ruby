@@ -25694,6 +25694,8 @@ module Aws::EC2
     #   resp.service_details[0].base_endpoint_dns_names #=> Array
     #   resp.service_details[0].base_endpoint_dns_names[0] #=> String
     #   resp.service_details[0].private_dns_name #=> String
+    #   resp.service_details[0].private_dns_names #=> Array
+    #   resp.service_details[0].private_dns_names[0].private_dns_name #=> String
     #   resp.service_details[0].vpc_endpoint_policy_supported #=> Boolean
     #   resp.service_details[0].acceptance_required #=> Boolean
     #   resp.service_details[0].manages_vpc_endpoints #=> Boolean
@@ -39284,7 +39286,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.210.0'
+      context[:gem_version] = '1.211.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

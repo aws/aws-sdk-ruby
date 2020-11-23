@@ -32,6 +32,9 @@ module Aws::Outposts
     #         site_id: "SiteId", # required
     #         availability_zone: "AvailabilityZone",
     #         availability_zone_id: "AvailabilityZoneId",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -58,6 +61,10 @@ module Aws::Outposts
     #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to apply to the Outpost.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpostInput AWS API Documentation
     #
     class CreateOutpostInput < Struct.new(
@@ -65,7 +72,8 @@ module Aws::Outposts
       :description,
       :site_id,
       :availability_zone,
-      :availability_zone_id)
+      :availability_zone_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -383,6 +391,10 @@ module Aws::Outposts
     #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The Outpost tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation
     #
     class Outpost < Struct.new(
@@ -394,7 +406,8 @@ module Aws::Outposts
       :description,
       :life_cycle_status,
       :availability_zone,
-      :availability_zone_id)
+      :availability_zone_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -430,13 +443,18 @@ module Aws::Outposts
     #   The description of the site.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The site tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Site AWS API Documentation
     #
     class Site < Struct.new(
       :site_id,
       :account_id,
       :name,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

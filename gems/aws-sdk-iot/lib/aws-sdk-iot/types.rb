@@ -3379,6 +3379,7 @@ module Aws::IoT
     #         files: [ # required
     #           {
     #             file_name: "FileName",
+    #             file_type: 1,
     #             file_version: "OTAUpdateFileVersion",
     #             file_location: {
     #               stream: {
@@ -12125,6 +12126,7 @@ module Aws::IoT
     #
     #       {
     #         file_name: "FileName",
+    #         file_type: 1,
     #         file_version: "OTAUpdateFileVersion",
     #         file_location: {
     #           stream: {
@@ -12174,6 +12176,11 @@ module Aws::IoT
     #   The name of the file.
     #   @return [String]
     #
+    # @!attribute [rw] file_type
+    #   An integer value you can include in the job document to allow your
+    #   devices to identify the type of file received from the cloud.
+    #   @return [Integer]
+    #
     # @!attribute [rw] file_version
     #   The file version.
     #   @return [String]
@@ -12192,6 +12199,7 @@ module Aws::IoT
     #
     class OTAUpdateFile < Struct.new(
       :file_name,
+      :file_type,
       :file_version,
       :file_location,
       :code_signing,

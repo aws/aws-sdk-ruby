@@ -31,6 +31,7 @@ module Aws::DynamoDB
   # * {BackupNotFoundException}
   # * {ConditionalCheckFailedException}
   # * {ContinuousBackupsUnavailableException}
+  # * {DuplicateItemException}
   # * {ExportConflictException}
   # * {ExportNotFoundException}
   # * {GlobalTableAlreadyExistsException}
@@ -112,6 +113,21 @@ module Aws::DynamoDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DynamoDB::Types::ContinuousBackupsUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DuplicateItemException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DynamoDB::Types::DuplicateItemException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

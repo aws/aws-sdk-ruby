@@ -387,26 +387,38 @@ module Aws::AutoScaling
     # Attaches one or more target groups to the specified Auto Scaling
     # group.
     #
+    # This operation is used with the following load balancer types:
+    #
+    # * Application Load Balancer - Operates at the application layer (layer
+    #   7) and supports HTTP and HTTPS.
+    #
+    # * Network Load Balancer - Operates at the transport layer (layer 4)
+    #   and supports TCP, TLS, and UDP.
+    #
+    # * Gateway Load Balancer - Operates at the network layer (layer 3).
+    #
     # To describe the target groups for an Auto Scaling group, call the
     # DescribeLoadBalancerTargetGroups API. To detach the target group from
     # the Auto Scaling group, call the DetachLoadBalancerTargetGroups API.
     #
-    # With Application Load Balancers and Network Load Balancers, instances
-    # are registered as targets with a target group. With Classic Load
-    # Balancers, instances are registered with the load balancer. For more
-    # information, see [Attaching a load balancer to your Auto Scaling
-    # group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Elastic Load Balancing and Amazon EC2 Auto
+    # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<String>] :target_group_arns
     #   The Amazon Resource Names (ARN) of the target groups. You can specify
-    #   up to 10 target groups.
+    #   up to 10 target groups. To get the ARN of a target group, use the
+    #   Elastic Load Balancing [DescribeTargetGroups][1] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -438,8 +450,9 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> To attach an Application Load Balancer or a Network Load Balancer, use
-    # the AttachLoadBalancerTargetGroups API operation instead.
+    # <note markdown="1"> To attach an Application Load Balancer, Network Load Balancer, or
+    # Gateway Load Balancer, use the AttachLoadBalancerTargetGroups API
+    # operation instead.
     #
     #  </note>
     #
@@ -451,12 +464,12 @@ module Aws::AutoScaling
     # DescribeLoadBalancers API. To detach the load balancer from the Auto
     # Scaling group, call the DetachLoadBalancers API.
     #
-    # For more information, see [Attaching a load balancer to your Auto
-    # Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Elastic Load Balancing and Amazon EC2 Auto
+    # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -788,10 +801,6 @@ module Aws::AutoScaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: You must specify either a launch template
-    #   (`LaunchTemplate` or `MixedInstancesPolicy`) or a launch configuration
-    #   (`LaunchConfigurationName` or `InstanceId`).
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
@@ -855,8 +864,9 @@ module Aws::AutoScaling
     #
     # @option params [Array<String>] :load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
-    #   group. For Application Load Balancers and Network Load Balancers,
-    #   specify `TargetGroupARNs` instead.
+    #   group. For Application Load Balancers, Network Load Balancers, and
+    #   Gateway Load Balancers, specify the `TargetGroupARNs` property
+    #   instead.
     #
     # @option params [Array<String>] :target_group_arns
     #   The Amazon Resource Names (ARN) of the target groups to associate with
@@ -1380,7 +1390,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
     #
     # @option params [Types::InstanceMetadataOptions] :metadata_options
     #   The metadata options for the instances. For more information, see
@@ -2624,8 +2634,8 @@ module Aws::AutoScaling
     # Describes the load balancers for the specified Auto Scaling group.
     #
     # This operation describes only Classic Load Balancers. If you have
-    # Application Load Balancers or Network Load Balancers, use the
-    # DescribeLoadBalancerTargetGroups API instead.
+    # Application Load Balancers, Network Load Balancers, or Gateway Load
+    # Balancers, use the DescribeLoadBalancerTargetGroups API instead.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -3484,8 +3494,8 @@ module Aws::AutoScaling
     # Scaling group.
     #
     # This operation detaches only Classic Load Balancers. If you have
-    # Application Load Balancers or Network Load Balancers, use the
-    # DetachLoadBalancerTargetGroups API instead.
+    # Application Load Balancers, Network Load Balancers, or Gateway Load
+    # Balancers, use the DetachLoadBalancerTargetGroups API instead.
     #
     # When you detach a load balancer, it enters the `Removing` state while
     # deregistering the instances in the group. When all instances are
@@ -5344,7 +5354,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

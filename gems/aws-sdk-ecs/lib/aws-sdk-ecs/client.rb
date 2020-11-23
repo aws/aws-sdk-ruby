@@ -400,6 +400,7 @@ module Aws::ECS
     #         target_capacity: 1,
     #         minimum_scaling_step_size: 1,
     #         maximum_scaling_step_size: 1,
+    #         instance_warmup_period: 1,
     #       },
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
     #     },
@@ -421,8 +422,9 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
@@ -1226,6 +1228,10 @@ module Aws::ECS
     #     platform_version: "String",
     #     role: "String",
     #     deployment_configuration: {
+    #       deployment_circuit_breaker: {
+    #         enable: false, # required
+    #         rollback: false, # required
+    #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
     #     },
@@ -1289,6 +1295,8 @@ module Aws::ECS
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.task_sets #=> Array
@@ -1340,6 +1348,7 @@ module Aws::ECS
     #   resp.service.deployments[0].desired_count #=> Integer
     #   resp.service.deployments[0].pending_count #=> Integer
     #   resp.service.deployments[0].running_count #=> Integer
+    #   resp.service.deployments[0].failed_tasks #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
     #   resp.service.deployments[0].capacity_provider_strategy #=> Array
@@ -1353,6 +1362,8 @@ module Aws::ECS
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.service.deployments[0].rollout_state_reason #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -1802,8 +1813,9 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
@@ -1995,6 +2007,8 @@ module Aws::ECS
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.task_sets #=> Array
@@ -2046,6 +2060,7 @@ module Aws::ECS
     #   resp.service.deployments[0].desired_count #=> Integer
     #   resp.service.deployments[0].pending_count #=> Integer
     #   resp.service.deployments[0].running_count #=> Integer
+    #   resp.service.deployments[0].failed_tasks #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
     #   resp.service.deployments[0].capacity_provider_strategy #=> Array
@@ -2059,6 +2074,8 @@ module Aws::ECS
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.service.deployments[0].rollout_state_reason #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -2581,8 +2598,9 @@ module Aws::ECS
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_providers[0].update_status_reason #=> String
     #   resp.capacity_providers[0].tags #=> Array
     #   resp.capacity_providers[0].tags[0].key #=> String
@@ -3021,6 +3039,8 @@ module Aws::ECS
     #   resp.services[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].platform_version #=> String
     #   resp.services[0].task_definition #=> String
+    #   resp.services[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.services[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.services[0].deployment_configuration.maximum_percent #=> Integer
     #   resp.services[0].deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.services[0].task_sets #=> Array
@@ -3072,6 +3092,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].desired_count #=> Integer
     #   resp.services[0].deployments[0].pending_count #=> Integer
     #   resp.services[0].deployments[0].running_count #=> Integer
+    #   resp.services[0].deployments[0].failed_tasks #=> Integer
     #   resp.services[0].deployments[0].created_at #=> Time
     #   resp.services[0].deployments[0].updated_at #=> Time
     #   resp.services[0].deployments[0].capacity_provider_strategy #=> Array
@@ -3085,6 +3106,8 @@ module Aws::ECS
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.services[0].deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.services[0].deployments[0].rollout_state_reason #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -5254,22 +5277,27 @@ module Aws::ECS
     #
     # @option params [String] :network_mode
     #   The Docker networking mode to use for the containers in the task. The
-    #   valid values are `none`, `bridge`, `awsvpc`, and `host`. The default
-    #   Docker network mode is `bridge`. If you are using the Fargate launch
-    #   type, the `awsvpc` network mode is required. If you are using the EC2
-    #   launch type, any network mode can be used. If the network mode is set
-    #   to `none`, you cannot specify port mappings in your container
-    #   definitions, and the tasks containers do not have external
-    #   connectivity. The `host` and `awsvpc` network modes offer the highest
-    #   networking performance for containers because they use the EC2 network
-    #   stack instead of the virtualized network stack provided by the
-    #   `bridge` mode.
+    #   valid values are `none`, `bridge`, `awsvpc`, and `host`. If no network
+    #   mode is specified, the default is `bridge`.
+    #
+    #   For Amazon ECS tasks on Fargate, the `awsvpc` network mode is
+    #   required. For Amazon ECS tasks on Amazon EC2 instances, any network
+    #   mode can be used. If the network mode is set to `none`, you cannot
+    #   specify port mappings in your container definitions, and the tasks
+    #   containers do not have external connectivity. The `host` and `awsvpc`
+    #   network modes offer the highest networking performance for containers
+    #   because they use the EC2 network stack instead of the virtualized
+    #   network stack provided by the `bridge` mode.
     #
     #   With the `host` and `awsvpc` network modes, exposed container ports
     #   are mapped directly to the corresponding host port (for the `host`
     #   network mode) or the attached elastic network interface port (for the
     #   `awsvpc` network mode), so you cannot take advantage of dynamic host
     #   port mappings.
+    #
+    #   When using the `host` network mode, you should not run containers
+    #   using the root user (UID 0). It is considered best practice to use a
+    #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
     #   network interface, and you must specify a NetworkConfiguration value
@@ -5493,11 +5521,7 @@ module Aws::ECS
     #   your container instances are launched from the Amazon ECS-optimized
     #   AMI version `20190301` or later, then they contain the required
     #   versions of the container agent and `ecs-init`. For more information,
-    #   see [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
-    #
-    #   For tasks using the Fargate launch type, the task or service requires
-    #   platform version 1.3.0 or later.
+    #   see [Amazon ECS-optimized Linux AMI][1]
     #
     #
     #
@@ -7178,6 +7202,62 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies the parameters for a capacity provider.
+    #
+    # @option params [required, String] :name
+    #   An object representing the parameters to update for the Auto Scaling
+    #   group capacity provider.
+    #
+    # @option params [required, Types::AutoScalingGroupProviderUpdate] :auto_scaling_group_provider
+    #   The name of the capacity provider to update.
+    #
+    # @return [Types::UpdateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCapacityProviderResponse#capacity_provider #capacity_provider} => Types::CapacityProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_capacity_provider({
+    #     name: "String", # required
+    #     auto_scaling_group_provider: { # required
+    #       managed_scaling: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         target_capacity: 1,
+    #         minimum_scaling_step_size: 1,
+    #         maximum_scaling_step_size: 1,
+    #         instance_warmup_period: 1,
+    #       },
+    #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider.capacity_provider_arn #=> String
+    #   resp.capacity_provider.name #=> String
+    #   resp.capacity_provider.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.capacity_provider.update_status_reason #=> String
+    #   resp.capacity_provider.tags #=> Array
+    #   resp.capacity_provider.tags[0].key #=> String
+    #   resp.capacity_provider.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProvider AWS API Documentation
+    #
+    # @overload update_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def update_capacity_provider(params = {}, options = {})
+      req = build_request(:update_capacity_provider, params)
+      req.send_request(options)
+    end
+
     # Modifies the settings to use for a cluster.
     #
     # @option params [required, String] :cluster
@@ -7764,6 +7844,10 @@ module Aws::ECS
     #       },
     #     ],
     #     deployment_configuration: {
+    #       deployment_circuit_breaker: {
+    #         enable: false, # required
+    #         rollback: false, # required
+    #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
     #     },
@@ -7817,6 +7901,8 @@ module Aws::ECS
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.task_sets #=> Array
@@ -7868,6 +7954,7 @@ module Aws::ECS
     #   resp.service.deployments[0].desired_count #=> Integer
     #   resp.service.deployments[0].pending_count #=> Integer
     #   resp.service.deployments[0].running_count #=> Integer
+    #   resp.service.deployments[0].failed_tasks #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
     #   resp.service.deployments[0].capacity_provider_strategy #=> Array
@@ -7881,6 +7968,8 @@ module Aws::ECS
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
+    #   resp.service.deployments[0].rollout_state_reason #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -8112,7 +8201,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

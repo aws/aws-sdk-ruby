@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-11-23)
+------------------
+
+* Feature - Support specifying tags during the creation of the Outpost resource. Tags are now returned in the response body of Outpost APIs.
+
 1.11.0 (2020-11-18)
 ------------------
 

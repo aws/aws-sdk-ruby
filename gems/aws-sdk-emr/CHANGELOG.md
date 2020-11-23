@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-11-23)
+------------------
+
+* Feature - Add API support for EMR Studio, a new notebook-first IDE for data scientists and data engineers with single sign-on, Jupyter notebooks, automated infrastructure provisioning, and job diagnosis.
+
 1.39.0 (2020-10-01)
 ------------------
 

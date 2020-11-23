@@ -22,6 +22,10 @@ module Aws::SecurityHub
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     ActionTarget = Shapes::StructureShape.new(name: 'ActionTarget')
     ActionTargetList = Shapes::ListShape.new(name: 'ActionTargetList')
+    AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
+    AdminAccounts = Shapes::ListShape.new(name: 'AdminAccounts')
+    AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
+    AdminsMaxResults = Shapes::IntegerShape.new(name: 'AdminsMaxResults')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
@@ -270,6 +274,7 @@ module Aws::SecurityHub
     CreateInsightResponse = Shapes::StructureShape.new(name: 'CreateInsightResponse')
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
     CreateMembersResponse = Shapes::StructureShape.new(name: 'CreateMembersResponse')
+    CrossAccountMaxResults = Shapes::IntegerShape.new(name: 'CrossAccountMaxResults')
     Cvss = Shapes::StructureShape.new(name: 'Cvss')
     CvssList = Shapes::ListShape.new(name: 'CvssList')
     DateFilter = Shapes::StructureShape.new(name: 'DateFilter')
@@ -290,6 +295,8 @@ module Aws::SecurityHub
     DescribeActionTargetsResponse = Shapes::StructureShape.new(name: 'DescribeActionTargetsResponse')
     DescribeHubRequest = Shapes::StructureShape.new(name: 'DescribeHubRequest')
     DescribeHubResponse = Shapes::StructureShape.new(name: 'DescribeHubResponse')
+    DescribeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationRequest')
+    DescribeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationResponse')
     DescribeProductsRequest = Shapes::StructureShape.new(name: 'DescribeProductsRequest')
     DescribeProductsResponse = Shapes::StructureShape.new(name: 'DescribeProductsResponse')
     DescribeStandardsControlsRequest = Shapes::StructureShape.new(name: 'DescribeStandardsControlsRequest')
@@ -298,6 +305,8 @@ module Aws::SecurityHub
     DescribeStandardsResponse = Shapes::StructureShape.new(name: 'DescribeStandardsResponse')
     DisableImportFindingsForProductRequest = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductRequest')
     DisableImportFindingsForProductResponse = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductResponse')
+    DisableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountRequest')
+    DisableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountResponse')
     DisableSecurityHubRequest = Shapes::StructureShape.new(name: 'DisableSecurityHubRequest')
     DisableSecurityHubResponse = Shapes::StructureShape.new(name: 'DisableSecurityHubResponse')
     DisassociateFromMasterAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountRequest')
@@ -307,6 +316,8 @@ module Aws::SecurityHub
     Double = Shapes::FloatShape.new(name: 'Double')
     EnableImportFindingsForProductRequest = Shapes::StructureShape.new(name: 'EnableImportFindingsForProductRequest')
     EnableImportFindingsForProductResponse = Shapes::StructureShape.new(name: 'EnableImportFindingsForProductResponse')
+    EnableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountRequest')
+    EnableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountResponse')
     EnableSecurityHubRequest = Shapes::StructureShape.new(name: 'EnableSecurityHubRequest')
     EnableSecurityHubResponse = Shapes::StructureShape.new(name: 'EnableSecurityHubResponse')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
@@ -354,6 +365,8 @@ module Aws::SecurityHub
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListOrganizationAdminAccountsRequest = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsRequest')
+    ListOrganizationAdminAccountsResponse = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LoadBalancerState = Shapes::StructureShape.new(name: 'LoadBalancerState')
@@ -452,6 +465,8 @@ module Aws::SecurityHub
     UpdateFindingsResponse = Shapes::StructureShape.new(name: 'UpdateFindingsResponse')
     UpdateInsightRequest = Shapes::StructureShape.new(name: 'UpdateInsightRequest')
     UpdateInsightResponse = Shapes::StructureShape.new(name: 'UpdateInsightResponse')
+    UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
+    UpdateOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationResponse')
     UpdateSecurityHubConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSecurityHubConfigurationRequest')
     UpdateSecurityHubConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSecurityHubConfigurationResponse')
     UpdateStandardsControlRequest = Shapes::StructureShape.new(name: 'UpdateStandardsControlRequest')
@@ -479,7 +494,7 @@ module Aws::SecurityHub
     AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AccountDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AccountDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     AccountDetails.add_member(:email, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Email"))
     AccountDetails.struct_class = Types::AccountDetails
 
@@ -493,6 +508,12 @@ module Aws::SecurityHub
     ActionTarget.struct_class = Types::ActionTarget
 
     ActionTargetList.member = Shapes::ShapeRef.new(shape: ActionTarget)
+
+    AdminAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
+    AdminAccount.add_member(:status, Shapes::ShapeRef.new(shape: AdminStatus, location_name: "Status"))
+    AdminAccount.struct_class = Types::AdminAccount
+
+    AdminAccounts.member = Shapes::ShapeRef.new(shape: AdminAccount)
 
     ArnList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -1985,7 +2006,7 @@ module Aws::SecurityHub
     CreateInsightResponse.add_member(:insight_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InsightArn"))
     CreateInsightResponse.struct_class = Types::CreateInsightResponse
 
-    CreateMembersRequest.add_member(:account_details, Shapes::ShapeRef.new(shape: AccountDetailsList, location_name: "AccountDetails"))
+    CreateMembersRequest.add_member(:account_details, Shapes::ShapeRef.new(shape: AccountDetailsList, required: true, location_name: "AccountDetails"))
     CreateMembersRequest.struct_class = Types::CreateMembersRequest
 
     CreateMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
@@ -2033,7 +2054,7 @@ module Aws::SecurityHub
     DeleteInvitationsResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
     DeleteInvitationsResponse.struct_class = Types::DeleteInvitationsResponse
 
-    DeleteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DeleteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "AccountIds"))
     DeleteMembersRequest.struct_class = Types::DeleteMembersRequest
 
     DeleteMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
@@ -2055,6 +2076,12 @@ module Aws::SecurityHub
     DescribeHubResponse.add_member(:subscribed_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubscribedAt"))
     DescribeHubResponse.add_member(:auto_enable_controls, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoEnableControls"))
     DescribeHubResponse.struct_class = Types::DescribeHubResponse
+
+    DescribeOrganizationConfigurationRequest.struct_class = Types::DescribeOrganizationConfigurationRequest
+
+    DescribeOrganizationConfigurationResponse.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoEnable"))
+    DescribeOrganizationConfigurationResponse.add_member(:member_account_limit_reached, Shapes::ShapeRef.new(shape: Boolean, location_name: "MemberAccountLimitReached"))
+    DescribeOrganizationConfigurationResponse.struct_class = Types::DescribeOrganizationConfigurationResponse
 
     DescribeProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     DescribeProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
@@ -2086,6 +2113,11 @@ module Aws::SecurityHub
 
     DisableImportFindingsForProductResponse.struct_class = Types::DisableImportFindingsForProductResponse
 
+    DisableOrganizationAdminAccountRequest.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AdminAccountId"))
+    DisableOrganizationAdminAccountRequest.struct_class = Types::DisableOrganizationAdminAccountRequest
+
+    DisableOrganizationAdminAccountResponse.struct_class = Types::DisableOrganizationAdminAccountResponse
+
     DisableSecurityHubRequest.struct_class = Types::DisableSecurityHubRequest
 
     DisableSecurityHubResponse.struct_class = Types::DisableSecurityHubResponse
@@ -2094,7 +2126,7 @@ module Aws::SecurityHub
 
     DisassociateFromMasterAccountResponse.struct_class = Types::DisassociateFromMasterAccountResponse
 
-    DisassociateMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DisassociateMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "AccountIds"))
     DisassociateMembersRequest.struct_class = Types::DisassociateMembersRequest
 
     DisassociateMembersResponse.struct_class = Types::DisassociateMembersResponse
@@ -2104,6 +2136,11 @@ module Aws::SecurityHub
 
     EnableImportFindingsForProductResponse.add_member(:product_subscription_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProductSubscriptionArn"))
     EnableImportFindingsForProductResponse.struct_class = Types::EnableImportFindingsForProductResponse
+
+    EnableOrganizationAdminAccountRequest.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AdminAccountId"))
+    EnableOrganizationAdminAccountRequest.struct_class = Types::EnableOrganizationAdminAccountRequest
+
+    EnableOrganizationAdminAccountResponse.struct_class = Types::EnableOrganizationAdminAccountResponse
 
     EnableSecurityHubRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     EnableSecurityHubRequest.add_member(:enable_default_standards, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableDefaultStandards"))
@@ -2213,7 +2250,7 @@ module Aws::SecurityHub
 
     InvitationList.member = Shapes::ShapeRef.new(shape: Invitation)
 
-    InviteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    InviteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "AccountIds"))
     InviteMembersRequest.struct_class = Types::InviteMembersRequest
 
     InviteMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
@@ -2248,7 +2285,7 @@ module Aws::SecurityHub
     ListEnabledProductsForImportResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEnabledProductsForImportResponse.struct_class = Types::ListEnabledProductsForImportResponse
 
-    ListInvitationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListInvitationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CrossAccountMaxResults, location: "querystring", location_name: "MaxResults"))
     ListInvitationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListInvitationsRequest.struct_class = Types::ListInvitationsRequest
 
@@ -2257,13 +2294,21 @@ module Aws::SecurityHub
     ListInvitationsResponse.struct_class = Types::ListInvitationsResponse
 
     ListMembersRequest.add_member(:only_associated, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "OnlyAssociated"))
-    ListMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CrossAccountMaxResults, location: "querystring", location_name: "MaxResults"))
     ListMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListMembersRequest.struct_class = Types::ListMembersRequest
 
     ListMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: MemberList, location_name: "Members"))
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
+
+    ListOrganizationAdminAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: AdminsMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListOrganizationAdminAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListOrganizationAdminAccountsRequest.struct_class = Types::ListOrganizationAdminAccountsRequest
+
+    ListOrganizationAdminAccountsResponse.add_member(:admin_accounts, Shapes::ShapeRef.new(shape: AdminAccounts, location_name: "AdminAccounts"))
+    ListOrganizationAdminAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOrganizationAdminAccountsResponse.struct_class = Types::ListOrganizationAdminAccountsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -2607,6 +2652,11 @@ module Aws::SecurityHub
 
     UpdateInsightResponse.struct_class = Types::UpdateInsightResponse
 
+    UpdateOrganizationConfigurationRequest.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "AutoEnable"))
+    UpdateOrganizationConfigurationRequest.struct_class = Types::UpdateOrganizationConfigurationRequest
+
+    UpdateOrganizationConfigurationResponse.struct_class = Types::UpdateOrganizationConfigurationResponse
+
     UpdateSecurityHubConfigurationRequest.add_member(:auto_enable_controls, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoEnableControls"))
     UpdateSecurityHubConfigurationRequest.struct_class = Types::UpdateSecurityHubConfigurationRequest
 
@@ -2865,6 +2915,18 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/organization/configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:describe_products, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeProducts"
         o.http_method = "GET"
@@ -2931,6 +2993,18 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:disable_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableOrganizationAdminAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/admin/disable"
+        o.input = Shapes::ShapeRef.new(shape: DisableOrganizationAdminAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableOrganizationAdminAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:disable_security_hub, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableSecurityHub"
         o.http_method = "DELETE"
@@ -2979,6 +3053,18 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:enable_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableOrganizationAdminAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/admin/enable"
+        o.input = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -3167,6 +3253,24 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:list_organization_admin_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationAdminAccounts"
+        o.http_method = "GET"
+        o.http_request_uri = "/organization/admin"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationAdminAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationAdminAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -3237,6 +3341,18 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOrganizationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOrganizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOrganizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:update_security_hub_configuration, Seahorse::Model::Operation.new.tap do |o|

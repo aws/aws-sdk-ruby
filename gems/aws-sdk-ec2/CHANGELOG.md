@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.211.0 (2020-11-23)
+------------------
+
+* Feature - This release adds support for Multiple Private DNS names to DescribeVpcEndpointServices response.
+
 1.210.0 (2020-11-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-11-23)
+------------------
+
+* Feature - Amazon Timestream now supports "QueryStatus" in Query API which has information about cumulative bytes scanned, metered, as well as progress percentage for the query.
+
 1.1.0 (2020-09-30)
 ------------------
 
