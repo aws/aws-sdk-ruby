@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-11-24)
+------------------
+
+* Feature - Adds support for the new Modules feature for CloudFormation. A module encapsulates one or more resources and their respective configurations for reuse across your organization.
+
 1.45.0 (2020-11-18)
 ------------------
 

@@ -344,6 +344,12 @@ module Aws::Batch
     #           launch_template_name: "String",
     #           version: "String",
     #         },
+    #         ec2_configuration: [
+    #           {
+    #             image_type: "ImageType", # required
+    #             image_id_override: "ImageIdOverride",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] type
@@ -400,7 +406,8 @@ module Aws::Batch
     #
     # @!attribute [rw] image_id
     #   The Amazon Machine Image (AMI) ID used for instances launched in the
-    #   compute environment.
+    #   compute environment. This parameter is overridden by the
+    #   `imageIdOverride` member of the `Ec2Configuration` structure.
     #   @return [String]
     #
     # @!attribute [rw] subnets
@@ -505,6 +512,11 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
     #   @return [Types::LaunchTemplateSpecification]
     #
+    # @!attribute [rw] ec2_configuration
+    #   Provides additional details used to selecting the AMI to use for
+    #   instances in a compute environment.
+    #   @return [Array<Types::Ec2Configuration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource AWS API Documentation
     #
     class ComputeResource < Struct.new(
@@ -523,7 +535,8 @@ module Aws::Batch
       :placement_group,
       :bid_percentage,
       :spot_iam_fleet_role,
-      :launch_template)
+      :launch_template,
+      :ec2_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1273,6 +1286,12 @@ module Aws::Batch
     #             launch_template_name: "String",
     #             version: "String",
     #           },
+    #           ec2_configuration: [
+    #             {
+    #               image_type: "ImageType", # required
+    #               image_id_override: "ImageIdOverride",
+    #             },
+    #           ],
     #         },
     #         service_role: "String", # required
     #         tags: {
@@ -1826,6 +1845,65 @@ module Aws::Batch
       :host_path,
       :container_path,
       :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information used to select Amazon Machine Images (AMIs) for
+    # instances in the compute environment. If the `Ec2Configuration` is not
+    # specified, the default is `ECS_AL1`.
+    #
+    # @note When making an API call, you may pass Ec2Configuration
+    #   data as a hash:
+    #
+    #       {
+    #         image_type: "ImageType", # required
+    #         image_id_override: "ImageIdOverride",
+    #       }
+    #
+    # @!attribute [rw] image_type
+    #   The image type to match with the instance type to pick an AMI. If
+    #   the `imageIdOverride` parameter is not specified, then a recent
+    #   [Amazon ECS-optimized AMI][1] will be used.
+    #
+    #   ECS\_AL2
+    #
+    #   : [Amazon Linux 2][2]− Default for all AWS Graviton-based instance
+    #     families (for example, `C6g`, `M6g`, `R6g`, and `T4g`) and can be
+    #     used for all non-GPU instance types.
+    #
+    #   ECS\_AL2\_NVIDIA
+    #
+    #   : [Amazon Linux 2 (GPU)][3]−Default for all GPU instance families
+    #     (for example `P4` and `G4`) and can be used for all non-AWS
+    #     Graviton-based instance types.
+    #
+    #   ECS\_AL1
+    #
+    #   : [Amazon Linux][4]−Default for all non-GPU, non-AWS-Graviton
+    #     instance families. Amazon Linux is reaching the end-of-life of
+    #     standard support. For more information, see [Amazon Linux AMI][5].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
+    #   [5]: https://aws.amazon.com/amazon-linux-ami/
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id_override
+    #   The AMI ID used for instances launched in the compute environment
+    #   that match the image type. This setting overrides the `imageId` set
+    #   in the `computeResource` object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Ec2Configuration AWS API Documentation
+    #
+    class Ec2Configuration < Struct.new(
+      :image_type,
+      :image_id_override)
       SENSITIVE = []
       include Aws::Structure
     end

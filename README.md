@@ -508,6 +508,7 @@ RubyGems.org page under "LINKS" section.
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi         | aws-sdk-apigatewaymanagementapi         | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                    | aws-sdk-apigatewayv2                    | 2018-11-29  |
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
+| AmazonMWAA                                            | Aws::MWAA                            | aws-sdk-mwaa                            | 2020-07-01  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
 | Braket                                                | Aws::Braket                          | aws-sdk-braket                          | 2019-09-01  |

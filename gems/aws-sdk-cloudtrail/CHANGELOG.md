@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-11-24)
+------------------
+
+* Feature - CloudTrail now includes advanced event selectors, which give you finer-grained control over the events that are logged to your trail.
+
 1.29.0 (2020-09-30)
 ------------------
 

@@ -1741,7 +1741,7 @@ module Aws::CloudFormation
     #
     #   resp = client.deregister_type({
     #     arn: "PrivateTypeArn",
-    #     type: "RESOURCE", # accepts RESOURCE
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName",
     #     version_id: "TypeVersionId",
     #   })
@@ -1892,6 +1892,8 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.details[0].change_source #=> String, one of "ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic"
     #   resp.changes[0].resource_change.details[0].causing_entity #=> String
     #   resp.changes[0].resource_change.change_set_id #=> String
+    #   resp.changes[0].resource_change.module_info.type_hierarchy #=> String
+    #   resp.changes[0].resource_change.module_info.logical_id_hierarchy #=> String
     #   resp.next_token #=> String
     #   resp.include_nested_stacks #=> Boolean
     #   resp.parent_change_set_id #=> String
@@ -2143,6 +2145,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_detail.metadata #=> String
     #   resp.stack_resource_detail.drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
     #   resp.stack_resource_detail.drift_information.last_check_timestamp #=> Time
+    #   resp.stack_resource_detail.module_info.type_hierarchy #=> String
+    #   resp.stack_resource_detail.module_info.logical_id_hierarchy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResource AWS API Documentation
     #
@@ -2237,6 +2241,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_drifts[0].property_differences[0].difference_type #=> String, one of "ADD", "REMOVE", "NOT_EQUAL"
     #   resp.stack_resource_drifts[0].stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
     #   resp.stack_resource_drifts[0].timestamp #=> Time
+    #   resp.stack_resource_drifts[0].module_info.type_hierarchy #=> String
+    #   resp.stack_resource_drifts[0].module_info.logical_id_hierarchy #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDrifts AWS API Documentation
@@ -2336,6 +2342,8 @@ module Aws::CloudFormation
     #   resp.stack_resources[0].description #=> String
     #   resp.stack_resources[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
     #   resp.stack_resources[0].drift_information.last_check_timestamp #=> Time
+    #   resp.stack_resources[0].module_info.type_hierarchy #=> String
+    #   resp.stack_resources[0].module_info.logical_id_hierarchy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources AWS API Documentation
     #
@@ -2616,7 +2624,7 @@ module Aws::CloudFormation
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_type({
-    #     type: "RESOURCE", # accepts RESOURCE
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName",
     #     arn: "TypeArn",
     #     version_id: "TypeVersionId",
@@ -2625,7 +2633,7 @@ module Aws::CloudFormation
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.type #=> String, one of "RESOURCE"
+    #   resp.type #=> String, one of "RESOURCE", "MODULE"
     #   resp.type_name #=> String
     #   resp.default_version_id #=> String
     #   resp.is_default_version #=> Boolean
@@ -2825,6 +2833,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_drift.property_differences[0].difference_type #=> String, one of "ADD", "REMOVE", "NOT_EQUAL"
     #   resp.stack_resource_drift.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
     #   resp.stack_resource_drift.timestamp #=> Time
+    #   resp.stack_resource_drift.module_info.type_hierarchy #=> String
+    #   resp.stack_resource_drift.module_info.logical_id_hierarchy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDrift AWS API Documentation
     #
@@ -3521,6 +3531,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_summaries[0].resource_status_reason #=> String
     #   resp.stack_resource_summaries[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
     #   resp.stack_resource_summaries[0].drift_information.last_check_timestamp #=> Time
+    #   resp.stack_resource_summaries[0].module_info.type_hierarchy #=> String
+    #   resp.stack_resource_summaries[0].module_info.logical_id_hierarchy #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources AWS API Documentation
@@ -3813,7 +3825,7 @@ module Aws::CloudFormation
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_type_registrations({
-    #     type: "RESOURCE", # accepts RESOURCE
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName",
     #     type_arn: "TypeArn",
     #     registration_status_filter: "COMPLETE", # accepts COMPLETE, IN_PROGRESS, FAILED
@@ -3895,7 +3907,7 @@ module Aws::CloudFormation
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_type_versions({
-    #     type: "RESOURCE", # accepts RESOURCE
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName",
     #     arn: "PrivateTypeArn",
     #     max_results: 1,
@@ -3906,7 +3918,7 @@ module Aws::CloudFormation
     # @example Response structure
     #
     #   resp.type_version_summaries #=> Array
-    #   resp.type_version_summaries[0].type #=> String, one of "RESOURCE"
+    #   resp.type_version_summaries[0].type #=> String, one of "RESOURCE", "MODULE"
     #   resp.type_version_summaries[0].type_name #=> String
     #   resp.type_version_summaries[0].version_id #=> String
     #   resp.type_version_summaries[0].is_default_version #=> Boolean
@@ -3971,6 +3983,9 @@ module Aws::CloudFormation
     #   * `DEPRECATED`\: The type has been deregistered and can no longer be
     #     used in CloudFormation operations.
     #
+    # @option params [String] :type
+    #   The type of extension.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
     #   the number of available results exceeds this maximum, the response
@@ -3998,6 +4013,7 @@ module Aws::CloudFormation
     #     visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
     #     provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
     #     deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4005,7 +4021,7 @@ module Aws::CloudFormation
     # @example Response structure
     #
     #   resp.type_summaries #=> Array
-    #   resp.type_summaries[0].type #=> String, one of "RESOURCE"
+    #   resp.type_summaries[0].type #=> String, one of "RESOURCE", "MODULE"
     #   resp.type_summaries[0].type_name #=> String
     #   resp.type_summaries[0].default_version_id #=> String
     #   resp.type_summaries[0].type_arn #=> String
@@ -4212,7 +4228,7 @@ module Aws::CloudFormation
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_type({
-    #     type: "RESOURCE", # accepts RESOURCE
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName", # required
     #     schema_handler_package: "S3Url", # required
     #     logging_config: {
@@ -4306,7 +4322,7 @@ module Aws::CloudFormation
     #
     #   resp = client.set_type_default_version({
     #     arn: "PrivateTypeArn",
-    #     type: "RESOURCE", # accepts RESOURCE
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName",
     #     version_id: "TypeVersionId",
     #   })
@@ -5358,7 +5374,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

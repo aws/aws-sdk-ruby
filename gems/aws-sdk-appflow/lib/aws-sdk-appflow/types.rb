@@ -322,6 +322,10 @@ module Aws::Appflow
     #   The connector metadata specific to Amazon EventBridge.
     #   @return [Types::EventBridgeMetadata]
     #
+    # @!attribute [rw] upsolver
+    #   The connector metadata specific to Upsolver.
+    #   @return [Types::UpsolverMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorMetadata AWS API Documentation
     #
     class ConnectorMetadata < Struct.new(
@@ -341,7 +345,8 @@ module Aws::Appflow
       :trendmicro,
       :veeva,
       :zendesk,
-      :event_bridge)
+      :event_bridge,
+      :upsolver)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1042,7 +1047,7 @@ module Aws::Appflow
     #       {
     #         connector_profile_name: "ConnectorProfileName", # required
     #         kms_arn: "KMSArn",
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connection_mode: "Public", # required, accepts Public, Private
     #         connector_profile_config: { # required
     #           connector_profile_properties: { # required
@@ -1259,7 +1264,7 @@ module Aws::Appflow
     #           },
     #         },
     #         source_flow_config: { # required
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -1314,7 +1319,7 @@ module Aws::Appflow
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -1367,6 +1372,20 @@ module Aws::Appflow
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
+    #                 },
+    #               },
+    #               upsolver: {
+    #                 bucket_name: "UpsolverBucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #                 s3_output_format_config: { # required
+    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #                   prefix_config: { # required
+    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                   },
+    #                   aggregation_config: {
+    #                     aggregation_type: "None", # accepts None, SingleFile
+    #                   },
     #                 },
     #               },
     #             },
@@ -1622,7 +1641,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_entity_name: "Name", # required
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connector_profile_name: "ConnectorProfileName",
     #       }
     #
@@ -1669,7 +1688,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_profile_names: ["ConnectorProfileName"],
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -1727,7 +1746,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         next_token: "NextToken",
     #       }
     #
@@ -1994,6 +2013,20 @@ module Aws::Appflow
     #             bucket_name: "BucketName",
     #           },
     #         },
+    #         upsolver: {
+    #           bucket_name: "UpsolverBucketName", # required
+    #           bucket_prefix: "BucketPrefix",
+    #           s3_output_format_config: { # required
+    #             file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #             prefix_config: { # required
+    #               prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #               prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #             },
+    #             aggregation_config: {
+    #               aggregation_type: "None", # accepts None, SingleFile
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] redshift
@@ -2016,6 +2049,10 @@ module Aws::Appflow
     #   The properties required to query Amazon EventBridge.
     #   @return [Types::EventBridgeDestinationProperties]
     #
+    # @!attribute [rw] upsolver
+    #   The properties required to query Upsolver.
+    #   @return [Types::UpsolverDestinationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
     #
     class DestinationConnectorProperties < Struct.new(
@@ -2023,7 +2060,8 @@ module Aws::Appflow
       :s3,
       :salesforce,
       :snowflake,
-      :event_bridge)
+      :event_bridge,
+      :upsolver)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2076,7 +2114,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connector_profile_name: "ConnectorProfileName",
     #         destination_connector_properties: { # required
     #           redshift: {
@@ -2129,6 +2167,20 @@ module Aws::Appflow
     #               fail_on_first_destination_error: false,
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
+    #             },
+    #           },
+    #           upsolver: {
+    #             bucket_name: "UpsolverBucketName", # required
+    #             bucket_prefix: "BucketPrefix",
+    #             s3_output_format_config: { # required
+    #               file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #               prefix_config: { # required
+    #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #               },
+    #               aggregation_config: {
+    #                 aggregation_type: "None", # accepts None, SingleFile
+    #               },
     #             },
     #           },
     #         },
@@ -2754,7 +2806,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_profile_name: "ConnectorProfileName",
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         entities_path: "EntitiesPath",
     #       }
     #
@@ -3454,8 +3506,8 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] schedule_expression
-    #   The scheduling expression that determines when and how often the
-    #   rule runs.
+    #   The scheduling expression that determines the rate at which the
+    #   schedule will run, for example `rate(5minutes)`.
     #   @return [String]
     #
     # @!attribute [rw] data_pull_mode
@@ -4055,7 +4107,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connector_profile_name: "ConnectorProfileName",
     #         source_connector_properties: { # required
     #           amplitude: {
@@ -4710,7 +4762,7 @@ module Aws::Appflow
     #           },
     #         },
     #         source_flow_config: {
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -4765,7 +4817,7 @@ module Aws::Appflow
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -4818,6 +4870,20 @@ module Aws::Appflow
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
+    #                 },
+    #               },
+    #               upsolver: {
+    #                 bucket_name: "UpsolverBucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #                 s3_output_format_config: { # required
+    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #                   prefix_config: { # required
+    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                   },
+    #                   aggregation_config: {
+    #                     aggregation_type: "None", # accepts None, SingleFile
+    #                   },
     #                 },
     #               },
     #             },
@@ -4900,6 +4966,101 @@ module Aws::Appflow
     #
     class UpdateFlowResponse < Struct.new(
       :flow_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that are applied when Upsolver is used as a
+    # destination.
+    #
+    # @note When making an API call, you may pass UpsolverDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "UpsolverBucketName", # required
+    #         bucket_prefix: "BucketPrefix",
+    #         s3_output_format_config: { # required
+    #           file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #           prefix_config: { # required
+    #             prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #             prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #           },
+    #           aggregation_config: {
+    #             aggregation_type: "None", # accepts None, SingleFile
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The Upsolver Amazon S3 bucket name in which Amazon AppFlow places
+    #   the transferred data.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The object key for the destination Upsolver Amazon S3 bucket in
+    #   which Amazon AppFlow places the files.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_format_config
+    #   The configuration that determines how data is formatted when
+    #   Upsolver is used as the flow destination.
+    #   @return [Types::UpsolverS3OutputFormatConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverDestinationProperties AWS API Documentation
+    #
+    class UpsolverDestinationProperties < Struct.new(
+      :bucket_name,
+      :bucket_prefix,
+      :s3_output_format_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connector metadata specific to Upsolver.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverMetadata AWS API Documentation
+    #
+    class UpsolverMetadata < Aws::EmptyStructure; end
+
+    # The configuration that determines how Amazon AppFlow formats the flow
+    # output data when Upsolver is used as the destination.
+    #
+    # @note When making an API call, you may pass UpsolverS3OutputFormatConfig
+    #   data as a hash:
+    #
+    #       {
+    #         file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #         prefix_config: { # required
+    #           prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #           prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #         },
+    #         aggregation_config: {
+    #           aggregation_type: "None", # accepts None, SingleFile
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_type
+    #   Indicates the file type that Amazon AppFlow places in the Upsolver
+    #   Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_config
+    #   Determines the prefix that Amazon AppFlow applies to the destination
+    #   folder name. You can name your destination folders according to the
+    #   flow frequency and date.
+    #   @return [Types::PrefixConfig]
+    #
+    # @!attribute [rw] aggregation_config
+    #   The aggregation settings that you can use to customize the output
+    #   format of your flow data.
+    #   @return [Types::AggregationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverS3OutputFormatConfig AWS API Documentation
+    #
+    class UpsolverS3OutputFormatConfig < Struct.new(
+      :file_type,
+      :prefix_config,
+      :aggregation_config)
       SENSITIVE = []
       include Aws::Structure
     end

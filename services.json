@@ -451,6 +451,9 @@
   "MTurk": {
     "models": "mturk-requester/2017-01-17"
   },
+  "MWAA": {
+    "models": "mwaa/2020-07-01"
+  },
   "MachineLearning": {
     "models": "machinelearning/2014-12-12",
     "addPlugins": [

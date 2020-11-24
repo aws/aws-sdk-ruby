@@ -149,6 +149,10 @@ module Aws::CognitoIdentityProvider
     CustomAttributeNameType = Shapes::StringShape.new(name: 'CustomAttributeNameType')
     CustomAttributesListType = Shapes::ListShape.new(name: 'CustomAttributesListType')
     CustomDomainConfigType = Shapes::StructureShape.new(name: 'CustomDomainConfigType')
+    CustomEmailLambdaVersionConfigType = Shapes::StructureShape.new(name: 'CustomEmailLambdaVersionConfigType')
+    CustomEmailSenderLambdaVersionType = Shapes::StringShape.new(name: 'CustomEmailSenderLambdaVersionType')
+    CustomSMSLambdaVersionConfigType = Shapes::StructureShape.new(name: 'CustomSMSLambdaVersionConfigType')
+    CustomSMSSenderLambdaVersionType = Shapes::StringShape.new(name: 'CustomSMSSenderLambdaVersionType')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
     DefaultEmailOptionType = Shapes::StringShape.new(name: 'DefaultEmailOptionType')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
@@ -957,6 +961,14 @@ module Aws::CognitoIdentityProvider
     CustomDomainConfigType.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "CertificateArn"))
     CustomDomainConfigType.struct_class = Types::CustomDomainConfigType
 
+    CustomEmailLambdaVersionConfigType.add_member(:lambda_version, Shapes::ShapeRef.new(shape: CustomEmailSenderLambdaVersionType, required: true, location_name: "LambdaVersion"))
+    CustomEmailLambdaVersionConfigType.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "LambdaArn"))
+    CustomEmailLambdaVersionConfigType.struct_class = Types::CustomEmailLambdaVersionConfigType
+
+    CustomSMSLambdaVersionConfigType.add_member(:lambda_version, Shapes::ShapeRef.new(shape: CustomSMSSenderLambdaVersionType, required: true, location_name: "LambdaVersion"))
+    CustomSMSLambdaVersionConfigType.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "LambdaArn"))
+    CustomSMSLambdaVersionConfigType.struct_class = Types::CustomSMSLambdaVersionConfigType
+
     DeleteGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupNameType, required: true, location_name: "GroupName"))
     DeleteGroupRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
@@ -1274,6 +1286,9 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.add_member(:verify_auth_challenge_response, Shapes::ShapeRef.new(shape: ArnType, location_name: "VerifyAuthChallengeResponse"))
     LambdaConfigType.add_member(:pre_token_generation, Shapes::ShapeRef.new(shape: ArnType, location_name: "PreTokenGeneration"))
     LambdaConfigType.add_member(:user_migration, Shapes::ShapeRef.new(shape: ArnType, location_name: "UserMigration"))
+    LambdaConfigType.add_member(:custom_sms_sender, Shapes::ShapeRef.new(shape: CustomSMSLambdaVersionConfigType, location_name: "CustomSMSSender"))
+    LambdaConfigType.add_member(:custom_email_sender, Shapes::ShapeRef.new(shape: CustomEmailLambdaVersionConfigType, location_name: "CustomEmailSender"))
+    LambdaConfigType.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: ArnType, location_name: "KMSKeyID"))
     LambdaConfigType.struct_class = Types::LambdaConfigType
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))

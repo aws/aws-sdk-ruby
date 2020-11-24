@@ -2384,6 +2384,49 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetReportGroupTrendInput
+    #   data as a hash:
+    #
+    #       {
+    #         report_group_arn: "NonEmptyString", # required
+    #         num_of_reports: 1,
+    #         trend_field: "PASS_RATE", # required, accepts PASS_RATE, DURATION, TOTAL, LINE_COVERAGE, LINES_COVERED, LINES_MISSED, BRANCH_COVERAGE, BRANCHES_COVERED, BRANCHES_MISSED
+    #       }
+    #
+    # @!attribute [rw] report_group_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] num_of_reports
+    #   @return [Integer]
+    #
+    # @!attribute [rw] trend_field
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetReportGroupTrendInput AWS API Documentation
+    #
+    class GetReportGroupTrendInput < Struct.new(
+      :report_group_arn,
+      :num_of_reports,
+      :trend_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stats
+    #   @return [Types::ReportGroupTrendStats]
+    #
+    # @!attribute [rw] raw_data
+    #   @return [Array<Types::ReportWithRawData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetReportGroupTrendOutput AWS API Documentation
+    #
+    class GetReportGroupTrendOutput < Struct.new(
+      :stats,
+      :raw_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetResourcePolicyInput
     #   data as a hash:
     #
@@ -4750,6 +4793,40 @@ module Aws::CodeBuild
       :last_modified,
       :tags,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] average
+    #   @return [String]
+    #
+    # @!attribute [rw] max
+    #   @return [String]
+    #
+    # @!attribute [rw] min
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportGroupTrendStats AWS API Documentation
+    #
+    class ReportGroupTrendStats < Struct.new(
+      :average,
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportWithRawData AWS API Documentation
+    #
+    class ReportWithRawData < Struct.new(
+      :report_arn,
+      :data)
       SENSITIVE = []
       include Aws::Structure
     end

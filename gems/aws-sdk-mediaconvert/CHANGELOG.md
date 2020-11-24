@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2020-11-24)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for Vorbis and Opus audio in OGG/OGA containers.
+
 1.59.0 (2020-11-11)
 ------------------
 

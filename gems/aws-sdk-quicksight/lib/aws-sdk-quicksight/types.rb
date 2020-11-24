@@ -6099,18 +6099,22 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Parameter input for the `GetDashboardEmbedUrl` operation.
+    #
     # @note When making an API call, you may pass GetDashboardEmbedUrlRequest
     #   data as a hash:
     #
     #       {
     #         aws_account_id: "AwsAccountId", # required
     #         dashboard_id: "RestrictiveResourceId", # required
-    #         identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #         identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, ANONYMOUS
     #         session_lifetime_in_minutes: 1,
     #         undo_redo_disabled: false,
     #         reset_disabled: false,
     #         state_persistence_enabled: false,
     #         user_arn: "Arn",
+    #         namespace: "Namespace",
+    #         additional_dashboard_ids: ["RestrictiveResourceId"],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -6170,6 +6174,22 @@ module Aws::QuickSight
     #   role-based sessions.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The QuickSight namespace that contains the dashboard IDs in this
+    #   request. If you're not using a custom namespace, set this to
+    #   "`default`".
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_dashboard_ids
+    #   A list of one or more dashboard ids that you want to add to a
+    #   session that includes anonymous authorizations. `IdentityType` must
+    #   be set to ANONYMOUS for this to work, because other other identity
+    #   types authenticate as QuickSight users. For example, if you set
+    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
     #
     class GetDashboardEmbedUrlRequest < Struct.new(
@@ -6180,11 +6200,15 @@ module Aws::QuickSight
       :undo_redo_disabled,
       :reset_disabled,
       :state_persistence_enabled,
-      :user_arn)
+      :user_arn,
+      :namespace,
+      :additional_dashboard_ids)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Output returned from the `GetDashboardEmbedUrl` operation.
+    #
     # @!attribute [rw] embed_url
     #   A single-use URL that you can put into your server-side webpage to
     #   embed your dashboard. This URL is valid for 5 minutes. The API
@@ -10701,6 +10725,32 @@ module Aws::QuickSight
       :dimension_foreground,
       :measure,
       :measure_foreground)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This error indicates that you are calling an embedding operation in
+    # Amazon QuickSight without the required pricing plan on your AWS
+    # account. Before you can use anonymous embedding, a QuickSight
+    # administrator needs to add capacity pricing to QuickSight. You can do
+    # this on the **Manage QuickSight** page.
+    #
+    # After capacity pricing is added, you can enable anonymous embedding by
+    # using the ` GetDashboardEmbedUrl ` API operation with the
+    # `--identity-type ANONYMOUS` option.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnsupportedPricingPlanException AWS API Documentation
+    #
+    class UnsupportedPricingPlanException < Struct.new(
+      :message,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end

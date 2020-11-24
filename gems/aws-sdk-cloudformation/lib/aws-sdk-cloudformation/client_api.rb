@@ -174,12 +174,14 @@ module Aws::CloudFormation
     ListTypesOutput = Shapes::StructureShape.new(name: 'ListTypesOutput')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
+    LogicalIdHierarchy = Shapes::StringShape.new(name: 'LogicalIdHierarchy')
     LogicalResourceId = Shapes::StringShape.new(name: 'LogicalResourceId')
     LogicalResourceIds = Shapes::ListShape.new(name: 'LogicalResourceIds')
     MaxConcurrentCount = Shapes::IntegerShape.new(name: 'MaxConcurrentCount')
     MaxConcurrentPercentage = Shapes::IntegerShape.new(name: 'MaxConcurrentPercentage')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metadata = Shapes::StringShape.new(name: 'Metadata')
+    ModuleInfo = Shapes::StructureShape.new(name: 'ModuleInfo')
     MonitoringTimeInMinutes = Shapes::IntegerShape.new(name: 'MonitoringTimeInMinutes')
     NameAlreadyExistsException = Shapes::StructureShape.new(name: 'NameAlreadyExistsException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -360,6 +362,7 @@ module Aws::CloudFormation
     TransformsList = Shapes::ListShape.new(name: 'TransformsList')
     Type = Shapes::StringShape.new(name: 'Type')
     TypeArn = Shapes::StringShape.new(name: 'TypeArn')
+    TypeHierarchy = Shapes::StringShape.new(name: 'TypeHierarchy')
     TypeName = Shapes::StringShape.new(name: 'TypeName')
     TypeNotFoundException = Shapes::StructureShape.new(name: 'TypeNotFoundException')
     TypeSchema = Shapes::StringShape.new(name: 'TypeSchema')
@@ -897,6 +900,7 @@ module Aws::CloudFormation
     ListTypesInput.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     ListTypesInput.add_member(:provisioning_type, Shapes::ShapeRef.new(shape: ProvisioningType, location_name: "ProvisioningType"))
     ListTypesInput.add_member(:deprecated_status, Shapes::ShapeRef.new(shape: DeprecatedStatus, location_name: "DeprecatedStatus"))
+    ListTypesInput.add_member(:type, Shapes::ShapeRef.new(shape: RegistryType, location_name: "Type"))
     ListTypesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListTypesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTypesInput.struct_class = Types::ListTypesInput
@@ -910,6 +914,10 @@ module Aws::CloudFormation
     LoggingConfig.struct_class = Types::LoggingConfig
 
     LogicalResourceIds.member = Shapes::ShapeRef.new(shape: LogicalResourceId)
+
+    ModuleInfo.add_member(:type_hierarchy, Shapes::ShapeRef.new(shape: TypeHierarchy, location_name: "TypeHierarchy"))
+    ModuleInfo.add_member(:logical_id_hierarchy, Shapes::ShapeRef.new(shape: LogicalIdHierarchy, location_name: "LogicalIdHierarchy"))
+    ModuleInfo.struct_class = Types::ModuleInfo
 
     NameAlreadyExistsException.struct_class = Types::NameAlreadyExistsException
 
@@ -1002,6 +1010,7 @@ module Aws::CloudFormation
     ResourceChange.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
     ResourceChange.add_member(:details, Shapes::ShapeRef.new(shape: ResourceChangeDetails, location_name: "Details"))
     ResourceChange.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ChangeSetId"))
+    ResourceChange.add_member(:module_info, Shapes::ShapeRef.new(shape: ModuleInfo, location_name: "ModuleInfo"))
     ResourceChange.struct_class = Types::ResourceChange
 
     ResourceChangeDetail.add_member(:target, Shapes::ShapeRef.new(shape: ResourceTargetDefinition, location_name: "Target"))
@@ -1168,6 +1177,7 @@ module Aws::CloudFormation
     StackResource.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
     StackResource.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StackResource.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackResourceDriftInformation, location_name: "DriftInformation"))
+    StackResource.add_member(:module_info, Shapes::ShapeRef.new(shape: ModuleInfo, location_name: "ModuleInfo"))
     StackResource.struct_class = Types::StackResource
 
     StackResourceDetail.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
@@ -1181,6 +1191,7 @@ module Aws::CloudFormation
     StackResourceDetail.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StackResourceDetail.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     StackResourceDetail.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackResourceDriftInformation, location_name: "DriftInformation"))
+    StackResourceDetail.add_member(:module_info, Shapes::ShapeRef.new(shape: ModuleInfo, location_name: "ModuleInfo"))
     StackResourceDetail.struct_class = Types::StackResourceDetail
 
     StackResourceDrift.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
@@ -1193,6 +1204,7 @@ module Aws::CloudFormation
     StackResourceDrift.add_member(:property_differences, Shapes::ShapeRef.new(shape: PropertyDifferences, location_name: "PropertyDifferences"))
     StackResourceDrift.add_member(:stack_resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, required: true, location_name: "StackResourceDriftStatus"))
     StackResourceDrift.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    StackResourceDrift.add_member(:module_info, Shapes::ShapeRef.new(shape: ModuleInfo, location_name: "ModuleInfo"))
     StackResourceDrift.struct_class = Types::StackResourceDrift
 
     StackResourceDriftInformation.add_member(:stack_resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, required: true, location_name: "StackResourceDriftStatus"))
@@ -1216,6 +1228,7 @@ module Aws::CloudFormation
     StackResourceSummary.add_member(:resource_status, Shapes::ShapeRef.new(shape: ResourceStatus, required: true, location_name: "ResourceStatus"))
     StackResourceSummary.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
     StackResourceSummary.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackResourceDriftInformationSummary, location_name: "DriftInformation"))
+    StackResourceSummary.add_member(:module_info, Shapes::ShapeRef.new(shape: ModuleInfo, location_name: "ModuleInfo"))
     StackResourceSummary.struct_class = Types::StackResourceSummary
 
     StackResources.member = Shapes::ShapeRef.new(shape: StackResource)

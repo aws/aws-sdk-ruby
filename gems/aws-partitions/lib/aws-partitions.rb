@@ -361,6 +361,7 @@ module Aws
             'Lightsail' => 'lightsail',
             'MQ' => 'mq',
             'MTurk' => 'mturk-requester',
+            'MWAA' => 'airflow',
             'MachineLearning' => 'machinelearning',
             'Macie' => 'macie',
             'Macie2' => 'macie2',

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-11-24)
+------------------
+
+* Feature - Lex now supports es-419, de-DE locales
+
 1.41.0 (2020-11-19)
 ------------------
 

@@ -937,6 +937,32 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ConfigurationErrorDetails < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   @return [Types::ConfigurationErrorDetails]
+    #
+    class ConfigurationStatus < Struct.new(
+      :state,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request has conflicting operations. This can occur if you're
     # trying to perform more than one operation on the same resource at the
     # same time.
@@ -1603,7 +1629,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] session_duration_seconds
     #   The duration (in seconds) for which the session at the URL is valid.
     #
-    #   Default: 900 seconds (15 minutes)
+    #   Default: 43,200 seconds (12 hours)
     #   @return [Integer]
     #
     class CreatePresignedPortalUrlRequest < Struct.new(
@@ -1615,10 +1641,10 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] presigned_portal_url
     #   The pre-signed URL to the portal. The URL contains the portal ID and
-    #   a session token that lets you access the portal. The URL has the
-    #   following format.
+    #   an authentication token that lets you access the portal. The URL has
+    #   the following format.
     #
-    #   `https://<portal-id>.app.iotsitewise.aws/auth?token=<encrypted-token>`
+    #   `https://<portal-id>.app.iotsitewise.aws/iam?token=<encrypted-token>`
     #   @return [String]
     #
     class CreatePresignedPortalUrlResponse < Struct.new(
@@ -2294,6 +2320,33 @@ module Aws::IoTSiteWise
       :dashboard_definition,
       :dashboard_creation_date,
       :dashboard_last_update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    class DescribeDefaultEncryptionConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] encryption_type
+    #   The type of encryption used for the encryption configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The key ARN of the customer managed customer master key (CMK) used
+    #   for AWS KMS encryption if you use `KMS_BASED_ENCRYPTION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_status
+    #   The status of the account configuration. This contains the
+    #   `ConfigurationState`. If there's an error, it also contains the
+    #   `ErrorDetails`.
+    #   @return [Types::ConfigurationStatus]
+    #
+    class DescribeDefaultEncryptionConfigurationResponse < Struct.new(
+      :encryption_type,
+      :kms_key_arn,
+      :configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4366,6 +4419,54 @@ module Aws::IoTSiteWise
       :property_id,
       :property_alias,
       :property_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutDefaultEncryptionConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_type: "SITEWISE_DEFAULT_ENCRYPTION", # required, accepts SITEWISE_DEFAULT_ENCRYPTION, KMS_BASED_ENCRYPTION
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption used for the encryption configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Key ID of the customer managed customer master key (CMK) used
+    #   for AWS KMS encryption. This is required if you use
+    #   `KMS_BASED_ENCRYPTION`.
+    #   @return [String]
+    #
+    class PutDefaultEncryptionConfigurationRequest < Struct.new(
+      :encryption_type,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encryption_type
+    #   The type of encryption used for the encryption configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Key ARN of the AWS KMS CMK used for AWS KMS encryption if you
+    #   use `KMS_BASED_ENCRYPTION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_status
+    #   The status of the account configuration. This contains the
+    #   `ConfigurationState`. If there is an error, it also contains the
+    #   `ErrorDetails`.
+    #   @return [Types::ConfigurationStatus]
+    #
+    class PutDefaultEncryptionConfigurationResponse < Struct.new(
+      :encryption_type,
+      :kms_key_arn,
+      :configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end

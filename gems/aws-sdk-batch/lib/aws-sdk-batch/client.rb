@@ -607,6 +607,12 @@ module Aws::Batch
     #         launch_template_name: "String",
     #         version: "String",
     #       },
+    #       ec2_configuration: [
+    #         {
+    #           image_type: "ImageType", # required
+    #           image_id_override: "ImageIdOverride",
+    #         },
+    #       ],
     #     },
     #     service_role: "String", # required
     #     tags: {
@@ -1011,6 +1017,9 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_id #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_name #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.version #=> String
+    #   resp.compute_environments[0].compute_resources.ec2_configuration #=> Array
+    #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
+    #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
     #   resp.compute_environments[0].service_role #=> String
     #   resp.next_token #=> String
     #
@@ -2648,7 +2657,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

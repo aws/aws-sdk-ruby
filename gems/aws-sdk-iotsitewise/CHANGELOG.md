@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2020-11-24)
+------------------
+
+* Feature - This release adds support for customer managed customer master key (CMK) based encryption in IoT SiteWise.
+
 1.14.0 (2020-11-16)
 ------------------
 

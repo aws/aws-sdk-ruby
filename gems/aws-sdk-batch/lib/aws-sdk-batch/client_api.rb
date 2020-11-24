@@ -62,10 +62,14 @@ module Aws::Batch
     DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
     DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
     DevicesList = Shapes::ListShape.new(name: 'DevicesList')
+    Ec2Configuration = Shapes::StructureShape.new(name: 'Ec2Configuration')
+    Ec2ConfigurationList = Shapes::ListShape.new(name: 'Ec2ConfigurationList')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     EvaluateOnExit = Shapes::StructureShape.new(name: 'EvaluateOnExit')
     EvaluateOnExitList = Shapes::ListShape.new(name: 'EvaluateOnExitList')
     Host = Shapes::StructureShape.new(name: 'Host')
+    ImageIdOverride = Shapes::StringShape.new(name: 'ImageIdOverride')
+    ImageType = Shapes::StringShape.new(name: 'ImageType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
     JQStatus = Shapes::StringShape.new(name: 'JQStatus')
@@ -208,7 +212,7 @@ module Aws::Batch
     ComputeResource.add_member(:maxv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxvCpus"))
     ComputeResource.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))
     ComputeResource.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceTypes"))
-    ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "imageId", metadata: {"deprecatedMessage"=>"This field is deprecated, use ec2Configuration[].imageIdOverride instead."}))
     ComputeResource.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
     ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     ComputeResource.add_member(:ec2_key_pair, Shapes::ShapeRef.new(shape: String, location_name: "ec2KeyPair"))
@@ -218,6 +222,7 @@ module Aws::Batch
     ComputeResource.add_member(:bid_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "bidPercentage"))
     ComputeResource.add_member(:spot_iam_fleet_role, Shapes::ShapeRef.new(shape: String, location_name: "spotIamFleetRole"))
     ComputeResource.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
+    ComputeResource.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationList, location_name: "ec2Configuration"))
     ComputeResource.struct_class = Types::ComputeResource
 
     ComputeResourceUpdate.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "minvCpus"))
@@ -364,6 +369,12 @@ module Aws::Batch
     DeviceCgroupPermissions.member = Shapes::ShapeRef.new(shape: DeviceCgroupPermission)
 
     DevicesList.member = Shapes::ShapeRef.new(shape: Device)
+
+    Ec2Configuration.add_member(:image_type, Shapes::ShapeRef.new(shape: ImageType, required: true, location_name: "imageType"))
+    Ec2Configuration.add_member(:image_id_override, Shapes::ShapeRef.new(shape: ImageIdOverride, location_name: "imageIdOverride"))
+    Ec2Configuration.struct_class = Types::Ec2Configuration
+
+    Ec2ConfigurationList.member = Shapes::ShapeRef.new(shape: Ec2Configuration)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 

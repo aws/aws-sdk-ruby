@@ -93,6 +93,14 @@ module Aws::CloudFormation
       data[:drift_information]
     end
 
+    # Contains information about the module from which the resource was
+    # created, if the resource was created from a module included in the
+    # stack template.
+    # @return [Types::ModuleInfo]
+    def module_info
+      data[:module_info]
+    end
+
     # @!endgroup
 
     # @return [Client]

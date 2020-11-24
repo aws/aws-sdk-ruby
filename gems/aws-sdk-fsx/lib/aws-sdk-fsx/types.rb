@@ -55,8 +55,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Describes a specific Amazon FSx Administrative Action for the current
-    # Windows file system.
+    # Describes a specific Amazon FSx administrative action for the current
+    # Windows or Lustre file system.
     #
     # @!attribute [rw] administrative_action_type
     #   Describes the type of administrative action, as follows:
@@ -67,13 +67,21 @@ module Aws::FSx
     #
     #   * `STORAGE_OPTIMIZATION` - Once the `FILE_SYSTEM_UPDATE` task to
     #     increase a file system's storage capacity completes successfully,
-    #     a `STORAGE_OPTIMIZATION` task starts. Storage optimization is the
-    #     process of migrating the file system data to the new, larger
-    #     disks. You can track the storage migration progress using the
+    #     a `STORAGE_OPTIMIZATION` task starts.
+    #
+    #     * For Windows, storage optimization is the process of migrating
+    #       the file system data to the new, larger disks.
+    #
+    #     * For Lustre, storage optimization consists of rebalancing the
+    #       data across the existing and newly added file servers.
+    #
+    #     You can track the storage optimization progress using the
     #     `ProgressPercent` property. When `STORAGE_OPTIMIZATION` completes
     #     successfully, the parent `FILE_SYSTEM_UPDATE` action status
     #     changes to `COMPLETED`. For more information, see [Managing
-    #     Storage Capacity][1].
+    #     storage capacity][1] in the *Amazon FSx for Windows File Server
+    #     User Guide* and [Managing storage and throughput capacity][2] in
+    #     the *Amazon FSx for Lustre User Guide*.
     #
     #   * `FILE_SYSTEM_ALIAS_ASSOCIATION` - A file system update to
     #     associate a new DNS alias with the file system. For more
@@ -86,6 +94,7 @@ module Aws::FSx
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [String]
     #
     # @!attribute [rw] progress_percent
@@ -116,11 +125,15 @@ module Aws::FSx
     #   * `UPDATED_OPTIMIZING` - For a storage capacity increase update,
     #     Amazon FSx has updated the file system with the new storage
     #     capacity, and is now performing the storage optimization process.
-    #     For more information, see [Managing Storage Capacity][1].
+    #     For more information, see [Managing storage capacity][1] in the
+    #     *Amazon FSx for Windows File Server User Guide* and [Managing
+    #     storage and throughput capacity][2] in the *Amazon FSx for Lustre
+    #     User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [String]
     #
     # @!attribute [rw] target_file_system_values
@@ -295,7 +308,16 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # A backup of an Amazon FSx for file system.
+    # A backup of an Amazon FSx file system. For more information see:
+    #
+    # * [Working with backups for Windows file systems][1]
+    #
+    # * [Working with backups for Lustre file systems][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
     #
     # @!attribute [rw] backup_id
     #   The ID of the backup.
@@ -306,12 +328,16 @@ module Aws::FSx
     #
     #   * `AVAILABLE` - The backup is fully available.
     #
-    #   * `CREATING` - FSx is creating the backup.
+    #   * `PENDING` - For user-initiated backups on Lustre file systems
+    #     only; Amazon FSx has not started creating the backup.
     #
-    #   * `TRANSFERRING` - For Lustre file systems only; FSx is transferring
-    #     the backup to S3.
+    #   * `CREATING` - Amazon FSx is creating the backup.
     #
-    #   * `DELETED` - The backup was deleted is no longer available.
+    #   * `TRANSFERRING` - For user-initiated backups on Lustre file systems
+    #     only; Amazon FSx is transferring the backup to S3.
+    #
+    #   * `DELETED` - Amazon FSx deleted the backup and it is no longer
+    #     available.
     #
     #   * `FAILED` - Amazon FSx could not complete the backup.
     #   @return [String]
@@ -2448,7 +2474,7 @@ module Aws::FSx
     #   @return [Types::FileSystemFailureDetails]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system in gigabytes (GB).
+    #   The storage capacity of the file system in gibibytes (GiB).
     #   @return [Integer]
     #
     # @!attribute [rw] storage_type
@@ -3410,18 +3436,40 @@ module Aws::FSx
     #
     # @!attribute [rw] storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server file system. Specifies the storage capacity
-    #   target value, GiB, for the file system you're updating. The storage
-    #   capacity target value must be at least 10 percent (%) greater than
-    #   the current storage capacity value. In order to increase storage
-    #   capacity, the file system needs to have at least 16 MB/s of
-    #   throughput capacity. You cannot make a storage capacity increase
-    #   request if there is an existing storage capacity increase request in
-    #   progress. For more information, see [Managing Storage Capacity][1].
+    #   file system. Specifies the storage capacity target value, GiB, to
+    #   increase the storage capacity for the file system that you're
+    #   updating. You cannot make a storage capacity increase request if
+    #   there is an existing storage capacity increase request in progress.
+    #
+    #   For Windows file systems, the storage capacity target value must be
+    #   at least 10 percent (%) greater than the current storage capacity
+    #   value. In order to increase storage capacity, the file system must
+    #   have at least 16 MB/s of throughput capacity.
+    #
+    #   For Lustre file systems, the storage capacity target value can be
+    #   the following:
+    #
+    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
+    #     values are in multiples of 2400 GiB. The value must be greater
+    #     than the current storage capacity.
+    #
+    #   * For `PERSISTENT HDD` file systems, valid values are multiples of
+    #     6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB
+    #     for 40 MB/s/TiB file systems. The values must be greater than the
+    #     current storage capacity.
+    #
+    #   * For `SCRATCH_1` file systems, you cannot increase the storage
+    #     capacity.
+    #
+    #   For more information, see [Managing storage capacity][1] in the
+    #   *Amazon FSx for Windows File Server User Guide* and [Managing
+    #   storage and throughput capacity][2] in the *Amazon FSx for Lustre
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] windows_configuration

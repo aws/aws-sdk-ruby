@@ -2746,9 +2746,21 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [String] :email_verification_message
     #   A string representing the email verification message.
+    #   EmailVerificationMessage is allowed only if [EmailSendingAccount][1]
+    #   is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #
     # @option params [String] :email_verification_subject
     #   A string representing the email verification subject.
+    #   EmailVerificationSubject is allowed only if [EmailSendingAccount][1]
+    #   is DEVELOPER.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
     #
     # @option params [Types::VerificationMessageTemplateType] :verification_message_template
     #   The template for the verification message that the user sees when the
@@ -2834,6 +2846,15 @@ module Aws::CognitoIdentityProvider
     #       verify_auth_challenge_response: "ArnType",
     #       pre_token_generation: "ArnType",
     #       user_migration: "ArnType",
+    #       custom_sms_sender: {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       },
+    #       custom_email_sender: {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       },
+    #       kms_key_id: "ArnType",
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
@@ -2931,6 +2952,11 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.verify_auth_challenge_response #=> String
     #   resp.user_pool.lambda_config.pre_token_generation #=> String
     #   resp.user_pool.lambda_config.user_migration #=> String
+    #   resp.user_pool.lambda_config.custom_sms_sender.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pool.lambda_config.custom_sms_sender.lambda_arn #=> String
+    #   resp.user_pool.lambda_config.custom_email_sender.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pool.lambda_config.custom_email_sender.lambda_arn #=> String
+    #   resp.user_pool.lambda_config.kms_key_id #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -3746,6 +3772,11 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.verify_auth_challenge_response #=> String
     #   resp.user_pool.lambda_config.pre_token_generation #=> String
     #   resp.user_pool.lambda_config.user_migration #=> String
+    #   resp.user_pool.lambda_config.custom_sms_sender.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pool.lambda_config.custom_sms_sender.lambda_arn #=> String
+    #   resp.user_pool.lambda_config.custom_email_sender.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pool.lambda_config.custom_email_sender.lambda_arn #=> String
+    #   resp.user_pool.lambda_config.kms_key_id #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -4997,6 +5028,11 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pools[0].lambda_config.verify_auth_challenge_response #=> String
     #   resp.user_pools[0].lambda_config.pre_token_generation #=> String
     #   resp.user_pools[0].lambda_config.user_migration #=> String
+    #   resp.user_pools[0].lambda_config.custom_sms_sender.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pools[0].lambda_config.custom_sms_sender.lambda_arn #=> String
+    #   resp.user_pools[0].lambda_config.custom_email_sender.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pools[0].lambda_config.custom_email_sender.lambda_arn #=> String
+    #   resp.user_pools[0].lambda_config.kms_key_id #=> String
     #   resp.user_pools[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pools[0].last_modified_date #=> Time
     #   resp.user_pools[0].creation_date #=> Time
@@ -5619,7 +5655,12 @@ module Aws::CognitoIdentityProvider
     # one factor can be set as preferred. The preferred MFA factor will be
     # used to authenticate a user if multiple factors are enabled. If
     # multiple options are enabled and no preference is set, a challenge to
-    # choose an MFA option will be returned during sign in.
+    # choose an MFA option will be returned during sign in. If an MFA type
+    # is enabled for a user, the user will be prompted for MFA during all
+    # sign in attempts, unless device tracking is turned on and the device
+    # has been trusted. If you would like MFA to be applied selectively
+    # based on the assessed risk level of sign in attempts, disable MFA for
+    # users and turn on Adaptive Authentication for the user pool.
     #
     # @option params [Types::SMSMfaSettingsType] :sms_mfa_settings
     #   The SMS text message multi-factor authentication (MFA) settings.
@@ -6482,6 +6523,15 @@ module Aws::CognitoIdentityProvider
     #       verify_auth_challenge_response: "ArnType",
     #       pre_token_generation: "ArnType",
     #       user_migration: "ArnType",
+    #       custom_sms_sender: {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       },
+    #       custom_email_sender: {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       },
+    #       kms_key_id: "ArnType",
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     sms_verification_message: "SmsVerificationMessageType",
@@ -6982,7 +7032,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

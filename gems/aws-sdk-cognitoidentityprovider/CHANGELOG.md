@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-11-24)
+------------------
+
+* Feature - This release adds ability to configure Cognito User Pools with third party sms and email providers for sending notifications to users.
+
 1.47.0 (2020-09-30)
 ------------------
 

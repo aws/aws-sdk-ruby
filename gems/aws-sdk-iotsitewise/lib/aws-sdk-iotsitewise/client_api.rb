@@ -73,6 +73,9 @@ module Aws::IoTSiteWise
     CapabilityNamespace = Shapes::StringShape.new(name: 'CapabilityNamespace')
     CapabilitySyncStatus = Shapes::StringShape.new(name: 'CapabilitySyncStatus')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ConfigurationErrorDetails = Shapes::StructureShape.new(name: 'ConfigurationErrorDetails')
+    ConfigurationState = Shapes::StringShape.new(name: 'ConfigurationState')
+    ConfigurationStatus = Shapes::StructureShape.new(name: 'ConfigurationStatus')
     ConflictingOperationException = Shapes::StructureShape.new(name: 'ConflictingOperationException')
     CreateAccessPolicyRequest = Shapes::StructureShape.new(name: 'CreateAccessPolicyRequest')
     CreateAccessPolicyResponse = Shapes::StructureShape.new(name: 'CreateAccessPolicyResponse')
@@ -117,6 +120,8 @@ module Aws::IoTSiteWise
     DescribeAssetResponse = Shapes::StructureShape.new(name: 'DescribeAssetResponse')
     DescribeDashboardRequest = Shapes::StructureShape.new(name: 'DescribeDashboardRequest')
     DescribeDashboardResponse = Shapes::StructureShape.new(name: 'DescribeDashboardResponse')
+    DescribeDefaultEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeDefaultEncryptionConfigurationRequest')
+    DescribeDefaultEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeDefaultEncryptionConfigurationResponse')
     DescribeGatewayCapabilityConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeGatewayCapabilityConfigurationRequest')
     DescribeGatewayCapabilityConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeGatewayCapabilityConfigurationResponse')
     DescribeGatewayRequest = Shapes::StructureShape.new(name: 'DescribeGatewayRequest')
@@ -130,6 +135,7 @@ module Aws::IoTSiteWise
     Description = Shapes::StringShape.new(name: 'Description')
     DisassociateAssetsRequest = Shapes::StructureShape.new(name: 'DisassociateAssetsRequest')
     Email = Shapes::StringShape.new(name: 'Email')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EntryId = Shapes::StringShape.new(name: 'EntryId')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
@@ -165,6 +171,7 @@ module Aws::IoTSiteWise
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     Interval = Shapes::StringShape.new(name: 'Interval')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAccessPoliciesRequest = Shapes::StructureShape.new(name: 'ListAccessPoliciesRequest')
     ListAccessPoliciesResponse = Shapes::StructureShape.new(name: 'ListAccessPoliciesResponse')
@@ -224,6 +231,8 @@ module Aws::IoTSiteWise
     PropertyValueStringValue = Shapes::StringShape.new(name: 'PropertyValueStringValue')
     PutAssetPropertyValueEntries = Shapes::ListShape.new(name: 'PutAssetPropertyValueEntries')
     PutAssetPropertyValueEntry = Shapes::StructureShape.new(name: 'PutAssetPropertyValueEntry')
+    PutDefaultEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'PutDefaultEncryptionConfigurationRequest')
+    PutDefaultEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'PutDefaultEncryptionConfigurationResponse')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
     PutLoggingOptionsResponse = Shapes::StructureShape.new(name: 'PutLoggingOptionsResponse')
     Qualities = Shapes::ListShape.new(name: 'Qualities')
@@ -458,6 +467,14 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchPutAssetPropertyErrorEntries, required: true, location_name: "errorEntries"))
     BatchPutAssetPropertyValueResponse.struct_class = Types::BatchPutAssetPropertyValueResponse
 
+    ConfigurationErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
+    ConfigurationErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ConfigurationErrorDetails.struct_class = Types::ConfigurationErrorDetails
+
+    ConfigurationStatus.add_member(:state, Shapes::ShapeRef.new(shape: ConfigurationState, required: true, location_name: "state"))
+    ConfigurationStatus.add_member(:error, Shapes::ShapeRef.new(shape: ConfigurationErrorDetails, location_name: "error"))
+    ConfigurationStatus.struct_class = Types::ConfigurationStatus
+
     ConflictingOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictingOperationException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     ConflictingOperationException.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
@@ -667,6 +684,13 @@ module Aws::IoTSiteWise
     DescribeDashboardResponse.add_member(:dashboard_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "dashboardCreationDate"))
     DescribeDashboardResponse.add_member(:dashboard_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "dashboardLastUpdateDate"))
     DescribeDashboardResponse.struct_class = Types::DescribeDashboardResponse
+
+    DescribeDefaultEncryptionConfigurationRequest.struct_class = Types::DescribeDefaultEncryptionConfigurationRequest
+
+    DescribeDefaultEncryptionConfigurationResponse.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    DescribeDefaultEncryptionConfigurationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "kmsKeyArn"))
+    DescribeDefaultEncryptionConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
+    DescribeDefaultEncryptionConfigurationResponse.struct_class = Types::DescribeDefaultEncryptionConfigurationResponse
 
     DescribeGatewayCapabilityConfigurationRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "gatewayId"))
     DescribeGatewayCapabilityConfigurationRequest.add_member(:capability_namespace, Shapes::ShapeRef.new(shape: CapabilityNamespace, required: true, location: "uri", location_name: "capabilityNamespace"))
@@ -1002,6 +1026,15 @@ module Aws::IoTSiteWise
     PutAssetPropertyValueEntry.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location_name: "propertyAlias"))
     PutAssetPropertyValueEntry.add_member(:property_values, Shapes::ShapeRef.new(shape: AssetPropertyValues, required: true, location_name: "propertyValues"))
     PutAssetPropertyValueEntry.struct_class = Types::PutAssetPropertyValueEntry
+
+    PutDefaultEncryptionConfigurationRequest.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    PutDefaultEncryptionConfigurationRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    PutDefaultEncryptionConfigurationRequest.struct_class = Types::PutDefaultEncryptionConfigurationRequest
+
+    PutDefaultEncryptionConfigurationResponse.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    PutDefaultEncryptionConfigurationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "kmsKeyArn"))
+    PutDefaultEncryptionConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
+    PutDefaultEncryptionConfigurationResponse.struct_class = Types::PutDefaultEncryptionConfigurationResponse
 
     PutLoggingOptionsRequest.add_member(:logging_options, Shapes::ShapeRef.new(shape: LoggingOptions, required: true, location_name: "loggingOptions"))
     PutLoggingOptionsRequest.struct_class = Types::PutLoggingOptionsRequest
@@ -1549,6 +1582,17 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:describe_default_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDefaultEncryptionConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/configuration/account/encryption"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDefaultEncryptionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDefaultEncryptionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:describe_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeGateway"
         o.http_method = "GET"
@@ -1892,6 +1936,19 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_default_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDefaultEncryptionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/configuration/account/encryption"
+        o.input = Shapes::ShapeRef.new(shape: PutDefaultEncryptionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDefaultEncryptionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
       api.add_operation(:put_logging_options, Seahorse::Model::Operation.new.tap do |o|

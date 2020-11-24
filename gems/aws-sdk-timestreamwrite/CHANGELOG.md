@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-11-24)
+------------------
+
+* Feature - Adds support of upserts for idempotent updates to Timestream.
+
 1.1.0 (2020-09-30)
 ------------------
 

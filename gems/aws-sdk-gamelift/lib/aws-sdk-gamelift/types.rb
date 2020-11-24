@@ -494,12 +494,19 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] storage_location
-    #   Information indicating where your game build files are stored. Use
-    #   this parameter only when creating a build with files stored in an S3
-    #   bucket that you own. The storage location must specify an S3 bucket
-    #   name and key. The location must also specify a role ARN that you set
-    #   up to allow Amazon GameLift to access your S3 bucket. The S3 bucket
-    #   and your new build must be in the same Region.
+    #   The location where your game build files are stored. Use this
+    #   parameter only when creating a build using files that are stored in
+    #   an S3 bucket that you own. Identify an S3 bucket name and key, which
+    #   must in the same Region where you're creating a build. This
+    #   parameter must also specify the ARN for an IAM role that you've set
+    #   up to give Amazon GameLift access your S3 bucket. To call this
+    #   operation with a storage location, you must have IAM PassRole
+    #   permission. For more details on IAM roles and PassRole permissions,
+    #   see [ Set up a role for GameLift access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] operating_system
@@ -582,7 +589,7 @@ module Aws::GameLift
     #         server_launch_path: "NonZeroAndMaxString",
     #         server_launch_parameters: "NonZeroAndMaxString",
     #         log_paths: ["NonZeroAndMaxString"],
-    #         ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge
+    #         ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge
     #         ec2_inbound_permissions: [
     #           {
     #             from_port: 1, # required
@@ -774,18 +781,17 @@ module Aws::GameLift
     #
     # @!attribute [rw] instance_role_arn
     #   A unique identifier for an AWS IAM role that manages access to your
-    #   AWS services. With an instance role ARN set, any application that
-    #   runs on an instance in this fleet can assume the role, including
-    #   install scripts, server processes, and daemons (background
-    #   processes). Create a role or look up a role's ARN from the [IAM
-    #   dashboard][1] in the AWS Management Console. Learn more about using
-    #   on-box credentials for your game servers at [ Access external
-    #   resources from a game server][2].
+    #   AWS services. Fleets with an instance role ARN allow applications
+    #   that are running on the fleet's instances to assume the role. Learn
+    #   more about using on-box credentials for your game servers at [
+    #   Access external resources from a game server][1]. To call this
+    #   operation with instance role ARN, you must have IAM PassRole
+    #   permissions. See [IAM policy examples for GameLift][2].
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/iam/
-    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_configuration
@@ -1023,7 +1029,7 @@ module Aws::GameLift
     #   VPCs that you've set up. This property cannot be updated after the
     #   game server group is created, and the corresponding Auto Scaling
     #   group will always use the property value that is set with this
-    #   request, even if the Auto Scaling group is updated directly
+    #   request, even if the Auto Scaling group is updated directly.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1310,7 +1316,7 @@ module Aws::GameLift
     #       {
     #         name: "MatchmakingIdStringModel", # required
     #         description: "NonZeroAndMaxString",
-    #         game_session_queue_arns: ["ArnStringModel"], # required
+    #         game_session_queue_arns: ["ArnStringModel"],
     #         request_timeout_seconds: 1, # required
     #         acceptance_timeout_seconds: 1,
     #         acceptance_required: false, # required
@@ -1326,6 +1332,7 @@ module Aws::GameLift
     #         ],
     #         game_session_data: "GameSessionData",
     #         backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
+    #         flex_match_mode: "STANDALONE", # accepts STANDALONE, WITH_QUEUE
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1347,9 +1354,10 @@ module Aws::GameLift
     # @!attribute [rw] game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a GameLift game
     #   session queue resource and uniquely identifies it. ARNs are unique
-    #   across all Regions. These queues are used when placing game sessions
-    #   for matches that are created with this matchmaking configuration.
-    #   Queues can be located in any Region.
+    #   across all Regions. Queues can be located in any Region. Queues are
+    #   used to start new GameLift-hosted game sessions for matches that are
+    #   created with this matchmaking configuration. If `FlexMatchMode` is
+    #   set to `STANDALONE`, do not set this parameter.
     #
     #
     #
@@ -1364,15 +1372,18 @@ module Aws::GameLift
     #
     # @!attribute [rw] acceptance_timeout_seconds
     #   The length of time (in seconds) to wait for players to accept a
-    #   proposed match. If any player rejects the match or fails to accept
-    #   before the timeout, the ticket continues to look for an acceptable
-    #   match.
+    #   proposed match, if acceptance is required. If any player rejects the
+    #   match or fails to accept before the timeout, the tickets are
+    #   returned to the ticket pool and continue to be evaluated for an
+    #   acceptable match.
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_required
     #   A flag that determines whether a match that was created with this
     #   configuration must be accepted by the matched players. To require
-    #   acceptance, set to `TRUE`.
+    #   acceptance, set to `TRUE`. With this option enabled, matchmaking
+    #   tickets use the status `REQUIRES_ACCEPTANCE` to indicate when a
+    #   completed potential match is waiting for player acceptance.
     #   @return [Boolean]
     #
     # @!attribute [rw] rule_set_name
@@ -1392,7 +1403,8 @@ module Aws::GameLift
     #   players. For example, assume that the configuration's rule set
     #   specifies a match for a single 12-person team. If the additional
     #   player count is set to 2, only 10 players are initially selected for
-    #   the match.
+    #   the match. This parameter is not used if `FlexMatchMode` is set to
+    #   `STANDALONE`.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
@@ -1406,7 +1418,8 @@ module Aws::GameLift
     #   process in the GameSession object with a request to start a new game
     #   session (see [Start a Game Session][1]). This information is added
     #   to the new GameSession object that is created for a successful
-    #   match.
+    #   match. This parameter is not used if `FlexMatchMode` is set to
+    #   `STANDALONE`.
     #
     #
     #
@@ -1418,7 +1431,8 @@ module Aws::GameLift
     #   string value. This data is passed to a game server process in the
     #   GameSession object with a request to start a new game session (see
     #   [Start a Game Session][1]). This information is added to the new
-    #   GameSession object that is created for a successful match.
+    #   GameSession object that is created for a successful match. This
+    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
@@ -1432,11 +1446,28 @@ module Aws::GameLift
     #   feature. Specify `AUTOMATIC` to have GameLift create a
     #   StartMatchBackfill request whenever a game session has one or more
     #   open slots. Learn more about manual and automatic backfill in [
-    #   Backfill Existing Games with FlexMatch][1].
+    #   Backfill Existing Games with FlexMatch][1]. Automatic backfill is
+    #   not available when `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html
+    #   @return [String]
+    #
+    # @!attribute [rw] flex_match_mode
+    #   Indicates whether this matchmaking configuration is being used with
+    #   GameLift hosting or as a standalone matchmaking solution.
+    #
+    #   * **STANDALONE** - FlexMatch forms matches and returns match
+    #     information, including players and team assignments, in a [
+    #     MatchmakingSucceeded][1] event.
+    #
+    #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
+    #     GameLift queue to start a game session for the match.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1471,6 +1502,7 @@ module Aws::GameLift
       :game_properties,
       :game_session_data,
       :backfill_mode,
+      :flex_match_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1695,15 +1727,21 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] storage_location
-    #   The location of the Amazon S3 bucket where a zipped file containing
-    #   your Realtime scripts is stored. The storage location must specify
-    #   the Amazon S3 bucket name, the zip file name (the "key"), and a
-    #   role ARN that allows Amazon GameLift to access the Amazon S3 storage
-    #   location. The S3 bucket must be in the same Region where you want to
-    #   create a new script. By default, Amazon GameLift uploads the latest
-    #   version of the zip file; if you have S3 object versioning turned on,
-    #   you can use the `ObjectVersion` parameter to specify an earlier
-    #   version.
+    #   The Amazon S3 location of your Realtime scripts. The storage
+    #   location must specify the S3 bucket name, the zip file name (the
+    #   "key"), and an IAM role ARN that allows Amazon GameLift to access
+    #   the S3 storage location. The S3 bucket must be in the same Region
+    #   where you are creating a new script. By default, Amazon GameLift
+    #   uploads the latest version of the zip file; if you have S3 object
+    #   versioning turned on, you can use the `ObjectVersion` parameter to
+    #   specify an earlier version. To call this operation with a storage
+    #   location, you must have IAM PassRole permission. For more details on
+    #   IAM roles and PassRole permissions, see [ Set up a role for GameLift
+    #   access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] zip_file
@@ -1947,8 +1985,8 @@ module Aws::GameLift
     # @!attribute [rw] delete_option
     #   The type of delete to perform. Options include the following:
     #
-    #   * `SAFE_DELETE` – Terminates the game server group and EC2 Auto
-    #     Scaling group only when it has no game servers that are in
+    #   * `SAFE_DELETE` – (default) Terminates the game server group and EC2
+    #     Auto Scaling group only when it has no game servers that are in
     #     `UTILIZED` status.
     #
     #   * `FORCE_DELETE` – Terminates the game server group, including all
@@ -2295,7 +2333,7 @@ module Aws::GameLift
     #   data as a hash:
     #
     #       {
-    #         ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge
+    #         ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge
     #       }
     #
     # @!attribute [rw] ec2_instance_type
@@ -4050,18 +4088,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] instance_role_arn
     #   A unique identifier for an AWS IAM role that manages access to your
-    #   AWS services. With an instance role ARN set, any application that
-    #   runs on an instance in this fleet can assume the role, including
-    #   install scripts, server processes, and daemons (background
-    #   processes). Create a role or look up a role's ARN from the [IAM
-    #   dashboard][1] in the AWS Management Console. Learn more about using
-    #   on-box credentials for your game servers at [ Access external
-    #   resources from a game server][2].
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/iam/
-    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   AWS services.
     #   @return [String]
     #
     # @!attribute [rw] certificate_configuration
@@ -4810,7 +4837,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSession AWS API Documentation
@@ -4838,12 +4865,12 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Connection information for the new game session that is created with
-    # matchmaking. (with StartMatchmaking). Once a match is set, the
-    # FlexMatch engine places the match and creates a new game session for
-    # it. This information, including the game session endpoint and player
-    # sessions for each player in the original matchmaking request, is added
-    # to the MatchmakingTicket, which can be retrieved by calling
+    # Connection information for a new game session that is created in
+    # response to a StartMatchmaking request. Once a match is made, the
+    # FlexMatch engine creates a new game session for it. This information,
+    # including the game session endpoint and player sessions for each
+    # player in the original matchmaking request, is added to the
+    # MatchmakingTicket, which can be retrieved by calling
     # DescribeMatchmaking.
     #
     # @!attribute [rw] game_session_arn
@@ -5108,7 +5135,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionPlacement AWS API Documentation
@@ -6177,9 +6204,10 @@ module Aws::GameLift
     # @!attribute [rw] game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a GameLift game
     #   session queue resource and uniquely identifies it. ARNs are unique
-    #   across all Regions. GameLift uses the listed queues when placing
-    #   game sessions for matches that are created with this matchmaking
-    #   configuration. Queues can be located in any Region.
+    #   across all Regions. Queues can be located in any Region. Queues are
+    #   used to start new GameLift-hosted game sessions for matches that are
+    #   created with this matchmaking configuration. Thais property is not
+    #   set when `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
@@ -6194,15 +6222,18 @@ module Aws::GameLift
     #
     # @!attribute [rw] acceptance_timeout_seconds
     #   The length of time (in seconds) to wait for players to accept a
-    #   proposed match. If any player rejects the match or fails to accept
-    #   before the timeout, the ticket continues to look for an acceptable
-    #   match.
+    #   proposed match, if acceptance is required. If any player rejects the
+    #   match or fails to accept before the timeout, the tickets are
+    #   returned to the ticket pool and continue to be evaluated for an
+    #   acceptable match.
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_required
     #   A flag that indicates whether a match that was created with this
     #   configuration must be accepted by the matched players. To require
-    #   acceptance, set to TRUE.
+    #   acceptance, set to TRUE. When this option is enabled, matchmaking
+    #   tickets use the status `REQUIRES_ACCEPTANCE` to indicate when a
+    #   completed potential match is waiting for player acceptance.
     #   @return [Boolean]
     #
     # @!attribute [rw] rule_set_name
@@ -6230,7 +6261,8 @@ module Aws::GameLift
     #   players. For example, assume that the configuration's rule set
     #   specifies a match for a single 12-person team. If the additional
     #   player count is set to 2, only 10 players are initially selected for
-    #   the match.
+    #   the match. This parameter is not used when `FlexMatchMode` is set to
+    #   `STANDALONE`.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
@@ -6250,7 +6282,8 @@ module Aws::GameLift
     #   process in the GameSession object with a request to start a new game
     #   session (see [Start a Game Session][1]). This information is added
     #   to the new GameSession object that is created for a successful
-    #   match.
+    #   match. This parameter is not used when `FlexMatchMode` is set to
+    #   `STANDALONE`.
     #
     #
     #
@@ -6262,7 +6295,8 @@ module Aws::GameLift
     #   string value. This data is passed to a game server process in the
     #   GameSession object with a request to start a new game session (see
     #   [Start a Game Session][1]). This information is added to the new
-    #   GameSession object that is created for a successful match.
+    #   GameSession object that is created for a successful match. This
+    #   parameter is not used when `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
@@ -6276,11 +6310,28 @@ module Aws::GameLift
     #   AUTOMATIC indicates that GameLift creates StartMatchBackfill
     #   requests whenever a game session has one or more open slots. Learn
     #   more about manual and automatic backfill in [Backfill Existing Games
-    #   with FlexMatch][1].
+    #   with FlexMatch][1]. Automatic backfill is not available when
+    #   `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html
+    #   @return [String]
+    #
+    # @!attribute [rw] flex_match_mode
+    #   Indicates whether this matchmaking configuration is being used with
+    #   GameLift hosting or as a standalone matchmaking solution.
+    #
+    #   * **STANDALONE** - FlexMatch forms matches and returns match
+    #     information, including players and team assignments, in a [
+    #     MatchmakingSucceeded][1] event.
+    #
+    #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
+    #     GameLift queue to start a game session for the match.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingConfiguration AWS API Documentation
@@ -6301,7 +6352,8 @@ module Aws::GameLift
       :creation_time,
       :game_properties,
       :game_session_data,
-      :backfill_mode)
+      :backfill_mode,
+      :flex_match_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6344,7 +6396,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html
     #
     # @!attribute [rw] rule_set_name
     #   A unique identifier for a matchmaking rule set
@@ -6480,7 +6532,9 @@ module Aws::GameLift
     # @!attribute [rw] game_session_connection_info
     #   Identifier and connection information of the game session created
     #   for the match. This information is added to the ticket only after
-    #   the matchmaking request has been successfully completed.
+    #   the matchmaking request has been successfully completed. This
+    #   parameter is not set when FlexMatch is being used without GameLift
+    #   hosting.
     #   @return [Types::GameSessionConnectionInfo]
     #
     # @!attribute [rw] estimated_wait_time
@@ -8029,7 +8083,7 @@ module Aws::GameLift
     #       {
     #         ticket_id: "MatchmakingIdStringModel",
     #         configuration_name: "MatchmakingConfigurationName", # required
-    #         game_session_arn: "ArnStringModel", # required
+    #         game_session_arn: "ArnStringModel",
     #         players: [ # required
     #           {
     #             player_id: "NonZeroAndMaxString",
@@ -8085,7 +8139,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data
     #   @return [Array<Types::Player>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchBackfillInput AWS API Documentation
@@ -9248,6 +9302,7 @@ module Aws::GameLift
     #         ],
     #         game_session_data: "GameSessionData",
     #         backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
+    #         flex_match_mode: "STANDALONE", # accepts STANDALONE, WITH_QUEUE
     #       }
     #
     # @!attribute [rw] name
@@ -9263,9 +9318,10 @@ module Aws::GameLift
     # @!attribute [rw] game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a GameLift game
     #   session queue resource and uniquely identifies it. ARNs are unique
-    #   across all Regions. These queues are used when placing game sessions
-    #   for matches that are created with this matchmaking configuration.
-    #   Queues can be located in any Region.
+    #   across all Regions. Queues can be located in any Region. Queues are
+    #   used to start new GameLift-hosted game sessions for matches that are
+    #   created with this matchmaking configuration. If `FlexMatchMode` is
+    #   set to `STANDALONE`, do not set this parameter.
     #
     #
     #
@@ -9280,15 +9336,18 @@ module Aws::GameLift
     #
     # @!attribute [rw] acceptance_timeout_seconds
     #   The length of time (in seconds) to wait for players to accept a
-    #   proposed match. If any player rejects the match or fails to accept
-    #   before the timeout, the ticket continues to look for an acceptable
-    #   match.
+    #   proposed match, if acceptance is required. If any player rejects the
+    #   match or fails to accept before the timeout, the tickets are
+    #   returned to the ticket pool and continue to be evaluated for an
+    #   acceptable match.
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_required
     #   A flag that indicates whether a match that was created with this
     #   configuration must be accepted by the matched players. To require
-    #   acceptance, set to TRUE.
+    #   acceptance, set to TRUE. With this option enabled, matchmaking
+    #   tickets use the status `REQUIRES_ACCEPTANCE` to indicate when a
+    #   completed potential match is waiting for player acceptance.
     #   @return [Boolean]
     #
     # @!attribute [rw] rule_set_name
@@ -9305,7 +9364,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html
     #   @return [String]
     #
     # @!attribute [rw] additional_player_count
@@ -9313,7 +9372,8 @@ module Aws::GameLift
     #   players. For example, assume that the configuration's rule set
     #   specifies a match for a single 12-person team. If the additional
     #   player count is set to 2, only 10 players are initially selected for
-    #   the match.
+    #   the match. This parameter is not used if `FlexMatchMode` is set to
+    #   `STANDALONE`.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
@@ -9327,7 +9387,8 @@ module Aws::GameLift
     #   process in the GameSession object with a request to start a new game
     #   session (see [Start a Game Session][1]). This information is added
     #   to the new GameSession object that is created for a successful
-    #   match.
+    #   match. This parameter is not used if `FlexMatchMode` is set to
+    #   `STANDALONE`.
     #
     #
     #
@@ -9339,7 +9400,8 @@ module Aws::GameLift
     #   string value. This data is passed to a game server process in the
     #   GameSession object with a request to start a new game session (see
     #   [Start a Game Session][1]). This information is added to the new
-    #   GameSession object that is created for a successful match.
+    #   GameSession object that is created for a successful match. This
+    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
@@ -9353,11 +9415,28 @@ module Aws::GameLift
     #   feature. Specify AUTOMATIC to have GameLift create a
     #   StartMatchBackfill request whenever a game session has one or more
     #   open slots. Learn more about manual and automatic backfill in
-    #   [Backfill Existing Games with FlexMatch][1].
+    #   [Backfill Existing Games with FlexMatch][1]. Automatic backfill is
+    #   not available when `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html
+    #   @return [String]
+    #
+    # @!attribute [rw] flex_match_mode
+    #   Indicates whether this matchmaking configuration is being used with
+    #   GameLift hosting or as a standalone matchmaking solution.
+    #
+    #   * **STANDALONE** - FlexMatch forms matches and returns match
+    #     information, including players and team assignments, in a [
+    #     MatchmakingSucceeded][1] event.
+    #
+    #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
+    #     GameLift queue to start a game session for the match.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfigurationInput AWS API Documentation
@@ -9375,7 +9454,8 @@ module Aws::GameLift
       :custom_event_data,
       :game_properties,
       :game_session_data,
-      :backfill_mode)
+      :backfill_mode,
+      :flex_match_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9486,15 +9566,20 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] storage_location
-    #   The location of the Amazon S3 bucket where a zipped file containing
-    #   your Realtime scripts is stored. The storage location must specify
-    #   the Amazon S3 bucket name, the zip file name (the "key"), and a
-    #   role ARN that allows Amazon GameLift to access the Amazon S3 storage
-    #   location. The S3 bucket must be in the same Region where you want to
-    #   create a new script. By default, Amazon GameLift uploads the latest
-    #   version of the zip file; if you have S3 object versioning turned on,
-    #   you can use the `ObjectVersion` parameter to specify an earlier
-    #   version.
+    #   The Amazon S3 location of your Realtime scripts. The storage
+    #   location must specify the S3 bucket name, the zip file name (the
+    #   "key"), and an IAM role ARN that allows Amazon GameLift to access
+    #   the S3 storage location. The S3 bucket must be in the same Region as
+    #   the script you're updating. By default, Amazon GameLift uploads the
+    #   latest version of the zip file; if you have S3 object versioning
+    #   turned on, you can use the `ObjectVersion` parameter to specify an
+    #   earlier version. To call this operation with a storage location, you
+    #   must have IAM PassRole permission. For more details on IAM roles and
+    #   PassRole permissions, see [ Set up a role for GameLift access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] zip_file

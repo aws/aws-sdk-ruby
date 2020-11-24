@@ -104,6 +104,8 @@ module Aws::CodeBuild
     FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
     FilterGroup = Shapes::ListShape.new(name: 'FilterGroup')
     FilterGroups = Shapes::ListShape.new(name: 'FilterGroups')
+    GetReportGroupTrendInput = Shapes::StructureShape.new(name: 'GetReportGroupTrendInput')
+    GetReportGroupTrendOutput = Shapes::StructureShape.new(name: 'GetReportGroupTrendOutput')
     GetResourcePolicyInput = Shapes::StructureShape.new(name: 'GetResourcePolicyInput')
     GetResourcePolicyOutput = Shapes::StructureShape.new(name: 'GetResourcePolicyOutput')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
@@ -188,11 +190,15 @@ module Aws::CodeBuild
     ReportGroupName = Shapes::StringShape.new(name: 'ReportGroupName')
     ReportGroupSortByType = Shapes::StringShape.new(name: 'ReportGroupSortByType')
     ReportGroupStatusType = Shapes::StringShape.new(name: 'ReportGroupStatusType')
+    ReportGroupTrendFieldType = Shapes::StringShape.new(name: 'ReportGroupTrendFieldType')
+    ReportGroupTrendRawDataList = Shapes::ListShape.new(name: 'ReportGroupTrendRawDataList')
+    ReportGroupTrendStats = Shapes::StructureShape.new(name: 'ReportGroupTrendStats')
     ReportGroups = Shapes::ListShape.new(name: 'ReportGroups')
     ReportPackagingType = Shapes::StringShape.new(name: 'ReportPackagingType')
     ReportStatusCounts = Shapes::MapShape.new(name: 'ReportStatusCounts')
     ReportStatusType = Shapes::StringShape.new(name: 'ReportStatusType')
     ReportType = Shapes::StringShape.new(name: 'ReportType')
+    ReportWithRawData = Shapes::StructureShape.new(name: 'ReportWithRawData')
     Reports = Shapes::ListShape.new(name: 'Reports')
     ResolvedArtifact = Shapes::StructureShape.new(name: 'ResolvedArtifact')
     ResolvedSecondaryArtifacts = Shapes::ListShape.new(name: 'ResolvedSecondaryArtifacts')
@@ -609,6 +615,15 @@ module Aws::CodeBuild
 
     FilterGroups.member = Shapes::ShapeRef.new(shape: FilterGroup)
 
+    GetReportGroupTrendInput.add_member(:report_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "reportGroupArn"))
+    GetReportGroupTrendInput.add_member(:num_of_reports, Shapes::ShapeRef.new(shape: PageSize, location_name: "numOfReports"))
+    GetReportGroupTrendInput.add_member(:trend_field, Shapes::ShapeRef.new(shape: ReportGroupTrendFieldType, required: true, location_name: "trendField"))
+    GetReportGroupTrendInput.struct_class = Types::GetReportGroupTrendInput
+
+    GetReportGroupTrendOutput.add_member(:stats, Shapes::ShapeRef.new(shape: ReportGroupTrendStats, location_name: "stats"))
+    GetReportGroupTrendOutput.add_member(:raw_data, Shapes::ShapeRef.new(shape: ReportGroupTrendRawDataList, location_name: "rawData"))
+    GetReportGroupTrendOutput.struct_class = Types::GetReportGroupTrendOutput
+
     GetResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "resourceArn"))
     GetResourcePolicyInput.struct_class = Types::GetResourcePolicyInput
 
@@ -920,10 +935,21 @@ module Aws::CodeBuild
 
     ReportGroupArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    ReportGroupTrendRawDataList.member = Shapes::ShapeRef.new(shape: ReportWithRawData)
+
+    ReportGroupTrendStats.add_member(:average, Shapes::ShapeRef.new(shape: String, location_name: "average"))
+    ReportGroupTrendStats.add_member(:max, Shapes::ShapeRef.new(shape: String, location_name: "max"))
+    ReportGroupTrendStats.add_member(:min, Shapes::ShapeRef.new(shape: String, location_name: "min"))
+    ReportGroupTrendStats.struct_class = Types::ReportGroupTrendStats
+
     ReportGroups.member = Shapes::ShapeRef.new(shape: ReportGroup)
 
     ReportStatusCounts.key = Shapes::ShapeRef.new(shape: String)
     ReportStatusCounts.value = Shapes::ShapeRef.new(shape: WrapperInt)
+
+    ReportWithRawData.add_member(:report_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reportArn"))
+    ReportWithRawData.add_member(:data, Shapes::ShapeRef.new(shape: String, location_name: "data"))
+    ReportWithRawData.struct_class = Types::ReportWithRawData
 
     Reports.member = Shapes::ShapeRef.new(shape: Report)
 
@@ -1353,6 +1379,16 @@ module Aws::CodeBuild
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_report_group_trend, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReportGroupTrend"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetReportGroupTrendInput)
+        o.output = Shapes::ShapeRef.new(shape: GetReportGroupTrendOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|

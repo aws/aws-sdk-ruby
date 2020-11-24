@@ -20,6 +20,7 @@ module Aws::QuickSight
     ActiveIAMPolicyAssignment = Shapes::StructureShape.new(name: 'ActiveIAMPolicyAssignment')
     ActiveIAMPolicyAssignmentList = Shapes::ListShape.new(name: 'ActiveIAMPolicyAssignmentList')
     AdHocFilteringOption = Shapes::StructureShape.new(name: 'AdHocFilteringOption')
+    AdditionalDashboardIdList = Shapes::ListShape.new(name: 'AdditionalDashboardIdList')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AmazonElasticsearchParameters = Shapes::StructureShape.new(name: 'AmazonElasticsearchParameters')
     Analysis = Shapes::StructureShape.new(name: 'Analysis')
@@ -228,6 +229,7 @@ module Aws::QuickSight
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleList = Shapes::ListShape.new(name: 'DoubleList')
     Edition = Shapes::StringShape.new(name: 'Edition')
+    EmbeddingIdentityType = Shapes::StringShape.new(name: 'EmbeddingIdentityType')
     EmbeddingUrl = Shapes::StringShape.new(name: 'EmbeddingUrl')
     EntryPoint = Shapes::StringShape.new(name: 'EntryPoint')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
@@ -466,6 +468,7 @@ module Aws::QuickSight
     TwitterParameters = Shapes::StructureShape.new(name: 'TwitterParameters')
     TypeCastFormat = Shapes::StringShape.new(name: 'TypeCastFormat')
     UIColorPalette = Shapes::StructureShape.new(name: 'UIColorPalette')
+    UnsupportedPricingPlanException = Shapes::StructureShape.new(name: 'UnsupportedPricingPlanException')
     UnsupportedUserEditionException = Shapes::StructureShape.new(name: 'UnsupportedUserEditionException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -549,6 +552,8 @@ module Aws::QuickSight
 
     AdHocFilteringOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     AdHocFilteringOption.struct_class = Types::AdHocFilteringOption
+
+    AdditionalDashboardIdList.member = Shapes::ShapeRef.new(shape: RestrictiveResourceId)
 
     AmazonElasticsearchParameters.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
     AmazonElasticsearchParameters.struct_class = Types::AmazonElasticsearchParameters
@@ -1486,12 +1491,14 @@ module Aws::QuickSight
 
     GetDashboardEmbedUrlRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     GetDashboardEmbedUrlRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
-    GetDashboardEmbedUrlRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, required: true, location: "querystring", location_name: "creds-type"))
+    GetDashboardEmbedUrlRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: EmbeddingIdentityType, required: true, location: "querystring", location_name: "creds-type"))
     GetDashboardEmbedUrlRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location: "querystring", location_name: "session-lifetime"))
     GetDashboardEmbedUrlRequest.add_member(:undo_redo_disabled, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "undo-redo-disabled"))
     GetDashboardEmbedUrlRequest.add_member(:reset_disabled, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "reset-disabled"))
     GetDashboardEmbedUrlRequest.add_member(:state_persistence_enabled, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "state-persistence-enabled"))
     GetDashboardEmbedUrlRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "user-arn"))
+    GetDashboardEmbedUrlRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    GetDashboardEmbedUrlRequest.add_member(:additional_dashboard_ids, Shapes::ShapeRef.new(shape: AdditionalDashboardIdList, location: "querystring", location_name: "additional-dashboard-ids"))
     GetDashboardEmbedUrlRequest.struct_class = Types::GetDashboardEmbedUrlRequest
 
     GetDashboardEmbedUrlResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, location_name: "EmbedUrl"))
@@ -2278,6 +2285,10 @@ module Aws::QuickSight
     UIColorPalette.add_member(:measure, Shapes::ShapeRef.new(shape: HexColor, location_name: "Measure"))
     UIColorPalette.add_member(:measure_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "MeasureForeground"))
     UIColorPalette.struct_class = Types::UIColorPalette
+
+    UnsupportedPricingPlanException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedPricingPlanException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UnsupportedPricingPlanException.struct_class = Types::UnsupportedPricingPlanException
 
     UnsupportedUserEditionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedUserEditionException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -3363,6 +3374,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: IdentityTypeNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: SessionLifetimeInMinutesInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

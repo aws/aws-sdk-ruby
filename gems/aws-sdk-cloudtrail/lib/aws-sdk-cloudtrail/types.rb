@@ -52,6 +52,87 @@ module Aws::CloudTrail
     #
     class AddTagsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AdvancedEventSelector
+    #   data as a hash:
+    #
+    #       {
+    #         name: "SelectorName", # required
+    #         field_selectors: [ # required
+    #           {
+    #             field: "SelectorField", # required
+    #             equals: ["OperatorValue"],
+    #             starts_with: ["OperatorValue"],
+    #             ends_with: ["OperatorValue"],
+    #             not_equals: ["OperatorValue"],
+    #             not_starts_with: ["OperatorValue"],
+    #             not_ends_with: ["OperatorValue"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] field_selectors
+    #   @return [Array<Types::AdvancedFieldSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AdvancedEventSelector AWS API Documentation
+    #
+    class AdvancedEventSelector < Struct.new(
+      :name,
+      :field_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AdvancedFieldSelector
+    #   data as a hash:
+    #
+    #       {
+    #         field: "SelectorField", # required
+    #         equals: ["OperatorValue"],
+    #         starts_with: ["OperatorValue"],
+    #         ends_with: ["OperatorValue"],
+    #         not_equals: ["OperatorValue"],
+    #         not_starts_with: ["OperatorValue"],
+    #         not_ends_with: ["OperatorValue"],
+    #       }
+    #
+    # @!attribute [rw] field
+    #   @return [String]
+    #
+    # @!attribute [rw] equals
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] starts_with
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ends_with
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_equals
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_starts_with
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_ends_with
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AdvancedFieldSelector AWS API Documentation
+    #
+    class AdvancedFieldSelector < Struct.new(
+      :field,
+      :equals,
+      :starts_with,
+      :ends_with,
+      :not_equals,
+      :not_starts_with,
+      :not_ends_with)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when an operation is called with an invalid
     # trail ARN. The format of a trail ARN is:
     #
@@ -659,9 +740,15 @@ module Aws::CloudTrail
     #
     #   By default, the value is `true`.
     #
+    #   The first copy of management events is free. You are charged for
+    #   additional copies of management events that you are logging on any
+    #   subsequent trail in the same region. For more information about
+    #   CloudTrail pricing, see [AWS CloudTrail Pricing][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events
+    #   [2]: http://aws.amazon.com/cloudtrail/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] data_resources
@@ -745,11 +832,15 @@ module Aws::CloudTrail
     #   The event selectors that are configured for the trail.
     #   @return [Array<Types::EventSelector>]
     #
+    # @!attribute [rw] advanced_event_selectors
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectorsResponse AWS API Documentation
     #
     class GetEventSelectorsResponse < Struct.new(
       :trail_arn,
-      :event_selectors)
+      :event_selectors,
+      :advanced_event_selectors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1240,8 +1331,10 @@ module Aws::CloudTrail
     #
     class KmsKeyDisabledException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the KMS key does not exist, or when the
-    # S3 bucket and the KMS key are not in the same region.
+    # This exception is thrown when the KMS key does not exist, when the S3
+    # bucket and the KMS key are not in the same region, or when the KMS key
+    # associated with the SNS topic either does not exist or is not in the
+    # same region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/KmsKeyNotFoundException AWS API Documentation
     #
@@ -1609,7 +1702,7 @@ module Aws::CloudTrail
     #
     #       {
     #         trail_name: "String", # required
-    #         event_selectors: [ # required
+    #         event_selectors: [
     #           {
     #             read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
     #             include_management_events: false,
@@ -1620,6 +1713,22 @@ module Aws::CloudTrail
     #               },
     #             ],
     #             exclude_management_event_sources: ["String"],
+    #           },
+    #         ],
+    #         advanced_event_selectors: [
+    #           {
+    #             name: "SelectorName", # required
+    #             field_selectors: [ # required
+    #               {
+    #                 field: "SelectorField", # required
+    #                 equals: ["OperatorValue"],
+    #                 starts_with: ["OperatorValue"],
+    #                 ends_with: ["OperatorValue"],
+    #                 not_equals: ["OperatorValue"],
+    #                 not_starts_with: ["OperatorValue"],
+    #                 not_ends_with: ["OperatorValue"],
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -1650,11 +1759,15 @@ module Aws::CloudTrail
     #   up to five event selectors for a trail.
     #   @return [Array<Types::EventSelector>]
     #
+    # @!attribute [rw] advanced_event_selectors
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectorsRequest AWS API Documentation
     #
     class PutEventSelectorsRequest < Struct.new(
       :trail_name,
-      :event_selectors)
+      :event_selectors,
+      :advanced_event_selectors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1670,11 +1783,15 @@ module Aws::CloudTrail
     #   Specifies the event selectors configured for your trail.
     #   @return [Array<Types::EventSelector>]
     #
+    # @!attribute [rw] advanced_event_selectors
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectorsResponse AWS API Documentation
     #
     class PutEventSelectorsResponse < Struct.new(
       :trail_arn,
-      :event_selectors)
+      :event_selectors,
+      :advanced_event_selectors)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -72,6 +72,8 @@ module Aws::Comprehend
     DescribeEntitiesDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeEntitiesDetectionJobResponse')
     DescribeEntityRecognizerRequest = Shapes::StructureShape.new(name: 'DescribeEntityRecognizerRequest')
     DescribeEntityRecognizerResponse = Shapes::StructureShape.new(name: 'DescribeEntityRecognizerResponse')
+    DescribeEventsDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeEventsDetectionJobRequest')
+    DescribeEventsDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeEventsDetectionJobResponse')
     DescribeKeyPhrasesDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeKeyPhrasesDetectionJobRequest')
     DescribeKeyPhrasesDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeKeyPhrasesDetectionJobResponse')
     DescribePiiEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribePiiEntitiesDetectionJobRequest')
@@ -140,6 +142,10 @@ module Aws::Comprehend
     EntityTypesEvaluationMetrics = Shapes::StructureShape.new(name: 'EntityTypesEvaluationMetrics')
     EntityTypesList = Shapes::ListShape.new(name: 'EntityTypesList')
     EntityTypesListItem = Shapes::StructureShape.new(name: 'EntityTypesListItem')
+    EventTypeString = Shapes::StringShape.new(name: 'EventTypeString')
+    EventsDetectionJobFilter = Shapes::StructureShape.new(name: 'EventsDetectionJobFilter')
+    EventsDetectionJobProperties = Shapes::StructureShape.new(name: 'EventsDetectionJobProperties')
+    EventsDetectionJobPropertiesList = Shapes::ListShape.new(name: 'EventsDetectionJobPropertiesList')
     Float = Shapes::FloatShape.new(name: 'Float')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     InferenceUnitsInteger = Shapes::IntegerShape.new(name: 'InferenceUnitsInteger')
@@ -173,6 +179,8 @@ module Aws::Comprehend
     ListEntitiesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListEntitiesDetectionJobsResponse')
     ListEntityRecognizersRequest = Shapes::StructureShape.new(name: 'ListEntityRecognizersRequest')
     ListEntityRecognizersResponse = Shapes::StructureShape.new(name: 'ListEntityRecognizersResponse')
+    ListEventsDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListEventsDetectionJobsRequest')
+    ListEventsDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListEventsDetectionJobsResponse')
     ListKeyPhrasesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsRequest')
     ListKeyPhrasesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsResponse')
     ListOfClasses = Shapes::ListShape.new(name: 'ListOfClasses')
@@ -230,6 +238,8 @@ module Aws::Comprehend
     StartDominantLanguageDetectionJobResponse = Shapes::StructureShape.new(name: 'StartDominantLanguageDetectionJobResponse')
     StartEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'StartEntitiesDetectionJobRequest')
     StartEntitiesDetectionJobResponse = Shapes::StructureShape.new(name: 'StartEntitiesDetectionJobResponse')
+    StartEventsDetectionJobRequest = Shapes::StructureShape.new(name: 'StartEventsDetectionJobRequest')
+    StartEventsDetectionJobResponse = Shapes::StructureShape.new(name: 'StartEventsDetectionJobResponse')
     StartKeyPhrasesDetectionJobRequest = Shapes::StructureShape.new(name: 'StartKeyPhrasesDetectionJobRequest')
     StartKeyPhrasesDetectionJobResponse = Shapes::StructureShape.new(name: 'StartKeyPhrasesDetectionJobResponse')
     StartPiiEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'StartPiiEntitiesDetectionJobRequest')
@@ -242,6 +252,8 @@ module Aws::Comprehend
     StopDominantLanguageDetectionJobResponse = Shapes::StructureShape.new(name: 'StopDominantLanguageDetectionJobResponse')
     StopEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'StopEntitiesDetectionJobRequest')
     StopEntitiesDetectionJobResponse = Shapes::StructureShape.new(name: 'StopEntitiesDetectionJobResponse')
+    StopEventsDetectionJobRequest = Shapes::StructureShape.new(name: 'StopEventsDetectionJobRequest')
+    StopEventsDetectionJobResponse = Shapes::StructureShape.new(name: 'StopEventsDetectionJobResponse')
     StopKeyPhrasesDetectionJobRequest = Shapes::StructureShape.new(name: 'StopKeyPhrasesDetectionJobRequest')
     StopKeyPhrasesDetectionJobResponse = Shapes::StructureShape.new(name: 'StopKeyPhrasesDetectionJobResponse')
     StopPiiEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'StopPiiEntitiesDetectionJobRequest')
@@ -264,6 +276,7 @@ module Aws::Comprehend
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetEventTypes = Shapes::ListShape.new(name: 'TargetEventTypes')
     TextSizeLimitExceededException = Shapes::StructureShape.new(name: 'TextSizeLimitExceededException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -472,6 +485,12 @@ module Aws::Comprehend
 
     DescribeEntityRecognizerResponse.add_member(:entity_recognizer_properties, Shapes::ShapeRef.new(shape: EntityRecognizerProperties, location_name: "EntityRecognizerProperties"))
     DescribeEntityRecognizerResponse.struct_class = Types::DescribeEntityRecognizerResponse
+
+    DescribeEventsDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeEventsDetectionJobRequest.struct_class = Types::DescribeEventsDetectionJobRequest
+
+    DescribeEventsDetectionJobResponse.add_member(:events_detection_job_properties, Shapes::ShapeRef.new(shape: EventsDetectionJobProperties, location_name: "EventsDetectionJobProperties"))
+    DescribeEventsDetectionJobResponse.struct_class = Types::DescribeEventsDetectionJobResponse
 
     DescribeKeyPhrasesDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribeKeyPhrasesDetectionJobRequest.struct_class = Types::DescribeKeyPhrasesDetectionJobRequest
@@ -748,6 +767,27 @@ module Aws::Comprehend
     EntityTypesListItem.add_member(:type, Shapes::ShapeRef.new(shape: EntityTypeName, required: true, location_name: "Type"))
     EntityTypesListItem.struct_class = Types::EntityTypesListItem
 
+    EventsDetectionJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    EventsDetectionJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    EventsDetectionJobFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
+    EventsDetectionJobFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    EventsDetectionJobFilter.struct_class = Types::EventsDetectionJobFilter
+
+    EventsDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    EventsDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    EventsDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    EventsDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
+    EventsDetectionJobProperties.add_member(:submit_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
+    EventsDetectionJobProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    EventsDetectionJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
+    EventsDetectionJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
+    EventsDetectionJobProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    EventsDetectionJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    EventsDetectionJobProperties.add_member(:target_event_types, Shapes::ShapeRef.new(shape: TargetEventTypes, location_name: "TargetEventTypes"))
+    EventsDetectionJobProperties.struct_class = Types::EventsDetectionJobProperties
+
+    EventsDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: EventsDetectionJobProperties)
+
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     InputDataConfig.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
     InputDataConfig.struct_class = Types::InputDataConfig
@@ -848,6 +888,15 @@ module Aws::Comprehend
     ListEntityRecognizersResponse.add_member(:entity_recognizer_properties_list, Shapes::ShapeRef.new(shape: EntityRecognizerPropertiesList, location_name: "EntityRecognizerPropertiesList"))
     ListEntityRecognizersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEntityRecognizersResponse.struct_class = Types::ListEntityRecognizersResponse
+
+    ListEventsDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EventsDetectionJobFilter, location_name: "Filter"))
+    ListEventsDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEventsDetectionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEventsDetectionJobsRequest.struct_class = Types::ListEventsDetectionJobsRequest
+
+    ListEventsDetectionJobsResponse.add_member(:events_detection_job_properties_list, Shapes::ShapeRef.new(shape: EventsDetectionJobPropertiesList, location_name: "EventsDetectionJobPropertiesList"))
+    ListEventsDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEventsDetectionJobsResponse.struct_class = Types::ListEventsDetectionJobsResponse
 
     ListKeyPhrasesDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobFilter, location_name: "Filter"))
     ListKeyPhrasesDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -1047,6 +1096,19 @@ module Aws::Comprehend
     StartEntitiesDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartEntitiesDetectionJobResponse.struct_class = Types::StartEntitiesDetectionJobResponse
 
+    StartEventsDetectionJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    StartEventsDetectionJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    StartEventsDetectionJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartEventsDetectionJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    StartEventsDetectionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartEventsDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartEventsDetectionJobRequest.add_member(:target_event_types, Shapes::ShapeRef.new(shape: TargetEventTypes, required: true, location_name: "TargetEventTypes"))
+    StartEventsDetectionJobRequest.struct_class = Types::StartEventsDetectionJobRequest
+
+    StartEventsDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartEventsDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartEventsDetectionJobResponse.struct_class = Types::StartEventsDetectionJobResponse
+
     StartKeyPhrasesDetectionJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     StartKeyPhrasesDetectionJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
     StartKeyPhrasesDetectionJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
@@ -1117,6 +1179,13 @@ module Aws::Comprehend
     StopEntitiesDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StopEntitiesDetectionJobResponse.struct_class = Types::StopEntitiesDetectionJobResponse
 
+    StopEventsDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StopEventsDetectionJobRequest.struct_class = Types::StopEventsDetectionJobRequest
+
+    StopEventsDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StopEventsDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopEventsDetectionJobResponse.struct_class = Types::StopEventsDetectionJobResponse
+
     StopKeyPhrasesDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     StopKeyPhrasesDetectionJobRequest.struct_class = Types::StopKeyPhrasesDetectionJobRequest
 
@@ -1170,6 +1239,8 @@ module Aws::Comprehend
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TargetEventTypes.member = Shapes::ShapeRef.new(shape: EventTypeString)
 
     TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
@@ -1480,6 +1551,18 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_events_detection_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEventsDetectionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventsDetectionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEventsDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_key_phrases_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeKeyPhrasesDetectionJob"
         o.http_method = "POST"
@@ -1701,6 +1784,24 @@ module Aws::Comprehend
         )
       end)
 
+      api.add_operation(:list_events_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventsDetectionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEventsDetectionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventsDetectionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_key_phrases_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListKeyPhrasesDetectionJobs"
         o.http_method = "POST"
@@ -1818,6 +1919,18 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_events_detection_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartEventsDetectionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartEventsDetectionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartEventsDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_key_phrases_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartKeyPhrasesDetectionJob"
         o.http_method = "POST"
@@ -1883,6 +1996,17 @@ module Aws::Comprehend
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopEntitiesDetectionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StopEntitiesDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_events_detection_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopEventsDetectionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopEventsDetectionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopEventsDetectionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

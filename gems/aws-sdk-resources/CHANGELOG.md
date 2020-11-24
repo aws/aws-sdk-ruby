@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.88.0 (2020-11-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mwaa` gem.
+
 3.87.0 (2020-11-17)
 ------------------
 

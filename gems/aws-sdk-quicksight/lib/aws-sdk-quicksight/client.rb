@@ -3901,6 +3901,20 @@ module Aws::QuickSight
     #   Omit this parameter for users in the third group – IAM users and IAM
     #   role-based sessions.
     #
+    # @option params [String] :namespace
+    #   The QuickSight namespace that contains the dashboard IDs in this
+    #   request. If you're not using a custom namespace, set this to
+    #   "`default`".
+    #
+    # @option params [Array<String>] :additional_dashboard_ids
+    #   A list of one or more dashboard ids that you want to add to a session
+    #   that includes anonymous authorizations. `IdentityType` must be set to
+    #   ANONYMOUS for this to work, because other other identity types
+    #   authenticate as QuickSight users. For example, if you set
+    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
+    #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDashboardEmbedUrlResponse#embed_url #embed_url} => String
@@ -3912,12 +3926,14 @@ module Aws::QuickSight
     #   resp = client.get_dashboard_embed_url({
     #     aws_account_id: "AwsAccountId", # required
     #     dashboard_id: "RestrictiveResourceId", # required
-    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, ANONYMOUS
     #     session_lifetime_in_minutes: 1,
     #     undo_redo_disabled: false,
     #     reset_disabled: false,
     #     state_persistence_enabled: false,
     #     user_arn: "Arn",
+    #     namespace: "Namespace",
+    #     additional_dashboard_ids: ["RestrictiveResourceId"],
     #   })
     #
     # @example Response structure
@@ -7378,7 +7394,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

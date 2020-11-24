@@ -255,6 +255,10 @@ module Aws::Appflow
     UpdateFlowRequest = Shapes::StructureShape.new(name: 'UpdateFlowRequest')
     UpdateFlowResponse = Shapes::StructureShape.new(name: 'UpdateFlowResponse')
     UpdatedBy = Shapes::StringShape.new(name: 'UpdatedBy')
+    UpsolverBucketName = Shapes::StringShape.new(name: 'UpsolverBucketName')
+    UpsolverDestinationProperties = Shapes::StructureShape.new(name: 'UpsolverDestinationProperties')
+    UpsolverMetadata = Shapes::StructureShape.new(name: 'UpsolverMetadata')
+    UpsolverS3OutputFormatConfig = Shapes::StructureShape.new(name: 'UpsolverS3OutputFormatConfig')
     Username = Shapes::StringShape.new(name: 'Username')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
@@ -341,6 +345,7 @@ module Aws::Appflow
     ConnectorMetadata.add_member(:veeva, Shapes::ShapeRef.new(shape: VeevaMetadata, location_name: "Veeva"))
     ConnectorMetadata.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskMetadata, location_name: "Zendesk"))
     ConnectorMetadata.add_member(:event_bridge, Shapes::ShapeRef.new(shape: EventBridgeMetadata, location_name: "EventBridge"))
+    ConnectorMetadata.add_member(:upsolver, Shapes::ShapeRef.new(shape: UpsolverMetadata, location_name: "Upsolver"))
     ConnectorMetadata.struct_class = Types::ConnectorMetadata
 
     ConnectorOAuthRequest.add_member(:auth_code, Shapes::ShapeRef.new(shape: AuthCode, location_name: "authCode"))
@@ -529,6 +534,7 @@ module Aws::Appflow
     DestinationConnectorProperties.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceDestinationProperties, location_name: "Salesforce"))
     DestinationConnectorProperties.add_member(:snowflake, Shapes::ShapeRef.new(shape: SnowflakeDestinationProperties, location_name: "Snowflake"))
     DestinationConnectorProperties.add_member(:event_bridge, Shapes::ShapeRef.new(shape: EventBridgeDestinationProperties, location_name: "EventBridge"))
+    DestinationConnectorProperties.add_member(:upsolver, Shapes::ShapeRef.new(shape: UpsolverDestinationProperties, location_name: "Upsolver"))
     DestinationConnectorProperties.struct_class = Types::DestinationConnectorProperties
 
     DestinationFieldProperties.add_member(:is_creatable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCreatable"))
@@ -947,6 +953,18 @@ module Aws::Appflow
 
     UpdateFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))
     UpdateFlowResponse.struct_class = Types::UpdateFlowResponse
+
+    UpsolverDestinationProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: UpsolverBucketName, required: true, location_name: "bucketName"))
+    UpsolverDestinationProperties.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "bucketPrefix"))
+    UpsolverDestinationProperties.add_member(:s3_output_format_config, Shapes::ShapeRef.new(shape: UpsolverS3OutputFormatConfig, required: true, location_name: "s3OutputFormatConfig"))
+    UpsolverDestinationProperties.struct_class = Types::UpsolverDestinationProperties
+
+    UpsolverMetadata.struct_class = Types::UpsolverMetadata
+
+    UpsolverS3OutputFormatConfig.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
+    UpsolverS3OutputFormatConfig.add_member(:prefix_config, Shapes::ShapeRef.new(shape: PrefixConfig, required: true, location_name: "prefixConfig"))
+    UpsolverS3OutputFormatConfig.add_member(:aggregation_config, Shapes::ShapeRef.new(shape: AggregationConfig, location_name: "aggregationConfig"))
+    UpsolverS3OutputFormatConfig.struct_class = Types::UpsolverS3OutputFormatConfig
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException

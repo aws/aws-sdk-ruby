@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2020-11-24)
+------------------
+
+* Feature - Adding GetReportGroupTrend API for Test Reports.
+
 1.64.0 (2020-11-18)
 ------------------
 

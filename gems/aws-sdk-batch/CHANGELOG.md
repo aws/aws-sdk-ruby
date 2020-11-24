@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-11-24)
+------------------
+
+* Feature - Add Ec2Configuration in ComputeEnvironment.ComputeResources. Use in CreateComputeEnvironment API to enable AmazonLinux2 support.
+
 1.40.0 (2020-10-20)
 ------------------
 

@@ -471,7 +471,7 @@ module Aws::FSx
     # For more information about backing up Amazon FSx for Lustre file
     # systems, see [Working with FSx for Lustre backups][1].
     #
-    # For more information about backing up Amazon FSx for Lustre file
+    # For more information about backing up Amazon FSx for Windows file
     # systems, see [Working with FSx for Windows backups][2].
     #
     # If a backup with the specified client request token exists, and the
@@ -586,7 +586,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup.backup_id #=> String
-    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
+    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED", "PENDING"
     #   resp.backup.failure_details.message #=> String
     #   resp.backup.type #=> String, one of "AUTOMATIC", "USER_INITIATED", "AWS_BACKUP"
     #   resp.backup.progress_percent #=> Integer
@@ -677,14 +677,14 @@ module Aws::FSx
     # from your FSx file system to its linked data repository. A
     # `CreateDataRepositoryTask` operation will fail if a data repository is
     # not linked to the FSx file system. To learn more about data repository
-    # tasks, see [Using Data Repository Tasks][1]. To learn more about
-    # linking a data repository to your file system, see [Setting the Export
-    # Prefix][2].
+    # tasks, see [Data Repository Tasks][1]. To learn more about linking a
+    # data repository to your file system, see [Linking your file system to
+    # an S3 bucket][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html
-    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-fs-linked-data-repo.html
     #
     # @option params [required, String] :type
     #   Specifies the type of data repository task to create.
@@ -1444,7 +1444,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup_id #=> String
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED", "PENDING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteBackup AWS API Documentation
     #
@@ -1677,7 +1677,7 @@ module Aws::FSx
     #
     #   resp.backups #=> Array
     #   resp.backups[0].backup_id #=> String
-    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
+    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED", "PENDING"
     #   resp.backups[0].failure_details.message #=> String
     #   resp.backups[0].type #=> String, one of "AUTOMATIC", "USER_INITIATED", "AWS_BACKUP"
     #   resp.backups[0].progress_percent #=> Integer
@@ -2353,6 +2353,8 @@ module Aws::FSx
     #
     # * DailyAutomaticBackupStartTime
     #
+    # * StorageCapacity
+    #
     # * WeeklyMaintenanceStartTime
     #
     # @option params [required, String] :file_system_id
@@ -2368,18 +2370,39 @@ module Aws::FSx
     #
     # @option params [Integer] :storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server file system. Specifies the storage capacity
-    #   target value, GiB, for the file system you're updating. The storage
-    #   capacity target value must be at least 10 percent (%) greater than the
-    #   current storage capacity value. In order to increase storage capacity,
-    #   the file system needs to have at least 16 MB/s of throughput capacity.
-    #   You cannot make a storage capacity increase request if there is an
-    #   existing storage capacity increase request in progress. For more
-    #   information, see [Managing Storage Capacity][1].
+    #   file system. Specifies the storage capacity target value, GiB, to
+    #   increase the storage capacity for the file system that you're
+    #   updating. You cannot make a storage capacity increase request if there
+    #   is an existing storage capacity increase request in progress.
+    #
+    #   For Windows file systems, the storage capacity target value must be at
+    #   least 10 percent (%) greater than the current storage capacity value.
+    #   In order to increase storage capacity, the file system must have at
+    #   least 16 MB/s of throughput capacity.
+    #
+    #   For Lustre file systems, the storage capacity target value can be the
+    #   following:
+    #
+    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
+    #     values are in multiples of 2400 GiB. The value must be greater than
+    #     the current storage capacity.
+    #
+    #   * For `PERSISTENT HDD` file systems, valid values are multiples of
+    #     6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for
+    #     40 MB/s/TiB file systems. The values must be greater than the
+    #     current storage capacity.
+    #
+    #   * For `SCRATCH_1` file systems, you cannot increase the storage
+    #     capacity.
+    #
+    #   For more information, see [Managing storage capacity][1] in the
+    #   *Amazon FSx for Windows File Server User Guide* and [Managing storage
+    #   and throughput capacity][2] in the *Amazon FSx for Lustre User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration updates for an Amazon FSx for Windows File Server
@@ -2548,7 +2571,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

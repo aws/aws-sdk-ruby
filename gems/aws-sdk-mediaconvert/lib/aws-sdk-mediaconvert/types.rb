@@ -2440,8 +2440,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] client_cache
-    #   When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents
-    #   client from saving media segments for later replay.
+    #   Disable this setting only when your workflow requires the
+    #   #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled
+    #   (ENABLED) and control caching in your video distribution set up. For
+    #   example, use the Cache-Control http header.
     #   @return [String]
     #
     # @!attribute [rw] codec_specification
@@ -2593,9 +2595,29 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #       }
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] scte_35_esam
     #   Use this setting only when you specify SCTE-35 markers from ESAM.
@@ -2615,6 +2637,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmfcSettings AWS API Documentation
     #
     class CmfcSettings < Struct.new(
+      :audio_duration,
       :scte_35_esam,
       :scte_35_source)
       SENSITIVE = []
@@ -2722,6 +2745,7 @@ module Aws::MediaConvert
     #
     #       {
     #         cmfc_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
@@ -2731,6 +2755,7 @@ module Aws::MediaConvert
     #         },
     #         m2ts_settings: {
     #           audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
     #           bitrate: 1,
@@ -2781,6 +2806,7 @@ module Aws::MediaConvert
     #           video_pid: 1,
     #         },
     #         m3u_8_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -2806,6 +2832,7 @@ module Aws::MediaConvert
     #           reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #         },
     #         mp_4_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2813,6 +2840,8 @@ module Aws::MediaConvert
     #           mp_4_major_brand: "__string",
     #         },
     #         mpd_settings: {
+    #           accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -3008,7 +3037,7 @@ module Aws::MediaConvert
     #                 kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #               },
     #               denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #               file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #               file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
     #               filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #               filter_strength: 1,
     #               image_inserter: {
@@ -3199,6 +3228,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
@@ -3520,6 +3550,7 @@ module Aws::MediaConvert
     #                   ],
     #                   container_settings: {
     #                     cmfc_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -3529,6 +3560,7 @@ module Aws::MediaConvert
     #                     },
     #                     m2ts_settings: {
     #                       audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       bitrate: 1,
@@ -3579,6 +3611,7 @@ module Aws::MediaConvert
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -3604,6 +3637,7 @@ module Aws::MediaConvert
     #                       reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                     },
     #                     mp_4_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -3611,6 +3645,8 @@ module Aws::MediaConvert
     #                       mp_4_major_brand: "__string",
     #                     },
     #                     mpd_settings: {
+    #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -4059,12 +4095,16 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] tags
     #   Optional. The tags that you want to add to the resource. You can tag
-    #   resources with a key-value pair or with only a key.
+    #   resources with a key-value pair or with only a key. Use standard AWS
+    #   tags on your job for automatic integration with AWS services and for
+    #   custom integrations and workflows.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_metadata
     #   Optional. User-defined metadata that you want to associate with an
-    #   MediaConvert job. You specify metadata in key/value pairs.
+    #   MediaConvert job. You specify metadata in key/value pairs. Use only
+    #   for existing integrations or workflows that rely on job metadata
+    #   tags. Otherwise, we recommend that you use standard AWS tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobRequest AWS API Documentation
@@ -4407,6 +4447,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
@@ -4728,6 +4769,7 @@ module Aws::MediaConvert
     #                   ],
     #                   container_settings: {
     #                     cmfc_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -4737,6 +4779,7 @@ module Aws::MediaConvert
     #                     },
     #                     m2ts_settings: {
     #                       audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       bitrate: 1,
@@ -4787,6 +4830,7 @@ module Aws::MediaConvert
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -4812,6 +4856,7 @@ module Aws::MediaConvert
     #                       reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                     },
     #                     mp_4_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -4819,6 +4864,8 @@ module Aws::MediaConvert
     #                       mp_4_major_brand: "__string",
     #                     },
     #                     mpd_settings: {
+    #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -5486,6 +5533,7 @@ module Aws::MediaConvert
     #           ],
     #           container_settings: {
     #             cmfc_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
@@ -5495,6 +5543,7 @@ module Aws::MediaConvert
     #             },
     #             m2ts_settings: {
     #               audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               bitrate: 1,
@@ -5545,6 +5594,7 @@ module Aws::MediaConvert
     #               video_pid: 1,
     #             },
     #             m3u_8_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -5570,6 +5620,7 @@ module Aws::MediaConvert
     #               reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #             },
     #             mp_4_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               ctts_version: 1,
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -5577,6 +5628,8 @@ module Aws::MediaConvert
     #               mp_4_major_brand: "__string",
     #             },
     #             mpd_settings: {
+    #               accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -6164,6 +6217,7 @@ module Aws::MediaConvert
     #         fragment_length: 1,
     #         hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #         min_buffer_time: 1,
+    #         min_final_segment_length: 1.0,
     #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
@@ -6219,6 +6273,22 @@ module Aws::MediaConvert
     #   smooth playout.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_final_segment_length
+    #   Keep this setting at the default value of 0, unless you are
+    #   troubleshooting a problem with how devices play back the end of your
+    #   video asset. If you know that player devices are hanging on the
+    #   final segment of your video because the length of your final segment
+    #   is too short, use this setting to specify a minimum final segment
+    #   length, in seconds. Choose a value that is greater than or equal to
+    #   1 and less than your segment length. When you specify a value for
+    #   this setting, the encoder will combine any final segment that is
+    #   shorter than the length that you specify with the previous segment.
+    #   For example, your segment length is 3 seconds and your final segment
+    #   is .5 seconds without a minimum final segment length; when you set
+    #   the minimum final segment length to 1, your final segment is 3.5
+    #   seconds.
+    #   @return [Float]
+    #
     # @!attribute [rw] mpd_profile
     #   Specify whether your DASH profile is on-demand or main. When you
     #   choose Main profile (MAIN\_PROFILE), the service signals
@@ -6267,6 +6337,7 @@ module Aws::MediaConvert
       :fragment_length,
       :hbbtv_compliance,
       :min_buffer_time,
+      :min_final_segment_length,
       :mpd_profile,
       :segment_control,
       :segment_length,
@@ -9245,8 +9316,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] client_cache
-    #   When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents
-    #   client from saving media segments for later replay.
+    #   Disable this setting only when your workflow requires the
+    #   #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled
+    #   (ENABLED) and control caching in your video distribution set up. For
+    #   example, use the Cache-Control http header.
     #   @return [String]
     #
     # @!attribute [rw] codec_specification
@@ -9691,7 +9764,7 @@ module Aws::MediaConvert
     #           kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #         },
     #         denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #         file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #         file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
     #         filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #         filter_strength: 1,
     #         image_inserter: {
@@ -10769,7 +10842,7 @@ module Aws::MediaConvert
     #               kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #             },
     #             denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #             file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #             file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
     #             filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #             filter_strength: 1,
     #             image_inserter: {
@@ -10960,6 +11033,7 @@ module Aws::MediaConvert
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
+    #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
@@ -11281,6 +11355,7 @@ module Aws::MediaConvert
     #                 ],
     #                 container_settings: {
     #                   cmfc_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
@@ -11290,6 +11365,7 @@ module Aws::MediaConvert
     #                   },
     #                   m2ts_settings: {
     #                     audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     bitrate: 1,
@@ -11340,6 +11416,7 @@ module Aws::MediaConvert
     #                     video_pid: 1,
     #                   },
     #                   m3u_8_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -11365,6 +11442,7 @@ module Aws::MediaConvert
     #                     reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                   },
     #                   mp_4_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     ctts_version: 1,
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -11372,6 +11450,8 @@ module Aws::MediaConvert
     #                     mp_4_major_brand: "__string",
     #                   },
     #                   mpd_settings: {
+    #                     accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -12198,6 +12278,7 @@ module Aws::MediaConvert
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
+    #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
@@ -12519,6 +12600,7 @@ module Aws::MediaConvert
     #                 ],
     #                 container_settings: {
     #                   cmfc_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
@@ -12528,6 +12610,7 @@ module Aws::MediaConvert
     #                   },
     #                   m2ts_settings: {
     #                     audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     bitrate: 1,
@@ -12578,6 +12661,7 @@ module Aws::MediaConvert
     #                     video_pid: 1,
     #                   },
     #                   m3u_8_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -12603,6 +12687,7 @@ module Aws::MediaConvert
     #                     reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                   },
     #                   mp_4_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     ctts_version: 1,
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -12610,6 +12695,8 @@ module Aws::MediaConvert
     #                     mp_4_major_brand: "__string",
     #                   },
     #                   mpd_settings: {
+    #                     accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -13442,6 +13529,7 @@ module Aws::MediaConvert
     #
     #       {
     #         audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
     #         bitrate: 1,
@@ -13495,6 +13583,25 @@ module Aws::MediaConvert
     # @!attribute [rw] audio_buffer_model
     #   Selects between the DVB and ATSC buffer models for Dolby Digital
     #   audio.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
     #   @return [String]
     #
     # @!attribute [rw] audio_frames_per_pes
@@ -13728,6 +13835,7 @@ module Aws::MediaConvert
     #
     class M2tsSettings < Struct.new(
       :audio_buffer_model,
+      :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
       :bitrate,
@@ -13773,6 +13881,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
     #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -13790,6 +13899,25 @@ module Aws::MediaConvert
     #         transport_stream_id: 1,
     #         video_pid: 1,
     #       }
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] audio_frames_per_pes
     #   The number of audio frames to insert for each PES packet.
@@ -13884,6 +14012,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M3u8Settings AWS API Documentation
     #
     class M3u8Settings < Struct.new(
+      :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
       :nielsen_id_3,
@@ -14215,12 +14344,32 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         ctts_version: 1,
     #         free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         mp_4_major_brand: "__string",
     #       }
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] cslg_atom
     #   When enabled, file composition times will start at zero, composition
@@ -14258,6 +14407,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp4Settings AWS API Documentation
     #
     class Mp4Settings < Struct.new(
+      :audio_duration,
       :cslg_atom,
       :ctts_version,
       :free_space_box,
@@ -14273,10 +14423,35 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #       }
+    #
+    # @!attribute [rw] accessibility_caption_hints
+    #   Optional. Choose Include (INCLUDE) to have MediaConvert mark up your DASH manifest with <Accessibility> elements for embedded 608 captions. This markup isn't generally required, but some video players require it to discover and play embedded 608 captions. Keep the default value, Exclude (EXCLUDE), to leave these elements out. When you enable this setting, this is the markup that MediaConvert includes in your manifest: <Accessibility schemeIdUri="urn:scte:dash:cc:cea-608:2015" value="CC1=eng" /> </Accessibility>
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] caption_container_type
     #   Use this setting only in DASH output groups that include sidecar
@@ -14306,6 +14481,8 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MpdSettings AWS API Documentation
     #
     class MpdSettings < Struct.new(
+      :accessibility_caption_hints,
+      :audio_duration,
       :caption_container_type,
       :scte_35_esam,
       :scte_35_source)
@@ -15539,6 +15716,7 @@ module Aws::MediaConvert
     #         ],
     #         container_settings: {
     #           cmfc_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
@@ -15548,6 +15726,7 @@ module Aws::MediaConvert
     #           },
     #           m2ts_settings: {
     #             audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             bitrate: 1,
@@ -15598,6 +15777,7 @@ module Aws::MediaConvert
     #             video_pid: 1,
     #           },
     #           m3u_8_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -15623,6 +15803,7 @@ module Aws::MediaConvert
     #             reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #           },
     #           mp_4_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             ctts_version: 1,
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -15630,6 +15811,8 @@ module Aws::MediaConvert
     #             mp_4_major_brand: "__string",
     #           },
     #           mpd_settings: {
+    #             accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -16187,6 +16370,7 @@ module Aws::MediaConvert
     #             fragment_length: 1,
     #             hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #             min_buffer_time: 1,
+    #             min_final_segment_length: 1.0,
     #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
@@ -16508,6 +16692,7 @@ module Aws::MediaConvert
     #             ],
     #             container_settings: {
     #               cmfc_settings: {
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               },
@@ -16517,6 +16702,7 @@ module Aws::MediaConvert
     #               },
     #               m2ts_settings: {
     #                 audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
     #                 bitrate: 1,
@@ -16567,6 +16753,7 @@ module Aws::MediaConvert
     #                 video_pid: 1,
     #               },
     #               m3u_8_settings: {
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
     #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -16592,6 +16779,7 @@ module Aws::MediaConvert
     #                 reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #               },
     #               mp_4_settings: {
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 ctts_version: 1,
     #                 free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -16599,6 +16787,8 @@ module Aws::MediaConvert
     #                 mp_4_major_brand: "__string",
     #               },
     #               mpd_settings: {
+    #                 accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -17090,6 +17280,7 @@ module Aws::MediaConvert
     #           fragment_length: 1,
     #           hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #           min_buffer_time: 1,
+    #           min_final_segment_length: 1.0,
     #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
@@ -17571,6 +17762,7 @@ module Aws::MediaConvert
     #         ],
     #         container_settings: {
     #           cmfc_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
@@ -17580,6 +17772,7 @@ module Aws::MediaConvert
     #           },
     #           m2ts_settings: {
     #             audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             bitrate: 1,
@@ -17630,6 +17823,7 @@ module Aws::MediaConvert
     #             video_pid: 1,
     #           },
     #           m3u_8_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -17655,6 +17849,7 @@ module Aws::MediaConvert
     #             reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #           },
     #           mp_4_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             ctts_version: 1,
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -17662,6 +17857,8 @@ module Aws::MediaConvert
     #             mp_4_major_brand: "__string",
     #           },
     #           mpd_settings: {
+    #             accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -19468,6 +19665,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
@@ -19789,6 +19987,7 @@ module Aws::MediaConvert
     #                   ],
     #                   container_settings: {
     #                     cmfc_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -19798,6 +19997,7 @@ module Aws::MediaConvert
     #                     },
     #                     m2ts_settings: {
     #                       audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       bitrate: 1,
@@ -19848,6 +20048,7 @@ module Aws::MediaConvert
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -19873,6 +20074,7 @@ module Aws::MediaConvert
     #                       reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                     },
     #                     mp_4_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -19880,6 +20082,8 @@ module Aws::MediaConvert
     #                       mp_4_major_brand: "__string",
     #                     },
     #                     mpd_settings: {
+    #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -20534,6 +20738,7 @@ module Aws::MediaConvert
     #           ],
     #           container_settings: {
     #             cmfc_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
@@ -20543,6 +20748,7 @@ module Aws::MediaConvert
     #             },
     #             m2ts_settings: {
     #               audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               bitrate: 1,
@@ -20593,6 +20799,7 @@ module Aws::MediaConvert
     #               video_pid: 1,
     #             },
     #             m3u_8_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -20618,6 +20825,7 @@ module Aws::MediaConvert
     #               reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #             },
     #             mp_4_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               ctts_version: 1,
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -20625,6 +20833,8 @@ module Aws::MediaConvert
     #               mp_4_major_brand: "__string",
     #             },
     #             mpd_settings: {
+    #               accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE

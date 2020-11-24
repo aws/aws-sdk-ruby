@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-11-24)
+------------------
+
+* Feature - Updates the Integer constraint of DescribeEnvironmentManagedActionHistory's MaxItems parameter to [1, 100].
+
 1.39.0 (2020-10-20)
 ------------------
 

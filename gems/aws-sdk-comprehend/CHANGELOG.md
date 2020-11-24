@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-11-24)
+------------------
+
+* Feature - Support Comprehend events detection APIs
+
 1.41.0 (2020-09-30)
 ------------------
 

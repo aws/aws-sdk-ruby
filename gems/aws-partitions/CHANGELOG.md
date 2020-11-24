@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.399.0 (2020-11-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MWAA`.
+
 1.398.0 (2020-11-23)
 ------------------
 

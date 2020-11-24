@@ -145,6 +145,7 @@ module Aws
   autoload :Lightsail, 'aws-sdk-lightsail'
   autoload :MQ, 'aws-sdk-mq'
   autoload :MTurk, 'aws-sdk-mturk'
+  autoload :MWAA, 'aws-sdk-mwaa'
   autoload :MachineLearning, 'aws-sdk-machinelearning'
   autoload :Macie, 'aws-sdk-macie'
   autoload :Macie2, 'aws-sdk-macie2'

@@ -52,6 +52,7 @@ module Aws::TimestreamWrite
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordIndex = Shapes::IntegerShape.new(name: 'RecordIndex')
+    RecordVersion = Shapes::IntegerShape.new(name: 'RecordVersion')
     Records = Shapes::ListShape.new(name: 'Records')
     RejectedRecord = Shapes::StructureShape.new(name: 'RejectedRecord')
     RejectedRecords = Shapes::ListShape.new(name: 'RejectedRecords')
@@ -190,12 +191,14 @@ module Aws::TimestreamWrite
     Record.add_member(:measure_value_type, Shapes::ShapeRef.new(shape: MeasureValueType, location_name: "MeasureValueType"))
     Record.add_member(:time, Shapes::ShapeRef.new(shape: StringValue256, location_name: "Time"))
     Record.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "TimeUnit"))
+    Record.add_member(:version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "Version", metadata: {"box"=>true}))
     Record.struct_class = Types::Record
 
     Records.member = Shapes::ShapeRef.new(shape: Record)
 
     RejectedRecord.add_member(:record_index, Shapes::ShapeRef.new(shape: RecordIndex, location_name: "RecordIndex"))
     RejectedRecord.add_member(:reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Reason"))
+    RejectedRecord.add_member(:existing_version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "ExistingVersion", metadata: {"box"=>true}))
     RejectedRecord.struct_class = Types::RejectedRecord
 
     RejectedRecords.member = Shapes::ShapeRef.new(shape: RejectedRecord)
@@ -466,6 +469,7 @@ module Aws::TimestreamWrite
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
       end)
@@ -481,6 +485,7 @@ module Aws::TimestreamWrite
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
       end)
@@ -496,6 +501,7 @@ module Aws::TimestreamWrite
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
       end)

@@ -155,6 +155,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-lightsail', '~> 1')
   spec.add_dependency('aws-sdk-mq', '~> 1')
   spec.add_dependency('aws-sdk-mturk', '~> 1')
+  spec.add_dependency('aws-sdk-mwaa', '~> 1')
   spec.add_dependency('aws-sdk-machinelearning', '~> 1')
   spec.add_dependency('aws-sdk-macie', '~> 1')
   spec.add_dependency('aws-sdk-macie2', '~> 1')

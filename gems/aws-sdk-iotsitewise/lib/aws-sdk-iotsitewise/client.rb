@@ -1082,8 +1082,8 @@ module Aws::IoTSiteWise
     # Creates a pre-signed URL to a portal. Use this operation to create
     # URLs to portals that use AWS Identity and Access Management (IAM) to
     # authenticate users. An IAM user with access to a portal can call this
-    # API to get a URL to that portal. The URL contains a session token that
-    # lets the IAM user access the portal.
+    # API to get a URL to that portal. The URL contains an authentication
+    # token that lets the IAM user access the portal.
     #
     # @option params [required, String] :portal_id
     #   The ID of the portal to access.
@@ -1091,7 +1091,7 @@ module Aws::IoTSiteWise
     # @option params [Integer] :session_duration_seconds
     #   The duration (in seconds) for which the session at the URL is valid.
     #
-    #   Default: 900 seconds (15 minutes)
+    #   Default: 43,200 seconds (12 hours)
     #
     # @return [Types::CreatePresignedPortalUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1689,6 +1689,36 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def describe_dashboard(params = {}, options = {})
       req = build_request(:describe_dashboard, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the default encryption configuration for
+    # the AWS account in the default or specified region. For more
+    # information, see [Key management][1] in the *AWS IoT SiteWise User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html
+    #
+    # @return [Types::DescribeDefaultEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDefaultEncryptionConfigurationResponse#encryption_type #encryption_type} => String
+    #   * {Types::DescribeDefaultEncryptionConfigurationResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::DescribeDefaultEncryptionConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
+    #
+    # @example Response structure
+    #
+    #   resp.encryption_type #=> String, one of "SITEWISE_DEFAULT_ENCRYPTION", "KMS_BASED_ENCRYPTION"
+    #   resp.kms_key_arn #=> String
+    #   resp.configuration_status.state #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.configuration_status.error.message #=> String
+    #
+    # @overload describe_default_encryption_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_default_encryption_configuration(params = {}, options = {})
+      req = build_request(:describe_default_encryption_configuration, params)
       req.send_request(options)
     end
 
@@ -2753,6 +2783,50 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Sets the default encryption configuration for the AWS account. For
+    # more information, see [Key management][1] in the *AWS IoT SiteWise
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html
+    #
+    # @option params [required, String] :encryption_type
+    #   The type of encryption used for the encryption configuration.
+    #
+    # @option params [String] :kms_key_id
+    #   The Key ID of the customer managed customer master key (CMK) used for
+    #   AWS KMS encryption. This is required if you use
+    #   `KMS_BASED_ENCRYPTION`.
+    #
+    # @return [Types::PutDefaultEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutDefaultEncryptionConfigurationResponse#encryption_type #encryption_type} => String
+    #   * {Types::PutDefaultEncryptionConfigurationResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::PutDefaultEncryptionConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_default_encryption_configuration({
+    #     encryption_type: "SITEWISE_DEFAULT_ENCRYPTION", # required, accepts SITEWISE_DEFAULT_ENCRYPTION, KMS_BASED_ENCRYPTION
+    #     kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.encryption_type #=> String, one of "SITEWISE_DEFAULT_ENCRYPTION", "KMS_BASED_ENCRYPTION"
+    #   resp.kms_key_arn #=> String
+    #   resp.configuration_status.state #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.configuration_status.error.message #=> String
+    #
+    # @overload put_default_encryption_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_default_encryption_configuration(params = {}, options = {})
+      req = build_request(:put_default_encryption_configuration, params)
+      req.send_request(options)
+    end
+
     # Sets logging options for AWS IoT SiteWise.
     #
     # @option params [required, Types::LoggingOptions] :logging_options
@@ -3417,7 +3491,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
