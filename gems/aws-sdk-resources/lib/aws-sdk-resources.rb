@@ -187,7 +187,6 @@ module Aws
   autoload :PinpointSMSVoice, 'aws-sdk-pinpointsmsvoice'
   autoload :Polly, 'aws-sdk-polly'
   autoload :Pricing, 'aws-sdk-pricing'
-  autoload :Profile, 'aws-sdk-profile'
   autoload :QLDB, 'aws-sdk-qldb'
   autoload :QLDBSession, 'aws-sdk-qldbsession'
   autoload :QuickSight, 'aws-sdk-quicksight'
