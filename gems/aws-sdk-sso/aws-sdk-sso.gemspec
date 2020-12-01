@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-sso'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - SSO'
-  spec.description   = 'Official AWS Ruby gem for AWS Single Sign-On (SSO). This gem is part of the AWS SDK for Ruby.'
+  spec.description   = 'Official AWS Ruby gem for AWS Single Sign-On (SSO). SSO is included as part of aws-sdk-core - this gem is an alias for loading aws-sdk-core.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'

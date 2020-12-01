@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Support `aws-sdk-sts` no-op gem.
+* Issue - Support `aws-sdk-sts` alias gem.
 
 3.109.3 (2020-11-17)
 ------------------
