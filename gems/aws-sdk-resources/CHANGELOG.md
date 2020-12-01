@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.89.1 (2020-12-01)
+------------------
+
+* Issue - Remove dependency on the `aws-sdk-profile` gem. This gem will be republished under a different name.
+
 3.89.0 (2020-12-01)
 ------------------
 
