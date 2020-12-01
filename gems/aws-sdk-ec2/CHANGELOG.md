@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.212.0 (2020-12-01)
+------------------
+
+* Feature - This release introduces Amazon EC2 Mac1 instances, a new Amazon EC2 instance family built on Apple Mac mini computers, powered by AWS Nitro System, and support running macOS workloads on Amazon EC2
+
 1.211.0 (2020-11-23)
 ------------------
 
