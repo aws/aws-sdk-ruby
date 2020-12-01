@@ -3541,6 +3541,7 @@ module Aws::EC2
     CreateVolumeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateVolumeRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVolumeRequest.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAttachEnabled"))
+    CreateVolumeRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
     CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
 
     CreateVpcEndpointConnectionNotificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -5516,6 +5517,7 @@ module Aws::EC2
     EbsBlockDevice.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
     EbsBlockDevice.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     EbsBlockDevice.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    EbsBlockDevice.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
     EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.struct_class = Types::EbsBlockDevice
 
@@ -7039,6 +7041,7 @@ module Aws::EC2
     LaunchTemplateEbsBlockDevice.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "snapshotId"))
     LaunchTemplateEbsBlockDevice.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
     LaunchTemplateEbsBlockDevice.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    LaunchTemplateEbsBlockDevice.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
     LaunchTemplateEbsBlockDevice.struct_class = Types::LaunchTemplateEbsBlockDevice
 
     LaunchTemplateEbsBlockDeviceRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
@@ -7048,6 +7051,7 @@ module Aws::EC2
     LaunchTemplateEbsBlockDeviceRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
     LaunchTemplateEbsBlockDeviceRequest.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "VolumeSize"))
     LaunchTemplateEbsBlockDeviceRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
+    LaunchTemplateEbsBlockDeviceRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
     LaunchTemplateEbsBlockDeviceRequest.struct_class = Types::LaunchTemplateEbsBlockDeviceRequest
 
     LaunchTemplateElasticInferenceAccelerator.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
@@ -7700,6 +7704,7 @@ module Aws::EC2
     ModifyVolumeRequest.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "Size"))
     ModifyVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     ModifyVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
+    ModifyVolumeRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
     ModifyVolumeRequest.struct_class = Types::ModifyVolumeRequest
 
     ModifyVolumeResult.add_member(:volume_modification, Shapes::ShapeRef.new(shape: VolumeModification, location_name: "volumeModification"))
@@ -10095,6 +10100,7 @@ module Aws::EC2
     Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     Volume.add_member(:fast_restored, Shapes::ShapeRef.new(shape: Boolean, location_name: "fastRestored"))
     Volume.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "multiAttachEnabled"))
+    Volume.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
     Volume.struct_class = Types::Volume
 
     VolumeAttachment.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))
@@ -10120,9 +10126,11 @@ module Aws::EC2
     VolumeModification.add_member(:target_size, Shapes::ShapeRef.new(shape: Integer, location_name: "targetSize"))
     VolumeModification.add_member(:target_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "targetIops"))
     VolumeModification.add_member(:target_volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "targetVolumeType"))
+    VolumeModification.add_member(:target_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "targetThroughput"))
     VolumeModification.add_member(:original_size, Shapes::ShapeRef.new(shape: Integer, location_name: "originalSize"))
     VolumeModification.add_member(:original_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "originalIops"))
     VolumeModification.add_member(:original_volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "originalVolumeType"))
+    VolumeModification.add_member(:original_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "originalThroughput"))
     VolumeModification.add_member(:progress, Shapes::ShapeRef.new(shape: Long, location_name: "progress"))
     VolumeModification.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     VolumeModification.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))

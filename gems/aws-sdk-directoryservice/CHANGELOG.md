@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-12-01)
+------------------
+
+* Feature - Adding client authentication feature for AWS AD Connector
+
 1.35.0 (2020-11-19)
 ------------------
 

@@ -1350,6 +1350,8 @@ module Aws::DirectoryService
     #   resp.certificate.common_name #=> String
     #   resp.certificate.registered_date_time #=> Time
     #   resp.certificate.expiry_date_time #=> Time
+    #   resp.certificate.type #=> String, one of "ClientCertAuth", "ClientLDAPS"
+    #   resp.certificate.client_cert_auth_settings.ocsp_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificate AWS API Documentation
     #
@@ -1689,7 +1691,7 @@ module Aws::DirectoryService
     #   The name of the Region. For example, `us-east-1`.
     #
     # @option params [String] :next_token
-    #   The *DescribeRegionsResult.NextToken* value from a previous call to
+    #   The `DescribeRegionsResult.NextToken` value from a previous call to
     #   DescribeRegions. Pass null if this is the first call.
     #
     # @return [Types::DescribeRegionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1908,6 +1910,33 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Disable client authentication for smart cards.
+    #
+    # @option params [required, String] :directory_id
+    #   Disable client authentication in a specified directory for smart
+    #   cards.
+    #
+    # @option params [required, String] :type
+    #   Disable the type of client authentication request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_client_authentication({
+    #     directory_id: "DirectoryId", # required
+    #     type: "SmartCard", # required, accepts SmartCard
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthentication AWS API Documentation
+    #
+    # @overload disable_client_authentication(params = {})
+    # @param [Hash] params ({})
+    def disable_client_authentication(params = {}, options = {})
+      req = build_request(:disable_client_authentication, params)
+      req.send_request(options)
+    end
+
     # Deactivates LDAP secure calls for the specified directory.
     #
     # @option params [required, String] :directory_id
@@ -1996,6 +2025,32 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def disable_sso(params = {}, options = {})
       req = build_request(:disable_sso, params)
+      req.send_request(options)
+    end
+
+    # Enable client authentication for smardtcards.
+    #
+    # @option params [required, String] :directory_id
+    #   Enable client authentication in a specified directory for smart cards.
+    #
+    # @option params [required, String] :type
+    #   Enable the type of client authentication request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_client_authentication({
+    #     directory_id: "DirectoryId", # required
+    #     type: "SmartCard", # required, accepts SmartCard
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthentication AWS API Documentation
+    #
+    # @overload enable_client_authentication(params = {})
+    # @param [Hash] params ({})
+    def enable_client_authentication(params = {}, options = {})
+      req = build_request(:enable_client_authentication, params)
       req.send_request(options)
     end
 
@@ -2200,6 +2255,7 @@ module Aws::DirectoryService
     #   resp.certificates_info[0].common_name #=> String
     #   resp.certificates_info[0].state #=> String, one of "Registering", "Registered", "RegisterFailed", "Deregistering", "Deregistered", "DeregisterFailed"
     #   resp.certificates_info[0].expiry_date_time #=> Time
+    #   resp.certificates_info[0].type #=> String, one of "ClientCertAuth", "ClientLDAPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificates AWS API Documentation
     #
@@ -2397,6 +2453,13 @@ module Aws::DirectoryService
     # @option params [required, String] :certificate_data
     #   The certificate PEM string that needs to be registered.
     #
+    # @option params [String] :type
+    #   The certificate type to register for the request.
+    #
+    # @option params [Types::ClientCertAuthSettings] :client_cert_auth_settings
+    #   Contains information about the client certificate authentication
+    #   settings, such as `ClientLDAPS` or `ClientCertAuth`.
+    #
     # @return [Types::RegisterCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterCertificateResult#certificate_id #certificate_id} => String
@@ -2406,6 +2469,10 @@ module Aws::DirectoryService
     #   resp = client.register_certificate({
     #     directory_id: "DirectoryId", # required
     #     certificate_data: "CertificateData", # required
+    #     type: "ClientCertAuth", # accepts ClientCertAuth, ClientLDAPS
+    #     client_cert_auth_settings: {
+    #       ocsp_url: "OCSPUrl",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2980,7 +3047,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

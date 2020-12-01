@@ -975,9 +975,10 @@ module Aws::Lambda
 
     # Creates a Lambda function. To create a function, you need a
     # [deployment package][1] and an [execution role][2]. The deployment
-    # package contains your function code. The execution role grants the
-    # function permission to use AWS services, such as Amazon CloudWatch
-    # Logs for log streaming and AWS X-Ray for request tracing.
+    # package is a ZIP archive or image container that contains your
+    # function code. The execution role grants the function permission to
+    # use AWS services, such as Amazon CloudWatch Logs for log streaming and
+    # AWS X-Ray for request tracing.
     #
     # When you create a function, Lambda provisions an instance of the
     # function and its supporting resources. If your function connects to a
@@ -1002,6 +1003,7 @@ module Aws::Lambda
     # include tags (TagResource) and per-function concurrency limits
     # (PutFunctionConcurrency).
     #
+    # You can use code signing if your deployment package is a ZIP archive.
     # To enable code signing for this function, specify the ARN of a
     # code-signing configuration. When a user attempts to deploy a code
     # package with UpdateFunctionCode, Lambda checks that the code package
@@ -1021,7 +1023,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
     # [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html
@@ -1041,7 +1043,7 @@ module Aws::Lambda
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
-    # @option params [required, String] :runtime
+    # @option params [String] :runtime
     #   The identifier of the function's [runtime][1].
     #
     #
@@ -1051,7 +1053,7 @@ module Aws::Lambda
     # @option params [required, String] :role
     #   The Amazon Resource Name (ARN) of the function's execution role.
     #
-    # @option params [required, String] :handler
+    # @option params [String] :handler
     #   The name of the method within your code that Lambda calls to execute
     #   your function. The format includes the file name. It can also include
     #   namespaces and other qualifiers, depending on the runtime. For more
@@ -1090,6 +1092,10 @@ module Aws::Lambda
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
+    #
+    # @option params [String] :package_type
+    #   The type of deployment package. Set to `Image` for container image and
+    #   set `Zip` for ZIP archive.
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
     #   A dead letter queue configuration that specifies the queue or topic
@@ -1131,9 +1137,12 @@ module Aws::Lambda
     # @option params [Array<Types::FileSystemConfig>] :file_system_configs
     #   Connection settings for an Amazon EFS file system.
     #
+    # @option params [Types::ImageConfig] :image_config
+    #   Configuration values that override the container image Dockerfile.
+    #
     # @option params [String] :code_signing_config_arn
     #   To enable code signing for this function, specify the ARN of a
-    #   code-signing configuration. A code-signing configuration includes set
+    #   code-signing configuration. A code-signing configuration includes a
     #   set of signing profiles, which define the trusted publishers for this
     #   function.
     #
@@ -1166,6 +1175,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
@@ -1236,14 +1247,15 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     role: "RoleArn", # required
-    #     handler: "Handler", # required
+    #     handler: "Handler",
     #     code: { # required
     #       zip_file: "data",
     #       s3_bucket: "S3Bucket",
     #       s3_key: "S3Key",
     #       s3_object_version: "S3ObjectVersion",
+    #       image_uri: "String",
     #     },
     #     description: "Description",
     #     timeout: 1,
@@ -1253,6 +1265,7 @@ module Aws::Lambda
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
     #     },
+    #     package_type: "Zip", # accepts Zip, Image
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -1275,6 +1288,11 @@ module Aws::Lambda
     #         local_mount_path: "LocalMountPath", # required
     #       },
     #     ],
+    #     image_config: {
+    #       entry_point: ["String"],
+    #       command: ["String"],
+    #       working_directory: "WorkingDirectory",
+    #     },
     #     code_signing_config_arn: "CodeSigningConfigArn",
     #   })
     #
@@ -1313,13 +1331,21 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #
@@ -2171,17 +2197,27 @@ module Aws::Lambda
     #   resp.configuration.layers[0].signing_job_arn #=> String
     #   resp.configuration.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.configuration.state_reason #=> String
-    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.configuration.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.configuration.last_update_status_reason #=> String
-    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.configuration.file_system_configs #=> Array
     #   resp.configuration.file_system_configs[0].arn #=> String
     #   resp.configuration.file_system_configs[0].local_mount_path #=> String
+    #   resp.configuration.package_type #=> String, one of "Zip", "Image"
+    #   resp.configuration.image_config_response.image_config.entry_point #=> Array
+    #   resp.configuration.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.configuration.image_config_response.image_config.command #=> Array
+    #   resp.configuration.image_config_response.image_config.command[0] #=> String
+    #   resp.configuration.image_config_response.image_config.working_directory #=> String
+    #   resp.configuration.image_config_response.error.error_code #=> String
+    #   resp.configuration.image_config_response.error.message #=> String
     #   resp.configuration.signing_profile_version_arn #=> String
     #   resp.configuration.signing_job_arn #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
+    #   resp.code.image_uri #=> String
+    #   resp.code.resolved_image_uri #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.concurrency.reserved_concurrent_executions #=> Integer
@@ -2355,6 +2391,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
@@ -2439,13 +2477,21 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #
@@ -3244,10 +3290,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns a list of [code signing configurations][1] for the specified
-    # function. A request returns up to 10,000 configurations per call. You
-    # can use the `MaxItems` parameter to return fewer configurations per
-    # call.
+    # Returns a list of [code signing configurations][1]. A request returns
+    # up to 10,000 configurations per call. You can use the `MaxItems`
+    # parameter to return fewer configurations per call.
     #
     #
     #
@@ -3638,13 +3683,21 @@ module Aws::Lambda
     #   resp.functions[0].layers[0].signing_job_arn #=> String
     #   resp.functions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.functions[0].state_reason #=> String
-    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.functions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.functions[0].last_update_status_reason #=> String
-    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.functions[0].file_system_configs #=> Array
     #   resp.functions[0].file_system_configs[0].arn #=> String
     #   resp.functions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.functions[0].package_type #=> String, one of "Zip", "Image"
+    #   resp.functions[0].image_config_response.image_config.entry_point #=> Array
+    #   resp.functions[0].image_config_response.image_config.entry_point[0] #=> String
+    #   resp.functions[0].image_config_response.image_config.command #=> Array
+    #   resp.functions[0].image_config_response.image_config.command[0] #=> String
+    #   resp.functions[0].image_config_response.image_config.working_directory #=> String
+    #   resp.functions[0].image_config_response.error.error_code #=> String
+    #   resp.functions[0].image_config_response.error.message #=> String
     #   resp.functions[0].signing_profile_version_arn #=> String
     #   resp.functions[0].signing_job_arn #=> String
     #
@@ -4167,13 +4220,21 @@ module Aws::Lambda
     #   resp.versions[0].layers[0].signing_job_arn #=> String
     #   resp.versions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.versions[0].state_reason #=> String
-    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.versions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.versions[0].last_update_status_reason #=> String
-    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.versions[0].file_system_configs #=> Array
     #   resp.versions[0].file_system_configs[0].arn #=> String
     #   resp.versions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.versions[0].package_type #=> String, one of "Zip", "Image"
+    #   resp.versions[0].image_config_response.image_config.entry_point #=> Array
+    #   resp.versions[0].image_config_response.image_config.entry_point[0] #=> String
+    #   resp.versions[0].image_config_response.image_config.command #=> Array
+    #   resp.versions[0].image_config_response.image_config.command[0] #=> String
+    #   resp.versions[0].image_config_response.image_config.working_directory #=> String
+    #   resp.versions[0].image_config_response.error.error_code #=> String
+    #   resp.versions[0].image_config_response.error.message #=> String
     #   resp.versions[0].signing_profile_version_arn #=> String
     #   resp.versions[0].signing_job_arn #=> String
     #
@@ -4394,6 +4455,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
@@ -4481,13 +4544,21 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #
@@ -5460,6 +5531,9 @@ module Aws::Lambda
     #   For versioned objects, the version of the deployment package object to
     #   use.
     #
+    # @option params [String] :image_uri
+    #   URI of a container image in the Amazon ECR registry.
+    #
     # @option params [Boolean] :publish
     #   Set to true to publish a new version of the function after updating
     #   the code. This has the same effect as calling PublishVersion
@@ -5503,6 +5577,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
@@ -5546,6 +5622,7 @@ module Aws::Lambda
     #     s3_bucket: "S3Bucket",
     #     s3_key: "S3Key",
     #     s3_object_version: "S3ObjectVersion",
+    #     image_uri: "String",
     #     publish: false,
     #     dry_run: false,
     #     revision_id: "String",
@@ -5586,13 +5663,21 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #
@@ -5725,6 +5810,9 @@ module Aws::Lambda
     # @option params [Array<Types::FileSystemConfig>] :file_system_configs
     #   Connection settings for an Amazon EFS file system.
     #
+    # @option params [Types::ImageConfig] :image_config
+    #   Configuration values that override the container image Dockerfile.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -5754,6 +5842,8 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
@@ -5822,6 +5912,11 @@ module Aws::Lambda
     #         local_mount_path: "LocalMountPath", # required
     #       },
     #     ],
+    #     image_config: {
+    #       entry_point: ["String"],
+    #       command: ["String"],
+    #       working_directory: "WorkingDirectory",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5859,13 +5954,21 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #
@@ -6012,7 +6115,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

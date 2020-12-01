@@ -29,7 +29,7 @@ require_relative 'aws-sdk-eks/customizations'
 # structure.
 #
 #     eks = Aws::EKS::Client.new
-#     resp = eks.create_cluster(params)
+#     resp = eks.create_addon(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-eks/customizations'
 # @!group service
 module Aws::EKS
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end

@@ -168,7 +168,7 @@ module Aws::Connect
     #           {
     #             queue_reference: { # required
     #               queue_id: "QueueId", # required
-    #               channel: "VOICE", # required, accepts VOICE, CHAT
+    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #             },
     #             priority: 1, # required
     #             delay: 1, # required
@@ -535,6 +535,72 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateIntegrationAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_type: "EVENT", # required, accepts EVENT
+    #         integration_arn: "ARN", # required
+    #         source_application_url: "URI", # required
+    #         source_application_name: "SourceApplicationName", # required
+    #         source_type: "SALESFORCE", # required, accepts SALESFORCE, ZENDESK
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_type
+    #   The type of information to be ingested.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_url
+    #   The URL for the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_name
+    #   The name of the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
+    #
+    class CreateIntegrationAssociationRequest < Struct.new(
+      :instance_id,
+      :integration_type,
+      :integration_arn,
+      :source_application_url,
+      :source_application_name,
+      :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_arn
+    #   The Amazon Resource Name (ARN) for the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationResponse AWS API Documentation
+    #
+    class CreateIntegrationAssociationResponse < Struct.new(
+      :integration_association_id,
+      :integration_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRoutingProfileRequest
     #   data as a hash:
     #
@@ -547,7 +613,7 @@ module Aws::Connect
     #           {
     #             queue_reference: { # required
     #               queue_id: "QueueId", # required
-    #               channel: "VOICE", # required, accepts VOICE, CHAT
+    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #             },
     #             priority: 1, # required
     #             delay: 1, # required
@@ -555,7 +621,7 @@ module Aws::Connect
     #         ],
     #         media_concurrencies: [ # required
     #           {
-    #             channel: "VOICE", # required, accepts VOICE, CHAT
+    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #             concurrency: 1, # required
     #           },
     #         ],
@@ -623,6 +689,56 @@ module Aws::Connect
     class CreateRoutingProfileResponse < Struct.new(
       :routing_profile_arn,
       :routing_profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUseCaseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #         use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_type
+    #   The type of use case to associate to the AppIntegration association.
+    #   Each AppIntegration association can have only one of each use case
+    #   type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
+    #
+    class CreateUseCaseRequest < Struct.new(
+      :instance_id,
+      :integration_association_id,
+      :use_case_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] use_case_id
+    #   The identifier of the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_arn
+    #   The Amazon Resource Name (ARN) for the use case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseResponse AWS API Documentation
+    #
+    class CreateUseCaseResponse < Struct.new(
+      :use_case_id,
+      :use_case_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -912,6 +1028,62 @@ module Aws::Connect
     #
     class DeleteInstanceRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteIntegrationAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteIntegrationAssociationRequest AWS API Documentation
+    #
+    class DeleteIntegrationAssociationRequest < Struct.new(
+      :instance_id,
+      :integration_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUseCaseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #         use_case_id: "UseCaseId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_id
+    #   The identifier for the use case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUseCaseRequest AWS API Documentation
+    #
+    class DeleteUseCaseRequest < Struct.new(
+      :instance_id,
+      :integration_association_id,
+      :use_case_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1413,7 +1585,7 @@ module Aws::Connect
     #         queue_references: [ # required
     #           {
     #             queue_id: "QueueId", # required
-    #             channel: "VOICE", # required, accepts VOICE, CHAT
+    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #           },
     #         ],
     #       }
@@ -1513,7 +1685,7 @@ module Aws::Connect
     #
     #       {
     #         queues: ["QueueId"],
-    #         channels: ["VOICE"], # accepts VOICE, CHAT
+    #         channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       }
     #
     # @!attribute [rw] queues
@@ -1578,7 +1750,7 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE, CHAT
+    #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         current_metrics: [ # required
@@ -1599,16 +1771,16 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
-    #   `CHAT` channels are supported.
+    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
+    #   TASK channels are supported.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
     #   The grouping applied to the metrics returned. For example, when
     #   grouped by `QUEUE`, the metrics returned apply to each queue rather
     #   than aggregated for all queues. If you group by `CHANNEL`, you
-    #   should include a Channels filter. Both `VOICE` and `CHAT` channels
-    #   are supported.
+    #   should include a Channels filter. VOICE, CHAT, and TASK channels are
+    #   supported.
     #
     #   If no `Grouping` is included in the request, a summary of metrics is
     #   returned.
@@ -1819,7 +1991,7 @@ module Aws::Connect
     #         end_time: Time.now, # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE, CHAT
+    #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         historical_metrics: [ # required
@@ -1866,8 +2038,8 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. Both `VOICE` and
-    #   `CHAT` channels are supported.
+    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
+    #   TASK channels are supported.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
@@ -2631,6 +2803,55 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains summary information about the associated AppIntegrations.
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_arn
+    #   The Amazon Resource Name (ARN) for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_type
+    #   The integration type.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) for the AppIntegration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_url
+    #   The URL for the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_name
+    #   The user-provided, friendly name for the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The name of the source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/IntegrationAssociationSummary AWS API Documentation
+    #
+    class IntegrationAssociationSummary < Struct.new(
+      :integration_association_id,
+      :integration_association_arn,
+      :instance_id,
+      :integration_type,
+      :integration_arn,
+      :source_application_url,
+      :source_application_name,
+      :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request processing failed due to an error or failure with the service.
     #
     # @!attribute [rw] message
@@ -3118,6 +3339,57 @@ module Aws::Connect
     #
     class ListInstancesResponse < Struct.new(
       :instance_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListIntegrationAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociationsRequest AWS API Documentation
+    #
+    class ListIntegrationAssociationsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_association_summary_list
+    #   The AppIntegration associations.
+    #   @return [Array<Types::IntegrationAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociationsResponse AWS API Documentation
+    #
+    class ListIntegrationAssociationsResponse < Struct.new(
+      :integration_association_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3638,6 +3910,66 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Provides summary information about the use cases for the specified
+    # Amazon Connect AppIntegration association.
+    #
+    # @note When making an API call, you may pass ListUseCasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the integration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUseCasesRequest AWS API Documentation
+    #
+    class ListUseCasesRequest < Struct.new(
+      :instance_id,
+      :integration_association_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] use_case_summary_list
+    #   The use cases.
+    #   @return [Array<Types::UseCase>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUseCasesResponse AWS API Documentation
+    #
+    class ListUseCasesResponse < Struct.new(
+      :use_case_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListUserHierarchyGroupsRequest
     #   data as a hash:
     #
@@ -3747,7 +4079,7 @@ module Aws::Connect
     #   data as a hash:
     #
     #       {
-    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         concurrency: 1, # required
     #       }
     #
@@ -3927,6 +4259,35 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A link that an agent selects to complete a given task. You can have up
+    # to 4,096 UTF-8 bytes across all references for a contact.
+    #
+    # @note When making an API call, you may pass Reference
+    #   data as a hash:
+    #
+    #       {
+    #         value: "ReferenceValue", # required
+    #         type: "URL", # required, accepts URL
+    #       }
+    #
+    # @!attribute [rw] value
+    #   A formatted URL that will be shown to an agent in the Contact
+    #   Control Panel (CCP)
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   A valid URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Reference AWS API Documentation
+    #
+    class Reference < Struct.new(
+      :value,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource already has that name.
     #
     # @!attribute [rw] message
@@ -4073,7 +4434,7 @@ module Aws::Connect
     #       {
     #         queue_reference: { # required
     #           queue_id: "QueueId", # required
-    #           channel: "VOICE", # required, accepts VOICE, CHAT
+    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
@@ -4170,7 +4531,7 @@ module Aws::Connect
     #
     #       {
     #         queue_id: "QueueId", # required
-    #         channel: "VOICE", # required, accepts VOICE, CHAT
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #       }
     #
     # @!attribute [rw] queue_id
@@ -4548,6 +4909,106 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactResponse AWS API Documentation
     #
     class StartOutboundVoiceContactResponse < Struct.new(
+      :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartTaskContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         previous_contact_id: "ContactId",
+    #         contact_flow_id: "ContactFlowId", # required
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         name: "Name", # required
+    #         references: {
+    #           "ReferenceKey" => {
+    #             value: "ReferenceValue", # required
+    #             type: "URL", # required, accepts URL
+    #           },
+    #         },
+    #         description: "Description",
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_contact_id
+    #   The identifier of the previous chat, voice, or task contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow for initiating the tasks. To see
+    #   the ContactFlowId in the Amazon Connect console user interface, on
+    #   the navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] name
+    #   The name of a task that is shown to an agent in the Contact Control
+    #   Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A formatted URL that is shown to an agent in the Contact Control
+    #   Panel (CCP).
+    #   @return [Hash<String,Types::Reference>]
+    #
+    # @!attribute [rw] description
+    #   A description of the task that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactRequest AWS API Documentation
+    #
+    class StartTaskContactRequest < Struct.new(
+      :instance_id,
+      :previous_contact_id,
+      :contact_flow_id,
+      :attributes,
+      :name,
+      :references,
+      :description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_id
+    #   The identifier of this contact within the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactResponse AWS API Documentation
+    #
+    class StartTaskContactResponse < Struct.new(
       :contact_id)
       SENSITIVE = []
       include Aws::Structure
@@ -4967,7 +5428,7 @@ module Aws::Connect
     #         routing_profile_id: "RoutingProfileId", # required
     #         media_concurrencies: [ # required
     #           {
-    #             channel: "VOICE", # required, accepts VOICE, CHAT
+    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #             concurrency: 1, # required
     #           },
     #         ],
@@ -5075,7 +5536,7 @@ module Aws::Connect
     #           {
     #             queue_reference: { # required
     #               queue_id: "QueueId", # required
-    #               channel: "VOICE", # required, accepts VOICE, CHAT
+    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #             },
     #             priority: 1, # required
     #             delay: 1, # required
@@ -5092,7 +5553,9 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] queue_configs
-    #   The queues to be updated for this routing profile.
+    #   The queues to be updated for this routing profile. Queues must first
+    #   be associated to the routing profile. You can do this using
+    #   AssociateRoutingProfileQueues.
     #   @return [Array<Types::RoutingProfileQueueConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileQueuesRequest AWS API Documentation
@@ -5338,6 +5801,32 @@ module Aws::Connect
       :security_profile_ids,
       :user_id,
       :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the use case.
+    #
+    # @!attribute [rw] use_case_id
+    #   The identifier for the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_arn
+    #   The Amazon Resource Name (ARN) for the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_type
+    #   The type of use case to associate to the AppIntegration association.
+    #   Each AppIntegration association can have only one of each use case
+    #   type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UseCase AWS API Documentation
+    #
+    class UseCase < Struct.new(
+      :use_case_id,
+      :use_case_arn,
+      :use_case_type)
       SENSITIVE = []
       include Aws::Structure
     end

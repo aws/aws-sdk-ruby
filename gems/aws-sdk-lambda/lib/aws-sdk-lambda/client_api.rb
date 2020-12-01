@@ -121,6 +121,9 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigResponse')
     Handler = Shapes::StringShape.new(name: 'Handler')
     HttpStatus = Shapes::IntegerShape.new(name: 'HttpStatus')
+    ImageConfig = Shapes::StructureShape.new(name: 'ImageConfig')
+    ImageConfigError = Shapes::StructureShape.new(name: 'ImageConfigError')
+    ImageConfigResponse = Shapes::StructureShape.new(name: 'ImageConfigResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidCodeSignatureException = Shapes::StructureShape.new(name: 'InvalidCodeSignatureException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
@@ -201,6 +204,7 @@ module Aws::Lambda
     OnFailure = Shapes::StructureShape.new(name: 'OnFailure')
     OnSuccess = Shapes::StructureShape.new(name: 'OnSuccess')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
+    PackageType = Shapes::StringShape.new(name: 'PackageType')
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
@@ -250,6 +254,7 @@ module Aws::Lambda
     StateReasonCode = Shapes::StringShape.new(name: 'StateReasonCode')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetIPAddressLimitReachedException = Shapes::StructureShape.new(name: 'SubnetIPAddressLimitReachedException')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -282,6 +287,7 @@ module Aws::Lambda
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     Weight = Shapes::FloatShape.new(name: 'Weight')
+    WorkingDirectory = Shapes::StringShape.new(name: 'WorkingDirectory')
 
     AccountLimit.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
     AccountLimit.add_member(:code_size_unzipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeUnzipped"))
@@ -403,15 +409,16 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
-    CreateFunctionRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, required: true, location_name: "Runtime"))
+    CreateFunctionRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, location_name: "Runtime"))
     CreateFunctionRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "Role"))
-    CreateFunctionRequest.add_member(:handler, Shapes::ShapeRef.new(shape: Handler, required: true, location_name: "Handler"))
+    CreateFunctionRequest.add_member(:handler, Shapes::ShapeRef.new(shape: Handler, location_name: "Handler"))
     CreateFunctionRequest.add_member(:code, Shapes::ShapeRef.new(shape: FunctionCode, required: true, location_name: "Code"))
     CreateFunctionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateFunctionRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     CreateFunctionRequest.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "MemorySize"))
     CreateFunctionRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
     CreateFunctionRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CreateFunctionRequest.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
     CreateFunctionRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     CreateFunctionRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     CreateFunctionRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
@@ -419,6 +426,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFunctionRequest.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "Layers"))
     CreateFunctionRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
+    CreateFunctionRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     CreateFunctionRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, location_name: "CodeSigningConfigArn"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
@@ -545,10 +553,13 @@ module Aws::Lambda
     FunctionCode.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     FunctionCode.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     FunctionCode.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    FunctionCode.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     FunctionCode.struct_class = Types::FunctionCode
 
     FunctionCodeLocation.add_member(:repository_type, Shapes::ShapeRef.new(shape: String, location_name: "RepositoryType"))
     FunctionCodeLocation.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "Location"))
+    FunctionCodeLocation.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
+    FunctionCodeLocation.add_member(:resolved_image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ResolvedImageUri"))
     FunctionCodeLocation.struct_class = Types::FunctionCodeLocation
 
     FunctionConfiguration.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, location_name: "FunctionName"))
@@ -578,6 +589,8 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:last_update_status_reason, Shapes::ShapeRef.new(shape: LastUpdateStatusReason, location_name: "LastUpdateStatusReason"))
     FunctionConfiguration.add_member(:last_update_status_reason_code, Shapes::ShapeRef.new(shape: LastUpdateStatusReasonCode, location_name: "LastUpdateStatusReasonCode"))
     FunctionConfiguration.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
+    FunctionConfiguration.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
+    FunctionConfiguration.add_member(:image_config_response, Shapes::ShapeRef.new(shape: ImageConfigResponse, location_name: "ImageConfigResponse"))
     FunctionConfiguration.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningProfileVersionArn"))
     FunctionConfiguration.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningJobArn"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
@@ -687,6 +700,19 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
+
+    ImageConfig.add_member(:entry_point, Shapes::ShapeRef.new(shape: StringList, location_name: "EntryPoint"))
+    ImageConfig.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "Command"))
+    ImageConfig.add_member(:working_directory, Shapes::ShapeRef.new(shape: WorkingDirectory, location_name: "WorkingDirectory"))
+    ImageConfig.struct_class = Types::ImageConfig
+
+    ImageConfigError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    ImageConfigError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
+    ImageConfigError.struct_class = Types::ImageConfigError
+
+    ImageConfigResponse.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
+    ImageConfigResponse.add_member(:error, Shapes::ShapeRef.new(shape: ImageConfigError, location_name: "Error"))
+    ImageConfigResponse.struct_class = Types::ImageConfigResponse
 
     InvalidCodeSignatureException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     InvalidCodeSignatureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1031,6 +1057,8 @@ module Aws::Lambda
 
     SourceAccessConfigurations.member = Shapes::ShapeRef.new(shape: SourceAccessConfiguration)
 
+    StringList.member = Shapes::ShapeRef.new(shape: String)
+
     SubnetIPAddressLimitReachedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     SubnetIPAddressLimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     SubnetIPAddressLimitReachedException.struct_class = Types::SubnetIPAddressLimitReachedException
@@ -1103,6 +1131,7 @@ module Aws::Lambda
     UpdateFunctionCodeRequest.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     UpdateFunctionCodeRequest.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     UpdateFunctionCodeRequest.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    UpdateFunctionCodeRequest.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     UpdateFunctionCodeRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
     UpdateFunctionCodeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateFunctionCodeRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
@@ -1123,6 +1152,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     UpdateFunctionConfigurationRequest.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "Layers"))
     UpdateFunctionConfigurationRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
+    UpdateFunctionConfigurationRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

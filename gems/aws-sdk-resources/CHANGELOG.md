@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+3.89.0 (2020-12-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerfeaturestoreruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-profile` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lookoutforvision` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ecrpublic` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-devopsguru` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-connectcontactlens` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appintegrationsservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-amplifybackend` gem.
+
 3.88.0 (2020-11-24)
 ------------------
 

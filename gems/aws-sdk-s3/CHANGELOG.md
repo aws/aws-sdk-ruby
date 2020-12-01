@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2020-12-01)
+------------------
+
+* Feature - S3 adds support for multiple-destination replication, option to sync replica modifications;  S3 Bucket Keys to reduce cost of S3 SSE with AWS KMS
+
 1.85.0 (2020-11-20)
 ------------------
 

@@ -20,6 +20,9 @@
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
+  "AmplifyBackend": {
+    "models": "amplifybackend/2020-08-11"
+  },
   "ApiGatewayManagementApi": {
     "models": "apigatewaymanagementapi/2018-11-29"
   },
@@ -28,6 +31,9 @@
   },
   "AppConfig": {
     "models": "appconfig/2019-10-09"
+  },
+  "AppIntegrationsService": {
+    "models": "appintegrations/2020-07-29"
   },
   "AppMesh": {
     "models": "appmesh/2019-01-25"
@@ -181,6 +187,9 @@
   "Connect": {
     "models": "connect/2017-08-08"
   },
+  "ConnectContactLens": {
+    "models": "connect-contact-lens/2020-08-21"
+  },
   "ConnectParticipant": {
     "models": "connectparticipant/2018-09-07"
   },
@@ -210,6 +219,9 @@
   },
   "Detective": {
     "models": "detective/2018-10-26"
+  },
+  "DevOpsGuru": {
+    "models": "devops-guru/2020-12-01"
   },
   "DeviceFarm": {
     "models": "devicefarm/2015-06-23"
@@ -252,6 +264,9 @@
   },
   "ECR": {
     "models": "ecr/2015-09-21"
+  },
+  "ECRPublic": {
+    "models": "ecr-public/2020-10-30"
   },
   "ECS": {
     "models": "ecs/2014-11-13"
@@ -445,6 +460,9 @@
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
+  "LookoutforVision": {
+    "models": "lookoutvision/2020-11-20"
+  },
   "MQ": {
     "models": "mq/2017-11-27"
   },
@@ -561,6 +579,9 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "Profile": {
+    "models": "profile/2020-08-15"
   },
   "QLDB": {
     "models": "qldb/2019-01-02"
@@ -713,6 +734,9 @@
   },
   "SageMaker": {
     "models": "sagemaker/2017-07-24"
+  },
+  "SageMakerFeatureStoreRuntime": {
+    "models": "sagemaker-featurestore-runtime/2020-07-01"
   },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"

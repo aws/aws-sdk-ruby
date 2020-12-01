@@ -45,6 +45,7 @@ module Aws::DirectoryService
   # * {EntityDoesNotExistException}
   # * {InsufficientPermissionsException}
   # * {InvalidCertificateException}
+  # * {InvalidClientAuthStatusException}
   # * {InvalidLDAPSStatusException}
   # * {InvalidNextTokenException}
   # * {InvalidParameterException}
@@ -412,6 +413,26 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::InvalidCertificateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class InvalidClientAuthStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::InvalidClientAuthStatusException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

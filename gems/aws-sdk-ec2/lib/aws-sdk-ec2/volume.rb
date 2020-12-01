@@ -91,28 +91,11 @@ module Aws::EC2
       data[:state]
     end
 
-    # The number of I/O operations per second (IOPS) that the volume
-    # supports. For Provisioned IOPS SSD volumes, this represents the number
-    # of IOPS that are provisioned for the volume. For General Purpose SSD
-    # volumes, this represents the baseline performance of the volume and
-    # the rate at which the volume accumulates I/O credits for bursting. For
-    # more information, see [Amazon EBS volume types][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
-    #
-    # Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    # 64,000 IOPS for `io1` and `io2` volumes, in most Regions. The maximum
-    # IOPS for `io1` and `io2` of 64,000 is guaranteed only on [Nitro-based
-    # instances][2]. Other instance families guarantee performance up to
-    # 32,000 IOPS.
-    #
-    # Condition: This parameter is required for requests to create `io1` and
-    # `io2` volumes; it is not used in requests to create `gp2`, `st1`,
-    # `sc1`, or `standard` volumes.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    # The number of I/O operations per second (IOPS). For `gp3`, `io1`, and
+    # `io2` volumes, this represents the number of IOPS that are provisioned
+    # for the volume. For `gp2` volumes, this represents the baseline
+    # performance of the volume and the rate at which the volume accumulates
+    # I/O credits for bursting.
     # @return [Integer]
     def iops
       data[:iops]
@@ -124,9 +107,7 @@ module Aws::EC2
       data[:tags]
     end
 
-    # The volume type. This can be `gp2` for General Purpose SSD, `io1` or
-    # `io2` for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD,
-    # `sc1` for Cold HDD, or `standard` for Magnetic volumes.
+    # The volume type.
     # @return [String]
     def volume_type
       data[:volume_type]
@@ -142,6 +123,12 @@ module Aws::EC2
     # @return [Boolean]
     def multi_attach_enabled
       data[:multi_attach_enabled]
+    end
+
+    # The throughput that the volume supports, in MiB/s.
+    # @return [Integer]
+    def throughput
+      data[:throughput]
     end
 
     # @!endgroup
@@ -513,11 +500,11 @@ module Aws::EC2
     #   used, the request only returns `MaxResults` results in a single page
     #   along with a `NextToken` response element. The remaining results of
     #   the initial request can be seen by sending another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1000; if
-    #   `MaxResults` is given a value larger than 1000, only 1000 results are
-    #   returned. If this parameter is not used, then `DescribeVolumeStatus`
-    #   returns all results. You cannot specify this parameter and the volume
-    #   IDs parameter in the same request.
+    #   returned `NextToken` value. This value can be between 5 and 1,000; if
+    #   `MaxResults` is given a value larger than 1,000, only 1,000 results
+    #   are returned. If this parameter is not used, then
+    #   `DescribeVolumeStatus` returns all results. You cannot specify this
+    #   parameter and the volume IDs parameter in the same request.
     # @option options [String] :next_token
     #   The `NextToken` value to include in a future `DescribeVolumeStatus`
     #   request. When the results of the request exceed `MaxResults`, this

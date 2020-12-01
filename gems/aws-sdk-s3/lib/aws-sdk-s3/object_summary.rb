@@ -302,6 +302,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -458,6 +459,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a COPY operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
     #   example, AES256).
@@ -681,6 +690,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -772,6 +782,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an object operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -840,6 +858,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1009,6 +1028,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a PUT operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
