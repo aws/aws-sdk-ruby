@@ -197,7 +197,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-pinpointsmsvoice', '~> 1')
   spec.add_dependency('aws-sdk-polly', '~> 1')
   spec.add_dependency('aws-sdk-pricing', '~> 1')
-  spec.add_dependency('aws-sdk-profile', '~> 1')
   spec.add_dependency('aws-sdk-qldb', '~> 1')
   spec.add_dependency('aws-sdk-qldbsession', '~> 1')
   spec.add_dependency('aws-sdk-quicksight', '~> 1')
