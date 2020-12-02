@@ -583,9 +583,6 @@
   "Pricing": {
     "models": "pricing/2017-10-15"
   },
-  "Profile": {
-    "models": "profile/2020-08-15"
-  },
   "QLDB": {
     "models": "qldb/2019-01-02"
   },
