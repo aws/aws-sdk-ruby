@@ -1,0 +1,1997 @@
+# frozen_string_literal: true
+
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/credentials_configuration.rb'
+require 'aws-sdk-core/plugins/logging.rb'
+require 'aws-sdk-core/plugins/param_converter.rb'
+require 'aws-sdk-core/plugins/param_validator.rb'
+require 'aws-sdk-core/plugins/user_agent.rb'
+require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
+require 'aws-sdk-core/plugins/retry_errors.rb'
+require 'aws-sdk-core/plugins/global_configuration.rb'
+require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
+require 'aws-sdk-core/plugins/response_paging.rb'
+require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+
+Aws::Plugins::GlobalConfiguration.add_identifier(:customerprofiles)
+
+module Aws::CustomerProfiles
+  # An API client for CustomerProfiles.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::CustomerProfiles::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
+  class Client < Seahorse::Client::Base
+
+    include Aws::ClientStubs
+
+    @identifier = :customerprofiles
+
+    set_api(ClientApi::API)
+
+    add_plugin(Seahorse::Client::Plugins::ContentLength)
+    add_plugin(Aws::Plugins::CredentialsConfiguration)
+    add_plugin(Aws::Plugins::Logging)
+    add_plugin(Aws::Plugins::ParamConverter)
+    add_plugin(Aws::Plugins::ParamValidator)
+    add_plugin(Aws::Plugins::UserAgent)
+    add_plugin(Aws::Plugins::HelpfulSocketErrors)
+    add_plugin(Aws::Plugins::RetryErrors)
+    add_plugin(Aws::Plugins::GlobalConfiguration)
+    add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
+    add_plugin(Aws::Plugins::ResponsePaging)
+    add_plugin(Aws::Plugins::StubResponses)
+    add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Protocols::RestJson)
+
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
+    #
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
+    #       shared file, such as `~/.aws/config`.
+    #
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
+    #
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
+    #
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
+    #
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is searched for in the following locations:
+    #
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #
+    #   @option options [String] :access_key_id
+    #
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
+    #
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
+    #
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
+    #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
+    #
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
+    #
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
+    #
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
+    def initialize(*args)
+      super
+    end
+
+    # @!group API Operations
+
+    # Associates a new key value with a specific profile, such as a Contact
+    # Trace Record (CTR) ContactId.
+    #
+    # A profile object can have a single unique key and any number of
+    # additional keys that can be used to identify the profile that it
+    # belongs to.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of a customer profile.
+    #
+    # @option params [required, String] :key_name
+    #   A searchable identifier of a customer profile.
+    #
+    # @option params [required, Array<String>] :values
+    #   A list of key values.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::AddProfileKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddProfileKeyResponse#key_name #key_name} => String
+    #   * {Types::AddProfileKeyResponse#values #values} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_profile_key({
+    #     profile_id: "uuid", # required
+    #     key_name: "name", # required
+    #     values: ["string1To255"], # required
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_name #=> String
+    #   resp.values #=> Array
+    #   resp.values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AddProfileKey AWS API Documentation
+    #
+    # @overload add_profile_key(params = {})
+    # @param [Hash] params ({})
+    def add_profile_key(params = {}, options = {})
+      req = build_request(:add_profile_key, params)
+      req.send_request(options)
+    end
+
+    # Creates a domain, which is a container for all customer data, such as
+    # customer profile attributes, object types, profile keys, and
+    # encryption keys. You can create multiple domains, and each domain can
+    # have multiple third-party integrations.
+    #
+    # Each Amazon Connect instance can be associated with only one domain.
+    # Multiple Amazon Connect instances can be associated with one domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, Integer] :default_expiration_days
+    #   The default number of days until the data within the domain expires.
+    #
+    # @option params [String] :default_encryption_key
+    #   The default encryption key, which is an AWS managed key, is used when
+    #   no specific type of encryption key is specified. It is used to encrypt
+    #   all data before it is placed in permanent or semi-permanent storage.
+    #
+    # @option params [String] :dead_letter_queue_url
+    #   The URL of the SQS dead letter queue, which is used for reporting
+    #   errors associated with ingesting data from third party applications.
+    #   You must set up a policy on the DeadLetterQueue for the SendMessage
+    #   operation to enable Amazon Connect Customer Profiles to send messages
+    #   to the DeadLetterQueue.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDomainResponse#domain_name #domain_name} => String
+    #   * {Types::CreateDomainResponse#default_expiration_days #default_expiration_days} => Integer
+    #   * {Types::CreateDomainResponse#default_encryption_key #default_encryption_key} => String
+    #   * {Types::CreateDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
+    #   * {Types::CreateDomainResponse#created_at #created_at} => Time
+    #   * {Types::CreateDomainResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::CreateDomainResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_domain({
+    #     domain_name: "name", # required
+    #     default_expiration_days: 1, # required
+    #     default_encryption_key: "encryptionKey",
+    #     dead_letter_queue_url: "sqsQueueUrl",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.default_expiration_days #=> Integer
+    #   resp.default_encryption_key #=> String
+    #   resp.dead_letter_queue_url #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateDomain AWS API Documentation
+    #
+    # @overload create_domain(params = {})
+    # @param [Hash] params ({})
+    def create_domain(params = {}, options = {})
+      req = build_request(:create_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates a standard profile.
+    #
+    # A standard profile represents the following attributes for a customer
+    # profile in a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :account_number
+    #   A unique account number that you have given to the customer.
+    #
+    # @option params [String] :additional_information
+    #   Any additional information relevant to the customer's profile.
+    #
+    # @option params [String] :party_type
+    #   The type of profile used to describe the customer.
+    #
+    # @option params [String] :business_name
+    #   The name of the customer’s business.
+    #
+    # @option params [String] :first_name
+    #   The customer’s first name.
+    #
+    # @option params [String] :middle_name
+    #   The customer’s middle name.
+    #
+    # @option params [String] :last_name
+    #   The customer’s last name.
+    #
+    # @option params [String] :birth_date
+    #   The customer’s birth date.
+    #
+    # @option params [String] :gender
+    #   The gender with which the customer identifies.
+    #
+    # @option params [String] :phone_number
+    #   The customer's phone number, which has not been specified as a
+    #   mobile, home, or business number.
+    #
+    # @option params [String] :mobile_phone_number
+    #   The customer’s mobile phone number.
+    #
+    # @option params [String] :home_phone_number
+    #   The customer’s home phone number.
+    #
+    # @option params [String] :business_phone_number
+    #   The customer’s business phone number.
+    #
+    # @option params [String] :email_address
+    #   The customer's email address, which has not been specified as a
+    #   personal or business address.
+    #
+    # @option params [String] :personal_email_address
+    #   The customer’s personal email address.
+    #
+    # @option params [String] :business_email_address
+    #   The customer’s business email address.
+    #
+    # @option params [Types::Address] :address
+    #   A generic address associated with the customer that is not mailing,
+    #   shipping, or billing.
+    #
+    # @option params [Types::Address] :shipping_address
+    #   The customer’s shipping address.
+    #
+    # @option params [Types::Address] :mailing_address
+    #   The customer’s mailing address.
+    #
+    # @option params [Types::Address] :billing_address
+    #   The customer’s billing address.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   A key value pair of attributes of a customer profile.
+    #
+    # @return [Types::CreateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProfileResponse#profile_id #profile_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_profile({
+    #     domain_name: "name", # required
+    #     account_number: "string1To255",
+    #     additional_information: "string1To1000",
+    #     party_type: "INDIVIDUAL", # accepts INDIVIDUAL, BUSINESS, OTHER
+    #     business_name: "string1To255",
+    #     first_name: "string1To255",
+    #     middle_name: "string1To255",
+    #     last_name: "string1To255",
+    #     birth_date: "string1To255",
+    #     gender: "MALE", # accepts MALE, FEMALE, UNSPECIFIED
+    #     phone_number: "string1To255",
+    #     mobile_phone_number: "string1To255",
+    #     home_phone_number: "string1To255",
+    #     business_phone_number: "string1To255",
+    #     email_address: "string1To255",
+    #     personal_email_address: "string1To255",
+    #     business_email_address: "string1To255",
+    #     address: {
+    #       address_1: "string1To255",
+    #       address_2: "string1To255",
+    #       address_3: "string1To255",
+    #       address_4: "string1To255",
+    #       city: "string1To255",
+    #       county: "string1To255",
+    #       state: "string1To255",
+    #       province: "string1To255",
+    #       country: "string1To255",
+    #       postal_code: "string1To255",
+    #     },
+    #     shipping_address: {
+    #       address_1: "string1To255",
+    #       address_2: "string1To255",
+    #       address_3: "string1To255",
+    #       address_4: "string1To255",
+    #       city: "string1To255",
+    #       county: "string1To255",
+    #       state: "string1To255",
+    #       province: "string1To255",
+    #       country: "string1To255",
+    #       postal_code: "string1To255",
+    #     },
+    #     mailing_address: {
+    #       address_1: "string1To255",
+    #       address_2: "string1To255",
+    #       address_3: "string1To255",
+    #       address_4: "string1To255",
+    #       city: "string1To255",
+    #       county: "string1To255",
+    #       state: "string1To255",
+    #       province: "string1To255",
+    #       country: "string1To255",
+    #       postal_code: "string1To255",
+    #     },
+    #     billing_address: {
+    #       address_1: "string1To255",
+    #       address_2: "string1To255",
+    #       address_3: "string1To255",
+    #       address_4: "string1To255",
+    #       city: "string1To255",
+    #       county: "string1To255",
+    #       state: "string1To255",
+    #       province: "string1To255",
+    #       country: "string1To255",
+    #       postal_code: "string1To255",
+    #     },
+    #     attributes: {
+    #       "string1To255" => "string1To255",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateProfile AWS API Documentation
+    #
+    # @overload create_profile(params = {})
+    # @param [Hash] params ({})
+    def create_profile(params = {}, options = {})
+      req = build_request(:create_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specific domain and all of its customer data, such as
+    # customer profile attributes and their related objects.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::DeleteDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDomainResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_domain({
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteDomain AWS API Documentation
+    #
+    # @overload delete_domain(params = {})
+    # @param [Hash] params ({})
+    def delete_domain(params = {}, options = {})
+      req = build_request(:delete_domain, params)
+      req.send_request(options)
+    end
+
+    # Removes an integration from a specific domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :uri
+    #   The URI of the S3 bucket or any other type of data source.
+    #
+    # @return [Types::DeleteIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIntegrationResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_integration({
+    #     domain_name: "name", # required
+    #     uri: "string1To255",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteIntegration AWS API Documentation
+    #
+    # @overload delete_integration(params = {})
+    # @param [Hash] params ({})
+    def delete_integration(params = {}, options = {})
+      req = build_request(:delete_integration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the standard customer profile and all data pertaining to the
+    # profile.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of a customer profile.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::DeleteProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProfileResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_profile({
+    #     profile_id: "uuid", # required
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteProfile AWS API Documentation
+    #
+    # @overload delete_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_profile(params = {}, options = {})
+      req = build_request(:delete_profile, params)
+      req.send_request(options)
+    end
+
+    # Removes a searchable key from a customer profile.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of a customer profile.
+    #
+    # @option params [required, String] :key_name
+    #   A searchable identifier of a customer profile.
+    #
+    # @option params [required, Array<String>] :values
+    #   A list of key values.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::DeleteProfileKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProfileKeyResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_profile_key({
+    #     profile_id: "uuid", # required
+    #     key_name: "name", # required
+    #     values: ["string1To255"], # required
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteProfileKey AWS API Documentation
+    #
+    # @overload delete_profile_key(params = {})
+    # @param [Hash] params ({})
+    def delete_profile_key(params = {}, options = {})
+      req = build_request(:delete_profile_key, params)
+      req.send_request(options)
+    end
+
+    # Removes an object associated with a profile of a given
+    # ProfileObjectType.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of a customer profile.
+    #
+    # @option params [required, String] :profile_object_unique_key
+    #   The unique identifier of the profile object generated by the service.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::DeleteProfileObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProfileObjectResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_profile_object({
+    #     profile_id: "uuid", # required
+    #     profile_object_unique_key: "string1To255", # required
+    #     object_type_name: "typeName", # required
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteProfileObject AWS API Documentation
+    #
+    # @overload delete_profile_object(params = {})
+    # @param [Hash] params ({})
+    def delete_profile_object(params = {}, options = {})
+      req = build_request(:delete_profile_object, params)
+      req.send_request(options)
+    end
+
+    # Removes a ProfileObjectType from a specific domain as well as removes
+    # all the ProfileObjects of that type. It also disables integrations
+    # from this specific ProfileObjectType. In addition, it scrubs all of
+    # the fields of the standard profile that were populated from this
+    # ProfileObjectType.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @return [Types::DeleteProfileObjectTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProfileObjectTypeResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_profile_object_type({
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteProfileObjectType AWS API Documentation
+    #
+    # @overload delete_profile_object_type(params = {})
+    # @param [Hash] params ({})
+    def delete_profile_object_type(params = {}, options = {})
+      req = build_request(:delete_profile_object_type, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific domain.
+    #
+    # @option params [required, String] :domain_name
+    #   A unique name for the domain.
+    #
+    # @return [Types::GetDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainResponse#domain_name #domain_name} => String
+    #   * {Types::GetDomainResponse#default_expiration_days #default_expiration_days} => Integer
+    #   * {Types::GetDomainResponse#default_encryption_key #default_encryption_key} => String
+    #   * {Types::GetDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
+    #   * {Types::GetDomainResponse#stats #stats} => Types::DomainStats
+    #   * {Types::GetDomainResponse#created_at #created_at} => Time
+    #   * {Types::GetDomainResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetDomainResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain({
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.default_expiration_days #=> Integer
+    #   resp.default_encryption_key #=> String
+    #   resp.dead_letter_queue_url #=> String
+    #   resp.stats.profile_count #=> Integer
+    #   resp.stats.metering_profile_count #=> Integer
+    #   resp.stats.object_count #=> Integer
+    #   resp.stats.total_size #=> Integer
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomain AWS API Documentation
+    #
+    # @overload get_domain(params = {})
+    # @param [Hash] params ({})
+    def get_domain(params = {}, options = {})
+      req = build_request(:get_domain, params)
+      req.send_request(options)
+    end
+
+    # Returns an integration for a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :uri
+    #   The URI of the S3 bucket or any other type of data source.
+    #
+    # @return [Types::GetIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIntegrationResponse#domain_name #domain_name} => String
+    #   * {Types::GetIntegrationResponse#uri #uri} => String
+    #   * {Types::GetIntegrationResponse#object_type_name #object_type_name} => String
+    #   * {Types::GetIntegrationResponse#created_at #created_at} => Time
+    #   * {Types::GetIntegrationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_integration({
+    #     domain_name: "name", # required
+    #     uri: "string1To255",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.uri #=> String
+    #   resp.object_type_name #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegration AWS API Documentation
+    #
+    # @overload get_integration(params = {})
+    # @param [Hash] params ({})
+    def get_integration(params = {}, options = {})
+      req = build_request(:get_integration, params)
+      req.send_request(options)
+    end
+
+    # Returns the object types for a specific domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @return [Types::GetProfileObjectTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProfileObjectTypeResponse#object_type_name #object_type_name} => String
+    #   * {Types::GetProfileObjectTypeResponse#description #description} => String
+    #   * {Types::GetProfileObjectTypeResponse#template_id #template_id} => String
+    #   * {Types::GetProfileObjectTypeResponse#expiration_days #expiration_days} => Integer
+    #   * {Types::GetProfileObjectTypeResponse#encryption_key #encryption_key} => String
+    #   * {Types::GetProfileObjectTypeResponse#allow_profile_creation #allow_profile_creation} => Boolean
+    #   * {Types::GetProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
+    #   * {Types::GetProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
+    #   * {Types::GetProfileObjectTypeResponse#created_at #created_at} => Time
+    #   * {Types::GetProfileObjectTypeResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetProfileObjectTypeResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_profile_object_type({
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.object_type_name #=> String
+    #   resp.description #=> String
+    #   resp.template_id #=> String
+    #   resp.expiration_days #=> Integer
+    #   resp.encryption_key #=> String
+    #   resp.allow_profile_creation #=> Boolean
+    #   resp.fields #=> Hash
+    #   resp.fields["name"].source #=> String
+    #   resp.fields["name"].target #=> String
+    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.keys #=> Hash
+    #   resp.keys["name"] #=> Array
+    #   resp.keys["name"][0].standard_identifiers #=> Array
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].field_names #=> Array
+    #   resp.keys["name"][0].field_names[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetProfileObjectType AWS API Documentation
+    #
+    # @overload get_profile_object_type(params = {})
+    # @param [Hash] params ({})
+    def get_profile_object_type(params = {}, options = {})
+      req = build_request(:get_profile_object_type, params)
+      req.send_request(options)
+    end
+
+    # Returns the template information for a specific object type.
+    #
+    # A template is a predefined ProfileObjectType, such as
+    # “Salesforce-Account” or “Salesforce-Contact.” When a user sends a
+    # ProfileObject, using the PutProfileObject API, with an ObjectTypeName
+    # that matches one of the TemplateIds, it uses the mappings from the
+    # template.
+    #
+    # @option params [required, String] :template_id
+    #   A unique identifier for the object template.
+    #
+    # @return [Types::GetProfileObjectTypeTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProfileObjectTypeTemplateResponse#template_id #template_id} => String
+    #   * {Types::GetProfileObjectTypeTemplateResponse#source_name #source_name} => String
+    #   * {Types::GetProfileObjectTypeTemplateResponse#source_object #source_object} => String
+    #   * {Types::GetProfileObjectTypeTemplateResponse#allow_profile_creation #allow_profile_creation} => Boolean
+    #   * {Types::GetProfileObjectTypeTemplateResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
+    #   * {Types::GetProfileObjectTypeTemplateResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_profile_object_type_template({
+    #     template_id: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_id #=> String
+    #   resp.source_name #=> String
+    #   resp.source_object #=> String
+    #   resp.allow_profile_creation #=> Boolean
+    #   resp.fields #=> Hash
+    #   resp.fields["name"].source #=> String
+    #   resp.fields["name"].target #=> String
+    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.keys #=> Hash
+    #   resp.keys["name"] #=> Array
+    #   resp.keys["name"][0].standard_identifiers #=> Array
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].field_names #=> Array
+    #   resp.keys["name"][0].field_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetProfileObjectTypeTemplate AWS API Documentation
+    #
+    # @overload get_profile_object_type_template(params = {})
+    # @param [Hash] params ({})
+    def get_profile_object_type_template(params = {}, options = {})
+      req = build_request(:get_profile_object_type_template, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the integrations associated to a specific URI in the AWS
+    # account.
+    #
+    # @option params [required, String] :uri
+    #   The URI of the S3 bucket or any other type of data source.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous ListAccountIntegrations API
+    #   call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @return [Types::ListAccountIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountIntegrationsResponse#items #items} => Array&lt;Types::ListIntegrationItem&gt;
+    #   * {Types::ListAccountIntegrationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_account_integrations({
+    #     uri: "string1To255", # required
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].domain_name #=> String
+    #   resp.items[0].uri #=> String
+    #   resp.items[0].object_type_name #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListAccountIntegrations AWS API Documentation
+    #
+    # @overload list_account_integrations(params = {})
+    # @param [Hash] params ({})
+    def list_account_integrations(params = {}, options = {})
+      req = build_request(:list_account_integrations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the domains for an AWS account that have been
+    # created.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous ListDomain API call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @return [Types::ListDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainsResponse#items #items} => Array&lt;Types::ListDomainItem&gt;
+    #   * {Types::ListDomainsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domains({
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].domain_name #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomains AWS API Documentation
+    #
+    # @overload list_domains(params = {})
+    # @param [Hash] params ({})
+    def list_domains(params = {}, options = {})
+      req = build_request(:list_domains, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the integrations in your domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous ListIntegrations API call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @return [Types::ListIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntegrationsResponse#items #items} => Array&lt;Types::ListIntegrationItem&gt;
+    #   * {Types::ListIntegrationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_integrations({
+    #     domain_name: "name", # required
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].domain_name #=> String
+    #   resp.items[0].uri #=> String
+    #   resp.items[0].object_type_name #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrations AWS API Documentation
+    #
+    # @overload list_integrations(params = {})
+    # @param [Hash] params ({})
+    def list_integrations(params = {}, options = {})
+      req = build_request(:list_integrations, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the template information for object types.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous ListObjectTypeTemplates API
+    #   call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @return [Types::ListProfileObjectTypeTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfileObjectTypeTemplatesResponse#items #items} => Array&lt;Types::ListProfileObjectTypeTemplateItem&gt;
+    #   * {Types::ListProfileObjectTypeTemplatesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_object_type_templates({
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].template_id #=> String
+    #   resp.items[0].source_name #=> String
+    #   resp.items[0].source_object #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileObjectTypeTemplates AWS API Documentation
+    #
+    # @overload list_profile_object_type_templates(params = {})
+    # @param [Hash] params ({})
+    def list_profile_object_type_templates(params = {}, options = {})
+      req = build_request(:list_profile_object_type_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the templates available within the service.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @return [Types::ListProfileObjectTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfileObjectTypesResponse#items #items} => Array&lt;Types::ListProfileObjectTypeItem&gt;
+    #   * {Types::ListProfileObjectTypesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_object_types({
+    #     domain_name: "name", # required
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].object_type_name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileObjectTypes AWS API Documentation
+    #
+    # @overload list_profile_object_types(params = {})
+    # @param [Hash] params ({})
+    def list_profile_object_types(params = {}, options = {})
+      req = build_request(:list_profile_object_types, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of objects associated with a profile of a given
+    # ProfileObjectType.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous call to ListProfileObjects.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of a customer profile.
+    #
+    # @return [Types::ListProfileObjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfileObjectsResponse#items #items} => Array&lt;Types::ListProfileObjectsItem&gt;
+    #   * {Types::ListProfileObjectsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_objects({
+    #     next_token: "token",
+    #     max_results: 1,
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #     profile_id: "uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].object_type_name #=> String
+    #   resp.items[0].profile_object_unique_key #=> String
+    #   resp.items[0].object #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileObjects AWS API Documentation
+    #
+    # @overload list_profile_objects(params = {})
+    # @param [Hash] params ({})
+    def list_profile_objects(params = {}, options = {})
+      req = build_request(:list_profile_objects, params)
+      req.send_request(options)
+    end
+
+    # Displays the tags associated with an Amazon Connect Customer Profiles
+    # resource. In Connect Customer Profiles, domains, profile object types,
+    # and integrations can be tagged.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource for which you want to view tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TagArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds an integration between the service and a third-party service,
+    # which includes Amazon AppFlow and Amazon Connect.
+    #
+    # An integration can belong to only one domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :uri
+    #   The URI of the S3 bucket or any other type of data source.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::PutIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutIntegrationResponse#domain_name #domain_name} => String
+    #   * {Types::PutIntegrationResponse#uri #uri} => String
+    #   * {Types::PutIntegrationResponse#object_type_name #object_type_name} => String
+    #   * {Types::PutIntegrationResponse#created_at #created_at} => Time
+    #   * {Types::PutIntegrationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::PutIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_integration({
+    #     domain_name: "name", # required
+    #     uri: "string1To255", # required
+    #     object_type_name: "typeName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.uri #=> String
+    #   resp.object_type_name #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegration AWS API Documentation
+    #
+    # @overload put_integration(params = {})
+    # @param [Hash] params ({})
+    def put_integration(params = {}, options = {})
+      req = build_request(:put_integration, params)
+      req.send_request(options)
+    end
+
+    # Adds additional objects to customer profiles of a given ObjectType.
+    #
+    # When adding a specific profile object, like a Contact Trace Record
+    # (CTR), an inferred profile can get created if it is not mapped to an
+    # existing profile. The resulting profile will only have a phone number
+    # populated in the standard ProfileObject. Any additional CTRs with the
+    # same phone number will be mapped to the same inferred profile.
+    #
+    # When a ProfileObject is created and if a ProfileObjectType already
+    # exists for the ProfileObject, it will provide data to a standard
+    # profile depending on the ProfileObjectType definition.
+    #
+    # PutProfileObject needs an ObjectType, which can be created using
+    # PutProfileObjectType.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @option params [required, String] :object
+    #   A string that is serialized from a JSON object.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::PutProfileObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProfileObjectResponse#profile_object_unique_key #profile_object_unique_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_profile_object({
+    #     object_type_name: "typeName", # required
+    #     object: "stringifiedJson", # required
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_object_unique_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutProfileObject AWS API Documentation
+    #
+    # @overload put_profile_object(params = {})
+    # @param [Hash] params ({})
+    def put_profile_object(params = {}, options = {})
+      req = build_request(:put_profile_object, params)
+      req.send_request(options)
+    end
+
+    # Defines a ProfileObjectType.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @option params [required, String] :description
+    #   Description of the profile object type.
+    #
+    # @option params [String] :template_id
+    #   A unique identifier for the object template.
+    #
+    # @option params [Integer] :expiration_days
+    #   The number of days until the data in the object expires.
+    #
+    # @option params [String] :encryption_key
+    #   The customer-provided key to encrypt the profile object that will be
+    #   created in this profile object type.
+    #
+    # @option params [Boolean] :allow_profile_creation
+    #   Indicates whether a profile should be created when data is received if
+    #   one doesn’t exist for an object of this type. The default is `FALSE`.
+    #   If the AllowProfileCreation flag is set to `FALSE`, then the service
+    #   tries to fetch a standard profile and associate this object with the
+    #   profile. If it is set to `TRUE`, and if no match is found, then the
+    #   service creates a new standard profile.
+    #
+    # @option params [Hash<String,Types::ObjectTypeField>] :fields
+    #   A map of the name and ObjectType field.
+    #
+    # @option params [Hash<String,Array>] :keys
+    #   A list of unique keys that can be used to map data to the profile.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::PutProfileObjectTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProfileObjectTypeResponse#object_type_name #object_type_name} => String
+    #   * {Types::PutProfileObjectTypeResponse#description #description} => String
+    #   * {Types::PutProfileObjectTypeResponse#template_id #template_id} => String
+    #   * {Types::PutProfileObjectTypeResponse#expiration_days #expiration_days} => Integer
+    #   * {Types::PutProfileObjectTypeResponse#encryption_key #encryption_key} => String
+    #   * {Types::PutProfileObjectTypeResponse#allow_profile_creation #allow_profile_creation} => Boolean
+    #   * {Types::PutProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
+    #   * {Types::PutProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
+    #   * {Types::PutProfileObjectTypeResponse#created_at #created_at} => Time
+    #   * {Types::PutProfileObjectTypeResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::PutProfileObjectTypeResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_profile_object_type({
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #     description: "text", # required
+    #     template_id: "name",
+    #     expiration_days: 1,
+    #     encryption_key: "encryptionKey",
+    #     allow_profile_creation: false,
+    #     fields: {
+    #       "name" => {
+    #         source: "text",
+    #         target: "text",
+    #         content_type: "STRING", # accepts STRING, NUMBER, PHONE_NUMBER, EMAIL_ADDRESS, NAME
+    #       },
+    #     },
+    #     keys: {
+    #       "name" => [
+    #         {
+    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #           field_names: ["name"],
+    #         },
+    #       ],
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.object_type_name #=> String
+    #   resp.description #=> String
+    #   resp.template_id #=> String
+    #   resp.expiration_days #=> Integer
+    #   resp.encryption_key #=> String
+    #   resp.allow_profile_creation #=> Boolean
+    #   resp.fields #=> Hash
+    #   resp.fields["name"].source #=> String
+    #   resp.fields["name"].target #=> String
+    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.keys #=> Hash
+    #   resp.keys["name"] #=> Array
+    #   resp.keys["name"][0].standard_identifiers #=> Array
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].field_names #=> Array
+    #   resp.keys["name"][0].field_names[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutProfileObjectType AWS API Documentation
+    #
+    # @overload put_profile_object_type(params = {})
+    # @param [Hash] params ({})
+    def put_profile_object_type(params = {}, options = {})
+      req = build_request(:put_profile_object_type, params)
+      req.send_request(options)
+    end
+
+    # Searches for profiles within a specific domain name using name, phone
+    # number, email address, account number, or a custom defined index.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous SearchProfiles API call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :key_name
+    #   A searchable identifier of a customer profile. The predefined keys you
+    #   can use to search include: \_account, \_profileId, \_fullName,
+    #   \_phone, \_email, \_ctrContactId, \_marketoLeadId,
+    #   \_salesforceAccountId, \_salesforceContactId, \_zendeskUserId,
+    #   \_zendeskExternalId, \_serviceNowSystemId.
+    #
+    # @option params [required, Array<String>] :values
+    #   A list of key values.
+    #
+    # @return [Types::SearchProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchProfilesResponse#items #items} => Array&lt;Types::Profile&gt;
+    #   * {Types::SearchProfilesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_profiles({
+    #     next_token: "token",
+    #     max_results: 1,
+    #     domain_name: "name", # required
+    #     key_name: "name", # required
+    #     values: ["string1To255"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].profile_id #=> String
+    #   resp.items[0].account_number #=> String
+    #   resp.items[0].additional_information #=> String
+    #   resp.items[0].party_type #=> String, one of "INDIVIDUAL", "BUSINESS", "OTHER"
+    #   resp.items[0].business_name #=> String
+    #   resp.items[0].first_name #=> String
+    #   resp.items[0].middle_name #=> String
+    #   resp.items[0].last_name #=> String
+    #   resp.items[0].birth_date #=> String
+    #   resp.items[0].gender #=> String, one of "MALE", "FEMALE", "UNSPECIFIED"
+    #   resp.items[0].phone_number #=> String
+    #   resp.items[0].mobile_phone_number #=> String
+    #   resp.items[0].home_phone_number #=> String
+    #   resp.items[0].business_phone_number #=> String
+    #   resp.items[0].email_address #=> String
+    #   resp.items[0].personal_email_address #=> String
+    #   resp.items[0].business_email_address #=> String
+    #   resp.items[0].address.address_1 #=> String
+    #   resp.items[0].address.address_2 #=> String
+    #   resp.items[0].address.address_3 #=> String
+    #   resp.items[0].address.address_4 #=> String
+    #   resp.items[0].address.city #=> String
+    #   resp.items[0].address.county #=> String
+    #   resp.items[0].address.state #=> String
+    #   resp.items[0].address.province #=> String
+    #   resp.items[0].address.country #=> String
+    #   resp.items[0].address.postal_code #=> String
+    #   resp.items[0].shipping_address.address_1 #=> String
+    #   resp.items[0].shipping_address.address_2 #=> String
+    #   resp.items[0].shipping_address.address_3 #=> String
+    #   resp.items[0].shipping_address.address_4 #=> String
+    #   resp.items[0].shipping_address.city #=> String
+    #   resp.items[0].shipping_address.county #=> String
+    #   resp.items[0].shipping_address.state #=> String
+    #   resp.items[0].shipping_address.province #=> String
+    #   resp.items[0].shipping_address.country #=> String
+    #   resp.items[0].shipping_address.postal_code #=> String
+    #   resp.items[0].mailing_address.address_1 #=> String
+    #   resp.items[0].mailing_address.address_2 #=> String
+    #   resp.items[0].mailing_address.address_3 #=> String
+    #   resp.items[0].mailing_address.address_4 #=> String
+    #   resp.items[0].mailing_address.city #=> String
+    #   resp.items[0].mailing_address.county #=> String
+    #   resp.items[0].mailing_address.state #=> String
+    #   resp.items[0].mailing_address.province #=> String
+    #   resp.items[0].mailing_address.country #=> String
+    #   resp.items[0].mailing_address.postal_code #=> String
+    #   resp.items[0].billing_address.address_1 #=> String
+    #   resp.items[0].billing_address.address_2 #=> String
+    #   resp.items[0].billing_address.address_3 #=> String
+    #   resp.items[0].billing_address.address_4 #=> String
+    #   resp.items[0].billing_address.city #=> String
+    #   resp.items[0].billing_address.county #=> String
+    #   resp.items[0].billing_address.state #=> String
+    #   resp.items[0].billing_address.province #=> String
+    #   resp.items[0].billing_address.country #=> String
+    #   resp.items[0].billing_address.postal_code #=> String
+    #   resp.items[0].attributes #=> Hash
+    #   resp.items[0].attributes["string1To255"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchProfiles AWS API Documentation
+    #
+    # @overload search_profiles(params = {})
+    # @param [Hash] params ({})
+    def search_profiles(params = {}, options = {})
+      req = build_request(:search_profiles, params)
+      req.send_request(options)
+    end
+
+    # Assigns one or more tags (key-value pairs) to the specified Amazon
+    # Connect Customer Profiles resource. Tags can help you organize and
+    # categorize your resources. You can also use them to scope user
+    # permissions by granting a user permission to access or change only
+    # resources with certain tag values. In Connect Customer Profiles,
+    # domains, profile object types, and integrations can be tagged.
+    #
+    # Tags don't have any semantic meaning to AWS and are interpreted
+    # strictly as strings of characters.
+    #
+    # You can use the TagResource action with a resource that already has
+    # tags. If you specify a new tag key, this tag is appended to the list
+    # of tags associated with the resource. If you specify a tag key that is
+    # already associated with the resource, the new tag value that you
+    # specify replaces the previous value for that tag.
+    #
+    # You can associate as many as 50 tags with a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource that you're adding tags to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TagArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from the specified Amazon Connect Customer
+    # Profiles resource. In Connect Customer Profiles, domains, profile
+    # object types, and integrations can be tagged.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource from which you are removing tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TagArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of a domain, including creating or selecting a
+    # dead letter queue or an encryption key.
+    #
+    # Once a domain is created, the name can’t be changed.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name for the domain.
+    #
+    # @option params [Integer] :default_expiration_days
+    #   The default number of days until the data within the domain expires.
+    #
+    # @option params [String] :default_encryption_key
+    #   The default encryption key, which is an AWS managed key, is used when
+    #   no specific type of encryption key is specified. It is used to encrypt
+    #   all data before it is placed in permanent or semi-permanent storage.
+    #   If specified as an empty string, it will clear any existing value.
+    #
+    # @option params [String] :dead_letter_queue_url
+    #   The URL of the SQS dead letter queue, which is used for reporting
+    #   errors associated with ingesting data from third party applications.
+    #   If specified as an empty string, it will clear any existing value. You
+    #   must set up a policy on the DeadLetterQueue for the SendMessage
+    #   operation to enable Amazon Connect Customer Profiles to send messages
+    #   to the DeadLetterQueue.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::UpdateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDomainResponse#domain_name #domain_name} => String
+    #   * {Types::UpdateDomainResponse#default_expiration_days #default_expiration_days} => Integer
+    #   * {Types::UpdateDomainResponse#default_encryption_key #default_encryption_key} => String
+    #   * {Types::UpdateDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
+    #   * {Types::UpdateDomainResponse#created_at #created_at} => Time
+    #   * {Types::UpdateDomainResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdateDomainResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain({
+    #     domain_name: "name", # required
+    #     default_expiration_days: 1,
+    #     default_encryption_key: "encryptionKey",
+    #     dead_letter_queue_url: "sqsQueueUrl",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.default_expiration_days #=> Integer
+    #   resp.default_encryption_key #=> String
+    #   resp.dead_letter_queue_url #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateDomain AWS API Documentation
+    #
+    # @overload update_domain(params = {})
+    # @param [Hash] params ({})
+    def update_domain(params = {}, options = {})
+      req = build_request(:update_domain, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of a profile. The ProfileId is required for
+    # updating a customer profile.
+    #
+    # When calling the UpdateProfile API, specifying an empty string value
+    # means that any existing value will be removed. Not specifying a string
+    # value means that any value already there will be kept.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of a customer profile.
+    #
+    # @option params [String] :additional_information
+    #   Any additional information relevant to the customer's profile.
+    #
+    # @option params [String] :account_number
+    #   A unique account number that you have given to the customer.
+    #
+    # @option params [String] :party_type
+    #   The type of profile used to describe the customer.
+    #
+    # @option params [String] :business_name
+    #   The name of the customer’s business.
+    #
+    # @option params [String] :first_name
+    #   The customer’s first name.
+    #
+    # @option params [String] :middle_name
+    #   The customer’s middle name.
+    #
+    # @option params [String] :last_name
+    #   The customer’s last name.
+    #
+    # @option params [String] :birth_date
+    #   The customer’s birth date.
+    #
+    # @option params [String] :gender
+    #   The gender with which the customer identifies.
+    #
+    # @option params [String] :phone_number
+    #   The customer's phone number, which has not been specified as a
+    #   mobile, home, or business number.
+    #
+    # @option params [String] :mobile_phone_number
+    #   The customer’s mobile phone number.
+    #
+    # @option params [String] :home_phone_number
+    #   The customer’s home phone number.
+    #
+    # @option params [String] :business_phone_number
+    #   The customer’s business phone number.
+    #
+    # @option params [String] :email_address
+    #   The customer's email address, which has not been specified as a
+    #   personal or business address.
+    #
+    # @option params [String] :personal_email_address
+    #   The customer’s personal email address.
+    #
+    # @option params [String] :business_email_address
+    #   The customer’s business email address.
+    #
+    # @option params [Types::UpdateAddress] :address
+    #   A generic address associated with the customer that is not mailing,
+    #   shipping, or billing.
+    #
+    # @option params [Types::UpdateAddress] :shipping_address
+    #   The customer’s shipping address.
+    #
+    # @option params [Types::UpdateAddress] :mailing_address
+    #   The customer’s mailing address.
+    #
+    # @option params [Types::UpdateAddress] :billing_address
+    #   The customer’s billing address.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   A key value pair of attributes of a customer profile.
+    #
+    # @return [Types::UpdateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProfileResponse#profile_id #profile_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_profile({
+    #     domain_name: "name", # required
+    #     profile_id: "uuid", # required
+    #     additional_information: "string0To1000",
+    #     account_number: "string0To255",
+    #     party_type: "INDIVIDUAL", # accepts INDIVIDUAL, BUSINESS, OTHER
+    #     business_name: "string0To255",
+    #     first_name: "string0To255",
+    #     middle_name: "string0To255",
+    #     last_name: "string0To255",
+    #     birth_date: "string0To255",
+    #     gender: "MALE", # accepts MALE, FEMALE, UNSPECIFIED
+    #     phone_number: "string0To255",
+    #     mobile_phone_number: "string0To255",
+    #     home_phone_number: "string0To255",
+    #     business_phone_number: "string0To255",
+    #     email_address: "string0To255",
+    #     personal_email_address: "string0To255",
+    #     business_email_address: "string0To255",
+    #     address: {
+    #       address_1: "string0To255",
+    #       address_2: "string0To255",
+    #       address_3: "string0To255",
+    #       address_4: "string0To255",
+    #       city: "string0To255",
+    #       county: "string0To255",
+    #       state: "string0To255",
+    #       province: "string0To255",
+    #       country: "string0To255",
+    #       postal_code: "string0To255",
+    #     },
+    #     shipping_address: {
+    #       address_1: "string0To255",
+    #       address_2: "string0To255",
+    #       address_3: "string0To255",
+    #       address_4: "string0To255",
+    #       city: "string0To255",
+    #       county: "string0To255",
+    #       state: "string0To255",
+    #       province: "string0To255",
+    #       country: "string0To255",
+    #       postal_code: "string0To255",
+    #     },
+    #     mailing_address: {
+    #       address_1: "string0To255",
+    #       address_2: "string0To255",
+    #       address_3: "string0To255",
+    #       address_4: "string0To255",
+    #       city: "string0To255",
+    #       county: "string0To255",
+    #       state: "string0To255",
+    #       province: "string0To255",
+    #       country: "string0To255",
+    #       postal_code: "string0To255",
+    #     },
+    #     billing_address: {
+    #       address_1: "string0To255",
+    #       address_2: "string0To255",
+    #       address_3: "string0To255",
+    #       address_4: "string0To255",
+    #       city: "string0To255",
+    #       county: "string0To255",
+    #       state: "string0To255",
+    #       province: "string0To255",
+    #       country: "string0To255",
+    #       postal_code: "string0To255",
+    #     },
+    #     attributes: {
+    #       "string1To255" => "string0To255",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateProfile AWS API Documentation
+    #
+    # @overload update_profile(params = {})
+    # @param [Hash] params ({})
+    def update_profile(params = {}, options = {})
+      req = build_request(:update_profile, params)
+      req.send_request(options)
+    end
+
+    # @!endgroup
+
+    # @param params ({})
+    # @api private
+    def build_request(operation_name, params = {})
+      handlers = @handlers.for(operation_name)
+      context = Seahorse::Client::RequestContext.new(
+        operation_name: operation_name,
+        operation: config.api.operation(operation_name),
+        client: self,
+        params: params,
+        config: config)
+      context[:gem_name] = 'aws-sdk-customerprofiles'
+      context[:gem_version] = '1.0.0'
+      Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # @api private
+    # @deprecated
+    def waiter_names
+      []
+    end
+
+    class << self
+
+      # @api private
+      attr_reader :identifier
+
+      # @api private
+      def errors_module
+        Errors
+      end
+
+    end
+  end
+end

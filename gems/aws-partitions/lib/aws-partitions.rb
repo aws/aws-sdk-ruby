@@ -284,6 +284,7 @@ module Aws
             'ConnectParticipant' => 'participant.connect',
             'CostExplorer' => 'ce',
             'CostandUsageReportService' => 'cur',
+            'CustomerProfiles' => 'profile',
             'DAX' => 'dax',
             'DLM' => 'dlm',
             'DataExchange' => 'dataexchange',
