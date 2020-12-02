@@ -422,7 +422,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon Comprehend                                     | Aws::Comprehend                      | aws-sdk-comprehend                      | 2017-11-27  |
 | Amazon Connect Contact Lens                           | Aws::ConnectContactLens              | aws-sdk-connectcontactlens              | 2020-08-21  |
 | Amazon Connect Customer Profiles                      | Aws::CustomerProfiles                | aws-sdk-customerprofiles                | 2020-08-15  |
-| Amazon Connect Customer Profiles                      | Aws::Profile                         | aws-sdk-profile                         | 2020-08-15  |
 | Amazon Connect Participant Service                    | Aws::ConnectParticipant              | aws-sdk-connectparticipant              | 2018-09-07  |
 | Amazon Connect Service                                | Aws::Connect                         | aws-sdk-connect                         | 2017-08-08  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                             | aws-sdk-dlm                             | 2018-01-12  |
