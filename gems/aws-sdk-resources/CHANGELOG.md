@@ -4,8 +4,6 @@ Unreleased Changes
 3.90.0 (2020-12-02)
 ------------------
 
-* Feature - Added a dependency on the new `aws-sdk-profile` gem.
-
 * Feature - Added a dependency on the new `aws-sdk-customerprofiles` gem.
 
 3.89.1 (2020-12-01)
