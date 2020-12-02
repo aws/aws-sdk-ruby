@@ -659,6 +659,7 @@ module Aws::S3
     #   * {Types::CompleteMultipartUploadOutput#server_side_encryption #server_side_encryption} => String
     #   * {Types::CompleteMultipartUploadOutput#version_id #version_id} => String
     #   * {Types::CompleteMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::CompleteMultipartUploadOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::CompleteMultipartUploadOutput#request_charged #request_charged} => String
     #
     #
@@ -720,6 +721,7 @@ module Aws::S3
     #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
     #   resp.version_id #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUpload AWS API Documentation
@@ -830,22 +832,20 @@ module Aws::S3
     #
     #  </note>
     #
-    # **Encryption**
+    # **Server-side encryption**
     #
-    # The source object that you are copying can be encrypted or
-    # unencrypted. The source object can be encrypted with server-side
-    # encryption using AWS managed encryption keys (SSE-S3 or SSE-KMS) or by
-    # using a customer-provided encryption key. With server-side encryption,
-    # Amazon S3 encrypts your data as it writes it to disks in its data
-    # centers and decrypts the data when you access it.
+    # When you perform a CopyObject operation, you can optionally use the
+    # appropriate encryption-related headers to encrypt the object using
+    # server-side encryption with AWS managed encryption keys (SSE-S3 or
+    # SSE-KMS) or a customer-provided encryption key. With server-side
+    # encryption, Amazon S3 encrypts your data as it writes it to disks in
+    # its data centers and decrypts the data when you access it. For more
+    # information about server-side encryption, see [Using Server-Side
+    # Encryption][8].
     #
-    # You can optionally use the appropriate encryption-related headers to
-    # request server-side encryption for the target object. You have the
-    # option to provide your own encryption key or use SSE-S3 or SSE-KMS,
-    # regardless of the form of server-side encryption that was used to
-    # encrypt the source object. You can even request encryption if the
-    # source object was not encrypted. For more information about
-    # server-side encryption, see [Using Server-Side Encryption][8].
+    # If a target object uses SSE-KMS, you can enable an S3 Bucket Key for
+    # the object. For more information, see [Amazon S3 Bucket Keys][9] in
+    # the *Amazon Simple Storage Service Developer Guide*.
     #
     # **Access Control List (ACL)-Specific Request Headers**
     #
@@ -855,13 +855,13 @@ module Aws::S3
     # permissions to individual AWS accounts or to predefined groups defined
     # by Amazon S3. These permissions are then added to the ACL on the
     # object. For more information, see [Access Control List (ACL)
-    # Overview][9] and [Managing ACLs Using the REST API][10].
+    # Overview][10] and [Managing ACLs Using the REST API][11].
     #
     # **Storage Class Options**
     #
     # You can use the `CopyObject` operation to change the storage class of
     # an object that is already stored in Amazon S3 using the `StorageClass`
-    # parameter. For more information, see [Storage Classes][11] in the
+    # parameter. For more information, see [Storage Classes][12] in the
     # *Amazon S3 Service Developer Guide*.
     #
     # **Versioning**
@@ -882,15 +882,15 @@ module Aws::S3
     #
     # If the source object's storage class is GLACIER, you must restore a
     # copy of this object before you can use it as a source object for the
-    # copy operation. For more information, see [RestoreObject][12].
+    # copy operation. For more information, see [RestoreObject][13].
     #
     # The following operations are related to `CopyObject`\:
     #
-    # * [PutObject][13]
+    # * [PutObject][14]
     #
-    # * [GetObject][14]
+    # * [GetObject][15]
     #
-    # For more information, see [Copying Objects][15].
+    # For more information, see [Copying Objects][16].
     #
     #
     #
@@ -902,13 +902,14 @@ module Aws::S3
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
-    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
-    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
@@ -1109,6 +1110,15 @@ module Aws::S3
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
     #
+    # @option params [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a COPY operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
+    #
     # @option params [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
     #   example, AES256).
@@ -1170,6 +1180,7 @@ module Aws::S3
     #   * {Types::CopyObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::CopyObjectOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::CopyObjectOutput#ssekms_encryption_context #ssekms_encryption_context} => String
+    #   * {Types::CopyObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::CopyObjectOutput#request_charged #request_charged} => String
     #
     #
@@ -1225,6 +1236,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -1249,6 +1261,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.ssekms_encryption_context #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObject AWS API Documentation
@@ -1405,19 +1418,6 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
-    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -1432,6 +1432,19 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1827,6 +1840,15 @@ module Aws::S3
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
     #
+    # @option params [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an object operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
+    #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -1870,6 +1892,7 @@ module Aws::S3
     #   * {Types::CreateMultipartUploadOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::CreateMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::CreateMultipartUploadOutput#ssekms_encryption_context #ssekms_encryption_context} => String
+    #   * {Types::CreateMultipartUploadOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::CreateMultipartUploadOutput#request_charged #request_charged} => String
     #
     #
@@ -1916,6 +1939,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1936,6 +1960,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.ssekms_encryption_context #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload AWS API Documentation
@@ -2929,6 +2954,21 @@ module Aws::S3
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
     #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To remove tag set from an object version
     #
     #   # The following example removes tag set associated with the specified object version. The request specifies both the
@@ -2943,21 +2983,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3097,42 +3122,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -3165,6 +3154,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -3614,6 +3639,7 @@ module Aws::S3
     #   resp.server_side_encryption_configuration.rules #=> Array
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:kms"
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #   resp.server_side_encryption_configuration.rules[0].bucket_key_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryption AWS API Documentation
     #
@@ -4705,6 +4731,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].source_selection_criteria.replica_modifications.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].existing_object_replication.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.account #=> String
@@ -5333,6 +5360,7 @@ module Aws::S3
     #   * {Types::GetObjectOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::GetObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::GetObjectOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::GetObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::GetObjectOutput#storage_class #storage_class} => String
     #   * {Types::GetObjectOutput#request_charged #request_charged} => String
     #   * {Types::GetObjectOutput#replication_status #replication_status} => String
@@ -5342,6 +5370,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_retain_until_date #object_lock_retain_until_date} => Time
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
+    #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
     #
     # @example Example: To retrieve a byte range of an object 
     #
@@ -5364,28 +5414,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -5470,6 +5498,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
@@ -6443,6 +6472,7 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::HeadObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::HeadObjectOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::HeadObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::HeadObjectOutput#storage_class #storage_class} => String
     #   * {Types::HeadObjectOutput#request_charged #request_charged} => String
     #   * {Types::HeadObjectOutput#replication_status #replication_status} => String
@@ -6518,6 +6548,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
@@ -8669,14 +8700,17 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # This implementation of the `PUT` operation uses the `encryption`
-    # subresource to set the default encryption state of an existing bucket.
+    # This operation uses the `encryption` subresource to configure default
+    # encryption and Amazon S3 Bucket Key for an existing bucket.
     #
-    # This implementation of the `PUT` operation sets default encryption for
-    # a bucket using server-side encryption with Amazon S3-managed keys
-    # SSE-S3 or AWS KMS customer master keys (CMKs) (SSE-KMS). For
-    # information about the Amazon S3 default encryption feature, see
-    # [Amazon S3 Default Bucket Encryption][1].
+    # Default encryption for a bucket can use server-side encryption with
+    # Amazon S3-managed keys (SSE-S3) or AWS KMS customer master keys
+    # (SSE-KMS). If you specify default encryption using SSE-KMS, you can
+    # also configure Amazon S3 Bucket Key. For information about default
+    # encryption, see [Amazon S3 default bucket encryption][1] in the
+    # *Amazon Simple Storage Service Developer Guide*. For more information
+    # about S3 Bucket Keys, see [Amazon S3 Bucket Keys][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     # This operation requires AWS Signature Version 4. For more information,
     # see [ Authenticating Requests (AWS Signature Version
@@ -8686,23 +8720,24 @@ module Aws::S3
     # `s3:PutEncryptionConfiguration` action. The bucket owner has this
     # permission by default. The bucket owner can grant this permission to
     # others. For more information about permissions, see [Permissions
-    # Related to Bucket Subresource Operations][2] and [Managing Access
-    # Permissions to Your Amazon S3 Resources][3] in the Amazon Simple
+    # Related to Bucket Subresource Operations][3] and [Managing Access
+    # Permissions to Your Amazon S3 Resources][4] in the Amazon Simple
     # Storage Service Developer Guide.
     #
     # **Related Resources**
     #
-    # * [GetBucketEncryption][4]
+    # * [GetBucketEncryption][5]
     #
-    # * [DeleteBucketEncryption][5]
+    # * [DeleteBucketEncryption][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
     #
     # @option params [required, String] :bucket
     #   Specifies default encryption for a bucket using server-side encryption
@@ -8744,6 +8779,7 @@ module Aws::S3
     #             sse_algorithm: "AES256", # required, accepts AES256, aws:kms
     #             kms_master_key_id: "SSEKMSKeyId",
     #           },
+    #           bucket_key_enabled: false,
     #         },
     #       ],
     #     },
@@ -9931,15 +9967,15 @@ module Aws::S3
     #
     # Specify the replication configuration in the request body. In the
     # replication configuration, you provide the name of the destination
-    # bucket where you want Amazon S3 to replicate objects, the IAM role
-    # that Amazon S3 can assume to replicate objects on your behalf, and
-    # other relevant information.
+    # bucket or buckets where you want Amazon S3 to replicate objects, the
+    # IAM role that Amazon S3 can assume to replicate objects on your
+    # behalf, and other relevant information.
     #
     # A replication configuration must include at least one rule, and can
     # contain a maximum of 1,000. Each rule identifies a subset of objects
     # to replicate by filtering the objects in the source bucket. To choose
     # additional subsets of objects to replicate, add a rule for each
-    # subset. All rules must specify the same destination bucket.
+    # subset.
     #
     # To specify a subset of the objects in the source bucket to apply a
     # replication rule to, add the Filter element as a child of the Rule
@@ -10078,6 +10114,9 @@ module Aws::S3
     #           status: "Enabled", # required, accepts Enabled, Disabled
     #           source_selection_criteria: {
     #             sse_kms_encrypted_objects: {
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #             replica_modifications: {
     #               status: "Enabled", # required, accepts Enabled, Disabled
     #             },
     #           },
@@ -10647,8 +10686,13 @@ module Aws::S3
     # encryption, Amazon S3 encrypts your data as it writes it to disks in
     # its data centers and decrypts the data when you access it. You have
     # the option to provide your own encryption key or use AWS managed
-    # encryption keys. For more information, see [Using Server-Side
-    # Encryption][2].
+    # encryption keys (SSE-S3 or SSE-KMS). For more information, see [Using
+    # Server-Side Encryption][2].
+    #
+    # If you request server-side encryption using AWS Key Management Service
+    # (SSE-KMS), you can enable an S3 Bucket Key at the object-level. For
+    # more information, see [Amazon S3 Bucket Keys][3] in the *Amazon Simple
+    # Storage Service Developer Guide*.
     #
     # **Access Control List (ACL)-Specific Request Headers**
     #
@@ -10657,8 +10701,8 @@ module Aws::S3
     # adding a new object, you can grant permissions to individual AWS
     # accounts or to predefined groups defined by Amazon S3. These
     # permissions are then added to the ACL on the object. For more
-    # information, see [Access Control List (ACL) Overview][3] and [Managing
-    # ACLs Using the REST API][4].
+    # information, see [Access Control List (ACL) Overview][4] and [Managing
+    # ACLs Using the REST API][5].
     #
     # **Storage Class Options**
     #
@@ -10666,7 +10710,7 @@ module Aws::S3
     # created objects. The STANDARD storage class provides high durability
     # and high availability. Depending on performance needs, you can specify
     # a different Storage Class. Amazon S3 on Outposts only uses the
-    # OUTPOSTS Storage Class. For more information, see [Storage Classes][5]
+    # OUTPOSTS Storage Class. For more information, see [Storage Classes][6]
     # in the *Amazon S3 Service Developer Guide*.
     #
     # **Versioning**
@@ -10678,26 +10722,27 @@ module Aws::S3
     # object simultaneously, it stores all of the objects.
     #
     # For more information about versioning, see [Adding Objects to
-    # Versioning Enabled Buckets][6]. For information about returning the
-    # versioning state of a bucket, see [GetBucketVersioning][7].
+    # Versioning Enabled Buckets][7]. For information about returning the
+    # versioning state of a bucket, see [GetBucketVersioning][8].
     #
     # **Related Resources**
     #
-    # * [CopyObject][8]
+    # * [CopyObject][9]
     #
-    # * [DeleteObject][9]
+    # * [DeleteObject][10]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
@@ -10911,6 +10956,15 @@ module Aws::S3
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
     #
+    # @option params [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a PUT operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
+    #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -10955,8 +11009,26 @@ module Aws::S3
     #   * {Types::PutObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::PutObjectOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::PutObjectOutput#ssekms_encryption_context #ssekms_encryption_context} => String
+    #   * {Types::PutObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
     #
     # @example Example: To upload an object and specify canned ACL.
     #
@@ -10976,22 +11048,24 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To upload an object (specify optional headers)
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
     #
     #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -11051,41 +11125,22 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
-    # @example Example: To upload an object
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Streaming a file from disk
@@ -11124,6 +11179,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -11142,6 +11198,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.ssekms_encryption_context #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObject AWS API Documentation
@@ -13053,6 +13110,7 @@ module Aws::S3
     #   * {Types::UploadPartOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::UploadPartOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::UploadPartOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::UploadPartOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::UploadPartOutput#request_charged #request_charged} => String
     #
     #
@@ -13098,6 +13156,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPart AWS API Documentation
@@ -13403,8 +13462,29 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::UploadPartCopyOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::UploadPartCopyOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::UploadPartCopyOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
     #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
@@ -13425,26 +13505,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -13481,6 +13541,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopy AWS API Documentation
@@ -13505,7 +13566,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

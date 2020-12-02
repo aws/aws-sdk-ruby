@@ -224,6 +224,13 @@ module Aws::S3
       data[:ssekms_key_id]
     end
 
+    # Indicates whether the object uses an S3 Bucket Key for server-side
+    # encryption with AWS KMS (SSE-KMS).
+    # @return [Boolean]
+    def bucket_key_enabled
+      data[:bucket_key_enabled]
+    end
+
     # Provides storage class information of the object. Amazon S3 returns
     # this header for all objects except for S3 Standard storage class
     # objects.
@@ -246,12 +253,12 @@ module Aws::S3
     end
 
     # Amazon S3 can return this header if your request involves a bucket
-    # that is either a source or destination in a replication rule.
+    # that is either a source or a destination in a replication rule.
     #
     # In replication, you have a source bucket on which you configure
-    # replication and destination bucket where Amazon S3 stores object
-    # replicas. When you request an object (`GetObject`) or object metadata
-    # (`HeadObject`) from these buckets, Amazon S3 will return the
+    # replication and destination bucket or buckets where Amazon S3 stores
+    # object replicas. When you request an object (`GetObject`) or object
+    # metadata (`HeadObject`) from these buckets, Amazon S3 will return the
     # `x-amz-replication-status` header in the response as follows:
     #
     # * If requesting an object from the source bucket — Amazon S3 will
@@ -267,9 +274,18 @@ module Aws::S3
     #   value PENDING, COMPLETED or FAILED indicating object replication
     #   status.
     #
-    # * If requesting an object from the destination bucket — Amazon S3 will
+    # * If requesting an object from a destination bucket — Amazon S3 will
     #   return the `x-amz-replication-status` header with value REPLICA if
-    #   the object in your request is a replica that Amazon S3 created.
+    #   the object in your request is a replica that Amazon S3 created and
+    #   there is no replica modification replication in progress.
+    #
+    # * When replicating objects to multiple destination buckets the
+    #   `x-amz-replication-status` header acts differently. The header of
+    #   the source object will only return a value of COMPLETED when
+    #   replication is successful to all destinations. The header will
+    #   remain at value PENDING until replication has completed for all
+    #   destinations. If one or more destinations fails replication the
+    #   header will return FAILED.
     #
     # For more information, see [Replication][1].
     #
@@ -543,6 +559,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -699,6 +716,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a COPY operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
     #   example, AES256).
@@ -922,6 +947,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1013,6 +1039,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an object operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -1081,6 +1115,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1250,6 +1285,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a PUT operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their

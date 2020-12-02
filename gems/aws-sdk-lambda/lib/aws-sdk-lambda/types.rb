@@ -420,9 +420,9 @@ module Aws::Lambda
     # @!attribute [rw] untrusted_artifact_on_deployment
     #   Code signing configuration policy for deployment validation failure.
     #   If you set the policy to `Enforce`, Lambda blocks the deployment
-    #   request if code-signing validation checks fail. If you set the
-    #   policy to `Warn`, Lambda allows the deployment and creates a
-    #   CloudWatch log.
+    #   request if signature validation checks fail. If you set the policy
+    #   to `Warn`, Lambda allows the deployment and creates a CloudWatch
+    #   log.
     #
     #   Default value: `Warn`
     #   @return [String]
@@ -780,14 +780,15 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         role: "RoleArn", # required
-    #         handler: "Handler", # required
+    #         handler: "Handler",
     #         code: { # required
     #           zip_file: "data",
     #           s3_bucket: "S3Bucket",
     #           s3_key: "S3Key",
     #           s3_object_version: "S3ObjectVersion",
+    #           image_uri: "String",
     #         },
     #         description: "Description",
     #         timeout: 1,
@@ -797,6 +798,7 @@ module Aws::Lambda
     #           subnet_ids: ["SubnetId"],
     #           security_group_ids: ["SecurityGroupId"],
     #         },
+    #         package_type: "Zip", # accepts Zip, Image
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },
@@ -819,6 +821,11 @@ module Aws::Lambda
     #             local_mount_path: "LocalMountPath", # required
     #           },
     #         ],
+    #         image_config: {
+    #           entry_point: ["String"],
+    #           command: ["String"],
+    #           working_directory: "WorkingDirectory",
+    #         },
     #         code_signing_config_arn: "CodeSigningConfigArn",
     #       }
     #
@@ -897,6 +904,11 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] package_type
+    #   The type of deployment package. Set to `Image` for container image
+    #   and set `Zip` for ZIP archive.
+    #   @return [String]
+    #
     # @!attribute [rw] dead_letter_config
     #   A dead letter queue configuration that specifies the queue or topic
     #   where Lambda sends asynchronous events when they fail processing.
@@ -944,10 +956,14 @@ module Aws::Lambda
     #   Connection settings for an Amazon EFS file system.
     #   @return [Array<Types::FileSystemConfig>]
     #
+    # @!attribute [rw] image_config
+    #   Configuration values that override the container image Dockerfile.
+    #   @return [Types::ImageConfig]
+    #
     # @!attribute [rw] code_signing_config_arn
     #   To enable code signing for this function, specify the ARN of a
-    #   code-signing configuration. A code-signing configuration includes
-    #   set set of signing profiles, which define the trusted publishers for
+    #   code-signing configuration. A code-signing configuration includes a
+    #   set of signing profiles, which define the trusted publishers for
     #   this function.
     #   @return [String]
     #
@@ -964,6 +980,7 @@ module Aws::Lambda
       :memory_size,
       :publish,
       :vpc_config,
+      :package_type,
       :dead_letter_config,
       :environment,
       :kms_key_arn,
@@ -971,6 +988,7 @@ module Aws::Lambda
       :tags,
       :layers,
       :file_system_configs,
+      :image_config,
       :code_signing_config_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -1692,7 +1710,8 @@ module Aws::Lambda
     end
 
     # The code for the Lambda function. You can specify either an object in
-    # Amazon S3, or upload a deployment package directly.
+    # Amazon S3, upload a ZIP archive deployment package directly, or
+    # specify the URI of a container image.
     #
     # @note When making an API call, you may pass FunctionCode
     #   data as a hash:
@@ -1702,6 +1721,7 @@ module Aws::Lambda
     #         s3_bucket: "S3Bucket",
     #         s3_key: "S3Key",
     #         s3_object_version: "S3ObjectVersion",
+    #         image_uri: "String",
     #       }
     #
     # @!attribute [rw] zip_file
@@ -1723,13 +1743,18 @@ module Aws::Lambda
     #   to use.
     #   @return [String]
     #
+    # @!attribute [rw] image_uri
+    #   URI of a container image in the Amazon ECR registry.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode AWS API Documentation
     #
     class FunctionCode < Struct.new(
       :zip_file,
       :s3_bucket,
       :s3_key,
-      :s3_object_version)
+      :s3_object_version,
+      :image_uri)
       SENSITIVE = [:zip_file]
       include Aws::Structure
     end
@@ -1744,11 +1769,21 @@ module Aws::Lambda
     #   A presigned URL that you can use to download the deployment package.
     #   @return [String]
     #
+    # @!attribute [rw] image_uri
+    #   URI of a container image in the Amazon ECR registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_image_uri
+    #   The resolved URI for the image.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation AWS API Documentation
     #
     class FunctionCodeLocation < Struct.new(
       :repository_type,
-      :location)
+      :location,
+      :image_uri,
+      :resolved_image_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1879,6 +1914,15 @@ module Aws::Lambda
     #   Connection settings for an Amazon EFS file system.
     #   @return [Array<Types::FileSystemConfig>]
     #
+    # @!attribute [rw] package_type
+    #   The type of deployment package. Set to `Image` for container image
+    #   and set `Zip` for ZIP archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_config_response
+    #   The function's image configuration values.
+    #   @return [Types::ImageConfigResponse]
+    #
     # @!attribute [rw] signing_profile_version_arn
     #   The ARN of the signing profile version.
     #   @return [String]
@@ -1917,6 +1961,8 @@ module Aws::Lambda
       :last_update_status_reason,
       :last_update_status_reason_code,
       :file_system_configs,
+      :package_type,
+      :image_config_response,
       :signing_profile_version_arn,
       :signing_job_arn)
       SENSITIVE = []
@@ -2609,6 +2655,83 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration values that override the container image Dockerfile. See
+    # [Override Container settings][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html
+    #
+    # @note When making an API call, you may pass ImageConfig
+    #   data as a hash:
+    #
+    #       {
+    #         entry_point: ["String"],
+    #         command: ["String"],
+    #         working_directory: "WorkingDirectory",
+    #       }
+    #
+    # @!attribute [rw] entry_point
+    #   Specifies the entry point to their application, which is typically
+    #   the location of the runtime executable.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] command
+    #   Specifies parameters that you want to pass in with ENTRYPOINT.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] working_directory
+    #   Specifies the working directory.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ImageConfig AWS API Documentation
+    #
+    class ImageConfig < Struct.new(
+      :entry_point,
+      :command,
+      :working_directory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error response to GetFunctionConfiguration.
+    #
+    # @!attribute [rw] error_code
+    #   Error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ImageConfigError AWS API Documentation
+    #
+    class ImageConfigError < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # Response to GetFunctionConfiguration request.
+    #
+    # @!attribute [rw] image_config
+    #   Configuration values that override the container image Dockerfile.
+    #   @return [Types::ImageConfig]
+    #
+    # @!attribute [rw] error
+    #   Error response to GetFunctionConfiguration.
+    #   @return [Types::ImageConfigError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ImageConfigResponse AWS API Documentation
+    #
+    class ImageConfigResponse < Struct.new(
+      :image_config,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5052,6 +5175,7 @@ module Aws::Lambda
     #         s3_bucket: "S3Bucket",
     #         s3_key: "S3Key",
     #         s3_object_version: "S3ObjectVersion",
+    #         image_uri: "String",
     #         publish: false,
     #         dry_run: false,
     #         revision_id: "String",
@@ -5092,6 +5216,10 @@ module Aws::Lambda
     #   to use.
     #   @return [String]
     #
+    # @!attribute [rw] image_uri
+    #   URI of a container image in the Amazon ECR registry.
+    #   @return [String]
+    #
     # @!attribute [rw] publish
     #   Set to true to publish a new version of the function after updating
     #   the code. This has the same effect as calling PublishVersion
@@ -5117,6 +5245,7 @@ module Aws::Lambda
       :s3_bucket,
       :s3_key,
       :s3_object_version,
+      :image_uri,
       :publish,
       :dry_run,
       :revision_id)
@@ -5159,6 +5288,11 @@ module Aws::Lambda
     #             local_mount_path: "LocalMountPath", # required
     #           },
     #         ],
+    #         image_config: {
+    #           entry_point: ["String"],
+    #           command: ["String"],
+    #           working_directory: "WorkingDirectory",
+    #         },
     #       }
     #
     # @!attribute [rw] function_name
@@ -5272,6 +5406,10 @@ module Aws::Lambda
     #   Connection settings for an Amazon EFS file system.
     #   @return [Array<Types::FileSystemConfig>]
     #
+    # @!attribute [rw] image_config
+    #   Configuration values that override the container image Dockerfile.
+    #   @return [Types::ImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -5289,7 +5427,8 @@ module Aws::Lambda
       :tracing_config,
       :revision_id,
       :layers,
-      :file_system_configs)
+      :file_system_configs,
+      :image_config)
       SENSITIVE = []
       include Aws::Structure
     end

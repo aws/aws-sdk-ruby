@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.213.0 (2020-12-01)
+------------------
+
+* Feature - This release adds support for: EBS gp3 volumes; and D3/D3en/R5b/M5zn instances powered by Intel Cascade Lake CPUs
+
 1.212.0 (2020-12-01)
 ------------------
 

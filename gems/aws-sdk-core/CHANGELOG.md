@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Issue - Support `aws-sdk-sts` alias gem.
 
+* Issue - Retry when `Net:HTTPFatalError` is thrown by the `Net::HTTP` library. This can occur when proxy connections are configured. (#2439)
+
 3.109.3 (2020-11-17)
 ------------------
 

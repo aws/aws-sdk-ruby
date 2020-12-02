@@ -322,7 +322,7 @@ module Aws::EC2
     #   omit this parameter. Encrypted snapshots are encrypted, even if you
     #   omit this parameter and encryption by default is not enabled. You
     #   cannot set this parameter to false. For more information, see [Amazon
-    #   EBS Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   EBS encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -351,7 +351,7 @@ module Aws::EC2
     # @option options [String] :presigned_url
     #   When you copy an encrypted source snapshot using the Amazon EC2 Query
     #   API, you must supply a pre-signed URL. This parameter is optional for
-    #   unencrypted snapshots. For more information, see [Query Requests][1].
+    #   unencrypted snapshots. For more information, see [Query requests][1].
     #
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,
@@ -359,8 +359,8 @@ module Aws::EC2
     #   `PresignedUrl` must be signed using AWS Signature Version 4. Because
     #   EBS snapshots are stored in Amazon S3, the signing algorithm for this
     #   parameter uses the same logic that is described in [Authenticating
-    #   Requests by Using Query Parameters (AWS Signature Version 4)][2] in
-    #   the *Amazon Simple Storage Service API Reference*. An invalid or
+    #   Requests: Using Query Parameters (AWS Signature Version 4)][2] in the
+    #   *Amazon Simple Storage Service API Reference*. An invalid or
     #   improperly signed `PresignedUrl` will cause the copy operation to fail
     #   asynchronously, and the snapshot will move to an `error` state.
     #

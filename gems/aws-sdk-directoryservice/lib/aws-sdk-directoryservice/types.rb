@@ -343,6 +343,15 @@ module Aws::DirectoryService
     #   The date and time when the certificate will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] type
+    #   Select `ClientCertAuth` for smart card integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_cert_auth_settings
+    #   Provides information about the client certificate authentication
+    #   settings. The default value is `ClientLDAPS`.
+    #   @return [Types::ClientCertAuthSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Certificate AWS API Documentation
     #
     class Certificate < Struct.new(
@@ -351,7 +360,9 @@ module Aws::DirectoryService
       :state_reason,
       :common_name,
       :registered_date_time,
-      :expiry_date_time)
+      :expiry_date_time,
+      :type,
+      :client_cert_auth_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -433,13 +444,18 @@ module Aws::DirectoryService
     #   The date and time when the certificate will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] type
+    #   Displays the type of certificate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateInfo AWS API Documentation
     #
     class CertificateInfo < Struct.new(
       :certificate_id,
       :common_name,
       :state,
-      :expiry_date_time)
+      :expiry_date_time,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -460,6 +476,29 @@ module Aws::DirectoryService
     class CertificateLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the client certificate authentication
+    # settings, such as `ClientLDAPS` or `ClientCertAuth`.
+    #
+    # @note When making an API call, you may pass ClientCertAuthSettings
+    #   data as a hash:
+    #
+    #       {
+    #         ocsp_url: "OCSPUrl",
+    #       }
+    #
+    # @!attribute [rw] ocsp_url
+    #   Specifies the URL of the default OCSP server used to check for
+    #   revocation status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ClientCertAuthSettings AWS API Documentation
+    #
+    class ClientCertAuthSettings < Struct.new(
+      :ocsp_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1718,7 +1757,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The *DescribeRegionsResult.NextToken* value from a previous call to
+    #   The `DescribeRegionsResult.NextToken` value from a previous call to
     #   DescribeRegions. Pass null if this is the first call.
     #   @return [String]
     #
@@ -1733,13 +1772,13 @@ module Aws::DirectoryService
     end
 
     # @!attribute [rw] regions_description
-    #   List of regional information related to the directory per replicated
-    #   Region.
+    #   List of Region information related to the directory for each
+    #   replicated Region.
     #   @return [Array<Types::RegionDescription>]
     #
     # @!attribute [rw] next_token
     #   If not null, more results are available. Pass this value for the
-    #   *NextToken* parameter in a subsequent call to DescribeRegions to
+    #   `NextToken` parameter in a subsequent call to DescribeRegions to
     #   retrieve the next set of items.
     #   @return [String]
     #
@@ -2437,6 +2476,36 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableClientAuthenticationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "SmartCard", # required, accepts SmartCard
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Disable client authentication in a specified directory for smart
+    #   cards.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Disable the type of client authentication request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthenticationRequest AWS API Documentation
+    #
+    class DisableClientAuthenticationRequest < Struct.new(
+      :directory_id,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthenticationResult AWS API Documentation
+    #
+    class DisableClientAuthenticationResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisableLDAPSRequest
     #   data as a hash:
     #
@@ -2624,6 +2693,36 @@ module Aws::DirectoryService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass EnableClientAuthenticationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "SmartCard", # required, accepts SmartCard
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Enable client authentication in a specified directory for smart
+    #   cards.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Enable the type of client authentication request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthenticationRequest AWS API Documentation
+    #
+    class EnableClientAuthenticationRequest < Struct.new(
+      :directory_id,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthenticationResult AWS API Documentation
+    #
+    class EnableClientAuthenticationResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass EnableLDAPSRequest
     #   data as a hash:
@@ -2915,6 +3014,25 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidCertificateException AWS API Documentation
     #
     class InvalidCertificateException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The client authorization was invalid.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidClientAuthStatusException AWS API Documentation
+    #
+    class InvalidClientAuthStatusException < Struct.new(
       :message,
       :request_id)
       SENSITIVE = []
@@ -3571,7 +3689,7 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # The replicated regional information for a directory.
+    # The replicated Region information for a directory.
     #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
@@ -3582,7 +3700,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] region_type
-    #   Specifies if the Region is the primary Region or an additional
+    #   Specifies whether the Region is the primary Region or an additional
     #   Region.
     #   @return [String]
     #
@@ -3628,7 +3746,7 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # You have reached the limit for maximum number of simultaneous region
+    # You have reached the limit for maximum number of simultaneous Region
     # replications per directory.
     #
     # @!attribute [rw] message
@@ -3652,7 +3770,7 @@ module Aws::DirectoryService
     # multi-Region replication.
     #
     # @!attribute [rw] primary_region
-    #   The Region from where the AWS Managed Microsoft AD directory was
+    #   The Region where the AWS Managed Microsoft AD directory was
     #   originally created.
     #   @return [String]
     #
@@ -3676,6 +3794,10 @@ module Aws::DirectoryService
     #       {
     #         directory_id: "DirectoryId", # required
     #         certificate_data: "CertificateData", # required
+    #         type: "ClientCertAuth", # accepts ClientCertAuth, ClientLDAPS
+    #         client_cert_auth_settings: {
+    #           ocsp_url: "OCSPUrl",
+    #         },
     #       }
     #
     # @!attribute [rw] directory_id
@@ -3686,11 +3808,22 @@ module Aws::DirectoryService
     #   The certificate PEM string that needs to be registered.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The certificate type to register for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_cert_auth_settings
+    #   Contains information about the client certificate authentication
+    #   settings, such as `ClientLDAPS` or `ClientCertAuth`.
+    #   @return [Types::ClientCertAuthSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificateRequest AWS API Documentation
     #
     class RegisterCertificateRequest < Struct.new(
       :directory_id,
-      :certificate_data)
+      :certificate_data,
+      :type,
+      :client_cert_auth_settings)
       SENSITIVE = []
       include Aws::Structure
     end

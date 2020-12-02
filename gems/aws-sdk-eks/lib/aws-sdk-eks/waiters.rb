@@ -69,12 +69,101 @@ module Aws::EKS
   #
   # | waiter_name       | params                      | :delay   | :max_attempts |
   # | ----------------- | --------------------------- | -------- | ------------- |
+  # | addon_active      | {Client#describe_addon}     | 10       | 60            |
+  # | addon_deleted     | {Client#describe_addon}     | 10       | 60            |
   # | cluster_active    | {Client#describe_cluster}   | 30       | 40            |
   # | cluster_deleted   | {Client#describe_cluster}   | 30       | 40            |
   # | nodegroup_active  | {Client#describe_nodegroup} | 30       | 80            |
   # | nodegroup_deleted | {Client#describe_nodegroup} | 30       | 40            |
   #
   module Waiters
+
+    class AddonActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_addon,
+            acceptors: [
+              {
+                "expected" => "CREATE_FAILED",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "addon.status"
+              },
+              {
+                "expected" => "ACTIVE",
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "addon.status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_addon)
+      # @return (see Client#describe_addon)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class AddonDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_addon,
+            acceptors: [
+              {
+                "expected" => "DELETE_FAILED",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "addon.status"
+              },
+              {
+                "expected" => "ResourceNotFoundException",
+                "matcher" => "error",
+                "state" => "success"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_addon)
+      # @return (see Client#describe_addon)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class ClusterActive
 

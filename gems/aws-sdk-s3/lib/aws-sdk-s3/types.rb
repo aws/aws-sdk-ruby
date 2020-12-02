@@ -459,7 +459,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   Date the bucket was created.
+    #   Date the bucket was created. This date can change when making
+    #   changes to your bucket, such as editing its bucket policy.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Bucket AWS API Documentation
@@ -973,6 +974,11 @@ module Aws::S3
     #   used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the multipart upload uses an S3 Bucket Key for
+    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -989,6 +995,7 @@ module Aws::S3
       :server_side_encryption,
       :version_id,
       :ssekms_key_id,
+      :bucket_key_enabled,
       :request_charged)
       SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
@@ -1213,6 +1220,11 @@ module Aws::S3
     #   pairs.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the copied object uses an S3 Bucket Key for
+    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -1230,6 +1242,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :ssekms_encryption_context,
+      :bucket_key_enabled,
       :request_charged)
       SENSITIVE = [:ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
@@ -1270,6 +1283,7 @@ module Aws::S3
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
     #         ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #         bucket_key_enabled: false,
     #         copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #         copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #         copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -1513,6 +1527,16 @@ module Aws::S3
     #   string holding JSON with the encryption context key-value pairs.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
+    #   Key for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a COPY operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object
     #   (for example, AES256).
@@ -1606,6 +1630,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :ssekms_encryption_context,
+      :bucket_key_enabled,
       :copy_source_sse_customer_algorithm,
       :copy_source_sse_customer_key,
       :copy_source_sse_customer_key_md5,
@@ -1859,6 +1884,11 @@ module Aws::S3
     #   pairs.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the multipart upload uses an S3 Bucket Key for
+    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -1877,6 +1907,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :ssekms_encryption_context,
+      :bucket_key_enabled,
       :request_charged)
       SENSITIVE = [:ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
@@ -1910,6 +1941,7 @@ module Aws::S3
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
     #         ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #         bucket_key_enabled: false,
     #         request_payer: "requester", # accepts requester
     #         tagging: "TaggingHeader",
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -2074,6 +2106,16 @@ module Aws::S3
     #   string holding JSON with the encryption context key-value pairs.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
+    #   Key for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an object operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -2136,6 +2178,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :ssekms_encryption_context,
+      :bucket_key_enabled,
       :request_payer,
       :tagging,
       :object_lock_mode,
@@ -5370,6 +5413,11 @@ module Aws::S3
     #   used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the object uses an S3 Bucket Key for server-side
+    #   encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] storage_class
     #   Provides storage class information of the object. Amazon S3 returns
     #   this header for all objects except for S3 Standard storage class
@@ -5435,6 +5483,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :bucket_key_enabled,
       :storage_class,
       :request_charged,
       :replication_status,
@@ -6222,6 +6271,11 @@ module Aws::S3
     #   used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the object uses an S3 Bucket Key for server-side
+    #   encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] storage_class
     #   Provides storage class information of the object. Amazon S3 returns
     #   this header for all objects except for S3 Standard storage class
@@ -6241,11 +6295,11 @@ module Aws::S3
     #
     # @!attribute [rw] replication_status
     #   Amazon S3 can return this header if your request involves a bucket
-    #   that is either a source or destination in a replication rule.
+    #   that is either a source or a destination in a replication rule.
     #
     #   In replication, you have a source bucket on which you configure
-    #   replication and destination bucket where Amazon S3 stores object
-    #   replicas. When you request an object (`GetObject`) or object
+    #   replication and destination bucket or buckets where Amazon S3 stores
+    #   object replicas. When you request an object (`GetObject`) or object
     #   metadata (`HeadObject`) from these buckets, Amazon S3 will return
     #   the `x-amz-replication-status` header in the response as follows:
     #
@@ -6262,10 +6316,18 @@ module Aws::S3
     #     header with value PENDING, COMPLETED or FAILED indicating object
     #     replication status.
     #
-    #   * If requesting an object from the destination bucket — Amazon S3
-    #     will return the `x-amz-replication-status` header with value
-    #     REPLICA if the object in your request is a replica that Amazon S3
-    #     created.
+    #   * If requesting an object from a destination bucket — Amazon S3 will
+    #     return the `x-amz-replication-status` header with value REPLICA if
+    #     the object in your request is a replica that Amazon S3 created and
+    #     there is no replica modification replication in progress.
+    #
+    #   * When replicating objects to multiple destination buckets the
+    #     `x-amz-replication-status` header acts differently. The header of
+    #     the source object will only return a value of COMPLETED when
+    #     replication is successful to all destinations. The header will
+    #     remain at value PENDING until replication has completed for all
+    #     destinations. If one or more destinations fails replication the
+    #     header will return FAILED.
     #
     #   For more information, see [Replication][1].
     #
@@ -6334,6 +6396,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :bucket_key_enabled,
       :storage_class,
       :request_charged,
       :replication_status,
@@ -10178,6 +10241,7 @@ module Aws::S3
     #                 sse_algorithm: "AES256", # required, accepts AES256, aws:kms
     #                 kms_master_key_id: "SSEKMSKeyId",
     #               },
+    #               bucket_key_enabled: false,
     #             },
     #           ],
     #         },
@@ -10892,6 +10956,9 @@ module Aws::S3
     #               status: "Enabled", # required, accepts Enabled, Disabled
     #               source_selection_criteria: {
     #                 sse_kms_encrypted_objects: {
+    #                   status: "Enabled", # required, accepts Enabled, Disabled
+    #                 },
+    #                 replica_modifications: {
     #                   status: "Enabled", # required, accepts Enabled, Disabled
     #                 },
     #               },
@@ -11650,6 +11717,11 @@ module Aws::S3
     #   pairs.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the uploaded object uses an S3 Bucket Key for
+    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -11666,6 +11738,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :ssekms_encryption_context,
+      :bucket_key_enabled,
       :request_charged)
       SENSITIVE = [:ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
@@ -11702,6 +11775,7 @@ module Aws::S3
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
     #         ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #         bucket_key_enabled: false,
     #         request_payer: "requester", # accepts requester
     #         tagging: "TaggingHeader",
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -11951,6 +12025,16 @@ module Aws::S3
     #   string holding JSON with the encryption context key-value pairs.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
+    #   Key for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a PUT operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -12020,6 +12104,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :ssekms_encryption_context,
+      :bucket_key_enabled,
       :request_payer,
       :tagging,
       :object_lock_mode,
@@ -12500,6 +12585,37 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # A filter that you can specify for selection for modifications on
+    # replicas. Amazon S3 doesn't replicate replica modifications by
+    # default. In the latest version of replication configuration (when
+    # `Filter` is specified), you can specify this element and set the
+    # status to `Enabled` to replicate modifications on replicas.
+    #
+    # <note markdown="1"> If you don't specify the `Filter` element, Amazon S3 assumes that the
+    # replication configuration is the earlier version, V1. In the earlier
+    # version, this element is not allowed.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass ReplicaModifications
+    #   data as a hash:
+    #
+    #       {
+    #         status: "Enabled", # required, accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Specifies whether Amazon S3 replicates modifications on replicas.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicaModifications AWS API Documentation
+    #
+    class ReplicaModifications < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A container for replication rules. You can add up to 1,000 rules. The
     # maximum size of a replication configuration is 2 MB.
     #
@@ -12532,6 +12648,9 @@ module Aws::S3
     #             status: "Enabled", # required, accepts Enabled, Disabled
     #             source_selection_criteria: {
     #               sse_kms_encrypted_objects: {
+    #                 status: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #               replica_modifications: {
     #                 status: "Enabled", # required, accepts Enabled, Disabled
     #               },
     #             },
@@ -12625,6 +12744,9 @@ module Aws::S3
     #           sse_kms_encrypted_objects: {
     #             status: "Enabled", # required, accepts Enabled, Disabled
     #           },
+    #           replica_modifications: {
+    #             status: "Enabled", # required, accepts Enabled, Disabled
+    #           },
     #         },
     #         existing_object_replication: {
     #           status: "Enabled", # required, accepts Enabled, Disabled
@@ -12663,17 +12785,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   The priority associated with the rule. If you specify multiple rules
-    #   in a replication configuration, Amazon S3 prioritizes the rules to
-    #   prevent conflicts when filtering. If two or more rules identify the
-    #   same object based on a specified filter, the rule with higher
-    #   priority takes precedence. For example:
-    #
-    #   * Same object quality prefix-based filter criteria if prefixes you
-    #     specified in multiple rules overlap
-    #
-    #   * Same object qualify tag-based filter criteria specified in
-    #     multiple rules
+    #   The priority indicates which rule has precedence whenever two or
+    #   more replication rules conflict. Amazon S3 will attempt to replicate
+    #   objects according to all replication rules. However, if there are
+    #   two or more rules with the same destination bucket, then objects
+    #   will be replicated according to the rule with the highest priority.
+    #   The higher the number, the higher the priority.
     #
     #   For more information, see [Replication][1] in the *Amazon Simple
     #   Storage Service Developer Guide*.
@@ -13945,6 +14062,7 @@ module Aws::S3
     #               sse_algorithm: "AES256", # required, accepts AES256, aws:kms
     #               kms_master_key_id: "SSEKMSKeyId",
     #             },
+    #             bucket_key_enabled: false,
     #           },
     #         ],
     #       }
@@ -13972,6 +14090,7 @@ module Aws::S3
     #           sse_algorithm: "AES256", # required, accepts AES256, aws:kms
     #           kms_master_key_id: "SSEKMSKeyId",
     #         },
+    #         bucket_key_enabled: false,
     #       }
     #
     # @!attribute [rw] apply_server_side_encryption_by_default
@@ -13980,10 +14099,26 @@ module Aws::S3
     #   server-side encryption, this default encryption will be applied.
     #   @return [Types::ServerSideEncryptionByDefault]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key with
+    #   server-side encryption using KMS (SSE-KMS) for new objects in the
+    #   bucket. Existing objects are not affected. Setting the
+    #   `BucketKeyEnabled` element to `true` causes Amazon S3 to use an S3
+    #   Bucket Key. By default, S3 Bucket Key is not enabled.
+    #
+    #   For more information, see [Amazon S3 Bucket Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule AWS API Documentation
     #
     class ServerSideEncryptionRule < Struct.new(
-      :apply_server_side_encryption_by_default)
+      :apply_server_side_encryption_by_default,
+      :bucket_key_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14002,6 +14137,9 @@ module Aws::S3
     #         sse_kms_encrypted_objects: {
     #           status: "Enabled", # required, accepts Enabled, Disabled
     #         },
+    #         replica_modifications: {
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #         },
     #       }
     #
     # @!attribute [rw] sse_kms_encrypted_objects
@@ -14011,10 +14149,25 @@ module Aws::S3
     #   element is required.
     #   @return [Types::SseKmsEncryptedObjects]
     #
+    # @!attribute [rw] replica_modifications
+    #   A filter that you can specify for selections for modifications on
+    #   replicas. Amazon S3 doesn't replicate replica modifications by
+    #   default. In the latest version of replication configuration (when
+    #   `Filter` is specified), you can specify this element and set the
+    #   status to `Enabled` to replicate modifications on replicas.
+    #
+    #   <note markdown="1"> If you don't specify the `Filter` element, Amazon S3 assumes that
+    #   the replication configuration is the earlier version, V1. In the
+    #   earlier version, this element is not allowed
+    #
+    #    </note>
+    #   @return [Types::ReplicaModifications]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria AWS API Documentation
     #
     class SourceSelectionCriteria < Struct.new(
-      :sse_kms_encrypted_objects)
+      :sse_kms_encrypted_objects,
+      :replica_modifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14470,6 +14623,11 @@ module Aws::S3
     #   used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the multipart upload uses an S3 Bucket Key for
+    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -14484,6 +14642,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :bucket_key_enabled,
       :request_charged)
       SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
@@ -14745,6 +14904,11 @@ module Aws::S3
     #   for the object.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the multipart upload uses an S3 Bucket Key for
+    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -14758,6 +14922,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :bucket_key_enabled,
       :request_charged)
       SENSITIVE = [:ssekms_key_id]
       include Aws::Structure

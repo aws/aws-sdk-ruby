@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2020-12-01)
+------------------
+
+* Feature - Amazon SageMaker Pipelines for ML workflows. Amazon SageMaker Feature Store, a fully managed repository for ML features.
+
 1.72.0 (2020-11-16)
 ------------------
 

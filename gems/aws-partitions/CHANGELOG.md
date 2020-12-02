@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+1.402.0 (2020-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CustomerProfiles`.
+
+1.401.0 (2020-12-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerFeatureStoreRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::Profile`.
+
+* Feature - Added support for enumerating regions for `Aws::LookoutforVision`.
+
+* Feature - Added support for enumerating regions for `Aws::ECRPublic`.
+
+* Feature - Added support for enumerating regions for `Aws::DevOpsGuru`.
+
+* Feature - Added support for enumerating regions for `Aws::ConnectContactLens`.
+
+* Feature - Added support for enumerating regions for `Aws::AppIntegrationsService`.
+
+* Feature - Added support for enumerating regions for `Aws::AmplifyBackend`.
+
 1.400.0 (2020-12-01)
 ------------------
 
