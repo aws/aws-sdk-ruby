@@ -404,7 +404,6 @@ module Aws
             'PinpointSMSVoice' => 'sms-voice.pinpoint',
             'Polly' => 'polly',
             'Pricing' => 'api.pricing',
-            'Profile' => 'profile',
             'QLDB' => 'qldb',
             'QLDBSession' => 'session.qldb',
             'QuickSight' => 'quicksight',

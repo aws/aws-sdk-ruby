@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-12-03)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for EBS volumes that are attached to instances.
+
 1.9.0 (2020-10-07)
 ------------------
 

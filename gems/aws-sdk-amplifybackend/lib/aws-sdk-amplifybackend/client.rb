@@ -428,8 +428,8 @@ module Aws::AmplifyBackend
     # @option params [required, String] :backend_environment_name
     #
     # @option params [required, Types::BackendAPIResourceConfig] :resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part of
+    #   the Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -642,7 +642,7 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Generates a one time challenge code to authenticate a user into your
+    # Generates a one-time challenge code to authenticate a user into your
     # Amplify Admin UI.
     #
     # @option params [required, String] :app_id
@@ -676,7 +676,7 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Removes an existing environment from your Ampify project.
+    # Removes an existing environment from your Amplify project.
     #
     # @option params [required, String] :app_id
     #
@@ -723,8 +723,8 @@ module Aws::AmplifyBackend
     # @option params [required, String] :backend_environment_name
     #
     # @option params [Types::BackendAPIResourceConfig] :resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part of
+    #   the Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -915,7 +915,7 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Provides project level details for your Amplify UI project.
+    # Provides project-level details for your Amplify UI project.
     #
     # @option params [required, String] :app_id
     #
@@ -956,15 +956,15 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Gets the details for a backend api.
+    # Gets the details for a backend API.
     #
     # @option params [required, String] :app_id
     #
     # @option params [required, String] :backend_environment_name
     #
     # @option params [Types::BackendAPIResourceConfig] :resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part of
+    #   the Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -1094,7 +1094,7 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Gets a backend auth details.
+    # Gets backend auth details.
     #
     # @option params [required, String] :app_id
     #
@@ -1345,7 +1345,8 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Removes the AWS resources required to access the Amplify Admin UI.
+    # Removes the AWS resources that are required to access the Amplify
+    # Admin UI.
     #
     # @option params [required, String] :app_id
     #
@@ -1379,8 +1380,8 @@ module Aws::AmplifyBackend
     # @option params [required, String] :backend_environment_name
     #
     # @option params [Types::BackendAPIResourceConfig] :resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part of
+    #   the Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -1553,7 +1554,8 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Updates the AWS resources required to access the Amplify Admin UI.
+    # Updates the AWS resources that are required to access the Amplify
+    # Admin UI.
     #
     # @option params [required, String] :app_id
     #
@@ -1664,7 +1666,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -84,11 +84,6 @@ module Aws::ComputeOptimizer
     #     group is correctly provisioned to run your workload based on the
     #     chosen instance type. For optimized resources, Compute Optimizer
     #     might recommend a new generation instance type.
-    #
-    #   <note markdown="1"> The values that are returned might be `NOT_OPTIMIZED` or
-    #   `OPTIMIZED`.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] utilization_metrics
@@ -257,6 +252,102 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes a filter that returns a more specific list of Amazon Elastic
+    # Block Store (Amazon EBS) volume recommendations.
+    #
+    # This filter is used with the `GetEBSVolumeRecommendations` action.
+    #
+    # @note When making an API call, you may pass EBSFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Finding", # accepts Finding
+    #         values: ["FilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #
+    #   Specify `Finding` to return recommendations with a specific finding
+    #   classification (e.g., `Optimized`).
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value of the filter.
+    #
+    #   The valid values are `Optimized`, or `NotOptimized`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EBSFilter AWS API Documentation
+    #
+    class EBSFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a utilization metric of an Amazon Elastic Block Store
+    # (Amazon EBS) volume.
+    #
+    # Compare the utilization metric data of your resource against its
+    # projected utilization metric data to determine the performance
+    # difference between your current resource and the recommended option.
+    #
+    # @!attribute [rw] name
+    #   The name of the utilization metric.
+    #
+    #   The following utilization metrics are available:
+    #
+    #   * `VolumeReadOpsPerSecond` - The completed read operations per
+    #     second from the volume in a specified period of time.
+    #
+    #     Unit: Count
+    #
+    #   * `VolumeWriteOpsPerSecond` - The completed write operations per
+    #     second to the volume in a specified period of time.
+    #
+    #     Unit: Count
+    #
+    #   * `VolumeReadBytesPerSecond` - The bytes read per second from the
+    #     volume in a specified period of time.
+    #
+    #     Unit: Bytes
+    #
+    #   * `VolumeWriteBytesPerSecond` - The bytes written to the volume in a
+    #     specified period of time.
+    #
+    #     Unit: Bytes
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the utilization metric.
+    #
+    #   The following statistics are available:
+    #
+    #   * `Average` - This is the value of Sum / SampleCount during the
+    #     specified period, or the average value observed during the
+    #     specified period.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the utilization metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EBSUtilizationMetric AWS API Documentation
+    #
+    class EBSUtilizationMetric < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ExportAutoScalingGroupRecommendationsRequest
     #   data as a hash:
     #
@@ -281,8 +372,8 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to export Auto Scaling group
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member accounts for which you want to
     #   export recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -337,8 +428,8 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] include_member_accounts
     #   Indicates whether to include recommendations for resources in all
-    #   member accounts of the organization if your account is the master
-    #   account of an organization.
+    #   member accounts of the organization if your account is the
+    #   management account of an organization.
     #
     #   The member accounts must also be opted in to Compute Optimizer.
     #
@@ -427,8 +518,8 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to export instance
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member accounts for which you want to
     #   export recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -483,8 +574,8 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] include_member_accounts
     #   Indicates whether to include recommendations for resources in all
-    #   member accounts of the organization if your account is the master
-    #   account of an organization.
+    #   member accounts of the organization if your account is the
+    #   management account of an organization.
     #
     #   The member accounts must also be opted in to Compute Optimizer.
     #
@@ -532,6 +623,9 @@ module Aws::ComputeOptimizer
     # Describes a filter that returns a more specific list of
     # recommendations.
     #
+    # This filter is used with the `GetAutoScalingGroupRecommendations` and
+    # `GetEC2InstanceRecommendations` actions.
+    #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
     #
@@ -543,7 +637,7 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] name
     #   The name of the filter.
     #
-    #   Specify `Finding` to return recommendations with a specific findings
+    #   Specify `Finding` to return recommendations with a specific finding
     #   classification (e.g., `Overprovisioned`).
     #
     #   Specify `RecommendationSourceType` to return recommendations of a
@@ -553,17 +647,20 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] values
     #   The value of the filter.
     #
-    #   If you specify the `name` parameter as `Finding`, and you request
-    #   recommendations for an *instance*, then the valid values are
-    #   `Underprovisioned`, `Overprovisioned`, `NotOptimized`, or
-    #   `Optimized`.
+    #   The valid values for this parameter are as follows, depending on
+    #   what you specify for the `name` parameter and the resource type that
+    #   you wish to filter results for:
     #
-    #   If you specify the `name` parameter as `Finding`, and you request
-    #   recommendations for an *Auto Scaling group*, then the valid values
-    #   are `Optimized`, or `NotOptimized`.
+    #   * Specify `Optimized` or `NotOptimized` if you specified the `name`
+    #     parameter as `Finding` and you want to filter results for Auto
+    #     Scaling groups.
     #
-    #   If you specify the `name` parameter as `RecommendationSourceType`,
-    #   then the valid values are `Ec2Instance`, or `AutoScalingGroup`.
+    #   * Specify `Underprovisioned`, `Overprovisioned`, or `Optimized` if
+    #     you specified the `name` parameter as `Finding` and you want to
+    #     filter results for EC2 instances.
+    #
+    #   * Specify `Ec2Instance` or `AutoScalingGroup` if you specified the
+    #     `name` parameter as `RecommendationSourceType`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Filter AWS API Documentation
@@ -595,8 +692,8 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to return Auto Scaling group
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member accounts for which you want to
     #   return Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -667,6 +764,96 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetEBSVolumeRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         volume_arns: ["VolumeArn"],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "Finding", # accepts Finding
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         account_ids: ["AccountId"],
+    #       }
+    #
+    # @!attribute [rw] volume_arns
+    #   The Amazon Resource Name (ARN) of the volumes for which to return
+    #   recommendations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of volume recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of volume recommendations to return with a single
+    #   request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects that describe a filter that returns a more
+    #   specific list of volume recommendations.
+    #   @return [Array<Types::EBSFilter>]
+    #
+    # @!attribute [rw] account_ids
+    #   The IDs of the AWS accounts for which to return volume
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member accounts for which you want to
+    #   return volume recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEBSVolumeRecommendationsRequest AWS API Documentation
+    #
+    class GetEBSVolumeRecommendationsRequest < Struct.new(
+      :volume_arns,
+      :next_token,
+      :max_results,
+      :filters,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to advance to the next page of volume
+    #   recommendations.
+    #
+    #   This value is null when there are no more pages of volume
+    #   recommendations to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_recommendations
+    #   An array of objects that describe volume recommendations.
+    #   @return [Array<Types::VolumeRecommendation>]
+    #
+    # @!attribute [rw] errors
+    #   An array of objects that describe errors of the request.
+    #
+    #   For example, an error is returned if you request recommendations for
+    #   an unsupported volume.
+    #   @return [Array<Types::GetRecommendationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEBSVolumeRecommendationsResponse AWS API Documentation
+    #
+    class GetEBSVolumeRecommendationsResponse < Struct.new(
+      :next_token,
+      :volume_recommendations,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetEC2InstanceRecommendationsRequest
     #   data as a hash:
     #
@@ -709,8 +896,8 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to return instance
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member accounts for which you want to
     #   return instance recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -833,7 +1020,8 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] member_accounts_enrolled
     #   Confirms the enrollment status of member accounts within the
-    #   organization, if the account is a master account of an organization.
+    #   organization, if the account is a management account of an
+    #   organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEnrollmentStatusResponse AWS API Documentation
@@ -887,8 +1075,8 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to return recommendation
     #   summaries.
     #
-    #   If your account is the master account of an organization, use this
-    #   parameter to specify the member accounts for which you want to
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member accounts for which you want to
     #   return recommendation summaries.
     #
     #   Only one account ID can be specified per request.
@@ -980,11 +1168,6 @@ module Aws::ComputeOptimizer
     #     your workloads with optimal performance and infrastructure cost.
     #     For optimized resources, AWS Compute Optimizer might recommend a
     #     new generation instance type.
-    #
-    #   <note markdown="1"> The values that are returned might be `UNDER_PROVISIONED`,
-    #   `OVER_PROVISIONED`, or `OPTIMIZED`.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] utilization_metrics
@@ -1132,11 +1315,16 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] values
     #   The value of the filter.
     #
-    #   If you specify the `name` parameter as `ResourceType`, the valid
-    #   values are `Ec2Instance` or `AutoScalingGroup`.
+    #   The valid values for this parameter are as follows, depending on
+    #   what you specify for the `name` parameter:
     #
-    #   If you specify the `name` parameter as `JobStatus`, the valid values
-    #   are `Queued`, `InProgress`, `Complete`, or `Failed`.
+    #   * Specify `Ec2Instance` or `AutoScalingGroup` if you specified the
+    #     `name` parameter as `ResourceType`. There is no filter for EBS
+    #     volumes because volume recommendations cannot be exported at this
+    #     time.
+    #
+    #   * Specify `Queued`, `InProgress`, `Complete`, or `Failed` if you
+    #     specified the `name` parameter as `JobStatus`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/JobFilter AWS API Documentation
@@ -1189,7 +1377,13 @@ module Aws::ComputeOptimizer
     end
 
     # Describes a projected utilization metric of a recommendation option,
-    # such as an Amazon EC2 instance.
+    # such as an Amazon EC2 instance. This represents the projected
+    # utilization of a recommendation option had you used that resource
+    # during the analyzed period.
+    #
+    # Compare the utilization metric data of your resource against its
+    # projected utilization metric data to determine the performance
+    # difference between your current resource and the recommended option.
     #
     # <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
     # metrics returned when you run the
@@ -1206,6 +1400,37 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] name
     #   The name of the projected utilization metric.
+    #
+    #   The following projected utilization metrics are returned:
+    #
+    #   * `Cpu` - The projected percentage of allocated EC2 compute units
+    #     that would be in use on the recommendation option had you used
+    #     that resource during the analyzed period. This metric identifies
+    #     the processing power required to run an application on the
+    #     recommendation option.
+    #
+    #     Depending on the instance type, tools in your operating system can
+    #     show a lower percentage than CloudWatch when the instance is not
+    #     allocated a full processor core.
+    #
+    #     Units: Percent
+    #
+    #   * `Memory` - The percentage of memory that would be in use on the
+    #     recommendation option had you used that resource during the
+    #     analyzed period. This metric identifies the amount of memory
+    #     required to run an application on the recommendation option.
+    #
+    #     Units: Percent
+    #
+    #     <note markdown="1"> The `Memory` metric is returned only for resources that have the
+    #     unified CloudWatch agent installed on them. For more information,
+    #     see [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
     #   @return [String]
     #
     # @!attribute [rw] timestamps
@@ -1516,7 +1741,7 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] include_member_accounts
     #   Indicates whether to enroll member accounts of the organization if
-    #   the your account is the master account of an organization.
+    #   the your account is the management account of an organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/UpdateEnrollmentStatusRequest AWS API Documentation
@@ -1550,14 +1775,58 @@ module Aws::ComputeOptimizer
     # Describes a utilization metric of a resource, such as an Amazon EC2
     # instance.
     #
+    # Compare the utilization metric data of your resource against its
+    # projected utilization metric data to determine the performance
+    # difference between your current resource and the recommended option.
+    #
     # @!attribute [rw] name
     #   The name of the utilization metric.
     #
-    #   <note markdown="1"> The `Memory` metric is returned only for resources that have the
-    #   unified CloudWatch agent installed on them. For more information,
-    #   see [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #   The following utilization metrics are available:
     #
-    #    </note>
+    #   * `Cpu` - The percentage of allocated EC2 compute units that are
+    #     currently in use on the instance. This metric identifies the
+    #     processing power required to run an application on the instance.
+    #
+    #     Depending on the instance type, tools in your operating system can
+    #     show a lower percentage than CloudWatch when the instance is not
+    #     allocated a full processor core.
+    #
+    #     Units: Percent
+    #
+    #   * `Memory` - The percentage of memory that is currently in use on
+    #     the instance. This metric identifies the amount of memory required
+    #     to run an application on the instance.
+    #
+    #     Units: Percent
+    #
+    #     <note markdown="1"> The `Memory` metric is returned only for resources that have the
+    #     unified CloudWatch agent installed on them. For more information,
+    #     see [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #
+    #      </note>
+    #
+    #   * `EBS_READ_OPS_PER_SECOND` - The completed read operations from all
+    #     EBS volumes attached to the instance in a specified period of
+    #     time.
+    #
+    #     Unit: Count
+    #
+    #   * `EBS_WRITE_OPS_PER_SECOND` - The completed write operations to all
+    #     EBS volumes attached to the instance in a specified period of
+    #     time.
+    #
+    #     Unit: Count
+    #
+    #   * `EBS_READ_BYTES_PER_SECOND` - The bytes read from all EBS volumes
+    #     attached to the instance in a specified period of time.
+    #
+    #     Unit: Bytes
+    #
+    #   * `EBS_WRITE_BYTES_PER_SECOND` - The bytes written to all EBS
+    #     volumes attached to the instance in a specified period of time.
+    #
+    #     Unit: Bytes
     #
     #
     #
@@ -1566,6 +1835,16 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] statistic
     #   The statistic of the utilization metric.
+    #
+    #   The following statistics are available:
+    #
+    #   * `Average` - This is the value of Sum / SampleCount during the
+    #     specified period, or the average value observed during the
+    #     specified period.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1578,6 +1857,149 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of an Amazon Elastic Block Store (Amazon
+    # EBS) volume.
+    #
+    # @!attribute [rw] volume_type
+    #   The volume type.
+    #
+    #   This can be `gp2` for General Purpose SSD, `io1` or `io2` for
+    #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
+    #   Cold HDD, or `standard` for Magnetic volumes.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   The size of the volume, in GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_baseline_iops
+    #   The baseline IOPS of the volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_burst_iops
+    #   The burst IOPS of the volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_baseline_throughput
+    #   The baseline throughput of the volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_burst_throughput
+    #   The burst throughput of the volume.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeConfiguration AWS API Documentation
+    #
+    class VolumeConfiguration < Struct.new(
+      :volume_type,
+      :volume_size,
+      :volume_baseline_iops,
+      :volume_burst_iops,
+      :volume_baseline_throughput,
+      :volume_burst_throughput)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Elastic Block Store (Amazon EBS) volume
+    # recommendation.
+    #
+    # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the current volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_configuration
+    #   An array of objects that describe the current configuration of the
+    #   volume.
+    #   @return [Types::VolumeConfiguration]
+    #
+    # @!attribute [rw] finding
+    #   The finding classification for the volume.
+    #
+    #   Findings for volumes include:
+    #
+    #   * <b> <code>NotOptimized</code> </b>—A volume is considered not
+    #     optimized when AWS Compute Optimizer identifies a recommendation
+    #     that can provide better performance for your workload.
+    #
+    #   * <b> <code>Optimized</code> </b>—An volume is considered optimized
+    #     when Compute Optimizer determines that the volume is correctly
+    #     provisioned to run your workload based on the chosen volume type.
+    #     For optimized resources, Compute Optimizer might recommend a new
+    #     generation volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization_metrics
+    #   An array of objects that describe the utilization metrics of the
+    #   volume.
+    #   @return [Array<Types::EBSUtilizationMetric>]
+    #
+    # @!attribute [rw] look_back_period_in_days
+    #   The number of days for which utilization metrics were analyzed for
+    #   the volume.
+    #   @return [Float]
+    #
+    # @!attribute [rw] volume_recommendation_options
+    #   An array of objects that describe the recommendation options for the
+    #   volume.
+    #   @return [Array<Types::VolumeRecommendationOption>]
+    #
+    # @!attribute [rw] last_refresh_timestamp
+    #   The time stamp of when the volume recommendation was last refreshed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeRecommendation AWS API Documentation
+    #
+    class VolumeRecommendation < Struct.new(
+      :volume_arn,
+      :account_id,
+      :current_configuration,
+      :finding,
+      :utilization_metrics,
+      :look_back_period_in_days,
+      :volume_recommendation_options,
+      :last_refresh_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a recommendation option for an Amazon Elastic Block Store
+    # (Amazon EBS) instance.
+    #
+    # @!attribute [rw] configuration
+    #   An array of objects that describe a volume configuration.
+    #   @return [Types::VolumeConfiguration]
+    #
+    # @!attribute [rw] performance_risk
+    #   The performance risk of the volume recommendation option.
+    #
+    #   Performance risk is the likelihood of the recommended volume type
+    #   not meeting the performance requirement of your workload.
+    #
+    #   The lowest performance risk is categorized as `0`, and the highest
+    #   as `5`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rank
+    #   The rank of the volume recommendation option.
+    #
+    #   The top recommendation option is ranked as `1`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeRecommendationOption AWS API Documentation
+    #
+    class VolumeRecommendationOption < Struct.new(
+      :configuration,
+      :performance_risk,
+      :rank)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.110.0 (2020-12-03)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Issue - Support `aws-sdk-sts` alias gem.
 
 * Issue - Retry when `Net:HTTPFatalError` is thrown by the `Net::HTTP` library. This can occur when proxy connections are configured. (#2439)

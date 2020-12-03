@@ -7,10 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-unless Module.const_defined?(:Aws)
-  require 'aws-sdk-core'
-  require 'aws-sigv4'
-end
+
 
 require_relative 'aws-sdk-sts/types'
 require_relative 'aws-sdk-sts/client_api'
@@ -49,6 +46,6 @@ require_relative 'aws-sdk-sts/customizations'
 # @!group service
 module Aws::STS
 
-  GEM_VERSION = '3.109.3'
+  GEM_VERSION = '3.110.0'
 
 end

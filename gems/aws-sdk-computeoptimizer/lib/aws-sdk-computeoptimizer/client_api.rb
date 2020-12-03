@@ -33,6 +33,13 @@ module Aws::ComputeOptimizer
     DestinationBucket = Shapes::StringShape.new(name: 'DestinationBucket')
     DestinationKey = Shapes::StringShape.new(name: 'DestinationKey')
     DestinationKeyPrefix = Shapes::StringShape.new(name: 'DestinationKeyPrefix')
+    EBSFilter = Shapes::StructureShape.new(name: 'EBSFilter')
+    EBSFilterName = Shapes::StringShape.new(name: 'EBSFilterName')
+    EBSFilters = Shapes::ListShape.new(name: 'EBSFilters')
+    EBSFinding = Shapes::StringShape.new(name: 'EBSFinding')
+    EBSMetricName = Shapes::StringShape.new(name: 'EBSMetricName')
+    EBSUtilizationMetric = Shapes::StructureShape.new(name: 'EBSUtilizationMetric')
+    EBSUtilizationMetrics = Shapes::ListShape.new(name: 'EBSUtilizationMetrics')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportAutoScalingGroupRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsRequest')
     ExportAutoScalingGroupRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsResponse')
@@ -53,6 +60,8 @@ module Aws::ComputeOptimizer
     Finding = Shapes::StringShape.new(name: 'Finding')
     GetAutoScalingGroupRecommendationsRequest = Shapes::StructureShape.new(name: 'GetAutoScalingGroupRecommendationsRequest')
     GetAutoScalingGroupRecommendationsResponse = Shapes::StructureShape.new(name: 'GetAutoScalingGroupRecommendationsResponse')
+    GetEBSVolumeRecommendationsRequest = Shapes::StructureShape.new(name: 'GetEBSVolumeRecommendationsRequest')
+    GetEBSVolumeRecommendationsResponse = Shapes::StructureShape.new(name: 'GetEBSVolumeRecommendationsResponse')
     GetEC2InstanceRecommendationsRequest = Shapes::StructureShape.new(name: 'GetEC2InstanceRecommendationsRequest')
     GetEC2InstanceRecommendationsResponse = Shapes::StructureShape.new(name: 'GetEC2InstanceRecommendationsResponse')
     GetEC2RecommendationProjectedMetricsRequest = Shapes::StructureShape.new(name: 'GetEC2RecommendationProjectedMetricsRequest')
@@ -132,6 +141,19 @@ module Aws::ComputeOptimizer
     UpdateEnrollmentStatusResponse = Shapes::StructureShape.new(name: 'UpdateEnrollmentStatusResponse')
     UtilizationMetric = Shapes::StructureShape.new(name: 'UtilizationMetric')
     UtilizationMetrics = Shapes::ListShape.new(name: 'UtilizationMetrics')
+    VolumeArn = Shapes::StringShape.new(name: 'VolumeArn')
+    VolumeArns = Shapes::ListShape.new(name: 'VolumeArns')
+    VolumeBaselineIOPS = Shapes::IntegerShape.new(name: 'VolumeBaselineIOPS')
+    VolumeBaselineThroughput = Shapes::IntegerShape.new(name: 'VolumeBaselineThroughput')
+    VolumeBurstIOPS = Shapes::IntegerShape.new(name: 'VolumeBurstIOPS')
+    VolumeBurstThroughput = Shapes::IntegerShape.new(name: 'VolumeBurstThroughput')
+    VolumeConfiguration = Shapes::StructureShape.new(name: 'VolumeConfiguration')
+    VolumeRecommendation = Shapes::StructureShape.new(name: 'VolumeRecommendation')
+    VolumeRecommendationOption = Shapes::StructureShape.new(name: 'VolumeRecommendationOption')
+    VolumeRecommendationOptions = Shapes::ListShape.new(name: 'VolumeRecommendationOptions')
+    VolumeRecommendations = Shapes::ListShape.new(name: 'VolumeRecommendations')
+    VolumeSize = Shapes::IntegerShape.new(name: 'VolumeSize')
+    VolumeType = Shapes::StringShape.new(name: 'VolumeType')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -176,6 +198,19 @@ module Aws::ComputeOptimizer
     DescribeRecommendationExportJobsResponse.add_member(:recommendation_export_jobs, Shapes::ShapeRef.new(shape: RecommendationExportJobs, location_name: "recommendationExportJobs"))
     DescribeRecommendationExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeRecommendationExportJobsResponse.struct_class = Types::DescribeRecommendationExportJobsResponse
+
+    EBSFilter.add_member(:name, Shapes::ShapeRef.new(shape: EBSFilterName, location_name: "name"))
+    EBSFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
+    EBSFilter.struct_class = Types::EBSFilter
+
+    EBSFilters.member = Shapes::ShapeRef.new(shape: EBSFilter)
+
+    EBSUtilizationMetric.add_member(:name, Shapes::ShapeRef.new(shape: EBSMetricName, location_name: "name"))
+    EBSUtilizationMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, location_name: "statistic"))
+    EBSUtilizationMetric.add_member(:value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "value"))
+    EBSUtilizationMetric.struct_class = Types::EBSUtilizationMetric
+
+    EBSUtilizationMetrics.member = Shapes::ShapeRef.new(shape: EBSUtilizationMetric)
 
     ExportAutoScalingGroupRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     ExportAutoScalingGroupRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
@@ -227,6 +262,18 @@ module Aws::ComputeOptimizer
     GetAutoScalingGroupRecommendationsResponse.add_member(:auto_scaling_group_recommendations, Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendations, location_name: "autoScalingGroupRecommendations"))
     GetAutoScalingGroupRecommendationsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: GetRecommendationErrors, location_name: "errors"))
     GetAutoScalingGroupRecommendationsResponse.struct_class = Types::GetAutoScalingGroupRecommendationsResponse
+
+    GetEBSVolumeRecommendationsRequest.add_member(:volume_arns, Shapes::ShapeRef.new(shape: VolumeArns, location_name: "volumeArns"))
+    GetEBSVolumeRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetEBSVolumeRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetEBSVolumeRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: EBSFilters, location_name: "filters"))
+    GetEBSVolumeRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetEBSVolumeRecommendationsRequest.struct_class = Types::GetEBSVolumeRecommendationsRequest
+
+    GetEBSVolumeRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetEBSVolumeRecommendationsResponse.add_member(:volume_recommendations, Shapes::ShapeRef.new(shape: VolumeRecommendations, location_name: "volumeRecommendations"))
+    GetEBSVolumeRecommendationsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: GetRecommendationErrors, location_name: "errors"))
+    GetEBSVolumeRecommendationsResponse.struct_class = Types::GetEBSVolumeRecommendationsResponse
 
     GetEC2InstanceRecommendationsRequest.add_member(:instance_arns, Shapes::ShapeRef.new(shape: InstanceArns, location_name: "instanceArns"))
     GetEC2InstanceRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -403,6 +450,35 @@ module Aws::ComputeOptimizer
 
     UtilizationMetrics.member = Shapes::ShapeRef.new(shape: UtilizationMetric)
 
+    VolumeArns.member = Shapes::ShapeRef.new(shape: VolumeArn)
+
+    VolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    VolumeConfiguration.add_member(:volume_size, Shapes::ShapeRef.new(shape: VolumeSize, location_name: "volumeSize"))
+    VolumeConfiguration.add_member(:volume_baseline_iops, Shapes::ShapeRef.new(shape: VolumeBaselineIOPS, location_name: "volumeBaselineIOPS"))
+    VolumeConfiguration.add_member(:volume_burst_iops, Shapes::ShapeRef.new(shape: VolumeBurstIOPS, location_name: "volumeBurstIOPS"))
+    VolumeConfiguration.add_member(:volume_baseline_throughput, Shapes::ShapeRef.new(shape: VolumeBaselineThroughput, location_name: "volumeBaselineThroughput"))
+    VolumeConfiguration.add_member(:volume_burst_throughput, Shapes::ShapeRef.new(shape: VolumeBurstThroughput, location_name: "volumeBurstThroughput"))
+    VolumeConfiguration.struct_class = Types::VolumeConfiguration
+
+    VolumeRecommendation.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeArn, location_name: "volumeArn"))
+    VolumeRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    VolumeRecommendation.add_member(:current_configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "currentConfiguration"))
+    VolumeRecommendation.add_member(:finding, Shapes::ShapeRef.new(shape: EBSFinding, location_name: "finding"))
+    VolumeRecommendation.add_member(:utilization_metrics, Shapes::ShapeRef.new(shape: EBSUtilizationMetrics, location_name: "utilizationMetrics"))
+    VolumeRecommendation.add_member(:look_back_period_in_days, Shapes::ShapeRef.new(shape: LookBackPeriodInDays, location_name: "lookBackPeriodInDays"))
+    VolumeRecommendation.add_member(:volume_recommendation_options, Shapes::ShapeRef.new(shape: VolumeRecommendationOptions, location_name: "volumeRecommendationOptions"))
+    VolumeRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
+    VolumeRecommendation.struct_class = Types::VolumeRecommendation
+
+    VolumeRecommendationOption.add_member(:configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "configuration"))
+    VolumeRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
+    VolumeRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
+    VolumeRecommendationOption.struct_class = Types::VolumeRecommendationOption
+
+    VolumeRecommendationOptions.member = Shapes::ShapeRef.new(shape: VolumeRecommendationOption)
+
+    VolumeRecommendations.member = Shapes::ShapeRef.new(shape: VolumeRecommendation)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -476,6 +552,22 @@ module Aws::ComputeOptimizer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAutoScalingGroupRecommendationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAutoScalingGroupRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_ebs_volume_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEBSVolumeRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEBSVolumeRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEBSVolumeRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

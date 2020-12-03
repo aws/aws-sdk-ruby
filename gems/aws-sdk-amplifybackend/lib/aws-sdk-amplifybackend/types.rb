@@ -28,17 +28,17 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] cognito_user_pool_id
-    #   The Amazon Cognito user pool id, if Amazon Cognito was used as an
+    #   The Amazon Cognito user pool ID, if Amazon Cognito is used as an
     #   authentication setting to access your data models.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The api key description for API\_KEY, if it was used as an
+    #   The API key description for API\_KEY, if it is used as an
     #   authentication mechanism to access your data models.
     #   @return [String]
     #
     # @!attribute [rw] expiration_time
-    #   The api key expiration time for API\_KEY, if it was used as an
+    #   The API key expiration time for API\_KEY, if it is used as an
     #   authentication mechanism to access your data models.
     #   @return [Float]
     #
@@ -47,7 +47,7 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] open_id_client_id
-    #   The clientID for openID, if openID was used as an authentication
+    #   The clientID for openID, if openID is used as an authentication
     #   setting to access your data models.
     #   @return [String]
     #
@@ -56,12 +56,12 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] open_id_issue_url
-    #   The openID issuer URL, if openID was used as an authentication
+    #   The openID issuer URL, if openID is used as an authentication
     #   setting to access your data models.
     #   @return [String]
     #
     # @!attribute [rw] open_id_provider_name
-    #   The open id provider name, if openID was used as an authentication
+    #   The openID provider name, if openID is used as an authentication
     #   mechanism to access your data models.
     #   @return [String]
     #
@@ -169,7 +169,7 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # Describes the conflict resolution configuration for your data model
+    # Describes the conflict resolution configuration for the data model
     # configured in your Amplify project.
     #
     # @note When making an API call, you may pass BackendAPIConflictResolution
@@ -211,8 +211,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # The resource config for the data model,configured as a part of the
-    # Amplify project.
+    # The resource configuration for the data model, configured as a part of
+    # the Amplify project.
     #
     # @note When making an API call, you may pass BackendAPIResourceConfig
     #   data as a hash:
@@ -255,23 +255,23 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] additional_auth_types
-    #   Addition authentication methods used to interact with your data
+    #   Additional authentication methods used to interact with your data
     #   models.
     #   @return [Array<Types::BackendAPIAuthType>]
     #
     # @!attribute [rw] api_name
     #   The API name used to interact with the data model, configured as a
-    #   part of the amplify project.
+    #   part of the Amplify project.
     #   @return [String]
     #
     # @!attribute [rw] conflict_resolution
-    #   The conflict resoultion strategy for your data stored in the data
+    #   The conflict resolution strategy for your data stored in the data
     #   models.
     #   @return [Types::BackendAPIConflictResolution]
     #
     # @!attribute [rw] default_auth_type
     #   The default authentication type for interacting with the configured
-    #   data models in your amplify project.
+    #   data models in your Amplify project.
     #   @return [Types::BackendAPIAuthType]
     #
     # @!attribute [rw] service
@@ -280,7 +280,7 @@ module Aws::AmplifyBackend
     #
     # @!attribute [rw] transform_schema
     #   The definition of the data model in the annotated transform of the
-    #   graphql schema.
+    #   GraphQL schema.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/BackendAPIResourceConfig AWS API Documentation
@@ -374,7 +374,7 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # Describes third party social federation configurations for allowing
+    # Describes third-party social federation configurations for allowing
     # your app users to sign in using OAuth.
     #
     # @note When making an API call, you may pass BackendAuthSocialProviderConfig
@@ -386,12 +386,12 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] client_id
-    #   Describes the client\_id which can be obtained from the third party
+    #   Describes the client\_id that can be obtained from the third-party
     #   social federation provider.
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   Describes the client\_secret which can be obtained from third party
+    #   Describes the client\_secret that can be obtained from third-party
     #   social federation providers.
     #   @return [String]
     #
@@ -420,7 +420,7 @@ module Aws::AmplifyBackend
     #
     # @!attribute [rw] login_auth_config
     #   Describes the Amazon Cognito configurations for the Admin UI auth
-    #   resource to login with.
+    #   resource to log in with.
     #   @return [Types::LoginAuthConfigReqObj]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/BackendConfigRespObj AWS API Documentation
@@ -437,12 +437,12 @@ module Aws::AmplifyBackend
     # The request object for this operation.
     #
     # @!attribute [rw] operation
-    #   Filters the list of response objects to only include those with the
+    #   Filters the list of response objects to include only those with the
     #   specified operation name.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Filters the list of response objects to only include those with the
+    #   Filters the list of response objects to include only those with the
     #   specified status.
     #   @return [String]
     #
@@ -507,7 +507,7 @@ module Aws::AmplifyBackend
     # An error returned if a request is not formed properly.
     #
     # @!attribute [rw] message
-    #   An error message to inform that the request has failed.
+    #   An error message to inform that the request failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/BadRequestException AWS API Documentation
@@ -706,8 +706,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part
+    #   of the Amplify project.
     #   @return [Types::BackendAPIResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -756,7 +756,7 @@ module Aws::AmplifyBackend
     end
 
     # Describes the forgot password policy for authenticating into the
-    # Amlify app.
+    # Amplify app.
     #
     # @note When making an API call, you may pass CreateBackendAuthForgotPasswordConfig
     #   data as a hash:
@@ -773,7 +773,7 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] delivery_method
-    #   Describes which mode to use (either SMS or email) to deliver
+    #   Describes which method to use (either SMS or email) to deliver
     #   messages to app users that want to recover their password.
     #   @return [String]
     #
@@ -798,7 +798,7 @@ module Aws::AmplifyBackend
     end
 
     # Describes authorization configurations for the auth resources,
-    # configures as a part of your Amplify project.
+    # configured as a part of your Amplify project.
     #
     # @note When making an API call, you may pass CreateBackendAuthIdentityPoolConfig
     #   data as a hash:
@@ -826,8 +826,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # Describes whether multi-factor authentication policies should be
-    # applied for your Amazon Cognito user pool configured as a part of your
+    # Describes whether to apply multi-factor authentication (MFA) policies
+    # for your Amazon Cognito user pool that's configured as a part of your
     # Amplify project.
     #
     # @note When making an API call, you may pass CreateBackendAuthMFAConfig
@@ -842,7 +842,7 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] mfa_mode
-    #   Describes whether MFA should be \[ON, OFF, OPTIONAL\] for
+    #   Describes whether MFA should be \[ON, OFF, or OPTIONAL\] for
     #   authentication in your Amplify project.
     #   @return [String]
     #
@@ -892,25 +892,26 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] o_auth_grant_type
-    #   The OAuth grant type which you use to allow app users to
-    #   authenticate from your Amplify app.
+    #   The OAuth grant type that you use to allow app users to authenticate
+    #   from your Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] o_auth_scopes
-    #   List of OAuth related flows which use to allow your app users to
+    #   List of OAuth-related flows that allow your app users to
     #   authenticate from your Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redirect_sign_in_ur_is
-    #   The redirected URI for sigining into your Amplify app.
+    #   The redirected URI for signing in to your Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redirect_sign_out_ur_is
-    #   Redirect URLs used by OAuth when a user signs out of an Amplify app.
+    #   Redirect URLs that OAuth uses when a user signs out of an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] social_provider_settings
-    #   The settings for using the social providers for access to your
+    #   The settings for using social identity providers for access to your
     #   Amplify app.
     #   @return [Types::SocialProviderSettings]
     #
@@ -927,7 +928,7 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # The password policy configuration for the backend to your Amplify
+    # The password policy configuration for the backend of your Amplify
     # project.
     #
     # @note When making an API call, you may pass CreateBackendAuthPasswordPolicyConfig
@@ -939,13 +940,13 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] additional_constraints
-    #   Additional constraints for the pasword used to access the backend of
-    #   your Amplify project.
+    #   Additional constraints for the password used to access the backend
+    #   of your Amplify project.
     #   @return [Array<String>]
     #
     # @!attribute [rw] minimum_length
-    #   The minimum length of password used to access the backend of your
-    #   Amplify project.
+    #   The minimum length of the password used to access the backend of
+    #   your Amplify project.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendAuthPasswordPolicyConfig AWS API Documentation
@@ -1139,7 +1140,7 @@ module Aws::AmplifyBackend
     #
     # @!attribute [rw] identity_pool_configs
     #   Describes the authorization configuration for the Amazon Cognito
-    #   identity pool, provisioned as a part of your auth resource in the
+    #   identity pool, provisioned as a part of the auth resource in your
     #   Amplify project.
     #   @return [Types::CreateBackendAuthIdentityPoolConfig]
     #
@@ -1149,9 +1150,9 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] user_pool_configs
-    #   Describes authentication configuration for the Amazon Cognito user
-    #   pool, provisioned as a part of your auth resource in the Amplify
-    #   project.
+    #   Describes the authentication configuration for the Amazon Cognito
+    #   user pool, provisioned as a part of the auth resource in your
+    #   Amplify project.
     #   @return [Types::CreateBackendAuthUserPoolConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendAuthResourceConfig AWS API Documentation
@@ -1256,9 +1257,9 @@ module Aws::AmplifyBackend
     #   @return [Types::CreateBackendAuthForgotPasswordConfig]
     #
     # @!attribute [rw] mfa
-    #   Describes whether multi-factor authentication policies should be
-    #   applied for your Amazon Cognito user pool configured as a part of
-    #   your Amplify project.
+    #   Describes whether to apply multi-factor authentication (MFA)
+    #   policies for your Amazon Cognito user pool that's configured as a
+    #   part of your Amplify project.
     #   @return [Types::CreateBackendAuthMFAConfig]
     #
     # @!attribute [rw] o_auth
@@ -1272,13 +1273,14 @@ module Aws::AmplifyBackend
     #   @return [Types::CreateBackendAuthPasswordPolicyConfig]
     #
     # @!attribute [rw] required_sign_up_attributes
-    #   The required attributes to sign up new users in the user pool.
+    #   The required attributes to sign up new users in the Amazon Cognito
+    #   user pool.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sign_in_method
-    #   Describes the sign-in methods that your Amplify app users to login
-    #   using the Amazon Cognito user pool, configured as a part of your
-    #   Amplify project.
+    #   Describes the sign-in methods that your Amplify app users to log in
+    #   using the Amazon Cognito user pool that's configured as a part of
+    #   your Amplify project.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_name
@@ -1403,7 +1405,7 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource configuration for the create backend request.
+    #   The resource configuration for the backend creation request.
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -1556,15 +1558,16 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] challenge_code
-    #   One time challenge code for authenticating into Amplify Admin UI.
+    #   One-time challenge code for authenticating into the Amplify Admin
+    #   UI.
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   A unique identifier provided when creating a new challenge token.
+    #   A unique ID provided when creating a new challenge token.
     #   @return [String]
     #
     # @!attribute [rw] ttl
-    #   The expiry time for the one time generated token code.
+    #   The expiry time for the one-time generated token code.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateTokenRespObj AWS API Documentation
@@ -1653,8 +1656,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part
+    #   of the Amplify project.
     #   @return [Types::BackendAPIResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -2002,7 +2005,7 @@ module Aws::AmplifyBackend
     # The response object for this operation.
     #
     # @!attribute [rw] models
-    #   Stringified JSON of the datastore model.
+    #   Stringified JSON of the DataStore model.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2113,8 +2116,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part
+    #   of the Amplify project.
     #   @return [Types::BackendAPIResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -2175,8 +2178,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part
+    #   of the Amplify project.
     #   @return [Types::BackendAPIResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -2407,7 +2410,7 @@ module Aws::AmplifyBackend
     # The response object for this operation.
     #
     # @!attribute [rw] amplify_meta_config
-    #   A stringified version of the current configs for your Amplify
+    #   A stringified version of the current configurations for your Amplify
     #   project.
     #   @return [String]
     #
@@ -2505,16 +2508,16 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] challenge_code
-    #   The one time challenge code for authenticating into Amplify Admin
-    #   UI.
+    #   The one-time challenge code for authenticating into the Amplify
+    #   Admin UI.
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   A unique identifier provided when creating a new challenge token.
+    #   A unique ID provided when creating a new challenge token.
     #   @return [String]
     #
     # @!attribute [rw] ttl
-    #   The expiry time for the one time generated token code.
+    #   The expiry time for the one-time generated token code.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetTokenRespObj AWS API Documentation
@@ -2554,7 +2557,7 @@ module Aws::AmplifyBackend
     # An error returned if there's a temporary issue with the service.
     #
     # @!attribute [rw] message
-    #   An error message to inform that the request has failed.
+    #   An error message to inform that the request failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/InternalServiceException AWS API Documentation
@@ -2565,15 +2568,14 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # An error that is returned when a limit of a specific type has been
-    # exceeded.
+    # An error that is returned when a limit of a specific type is exceeded.
     #
     # @!attribute [rw] limit_type
     #   The type of limit that was exceeded.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   An error message to inform that the request has failed.
+    #   An error message to inform that the request failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/LimitExceededException AWS API Documentation
@@ -2592,7 +2594,7 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results you want in the response.
+    #   The maximum number of results that you want in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2600,12 +2602,12 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   Filters the list of response objects to only include those with the
+    #   Filters the list of response objects to include only those with the
     #   specified operation name.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Filters the list of response objects to only include those with the
+    #   Filters the list of response objects to include only those with the
     #   specified status.
     #   @return [String]
     #
@@ -2716,21 +2718,21 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] aws_cognito_identity_pool_id
-    #   Amazon Cognito identitypool id used for the Amplify Admin UI login
+    #   The Amazon Cognito identity pool ID used for Amplify Admin UI login
     #   authorization.
     #   @return [String]
     #
     # @!attribute [rw] aws_cognito_region
-    #   The AWS Region for the the Amplify Admin login.
+    #   The AWS Region for the Amplify Admin UI login.
     #   @return [String]
     #
     # @!attribute [rw] aws_user_pools_id
-    #   The Amazon Cognito userpool id used for Amplify Admin UI login
+    #   The Amazon Cognito user pool ID used for Amplify Admin UI login
     #   authentication.
     #   @return [String]
     #
     # @!attribute [rw] aws_user_pools_web_client_id
-    #   The web client ID for the Amazon Cognito userpools.
+    #   The web client ID for the Amazon Cognito user pools.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/LoginAuthConfigReqObj AWS API Documentation
@@ -2747,7 +2749,7 @@ module Aws::AmplifyBackend
     # An error returned when a specific resource type is not found.
     #
     # @!attribute [rw] message
-    #   An error message to inform that the request has failed.
+    #   An error message to inform that the request failed.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -2986,17 +2988,17 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] facebook
-    #   Describes third party social federation configurations for allowing
+    #   Describes third-party social federation configurations for allowing
     #   your app users to sign in using OAuth.
     #   @return [Types::BackendAuthSocialProviderConfig]
     #
     # @!attribute [rw] google
-    #   Describes third party social federation configurations for allowing
+    #   Describes third-party social federation configurations for allowing
     #   your app users to sign in using OAuth.
     #   @return [Types::BackendAuthSocialProviderConfig]
     #
     # @!attribute [rw] login_with_amazon
-    #   Describes third party social federation configurations for allowing
+    #   Describes third-party social federation configurations for allowing
     #   your app users to sign in using OAuth.
     #   @return [Types::BackendAuthSocialProviderConfig]
     #
@@ -3010,8 +3012,7 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # An error that is returned when a limit of a specific type has been
-    # exceeded.
+    # An error that is returned when a limit of a specific type is exceeded.
     #
     # @!attribute [rw] limit_type
     #   @return [String]
@@ -3080,8 +3081,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource config for the data model,configured as a part of the
-    #   Amplify project.
+    #   The resource configuration for the data model, configured as a part
+    #   of the Amplify project.
     #   @return [Types::BackendAPIResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -3130,7 +3131,7 @@ module Aws::AmplifyBackend
     end
 
     # Describes the forgot password policy for authenticating into the
-    # Amlify app.
+    # Amplify app.
     #
     # @note When making an API call, you may pass UpdateBackendAuthForgotPasswordConfig
     #   data as a hash:
@@ -3147,7 +3148,7 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] delivery_method
-    #   Describes which mode to use (either SMS or email) to deliver
+    #   Describes which method to use (either SMS or email) to deliver
     #   messages to app users that want to recover their password.
     #   @return [String]
     #
@@ -3183,7 +3184,7 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] unauthenticated_login
-    #   A boolean value which can be set to allow or disallow guest level
+    #   A Boolean value that you can set to allow or disallow guest-level
     #   authorization into your Amplify app.
     #   @return [Boolean]
     #
@@ -3266,20 +3267,22 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] o_auth_scopes
-    #   The list of OAuth related flows which can allow users to
-    #   authenticate from your Amplify app.
+    #   The list of OAuth-related flows that can allow users to authenticate
+    #   from your Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redirect_sign_in_ur_is
-    #   Redirect URLs used by OAuth when a user signs in to an Amplify app.
+    #   Redirect URLs that OAuth uses when a user signs in to an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redirect_sign_out_ur_is
-    #   Redirect URLs used by OAuth when a user signs out of an Amplify app.
+    #   Redirect URLs that OAuth uses when a user signs out of an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] social_provider_settings
-    #   Describes third party social federation configurations for allowing
+    #   Describes third-party social federation configurations for allowing
     #   your users to sign in with OAuth.
     #   @return [Types::SocialProviderSettings]
     #
@@ -3297,7 +3300,7 @@ module Aws::AmplifyBackend
     end
 
     # Describes the password policy for your Amazon Cognito user pool
-    # configured as a part of your Amplify project.
+    # that's configured as a part of your Amplify project.
     #
     # @note When making an API call, you may pass UpdateBackendAuthPasswordPolicyConfig
     #   data as a hash:
@@ -3308,13 +3311,14 @@ module Aws::AmplifyBackend
     #       }
     #
     # @!attribute [rw] additional_constraints
-    #   Describes additional constrains on password requirements to sign in
-    #   into the auth resource, configured as a part of your Ampify project.
+    #   Describes additional constrains on the password requirements to sign
+    #   in to the auth resource, configured as a part of your Amplify
+    #   project.
     #   @return [Array<String>]
     #
     # @!attribute [rw] minimum_length
-    #   Describes the minimum length of password required to sign in into
-    #   the auth resource, configured as a part of your Ampify project.
+    #   Describes the minimum length of the password required to sign in to
+    #   the auth resource, configured as a part of your Amplify project.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendAuthPasswordPolicyConfig AWS API Documentation
@@ -3495,7 +3499,7 @@ module Aws::AmplifyBackend
     #
     # @!attribute [rw] identity_pool_configs
     #   Describes the authorization configuration for the Amazon Cognito
-    #   identity pool, provisioned as a part of your auth resource in the
+    #   identity pool, provisioned as a part of the auth resource in your
     #   Amplify project.
     #   @return [Types::UpdateBackendAuthIdentityPoolConfig]
     #
@@ -3506,8 +3510,8 @@ module Aws::AmplifyBackend
     #
     # @!attribute [rw] user_pool_configs
     #   Describes the authentication configuration for the Amazon Cognito
-    #   userpool, provisioned as a part of your auth resource in the Amplify
-    #   project.
+    #   user pool, provisioned as a part of the auth resource in your
+    #   Amplify project.
     #   @return [Types::UpdateBackendAuthUserPoolConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendAuthResourceConfig AWS API Documentation
@@ -3552,9 +3556,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # Describes the Amazon Cognito user pool configuration for the
-    # authorization resource to be configured for your Amplify project on an
-    # update.
+    # Describes the Amazon Cognito user pool configuration to configure the
+    # authorization resource for your Amplify project on an update.
     #
     # @note When making an API call, you may pass UpdateBackendAuthUserPoolConfig
     #   data as a hash:
@@ -3610,9 +3613,9 @@ module Aws::AmplifyBackend
     #   @return [Types::UpdateBackendAuthForgotPasswordConfig]
     #
     # @!attribute [rw] mfa
-    #   Describes whether multi-factor authentication policies should be
-    #   applied for your Amazon Cognito user pool configured as a part of
-    #   your Amplify project.
+    #   Describes whether to apply multi-factor authentication (MFA)
+    #   policies for your Amazon Cognito user pool that's configured as a
+    #   part of your Amplify project.
     #   @return [Types::UpdateBackendAuthMFAConfig]
     #
     # @!attribute [rw] o_auth

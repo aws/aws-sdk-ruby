@@ -428,7 +428,7 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to export Auto Scaling group
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
+    #   If your account is the management account of an organization, use this
     #   parameter to specify the member accounts for which you want to export
     #   recommendations.
     #
@@ -478,7 +478,7 @@ module Aws::ComputeOptimizer
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to include recommendations for resources in all
-    #   member accounts of the organization if your account is the master
+    #   member accounts of the organization if your account is the management
     #   account of an organization.
     #
     #   The member accounts must also be opted in to Compute Optimizer.
@@ -551,7 +551,7 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to export instance
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
+    #   If your account is the management account of an organization, use this
     #   parameter to specify the member accounts for which you want to export
     #   recommendations.
     #
@@ -601,7 +601,7 @@ module Aws::ComputeOptimizer
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to include recommendations for resources in all
-    #   member accounts of the organization if your account is the master
+    #   member accounts of the organization if your account is the management
     #   account of an organization.
     #
     #   The member accounts must also be opted in to Compute Optimizer.
@@ -667,7 +667,7 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to return Auto Scaling group
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
+    #   If your account is the management account of an organization, use this
     #   parameter to specify the member accounts for which you want to return
     #   Auto Scaling group recommendations.
     #
@@ -756,6 +756,109 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
+    # Returns Amazon Elastic Block Store (Amazon EBS) volume
+    # recommendations.
+    #
+    # AWS Compute Optimizer generates recommendations for Amazon EBS volumes
+    # that meet a specific set of requirements. For more information, see
+    # the [Supported resources and requirements][1] in the *AWS Compute
+    # Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
+    #
+    # @option params [Array<String>] :volume_arns
+    #   The Amazon Resource Name (ARN) of the volumes for which to return
+    #   recommendations.
+    #
+    # @option params [String] :next_token
+    #   The token to advance to the next page of volume recommendations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of volume recommendations to return with a single
+    #   request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #
+    # @option params [Array<Types::EBSFilter>] :filters
+    #   An array of objects that describe a filter that returns a more
+    #   specific list of volume recommendations.
+    #
+    # @option params [Array<String>] :account_ids
+    #   The IDs of the AWS accounts for which to return volume
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member accounts for which you want to return
+    #   volume recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #
+    # @return [Types::GetEBSVolumeRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEBSVolumeRecommendationsResponse#next_token #next_token} => String
+    #   * {Types::GetEBSVolumeRecommendationsResponse#volume_recommendations #volume_recommendations} => Array&lt;Types::VolumeRecommendation&gt;
+    #   * {Types::GetEBSVolumeRecommendationsResponse#errors #errors} => Array&lt;Types::GetRecommendationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ebs_volume_recommendations({
+    #     volume_arns: ["VolumeArn"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     account_ids: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.volume_recommendations #=> Array
+    #   resp.volume_recommendations[0].volume_arn #=> String
+    #   resp.volume_recommendations[0].account_id #=> String
+    #   resp.volume_recommendations[0].current_configuration.volume_type #=> String
+    #   resp.volume_recommendations[0].current_configuration.volume_size #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_baseline_iops #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_burst_iops #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_baseline_throughput #=> Integer
+    #   resp.volume_recommendations[0].current_configuration.volume_burst_throughput #=> Integer
+    #   resp.volume_recommendations[0].finding #=> String, one of "Optimized", "NotOptimized"
+    #   resp.volume_recommendations[0].utilization_metrics #=> Array
+    #   resp.volume_recommendations[0].utilization_metrics[0].name #=> String, one of "VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond", "VolumeReadBytesPerSecond", "VolumeWriteBytesPerSecond"
+    #   resp.volume_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
+    #   resp.volume_recommendations[0].utilization_metrics[0].value #=> Float
+    #   resp.volume_recommendations[0].look_back_period_in_days #=> Float
+    #   resp.volume_recommendations[0].volume_recommendation_options #=> Array
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_type #=> String
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_size #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_baseline_iops #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_burst_iops #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_baseline_throughput #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].configuration.volume_burst_throughput #=> Integer
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].performance_risk #=> Float
+    #   resp.volume_recommendations[0].volume_recommendation_options[0].rank #=> Integer
+    #   resp.volume_recommendations[0].last_refresh_timestamp #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEBSVolumeRecommendations AWS API Documentation
+    #
+    # @overload get_ebs_volume_recommendations(params = {})
+    # @param [Hash] params ({})
+    def get_ebs_volume_recommendations(params = {}, options = {})
+      req = build_request(:get_ebs_volume_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns Amazon EC2 instance recommendations.
     #
     # AWS Compute Optimizer generates recommendations for Amazon Elastic
@@ -789,7 +892,7 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to return instance
     #   recommendations.
     #
-    #   If your account is the master account of an organization, use this
+    #   If your account is the management account of an organization, use this
     #   parameter to specify the member accounts for which you want to return
     #   instance recommendations.
     #
@@ -840,7 +943,7 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].recommendation_options[0].rank #=> Integer
     #   resp.instance_recommendations[0].recommendation_sources #=> Array
     #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_arn #=> String
-    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup"
+    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume"
     #   resp.instance_recommendations[0].last_refresh_timestamp #=> Time
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
@@ -925,9 +1028,9 @@ module Aws::ComputeOptimizer
     # Returns the enrollment (opt in) status of an account to the AWS
     # Compute Optimizer service.
     #
-    # If the account is the master account of an organization, this action
-    # also confirms the enrollment status of member accounts within the
-    # organization.
+    # If the account is the management account of an organization, this
+    # action also confirms the enrollment status of member accounts within
+    # the organization.
     #
     # @return [Types::GetEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -961,7 +1064,7 @@ module Aws::ComputeOptimizer
     #   The IDs of the AWS accounts for which to return recommendation
     #   summaries.
     #
-    #   If your account is the master account of an organization, use this
+    #   If your account is the management account of an organization, use this
     #   parameter to specify the member accounts for which you want to return
     #   recommendation summaries.
     #
@@ -997,7 +1100,7 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_summaries[0].summaries #=> Array
     #   resp.recommendation_summaries[0].summaries[0].name #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.recommendation_summaries[0].summaries[0].value #=> Float
-    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup"
+    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume"
     #   resp.recommendation_summaries[0].account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRecommendationSummaries AWS API Documentation
@@ -1012,8 +1115,8 @@ module Aws::ComputeOptimizer
     # Updates the enrollment (opt in) status of an account to the AWS
     # Compute Optimizer service.
     #
-    # If the account is a master account of an organization, this action can
-    # also be used to enroll member accounts within the organization.
+    # If the account is a management account of an organization, this action
+    # can also be used to enroll member accounts within the organization.
     #
     # @option params [required, String] :status
     #   The new enrollment status of the account.
@@ -1023,7 +1126,7 @@ module Aws::ComputeOptimizer
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to enroll member accounts of the organization if the
-    #   your account is the master account of an organization.
+    #   your account is the management account of an organization.
     #
     # @return [Types::UpdateEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1064,7 +1167,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
