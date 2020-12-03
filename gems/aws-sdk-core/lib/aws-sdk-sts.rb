@@ -8,6 +8,10 @@
 # WARNING ABOUT GENERATED CODE
 
 
+unless Module.const_defined?(:Aws)
+  require 'aws-sdk-core'
+  require 'aws-sigv4'
+end
 
 require_relative 'aws-sdk-sts/types'
 require_relative 'aws-sdk-sts/client_api'
