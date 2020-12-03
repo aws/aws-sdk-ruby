@@ -29,7 +29,6 @@ end
 # Only building source, but not gemspecs, version file, etc.
 task 'build:aws-sdk-sts' do
   sts = BuildTools::Services.service('sts')
-  sts.gem_dependencies.clear
   generator = AwsSdkCodeGenerator::CodeBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,
     service: sts,
